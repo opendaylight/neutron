@@ -47,7 +47,8 @@ public class NeutronLoadBalancerPoolMembersNorthbound {
 @StatusCodes({
         @ResponseCode(code = 200, condition = "Operation successful"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 501, condition = "Not Implemented")})
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
 
 public Response listMembers(
         //Path param
@@ -125,7 +126,8 @@ public Response listMembers(
     @ResponseCode(code = 200, condition = "Operation successful"),
     @ResponseCode(code = 401, condition = "Unauthorized"),
     @ResponseCode(code = 404, condition = "Not Found"),
-    @ResponseCode(code = 501, condition = "Not Implemented") })
+    @ResponseCode(code = 501, condition = "Not Implemented"),
+    @ResponseCode(code = 503, condition = "No providers available") })
 public Response showLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
         @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID,
@@ -168,7 +170,8 @@ public Response showLoadBalancerPoolMember(
         @ResponseCode(code = 200, condition = "Operation successful"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
         @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented")})
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
 public Response createLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
         final NeutronLoadBalancerPoolMemberRequest input) {
@@ -317,7 +320,8 @@ public Response updateLoadBalancerPoolMember(
     @ResponseCode(code = 401, condition = "Unauthorized"),
     @ResponseCode(code = 403, condition = "Forbidden"),
     @ResponseCode(code = 404, condition = "Not Found"),
-    @ResponseCode(code = 501, condition = "Not Implemented") })
+    @ResponseCode(code = 501, condition = "Not Implemented"),
+    @ResponseCode(code = 503, condition = "No providers available") })
 public Response deleteLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
         @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID) {

@@ -68,7 +68,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     @StatusCodes({
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
 
     public Response listGroups(
             // return fields
@@ -156,7 +157,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showLoadBalancerHealthMonitor(@PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             // return fields
             @QueryParam("fields") List<String> fields) {
@@ -190,7 +192,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = 403, condition = "Forbidden"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createLoadBalancerHealthMonitors(final NeutronLoadBalancerHealthMonitorRequest input) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
@@ -297,7 +300,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 403, condition = "Forbidden"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             final NeutronLoadBalancerHealthMonitorRequest input) {
@@ -384,7 +388,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);

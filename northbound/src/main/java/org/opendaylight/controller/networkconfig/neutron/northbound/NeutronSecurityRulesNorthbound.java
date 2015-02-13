@@ -70,7 +70,8 @@ public class NeutronSecurityRulesNorthbound {
     @StatusCodes ({
             @ResponseCode (code = 200, condition = "Operation successful"),
             @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response listRules(
             // return fields
             @QueryParam ("fields") List<String> fields,
@@ -141,7 +142,8 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode (code = 200, condition = "Operation successful"),
             @ResponseCode (code = 401, condition = "Unauthorized"),
             @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showSecurityRule(@PathParam ("securityRuleUUID") String securityRuleUUID,
                                      // return fields
                                      @QueryParam ("fields") List<String> fields) {
@@ -176,7 +178,8 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode (code = 403, condition = "Forbidden"),
             @ResponseCode (code = 404, condition = "Not Found"),
             @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
@@ -300,7 +303,8 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode (code = 401, condition = "Unauthorized"),
             @ResponseCode (code = 403, condition = "Forbidden"),
             @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
@@ -380,7 +384,8 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode (code = 401, condition = "Unauthorized"),
             @ResponseCode (code = 404, condition = "Not Found"),
             @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);

@@ -66,7 +66,8 @@ public class NeutronFirewallRulesNorthbound {
     @StatusCodes({
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response listRules(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -161,7 +162,8 @@ public class NeutronFirewallRulesNorthbound {
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showFirewallRule(@PathParam("firewallRuleUUID") String firewallRuleUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
@@ -199,7 +201,8 @@ public class NeutronFirewallRulesNorthbound {
             @ResponseCode(code = 403, condition = "Forbidden"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createFirewallRules(final NeutronFirewallRuleRequest input) {
         INeutronFirewallRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronFirewallRuleCRUD(this);
         if (firewallRuleInterface == null) {
@@ -308,7 +311,8 @@ public class NeutronFirewallRulesNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 403, condition = "Forbidden"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateFirewallRule(
             @PathParam("firewallRuleUUID") String firewallRuleUUID, final NeutronFirewallRuleRequest input) {
         INeutronFirewallRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronFirewallRuleCRUD(this);
@@ -396,7 +400,8 @@ public class NeutronFirewallRulesNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteFirewallRule(
             @PathParam("firewallRuleUUID") String firewallRuleUUID) {
         INeutronFirewallRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronFirewallRuleCRUD(this);

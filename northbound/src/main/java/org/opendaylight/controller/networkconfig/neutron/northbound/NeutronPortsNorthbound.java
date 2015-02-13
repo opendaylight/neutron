@@ -78,7 +78,8 @@ public class NeutronPortsNorthbound {
     @StatusCodes({
         @ResponseCode(code = 200, condition = "Operation successful"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response listPorts(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -147,7 +148,8 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = 200, condition = "Operation successful"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
         @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response showPort(
             @PathParam("portUUID") String portUUID,
             // return fields
@@ -185,7 +187,8 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = 404, condition = "Not Found"),
         @ResponseCode(code = 409, condition = "Conflict"),
         @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "MAC generation failure") })
+        @ResponseCode(code = 503, condition = "MAC generation failure"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
@@ -405,7 +408,8 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = 403, condition = "Forbidden"),
         @ResponseCode(code = 404, condition = "Not Found"),
         @ResponseCode(code = 409, condition = "Conflict"),
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response updatePort(
             @PathParam("portUUID") String portUUID,
             NeutronPortRequest input
@@ -507,7 +511,8 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = 401, condition = "Unauthorized"),
         @ResponseCode(code = 403, condition = "Forbidden"),
         @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);

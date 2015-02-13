@@ -72,7 +72,9 @@ public class NeutronNetworksNorthbound {
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
         @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 401, condition = "Unauthorized")})
+        @ResponseCode(code = 401, condition = "Unauthorized"),
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response listNetworks(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -152,7 +154,9 @@ public class NeutronNetworksNorthbound {
     @StatusCodes({
         @ResponseCode(code = 200, condition = "Operation successful"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 404, condition = "Not Found") })
+        @ResponseCode(code = 404, condition = "Not Found"),
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response showNetwork(
             @PathParam("netUUID") String netUUID,
             // return fields
@@ -185,7 +189,9 @@ public class NeutronNetworksNorthbound {
     @StatusCodes({
         @ResponseCode(code = 201, condition = "Created"),
         @ResponseCode(code = 400, condition = "Bad Request"),
-        @ResponseCode(code = 401, condition = "Unauthorized") })
+        @ResponseCode(code = 401, condition = "Unauthorized"),
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response createNetworks(final NeutronNetworkRequest input) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
         if (networkInterface == null) {
@@ -293,7 +299,9 @@ public class NeutronNetworksNorthbound {
         @ResponseCode(code = 200, condition = "Operation successful"),
         @ResponseCode(code = 400, condition = "Bad Request"),
         @ResponseCode(code = 403, condition = "Forbidden"),
-        @ResponseCode(code = 404, condition = "Not Found"), })
+        @ResponseCode(code = 404, condition = "Not Found"),
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateNetwork(
             @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
             ) {
@@ -362,7 +370,9 @@ public class NeutronNetworksNorthbound {
         @ResponseCode(code = 204, condition = "No Content"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
         @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 409, condition = "Network In Use") })
+        @ResponseCode(code = 409, condition = "Network In Use"),
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);

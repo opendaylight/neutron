@@ -64,7 +64,8 @@ public class NeutronLoadBalancerListenerNorthbound {
     @StatusCodes({
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
 
     public Response listGroups(
             // return fields
@@ -144,7 +145,8 @@ public class NeutronLoadBalancerListenerNorthbound {
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showLoadBalancerListener(@PathParam("loadBalancerListenerID") String loadBalancerListenerID,
             // return fields
             @QueryParam("fields") List<String> fields) {
@@ -178,7 +180,8 @@ public class NeutronLoadBalancerListenerNorthbound {
             @ResponseCode(code = 403, condition = "Forbidden"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createLoadBalancerListeners(final NeutronLoadBalancerListenerRequest input) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
         if (loadBalancerListenerInterface == null) {
@@ -284,7 +287,8 @@ public class NeutronLoadBalancerListenerNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 403, condition = "Forbidden"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateLoadBalancerListener(
             @PathParam("loadBalancerListenerID") String loadBalancerListenerID, final NeutronLoadBalancerListenerRequest input) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
@@ -363,7 +367,8 @@ public class NeutronLoadBalancerListenerNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteLoadBalancerListener(
             @PathParam("loadBalancerListenerID") String loadBalancerListenerID) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);

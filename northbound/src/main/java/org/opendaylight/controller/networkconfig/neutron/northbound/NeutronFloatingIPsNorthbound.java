@@ -71,7 +71,8 @@ public class NeutronFloatingIPsNorthbound {
     @StatusCodes({
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response listFloatingIPs(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -126,7 +127,8 @@ public class NeutronFloatingIPsNorthbound {
             @ResponseCode(code = 200, condition = "Operation successful"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID,
             // return fields
@@ -159,7 +161,8 @@ public class NeutronFloatingIPsNorthbound {
         @ResponseCode(code = 400, condition = "Bad Request"),
         @ResponseCode(code = 401, condition = "Unauthorized"),
         @ResponseCode(code = 409, condition = "Conflict"),
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+        @ResponseCode(code = 501, condition = "Not Implemented"),
+        @ResponseCode(code = 503, condition = "No providers available") })
     public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
         if (floatingIPInterface == null) {
@@ -281,7 +284,8 @@ public class NeutronFloatingIPsNorthbound {
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
             @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID,
             NeutronFloatingIPRequest input
@@ -404,7 +408,8 @@ public class NeutronFloatingIPsNorthbound {
             @ResponseCode(code = 204, condition = "No Content"),
             @ResponseCode(code = 401, condition = "Unauthorized"),
             @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);

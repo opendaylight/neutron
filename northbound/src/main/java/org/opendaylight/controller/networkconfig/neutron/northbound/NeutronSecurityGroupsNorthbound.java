@@ -68,7 +68,8 @@ public class NeutronSecurityGroupsNorthbound {
     @StatusCodes ({
             @ResponseCode (code = 200, condition = "Operation successful"),
             @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
 
     public Response listGroups(
             // return fields
@@ -123,7 +124,8 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode (code = 200, condition = "Operation successful"),
             @ResponseCode (code = 401, condition = "Unauthorized"),
             @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showSecurityGroup(@PathParam ("securityGroupUUID") String securityGroupUUID,
                                       // return fields
                                       @QueryParam ("fields") List<String> fields) {
@@ -158,7 +160,8 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode (code = 403, condition = "Forbidden"),
             @ResponseCode (code = 404, condition = "Not Found"),
             @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
         if (securityGroupInterface == null) {
@@ -262,7 +265,8 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode (code = 401, condition = "Unauthorized"),
             @ResponseCode (code = 403, condition = "Forbidden"),
             @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
@@ -332,7 +336,8 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode (code = 401, condition = "Unauthorized"),
             @ResponseCode (code = 404, condition = "Not Found"),
             @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode (code = 501, condition = "Not Implemented")})
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
