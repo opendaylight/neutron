@@ -4,7 +4,7 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
    <repository>mvn:org.opendaylight.aaa/features-aaa/${aaa.version}/xml/features</repository>
-   <feature name='odl-neutron-all' version='${networkconfig.neutron.version}' description="OpenDaylight :: Neutron :: API">
+   <feature name='odl-neutron-service' version='${networkconfig.neutron.version}' description="OpenDaylight :: Neutron :: API">
     <feature version='${networkconfig.neutron.version}'>odl-neutron-api</feature>
     <feature version='${networkconfig.neutron.version}'>odl-neutron-northbound</feature>
     <feature version='${networkconfig.neutron.version}'>odl-neutron-implementation</feature>
