@@ -13,7 +13,7 @@
   <packaging>bundle</packaging>
   <dependencies>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
+      <groupId>org.opendaylight.neutron</groupId>
       <artifactId>networkconfig.neutron</artifactId>
     </dependency>
     <dependency>
