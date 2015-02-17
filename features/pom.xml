@@ -25,10 +25,6 @@
       <type>xml</type>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>networkconfig.neutron</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
     </dependency>
@@ -53,8 +49,8 @@
       <artifactId>org.eclipse.persistence.core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>networkconfig.neutron</artifactId>
+      <groupId>org.opendaylight.neutron</groupId>
+      <artifactId>neutron_spi</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-net</groupId>

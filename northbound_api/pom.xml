@@ -3,28 +3,41 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.opendaylight.controller</groupId>
-    <artifactId>commons.opendaylight</artifactId>
+    <artifactId>enunciate-parent</artifactId>
     <version>1.5.0-SNAPSHOT</version>
-    <relativePath>../controller/opendaylight/commons/opendaylight</relativePath>
+    <relativePath>../../../commons/enunciate-parent</relativePath>
   </parent>
   <groupId>org.opendaylight.neutron</groupId>
-  <artifactId>neutron_spi</artifactId>
+  <artifactId>northbound_api</artifactId>
   <version>0.5.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <dependencies>
     <dependency>
-      <groupId>commons-net</groupId>
-      <artifactId>commons-net</artifactId>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>org.osgi.core</artifactId>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-server</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-servlet</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.enunciate</groupId>
+      <artifactId>enunciate-core-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>org.eclipse.persistence.moxy</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.neutron</groupId>
+      <artifactId>neutron_spi</artifactId>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -33,7 +46,18 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>*</Import-Package>
+            <Import-Package>org.opendaylight.neutron,
+                            org.eclipse.persistence.jaxb.rs,
+                            com.sun.jersey.spi.container.servlet,
+                            javax.ws.rs,
+                            javax.ws.rs.ext,
+                            javax.ws.rs.core,
+                            javax.xml.bind.annotation,
+                            javax.xml.bind,
+                            org.slf4j,
+                            org.osgi.framework,
+                            !org.codehaus.enunciate.jaxrs</Import-Package>
+            <Web-ContextPath>/controller/nb/v2/neutron</Web-ContextPath>
           </instructions>
           <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
         </configuration>
@@ -46,6 +70,7 @@
     <tag>HEAD</tag>
     <url>https://wiki.opendaylight.org/view/OpenDaylight_Controller:Main</url>
   </scm>
+
   <distributionManagement>
     <!-- OpenDayLight Released artifact -->
     <repository>
