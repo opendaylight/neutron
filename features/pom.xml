@@ -5,7 +5,7 @@
     <groupId>org.opendaylight.controller</groupId>
     <artifactId>commons.opendaylight</artifactId>
     <version>1.5.0-SNAPSHOT</version>
-    <relativePath>../../opendaylight/commons/opendaylight</relativePath>
+    <relativePath>../../controller/opendaylight/commons/opendaylight</relativePath>
   </parent>
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>features-neutron</artifactId>
@@ -23,10 +23,6 @@
       <version>${aaa.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>networkconfig.neutron</artifactId>
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
@@ -53,8 +49,8 @@
       <artifactId>org.eclipse.persistence.core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>networkconfig.neutron</artifactId>
+      <groupId>org.opendaylight.neutron</groupId>
+      <artifactId>neutron_spi</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-net</groupId>
