@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<features name="odl-neutron-${networkconfig.neutron.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
+<features name="odl-neutron-${neutron.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
    <repository>mvn:org.opendaylight.aaa/features-aaa/${aaa.version}/xml/features</repository>
-   <feature name='odl-neutron-service' version='${networkconfig.neutron.version}' description="OpenDaylight :: Neutron :: API">
-    <feature version='${networkconfig.neutron.version}'>odl-neutron-api</feature>
-    <feature version='${networkconfig.neutron.version}'>odl-neutron-northbound</feature>
-    <feature version='${networkconfig.neutron.version}'>odl-neutron-implementation</feature>
+   <feature name='odl-neutron-service' version='${neutron.version}' description="OpenDaylight :: Neutron :: API">
+    <feature version='${neutron.version}'>odl-neutron-spi</feature>
+    <feature version='${neutron.version}'>odl-neutron-northbound-api</feature>
+    <feature version='${neutron.version}'>odl-neutron-transcriber</feature>
   </feature>
-  <feature name='odl-neutron-northbound' version='${networkconfig.neutron.version}' description="OpenDaylight :: Neutron :: Northbound">
+  <feature name='odl-neutron-northbound-api' version='${neutron.version}' description="OpenDaylight :: Neutron :: Northbound">
     <feature version='${aaa.version}'>odl-aaa-authn</feature>
     <feature>war</feature>
-    <feature version='${networkconfig.neutron.version}'>odl-neutron-api</feature>
+    <feature version='${neutron.spi.version}'>odl-neutron-spi</feature>
     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/${eclipse.persistence.version}</bundle>
     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/${eclipse.persistence.version}</bundle>
     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/${eclipse.persistence.version}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/networkconfig.neutron.northbound/${networkconfig.neutron.northbound.version}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/northbound-api/${neutron.northbound.version}</bundle>
     <bundle>mvn:com.sun.jersey/jersey-core/${jersey.version}</bundle>
     <bundle>mvn:com.sun.jersey/jersey-server/${jersey.version}</bundle>
     <bundle>mvn:com.sun.jersey/jersey-servlet/${jersey.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>
 
-  <feature name='odl-neutron-api' version='${networkconfig.neutron.version}' description="OpenDaylight :: Neutron :: API">
-    <bundle>mvn:org.opendaylight.neutron/networkconfig.neutron/${networkconfig.neutron.version}</bundle>
+  <feature name='odl-neutron-spi' version='${neutron.version}' description="OpenDaylight :: Neutron :: API">
+    <bundle>mvn:org.opendaylight.neutron/neutron-spi/${neutron.spi.version}</bundle>
     <bundle>mvn:commons-net/commons-net/${commons.net.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>
-  <feature name='odl-neutron-implementation' version='${networkconfig.neutron.version}' description="OpenDaylight :: Neutron :: Implementation">
-    <feature version='${networkconfig.neutron.version}'>odl-neutron-api</feature>
+  <feature name='odl-neutron-transcriber' version='${neutron.version}' description="OpenDaylight :: Neutron :: Implementation">
+    <feature version='${neutron.spi.version}'>odl-neutron-spi</feature>
     <feature>war</feature>
-    <bundle>mvn:org.opendaylight.neutron/networkconfig.neutron.implementation/${networkconfig.neutron.implementation.version}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/transcriber/${neutron.transcriber.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>
 </features>
