@@ -176,6 +176,9 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
                     poolStarted = false;
                     ans.add(p);
                     p = new NeutronSubnet_IPAllocationPool();
+                    // Fix for 2120
+                    p.setPoolStart(NeutronSubnet_IPAllocationPool.longtoIP(i+1));
+                    poolStarted = true;
                 }
             }
         }
