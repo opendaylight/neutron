@@ -49,18 +49,14 @@
       <artifactId>org.eclipse.persistence.core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.neutron</groupId>
-      <artifactId>neutron-spi</artifactId>
-      <version>0.5.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
       <groupId>commons-net</groupId>
       <artifactId>commons-net</artifactId>
     </dependency>
     <!-- test to validate features.xml -->
     <dependency>
-      <groupId>org.opendaylight.yangtools</groupId>
+      <groupId>org.opendaylight.odlparent</groupId>
       <artifactId>features-test</artifactId>
+      <version>1.5.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
@@ -117,7 +113,7 @@
             <karaf.distro.version>${commons.opendaylight.version}</karaf.distro.version>
           </systemPropertyVariables>
           <dependenciesToScan>
-           <dependency>org.opendaylight.yangtools:features-test</dependency>
+           <dependency>org.opendaylight.odlparent:features-test</dependency>
           </dependenciesToScan>
         </configuration>
       </plugin>
