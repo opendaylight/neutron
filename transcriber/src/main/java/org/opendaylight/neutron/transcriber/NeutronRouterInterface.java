@@ -17,8 +17,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.opendaylight.neutron.neutron.spi.INeutronRouterCRUD;
-import org.opendaylight.neutron.neutron.spi.NeutronRouter;
+import org.opendaylight.neutron.spi.INeutronRouterCRUD;
+import org.opendaylight.neutron.spi.NeutronRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

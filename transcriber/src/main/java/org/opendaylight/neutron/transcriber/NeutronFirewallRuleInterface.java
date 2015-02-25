@@ -8,8 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import org.opendaylight.neutron.neutron.spi.INeutronFirewallRuleCRUD;
-import org.opendaylight.neutron.neutron.spi.NeutronFirewallRule;
+import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
+import org.opendaylight.neutron.spi.NeutronFirewallRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

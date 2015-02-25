@@ -8,8 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import org.opendaylight.neutron.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
-import org.opendaylight.neutron.neutron.spi.NeutronLoadBalancerHealthMonitor;
+import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
+import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -17,11 +17,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.opendaylight.neutron.neutron.spi.INeutronNetworkCRUD;
-import org.opendaylight.neutron.neutron.spi.INeutronSubnetCRUD;
-import org.opendaylight.neutron.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.neutron.spi.NeutronNetwork;
-import org.opendaylight.neutron.neutron.spi.NeutronSubnet;
+import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
+import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.opendaylight.neutron.spi.NeutronNetwork;
+import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -18,8 +18,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.opendaylight.neutron.neutron.spi.INeutronSecurityRuleCRUD;
-import org.opendaylight.neutron.neutron.spi.NeutronSecurityRule;
+import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
+import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
