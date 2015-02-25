@@ -63,6 +63,9 @@ public class NeutronPort implements Serializable, INeutronObject {
     @XmlElement (name="security_groups")
     List<NeutronSecurityGroup> securityGroups;
 
+    @XmlElement (name="allowed_address_pairs")
+    List<NeutronPort_AllowedAddressPairs> allowedAddressPairs;
+
     @XmlElement (namespace= "binding", name="host_id")
     String bindinghostID;
 
@@ -178,6 +181,14 @@ public class NeutronPort implements Serializable, INeutronObject {
 
     public void setSecurityGroups(List<NeutronSecurityGroup> securityGroups) {
         this.securityGroups = securityGroups;
+    }
+
+    public List<NeutronPort_AllowedAddressPairs> getAllowedAddressPairs() {
+        return allowedAddressPairs;
+    }
+
+    public void setAllowedAddressPairs(List<NeutronPort_AllowedAddressPairs> allowedAddressPairs) {
+        this.allowedAddressPairs = allowedAddressPairs;
     }
 
     public String getBindinghostID() {
