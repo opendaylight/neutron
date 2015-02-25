@@ -7,7 +7,7 @@
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
     <init-param>
       <param-name>javax.ws.rs.Application</param-name>
-      <param-value>org.opendaylight.controller.networkconfig.neutron.northbound.NeutronNorthboundRSApplication</param-value>
+      <param-value>org.opendaylight.neutron.northbound.api.NeutronNorthboundRSApplication</param-value>
     </init-param>
     <!-- AAA Auth Filter -->
     <init-param>
