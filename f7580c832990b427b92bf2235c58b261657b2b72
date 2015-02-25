@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a96c907_28100058",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort_AllowedAddressPairs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 254
+      },
+      "writtenOn": "2015-02-25T18:23:37Z",
+      "side": 1,
+      "message": "2013? Shouldn\u0027t this be 2015?",
+      "revId": "f7580c832990b427b92bf2235c58b261657b2b72",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
