@@ -70,10 +70,10 @@
     </plugins>
   </build>
   <scm>
-    <connection>scm:git:ssh://git.opendaylight.org:29418/controller.git</connection>
-    <developerConnection>scm:git:ssh://git.opendaylight.org:29418/controller.git</developerConnection>
+    <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
+    <developerConnection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</developerConnection>
     <tag>HEAD</tag>
-    <url>https://wiki.opendaylight.org/view/OpenDaylight_Controller:Main</url>
+    <url>https://wiki.opendaylight.org/view/NeutronNorthBound:Main</url>
   </scm>
 
   <distributionManagement>
