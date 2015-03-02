@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a96c907_aaeb9a11",
+        "filename": "features/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-02T20:08:39Z",
+      "side": 1,
+      "message": "Please also remove this dependency as it is coming from features-parent",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 17
+      },
+      "revId": "f89e6c372cb643e9b6747b329609e775bb48c096",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_4adc5673",
+        "filename": "parent/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-02T20:08:39Z",
+      "side": 1,
+      "message": "Please remove repositories as ODL is moving towards being independent of them via settings.xml",
+      "revId": "f89e6c372cb643e9b6747b329609e775bb48c096",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a96c907_eae4423d",
+        "filename": "parent/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-02T20:08:39Z",
+      "side": 1,
+      "message": "LIkewise please remove distributionManagement as that should be coming in from settings.xml in nexus I believe.",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 17
+      },
+      "revId": "f89e6c372cb643e9b6747b329609e775bb48c096",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
