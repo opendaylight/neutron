@@ -1,0 +1,65 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-attrs {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-attrs";
+
+    prefix neutron-attrs;
+
+    import ietf-yang-types { prefix "yang"; revision-date "2013-07-15";}
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines groupings that are used by Openstack
+        Ice House Neutron YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of attributes used by OpenStack Ice House Neutron
+                models";
+    }
+
+    grouping base-attrs {
+
+        leaf uuid {
+            type yang:uuid;
+            description "UUID to index this neutron object.";
+        }
+
+        leaf name {
+            type string;
+            description "Human-readable name for the item. Might not be unique.";
+        }
+
+        leaf tenant-id {
+            type yang:uuid;
+            description "Admin-only. The UUID of the tenant that will own the network.
+                        This tenant can be different from the tenant that makes the create
+                        network request. However, only administrative users can specify
+                        a tenant ID other than their own. You cannot change this value
+                        through authorization policies.";
+        }
+    }
+
+    grouping admin-attrs {
+        leaf admin-state-up {
+            type boolean;
+            description "The administrative state of the network, which is up (true) or
+                        down (false).";
+        }
+        leaf status {
+            type string;
+            description "The network status.";
+        }
+    }
+}
