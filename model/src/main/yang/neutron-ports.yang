@@ -1,0 +1,36 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-ports {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-ports";
+
+    prefix neutron-ports;
+
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines Openstack Ice House Neutron Ports model";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of Openstack Neutron Ice House Ports model.";
+    }
+
+    container ports {
+        list port {
+            key "portUUID";
+            uses attrs:base_attrs;
+            uses attrs:admin_attrs;
+            uses attrs:port_attrs;
+        }
+    }
+}
