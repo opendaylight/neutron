@@ -1,0 +1,69 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-provider {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-provider";
+
+    prefix neutron-provider;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+    import neutron-networks { prefix "networks"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines provider attributes that are used by Openstack
+        Ice House Neutron YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of provider attributes used by OpenStack Ice House Neutron
+                models";
+    }
+
+    grouping provider-attrs {
+        leaf physical-network {
+            type string;
+            description "The physical network where this network object is implemented.
+                        The Networking API v2.0 does not provide a way to list available
+                        physical networks. For example, the Open vSwitch plug-in configuration
+                        file defines a symbolic name that maps to specific bridges on
+                        each Compute host.";
+        }
+
+        leaf network-type {
+            type networks:network-type;
+            description "The type of physical network that maps to this network resource.";
+        }
+        leaf segmentation-id {
+            type string;
+            description "An isolated segment on the physical network. The network-type
+                        attribute defines the segmentation model. For example, if network-type
+                        is vlan, this ID is a vlan identifier. If network-type is gre,
+                        this ID is a gre key.";
+        }
+    }
+
+    augment "/networks:networks/networks:network"{
+        description "
+          This module augments the networks container in the neutron-networks
+          module with provider information.
+          ";
+        list providers {
+            description "List of provider network(s) associated with this network.";
+            key segmentation-id;
+            uses provider-attrs;
+        }
+        uses provider-attrs;
+    }
+}

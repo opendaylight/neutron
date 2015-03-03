@@ -1,0 +1,138 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-secgroups {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-secgroups";
+
+    prefix neutron-secgroups;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines Security group objects that are used by Openstack
+        Ice House Neutron YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of Security group objects used by OpenStack Ice House Neutron
+                models";
+    }
+
+    grouping security-group-attrs {
+        description "OpenStack Layer3 Security group information.";
+        leaf description {
+            type string;
+            description "Description for the security group.";
+        }
+    }
+    grouping security-rule-attrs {
+        description "OpenStack Layer3 Security Group rules.";
+        leaf id {
+            type yang:uuid;
+            description "Security Rule ID.";
+        }
+        leaf tenant-id {
+            type yang:uuid;
+            description "UUID of the tenant.";
+        }
+        leaf direction {
+            type enumeration {
+                enum ingress {
+                    description "Ingress direction.";
+                  }
+                  enum egress {
+                    description "Egress direction.";
+                  }
+            }
+            description "The direction in which metering rule is applied.
+                For a compute instance, an ingress security group rule is
+                applied to incoming (ingress) traffic for that instance.
+                An egress rule is applied to traffic leaving the instance.";
+            default "ingress";
+        }
+        leaf security-group-id {
+            type yang:uuid;
+            description "The security group ID to associate with this security group rule.";
+        }
+        leaf remote-group-id {
+            description "The remote group ID to be associated with this security group rule.
+                You can specify either remote-ip-prefix or remote-group-id in the request body.";
+            type yang:uuid;
+        }
+        leaf remote-ip-prefix {
+            description "The remote IP Prefix to be associated with this security group rule.
+                You can specify either remote-ip-prefix or remote-group-id in the request body.";
+            type inet:ip-address;
+        }
+        leaf protocol {
+            type enumeration {
+                enum null {
+                    description "NULL protocol.";
+                }
+                enum icmp {
+                    description "ICMP protocol.";
+                }
+                enum udp {
+                    description "UDP protocol.";
+                }
+                enum tcp {
+                    description "TCP protocol.";
+                }
+            }
+            description "The protocol that is matched by the security group rule.";
+        }
+        leaf ethertype {
+            description "Must be IPv4 or IPv6, and addresses represented in CIDR must
+                match the ingress or egress rules.";
+            type enumeration {
+                enum ipv4 {
+                    description "ipv4 type.";
+                }
+                enum ipv6 {
+                    description "ipv6 type.";
+                }
+            }
+        }
+        leaf port-range-min {
+            type uint32;
+            description "The minimum port number in the range that is matched by the
+                security group rule. If the protocol is TCP or UDP, this value must
+                be less than or equal to the value of the attribute. If the protocol
+                is ICMP, this value must be an ICMP type.";
+        }
+        leaf port-range-max {
+            type uint32;
+            description "The maximum port number in the range that is matched by the
+                security group rule. If the protocol is TCP or UDP, this value must
+                be less than or equal to the value of the attribute. If the protocol
+                is ICMP, this value must be an ICMP type.";
+        }
+    }
+    container security-groups {
+        description "Container for security groups.";
+        list security-group {
+            uses attrs:base-attrs;
+            uses security-group-attrs;
+            description "List of Metering Labels.";
+        }
+    }
+    container security-rules {
+        description "Container for security group rules.";
+        list security-rule {
+            uses security-rule-attrs;
+            description "List of Security Group Rules.";
+        }
+    }
+}
