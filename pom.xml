@@ -24,5 +24,6 @@
     <module>northbound-api</module>
     <module>transcriber</module>
     <module>features</module>
+    <module>model</module>
   </modules>
 </project>
