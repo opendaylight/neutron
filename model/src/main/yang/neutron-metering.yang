@@ -1,0 +1,90 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-metering {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-metering";
+
+    prefix neutron-metering;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines metering attributes that are used by Openstack
+        Ice House Neutron YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of metering attributes used by OpenStack Ice House Neutron
+                models";
+    }
+
+    grouping metering-label-attrs {
+        description "OpenStack Layer3 Metering label information.";
+        leaf description {
+            type string;
+            description "Description for the metering label.";
+        }
+    }
+    grouping metering-rule-attrs {
+        description "OpenStack Layer3 Metering label rules.";
+        leaf id {
+            type attrs:uuid;
+            description "Metering Rule ID.";
+        }
+        leaf direction {
+            type enumeration {
+                enum ingress {
+                    description "Ingress direction.";
+                  }
+                  enum egress {
+                    description "Egress direction.";
+                  }
+            }
+            description "The direction in which metering rule is applied.";
+            default "ingress";
+        }
+        leaf metering-label-id {
+            type attrs:uuid;
+            description "Metering Label ID to associate with this metering rule.";
+        }
+        leaf remote-ip-prefix {
+            description "The remote IP prefix to be associated with this metering rule. packet.";
+            type inet:ip-address;
+        }
+        leaf excluded {
+            type boolean;
+            description "Specify whether the remote_ip_prefix 
+                will be excluded or not from traffic counters of
+                the metering label, ie: to not count the traffic
+                of a specific IP address of a range.";
+            default "false";
+        }
+    }
+    container metering-labels {
+        description "Container for metering labels.";
+        list metering-label {
+            uses attrs:base-attrs;
+            uses metering-label-attrs;
+            description "List of Metering Labels.";
+        }
+    }
+    container metering-rules {
+        description " Container for metering rules.";
+        list metering-rule {
+            uses metering-rule-attrs;
+            description "List of Metering Rules.";
+        }
+    }
+}
