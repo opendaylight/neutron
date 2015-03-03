@@ -1,0 +1,309 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-attrs {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-attrs";
+
+    prefix neutron-attrs;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines groupings that are used by Openstack Ice House Neutron
+    	YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of attributes used by OpenStackk Ice House Neutron models";
+    }
+
+    // Defining this until ODL migrates to latest ietf-inet-types to avoid errors
+    typedef uuid {
+        type string {
+          pattern '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-'
+                + '[0-9a-fA-F]{4}-[0-9a-fA-F]{12}';
+        }
+        description
+         "A Universally Unique IDentifier in the string representation
+          defined in RFC 4122.  The canonical representation uses
+          lowercase characters.
+
+          The following is an example of a UUID in string representation:
+          f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+          ";
+        reference
+         "RFC 4122: A Universally Unique IDentifier (UUID) URN
+                    Namespace";
+      }
+    
+    grouping provider_attrs {
+        leaf physical_network {
+            type string;
+            description "The physical network where this network object is implemented.
+                        The Networking API v2.0 does not provide a way to list available
+                        physical networks. For example, the Open vSwitch plug-in configuration
+                        file defines a symbolic name that maps to specific bridges on
+                        each Compute host.";
+        }
+
+        leaf network_type {
+            type string;
+            description "The type of physical network that maps to this network resource.
+                        Examples are flat, vlan, vxlan, and gre.";
+        }
+        leaf segmentation_id {
+            type string;
+            description "An isolated segment on the physical network. The network_type
+                        attribute defines the segmentation model. For example, if network_type
+                        is vlan, this ID is a vlan identifier. If network_type is gre,
+                        this ID is a gre key.";
+        }
+    }
+
+    grouping base_attrs {
+
+        leaf networkUUID {
+            type uuid;
+            description "Network UUID";
+        }
+
+        leaf portUUID {
+            type uuid;
+            description "Port UUID";
+        }
+
+        leaf subnetUUID {
+            type uuid;
+            description "Port UUID";
+        }
+
+        leaf name {
+            type string;
+            description "Human-readable name for the item. Might not be unique.";
+        }
+
+        leaf tenant_id {
+            type uuid;
+            description "Admin-only. The UUID of the tenant that will own the network.
+                        This tenant can be different from the tenant that makes the create
+                        network request. However, only administrative users can specify
+                        a tenant ID other than their own. You cannot change this value
+                        through authorization policies.";
+        }
+        leaf shared {
+            type boolean;
+            default "false";
+            description "Indicates whether this network or subnet is shared across all
+                        tenants. By default, only administrative users can change this
+                        value.";
+        }
+    }
+
+    grouping admin_attrs {
+        leaf admin_state_up {
+            type boolean;
+            description "The administrative state of the network, which is up (true) or
+                        down (false).";
+        }
+        leaf status {
+            type string;
+            description "The network status.";
+        }
+    }
+
+    grouping network_attrs {
+
+        leaf-list subnets {
+            description "The associated subnets.";
+            type uuid;
+        }
+        leaf router_external {
+            description "TODO: missing openstack/neutron documentation on this one.";
+            type boolean;
+        }
+        list providers {
+            description "TODO: missing openstack/neutron documentation on this one.";
+            key segmentation_id;
+            uses provider_attrs;
+        }
+        uses provider_attrs;
+    }
+
+    grouping port_attrs {
+        leaf binding_host_id {
+            type uuid;
+            description "The ID of the host where the port is allocated. In some cases,
+                        different implementations can run on different hosts.";
+        }
+        leaf-list allowed_address_pairs {
+            type string;
+            description "Allowed address pairs for this port. For example: neutron port-create
+                        net1 --allowed-address-pairs type=dict list=true mac_address=<mac_address>,ip_address=<ip_cidr>
+                        Setting an allowed-address-pair that matches the mac_address and
+                        ip_address of a port is prevented. This is because that would
+                        have no effect since traffic matching the mac_address and ip_address
+                        is already allowed to pass through the port";
+        }
+
+        leaf network_id {
+            type uuid;
+        }
+        list extra_dhcp_opts {
+            description "Extra DHCP options";
+            reference "http://developer.openstack.org/api-ref-networking-v2.html";
+            key id ;
+            leaf id {
+                type string;
+            }
+            leaf opt_name {
+                type string;
+            }
+            leaf opt_value {
+                type string;
+            }
+        }
+
+        list binding_vif_details {
+            description "A dictionary that enables the application to pass information
+                        about functions that the Networking API provides. To enable or
+                        disable port filtering features such as security group and anti-MAC/IP
+                        spoofing, specify port_filter: True or port_filter: False ";
+
+            key id;
+            leaf id {
+                type string;
+            }
+
+            leaf port_filter {
+                type boolean;
+            }
+            leaf ovs_hybrid_plug {
+                type boolean;
+            }
+        }
+        leaf binding_vif_type {
+            type string;
+        }
+        leaf binding_vnic_type {
+            type string;
+        }
+        leaf device_owner {
+            type string;
+        }
+        leaf mac_address {
+            type string;
+        }
+        leaf binding_profile {
+            type string;
+        }
+
+        list fixed_ips {
+            key subnet_id;
+            leaf subnet_id {
+                type uuid;
+            }
+            leaf ip_address {
+                type inet:ip-address;
+            }
+        }
+
+        leaf-list security_groups {
+            type uuid;
+        }
+        leaf device_id {
+            type uuid;
+        }
+    }
+    
+    grouping subnet_attrs {
+        leaf network_id {
+            type uuid;
+            description "network this subnet is associated with.";
+        }
+        leaf ip_version {
+            description "IP version";
+            type enumeration {
+                enum 4;
+                enum 6;
+            }
+        }
+        leaf cidr {
+            type string;
+            description "cidr representing IP range for this subnet, based on IP version";
+        }
+        leaf gateway_ip {
+            type inet:ip-address;
+            description "default gateway used by devices in this subnet";
+        }
+        leaf-list dns_nameservers {
+            type inet:ip-address;
+            description "DNS name servers used by hosts in this subnet.";
+            // neutron subnet-create test-net1 40.0.0.0/24 --dns-nameservers list=true 8.8.8.7 8.8.8.8        }
+        }
+		leaf ipv6_address_mode {
+
+            description "neutron subnet-create --ip-version 6 --ipv6_ra_mode off --ipv6_address_mode
+                        off NETWORK CIDR neutron subnet-create --ip-version 6 --ipv6_ra_mode
+                        off --ipv6_address_mode dhcpv6-stateful NETWORK CIDR neutron subnet-create
+                        --ip-version 6 --ipv6_ra_mode slaac --ipv6_address_mode slaac
+                        NETWORK CIDR neutron subnet-create --ip-version 6 --ipv6_ra_mode
+                        dhcpv6-stateful --ipv6_address_mode off NETWORK CIDR neutron subnet-create
+                        --ip-version 6 --ipv6_ra_mode dhcpv6-stateless --ipv6_address_mode
+                        dhcpv6-stateless NETWORK CIDR Note: can't find this in the spec
+                        but OS is sending it with a null value.";
+            // ?? Do we make this an enumeration for validation or require the writer to write good values?
+            type enumeration {
+                enum off;
+                enum dhcpv6-stateful;
+                enum slaac;
+                enum dhcpv6-stateless;
+            }
+        }
+        leaf ipv6_ra_mode {
+            description "TODO can't find this in the spec but OS sends it with a null
+                        value.";
+            type enumeration {
+                enum off;
+                enum dhcpv6-stateful;
+                enum slaac;
+                enum dhcpv6-stateless;
+            }
+        }
+        list allocation_pools {
+            description "Sub-ranges of cidr available for dynamic allocation to ports";
+            key start;
+            leaf start {
+                type string;
+            }
+            leaf end {
+                type string;
+            }
+        }
+        list host_routes {
+            description "Routes that should be used by devices with IPs from this subnet
+                        (not including local subnet route).";
+            key destination;
+            leaf destination {
+                type inet:ip-address;
+            }
+            leaf nexthop {
+                type inet:ip-address;
+            }
+        }
+        leaf enable_dhcp {
+            type boolean;
+            description "Specifies whether DHCP is enabled for this subnet or not.";
+        }
+    }
+}

@@ -1,0 +1,45 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-networks {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-networks";
+
+    prefix neutron-networks;
+
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines Openstack Ice House Neutron Network model";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of Openstack Neutron Ice House Network model.";
+    }
+
+    container networks {
+        list network {
+
+            description "A network is a virtual isolated layer-2 broadcast domain which
+                        is typically reserved to the tenant who created it, unless the
+                        network has been explicitly configured to be shared. Tenants can
+                        create multiple networks, until they reach the thresholds specified
+                        by per-tenant Quotas. The network is the principal entity for 
+            			the Neutron API. Ports and Subnets must always be associated 
+            			with a network.";
+
+            key "networkUUID";
+            uses attrs:base_attrs;
+            uses attrs:admin_attrs;
+            uses attrs:network_attrs;
+        }
+    }
+}
