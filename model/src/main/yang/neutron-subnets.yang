@@ -1,0 +1,119 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-subnets {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-subnets";
+
+    prefix neutron-subnets;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines Openstack Ice House Neutron Subnets model";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of Openstack Neutron Ice House Subnets model.";
+    }
+
+    grouping subnet-attrs {
+        leaf network-id {
+            type attrs:uuid;
+            description "network this subnet is associated with.";
+        }
+        leaf ip-version {
+            description "IP version";
+            type enumeration {
+                enum 4;
+                enum 6;
+            }
+        }
+        leaf cidr {
+            type string;
+            description "cidr representing IP range for this subnet, based on IP version";
+        }
+        leaf gateway-ip {
+            type inet:ip-address;
+            description "default gateway used by devices in this subnet";
+        }
+        leaf-list dns-nameservers {
+            type inet:ip-address;
+            description "DNS name servers used by hosts in this subnet.";
+            // neutron subnet-create test-net1 40.0.0.0/24 --dns-nameservers list=true 8.8.8.7 8.8.8.8        }        }
+        }
+        leaf ipv6-address-mode {
+
+            description "neutron subnet-create --ip-version 6 --ipv6_ra_mode off --ipv6_address_mode
+                        off NETWORK CIDR neutron subnet-create --ip-version 6 --ipv6_ra_mode
+                        off --ipv6_address_mode dhcpv6-stateful NETWORK CIDR neutron subnet-create
+                        --ip-version 6 --ipv6_ra_mode slaac --ipv6_address_mode slaac
+                        NETWORK CIDR neutron subnet-create --ip-version 6 --ipv6_ra_mode
+                        dhcpv6-stateful --ipv6_address_mode off NETWORK CIDR neutron subnet-create
+                        --ip-version 6 --ipv6_ra_mode dhcpv6-stateless --ipv6_address_mode
+                        dhcpv6-stateless NETWORK CIDR Note: can't find this in the spec
+                        but OS is sending it with a null value.";
+            // ?? Do we make this an enumeration for validation or require the writer to write good values?
+            type enumeration {
+                enum off;
+                enum dhcpv6-stateful;
+                enum slaac;
+                enum dhcpv6-stateless;
+            }
+        }
+        leaf ipv6-ra-mode {
+            description "TODO can't find this in the spec but OS sends it with a null
+                        value.";
+            type enumeration {
+                enum off;
+                enum dhcpv6-stateful;
+                enum slaac;
+                enum dhcpv6-stateless;
+            }
+        }
+        list allocation-pools {
+            description "Sub-ranges of cidr available for dynamic allocation to ports";
+            key start;
+            leaf start {
+                type string;
+            }
+            leaf end {
+                type string;
+            }
+        }
+        list host-routes {
+            description "Routes that should be used by devices with IPs from this subnet
+                        (not including local subnet route).";
+            key destination;
+            leaf destination {
+                type inet:ip-address;
+            }
+            leaf nexthop {
+                type inet:ip-address;
+            }
+        }
+        leaf enable-dhcp {
+            type boolean;
+            description "Specifies whether DHCP is enabled for this subnet or not.";
+        }
+    }
+
+    container subnets {
+        list subnet {
+            key "uuid";
+            uses attrs:base-attrs;
+            uses subnet-attrs;
+        }
+    }
+}
