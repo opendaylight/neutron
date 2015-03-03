@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a96c907_fb6656ba",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569
+      },
+      "writtenOn": "2015-03-03T23:37:53Z",
+      "side": 0,
+      "message": "FYI:   This model supports a RESTCONF specific mechanism_odl.py.  To handle a syntax issue where RESTCONF doesn\u0027t support \"colon\" in a token, this model uses \"__.__\" in place of \":\" and the mechanism driver substitutes input/output accordingly.",
+      "revId": "7e8581e07cc5b79568b8834c2ddcd4de283edeae",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
