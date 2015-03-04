@@ -150,6 +150,52 @@
       "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_4014f0f4",
+        "filename": "parent/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-04T18:45:15Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 2
+      },
+      "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_200f64e3",
+        "filename": "parent/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-04T18:45:15Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 155,
+        "startChar": 10,
+        "endLine": 155,
+        "endChar": 11
+      },
+      "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
