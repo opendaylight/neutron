@@ -22,6 +22,30 @@
       "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_5dfffb01",
+        "filename": "model/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2015-03-04T05:44:42Z",
+      "side": 1,
+      "message": "i was planning to add the feature to the existing neutron/features/ pom. Are you suggesting to create separate features project for models ?",
+      "parentUuid": "7a96c907_5b0d0ae7",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 11
+      },
+      "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
