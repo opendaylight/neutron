@@ -17,5 +17,6 @@
     <module>northbound-api</module>
     <module>transcriber</module>
     <module>features</module>
+    <module>karaf</module>
   </modules>
 </project>
