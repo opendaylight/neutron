@@ -13,13 +13,13 @@
     <feature version='${aaa.version}'>odl-aaa-authn</feature>
     <feature>war</feature>
     <feature version='${project.version}'>odl-neutron-spi</feature>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/${eclipse.persistence.version}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/${eclipse.persistence.version}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/${eclipse.persistence.version}</bundle>
     <bundle>mvn:org.opendaylight.neutron/northbound-api/${project.version}</bundle>
     <bundle>mvn:com.sun.jersey/jersey-core/${jersey.version}</bundle>
     <bundle>mvn:com.sun.jersey/jersey-server/${jersey.version}</bundle>
     <bundle>mvn:com.sun.jersey/jersey-servlet/${jersey.version}</bundle>
+    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/${eclipse.persistence.version}</bundle>
+    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/${eclipse.persistence.version}</bundle>
+    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/${eclipse.persistence.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>
 
