@@ -83,6 +83,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_3d178f53",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1569
+      },
+      "writtenOn": "2015-03-04T15:34:34Z",
+      "side": 1,
+      "message": "Can\u0027t have colon\u0027s in the identifier with RESTCONF and so __.__ is the substitution pattern.",
+      "parentUuid": "5a93c517_bd515fda",
+      "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_5d5e1beb",
         "filename": "model/src/main/yang/neutron.yang",
         "patchSetId": 1
@@ -111,6 +129,24 @@
       "writtenOn": "2015-03-04T09:34:40Z",
       "side": 1,
       "message": "Why do we need this v2.0 container?",
+      "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_1d12d362",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1569
+      },
+      "writtenOn": "2015-03-04T15:34:34Z",
+      "side": 1,
+      "message": "No compelling reason.  It was perhaps a cute attempt to create a URL similar to the ML2 spec as I was learning how to write a yang model :-)  \n\nneutronv2.0:networks neutronv2.0:subnets neutronv2.0:ports ?\n\nI like the idea of keeping the version# in the URL, and keeping neutron in the URL seems desirable.",
+      "parentUuid": "5a93c517_7d63d7b1",
       "revId": "361a5381ed21eed9c047d5cf3c70c0f2e79a3fe7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
