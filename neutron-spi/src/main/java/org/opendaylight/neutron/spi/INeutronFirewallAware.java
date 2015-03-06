@@ -17,7 +17,11 @@ public interface INeutronFirewallAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewall can be created
+     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+     * the scope of neutron northbound
      *
+     * @deprecated
+     * 
      * @param firewall
      *            instance of proposed new Firewall object
      * @return integer
@@ -29,6 +33,10 @@ public interface INeutronFirewallAware {
 
     /**
      * Services provide this interface method for taking action after a firewall has been created
+     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+     * the scope of neutron northbound
+     *
+     * @deprecated
      *
      * @param firewall
      *            instance of new Firewall object
@@ -39,6 +47,10 @@ public interface INeutronFirewallAware {
     /**
      * Services provide this interface method to indicate if the specified firewall can be changed using the specified
      * delta
+     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+     * the scope of neutron northbound
+     *
+     * @deprecated
      *
      * @param delta
      *            updates to the firewall object using patch semantics
@@ -53,6 +65,10 @@ public interface INeutronFirewallAware {
 
     /**
      * Services provide this interface method for taking action after a firewall has been updated
+     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+     * the scope of neutron northbound
+     *
+     * @deprecated
      *
      * @param firewall
      *            instance of modified Firewall object
@@ -62,6 +78,10 @@ public interface INeutronFirewallAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewall can be deleted
+     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+     * the scope of neutron northbound
+     *
+     * @deprecated
      *
      * @param firewall
      *            instance of the Firewall object to be deleted
@@ -74,6 +94,10 @@ public interface INeutronFirewallAware {
 
     /**
      * Services provide this interface method for taking action after a firewall has been deleted
+     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+     * the scope of neutron northbound
+     *
+     * @deprecated
      *
      * @param firewall
      *            instance of deleted Firewall object
