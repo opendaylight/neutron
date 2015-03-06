@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_57b594cb",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-06T19:14:53Z",
+      "side": 1,
+      "message": "nitpick: the leaf blocks above have a line in between.\nplease remove them or add it here to make it consistent.\n\nThis is 100% cosmetics; so please feel free to ignore this\nsuggestion.",
+      "range": {
+        "startLine": 74,
+        "startChar": 9,
+        "endLine": 74,
+        "endChar": 18
+      },
+      "revId": "1f0772c83753274cf1c6255ca6223c54c07051f2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
