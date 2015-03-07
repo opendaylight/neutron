@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a93c517_d7544423",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 649
+      },
+      "writtenOn": "2015-03-07T10:39:22Z",
+      "side": 1,
+      "message": "this is better served with a base identity (identity network-type) and then declaring those identities.",
+      "revId": "1f0772c83753274cf1c6255ca6223c54c07051f2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_57b594cb",
         "filename": "model/src/main/yang/neutron.yang",
         "patchSetId": 3
@@ -19,6 +36,40 @@
         "endLine": 74,
         "endChar": 18
       },
+      "revId": "1f0772c83753274cf1c6255ca6223c54c07051f2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_9736bc02",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 649
+      },
+      "writtenOn": "2015-03-07T10:39:22Z",
+      "side": 1,
+      "message": "is this leaf mandatory? or does it have a default value?",
+      "revId": "1f0772c83753274cf1c6255ca6223c54c07051f2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_373b28ed",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 649
+      },
+      "writtenOn": "2015-03-07T10:39:22Z",
+      "side": 1,
+      "message": "What sort of status is this?",
       "revId": "1f0772c83753274cf1c6255ca6223c54c07051f2",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
