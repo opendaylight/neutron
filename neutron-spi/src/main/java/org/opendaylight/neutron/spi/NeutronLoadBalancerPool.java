@@ -206,4 +206,21 @@ public class NeutronLoadBalancerPool implements Serializable {
         }
         return ans;
     }
+
+    @Override
+    public String toString() {
+        return "NeutronLoadBalancerPool{" +
+            "id='" + loadBalancerPoolID + '\'' +
+            ", tenantID='" + loadBalancerPoolTenantID + '\'' +
+            ", name='" + loadBalancerPoolName + '\'' +
+            ", description='" + loadBalancerPoolDescription + '\'' +
+            ", protocol=" + loadBalancerPoolProtocol +'\''+
+            ", lbAlgorithm='" + loadBalancerPoolLbAlgorithm + '\'' +
+            ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID +
+            ", adminStateUp=" + loadBalancerPoolAdminStateIsUp +
+            ", status='" + loadBalancerPoolStatus + '\'' +
+// todo: add loadBalancerPoolMembers as joined string
+            '}';
+    }
+
 }

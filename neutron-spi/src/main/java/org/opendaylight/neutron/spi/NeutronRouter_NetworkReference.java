@@ -37,4 +37,10 @@ public class NeutronRouter_NetworkReference implements Serializable {
     public void setNetworkID(String networkID) {
         this.networkID = networkID;
     }
+    @Override
+    public String toString() {
+        return "NeutronRouterNetworkReference [" +
+            "networkID=" + networkID + "]";
+    }
+
 }

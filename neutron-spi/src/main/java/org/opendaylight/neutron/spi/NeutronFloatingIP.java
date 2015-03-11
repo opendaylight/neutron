@@ -134,6 +134,18 @@ public class NeutronFloatingIP implements Serializable {
         return ans;
     }
 
+    @Override
+    public String toString() {
+        return "NeutronFloatingIP{" +
+            "fipUUID='" + floatingIPUUID + '\'' +
+            ", fipFloatingNetworkId='" + floatingNetworkUUID + '\'' +
+            ", fipPortUUID='" + portUUID + '\'' +
+            ", fipFixedIPAddress='" + fixedIPAddress + '\'' +
+            ", fipFloatingIPAddress=" + floatingIPAddress +
+            ", fipTenantId='" + tenantUUID + '\'' +
+            '}';
+    }
+
     public void initDefaults() {
     }
 }
