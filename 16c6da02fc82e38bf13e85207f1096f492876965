@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_b1ddfa16",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronPortsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-11T17:00:26Z",
+      "side": 1,
+      "message": "if we are going to put this in (and I can see why), then we should change the message to \"subnet UUID must exist\" and we can remove the code at lines 245-247 as it is superfulous",
+      "revId": "16c6da02fc82e38bf13e85207f1096f492876965",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
