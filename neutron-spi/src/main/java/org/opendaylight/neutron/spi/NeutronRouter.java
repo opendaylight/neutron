@@ -203,4 +203,20 @@ public class NeutronRouter implements Serializable, INeutronObject {
     public void initDefaults() {
         adminStateUp = true;
     }
+
+    @Override
+    public String toString() {
+        return "NeutronRouter [" +
+            "id=" + routerUUID +
+            ", name=" + name + 
+            ", adminStateUp=" + adminStateUp + 
+            ", status=" + status + 
+            ", tenantID=" + tenantID +
+            ", external_gateway_info=" + externalGatewayInfo +
+            ", distributed=" + distributed +
+            ", gw_port_id=" + gatewayPortId +
+            ", routes=" + routes +
+            "]";
+    }
+
 }

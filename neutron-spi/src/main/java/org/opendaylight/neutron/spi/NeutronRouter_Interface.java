@@ -70,4 +70,13 @@ public class NeutronRouter_Interface implements Serializable {
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
     }
+
+    @Override
+    public String toString() {
+        return "NeutronRouterInterface [" +
+            "subnetUUID=" + subnetUUID + 
+            ", portUUID=" + portUUID + 
+            ", id=" + id +
+            ", tenantID=" + tenantID + "]";
+    }
 }
