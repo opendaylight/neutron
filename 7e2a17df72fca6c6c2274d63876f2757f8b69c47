@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_d109a696",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronRouter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-11T17:16:47Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace",
+      "range": {
+        "startLine": 211,
+        "startChar": 30,
+        "endLine": 211,
+        "endChar": 31
+      },
+      "revId": "7e2a17df72fca6c6c2274d63876f2757f8b69c47",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_71fe926d",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronRouter_Interface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-11T17:16:47Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace",
+      "revId": "7e2a17df72fca6c6c2274d63876f2757f8b69c47",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_91031e73",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet_HostRoute.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-11T17:16:47Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace",
+      "revId": "7e2a17df72fca6c6c2274d63876f2757f8b69c47",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_31f80a7c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet_IPAllocationPool.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-11T17:16:47Z",
+      "side": 1,
+      "message": "Please remove trailing whitespace",
+      "revId": "7e2a17df72fca6c6c2274d63876f2757f8b69c47",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
