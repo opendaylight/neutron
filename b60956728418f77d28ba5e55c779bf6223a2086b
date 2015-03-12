@@ -106,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_e5a97825",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:57:55Z",
+      "side": 1,
+      "message": "Ryan, are you suggesting taht provider-attributes should be augmented in as they are an extension? (not agreeing or disagreeing... just want to get clarity on what you think)",
+      "parentUuid": "5a93c517_a595b0e5",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_25544053",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
