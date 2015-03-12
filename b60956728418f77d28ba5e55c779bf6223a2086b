@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_656d6804",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T21:16:43Z",
+      "side": 1,
+      "message": "yes - I am suggesting that it should go in as an extension as should the binding changes to port, and the router addition to network (L3)",
+      "parentUuid": "5a93c517_e5a97825",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_25544053",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
