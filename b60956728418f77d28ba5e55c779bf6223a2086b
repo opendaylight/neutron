@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_c5cc7c38",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "I believe you can do this currently with yang:uuids ... we are using them in the ovsdb.yang model.",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_25dbe0ee",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "If (and I please ignore this comment if I\u0027m wrong) provider_attr are specific to networks... could we move this grouping the network.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_25544053",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "This seems to be used for all objects... do networks really have a portUUID?  If not, why not move these things to the correct place.\n\nDo ports really have a \u0027shared\u0027 attribute?\n\nWould it make sense to *just* have the attributes for each kind of thing they actually have?",
+      "range": {
+        "startLine": 109,
+        "startChar": 24,
+        "endLine": 109,
+        "endChar": 25
+      },
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_45d86cef",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "Would it make more sense for this grouping to be in the network.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_e5e418ae",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "Would it make more sense  for this to be in the ports.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_05e2649f",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "Would it make more sense for this to be in the subnet.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_45514c61",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-12T20:28:28Z",
+      "side": 1,
+      "message": "I think base_attr may be overpopulated and we probably need to better capture the real network attributes here.",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
