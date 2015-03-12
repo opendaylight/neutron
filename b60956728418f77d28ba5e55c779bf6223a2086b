@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a93c517_65d1e8cc",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "replace tabs with spaces",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_c5cc7c38",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -13,6 +30,23 @@
       "writtenOn": "2015-03-12T20:28:28Z",
       "side": 1,
       "message": "I believe you can do this currently with yang:uuids ... we are using them in the ovsdb.yang model.",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_85d674c4",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "remove trailing whitespace",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -47,6 +81,24 @@
       "writtenOn": "2015-03-12T20:42:54Z",
       "side": 1,
       "message": "Could we move from using _ to using - in identifiers to fall in line with common practices in yang files.",
+      "parentUuid": "5a93c517_25dbe0ee",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_a595b0e5",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "actually provider is it\u0027s own XML namespace in the neutron spec and so this should go into its own yang module",
       "parentUuid": "5a93c517_25dbe0ee",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
@@ -94,6 +146,40 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_2589a0ca",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "this attribute is part of the L3 extension and so should go into a separate yang model.",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_45862cbb",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "this attribute is part of the providers extension and so should go in the same yang file as the items defined starting at line 86",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_e5e418ae",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -105,6 +191,23 @@
       "writtenOn": "2015-03-12T20:28:28Z",
       "side": 1,
       "message": "Would it make more sense  for this to be in the ports.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_c5c1dce5",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "binding_host_id, binding_vif_*, binding_profile, and binding_vnic are all part of the port binding extension and so should be in a separate yang file",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -128,6 +231,57 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_054b44b1",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "remove whitespace at end of lines",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_a5c7f011",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "replace tab with spaces",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_25b0c08a",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "this should be UUID, as that is the key identifier field for all neutron objects.",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_45514c61",
         "filename": "model/src/main/yang/neutron-network.yang",
         "patchSetId": 6
@@ -145,6 +299,40 @@
         "endLine": 40,
         "endChar": 34
       },
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_65b6c88c",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "I know that others argued for using a specifier, but that is incorrect in this case.  UUID is the atomic identifier and so we should use uuid for all the base objects",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_85bbd471",
+        "filename": "model/src/main/yang/neutron-subnets.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-12T20:53:33Z",
+      "side": 1,
+      "message": "use UUID rather than subnetUUID",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
