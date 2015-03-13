@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_c0d54a44",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_65d1e8cc",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_c5cc7c38",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_6af690d9",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "When fixing the comment to use yang:uuid, I get the following error when I try to do : import ietf-yang-types { prefix \"yang\"; revision-date \"2013-07-15\";}\n\n [ERROR] Failed to execute goal org.opendaylight.yangtools:yang-maven-plugin:0.7.0-SNAPSHOT:generate-sources (default) on project model: yang-to-sources: Unable to parse yang files from /home/kkoushik/neutron_yang/neutron/model/src/main/yang: Not existing module imported:ietf-yang-types:2013-07-15",
+      "parentUuid": "5a93c517_c5cc7c38",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_85d674c4",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-12T20:53:33Z",
       "side": 1,
       "message": "remove trailing whitespace",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_0a034cb9",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_85d674c4",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -142,6 +196,60 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_8a267c67",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_659fa804",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_ea3140a3",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Will go into their own model.",
+      "parentUuid": "5a93c517_25dbe0ee",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_aa2b382f",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_a595b0e5",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_25544053",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -165,6 +273,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_6a1d300f",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_25544053",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_45d86cef",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -176,6 +302,24 @@
       "writtenOn": "2015-03-12T20:28:28Z",
       "side": 1,
       "message": "Would it make more sense for this grouping to be in the network.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_0a1a6c17",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_45d86cef",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -216,6 +360,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_2a1728ef",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_45862cbb",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_e5e418ae",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 6
@@ -227,6 +389,24 @@
       "writtenOn": "2015-03-12T20:28:28Z",
       "side": 1,
       "message": "Would it make more sense  for this to be in the ports.yang file?",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_cad32437",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_e5e418ae",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -267,6 +447,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_ead86055",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_05e2649f",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_054b44b1",
         "filename": "model/src/main/yang/neutron-network.yang",
         "patchSetId": 6
@@ -278,6 +476,24 @@
       "writtenOn": "2015-03-12T20:53:33Z",
       "side": 1,
       "message": "remove whitespace at end of lines",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_8add1c45",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_054b44b1",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -318,6 +534,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_aae25801",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_25b0c08a",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_45514c61",
         "filename": "model/src/main/yang/neutron-network.yang",
         "patchSetId": 6
@@ -341,6 +575,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_6ae4500d",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "I\u0027ll stick with the existing for now(it\u0027s just got 3 leaves)",
+      "parentUuid": "5a93c517_45514c61",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_65b6c88c",
         "filename": "model/src/main/yang/neutron-ports.yang",
         "patchSetId": 6
@@ -358,6 +610,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_0af10ccd",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_65b6c88c",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_85bbd471",
         "filename": "model/src/main/yang/neutron-subnets.yang",
         "patchSetId": 6
@@ -369,6 +639,24 @@
       "writtenOn": "2015-03-12T20:53:33Z",
       "side": 1,
       "message": "use UUID rather than subnetUUID",
+      "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_2aee48ed",
+        "filename": "model/src/main/yang/neutron-subnets.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-13T21:38:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_85bbd471",
       "revId": "b60956728418f77d28ba5e55c779bf6223a2086b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
