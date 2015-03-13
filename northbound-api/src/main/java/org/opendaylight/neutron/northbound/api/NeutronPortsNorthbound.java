@@ -8,16 +8,10 @@
 
 package org.opendaylight.neutron.northbound.api;
 
-import org.codehaus.enunciate.jaxrs.ResponseCode;
-import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
-import org.opendaylight.neutron.spi.INeutronPortAware;
-import org.opendaylight.neutron.spi.INeutronPortCRUD;
-import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronPort;
-import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.Neutron_IPs;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -33,10 +27,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+
+import org.codehaus.enunciate.jaxrs.ResponseCode;
+import org.codehaus.enunciate.jaxrs.StatusCodes;
+import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
+import org.opendaylight.neutron.spi.INeutronPortAware;
+import org.opendaylight.neutron.spi.INeutronPortCRUD;
+import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.opendaylight.neutron.spi.NeutronPort;
+import org.opendaylight.neutron.spi.NeutronSubnet;
+import org.opendaylight.neutron.spi.Neutron_IPs;
 
 /**
  * Neutron Northbound REST APIs.<br>
@@ -241,10 +242,10 @@ public class NeutronPortsNorthbound {
                     if (ip.getSubnetUUID() == null) {
                         throw new BadRequestException("subnet UUID not specified");
                     }
-                    if (!subnetInterface.subnetExists(ip.getSubnetUUID())) {
-                        throw new BadRequestException("subnet UUID must exists");
-                    }
                     NeutronSubnet subnet = subnetInterface.getSubnet(ip.getSubnetUUID());
+                    if (subnet == null) {
+                        throw new BadRequestException("subnet UUID must exist");
+                    }
                     if (!singleton.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
                         throw new BadRequestException("network UUID must match that of subnet");
                     }
