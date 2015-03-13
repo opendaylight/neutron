@@ -184,4 +184,11 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
         }
         return ans;
     }
+
+    @Override
+    public String toString() {
+        return "NeutronSubnetIPAllocationPool [" +
+            "start=" + poolStart +
+            ", end=" + poolEnd + "]";
+    }
 }
