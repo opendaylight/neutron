@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a93c517_77ac3dee",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-03-13T15:12:29Z",
+      "side": 1,
+      "message": "Please use the uuid from yang.",
+      "revId": "22f609bac26016004b2af6d71fc2e7aae7411327",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_b4e2c301",
         "filename": "model/src/main/yang/neutron-ports.yang",
         "patchSetId": 7
