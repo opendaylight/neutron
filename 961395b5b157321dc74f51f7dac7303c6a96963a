@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_cdc7be11",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "This presence of this model/extension is what adds the router:external attribute to the neutron network object, but I don\u0027t see any modifications of the object here.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_2d4bc2b1",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "I\u0027m not 100% convinced this is necessary/desirable - the router is defined to be external if the external_network_id exists and has a non-empty value.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_0de5a6a7",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "This is the port id that corresponds to the fixed-ip-address below",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_2de2e29f",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "this should be floating-network-id",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_4ddbaeed",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "You are missing the interface information - this is necessary to track in this object even though it is not accessible or visible via the router object - it gets modified via the add_router_interface and remove_router_interface URIs.  The interface information is a list of objects that contain both a subnet_id (uuid) and port_id (uuid).",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_6dd8eaef",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "This doesn\u0027t work as name is not an attribute of floating ips.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_cdeede8b",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "This is missing the status attribute of the floating ip.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_edf39a71",
+        "filename": "model/src/main/yang/neutron-provider.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-15T01:02:54Z",
+      "side": 1,
+      "message": "I\u0027m not seeing the modification to the network object that adds these attributes when this model is added.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
