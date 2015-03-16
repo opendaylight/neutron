@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_a1659ae2",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_cdc7be11",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_2d4bc2b1",
         "filename": "model/src/main/yang/neutron-L3.yang",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-15T01:02:54Z",
       "side": 1,
       "message": "I\u0027m not 100% convinced this is necessary/desirable - the router is defined to be external if the external_network_id exists and has a non-empty value.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_416296d9",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_2d4bc2b1",
       "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_615f920f",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_0de5a6a7",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_2de2e29f",
         "filename": "model/src/main/yang/neutron-L3.yang",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-15T01:02:54Z",
       "side": 1,
       "message": "this should be floating-network-id",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_019c8ebf",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_2de2e29f",
       "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_21a18af8",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "I\u0027ve tried to address this. Can you review and let me know if this is what you had in mind?",
+      "parentUuid": "5a93c517_4ddbaeed",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_6dd8eaef",
         "filename": "model/src/main/yang/neutron-L3.yang",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2015-03-15T01:02:54Z",
       "side": 1,
       "message": "This doesn\u0027t work as name is not an attribute of floating ips.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_c1a54605",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_6dd8eaef",
       "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_e1aac2d3",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "There is no status in floatingip? you probably meant the \u0027status\u0027 in router object, which I have fixed?",
+      "parentUuid": "5a93c517_cdeede8b",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_edf39a71",
         "filename": "model/src/main/yang/neutron-provider.yang",
         "patchSetId": 8
@@ -132,6 +258,24 @@
       "writtenOn": "2015-03-15T01:02:54Z",
       "side": 1,
       "message": "I\u0027m not seeing the modification to the network object that adds these attributes when this model is added.",
+      "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_61b6b23f",
+        "filename": "model/src/main/yang/neutron-provider.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-16T21:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_edf39a71",
       "revId": "961395b5b157321dc74f51f7dac7303c6a96963a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
