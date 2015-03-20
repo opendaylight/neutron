@@ -30,7 +30,7 @@ module neutron-ports {
 
     grouping port-attrs {
         leaf binding-host-id {
-            type attrs:uuid;
+            type yang:uuid;
             description "The ID of the host where the port is allocated. In some cases,
                         different implementations can run on different hosts.";
         }
@@ -45,7 +45,7 @@ module neutron-ports {
         }
 
         leaf network-id {
-            type attrs:uuid;
+            type yang:uuid;
         }
         list extra-dhcp-opts {
             description "Extra DHCP options";
@@ -99,7 +99,7 @@ module neutron-ports {
         list fixed-ips {
             key subnet-id;
             leaf subnet-id {
-                type attrs:uuid;
+                type yang:uuid;
             }
             leaf ip-address {
                 type inet:ip-address;
@@ -107,10 +107,10 @@ module neutron-ports {
         }
 
         leaf-list security-groups {
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf device-id {
-            type attrs:uuid;
+            type yang:uuid;
         }
     }
 

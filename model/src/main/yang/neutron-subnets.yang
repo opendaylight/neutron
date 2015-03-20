@@ -30,7 +30,7 @@ module neutron-subnets {
 
     grouping subnet-attrs {
         leaf network-id {
-            type attrs:uuid;
+            type yang:uuid;
             description "network this subnet is associated with.";
         }
         leaf ip-version {

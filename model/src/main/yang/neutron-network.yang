@@ -32,7 +32,7 @@ module neutron-networks {
 
         leaf-list subnets {
             description "The associated subnets.";
-            type attrs:uuid;
+            type yang:uuid;
         }
 
         leaf shared {

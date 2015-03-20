@@ -40,7 +40,7 @@ module neutron-metering {
     grouping metering-rule-attrs {
         description "OpenStack Layer3 Metering label rules.";
         leaf id {
-            type attrs:uuid;
+            type yang:uuid;
             description "Metering Rule ID.";
         }
         leaf direction {
@@ -56,7 +56,7 @@ module neutron-metering {
             default "ingress";
         }
         leaf metering-label-id {
-            type attrs:uuid;
+            type yang:uuid;
             description "Metering Label ID to associate with this metering rule.";
         }
         leaf remote-ip-prefix {

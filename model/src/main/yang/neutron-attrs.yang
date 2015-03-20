@@ -12,7 +12,7 @@ module neutron-attrs {
 
     prefix neutron-attrs;
 
-    import ietf-yang-types { prefix "yang";}
+    import ietf-yang-types { prefix "yang"; revision-date "2013-07-15";}
     // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
 
@@ -27,21 +27,6 @@ module neutron-attrs {
         description
                 "Initial version of attributes used by OpenStack Ice House Neutron
                 models";
-    }
-
-    // Defining this until ODL migrates to latest ietf-inet-types to avoid errors
-    typedef uuid {
-        type string {
-            pattern '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-'
-            + '[0-9a-fA-F]{4}-[0-9a-fA-F]{12}';
-        }
-        description
-                "A Universally Unique IDentifier in the string representation
-                defined in RFC 4122. The canonical representation uses lowercase
-                characters. The following is an example of a UUID in string representation:
-                f81d4fae-7dec-11d0-a765-00a0c91e6bf6 ";
-        reference
-                "RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace";
     }
 
     identity network-type-base {
@@ -81,7 +66,7 @@ module neutron-attrs {
     grouping base-attrs {
 
         leaf uuid {
-            type uuid;
+            type yang:uuid;
             description "UUID to index this neutron object.";
         }
 
@@ -91,7 +76,7 @@ module neutron-attrs {
         }
 
         leaf tenant-id {
-            type uuid;
+            type yang:uuid;
             description "Admin-only. The UUID of the tenant that will own the network.
                         This tenant can be different from the tenant that makes the create
                         network request. However, only administrative users can specify

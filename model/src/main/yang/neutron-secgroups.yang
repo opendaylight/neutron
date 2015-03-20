@@ -40,11 +40,11 @@ module neutron-secgroups {
     grouping security-rule-attrs {
         description "OpenStack Layer3 Security Group rules.";
         leaf id {
-            type attrs:uuid;
+            type yang:uuid;
             description "Security Rule ID.";
         }
         leaf tenant-id {
-            type attrs:uuid;
+            type yang:uuid;
             description "UUID of the tenant.";
         }
         leaf direction {
@@ -63,13 +63,13 @@ module neutron-secgroups {
             default "ingress";
         }
         leaf security-group-id {
-            type attrs:uuid;
+            type yang:uuid;
             description "The security group ID to associate with this security group rule.";
         }
         leaf remote-group-id {
             description "The remote group ID to be associated with this security group rule.
                 You can specify either remote-ip-prefix or remote-group-id in the request body.";
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf remote-ip-prefix {
             description "The remote IP Prefix to be associated with this security group rule.

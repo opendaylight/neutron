@@ -46,7 +46,7 @@ module neutron-L3 {
         leaf-list external_network_id {
             description "The network_id, for the external gateways. If this is empty, then this
                 network does not have external access";
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf router-status {
             description "Contains the Router status.";
@@ -56,26 +56,26 @@ module neutron-L3 {
 
     grouping L3-floatingip-attrs {
         leaf uuid {
-            type attrs:uuid;
+            type yang:uuid;
             description "UUID to index this object.";
         }
 
         leaf tenant-id {
-            type attrs:uuid;
+            type yang:uuid;
             description "The Tenant ID of this object.";
         }
         leaf router-id {
             description "Contains the Router ID of this floatingip object.";
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf port-id {
             description "Contains the Port ID of the fixed IP address that will be
                 associated with this object.";
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf floating-network-id {
             description "The ID of the network associated with the floating IP.";
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf floating-ip-address {
             description "The floating IP address.";
@@ -96,11 +96,11 @@ module neutron-L3 {
     grouping interface-attrs {
         leaf subnet-id {
             description "Contains the Subnet ID of the interface.";
-            type attrs:uuid;
+            type yang:uuid;
         }
         leaf port-id {
             description "Contains the Port ID of the interface.";
-            type attrs:uuid;
+            type yang:uuid;
         }
     }
 
