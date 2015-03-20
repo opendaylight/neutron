@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a93c517_8f10b84f",
+        "filename": "model/src/main/yang/neutron-metering.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-03-20T15:25:13Z",
+      "side": 1,
+      "message": "remove white space at end of line",
+      "revId": "9c7c4ed23ed49afe327ab0fcd76b79bbfbd0cb4a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_cf0ec034",
         "filename": "model/src/main/yang/neutron-secgroups.yang",
         "patchSetId": 11
