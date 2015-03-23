@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_d8268716",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "I think the more used convention is to name the tests: testIsValidCIDR(). Though this is fine also.",
+      "range": {
+        "startLine": 23,
+        "startChar": 16,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_58def712",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "use a constant since these strings are used all over. Pretty sure sonar will complain.",
+      "range": {
+        "startLine": 26,
+        "startChar": 34,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_b8c13b30",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "Might as well just use true instead of a variable. I guess you were trying to make the assert more readable",
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_38ed2bc4",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "this log just repeats what the assert and final test status will show so doesn\u0027t add much value in its current form.",
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_d8d1a7fc",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "if just checking a boolean, might as well just use assert{True,False}. that would be the most readable",
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_f86a6319",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "I think you could collapse all the code to just be:\n\nassertFalse(\"isValidCIDR(10.18.0.0/8) should be false\", objectUT.setCidr(\"10.18.0.0/18\").isValidCIDR))\n\nthough it may not be as readable. at a minium I would use assertFalse(isValidCIDR())",
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_b81dbbbf",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "_Test doesn\u0027t match the other tests",
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_f8234303",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "No test keywork in the method name",
+      "range": {
+        "startLine": 85,
+        "startChar": 5,
+        "endLine": 85,
+        "endChar": 9
+      },
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_b874dbfd",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnet_IPAllocationPoolTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-23T14:27:24Z",
+      "side": 1,
+      "message": "2013 or 2015?",
+      "revId": "4f9fec769f187a7d025c938003a34969cee0f5db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
