@@ -76,7 +76,6 @@ public class NeutronFirewallRulesNorthbound {
             @QueryParam("tenant_id") String queryFirewallRuleTenantID,
             @QueryParam("name") String queryFirewallRuleName,
             @QueryParam("description") String queryFirewallRuleDescription,
-            @QueryParam("admin_state_up") Boolean queryFirewallRuleAdminStateIsUp,
             @QueryParam("status") String queryFirewallRuleStatus,
             @QueryParam("shared") Boolean queryFirewallRuleIsShared,
             @QueryParam("firewall_policy_id") String queryFirewallRulePolicyID,
@@ -113,8 +112,6 @@ public class NeutronFirewallRulesNorthbound {
                             queryFirewallRuleName.equals(nsr.getFirewallRuleName())) &&
                     (queryFirewallRuleDescription == null ||
                             queryFirewallRuleDescription.equals(nsr.getFirewallRuleDescription())) &&
-                    (queryFirewallRuleAdminStateIsUp == null ||
-                            queryFirewallRuleAdminStateIsUp.equals(nsr.getFirewallRuleAdminStateIsUp())) &&
                     (queryFirewallRuleStatus == null ||
                             queryFirewallRuleStatus.equals(nsr.getFirewallRuleStatus())) &&
                     (queryFirewallRuleIsShared == null ||
@@ -340,7 +337,6 @@ public class NeutronFirewallRulesNorthbound {
                 delta.getFirewallRuleTenantID() != null ||
                 delta.getFirewallRuleName() != null ||
                 delta.getFirewallRuleDescription() != null ||
-                delta.getFirewallRuleAdminStateIsUp() != null ||
                 delta.getFirewallRuleStatus() != null ||
                 delta.getFirewallRuleIsShared() != null ||
                 delta.getFirewallRulePolicyID() != null ||

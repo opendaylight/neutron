@@ -60,11 +60,11 @@ public class NeutronFirewallPolicy implements Serializable {
     @XmlElement (defaultValue = "false", name = "audited")
     String firewallPolicyIsAudited;
 
-    public String getFirewallPolicyIsAudited() {
+    public Boolean getFirewallPolicyIsAudited() {
         return firewallPolicyIsAudited;
     }
 
-    public void setFirewallPolicyIsAudited(String firewallPolicyIsAudited) {
+    public void setFirewallPolicyIsAudited(Boolean firewallPolicyIsAudited) {
         this.firewallPolicyIsAudited = firewallPolicyIsAudited;
     }
 

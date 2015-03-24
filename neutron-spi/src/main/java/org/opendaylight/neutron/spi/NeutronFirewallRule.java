@@ -60,9 +60,6 @@ public class NeutronFirewallRule implements Serializable {
     @XmlElement(name = "description")
     String firewallRuleDescription;
 
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean firewallRuleAdminStateIsUp;
-
     @XmlElement(name = "status")
     String firewallRuleStatus;
 
@@ -195,14 +192,6 @@ public class NeutronFirewallRule implements Serializable {
         this.firewallRuleStatus = firewallRuleStatus;
     }
 
-    public Boolean getFirewallRuleAdminStateIsUp() {
-        return firewallRuleAdminStateIsUp;
-    }
-
-    public void setFirewallRuleAdminStateIsUp(Boolean firewallRuleAdminStateIsUp) {
-        this.firewallRuleAdminStateIsUp = firewallRuleAdminStateIsUp;
-    }
-
     public String getFirewallRuleDescription() {
         return firewallRuleDescription;
     }
@@ -252,9 +241,6 @@ public class NeutronFirewallRule implements Serializable {
             if (s.equals("description")) {
                 ans.setFirewallRuleDescription(this.getFirewallRuleDescription());
             }
-            if (s.equals("admin_state_up")) {
-                ans.setFirewallRuleAdminStateIsUp(firewallRuleAdminStateIsUp);
-            }
             if (s.equals("status")) {
                 ans.setFirewallRuleStatus(this.getFirewallRuleStatus());
             }
@@ -300,7 +286,6 @@ public class NeutronFirewallRule implements Serializable {
             ", firewallRuleTenantID='" + firewallRuleTenantID + '\'' +
             ", firewallRuleName='" + firewallRuleName + '\'' +
             ", firewallRuleDescription='" + firewallRuleDescription + '\'' +
-            ", firewallRuleAdminStateIsUp=" + firewallRuleAdminStateIsUp +
             ", firewallRuleStatus='" + firewallRuleStatus + '\'' +
             ", firewallRuleIsShared=" + firewallRuleIsShared +
             ", firewallRulePolicyID=" + firewallRulePolicyID +
