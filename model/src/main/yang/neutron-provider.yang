@@ -59,7 +59,7 @@ module neutron-provider {
           This module augments the networks container in the neutron-networks
           module with provider information.
           ";
-        list providers {
+        list segments {
             description "List of provider network(s) associated with this network.";
             key segmentation-id;
             uses provider-attrs;
