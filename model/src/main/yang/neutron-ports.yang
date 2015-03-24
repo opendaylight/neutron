@@ -1,0 +1,125 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-ports {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-ports";
+
+    prefix neutron-ports;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines Openstack Ice House Neutron Ports model";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of Openstack Neutron Ice House Ports model.";
+    }
+
+    grouping port-attrs {
+        leaf binding-host-id {
+            type yang:uuid;
+            description "The ID of the host where the port is allocated. In some cases,
+                        different implementations can run on different hosts.";
+        }
+        leaf-list allowed-address-pairs {
+            type string;
+            description "Allowed address pairs for this port. For example: neutron port-create
+                        net1 --allowed-address-pairs type=dict list=true mac_address=<mac_address>,ip_address=<ip_cidr>
+                        Setting an allowed-address-pair that matches the mac_address and
+                        ip_address of a port is prevented. This is because that would
+                        have no effect since traffic matching the mac_address and ip_address
+                        is already allowed to pass through the port";
+        }
+
+        leaf network-id {
+            type yang:uuid;
+        }
+        list extra-dhcp-opts {
+            description "Extra DHCP options";
+            reference "http://developer.openstack.org/api-ref-networking-v2.html";
+            key id ;
+            leaf id {
+                type string;
+            }
+            leaf opt-name {
+                type string;
+            }
+            leaf opt-value {
+                type string;
+            }
+        }
+
+        list binding-vif-details {
+            description "A dictionary that enables the application to pass information
+                        about functions that the Networking API provides. To enable or
+                        disable port filtering features such as security group and anti-MAC/IP
+                        spoofing, specify port-filter: True or port-filter: False ";
+
+            key id;
+            leaf id {
+                type string;
+            }
+
+            leaf port-filter {
+                type boolean;
+            }
+            leaf ovs-hybrid-plug {
+                type boolean;
+            }
+        }
+        leaf binding-vif-type {
+            type string;
+        }
+        leaf binding-vnic-type {
+            type string;
+        }
+        leaf device-owner {
+            type string;
+        }
+        leaf mac-address {
+            type string;
+        }
+        leaf binding-profile {
+            type string;
+        }
+
+        list fixed-ips {
+            key subnet-id;
+            leaf subnet-id {
+                type yang:uuid;
+            }
+            leaf ip-address {
+                type inet:ip-address;
+            }
+        }
+
+        leaf-list security-groups {
+            type yang:uuid;
+        }
+        leaf device-id {
+            type yang:uuid;
+        }
+    }
+
+    container ports {
+        list port {
+            key "uuid";
+            uses attrs:base-attrs;
+            uses attrs:admin-attrs;
+            uses port-attrs;
+        }
+    }
+}

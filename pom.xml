@@ -27,5 +27,6 @@
     <module>dummyprovider</module>
     <module>features</module>
     <module>karaf</module>
+    <module>model</module>
   </modules>
 </project>

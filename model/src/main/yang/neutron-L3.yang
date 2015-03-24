@@ -1,0 +1,135 @@
+//
+// Copyright (c) 2012-2014 by Brocade Communications Systems, Inc. All Rights Reserved.
+//
+// This software is licensed, and not freely redistributable. See the
+// license agreement for details.
+//
+module neutron-L3 {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-L3";
+
+    prefix neutron-L3;
+
+    import ietf-yang-types { prefix "yang";}
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+    import neutron-networks { prefix "networks"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>";
+
+    description "This YANG module defines L3 attributes that are used by Openstack
+        Ice House Neutron modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of L3 attributes used by OpenStack Ice House Neutron
+                models";
+    }
+    augment "/networks:networks/networks:network"{
+        description "
+          This module augments the networks container in the neutron-networks
+          module with router information.
+          ";
+        leaf external {
+            description "If true, it indicates that the router is externally accessible.";
+            type boolean;
+            default "false";
+        }
+    }
+    grouping L3-attrs {
+
+        leaf-list external_network_id {
+            description "The network_id, for the external gateways. If this is empty, then this
+                network does not have external access";
+            type yang:uuid;
+        }
+        leaf router-status {
+            description "Contains the Router status.";
+            type string;
+        }
+    }
+
+    grouping L3-floatingip-attrs {
+        leaf uuid {
+            type yang:uuid;
+            description "UUID to index this object.";
+        }
+
+        leaf tenant-id {
+            type yang:uuid;
+            description "The Tenant ID of this object.";
+        }
+        leaf router-id {
+            description "Contains the Router ID of this floatingip object.";
+            type yang:uuid;
+        }
+        leaf port-id {
+            description "Contains the Port ID of the fixed IP address that will be
+                associated with this object.";
+            type yang:uuid;
+        }
+        leaf floating-network-id {
+            description "The ID of the network associated with the floating IP.";
+            type yang:uuid;
+        }
+        leaf floating-ip-address {
+            description "The floating IP address.";
+            type inet:ip-address;
+        }
+        leaf fixed-ip-address {
+            description "The fixed IP address associated with the floating IP.
+                If you intend to associate the floating IP with a fixed IP at
+                creation time, then you must indicate the identifier of the
+                internal port(using port-id object). If an internal port has
+                multiple associated IP addresses, the service chooses the first
+                IP unless you explicitly specify the parameter fixed_ip_address
+                to select a specific IP.";
+            type inet:ip-address;
+        }
+    }
+
+    grouping interface-attrs {
+        leaf subnet-id {
+            description "Contains the Subnet ID of the interface.";
+            type yang:uuid;
+        }
+        leaf port-id {
+            description "Contains the Port ID of the interface.";
+            type yang:uuid;
+        }
+    }
+
+    container routers {
+        list router {
+
+            description "A logical entity for forwarding packets across internal subnets
+                and NATting them on external networks through an appropriate external
+                gateway.";
+
+            key "uuid";
+            uses attrs:base-attrs;
+            uses attrs:admin-attrs;
+            uses L3-attrs;
+            list interfaces {
+                description "List of interfaces associated with this router object.";
+                uses interface-attrs;
+            }
+        }
+    }
+    container floatingips {
+        list floatingip {
+
+            description "An external IP address that is mapped to a port that is
+                attached to an internal network.";
+
+            key "uuid";
+            uses L3-floatingip-attrs;
+        }
+    }
+
+}
