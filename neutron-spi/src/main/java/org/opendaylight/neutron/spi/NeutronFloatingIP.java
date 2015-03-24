@@ -44,6 +44,12 @@ public class NeutronFloatingIP implements Serializable {
     @XmlElement (name="tenant_id")
     String tenantUUID;
 
+    @XmlElement (name="router_id")
+    String routerUUID;
+
+    @XmlElement (name="status")
+    String status;
+
     public NeutronFloatingIP() {
     }
 
@@ -67,6 +73,10 @@ public class NeutronFloatingIP implements Serializable {
 
     public String getPortUUID() {
         return portUUID;
+    }
+
+    public String getRouterUUID() {
+        return routerUUID;
     }
 
     public void setPortUUID(String portUUID) {
@@ -95,6 +105,18 @@ public class NeutronFloatingIP implements Serializable {
 
     public void setTenantUUID(String tenantUUID) {
         this.tenantUUID = tenantUUID;
+    }
+
+    public void setRouterUUID(String routerUUID) {
+        this.routerUUID = routerUUID;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     /**
@@ -130,6 +152,12 @@ public class NeutronFloatingIP implements Serializable {
             if (s.equals("tenant_id")) {
                 ans.setTenantUUID(this.getTenantUUID());
             }
+            if (s.equals("router_id")) {
+                ans.setRouterUUID(this.getRouterUUID());
+            }
+            if (s.equals("status")) {
+                ans.setStatus(this.getStatus());
+            }
         }
         return ans;
     }
@@ -143,6 +171,8 @@ public class NeutronFloatingIP implements Serializable {
             ", fipFixedIPAddress='" + fixedIPAddress + '\'' +
             ", fipFloatingIPAddress=" + floatingIPAddress +
             ", fipTenantId='" + tenantUUID + '\'' +
+            ", fipRouterId='" + routerUUID + '\'' +
+            ", fipStatus='" + status + '\'' +
             '}';
     }
 
