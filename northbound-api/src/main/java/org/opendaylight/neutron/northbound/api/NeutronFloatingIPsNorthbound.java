@@ -83,6 +83,8 @@ public class NeutronFloatingIPsNorthbound {
             @QueryParam("fixed_ip_address") String queryFixedIPAddress,
             @QueryParam("floating_ip_address") String queryFloatingIPAddress,
             @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("router_id") String queryRouterID,
+            @QueryParam("status") String queryStatus,
             // pagination
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
@@ -105,6 +107,8 @@ public class NeutronFloatingIPsNorthbound {
                     (queryPortId == null || queryPortId.equals(oSS.getPortUUID())) &&
                     (queryFixedIPAddress == null || queryFixedIPAddress.equals(oSS.getFixedIPAddress())) &&
                     (queryFloatingIPAddress == null || queryFloatingIPAddress.equals(oSS.getFloatingIPAddress())) &&
+                    (queryStatus == null || queryStatus.equals(oSS.getStatus())) &&
+                    (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID())) &&
                     (queryTenantID == null || queryTenantID.equals(oSS.getTenantUUID()))) {
                 if (fields.size() > 0)
                     ans.add(extractFields(oSS,fields));

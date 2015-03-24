@@ -92,6 +92,10 @@ module neutron-L3 {
                 to select a specific IP.";
             type inet:ip-address;
         }
+        leaf status {
+            type string;
+            description "The network status.";
+        }
     }
 
     grouping interface-attrs {
