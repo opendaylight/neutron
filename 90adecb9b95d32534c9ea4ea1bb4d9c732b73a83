@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_07d7a3c2",
+        "filename": "neutron-spi/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-25T16:09:57Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "90adecb9b95d32534c9ea4ea1bb4d9c732b73a83",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_a7db4fec",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-25T16:09:57Z",
+      "side": 1,
+      "message": "I think assertTrue is more readable. Same comment for all the other asserts against a boolean",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 27
+      },
+      "revId": "90adecb9b95d32534c9ea4ea1bb4d9c732b73a83",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_c7d8dbf1",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-25T16:09:57Z",
+      "side": 1,
+      "message": "whitespace. Also in other places in the file.",
+      "revId": "90adecb9b95d32534c9ea4ea1bb4d9c732b73a83",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_67e547a7",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnet_IPAllocationPoolTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-25T16:09:57Z",
+      "side": 1,
+      "message": "assertFalse is more readable",
+      "range": {
+        "startLine": 47,
+        "startChar": 14,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "90adecb9b95d32534c9ea4ea1bb4d9c732b73a83",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
