@@ -9,6 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.Inet6Address;
 import java.util.ArrayList;
@@ -305,8 +306,15 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
         while (i.hasNext()) {
             NeutronSubnet_IPAllocationPool pool = i.next();
-            if (pool.contains(gatewayIP)) {
-                return true;
+            if (ipVersion == 4) {
+                if (pool.contains(gatewayIP)) {
+                    return true;
+                }
+            }
+            if (ipVersion == 6) {
+                if (pool.contains_V6(gatewayIP)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -326,20 +334,46 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         }
         if (allocationPools == null) {
             allocationPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
-            try {
-                SubnetUtils util = new SubnetUtils(cidr);
-                SubnetInfo info = util.getInfo();
-                if (gatewayIP == null || ("").equals(gatewayIP)) {
-                    gatewayIP = info.getLowAddress();
+            if (ipVersion == 4) {
+                try {
+                    SubnetUtils util = new SubnetUtils(cidr);
+                    SubnetInfo info = util.getInfo();
+                    if (gatewayIP == null || ("").equals(gatewayIP)) {
+                        gatewayIP = info.getLowAddress();
+                    }
+                    if (allocationPools.size() < 1) {
+                        NeutronSubnet_IPAllocationPool source =
+                            new NeutronSubnet_IPAllocationPool(info.getLowAddress(),
+                                    info.getHighAddress());
+                        allocationPools = source.splitPool(gatewayIP);
+                    }
+                } catch (Exception e) {
+                    return false;
                 }
-                if (allocationPools.size() < 1) {
-                    NeutronSubnet_IPAllocationPool source =
-                        new NeutronSubnet_IPAllocationPool(info.getLowAddress(),
-                                info.getHighAddress());
-                    allocationPools = source.splitPool(gatewayIP);
+            }
+            if (ipVersion == 6) {
+                String[] parts = cidr.split("/");
+                if (parts.length != 2) {
+                    return false;
                 }
-            } catch (Exception e) {
-                return false;
+                try {
+                    int length = Integer.parseInt(parts[1]);
+                    BigInteger lowAddress_bi = NeutronSubnet_IPAllocationPool.convert_V6(parts[0]);
+                    String lowAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
+                    BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
+                    String highAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
+                    if (gatewayIP == null || ("").equals(gatewayIP)) {
+                        gatewayIP = lowAddress;
+                    }
+                    if (allocationPools.size() < 1) {
+                        NeutronSubnet_IPAllocationPool source =
+                            new NeutronSubnet_IPAllocationPool(lowAddress,
+                                    highAddress);
+                        allocationPools = source.splitPool_V6(gatewayIP);
+                    }
+                } catch (Exception e) {
+                    return false;
+                }
             }
         }
         return true;
@@ -380,7 +414,10 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
         while (i.hasNext()) {
             NeutronSubnet_IPAllocationPool pool = i.next();
-            if (pool.contains(ipAddress)) {
+            if (ipVersion == 4 && pool.contains(ipAddress)) {
+                return false;
+            }
+            if (ipVersion == 6 && pool.contains_V6(ipAddress)) {
                 return false;
             }
         }
@@ -399,11 +436,19 @@ public class NeutronSubnet implements Serializable, INeutronObject {
             if (ans == null) {
                 ans = pool.getPoolStart();
             }
-            else
-                if (NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart()) <
-                        NeutronSubnet_IPAllocationPool.convert(ans)) {
-                    ans = pool.getPoolStart();
+            else {
+                if (ipVersion == 4) {
+                    if (NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart()) <
+                            NeutronSubnet_IPAllocationPool.convert(ans)) {
+                        ans = pool.getPoolStart();
+                    }
                 }
+                if (ipVersion == 6) {
+                    if (NeutronSubnet_IPAllocationPool.convert_V6(pool.getPoolStart()).compareTo(NeutronSubnet_IPAllocationPool.convert_V6(ans)) < 0) {
+                        ans = pool.getPoolStart();
+                    }
+                }
+           }
         }
         return ans;
     }
@@ -426,11 +471,21 @@ public class NeutronSubnet implements Serializable, INeutronObject {
              */
             if (!(pool.getPoolEnd().equalsIgnoreCase(ipAddress) &&
                     pool.getPoolStart().equalsIgnoreCase(ipAddress))) {
-                if (pool.contains(ipAddress)) {
-                    List<NeutronSubnet_IPAllocationPool> pools = pool.splitPool(ipAddress);
-                    newList.addAll(pools);
-                } else {
-                    newList.add(pool);
+                if (ipVersion == 4) {
+                    if (pool.contains(ipAddress)) {
+                        List<NeutronSubnet_IPAllocationPool> pools = pool.splitPool(ipAddress);
+                        newList.addAll(pools);
+                    } else {
+                        newList.add(pool);
+                    }
+                }
+                if (ipVersion == 6) {
+                    if (pool.contains_V6(ipAddress)) {
+                        List<NeutronSubnet_IPAllocationPool> pools = pool.splitPool_V6(ipAddress);
+                        newList.addAll(pools);
+                    } else {
+                        newList.add(pool);
+                    }
                 }
             }
         }
@@ -446,18 +501,36 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         NeutronSubnet_IPAllocationPool lPool = null;
         NeutronSubnet_IPAllocationPool hPool = null;
         Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
-        long sIP = NeutronSubnet_IPAllocationPool.convert(ipAddress);
-        //look for lPool where ipAddr - 1 is high address
-        //look for hPool where ipAddr + 1 is low address
-        while (i.hasNext()) {
-            NeutronSubnet_IPAllocationPool pool = i.next();
-            long lIP = NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart());
-            long hIP = NeutronSubnet_IPAllocationPool.convert(pool.getPoolEnd());
-            if (sIP+1 == lIP) {
-                hPool = pool;
+        if (ipVersion == 4) {
+            long sIP = NeutronSubnet_IPAllocationPool.convert(ipAddress);
+            //look for lPool where ipAddr - 1 is high address
+            //look for hPool where ipAddr + 1 is low address
+            while (i.hasNext()) {
+                NeutronSubnet_IPAllocationPool pool = i.next();
+                long lIP = NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart());
+                long hIP = NeutronSubnet_IPAllocationPool.convert(pool.getPoolEnd());
+                if (sIP+1 == lIP) {
+                    hPool = pool;
+                }
+                if (sIP-1 == hIP) {
+                    lPool = pool;
+                }
             }
-            if (sIP-1 == hIP) {
-                lPool = pool;
+        }
+        if (ipVersion == 6) {
+            BigInteger sIP = NeutronSubnet_IPAllocationPool.convert_V6(ipAddress);
+            //look for lPool where ipAddr - 1 is high address
+            //look for hPool where ipAddr + 1 is low address
+            while (i.hasNext()) {
+                NeutronSubnet_IPAllocationPool pool = i.next();
+                BigInteger lIP = NeutronSubnet_IPAllocationPool.convert_V6(pool.getPoolStart());
+                BigInteger hIP = NeutronSubnet_IPAllocationPool.convert_V6(pool.getPoolEnd());
+                if (lIP.compareTo(sIP.add(BigInteger.ONE)) == 0) {
+                    hPool = pool;
+                }
+                if (hIP.compareTo(sIP.subtract(BigInteger.ONE)) == 0) {
+                    lPool = pool;
+                }
             }
         }
         //if (lPool == NULL and hPool == NULL) create new pool where low = ip = high
