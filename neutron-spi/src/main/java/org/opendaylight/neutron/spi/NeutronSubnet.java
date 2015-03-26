@@ -9,9 +9,11 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
+import java.lang.Exception;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.Inet6Address;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -291,7 +293,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                     }
                 }
                 return(true);
-            } catch (Exception e) {
+            } catch (UnknownHostException e) {
                 return(false);
             }
         }
@@ -404,6 +406,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 return false;
             }
         }
+
         if (ipVersion == 6) {
             String[] parts = cidr.split("/");
             try {
@@ -418,7 +421,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                     }
                 }
                 return(true);
-            } catch (Exception e) {
+            } catch (UnknownHostException e) {
                 return(false);
             }
         }
