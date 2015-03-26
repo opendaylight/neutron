@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -32,12 +32,12 @@ public interface INeutronLoadBalancerPoolAware {
      *
      * @param loadBalancerPool
      *            instance of new LoadBalancerPool object
-     * @return void
      */
     public void neutronLoadBalancerPoolCreated(NeutronLoadBalancerPool loadBalancerPool);
 
     /**
-     * Services provide this interface method to indicate if the specified loadBalancerPool can be changed using the specified
+     * Services provide this interface method to indicate if the 
+     * specified loadBalancerPool can be changed using the specified
      * delta
      *
      * @param delta
@@ -56,7 +56,6 @@ public interface INeutronLoadBalancerPoolAware {
      *
      * @param loadBalancerPool
      *            instance of modified LoadBalancerPool object
-     * @return void
      */
     public void neutronLoadBalancerPoolUpdated(NeutronLoadBalancerPool loadBalancerPool);
 
@@ -77,7 +76,6 @@ public interface INeutronLoadBalancerPoolAware {
      *
      * @param loadBalancerPool
      *            instance of deleted LoadBalancerPool object
-     * @return void
      */
     public void neutronLoadBalancerPoolDeleted(NeutronLoadBalancerPool loadBalancerPool);
 }

@@ -32,7 +32,6 @@ public interface INeutronRouterAware {
      *
      * @param router
      *            instance of new Neutron Router object
-     * @return void
      */
     public void neutronRouterCreated(NeutronRouter router);
 
@@ -42,7 +41,7 @@ public interface INeutronRouterAware {
      *
      * @param delta
      *            updates to the router object using patch semantics
-     * @param router
+     * @param original
      *            instance of the Neutron Router object to be updated
      * @return integer
      *            the return value is understood to be a HTTP status code.  A return value outside of 200 through 299
@@ -56,7 +55,6 @@ public interface INeutronRouterAware {
      *
      * @param router
      *            instance of modified Neutron Router object
-     * @return void
      */
     public void neutronRouterUpdated(NeutronRouter router);
 
@@ -77,12 +75,12 @@ public interface INeutronRouterAware {
      *
      * @param router
      *            instance of deleted Router Network object
-     * @return void
      */
     public void neutronRouterDeleted(NeutronRouter router);
 
     /**
-     * Services provide this interface method to indicate if the specified interface can be attached to the specified route
+     * Services provide this interface method to indicate if the 
+     * specified interface can be attached to the specified router
      *
      * @param router
      *            instance of the base Neutron Router object
@@ -96,18 +94,19 @@ public interface INeutronRouterAware {
     public int canAttachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface);
 
     /**
-     * Services provide this interface method for taking action after an interface has been added to a router
+     * Services provide this interface method for taking action 
+     * after an interface has been added to a router
      *
      * @param router
      *            instance of the base Neutron Router object
      * @param routerInterface
      *            instance of the NeutronRouter_Interface being attached to the router
-     * @return void
      */
     public void neutronRouterInterfaceAttached(NeutronRouter router, NeutronRouter_Interface routerInterface);
 
     /**
-     * Services provide this interface method to indicate if the specified interface can be detached from the specified router
+     * Services provide this interface method to indicate if the
+     * specified interface can be detached from the specified router
      *
      * @param router
      *            instance of the base Neutron Router object
@@ -127,7 +126,6 @@ public interface INeutronRouterAware {
      *            instance of the base Neutron Router object
      * @param routerInterface
      *            instance of the NeutronRouter_Interface being detached from the router
-     * @return void
      */
     public void neutronRouterInterfaceDetached(NeutronRouter router, NeutronRouter_Interface routerInterface);
 }
