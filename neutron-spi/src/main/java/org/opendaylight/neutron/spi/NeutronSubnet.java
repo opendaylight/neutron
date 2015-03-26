@@ -395,13 +395,34 @@ public class NeutronSubnet implements Serializable, INeutronObject {
      * is valid for this subnet or not
      */
     public boolean isValidIP(String ipAddress) {
-        try {
-            SubnetUtils util = new SubnetUtils(cidr);
-            SubnetInfo info = util.getInfo();
-            return info.isInRange(ipAddress);
-        } catch (Exception e) {
-            return false;
+        if (ipVersion == 4) {
+            try {
+                SubnetUtils util = new SubnetUtils(cidr);
+                SubnetInfo info = util.getInfo();
+                return info.isInRange(ipAddress);
+            } catch (Exception e) {
+                return false;
+            }
         }
+        if (ipVersion == 6) {
+            String[] parts = cidr.split("/");
+            try {
+                int length = Integer.parseInt(parts[1]);
+                byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
+                byte[] ipBytes =  ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
+                int i;
+                for (i=0; i<length; i++) { // offset is to ensure proper comparison
+                    if (((((int) cidrBytes[i/8]) & 0x000000FF) & (1 << (7-(i%8)))) !=
+                        ((((int) ipBytes[i/8]) & 0x000000FF) & (1 << (7-(i%8))))) {
+                        return(false);
+                    }
+                }
+                return(true);
+            } catch (Exception e) {
+                return(false);
+            }
+        }
+        return false;
     }
 
     /* test to see if the supplied IPv4 address is part of one of the
