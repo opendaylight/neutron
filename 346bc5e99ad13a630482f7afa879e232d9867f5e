@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_3550c85d",
+        "filename": "neutron-spi/pom.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-26T13:22:43Z",
+      "side": 1,
+      "message": "spacing",
+      "revId": "346bc5e99ad13a630482f7afa879e232d9867f5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_555b1487",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-26T13:22:43Z",
+      "side": 1,
+      "message": "would it be better to catch the actual exception: UnknownHostException or SecurityException? I think sonar will complain here that catching all exceptions is too broad.",
+      "revId": "346bc5e99ad13a630482f7afa879e232d9867f5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_d54e44c1",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-26T13:22:43Z",
+      "side": 1,
+      "message": "Test 1-\u003e2 or maybe it is Test 3-\u003e1 to match with the numbering scheme used in other tests",
+      "range": {
+        "startLine": 43,
+        "startChar": 54,
+        "endLine": 43,
+        "endChar": 55
+      },
+      "revId": "346bc5e99ad13a630482f7afa879e232d9867f5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_b5993821",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-26T13:22:43Z",
+      "side": 1,
+      "message": "add exception handling test case like:\n\ntry {\n    isValid(cause_unknown_exception);\n    fail(\"Expected a UnknownHostException to be thrown\");\n} catch (UnknownHostException e) {\n    assertSame(UnknownHostException.class, e.getClass());\n}\n\ntry {\n    isValid(cause_security_exception);\n    fail(\"Expected a SecurityException to be thrown\");\n} catch (SecurityException e) {\n    assertSame(SecurityException.class, e.getClass());\n}",
+      "revId": "346bc5e99ad13a630482f7afa879e232d9867f5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_55d234d3",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSubnetTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-03-26T13:22:43Z",
+      "side": 1,
+      "message": "numbering convention isn\u0027t consistent - the other test cases incremented all positive cases with ipv4 and ipv6, and then negative the same sayw. But in this test case ipv4 and ipv6 are incremented separately. Related to the comment above, whichever scheme is chosen.",
+      "range": {
+        "startLine": 110,
+        "startChar": 55,
+        "endLine": 110,
+        "endChar": 56
+      },
+      "revId": "346bc5e99ad13a630482f7afa879e232d9867f5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
