@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -38,25 +38,25 @@ import java.util.List;
 public class NeutronLoadBalancer implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name="id")
+    @XmlElement(name = "id")
     String loadBalancerID;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String loadBalancerTenantID;
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String loadBalancerName;
 
-    @XmlElement (name="description")
+    @XmlElement (name = "description")
     String loadBalancerDescription;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String loadBalancerStatus;
 
-    @XmlElement (name="vip_address")
+    @XmlElement (name = "vip_address")
     String loadBalancerVipAddress;
 
-    @XmlElement (name="vip_subnet_id")
+    @XmlElement (name = "vip_subnet_id")
     String loadBalancerVipSubnetID;
 
     public String getLoadBalancerID() {

@@ -30,49 +30,49 @@ public class NeutronPort implements Serializable, INeutronObject {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String portUUID;
 
-    @XmlElement (name="network_id")
+    @XmlElement (name = "network_id")
     String networkUUID;
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String name;
 
-    @XmlElement (defaultValue="true", name="admin_state_up")
+    @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String status;
 
-    @XmlElement (name="mac_address")
+    @XmlElement (name = "mac_address")
     String macAddress;
 
-    @XmlElement (name="fixed_ips")
+    @XmlElement (name = "fixed_ips")
     List<Neutron_IPs> fixedIPs;
 
-    @XmlElement (name="device_id")
+    @XmlElement (name = "device_id")
     String deviceID;
 
-    @XmlElement (name="device_owner")
+    @XmlElement (name = "device_owner")
     String deviceOwner;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String tenantID;
 
-    @XmlElement (name="security_groups")
+    @XmlElement (name = "security_groups")
     List<NeutronSecurityGroup> securityGroups;
 
-    @XmlElement (name="allowed_address_pairs")
+    @XmlElement (name = "allowed_address_pairs")
     List<NeutronPort_AllowedAddressPairs> allowedAddressPairs;
 
-    @XmlElement (namespace= "binding", name="host_id")
+    @XmlElement (namespace = "binding", name = "host_id")
     String bindinghostID;
 
-    @XmlElement (namespace= "binding", name="vnic_type")
+    @XmlElement (namespace = "binding", name = "vnic_type")
     String bindingvnicType;
 
-    @XmlElement (namespace= "binding", name="vif_type")
+    @XmlElement (namespace = "binding", name = "vif_type")
     String bindingvifType;
 
 

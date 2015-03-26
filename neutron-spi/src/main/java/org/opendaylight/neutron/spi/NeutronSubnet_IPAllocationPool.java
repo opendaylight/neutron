@@ -28,10 +28,10 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="start")
+    @XmlElement(name = "start")
     String poolStart;
 
-    @XmlElement(name="end")
+    @XmlElement(name = "end")
     String poolEnd;
 
     public NeutronSubnet_IPAllocationPool() {
@@ -144,7 +144,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
     static String longToIP(long l) {
         int i;
         String[] parts = new String[4];
-        for (i=0; i<4; i++) {
+        for (i = 0; i < 4; i++) {
             parts[3-i] = String.valueOf(l & 255);
             l >>= 8;
         }
@@ -177,10 +177,10 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
         }
         StringBuilder sb = new StringBuilder();
         int i;
-        for(i=0;i<r.length-1;i++) {
-            sb.append(r[i]+d);
+        for(i = 0;i < r.length - 1;i++) {
+            sb.append(r[i] + d);
         }
-        return sb.toString()+r[i];
+        return sb.toString() + r[i];
     }
 
     /*
@@ -203,7 +203,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
         long i;
         NeutronSubnet_IPAllocationPool p = new NeutronSubnet_IPAllocationPool();
         boolean poolStarted = false;
-        for (i=sIP; i<=eIP; i++) {
+        for (i = sIP; i <= eIP; i++) {
             if (i == sIP) {
                 if (i != gIP) {
                     p.setPoolStart(poolStart);

@@ -32,7 +32,6 @@ public interface INeutronNetworkAware {
      *
      * @param network
      *            instance of new Neutron Network object
-     * @return void
      */
     public void neutronNetworkCreated(NeutronNetwork network);
 
@@ -42,7 +41,7 @@ public interface INeutronNetworkAware {
      *
      * @param delta
      *            updates to the network object using patch semantics
-     * @param network
+     * @param original
      *            instance of the Neutron Network object to be updated
      * @return integer
      *            the return value is understood to be a HTTP status code.  A return value outside of 200 through 299
@@ -56,7 +55,6 @@ public interface INeutronNetworkAware {
      *
      * @param network
      *            instance of modified Neutron Network object
-     * @return void
      */
     public void neutronNetworkUpdated(NeutronNetwork network);
 
@@ -77,7 +75,6 @@ public interface INeutronNetworkAware {
      *
      * @param network
      *            instance of deleted Neutron Network object
-     * @return void
      */
     public void neutronNetworkDeleted(NeutronNetwork network);
 }

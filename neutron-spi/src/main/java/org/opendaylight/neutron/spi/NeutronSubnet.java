@@ -35,43 +35,43 @@ public class NeutronSubnet implements Serializable, INeutronObject {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String subnetUUID;
 
-    @XmlElement (name="network_id")
+    @XmlElement (name = "network_id")
     String networkUUID;
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String name;
 
-    @XmlElement (defaultValue="4", name="ip_version")
+    @XmlElement (defaultValue = "4", name = "ip_version")
     Integer ipVersion;
 
-    @XmlElement (name="cidr")
+    @XmlElement (name = "cidr")
     String cidr;
 
-    @XmlElement (name="gateway_ip")
+    @XmlElement (name = "gateway_ip")
     String gatewayIP;
 
-    @XmlElement (name="dns_nameservers")
+    @XmlElement (name = "dns_nameservers")
     List<String> dnsNameservers;
 
-    @XmlElement (name="allocation_pools")
+    @XmlElement (name = "allocation_pools")
     List<NeutronSubnet_IPAllocationPool> allocationPools;
 
-    @XmlElement (name="host_routes")
+    @XmlElement (name = "host_routes")
     List<NeutronSubnet_HostRoute> hostRoutes;
 
-    @XmlElement (defaultValue="true", name="enable_dhcp")
+    @XmlElement (defaultValue = "true", name = "enable_dhcp")
     Boolean enableDHCP;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String tenantID;
 
-    @XmlElement (name="ipv6_address_mode", nillable=true)
+    @XmlElement (name = "ipv6_address_mode", nillable = true)
     String ipV6AddressMode;
 
-    @XmlElement (name="ipv6_ra_mode", nillable=true)
+    @XmlElement (name = "ipv6_ra_mode", nillable = true)
     String ipV6RaMode;
 
     /* stores the OpenStackPorts associated with an instance
@@ -287,7 +287,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 // convert to byte array
                 byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
                 int i;
-                for (i=length; i<128; i++) { // offset is to ensure proper comparison
+                for (i = length; i < 128; i++) { // offset is to ensure proper comparison
                     if (((((int) addrBytes[i/8]) & 0x000000FF) & (1 << (7-(i%8)))) != 0) {
                         return(false);
                     }
@@ -414,7 +414,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
                 byte[] ipBytes =  ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
                 int i;
-                for (i=0; i<length; i++) { // offset is to ensure proper comparison
+                for (i = 0; i < length; i++) { // offset is to ensure proper comparison
                     if (((((int) cidrBytes[i/8]) & 0x000000FF) & (1 << (7-(i%8)))) !=
                         ((((int) ipBytes[i/8]) & 0x000000FF) & (1 << (7-(i%8))))) {
                         return(false);

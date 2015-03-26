@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -18,10 +18,10 @@ public class INeutronLoadBalancerPoolMemberRequest {
      * http://docs.openstack.org/api/openstack-network/2.0/content/
      */
 
-    @XmlElement(name="member")
+    @XmlElement(name = "member")
     NeutronLoadBalancerPoolMember singletonLoadBalancerPoolMember;
 
-    @XmlElement(name="members")
+    @XmlElement(name = "members")
     List<NeutronLoadBalancerPoolMember> bulkRequest;
 
     INeutronLoadBalancerPoolMemberRequest() {

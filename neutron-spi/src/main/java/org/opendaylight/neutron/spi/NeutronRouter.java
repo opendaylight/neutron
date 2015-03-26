@@ -26,31 +26,31 @@ public class NeutronRouter implements Serializable, INeutronObject {
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String routerUUID;
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String name;
 
-    @XmlElement (defaultValue="true", name="admin_state_up")
+    @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String status;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String tenantID;
 
-    @XmlElement (name="external_gateway_info", nillable=true)
+    @XmlElement (name = "external_gateway_info", nillable = true)
     NeutronRouter_NetworkReference externalGatewayInfo;
 
-    @XmlElement (name="distributed")
+    @XmlElement (name = "distributed")
     Boolean distributed;
 
-    @XmlElement (name="gw_port_id", nillable=true)
+    @XmlElement (name = "gw_port_id", nillable = true)
     String gatewayPortId;
 
-    @XmlElement (name="routes")
+    @XmlElement (name = "routes")
     List<String> routes;
 
     /* Holds a map of OpenStackRouterInterfaces by subnet UUID

@@ -23,16 +23,16 @@ public class NeutronRouter_Interface implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name="subnet_id")
+    @XmlElement (name = "subnet_id")
     String subnetUUID;
 
-    @XmlElement (name="port_id")
+    @XmlElement (name = "port_id")
     String portUUID;
 
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String id;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String tenantID;
 
     public NeutronRouter_Interface() {

@@ -26,22 +26,22 @@ public class NeutronFloatingIP implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String floatingIPUUID;
 
-    @XmlElement (name="floating_network_id")
+    @XmlElement (name = "floating_network_id")
     String floatingNetworkUUID;
 
-    @XmlElement (name="port_id")
+    @XmlElement (name = "port_id")
     String portUUID;
 
-    @XmlElement (name="fixed_ip_address")
+    @XmlElement (name = "fixed_ip_address")
     String fixedIPAddress;
 
-    @XmlElement (name="floating_ip_address")
+    @XmlElement (name = "floating_ip_address")
     String floatingIPAddress;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String tenantUUID;
 
     public NeutronFloatingIP() {

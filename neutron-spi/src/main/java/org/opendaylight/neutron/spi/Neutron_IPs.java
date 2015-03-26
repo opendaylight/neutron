@@ -24,10 +24,10 @@ public class Neutron_IPs implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="ip_address")
+    @XmlElement(name = "ip_address")
     String ipAddress;
 
-    @XmlElement(name="subnet_id")
+    @XmlElement(name = "subnet_id")
     String subnetUUID;
 
     public Neutron_IPs() { }

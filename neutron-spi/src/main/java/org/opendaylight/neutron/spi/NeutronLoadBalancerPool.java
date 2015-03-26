@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -42,34 +42,34 @@ import java.util.List;
 public class NeutronLoadBalancerPool implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name="id")
+    @XmlElement(name = "id")
     String loadBalancerPoolID;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String loadBalancerPoolTenantID;
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String loadBalancerPoolName;
 
-    @XmlElement (name="description")
+    @XmlElement (name = "description")
     String loadBalancerPoolDescription;
 
-    @XmlElement (name="protocol")
+    @XmlElement (name = "protocol")
     String loadBalancerPoolProtocol;
 
-    @XmlElement (name="lb_algorithm")
+    @XmlElement (name = "lb_algorithm")
     String loadBalancerPoolLbAlgorithm;
 
-    @XmlElement (name="healthmonitor_id")
+    @XmlElement (name = "healthmonitor_id")
     String neutronLoadBalancerPoolHealthMonitorID;
 
-    @XmlElement (defaultValue="true", name="admin_state_up")
+    @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerPoolAdminStateIsUp;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String loadBalancerPoolStatus;
 
-    @XmlElement(name="members")
+    @XmlElement(name = "members")
     List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers;
 
     public NeutronLoadBalancerPool() {
