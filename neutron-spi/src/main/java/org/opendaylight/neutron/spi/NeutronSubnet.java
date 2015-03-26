@@ -268,7 +268,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 if (!info.getNetworkAddress().equals(info.getAddress())) {
                     return false;
                 }
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 return false;
             }
             return true;
@@ -349,7 +349,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                                     info.getHighAddress());
                         allocationPools = source.splitPool(gatewayIP);
                     }
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     return false;
                 }
             }
@@ -402,7 +402,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 SubnetUtils util = new SubnetUtils(cidr);
                 SubnetInfo info = util.getInfo();
                 return info.isInRange(ipAddress);
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 return false;
             }
         }
