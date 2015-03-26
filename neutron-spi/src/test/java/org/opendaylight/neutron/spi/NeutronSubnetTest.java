@@ -37,7 +37,7 @@ public class NeutronSubnetTest {
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015:0:0:0:0:0:0:0/24");
-        Assert.assertTrue("isValidCIDR Test 3: Testing valid V6 CIDR (2015:0:0:0:0:0:0:0/24) failed",
+        Assert.assertTrue("isValidCIDR Test 1: Testing valid V6 CIDR (2015:0:0:0:0:0:0:0/24) failed",
               objectUT.isValidCIDR());
         objectUT.setCidr("2015:0:0:0:0:0:0:1/24");
         Assert.assertFalse("isValidCIDR Negative Test 1: Testing invalid CIDR (2015:0:0:0:0:0:0:1) failed",
