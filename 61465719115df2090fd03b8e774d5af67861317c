@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_55ff9467",
+        "filename": "neutron-spi/pom.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-26T12:31:38Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "61465719115df2090fd03b8e774d5af67861317c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
