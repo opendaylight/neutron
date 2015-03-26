@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_18cb8154",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronRouterAware.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-26T14:50:41Z",
+      "side": 1,
+      "message": "extra space",
+      "revId": "12239e9e62c842c6c7442d0b0ed7e81705792750",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_78b405d1",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronRouterAware.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-26T14:50:41Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 97,
+        "startChar": 63,
+        "endLine": 97,
+        "endChar": 64
+      },
+      "revId": "12239e9e62c842c6c7442d0b0ed7e81705792750",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
