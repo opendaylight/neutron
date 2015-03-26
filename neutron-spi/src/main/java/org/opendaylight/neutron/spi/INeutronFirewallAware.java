@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -32,7 +32,6 @@ public interface INeutronFirewallAware {
      *
      * @param firewall
      *            instance of new Firewall object
-     * @return void
      */
     public void neutronFirewallCreated(NeutronFirewall firewall);
 
@@ -56,7 +55,6 @@ public interface INeutronFirewallAware {
      *
      * @param firewall
      *            instance of modified Firewall object
-     * @return void
      */
     public void neutronFirewallUpdated(NeutronFirewall firewall);
 
@@ -77,7 +75,6 @@ public interface INeutronFirewallAware {
      *
      * @param firewall
      *            instance of deleted Firewall object
-     * @return void
      */
     public void neutronFirewallDeleted(NeutronFirewall firewall);
 }

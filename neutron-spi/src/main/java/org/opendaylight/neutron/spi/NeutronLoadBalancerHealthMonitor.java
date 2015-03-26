@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -47,37 +47,37 @@ public class NeutronLoadBalancerHealthMonitor implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancer.class);
 
-    @XmlElement(name="id")
+    @XmlElement(name = "id")
     String loadBalancerHealthMonitorID;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String loadBalancerHealthMonitorTenantID;
 
-    @XmlElement (name="type")
+    @XmlElement (name = "type")
     String loadBalancerHealthMonitorType;
 
-    @XmlElement (name="delay")
+    @XmlElement (name = "delay")
     Integer loadBalancerHealthMonitorDelay;
 
-    @XmlElement (name="timeout")
+    @XmlElement (name = "timeout")
     Integer loadBalancerHealthMonitorTimeout;
 
-    @XmlElement (name="max_retries")
+    @XmlElement (name = "max_retries")
     Integer loadBalancerHealthMonitorMaxRetries;
 
-    @XmlElement (name="http_method")
+    @XmlElement (name = "http_method")
     String loadBalancerHealthMonitorHttpMethod;
 
-    @XmlElement (name="url_path")
+    @XmlElement (name = "url_path")
     String loadBalancerHealthMonitorUrlPath;
 
-    @XmlElement (name="expected_codes")
+    @XmlElement (name = "expected_codes")
     String loadBalancerHealthMonitorExpectedCodes;
 
-    @XmlElement (defaultValue="true", name="admin_state_up")
+    @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerHealthMonitorAdminStateIsUp;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String loadBalancerHealthMonitorStatus;
 
     public String getLoadBalancerHealthMonitorID() {

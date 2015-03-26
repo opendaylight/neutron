@@ -24,7 +24,7 @@ public class NeutronRouter_NetworkReference implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="network_id")
+    @XmlElement(name = "network_id")
     String networkID;
 
     public NeutronRouter_NetworkReference() {

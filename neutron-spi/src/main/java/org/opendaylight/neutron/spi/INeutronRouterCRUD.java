@@ -84,7 +84,7 @@ public interface INeutronRouterCRUD {
     /**
      * Applications call this interface method to check if a router is in use
      *
-     * @param uuid
+     * @param routerUUID
      *            identifier of the Router object
      * @return boolean on whether the router is in use or not
      */

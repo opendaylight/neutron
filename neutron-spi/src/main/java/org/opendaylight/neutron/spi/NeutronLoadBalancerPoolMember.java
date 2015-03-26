@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -27,28 +27,28 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
     /**
      * TODO: Plumb into LBaaS Pool. Members are nested underneath Pool CRUD.
      */
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String poolMemberID;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String poolMemberTenantID;
 
-    @XmlElement (name="address")
+    @XmlElement (name = "address")
     String poolMemberAddress;
 
-    @XmlElement (name="protocol_port")
+    @XmlElement (name = "protocol_port")
     Integer poolMemberProtoPort;
 
-    @XmlElement (name="admin_state_up")
+    @XmlElement (name = "admin_state_up")
     Boolean poolMemberAdminStateIsUp;
 
-    @XmlElement (name="weight")
+    @XmlElement (name = "weight")
     Integer poolMemberWeight;
 
-    @XmlElement (name="subnet_id")
+    @XmlElement (name = "subnet_id")
     String poolMemberSubnetID;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String poolMemberStatus;
 
     String poolID;

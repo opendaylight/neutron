@@ -27,37 +27,37 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name="id")
+    @XmlElement (name = "id")
     String networkUUID;              // network UUID
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String networkName;              // name
 
-    @XmlElement (defaultValue="true", name="admin_state_up")
+    @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;             // admin state up (true/false)
 
-    @XmlElement (defaultValue="false", name="shared")
+    @XmlElement (defaultValue = "false", name = "shared")
     Boolean shared;                   // shared network or not
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String tenantID;                 // tenant for this network
 
-    @XmlElement (defaultValue="false", namespace="router", name="external")
+    @XmlElement (defaultValue = "false", namespace = "router", name = "external")
     Boolean routerExternal;           // network external or not
 
-    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
+    @XmlElement (defaultValue = "flat", namespace = "provider", name = "network_type")
     String providerNetworkType;      // provider network type (flat or vlan)
 
-    @XmlElement (namespace="provider", name="physical_network")
+    @XmlElement (namespace = "provider", name = "physical_network")
     String providerPhysicalNetwork;  // provider physical network (name)
 
-    @XmlElement (namespace="provider", name="segmentation_id")
+    @XmlElement (namespace = "provider", name = "segmentation_id")
     String providerSegmentationID;   // provide segmentation ID (vlan ID)
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String status;                   // status (read-only)
 
-    @XmlElement (name="subnets")
+    @XmlElement (name = "subnets")
     List<String> subnets;            // subnets (read-only)
 
     /* This attribute lists the ports associated with an instance

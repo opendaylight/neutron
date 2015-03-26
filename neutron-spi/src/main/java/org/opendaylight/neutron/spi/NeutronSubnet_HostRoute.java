@@ -23,12 +23,15 @@ public class NeutronSubnet_HostRoute implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="destination")
+    @XmlElement(name = "destination")
     String destination;
 
-    @XmlElement(name="nexthop")
+    @XmlElement(name = "nexthop")
     String nextHop;
 
+    /**
+     *  HostRoute constructor
+     */
     public NeutronSubnet_HostRoute() { }
 
     @Override

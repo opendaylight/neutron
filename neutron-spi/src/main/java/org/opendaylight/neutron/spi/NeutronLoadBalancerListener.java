@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 Red Hat, Inc.
+ * Copyright (C) 2014 Red Hat, Inc.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -43,37 +43,37 @@ import java.util.List;
 public class NeutronLoadBalancerListener implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name="id")
+    @XmlElement(name = "id")
     String loadBalancerListenerID;
 
-    @XmlElement (name="default_pool_id")
+    @XmlElement (name = "default_pool_id")
     String neutronLoadBalancerListenerDefaultPoolID;
 
-    @XmlElement (name="tenant_id")
+    @XmlElement (name = "tenant_id")
     String loadBalancerListenerTenantID;
 
-    @XmlElement (name="name")
+    @XmlElement (name = "name")
     String loadBalancerListenerName;
 
-    @XmlElement (name="description")
+    @XmlElement (name = "description")
     String loadBalancerListenerDescription;
 
-    @XmlElement (defaultValue="true", name="admin_state_up")
+    @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerListenerAdminStateIsUp;
 
-    @XmlElement (name="status")
+    @XmlElement (name = "status")
     String loadBalancerListenerStatus;
 
-    @XmlElement (defaultValue="false", name="shared")
+    @XmlElement (defaultValue = "false", name = "shared")
     Boolean loadBalancerListenerIsShared;
 
-    @XmlElement (name="protocol")
+    @XmlElement (name = "protocol")
     String neutronLoadBalancerListenerProtocol;
 
-    @XmlElement (name="protocol_port")
+    @XmlElement (name = "protocol_port")
     String neutronLoadBalancerListenerProtocolPort;
 
-    @XmlElement (name="load_balancer_id")
+    @XmlElement (name = "load_balancer_id")
     String neutronLoadBalancerListenerLoadBalancerID;
 
 
