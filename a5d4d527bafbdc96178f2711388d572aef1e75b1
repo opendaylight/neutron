@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_44c6004b",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_e4c4ec41",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_04c0f828",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_a4dee40f",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_84b408d2",
+        "filename": "model/src/main/yang/neutron-metering.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_24cbb454",
+        "filename": "model/src/main/yang/neutron-metering.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_e4adcc89",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_a4b7c4d7",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_64b1bce0",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_04a9d87a",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_849de85b",
+        "filename": "model/src/main/yang/neutron-secgroups.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_24a414a5",
+        "filename": "model/src/main/yang/neutron-secgroups.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_649a1c65",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_c493f04d",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-03-27T15:18:54Z",
+      "side": 1,
+      "message": "Ed favorite comment: remove rogue spaces. :)",
+      "revId": "a5d4d527bafbdc96178f2711388d572aef1e75b1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
