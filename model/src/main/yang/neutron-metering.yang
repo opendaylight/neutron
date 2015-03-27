@@ -72,19 +72,24 @@ module neutron-metering {
             default "false";
         }
     }
-    container metering-labels {
-        description "Container for metering labels.";
-        list metering-label {
-            uses attrs:base-attrs;
-            uses metering-label-attrs;
-            description "List of Metering Labels.";
+    
+    grouping metering-labels-attributes {
+        container metering-labels {
+            description "Container for metering labels.";
+            list metering-label {
+                uses attrs:base-attrs;
+                uses metering-label-attrs;
+                description "List of Metering Labels.";
+            }
         }
     }
-    container metering-rules {
-        description " Container for metering rules.";
-        list metering-rule {
-            uses metering-rule-attrs;
-            description "List of Metering Rules.";
+    grouping metering-rules-attributes {
+        container metering-rules {
+            description " Container for metering rules.";
+            list metering-rule {
+                uses metering-rule-attrs;
+                description "List of Metering Rules.";
+            }
         }
     }
 }

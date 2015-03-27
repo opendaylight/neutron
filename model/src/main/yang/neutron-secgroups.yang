@@ -120,19 +120,25 @@ module neutron-secgroups {
                 is ICMP, this value must be an ICMP type.";
         }
     }
-    container security-groups {
-        description "Container for security groups.";
-        list security-group {
-            uses attrs:base-attrs;
-            uses security-group-attrs;
-            description "List of Metering Labels.";
+    
+    grouping security-groups-attributes {
+        container security-groups {
+            description "Container for security groups.";
+            list security-group {
+                uses attrs:base-attrs;
+                uses security-group-attrs;
+                description "List of Metering Labels.";
+            }
         }
     }
-    container security-rules {
-        description "Container for security group rules.";
-        list security-rule {
-            uses security-rule-attrs;
-            description "List of Security Group Rules.";
+    
+    grouping security-rules-attributes {
+        container security-rules {
+            description "Container for security group rules.";
+            list security-rule {
+                uses security-rule-attrs;
+                description "List of Security Group Rules.";
+            }
         }
     }
 }

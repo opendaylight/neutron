@@ -17,6 +17,7 @@ module neutron-L3 {
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
     import neutron-networks { prefix "networks"; }
+    import neutron { prefix "neutron"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -30,7 +31,7 @@ module neutron-L3 {
                 "Initial version of L3 attributes used by OpenStack Ice House Neutron
                 models";
     }
-    augment "/networks:networks/networks:network"{
+    augment "/neutron:neutron/networks:networks/networks:network"{
         description "
           This module augments the networks container in the neutron-networks
           module with router information.
@@ -104,32 +105,35 @@ module neutron-L3 {
         }
     }
 
-    container routers {
-        list router {
-
-            description "A logical entity for forwarding packets across internal subnets
-                and NATting them on external networks through an appropriate external
-                gateway.";
-
-            key "uuid";
-            uses attrs:base-attrs;
-            uses attrs:admin-attrs;
-            uses L3-attrs;
-            list interfaces {
-                description "List of interfaces associated with this router object.";
-                uses interface-attrs;
+    grouping routers-attributes {
+        container routers {
+            list router {
+    
+                description "A logical entity for forwarding packets across internal subnets
+                    and NATting them on external networks through an appropriate external
+                    gateway.";
+    
+                key "uuid";
+                uses attrs:base-attrs;
+                uses attrs:admin-attrs;
+                uses L3-attrs;
+                list interfaces {
+                    description "List of interfaces associated with this router object.";
+                    uses interface-attrs;
+                }
             }
         }
     }
-    container floatingips {
-        list floatingip {
-
-            description "An external IP address that is mapped to a port that is
-                attached to an internal network.";
-
-            key "uuid";
-            uses L3-floatingip-attrs;
+    grouping floatingips-attributes {
+        container floatingips {
+            list floatingip {
+    
+                description "An external IP address that is mapped to a port that is
+                    attached to an internal network.";
+    
+                key "uuid";
+                uses L3-floatingip-attrs;
+            }
         }
     }
-
 }

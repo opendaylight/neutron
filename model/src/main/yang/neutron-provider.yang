@@ -17,6 +17,7 @@ module neutron-provider {
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
     import neutron-networks { prefix "networks"; }
+    import neutron { prefix "neutron"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -54,7 +55,7 @@ module neutron-provider {
         }
     }
 
-    augment "/networks:networks/networks:network"{
+    augment "/neutron:neutron/networks:networks/networks:network"{
         description "
           This module augments the networks container in the neutron-networks
           module with provider information.

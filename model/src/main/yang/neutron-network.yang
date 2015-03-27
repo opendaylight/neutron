@@ -77,21 +77,23 @@ module neutron-networks {
 
     }
 
-    container networks {
-        list network {
-
-            description "A network is a virtual isolated layer-2 broadcast domain which
-                        is typically reserved to the tenant who created it, unless the
-                        network has been explicitly configured to be shared. Tenants can
-                        create multiple networks, until they reach the thresholds specified
-                        by per-tenant Quotas. The network is the principal entity for 
-                        the Neutron API. Ports and Subnets must always be associated 
-                        with a network.";
-
-            key "uuid";
-            uses attrs:base-attrs;
-            uses attrs:admin-attrs;
-            uses network-attrs;
+    grouping networks-attributes {
+        container networks {
+            list network {
+    
+                description "A network is a virtual isolated layer-2 broadcast domain which
+                            is typically reserved to the tenant who created it, unless the
+                            network has been explicitly configured to be shared. Tenants can
+                            create multiple networks, until they reach the thresholds specified
+                            by per-tenant Quotas. The network is the principal entity for 
+                            the Neutron API. Ports and Subnets must always be associated 
+                            with a network.";
+    
+                key "uuid";
+                uses attrs:base-attrs;
+                uses attrs:admin-attrs;
+                uses network-attrs;
+            }
         }
     }
 }
