@@ -31,6 +31,11 @@ import java.util.List;
  * shared             Bool
  * firewall_policy_id uuid-str
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
+ *
+ * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+ * the scope of neutron northbound
+ *
+ * @deprecated
  */
 
 @XmlRootElement

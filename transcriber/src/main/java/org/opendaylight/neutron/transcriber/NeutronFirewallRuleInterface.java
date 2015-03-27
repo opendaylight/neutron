@@ -22,6 +22,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+ * the scope of neutron northbound
+ *
+ * @deprecated
+ */
+
 public class NeutronFirewallRuleInterface implements INeutronFirewallRuleCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
 
