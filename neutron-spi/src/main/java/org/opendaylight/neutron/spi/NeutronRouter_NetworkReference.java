@@ -10,6 +10,8 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -27,6 +29,12 @@ public class NeutronRouter_NetworkReference implements Serializable {
     @XmlElement(name = "network_id")
     String networkID;
 
+    @XmlElement(name = "enable_snat")
+    Boolean enableSNAT;
+
+    @XmlElement(name = "external_fixed_ips")
+    List<Neutron_IPs> externalFixedIPs;
+
     public NeutronRouter_NetworkReference() {
     }
 
@@ -37,10 +45,28 @@ public class NeutronRouter_NetworkReference implements Serializable {
     public void setNetworkID(String networkID) {
         this.networkID = networkID;
     }
+
+    public Boolean getEnableSNAT() {
+        return enableSNAT;
+    }
+
+    public void setEnableSNAT(Boolean enableSNAT) {
+        this.enableSNAT = enableSNAT;
+    }
+
+    public List<Neutron_IPs> getExternalFixedIPs() {
+        return externalFixedIPs;
+    }
+
+    public void setExternalFixedIPs(List<Neutron_IPs> externalFixedIPs) {
+        this.externalFixedIPs = externalFixedIPs;
+    }
+
     @Override
     public String toString() {
-        return "NeutronRouterNetworkReference [" +
-            "networkID=" + networkID + "]";
+        return "NeutronRouterNetworkReference [networkID=" + networkID +
+            " enableSNAT=" + enableSNAT +
+            " externalFixedIPs=" + externalFixedIPs + "]";
     }
 
 }
