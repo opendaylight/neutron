@@ -89,7 +89,6 @@ public class NeutronLoadBalancerPoolNorthbound {
             @QueryParam("lb_algorithm") String queryLoadBalancerPoolLbAlgorithm,
             @QueryParam("healthmonitor_id") String queryLoadBalancerPoolHealthMonitorID,
             @QueryParam("admin_state_up") String queryLoadBalancerIsAdminStateUp,
-            @QueryParam("status") String queryLoadBalancerPoolStatus,
             @QueryParam("members") List<NeutronLoadBalancerPoolMember> queryLoadBalancerPoolMembers,
             // pagination
             @QueryParam("limit") String limit,
@@ -121,8 +120,6 @@ public class NeutronLoadBalancerPoolNorthbound {
                             queryLoadBalancerPoolHealthMonitorID.equals(nsg.getNeutronLoadBalancerPoolHealthMonitorID())) &&
                     (queryLoadBalancerIsAdminStateUp == null ||
                             queryLoadBalancerIsAdminStateUp.equals(nsg.getLoadBalancerPoolAdminIsStateIsUp())) &&
-                    (queryLoadBalancerPoolStatus == null ||
-                            queryLoadBalancerPoolStatus.equals(nsg.getLoadBalancerPoolStatus())) &&
                     (queryLoadBalancerPoolMembers.size() == 0 ||
                             queryLoadBalancerPoolMembers.equals(nsg.getLoadBalancerPoolMembers()))) {
                 if (fields.size() > 0) {
@@ -320,7 +317,6 @@ public class NeutronLoadBalancerPoolNorthbound {
                 delta.getLoadBalancerPoolLbAlgorithm() != null ||
                 delta.getNeutronLoadBalancerPoolHealthMonitorID() != null ||
                 delta.getLoadBalancerPoolAdminIsStateIsUp() != null ||
-                delta.getLoadBalancerPoolStatus() != null ||
                 delta.getLoadBalancerPoolMembers() != null) {
             throw new BadRequestException("Attribute edit blocked by Neutron");
         }

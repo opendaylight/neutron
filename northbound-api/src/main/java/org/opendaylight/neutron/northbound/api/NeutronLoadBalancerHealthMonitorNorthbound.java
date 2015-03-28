@@ -86,7 +86,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @QueryParam("url_path") String queryLoadBalancerHealthMonitorUrlPath,
             @QueryParam("expected_codes") String queryLoadBalancerHealthMonitorExpectedCodes,
             @QueryParam("admin_state_up") Boolean queryLoadBalancerHealthMonitorIsAdminStateUp,
-            @QueryParam("status") String queryLoadBalancerHealthMonitorStatus,
             // pagination
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
@@ -132,10 +131,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                                     (nsg.getLoadBalancerHealthMonitorExpectedCodes())) &&
                     (queryLoadBalancerHealthMonitorIsAdminStateUp == null ||
                             queryLoadBalancerHealthMonitorIsAdminStateUp.equals
-                                    (nsg.getLoadBalancerHealthMonitorAdminStateIsUp())) &&
-                    (queryLoadBalancerHealthMonitorStatus == null ||
-                            queryLoadBalancerHealthMonitorStatus.equals
-                                    (nsg.getLoadBalancerHealthMonitorStatus()))) {
+                                    (nsg.getLoadBalancerHealthMonitorAdminStateIsUp()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsg,fields));
                 } else {
@@ -337,8 +333,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 delta.getLoadBalancerHealthMonitorHttpMethod() != null ||
                 delta.getLoadBalancerHealthMonitorUrlPath() != null ||
                 delta.getLoadBalancerHealthMonitorExpectedCodes() != null ||
-                delta.getLoadBalancerHealthMonitorAdminStateIsUp() != null ||
-                delta.getLoadBalancerHealthMonitorStatus() != null) {
+                delta.getLoadBalancerHealthMonitorAdminStateIsUp() != null) {
             throw new BadRequestException("Attribute edit blocked by Neutron");
         }
 

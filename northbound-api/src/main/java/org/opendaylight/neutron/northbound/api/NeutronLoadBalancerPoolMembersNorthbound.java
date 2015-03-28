@@ -65,7 +65,6 @@ public Response listMembers(
         @QueryParam("admin_state_up") String queryLoadBalancerPoolMemberAdminStateUp,
         @QueryParam("weight") String queryLoadBalancerPoolMemberWeight,
         @QueryParam("subnet_id") String queryLoadBalancerPoolMemberSubnetID,
-        @QueryParam("status") String queryLoadBalancerPoolMemberStatus,
 
         // pagination
         @QueryParam("limit") String limit,
@@ -100,9 +99,7 @@ public Response listMembers(
                 (queryLoadBalancerPoolMemberWeight == null ||
                         queryLoadBalancerPoolMemberWeight.equals(nsg.getPoolMemberWeight())) &&
                 (queryLoadBalancerPoolMemberSubnetID == null ||
-                        queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID())) &&
-                (queryLoadBalancerPoolMemberStatus == null ||
-                        queryLoadBalancerPoolMemberStatus.equals(nsg.getPoolMemberStatus()))) {
+                        queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID()))) {
             if (fields.size() > 0) {
                 ans.add(extractFields(nsg, fields));
             } else {

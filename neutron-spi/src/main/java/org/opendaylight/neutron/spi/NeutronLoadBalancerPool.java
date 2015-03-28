@@ -66,8 +66,11 @@ public class NeutronLoadBalancerPool implements Serializable {
     @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerPoolAdminStateIsUp;
 
-    @XmlElement (name = "status")
-    String loadBalancerPoolStatus;
+    @XmlElement(name = "listeners")
+    List<Neutron_ID> loadBalancerPoolListeners;
+
+    @XmlElement(name = "session_persistence")
+    NeutronLoadBalancer_SessionPersistence loadBalancerPoolSessionPersistence;
 
     @XmlElement(name = "members")
     List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers;
@@ -139,12 +142,20 @@ public class NeutronLoadBalancerPool implements Serializable {
         this.loadBalancerPoolAdminStateIsUp = loadBalancerPoolAdminStateIsUp;
     }
 
-    public String getLoadBalancerPoolStatus() {
-        return loadBalancerPoolStatus;
+    public NeutronLoadBalancer_SessionPersistence getLoadBalancerPoolSessionPersistence() {
+        return loadBalancerPoolSessionPersistence;
     }
 
-    public void setLoadBalancerPoolStatus(String loadBalancerPoolStatus) {
-        this.loadBalancerPoolStatus = loadBalancerPoolStatus;
+    public void setLoadBalancerSessionPersistence(NeutronLoadBalancer_SessionPersistence loadBalancerPoolSessionPersistence) {
+        this.loadBalancerPoolSessionPersistence = loadBalancerPoolSessionPersistence;
+    }
+
+    public List<Neutron_ID> getLoadBalancerPoolListeners() {
+        return loadBalancerPoolListeners;
+    }
+
+    public void setLoadBalancerPoolListeners(List<Neutron_ID> loadBalancerPoolListeners) {
+        this.loadBalancerPoolListeners = loadBalancerPoolListeners;
     }
 
     public List<NeutronLoadBalancerPoolMember> getLoadBalancerPoolMembers() {
@@ -197,9 +208,6 @@ public class NeutronLoadBalancerPool implements Serializable {
             if (s.equals("admin_state_up")) {
                 ans.setLoadBalancerPoolAdminStateIsUp(loadBalancerPoolAdminStateIsUp);
             }
-            if (s.equals("status")) {
-                ans.setLoadBalancerPoolStatus(this.getLoadBalancerPoolStatus());
-            }
             if (s.equals("members")) {
                 ans.setLoadBalancerPoolMembers(getLoadBalancerPoolMembers());
             }
@@ -218,7 +226,6 @@ public class NeutronLoadBalancerPool implements Serializable {
             ", lbAlgorithm='" + loadBalancerPoolLbAlgorithm + '\'' +
             ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID +
             ", adminStateUp=" + loadBalancerPoolAdminStateIsUp +
-            ", status='" + loadBalancerPoolStatus + '\'' +
 // todo: add loadBalancerPoolMembers as joined string
             '}';
     }
