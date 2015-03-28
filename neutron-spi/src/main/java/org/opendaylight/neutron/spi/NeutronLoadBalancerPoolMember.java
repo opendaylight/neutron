@@ -48,9 +48,6 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
     @XmlElement (name = "subnet_id")
     String poolMemberSubnetID;
 
-    @XmlElement (name = "status")
-    String poolMemberStatus;
-
     String poolID;
 
     public NeutronLoadBalancerPoolMember() {
@@ -121,14 +118,6 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
         this.poolMemberSubnetID = poolMemberSubnetID;
     }
 
-    public String getPoolMemberStatus() {
-        return poolMemberStatus;
-    }
-
-    public void setPoolMemberStatus(String poolMemberStatus) {
-        this.poolMemberStatus = poolMemberStatus;
-    }
-
     public NeutronLoadBalancerPoolMember extractFields(List<String> fields) {
         NeutronLoadBalancerPoolMember ans = new NeutronLoadBalancerPoolMember();
         Iterator<String> i = fields.iterator();
@@ -158,9 +147,6 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
             if(s.equals("subnet_id")) {
                 ans.setPoolMemberSubnetID(this.getPoolMemberSubnetID());
             }
-            if (s.equals("status")) {
-                ans.setPoolMemberStatus(this.getPoolMemberStatus());
-            }
         }
         return ans;
     }
@@ -174,7 +160,6 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
                 ", poolMemberAdminStateIsUp=" + poolMemberAdminStateIsUp +
                 ", poolMemberWeight=" + poolMemberWeight +
                 ", poolMemberSubnetID='" + poolMemberSubnetID + '\'' +
-                ", poolMemberStatus='" + poolMemberStatus + '\'' +
                 '}';
     }
 }
