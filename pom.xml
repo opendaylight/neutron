@@ -21,6 +21,7 @@
   <name>neutron</name> <!-- Used by Sonar to set project name -->
   <modules>
     <module>parent</module>
+    <module>distribution/opendaylight-karaf</module>
     <module>neutron-spi</module>
     <module>northbound-api</module>
     <module>transcriber</module>
