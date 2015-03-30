@@ -53,6 +53,9 @@ public class NeutronLoadBalancer implements Serializable {
     @XmlElement (name = "status")
     String loadBalancerStatus;
 
+    @XmlElement (name = "admin_state_up")
+    Boolean loadBalancerAdminStateUp;
+
     @XmlElement (name = "vip_address")
     String loadBalancerVipAddress;
 
@@ -99,6 +102,14 @@ public class NeutronLoadBalancer implements Serializable {
         this.loadBalancerStatus = loadBalancerStatus;
     }
 
+    public Boolean getLoadBalancerAdminStateUp() {
+        return loadBalancerAdminStateUp;
+    }
+
+    public void setLoadBalancerAdminStateUp(Boolean loadBalancerAdminStateUp) {
+        this.loadBalancerAdminStateUp = loadBalancerAdminStateUp;
+    }
+
     public String getLoadBalancerVipAddress() {
         return loadBalancerVipAddress;
     }
@@ -141,6 +152,9 @@ public class NeutronLoadBalancer implements Serializable {
             if (s.equals("status")) {
                 ans.setLoadBalancerStatus(this.getLoadBalancerStatus());
             }
+            if (s.equals("admin_state_up")) {
+                ans.setLoadBalancerAdminStateUp(this.getLoadBalancerAdminStateUp());
+            }
         }
         return ans;
     }
@@ -152,6 +166,7 @@ public class NeutronLoadBalancer implements Serializable {
                 ", loadBalancerName='" + loadBalancerName + '\'' +
                 ", loadBalancerDescription='" + loadBalancerDescription + '\'' +
                 ", loadBalancerStatus='" + loadBalancerStatus + '\'' +
+                ", loadBalancerAdminStateUp='" + loadBalancerAdminStateUp + '\'' +
                 ", loadBalancerVipAddress='" + loadBalancerVipAddress + '\'' +
                 ", loadBalancerVipSubnetID='" + loadBalancerVipSubnetID + '\'' +
                 '}';

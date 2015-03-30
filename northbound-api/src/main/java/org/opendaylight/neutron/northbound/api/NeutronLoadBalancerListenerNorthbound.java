@@ -76,12 +76,9 @@ public class NeutronLoadBalancerListenerNorthbound {
             @QueryParam("tenant_id") String queryLoadBalancerListenerTenantID,
             @QueryParam("name") String queryLoadBalancerListenerName,
             @QueryParam("description") String queryLoadBalancerListenerDescription,
-            @QueryParam("shared") String queryLoadBalancerListenerIsShared,
             @QueryParam("protocol") String queryLoadBalancerListenerProtocol,
             @QueryParam("protocol_port") String queryLoadBalancerListenerProtocolPort,
-            @QueryParam("load_balancer_id") String queryLoadBalancerListenerLoadBalancerID,
             @QueryParam("admin_state_up") String queryLoadBalancerListenerAdminIsUp,
-            @QueryParam("status") String queryLoadBalancerListenerStatus,
             // pagination
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
@@ -112,18 +109,12 @@ public class NeutronLoadBalancerListenerNorthbound {
                             queryLoadBalancerListenerName.equals(nsg.getLoadBalancerListenerName())) &&
                     (queryLoadBalancerListenerDescription == null ||
                             queryLoadBalancerListenerDescription.equals(nsg.getLoadBalancerListenerDescription())) &&
-                    (queryLoadBalancerListenerIsShared == null ||
-                            queryLoadBalancerListenerIsShared.equals(nsg.getLoadBalancerListenerIsShared())) &&
                     (queryLoadBalancerListenerProtocol == null ||
                             queryLoadBalancerListenerProtocol.equals(nsg.getNeutronLoadBalancerListenerProtocol())) &&
                     (queryLoadBalancerListenerProtocolPort == null ||
                             queryLoadBalancerListenerProtocolPort.equals(nsg.getNeutronLoadBalancerListenerProtocolPort())) &&
-                    (queryLoadBalancerListenerLoadBalancerID == null ||
-                            queryLoadBalancerListenerLoadBalancerID.equals(nsg.getNeutronLoadBalancerListenerLoadBalancerID())) &&
                     (queryLoadBalancerListenerAdminIsUp == null ||
-                            queryLoadBalancerListenerAdminIsUp.equals(nsg.getLoadBalancerListenerAdminStateIsUp())) &&
-                    (queryLoadBalancerListenerStatus == null ||
-                            queryLoadBalancerListenerStatus.equals(nsg.getLoadBalancerListenerStatus()))) {
+                            queryLoadBalancerListenerAdminIsUp.equals(nsg.getLoadBalancerListenerAdminStateIsUp()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsg,fields));
                 } else {
@@ -317,12 +308,9 @@ public class NeutronLoadBalancerListenerNorthbound {
                 delta.getLoadBalancerListenerTenantID() != null ||
                 delta.getLoadBalancerListenerName() != null ||
                 delta.getLoadBalancerListenerDescription() != null ||
-                delta.getLoadBalancerListenerIsShared() != null ||
                 delta.getNeutronLoadBalancerListenerProtocol() != null ||
                 delta.getNeutronLoadBalancerListenerProtocolPort() != null ||
-                delta.getNeutronLoadBalancerListenerLoadBalancerID() != null ||
-                delta.getLoadBalancerListenerAdminStateIsUp() != null ||
-                delta.getLoadBalancerListenerStatus() != null) {
+                delta.getLoadBalancerListenerAdminStateIsUp() != null) {
             throw new BadRequestException("Attribute edit blocked by Neutron");
         }
 

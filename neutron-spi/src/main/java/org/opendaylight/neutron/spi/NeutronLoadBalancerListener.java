@@ -49,6 +49,9 @@ public class NeutronLoadBalancerListener implements Serializable {
     @XmlElement (name = "default_pool_id")
     String neutronLoadBalancerListenerDefaultPoolID;
 
+    @XmlElement (name = "connection_limit")
+    Integer neutronLoadBalancerListenerConnectionLimit;
+
     @XmlElement (name = "tenant_id")
     String loadBalancerListenerTenantID;
 
@@ -61,20 +64,14 @@ public class NeutronLoadBalancerListener implements Serializable {
     @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerListenerAdminStateIsUp;
 
-    @XmlElement (name = "status")
-    String loadBalancerListenerStatus;
-
-    @XmlElement (defaultValue = "false", name = "shared")
-    Boolean loadBalancerListenerIsShared;
-
     @XmlElement (name = "protocol")
     String neutronLoadBalancerListenerProtocol;
 
     @XmlElement (name = "protocol_port")
     String neutronLoadBalancerListenerProtocolPort;
 
-    @XmlElement (name = "load_balancer_id")
-    String neutronLoadBalancerListenerLoadBalancerID;
+    @XmlElement (name = "load_balancers")
+    List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs;
 
 
     public String getLoadBalancerListenerID() {
@@ -117,22 +114,6 @@ public class NeutronLoadBalancerListener implements Serializable {
         this.loadBalancerListenerAdminStateIsUp = loadBalancerListenerAdminStateIsUp;
     }
 
-    public String getLoadBalancerListenerStatus() {
-        return loadBalancerListenerStatus;
-    }
-
-    public void setLoadBalancerListenerStatus(String loadBalancerListenerStatus) {
-        this.loadBalancerListenerStatus = loadBalancerListenerStatus;
-    }
-
-    public Boolean getLoadBalancerListenerIsShared() {
-        return loadBalancerListenerIsShared;
-    }
-
-    public void setLoadBalancerListenerIsShared(Boolean loadBalancerListenerIsShared) {
-        this.loadBalancerListenerIsShared = loadBalancerListenerIsShared;
-    }
-
     public String getNeutronLoadBalancerListenerProtocol() {
         return neutronLoadBalancerListenerProtocol;
     }
@@ -157,12 +138,20 @@ public class NeutronLoadBalancerListener implements Serializable {
         this.neutronLoadBalancerListenerDefaultPoolID = neutronLoadBalancerListenerDefaultPoolID;
     }
 
-    public String getNeutronLoadBalancerListenerLoadBalancerID() {
-        return neutronLoadBalancerListenerLoadBalancerID;
+    public Integer getNeutronLoadBalancerListenerConnectionLimit() {
+        return neutronLoadBalancerListenerConnectionLimit;
     }
 
-    public void setNeutronLoadBalancerListenerLoadBalancerID(String neutronLoadBalancerListenerLoadBalancerID) {
-        this.neutronLoadBalancerListenerLoadBalancerID = neutronLoadBalancerListenerLoadBalancerID;
+    public void setNeutronLoadBalancerListenerConnectionLimit(Integer neutronLoadBalancerListenerConnectionLimit) {
+        this.neutronLoadBalancerListenerConnectionLimit = neutronLoadBalancerListenerConnectionLimit;
+    }
+
+    public List<Neutron_ID> getNeutronLoadBalancerListenerLoadBalancerIDs() {
+        return neutronLoadBalancerListenerLoadBalancerIDs;
+    }
+
+    public void setNeutronLoadBalancerListenerLoadBalancerIDs(List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs) {
+        this.neutronLoadBalancerListenerLoadBalancerIDs = neutronLoadBalancerListenerLoadBalancerIDs;
     }
 
     public NeutronLoadBalancerListener extractFields(List<String> fields) {
@@ -185,23 +174,14 @@ public class NeutronLoadBalancerListener implements Serializable {
             if(s.equals("description")) {
                 ans.setLoadBalancerListenerDescription(this.getLoadBalancerListenerDescription());
             }
-            if (s.equals("shared")) {
-                ans.setLoadBalancerListenerIsShared(loadBalancerListenerIsShared);
-            }
             if (s.equals("protocol")) {
                 ans.setNeutronLoadBalancerListenerProtocol(this.getNeutronLoadBalancerListenerProtocol());
             }
             if (s.equals("protocol_port")) {
                 ans.setNeutronLoadBalancerListenerProtocolPort(this.getNeutronLoadBalancerListenerProtocolPort());
             }
-            if (s.equals("load_balancer_id")) {
-                ans.setNeutronLoadBalancerListenerLoadBalancerID(this.getNeutronLoadBalancerListenerLoadBalancerID());
-            }
             if (s.equals("admin_state_up")) {
                 ans.setLoadBalancerListenerAdminStateIsUp(loadBalancerListenerAdminStateIsUp);
-            }
-            if (s.equals("status")) {
-                ans.setLoadBalancerListenerStatus(this.getLoadBalancerListenerStatus());
             }
         }
         return ans;
@@ -211,15 +191,13 @@ public class NeutronLoadBalancerListener implements Serializable {
         return "NeutronLoadBalancerListener{" +
                 "loadBalancerListenerID='" + loadBalancerListenerID + '\'' +
                 ", neutronLoadBalancerListenerDefaultPoolID='" + neutronLoadBalancerListenerDefaultPoolID + '\'' +
+                ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\'' +
                 ", loadBalancerListenerTenantID='" + loadBalancerListenerTenantID + '\'' +
                 ", loadBalancerListenerName='" + loadBalancerListenerName + '\'' +
                 ", loadBalancerListenerDescription='" + loadBalancerListenerDescription + '\'' +
                 ", loadBalancerListenerAdminStateIsUp=" + loadBalancerListenerAdminStateIsUp +
-                ", loadBalancerListenerStatus='" + loadBalancerListenerStatus + '\'' +
-                ", loadBalancerListenerIsShared=" + loadBalancerListenerIsShared +
                 ", neutronLoadBalancerListenerProtocol='" + neutronLoadBalancerListenerProtocol + '\'' +
                 ", neutronLoadBalancerListenerProtocolPort='" + neutronLoadBalancerListenerProtocolPort + '\'' +
-                ", neutronLoadBalancerListenerLoadBalancerID='" + neutronLoadBalancerListenerLoadBalancerID + '\'' +
                 '}';
     }
 }

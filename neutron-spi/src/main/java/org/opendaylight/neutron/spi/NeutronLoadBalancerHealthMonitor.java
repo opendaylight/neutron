@@ -77,8 +77,8 @@ public class NeutronLoadBalancerHealthMonitor implements Serializable {
     @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerHealthMonitorAdminStateIsUp;
 
-    @XmlElement (name = "status")
-    String loadBalancerHealthMonitorStatus;
+    @XmlElement (name = "pools")
+    List<Neutron_ID> loadBalancerHealthMonitorPools;
 
     public String getLoadBalancerHealthMonitorID() {
         return loadBalancerHealthMonitorID;
@@ -160,12 +160,12 @@ public class NeutronLoadBalancerHealthMonitor implements Serializable {
         this.loadBalancerHealthMonitorAdminStateIsUp = loadBalancerHealthMonitorAdminStateIsUp;
     }
 
-    public String getLoadBalancerHealthMonitorStatus() {
-        return loadBalancerHealthMonitorStatus;
+    public List<Neutron_ID> getLoadBalancerHealthMonitorPools() {
+        return loadBalancerHealthMonitorPools;
     }
 
-    public void setLoadBalancerHealthMonitorStatus(String loadBalancerHealthMonitorStatus) {
-        this.loadBalancerHealthMonitorStatus = loadBalancerHealthMonitorStatus;
+    public void setLoadBalancerHealthMonitorPools(List<Neutron_ID> loadBalancerHealthMonitorPools) {
+        this.loadBalancerHealthMonitorPools = loadBalancerHealthMonitorPools;
     }
 
     public NeutronLoadBalancerHealthMonitor extractFields(List<String> fields) {
@@ -203,9 +203,6 @@ public class NeutronLoadBalancerHealthMonitor implements Serializable {
             if (s.equals("admin_state_up")) {
                 ans.setLoadBalancerHealthMonitorAdminStateIsUp(loadBalancerHealthMonitorAdminStateIsUp);
             }
-            if (s.equals("status")) {
-                ans.setLoadBalancerHealthMonitorStatus(this.getLoadBalancerHealthMonitorStatus());
-            }
         }
         return ans;
     }
@@ -222,7 +219,6 @@ public class NeutronLoadBalancerHealthMonitor implements Serializable {
                 ", loadBalancerHealthMonitorUrlPath='" + loadBalancerHealthMonitorUrlPath + '\'' +
                 ", loadBalancerHealthMonitorExpectedCodes='" + loadBalancerHealthMonitorExpectedCodes + '\'' +
                 ", loadBalancerHealthMonitorAdminStateIsUp=" + loadBalancerHealthMonitorAdminStateIsUp +
-                ", loadBalancerHealthMonitorStatus='" + loadBalancerHealthMonitorStatus + '\'' +
                 '}';
     }
 }
