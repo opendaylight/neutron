@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2015 Brocade Communications Systems, Inc. and others.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+module neutron-provider-ext {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-provider-ext";
+
+    prefix neutron-provider-ext;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+    import neutron-networks { prefix "networks"; }
+    import neutron { prefix "neutron"; }
+    import neutron-provider { prefix "provider"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
+
+    description "This YANG module defines provider model extensions that are used by Openstack
+        Ice House Neutron YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of provider model extensions used by OpenStack Ice House Neutron
+                models";
+    }
+
+    augment "/neutron:neutron/neutron:networks/neutron:network"{
+        description "
+          This module augments the networks container in the neutron-networks
+          module with provider information.
+          ";
+        list providers {
+            description "List of provider network(s) associated with this network.";
+            key segmentation-id;
+            uses provider:provider-attrs;
+        }
+        uses provider:provider-attrs;
+    }
+}
