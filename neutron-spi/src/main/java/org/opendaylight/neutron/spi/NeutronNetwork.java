@@ -42,16 +42,21 @@ public class NeutronNetwork implements Serializable, INeutronObject {
     @XmlElement (name = "tenant_id")
     String tenantID;                 // tenant for this network
 
-    @XmlElement (defaultValue = "false", namespace = "router", name = "external")
+    @XmlElement (defaultValue = "false", name = "router:external")
+    //    @XmlElement (defaultValue="false", namespace="router", name="external")
     Boolean routerExternal;           // network external or not
 
-    @XmlElement (defaultValue = "flat", namespace = "provider", name = "network_type")
+    @XmlElement (defaultValue = "flat", name = "provider:network_type")
+    //    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
     String providerNetworkType;      // provider network type (flat or vlan)
 
-    @XmlElement (namespace = "provider", name = "physical_network")
+    @XmlElement (name = "provider:physical_network")
+    //    @XmlElement (namespace="provider", name="physical_network")
     String providerPhysicalNetwork;  // provider physical network (name)
 
-    @XmlElement (namespace = "provider", name = "segmentation_id")
+    @XmlElement (name = "provider:segmentation_id")
+    //    @XmlElement (namespace="provider", name="segmentation_id")
+
     String providerSegmentationID;   // provide segmentation ID (vlan ID)
 
     @XmlElement (name = "status")
@@ -59,6 +64,9 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     @XmlElement (name = "subnets")
     List<String> subnets;            // subnets (read-only)
+
+    @XmlElement (name="segments")
+    List<NeutronNetwork_Segment> segments;
 
     /* This attribute lists the ports associated with an instance
      * which is needed for determining if that instance can be deleted
@@ -191,6 +199,14 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         subnets.remove(uuid);
     }
 
+    public void setSegments(List<NeutronNetwork_Segment> segments) {
+        this.segments = segments;
+    }
+
+    public List<NeutronNetwork_Segment> getSegments() {
+        return segments;
+    }
+
     public List<NeutronPort> getPortsOnNetwork() {
         return myPorts;
     }
@@ -241,6 +257,18 @@ public class NeutronNetwork implements Serializable, INeutronObject {
             if (s.equals("tenant_id")) {
                 ans.setTenantID(this.getTenantID());
             }
+            if (s.equals("router:external")) {
+                ans.setRouterExternal(this.getRouterExternal());
+            }
+            if (s.equals("provider:segmentation_id")) {
+                ans.setProviderSegmentationID(this.getProviderSegmentationID());
+            }
+            if (s.equals("provider:physical_network")) {
+                ans.setProviderPhysicalNetwork(this.getProviderPhysicalNetwork());
+            }
+            if (s.equals("provider:network_type")) {
+                ans.setProviderNetworkType(this.getProviderNetworkType());
+            }
         }
         return ans;
     }
@@ -251,7 +279,8 @@ public class NeutronNetwork implements Serializable, INeutronObject {
                 + adminStateUp + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
-                + ", subnets=" + subnets + ", myPorts=" + myPorts + "]";
+                + ", subnets=" + subnets + ", myPorts=" + myPorts
+            + ", segments = " + segments + "]";
     }
 }
 
