@@ -109,12 +109,13 @@ module neutron-subnets {
             description "Specifies whether DHCP is enabled for this subnet or not.";
         }
     }
-
-    container subnets {
-        list subnet {
-            key "uuid";
-            uses attrs:base-attrs;
-            uses subnet-attrs;
+    grouping subnets-attributes {
+        container subnets {
+            list subnet {
+                key "uuid";
+                uses attrs:base-attrs;
+                uses subnet-attrs;
+            }
         }
     }
 }

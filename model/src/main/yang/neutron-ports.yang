@@ -115,12 +115,14 @@ module neutron-ports {
         }
     }
 
-    container ports {
-        list port {
-            key "uuid";
-            uses attrs:base-attrs;
-            uses attrs:admin-attrs;
-            uses port-attrs;
+    grouping ports-attributes {
+        container ports {
+            list port {
+                key "uuid";
+                uses attrs:base-attrs;
+                uses attrs:admin-attrs;
+                uses port-attrs;
+            }
         }
     }
 }
