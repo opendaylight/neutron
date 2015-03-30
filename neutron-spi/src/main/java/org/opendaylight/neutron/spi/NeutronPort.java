@@ -66,15 +66,24 @@ public class NeutronPort implements Serializable, INeutronObject {
     @XmlElement (name = "allowed_address_pairs")
     List<NeutronPort_AllowedAddressPairs> allowedAddressPairs;
 
-    @XmlElement (namespace = "binding", name = "host_id")
+    @XmlElement (name = "binding:host_id")
+    //@XmlElement (namespace = "binding", name = "host_id")
     String bindinghostID;
 
-    @XmlElement (namespace = "binding", name = "vnic_type")
+    @XmlElement (name = "binding:vnic_type")
+    //@XmlElement (namespace = "binding", name = "vnic_type")
     String bindingvnicType;
 
-    @XmlElement (namespace = "binding", name = "vif_type")
+    @XmlElement (name = "binding:vif_type")
+    //@XmlElement (namespace = "binding", name = "vif_type")
     String bindingvifType;
 
+    @XmlElement (name = "binding:vif_details")
+    //@XmlElement (namespace = "binding", name = "vif_details")
+    List<NeutronPort_VIFDetail> vifDetails;
+
+    @XmlElement (name = "extra_dhcp_opts")
+    List<NeutronPort_ExtraDHCPOption> extraDHCPOptions;
 
     /* this attribute stores the floating IP address assigned to
      * each fixed IP address
@@ -189,6 +198,22 @@ public class NeutronPort implements Serializable, INeutronObject {
 
     public void setAllowedAddressPairs(List<NeutronPort_AllowedAddressPairs> allowedAddressPairs) {
         this.allowedAddressPairs = allowedAddressPairs;
+    }
+
+    public List<NeutronPort_ExtraDHCPOption> getExtraDHCPOptions() {
+        return extraDHCPOptions;
+    }
+
+    public void setExtraDHCPOptions(List<NeutronPort_ExtraDHCPOption> extraDHCPOptions) {
+        this.extraDHCPOptions = extraDHCPOptions;
+    }
+
+    public List<NeutronPort_VIFDetail> getVIFDetail() {
+        return vifDetails;
+    }
+
+    public void setVIFDetail(List<NeutronPort_VIFDetail> vifDetails) {
+        this.vifDetails = vifDetails;
     }
 
     public String getBindinghostID() {
