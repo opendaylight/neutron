@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_d2ef2d86",
+        "filename": "model/src/main/yang/neutron-metering.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-31T01:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_7278992b",
+      "revId": "2841614f3cc643f7fa2f67e1a791ac0e04509730",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_1277d53b",
         "filename": "model/src/main/yang/neutron-network.yang",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "5a93c517_b2ece190",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-31T01:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_1277d53b",
+      "revId": "2841614f3cc643f7fa2f67e1a791ac0e04509730",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a93c517_3272114a",
         "filename": "model/src/main/yang/neutron-network.yang",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-30T21:43:25Z",
       "side": 1,
       "message": "rogue space",
+      "revId": "2841614f3cc643f7fa2f67e1a791ac0e04509730",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_52031d42",
+        "filename": "model/src/main/yang/neutron-network.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1820
+      },
+      "writtenOn": "2015-03-31T01:20:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93c517_3272114a",
       "revId": "2841614f3cc643f7fa2f67e1a791ac0e04509730",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
