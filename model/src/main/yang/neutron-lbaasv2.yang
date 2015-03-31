@@ -1,0 +1,283 @@
+/*
+ * Copyright (c) 2015 Brocade Communications Systems, Inc. and others.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+module neutron-lbaasv2 {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-lbaasv2";
+
+    prefix neutron-lbaasv2;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Kiran Sreenivasa <kkoushik@brocade.com>";
+
+    description "This YANG module defines LBaaSV2.0 objects that are used by Openstack
+        Ice House Neutron YANG modules.";
+
+    revision "2014-10-02" {
+        description
+                "Initial version of LBaaSV2.0 objects used by OpenStack Ice House Neutron
+                models";
+    }
+
+    grouping loadbalancer-attrs {
+        description "LBaaSV2.0 load balancer attributes.";
+        leaf descr {
+            type string;
+            description "Load balancer description.";
+            default "";
+        }
+        leaf vip-address {
+            type inet:ip-address;
+            description "The IP address of the VIP.";
+        }
+        leaf vip-subnet-id {
+            type yang:uuid;
+            description "The ID of the subnet on which to allocate the VIP address.";
+        }
+    }
+    grouping listener-attrs {
+        description "LBaaSV2.0 listener attributes.";
+        leaf admin-state-up {
+            type boolean;
+            description "The administrative state of the listner, which is up (true) or
+                        down (false).";
+            default "true";
+        }
+        leaf descr {
+            type string;
+            description "Detailed description of the listener.";
+        }
+        leaf protocol {
+            description "The protocol the front end listens for.";
+            type enumeration {
+                enum http {
+                    description "HTTP protocol.";
+                }
+                enum https {
+                    description "HTTPS protocol.";
+                }
+                enum tcp {
+                    description "TCP protocol.";
+                }
+            }
+        }
+        leaf protocol-port {
+            description "The port on which the front end listens.";
+            type uint16 {
+                range 1..65535;
+            }
+        }
+        leaf-list loadbalancers {
+            type yang:uuid;
+            description "List of loadbalancers on which this listener is provisioned.";
+        }
+        leaf connection-limit {
+            description "Maximum connections this load balancer can have. Default is infinite.";
+            type int32 {
+                range -1..65535;
+            }
+            default "-1";
+        }
+    }
+    grouping pool-attrs {
+        leaf descr {
+            type string;
+            description "Detailed description of the listener.";
+        }
+        leaf protocol {
+            description "The protocol the front end listens for.";
+            type enumeration {
+                enum http {
+                    description "HTTP protocol.";
+                }
+                enum https {
+                    description "HTTPS protocol.";
+                }
+                enum tcp {
+                    description "TCP protocol.";
+                }
+            }
+        }
+        leaf lb-algorithm {
+            type string;
+            description "The load-balancer algorithm, which is round-robin,
+                least-connections, and so on. This value, which must be supported,
+                is dependent on the load-balancer provider. Round-robin
+                must be supported.";
+        }
+        leaf-list healthmonitor-ids {
+            type yang:uuid;
+            description "List of healthmonitors associated with this pool.";
+        }
+        leaf-list members {
+            type yang:uuid;
+            description "List of members that belong to the pool.";
+        }
+        container session-persistence {
+            description "The session persistence algorithm. This algorithm is a
+                dictionary with type and cookie_name keys.";
+            leaf cookie-name {
+                type string;
+                description "Cookie Name.";
+            }
+            leaf type {
+                type string;
+                description "Cookie type.";
+            }
+        }
+    }
+    grouping member-attrs {
+        leaf id {
+            type yang:uuid;
+            description "The unique ID for the member.";
+        }
+        leaf tenant-id {
+            type yang:uuid;
+            description "Owner of the member. Only an administrative user can specify
+                a tenant ID other than its own.";
+        }
+        leaf subnet-id {
+            type yang:uuid;
+            description "Subnet in which to access this member.";
+        }
+        leaf address {
+            type inet:ip-address;
+            description "The IP address of the member.";
+        }
+        leaf protocol-port {
+            description "The port on which the application is hosted.";
+            type uint16 {
+                range 1..65535;
+            }
+        }
+        leaf weight {
+            description "Weight of member.";
+            type uint16 {
+                range 1..65535;
+            }
+            default "1";
+        }
+    }
+    grouping healthmonitor-attrs {
+        leaf tenant-id {
+            type yang:uuid;
+            description "Owner of the VIP. Only an administrative user can specify
+                a tenant ID other than its own.";
+        }
+        leaf type {
+            description "The type of probe, which is PING, TCP, HTTP, or HTTPS, that
+                is sent by the load balancer to verify the member state.";
+            type enumeration {
+                enum http {
+                    description "HTTP protocol.";
+                }
+                enum https {
+                    description "HTTPS protocol.";
+                }
+                enum tcp {
+                    description "TCP protocol.";
+                }
+                enum ping {
+                    description "ICMP protocol.";
+                }
+            }
+        }
+        leaf admin-state-up {
+            type boolean;
+            description "The administrative state of the VPI, which is up (true) or
+                        down (false).";
+            default "true";
+        }
+        leaf delay {
+            description "The time, in seconds, between sending probes to members.";
+            type uint32;
+        }
+        leaf timeout {
+            description "The maximum number of seconds for a monitor to wait for a
+                connection to be established before it times out. This value must be
+                less than the delay value.";
+            type uint32;
+        }
+        leaf max-retries {
+            description "Number of allowed connection failures before changing the
+                status of the member to INACTIVE.";
+            type uint16 {
+                range 1..10;
+            }
+        }
+        leaf http-method {
+            type string;
+            description "The HTTP method that the monitor uses for requests.";
+            default "";
+        }
+        leaf url-path {
+            type string;
+            description "The HTTP path of the request sent by the monitor to test
+                the health of a member. Must be a string beginning with a forward
+                slash (/).";
+        }
+        leaf expected-codes {
+            type string;
+            description "Expected HTTP codes for a passing HTTP(S) monitor.";
+            default "";
+        }
+        leaf-list pools {
+            type yang:uuid;
+            description "List of pools associated with this healthmonitor.";
+        }
+    }
+    grouping lbaas-attrs {
+        container loadbalancer {
+            description "Container for Loadbalancers.";
+            list loadbalancers {
+                uses attrs:base-attrs;
+                uses attrs:admin-attrs;
+                uses loadbalancer-attrs;
+                description "List of Loadbalancers.";
+            }
+        }
+        container listener {
+            description "Container for Listeners.";
+            list listeners {
+                uses attrs:base-attrs;
+                uses listener-attrs;
+                description "List of Listeners";
+            }
+        }
+        container pool {
+            description "Container for LBaaSV2.0 pools.";
+            list pools {
+                uses attrs:base-attrs;
+                uses attrs:admin-attrs;
+                uses pool-attrs;
+                description "List of Pools";
+                container member {
+                    description "Container for pool members.";
+                    list members {
+                        uses member-attrs;
+                        description "List of members.";
+                    }
+                }
+            }
+        }
+        container healthmonitor {
+            description "Container for LBaaSV2.0 healthmonitors.";
+            list healthmonitors {
+                uses healthmonitor-attrs;
+                description "List of healthmonitors.";
+            }
+        }
+    }
+}
