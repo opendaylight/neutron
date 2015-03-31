@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNIKEPolicy implements Serializable {
+public class NeutronVPNIKEPolicy implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
