@@ -31,25 +31,25 @@ public class NeutronLoadBalancerJAXBTest {
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
                     "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.loadBalancerID);
 
-            Assert.assertEquals("NeutronLoadBalancer JAXB Test 4: Testing LoadBalancer Name failed",
+            Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed",
                     "NeutronLoadBalancer", testObject.getLoadBalancerName());
 
-            Assert.assertEquals("NeutronLoadBalancer JAXB Test 5: Testing LoadBalancer Description failed",
+            Assert.assertEquals("NeutronLoadBalancer JAXB Test 3: Testing LoadBalancer Description failed",
                     "NeutronLoadBalancer_Description", testObject.getLoadBalancerDescription());
 
-            Assert.assertEquals("NeutronLoadBalancer JAXB Test 7: Testing status failed", "ACTIVE",
+            Assert.assertEquals("NeutronLoadBalancer JAXB Test 4: Testing status failed", "ACTIVE",
                     testObject.getLoadBalancerStatus());
 
-            Assert.assertFalse("NeutronLoadBalancer JAXB Test 7: Testing Admin state up failed",
+            Assert.assertFalse("NeutronLoadBalancer JAXB Test 5: Testing Admin state up failed",
                     testObject.getLoadBalancerAdminStateUp());
 
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 6: Testing LoadBalancer VipAddress failed", "10.0.0.3",
                     testObject.getLoadBalancerVipAddress());
 
-            Assert.assertEquals("NeutronLoadBalancer JAXB Test 3: Testing router id failed",
+            Assert.assertEquals("NeutronLoadBalancer JAXB Test 7: Testing router id failed",
                     "d23abc8d-2991-4a55-ba98-2aaea84cc72f", testObject.loadBalancerVipSubnetID);
 
-            Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing tenant_id failed",
+            Assert.assertEquals("NeutronLoadBalancer JAXB Test 8: Testing tenant_id failed",
                     "4969c491a3c74ee4af974e6d800c62de", testObject.getLoadBalancerTenantID());
         } catch (Exception e) {
             e.printStackTrace();
