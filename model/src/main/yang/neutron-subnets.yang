@@ -22,7 +22,7 @@ module neutron-subnets {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines Openstack Ice House Neutron Subnets model";
+    description "This YANG module defines Openstack Juno House Neutron Subnets model";
 
     revision "2014-10-02" {
         description
@@ -107,6 +107,7 @@ module neutron-subnets {
         leaf enable-dhcp {
             type boolean;
             description "Specifies whether DHCP is enabled for this subnet or not.";
+            default "true";
         }
     }
     grouping subnets-attributes {
