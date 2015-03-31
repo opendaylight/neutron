@@ -22,7 +22,7 @@ module neutron-ports {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines Openstack Ice House Neutron Ports model";
+    description "This YANG module defines Openstack Juno House Neutron Ports model";
 
     revision "2014-10-02" {
         description
@@ -30,19 +30,22 @@ module neutron-ports {
     }
 
     grouping port-attrs {
-        leaf binding-host-id {
-            type yang:uuid;
-            description "The ID of the host where the port is allocated. In some cases,
-                        different implementations can run on different hosts.";
-        }
-        leaf-list allowed-address-pairs {
-            type string;
+        list allowed-address-pairs {
             description "Allowed address pairs for this port. For example: neutron port-create
                         net1 --allowed-address-pairs type=dict list=true mac_address=<mac_address>,ip_address=<ip_cidr>
                         Setting an allowed-address-pair that matches the mac_address and
                         ip_address of a port is prevented. This is because that would
                         have no effect since traffic matching the mac_address and ip_address
                         is already allowed to pass through the port";
+            leaf port-id {
+                type string;
+            }
+            leaf mac-address {
+                type string;
+            }
+            leaf ip-address {
+                type string;
+            }
         }
 
         leaf network-id {
@@ -51,41 +54,12 @@ module neutron-ports {
         list extra-dhcp-opts {
             description "Extra DHCP options";
             reference "http://developer.openstack.org/api-ref-networking-v2.html";
-            key id ;
-            leaf id {
-                type string;
-            }
             leaf opt-name {
                 type string;
             }
             leaf opt-value {
                 type string;
             }
-        }
-
-        list binding-vif-details {
-            description "A dictionary that enables the application to pass information
-                        about functions that the Networking API provides. To enable or
-                        disable port filtering features such as security group and anti-MAC/IP
-                        spoofing, specify port-filter: True or port-filter: False ";
-
-            key id;
-            leaf id {
-                type string;
-            }
-
-            leaf port-filter {
-                type boolean;
-            }
-            leaf ovs-hybrid-plug {
-                type boolean;
-            }
-        }
-        leaf binding-vif-type {
-            type string;
-        }
-        leaf binding-vnic-type {
-            type string;
         }
         leaf device-owner {
             type string;

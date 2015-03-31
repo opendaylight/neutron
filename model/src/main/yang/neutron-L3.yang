@@ -24,7 +24,7 @@ module neutron-L3 {
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
     description "This YANG module defines L3 attributes that are used by Openstack
-        Ice House Neutron modules.";
+        Juno House Neutron modules.";
 
     revision "2014-10-02" {
         description
@@ -43,11 +43,18 @@ module neutron-L3 {
         }
     }
     grouping L3-attrs {
-
-        leaf-list external_network_id {
-            description "The network_id, for the external gateways. If this is empty, then this
-                network does not have external access";
+        leaf distribted {
+            description "whether this router is distributed or not.";
+            type boolean;
+            default "false";
+        }
+        leaf gateway-port-id {
+            description "the port uuid holding the router's gateway address.";
             type yang:uuid;
+        }
+        leaf-list routes {
+            description "list of routes for this router.";
+            type string;
         }
         leaf router-status {
             description "Contains the Router status.";
@@ -60,7 +67,6 @@ module neutron-L3 {
             type yang:uuid;
             description "UUID to index this object.";
         }
-
         leaf tenant-id {
             type yang:uuid;
             description "The Tenant ID of this object.";
@@ -82,7 +88,7 @@ module neutron-L3 {
             description "The floating IP address.";
             type inet:ip-address;
         }
-        leaf fixed-ip-address {
+        list fixed-ip-address {
             description "The fixed IP address associated with the floating IP.
                 If you intend to associate the floating IP with a fixed IP at
                 creation time, then you must indicate the identifier of the
@@ -90,7 +96,13 @@ module neutron-L3 {
                 multiple associated IP addresses, the service chooses the first
                 IP unless you explicitly specify the parameter fixed_ip_address
                 to select a specific IP.";
-            type inet:ip-address;
+            key subnet-id;
+            leaf subnet-id {
+                type yang:uuid;
+            }
+            leaf ip-address {
+                type inet:ip-address;
+            }
         }
         leaf status {
             type string;
@@ -99,6 +111,14 @@ module neutron-L3 {
     }
 
     grouping interface-attrs {
+        leaf uuid {
+            type yang:uuid;
+            description "UUID to index this object.";
+        }
+        leaf tenant-id {
+            type yang:uuid;
+            description "The Tenant ID of this object.";
+        }
         leaf subnet-id {
             description "Contains the Subnet ID of the interface.";
             type yang:uuid;
@@ -111,7 +131,6 @@ module neutron-L3 {
 
     container routers {
         list router {
-
             description "A logical entity for forwarding packets across internal subnets
                 and NATting them on external networks through an appropriate external
                 gateway.";
@@ -120,6 +139,28 @@ module neutron-L3 {
             uses attrs:base-attrs;
             uses attrs:admin-attrs;
             uses L3-attrs;
+            container external_gateway_info {
+                leaf external-network-id {
+                    description "The network_id, for the external gateways. If this is empty, then this
+                        network does not have external access";
+                    type yang:uuid;
+                }
+                leaf enable-snat {
+                    description "If true, it indicates that the router is performing snat on external access ";
+                    type boolean;
+                    default "true";
+                }
+                list external-fixed-ips {
+                    description "external fixed IPs for this router ";
+                    key subnet-id;
+                    leaf subnet-id {
+                        type yang:uuid;
+                    }
+                    leaf ip-address {
+                        type inet:ip-address;
+                    }
+                }
+            }
             list interfaces {
                 description "List of interfaces associated with this router object.";
                 uses interface-attrs;

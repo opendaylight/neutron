@@ -1,0 +1,66 @@
+/*
+ * Copyright (c) 2015 IBM Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+module neutron-binding {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-binding";
+
+    prefix neutron-binding;
+
+    import ietf-yang-types { prefix "yang"; }
+    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import neutron-attrs { prefix "attrs"; }
+    import neutron-ports { prefix "ports"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Ryan Moats <rmoats@us.ibm.com>";
+
+    description "This YANG module defines binding attributes that are used by Openstack
+        Juno Port YANG modules.";
+
+    grouping binding-attrs {
+        leaf host-id {
+            type yang:uuid;
+            description "The ID of the host where the port is allocated. In some cases,
+                        different implementations can run on different hosts.";
+        }
+
+        list vif-details {
+            description "A dictionary that enables the application to pass information
+                        about functions that the Networking API provides. To enable or
+                        disable port filtering features such as security group and anti-MAC/IP
+                        spoofing, specify port-filter: True or port-filter: False ";
+            leaf port-filter {
+                type boolean;
+            }
+            leaf ovs-hybrid-plug {
+                type boolean;
+            }
+        }
+        leaf vif-type {
+            type string;
+        }
+        leaf vnic-type {
+            type string;
+        }
+        leaf profile {
+            type string;
+        }
+    }
+
+    augment "/ports:ports/ports:port"{
+        description "
+          This module augments the ports container in the neutron-ports
+          module with binding information.
+          ";
+        uses binding-attrs;
+    }
+}

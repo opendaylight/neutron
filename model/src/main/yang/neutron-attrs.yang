@@ -22,11 +22,11 @@ module neutron-attrs {
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
     description "This YANG module defines groupings that are used by Openstack
-        Ice House Neutron YANG modules.";
+        Juno House Neutron YANG modules.";
 
     revision "2014-10-02" {
         description
-                "Initial version of attributes used by OpenStack Ice House Neutron
+                "Initial version of attributes used by OpenStack Icehouse House Neutron
                 models";
     }
 

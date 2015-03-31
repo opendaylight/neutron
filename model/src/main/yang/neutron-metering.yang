@@ -23,7 +23,7 @@ module neutron-metering {
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
     description "This YANG module defines metering attributes that are used by Openstack
-        Ice House Neutron YANG modules.";
+        Juno House Neutron YANG modules.";
 
     revision "2014-10-02" {
         description
