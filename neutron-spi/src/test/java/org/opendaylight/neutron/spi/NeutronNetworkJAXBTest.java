@@ -74,6 +74,7 @@ public class NeutronNetworkJAXBTest {
                   false, testObject.getShared());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 
@@ -150,6 +151,7 @@ public class NeutronNetworkJAXBTest {
                                 "stt", segments.get(1).getProviderNetworkType());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 }

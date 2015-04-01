@@ -42,20 +42,20 @@ public class NeutronNetwork implements Serializable, INeutronObject {
     @XmlElement (name = "tenant_id")
     String tenantID;                 // tenant for this network
 
-    @XmlElement (defaultValue = "false", name = "router:external")
-    //    @XmlElement (defaultValue="false", namespace="router", name="external")
+    //    @XmlElement (defaultValue = "false", name = "router:external")
+    @XmlElement (defaultValue="false", namespace="router", name="external")
     Boolean routerExternal;           // network external or not
 
-    @XmlElement (defaultValue = "flat", name = "provider:network_type")
-    //    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
+    //    @XmlElement (defaultValue = "flat", name = "provider:network_type")
+    @XmlElement (namespace="provider", name="network_type")
     String providerNetworkType;      // provider network type (flat or vlan)
 
-    @XmlElement (name = "provider:physical_network")
-    //    @XmlElement (namespace="provider", name="physical_network")
+    //    @XmlElement (name = "provider:physical_network")
+    @XmlElement (namespace="provider", name="physical_network")
     String providerPhysicalNetwork;  // provider physical network (name)
 
-    @XmlElement (name = "provider:segmentation_id")
-    //    @XmlElement (namespace="provider", name="segmentation_id")
+    //    @XmlElement (name = "provider:segmentation_id")
+    @XmlElement (namespace="provider", name="segmentation_id")
 
     String providerSegmentationID;   // provide segmentation ID (vlan ID)
 
@@ -257,16 +257,16 @@ public class NeutronNetwork implements Serializable, INeutronObject {
             if (s.equals("tenant_id")) {
                 ans.setTenantID(this.getTenantID());
             }
-            if (s.equals("router:external")) {
+            if (s.equals("external")) {
                 ans.setRouterExternal(this.getRouterExternal());
             }
-            if (s.equals("provider:segmentation_id")) {
+            if (s.equals("segmentation_id")) {
                 ans.setProviderSegmentationID(this.getProviderSegmentationID());
             }
-            if (s.equals("provider:physical_network")) {
+            if (s.equals("physical_network")) {
                 ans.setProviderPhysicalNetwork(this.getProviderPhysicalNetwork());
             }
-            if (s.equals("provider:network_type")) {
+            if (s.equals("network_type")) {
                 ans.setProviderNetworkType(this.getProviderNetworkType());
             }
         }

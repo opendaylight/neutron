@@ -10,11 +10,17 @@ package org.opendaylight.neutron.spi;
 
 import java.io.StringReader;
 
-import javax.xml.bind.JAXBException;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.sun.jersey.api.json.JSONConfiguration;
-import com.sun.jersey.api.json.JSONJAXBContext;
-import com.sun.jersey.api.json.JSONUnmarshaller;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import javax.xml.transform.stream.StreamSource;
+
+import org.eclipse.persistence.jaxb.JAXBContextProperties;
+import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 
 public class JaxbTestHelper {
 
@@ -23,9 +29,22 @@ public class JaxbTestHelper {
         Class c = schemaObject.getClass();
         Class[] types = new Class[1];
         types[0] = c;
-        JSONJAXBContext context = new JSONJAXBContext(JSONConfiguration.natural().build(), types);
-        JSONUnmarshaller unmarshaller = context.createJSONUnmarshaller();
+        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(3);
+        namespacePrefixMapper.put("router", "router");
+        namespacePrefixMapper.put("provider", "provider");
+        namespacePrefixMapper.put("binding", "binding");
+        Map<String, Object> jaxbProperties = new HashMap<String, Object>(2);
+        jaxbProperties.put(JAXBContextProperties.MEDIA_TYPE, "application/json");
+        jaxbProperties.put(JAXBContextProperties.JSON_INCLUDE_ROOT, false);
+        jaxbProperties.put(JAXBContextProperties.JSON_NAMESPACE_SEPARATOR, ':');
+        jaxbProperties.put(JAXBContextProperties.NAMESPACE_PREFIX_MAPPER, namespacePrefixMapper);
+        JAXBContext jc = JAXBContext.newInstance(types, jaxbProperties);
+
+        Unmarshaller unmarshaller = jc.createUnmarshaller();
+        unmarshaller.setProperty(UnmarshallerProperties.JSON_NAMESPACE_PREFIX_MAPPER, namespacePrefixMapper);
+        
         StringReader reader = new StringReader(json);
-        return unmarshaller.unmarshalFromJSON(reader, c);
+        StreamSource stream = new StreamSource(reader);
+        return unmarshaller.unmarshal(stream, c).getValue();
     }
 }
