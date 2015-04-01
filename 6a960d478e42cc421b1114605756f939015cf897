@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_57754696",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronRouter_NetworkReferenceJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-04-01T15:53:57Z",
+      "side": 1,
+      "message": "this test isn\u0027t complete, we need to also check for the enable_snat and external_fixed_ip elements of this object",
+      "revId": "6a960d478e42cc421b1114605756f939015cf897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
