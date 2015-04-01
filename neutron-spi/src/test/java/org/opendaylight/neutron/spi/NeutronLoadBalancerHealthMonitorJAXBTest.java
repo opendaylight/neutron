@@ -67,7 +67,6 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
                     "2f245a7b-0000-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerHealthMonitorPools().get(0)
                             .getID());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertFalse("Tests Failed", true);
         }
     }

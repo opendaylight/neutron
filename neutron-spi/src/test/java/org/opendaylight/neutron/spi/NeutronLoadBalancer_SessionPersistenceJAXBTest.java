@@ -29,7 +29,6 @@ public class NeutronLoadBalancer_SessionPersistenceJAXBTest {
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed", "HTTP_COOKIE",
                     testObject.getType());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }

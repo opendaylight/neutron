@@ -32,7 +32,6 @@ public class NeutronPort_VIFDetailJAXBTest {
                     testObject.getMacAddress());
 
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertFalse("Tests Failed", true);
         }
     }

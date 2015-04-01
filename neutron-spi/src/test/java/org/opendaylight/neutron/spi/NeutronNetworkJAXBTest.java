@@ -73,7 +73,6 @@ public class NeutronNetworkJAXBTest {
             Assert.assertEquals("NeutronNetwork JAXB Test 11: Testing shared failed",
                   false, testObject.getShared());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }
@@ -150,7 +149,6 @@ public class NeutronNetworkJAXBTest {
             Assert.assertEquals("NeutronNetwork JAXB Test 9.4: Testing segment index 1 network type failed",
                                 "stt", segments.get(1).getProviderNetworkType());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }

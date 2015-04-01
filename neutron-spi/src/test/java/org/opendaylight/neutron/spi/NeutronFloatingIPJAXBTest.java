@@ -57,7 +57,6 @@ public class NeutronFloatingIPJAXBTest {
             Assert.assertEquals("NeutronFloatingIP JAXB Test 8: Testing status failed",
                   "ACTIVE", testObject.getStatus());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }

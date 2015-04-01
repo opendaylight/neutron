@@ -35,7 +35,6 @@ public class NeutronPort_AllowedAddressPairsJAXBTest {
                     "fa:16:3e:c9:cb:f0", testObject.getMacAddress());
 
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertFalse("Tests Failed", true);
         }
     }

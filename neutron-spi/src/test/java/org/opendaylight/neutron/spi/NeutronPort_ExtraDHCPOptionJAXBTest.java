@@ -32,7 +32,6 @@ public class NeutronPort_ExtraDHCPOptionJAXBTest {
                     "server-ip-address", testObject.getName());
 
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertFalse("Tests Failed", true);
         }
     }

@@ -51,7 +51,6 @@ public class NeutronFirewallJAXBTest {
             Assert.assertEquals("NeutronFirewall JAXB Test 8: Testing firewall_policy_id failed",
                   "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", testObject.getFirewallPolicyID());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }
@@ -87,7 +86,6 @@ public class NeutronFirewallJAXBTest {
             Assert.assertEquals("NeutronFirewallPolicy JAXB Test 7.2: Testing firewall policy rules content failed", 
                   "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", policyRules.get(0));
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }
@@ -144,7 +142,6 @@ public class NeutronFirewallJAXBTest {
             Assert.assertTrue("NeutronFirewallRule JAXB Test 15: Testing enabled failed",
                   testObject.getFirewallRuleIsEnabled());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }

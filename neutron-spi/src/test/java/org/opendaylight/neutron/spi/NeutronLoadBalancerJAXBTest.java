@@ -52,7 +52,6 @@ public class NeutronLoadBalancerJAXBTest {
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 8: Testing tenant_id failed",
                     "4969c491a3c74ee4af974e6d800c62de", testObject.getLoadBalancerTenantID());
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertTrue("Tests failed", false);
         }
     }

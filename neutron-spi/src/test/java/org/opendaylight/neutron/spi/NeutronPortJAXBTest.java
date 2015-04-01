@@ -105,7 +105,6 @@ public class NeutronPortJAXBTest {
                     neutronObject.getBindinghostID());
 
         } catch (Exception e) {
-            e.printStackTrace();
             Assert.assertFalse("Tests Failed", true);
         }
     }
