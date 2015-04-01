@@ -58,6 +58,7 @@ public class NeutronFloatingIPJAXBTest {
                   "ACTIVE", testObject.getStatus());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 }

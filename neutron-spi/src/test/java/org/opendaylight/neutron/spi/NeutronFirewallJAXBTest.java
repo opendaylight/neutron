@@ -52,6 +52,7 @@ public class NeutronFirewallJAXBTest {
                   "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", testObject.getFirewallPolicyID());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 
@@ -87,6 +88,7 @@ public class NeutronFirewallJAXBTest {
                   "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", policyRules.get(0));
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 
@@ -143,6 +145,7 @@ public class NeutronFirewallJAXBTest {
                   testObject.getFirewallRuleIsEnabled());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 }
