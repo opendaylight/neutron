@@ -174,6 +174,24 @@
       "revId": "5f41322eccf89ad025a7228cf76a755af49015c9",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a93c517_dd95f540",
+        "filename": "model/src/main/yang/neutron-lbaasv2.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-04-01T21:16:05Z",
+      "side": 1,
+      "message": "The openstack code base does not include a status column",
+      "parentUuid": "5a93c517_1db59ded",
+      "revId": "5f41322eccf89ad025a7228cf76a755af49015c9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
