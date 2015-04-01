@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_3d2ad92c",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronFirewallJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-04-01T20:39:22Z",
+      "side": 1,
+      "message": "Might be better to use fail() here. It is more readable and clearly indicates that the exception should not happen.\n\nRelated, do we want to test that an exception can happen? You can also add a test for that with something like this:\n\ntry {\n    NodeResource nodeResource \u003d ovsdbNorthboundV3.getNode();\n    fail(\"Expected an UnauthorizedException to be thrown\");\n} catch (UnauthorizedException e) {\n    assertSame(UnauthorizedException.class, e.getClass());\n}",
+      "range": {
+        "startLine": 54,
+        "startChar": 19,
+        "endLine": 54,
+        "endChar": 29
+      },
+      "revId": "d20c2c12ac86c71c0ae038aa327c4de83fa07777",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
