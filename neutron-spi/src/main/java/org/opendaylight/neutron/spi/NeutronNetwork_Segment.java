@@ -27,16 +27,16 @@ public class NeutronNetwork_Segment implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (defaultValue="flat", name="provider:network_type")
-    //    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
+    //    @XmlElement (defaultValue="flat", name="provider:network_type")
+    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
     String providerNetworkType;      // provider network type (flat or vlan)
 
-    @XmlElement (name="provider:physical_network")
-    //    @XmlElement (namespace="provider", name="physical_network")
+    //    @XmlElement (name="provider:physical_network")
+    @XmlElement (namespace="provider", name="physical_network")
     String providerPhysicalNetwork;  // provider physical network (name)
 
-    @XmlElement (name="provider:segmentation_id")
-    //    @XmlElement (namespace="provider", name="segmentation_id")
+    //    @XmlElement (name="provider:segmentation_id")
+    @XmlElement (namespace="provider", name="segmentation_id")
     String providerSegmentationID;   // provide segmentation ID (vlan ID)
 
     public NeutronNetwork_Segment() {
