@@ -23,7 +23,7 @@ module neutron-secgroups {
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
     description "This YANG module defines Security group objects that are used by Openstack
-        Ice House Neutron YANG modules.";
+        Juno House Neutron YANG modules.";
 
     revision "2014-10-02" {
         description
@@ -129,6 +129,9 @@ module neutron-secgroups {
                 uses attrs:base-attrs;
                 uses security-group-attrs;
                 description "List of Metering Labels.";
+                leaf-list security-rules {
+                    type yang:uuid;
+                }
             }
         }
     }

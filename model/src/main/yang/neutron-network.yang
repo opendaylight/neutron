@@ -22,7 +22,7 @@ module neutron-networks {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines Openstack Ice House Neutron Network model";
+    description "This YANG module defines Openstack Juno House Neutron Network model";
 
     revision "2014-10-02" {
         description
