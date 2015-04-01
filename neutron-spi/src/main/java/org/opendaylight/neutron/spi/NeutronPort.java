@@ -66,20 +66,20 @@ public class NeutronPort implements Serializable, INeutronObject {
     @XmlElement (name = "allowed_address_pairs")
     List<NeutronPort_AllowedAddressPairs> allowedAddressPairs;
 
-    @XmlElement (name = "binding:host_id")
-    //@XmlElement (namespace = "binding", name = "host_id")
+    //@XmlElement (name = "binding:host_id")
+    @XmlElement (namespace = "binding", name = "host_id")
     String bindinghostID;
 
-    @XmlElement (name = "binding:vnic_type")
-    //@XmlElement (namespace = "binding", name = "vnic_type")
+    //@XmlElement (name = "binding:vnic_type")
+    @XmlElement (namespace = "binding", name = "vnic_type")
     String bindingvnicType;
 
-    @XmlElement (name = "binding:vif_type")
-    //@XmlElement (namespace = "binding", name = "vif_type")
+    //@XmlElement (name = "binding:vif_type")
+    @XmlElement (namespace = "binding", name = "vif_type")
     String bindingvifType;
 
-    @XmlElement (name = "binding:vif_details")
-    //@XmlElement (namespace = "binding", name = "vif_details")
+    //@XmlElement (name = "binding:vif_details")
+    @XmlElement (namespace = "binding", name = "vif_details")
     List<NeutronPort_VIFDetail> vifDetails;
 
     @XmlElement (name = "extra_dhcp_opts")
