@@ -261,7 +261,7 @@ module neutron-lbaasv2 {
             description "List of pools associated with this healthmonitor.";
         }
     }
-    grouping lbaas-attrs {
+    grouping lbaas-attributes {
         container loadbalancer {
             description "Container for Loadbalancers.";
             list loadbalancers {
