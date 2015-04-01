@@ -42,20 +42,20 @@ public class NeutronNetwork implements Serializable, INeutronObject {
     @XmlElement (name = "tenant_id")
     String tenantID;                 // tenant for this network
 
-    @XmlElement (defaultValue = "false", name = "router:external")
-    //    @XmlElement (defaultValue="false", namespace="router", name="external")
+    //    @XmlElement (defaultValue = "false", name = "router:external")
+    @XmlElement (defaultValue="false", namespace="router", name="external")
     Boolean routerExternal;           // network external or not
 
-    @XmlElement (defaultValue = "flat", name = "provider:network_type")
-    //    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
+    //    @XmlElement (defaultValue = "flat", name = "provider:network_type")
+    @XmlElement (namespace="provider", name="network_type")
     String providerNetworkType;      // provider network type (flat or vlan)
 
-    @XmlElement (name = "provider:physical_network")
-    //    @XmlElement (namespace="provider", name="physical_network")
+    //    @XmlElement (name = "provider:physical_network")
+    @XmlElement (namespace="provider", name="physical_network")
     String providerPhysicalNetwork;  // provider physical network (name)
 
-    @XmlElement (name = "provider:segmentation_id")
-    //    @XmlElement (namespace="provider", name="segmentation_id")
+    //    @XmlElement (name = "provider:segmentation_id")
+    @XmlElement (namespace="provider", name="segmentation_id")
 
     String providerSegmentationID;   // provide segmentation ID (vlan ID)
 

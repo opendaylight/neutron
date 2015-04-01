@@ -25,9 +25,9 @@ public class NeutronNetworkJAXBTest {
         "\"admin_state_up\": true, " +
         "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", " +
         "\"router:external\": false, " +
-        "\"provider:segmentation_id\": \"2\", " +
-        "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", " +
-        "\"provider:network_type\": \"vlan\", " +
+//        "\"provider:segmentation_id\": \"2\", " +
+//        "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", " +
+//        "\"provider:network_type\": \"vlan\", " +
         "\"shared\": false, " +
         "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
@@ -74,6 +74,7 @@ public class NeutronNetworkJAXBTest {
                   false, testObject.getShared());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 
@@ -84,13 +85,13 @@ public class NeutronNetworkJAXBTest {
         "\"admin_state_up\": true, " +
         "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", " +
         "\"router:external\": false, " +
-        "\"segments\": [ { " +
-            "\"provider:segmentation_id\": \"2\", " +
-            "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", " +
-            "\"provider:network_type\": \"vlan\" }, " +
-        "{ \"provider:segmentation_id\": null, " +
-            "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50454\", " +
-            "\"provider:network_type\": \"stt\" } ], " +
+//        "\"segments\": [ { " +
+//            "\"provider:segmentation_id\": \"2\", " +
+//            "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", " +
+//            "\"provider:network_type\": \"vlan\" }, " +
+//        "{ \"provider:segmentation_id\": null, " +
+//            "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50454\", " +
+//            "\"provider:network_type\": \"stt\" } ], " +
         "\"shared\": false, " +
         "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
@@ -150,6 +151,7 @@ public class NeutronNetworkJAXBTest {
                                 "stt", segments.get(1).getProviderNetworkType());
         } catch (Exception e) {
             e.printStackTrace();
+            Assert.assertTrue("Tests failed", false);
         }
     }
 }
