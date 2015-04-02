@@ -52,7 +52,7 @@ public class NeutronSecurityRule implements Serializable {
     @XmlElement(name = "port_range_min")
     Integer securityRulePortMin;
 
-    @XmlElement(name = " port_range_max")
+    @XmlElement(name = "port_range_max")
     Integer securityRulePortMax;
 
     @XmlElement(name = "ethertype")
