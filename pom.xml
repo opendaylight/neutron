@@ -19,6 +19,63 @@
   <version>0.5.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>neutron</name> <!-- Used by Sonar to set project name -->
+  <description>OpenDaylight Neutron Northbound Service</description>
+  <licenses>
+    <license>
+      <name>Eclipse Public License v1.0</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>regXboi</id>
+      <name>Ryan Moats</name>
+      <email>rmoats@us.ibm.com</email>
+      <organization>IBM</organization>
+      <organizationUrl>http://www.ibm.com</organizationUrl>
+      <roles>
+         <role>contributor</role>
+         <role>committer</role>
+      </roles>
+      <timezone>America/Chicago</timezone>
+    </developer>
+    <developer>
+      <id>kkoushik</id>
+      <name>Kiran Sreenivasa</name>
+      <email>kkoushik@brocade.com</email>
+      <organization>Brocade Communications Inc</organization>
+      <organizationUrl>http://www.brocade.com</organizationUrl>
+      <roles>
+         <role>contributor</role>
+      </roles>
+      <timezone>America/Chicago</timezone>
+    </developer>
+    <developer>
+      <id>eaw</id>
+      <name>Ed Warnicke</name>
+      <email>hagbard@gmail.com</email>
+      <organization>Cisco Systems, Inc.</organization>
+      <organizationUrl>http://www.cisco.com</organizationUrl>
+      <roles>
+         <role>committer</role>
+         <role>contributor</role>
+      </roles>
+      <timezone>America/Chicago</timezone>
+    </developer>
+    <developer>
+      <id>flaviof</id>
+      <name>Flavio Fernandes</name>
+      <email>ffernand@redhat.com</email>
+      <organization>Red Hat, Inc.</organization>
+      <organizationUrl>http://www.redhat.com</organizationUrl>
+      <roles>
+         <role>committer</role>
+         <role>contributor</role>
+      </roles>
+      <timezone>America/New_York</timezone>
+    </developer>
+  </developers>
   <modules>
     <module>parent</module>
     <module>neutron-spi</module>
@@ -29,4 +86,11 @@
     <module>karaf</module>
     <module>model</module>
   </modules>
+  <scm>
+    <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
+    <developerConnection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://wiki.opendaylight.org/view/NeutronNorthbound:Main</url>
+  </scm>
+
 </project>
