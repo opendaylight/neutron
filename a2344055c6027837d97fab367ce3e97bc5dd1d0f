@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_bbaa6c17",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronLoadBalancerPoolJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-04-03T14:46:27Z",
+      "side": 1,
+      "message": "missing tests for listeners and members elements",
+      "revId": "a2344055c6027837d97fab367ce3e97bc5dd1d0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
