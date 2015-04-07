@@ -28,14 +28,31 @@ public class NeutronMeteringLabelRequest {
     @XmlElement(name="metering_label")
     NeutronMeteringLabel singletonMeteringLabel;
 
+    @XmlElement(name="metering_labels")
+    List<NeutronMeteringLabel> bulkMeteringLabels;
+
     NeutronMeteringLabelRequest() {
     }
 
     NeutronMeteringLabelRequest(NeutronMeteringLabel label) {
         singletonMeteringLabel = label;
+        bulkMeteringLabels = null;
+    }
+
+    NeutronMeteringLabelRequest(List<NeutronMeteringLabel> bulk) {
+        bulkMeteringLabels = bulk;
+        singletonMeteringLabel = null;
     }
 
     public NeutronMeteringLabel getSingleton() {
         return singletonMeteringLabel;
+    }
+
+    public boolean isSingleton() {
+        return (singletonMeteringLabel != null);
+    }
+
+    public List<NeutronMeteringLabel> getBulk() {
+        return bulkMeteringLabels;
     }
 }
