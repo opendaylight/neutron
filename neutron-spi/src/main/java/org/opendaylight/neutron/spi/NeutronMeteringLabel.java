@@ -10,6 +10,9 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -52,19 +55,19 @@ public class NeutronMeteringLabel implements Serializable {
         this.meteringLabelName = name;
     }
 
-    public String getMeteringTenantID() {
+    public String getMeteringLabelTenantID() {
         return tenantID;
     }
 
-    public void setMeteringTenantID(String tenantID) {
+    public void setMeteringLabelTenantID(String tenantID) {
         this.tenantID = tenantID;
     }
 
-    public String getMeteringDescription() {
+    public String getMeteringLabelDescription() {
         return description;
     }
 
-    public void setMeteringDescription(String description) {
+    public void setMeteringLabelDescription(String description) {
         this.description = description;
     }
 
@@ -81,4 +84,33 @@ public class NeutronMeteringLabel implements Serializable {
             ", tenant_id=" + tenantID + "]";
     }
 
+    /**
+     * This method copies selected fields from the object and returns them
+     * as a new object, suitable for marshaling.
+     *
+     * @param fields
+     *            List of attributes to be extracted
+     * @return a NeutronMeteringLabel object with only the selected fields
+     * populated
+     */
+    public NeutronMeteringLabel extractFields(List<String> fields) {
+        NeutronMeteringLabel ans = new NeutronMeteringLabel();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setMeteringLabelUUID(this.getMeteringLabelUUID());
+            }
+            if (s.equals("name")) {
+                ans.setMeteringLabelName(this.getMeteringLabelName());
+            }
+            if (s.equals("tenant_id")) {
+                ans.setMeteringLabelTenantID(this.getMeteringLabelTenantID());
+            }
+            if (s.equals("description")) {
+                ans.setMeteringLabelDescription(this.getMeteringLabelDescription());
+            }
+        }
+        return ans;
+    }
 }
