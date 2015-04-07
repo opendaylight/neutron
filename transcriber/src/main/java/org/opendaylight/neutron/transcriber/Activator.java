@@ -19,6 +19,7 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberCRUD;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
@@ -93,7 +94,7 @@ public class Activator implements BundleActivator {
 
         NeutronLoadBalancerInterface neutronLoadBalancerInterface = new NeutronLoadBalancerInterface();
         ServiceRegistration<INeutronLoadBalancerCRUD> neutronLoadBalancerInterfaceRegistration = context.registerService(INeutronLoadBalancerCRUD.class, neutronLoadBalancerInterface, null);
-        if(neutronFirewallInterfaceRegistration != null) {
+        if(neutronLoadBalancerInterfaceRegistration != null) {
             registrations.add(neutronLoadBalancerInterfaceRegistration);
         }
 
@@ -119,6 +120,12 @@ public class Activator implements BundleActivator {
         ServiceRegistration<INeutronLoadBalancerPoolMemberCRUD> neutronLoadBalancerPoolMemberInterfaceRegistration = context.registerService(INeutronLoadBalancerPoolMemberCRUD.class, neutronLoadBalancerPoolMemberInterface, null);
         if(neutronLoadBalancerPoolMemberInterfaceRegistration != null) {
             registrations.add(neutronLoadBalancerPoolMemberInterfaceRegistration);
+        }
+
+        NeutronMeteringLabelInterface neutronMeteringLabelInterface = new NeutronMeteringLabelInterface();
+        ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
+        if(neutronMeteringLabelInterfaceRegistration != null) {
+            registrations.add(neutronMeteringLabelInterfaceRegistration);
         }
 
     }
