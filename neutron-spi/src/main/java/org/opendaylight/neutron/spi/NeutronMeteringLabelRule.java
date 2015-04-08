@@ -10,6 +10,9 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -91,5 +94,38 @@ public class NeutronMeteringLabelRule implements Serializable {
             ", excluded=" + meteringLabelRuleExcluded +
             ", remote_ip_prefix=" + meteringLabelRuleRemoteIPPrefix +
             ", metering_label_id=" + meteringLabelRuleLabelID + "]";
+    }
+
+    /**
+     * This method copies selected fields from the object and returns them
+     * as a new object, suitable for marshaling.
+     *
+     * @param fields
+     *            List of attributes to be extracted
+     * @return a NeutronMeteringLabelRule object with only the selected fields
+     * populated
+     */
+    public NeutronMeteringLabelRule extractFields(List<String> fields) {
+        NeutronMeteringLabelRule ans = new NeutronMeteringLabelRule();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setMeteringLabelRuleUUID(this.getMeteringLabelRuleUUID());
+            }
+            if (s.equals("direction")) {
+                ans.setMeteringLabelRuleDirection(this.getMeteringLabelRuleDirection());
+            }
+            if (s.equals("excluded")) {
+                ans.setMeteringLabelRuleExcluded(this.getMeteringLabelRuleExcluded());
+            }
+            if (s.equals("remote_ip_prefix")) {
+                ans.setMeteringLabelRuleRemoteIPPrefix(this.getMeteringLabelRuleRemoteIPPrefix());
+            }
+            if (s.equals("metering_label_id")) {
+                ans.setMeteringLabelRuleLabelID(this.getMeteringLabelRuleLabelID());
+            }
+        }
+        return ans;
     }
 }
