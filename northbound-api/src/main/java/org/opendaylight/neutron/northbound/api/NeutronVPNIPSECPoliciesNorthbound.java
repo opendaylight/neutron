@@ -32,7 +32,9 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyAware;
+import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 
 /**
  * Neutron Northbound REST APIs for VPN IPSEC Policy.<br>
@@ -64,26 +66,87 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 200, condition = "Operation successful"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response listVPNIPSECPolicies(
+            // filter fields
+            @QueryParam("id") String queryID,
+            @QueryParam("name") String queryName,
+            @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("description") String queryDescription,
+            @QueryParam("auth_algorithm") String queryAuthAlgorithm,
+            @QueryParam("encryption_algorithm") String queryEncryptionAlgorithm,
+            @QueryParam("phase1_negotiation_mode") String queryPhase1NegotiationMode,
+            @QueryParam("pfs") String queryPFS,
+            @QueryParam("ike_version") String queryIKEVersion
+            // pagination and sorting are TODO
             ) {
-        throw new UnimplementedException("Not Implemented");
+        INeutronVPNIPSECPolicyCRUD labelInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
+        if (labelInterface == null) {
+            throw new ServiceUnavailableException("NeutronVPNIPSECPolicy CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        List<NeutronVPNIPSECPolicy> allNeutronVPNIPSECPolicies = labelInterface.getAllNeutronVPNIPSECPolicies();
+        List<NeutronVPNIPSECPolicy> ans = new ArrayList<NeutronVPNIPSECPolicy>();
+        Iterator<NeutronVPNIPSECPolicy> i = allNeutronVPNIPSECPolicies.iterator();
+        while (i.hasNext()) {
+            NeutronVPNIPSECPolicy oSS = i.next();
+            if ((queryID == null || queryID.equals(oSS.getID())) &&
+                    (queryName == null || queryName.equals(oSS.getName())) &&
+                    (queryDescription == null || queryDescription.equals(oSS.getDescription())) &&
+                    (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm())) &&
+                    (queryEncryptionAlgorithm == null || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm())) &&
+                    (queryPhase1NegotiationMode == null || queryPhase1NegotiationMode.equals(oSS.getPhase1NegotiationMode())) &&
+                    (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy())) &&
+                    (queryIPSECVersion == null || queryIPSECVersion.equals(oSS.getIkeVersion())) &&
+                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+                if (fields.size() > 0)
+                    ans.add(extractFields(oSS,fields));
+                else
+                    ans.add(oSS);
+            }
+        }
+        //TODO: apply pagination to results
+        return Response.status(200).entity(
+                new NeutronVPNIPSECPolicyRequest(ans)).build();
     }
 
     /**
      * Returns a specific VPN IPSEC Policy */
 
-    @Path("{serviceID}")
+    @Path("{policyUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 200, condition = "Operation successful"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 403, condition = "Forbidden"),
+            @ResponseCode(code = 404, condition = "Not Found"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showVPNIPSECPolicy(
-            @PathParam("serviceID") String serviceID,
+            @PathParam("policyUUID") String policyUUID,
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        throw new UnimplementedException("Not Implemented");
+        INeutronVPNIPSECPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
+        if (policyInterface == null) {
+            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (!policyInterface.neutronVPNIPSECPolicyExists(policyUUID)) {
+            throw new ResourceNotFoundException("VPNIPSECPolicy UUID not found");
+        }
+        if (fields.size() > 0) {
+            NeutronVPNIPSECPolicy ans = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
+            return Response.status(200).entity(
+                    new NeutronVPNIPSECPolicyRequest(extractFields(ans, fields))).build();
+        } else {
+            return Response.status(200).entity(
+                    new NeutronVPNIPSECPolicyRequest(policyInterface.getNeutronVPNIPSECPolicy(policyUUID))).build();
+        }
     }
 
     /**
@@ -93,9 +156,59 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVPNIPSECPolicy.class)
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 201, condition = "Created"),
+            @ResponseCode(code = 400, condition = "Bad Request"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createVPNIPSECPolicy(final NeutronVPNIPSECPolicyRequest input) {
-        throw new UnimplementedException("Not Implemented");
+        INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
+        if (ipsecPolicyInterface == null) {
+            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (input.isSingleton()) {
+            NeutronVPNIPSECPolicy singleton = input.getSingleton();
+
+            /*
+             * verify that the ipsecPolicy doesn't already exist (issue: is deeper inspection necessary?)
+             */
+            if (ipsecPolicyInterface.neutronVPNIPSECPolicyExists(singleton.getID()))
+                throw new BadRequestException("ipsecPolicy UUID already exists");
+            Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
+            if (instances != null) {
+                if (instances.length > 0) {
+                    for (Object instance : instances) {
+                        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+                        int status = service.canCreateNeutronVPNIPSECPolicy(singleton);
+                        if (status < 200 || status > 299)
+                            return Response.status(status).build();
+                    }
+                } else {
+                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                }
+            } else {
+                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            }
+
+            /*
+             * add ipsecPolicy to the cache
+             */
+            ipsecPolicyInterface.addNeutronVPNIPSECPolicy(singleton);
+            if (instances != null) {
+                for (Object instance : instances) {
+                    INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+                    service.neutronVPNIPSECPolicyCreated(singleton);
+                }
+            }
+        } else {
+
+            /*
+             * only singleton ipsecPolicy creates supported
+             */
+            throw new BadRequestException("Only singleton ipsecPolicy creates supported");
+        }
+        return Response.status(201).entity(input).build();
     }
 
     /**
@@ -105,11 +218,65 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 200, condition = "Operation successful"),
+            @ResponseCode(code = 400, condition = "Bad Request"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 404, condition = "Not Found"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response updateVPNIPSECPolicy(
-            @PathParam("policyID") String policyID, final NeutronVPNIPSECPolicyRequest input
+            @PathParam("policyID") String policyUUID, final NeutronVPNIPSECPolicyRequest input
             ) {
-        throw new UnimplementedException("Not Implemented");
+        INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
+        if (ipsecPolicyInterface == null) {
+            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+
+        /*
+         * ipsecPolicy has to exist and only a single delta can be supplied
+         */
+        if (!ipsecPolicyInterface.neutronVPNIPSECPolicyExists(policyUUID))
+            throw new ResourceNotFoundException("VPNIPSECPolicy UUID not found");
+        if (!input.isSingleton())
+            throw new BadRequestException("Only single ipsecPolicy deltas supported");
+        NeutronVPNIPSECPolicy singleton = input.getSingleton();
+        NeutronVPNIPSECPolicy original = ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID);
+
+        /*
+         * attribute changes blocked by Neutron
+         */
+        if (singleton.getID() != null || singleton.getTenantID() != null)
+            throw new BadRequestException("Request attribute change not allowed");
+
+        Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
+        if (instances != null) {
+            if (instances.length > 0) {
+                for (Object instance : instances) {
+                    INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+                    int status = service.canUpdateNeutronVPNIPSECPolicy(singleton, original);
+                    if (status < 200 || status > 299)
+                        return Response.status(status).build();
+                }
+            } else {
+                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+            }
+        } else {
+            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+        }
+        /*
+         * update the ipsecPolicy entry and return the modified object
+         */
+        ipsecPolicyInterface.updateNeutronVPNIPSECPolicy(policyUUID, singleton);
+        NeutronVPNIPSECPolicy updatedVPNIPSECPolicy = ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID);
+        if (instances != null) {
+            for (Object instance : instances) {
+                INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+                service.neutronVPNIPSECPolicyUpdated(updatedVPNIPSECPolicy);
+            }
+        }
+        return Response.status(200).entity(
+                new NeutronVPNIPSECPolicyRequest(ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID))).build();
     }
 
     /**
@@ -118,9 +285,14 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Path("{policyID}")
     @DELETE
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 204, condition = "No Content"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 404, condition = "Not Found"),
+            @ResponseCode(code = 409, condition = "Conflict"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteVPNIPSECPolicy(
-            @PathParam("policyID") String policyID) {
+            @PathParam("policyID") String policyUUID) {
         throw new UnimplementedException("Not Implemented");
     }
 }
