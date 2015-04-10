@@ -31,6 +31,11 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 
+import org.opendaylight.neutron.spi.INeutronMeteringLabelAware;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.opendaylight.neutron.spi.NeutronMeteringLabel;
+
 /**
  * Neutron Northbound REST APIs for Metering Lables.<br>
  * This class provides REST APIs for managing neutron metering labels
@@ -52,6 +57,10 @@ import org.codehaus.enunciate.jaxrs.TypeHint;
 @Path("/metering/metering-labels")
 public class NeutronMeteringLabelsNorthbound {
 
+    private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
+        return o.extractFields(fields);
+    }
+
     @Context
     UriInfo uriInfo;
 
@@ -62,10 +71,43 @@ public class NeutronMeteringLabelsNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 200, condition = "Operation successful"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response listMeteringLabels(
+            // return fields
+            @QueryParam("fields") List<String> fields,
+            // filter fields
+            @QueryParam("id") String queryID,
+            @QueryParam("name") String queryName,
+            @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("description") String queryDescription
+            // pagination and sorting are TODO
             ) {
-        throw new UnimplementedException("Unimplemented");
+        INeutronMeteringLabelCRUD labelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
+        if (labelInterface == null) {
+            throw new ServiceUnavailableException("NeutronMeteringLabel CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        List<NeutronMeteringLabel> allNeutronMeteringLabels = labelInterface.getAllNeutronMeteringLabels();
+        List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
+        Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabels.iterator();
+        while (i.hasNext()) {
+            NeutronMeteringLabel oSS = i.next();
+            if ((queryID == null || queryID.equals(oSS.getMeteringLabelUUID())) &&
+                    (queryName == null || queryName.equals(oSS.getMeteringLabelName())) &&
+                    (queryDescription == null || queryDescription.equals(oSS.getMeteringLabelDescription())) &&
+                    (queryTenantID == null || queryTenantID.equals(oSS.getMeteringLabelTenantID()))) {
+                if (fields.size() > 0)
+                    ans.add(extractFields(oSS,fields));
+                else
+                    ans.add(oSS);
+            }
+        }
+        //TODO: apply pagination to results
+        return Response.status(200).entity(
+                new NeutronMeteringLabelRequest(ans)).build();
     }
 
     /**
@@ -75,11 +117,32 @@ public class NeutronMeteringLabelsNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 200, condition = "Operation successful"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 403, condition = "Forbidden"),
+            @ResponseCode(code = 404, condition = "Not Found"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response showMeteringLabel(
-            @PathParam("labelUUID") String labelUUID
-            ) {
-        throw new UnimplementedException("Unimplemented");
+            @PathParam("labelUUID") String labelUUID,
+            // return fields
+            @QueryParam("fields") List<String> fields) {
+        INeutronMeteringLabelCRUD labelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
+        if (labelInterface == null) {
+            throw new ServiceUnavailableException("MeteringLabel CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (!labelInterface.neutronMeteringLabelExists(labelUUID)) {
+            throw new ResourceNotFoundException("MeteringLabel UUID not found");
+        }
+        if (fields.size() > 0) {
+            NeutronMeteringLabel ans = labelInterface.getNeutronMeteringLabel(labelUUID);
+            return Response.status(200).entity(
+                    new NeutronMeteringLabelRequest(extractFields(ans, fields))).build();
+        } else {
+            return Response.status(200).entity(
+                    new NeutronMeteringLabelRequest(labelInterface.getNeutronMeteringLabel(labelUUID))).build();
+        }
     }
 
     /**
@@ -89,9 +152,59 @@ public class NeutronMeteringLabelsNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(NeutronNetwork.class)
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 201, condition = "Created"),
+            @ResponseCode(code = 400, condition = "Bad Request"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response createMeteringLabel(final NeutronMeteringLabelRequest input) {
-        throw new UnimplementedException("Unimplemented");
+        INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
+        if (meteringLabelInterface == null) {
+            throw new ServiceUnavailableException("MeteringLabel CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (input.isSingleton()) {
+            NeutronMeteringLabel singleton = input.getSingleton();
+
+            /*
+             * verify that the meteringLabel doesn't already exist (issue: is deeper inspection necessary?)
+             */
+            if (meteringLabelInterface.neutronMeteringLabelExists(singleton.getMeteringLabelUUID()))
+                throw new BadRequestException("meteringLabel UUID already exists");
+            Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
+            if (instances != null) {
+                if (instances.length > 0) {
+                    for (Object instance : instances) {
+                        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+                        int status = service.canCreateMeteringLabel(singleton);
+                        if (status < 200 || status > 299)
+                            return Response.status(status).build();
+                    }
+                } else {
+                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                }
+            } else {
+                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            }
+
+            /*
+             * add meteringLabel to the cache
+             */
+            meteringLabelInterface.addNeutronMeteringLabel(singleton);
+            if (instances != null) {
+                for (Object instance : instances) {
+                    INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+                    service.neutronMeteringLabelCreated(singleton);
+                }
+            }
+        } else {
+
+            /*
+             * only singleton meteringLabel creates supported
+             */
+            throw new BadRequestException("Only singleton meteringLabel creates supported");
+        }
+        return Response.status(201).entity(input).build();
     }
 
     /**
@@ -100,9 +213,48 @@ public class NeutronMeteringLabelsNorthbound {
     @Path("{labelUUID}")
     @DELETE
     @StatusCodes({
-        @ResponseCode(code = 501, condition = "Not Implemented") })
+            @ResponseCode(code = 204, condition = "No Content"),
+            @ResponseCode(code = 401, condition = "Unauthorized"),
+            @ResponseCode(code = 404, condition = "Not Found"),
+            @ResponseCode(code = 409, condition = "Conflict"),
+            @ResponseCode(code = 501, condition = "Not Implemented"),
+            @ResponseCode(code = 503, condition = "No providers available") })
     public Response deleteMeteringLabel(
             @PathParam("labelUUID") String labelUUID) {
-        throw new UnimplementedException("Unimplemented");
+        INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
+        if (meteringLabelInterface == null) {
+            throw new ServiceUnavailableException("MeteringLabel CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+
+        /*
+         * verify that the meteringLabel exists and is not in use before removing it
+         */
+        if (!meteringLabelInterface.neutronMeteringLabelExists(labelUUID))
+            throw new ResourceNotFoundException("MeteringLabel UUID not found");
+        NeutronMeteringLabel singleton = meteringLabelInterface.getNeutronMeteringLabel(labelUUID);
+        Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
+        if (instances != null) {
+            if (instances.length > 0) {
+                for (Object instance : instances) {
+                    INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+                    int status = service.canDeleteMeteringLabel(singleton);
+                    if (status < 200 || status > 299)
+                        return Response.status(status).build();
+                }
+            } else {
+                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+            }
+        } else {
+            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+        }
+        meteringLabelInterface.removeNeutronMeteringLabel(labelUUID);
+        if (instances != null) {
+            for (Object instance : instances) {
+                INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+                service.neutronMeteringLabelDeleted(singleton);
+            }
+        }
+        return Response.status(204).build();
     }
 }

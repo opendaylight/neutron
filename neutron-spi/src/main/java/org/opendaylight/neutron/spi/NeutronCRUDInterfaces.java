@@ -93,6 +93,11 @@ public class NeutronCRUDInterfaces {
         return answer;
     }
 
+    public static INeutronMeteringLabelCRUD getINeutronMeteringLabelCRUD(Object o) {
+        INeutronMeteringLabelCRUD answer = (INeutronMeteringLabelCRUD) getInstances(INeutronMeteringLabelCRUD.class, o);
+        return answer;
+    }
+
     public static Object getInstances(Class<?> clazz,Object bundle) {
         try {
             BundleContext bCtx = FrameworkUtil.getBundle(bundle.getClass())
