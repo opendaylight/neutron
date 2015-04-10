@@ -10,6 +10,9 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -136,4 +139,48 @@ public class NeutronVPNIKEPolicy implements Serializable, INeutronObject {
         this.lifetime = lifetime;
     }
 
+    /**
+     * This method copies selected fields from the object and returns them
+     * as a new object, suitable for marshaling.
+     *
+     * @param fields
+     *            List of attributes to be extracted
+     * @return a NeutronVPNIKEPolicy object with only the selected fields
+     * populated
+     */
+    public NeutronVPNIKEPolicy extractFields(List<String> fields) {
+        NeutronVPNIKEPolicy ans = new NeutronVPNIKEPolicy();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setID(this.getID());
+            }
+            if (s.equals("name")) {
+                ans.setName(this.getName());
+            }
+            if (s.equals("tenant_id")) {
+                ans.setTenantID(this.getTenantID());
+            }
+            if (s.equals("description")) {
+                ans.setDescription(this.getDescription());
+            }
+            if (s.equals("auth_algorithm")) {
+                ans.setAuthAlgorithm(this.getAuthAlgorithm());
+            }
+            if (s.equals("encryption_algorithm")) {
+                ans.setEncryptionAlgorithm(this.getEncryptionAlgorithm());
+            }
+            if (s.equals("phase1_negotiation_mode")) {
+                ans.setPhase1NegotiationMode(this.getPhase1NegotiationMode());
+            }
+            if (s.equals("pfs")) {
+                ans.setPerfectForwardSecrecy(this.getPerfectForwardSecrecy());
+            }
+            if (s.equals("ike_version")) {
+                ans.setIkeVersion(this.getIkeVersion());
+            }
+        }
+        return ans;
+    }
 }

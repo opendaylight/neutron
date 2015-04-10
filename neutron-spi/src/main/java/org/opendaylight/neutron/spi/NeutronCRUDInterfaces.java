@@ -103,6 +103,11 @@ public class NeutronCRUDInterfaces {
         return answer;
     }
 
+    public static INeutronVPNIKEPolicyCRUD getINeutronVPNIKEPolicyCRUD(Object o) {
+        INeutronVPNIKEPolicyCRUD answer = (INeutronVPNIKEPolicyCRUD) getInstances(INeutronVPNIKEPolicyCRUD.class, o);
+        return answer;
+    }
+
     public static Object getInstances(Class<?> clazz,Object bundle) {
         try {
             BundleContext bCtx = FrameworkUtil.getBundle(bundle.getClass())
