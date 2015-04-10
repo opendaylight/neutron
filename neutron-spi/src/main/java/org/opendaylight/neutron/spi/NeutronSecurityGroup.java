@@ -9,14 +9,15 @@
 
 package org.opendaylight.neutron.spi;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * OpenStack Neutron v2.0 Security Group bindings.
@@ -96,8 +97,8 @@ public class NeutronSecurityGroup implements Serializable {
         return neutronSecurityRule;
     }
 
-    public void setSecurityRules(NeutronSecurityRule neutronSecurityRule) {
-        this.neutronSecurityRule = (List<NeutronSecurityRule>) neutronSecurityRule;
+    public void setSecurityRules(List<NeutronSecurityRule> neutronSecurityRule) {
+        this.neutronSecurityRule = neutronSecurityRule;
     }
 
     public NeutronSecurityGroup extractFields(List<String> fields) {
@@ -118,7 +119,7 @@ public class NeutronSecurityGroup implements Serializable {
                 ans.setSecurityGroupTenantID (this.getSecurityGroupTenantID ());
             }
             if (s.equals ("security_group_rules")) {
-                ans.setSecurityRules ((NeutronSecurityRule) this.getSecurityRules ());
+                ans.setSecurityRules (this.getSecurityRules ());
             }
         }
         return ans;
