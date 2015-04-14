@@ -21,7 +21,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
     <maven>3.1.1</maven>
   </prerequisites>
   <properties>
-    <karaf.localFeature>odl-neutron-service</karaf.localFeature>
+    <karaf.localFeature>odl-neutron-dummyprovider-test</karaf.localFeature>
   </properties>
   <dependencies>
     <dependency>
@@ -34,7 +34,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>features-neutron</artifactId>
+      <artifactId>features-neutron-test</artifactId>
       <version>${project.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
