@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation, 2013.  All rights reserved.
+ * Copyright IBM Corporation and others, 2015.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -26,6 +26,7 @@ import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -126,6 +127,12 @@ public class Activator implements BundleActivator {
         ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
         if(neutronMeteringLabelInterfaceRegistration != null) {
             registrations.add(neutronMeteringLabelInterfaceRegistration);
+        }
+
+        NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface();
+        ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
+        if(neutronVPNServiceInterfaceRegistration != null) {
+            registrations.add(neutronVPNServiceInterfaceRegistration);
         }
 
     }
