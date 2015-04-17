@@ -111,16 +111,18 @@ public class NeutronCRUDInterfaces {
     public static INeutronVPNServiceCRUD getINeutronVPNServiceCRUD(Object o) {
         INeutronVPNServiceCRUD answer = (INeutronVPNServiceCRUD) getInstances(INeutronVPNServiceCRUD.class, o);
         return answer;
+
+    public static INeutronVPNIPSECSiteConnectionsCRUD getINeutronVPNIPSECSiteConnectionsCRUD(Object o) {
+        INeutronVPNIPSECSiteConnectionsCRUD answer = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(INeutronVPNIPSECSiteConnectionsCRUD.class, o);
+        return answer;
     }
 
-    public static Object getInstances(Class<?> clazz,Object bundle) {
+    public static Object getInstances(Class<?> clazz, Object bundle) {
         try {
-            BundleContext bCtx = FrameworkUtil.getBundle(bundle.getClass())
-                    .getBundleContext();
+            BundleContext bCtx = FrameworkUtil.getBundle(bundle.getClass()).getBundleContext();
 
             ServiceReference<?>[] services = null;
-                services = bCtx.getServiceReferences(clazz.getName(),
-                        null);
+            services = bCtx.getServiceReferences(clazz.getName(), null);
             if (services != null) {
                 return bCtx.getService(services[0]);
             }
