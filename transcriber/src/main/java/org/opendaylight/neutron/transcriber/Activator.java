@@ -27,6 +27,7 @@ import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
+import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -135,15 +136,19 @@ public class Activator implements BundleActivator {
             registrations.add(neutronVPNServiceInterfaceRegistration);
         }
 
+        NeutronVPNIPSECSiteConnectionsInterface neutronVPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface();
+        ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
+        if (neutronVPNIPSECSiteConnectionsInterfaceRegistration != null) {
+            registrations.add(neutronVPNIPSECSiteConnectionsInterfaceRegistration);
+        }
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-       for(ServiceRegistration registration : registrations) {
-           if(registration != null) {
-               registration.unregister();
-           }
-       }
-
+        for (ServiceRegistration registration : registrations) {
+            if (registration != null) {
+                registration.unregister();
+            }
+        }
     }
 }
