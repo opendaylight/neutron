@@ -162,8 +162,11 @@ public class NeutronLoadBalancerPool implements Serializable {
         /*
          * Update the pool_id of the member to that this.loadBalancerPoolID
          */
-        for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers)
-            member.setPoolID(loadBalancerPoolID);
+        if (loadBalancerPoolMembers != null) {
+            for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers)
+                member.setPoolID(loadBalancerPoolID);
+            return loadBalancerPoolMembers;
+        }
         return loadBalancerPoolMembers;
     }
 
