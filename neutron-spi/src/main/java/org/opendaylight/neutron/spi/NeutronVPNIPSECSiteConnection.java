@@ -10,6 +10,7 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -224,4 +225,80 @@ public class NeutronVPNIPSECSiteConnection implements Serializable, INeutronObje
         this.deadPeerDetection = deadPeerDetection;
     }
 
+    /**
+     * This method copies selected fields from the object and returns them as a
+     * new object, suitable for marshaling.
+     * 
+     * @param fields
+     *            List of attributes to be extracted
+     * @return a NeutronVPNIPSECSiteConnection object with only the selected
+     *         fields populated
+     */
+
+    public NeutronVPNIPSECSiteConnection extractFields(List<String> fields) {
+        NeutronVPNIPSECSiteConnection ans = new NeutronVPNIPSECSiteConnection();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setID(this.getID());
+            }
+            if (s.equals("tenant_id")) {
+                ans.setTenantID(this.getTenantID());
+            }
+            if (s.equals("name")) {
+                ans.setName(this.getName());
+            }
+            if (s.equals("description")) {
+                ans.setDescription(this.getDescription());
+            }
+            if (s.equals("peer_address")) {
+                ans.setPeerAddress(this.getPeerAddress());
+            }
+            if (s.equals("peer_id")) {
+                ans.setPeerID(this.getPeerID());
+            }
+            if (s.equals("route_mode")) {
+                ans.setRouteMode(this.getRouteMode());
+            }
+            if (s.equals("mtu")) {
+                ans.setMtu(this.getMtu());
+            }
+            if (s.equals("auth_mode")) {
+                ans.setAuthMode(this.getAuthMode());
+            }
+            if (s.equals("psk")) {
+                ans.setPreSharedKey(this.getPreSharedKey());
+            }
+            if (s.equals("initiator")) {
+                ans.setInitiator(this.getInitiator());
+            }
+            if (s.equals("admin_state_up")) {
+                ans.setAdminStateUp(this.getAdminStateUp());
+            }
+            if (s.equals("status")) {
+                ans.setStatus(this.getStatus());
+            }
+            if (s.equals("ikepolicy_id")) {
+                ans.setIkePolicyID(this.getIkePolicyID());
+            }
+            if (s.equals("ipsecpolicy_id")) {
+                ans.setIpsecPolicyID(this.getIpsecPolicyID());
+            }
+            if (s.equals("vpnservice_id")) {
+                ans.setVpnServiceID(this.getVpnServiceID());
+            }
+        }
+        return ans;
+    }
+
+    @Override
+    public String toString() {
+        return "NeutronVPNIPSECSiteConnection{" + "id='" + id + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
+                + name + '\'' + ", description=" + description + ", peerAddress=" + peerAddress + ", peerID='" + peerID
+                + '\'' + ", routeMode='" + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\''
+                + ", preSharedKey='" + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp="
+                + adminStateUp + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\''
+                + ", ipsecPolicyID='" + ipsecPolicyID + '\'' + ", vpnServiceID='" + vpnServiceID + '\'' + '}';
+    }
 }
