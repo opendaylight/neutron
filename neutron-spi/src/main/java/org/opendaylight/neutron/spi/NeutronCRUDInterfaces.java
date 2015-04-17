@@ -108,6 +108,11 @@ public class NeutronCRUDInterfaces {
         return answer;
     }
 
+    public static INeutronVPNServiceCRUD getINeutronVPNServiceCRUD(Object o) {
+    	INeutronVPNServiceCRUD answer = (INeutronVPNServiceCRUD) getInstances(INeutronVPNServiceCRUD.class, o);
+        return answer;
+    }
+
     public static Object getInstances(Class<?> clazz,Object bundle) {
         try {
             BundleContext bCtx = FrameworkUtil.getBundle(bundle.getClass())

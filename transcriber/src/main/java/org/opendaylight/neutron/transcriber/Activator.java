@@ -26,6 +26,7 @@ import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -126,6 +127,12 @@ public class Activator implements BundleActivator {
         ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
         if(neutronMeteringLabelInterfaceRegistration != null) {
             registrations.add(neutronMeteringLabelInterfaceRegistration);
+        }
+
+        NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface();
+        ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
+        if(neutronVPNServiceInterfaceRegistration != null) {
+            registrations.add(neutronVPNServiceInterfaceRegistration);
         }
 
     }

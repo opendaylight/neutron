@@ -9,11 +9,15 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.opendaylight.neutron.spi.INeutronObject;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -110,5 +114,38 @@ public class NeutronVPNService implements Serializable, INeutronObject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public NeutronVPNService extractFields(List<String> fields) {
+        NeutronVPNService ans = new NeutronVPNService();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setID(this.getID());
+            }
+            if (s.equals("admin_state_up")) {
+                ans.setAdminStateUp(this.getAdminStateUp());
+            }
+            if (s.equals("description")) {
+                ans.setDescription(this.getDescription());
+            }
+            if (s.equals("name")) {
+                ans.setName(this.getName());
+            }
+            if (s.equals("router_id")) {
+                ans.setRouterUUID(this.getRouterUUID());
+            }
+            if (s.equals("status")) {
+                ans.setStatus(this.getStatus());
+            }
+            if (s.equals("subnet_id")) {
+                ans.setSubnetUUID(this.getSubnetUUID());
+            }
+            if (s.equals("tenant_id")) {
+                ans.setTenantID(this.getTenantID());
+            }
+        }
+        return ans;
     }
 }
