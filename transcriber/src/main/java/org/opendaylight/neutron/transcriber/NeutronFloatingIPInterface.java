@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
@@ -28,10 +29,15 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFloatingIPInterface implements INeutronFloatingIPCRUD {
+public class NeutronFloatingIPInterface extends AbstractNeutronInterface implements INeutronFloatingIPCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     private ConcurrentMap<String, NeutronFloatingIP> floatingIPDB  = new ConcurrentHashMap<String, NeutronFloatingIP>();
+
+
+    NeutronFloatingIPInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 

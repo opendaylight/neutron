@@ -17,16 +17,20 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIKEPolicyInterface implements INeutronVPNIKEPolicyCRUD {
+public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface implements INeutronVPNIKEPolicyCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIKEPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIKEPolicy>();
 
 
+    NeutronVPNIKEPolicyInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
 
     // this method uses reflection to update an object from it's delta.

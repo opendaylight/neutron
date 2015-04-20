@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 import org.slf4j.Logger;
@@ -23,16 +24,22 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+ * Deprecated as all Neutron FWaaS is experimental and so doesn't meet
  * the scope of neutron northbound
  *
  * @deprecated
  */
 
-public class NeutronFirewallInterface implements INeutronFirewallCRUD {
+public class NeutronFirewallInterface extends AbstractNeutronInterface implements INeutronFirewallCRUD {
+
     private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
     private ConcurrentMap<String, NeutronFirewall> firewallDB  = new ConcurrentHashMap<String, NeutronFirewall>();
+
+
+    NeutronFirewallInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 

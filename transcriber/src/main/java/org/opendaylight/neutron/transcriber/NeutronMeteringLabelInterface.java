@@ -17,17 +17,19 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelInterface implements INeutronMeteringLabelCRUD {
+public class NeutronMeteringLabelInterface extends AbstractNeutronInterface implements INeutronMeteringLabelCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabel> meteringLabelDB = new ConcurrentHashMap<String, NeutronMeteringLabel>();
 
-
-
+    NeutronMeteringLabelInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 
