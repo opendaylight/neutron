@@ -10,7 +10,7 @@ module neutron {
 
     yang-version 1;
 
-    namespace "urn:opendaylight:neutron-L3";
+    namespace "urn:opendaylight:neutron";
 
     prefix neutron-L3;
 

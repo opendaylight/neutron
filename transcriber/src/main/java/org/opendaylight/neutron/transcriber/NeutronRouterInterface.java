@@ -20,6 +20,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.NeutronRouter;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -123,6 +125,24 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface implements
         }
         NeutronRouter target = routerDB.get(routerUUID);
         return (target.getInterfaces().size() > 0);
+    }
+
+    @Override
+    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(Object neutronObject) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(String uuid) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

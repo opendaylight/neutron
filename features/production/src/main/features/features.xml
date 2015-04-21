@@ -4,6 +4,9 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
    <repository>mvn:org.opendaylight.aaa/features-aaa/${aaa.version}/xml/features</repository>
+   <repository>mvn:org.opendaylight.yangtools/features-yangtools/${yangtools.version}/xml/features</repository>
+   <repository>mvn:org.opendaylight.controller/features-mdsal/${mdsal.version}/xml/features</repository>
+   <repository>mvn:org.opendaylight.controller/features-restconf/${mdsal.version}/xml/features</repository>
    <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
@@ -29,11 +32,12 @@
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>
   <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
-    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature>war</feature>
+    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
     <bundle>mvn:org.opendaylight.neutron/transcriber/${project.version}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/model/${project.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
-    <configfile finalname="etc/opendaylight/karaf/neutron-transriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/${project.version}/xml/config</configfile>
+    <configfile finalname="etc/opendaylight/karaf/neutron-transcriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/${project.version}/xml/config</configfile>
   </feature>
 </features>

@@ -20,10 +20,16 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.Networks;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.networks.Network;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.networks.NetworkBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronNetworkInterface extends AbstractNeutronInterface implements INeutronNetworkCRUD {
+public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,NeutronNetwork> implements INeutronNetworkCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronNetworkInterface.class);
     private ConcurrentMap<String, NeutronNetwork> networkDB = new ConcurrentHashMap<String, NeutronNetwork>();
 
@@ -94,6 +100,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface implements
             return false;
         }
         networkDB.putIfAbsent(input.getID(), input);
+        addMd(input);
       //TODO: add code to find INeutronNetworkAware services and call newtorkCreated on them
         return true;
     }
@@ -104,6 +111,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface implements
             return false;
         }
         networkDB.remove(uuid);
+        removeMd(toMd(uuid));
       //TODO: add code to find INeutronNetworkAware services and call newtorkDeleted on them
         return true;
     }
@@ -114,6 +122,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface implements
             return false;
         }
         NeutronNetwork target = networkDB.get(uuid);
+        updateMd(delta);
         return overwrite(target, delta);
     }
 
@@ -127,5 +136,48 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface implements
             return true;
         }
         return false;
+    }
+
+    protected Network toMd(NeutronNetwork network) {
+        NetworkBuilder networkBuilder = new NetworkBuilder();
+        networkBuilder.setAdminStateUp(network.getAdminStateUp());
+        if (network.getNetworkName() != null) {
+            networkBuilder.setName(network.getNetworkName());
+        }
+        if (network.getShared() != null) {
+            networkBuilder.setShared(network.getShared());
+        }
+        if (network.getStatus() != null) {
+            networkBuilder.setStatus(network.getStatus());
+        }
+        if (network.getSubnets() != null) {
+            List<Uuid> subnets = new ArrayList<Uuid>();
+            for( String subnet : network.getSubnets()) {
+                subnets.add(toUuid(subnet));
+            }
+            networkBuilder.setSubnets(subnets);
+        }
+        if (network.getTenantID() != null) {
+            networkBuilder.setTenantId(toUuid(network.getTenantID()));
+        }
+        if (network.getNetworkUUID() != null) {
+            networkBuilder.setUuid(toUuid(network.getNetworkUUID()));
+        } else {
+            logger.warn("Attempting to write neutron network without UUID");
+        }
+        return networkBuilder.build();
+    }
+
+    protected Network toMd(String uuid) {
+        NetworkBuilder networkBuilder = new NetworkBuilder();
+        networkBuilder.setUuid(toUuid(uuid));
+        return networkBuilder.build();
+    }
+
+    @Override
+    protected InstanceIdentifier<Network> createInstanceIdentifier(Network network) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Networks.class)
+                .child(Network.class,network.getKey());
     }
 }

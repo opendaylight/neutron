@@ -27,6 +27,11 @@ module neutron-binding {
 
     description "This YANG module defines binding attributes that are used by Openstack
         Juno Port YANG modules.";
+    
+    revision "2014-10-02" {
+        description
+                "Initial version";
+    }
 
     grouping binding-attrs {
         leaf host-id {

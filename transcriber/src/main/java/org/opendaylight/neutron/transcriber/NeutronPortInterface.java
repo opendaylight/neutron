@@ -27,6 +27,8 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.Neutron_IPs;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -218,6 +220,24 @@ public class NeutronPortInterface extends AbstractNeutronInterface implements IN
                 }
             }
         }
+        return null;
+    }
+
+    @Override
+    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(Object neutronObject) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(String uuid) {
+        // TODO Auto-generated method stub
         return null;
     }
 }

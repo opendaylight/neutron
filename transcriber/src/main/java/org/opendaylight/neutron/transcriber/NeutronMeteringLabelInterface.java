@@ -20,6 +20,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -121,5 +123,23 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface impl
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(Object neutronObject) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(String uuid) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
