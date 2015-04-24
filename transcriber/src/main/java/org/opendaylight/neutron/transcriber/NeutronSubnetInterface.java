@@ -23,12 +23,29 @@ import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronSubnet;
+import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
+import org.opendaylight.neutron.spi.NeutronSubnet_IPAllocationPool;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefixBuilder;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpVersion;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv4Address;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.Ipv6Address;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.SubnetAttrs;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attrs.AllocationPools;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attrs.AllocationPoolsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attrs.HostRoutes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attrs.HostRoutesBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.Subnets;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.subnets.Subnet;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.subnets.SubnetBuilder;
 import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronSubnetInterface extends AbstractNeutronInterface implements INeutronSubnetCRUD {
+public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, NeutronSubnet> implements INeutronSubnetCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronSubnetInterface.class);
     private ConcurrentMap<String, NeutronSubnet> subnetDB  = new ConcurrentHashMap<String, NeutronSubnet>();
 
@@ -100,6 +117,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface implements 
             return false;
         }
         subnetDB.putIfAbsent(id, input);
+        addMd(input);
         INeutronNetworkCRUD networkIf = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
 
         NeutronNetwork targetNet = networkIf.getNetwork(input.getNetworkUUID());
@@ -118,6 +136,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface implements 
         NeutronNetwork targetNet = networkIf.getNetwork(target.getNetworkUUID());
         targetNet.removeSubnet(uuid);
         subnetDB.remove(uuid);
+        removeMd(toMd(uuid));
         return true;
     }
 
@@ -127,6 +146,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface implements 
             return false;
         }
         NeutronSubnet target = subnetDB.get(uuid);
+        updateMd(delta);
         return overwrite(target, delta);
     }
 
@@ -139,21 +159,76 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface implements 
         return (target.getPortsInSubnet().size() > 0);
     }
 
-    @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	protected Subnet toMd(NeutronSubnet subnet) {
+		SubnetBuilder subnetBuilder = new SubnetBuilder();
+		if (subnet.getName() != null) {
+			subnetBuilder.setName(subnet.getName());
+		}
+		if (subnet.getTenantID() != null) {
+			subnetBuilder.setTenantId(toUuid(subnet.getTenantID()));
+		}
+		if (subnet.getNetworkUUID() != null) {
+			subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
+		}
+		if (subnet.getIpVersion() != null) {
+			subnetBuilder.setIpVersion(SubnetAttrs.IpVersion.forValue(subnet
+					.getIpVersion()));
+		}
+		if (subnet.getCidr() != null) {
+			subnetBuilder.setCidr(subnet.getCidr());
+		}
+		if (subnet.getGatewayIP() != null) {
+			IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
+					.toCharArray());
+			subnetBuilder.setGatewayIp(ipAddress);
+		}
+		if (subnet.getIpV6RaMode() != null) {
+			subnetBuilder.setIpv6RaMode(SubnetAttrs.Ipv6RaMode.forValue(Integer
+					.parseInt(subnet.getIpV6RaMode())));
+		}
+		if (subnet.getIpV6AddressMode() != null) {
+			subnetBuilder.setIpv6AddressMode(SubnetAttrs.Ipv6AddressMode
+					.forValue(Integer.parseInt(subnet.getIpV6AddressMode())));
+		}
+		subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
+		if (subnet.getAllocationPools() != null) {
+			List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
+			for (NeutronSubnet_IPAllocationPool allocationPool : subnet
+					.getAllocationPools()) {
+				AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
+				builder.setStart(allocationPool.getPoolStart());
+				builder.setEnd(allocationPool.getPoolEnd());
+				AllocationPools temp = builder.build();
+				allocationPools.add(temp);
+			}
+			subnetBuilder.setAllocationPools(allocationPools);
+		}
+		if (subnet.getDnsNameservers() != null) {
+			List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
+			for (String dnsNameServer : subnet.getDnsNameservers()) {
+				IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
+				dnsNameServers.add(ipAddress);
+			}
+			subnetBuilder.setDnsNameservers(dnsNameServers);
+		}
+		if (subnet.getID() != null) {
+			subnetBuilder.setUuid(toUuid(subnet.getID()));
+		} else {
+			logger.warn("Attempting to write neutron subnet without UUID");
+		}
+		return subnetBuilder.build();
+	}
 
-    @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
+		return InstanceIdentifier.create(Neutron.class).child(Subnets.class)
+				.child(Subnet.class, subnet.getKey());
+	}
 
-    @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	@Override
+	protected Subnet toMd(String uuid) {
+		SubnetBuilder subnetBuilder = new SubnetBuilder();
+		subnetBuilder.setUuid(toUuid(uuid));
+		return subnetBuilder.build();
+	}
 }
