@@ -32,6 +32,7 @@
     <dependency>
       <groupId>org.eclipse.persistence</groupId>
       <artifactId>org.eclipse.persistence.moxy</artifactId>
+      <version>${eclipse.persistence.version}</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
@@ -53,7 +54,7 @@
         <configuration>
           <instructions>
             <Import-Package>
-              org.eclipse.persistence.jaxb.rs,
+              org.eclipse.persistence.jaxb.rs;version="${eclipse.persistence.version}",
               com.sun.jersey.spi.container.servlet,
               javax.ws.rs,
               javax.ws.rs.ext,
