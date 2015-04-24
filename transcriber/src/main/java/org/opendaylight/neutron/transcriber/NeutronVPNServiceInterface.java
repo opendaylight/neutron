@@ -12,19 +12,25 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNServiceInterface implements INeutronVPNServiceCRUD {
+public class NeutronVPNServiceInterface extends AbstractNeutronInterface implements INeutronVPNServiceCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
     private ConcurrentMap<String, NeutronVPNService> VPNServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
+
+
+    NeutronVPNServiceInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 

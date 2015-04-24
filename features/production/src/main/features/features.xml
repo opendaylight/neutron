@@ -29,9 +29,11 @@
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>
   <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
+    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature>war</feature>
     <bundle>mvn:org.opendaylight.neutron/transcriber/${project.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
+    <configfile finalname="etc/opendaylight/karaf/neutron-transriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/${project.version}/xml/config</configfile>
   </feature>
 </features>

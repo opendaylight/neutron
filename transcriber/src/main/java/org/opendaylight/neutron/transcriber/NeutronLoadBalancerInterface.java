@@ -8,11 +8,6 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
-import org.opendaylight.neutron.spi.NeutronLoadBalancer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,10 +17,20 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class NeutronLoadBalancerInterface implements INeutronLoadBalancerCRUD {
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
+import org.opendaylight.neutron.spi.NeutronLoadBalancer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class NeutronLoadBalancerInterface extends AbstractNeutronInterface implements INeutronLoadBalancerCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancer> loadBalancerDB  = new ConcurrentHashMap<String, NeutronLoadBalancer>();
 
+
+    NeutronLoadBalancerInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 

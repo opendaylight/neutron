@@ -12,23 +12,27 @@ package org.opendaylight.neutron.transcriber;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Map.Entry;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class NeutronSecurityGroupInterface implements INeutronSecurityGroupCRUD {
+public class NeutronSecurityGroupInterface extends AbstractNeutronInterface implements INeutronSecurityGroupCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
     private ConcurrentMap<String, NeutronSecurityGroup> securityGroupDB  = new ConcurrentHashMap<String, NeutronSecurityGroup>();
 
 
+    NeutronSecurityGroupInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 

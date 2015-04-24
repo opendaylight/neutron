@@ -13,9 +13,41 @@
   <packaging>jar</packaging>
   <properties>
       <aaa.version>0.2.0-SNAPSHOT</aaa.version>
+      <yangtools.version>0.7.0-SNAPSHOT</yangtools.version>
+      <mdsal.version>1.2.0-SNAPSHOT</mdsal.version>
   </properties>
-
+  <dependencyManagement>
+    <dependencies>
+      <!-- project specific dependencies -->
+      <dependency>
+        <groupId>org.opendaylight.yangtools</groupId>
+        <artifactId>yangtools-artifacts</artifactId>
+        <version>${yangtools.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.opendaylight.controller</groupId>
+        <artifactId>mdsal-artifacts</artifactId>
+        <version>${mdsal.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.opendaylight.yangtools</groupId>
+      <artifactId>features-yangtools</artifactId>
+      <type>xml</type>
+      <classifier>features</classifier>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.controller</groupId>
+      <artifactId>features-mdsal</artifactId>
+      <type>xml</type>
+      <classifier>features</classifier>
+    </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa</groupId>
       <artifactId>features-aaa</artifactId>
@@ -69,6 +101,13 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>transcriber</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>transcriber</artifactId>
+      <version>${project.version}</version>
+      <type>xml</type>
+      <classifier>config</classifier>
     </dependency>
   </dependencies>
   <scm>

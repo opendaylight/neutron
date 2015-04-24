@@ -8,11 +8,6 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
-import org.opendaylight.neutron.spi.NeutronFirewallRule;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,17 +17,28 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
+import org.opendaylight.neutron.spi.NeutronFirewallRule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
+ * Deprecated as all Neutron FWaaS is experimental and so doesn't meet
  * the scope of neutron northbound
  *
  * @deprecated
  */
 
-public class NeutronFirewallRuleInterface implements INeutronFirewallRuleCRUD {
+public class NeutronFirewallRuleInterface extends AbstractNeutronInterface implements INeutronFirewallRuleCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
 
     private ConcurrentMap<String, NeutronFirewallRule> firewallRuleDB = new ConcurrentHashMap<String, NeutronFirewallRule>();
+
+
+    NeutronFirewallRuleInterface(ProviderContext providerContext) {
+        super(providerContext);
+    }
 
     // this method uses reflection to update an object from it's delta.
 
