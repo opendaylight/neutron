@@ -1,0 +1,55 @@
+{
+   "id":"eb9ff6ed-28a8-ac1f-7a81-18c877a44749",
+   "name":"Neutron Collection",
+   "timestamp":1429647764368,
+   "requests":[
+      {
+         "collectionId":"eb9ff6ed-28a8-ac1f-7a81-18c877a44749",
+         "id":"5ee3f657-bd7c-970d-a9b7-203023515ba9",
+         "name":"net-get-mdsal",
+         "description":"",
+         "url":"http://localhost:8080/restconf/config/neutron:neutron/networks/",
+         "method":"GET",
+         "headers":"Content-Type: application/json\nCache-Control: no-cache\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+         "data":"{  \n   \"network\":{  \n      \"status\":\"ACTIVE\",\n      \"subnets\":[  \n\n      ],\n      \"name\":\"net1\",\n      \"router:external\":false,\n      \"tenant_id\":\"38470401580249029f5b811e841e16a4\",\n      \"admin_state_up\":true,\n      \"mtu\":0,\n      \"vlan_transparent\":false,\n      \"shared\":false,\n      \"id\":\"2775510e-4c75-4f94-92bf-6743a43c7002\"\n   }\n}",
+         "dataMode":"raw",
+         "timestamp":0,
+         "responses":[
+
+         ],
+         "version":2
+      },
+      {
+         "collectionId":"eb9ff6ed-28a8-ac1f-7a81-18c877a44749",
+         "id":"885e7795-458a-be32-789d-f5c9b38cb1c6",
+         "name":"net-get",
+         "description":"",
+         "url":"http://localhost:8080/controller/nb/v2/neutron/networks",
+         "method":"GET",
+         "headers":"Content-Type: application/json\nCache-Control: no-cache\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+         "data":"{  \n   \"network\":{  \n      \"status\":\"ACTIVE\",\n      \"subnets\":[  \n\n      ],\n      \"name\":\"net1\",\n      \"router:external\":false,\n      \"tenant_id\":\"38470401580249029f5b811e841e16a4\",\n      \"admin_state_up\":true,\n      \"mtu\":0,\n      \"vlan_transparent\":false,\n      \"shared\":false,\n      \"id\":\"2775510e-4c75-4f94-92bf-6743a43c7002\"\n   }\n}",
+         "dataMode":"raw",
+         "timestamp":0,
+         "responses":[
+
+         ],
+         "version":2
+      },
+      {
+         "collectionId":"eb9ff6ed-28a8-ac1f-7a81-18c877a44749",
+         "id":"b848f28c-b2da-b866-5108-342b42c59d00",
+         "name":"net-create",
+         "description":"",
+         "url":"http://localhost:8080/controller/nb/v2/neutron/networks",
+         "method":"POST",
+         "headers":"Content-Type: application/json\nCache-Control: no-cache\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+         "data":"{  \n   \"network\":{  \n      \"status\":\"ACTIVE\",\n      \"subnets\":[  \n\n      ],\n      \"name\":\"net1\",\n      \"router:external\":false,\n      \"tenant_id\":\"38470401580249029f5b811e841e16a4\",\n      \"admin_state_up\":true,\n      \"mtu\":0,\n      \"vlan_transparent\":false,\n      \"shared\":false,\n      \"id\":\"2775510e-4c75-4f94-92bf-6743a43c7002\"\n   }\n}",
+         "dataMode":"raw",
+         "timestamp":0,
+         "responses":[
+
+         ],
+         "version":2
+      }
+   ]
+}
