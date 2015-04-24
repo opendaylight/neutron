@@ -53,7 +53,7 @@
         <configuration>
           <instructions>
             <Import-Package>
-              org.eclipse.persistence.jaxb.rs,
+              org.eclipse.persistence.jaxb.rs;version="${eclipse.persistence.version}",
               com.sun.jersey.spi.container.servlet,
               javax.ws.rs,
               javax.ws.rs.ext,
