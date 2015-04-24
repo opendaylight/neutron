@@ -20,6 +20,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,6 +120,24 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface imple
     @Override
     public boolean neutronLoadBalancerInUse(String loadBalancerUUID) {
         return !neutronLoadBalancerExists(loadBalancerUUID);
+    }
+
+    @Override
+    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(Object neutronObject) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(String uuid) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

@@ -11,6 +11,8 @@ package org.opendaylight.neutron.transcriber;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
+import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -125,6 +127,24 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
     @Override
     public boolean neutronFirewallInUse(String firewallUUID) {
         return !neutronFirewallExists(firewallUUID);
+    }
+
+    @Override
+    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(Object neutronObject) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    protected DataObject toMd(String uuid) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 

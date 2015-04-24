@@ -23,6 +23,11 @@ module neutron-vpnaas {
     contact "R. Moats <rmoats@us.ibm.com>";
 
     description "This YANG module defines Openstack Juno House Neutron VPNaaS model";
+    
+    revision "2014-10-02" {
+        description
+                "Initial version";
+    }
 
     grouping vpnservices-attrs {
         leaf descr {
