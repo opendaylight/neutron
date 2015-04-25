@@ -29,7 +29,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      *
      * @param uuid
      *            UUID of the NeutronLoadBalancerPoolMember object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronLoadBalancerPoolMember}
+     * @return {@link org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember}
      *          OpenStackNeutronLoadBalancerPoolMember class
      */
 

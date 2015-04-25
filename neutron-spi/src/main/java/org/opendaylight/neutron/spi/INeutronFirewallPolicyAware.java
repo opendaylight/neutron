@@ -44,7 +44,6 @@ public interface INeutronFirewallPolicyAware {
      *
      * @param firewallPolicy
      *            instance of new Firewall Policy object
-     * @return void
      */
     public void neutronFirewallPolicyCreated(NeutronFirewallPolicy firewallPolicy);
 
@@ -76,7 +75,6 @@ public interface INeutronFirewallPolicyAware {
      *
      * @param firewallPolicy
      *            instance of modified Firewall Policy object
-     * @return void
      */
     public void neutronFirewallPolicyUpdated(NeutronFirewallPolicy firewallPolicy);
 
@@ -105,7 +103,6 @@ public interface INeutronFirewallPolicyAware {
      *
      * @param firewallPolicy
      *            instance of deleted Firewall Policy object
-     * @return void
      */
     public void neutronFirewallPolicyDeleted(NeutronFirewallPolicy firewallPolicy);
 }

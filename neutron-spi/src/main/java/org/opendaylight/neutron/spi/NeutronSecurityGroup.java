@@ -23,12 +23,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * OpenStack Neutron v2.0 Security Group bindings.
  * See OpenStack Network API v2.0 Reference for description of
  * annotated attributes. The current fields are as follows:
- * <p/>
+ * <p>
  * id                   uuid-str unique ID for the security group.
  * name                 String name of the security group.
  * description          String name of the security group.
  * tenant_id            uuid-str Owner of security rule..
- * security_group_rules List<NeutronSecurityRule> nested RO in the sec group.
+ * security_group_rules List&lt;NeutronSecurityRule&gt; nested RO in the sec group.
  */
 
 @XmlRootElement

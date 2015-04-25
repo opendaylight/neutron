@@ -44,7 +44,6 @@ public interface INeutronFirewallRuleAware {
      *
      * @param firewallRule
      *            instance of new Firewall Rule object
-     * @return void
      */
     public void neutronFirewallRuleCreated(NeutronFirewallRule firewallRule);
 
@@ -76,7 +75,6 @@ public interface INeutronFirewallRuleAware {
      *
      * @param firewallRule
      *            instance of modified Firewall Rule object
-     * @return void
      */
     public void neutronFirewallRuleUpdated(NeutronFirewallRule firewallRule);
 
@@ -105,7 +103,6 @@ public interface INeutronFirewallRuleAware {
      *
      * @param firewallRule
      *            instance of deleted Firewall Rule object
-     * @return void
      */
     public void neutronFirewallRuleDeleted(NeutronFirewallRule firewallRule);
 }

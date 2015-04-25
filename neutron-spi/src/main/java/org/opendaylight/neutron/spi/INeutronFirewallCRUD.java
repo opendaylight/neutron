@@ -45,7 +45,7 @@ public interface INeutronFirewallCRUD {
      *
      * @param uuid
      *            UUID of the Firewall object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronFirewall}
+     * @return {@link org.opendaylight.neutron.spi.NeutronFirewall}
      *          OpenStackFirewall class
      */
 

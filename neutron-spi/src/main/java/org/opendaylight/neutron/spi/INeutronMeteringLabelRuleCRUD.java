@@ -29,7 +29,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      *
      * @param uuid
      *            UUID of the NeutronMeteringLabelRule object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronMeteringLabelRule}
+     * @return {@link org.opendaylight.neutron.spi.NeutronMeteringLabelRule}
      *          OpenStackNeutronMeteringLabelRule class
      */
 

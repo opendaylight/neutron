@@ -29,7 +29,6 @@ public interface INeutronSecurityRuleAware {
      * Services provide this interface method for taking action after a security rule has been created
      *
      * @param securityRule instance of new Neutron Security Rule object
-     * @return void
      */
     public void neutronSecurityRuleCreated(NeutronSecurityRule securityRule);
 
@@ -50,7 +49,6 @@ public interface INeutronSecurityRuleAware {
      * Services provide this interface method for taking action after a security rule has been updated
      *
      * @param securityRule instance of modified Neutron Security Rule object
-     * @return void
      */
     public void neutronSecurityRuleUpdated(NeutronSecurityRule securityRule);
 
@@ -69,7 +67,6 @@ public interface INeutronSecurityRuleAware {
      * Services provide this interface method for taking action after a security rule has been deleted
      *
      * @param securityRule instance of deleted Neutron Security Rule object
-     * @return void
      */
     public void neutronSecurityRuleDeleted(NeutronSecurityRule securityRule);
 }

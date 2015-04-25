@@ -27,9 +27,9 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * Applications call this interface method to return if a particular
      * NeutronVPNIPSECSiteConnection object exists
      *
-     * @param uuid
+     * @param policyID
      *            UUID of the NeutronVPNIPSECSiteConnection object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronVPNIPSECSiteConnection}
+     * @return {@link org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection}
      *         NeutronVPNIPSECSiteConnection class
      */
 

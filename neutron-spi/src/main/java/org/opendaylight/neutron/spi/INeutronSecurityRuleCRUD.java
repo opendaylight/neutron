@@ -30,7 +30,7 @@ public interface INeutronSecurityRuleCRUD {
      * Security Rule object exists
      *
      * @param uuid UUID of the security rule object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronSecurityRule.OpenStackNetworks}
+     * @return {@link org.opendaylight.neutron.spi.NeutronSecurityRule}
      * OpenStackSecurity Rule class
      */
 

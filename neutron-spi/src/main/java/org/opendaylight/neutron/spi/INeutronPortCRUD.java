@@ -33,7 +33,7 @@ public interface INeutronPortCRUD {
      *
      * @param uuid
      *            UUID of the Port object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronPort.OpenStackPorts}
+     * @return {@link org.opendaylight.neutron.spi.NeutronPort}
      *          OpenStack Port class
      */
 

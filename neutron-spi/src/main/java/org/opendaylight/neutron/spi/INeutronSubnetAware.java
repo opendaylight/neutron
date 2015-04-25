@@ -32,7 +32,6 @@ public interface INeutronSubnetAware {
      *
      * @param subnet
      *            instance of new Neutron Subnet object
-     * @return void
      */
     public void neutronSubnetCreated(NeutronSubnet subnet);
 
@@ -42,7 +41,7 @@ public interface INeutronSubnetAware {
      *
      * @param delta
      *            updates to the subnet object using patch semantics
-     * @param subnet
+     * @param original
      *            instance of the Neutron Subnet object to be updated
      * @return integer
      *            the return value is understood to be a HTTP status code.  A return value outside of 200 through 299
@@ -56,7 +55,6 @@ public interface INeutronSubnetAware {
      *
      * @param subnet
      *            instance of modified Neutron Subnet object
-     * @return void
      */
     public void neutronSubnetUpdated(NeutronSubnet subnet);
 
@@ -77,7 +75,6 @@ public interface INeutronSubnetAware {
      *
      * @param subnet
      *            instance of deleted Router Subnet object
-     * @return void
      */
     public void neutronSubnetDeleted(NeutronSubnet subnet);
 

@@ -32,7 +32,6 @@ public interface INeutronLoadBalancerListenerAware {
      *
      * @param loadBalancerListener
      *            instance of new LoadBalancerListener object
-     * @return void
      */
     public void neutronLoadBalancerListenerCreated(NeutronLoadBalancerListener loadBalancerListener);
 
@@ -57,7 +56,6 @@ public interface INeutronLoadBalancerListenerAware {
      *
      * @param loadBalancerListener
      *            instance of modified LoadBalancerListener object
-     * @return void
      */
     public void neutronLoadBalancerListenerUpdated(NeutronLoadBalancerListener loadBalancerListener);
 
@@ -78,7 +76,6 @@ public interface INeutronLoadBalancerListenerAware {
      *
      * @param loadBalancerListener
      *            instance of deleted LoadBalancerListener object
-     * @return void
      */
     public void neutronLoadBalancerListenerDeleted(NeutronLoadBalancerListener loadBalancerListener);
 }

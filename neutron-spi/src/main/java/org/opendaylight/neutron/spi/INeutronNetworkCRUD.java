@@ -33,7 +33,7 @@ public interface INeutronNetworkCRUD {
      *
      * @param uuid
      *            UUID of the Network object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronNetwork.OpenStackNetworks}
+     * @return {@link org.opendaylight.neutron.spi.NeutronNetwork}
      *          OpenStack Network class
      */
 

@@ -29,7 +29,6 @@ public interface INeutronSecurityGroupAware {
      * Services provide this interface method for taking action after a security group has been created
      *
      * @param securityGroup instance of new Neutron Security Group object
-     * @return void
      */
     public void neutronSecurityGroupCreated(NeutronSecurityGroup securityGroup);
 
@@ -50,7 +49,6 @@ public interface INeutronSecurityGroupAware {
      * Services provide this interface method for taking action after a security group has been updated
      *
      * @param securityGroup instance of modified Neutron Security Group object
-     * @return void
      */
     public void neutronSecurityGroupUpdated(NeutronSecurityGroup securityGroup);
 
@@ -69,7 +67,6 @@ public interface INeutronSecurityGroupAware {
      * Services provide this interface method for taking action after a security group has been deleted
      *
      * @param securityGroup instance of deleted Neutron Security Group object
-     * @return void
      */
     public void neutronSecurityGroupDeleted(NeutronSecurityGroup securityGroup);
 }

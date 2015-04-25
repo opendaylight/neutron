@@ -27,7 +27,6 @@ public interface INeutronLoadBalancerPoolMemberAware {
      *
      * @param loadBalancerPoolMember
      *            instance of new LoadBalancerPool object
-     * @return void
      */
     public void neutronLoadBalancerPoolMemberCreated(NeutronLoadBalancerPoolMember loadBalancerPoolMember);
 
@@ -52,7 +51,6 @@ public interface INeutronLoadBalancerPoolMemberAware {
      *
      * @param loadBalancerPoolMember
      *            instance of modified LoadBalancerPool object
-     * @return void
      */
     public void neutronLoadBalancerPoolMemberUpdated(NeutronLoadBalancerPoolMember loadBalancerPoolMember);
 
@@ -73,7 +71,6 @@ public interface INeutronLoadBalancerPoolMemberAware {
      *
      * @param loadBalancerPoolMember
      *            instance of deleted LoadBalancerPool object
-     * @return void
      */
     public void neutronLoadBalancerPoolMemberDeleted(NeutronLoadBalancerPoolMember loadBalancerPoolMember);
 }

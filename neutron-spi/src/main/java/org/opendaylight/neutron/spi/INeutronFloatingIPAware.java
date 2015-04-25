@@ -32,7 +32,6 @@ public interface INeutronFloatingIPAware {
      *
      * @param floatingIP
      *            instance of new Neutron FloatingIP object
-     * @return void
      */
     public void neutronFloatingIPCreated(NeutronFloatingIP floatingIP);
 
@@ -42,7 +41,7 @@ public interface INeutronFloatingIPAware {
      *
      * @param delta
      *            updates to the floatingIP object using patch semantics
-     * @param floatingIP
+     * @param original
      *            instance of the Neutron FloatingIP object to be updated
      * @return integer
      *            the return value is understood to be a HTTP status code.  A return value outside of 200 through 299
@@ -56,7 +55,6 @@ public interface INeutronFloatingIPAware {
      *
      * @param floatingIP
      *            instance of modified Neutron FloatingIP object
-     * @return void
      */
     public void neutronFloatingIPUpdated(NeutronFloatingIP floatingIP);
 
@@ -77,7 +75,6 @@ public interface INeutronFloatingIPAware {
      *
      * @param floatingIP
      *            instance of deleted Neutron FloatingIP object
-     * @return void
      */
     public void neutronFloatingIPDeleted(NeutronFloatingIP floatingIP);
 }

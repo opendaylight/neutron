@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Neutron Northbound REST APIs for Security Group.<br>
  * This class provides REST APIs for managing neutron Security Group
- * <p/>
+ * <p>
  * <br>
  * <br>
  * Authentication scheme : <b>HTTP Basic</b><br>

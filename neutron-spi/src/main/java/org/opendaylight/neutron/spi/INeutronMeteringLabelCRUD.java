@@ -29,7 +29,7 @@ public interface INeutronMeteringLabelCRUD {
      *
      * @param uuid
      *            UUID of the NeutronMeteringLabel object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronMeteringLabel}
+     * @return {@link org.opendaylight.neutron.spi.NeutronMeteringLabel}
      *          OpenStackNeutronMeteringLabel class
      */
 

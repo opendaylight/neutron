@@ -31,7 +31,7 @@ public interface INeutronSecurityGroupCRUD {
      * Security Group object exists
      *
      * @param uuid UUID of the Security Group object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronSecurityGroup.OpenStackSecurity Groups}
+     * @return {@link org.opendaylight.neutron.spi.NeutronSecurityGroup}
      * OpenStack Security Group class
      */
 

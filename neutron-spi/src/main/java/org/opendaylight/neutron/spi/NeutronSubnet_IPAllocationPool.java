@@ -64,7 +64,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      *
      * @param inputString
      *            IPv4 address in dotted decimal format
-     * @returns a boolean on whether the pool contains the address or not
+     * @return a boolean on whether the pool contains the address or not
      */
 
     public boolean contains(String inputString) {
@@ -80,7 +80,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      *
      * @param inputString
      *            IPv4 address in dotted decimal format
-     * @returns high-endian representation of the IPv4 address as a long.
+     * @return high-endian representation of the IPv4 address as a long.
      *          This method will return 0 if the input is null.
      */
 
@@ -102,7 +102,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      *
      * @param inputString
      *            IPv4 address in dotted decimal format
-     * @returns a boolean on whether the pool contains the address or not
+     * @return a boolean on whether the pool contains the address or not
      */
 
     public boolean contains_V6(String inputString) {
@@ -118,7 +118,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      *
      * @param inputString
      *            IPv6 address in dotted decimal format
-     * @returns high-endian representation of the IPv4 address as a BigInteger.
+     * @return high-endian representation of the IPv4 address as a BigInteger.
      *          This method will return 0 if the input is null.
      */
 
@@ -139,7 +139,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      *
      * @param l
      *            high-endian representation of the IPv4 address as a long
-     * @returns IPv4 address in dotted decimal format
+     * @return IPv4 address in dotted decimal format
      */
     static String longToIP(long l) {
         int i;
@@ -157,7 +157,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      *
      * @param l
      *            high-endian representation of the IPv4 address as a long
-     * @returns IPv4 address in dotted decimal format
+     * @return IPv4 address in dotted decimal format
      */
     static String bigIntegerToIP(BigInteger b) {
         try {

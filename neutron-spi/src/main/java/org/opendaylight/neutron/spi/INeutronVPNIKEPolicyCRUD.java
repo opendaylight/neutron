@@ -29,7 +29,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      *
      * @param uuid
      *            UUID of the NeutronVPNIKEPolicy object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronVPNIKEPolicy}
+     * @return {@link org.opendaylight.neutron.spi.NeutronVPNIKEPolicy}
      *          OpenStackNeutronVPNIKEPolicy class
      */
 

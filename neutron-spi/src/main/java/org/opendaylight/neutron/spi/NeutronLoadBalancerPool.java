@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-//import javax.xml.bind.annotation.XmlElementWrapper;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
@@ -32,7 +31,7 @@ import java.util.List;
  * healthmonitor_id   String
  * admin_state_up     Bool
  * status             String
- * members            List <NeutronLoadBalancerPoolMember>
+ * members            List &lt;NeutronLoadBalancerPoolMember&gt;
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
  */
 

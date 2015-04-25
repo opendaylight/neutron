@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * See OpenStack Network API v2.0 Reference for description of
  * annotated attributes. The current fields are as follows:
- * <p/>
+ * <p>
  * id                uuid (String) UUID for the security group rule.
  * security_rule_id  uuid (String) The security group to associate rule.
  * direction         String Direction the VM traffic  (ingress/egress).

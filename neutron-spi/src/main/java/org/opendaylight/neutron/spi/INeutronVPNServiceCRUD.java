@@ -34,7 +34,7 @@ public interface INeutronVPNServiceCRUD {
      *
      * @param uuid
      *            UUID of the VPNService object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronVPNService.OpenStackVPNService}
+     * @return {@link org.opendaylight.neutron.spi.NeutronVPNService}
      *         OpenStack VPNService class
      */
 

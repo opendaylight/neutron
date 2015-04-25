@@ -33,7 +33,7 @@ public interface INeutronFloatingIPCRUD {
      *
      * @param uuid
      *            UUID of the FloatingIP object
-     * @return {@link org.opendaylight.neutron.neutron.spi.NeutronFloatingIP.OpenStackFloatingIPs}
+     * @return {@link org.opendaylight.neutron.spi.NeutronFloatingIP}
      *          OpenStack FloatingIP class
      */
 

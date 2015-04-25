@@ -32,7 +32,6 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      *
      * @param loadBalancerHealthMonitor
      *            instance of new LoadBalancerHealthMonitor object
-     * @return void
      */
     public void neutronLoadBalancerHealthMonitorCreated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 
@@ -57,7 +56,6 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      *
      * @param loadBalancerHealthMonitor
      *            instance of modified LoadBalancerHealthMonitor object
-     * @return void
      */
     public void neutronLoadBalancerHealthMonitorUpdated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 
@@ -78,7 +76,6 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      *
      * @param loadBalancerHealthMonitor
      *            instance of deleted LoadBalancerHealthMonitor object
-     * @return void
      */
     public void neutronLoadBalancerHealthMonitorDeleted(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 }

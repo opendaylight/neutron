@@ -32,7 +32,6 @@ public interface INeutronPortAware {
      *
      * @param port
      *            instance of new Neutron Port object
-     * @return void
      */
     public void neutronPortCreated(NeutronPort port);
 
@@ -42,7 +41,7 @@ public interface INeutronPortAware {
      *
      * @param delta
      *            updates to the port object using patch semantics
-     * @param port
+     * @param original
      *            instance of the Neutron Port object to be updated
      * @return integer
      *            the return value is understood to be a HTTP status code.  A return value outside of 200 through 299
@@ -56,7 +55,6 @@ public interface INeutronPortAware {
      *
      * @param port
      *            instance of modified Neutron Port object
-     * @return void
      */
     public void neutronPortUpdated(NeutronPort port);
 
@@ -77,7 +75,6 @@ public interface INeutronPortAware {
      *
      * @param port
      *            instance of deleted Port Network object
-     * @return void
      */
     public void neutronPortDeleted(NeutronPort port);
 }
