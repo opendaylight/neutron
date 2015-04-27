@@ -26,12 +26,18 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronFloatingIP;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.Floatingips;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.floatingips.Floatingip;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.floatingips.FloatingipBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attrs.FixedIpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attrs.FixedIpAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFloatingIPInterface extends AbstractNeutronInterface implements INeutronFloatingIPCRUD {
+public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, NeutronFloatingIP> implements INeutronFloatingIPCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     private ConcurrentMap<String, NeutronFloatingIP> floatingIPDB  = new ConcurrentHashMap<String, NeutronFloatingIP>();
@@ -169,20 +175,54 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface impleme
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Floatingip toMd(String uuid) {
+        FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
+        floatingipBuilder.setUuid(toUuid(uuid));
+        return floatingipBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<Floatingip> createInstanceIdentifier(
+            Floatingip item) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Floatingips.class)
+                .child(Floatingip.class,item.getKey());
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Floatingip toMd(NeutronFloatingIP floatingIp) {
+        FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
+        if (floatingIp.getFixedIPAddress() != null) {
+            List<FixedIpAddress> listFixedIpAddress = new ArrayList<FixedIpAddress>();
+            FixedIpAddressBuilder fixedIpAddressBuilder = new FixedIpAddressBuilder();
+            fixedIpAddressBuilder.setIpAddress(new IpAddress(floatingIp.getFixedIPAddress().toCharArray()));
+            listFixedIpAddress.add(fixedIpAddressBuilder.build());
+            floatingipBuilder.setFixedIpAddress(listFixedIpAddress );
+        }
+        if(floatingIp.getFloatingIPAddress() != null) {
+            floatingipBuilder.setFloatingIpAddress(new IpAddress(floatingIp.getFloatingIPAddress().toCharArray()));
+        }
+        if (floatingIp.getFloatingNetworkUUID() != null) {
+            floatingipBuilder.setFloatingNetworkId(toUuid(floatingIp.getFloatingNetworkUUID()));
+        }
+        if (floatingIp.getPortUUID() != null) {
+            floatingipBuilder.setPortId(toUuid(floatingIp.getPortUUID()));
+        }
+        if (floatingIp.getRouterUUID() != null) {
+            floatingipBuilder.setRouterId(toUuid(floatingIp.getRouterUUID()));
+        }
+        if (floatingIp.getStatus() != null) {
+            floatingipBuilder.setStatus(floatingIp.getStatus());
+        }
+        if (floatingIp.getTenantUUID() != null) {
+            floatingipBuilder.setTenantId(toUuid(floatingIp.getTenantUUID()));
+        }
+        if (floatingIp.getFloatingIPUUID() != null) {
+            floatingipBuilder.setUuid(toUuid(floatingIp.getFloatingIPUUID()));
+        }
+        else {
+            logger.warn("Attempting to write neutron floating IP without UUID");
+        }
+        return floatingipBuilder.build();
     }
 }
