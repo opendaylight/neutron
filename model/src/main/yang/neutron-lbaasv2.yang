@@ -297,6 +297,7 @@ module neutron-lbaasv2 {
         container healthmonitor {
             description "Container for LBaaSV2.0 healthmonitors.";
             list healthmonitors {
+                key "id";
                 uses healthmonitor-attrs;
                 description "List of healthmonitors.";
             }
