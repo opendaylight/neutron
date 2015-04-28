@@ -16,6 +16,24 @@
       "revId": "5842d96e3b6e0a9611e17405cae9043f8e9a106d",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3aa0d159_39276ab8",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronLoadBalancerInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 3675
+      },
+      "writtenOn": "2015-04-28T16:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aa0d159_3900ca00",
+      "revId": "5842d96e3b6e0a9611e17405cae9043f8e9a106d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
