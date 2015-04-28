@@ -274,6 +274,7 @@ module neutron-lbaasv2 {
         container listener {
             description "Container for Listeners.";
             list listeners {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses listener-attrs;
                 description "List of Listeners";
