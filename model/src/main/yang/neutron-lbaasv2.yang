@@ -282,6 +282,7 @@ module neutron-lbaasv2 {
         container pool {
             description "Container for LBaaSV2.0 pools.";
             list pools {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses pool-attrs;
                 description "List of Pools";
