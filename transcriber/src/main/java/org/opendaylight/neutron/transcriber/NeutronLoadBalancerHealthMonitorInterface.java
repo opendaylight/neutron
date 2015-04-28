@@ -131,7 +131,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     @Override
     protected Healthmonitors toMd(String uuid) {
         HealthmonitorsBuilder healthmonitorsBuilder = new HealthmonitorsBuilder();
-        healthmonitorsBuilder.setId(toUuid(uuid));
+        healthmonitorsBuilder.setUuid(toUuid(uuid));
         return healthmonitorsBuilder.build();
     }
 
@@ -179,7 +179,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             healthmonitorsBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
         }
         if (healthMonitor.getLoadBalancerHealthMonitorID() != null) {
-            healthmonitorsBuilder.setId(toUuid(healthMonitor.getLoadBalancerHealthMonitorID()));
+            healthmonitorsBuilder.setUuid(toUuid(healthMonitor.getLoadBalancerHealthMonitorID()));
         } else {
             logger.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
