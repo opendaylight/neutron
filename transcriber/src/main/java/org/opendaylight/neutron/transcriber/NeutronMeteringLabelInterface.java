@@ -20,12 +20,15 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.labels.attributes.MeteringLabels;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.labels.attributes.metering.labels.MeteringLabel;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.labels.attributes.metering.labels.MeteringLabelBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelInterface extends AbstractNeutronInterface implements INeutronMeteringLabelCRUD {
+public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, NeutronMeteringLabel>  implements INeutronMeteringLabelCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabel> meteringLabelDB = new ConcurrentHashMap<String, NeutronMeteringLabel>();
 
@@ -126,20 +129,34 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface impl
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        protected InstanceIdentifier<MeteringLabel> createInstanceIdentifier(
+                        MeteringLabel item) {
+                return InstanceIdentifier.create(Neutron.class).child(MeteringLabels.class).child(MeteringLabel.class);
 
-    @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        }
 
-    @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        @Override
+        protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
+      MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+      if (meteringLabel.getMeteringLabelName()!=null) {
+                        meteringLabelBuilder.setName(meteringLabel.getMeteringLabelName());
+                }
+      if (meteringLabel.getMeteringLabelDescription()!=null) {
+                        meteringLabelBuilder.setDescription(meteringLabel.getMeteringLabelDescription());
+                }
+      if (meteringLabel.getMeteringLabelTenantID()!=null) {
+                        meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getMeteringLabelTenantID()));
+                }
+      if (meteringLabel.getMeteringLabelUUID()!=null) {
+                        meteringLabelBuilder.setUuid(toUuid(meteringLabel.getMeteringLabelUUID()));
+                }
+                return meteringLabelBuilder.build();
+        }
+
+        @Override
+        protected MeteringLabel toMd(String uuid) {
+            MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+      meteringLabelBuilder.setUuid(toUuid(uuid));
+      return meteringLabelBuilder.build();
+        }
 }
