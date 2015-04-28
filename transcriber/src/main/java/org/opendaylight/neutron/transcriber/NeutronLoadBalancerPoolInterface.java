@@ -20,12 +20,21 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
+import org.opendaylight.neutron.spi.NeutronLoadBalancer_SessionPersistence;
+import org.opendaylight.neutron.spi.Neutron_ID;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.PoolAttrs.Protocol;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Pool;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.Pools;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.PoolsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.pool.attrs.SessionPersistenceBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface implements INeutronLoadBalancerPoolCRUD {
+public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pools, NeutronLoadBalancerPool> implements INeutronLoadBalancerPoolCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerPool> loadBalancerPoolDB = new ConcurrentHashMap<String, NeutronLoadBalancerPool>();
 
@@ -123,21 +132,70 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface i
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Pools toMd(String uuid) {
+        PoolsBuilder poolsBuilder = new PoolsBuilder();
+        poolsBuilder.setUuid(toUuid(uuid));
+        return poolsBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<Pools> createInstanceIdentifier(Pools pools) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Pool.class)
+                .child(Pools.class, pools.getKey());
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    protected Pools toMd(NeutronLoadBalancerPool pools) {
+        PoolsBuilder poolsBuilder = new PoolsBuilder();
+        poolsBuilder.setAdminStateUp(pools.getLoadBalancerPoolAdminIsStateIsUp());
+        if (pools.getLoadBalancerPoolDescription() != null) {
+            poolsBuilder.setDescr(pools.getLoadBalancerPoolDescription());
+        }
+        if (pools.getNeutronLoadBalancerPoolHealthMonitorID() != null) {
+            List<Uuid> listHealthMonitor = new ArrayList<Uuid>();
+            listHealthMonitor.add(toUuid(pools.getNeutronLoadBalancerPoolHealthMonitorID()));
+            poolsBuilder.setHealthmonitorIds(listHealthMonitor);
+        }
+        if (pools.getLoadBalancerPoolLbAlgorithm() != null) {
+            poolsBuilder.setLbAlgorithm(pools.getLoadBalancerPoolLbAlgorithm());
+        }
+        if (pools.getLoadBalancerPoolListeners() != null) {
+            List<Uuid> listListener = new ArrayList<Uuid>();
+            for (Neutron_ID neutron_id : pools.getLoadBalancerPoolListeners()) {
+                listListener.add(toUuid(neutron_id.getID()));
+            }
+            poolsBuilder.setListeners(listListener);
+        }
+        if (pools.getLoadBalancerPoolMembers() != null) {
+            List<Uuid> listMember = new ArrayList<Uuid>();
+            for (NeutronLoadBalancerPoolMember laodBalancerPoolMember : pools.getLoadBalancerPoolMembers()) {
+                listMember.add(toUuid(laodBalancerPoolMember.getPoolMemberID()));
 
+            }
+            poolsBuilder.setMembers(listMember);
+        }
+        if (pools.getLoadBalancerPoolName() != null) {
+            poolsBuilder.setName(pools.getLoadBalancerPoolName());
+        }
+        if (pools.getLoadBalancerPoolProtocol() != null) {
+            poolsBuilder.setProtocol(Protocol.valueOf(pools.getLoadBalancerPoolProtocol()));
+        }
+        if (pools.getLoadBalancerPoolSessionPersistence() != null) {
+            NeutronLoadBalancer_SessionPersistence sessionPersistence = pools.getLoadBalancerPoolSessionPersistence();
+            SessionPersistenceBuilder sessionPersistenceBuilder = new SessionPersistenceBuilder();
+            sessionPersistenceBuilder.setCookieName(sessionPersistence.getCookieName());
+            sessionPersistenceBuilder.setType(sessionPersistence.getType());
+            poolsBuilder.setSessionPersistence(sessionPersistenceBuilder.build());
+        }
+        if (pools.getLoadBalancerPoolTenantID() != null) {
+            poolsBuilder.setTenantId(toUuid(pools.getLoadBalancerPoolTenantID()));
+        }
+        if (pools.getLoadBalancerPoolID() != null) {
+            poolsBuilder.setUuid(toUuid(pools.getLoadBalancerPoolID()));
+        } else {
+            logger.warn("Attempting to write neutron load balancer pool without UUID");
+        }
+        return poolsBuilder.build();
+    }
 }
