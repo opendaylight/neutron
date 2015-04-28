@@ -25,14 +25,28 @@ import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
+import org.opendaylight.neutron.spi.NeutronPort_AllowedAddressPairs;
+import org.opendaylight.neutron.spi.NeutronPort_ExtraDHCPOption;
+import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.Neutron_IPs;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attrs.AllowedAddressPairs;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attrs.AllowedAddressPairsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attrs.ExtraDhcpOpts;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attrs.ExtraDhcpOptsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attrs.FixedIps;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attrs.FixedIpsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.ports.attributes.Ports;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.ports.attributes.ports.Port;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.ports.attributes.ports.PortBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronPortInterface extends AbstractNeutronInterface implements INeutronPortCRUD {
+public class NeutronPortInterface extends AbstractNeutronInterface<Port, NeutronPort> implements INeutronPortCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronPortInterface.class);
     private ConcurrentMap<String, NeutronPort> portDB = new ConcurrentHashMap<String, NeutronPort>();
 
@@ -224,20 +238,90 @@ public class NeutronPortInterface extends AbstractNeutronInterface implements IN
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<Port> createInstanceIdentifier(Port port) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Ports.class)
+                .child(Port.class, port.getKey());
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Port toMd(NeutronPort neutronPort) {
+        PortBuilder portBuilder = new PortBuilder();
+        portBuilder.setAdminStateUp(neutronPort.isAdminStateUp());
+        if(neutronPort.getAllowedAddressPairs() != null) {
+            List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
+            for (NeutronPort_AllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
+                    AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
+                    allowedAddressPairsBuilder.setIpAddress(allowedAddressPairs.getIpAddress());
+                    allowedAddressPairsBuilder.setMacAddress(allowedAddressPairs.getMacAddress());
+                    allowedAddressPairsBuilder.setPortId(allowedAddressPairs.getPortID());
+                    listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
+            }
+            portBuilder.setAllowedAddressPairs(listAllowedAddressPairs);
+        }
+        if (neutronPort.getBindinghostID() != null) {
+            portBuilder.setBindingProfile(neutronPort.getBindinghostID());
+        }
+        if (neutronPort.getDeviceID() != null) {
+            portBuilder.setDeviceId(toUuid(neutronPort.getDeviceID()));
+        }
+        if (neutronPort.getDeviceOwner() != null) {
+        portBuilder.setDeviceOwner(neutronPort.getDeviceOwner());
+        }
+        if (neutronPort.getExtraDHCPOptions() != null) {
+            List<ExtraDhcpOpts> listExtraDHCPOptions = new ArrayList<ExtraDhcpOpts>();
+            for (NeutronPort_ExtraDHCPOption extraDHCPOption : neutronPort.getExtraDHCPOptions()) {
+                ExtraDhcpOptsBuilder extraDHCPOptsBuilder = new ExtraDhcpOptsBuilder();
+                extraDHCPOptsBuilder.setOptName(extraDHCPOption.getName());
+                extraDHCPOptsBuilder.setOptValue(extraDHCPOption.getValue());
+                listExtraDHCPOptions.add(extraDHCPOptsBuilder.build());
+            }
+            portBuilder.setExtraDhcpOpts(listExtraDHCPOptions);
+        }
+        if (neutronPort.getFixedIPs() != null) {
+            List<FixedIps> listNeutronIPs = new ArrayList<FixedIps>();
+            for (Neutron_IPs neutron_IPs : neutronPort.getFixedIPs()) {
+                FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
+                fixedIpsBuilder.setIpAddress(new IpAddress(neutron_IPs.getIpAddress().toCharArray()));
+                fixedIpsBuilder.setSubnetId(toUuid(neutron_IPs.getSubnetUUID()));
+                listNeutronIPs.add(fixedIpsBuilder.build());
+            }
+            portBuilder.setFixedIps(listNeutronIPs);
+        }
+        if (neutronPort.getMacAddress() != null) {
+            portBuilder.setMacAddress(neutronPort.getMacAddress());
+        }
+        if (neutronPort.getName() != null) {
+        portBuilder.setName(neutronPort.getName());
+        }
+        if (neutronPort.getNetworkUUID() != null) {
+        portBuilder.setNetworkId(toUuid(neutronPort.getNetworkUUID()));
+        }
+        if (neutronPort.getSecurityGroups() != null) {
+            List<Uuid> listSecurityGroups = new ArrayList<Uuid>();
+            for (NeutronSecurityGroup neutronSecurityGroup : neutronPort.getSecurityGroups()) {
+                listSecurityGroups.add(toUuid(neutronSecurityGroup.getSecurityGroupUUID()));
+            }
+            portBuilder.setSecurityGroups(listSecurityGroups);
+        }
+        if (neutronPort.getStatus() != null) {
+            portBuilder.setStatus(neutronPort.getStatus());
+        }
+        if (neutronPort.getTenantID() != null) {
+            portBuilder.setTenantId(toUuid(neutronPort.getTenantID()));
+        }
+        if (neutronPort.getPortUUID() != null) {
+            portBuilder.setUuid(toUuid(neutronPort.getPortUUID()));
+        } else {
+            logger.warn("Attempting to write neutron port without UUID");
+        }
+        return portBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Port toMd(String uuid) {
+        PortBuilder portBuilder = new PortBuilder();
+        portBuilder.setUuid(toUuid(uuid));
+        return portBuilder.build();
     }
 }
