@@ -265,6 +265,7 @@ module neutron-lbaasv2 {
         container loadbalancer {
             description "Container for Loadbalancers.";
             list loadbalancers {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses attrs:admin-attrs;
                 uses loadbalancer-attrs;
