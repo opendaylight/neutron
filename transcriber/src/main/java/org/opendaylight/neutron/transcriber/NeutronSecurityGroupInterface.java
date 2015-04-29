@@ -21,13 +21,21 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.neutron.spi.NeutronSecurityRule;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.SecurityRuleAttrs;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.groups.attributes.SecurityGroups;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.groups.attributes.security.groups.SecurityGroup;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.groups.attributes.security.groups.SecurityGroupBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRuleBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class NeutronSecurityGroupInterface extends AbstractNeutronInterface implements INeutronSecurityGroupCRUD {
+public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<SecurityGroup,NeutronSecurityGroup> implements INeutronSecurityGroupCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
     private ConcurrentMap<String, NeutronSecurityGroup> securityGroupDB  = new ConcurrentHashMap<String, NeutronSecurityGroup>();
 
@@ -96,6 +104,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface impl
             return false;
         }
         securityGroupDB.putIfAbsent(input.getSecurityGroupUUID(), input);
+        addMd(input);
         return true;
     }
 
@@ -105,6 +114,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface impl
             return false;
         }
         securityGroupDB.remove(uuid);
+        removeMd(toMd(uuid));
         return true;
     }
 
@@ -114,6 +124,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface impl
             return false;
         }
         NeutronSecurityGroup target = securityGroupDB.get(uuid);
+        updateMd(delta);
         return overwrite(target, delta);
     }
 
@@ -123,21 +134,55 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface impl
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected SecurityGroup toMd(NeutronSecurityGroup securityGroup) {
+        SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
+        if (securityGroup.getSecurityGroupName() != null) {
+            securityGroupBuilder.setName(securityGroup.getSecurityGroupName());
+        }
+        if (securityGroup.getSecurityGroupDescription() != null) {
+            securityGroupBuilder.setDescription(securityGroup.getSecurityGroupDescription());
+        }
+        if (securityGroup.getSecurityGroupTenantID() != null) {
+            securityGroupBuilder.setTenantId(toUuid(securityGroup.getSecurityGroupTenantID()));
+        }
+        if (securityGroup.getSecurityRules() != null) {
+            List<Uuid> neutronSecurityRule = new ArrayList<Uuid>();
+
+            for (NeutronSecurityRule securityRule : securityGroup.getSecurityRules()) {
+                SecurityRuleBuilder builder = new SecurityRuleBuilder();
+                builder.setId(toUuid(securityRule.getSecurityRuleUUID()));
+                builder.setTenantId(toUuid(securityRule.getSecurityRuleTenantID()));
+                builder.setDirection(SecurityRuleAttrs.Direction.valueOf(securityRule.getSecurityRuleDirection()));
+                builder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
+                builder.setRemoteGroupId(toUuid(securityRule.getSecurityRemoteGroupID()));
+                IpAddress ipAddress = new IpAddress(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
+                builder.setRemoteIpPrefix(ipAddress);
+                builder.setProtocol(SecurityRuleAttrs.Protocol.valueOf(securityRule.getSecurityRuleProtocol()));
+                builder.setEthertype(SecurityRuleAttrs.Ethertype.valueOf(securityRule.getSecurityRuleEthertype()));
+                builder.setPortRangeMin(new Long(securityRule.getSecurityRulePortMin()));
+                builder.setPortRangeMax(new Long(securityRule.getSecurityRulePortMax()));
+                Uuid temp = (Uuid) builder.build();
+                neutronSecurityRule.add(temp);
+            }
+            if (securityGroup.getSecurityGroupUUID() != null) {
+                securityGroupBuilder.setUuid(toUuid(securityGroup.getSecurityGroupUUID()));
+            } else {
+                logger.warn("Attempting to write neutron securityGroup without UUID");
+            }
+            securityGroupBuilder.setSecurityRules(neutronSecurityRule);
+        }
+        return securityGroupBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<SecurityGroup> createInstanceIdentifier(SecurityGroup securityGroup) {
+        return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class).child(SecurityGroup.class);
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected SecurityGroup toMd(String uuid) {
+        SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
+        securityGroupBuilder.setUuid(toUuid(uuid));
+        return securityGroupBuilder.build();
     }
-
 }
