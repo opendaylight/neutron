@@ -152,7 +152,7 @@ module neutron-lbaasv2 {
         }
     }
     grouping member-attrs {
-        leaf id {
+        leaf uuid {
             type yang:uuid;
             description "The unique ID for the member.";
         }
@@ -190,7 +190,7 @@ module neutron-lbaasv2 {
         }
     }
     grouping healthmonitor-attrs {
-        leaf id {
+        leaf uuid {
             type yang:uuid;
             description "The unique ID for the healthmonitor.";
         }
@@ -265,6 +265,7 @@ module neutron-lbaasv2 {
         container loadbalancer {
             description "Container for Loadbalancers.";
             list loadbalancers {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses attrs:admin-attrs;
                 uses loadbalancer-attrs;
@@ -274,6 +275,7 @@ module neutron-lbaasv2 {
         container listener {
             description "Container for Listeners.";
             list listeners {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses listener-attrs;
                 description "List of Listeners";
@@ -282,12 +284,14 @@ module neutron-lbaasv2 {
         container pool {
             description "Container for LBaaSV2.0 pools.";
             list pools {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses pool-attrs;
                 description "List of Pools";
                 container member {
                     description "Container for pool members.";
                     list members {
+                        key "uuid";
                         uses member-attrs;
                         description "List of members.";
                     }
@@ -297,7 +301,7 @@ module neutron-lbaasv2 {
         container healthmonitor {
             description "Container for LBaaSV2.0 healthmonitors.";
             list healthmonitors {
-                key "id";
+                key "uuid";
                 uses healthmonitor-attrs;
                 description "List of healthmonitors.";
             }

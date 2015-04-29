@@ -20,12 +20,16 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Loadbalancer;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.loadbalancer.Loadbalancers;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.loadbalancer.LoadbalancersBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerInterface extends AbstractNeutronInterface implements INeutronLoadBalancerCRUD {
+public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancer> loadBalancerDB  = new ConcurrentHashMap<String, NeutronLoadBalancer>();
 
@@ -123,21 +127,47 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface imple
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Loadbalancers toMd(String uuid) {
+        LoadbalancersBuilder loadBalancersBuilder = new LoadbalancersBuilder();
+        loadBalancersBuilder.setUuid(toUuid(uuid));
+        return loadBalancersBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier(
+            Loadbalancers loadBalancers) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Loadbalancer.class)
+                .child(Loadbalancers.class, loadBalancers.getKey());
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Loadbalancers toMd(NeutronLoadBalancer loadBalancer) {
+        LoadbalancersBuilder loadBalancersBuilder = new LoadbalancersBuilder();
+        loadBalancersBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
+        if (loadBalancer.getLoadBalancerDescription() != null) {
+            loadBalancersBuilder.setDescr(loadBalancer.getLoadBalancerDescription());
+        }
+        if (loadBalancer.getLoadBalancerName() != null) {
+            loadBalancersBuilder.setName(loadBalancer.getLoadBalancerName());
+        }
+        if (loadBalancer.getLoadBalancerStatus() != null) {
+            loadBalancersBuilder.setStatus(loadBalancer.getLoadBalancerStatus());
+        }
+        if (loadBalancer.getLoadBalancerTenantID() != null) {
+            loadBalancersBuilder.setTenantId(toUuid(loadBalancer.getLoadBalancerTenantID()));
+        }
+        if (loadBalancer.getLoadBalancerVipAddress() != null) {
+            loadBalancersBuilder.setVipAddress(new IpAddress(loadBalancer.getLoadBalancerVipAddress().toCharArray()));
+        }
+        if (loadBalancer.getLoadBalancerVipSubnetID() != null) {
+            loadBalancersBuilder.setVipSubnetId(toUuid(loadBalancer.getLoadBalancerVipSubnetID()));
+        }
+        if (loadBalancer.getLoadBalancerID() != null) {
+            loadBalancersBuilder.setUuid(toUuid(loadBalancer.getLoadBalancerID()));
+        } else {
+            logger.warn("Attempting to write neutron load balancer without UUID");
+        }
+        return loadBalancersBuilder.build();
     }
-
 }
