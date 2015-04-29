@@ -20,12 +20,14 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNService;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.VpnServices;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.vpn.services.VpnService;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.vpn.services.VpnServiceBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNServiceInterface extends AbstractNeutronInterface implements INeutronVPNServiceCRUD {
+public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnService,NeutronVPNService> implements INeutronVPNServiceCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
     private ConcurrentMap<String, NeutronVPNService> VPNServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
 
@@ -93,6 +95,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface impleme
             return false;
         }
         VPNServiceDB.putIfAbsent(input.getID(), input);
+        addMd(input);
         return true;
     }
 
@@ -102,6 +105,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface impleme
             return false;
         }
         VPNServiceDB.remove(uuid);
+        removeMd(toMd(uuid));
         return true;
     }
 
@@ -111,6 +115,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface impleme
             return false;
         }
         NeutronVPNService target = VPNServiceDB.get(uuid);
+        updateMd(delta);
         return overwrite(target, delta);
     }
 
@@ -120,21 +125,44 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface impleme
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected VpnService toMd(NeutronVPNService vpnService) {
+        VpnServiceBuilder vpnServiceBuilder = new VpnServiceBuilder();
+        if (vpnService.getName() != null) {
+            vpnServiceBuilder.setName(vpnService.getName());
+        }
+        if (vpnService.getTenantID() != null) {
+            vpnServiceBuilder.setTenantId(toUuid(vpnService.getTenantID()));
+        }
+        if (vpnService.getStatus() != null) {
+            vpnServiceBuilder.setStatus(vpnService.getStatus());
+        }
+        if (vpnService.getDescription() != null) {
+            vpnServiceBuilder.setDescr(vpnService.getDescription());
+        }
+        if (vpnService.getSubnetUUID() != null) {
+            vpnServiceBuilder.setSubnetId(toUuid(vpnService.getSubnetUUID()));
+        }
+        if (vpnService.getRouterUUID() != null) {
+            vpnServiceBuilder.setRouterId(toUuid(vpnService.getRouterUUID()));
+        }
+        vpnServiceBuilder.setAdminStateUp(vpnService.getAdminStateUp());
+        if (vpnService.getID() != null) {
+            vpnServiceBuilder.setUuid(toUuid(vpnService.getID()));
+        } else {
+            logger.warn("Attempting to write neutron vpnService without UUID");
+        }
+        return vpnServiceBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<VpnService> createInstanceIdentifier(VpnService vpnService) {
+        return InstanceIdentifier.create(VpnServices.class).child(VpnService.class, vpnService.getKey());
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected VpnService toMd(String uuid) {
+        VpnServiceBuilder vpnServiceBuilder = new VpnServiceBuilder();
+        vpnServiceBuilder.setUuid(toUuid(uuid));
+        return vpnServiceBuilder.build();
     }
-
 }
