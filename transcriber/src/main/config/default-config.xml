@@ -9,6 +9,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
 -->
 <snapshot>
   <required-capabilities>
+    <capability>urn:opendaylight:params:xml:ns:yang:neutron:transcriber:impl?module=neutron-transcriber-impl&amp;revision=2014-12-10</capability>
   </required-capabilities>
   <configuration>
 
