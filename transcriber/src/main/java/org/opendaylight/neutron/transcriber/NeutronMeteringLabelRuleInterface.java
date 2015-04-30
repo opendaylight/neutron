@@ -20,16 +20,20 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.MeteringRuleAttrs;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.MeteringRules;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRule;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRuleBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface implements INeutronMeteringLabelRuleCRUD {
+public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
+        implements INeutronMeteringLabelRuleCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabelRule> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronMeteringLabelRule>();
-
-
 
     NeutronMeteringLabelRuleInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -40,17 +44,16 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface 
     private boolean overwrite(Object target, Object delta) {
         Method[] methods = target.getClass().getMethods();
 
-        for(Method toMethod: methods){
-            if(toMethod.getDeclaringClass().equals(target.getClass())
-                    && toMethod.getName().startsWith("set")){
+        for (Method toMethod : methods) {
+            if (toMethod.getDeclaringClass().equals(target.getClass()) && toMethod.getName().startsWith("set")) {
 
                 String toName = toMethod.getName();
                 String fromName = toName.replace("set", "get");
 
                 try {
                     Method fromMethod = delta.getClass().getMethod(fromName);
-                    Object value = fromMethod.invoke(delta, (Object[])null);
-                    if(value != null){
+                    Object value = fromMethod.invoke(delta, (Object[]) null);
+                    if (value != null) {
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
@@ -84,7 +87,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface 
             NeutronMeteringLabelRule meteringLabelRule = entry.getValue();
             allMeteringLabelRules.add(meteringLabelRule);
         }
-        logger.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules", allMeteringLabelRules.size());
+        logger.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules",
+                allMeteringLabelRules.size());
         List<NeutronMeteringLabelRule> ans = new ArrayList<NeutronMeteringLabelRule>();
         ans.addAll(allMeteringLabelRules);
         return ans;
@@ -96,7 +100,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface 
             return false;
         }
         meteringLabelRuleDB.putIfAbsent(input.getMeteringLabelRuleUUID(), input);
-      //TODO: add code to find INeutronMeteringLabelRuleAware services and call newtorkCreated on them
+        // TODO: add code to find INeutronMeteringLabelRuleAware services and
+        // call newtorkCreated on them
         return true;
     }
 
@@ -106,7 +111,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface 
             return false;
         }
         meteringLabelRuleDB.remove(uuid);
-      //TODO: add code to find INeutronMeteringLabelRuleAware services and call newtorkDeleted on them
+        // TODO: add code to find INeutronMeteringLabelRuleAware services and
+        // call newtorkDeleted on them
         return true;
     }
 
@@ -128,20 +134,36 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface 
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<MeteringRule> createInstanceIdentifier(MeteringRule item) {
+        return InstanceIdentifier.create(Neutron.class).child(MeteringRules.class).child(MeteringRule.class);
+
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected MeteringRule toMd(NeutronMeteringLabelRule meteringLableRule) {
+        MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
+        if (meteringLableRule.getMeteringLabelRuleLabelID() != null) {
+            meteringRuleBuilder.setId((toUuid(meteringLableRule.getMeteringLabelRuleLabelID())));
+        }
+        if (meteringLableRule.getMeteringLabelRuleUUID() != null) {
+            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLableRule.getMeteringLabelRuleUUID()));
+        }
+        if (meteringLableRule.getMeteringLabelRuleDirection() != null) {
+            meteringRuleBuilder.setDirection((MeteringRuleAttrs.Direction.valueOf(meteringLableRule
+                    .getMeteringLabelRuleDirection())));
+        }
+        if (meteringLableRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
+            IpAddress ipAddress = new IpAddress(meteringLableRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
+            meteringRuleBuilder.setRemoteIpPrefix(ipAddress);
+        }
+        meteringRuleBuilder.setExcluded(meteringLableRule.getMeteringLabelRuleExcluded());
+        return meteringRuleBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected MeteringRule toMd(String uuid) {
+        MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
+        meteringRuleBuilder.setId((toUuid(uuid)));
+        return meteringRuleBuilder.build();
     }
 }
