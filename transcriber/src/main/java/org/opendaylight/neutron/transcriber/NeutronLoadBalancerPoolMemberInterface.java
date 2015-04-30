@@ -20,17 +20,18 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.pools.Member;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.pools.member.Members;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.pools.member.MembersBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerPoolMemberInterface
-        extends AbstractNeutronInterface
-        implements INeutronLoadBalancerPoolMemberCRUD {
+public class NeutronLoadBalancerPoolMemberInterface extends
+        AbstractNeutronInterface<Members, NeutronLoadBalancerPoolMember> implements INeutronLoadBalancerPoolMemberCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerPoolMemberInterface.class);
-    private ConcurrentMap<String, NeutronLoadBalancerPoolMember> loadBalancerPoolMemberDB  = new ConcurrentHashMap<String, NeutronLoadBalancerPoolMember>();
-
+    private ConcurrentMap<String, NeutronLoadBalancerPoolMember> loadBalancerPoolMemberDB = new ConcurrentHashMap<String, NeutronLoadBalancerPoolMember>();
 
     NeutronLoadBalancerPoolMemberInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -42,8 +43,7 @@ public class NeutronLoadBalancerPoolMemberInterface
         Method[] methods = target.getClass().getMethods();
 
         for (Method toMethod : methods) {
-            if (toMethod.getDeclaringClass().equals(target.getClass())
-                    && toMethod.getName().startsWith("set")) {
+            if (toMethod.getDeclaringClass().equals(target.getClass()) && toMethod.getName().startsWith("set")) {
 
                 String toName = toMethod.getName();
                 String fromName = toName.replace("set", "get");
@@ -54,7 +54,7 @@ public class NeutronLoadBalancerPoolMemberInterface
                     if (value != null) {
                         toMethod.invoke(target, value);
                     }
-                } catch(Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     return false;
                 }
@@ -124,20 +124,43 @@ public class NeutronLoadBalancerPoolMemberInterface
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<Members> createInstanceIdentifier(Members item) {
+        return InstanceIdentifier.create(Member.class).child(Members.class);
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Members toMd(NeutronLoadBalancerPoolMember member) {
+        MembersBuilder membersBuilder = new MembersBuilder();
+        membersBuilder.setAdminStateUp(member.getPoolMemberAdminStateIsUp());
+        if (member.getPoolID() != null) {
+            membersBuilder.setUuid(toUuid(member.getPoolID()));
+        }
+        if (member.getPoolMemberAddress() != null) {
+            IpAddress ipAddress = new IpAddress(member.getPoolMemberAddress().toCharArray());
+            membersBuilder.setAddress(ipAddress);
+        }
+        if (member.getPoolMemberProtoPort() != null) {
+            membersBuilder.setProtocolPort(member.getPoolMemberProtoPort());
+        }
+        if (member.getPoolMemberID() != null) {
+            membersBuilder.setUuid(toUuid(member.getPoolMemberID()));
+        }
+        if (member.getPoolMemberSubnetID() != null) {
+            membersBuilder.setSubnetId(toUuid(member.getPoolMemberSubnetID()));
+        }
+        if (member.getPoolMemberTenantID() != null) {
+            membersBuilder.setTenantId(toUuid(member.getPoolMemberTenantID()));
+        }
+        if (member.getPoolMemberWeight() != null) {
+            membersBuilder.setWeight(member.getPoolMemberWeight());
+        }
+        return membersBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected Members toMd(String uuid) {
+        MembersBuilder membersBuilder = new MembersBuilder();
+        membersBuilder.setUuid(toUuid(uuid));
+        return membersBuilder.build();
     }
 }
