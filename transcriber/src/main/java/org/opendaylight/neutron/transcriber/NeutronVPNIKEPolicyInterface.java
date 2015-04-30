@@ -20,12 +20,16 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.neutron.spi.NeutronVPNLifetime;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicy.attrs.LifetimeBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.IkePolicies;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ike.policies.IkePolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ike.policies.IkePolicyBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface implements INeutronVPNIKEPolicyCRUD {
+public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePolicy, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIKEPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIKEPolicy>();
 
@@ -96,6 +100,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface imple
             return false;
         }
         meteringLabelRuleDB.putIfAbsent(input.getID(), input);
+        addMd(input);
       //TODO: add code to find INeutronVPNIKEPolicyAware services and call newtorkCreated on them
         return true;
     }
@@ -106,6 +111,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface imple
             return false;
         }
         meteringLabelRuleDB.remove(uuid);
+        removeMd(toMd(uuid));
       //TODO: add code to find INeutronVPNIKEPolicyAware services and call newtorkDeleted on them
         return true;
     }
@@ -116,6 +122,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface imple
             return false;
         }
         NeutronVPNIKEPolicy target = meteringLabelRuleDB.get(uuid);
+        updateMd(delta);
         return overwrite(target, delta);
     }
 
@@ -129,22 +136,58 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface imple
 
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected IkePolicy toMd(NeutronVPNIKEPolicy ikePolicy) {
+        IkePolicyBuilder ikePolicyBuilder = new IkePolicyBuilder();
+        if (ikePolicy.getName() != null) {
+            ikePolicyBuilder.setName(ikePolicy.getName());
+        }
+        if (ikePolicy.getTenantID() != null) {
+            ikePolicyBuilder.setTenantId(toUuid(ikePolicy.getTenantID()));
+        }
+        if (ikePolicy.getDescription() != null) {
+            ikePolicyBuilder.setDescr(ikePolicy.getDescription());
+        }
+        if (ikePolicy.getAuthAlgorithm() != null) {
+            ikePolicyBuilder.setAuthAlgorithm(ikePolicy.getAuthAlgorithm());
+        }
+        if (ikePolicy.getEncryptionAlgorithm() != null) {
+            ikePolicyBuilder.setEncryptionAlgorithm(ikePolicy.getEncryptionAlgorithm());
+        }
+        if (ikePolicy.getPhase1NegotiationMode() != null) {
+            ikePolicyBuilder.setPhaseNegotiationMode(ikePolicy.getPhase1NegotiationMode());
+        }
+        if (ikePolicy.getPerfectForwardSecrecy() != null) {
+            ikePolicyBuilder.setPfs(ikePolicy.getPerfectForwardSecrecy());
+        }
+        if (ikePolicy.getIkeVersion() != null) {
+            ikePolicyBuilder.setIkeVersion(ikePolicy.getIkeVersion());
+        }
+        if (ikePolicy.getLifetime() !=null) {
+            NeutronVPNLifetime vpnLifetime = ikePolicy.getLifetime();
+            LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
+            lifetimeBuilder.setUnits(vpnLifetime.getUnits());
+            lifetimeBuilder.setValue(vpnLifetime.getValue());
+            ikePolicyBuilder.setLifetime(lifetimeBuilder.build());
+        }
+        if (ikePolicy.getID() != null) {
+            ikePolicyBuilder.setUuid(toUuid(ikePolicy.getID()));
+        } else {
+            logger.warn("Attempting to write neutron vpnIKEPolicy without UUID");
+        }
+        return ikePolicyBuilder.build();
     }
 
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<IkePolicy> createInstanceIdentifier(IkePolicy ikePolicy) {
+        return InstanceIdentifier.create(IkePolicies.class).child(IkePolicy.class, ikePolicy.getKey());
     }
 
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected IkePolicy toMd(String uuid) {
+        IkePolicyBuilder ikePolicyBuilder = new IkePolicyBuilder();
+        ikePolicyBuilder.setUuid(toUuid(uuid));
+        return ikePolicyBuilder.build();
     }
 }
