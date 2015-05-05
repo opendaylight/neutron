@@ -183,12 +183,30 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         subnetBuilder.setGatewayIp(ipAddress);
                 }
                 if (subnet.getIpV6RaMode() != null) {
-                        subnetBuilder.setIpv6RaMode(SubnetAttrs.Ipv6RaMode.forValue(Integer
-                                        .parseInt(subnet.getIpV6RaMode())));
+                    boolean foundMatch = false;
+                    for (SubnetAttrs.Ipv6RaMode ipv6RaMode : SubnetAttrs.Ipv6RaMode.values()) {
+                        if (ipv6RaMode.toString().equalsIgnoreCase(subnet.getIpV6RaMode())) {
+                            subnetBuilder.setIpv6RaMode(ipv6RaMode);
+                            foundMatch = true;
+                            break;
+                        }
+                    }
+                    if (! foundMatch) {
+                        logger.warn("Unable to find Ipv6RaMode value for {}", subnet.getIpV6RaMode());
+                    }
                 }
                 if (subnet.getIpV6AddressMode() != null) {
-                        subnetBuilder.setIpv6AddressMode(SubnetAttrs.Ipv6AddressMode
-                                        .forValue(Integer.parseInt(subnet.getIpV6AddressMode())));
+                    boolean foundMatch = false;
+                    for (SubnetAttrs.Ipv6AddressMode ipv6AddressMode : SubnetAttrs.Ipv6AddressMode.values()) {
+                        if (ipv6AddressMode.toString().equalsIgnoreCase(subnet.getIpV6AddressMode())) {
+                            subnetBuilder.setIpv6AddressMode(ipv6AddressMode);
+                            foundMatch = true;
+                            break;
+                        }
+                    }
+                    if (! foundMatch) {
+                        logger.warn("Unable to find IpV6AddressMode value for {}", subnet.getIpV6AddressMode());
+                    }
                 }
                 subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
                 if (subnet.getAllocationPools() != null) {
