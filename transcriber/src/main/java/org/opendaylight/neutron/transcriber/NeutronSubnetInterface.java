@@ -183,12 +183,14 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         subnetBuilder.setGatewayIp(ipAddress);
                 }
                 if (subnet.getIpV6RaMode() != null) {
-                        subnetBuilder.setIpv6RaMode(SubnetAttrs.Ipv6RaMode.forValue(Integer
-                                        .parseInt(subnet.getIpV6RaMode())));
+                    // BUG: 3113: need to convert string to Enum
+                    // subnetBuilder.setIpv6RaMode(SubnetAttrs.Ipv6RaMode.forValue(Integer
+                    //                     .parseInt(subnet.getIpV6RaMode())));
                 }
                 if (subnet.getIpV6AddressMode() != null) {
-                        subnetBuilder.setIpv6AddressMode(SubnetAttrs.Ipv6AddressMode
-                                        .forValue(Integer.parseInt(subnet.getIpV6AddressMode())));
+                    // BUG: 3113: need to convert string to Enum
+                    // subnetBuilder.setIpv6AddressMode(SubnetAttrs.Ipv6AddressMode
+                    //                    .forValue(Integer.parseInt(subnet.getIpV6AddressMode())));
                 }
                 subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
                 if (subnet.getAllocationPools() != null) {
