@@ -120,8 +120,11 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             return false;
         }
         NeutronSecurityRule target = securityRuleDB.get(uuid);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(securityRuleDB.get(uuid));
+        }
+        return rc;
     }
 
     @Override

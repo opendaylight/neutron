@@ -115,8 +115,11 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
             return false;
         }
         NeutronVPNService target = VPNServiceDB.get(uuid);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(VPNServiceDB.get(uuid));
+        }
+        return rc;
     }
 
     @Override

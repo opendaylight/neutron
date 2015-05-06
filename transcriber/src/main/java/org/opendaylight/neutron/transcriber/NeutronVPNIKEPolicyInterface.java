@@ -122,8 +122,11 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
             return false;
         }
         NeutronVPNIKEPolicy target = meteringLabelRuleDB.get(uuid);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(meteringLabelRuleDB.get(uuid));
+        }
+        return rc;
     }
 
     @Override

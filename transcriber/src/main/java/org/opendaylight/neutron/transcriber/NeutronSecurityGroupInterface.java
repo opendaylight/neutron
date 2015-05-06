@@ -124,8 +124,11 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
             return false;
         }
         NeutronSecurityGroup target = securityGroupDB.get(uuid);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(securityGroupDB.get(uuid));
+        }
+        return rc;
     }
 
     @Override

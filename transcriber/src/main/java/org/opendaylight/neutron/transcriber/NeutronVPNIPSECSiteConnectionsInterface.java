@@ -117,8 +117,11 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             return false;
         }
         NeutronVPNIPSECSiteConnection target = neutronVPNIPSECSiteConnectionDB.get(policyID);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(neutronVPNIPSECSiteConnectionDB.get(policyID));
+        }
+        return rc;
     }
 
     @Override

@@ -122,8 +122,11 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             return false;
         }
         NeutronNetwork target = networkDB.get(uuid);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(networkDB.get(uuid));
+        }
+        return rc;
     }
 
     @Override

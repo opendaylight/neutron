@@ -146,8 +146,11 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
             return false;
         }
         NeutronSubnet target = subnetDB.get(uuid);
-        updateMd(delta);
-        return overwrite(target, delta);
+        boolean rc = overwrite(target, delta);
+        if (rc) {
+            updateMd(subnetDB.get(uuid));
+        }
+        return rc;
     }
 
     @Override
