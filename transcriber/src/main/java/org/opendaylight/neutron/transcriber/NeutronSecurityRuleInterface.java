@@ -140,8 +140,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setTenantId(toUuid(securityRule.getSecurityRuleTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {
-            securityRuleBuilder.setDirection(SecurityRuleAttrs.Direction.valueOf(securityRule
-                    .getSecurityRuleDirection()));
+            // FIXME (bug 3165)
+            // securityRuleBuilder.setDirection(SecurityRuleAttrs.Direction.valueOf(securityRule
+            //        .getSecurityRuleDirection()));
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
@@ -154,11 +155,13 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteIpPrefix(ipAddress);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            securityRuleBuilder.setProtocol(SecurityRuleAttrs.Protocol.valueOf(securityRule.getSecurityRuleProtocol()));
+            // FIXME (bug 3165)
+            // securityRuleBuilder.setProtocol(SecurityRuleAttrs.Protocol.valueOf(securityRule.getSecurityRuleProtocol()));
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
-            securityRuleBuilder.setEthertype(SecurityRuleAttrs.Ethertype.valueOf(securityRule
-                    .getSecurityRuleEthertype()));
+            // FIXME (bug 3165)
+            // securityRuleBuilder.setEthertype(SecurityRuleAttrs.Ethertype.valueOf(securityRule
+            //        .getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
             securityRuleBuilder.setPortRangeMin(new Long(securityRule.getSecurityRulePortMin()));

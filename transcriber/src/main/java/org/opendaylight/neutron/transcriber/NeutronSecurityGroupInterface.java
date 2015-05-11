@@ -22,14 +22,11 @@ import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderCo
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.SecurityRuleAttrs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.groups.attributes.SecurityGroups;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.groups.attributes.security.groups.SecurityGroup;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.groups.attributes.security.groups.SecurityGroupBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRuleBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -149,31 +146,20 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
             securityGroupBuilder.setTenantId(toUuid(securityGroup.getSecurityGroupTenantID()));
         }
         if (securityGroup.getSecurityRules() != null) {
-            List<Uuid> neutronSecurityRule = new ArrayList<Uuid>();
-
+            List<Uuid> neutronSecurityRule = new ArrayList<>();
             for (NeutronSecurityRule securityRule : securityGroup.getSecurityRules()) {
-                SecurityRuleBuilder builder = new SecurityRuleBuilder();
-                builder.setId(toUuid(securityRule.getSecurityRuleUUID()));
-                builder.setTenantId(toUuid(securityRule.getSecurityRuleTenantID()));
-                builder.setDirection(SecurityRuleAttrs.Direction.valueOf(securityRule.getSecurityRuleDirection()));
-                builder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
-                builder.setRemoteGroupId(toUuid(securityRule.getSecurityRemoteGroupID()));
-                IpAddress ipAddress = new IpAddress(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
-                builder.setRemoteIpPrefix(ipAddress);
-                builder.setProtocol(SecurityRuleAttrs.Protocol.valueOf(securityRule.getSecurityRuleProtocol()));
-                builder.setEthertype(SecurityRuleAttrs.Ethertype.valueOf(securityRule.getSecurityRuleEthertype()));
-                builder.setPortRangeMin(new Long(securityRule.getSecurityRulePortMin()));
-                builder.setPortRangeMax(new Long(securityRule.getSecurityRulePortMax()));
-                Uuid temp = (Uuid) builder.build();
-                neutronSecurityRule.add(temp);
-            }
-            if (securityGroup.getSecurityGroupUUID() != null) {
-                securityGroupBuilder.setUuid(toUuid(securityGroup.getSecurityGroupUUID()));
-            } else {
-                logger.warn("Attempting to write neutron securityGroup without UUID");
+                if (securityRule.getSecurityRuleUUID() != null) {
+                    neutronSecurityRule.add(toUuid(securityRule.getSecurityRuleUUID()));
+                }
             }
             securityGroupBuilder.setSecurityRules(neutronSecurityRule);
         }
+        if (securityGroup.getSecurityGroupUUID() != null) {
+            securityGroupBuilder.setUuid(toUuid(securityGroup.getSecurityGroupUUID()));
+        } else {
+            logger.warn("Attempting to write neutron securityGroup without UUID");
+        }
+
         return securityGroupBuilder.build();
     }
 
