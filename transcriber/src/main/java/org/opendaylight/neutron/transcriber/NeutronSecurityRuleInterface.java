@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
     private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
-    private ConcurrentMap<String, NeutronSecurityRule> securityRuleDB  = new ConcurrentHashMap<String, NeutronSecurityRule>();
+    private ConcurrentMap<String, NeutronSecurityRule> securityRuleDB = new ConcurrentHashMap<String, NeutronSecurityRule>();
 
 
     NeutronSecurityRuleInterface(ProviderContext providerContext) {
@@ -140,9 +140,17 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setTenantId(toUuid(securityRule.getSecurityRuleTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {
-            // FIXME (bug 3165)
-            // securityRuleBuilder.setDirection(SecurityRuleAttrs.Direction.valueOf(securityRule
-            //        .getSecurityRuleDirection()));
+            boolean foundMatch = false;
+            for (SecurityRuleAttrs.Direction direction : SecurityRuleAttrs.Direction.values()) {
+                if (direction.toString().equalsIgnoreCase(securityRule.getSecurityRuleDirection())) {
+                    securityRuleBuilder.setDirection(direction);
+                    foundMatch = true;
+                    break;
+                }
+            }
+            if (!foundMatch) {
+                logger.warn("Unable to find direction value for {}", securityRule.getSecurityRuleDirection());
+            }
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
@@ -155,13 +163,30 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteIpPrefix(ipAddress);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            // FIXME (bug 3165)
-            // securityRuleBuilder.setProtocol(SecurityRuleAttrs.Protocol.valueOf(securityRule.getSecurityRuleProtocol()));
+            boolean foundMatch = false;
+            for (SecurityRuleAttrs.Protocol protocol : SecurityRuleAttrs.Protocol.values()) {
+                if (protocol.toString().equalsIgnoreCase(securityRule.getSecurityRuleProtocol())) {
+                    securityRuleBuilder.setProtocol(protocol);
+                    foundMatch = true;
+                    break;
+                }
+            }
+            if (!foundMatch) {
+                logger.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
+            }
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
-            // FIXME (bug 3165)
-            // securityRuleBuilder.setEthertype(SecurityRuleAttrs.Ethertype.valueOf(securityRule
-            //        .getSecurityRuleEthertype()));
+            boolean foundMatch = false;
+            for (SecurityRuleAttrs.Ethertype etherType : SecurityRuleAttrs.Ethertype.values()) {
+                if (etherType.toString().equalsIgnoreCase(securityRule.getSecurityRuleEthertype())) {
+                    securityRuleBuilder.setEthertype(etherType);
+                    foundMatch = true;
+                    break;
+                }
+            }
+            if (!foundMatch) {
+                logger.warn("Unable to find ethertype value for {}", securityRule.getSecurityRuleEthertype());
+            }
         }
         if (securityRule.getSecurityRulePortMin() != null) {
             securityRuleBuilder.setPortRangeMin(new Long(securityRule.getSecurityRulePortMin()));
