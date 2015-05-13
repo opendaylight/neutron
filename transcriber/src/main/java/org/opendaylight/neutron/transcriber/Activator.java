@@ -15,6 +15,7 @@ import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderCo
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
+import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
@@ -146,6 +147,12 @@ public class Activator implements BundleActivator {
         ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
         if (neutronVPNIPSECSiteConnectionsInterfaceRegistration != null) {
             registrations.add(neutronVPNIPSECSiteConnectionsInterfaceRegistration);
+        }
+
+        NeutronFloatingIPInterface neutronFloatingIPInterface = new NeutronFloatingIPInterface(providerContext);
+        ServiceRegistration<INeutronFloatingIPCRUD> neutronFloatingIPInterfaceRegistration = context.registerService(INeutronFloatingIPCRUD.class, neutronFloatingIPInterface, null);
+        if (neutronFloatingIPInterfaceRegistration != null) {
+            registrations.add(neutronFloatingIPInterfaceRegistration);
         }
     }
 
