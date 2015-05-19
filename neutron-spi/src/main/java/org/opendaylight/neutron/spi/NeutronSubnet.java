@@ -393,6 +393,32 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         myPorts.remove(port);
     }
 
+    public List<NeutronPort> getFloatingIpPortsInSubnet() {
+        List<NeutronPort> result = new ArrayList<NeutronPort>();
+        List<NeutronPort> ports = getPortsInSubnet();
+        for(NeutronPort port: ports) {
+            if(port.getDeviceOwner().equals("network:floatingip")) {
+                result.add(port);
+            }
+        }
+        return result;
+    }
+
+    public List<NeutronPort> getFloatingIpPortsInSubnet(String floatingIPaddress) {
+        List<NeutronPort> result = new ArrayList<NeutronPort>();
+        List<NeutronPort> floatingIpPorts = getFloatingIpPortsInSubnet();
+        for(NeutronPort port: floatingIpPorts) {
+            List<Neutron_IPs> fixedIps = port.getFixedIPs();
+            for(Neutron_IPs fixedIp: fixedIps) {
+                if(fixedIp.getIpAddress() != null && fixedIp.getIpAddress().equals(floatingIPaddress)) {
+                    result.add(port);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
     /* this method tests to see if the supplied IPv4 address
      * is valid for this subnet or not
      */
