@@ -335,7 +335,7 @@ public class NeutronFloatingIPsNorthbound {
             NeutronSubnet externSubnet = subnetInterface.getSubnet(externNetwork.getSubnets().get(0));
             if (!externSubnet.isValidIP(floatingIP))
                 throw new BadRequestException("floating IP not valid for external subnet");
-            if (externSubnet.isIPInUse(floatingIP))
+            if (externSubnet.getFloatingIpPortsInSubnet(floatingIP).isEmpty() && externSubnet.isIPInUse(floatingIP))
                 throw new ResourceConflictException("floating IP is in use.");
         }
 
