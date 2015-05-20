@@ -25,7 +25,8 @@ public class NeutronTranscriberProvider implements BindingAwareProvider, AutoClo
 
     @Override
     public void onSessionInitiated(ProviderContext providerContext) {
-        this.activator = new Activator(providerContext);
+        this.activator = new Activator();
+        this.activator.setProviderContext(providerContext);
         try {
             logger.warn("BundleContext found to be: {}",bundleContext);
             this.activator.start(bundleContext);

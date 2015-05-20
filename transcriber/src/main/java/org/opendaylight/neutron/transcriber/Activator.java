@@ -42,7 +42,7 @@ public class Activator implements BundleActivator {
     private List<ServiceRegistration<?>> registrations = new ArrayList<ServiceRegistration<?>>();
     private ProviderContext providerContext;
 
-    public Activator(ProviderContext providerContext) {
+    public void setProviderContext(ProviderContext providerContext) {
         this.providerContext = providerContext;
     }
 
