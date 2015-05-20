@@ -36,13 +36,13 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Activator implements BundleActivator {
+public class NotAtAllTheActivator implements BundleActivator {
     protected static final Logger logger = LoggerFactory
-    .getLogger(Activator.class);
+    .getLogger(NotAtAllTheActivator.class);
     private List<ServiceRegistration<?>> registrations = new ArrayList<ServiceRegistration<?>>();
     private ProviderContext providerContext;
 
-    public Activator(ProviderContext providerContext) {
+    public NotAtAllTheActivator(ProviderContext providerContext) {
         this.providerContext = providerContext;
     }
 
