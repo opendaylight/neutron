@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import org.ops4j.pax.exam.Configuration;
 import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.debugConfiguration;
@@ -30,7 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.ops4j.pax.exam.Option;
-import org.ops4j.pax.exam.junit.Configuration;
+//import org.ops4j.pax.exam.junit.Configuration;
 import org.ops4j.pax.exam.junit.PaxExam;
 
 import org.osgi.framework.BundleContext;
@@ -68,13 +69,13 @@ public class NeutronE2ETest {
        // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
            logLevel(LogLevel.INFO),
        // Provision the example feature exercised by this test
-           features(
-                  "mvn:org.opendaylight.neutron/features-test/0.5.0-SNAPSHOT/xml/features",
-                   "odl-neutron-dummyprovider-test"),
+           //features(
+           //       "mvn:org.opendaylight.neutron/features-test/0.5.0-SNAPSHOT/xml/features",
+           //        "odl-neutron-dummyprovider-test"),
        // Remember that the test executes in another process.  If you want to debug it, you need
        // to tell Pax Exam to launch that process with debugging enabled.  Launching the test class itself with
        // debugging enabled (for example in Eclipse) will not get you the desired results.
-          debugConfiguration("5000", true),
+          //debugConfiguration("5000", true),
        };
     }
 
@@ -102,6 +103,7 @@ public class NeutronE2ETest {
             " \"shared\": false, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " +
             " } } ";
 
+        System.out.println(">>>>> test is running");
         try {        
             URL url = new URL(url_s);
             HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
