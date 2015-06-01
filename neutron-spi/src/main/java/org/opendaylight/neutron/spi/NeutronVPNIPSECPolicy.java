@@ -10,6 +10,9 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 
+import java.util.Iterator;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -38,7 +41,7 @@ public class NeutronVPNIPSECPolicy implements Serializable, INeutronObject {
     @XmlElement (name = "transform_protocol")
     String transformProtocol;
 
-    @XmlElement (name = "encapsulaion_mode")
+    @XmlElement (name = "encapsulation_mode")
     String encapsulationMode;
 
     @XmlElement (name = "auth_algorithm")
@@ -134,6 +137,51 @@ public class NeutronVPNIPSECPolicy implements Serializable, INeutronObject {
 
     public void setLifetime(NeutronVPNLifetime lifetime) {
         this.lifetime = lifetime;
+    }
+
+    /**
+     * This method copies selected fields from the object and returns them
+     * as a new object, suitable for marshaling.
+     *
+     * @param fields
+     *            List of attributes to be extracted
+     * @return a NeutronVPNIPSECPolicy object with only the selected fields
+     * populated
+     */
+    public NeutronVPNIPSECPolicy extractFields(List<String> fields) {
+        NeutronVPNIPSECPolicy ans = new NeutronVPNIPSECPolicy();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setID(this.getID());
+            }
+            if (s.equals("tenant_id")) {
+                ans.setTenantID(this.getTenantID());
+            }
+            if (s.equals("name")) {
+                ans.setName(this.getName());
+            }
+            if (s.equals("description")) {
+                ans.setDescription(this.getDescription());
+            }
+            if (s.equals("transform_protocol")) {
+                ans.setTransformProtocol(this.getTransformProtocol());
+            }
+            if (s.equals("encapsulation_mode")) {
+                ans.setEncapsulationMode(this.getEncapsulationMode());
+            }
+            if (s.equals("auth_algorithm")) {
+                ans.setAuthAlgorithm(this.getAuthAlgorithm());
+            }
+            if (s.equals("encryption_algorithm")) {
+                ans.setEncryptionAlgorithm(this.getEncryptionAlgorithm());
+            }
+            if (s.equals("pfs")) {
+                ans.setPerfectForwardSecrecy(this.getPerfectForwardSecrecy());
+            }
+        }
+        return ans;
     }
 
 }
