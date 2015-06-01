@@ -86,5 +86,17 @@ public class NeutronE2ETest {
         NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
         network_tester.network_collection_get_test();
         network_tester.singleton_network_create_test();
+
+	NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
+        subnet_tester.subnet_collection_get_test();
+
+	NeutronPortTests port_tester = new NeutronPortTests(base);
+        port_tester.port_collection_get_test();
+
+	NeutronRouterTests router_tester = new NeutronRouterTests(base);
+        router_tester.router_collection_get_test();
+
+	NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
+        floatingIP_tester.floatingIP_collection_get_test();
     }
 }
