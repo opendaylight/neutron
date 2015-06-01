@@ -50,7 +50,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancer;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  *
  */
-@Path("/loadbalancers")
+@Path("/lbaas/loadbalancers")
 public class NeutronLoadBalancerNorthbound {
 
     private NeutronLoadBalancer extractFields(NeutronLoadBalancer o, List<String> fields) {
