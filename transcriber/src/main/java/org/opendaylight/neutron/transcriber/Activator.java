@@ -22,6 +22,7 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberCRUD;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
@@ -135,6 +136,12 @@ public class Activator implements BundleActivator {
         ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
         if(neutronMeteringLabelInterfaceRegistration != null) {
             registrations.add(neutronMeteringLabelInterfaceRegistration);
+        }
+
+        NeutronMeteringLabelRuleInterface neutronMeteringLabelRuleInterface = new NeutronMeteringLabelRuleInterface(providerContext);
+        ServiceRegistration<INeutronMeteringLabelRuleCRUD> neutronMeteringLabelRuleInterfaceRegistration = context.registerService(INeutronMeteringLabelRuleCRUD.class, neutronMeteringLabelRuleInterface, null);
+        if(neutronMeteringLabelRuleInterfaceRegistration != null) {
+            registrations.add(neutronMeteringLabelRuleInterfaceRegistration);
         }
 
         NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface(providerContext);
