@@ -108,6 +108,11 @@ public class NeutronCRUDInterfaces {
         return answer;
     }
 
+    public static INeutronVPNIPSECPolicyCRUD getINeutronVPNIPSECPolicyCRUD(Object o) {
+        INeutronVPNIPSECPolicyCRUD answer = (INeutronVPNIPSECPolicyCRUD) getInstances(INeutronVPNIPSECPolicyCRUD.class, o);
+        return answer;
+    }
+
     public static INeutronVPNServiceCRUD getINeutronVPNServiceCRUD(Object o) {
         INeutronVPNServiceCRUD answer = (INeutronVPNServiceCRUD) getInstances(INeutronVPNServiceCRUD.class, o);
         return answer;
