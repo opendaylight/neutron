@@ -53,8 +53,8 @@ import org.slf4j.LoggerFactory;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  *
  */
-@Path("/lbaas/healthmonitors")
-public class NeutronLoadBalancerHealthMonitorNorthbound {
+@Path("/healthmonitors")
+public class Li_NeutronLoadBalancerHealthMonitorNorthbound {
     private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancer.class);
 
     private NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {

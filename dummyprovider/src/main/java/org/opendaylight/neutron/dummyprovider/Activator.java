@@ -23,12 +23,18 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberAware;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelAware;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleAware;
 import org.opendaylight.neutron.spi.INeutronNetworkAware;
 import org.opendaylight.neutron.spi.INeutronPortAware;
 import org.opendaylight.neutron.spi.INeutronRouterAware;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupAware;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleAware;
 import org.opendaylight.neutron.spi.INeutronSubnetAware;
+import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyAware;
+import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyAware;
+import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionAware;
+import org.opendaylight.neutron.spi.INeutronVPNServiceAware;
 
 import org.osgi.framework.BundleContext;
 
@@ -69,6 +75,13 @@ public class Activator extends DependencyActivatorBase {
            INeutronLoadBalancerPoolMemberAware.class.getName()}, null)
            .setImplementation(NeutronLoadBalancerPoolMemberDummyProvider.class));
        manager.add(createComponent().setInterface(new String[] {
+           INeutronMeteringLabelAware.class.getName()}, null)
+           .setImplementation(NeutronMeteringLabelDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+           INeutronMeteringLabelRuleAware.class.getName()}, null)
+           .setImplementation(NeutronMeteringLabelRuleDummyProvider.class));
+
+       manager.add(createComponent().setInterface(new String[] {
            INeutronNetworkAware.class.getName()}, null)
            .setImplementation(NeutronNetworkDummyProvider.class));
        manager.add(createComponent().setInterface(new String[] {
@@ -86,6 +99,19 @@ public class Activator extends DependencyActivatorBase {
        manager.add(createComponent().setInterface(new String[] {
            INeutronSubnetAware.class.getName()}, null)
            .setImplementation(NeutronSubnetDummyProvider.class));
+
+       manager.add(createComponent().setInterface(new String[] {
+           INeutronVPNIKEPolicyAware.class.getName()}, null)
+           .setImplementation(NeutronVPNIKEPolicyDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+           INeutronVPNIPSECPolicyAware.class.getName()}, null)
+           .setImplementation(NeutronVPNIPSECPolicyDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+           INeutronVPNIPSECSiteConnectionAware.class.getName()}, null)
+           .setImplementation(NeutronVPNIPSECSiteConnectionDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+           INeutronVPNServiceAware.class.getName()}, null)
+           .setImplementation(NeutronVPNServiceDummyProvider.class));
     }
 
     /**

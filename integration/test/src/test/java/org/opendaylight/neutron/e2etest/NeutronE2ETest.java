@@ -105,12 +105,50 @@ public class NeutronE2ETest {
         NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
         securityRule_tester.securityRule_collection_get_test();
 
-//  TODO: find why this is throwing a 404
-//        NeutronMeteringLabelTests meteringLabel_tester = new NeutronMeteringLabelTests(base);
-//        meteringLabel_tester.meteringLabel_collection_get_test();
+        NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
+        loadBalancer_tester.loadBalancer_collection_get_test();
 
-//  TODO: find why this is throwing a 404
-//        NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
-//        meteringRule_tester.meteringRule_collection_get_test();
+        NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
+        listener_tester.listener_collection_get_test();
+
+        NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
+        pool_tester.pool_collection_get_test();
+
+        NeutronLBHealthMonitorTests healthMonitor_tester = new NeutronLBHealthMonitorTests(base);
+        healthMonitor_tester.healthMonitor_collection_get_test();
+
+//  TODO: add LoadBalancerPoolMembers testing
+
+        Li_NeutronLoadBalancerTests li_loadBalancer_tester = new Li_NeutronLoadBalancerTests(base);
+        li_loadBalancer_tester.li_loadBalancer_collection_get_test();
+
+        Li_NeutronLBListenerTests li_listener_tester = new Li_NeutronLBListenerTests(base);
+        li_listener_tester.li_listener_collection_get_test();
+
+        Li_NeutronLBPoolTests li_pool_tester = new Li_NeutronLBPoolTests(base);
+        li_pool_tester.li_pool_collection_get_test();
+
+        Li_NeutronLBHealthMonitorTests li_healthMonitor_tester = new Li_NeutronLBHealthMonitorTests(base);
+        li_healthMonitor_tester.li_healthMonitor_collection_get_test();
+
+//  TODO: add LoadBalancerPoolMembers testing
+
+        NeutronMeteringLabelTests meteringLabel_tester = new NeutronMeteringLabelTests(base);
+        meteringLabel_tester.meteringLabel_collection_get_test();
+
+        NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
+        meteringRule_tester.meteringRule_collection_get_test();
+
+        NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
+        vpnService_tester.vpnService_collection_get_test();
+
+        NeutronIKEPoliciesTests ike_policy_tester = new NeutronIKEPoliciesTests(base);
+        ike_policy_tester.ikePolicy_collection_get_test();
+
+        NeutronIPSECPoliciesTests ipsec_policy_tester = new NeutronIPSECPoliciesTests(base);
+        ipsec_policy_tester.ipsecPolicy_collection_get_test();
+
+        NeutronIPSECSiteConnectionTests ipsec_siteConnection_test = new NeutronIPSECSiteConnectionTests(base);
+        ipsec_siteConnection_test.ipsecSiteConnection_collection_get_test();
     }
 }

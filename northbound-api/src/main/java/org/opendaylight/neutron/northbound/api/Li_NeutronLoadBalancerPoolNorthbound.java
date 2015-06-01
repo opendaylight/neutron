@@ -59,8 +59,8 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
  * and not duplicated within the INeutronLoadBalancerPoolMemberCRUD's cache.
  */
 
-@Path("/lbaas/pools")
-public class NeutronLoadBalancerPoolNorthbound {
+@Path("/pools")
+public class Li_NeutronLoadBalancerPoolNorthbound {
 
     private NeutronLoadBalancerPool extractFields(NeutronLoadBalancerPool o, List<String> fields) {
         return o.extractFields(fields);
