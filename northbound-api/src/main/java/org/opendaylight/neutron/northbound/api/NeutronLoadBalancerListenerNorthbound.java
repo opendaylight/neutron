@@ -50,7 +50,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  *
  */
-@Path("/listeners")
+@Path("/lbaas/listeners")
 public class NeutronLoadBalancerListenerNorthbound {
 
     private NeutronLoadBalancerListener extractFields(NeutronLoadBalancerListener o, List<String> fields) {

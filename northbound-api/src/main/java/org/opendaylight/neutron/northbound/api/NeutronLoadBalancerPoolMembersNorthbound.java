@@ -34,7 +34,7 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
-@Path("/pools/{loadBalancerPoolUUID}/members")
+@Path("/lbaas/pools/{loadBalancerPoolUUID}/members")
 public class NeutronLoadBalancerPoolMembersNorthbound {
     private NeutronLoadBalancerPoolMember extractFields(NeutronLoadBalancerPoolMember o, List<String> fields) {
         return o.extractFields(fields);
