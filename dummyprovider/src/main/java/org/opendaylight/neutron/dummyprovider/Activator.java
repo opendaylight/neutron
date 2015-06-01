@@ -23,6 +23,8 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberAware;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelAware;
+import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleAware;
 import org.opendaylight.neutron.spi.INeutronNetworkAware;
 import org.opendaylight.neutron.spi.INeutronPortAware;
 import org.opendaylight.neutron.spi.INeutronRouterAware;
@@ -69,6 +71,12 @@ public class Activator extends DependencyActivatorBase {
            INeutronLoadBalancerPoolMemberAware.class.getName()}, null)
            .setImplementation(NeutronLoadBalancerPoolMemberDummyProvider.class));
        manager.add(createComponent().setInterface(new String[] {
+           INeutronMeteringLabelAware.class.getName()}, null)
+           .setImplementation(NeutronMeteringLabelDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+           INeutronMeteringLabelRuleAware.class.getName()}, null)
+           .setImplementation(NeutronMeteringLabelRuleDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
            INeutronNetworkAware.class.getName()}, null)
            .setImplementation(NeutronNetworkDummyProvider.class));
        manager.add(createComponent().setInterface(new String[] {
@@ -98,3 +106,8 @@ public class Activator extends DependencyActivatorBase {
     }
 
 }
+/*
+NeutronVPNIKEPolicyDummyProvider.java
+NeutronVPNIPSECPolicyDummyProvider.java
+NeutronVPNIPSECSiteConnectionDummyProvider.java
+NeutronVPNServiceDummyProvider.java*/
