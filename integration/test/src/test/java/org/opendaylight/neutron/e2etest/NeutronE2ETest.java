@@ -87,16 +87,28 @@ public class NeutronE2ETest {
         network_tester.network_collection_get_test();
         network_tester.singleton_network_create_test();
 
-	NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
+        NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
         subnet_tester.subnet_collection_get_test();
 
-	NeutronPortTests port_tester = new NeutronPortTests(base);
+        NeutronPortTests port_tester = new NeutronPortTests(base);
         port_tester.port_collection_get_test();
 
-	NeutronRouterTests router_tester = new NeutronRouterTests(base);
+        NeutronRouterTests router_tester = new NeutronRouterTests(base);
         router_tester.router_collection_get_test();
 
-	NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
+        NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
         floatingIP_tester.floatingIP_collection_get_test();
+
+        NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
+        securityGroup_tester.securityGroup_collection_get_test();
+
+        NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
+        securityRule_tester.securityRule_collection_get_test();
+
+//        NeutronMeteringLabelTests meteringLabel_tester = new NeutronMeteringLabelTests(base);
+//        meteringLabel_tester.meteringLabel_collection_get_test();
+
+        NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
+        meteringRule_tester.meteringRule_collection_get_test();
     }
 }
