@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_4764c6e4",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronIKEPoliciesTests.java",
+        "patchSetId": 21
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-02T18:39:15Z",
+      "side": 1,
+      "message": "I see the 3 lines below everywhere... any way they could be shared from a common location?",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 20
+      },
+      "revId": "90e1ce649f4bdbec4e5de3fcc14760011a3c6c33",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
