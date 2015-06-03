@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_bd688788",
+        "filename": "integration/test/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2015-06-03T13:48:53Z",
+      "side": 1,
+      "message": "not sure if this works. prepare-agent is the unit test goal. prepare-agent-integration is for integration tests.",
+      "range": {
+        "startLine": 54,
+        "startChar": 28,
+        "endLine": 54,
+        "endChar": 33
+      },
+      "revId": "aa5fc2a2374b106b76f589833469efab0dd22884",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
