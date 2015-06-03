@@ -89,9 +89,11 @@ public class NeutronE2ETest {
 
         NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
         subnet_tester.subnet_collection_get_test();
+        subnet_tester.singleton_subnet_create_test();
 
         NeutronPortTests port_tester = new NeutronPortTests(base);
         port_tester.port_collection_get_test();
+        port_tester.singleton_port_create_test();
 
         NeutronRouterTests router_tester = new NeutronRouterTests(base);
         router_tester.router_collection_get_test();
