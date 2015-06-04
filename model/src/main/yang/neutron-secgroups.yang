@@ -126,6 +126,7 @@ module neutron-secgroups {
         container security-groups {
             description "Container for security groups.";
             list security-group {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses security-group-attrs;
                 description "List of Metering Labels.";
@@ -140,6 +141,7 @@ module neutron-secgroups {
         container security-rules {
             description "Container for security group rules.";
             list security-rule {
+                key "id";
                 uses security-rule-attrs;
                 description "List of Security Group Rules.";
             }
