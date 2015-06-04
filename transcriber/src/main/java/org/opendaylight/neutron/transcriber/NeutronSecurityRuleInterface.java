@@ -204,7 +204,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     protected InstanceIdentifier<SecurityRule> createInstanceIdentifier(SecurityRule securityRule) {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class);
+        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
+                securityRule.getKey());
     }
 
     @Override
