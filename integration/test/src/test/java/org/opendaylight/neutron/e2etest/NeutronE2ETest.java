@@ -109,12 +109,15 @@ public class NeutronE2ETest {
 
         NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
         loadBalancer_tester.loadBalancer_collection_get_test();
+        loadBalancer_tester.singleton_loadbalancer_create_test();
 
         NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
         listener_tester.listener_collection_get_test();
+        listener_tester.singleton_lb_listener_create_test();
 
         NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
         pool_tester.pool_collection_get_test();
+        pool_tester.singleton_lb_pool_create_test();
 
         NeutronLBHealthMonitorTests healthMonitor_tester = new NeutronLBHealthMonitorTests(base);
         healthMonitor_tester.healthMonitor_collection_get_test();
@@ -123,12 +126,15 @@ public class NeutronE2ETest {
 
         Li_NeutronLoadBalancerTests li_loadBalancer_tester = new Li_NeutronLoadBalancerTests(base);
         li_loadBalancer_tester.li_loadBalancer_collection_get_test();
+        li_loadBalancer_tester.singleton_loadbalancer_create_test();
 
         Li_NeutronLBListenerTests li_listener_tester = new Li_NeutronLBListenerTests(base);
         li_listener_tester.li_listener_collection_get_test();
+        li_listener_tester.singleton_lb_listener_create_test();
 
         Li_NeutronLBPoolTests li_pool_tester = new Li_NeutronLBPoolTests(base);
         li_pool_tester.li_pool_collection_get_test();
+        li_pool_tester.singleton_lb_pool_create_test();
 
         Li_NeutronLBHealthMonitorTests li_healthMonitor_tester = new Li_NeutronLBHealthMonitorTests(base);
         li_healthMonitor_tester.li_healthMonitor_collection_get_test();
