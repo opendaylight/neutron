@@ -109,9 +109,11 @@ public class NeutronE2ETest {
 
         NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
         loadBalancer_tester.loadBalancer_collection_get_test();
+        loadBalancer_tester.singleton_loadbalancer_create_test();
 
         NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
         listener_tester.listener_collection_get_test();
+        listener_tester.singleton_lb_listener_create_test();
 
         NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
         pool_tester.pool_collection_get_test();
@@ -125,7 +127,7 @@ public class NeutronE2ETest {
         meteringLabel_tester.meteringLabel_collection_get_test();
 
         NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
-        meteringRule_tester.meteringRule_collection_get_test();
+        meteringRule_tester.meteringRule_collecgit sttion_get_test();
 
         NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
         vpnService_tester.vpnService_collection_get_test();
