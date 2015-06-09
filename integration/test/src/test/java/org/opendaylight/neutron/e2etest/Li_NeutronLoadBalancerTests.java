@@ -38,4 +38,37 @@ public class Li_NeutronLoadBalancerTests {
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
+
+    //TODO handle SB check
+    public void singleton_loadbalancer_create_test() {
+        String url_s = base + "/loadbalancers";
+        String content = "{ \"loadbalancer\": { " +
+            "\"admin_state_up\": true, " +
+            "\"description\": \"simple lb\", " +
+            "\"id\": \"a36c20d0-18e9-42ce-88fd-82a35977ee8d\", " +
+            "\"listeners\": [], " +
+            "\"name\": \"loadbalancer1\", " +
+            "\"operating_status\": \"ONLINE\", " +
+            "\"provisioning_status\": \"ACTIVE\", " +
+            "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\", " +
+            "\"vip_address\": \"10.0.0.4\", " +
+            "\"vip_subnet_id\": \"013d3059-87a4-45a5-91e9-d721068ae0b2\" } }";
+
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("POST");
+            httpConn.setRequestProperty("Content-Type", "application/json");
+            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            httpConn.setDoOutput(true);
+            OutputStreamWriter out = new OutputStreamWriter(
+                httpConn.getOutputStream());
+            out.write(content);
+            out.close();
+            Assert.assertEquals("Old URI Singleton Load Balancer Post Failed NB",
+                201, httpConn.getResponseCode());
+        } catch (Exception e) {
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+    }
 }
