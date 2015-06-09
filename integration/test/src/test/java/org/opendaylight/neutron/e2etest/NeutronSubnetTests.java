@@ -68,7 +68,43 @@ public class NeutronSubnetTests {
                 httpConn.getOutputStream());
             out.write(content);
             out.close();
-            Assert.assertEquals("Singleton Network Post Failed NB",
+            Assert.assertEquals("Singleton Subnet Post Failed NB",
+                201, httpConn.getResponseCode());
+        } catch (Exception e) {
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+    }
+
+    //TODO handle SB check
+    public void external_subnet_create_test() {
+        String url_s = base + "/subnets";
+        String content = " { \"subnet\": { "+
+            "\"name\": \"\", "+
+            "\"enable_dhcp\": true, "+
+            "\"network_id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\", "+
+            "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "+
+            "\"dns_nameservers\": [], "+
+            "\"allocation_pools\": [ { "+
+                "\"start\": \"10.1.0.2\", "+
+                "\"end\": \"10.1.0.254\" } ], "+
+            "\"host_routes\": [], "+
+            "\"ip_version\": 4, "+
+            "\"gateway_ip\": \"10.1.0.1\", "+
+            "\"cidr\": \"10.1.0.0/24\", "+
+            "\"id\": \"f13b537f-1268-455f-b5fa-1e6817a9c204\" } } ";
+
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+            httpConn.setRequestMethod("POST");
+            httpConn.setRequestProperty("Content-Type", "application/json");
+            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            httpConn.setDoOutput(true);
+            OutputStreamWriter out = new OutputStreamWriter(
+                httpConn.getOutputStream());
+            out.write(content);
+            out.close();
+            Assert.assertEquals("External Subnet Post Failed NB",
                 201, httpConn.getResponseCode());
         } catch (Exception e) {
             Assert.assertFalse("E2E Tests Failed", true);
