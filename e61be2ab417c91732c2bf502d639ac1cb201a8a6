@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_ebcce237",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronRoutersNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-09T18:49:13Z",
+      "side": 1,
+      "message": "also account for:\nnetwork:router_interface_distributed",
+      "range": {
+        "startLine": 443,
+        "startChar": 58,
+        "endLine": 443,
+        "endChar": 76
+      },
+      "revId": "e61be2ab417c91732c2bf502d639ac1cb201a8a6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
