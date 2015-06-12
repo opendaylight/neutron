@@ -108,10 +108,11 @@ public class NeutronVPNIKEPoliciesNorthbound {
                     (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy())) &&
                     (queryIKEVersion == null || queryIKEVersion.equals(oSS.getIkeVersion())) &&
                     (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
-                if (fields.size() > 0)
+                if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
-                else
+                } else {
                     ans.add(oSS);
+                }
             }
         }
         //TODO: apply pagination to results
@@ -179,16 +180,18 @@ public class NeutronVPNIKEPoliciesNorthbound {
             /*
              * verify that the ikePolicy doesn't already exist (issue: is deeper inspection necessary?)
              */
-            if (ikePolicyInterface.neutronVPNIKEPolicyExists(singleton.getID()))
+            if (ikePolicyInterface.neutronVPNIKEPolicyExists(singleton.getID())) {
                 throw new BadRequestException("ikePolicy UUID already exists");
+            }
             Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
                     for (Object instance : instances) {
                         INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
                         int status = service.canCreateNeutronVPNIKEPolicy(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < 200 || status > 299) {
                             return Response.status(status).build();
+                        }
                     }
                 } else {
                     throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -242,18 +245,21 @@ public class NeutronVPNIKEPoliciesNorthbound {
         /*
          * ikePolicy has to exist and only a single delta can be supplied
          */
-        if (!ikePolicyInterface.neutronVPNIKEPolicyExists(policyUUID))
+        if (!ikePolicyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
             throw new ResourceNotFoundException("VPNIKEPolicy UUID not found");
-        if (!input.isSingleton())
+        }
+        if (!input.isSingleton()) {
             throw new BadRequestException("Only single ikePolicy deltas supported");
+        }
         NeutronVPNIKEPolicy singleton = input.getSingleton();
         NeutronVPNIKEPolicy original = ikePolicyInterface.getNeutronVPNIKEPolicy(policyUUID);
 
         /*
          * attribute changes blocked by Neutron
          */
-        if (singleton.getID() != null || singleton.getTenantID() != null)
+        if (singleton.getID() != null || singleton.getTenantID() != null) {
             throw new BadRequestException("Request attribute change not allowed");
+        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {
@@ -261,8 +267,9 @@ public class NeutronVPNIKEPoliciesNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
                     int status = service.canUpdateNeutronVPNIKEPolicy(singleton, original);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -308,8 +315,9 @@ public class NeutronVPNIKEPoliciesNorthbound {
         /*
          * verify that the policy exists and is not in use before removing it
          */
-        if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID))
+        if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
             throw new ResourceNotFoundException("VPNIKEPolicy UUID not found");
+        }
         NeutronVPNIKEPolicy singleton = policyInterface.getNeutronVPNIKEPolicy(policyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {
@@ -317,8 +325,9 @@ public class NeutronVPNIKEPoliciesNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
                     int status = service.canDeleteNeutronVPNIKEPolicy(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");

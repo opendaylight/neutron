@@ -99,10 +99,11 @@ public class NeutronMeteringLabelsNorthbound {
                     (queryName == null || queryName.equals(oSS.getMeteringLabelName())) &&
                     (queryDescription == null || queryDescription.equals(oSS.getMeteringLabelDescription())) &&
                     (queryTenantID == null || queryTenantID.equals(oSS.getMeteringLabelTenantID()))) {
-                if (fields.size() > 0)
+                if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
-                else
+                } else {
                     ans.add(oSS);
+                }
             }
         }
         //TODO: apply pagination to results
@@ -169,16 +170,18 @@ public class NeutronMeteringLabelsNorthbound {
             /*
              * verify that the meteringLabel doesn't already exist (issue: is deeper inspection necessary?)
              */
-            if (meteringLabelInterface.neutronMeteringLabelExists(singleton.getMeteringLabelUUID()))
+            if (meteringLabelInterface.neutronMeteringLabelExists(singleton.getMeteringLabelUUID())) {
                 throw new BadRequestException("meteringLabel UUID already exists");
+            }
             Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
                     for (Object instance : instances) {
                         INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
                         int status = service.canCreateMeteringLabel(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < 200 || status > 299) {
                             return Response.status(status).build();
+                        }
                     }
                 } else {
                     throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -230,8 +233,9 @@ public class NeutronMeteringLabelsNorthbound {
         /*
          * verify that the meteringLabel exists and is not in use before removing it
          */
-        if (!meteringLabelInterface.neutronMeteringLabelExists(labelUUID))
+        if (!meteringLabelInterface.neutronMeteringLabelExists(labelUUID)) {
             throw new ResourceNotFoundException("MeteringLabel UUID not found");
+        }
         NeutronMeteringLabel singleton = meteringLabelInterface.getNeutronMeteringLabel(labelUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
         if (instances != null) {
@@ -239,8 +243,9 @@ public class NeutronMeteringLabelsNorthbound {
                 for (Object instance : instances) {
                     INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
                     int status = service.canDeleteMeteringLabel(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");

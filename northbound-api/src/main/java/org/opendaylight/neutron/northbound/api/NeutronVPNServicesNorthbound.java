@@ -104,10 +104,11 @@ public class NeutronVPNServicesNorthbound {
                     && (querySubnetID == null || querySubnetID.equals(oSS.getSubnetUUID()))
                     && (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
-                if (fields.size() > 0)
+                if (fields.size() > 0) {
                     ans.add(extractFields(oSS, fields));
-                else
+                } else {
                     ans.add(oSS);
+                }
             }
         }
 

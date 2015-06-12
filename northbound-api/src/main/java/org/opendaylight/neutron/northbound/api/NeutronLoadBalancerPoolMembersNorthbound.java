@@ -143,8 +143,9 @@ public Response showLoadBalancerPoolMember(
     List<NeutronLoadBalancerPoolMember> members =
                 loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
     for (NeutronLoadBalancerPoolMember ans: members) {
-        if (!ans.getPoolMemberID().equals(loadBalancerPoolMemberUUID))
+        if (!ans.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
             continue;
+        }
 
         if (fields.size() > 0) {
             return Response.status(200).entity(
@@ -195,8 +196,9 @@ public Response createLoadBalancerPoolMember(
         if (singletonPool.getLoadBalancerPoolMembers() != null) {
             List<NeutronLoadBalancerPoolMember> members = singletonPool.getLoadBalancerPoolMembers();
             for (NeutronLoadBalancerPoolMember member: members) {
-                if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID))
+                if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
                     throw new BadRequestException("LoadBalancerPoolMember UUID already exists");
+                }
             }
         }
 
@@ -243,8 +245,9 @@ public Response createLoadBalancerPoolMember(
              */
             List<NeutronLoadBalancerPoolMember> members = singletonPool.getLoadBalancerPoolMembers();
             for (NeutronLoadBalancerPoolMember member: members) {
-                if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID))
+                if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
                     throw new BadRequestException("LoadBalancerPoolMember UUID already exists");
+                }
             }
 
             if (testMap.containsKey(test.getPoolMemberID())) {
@@ -345,8 +348,9 @@ public Response deleteLoadBalancerPoolMember(
             break;
         }
     }
-    if (singleton == null)
+    if (singleton == null) {
         throw new BadRequestException("LoadBalancerPoolMember UUID does not exist.");
+    }
 
     Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
     if (instances != null) {

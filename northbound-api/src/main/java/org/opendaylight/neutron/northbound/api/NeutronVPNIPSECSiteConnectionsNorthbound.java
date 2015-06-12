@@ -117,11 +117,13 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                     && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
                     && (queryIkePolicyID == null || queryIkePolicyID.equals(oSS.getIkePolicyID()))
                     && (queryIpSecPolicyID == null || queryIpSecPolicyID.equals(oSS.getIpsecPolicyID()))
-                    && (queryVpnServiceID == null || queryVpnServiceID.equals(oSS.getVpnServiceID())))
-                if (fields.size() > 0)
+                    && (queryVpnServiceID == null || queryVpnServiceID.equals(oSS.getVpnServiceID()))) {
+                if (fields.size() > 0) {
                     ans.add(extractFields(oSS, fields));
-                else
+                } else {
                     ans.add(oSS);
+                }
+            }
         }
 
         // TODO: apply pagination to results
@@ -190,16 +192,18 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
              * verify that the ipsec site connection doesn't already exist (issue: is deeper
              * inspection necessary?)
              */
-            if (ipsecSiteConnectionsInterface.neutronVPNIPSECSiteConnectionsExists(singleton.getID()))
+            if (ipsecSiteConnectionsInterface.neutronVPNIPSECSiteConnectionsExists(singleton.getID())) {
                 throw new BadRequestException("VPNIPSECSiteConnections ID already exists");
+            }
             Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECSiteConnectionAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
                     for (Object instance : instances) {
                         INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
                         int status = service.canCreateNeutronVPNIPSECSiteConnection(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < 200 || status > 299) {
                             return Response.status(status).build();
+                        }
                     }
                 } else {
                     throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -253,10 +257,12 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
          * ipsecSiteConnection has to exist and only a single delta can be
          * supplied
          */
-        if (!ipsecSiteConnectionsInterface.neutronVPNIPSECSiteConnectionsExists(policyID))
+        if (!ipsecSiteConnectionsInterface.neutronVPNIPSECSiteConnectionsExists(policyID)) {
             throw new ResourceNotFoundException("VPNIPSECSiteConnections ID not found");
-        if (!input.isSingleton())
+        }
+        if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton deltas supported");
+        }
         NeutronVPNIPSECSiteConnection singleton = input.getSingleton();
         NeutronVPNIPSECSiteConnection original = ipsecSiteConnectionsInterface
                 .getNeutronVPNIPSECSiteConnections(policyID);
@@ -264,8 +270,9 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         /*
          * attribute changes blocked by Neutron
          */
-        if (singleton.getID() != null || singleton.getTenantID() != null)
+        if (singleton.getID() != null || singleton.getTenantID() != null) {
             throw new BadRequestException("Request attribute change not allowed");
+        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {
@@ -273,8 +280,9 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
                     int status = service.canUpdateNeutronVPNIPSECSiteConnection(singleton, original);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -323,8 +331,9 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
          * verify that the iSiteConnections exists and is not in use before
          * removing it
          */
-        if (!ipsecSiteConnectionsInterface.neutronVPNIPSECSiteConnectionsExists(policyID))
+        if (!ipsecSiteConnectionsInterface.neutronVPNIPSECSiteConnectionsExists(policyID)) {
             throw new ResourceNotFoundException("VPNIPSECSiteConnections ID not found");
+        }
         NeutronVPNIPSECSiteConnection singleton = ipsecSiteConnectionsInterface
                 .getNeutronVPNIPSECSiteConnections(policyID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECSiteConnectionAware.class, this);
@@ -333,8 +342,9 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
                     int status = service.canDeleteNeutronVPNIPSECSiteConnection(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");

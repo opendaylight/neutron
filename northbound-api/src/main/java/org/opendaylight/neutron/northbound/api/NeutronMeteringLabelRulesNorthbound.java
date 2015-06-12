@@ -99,10 +99,11 @@ public class NeutronMeteringLabelRulesNorthbound {
                     (queryDirection == null || queryDirection.equals(oSS.getMeteringLabelRuleDirection())) &&
                     (queryRemoteIPPrefix == null || queryRemoteIPPrefix.equals(oSS.getMeteringLabelRuleRemoteIPPrefix())) &&
                     (queryLabelID == null || queryLabelID.equals(oSS.getMeteringLabelRuleLabelID()))) {
-                if (fields.size() > 0)
+                if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
-                else
+                } else {
                     ans.add(oSS);
+                }
             }
         }
         //TODO: apply pagination to results
@@ -169,16 +170,18 @@ public class NeutronMeteringLabelRulesNorthbound {
             /*
              * verify that the meteringLabelRule doesn't already exist (issue: is deeper inspection necessary?)
              */
-            if (meteringLabelRuleInterface.neutronMeteringLabelRuleExists(singleton.getMeteringLabelRuleUUID()))
+            if (meteringLabelRuleInterface.neutronMeteringLabelRuleExists(singleton.getMeteringLabelRuleUUID())) {
                 throw new BadRequestException("meteringLabelRule UUID already exists");
+            }
             Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
                     for (Object instance : instances) {
                         INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
                         int status = service.canCreateMeteringLabelRule(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < 200 || status > 299) {
                             return Response.status(status).build();
+                        }
                     }
                 } else {
                     throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -230,8 +233,9 @@ public class NeutronMeteringLabelRulesNorthbound {
         /*
          * verify that the meteringLabelRule exists and is not in use before removing it
          */
-        if (!meteringLabelRuleInterface.neutronMeteringLabelRuleExists(ruleUUID))
+        if (!meteringLabelRuleInterface.neutronMeteringLabelRuleExists(ruleUUID)) {
             throw new ResourceNotFoundException("MeteringLabelRule UUID not found");
+        }
         NeutronMeteringLabelRule singleton = meteringLabelRuleInterface.getNeutronMeteringLabelRule(ruleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
         if (instances != null) {
@@ -239,8 +243,9 @@ public class NeutronMeteringLabelRulesNorthbound {
                 for (Object instance : instances) {
                     INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
                     int status = service.canDeleteMeteringLabelRule(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");
