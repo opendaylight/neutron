@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_1ff142cd",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronLoadBalancerPool.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-12T22:22:13Z",
+      "side": 1,
+      "message": "should we also add this space in lines 202, 199 ?",
+      "revId": "4adcf131fb5879d053a8226ee9705946fdc8d021",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
