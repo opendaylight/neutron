@@ -74,7 +74,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }

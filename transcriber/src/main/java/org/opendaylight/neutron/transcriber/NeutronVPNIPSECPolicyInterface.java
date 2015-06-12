@@ -58,7 +58,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }

@@ -61,7 +61,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface imple
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }

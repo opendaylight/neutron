@@ -64,7 +64,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }
