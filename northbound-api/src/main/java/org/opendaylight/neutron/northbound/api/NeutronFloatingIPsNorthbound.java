@@ -110,10 +110,11 @@ public class NeutronFloatingIPsNorthbound {
                     (queryStatus == null || queryStatus.equals(oSS.getStatus())) &&
                     (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID())) &&
                     (queryTenantID == null || queryTenantID.equals(oSS.getTenantUUID()))) {
-                if (fields.size() > 0)
+                if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
-                else
+                } else {
                     ans.add(oSS);
+                }
             }
         }
         //TODO: apply pagination to results
@@ -142,8 +143,9 @@ public class NeutronFloatingIPsNorthbound {
             throw new ServiceUnavailableException("Floating IP CRUD Interface "
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
-        if (!floatingIPInterface.floatingIPExists(floatingipUUID))
+        if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
             throw new ResourceNotFoundException("Floating IP UUID doesn't exist.");
+        }
         if (fields.size() > 0) {
             NeutronFloatingIP ans = floatingIPInterface.getFloatingIP(floatingipUUID);
             return Response.status(200).entity(
@@ -191,60 +193,74 @@ public class NeutronFloatingIPsNorthbound {
         if (input.isSingleton()) {
             NeutronFloatingIP singleton = input.getSingleton();
             // check existence of id in cache and return badrequest if exists
-            if (floatingIPInterface.floatingIPExists(singleton.getID()))
+            if (floatingIPInterface.floatingIPExists(singleton.getID())) {
                 throw new BadRequestException("Floating IP UUID already exists.");
+            }
             // check if the external network is specified, exists, and is an external network
             String externalNetworkUUID = singleton.getFloatingNetworkUUID();
-            if (externalNetworkUUID == null)
+            if (externalNetworkUUID == null) {
                 throw new BadRequestException("external network UUID doesn't exist.");
-            if (!networkInterface.networkExists(externalNetworkUUID))
+            }
+            if (!networkInterface.networkExists(externalNetworkUUID)) {
                 throw new BadRequestException("external network UUID doesn't exist.");
+            }
             NeutronNetwork externNetwork = networkInterface.getNetwork(externalNetworkUUID);
-            if (!externNetwork.isRouterExternal())
+            if (!externNetwork.isRouterExternal()) {
                 throw new BadRequestException("external network isn't marked router:external");
+            }
             // if floating IP is specified, make sure it can come from the network
             String floatingIP = singleton.getFloatingIPAddress();
             if (floatingIP != null) {
-                if (externNetwork.getSubnets().size() != 1)
+                if (externNetwork.getSubnets().size() != 1) {
                     throw new BadRequestException("external network doesn't have a subnet");
+                }
                 NeutronSubnet externSubnet = subnetInterface.getSubnet(externNetwork.getSubnets().get(0));
-                if (!externSubnet.isValidIP(floatingIP))
+                if (!externSubnet.isValidIP(floatingIP)) {
                     throw new BadRequestException("external IP isn't valid for the specified subnet.");
-                if (externSubnet.getFloatingIpPortsInSubnet(floatingIP).isEmpty() && externSubnet.isIPInUse(floatingIP))
+                }
+                if (externSubnet.getFloatingIpPortsInSubnet(floatingIP).isEmpty() && externSubnet.isIPInUse(floatingIP)) {
                     throw new ResourceConflictException("floating IP is in use.");
+                }
             }
             // if port_id is specified, then check that the port exists and has at least one IP
             String port_id = singleton.getPortUUID();
             if (port_id != null) {
                 String fixedIP = null;        // used for the fixedIP calculation
-                if (!portInterface.portExists(port_id))
+                if (!portInterface.portExists(port_id)) {
                     throw new ResourceNotFoundException("Port UUID doesn't exist.");
+                }
                 NeutronPort port = portInterface.getPort(port_id);
-                if (port.getFixedIPs().size() < 1)
+                if (port.getFixedIPs().size() < 1) {
                     throw new BadRequestException("port UUID doesn't have an IP address.");
+                }
                 // if there is more than one fixed IP then check for fixed_ip_address
                 // and that it is in the list of port addresses
                 if (port.getFixedIPs().size() > 1) {
                     fixedIP = singleton.getFixedIPAddress();
-                    if (fixedIP == null)
+                    if (fixedIP == null) {
                         throw new BadRequestException("fixed IP address doesn't exist.");
+                    }
                     Iterator<Neutron_IPs> i = port.getFixedIPs().iterator();
                     boolean validFixedIP = false;
                     while (i.hasNext() && !validFixedIP) {
                         Neutron_IPs ip = i.next();
-                        if (ip.getIpAddress().equals(fixedIP))
+                        if (ip.getIpAddress().equals(fixedIP)) {
                             validFixedIP = true;
+                        }
                     }
-                    if (!validFixedIP)
+                    if (!validFixedIP) {
                         throw new BadRequestException("can't find a valid fixed IP address");
+                    }
                 } else {
                     fixedIP = port.getFixedIPs().get(0).getIpAddress();
-                    if (singleton.getFixedIPAddress() != null && !fixedIP.equalsIgnoreCase(singleton.getFixedIPAddress()))
+                    if (singleton.getFixedIPAddress() != null && !fixedIP.equalsIgnoreCase(singleton.getFixedIPAddress())) {
                         throw new BadRequestException("mismatched fixed IP address in request");
+                    }
                 }
                 //lastly check that this fixed IP address isn't already used
-                if (port.isBoundToFloatingIP(fixedIP))
+                if (port.isBoundToFloatingIP(fixedIP)) {
                     throw new ResourceConflictException("fixed IP is in use.");
+                }
                 singleton.setFixedIPAddress(fixedIP);
             }
             Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
@@ -253,8 +269,9 @@ public class NeutronFloatingIPsNorthbound {
                     for (Object instance : instances) {
                         INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
                         int status = service.canCreateFloatingIP(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < 200 || status > 299) {
                             return Response.status(status).build();
+                        }
                     }
                 } else {
                     throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -314,15 +331,18 @@ public class NeutronFloatingIPsNorthbound {
             throw new ServiceUnavailableException("Port CRUD Interface "
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
-        if (!floatingIPInterface.floatingIPExists(floatingipUUID))
+        if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
             throw new ResourceNotFoundException("Floating IP UUID doesn't exist.");
+        }
 
         NeutronFloatingIP sourceFloatingIP = floatingIPInterface.getFloatingIP(floatingipUUID);
-        if (!input.isSingleton())
+        if (!input.isSingleton()) {
             throw new BadRequestException("only singleton requests allowed.");
+        }
         NeutronFloatingIP singleton = input.getSingleton();
-        if (singleton.getID() == null)
+        if (singleton.getID() == null) {
             throw new BadRequestException("singleton UUID doesn't exist.");
+        }
 
         NeutronNetwork externNetwork = networkInterface.getNetwork(
                 sourceFloatingIP.getFloatingNetworkUUID());
@@ -330,48 +350,59 @@ public class NeutronFloatingIPsNorthbound {
         // if floating IP is specified, make sure it can come from the network
         String floatingIP = singleton.getFloatingIPAddress();
         if (floatingIP != null) {
-            if (externNetwork.getSubnets().size() != 1)
+            if (externNetwork.getSubnets().size() != 1) {
                 throw new BadRequestException("external network doesn't have a subnet.");
+            }
             NeutronSubnet externSubnet = subnetInterface.getSubnet(externNetwork.getSubnets().get(0));
-            if (!externSubnet.isValidIP(floatingIP))
+            if (!externSubnet.isValidIP(floatingIP)) {
                 throw new BadRequestException("floating IP not valid for external subnet");
-            if (externSubnet.getFloatingIpPortsInSubnet(floatingIP).isEmpty() && externSubnet.isIPInUse(floatingIP))
+            }
+            if (externSubnet.getFloatingIpPortsInSubnet(floatingIP).isEmpty()
+                && externSubnet.isIPInUse(floatingIP)) {
                 throw new ResourceConflictException("floating IP is in use.");
+            }
         }
 
         // if port_id is specified, then check that the port exists and has at least one IP
         String port_id = singleton.getPortUUID();
         if (port_id != null) {
             String fixedIP = null;        // used for the fixedIP calculation
-            if (!portInterface.portExists(port_id))
+            if (!portInterface.portExists(port_id)) {
                 throw new ResourceNotFoundException("Port UUID doesn't exist.");
+            }
             NeutronPort port = portInterface.getPort(port_id);
-            if (port.getFixedIPs().size() < 1)
+            if (port.getFixedIPs().size() < 1) {
                 throw new BadRequestException("port ID doesn't have a fixed IP address.");
+            }
             // if there is more than one fixed IP then check for fixed_ip_address
             // and that it is in the list of port addresses
             if (port.getFixedIPs().size() > 1) {
                 fixedIP = singleton.getFixedIPAddress();
-                if (fixedIP == null)
+                if (fixedIP == null) {
                     throw new BadRequestException("request doesn't have a fixed IP address");
+                }
                 Iterator<Neutron_IPs> i = port.getFixedIPs().iterator();
                 boolean validFixedIP = false;
                 while (i.hasNext() && !validFixedIP) {
                     Neutron_IPs ip = i.next();
-                    if (ip.getIpAddress().equals(fixedIP))
+                    if (ip.getIpAddress().equals(fixedIP)) {
                         validFixedIP = true;
+                    }
                 }
-                if (!validFixedIP)
+                if (!validFixedIP) {
                     throw new BadRequestException("couldn't find a valid fixed IP address");
+                }
             } else {
                 fixedIP = port.getFixedIPs().get(0).getIpAddress();
                 if (singleton.getFixedIPAddress() != null &&
-                        !fixedIP.equalsIgnoreCase(singleton.getFixedIPAddress()))
+                        !fixedIP.equalsIgnoreCase(singleton.getFixedIPAddress())) {
                     throw new BadRequestException("mismatch in fixed IP addresses");
+                }
             }
             //lastly check that this fixed IP address isn't already used
-            if (port.isBoundToFloatingIP(fixedIP))
+            if (port.isBoundToFloatingIP(fixedIP)) {
                 throw new ResourceConflictException("fixed IP is in use.");
+            }
             singleton.setFixedIPAddress(fixedIP);
         }
         NeutronFloatingIP target = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -381,8 +412,9 @@ public class NeutronFloatingIPsNorthbound {
                 for (Object instance : instances) {
                     INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
                     int status = service.canUpdateFloatingIP(singleton, target);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");
@@ -421,8 +453,9 @@ public class NeutronFloatingIPsNorthbound {
             throw new ServiceUnavailableException("Floating IP CRUD Interface "
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
-        if (!floatingIPInterface.floatingIPExists(floatingipUUID))
+        if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
             throw new ResourceNotFoundException("Floating IP UUID doesn't exist.");
+        }
         // TODO: need to undo port association if it exists
         NeutronFloatingIP singleton = floatingIPInterface.getFloatingIP(floatingipUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
@@ -431,8 +464,9 @@ public class NeutronFloatingIPsNorthbound {
                 for (Object instance : instances) {
                     INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
                     int status = service.canDeleteFloatingIP(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < 200 || status > 299) {
                         return Response.status(status).build();
+                    }
                 }
             } else {
                 throw new ServiceUnavailableException("No providers registered.  Please try again later");
