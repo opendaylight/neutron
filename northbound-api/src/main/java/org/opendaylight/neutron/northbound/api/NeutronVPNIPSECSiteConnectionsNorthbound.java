@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,6 +60,9 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 @Path("/vpn/ipsecsiteconnections")
 public class NeutronVPNIPSECSiteConnectionsNorthbound {
 
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
+
     private NeutronVPNIPSECSiteConnection extractFields(NeutronVPNIPSECSiteConnection o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -71,10 +76,10 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listVPNIPSECSiteConnections(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -125,7 +130,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         }
 
         // TODO: apply pagination to results
-        return Response.status(200).entity(new NeutronVPNIPSECSiteConnectionRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNIPSECSiteConnectionRequest(ans)).build();
     }
 
     /**
@@ -135,11 +140,12 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     @Path("{connectionID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showVPNIPSECSiteConnection(@PathParam("policyID") String policyID,
     // return fields
             @QueryParam("fields") List<String> fields) {
@@ -154,11 +160,11 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         }
         if (fields.size() > 0) {
             NeutronVPNIPSECSiteConnection ans = connectionInterface.getNeutronVPNIPSECSiteConnections(policyID);
-            return Response.status(200).entity(new NeutronVPNIPSECSiteConnectionRequest(extractFields(ans, fields)))
+            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNIPSECSiteConnectionRequest(extractFields(ans, fields)))
                     .build();
         } else {
             return Response
-                    .status(200)
+                    .status(HttpURLConnection.HTTP_OK)
                     .entity(new NeutronVPNIPSECSiteConnectionRequest(connectionInterface
                             .getNeutronVPNIPSECSiteConnections(policyID))).build();
         }
@@ -171,11 +177,11 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVPNIPSECSiteConnection.class)
-    @StatusCodes({ @ResponseCode(code = 201, condition = "Created"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIPSECSiteConnection(final NeutronVPNIPSECSiteConnectionRequest input) {
         INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
                 .getINeutronVPNIPSECSiteConnectionsCRUD(this);
@@ -198,7 +204,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                     for (Object instance : instances) {
                         INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
                         int status = service.canCreateNeutronVPNIPSECSiteConnection(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < HTTP_OK_BOTTOM || status > 299)
                             return Response.status(status).build();
                     }
                 } else {
@@ -224,7 +230,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
              */
             throw new BadRequestException("Only singleton ipsecSiteConnections creates supported");
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -234,11 +240,12 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNIPSECSiteConnection(@PathParam("policyID") String policyID,
             final NeutronVPNIPSECSiteConnectionRequest input) {
         INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
@@ -273,7 +280,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
                     int status = service.canUpdateNeutronVPNIPSECSiteConnection(singleton, original);
-                    if (status < 200 || status > 299)
+                    if (status < HTTP_OK_BOTTOM || status > 299)
                         return Response.status(status).build();
                 }
             } else {
@@ -295,7 +302,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
             }
         }
         return Response
-                .status(200)
+                .status(HttpURLConnection.HTTP_OK)
                 .entity(new NeutronVPNIPSECSiteConnectionRequest(ipsecSiteConnectionsInterface
                         .getNeutronVPNIPSECSiteConnections(policyID))).build();
     }
@@ -306,11 +313,12 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
 
     @Path("{policyID}")
     @DELETE
-    @StatusCodes({ @ResponseCode(code = 204, condition = "No Content"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECSiteConnection(@PathParam("policyID") String policyID) {
         INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
                 .getINeutronVPNIPSECSiteConnectionsCRUD(this);
@@ -333,7 +341,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
                     int status = service.canDeleteNeutronVPNIPSECSiteConnection(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < HTTP_OK_BOTTOM || status > 299)
                         return Response.status(status).build();
                 }
             } else {
@@ -349,7 +357,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                 service.neutronVPNIPSECSiteConnectionDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 
 }

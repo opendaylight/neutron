@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,6 +59,9 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 @Path("/metering/metering-label-rules")
 public class NeutronMeteringLabelRulesNorthbound {
 
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
+
     private NeutronMeteringLabelRule extractFields(NeutronMeteringLabelRule o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -71,10 +76,10 @@ public class NeutronMeteringLabelRulesNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listMeteringLabelRules(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -106,7 +111,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             }
         }
         //TODO: apply pagination to results
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronMeteringLabelRuleRequest(ans)).build();
     }
 
@@ -117,12 +122,12 @@ public class NeutronMeteringLabelRulesNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showMeteringLabelRule(
             @PathParam("ruleUUID") String ruleUUID,
             // return fields
@@ -137,10 +142,10 @@ public class NeutronMeteringLabelRulesNorthbound {
         }
         if (fields.size() > 0) {
             NeutronMeteringLabelRule ans = ruleInterface.getNeutronMeteringLabelRule(ruleUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronMeteringLabelRuleRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronMeteringLabelRuleRequest(ruleInterface.getNeutronMeteringLabelRule(ruleUUID))).build();
         }
     }
@@ -152,11 +157,11 @@ public class NeutronMeteringLabelRulesNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(NeutronNetwork.class)
     @StatusCodes({
-            @ResponseCode(code = 201, condition = "Created"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabelRule(final NeutronMeteringLabelRuleRequest input) {
         INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
         if (meteringLabelRuleInterface == null) {
@@ -177,7 +182,7 @@ public class NeutronMeteringLabelRulesNorthbound {
                     for (Object instance : instances) {
                         INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
                         int status = service.canCreateMeteringLabelRule(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                             return Response.status(status).build();
                     }
                 } else {
@@ -204,7 +209,7 @@ public class NeutronMeteringLabelRulesNorthbound {
              */
             throw new BadRequestException("Only singleton meteringLabelRule creates supported");
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -213,12 +218,12 @@ public class NeutronMeteringLabelRulesNorthbound {
     @Path("{ruleUUID}")
     @DELETE
     @StatusCodes({
-            @ResponseCode(code = 204, condition = "No Content"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabelRule(
             @PathParam("ruleUUID") String ruleUUID) {
         INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
@@ -239,7 +244,7 @@ public class NeutronMeteringLabelRulesNorthbound {
                 for (Object instance : instances) {
                     INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
                     int status = service.canDeleteMeteringLabelRule(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                         return Response.status(status).build();
                 }
             } else {
@@ -255,6 +260,6 @@ public class NeutronMeteringLabelRulesNorthbound {
                 service.neutronMeteringLabelRuleDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }

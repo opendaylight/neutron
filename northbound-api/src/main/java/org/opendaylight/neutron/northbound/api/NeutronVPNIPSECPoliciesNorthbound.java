@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,6 +59,9 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 @Path("/vpn/ipsecpolicies")
 public class NeutronVPNIPSECPoliciesNorthbound {
 
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
+
     private NeutronVPNIPSECPolicy extractFields(NeutronVPNIPSECPolicy o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -70,10 +75,10 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listVPNIPSECPolicies(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -115,7 +120,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
             }
         }
         //TODO: apply pagination to results
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronVPNIPSECPolicyRequest(ans)).build();
     }
 
@@ -126,12 +131,12 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID,
             // return fields
@@ -147,10 +152,10 @@ public class NeutronVPNIPSECPoliciesNorthbound {
         }
         if (fields.size() > 0) {
             NeutronVPNIPSECPolicy ans = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronVPNIPSECPolicyRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronVPNIPSECPolicyRequest(policyInterface.getNeutronVPNIPSECPolicy(policyUUID))).build();
         }
     }
@@ -162,11 +167,11 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVPNIPSECPolicy.class)
     @StatusCodes({
-            @ResponseCode(code = 201, condition = "Created"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIPSECPolicy(final NeutronVPNIPSECPolicyRequest input) {
         INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
         if (ipsecPolicyInterface == null) {
@@ -187,7 +192,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                     for (Object instance : instances) {
                         INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
                         int status = service.canCreateNeutronVPNIPSECPolicy(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                             return Response.status(status).build();
                     }
                 } else {
@@ -214,7 +219,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
              */
             throw new BadRequestException("Only singleton ipsecPolicy creates supported");
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -224,12 +229,12 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID, final NeutronVPNIPSECPolicyRequest input
             ) {
@@ -261,7 +266,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
                     int status = service.canUpdateNeutronVPNIPSECPolicy(singleton, original);
-                    if (status < 200 || status > 299)
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                         return Response.status(status).build();
                 }
             } else {
@@ -281,7 +286,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                 service.neutronVPNIPSECPolicyUpdated(updatedVPNIPSECPolicy);
             }
         }
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronVPNIPSECPolicyRequest(ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID))).build();
     }
 
@@ -291,12 +296,12 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Path("{policyID}")
     @DELETE
     @StatusCodes({
-            @ResponseCode(code = 204, condition = "No Content"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID) {
         INeutronVPNIPSECPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
@@ -317,7 +322,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
                     int status = service.canDeleteNeutronVPNIPSECPolicy(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                         return Response.status(status).build();
                 }
             } else {
@@ -333,6 +338,6 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                 service.neutronVPNIPSECPolicyDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }

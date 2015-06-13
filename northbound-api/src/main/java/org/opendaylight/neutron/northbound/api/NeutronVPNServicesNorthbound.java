@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,6 +59,9 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
 @Path("/vpn/vpnservices")
 public class NeutronVPNServicesNorthbound {
 
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
+
     private NeutronVPNService extractFields(NeutronVPNService o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -70,20 +75,24 @@ public class NeutronVPNServicesNorthbound {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listVPNServices(
             // return fields
             @QueryParam("fields") List<String> fields,
             // OpenStack VPNService attributes
-            @QueryParam("id") String queryID, @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("name") String queryName, @QueryParam("admin_state_up") String queryAdminStateUp,
-            @QueryParam("router_id") String queryRouterID, @QueryParam("status") String queryStatus,
+            @QueryParam("id") String queryID,
+            @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("name") String queryName,
+            @QueryParam("admin_state_up") String queryAdminStateUp,
+            @QueryParam("router_id") String queryRouterID,
+            @QueryParam("status") String queryStatus,
             @QueryParam("subnet_id") String querySubnetID,
             // pagination
-            @QueryParam("limit") String limit, @QueryParam("marker") String marker,
+            @QueryParam("limit") String limit,
+            @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
@@ -111,7 +120,7 @@ public class NeutronVPNServicesNorthbound {
             }
         }
 
-        return Response.status(200).entity(new NeutronVPNServiceRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNServiceRequest(ans)).build();
     }
 
     /**
@@ -121,10 +130,11 @@ public class NeutronVPNServicesNorthbound {
     @Path("{serviceID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showVPNService(@PathParam("serviceID") String serviceID,
     // return fields
             @QueryParam("fields") List<String> fields) {
@@ -138,9 +148,9 @@ public class NeutronVPNServicesNorthbound {
         }
         if (fields.size() > 0) {
             NeutronVPNService ans = VPNServiceInterface.getVPNService(serviceID);
-            return Response.status(200).entity(new NeutronVPNServiceRequest(extractFields(ans, fields))).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNServiceRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200)
+            return Response.status(HttpURLConnection.HTTP_OK)
                     .entity(new NeutronVPNServiceRequest(VPNServiceInterface.getVPNService(serviceID))).build();
         }
     }
@@ -152,12 +162,14 @@ public class NeutronVPNServicesNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVPNService.class)
-    @StatusCodes({ @ResponseCode(code = 201, condition = "Created"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"), @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNService(final NeutronVPNServiceRequest input) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
@@ -179,7 +191,7 @@ public class NeutronVPNServicesNorthbound {
                     for (Object instance : instances) {
                         INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
                         int status = service.canCreateNeutronVPNService(singleton);
-                        if (status < 200 || status > 299) {
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                             return Response.status(status).build();
                         }
                     }
@@ -220,7 +232,7 @@ public class NeutronVPNServicesNorthbound {
                         for (Object instance : instances) {
                             INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
                             int status = service.canCreateNeutronVPNService(test);
-                            if (status < 200 || status > 299) {
+                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                                 return Response.status(status).build();
                             }
                         }
@@ -246,7 +258,7 @@ public class NeutronVPNServicesNorthbound {
                 }
             }
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -256,12 +268,13 @@ public class NeutronVPNServicesNorthbound {
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNService(@PathParam("serviceID") String serviceID, final NeutronVPNServiceRequest input) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
@@ -296,7 +309,7 @@ public class NeutronVPNServicesNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
                     int status = service.canUpdateNeutronVPNService(delta, original);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -318,7 +331,7 @@ public class NeutronVPNServicesNorthbound {
                 service.neutronVPNServiceUpdated(updatedVPNService);
             }
         }
-        return Response.status(200).entity(new NeutronVPNServiceRequest(VPNServiceInterface.getVPNService(serviceID)))
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNServiceRequest(VPNServiceInterface.getVPNService(serviceID)))
                 .build();
     }
 
@@ -328,11 +341,12 @@ public class NeutronVPNServicesNorthbound {
 
     @Path("{serviceID}")
     @DELETE
-    @StatusCodes({ @ResponseCode(code = 204, condition = "No Content"),
-            @ResponseCode(code = 401, condition = "Unauthorized"), @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
@@ -347,7 +361,7 @@ public class NeutronVPNServicesNorthbound {
             throw new ResourceNotFoundException("VPNService UUID does not exist.");
         }
         if (VPNServiceInterface.neutronVPNServiceInUse(serviceID)) {
-            return Response.status(409).build();
+            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
         }
         NeutronVPNService singleton = VPNServiceInterface.getVPNService(serviceID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
@@ -356,7 +370,7 @@ public class NeutronVPNServicesNorthbound {
                 for (Object instance : instances) {
                     INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
                     int status = service.canDeleteNeutronVPNService(singleton);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -374,6 +388,6 @@ public class NeutronVPNServicesNorthbound {
                 service.neutronVPNServiceDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }
