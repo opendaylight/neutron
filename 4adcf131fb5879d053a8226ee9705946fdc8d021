@@ -16,6 +16,24 @@
       "revId": "4adcf131fb5879d053a8226ee9705946fdc8d021",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_7f239e05",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronLoadBalancerPool.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-06-13T02:05:21Z",
+      "side": 1,
+      "message": "probably, but I wasn\u0027t looking at that particular technical debt this time around, so I only caught it in lines I was changing",
+      "parentUuid": "9a6a9dd7_1ff142cd",
+      "revId": "4adcf131fb5879d053a8226ee9705946fdc8d021",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
