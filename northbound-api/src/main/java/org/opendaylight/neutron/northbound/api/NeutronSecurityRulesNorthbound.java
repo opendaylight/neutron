@@ -9,6 +9,7 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +57,8 @@ import org.slf4j.LoggerFactory;
 
 @Path ("/security-group-rules")
 public class NeutronSecurityRulesNorthbound {
-    static final Logger logger = LoggerFactory.getLogger(NeutronSecurityRulesNorthbound.class);
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
 
     private NeutronSecurityRule extractFields(NeutronSecurityRule o, List<String> fields) {
         return o.extractFields(fields);
@@ -68,10 +70,10 @@ public class NeutronSecurityRulesNorthbound {
     @GET
     @Produces ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 200, condition = "Operation successful"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listRules(
             // return fields
             @QueryParam ("fields") List<String> fields,
@@ -127,7 +129,7 @@ public class NeutronSecurityRulesNorthbound {
                 }
             }
         }
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronSecurityRuleRequest(ans)).build();
     }
 
@@ -139,11 +141,11 @@ public class NeutronSecurityRulesNorthbound {
     @GET
     @Produces ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 200, condition = "Operation successful"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showSecurityRule(@PathParam ("securityRuleUUID") String securityRuleUUID,
                                      // return fields
                                      @QueryParam ("fields") List<String> fields) {
@@ -157,10 +159,10 @@ public class NeutronSecurityRulesNorthbound {
         }
         if (!fields.isEmpty()) {
             NeutronSecurityRule ans = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronSecurityRuleRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(new NeutronSecurityRuleRequest(securityRuleInterface.getNeutronSecurityRule(securityRuleUUID))).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityRuleRequest(securityRuleInterface.getNeutronSecurityRule(securityRuleUUID))).build();
         }
     }
 
@@ -172,14 +174,14 @@ public class NeutronSecurityRulesNorthbound {
     @Produces ({MediaType.APPLICATION_JSON})
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 201, condition = "Created"),
-            @ResponseCode (code = 400, condition = "Bad Request"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 403, condition = "Forbidden"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode (code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode (code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
@@ -208,7 +210,7 @@ public class NeutronSecurityRulesNorthbound {
                     for (Object instance : instances) {
                         INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
                         int status = service.canCreateNeutronSecurityRule(singleton);
-                        if ((status < 200) || (status > 299)) {
+                        if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
                             return Response.status(status).build();
                         }
                     }
@@ -251,7 +253,7 @@ public class NeutronSecurityRulesNorthbound {
                         for (Object instance : instances) {
                             INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
                             int status = service.canCreateNeutronSecurityRule(test);
-                            if ((status < 200) || (status > 299)) {
+                            if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
                                 return Response.status(status).build();
                             }
                         }
@@ -278,7 +280,7 @@ public class NeutronSecurityRulesNorthbound {
                 }
             }
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -290,13 +292,13 @@ public class NeutronSecurityRulesNorthbound {
     @Produces ({MediaType.APPLICATION_JSON})
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 200, condition = "Operation successful"),
-            @ResponseCode (code = 400, condition = "Bad Request"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 403, condition = "Forbidden"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode (code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
@@ -340,7 +342,7 @@ public class NeutronSecurityRulesNorthbound {
                 for (Object instance : instances) {
                     INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
                     int status = service.canUpdateNeutronSecurityRule(delta, original);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -362,7 +364,7 @@ public class NeutronSecurityRulesNorthbound {
                 service.neutronSecurityRuleUpdated(updatedSecurityRule);
             }
         }
-        return Response.status(200).entity(new NeutronSecurityRuleRequest(securityRuleInterface.getNeutronSecurityRule(securityRuleUUID))).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityRuleRequest(securityRuleInterface.getNeutronSecurityRule(securityRuleUUID))).build();
     }
 
     /**
@@ -372,12 +374,12 @@ public class NeutronSecurityRulesNorthbound {
     @Path ("{securityRuleUUID}")
     @DELETE
     @StatusCodes ({
-            @ResponseCode (code = 204, condition = "No Content"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode (code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
@@ -393,7 +395,7 @@ public class NeutronSecurityRulesNorthbound {
             throw new ResourceNotFoundException("Security Rule UUID does not exist.");
         }
         if (securityRuleInterface.neutronSecurityRuleInUse(securityRuleUUID)) {
-            return Response.status(409).build();
+            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
         }
         NeutronSecurityRule singleton = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
@@ -402,7 +404,7 @@ public class NeutronSecurityRulesNorthbound {
                 for (Object instance : instances) {
                     INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
                     int status = service.canDeleteNeutronSecurityRule(singleton);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -424,6 +426,6 @@ public class NeutronSecurityRulesNorthbound {
                 service.neutronSecurityRuleDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }

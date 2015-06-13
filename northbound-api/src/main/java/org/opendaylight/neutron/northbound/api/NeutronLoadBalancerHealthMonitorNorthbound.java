@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +56,9 @@ import org.slf4j.LoggerFactory;
  */
 @Path("/lbaas/healthmonitors")
 public class NeutronLoadBalancerHealthMonitorNorthbound {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancer.class);
+
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
 
     private NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
         return o.extractFields(fields);
@@ -66,10 +69,10 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 
     public Response listGroups(
             // return fields
@@ -139,7 +142,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 }
             }
         }
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronLoadBalancerHealthMonitorRequest(ans)).build();
     }
 
@@ -150,11 +153,11 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showLoadBalancerHealthMonitor(@PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             // return fields
             @QueryParam("fields") List<String> fields) {
@@ -168,10 +171,10 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         }
         if (fields.size() > 0) {
             NeutronLoadBalancerHealthMonitor ans = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronLoadBalancerHealthMonitorRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(new NeutronLoadBalancerHealthMonitorRequest(loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID))).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerHealthMonitorRequest(loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID))).build();
         }
     }
 
@@ -182,14 +185,14 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 201, condition = "Created"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerHealthMonitors(final NeutronLoadBalancerHealthMonitorRequest input) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
@@ -212,7 +215,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                     for (Object instance : instances) {
                         INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
                         int status = service.canCreateNeutronLoadBalancerHealthMonitor(singleton);
-                        if (status < 200 || status > 299) {
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                             return Response.status(status).build();
                         }
                     }
@@ -253,7 +256,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                         for (Object instance : instances) {
                             INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
                             int status = service.canCreateNeutronLoadBalancerHealthMonitor(test);
-                            if (status < 200 || status > 299) {
+                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                                 return Response.status(status).build();
                             }
                         }
@@ -279,7 +282,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 }
             }
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -290,13 +293,13 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             final NeutronLoadBalancerHealthMonitorRequest input) {
@@ -342,7 +345,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 for (Object instance : instances) {
                     INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
                     int status = service.canUpdateNeutronLoadBalancerHealthMonitor(delta, original);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -365,7 +368,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 service.neutronLoadBalancerHealthMonitorUpdated(updatedLoadBalancerHealthMonitor);
             }
         }
-        return Response.status(200).entity(new NeutronLoadBalancerHealthMonitorRequest
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerHealthMonitorRequest
                 (loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor
                         (loadBalancerHealthMonitorID))).build();
     }
@@ -378,12 +381,12 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     @Path("{loadBalancerHealthMonitorID}")
     @DELETE
     @StatusCodes({
-            @ResponseCode(code = 204, condition = "No Content"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
@@ -398,7 +401,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             throw new ResourceNotFoundException("LoadBalancerHealthMonitor UUID does not exist.");
         }
         if (loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorInUse(loadBalancerHealthMonitorID)) {
-            return Response.status(409).build();
+            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
         }
         NeutronLoadBalancerHealthMonitor singleton = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
@@ -407,7 +410,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 for (Object instance : instances) {
                     INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
                     int status = service.canDeleteNeutronLoadBalancerHealthMonitor(singleton);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -424,6 +427,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 service.neutronLoadBalancerHealthMonitorDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }
