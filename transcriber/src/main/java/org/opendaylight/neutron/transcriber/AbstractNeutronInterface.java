@@ -19,6 +19,13 @@ import com.google.common.util.concurrent.CheckedFuture;
 
 public abstract class AbstractNeutronInterface<T extends DataObject,S> implements AutoCloseable {
     private static final Logger logger = LoggerFactory.getLogger(AbstractNeutronInterface.class);
+    private static final int DEDASHED_UUID_LENGTH = 32;
+    private static final int DEDASHED_UUID_START = 0;
+    private static final int DEDASHED_UUID_DIV1 = 8;
+    private static final int DEDASHED_UUID_DIV2 = 12;
+    private static final int DEDASHED_UUID_DIV3 = 16;
+    private static final int DEDASHED_UUID_DIV4 = 20;
+
 
     private ProviderContext providerContext;
     private DataBroker db;
@@ -85,16 +92,16 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
         } catch(IllegalArgumentException e) {
             // OK... someone didn't follow RFC 4122... lets try this the hard way
             String dedashed = uuid.replace("-", "");
-            if(dedashed.length() == 32) {
-                String redashed = dedashed.substring(0, 8) // 8 chars
+            if(dedashed.length() == DEDASHED_UUID_LENGTH) {
+                String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1) // 8 chars
                         + "-"
-                        + dedashed.substring(8, 12) // 4 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV1, DEDASHED_UUID_DIV2) // 4 chars
                         + "-"
-                        + dedashed.substring(12, 16) // 4 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV2, DEDASHED_UUID_DIV3) // 4 chars
                         + "-"
-                        + dedashed.substring(16, 20) // 4 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV3, DEDASHED_UUID_DIV4) // 4 chars
                         + "-"
-                        + dedashed.substring(20, 32); // 12 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV4, DEDASHED_UUID_LENGTH); // 12 chars
                 result = new Uuid(redashed);
             } else {
                 throw e;
