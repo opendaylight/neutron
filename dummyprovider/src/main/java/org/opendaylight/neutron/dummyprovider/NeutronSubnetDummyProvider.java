@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronSubnetAware;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 
@@ -17,33 +19,33 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronSubnetDummyProvider implements INeutronSubnetAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronSubnetDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetDummyProvider.class);
 
     public NeutronSubnetDummyProvider() {
     }
 
     public int canCreateSubnet(NeutronSubnet subnet) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSubnetCreated(NeutronSubnet subnet) {
-        logger.info(subnet.toString());
+        LOGGER.info(subnet.toString());
     }
 
     public int canUpdateSubnet(NeutronSubnet delta, NeutronSubnet original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSubnetUpdated(NeutronSubnet subnet) {
-        logger.info(subnet.toString());
+        LOGGER.info(subnet.toString());
     }
 
     public int canDeleteSubnet(NeutronSubnet subnet) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSubnetDeleted(NeutronSubnet subnet) {
-        logger.info(subnet.toString());
+        LOGGER.info(subnet.toString());
     }
 
 }

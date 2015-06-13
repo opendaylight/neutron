@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronMeteringLabelAware;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 
@@ -17,24 +19,24 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronMeteringLabelDummyProvider implements INeutronMeteringLabelAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronMeteringLabelDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelDummyProvider.class);
 
     public NeutronMeteringLabelDummyProvider() {
     }
 
     public int canCreateMeteringLabel(NeutronMeteringLabel meteringLabel) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronMeteringLabelCreated(NeutronMeteringLabel meteringLabel) {
-        logger.info(meteringLabel.toString());
+        LOGGER.info(meteringLabel.toString());
     }
 
     public int canDeleteMeteringLabel(NeutronMeteringLabel meteringLabel) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronMeteringLabelDeleted(NeutronMeteringLabel meteringLabel) {
-        logger.info(meteringLabel.toString());
+        LOGGER.info(meteringLabel.toString());
     }
 }

@@ -9,6 +9,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronSecurityRuleAware;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 
@@ -17,32 +19,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronSecurityRuleDummyProvider implements INeutronSecurityRuleAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityRuleDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleDummyProvider.class);
 
     public NeutronSecurityRuleDummyProvider() {
     }
 
     public int canCreateNeutronSecurityRule(NeutronSecurityRule securityRule) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSecurityRuleCreated(NeutronSecurityRule securityRule) {
-        logger.info(securityRule.toString());
+        LOGGER.info(securityRule.toString());
     }
 
     public int canUpdateNeutronSecurityRule(NeutronSecurityRule delta, NeutronSecurityRule original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSecurityRuleUpdated(NeutronSecurityRule securityRule) {
-        logger.info(securityRule.toString());
+        LOGGER.info(securityRule.toString());
     }
 
     public int canDeleteNeutronSecurityRule(NeutronSecurityRule securityRule) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSecurityRuleDeleted(NeutronSecurityRule securityRule) {
-        logger.info(securityRule.toString());
+        LOGGER.info(securityRule.toString());
     }
 }

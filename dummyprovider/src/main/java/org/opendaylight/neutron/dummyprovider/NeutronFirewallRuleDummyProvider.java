@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronFirewallRuleAware;
 import org.opendaylight.neutron.spi.NeutronFirewallRule;
 
@@ -16,29 +18,29 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronFirewallRuleDummyProvider implements INeutronFirewallRuleAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallDummyProvider.class);
 
     public int canCreateNeutronFirewallRule(NeutronFirewallRule firewallRule) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFirewallRuleCreated(NeutronFirewallRule firewallRule) {
-        logger.info(firewallRule.toString());
+        LOGGER.info(firewallRule.toString());
     }
 
     public int canUpdateNeutronFirewallRule(NeutronFirewallRule delta, NeutronFirewallRule original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFirewallRuleUpdated(NeutronFirewallRule firewallRule) {
-        logger.info(firewallRule.toString());
+        LOGGER.info(firewallRule.toString());
     }
 
     public int canDeleteNeutronFirewallRule(NeutronFirewallRule firewallRule) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFirewallRuleDeleted(NeutronFirewallRule firewallRule) {
-        logger.info(firewallRule.toString());
+        LOGGER.info(firewallRule.toString());
     }
 }

@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronPortAware;
 import org.opendaylight.neutron.spi.NeutronPort;
 
@@ -16,32 +18,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronPortDummyProvider implements INeutronPortAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronPortDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortDummyProvider.class);
 
     public NeutronPortDummyProvider() {
     }
 
     public int canCreatePort(NeutronPort port) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronPortCreated(NeutronPort port) {
-        logger.info(port.toString());
+        LOGGER.info(port.toString());
     }
 
     public int canUpdatePort(NeutronPort delta, NeutronPort original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronPortUpdated(NeutronPort port) {
-        logger.info(port.toString());
+        LOGGER.info(port.toString());
     }
 
     public int canDeletePort(NeutronPort port) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronPortDeleted(NeutronPort port) {
-        logger.info(port.toString());
+        LOGGER.info(port.toString());
     }
 }

@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerAware;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 
@@ -16,33 +18,33 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerListenerDummyProvider implements INeutronLoadBalancerListenerAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerListenerDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerDummyProvider.class);
 
     public NeutronLoadBalancerListenerDummyProvider() {
     }
 
     public int canCreateNeutronLoadBalancerListener(NeutronLoadBalancerListener loadBalancerListener) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerListenerCreated(NeutronLoadBalancerListener loadBalancerListener) {
-        logger.info(loadBalancerListener.toString());
+        LOGGER.info(loadBalancerListener.toString());
     }
 
     public int canUpdateNeutronLoadBalancerListener(NeutronLoadBalancerListener delta,
             NeutronLoadBalancerListener original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerListenerUpdated(NeutronLoadBalancerListener loadBalancerListener) {
-        logger.info(loadBalancerListener.toString());
+        LOGGER.info(loadBalancerListener.toString());
     }
 
     public int canDeleteNeutronLoadBalancerListener(NeutronLoadBalancerListener loadBalancerListener) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerListenerDeleted(NeutronLoadBalancerListener loadBalancerListener) {
-        logger.info(loadBalancerListener.toString());
+        LOGGER.info(loadBalancerListener.toString());
     }
 }

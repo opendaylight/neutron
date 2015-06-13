@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionAware;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 
@@ -17,32 +19,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECSiteConnectionDummyProvider implements INeutronVPNIPSECSiteConnectionAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIPSECSiteConnectionDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECSiteConnectionDummyProvider.class);
 
     public NeutronVPNIPSECSiteConnectionDummyProvider() {
     }
 
     public int canCreateNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection ikeSiteConnection) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNIPSECSiteConnectionCreated(NeutronVPNIPSECSiteConnection ikeSiteConnection) {
-        logger.info(ikeSiteConnection.toString());
+        LOGGER.info(ikeSiteConnection.toString());
     }
 
     public int canUpdateNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection delta, NeutronVPNIPSECSiteConnection original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNIPSECSiteConnectionUpdated(NeutronVPNIPSECSiteConnection ikeSiteConnection) {
-        logger.info(ikeSiteConnection.toString());
+        LOGGER.info(ikeSiteConnection.toString());
     }
 
     public int canDeleteNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection ikeSiteConnection) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNIPSECSiteConnectionDeleted(NeutronVPNIPSECSiteConnection ikeSiteConnection) {
-        logger.info(ikeSiteConnection.toString());
+        LOGGER.info(ikeSiteConnection.toString());
     }
 }
