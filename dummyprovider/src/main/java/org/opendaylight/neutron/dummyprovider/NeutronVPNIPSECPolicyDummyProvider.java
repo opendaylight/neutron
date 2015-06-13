@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyAware;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 
@@ -17,32 +19,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECPolicyDummyProvider implements INeutronVPNIPSECPolicyAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIPSECPolicyDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyDummyProvider.class);
 
     public NeutronVPNIPSECPolicyDummyProvider() {
     }
 
     public int canCreateNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy ipsecPolicy) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNIPSECPolicyCreated(NeutronVPNIPSECPolicy ipsecPolicy) {
-        logger.info(ipsecPolicy.toString());
+        LOGGER.info(ipsecPolicy.toString());
     }
 
     public int canUpdateNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy delta, NeutronVPNIPSECPolicy original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNIPSECPolicyUpdated(NeutronVPNIPSECPolicy ipsecPolicy) {
-        logger.info(ipsecPolicy.toString());
+        LOGGER.info(ipsecPolicy.toString());
     }
 
     public int canDeleteNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy ipsecPolicy) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNIPSECPolicyDeleted(NeutronVPNIPSECPolicy ipsecPolicy) {
-        logger.info(ipsecPolicy.toString());
+        LOGGER.info(ipsecPolicy.toString());
     }
 }

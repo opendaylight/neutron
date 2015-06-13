@@ -9,6 +9,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronSecurityGroupAware;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 
@@ -17,31 +19,31 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronSecurityGroupDummyProvider implements INeutronSecurityGroupAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityGroupDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupDummyProvider.class);
 
     public NeutronSecurityGroupDummyProvider() { }
 
     public int canCreateNeutronSecurityGroup(NeutronSecurityGroup securityGroup) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSecurityGroupCreated(NeutronSecurityGroup securityGroup) {
-        logger.info(securityGroup.toString());
+        LOGGER.info(securityGroup.toString());
     }
 
     public int canUpdateNeutronSecurityGroup(NeutronSecurityGroup delta, NeutronSecurityGroup original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSecurityGroupUpdated(NeutronSecurityGroup securityGroup) {
-        logger.info(securityGroup.toString());
+        LOGGER.info(securityGroup.toString());
     }
 
     public int canDeleteNeutronSecurityGroup(NeutronSecurityGroup securityGroup) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronSecurityGroupDeleted(NeutronSecurityGroup securityGroup) {
-        logger.info(securityGroup.toString());
+        LOGGER.info(securityGroup.toString());
     }
 }

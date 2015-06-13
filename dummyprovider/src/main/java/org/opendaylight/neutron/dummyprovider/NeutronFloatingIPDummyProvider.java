@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronFloatingIPAware;
 import org.opendaylight.neutron.spi.NeutronFloatingIP;
 
@@ -16,32 +18,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronFloatingIPDummyProvider implements INeutronFloatingIPAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronFloatingIPDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPDummyProvider.class);
 
     public NeutronFloatingIPDummyProvider() {
     }
 
     public int canCreateFloatingIP(NeutronFloatingIP floatingIP) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFloatingIPCreated(NeutronFloatingIP floatingIP) {
-        logger.info(floatingIP.toString());
+        LOGGER.info(floatingIP.toString());
     }
 
     public int canUpdateFloatingIP(NeutronFloatingIP delta, NeutronFloatingIP original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFloatingIPUpdated(NeutronFloatingIP floatingIP) {
-        logger.info(floatingIP.toString());
+        LOGGER.info(floatingIP.toString());
     }
 
     public int canDeleteFloatingIP(NeutronFloatingIP floatingIP) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFloatingIPDeleted(NeutronFloatingIP floatingIP) {
-        logger.info(floatingIP.toString());
+        LOGGER.info(floatingIP.toString());
     }
 }
