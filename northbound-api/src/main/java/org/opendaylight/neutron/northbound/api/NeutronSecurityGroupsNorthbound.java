@@ -9,6 +9,7 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,7 +55,8 @@ import org.slf4j.LoggerFactory;
  */
 @Path ("/security-groups")
 public class NeutronSecurityGroupsNorthbound {
-    static final Logger logger = LoggerFactory.getLogger(NeutronSecurityGroupsNorthbound.class);
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
 
     private NeutronSecurityGroup extractFields(NeutronSecurityGroup o, List<String> fields) {
         return o.extractFields(fields);
@@ -66,10 +68,10 @@ public class NeutronSecurityGroupsNorthbound {
     @GET
     @Produces ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 200, condition = "Operation successful"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 
     public Response listGroups(
             // return fields
@@ -109,7 +111,7 @@ public class NeutronSecurityGroupsNorthbound {
                 }
             }
         }
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronSecurityGroupRequest(ans)).build();
     }
 
@@ -121,11 +123,11 @@ public class NeutronSecurityGroupsNorthbound {
     @GET
     @Produces ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 200, condition = "Operation successful"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showSecurityGroup(@PathParam ("securityGroupUUID") String securityGroupUUID,
                                       // return fields
                                       @QueryParam ("fields") List<String> fields) {
@@ -139,10 +141,10 @@ public class NeutronSecurityGroupsNorthbound {
         }
         if (!fields.isEmpty()) {
             NeutronSecurityGroup ans = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronSecurityGroupRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(new NeutronSecurityGroupRequest(securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID))).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityGroupRequest(securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID))).build();
         }
     }
 
@@ -154,14 +156,14 @@ public class NeutronSecurityGroupsNorthbound {
     @Produces ({MediaType.APPLICATION_JSON})
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 201, condition = "Created"),
-            @ResponseCode (code = 400, condition = "Bad Request"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 403, condition = "Forbidden"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode (code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode (code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
         if (securityGroupInterface == null) {
@@ -185,7 +187,7 @@ public class NeutronSecurityGroupsNorthbound {
                     for (Object instance : instances) {
                         INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
                         int status = service.canCreateNeutronSecurityGroup(singleton);
-                        if (status < 200 || status > 299) {
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                             return Response.status(status).build();
                         }
                     }
@@ -223,7 +225,7 @@ public class NeutronSecurityGroupsNorthbound {
                         for (Object instance : instances) {
                             INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
                             int status = service.canCreateNeutronSecurityGroup(test);
-                            if ((status < 200) || (status > 299)) {
+                            if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
                                 return Response.status(status).build();
                             }
                         }
@@ -250,7 +252,7 @@ public class NeutronSecurityGroupsNorthbound {
                 }
             }
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -262,13 +264,13 @@ public class NeutronSecurityGroupsNorthbound {
     @Produces ({MediaType.APPLICATION_JSON})
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
-            @ResponseCode (code = 200, condition = "Operation successful"),
-            @ResponseCode (code = 400, condition = "Bad Request"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 403, condition = "Forbidden"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode (code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
@@ -302,7 +304,7 @@ public class NeutronSecurityGroupsNorthbound {
                 for (Object instance : instances) {
                     INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
                     int status = service.canUpdateNeutronSecurityGroup(delta, original);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -324,7 +326,7 @@ public class NeutronSecurityGroupsNorthbound {
                 service.neutronSecurityGroupUpdated(updatedSecurityGroup);
             }
         }
-        return Response.status(200).entity(new NeutronSecurityGroupRequest(securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID))).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityGroupRequest(securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID))).build();
     }
 
     /**
@@ -334,12 +336,12 @@ public class NeutronSecurityGroupsNorthbound {
     @Path ("{securityGroupUUID}")
     @DELETE
     @StatusCodes ({
-            @ResponseCode (code = 204, condition = "No Content"),
-            @ResponseCode (code = 401, condition = "Unauthorized"),
-            @ResponseCode (code = 404, condition = "Not Found"),
-            @ResponseCode (code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode (code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
@@ -355,7 +357,7 @@ public class NeutronSecurityGroupsNorthbound {
             throw new ResourceNotFoundException("Security Group UUID does not exist.");
         }
         if (securityGroupInterface.neutronSecurityGroupInUse(securityGroupUUID)) {
-            return Response.status(409).build();
+            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
         }
         NeutronSecurityGroup singleton = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
@@ -364,7 +366,7 @@ public class NeutronSecurityGroupsNorthbound {
                 for (Object instance : instances) {
                     INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
                     int status = service.canDeleteNeutronSecurityGroup(singleton);
-                    if ((status < 200) || (status > 299)) {
+                    if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
                         return Response.status(status).build();
                     }
                 }
@@ -385,6 +387,6 @@ public class NeutronSecurityGroupsNorthbound {
                 service.neutronSecurityGroupDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }
