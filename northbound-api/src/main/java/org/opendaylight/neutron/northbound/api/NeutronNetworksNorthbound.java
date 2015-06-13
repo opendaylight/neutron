@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -60,6 +62,9 @@ public class NeutronNetworksNorthbound {
     @Context
     UriInfo uriInfo;
 
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
+
     private NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -71,10 +76,10 @@ public class NeutronNetworksNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listNetworks(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -137,10 +142,10 @@ public class NeutronNetworksNorthbound {
             // Return a paginated request
             NeutronNetworkRequest request = (NeutronNetworkRequest) PaginatedRequestFactory.createRequest(limit,
                     marker, pageReverse, uriInfo, ans, NeutronNetwork.class);
-            return Response.status(200).entity(request).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(request).build();
         }
 
-    return Response.status(200).entity(new NeutronNetworkRequest(ans)).build();
+    return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronNetworkRequest(ans)).build();
 
     }
 
@@ -152,11 +157,11 @@ public class NeutronNetworksNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showNetwork(
             @PathParam("netUUID") String netUUID,
             // return fields
@@ -172,10 +177,10 @@ public class NeutronNetworksNorthbound {
         }
         if (fields.size() > 0) {
             NeutronNetwork ans = networkInterface.getNetwork(netUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronNetworkRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronNetworkRequest(networkInterface.getNetwork(netUUID))).build();
         }
     }
@@ -187,11 +192,11 @@ public class NeutronNetworksNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronNetwork.class)
     @StatusCodes({
-        @ResponseCode(code = 201, condition = "Created"),
-        @ResponseCode(code = 400, condition = "Bad Request"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createNetworks(final NeutronNetworkRequest input) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
         if (networkInterface == null) {
@@ -214,7 +219,7 @@ public class NeutronNetworksNorthbound {
                     for (Object instance : instances) {
                         INeutronNetworkAware service = (INeutronNetworkAware) instance;
                         int status = service.canCreateNetwork(singleton);
-                        if (status < 200 || status > 299) {
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                             return Response.status(status).build();
                         }
                     }
@@ -258,7 +263,7 @@ public class NeutronNetworksNorthbound {
                         for (Object instance: instances) {
                             INeutronNetworkAware service = (INeutronNetworkAware) instance;
                             int status = service.canCreateNetwork(test);
-                            if (status < 200 || status > 299) {
+                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                                 return Response.status(status).build();
                             }
                         }
@@ -285,7 +290,7 @@ public class NeutronNetworksNorthbound {
                 }
             }
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -296,12 +301,12 @@ public class NeutronNetworksNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 400, condition = "Bad Request"),
-        @ResponseCode(code = 403, condition = "Forbidden"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateNetwork(
             @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
             ) {
@@ -337,7 +342,7 @@ public class NeutronNetworksNorthbound {
                     INeutronNetworkAware service = (INeutronNetworkAware) instance;
                     NeutronNetwork original = networkInterface.getNetwork(netUUID);
                     int status = service.canUpdateNetwork(delta, original);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -357,7 +362,7 @@ public class NeutronNetworksNorthbound {
                         service.neutronNetworkUpdated(updatedSingleton);
                     }
                 }
-                return Response.status(200).entity(
+                return Response.status(HttpURLConnection.HTTP_OK).entity(
                         new NeutronNetworkRequest(networkInterface.getNetwork(netUUID))).build();
     }
 
@@ -367,12 +372,12 @@ public class NeutronNetworksNorthbound {
     @Path("{netUUID}")
     @DELETE
     @StatusCodes({
-        @ResponseCode(code = 204, condition = "No Content"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 409, condition = "Network In Use"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Network In Use"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -398,7 +403,7 @@ public class NeutronNetworksNorthbound {
                 for (Object instance : instances) {
                     INeutronNetworkAware service = (INeutronNetworkAware) instance;
                     int status = service.canDeleteNetwork(singleton);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -416,6 +421,6 @@ public class NeutronNetworksNorthbound {
                 service.neutronNetworkDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }

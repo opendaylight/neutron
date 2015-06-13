@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -62,6 +64,9 @@ public class NeutronPortsNorthbound {
 
     final String mac_regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
 
+    static private final int HTTP_OK_BOTTOM = 200;
+    static private final int HTTP_OK_TOP = 299;
+
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -76,10 +81,10 @@ public class NeutronPortsNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listPorts(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -130,10 +135,10 @@ public class NeutronPortsNorthbound {
             // Return a paginated request
             NeutronPortRequest request = (NeutronPortRequest) PaginatedRequestFactory.createRequest(limit,
                     marker, pageReverse, uriInfo, ans, NeutronPort.class);
-            return Response.status(200).entity(request).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(request).build();
         }
 
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronPortRequest(ans)).build();
     }
 
@@ -145,11 +150,11 @@ public class NeutronPortsNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showPort(
             @PathParam("portUUID") String portUUID,
             // return fields
@@ -164,10 +169,10 @@ public class NeutronPortsNorthbound {
         }
         if (fields.size() > 0) {
             NeutronPort ans = portInterface.getPort(portUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronPortRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronPortRequest(portInterface.getPort(portUUID))).build();
         }
     }
@@ -180,15 +185,15 @@ public class NeutronPortsNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
     @StatusCodes({
-        @ResponseCode(code = 201, condition = "Created"),
-        @ResponseCode(code = 400, condition = "Bad Request"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 403, condition = "Forbidden"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 409, condition = "Conflict"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "MAC generation failure"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "MAC generation failure"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
@@ -266,7 +271,7 @@ public class NeutronPortsNorthbound {
                     for (Object instance : instances) {
                         INeutronPortAware service = (INeutronPortAware) instance;
                         int status = service.canCreatePort(singleton);
-                        if (status < 200 || status > 299) {
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                             return Response.status(status).build();
                         }
                     }
@@ -367,7 +372,7 @@ public class NeutronPortsNorthbound {
                         for (Object instance : instances) {
                             INeutronPortAware service = (INeutronPortAware) instance;
                             int status = service.canCreatePort(test);
-                            if (status < 200 || status > 299) {
+                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                                 return Response.status(status).build();
                             }
                         }
@@ -392,7 +397,7 @@ public class NeutronPortsNorthbound {
                 }
             }
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -404,14 +409,14 @@ public class NeutronPortsNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
     @StatusCodes({
-        @ResponseCode(code = 200, condition = "Operation successful"),
-        @ResponseCode(code = 400, condition = "Bad Request"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 403, condition = "Forbidden"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 409, condition = "Conflict"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updatePort(
             @PathParam("portUUID") String portUUID,
             NeutronPortRequest input
@@ -450,7 +455,7 @@ public class NeutronPortsNorthbound {
                 for (Object instance : instances) {
                     INeutronPortAware service = (INeutronPortAware) instance;
                     int status = service.canUpdatePort(singleton, original);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -498,7 +503,7 @@ public class NeutronPortsNorthbound {
                 service.neutronPortUpdated(updatedPort);
             }
         }
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronPortRequest(updatedPort)).build();
 
     }
@@ -509,12 +514,12 @@ public class NeutronPortsNorthbound {
     @Path("{portUUID}")
     @DELETE
     @StatusCodes({
-        @ResponseCode(code = 204, condition = "No Content"),
-        @ResponseCode(code = 401, condition = "Unauthorized"),
-        @ResponseCode(code = 403, condition = "Forbidden"),
-        @ResponseCode(code = 404, condition = "Not Found"),
-        @ResponseCode(code = 501, condition = "Not Implemented"),
-        @ResponseCode(code = 503, condition = "No providers available") })
+        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
@@ -530,7 +535,7 @@ public class NeutronPortsNorthbound {
         NeutronPort port = portInterface.getPort(portUUID);
         if (port.getDeviceID() != null ||
                 port.getDeviceOwner() != null) {
-            Response.status(403).build();
+            Response.status(HttpURLConnection.HTTP_FORBIDDEN).build();
         }
         NeutronPort singleton = portInterface.getPort(portUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
@@ -539,7 +544,7 @@ public class NeutronPortsNorthbound {
                 for (Object instance : instances) {
                     INeutronPortAware service = (INeutronPortAware) instance;
                     int status = service.canDeletePort(singleton);
-                    if (status < 200 || status > 299) {
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
                 }
@@ -556,6 +561,6 @@ public class NeutronPortsNorthbound {
                 service.neutronPortDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }

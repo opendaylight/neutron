@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -57,6 +59,9 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 @Path("/metering/metering-labels")
 public class NeutronMeteringLabelsNorthbound {
 
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
+
     private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
         return o.extractFields(fields);
     }
@@ -71,10 +76,10 @@ public class NeutronMeteringLabelsNorthbound {
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listMeteringLabels(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -106,7 +111,7 @@ public class NeutronMeteringLabelsNorthbound {
             }
         }
         //TODO: apply pagination to results
-        return Response.status(200).entity(
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronMeteringLabelRequest(ans)).build();
     }
 
@@ -117,12 +122,12 @@ public class NeutronMeteringLabelsNorthbound {
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({
-            @ResponseCode(code = 200, condition = "Operation successful"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 403, condition = "Forbidden"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showMeteringLabel(
             @PathParam("labelUUID") String labelUUID,
             // return fields
@@ -137,10 +142,10 @@ public class NeutronMeteringLabelsNorthbound {
         }
         if (fields.size() > 0) {
             NeutronMeteringLabel ans = labelInterface.getNeutronMeteringLabel(labelUUID);
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronMeteringLabelRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(200).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronMeteringLabelRequest(labelInterface.getNeutronMeteringLabel(labelUUID))).build();
         }
     }
@@ -152,11 +157,11 @@ public class NeutronMeteringLabelsNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(NeutronNetwork.class)
     @StatusCodes({
-            @ResponseCode(code = 201, condition = "Created"),
-            @ResponseCode(code = 400, condition = "Bad Request"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabel(final NeutronMeteringLabelRequest input) {
         INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
         if (meteringLabelInterface == null) {
@@ -177,7 +182,7 @@ public class NeutronMeteringLabelsNorthbound {
                     for (Object instance : instances) {
                         INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
                         int status = service.canCreateMeteringLabel(singleton);
-                        if (status < 200 || status > 299)
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                             return Response.status(status).build();
                     }
                 } else {
@@ -204,7 +209,7 @@ public class NeutronMeteringLabelsNorthbound {
              */
             throw new BadRequestException("Only singleton meteringLabel creates supported");
         }
-        return Response.status(201).entity(input).build();
+        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**
@@ -213,12 +218,12 @@ public class NeutronMeteringLabelsNorthbound {
     @Path("{labelUUID}")
     @DELETE
     @StatusCodes({
-            @ResponseCode(code = 204, condition = "No Content"),
-            @ResponseCode(code = 401, condition = "Unauthorized"),
-            @ResponseCode(code = 404, condition = "Not Found"),
-            @ResponseCode(code = 409, condition = "Conflict"),
-            @ResponseCode(code = 501, condition = "Not Implemented"),
-            @ResponseCode(code = 503, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabel(
             @PathParam("labelUUID") String labelUUID) {
         INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
@@ -239,7 +244,7 @@ public class NeutronMeteringLabelsNorthbound {
                 for (Object instance : instances) {
                     INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
                     int status = service.canDeleteMeteringLabel(singleton);
-                    if (status < 200 || status > 299)
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP)
                         return Response.status(status).build();
                 }
             } else {
@@ -255,6 +260,6 @@ public class NeutronMeteringLabelsNorthbound {
                 service.neutronMeteringLabelDeleted(singleton);
             }
         }
-        return Response.status(204).build();
+        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }
