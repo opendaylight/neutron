@@ -57,7 +57,7 @@ public class NeutronE2ETest {
                         .groupId("org.opendaylight.neutron")
                         .artifactId("neutron-karaf")
                         .type("zip")
-                        .version("0.6.0-SNAPSHOT"))
+                        .versionAsInProject())
                 .karafVersion("3.0.3")
                 .name("Neutron")
                 .unpackDirectory(new File("target/pax"))
