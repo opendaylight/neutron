@@ -25,6 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronSubnet_IPAllocationPool implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private static final int BYTE_LENGTH = 8;
+    private static final int IPV4_DOTTED_QUADS = 4;
+    private static final int IPV4_DOTTED_QUAD_OFFSET = 3;
+    private static final int IPV4_DOTTED_QUAD_MASK = 255;
+
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -89,7 +94,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
         if (inputString != null) {
             String[] parts = inputString.split("\\.");
             for (String part: parts) {
-                ans <<= 8;
+                ans <<= BYTE_LENGTH;
                 ans |= Integer.parseInt(part);
             }
         }
@@ -143,10 +148,10 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
      */
     static String longToIP(long l) {
         int i;
-        String[] parts = new String[4];
-        for (i = 0; i < 4; i++) {
-            parts[3-i] = String.valueOf(l & 255);
-            l >>= 8;
+        String[] parts = new String[IPV4_DOTTED_QUADS];
+        for (i = 0; i < IPV4_DOTTED_QUADS; i++) {
+            parts[IPV4_DOTTED_QUAD_OFFSET-i] = String.valueOf(l & IPV4_DOTTED_QUAD_MASK);
+            l >>= BYTE_LENGTH;
         }
         return join(parts,".");
     }
