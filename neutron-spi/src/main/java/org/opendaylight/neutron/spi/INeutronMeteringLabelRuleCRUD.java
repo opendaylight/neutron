@@ -21,7 +21,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      * @return boolean
      */
 
-    public boolean neutronMeteringLabelRuleExists(String uuid);
+    boolean neutronMeteringLabelRuleExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -33,7 +33,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      *          OpenStackNeutronMeteringLabelRule class
      */
 
-    public NeutronMeteringLabelRule getNeutronMeteringLabelRule(String uuid);
+    NeutronMeteringLabelRule getNeutronMeteringLabelRule(String uuid);
 
     /**
      * Applications call this interface method to return all NeutronMeteringLabelRule objects
@@ -41,7 +41,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules();
+    List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules();
 
     /**
      * Applications call this interface method to add a NeutronMeteringLabelRule object to the
@@ -52,7 +52,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronMeteringLabelRule(NeutronMeteringLabelRule input);
+    boolean addNeutronMeteringLabelRule(NeutronMeteringLabelRule input);
 
     /**
      * Applications call this interface method to remove a Neutron NeutronMeteringLabelRule object to the
@@ -63,7 +63,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronMeteringLabelRule(String uuid);
+    boolean removeNeutronMeteringLabelRule(String uuid);
 
     /**
      * Applications call this interface method to edit a NeutronMeteringLabelRule object
@@ -75,7 +75,7 @@ public interface INeutronMeteringLabelRuleCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronMeteringLabelRule(String uuid, NeutronMeteringLabelRule delta);
+    boolean updateNeutronMeteringLabelRule(String uuid, NeutronMeteringLabelRule delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -86,6 +86,6 @@ public interface INeutronMeteringLabelRuleCRUD {
      * port or not
      */
 
-    public boolean neutronMeteringLabelRuleInUse(String uuid);
+    boolean neutronMeteringLabelRuleInUse(String uuid);
 
 }

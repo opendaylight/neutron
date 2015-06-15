@@ -23,7 +23,7 @@ public interface INeutronSecurityRuleCRUD {
      * @return boolean
      */
 
-    public boolean neutronSecurityRuleExists(String uuid);
+    boolean neutronSecurityRuleExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -34,7 +34,7 @@ public interface INeutronSecurityRuleCRUD {
      * OpenStackSecurity Rule class
      */
 
-    public NeutronSecurityRule getNeutronSecurityRule(String uuid);
+    NeutronSecurityRule getNeutronSecurityRule(String uuid);
 
     /**
      * Applications call this interface method to return all Security Rule objects
@@ -42,7 +42,7 @@ public interface INeutronSecurityRuleCRUD {
      * @return List of OpenStack SecurityRules objects
      */
 
-    public List<NeutronSecurityRule> getAllNeutronSecurityRules();
+    List<NeutronSecurityRule> getAllNeutronSecurityRules();
 
     /**
      * Applications call this interface method to add a Security Rule object to the
@@ -52,7 +52,7 @@ public interface INeutronSecurityRuleCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronSecurityRule(NeutronSecurityRule input);
+    boolean addNeutronSecurityRule(NeutronSecurityRule input);
 
     /**
      * Applications call this interface method to remove a Neutron Security Rule object to the
@@ -62,7 +62,7 @@ public interface INeutronSecurityRuleCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronSecurityRule(String uuid);
+    boolean removeNeutronSecurityRule(String uuid);
 
     /**
      * Applications call this interface method to edit aSecurity Rule object
@@ -72,7 +72,7 @@ public interface INeutronSecurityRuleCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronSecurityRule(String uuid, NeutronSecurityRule delta);
+    boolean updateNeutronSecurityRule(String uuid, NeutronSecurityRule delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -82,6 +82,6 @@ public interface INeutronSecurityRuleCRUD {
      * port or not
      */
 
-    public boolean neutronSecurityRuleInUse(String uuid);
+    boolean neutronSecurityRuleInUse(String uuid);
 
 }

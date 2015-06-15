@@ -25,7 +25,7 @@ public interface INeutronSubnetCRUD {
      * @return boolean
      */
 
-    public boolean subnetExists(String uuid);
+    boolean subnetExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronSubnetCRUD {
      *          OpenStack Subnet class
      */
 
-    public NeutronSubnet getSubnet(String uuid);
+    NeutronSubnet getSubnet(String uuid);
 
     /**
      * Applications call this interface method to return all Subnet objects
@@ -45,7 +45,7 @@ public interface INeutronSubnetCRUD {
      * @return List of OpenStackSubnets objects
      */
 
-    public List<NeutronSubnet> getAllSubnets();
+    List<NeutronSubnet> getAllSubnets();
 
     /**
      * Applications call this interface method to add a Subnet object to the
@@ -56,7 +56,7 @@ public interface INeutronSubnetCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addSubnet(NeutronSubnet input);
+    boolean addSubnet(NeutronSubnet input);
 
     /**
      * Applications call this interface method to remove a Subnet object to the
@@ -67,7 +67,7 @@ public interface INeutronSubnetCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeSubnet(String uuid);
+    boolean removeSubnet(String uuid);
 
     /**
      * Applications call this interface method to edit a Subnet object
@@ -79,7 +79,7 @@ public interface INeutronSubnetCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateSubnet(String uuid, NeutronSubnet delta);
+    boolean updateSubnet(String uuid, NeutronSubnet delta);
 
     /**
      * Applications call this interface method to determine if a Subnet object
@@ -91,5 +91,5 @@ public interface INeutronSubnetCRUD {
      * @return boolean on whether the subnet is in use or not
      */
 
-    public boolean subnetInUse(String subnetUUID);
+    boolean subnetInUse(String subnetUUID);
 }
