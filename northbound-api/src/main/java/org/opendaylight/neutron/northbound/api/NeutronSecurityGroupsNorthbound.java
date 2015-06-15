@@ -223,7 +223,9 @@ public class NeutronSecurityGroupsNorthbound {
                         for (Object instance : instances) {
                             INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
                             int status = service.canCreateNeutronSecurityGroup(test);
-                            if ((status < 200) || (status > 299)) return Response.status(status).build();
+                            if ((status < 200) || (status > 299)) {
+                                return Response.status(status).build();
+                            }
                         }
                     } else {
                         throw new BadRequestException("No providers registered.  Please try again later");
