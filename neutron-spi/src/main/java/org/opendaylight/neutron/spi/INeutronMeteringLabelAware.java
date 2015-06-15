@@ -25,7 +25,7 @@ public interface INeutronMeteringLabelAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateMeteringLabel(NeutronMeteringLabel meteringLabel);
+    int canCreateMeteringLabel(NeutronMeteringLabel meteringLabel);
 
     /**
      * Services provide this interface method for taking action after a network has been created
@@ -33,7 +33,7 @@ public interface INeutronMeteringLabelAware {
      * @param meteringLabel
      *            instance of new Neutron Metering Label object
      */
-    public void neutronMeteringLabelCreated(NeutronMeteringLabel meteringLabel);
+    void neutronMeteringLabelCreated(NeutronMeteringLabel meteringLabel);
 
     /**
      * Services provide this interface method to indicate if the specified
@@ -46,7 +46,7 @@ public interface INeutronMeteringLabelAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteMeteringLabel(NeutronMeteringLabel meteringLabel);
+    int canDeleteMeteringLabel(NeutronMeteringLabel meteringLabel);
 
     /**
      * Services provide this interface method for taking action after a network has been deleted
@@ -54,5 +54,5 @@ public interface INeutronMeteringLabelAware {
      * @param meteringLabel
      *            instance of deleted Neutron Metering Label object
      */
-    public void neutronMeteringLabelDeleted(NeutronMeteringLabel meteringLabel);
+    void neutronMeteringLabelDeleted(NeutronMeteringLabel meteringLabel);
 }

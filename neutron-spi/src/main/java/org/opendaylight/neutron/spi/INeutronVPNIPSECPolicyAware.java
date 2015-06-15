@@ -25,7 +25,7 @@ public interface INeutronVPNIPSECPolicyAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy ipsecPolicy);
+    int canCreateNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy ipsecPolicy);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIPSECPolicy has been created
@@ -33,7 +33,7 @@ public interface INeutronVPNIPSECPolicyAware {
      * @param ipsecPolicy
      *            instance of new NeutronVPNIPSECPolicy object
      */
-    public void neutronVPNIPSECPolicyCreated(NeutronVPNIPSECPolicy ipsecPolicy);
+    void neutronVPNIPSECPolicyCreated(NeutronVPNIPSECPolicy ipsecPolicy);
 
     /**
      * Services provide this interface method to indicate if the
@@ -49,7 +49,7 @@ public interface INeutronVPNIPSECPolicyAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy delta, NeutronVPNIPSECPolicy original);
+    int canUpdateNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy delta, NeutronVPNIPSECPolicy original);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIPSECPolicy has been updated
@@ -57,7 +57,7 @@ public interface INeutronVPNIPSECPolicyAware {
      * @param ipsecPolicy
      *            instance of modified NeutronVPNIPSECPolicy object
      */
-    public void neutronVPNIPSECPolicyUpdated(NeutronVPNIPSECPolicy ipsecPolicy);
+    void neutronVPNIPSECPolicyUpdated(NeutronVPNIPSECPolicy ipsecPolicy);
 
     /**
      * Services provide this interface method to indicate if the specified NeutronVPNIPSECPolicy can be deleted
@@ -69,7 +69,7 @@ public interface INeutronVPNIPSECPolicyAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy ipsecPolicy);
+    int canDeleteNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy ipsecPolicy);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIPSECPolicy has been deleted
@@ -77,5 +77,5 @@ public interface INeutronVPNIPSECPolicyAware {
      * @param ipsecPolicy
      *            instance of deleted NeutronVPNIPSECPolicy object
      */
-    public void neutronVPNIPSECPolicyDeleted(NeutronVPNIPSECPolicy ipsecPolicy);
+    void neutronVPNIPSECPolicyDeleted(NeutronVPNIPSECPolicy ipsecPolicy);
 }

@@ -25,7 +25,7 @@ public interface INeutronPortCRUD {
      * @return boolean
      */
 
-    public boolean portExists(String uuid);
+    boolean portExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronPortCRUD {
      *          OpenStack Port class
      */
 
-    public NeutronPort getPort(String uuid);
+    NeutronPort getPort(String uuid);
 
     /**
      * Applications call this interface method to return all Port objects
@@ -45,7 +45,7 @@ public interface INeutronPortCRUD {
      * @return List of OpenStackPorts objects
      */
 
-    public List<NeutronPort> getAllPorts();
+    List<NeutronPort> getAllPorts();
 
     /**
      * Applications call this interface method to add a Port object to the
@@ -56,7 +56,7 @@ public interface INeutronPortCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addPort(NeutronPort input);
+    boolean addPort(NeutronPort input);
 
     /**
      * Applications call this interface method to remove a Port object to the
@@ -67,7 +67,7 @@ public interface INeutronPortCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removePort(String uuid);
+    boolean removePort(String uuid);
 
     /**
      * Applications call this interface method to edit a Port object
@@ -79,7 +79,7 @@ public interface INeutronPortCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updatePort(String uuid, NeutronPort delta);
+    boolean updatePort(String uuid, NeutronPort delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -90,7 +90,7 @@ public interface INeutronPortCRUD {
      * port or not
      */
 
-    public boolean macInUse(String macAddress);
+    boolean macInUse(String macAddress);
 
     /**
      * Applications call this interface method to retrieve the port associated with
@@ -101,5 +101,5 @@ public interface INeutronPortCRUD {
      * @return OpenStackPorts object if the port exists and null if it does not
      */
 
-    public NeutronPort getGatewayPort(String subnetUUID);
+    NeutronPort getGatewayPort(String subnetUUID);
 }

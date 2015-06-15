@@ -23,14 +23,14 @@ public interface INeutronSecurityRuleAware {
      * results in the create operation being interrupted and the returned status value reflected in the
      * HTTP response.
      */
-    public int canCreateNeutronSecurityRule(NeutronSecurityRule securityRule);
+    int canCreateNeutronSecurityRule(NeutronSecurityRule securityRule);
 
     /**
      * Services provide this interface method for taking action after a security rule has been created
      *
      * @param securityRule instance of new Neutron Security Rule object
      */
-    public void neutronSecurityRuleCreated(NeutronSecurityRule securityRule);
+    void neutronSecurityRuleCreated(NeutronSecurityRule securityRule);
 
     /**
      * Services provide this interface method to indicate if the specified security rule can be changed using the specified
@@ -43,14 +43,14 @@ public interface INeutronSecurityRuleAware {
      * results in the update operation being interrupted and the returned status value reflected in the
      * HTTP response.
      */
-    public int canUpdateNeutronSecurityRule(NeutronSecurityRule delta, NeutronSecurityRule original);
+    int canUpdateNeutronSecurityRule(NeutronSecurityRule delta, NeutronSecurityRule original);
 
     /**
      * Services provide this interface method for taking action after a security rule has been updated
      *
      * @param securityRule instance of modified Neutron Security Rule object
      */
-    public void neutronSecurityRuleUpdated(NeutronSecurityRule securityRule);
+    void neutronSecurityRuleUpdated(NeutronSecurityRule securityRule);
 
     /**
      * Services provide this interface method to indicate if the specified security rule can be deleted
@@ -61,12 +61,12 @@ public interface INeutronSecurityRuleAware {
      * results in the delete operation being interrupted and the returned status value reflected in the
      * HTTP response.
      */
-    public int canDeleteNeutronSecurityRule(NeutronSecurityRule securityRule);
+    int canDeleteNeutronSecurityRule(NeutronSecurityRule securityRule);
 
     /**
      * Services provide this interface method for taking action after a security rule has been deleted
      *
      * @param securityRule instance of deleted Neutron Security Rule object
      */
-    public void neutronSecurityRuleDeleted(NeutronSecurityRule securityRule);
+    void neutronSecurityRuleDeleted(NeutronSecurityRule securityRule);
 }

@@ -13,7 +13,7 @@ package org.opendaylight.neutron.spi;
  */
 public interface INeutronObject {
 
-    public String getID();
+    String getID();
 
-    public void setID(String id);
+    void setID(String id);
 }

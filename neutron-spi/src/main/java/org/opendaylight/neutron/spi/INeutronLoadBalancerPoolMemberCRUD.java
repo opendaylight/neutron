@@ -21,7 +21,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      * @return boolean
      */
 
-    public boolean neutronLoadBalancerPoolMemberExists(String uuid);
+    boolean neutronLoadBalancerPoolMemberExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -33,7 +33,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      *          OpenStackNeutronLoadBalancerPoolMember class
      */
 
-    public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String uuid);
+    NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String uuid);
 
     /**
      * Applications call this interface method to return all NeutronLoadBalancerPoolMember objects
@@ -41,7 +41,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers();
+    List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers();
 
     /**
      * Applications call this interface method to add a NeutronLoadBalancerPoolMember object to the
@@ -52,7 +52,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronLoadBalancerPoolMember(NeutronLoadBalancerPoolMember input);
+    boolean addNeutronLoadBalancerPoolMember(NeutronLoadBalancerPoolMember input);
 
     /**
      * Applications call this interface method to remove a Neutron NeutronLoadBalancerPoolMember object to the
@@ -63,7 +63,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronLoadBalancerPoolMember(String uuid);
+    boolean removeNeutronLoadBalancerPoolMember(String uuid);
 
     /**
      * Applications call this interface method to edit a NeutronLoadBalancerPoolMember object
@@ -75,7 +75,7 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronLoadBalancerPoolMember(String uuid, NeutronLoadBalancerPoolMember delta);
+    boolean updateNeutronLoadBalancerPoolMember(String uuid, NeutronLoadBalancerPoolMember delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -86,6 +86,6 @@ public interface INeutronLoadBalancerPoolMemberCRUD {
      * port or not
      */
 
-    public boolean neutronLoadBalancerPoolMemberInUse(String uuid);
+    boolean neutronLoadBalancerPoolMemberInUse(String uuid);
 
 }

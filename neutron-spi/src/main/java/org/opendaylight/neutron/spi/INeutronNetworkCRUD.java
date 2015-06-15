@@ -25,7 +25,7 @@ public interface INeutronNetworkCRUD {
      * @return boolean
      */
 
-    public boolean networkExists(String uuid);
+    boolean networkExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronNetworkCRUD {
      *          OpenStack Network class
      */
 
-    public NeutronNetwork getNetwork(String uuid);
+    NeutronNetwork getNetwork(String uuid);
 
     /**
      * Applications call this interface method to return all Network objects
@@ -45,7 +45,7 @@ public interface INeutronNetworkCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronNetwork> getAllNetworks();
+    List<NeutronNetwork> getAllNetworks();
 
     /**
      * Applications call this interface method to add a Network object to the
@@ -56,7 +56,7 @@ public interface INeutronNetworkCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNetwork(NeutronNetwork input);
+    boolean addNetwork(NeutronNetwork input);
 
     /**
      * Applications call this interface method to remove a Network object to the
@@ -67,7 +67,7 @@ public interface INeutronNetworkCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNetwork(String uuid);
+    boolean removeNetwork(String uuid);
 
     /**
      * Applications call this interface method to edit a Network object
@@ -79,7 +79,7 @@ public interface INeutronNetworkCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNetwork(String uuid, NeutronNetwork delta);
+    boolean updateNetwork(String uuid, NeutronNetwork delta);
 
     /**
      * Applications call this interface method to determine if a Network object
@@ -91,5 +91,5 @@ public interface INeutronNetworkCRUD {
      * @return boolean on whether the network is in use or not
      */
 
-    public boolean networkInUse(String netUUID);
+    boolean networkInUse(String netUUID);
 }

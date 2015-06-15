@@ -25,7 +25,7 @@ public interface INeutronRouterAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateRouter(NeutronRouter router);
+    int canCreateRouter(NeutronRouter router);
 
     /**
      * Services provide this interface method for taking action after a router has been created
@@ -33,7 +33,7 @@ public interface INeutronRouterAware {
      * @param router
      *            instance of new Neutron Router object
      */
-    public void neutronRouterCreated(NeutronRouter router);
+    void neutronRouterCreated(NeutronRouter router);
 
     /**
      * Services provide this interface method to indicate if the specified router can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronRouterAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateRouter(NeutronRouter delta, NeutronRouter original);
+    int canUpdateRouter(NeutronRouter delta, NeutronRouter original);
 
     /**
      * Services provide this interface method for taking action after a router has been updated
@@ -56,7 +56,7 @@ public interface INeutronRouterAware {
      * @param router
      *            instance of modified Neutron Router object
      */
-    public void neutronRouterUpdated(NeutronRouter router);
+    void neutronRouterUpdated(NeutronRouter router);
 
     /**
      * Services provide this interface method to indicate if the specified router can be deleted
@@ -68,7 +68,7 @@ public interface INeutronRouterAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteRouter(NeutronRouter router);
+    int canDeleteRouter(NeutronRouter router);
 
     /**
      * Services provide this interface method for taking action after a router has been deleted
@@ -76,7 +76,7 @@ public interface INeutronRouterAware {
      * @param router
      *            instance of deleted Router Network object
      */
-    public void neutronRouterDeleted(NeutronRouter router);
+    void neutronRouterDeleted(NeutronRouter router);
 
     /**
      * Services provide this interface method to indicate if the 
@@ -91,7 +91,7 @@ public interface INeutronRouterAware {
      *            results in the attach operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canAttachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface);
+    int canAttachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface);
 
     /**
      * Services provide this interface method for taking action 
@@ -102,7 +102,7 @@ public interface INeutronRouterAware {
      * @param routerInterface
      *            instance of the NeutronRouter_Interface being attached to the router
      */
-    public void neutronRouterInterfaceAttached(NeutronRouter router, NeutronRouter_Interface routerInterface);
+    void neutronRouterInterfaceAttached(NeutronRouter router, NeutronRouter_Interface routerInterface);
 
     /**
      * Services provide this interface method to indicate if the
@@ -117,7 +117,7 @@ public interface INeutronRouterAware {
      *            results in the detach operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDetachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface);
+    int canDetachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface);
 
     /**
      * Services provide this interface method for taking action after an interface has been removed from a router
@@ -127,5 +127,5 @@ public interface INeutronRouterAware {
      * @param routerInterface
      *            instance of the NeutronRouter_Interface being detached from the router
      */
-    public void neutronRouterInterfaceDetached(NeutronRouter router, NeutronRouter_Interface routerInterface);
+    void neutronRouterInterfaceDetached(NeutronRouter router, NeutronRouter_Interface routerInterface);
 }

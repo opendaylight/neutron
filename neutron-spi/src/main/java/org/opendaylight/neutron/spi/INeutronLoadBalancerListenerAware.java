@@ -25,7 +25,7 @@ public interface INeutronLoadBalancerListenerAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronLoadBalancerListener(NeutronLoadBalancerListener loadBalancerListener);
+    int canCreateNeutronLoadBalancerListener(NeutronLoadBalancerListener loadBalancerListener);
 
     /**
      * Services provide this interface method for taking action after a loadBalancerListener has been created
@@ -33,7 +33,7 @@ public interface INeutronLoadBalancerListenerAware {
      * @param loadBalancerListener
      *            instance of new LoadBalancerListener object
      */
-    public void neutronLoadBalancerListenerCreated(NeutronLoadBalancerListener loadBalancerListener);
+    void neutronLoadBalancerListenerCreated(NeutronLoadBalancerListener loadBalancerListener);
 
     /**
      * Services provide this interface method to indicate if the specified loadBalancerListener can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronLoadBalancerListenerAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronLoadBalancerListener(NeutronLoadBalancerListener delta,
+    int canUpdateNeutronLoadBalancerListener(NeutronLoadBalancerListener delta,
             NeutronLoadBalancerListener original);
 
     /**
@@ -57,7 +57,7 @@ public interface INeutronLoadBalancerListenerAware {
      * @param loadBalancerListener
      *            instance of modified LoadBalancerListener object
      */
-    public void neutronLoadBalancerListenerUpdated(NeutronLoadBalancerListener loadBalancerListener);
+    void neutronLoadBalancerListenerUpdated(NeutronLoadBalancerListener loadBalancerListener);
 
     /**
      * Services provide this interface method to indicate if the specified loadBalancerListener can be deleted
@@ -69,7 +69,7 @@ public interface INeutronLoadBalancerListenerAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronLoadBalancerListener(NeutronLoadBalancerListener loadBalancerListener);
+    int canDeleteNeutronLoadBalancerListener(NeutronLoadBalancerListener loadBalancerListener);
 
     /**
      * Services provide this interface method for taking action after a loadBalancerListener has been deleted
@@ -77,5 +77,5 @@ public interface INeutronLoadBalancerListenerAware {
      * @param loadBalancerListener
      *            instance of deleted LoadBalancerListener object
      */
-    public void neutronLoadBalancerListenerDeleted(NeutronLoadBalancerListener loadBalancerListener);
+    void neutronLoadBalancerListenerDeleted(NeutronLoadBalancerListener loadBalancerListener);
 }

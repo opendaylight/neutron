@@ -29,7 +29,7 @@ public interface INeutronFirewallAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronFirewall(NeutronFirewall firewall);
+    int canCreateNeutronFirewall(NeutronFirewall firewall);
 
     /**
      * Services provide this interface method for taking action after a firewall has been created
@@ -41,7 +41,7 @@ public interface INeutronFirewallAware {
      * @param firewall
      *            instance of new Firewall object
      */
-    public void neutronFirewallCreated(NeutronFirewall firewall);
+    void neutronFirewallCreated(NeutronFirewall firewall);
 
     /**
      * Services provide this interface method to indicate if the specified firewall can be changed using the specified
@@ -60,7 +60,7 @@ public interface INeutronFirewallAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronFirewall(NeutronFirewall delta, NeutronFirewall original);
+    int canUpdateNeutronFirewall(NeutronFirewall delta, NeutronFirewall original);
 
     /**
      * Services provide this interface method for taking action after a firewall has been updated
@@ -72,7 +72,7 @@ public interface INeutronFirewallAware {
      * @param firewall
      *            instance of modified Firewall object
      */
-    public void neutronFirewallUpdated(NeutronFirewall firewall);
+    void neutronFirewallUpdated(NeutronFirewall firewall);
 
     /**
      * Services provide this interface method to indicate if the specified firewall can be deleted
@@ -88,7 +88,7 @@ public interface INeutronFirewallAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronFirewall(NeutronFirewall firewall);
+    int canDeleteNeutronFirewall(NeutronFirewall firewall);
 
     /**
      * Services provide this interface method for taking action after a firewall has been deleted
@@ -100,5 +100,5 @@ public interface INeutronFirewallAware {
      * @param firewall
      *            instance of deleted Firewall object
      */
-    public void neutronFirewallDeleted(NeutronFirewall firewall);
+    void neutronFirewallDeleted(NeutronFirewall firewall);
 }

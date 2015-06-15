@@ -25,7 +25,7 @@ public interface INeutronFloatingIPCRUD {
      * @return boolean
      */
 
-    public boolean floatingIPExists(String uuid);
+    boolean floatingIPExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronFloatingIPCRUD {
      *          OpenStack FloatingIP class
      */
 
-    public NeutronFloatingIP getFloatingIP(String uuid);
+    NeutronFloatingIP getFloatingIP(String uuid);
 
     /**
      * Applications call this interface method to return all FloatingIP objects
@@ -45,7 +45,7 @@ public interface INeutronFloatingIPCRUD {
      * @return a Set of OpenStackFloatingIPs objects
      */
 
-    public List<NeutronFloatingIP> getAllFloatingIPs();
+    List<NeutronFloatingIP> getAllFloatingIPs();
 
     /**
      * Applications call this interface method to add a FloatingIP object to the
@@ -56,7 +56,7 @@ public interface INeutronFloatingIPCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addFloatingIP(NeutronFloatingIP input);
+    boolean addFloatingIP(NeutronFloatingIP input);
 
     /**
      * Applications call this interface method to remove a FloatingIP object to the
@@ -67,7 +67,7 @@ public interface INeutronFloatingIPCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeFloatingIP(String uuid);
+    boolean removeFloatingIP(String uuid);
 
     /**
      * Applications call this interface method to edit a FloatingIP object
@@ -79,5 +79,5 @@ public interface INeutronFloatingIPCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta);
+    boolean updateFloatingIP(String uuid, NeutronFloatingIP delta);
 }

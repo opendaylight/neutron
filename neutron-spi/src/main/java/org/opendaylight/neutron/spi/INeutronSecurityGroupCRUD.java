@@ -24,7 +24,7 @@ public interface INeutronSecurityGroupCRUD {
      * @return boolean
      */
 
-    public boolean neutronSecurityGroupExists(String uuid);
+    boolean neutronSecurityGroupExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -35,7 +35,7 @@ public interface INeutronSecurityGroupCRUD {
      * OpenStack Security Group class
      */
 
-    public NeutronSecurityGroup getNeutronSecurityGroup(String uuid);
+    NeutronSecurityGroup getNeutronSecurityGroup(String uuid);
 
     /**
      * Applications call this interface method to return all Security Group objects
@@ -43,7 +43,7 @@ public interface INeutronSecurityGroupCRUD {
      * @return List of OpenStackSecurity Groups objects
      */
 
-    public List<NeutronSecurityGroup> getAllNeutronSecurityGroups();
+    List<NeutronSecurityGroup> getAllNeutronSecurityGroups();
 
     /**
      * Applications call this interface method to add a Security Group object to the
@@ -53,7 +53,7 @@ public interface INeutronSecurityGroupCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronSecurityGroup(NeutronSecurityGroup input);
+    boolean addNeutronSecurityGroup(NeutronSecurityGroup input);
 
     /**
      * Applications call this interface method to remove a Neutron Security Group object to the
@@ -63,7 +63,7 @@ public interface INeutronSecurityGroupCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronSecurityGroup(String uuid);
+    boolean removeNeutronSecurityGroup(String uuid);
 
     /**
      * Applications call this interface method to edit a Security Group object
@@ -73,7 +73,7 @@ public interface INeutronSecurityGroupCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronSecurityGroup(String uuid, NeutronSecurityGroup delta);
+    boolean updateNeutronSecurityGroup(String uuid, NeutronSecurityGroup delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -82,6 +82,6 @@ public interface INeutronSecurityGroupCRUD {
      * @return boolean on whether the Security Groups is already in use
      */
 
-    public boolean neutronSecurityGroupInUse(String uuid);
+    boolean neutronSecurityGroupInUse(String uuid);
 
 }

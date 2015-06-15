@@ -33,7 +33,7 @@ public interface INeutronFirewallCRUD {
      * @return boolean
      */
 
-    public boolean neutronFirewallExists(String uuid);
+    boolean neutronFirewallExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -49,7 +49,7 @@ public interface INeutronFirewallCRUD {
      *          OpenStackFirewall class
      */
 
-    public NeutronFirewall getNeutronFirewall(String uuid);
+    NeutronFirewall getNeutronFirewall(String uuid);
 
     /**
      * Applications call this interface method to return all Firewall objects
@@ -61,7 +61,7 @@ public interface INeutronFirewallCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronFirewall> getAllNeutronFirewalls();
+    List<NeutronFirewall> getAllNeutronFirewalls();
 
     /**
      * Applications call this interface method to add a Firewall object to the
@@ -76,7 +76,7 @@ public interface INeutronFirewallCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronFirewall(NeutronFirewall input);
+    boolean addNeutronFirewall(NeutronFirewall input);
 
     /**
      * Applications call this interface method to remove a Neutron Firewall object to the
@@ -91,7 +91,7 @@ public interface INeutronFirewallCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronFirewall(String uuid);
+    boolean removeNeutronFirewall(String uuid);
 
     /**
      * Applications call this interface method to edit a Firewall object
@@ -107,7 +107,7 @@ public interface INeutronFirewallCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronFirewall(String uuid, NeutronFirewall delta);
+    boolean updateNeutronFirewall(String uuid, NeutronFirewall delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -122,6 +122,6 @@ public interface INeutronFirewallCRUD {
      * port or not
      */
 
-    public boolean neutronFirewallInUse(String uuid);
+    boolean neutronFirewallInUse(String uuid);
 
 }

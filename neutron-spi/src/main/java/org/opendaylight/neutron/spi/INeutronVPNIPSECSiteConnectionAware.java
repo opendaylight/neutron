@@ -25,7 +25,7 @@ public interface INeutronVPNIPSECSiteConnectionAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
+    int canCreateNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIPSECSiteConnection has been created
@@ -33,7 +33,7 @@ public interface INeutronVPNIPSECSiteConnectionAware {
      * @param ipsecSiteConnection
      *            instance of new NeutronVPNIPSECSiteConnection object
      */
-    public void neutronVPNIPSECSiteConnectionCreated(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
+    void neutronVPNIPSECSiteConnectionCreated(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
 
     /**
      * Services provide this interface method to indicate if the
@@ -49,7 +49,7 @@ public interface INeutronVPNIPSECSiteConnectionAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection delta, NeutronVPNIPSECSiteConnection original);
+    int canUpdateNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection delta, NeutronVPNIPSECSiteConnection original);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIPSECSiteConnection has been updated
@@ -57,7 +57,7 @@ public interface INeutronVPNIPSECSiteConnectionAware {
      * @param ipsecSiteConnection
      *            instance of modified NeutronVPNIPSECSiteConnection object
      */
-    public void neutronVPNIPSECSiteConnectionUpdated(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
+    void neutronVPNIPSECSiteConnectionUpdated(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
 
     /**
      * Services provide this interface method to indicate if the specified NeutronVPNIPSECSiteConnection can be deleted
@@ -69,7 +69,7 @@ public interface INeutronVPNIPSECSiteConnectionAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
+    int canDeleteNeutronVPNIPSECSiteConnection(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIPSECSiteConnection has been deleted
@@ -77,5 +77,5 @@ public interface INeutronVPNIPSECSiteConnectionAware {
      * @param ipsecSiteConnection
      *            instance of deleted NeutronVPNIPSECSiteConnection object
      */
-    public void neutronVPNIPSECSiteConnectionDeleted(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
+    void neutronVPNIPSECSiteConnectionDeleted(NeutronVPNIPSECSiteConnection ipsecSiteConnection);
 }

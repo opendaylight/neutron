@@ -25,7 +25,7 @@ public interface INeutronRouterCRUD {
      * @return boolean
      */
 
-    public boolean routerExists(String uuid);
+    boolean routerExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronRouterCRUD {
      *          OpenStack Router class
      */
 
-    public NeutronRouter getRouter(String uuid);
+    NeutronRouter getRouter(String uuid);
 
     /**
      * Applications call this interface method to return all Router objects
@@ -45,7 +45,7 @@ public interface INeutronRouterCRUD {
      * @return List of OpenStackRouters objects
      */
 
-    public List<NeutronRouter> getAllRouters();
+    List<NeutronRouter> getAllRouters();
 
     /**
      * Applications call this interface method to add a Router object to the
@@ -56,7 +56,7 @@ public interface INeutronRouterCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addRouter(NeutronRouter input);
+    boolean addRouter(NeutronRouter input);
 
     /**
      * Applications call this interface method to remove a Router object to the
@@ -67,7 +67,7 @@ public interface INeutronRouterCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeRouter(String uuid);
+    boolean removeRouter(String uuid);
 
     /**
      * Applications call this interface method to edit a Router object
@@ -79,7 +79,7 @@ public interface INeutronRouterCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateRouter(String uuid, NeutronRouter delta);
+    boolean updateRouter(String uuid, NeutronRouter delta);
 
     /**
      * Applications call this interface method to check if a router is in use
@@ -89,5 +89,5 @@ public interface INeutronRouterCRUD {
      * @return boolean on whether the router is in use or not
      */
 
-    public boolean routerInUse(String routerUUID);
+    boolean routerInUse(String routerUUID);
 }
