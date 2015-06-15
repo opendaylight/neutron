@@ -15,7 +15,7 @@ import org.opendaylight.neutron.spi.INeutronObject;
 import java.util.List;
 
 public interface INeutronRequest<T extends INeutronObject> {
-    public T getSingleton();
-    public boolean isSingleton();
-    public List<T> getBulk();
+    T getSingleton();
+    boolean isSingleton();
+    List<T> getBulk();
 }
