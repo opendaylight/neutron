@@ -69,7 +69,7 @@
           <execution>
             <id>pre-test</id>
             <goals>
-              <goal>prepare-agent-integration</goal>
+              <goal>prepare-agent</goal>
             </goals>
           </execution>
           <execution>
