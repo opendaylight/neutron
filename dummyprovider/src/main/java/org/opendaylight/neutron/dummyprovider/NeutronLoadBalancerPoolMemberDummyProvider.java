@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberAware;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
@@ -16,33 +18,33 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerPoolMemberDummyProvider implements INeutronLoadBalancerPoolMemberAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerPoolMemberDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMemberDummyProvider.class);
 
     public NeutronLoadBalancerPoolMemberDummyProvider() {
     }
 
     public int canCreateNeutronLoadBalancerPoolMember(NeutronLoadBalancerPoolMember loadBalancerPoolMember) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerPoolMemberCreated(NeutronLoadBalancerPoolMember loadBalancerPoolMember) {
-        logger.info(loadBalancerPoolMember.toString());
+        LOGGER.info(loadBalancerPoolMember.toString());
     }
 
     public int canUpdateNeutronLoadBalancerPoolMember(NeutronLoadBalancerPoolMember delta,
             NeutronLoadBalancerPoolMember original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerPoolMemberUpdated(NeutronLoadBalancerPoolMember loadBalancerPoolMember) {
-        logger.info(loadBalancerPoolMember.toString());
+        LOGGER.info(loadBalancerPoolMember.toString());
     }
 
     public int canDeleteNeutronLoadBalancerPoolMember(NeutronLoadBalancerPoolMember loadBalancerPoolMember) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerPoolMemberDeleted(NeutronLoadBalancerPoolMember loadBalancerPoolMember) {
-        logger.info(loadBalancerPoolMember.toString());
+        LOGGER.info(loadBalancerPoolMember.toString());
     }
 }

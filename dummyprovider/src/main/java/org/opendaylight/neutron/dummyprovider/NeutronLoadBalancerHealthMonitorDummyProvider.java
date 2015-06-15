@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorAware;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 
@@ -16,34 +18,34 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerHealthMonitorDummyProvider implements INeutronLoadBalancerHealthMonitorAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorDummyProvider.class);
 
     public NeutronLoadBalancerHealthMonitorDummyProvider() {
     }
 
     public int canCreateNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerHealthMonitorCreated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor) {
-        logger.info(loadBalancerHealthMonitor.toString());
+        LOGGER.info(loadBalancerHealthMonitor.toString());
     }
 
     public int canUpdateNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor delta,
             NeutronLoadBalancerHealthMonitor original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerHealthMonitorUpdated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor) {
-        logger.info(loadBalancerHealthMonitor.toString());
+        LOGGER.info(loadBalancerHealthMonitor.toString());
     }
 
     public int canDeleteNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronLoadBalancerHealthMonitorDeleted(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor) {
-        logger.info(loadBalancerHealthMonitor.toString());
+        LOGGER.info(loadBalancerHealthMonitor.toString());
     }
 
 }

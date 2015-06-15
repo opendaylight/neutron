@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronFirewallAware;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 
@@ -16,32 +18,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronFirewallDummyProvider implements INeutronFirewallAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallDummyProvider.class);
 
     public NeutronFirewallDummyProvider() {
     }
 
     public int canCreateNeutronFirewall(NeutronFirewall firewall) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFirewallCreated(NeutronFirewall firewall) {
-        logger.info(firewall.toString());
+        LOGGER.info(firewall.toString());
     }
 
     public int canUpdateNeutronFirewall(NeutronFirewall delta, NeutronFirewall original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronFirewallUpdated(NeutronFirewall firewall) {
-        logger.info(firewall.toString());
+        LOGGER.info(firewall.toString());
     }
 
     public int canDeleteNeutronFirewall(NeutronFirewall firewall) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
   
     public void neutronFirewallDeleted(NeutronFirewall firewall) {
-        logger.info(firewall.toString());
+        LOGGER.info(firewall.toString());
     }
 }
