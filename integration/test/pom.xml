@@ -67,17 +67,44 @@
         </configuration>
         <executions>
           <execution>
-            <id>pre-test</id>
+            <id>pre-integration-test</id>
+            <phase>pre-integration-test</phase>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
+            <configuration>
+              <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
+              <propertyName>failsafeArgLine</propertyName>
+            </configuration>
           </execution>
           <execution>
-            <id>post-test</id>
+            <id>post-integration-test</id>
+            <phase>post-integration-test</phase>
             <goals>
               <goal>report</goal>
             </goals>
-            <phase>test</phase>
+            <configuration>
+              <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${failsafe.version}</version>
+        <executions>
+          <execution>
+            <id>integration-tests</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+            <configuration>
+              <argLine>${failsafeArgLine}</argLine>
+              <skipTests>${skip.integration.tests}</skipTests>
+            </configuration>
           </execution>
         </executions>
       </plugin>
