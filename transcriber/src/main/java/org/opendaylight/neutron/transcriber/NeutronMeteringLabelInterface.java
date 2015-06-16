@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, NeutronMeteringLabel>  implements INeutronMeteringLabelCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabel> meteringLabelDB = new ConcurrentHashMap<String, NeutronMeteringLabel>();
 
     NeutronMeteringLabelInterface(ProviderContext providerContext) {
@@ -55,7 +55,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -85,7 +85,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
             NeutronMeteringLabel meteringLabel = entry.getValue();
             allMeteringLabels.add(meteringLabel);
         }
-        logger.debug("Exiting getAllMeteringLabels, Found {} OpenStackMeteringLabels", allMeteringLabels.size());
+        LOGGER.debug("Exiting getAllMeteringLabels, Found {} OpenStackMeteringLabels", allMeteringLabels.size());
         List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
         ans.addAll(allMeteringLabels);
         return ans;

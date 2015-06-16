@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  */
 
 public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface implements INeutronFirewallPolicyCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
 
     private ConcurrentMap<String, NeutronFirewallPolicy> firewallPolicyDB  = new ConcurrentHashMap<String, NeutronFirewallPolicy>();
 
@@ -61,7 +61,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -77,7 +77,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
     @Override
     public NeutronFirewallPolicy getNeutronFirewallPolicy(String uuid) {
         if (!neutronFirewallPolicyExists(uuid)) {
-            logger.debug("No Firewall Rule Have Been Defined");
+            LOGGER.debug("No Firewall Rule Have Been Defined");
             return null;
         }
         return firewallPolicyDB.get(uuid);
@@ -90,7 +90,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
             NeutronFirewallPolicy firewallPolicy = entry.getValue();
             allFirewallPolicies.add(firewallPolicy);
         }
-        logger.debug("Exiting getFirewallPolicies, Found {} OpenStackFirewallPolicy", allFirewallPolicies.size());
+        LOGGER.debug("Exiting getFirewallPolicies, Found {} OpenStackFirewallPolicy", allFirewallPolicies.size());
         List<NeutronFirewallPolicy> ans = new ArrayList<NeutronFirewallPolicy>();
         ans.addAll(allFirewallPolicies);
         return ans;

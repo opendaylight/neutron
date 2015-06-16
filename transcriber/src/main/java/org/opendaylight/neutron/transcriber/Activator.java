@@ -36,12 +36,8 @@ import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Activator implements BundleActivator {
-    protected static final Logger logger = LoggerFactory
-    .getLogger(Activator.class);
     private List<ServiceRegistration<?>> registrations = new ArrayList<ServiceRegistration<?>>();
     private ProviderContext providerContext;
 

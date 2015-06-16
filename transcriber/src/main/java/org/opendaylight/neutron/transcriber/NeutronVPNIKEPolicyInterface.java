@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePolicy, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIKEPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIKEPolicy>();
 
 
@@ -58,7 +58,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -88,7 +88,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
             NeutronVPNIKEPolicy meteringLabelRule = entry.getValue();
             allVPNIKEPolicies.add(meteringLabelRule);
         }
-        logger.debug("Exiting getAllVPNIKEPolicies, Found {} OpenStackVPNIKEPolicies", allVPNIKEPolicies.size());
+        LOGGER.debug("Exiting getAllVPNIKEPolicies, Found {} OpenStackVPNIKEPolicies", allVPNIKEPolicies.size());
         List<NeutronVPNIKEPolicy> ans = new ArrayList<NeutronVPNIKEPolicy>();
         ans.addAll(allVPNIKEPolicies);
         return ans;
@@ -175,7 +175,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
         if (ikePolicy.getID() != null) {
             ikePolicyBuilder.setUuid(toUuid(ikePolicy.getID()));
         } else {
-            logger.warn("Attempting to write neutron vpnIKEPolicy without UUID");
+            LOGGER.warn("Attempting to write neutron vpnIKEPolicy without UUID");
         }
         return ikePolicyBuilder.build();
     }

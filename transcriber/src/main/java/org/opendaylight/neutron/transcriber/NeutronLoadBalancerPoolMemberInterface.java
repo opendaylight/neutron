@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerPoolMemberInterface extends
         AbstractNeutronInterface<Members, NeutronLoadBalancerPoolMember> implements INeutronLoadBalancerPoolMemberCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerPoolMemberInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMemberInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerPoolMember> loadBalancerPoolMemberDB = new ConcurrentHashMap<String, NeutronLoadBalancerPoolMember>();
 
     NeutronLoadBalancerPoolMemberInterface(ProviderContext providerContext) {
@@ -55,7 +55,7 @@ public class NeutronLoadBalancerPoolMemberInterface extends
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -71,7 +71,7 @@ public class NeutronLoadBalancerPoolMemberInterface extends
     @Override
     public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String uuid) {
         if (!neutronLoadBalancerPoolMemberExists(uuid)) {
-            logger.debug("No LoadBalancerPoolMember Have Been Defined");
+            LOGGER.debug("No LoadBalancerPoolMember Have Been Defined");
             return null;
         }
         return loadBalancerPoolMemberDB.get(uuid);
@@ -84,7 +84,7 @@ public class NeutronLoadBalancerPoolMemberInterface extends
             NeutronLoadBalancerPoolMember loadBalancerPoolMember = entry.getValue();
             allLoadBalancerPoolMembers.add(loadBalancerPoolMember);
         }
-        logger.debug("Exiting getLoadBalancerPoolMembers, Found {} OpenStackLoadBalancerPoolMember",
+        LOGGER.debug("Exiting getLoadBalancerPoolMembers, Found {} OpenStackLoadBalancerPoolMember",
                 allLoadBalancerPoolMembers.size());
         List<NeutronLoadBalancerPoolMember> ans = new ArrayList<NeutronLoadBalancerPoolMember>();
         ans.addAll(allLoadBalancerPoolMembers);

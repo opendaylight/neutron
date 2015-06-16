@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronTranscriberProvider implements BindingAwareProvider, AutoCloseable {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
 
     private BundleContext bundleContext;
 
@@ -19,7 +19,7 @@ public class NeutronTranscriberProvider implements BindingAwareProvider, AutoClo
     private Activator activator;
 
     public NeutronTranscriberProvider(BundleContext bundleContext) {
-        logger.warn("BundleContext set to: {}",bundleContext);
+        LOGGER.warn("BundleContext set to: {}",bundleContext);
         this.bundleContext = bundleContext;
     }
 
@@ -27,10 +27,10 @@ public class NeutronTranscriberProvider implements BindingAwareProvider, AutoClo
     public void onSessionInitiated(ProviderContext providerContext) {
         this.activator = new Activator(providerContext);
         try {
-            logger.warn("BundleContext found to be: {}",bundleContext);
+            LOGGER.warn("BundleContext found to be: {}",bundleContext);
             this.activator.start(bundleContext);
         } catch (Exception e) {
-            logger.warn("Unable to start Neutron Transcriber because: ",e);
+            LOGGER.warn("Unable to start Neutron Transcriber because: ",e);
         }
     }
 

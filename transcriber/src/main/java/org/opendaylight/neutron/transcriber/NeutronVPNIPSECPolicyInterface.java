@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<IpsecPolicy, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIPSECPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIPSECPolicy>();
 
 
@@ -58,7 +58,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -88,7 +88,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
             NeutronVPNIPSECPolicy meteringLabelRule = entry.getValue();
             allVPNIPSECPolicies.add(meteringLabelRule);
         }
-        logger.debug("Exiting getAllVPNIPSECPolicies, Found {} OpenStackVPNIPSECPolicies", allVPNIPSECPolicies.size());
+        LOGGER.debug("Exiting getAllVPNIPSECPolicies, Found {} OpenStackVPNIPSECPolicies", allVPNIPSECPolicies.size());
         List<NeutronVPNIPSECPolicy> ans = new ArrayList<NeutronVPNIPSECPolicy>();
         ans.addAll(allVPNIPSECPolicies);
         return ans;
@@ -175,7 +175,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (ipsecPolicy.getID() != null) {
             ipsecPolicyBuilder.setUuid(toUuid(ipsecPolicy.getID()));
         } else {
-            logger.warn("Attempting to write neutron vpnIPSECPolicy without UUID");
+            LOGGER.warn("Attempting to write neutron vpnIPSECPolicy without UUID");
         }
         return ipsecPolicyBuilder.build();
     }

@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<SecurityGroup,NeutronSecurityGroup> implements INeutronSecurityGroupCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
     private ConcurrentMap<String, NeutronSecurityGroup> securityGroupDB  = new ConcurrentHashMap<String, NeutronSecurityGroup>();
 
 
@@ -60,7 +60,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -76,7 +76,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     @Override
     public NeutronSecurityGroup getNeutronSecurityGroup(String uuid) {
         if (!neutronSecurityGroupExists(uuid)) {
-            logger.debug("No Security Groups Have Been Defined");
+            LOGGER.debug("No Security Groups Have Been Defined");
             return null;
         }
         return securityGroupDB.get(uuid);
@@ -89,7 +89,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
             NeutronSecurityGroup securityGroup = entry.getValue();
             allSecurityGroups.add(securityGroup);
         }
-        logger.debug("Exiting getSecurityGroups, Found {} OpenStackSecurityGroup", allSecurityGroups.size());
+        LOGGER.debug("Exiting getSecurityGroups, Found {} OpenStackSecurityGroup", allSecurityGroups.size());
         List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
         ans.addAll(allSecurityGroups);
         return ans;
@@ -157,7 +157,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (securityGroup.getSecurityGroupUUID() != null) {
             securityGroupBuilder.setUuid(toUuid(securityGroup.getSecurityGroupUUID()));
         } else {
-            logger.warn("Attempting to write neutron securityGroup without UUID");
+            LOGGER.warn("Attempting to write neutron securityGroup without UUID");
         }
 
         return securityGroupBuilder.build();
