@@ -25,7 +25,7 @@ public interface INeutronLoadBalancerCRUD {
      * @return boolean
      */
 
-    public boolean neutronLoadBalancerExists(String uuid);
+    boolean neutronLoadBalancerExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronLoadBalancerCRUD {
      *          OpenStackLoadBalancer class
      */
 
-    public NeutronLoadBalancer getNeutronLoadBalancer(String uuid);
+    NeutronLoadBalancer getNeutronLoadBalancer(String uuid);
 
     /**
      * Applications call this interface method to return all LoadBalancer objects
@@ -45,7 +45,7 @@ public interface INeutronLoadBalancerCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronLoadBalancer> getAllNeutronLoadBalancers();
+    List<NeutronLoadBalancer> getAllNeutronLoadBalancers();
 
     /**
      * Applications call this interface method to add a LoadBalancer object to the
@@ -56,7 +56,7 @@ public interface INeutronLoadBalancerCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronLoadBalancer(NeutronLoadBalancer input);
+    boolean addNeutronLoadBalancer(NeutronLoadBalancer input);
 
     /**
      * Applications call this interface method to remove a Neutron LoadBalancer object to the
@@ -67,7 +67,7 @@ public interface INeutronLoadBalancerCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronLoadBalancer(String uuid);
+    boolean removeNeutronLoadBalancer(String uuid);
 
     /**
      * Applications call this interface method to edit a LoadBalancer object
@@ -79,7 +79,7 @@ public interface INeutronLoadBalancerCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronLoadBalancer(String uuid, NeutronLoadBalancer delta);
+    boolean updateNeutronLoadBalancer(String uuid, NeutronLoadBalancer delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -90,6 +90,6 @@ public interface INeutronLoadBalancerCRUD {
      * port or not
      */
 
-    public boolean neutronLoadBalancerInUse(String uuid);
+    boolean neutronLoadBalancerInUse(String uuid);
 
 }

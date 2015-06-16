@@ -33,7 +33,7 @@ public interface INeutronFirewallRuleAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronFirewallRule(NeutronFirewallRule firewallRule);
+    int canCreateNeutronFirewallRule(NeutronFirewallRule firewallRule);
 
     /**
      * Services provide this interface method for taking action after a firewallRule has been created
@@ -45,7 +45,7 @@ public interface INeutronFirewallRuleAware {
      * @param firewallRule
      *            instance of new Firewall Rule object
      */
-    public void neutronFirewallRuleCreated(NeutronFirewallRule firewallRule);
+    void neutronFirewallRuleCreated(NeutronFirewallRule firewallRule);
 
     /**
      * Services provide this interface method to indicate if the specified firewallRule can be changed using the specified
@@ -64,7 +64,7 @@ public interface INeutronFirewallRuleAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronFirewallRule(NeutronFirewallRule delta, NeutronFirewallRule original);
+    int canUpdateNeutronFirewallRule(NeutronFirewallRule delta, NeutronFirewallRule original);
 
     /**
      * Services provide this interface method for taking action after a firewallRule has been updated
@@ -76,7 +76,7 @@ public interface INeutronFirewallRuleAware {
      * @param firewallRule
      *            instance of modified Firewall Rule object
      */
-    public void neutronFirewallRuleUpdated(NeutronFirewallRule firewallRule);
+    void neutronFirewallRuleUpdated(NeutronFirewallRule firewallRule);
 
     /**
      * Services provide this interface method to indicate if the specified firewallRule can be deleted
@@ -92,7 +92,7 @@ public interface INeutronFirewallRuleAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronFirewallRule(NeutronFirewallRule firewallRule);
+    int canDeleteNeutronFirewallRule(NeutronFirewallRule firewallRule);
 
     /**
      * Services provide this interface method for taking action after a firewallRule has been deleted
@@ -104,5 +104,5 @@ public interface INeutronFirewallRuleAware {
      * @param firewallRule
      *            instance of deleted Firewall Rule object
      */
-    public void neutronFirewallRuleDeleted(NeutronFirewallRule firewallRule);
+    void neutronFirewallRuleDeleted(NeutronFirewallRule firewallRule);
 }

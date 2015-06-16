@@ -33,7 +33,7 @@ public interface INeutronFirewallPolicyAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronFirewallPolicy(NeutronFirewallPolicy firewallPolicy);
+    int canCreateNeutronFirewallPolicy(NeutronFirewallPolicy firewallPolicy);
 
     /**
      * Services provide this interface method for taking action after a firewallPolicy has been created
@@ -45,7 +45,7 @@ public interface INeutronFirewallPolicyAware {
      * @param firewallPolicy
      *            instance of new Firewall Policy object
      */
-    public void neutronFirewallPolicyCreated(NeutronFirewallPolicy firewallPolicy);
+    void neutronFirewallPolicyCreated(NeutronFirewallPolicy firewallPolicy);
 
     /**
      * Services provide this interface method to indicate if the specified firewallPolicy can be changed using the specified
@@ -64,7 +64,7 @@ public interface INeutronFirewallPolicyAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronFirewallPolicy(NeutronFirewallPolicy delta, NeutronFirewallPolicy original);
+    int canUpdateNeutronFirewallPolicy(NeutronFirewallPolicy delta, NeutronFirewallPolicy original);
 
     /**
      * Services provide this interface method for taking action after a firewallPolicy has been updated
@@ -76,7 +76,7 @@ public interface INeutronFirewallPolicyAware {
      * @param firewallPolicy
      *            instance of modified Firewall Policy object
      */
-    public void neutronFirewallPolicyUpdated(NeutronFirewallPolicy firewallPolicy);
+    void neutronFirewallPolicyUpdated(NeutronFirewallPolicy firewallPolicy);
 
     /**
      * Services provide this interface method to indicate if the specified firewallPolicy can be deleted
@@ -92,7 +92,7 @@ public interface INeutronFirewallPolicyAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronFirewallPolicy(NeutronFirewallPolicy firewallPolicy);
+    int canDeleteNeutronFirewallPolicy(NeutronFirewallPolicy firewallPolicy);
 
     /**
      * Services provide this interface method for taking action after a firewallPolicy has been deleted
@@ -104,5 +104,5 @@ public interface INeutronFirewallPolicyAware {
      * @param firewallPolicy
      *            instance of deleted Firewall Policy object
      */
-    public void neutronFirewallPolicyDeleted(NeutronFirewallPolicy firewallPolicy);
+    void neutronFirewallPolicyDeleted(NeutronFirewallPolicy firewallPolicy);
 }

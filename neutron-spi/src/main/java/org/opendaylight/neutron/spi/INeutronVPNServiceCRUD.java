@@ -26,7 +26,7 @@ public interface INeutronVPNServiceCRUD {
      * @return boolean
      */
 
-    public boolean neutronVPNServiceExists(String uuid);
+    boolean neutronVPNServiceExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -38,7 +38,7 @@ public interface INeutronVPNServiceCRUD {
      *         OpenStack VPNService class
      */
 
-    public NeutronVPNService getVPNService(String uuid);
+    NeutronVPNService getVPNService(String uuid);
 
     /**
      * Applications call this interface method to return all VPNService objects
@@ -46,7 +46,7 @@ public interface INeutronVPNServiceCRUD {
      * @return a Set of OpenStackVPNService objects
      */
 
-    public List<NeutronVPNService> getAllVPNService();
+    List<NeutronVPNService> getAllVPNService();
 
     /**
      * Applications call this interface method to add a VPNService object to the
@@ -57,7 +57,7 @@ public interface INeutronVPNServiceCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addVPNService(NeutronVPNService input);
+    boolean addVPNService(NeutronVPNService input);
 
     /**
      * Applications call this interface method to remove a VPNService object to
@@ -68,7 +68,7 @@ public interface INeutronVPNServiceCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeVPNService(String uuid);
+    boolean removeVPNService(String uuid);
 
     /**
      * Applications call this interface method to edit a VPNService object
@@ -80,7 +80,7 @@ public interface INeutronVPNServiceCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateVPNService(String uuid, NeutronVPNService delta);
+    boolean updateVPNService(String uuid, NeutronVPNService delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -91,6 +91,6 @@ public interface INeutronVPNServiceCRUD {
      *         port or not
      */
 
-    public boolean neutronVPNServiceInUse(String uuid);
+    boolean neutronVPNServiceInUse(String uuid);
 
 }

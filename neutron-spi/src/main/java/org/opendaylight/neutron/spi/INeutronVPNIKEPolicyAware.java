@@ -25,7 +25,7 @@ public interface INeutronVPNIKEPolicyAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronVPNIKEPolicy(NeutronVPNIKEPolicy ikePolicy);
+    int canCreateNeutronVPNIKEPolicy(NeutronVPNIKEPolicy ikePolicy);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIKEPolicy has been created
@@ -33,7 +33,7 @@ public interface INeutronVPNIKEPolicyAware {
      * @param ikePolicy
      *            instance of new NeutronVPNIKEPolicy object
      */
-    public void neutronVPNIKEPolicyCreated(NeutronVPNIKEPolicy ikePolicy);
+    void neutronVPNIKEPolicyCreated(NeutronVPNIKEPolicy ikePolicy);
 
     /**
      * Services provide this interface method to indicate if the
@@ -49,7 +49,7 @@ public interface INeutronVPNIKEPolicyAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronVPNIKEPolicy(NeutronVPNIKEPolicy delta, NeutronVPNIKEPolicy original);
+    int canUpdateNeutronVPNIKEPolicy(NeutronVPNIKEPolicy delta, NeutronVPNIKEPolicy original);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIKEPolicy has been updated
@@ -57,7 +57,7 @@ public interface INeutronVPNIKEPolicyAware {
      * @param ikePolicy
      *            instance of modified NeutronVPNIKEPolicy object
      */
-    public void neutronVPNIKEPolicyUpdated(NeutronVPNIKEPolicy ikePolicy);
+    void neutronVPNIKEPolicyUpdated(NeutronVPNIKEPolicy ikePolicy);
 
     /**
      * Services provide this interface method to indicate if the specified NeutronVPNIKEPolicy can be deleted
@@ -69,7 +69,7 @@ public interface INeutronVPNIKEPolicyAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronVPNIKEPolicy(NeutronVPNIKEPolicy ikePolicy);
+    int canDeleteNeutronVPNIKEPolicy(NeutronVPNIKEPolicy ikePolicy);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNIKEPolicy has been deleted
@@ -77,5 +77,5 @@ public interface INeutronVPNIKEPolicyAware {
      * @param ikePolicy
      *            instance of deleted NeutronVPNIKEPolicy object
      */
-    public void neutronVPNIKEPolicyDeleted(NeutronVPNIKEPolicy ikePolicy);
+    void neutronVPNIKEPolicyDeleted(NeutronVPNIKEPolicy ikePolicy);
 }

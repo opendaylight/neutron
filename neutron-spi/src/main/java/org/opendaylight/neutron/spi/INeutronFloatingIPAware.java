@@ -25,7 +25,7 @@ public interface INeutronFloatingIPAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateFloatingIP(NeutronFloatingIP floatingIP);
+    int canCreateFloatingIP(NeutronFloatingIP floatingIP);
 
     /**
      * Services provide this interface method for taking action after a floatingIP has been created
@@ -33,7 +33,7 @@ public interface INeutronFloatingIPAware {
      * @param floatingIP
      *            instance of new Neutron FloatingIP object
      */
-    public void neutronFloatingIPCreated(NeutronFloatingIP floatingIP);
+    void neutronFloatingIPCreated(NeutronFloatingIP floatingIP);
 
     /**
      * Services provide this interface method to indicate if the specified floatingIP can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronFloatingIPAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateFloatingIP(NeutronFloatingIP delta, NeutronFloatingIP original);
+    int canUpdateFloatingIP(NeutronFloatingIP delta, NeutronFloatingIP original);
 
     /**
      * Services provide this interface method for taking action after a floatingIP has been updated
@@ -56,7 +56,7 @@ public interface INeutronFloatingIPAware {
      * @param floatingIP
      *            instance of modified Neutron FloatingIP object
      */
-    public void neutronFloatingIPUpdated(NeutronFloatingIP floatingIP);
+    void neutronFloatingIPUpdated(NeutronFloatingIP floatingIP);
 
     /**
      * Services provide this interface method to indicate if the specified floatingIP can be deleted
@@ -68,7 +68,7 @@ public interface INeutronFloatingIPAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteFloatingIP(NeutronFloatingIP floatingIP);
+    int canDeleteFloatingIP(NeutronFloatingIP floatingIP);
 
     /**
      * Services provide this interface method for taking action after a floatingIP has been deleted
@@ -76,5 +76,5 @@ public interface INeutronFloatingIPAware {
      * @param floatingIP
      *            instance of deleted Neutron FloatingIP object
      */
-    public void neutronFloatingIPDeleted(NeutronFloatingIP floatingIP);
+    void neutronFloatingIPDeleted(NeutronFloatingIP floatingIP);
 }

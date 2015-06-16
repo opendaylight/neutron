@@ -25,7 +25,7 @@ public interface INeutronSubnetAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateSubnet(NeutronSubnet subnet);
+    int canCreateSubnet(NeutronSubnet subnet);
 
     /**
      * Services provide this interface method for taking action after a subnet has been created
@@ -33,7 +33,7 @@ public interface INeutronSubnetAware {
      * @param subnet
      *            instance of new Neutron Subnet object
      */
-    public void neutronSubnetCreated(NeutronSubnet subnet);
+    void neutronSubnetCreated(NeutronSubnet subnet);
 
     /**
      * Services provide this interface method to indicate if the specified subnet can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronSubnetAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateSubnet(NeutronSubnet delta, NeutronSubnet original);
+    int canUpdateSubnet(NeutronSubnet delta, NeutronSubnet original);
 
     /**
      * Services provide this interface method for taking action after a subnet has been updated
@@ -56,7 +56,7 @@ public interface INeutronSubnetAware {
      * @param subnet
      *            instance of modified Neutron Subnet object
      */
-    public void neutronSubnetUpdated(NeutronSubnet subnet);
+    void neutronSubnetUpdated(NeutronSubnet subnet);
 
     /**
      * Services provide this interface method to indicate if the specified subnet can be deleted
@@ -68,7 +68,7 @@ public interface INeutronSubnetAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteSubnet(NeutronSubnet subnet);
+    int canDeleteSubnet(NeutronSubnet subnet);
 
     /**
      * Services provide this interface method for taking action after a subnet has been deleted
@@ -76,6 +76,6 @@ public interface INeutronSubnetAware {
      * @param subnet
      *            instance of deleted Router Subnet object
      */
-    public void neutronSubnetDeleted(NeutronSubnet subnet);
+    void neutronSubnetDeleted(NeutronSubnet subnet);
 
 }

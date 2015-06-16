@@ -33,7 +33,7 @@ public interface INeutronFirewallPolicyCRUD {
      * @return boolean
      */
 
-    public boolean neutronFirewallPolicyExists(String uuid);
+    boolean neutronFirewallPolicyExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -49,7 +49,7 @@ public interface INeutronFirewallPolicyCRUD {
      *          OpenStackFirewallPolicy class
      */
 
-    public NeutronFirewallPolicy getNeutronFirewallPolicy(String uuid);
+    NeutronFirewallPolicy getNeutronFirewallPolicy(String uuid);
 
     /**
      * Applications call this interface method to return all Firewall Policy objects
@@ -61,7 +61,7 @@ public interface INeutronFirewallPolicyCRUD {
      * @return List of OpenStack Firewall Policy objects
      */
 
-    public List<NeutronFirewallPolicy> getAllNeutronFirewallPolicies();
+    List<NeutronFirewallPolicy> getAllNeutronFirewallPolicies();
 
     /**
      * Applications call this interface method to add a Firewall Policy object to the
@@ -76,7 +76,7 @@ public interface INeutronFirewallPolicyCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronFirewallPolicy(NeutronFirewallPolicy input);
+    boolean addNeutronFirewallPolicy(NeutronFirewallPolicy input);
 
     /**
      * Applications call this interface method to remove a Neutron FirewallPolicy object to the
@@ -91,7 +91,7 @@ public interface INeutronFirewallPolicyCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronFirewallPolicy(String uuid);
+    boolean removeNeutronFirewallPolicy(String uuid);
 
     /**
      * Applications call this interface method to edit a FirewallPolicy object
@@ -107,7 +107,7 @@ public interface INeutronFirewallPolicyCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronFirewallPolicy(String uuid, NeutronFirewallPolicy delta);
+    boolean updateNeutronFirewallPolicy(String uuid, NeutronFirewallPolicy delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -122,6 +122,6 @@ public interface INeutronFirewallPolicyCRUD {
      * port or not
      */
 
-    public boolean neutronFirewallPolicyInUse(String uuid);
+    boolean neutronFirewallPolicyInUse(String uuid);
 
 }

@@ -21,7 +21,7 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * @return boolean
      */
 
-    public boolean neutronVPNIPSECSiteConnectionsExists(String policyID);
+    boolean neutronVPNIPSECSiteConnectionsExists(String policyID);
 
     /**
      * Applications call this interface method to return if a particular
@@ -33,7 +33,7 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      *         NeutronVPNIPSECSiteConnection class
      */
 
-    public NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String policyID);
+    NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String policyID);
 
     /**
      * Applications call this interface method to return all
@@ -42,7 +42,7 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * @return List of NeutronVPNIPSECSiteConnection objects
      */
 
-    public List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections();
+    List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections();
 
     /**
      * Applications call this interface method to add a
@@ -53,7 +53,7 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronVPNIPSECSiteConnections(NeutronVPNIPSECSiteConnection input);
+    boolean addNeutronVPNIPSECSiteConnections(NeutronVPNIPSECSiteConnection input);
 
     /**
      * Applications call this interface method to remove a
@@ -64,7 +64,7 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronVPNIPSECSiteConnections(String policyID);
+    boolean removeNeutronVPNIPSECSiteConnections(String policyID);
 
     /**
      * Applications call this interface method to edit a
@@ -78,7 +78,7 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronVPNIPSECSiteConnections(String policyID, NeutronVPNIPSECSiteConnection delta);
+    boolean updateNeutronVPNIPSECSiteConnections(String policyID, NeutronVPNIPSECSiteConnection delta);
 
     /**
      * Applications call this interface method to see if a connection is in use
@@ -88,6 +88,6 @@ public interface INeutronVPNIPSECSiteConnectionsCRUD {
      * @return boolean on whether the connection is already is in use or not
      */
 
-    public boolean neutronVPNIPSECSiteConnectionsInUse(String policyID);
+    boolean neutronVPNIPSECSiteConnectionsInUse(String policyID);
 
 }

@@ -25,7 +25,7 @@ public interface INeutronLoadBalancerPoolCRUD {
      * @return boolean
      */
 
-    public boolean neutronLoadBalancerPoolExists(String uuid);
+    boolean neutronLoadBalancerPoolExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronLoadBalancerPoolCRUD {
      *          OpenStackLoadBalancerPool class
      */
 
-    public NeutronLoadBalancerPool getNeutronLoadBalancerPool(String uuid);
+    NeutronLoadBalancerPool getNeutronLoadBalancerPool(String uuid);
 
     /**
      * Applications call this interface method to return all LoadBalancerPool objects
@@ -45,7 +45,7 @@ public interface INeutronLoadBalancerPoolCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronLoadBalancerPool> getAllNeutronLoadBalancerPools();
+    List<NeutronLoadBalancerPool> getAllNeutronLoadBalancerPools();
 
     /**
      * Applications call this interface method to add a LoadBalancerPool object to the
@@ -56,7 +56,7 @@ public interface INeutronLoadBalancerPoolCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronLoadBalancerPool(NeutronLoadBalancerPool input);
+    boolean addNeutronLoadBalancerPool(NeutronLoadBalancerPool input);
 
     /**
      * Applications call this interface method to remove a Neutron LoadBalancerPool object to the
@@ -67,7 +67,7 @@ public interface INeutronLoadBalancerPoolCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronLoadBalancerPool(String uuid);
+    boolean removeNeutronLoadBalancerPool(String uuid);
 
     /**
      * Applications call this interface method to edit a LoadBalancerPool object
@@ -79,7 +79,7 @@ public interface INeutronLoadBalancerPoolCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronLoadBalancerPool(String uuid, NeutronLoadBalancerPool delta);
+    boolean updateNeutronLoadBalancerPool(String uuid, NeutronLoadBalancerPool delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -90,6 +90,6 @@ public interface INeutronLoadBalancerPoolCRUD {
      * port or not
      */
 
-    public boolean neutronLoadBalancerPoolInUse(String uuid);
+    boolean neutronLoadBalancerPoolInUse(String uuid);
 
 }

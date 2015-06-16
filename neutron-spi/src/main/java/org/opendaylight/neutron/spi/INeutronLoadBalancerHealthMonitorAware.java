@@ -25,7 +25,7 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
+    int canCreateNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 
     /**
      * Services provide this interface method for taking action after a loadBalancerHealthMonitor has been created
@@ -33,7 +33,7 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      * @param loadBalancerHealthMonitor
      *            instance of new LoadBalancerHealthMonitor object
      */
-    public void neutronLoadBalancerHealthMonitorCreated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
+    void neutronLoadBalancerHealthMonitorCreated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 
     /**
      * Services provide this interface method to indicate if the specified loadBalancerHealthMonitor can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor delta,
+    int canUpdateNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor delta,
             NeutronLoadBalancerHealthMonitor original);
 
     /**
@@ -57,7 +57,7 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      * @param loadBalancerHealthMonitor
      *            instance of modified LoadBalancerHealthMonitor object
      */
-    public void neutronLoadBalancerHealthMonitorUpdated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
+    void neutronLoadBalancerHealthMonitorUpdated(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 
     /**
      * Services provide this interface method to indicate if the specified loadBalancerHealthMonitor can be deleted
@@ -69,7 +69,7 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
+    int canDeleteNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 
     /**
      * Services provide this interface method for taking action after a loadBalancerHealthMonitor has been deleted
@@ -77,5 +77,5 @@ public interface INeutronLoadBalancerHealthMonitorAware {
      * @param loadBalancerHealthMonitor
      *            instance of deleted LoadBalancerHealthMonitor object
      */
-    public void neutronLoadBalancerHealthMonitorDeleted(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
+    void neutronLoadBalancerHealthMonitorDeleted(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor);
 }

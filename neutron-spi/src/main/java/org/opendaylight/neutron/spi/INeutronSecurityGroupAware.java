@@ -23,14 +23,14 @@ public interface INeutronSecurityGroupAware {
      * results in the create operation being interrupted and the returned status value reflected in the
      * HTTP response.
      */
-    public int canCreateNeutronSecurityGroup(NeutronSecurityGroup securityGroup);
+    int canCreateNeutronSecurityGroup(NeutronSecurityGroup securityGroup);
 
     /**
      * Services provide this interface method for taking action after a security group has been created
      *
      * @param securityGroup instance of new Neutron Security Group object
      */
-    public void neutronSecurityGroupCreated(NeutronSecurityGroup securityGroup);
+    void neutronSecurityGroupCreated(NeutronSecurityGroup securityGroup);
 
     /**
      * Services provide this interface method to indicate if the specified security group can be changed using the specified
@@ -43,14 +43,14 @@ public interface INeutronSecurityGroupAware {
      * results in the update operation being interrupted and the returned status value reflected in the
      * HTTP response.
      */
-    public int canUpdateNeutronSecurityGroup(NeutronSecurityGroup delta, NeutronSecurityGroup original);
+    int canUpdateNeutronSecurityGroup(NeutronSecurityGroup delta, NeutronSecurityGroup original);
 
     /**
      * Services provide this interface method for taking action after a security group has been updated
      *
      * @param securityGroup instance of modified Neutron Security Group object
      */
-    public void neutronSecurityGroupUpdated(NeutronSecurityGroup securityGroup);
+    void neutronSecurityGroupUpdated(NeutronSecurityGroup securityGroup);
 
     /**
      * Services provide this interface method to indicate if the specified security group can be deleted
@@ -61,12 +61,12 @@ public interface INeutronSecurityGroupAware {
      * results in the delete operation being interrupted and the returned status value reflected in the
      * HTTP response.
      */
-    public int canDeleteNeutronSecurityGroup(NeutronSecurityGroup securityGroup);
+    int canDeleteNeutronSecurityGroup(NeutronSecurityGroup securityGroup);
 
     /**
      * Services provide this interface method for taking action after a security group has been deleted
      *
      * @param securityGroup instance of deleted Neutron Security Group object
      */
-    public void neutronSecurityGroupDeleted(NeutronSecurityGroup securityGroup);
+    void neutronSecurityGroupDeleted(NeutronSecurityGroup securityGroup);
 }
