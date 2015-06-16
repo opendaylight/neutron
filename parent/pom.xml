@@ -90,6 +90,18 @@
           <artifactId>maven-bundle-plugin</artifactId>
           <version>${maven.bundle.version}</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven.surefire.version}</version>
+          <configuration>
+            <argLine>${surefireArgLine}</argLine>
+            <skipTests>${skip.unit.tests}</skipTests>
+            <excludes>
+               <exclude>**/IT*.java</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -107,12 +119,20 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
+            <configuration>
+              <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+              <propertyName>surefireArgLine</propertyName>
+            </configuration>
           </execution>
           <execution>
             <id>post-test</id>
             <goals>
               <goal>report</goal>
             </goals>
+            <configuration>
+                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+            </configuration>
             <phase>test</phase>
           </execution>
         </executions>

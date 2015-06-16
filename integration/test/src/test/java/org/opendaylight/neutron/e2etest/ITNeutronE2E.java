@@ -37,7 +37,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
 
 @RunWith(PaxExam.class)
-public class NeutronE2ETest {
+public class ITNeutronE2E {
 
     @Inject
     private BundleContext bundleContext;
