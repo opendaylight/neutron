@@ -70,7 +70,7 @@
             <id>pre-integration-test</id>
             <phase>pre-integration-test</phase>
             <goals>
-              <goal>prepare-agent</goal>
+              <goal>prepare-agent-integration</goal>
             </goals>
             <configuration>
               <destFile>${project.build.directory}/coverage-reports/jacoco-it.exec</destFile>
@@ -81,9 +81,18 @@
             <id>post-integration-test</id>
             <phase>post-integration-test</phase>
             <goals>
-              <goal>report</goal>
+              <goal>report-integration</goal>
             </goals>
             <configuration>
+              <includes>
+                <include>${project.build.directory}/../../**/classes</include>
+              </includes>
+              <excludes>
+                <exclude>**/gen/**</exclude>
+                <exclude>**/generated-sources/**</exclude>
+                <exclude>**/yang-gen**</exclude>
+                <exclude>**/pax/**</exclude>
+              </excludes>
               <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
               <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
             </configuration>
