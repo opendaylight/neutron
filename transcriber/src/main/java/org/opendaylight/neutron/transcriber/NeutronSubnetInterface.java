@@ -46,7 +46,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, NeutronSubnet> implements INeutronSubnetCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronSubnetInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
     private ConcurrentMap<String, NeutronSubnet> subnetDB  = new ConcurrentHashMap<String, NeutronSubnet>();
 
 
@@ -73,7 +73,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -104,7 +104,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
             NeutronSubnet subnet = entry.getValue();
             allSubnets.add(subnet);
         }
-        logger.debug("Exiting getAllSubnets, Found {} OpenStackSubnets", allSubnets.size());
+        LOGGER.debug("Exiting getAllSubnets, Found {} OpenStackSubnets", allSubnets.size());
         List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
         ans.addAll(allSubnets);
         return ans;
@@ -195,7 +195,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         }
                     }
                     if (! foundMatch) {
-                        logger.warn("Unable to find Ipv6RaMode value for {}", subnet.getIpV6RaMode());
+                        LOGGER.warn("Unable to find Ipv6RaMode value for {}", subnet.getIpV6RaMode());
                     }
                 }
                 if (subnet.getIpV6AddressMode() != null) {
@@ -208,7 +208,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         }
                     }
                     if (! foundMatch) {
-                        logger.warn("Unable to find IpV6AddressMode value for {}", subnet.getIpV6AddressMode());
+                        LOGGER.warn("Unable to find IpV6AddressMode value for {}", subnet.getIpV6AddressMode());
                     }
                 }
                 subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
@@ -235,7 +235,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                 if (subnet.getID() != null) {
                         subnetBuilder.setUuid(toUuid(subnet.getID()));
                 } else {
-                        logger.warn("Attempting to write neutron subnet without UUID");
+                        LOGGER.warn("Attempting to write neutron subnet without UUID");
                 }
                 return subnetBuilder.build();
         }

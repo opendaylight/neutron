@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnService,NeutronVPNService> implements INeutronVPNServiceCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
     private ConcurrentMap<String, NeutronVPNService> VPNServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
 
 
@@ -54,7 +54,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -70,7 +70,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
     @Override
     public NeutronVPNService getVPNService(String uuid) {
         if (!neutronVPNServiceExists(uuid)) {
-            logger.debug("No VPNService Have Been Defined");
+            LOGGER.debug("No VPNService Have Been Defined");
             return null;
         }
         return VPNServiceDB.get(uuid);
@@ -83,7 +83,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
             NeutronVPNService VPNService = entry.getValue();
             allVPNService.add(VPNService);
         }
-        logger.debug("Exiting getVPNService, Found {} OpenStackVPNService", allVPNService.size());
+        LOGGER.debug("Exiting getVPNService, Found {} OpenStackVPNService", allVPNService.size());
         List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
         ans.addAll(allVPNService);
         return ans;
@@ -152,7 +152,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
         if (vpnService.getID() != null) {
             vpnServiceBuilder.setUuid(toUuid(vpnService.getID()));
         } else {
-            logger.warn("Attempting to write neutron vpnService without UUID");
+            LOGGER.warn("Attempting to write neutron vpnService without UUID");
         }
         return vpnServiceBuilder.build();
     }

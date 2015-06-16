@@ -55,7 +55,6 @@ import org.slf4j.LoggerFactory;
  */
 @Path("/healthmonitors")
 public class Li_NeutronLoadBalancerHealthMonitorNorthbound {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancer.class);
 
     private NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
         return o.extractFields(fields);

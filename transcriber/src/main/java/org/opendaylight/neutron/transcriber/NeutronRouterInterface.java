@@ -36,7 +36,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, NeutronRouter> implements INeutronRouterCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronRouterInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     private ConcurrentMap<String, NeutronRouter> routerDB  = new ConcurrentHashMap<String, NeutronRouter>();
     // methods needed for creating caches
 
@@ -64,7 +64,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -95,7 +95,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
             NeutronRouter router = entry.getValue();
             allRouters.add(router);
         }
-        logger.debug("Exiting getAllRouters, Found {} Routers", allRouters.size());
+        LOGGER.debug("Exiting getAllRouters, Found {} Routers", allRouters.size());
         List<NeutronRouter> ans = new ArrayList<NeutronRouter>();
         ans.addAll(allRouters);
         return ans;
@@ -200,7 +200,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
         if (router.getID() != null) {
             routerBuilder.setUuid(toUuid(router.getID()));
         } else {
-            logger.warn("Attempting to write neutron router without UUID");
+            LOGGER.warn("Attempting to write neutron router without UUID");
         }
         return routerBuilder.build();
     }

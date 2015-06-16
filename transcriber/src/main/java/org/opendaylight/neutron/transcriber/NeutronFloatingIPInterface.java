@@ -38,7 +38,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, NeutronFloatingIP> implements INeutronFloatingIPCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     private ConcurrentMap<String, NeutronFloatingIP> floatingIPDB  = new ConcurrentHashMap<String, NeutronFloatingIP>();
 
@@ -67,7 +67,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -97,7 +97,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             NeutronFloatingIP floatingip = entry.getValue();
             allIPs.add(floatingip);
         }
-        logger.debug("Exiting getAllFloatingIPs, Found {} FloatingIPs", allIPs.size());
+        LOGGER.debug("Exiting getAllFloatingIPs, Found {} FloatingIPs", allIPs.size());
         List<NeutronFloatingIP> ans = new ArrayList<NeutronFloatingIP>();
         ans.addAll(allIPs);
         return ans;
@@ -221,7 +221,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             floatingipBuilder.setUuid(toUuid(floatingIp.getFloatingIPUUID()));
         }
         else {
-            logger.warn("Attempting to write neutron floating IP without UUID");
+            LOGGER.warn("Attempting to write neutron floating IP without UUID");
         }
         return floatingipBuilder.build();
     }

@@ -18,7 +18,7 @@ import com.google.common.base.Predicates;
 import com.google.common.util.concurrent.CheckedFuture;
 
 public abstract class AbstractNeutronInterface<T extends DataObject,S> implements AutoCloseable {
-    private static final Logger logger = LoggerFactory.getLogger(AbstractNeutronInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
     private static final int DEDASHED_UUID_DIV1 = 8;
@@ -55,7 +55,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            logger.warn("Transation failed ",e);
+            LOGGER.warn("Transation failed ",e);
             return false;
         }
         return true;
@@ -70,7 +70,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            logger.warn("Transation failed ",e);
+            LOGGER.warn("Transation failed ",e);
             return false;
         }
         return true;

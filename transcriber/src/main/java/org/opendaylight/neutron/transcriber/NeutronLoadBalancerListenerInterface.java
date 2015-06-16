@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listeners, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerListener> loadBalancerListenerDB  = new ConcurrentHashMap<String, NeutronLoadBalancerListener>();
 
 
@@ -59,7 +59,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -75,7 +75,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     @Override
     public NeutronLoadBalancerListener getNeutronLoadBalancerListener(String uuid) {
         if (!neutronLoadBalancerListenerExists(uuid)) {
-            logger.debug("No LoadBalancerListener Have Been Defined");
+            LOGGER.debug("No LoadBalancerListener Have Been Defined");
             return null;
         }
         return loadBalancerListenerDB.get(uuid);
@@ -88,7 +88,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             NeutronLoadBalancerListener loadBalancerListener = entry.getValue();
             allLoadBalancerListeners.add(loadBalancerListener);
         }
-        logger.debug("Exiting getLoadBalancerListeners, Found {} OpenStackLoadBalancerListener", allLoadBalancerListeners.size());
+        LOGGER.debug("Exiting getLoadBalancerListeners, Found {} OpenStackLoadBalancerListener", allLoadBalancerListeners.size());
         List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
         ans.addAll(allLoadBalancerListeners);
         return ans;
@@ -179,7 +179,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (listeners.getLoadBalancerListenerID() != null) {
             listenersBuilder.setUuid(toUuid(listeners.getLoadBalancerListenerID()));
         } else {
-            logger.warn("Attempting to write neutron load balancer listener without UUID");
+            LOGGER.warn("Attempting to write neutron load balancer listener without UUID");
         }
         return listenersBuilder.build();
     }
