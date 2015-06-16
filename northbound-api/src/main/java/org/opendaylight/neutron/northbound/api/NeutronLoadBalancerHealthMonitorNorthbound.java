@@ -33,8 +33,6 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Neutron Northbound REST APIs for Load Balancer HealthMonitor.<br>

@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabelRule> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronMeteringLabelRule>();
 
     NeutronMeteringLabelRuleInterface(ProviderContext providerContext) {
@@ -57,7 +57,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -87,7 +87,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             NeutronMeteringLabelRule meteringLabelRule = entry.getValue();
             allMeteringLabelRules.add(meteringLabelRule);
         }
-        logger.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules",
+        LOGGER.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules",
                 allMeteringLabelRules.size());
         List<NeutronMeteringLabelRule> ans = new ArrayList<NeutronMeteringLabelRule>();
         ans.addAll(allMeteringLabelRules);

@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pools, NeutronLoadBalancerPool> implements INeutronLoadBalancerPoolCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerPool> loadBalancerPoolDB = new ConcurrentHashMap<String, NeutronLoadBalancerPool>();
 
 
@@ -62,7 +62,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -78,7 +78,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     @Override
     public NeutronLoadBalancerPool getNeutronLoadBalancerPool(String uuid) {
         if (!neutronLoadBalancerPoolExists(uuid)) {
-            logger.debug("No LoadBalancerPool has Been Defined");
+            LOGGER.debug("No LoadBalancerPool has Been Defined");
             return null;
         }
         return loadBalancerPoolDB.get(uuid);
@@ -91,7 +91,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             NeutronLoadBalancerPool loadBalancerPool = entry.getValue();
             allLoadBalancerPools.add(loadBalancerPool);
         }
-        logger.debug("Exiting getLoadBalancerPools, Found {} OpenStackLoadBalancerPool", allLoadBalancerPools.size());
+        LOGGER.debug("Exiting getLoadBalancerPools, Found {} OpenStackLoadBalancerPool", allLoadBalancerPools.size());
         List<NeutronLoadBalancerPool> ans = new ArrayList<NeutronLoadBalancerPool>();
         ans.addAll(allLoadBalancerPools);
         return ans;
@@ -194,7 +194,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         if (pools.getLoadBalancerPoolID() != null) {
             poolsBuilder.setUuid(toUuid(pools.getLoadBalancerPoolID()));
         } else {
-            logger.warn("Attempting to write neutron load balancer pool without UUID");
+            LOGGER.warn("Attempting to write neutron load balancer pool without UUID");
         }
         return poolsBuilder.build();
     }

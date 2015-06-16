@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 
 
 public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
     private ConcurrentMap<String, NeutronSecurityRule> securityRuleDB = new ConcurrentHashMap<String, NeutronSecurityRule>();
 
 
@@ -62,7 +62,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -108,7 +108,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     @Override
     public NeutronSecurityRule getNeutronSecurityRule(String uuid) {
         if (!neutronSecurityRuleExists(uuid)) {
-            logger.debug("No Security Rules Have Been Defined");
+            LOGGER.debug("No Security Rules Have Been Defined");
             return null;
         }
         return securityRuleDB.get(uuid);
@@ -121,7 +121,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             NeutronSecurityRule securityRule = entry.getValue();
             allSecurityRules.add(securityRule);
         }
-        logger.debug("Exiting getSecurityRule, Found {} OpenStackSecurityRule", allSecurityRules.size());
+        LOGGER.debug("Exiting getSecurityRule, Found {} OpenStackSecurityRule", allSecurityRules.size());
         List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
         ans.addAll(allSecurityRules);
         return ans;
@@ -185,7 +185,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
                 }
             }
             if (!foundMatch) {
-                logger.warn("Unable to find direction value for {}", securityRule.getSecurityRuleDirection());
+                LOGGER.warn("Unable to find direction value for {}", securityRule.getSecurityRuleDirection());
             }
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
@@ -208,7 +208,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
                 }
             }
             if (!foundMatch) {
-                logger.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
+                LOGGER.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
             }
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
@@ -221,7 +221,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
                 }
             }
             if (!foundMatch) {
-                logger.warn("Unable to find ethertype value for {}", securityRule.getSecurityRuleEthertype());
+                LOGGER.warn("Unable to find ethertype value for {}", securityRule.getSecurityRuleEthertype());
             }
         }
         if (securityRule.getSecurityRulePortMin() != null) {
@@ -233,7 +233,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (securityRule.getSecurityRuleUUID() != null) {
             securityRuleBuilder.setId(toUuid(securityRule.getSecurityRuleUUID()));
         } else {
-            logger.warn("Attempting to write neutron securityRule without UUID");
+            LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }
         return securityRuleBuilder.build();
     }

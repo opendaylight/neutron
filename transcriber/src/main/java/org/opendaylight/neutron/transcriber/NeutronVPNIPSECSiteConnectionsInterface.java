@@ -29,7 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<IpsecSiteConnection, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIPSECSiteConnection> neutronVPNIPSECSiteConnectionDB = new ConcurrentHashMap<String, NeutronVPNIPSECSiteConnection>();
 
 
@@ -55,7 +55,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -85,7 +85,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             NeutronVPNIPSECSiteConnection meteringLabelRule = entry.getValue();
             allNeutronVPNIPSECSiteConnections.add(meteringLabelRule);
         }
-        logger.debug("Exiting getAllNeutronVPNIPSECSiteConnections, Found {} OpenStackVPNIPSECSiteConnections", allNeutronVPNIPSECSiteConnections.size());
+        LOGGER.debug("Exiting getAllNeutronVPNIPSECSiteConnections, Found {} OpenStackVPNIPSECSiteConnections", allNeutronVPNIPSECSiteConnections.size());
         List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
         ans.addAll(allNeutronVPNIPSECSiteConnections);
         return ans;
@@ -196,7 +196,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         if (ipsecSiteConnection.getID() != null) {
             ipsecSiteConnectionBuilder.setUuid(toUuid(ipsecSiteConnection.getID()));
         } else {
-            logger.warn("Attempting to write neutron vpnIPSECSiteConnection without UUID");
+            LOGGER.warn("Attempting to write neutron vpnIPSECSiteConnection without UUID");
         }
         return ipsecSiteConnectionBuilder.build();
     }

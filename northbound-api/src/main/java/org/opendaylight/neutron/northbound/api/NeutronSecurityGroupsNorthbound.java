@@ -33,8 +33,6 @@ import org.opendaylight.neutron.spi.INeutronSecurityGroupAware;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Neutron Northbound REST APIs for Security Group.<br>
