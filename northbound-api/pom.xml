@@ -53,6 +53,7 @@
         <configuration>
           <instructions>
             <Import-Package>
+              org.eclipse.jetty.servlets,
               org.eclipse.persistence.jaxb.rs,
               com.sun.jersey.spi.container.servlet,
               javax.ws.rs,
