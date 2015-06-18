@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentMap;
 
 public class NeutronFirewallInterface extends AbstractNeutronInterface implements INeutronFirewallCRUD {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronFirewallInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
     private ConcurrentMap<String, NeutronFirewall> firewallDB  = new ConcurrentHashMap<String, NeutronFirewall>();
 
@@ -62,7 +62,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -78,7 +78,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
     @Override
     public NeutronFirewall getNeutronFirewall(String uuid) {
         if (!neutronFirewallExists(uuid)) {
-            logger.debug("No Firewall Have Been Defined");
+            LOGGER.debug("No Firewall Have Been Defined");
             return null;
         }
         return firewallDB.get(uuid);
@@ -91,7 +91,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
             NeutronFirewall firewall = entry.getValue();
             allFirewalls.add(firewall);
         }
-        logger.debug("Exiting getFirewalls, Found {} OpenStackFirewall", allFirewalls.size());
+        LOGGER.debug("Exiting getFirewalls, Found {} OpenStackFirewall", allFirewalls.size());
         List<NeutronFirewall> ans = new ArrayList<NeutronFirewall>();
         ans.addAll(allFirewalls);
         return ans;

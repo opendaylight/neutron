@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancer> loadBalancerDB  = new ConcurrentHashMap<String, NeutronLoadBalancer>();
 
 
@@ -57,7 +57,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -73,7 +73,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     @Override
     public NeutronLoadBalancer getNeutronLoadBalancer(String uuid) {
         if (!neutronLoadBalancerExists(uuid)) {
-            logger.debug("No LoadBalancer Have Been Defined");
+            LOGGER.debug("No LoadBalancer Have Been Defined");
             return null;
         }
         return loadBalancerDB.get(uuid);
@@ -86,7 +86,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
             NeutronLoadBalancer loadBalancer = entry.getValue();
             allLoadBalancers.add(loadBalancer);
         }
-        logger.debug("Exiting getLoadBalancers, Found {} OpenStackLoadBalancer", allLoadBalancers.size());
+        LOGGER.debug("Exiting getLoadBalancers, Found {} OpenStackLoadBalancer", allLoadBalancers.size());
         List<NeutronLoadBalancer> ans = new ArrayList<NeutronLoadBalancer>();
         ans.addAll(allLoadBalancers);
         return ans;
@@ -166,7 +166,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (loadBalancer.getLoadBalancerID() != null) {
             loadBalancersBuilder.setUuid(toUuid(loadBalancer.getLoadBalancerID()));
         } else {
-            logger.warn("Attempting to write neutron load balancer without UUID");
+            LOGGER.warn("Attempting to write neutron load balancer without UUID");
         }
         return loadBalancersBuilder.build();
     }

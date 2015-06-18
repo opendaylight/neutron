@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronUtil {
-    private static final Logger logger = LoggerFactory
+    private static final Logger LOGGER = LoggerFactory
             .getLogger(NeutronUtil.class);
     public static Object[] getInstances(Class<?> clazz,Object bundle) {
         Object instances[] = null;
@@ -25,7 +25,7 @@ public class NeutronUtil {
                 }
             }
         } catch (Exception e) {
-            logger.error("Instance reference is NULL");
+            LOGGER.error("Instance reference is NULL");
         }
         return instances;
     }

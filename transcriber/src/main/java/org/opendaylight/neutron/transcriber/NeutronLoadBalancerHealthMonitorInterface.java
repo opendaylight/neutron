@@ -32,7 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitors, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerHealthMonitor> loadBalancerHealthMonitorDB = new ConcurrentHashMap<String, NeutronLoadBalancerHealthMonitor>();
 
 
@@ -59,7 +59,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -75,7 +75,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     @Override
     public NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid) {
         if (!neutronLoadBalancerHealthMonitorExists(uuid)) {
-            logger.debug("No LoadBalancerHealthMonitor has Been Defined");
+            LOGGER.debug("No LoadBalancerHealthMonitor has Been Defined");
             return null;
         }
         return loadBalancerHealthMonitorDB.get(uuid);
@@ -88,7 +88,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor = entry.getValue();
             allLoadBalancerHealthMonitors.add(loadBalancerHealthMonitor);
         }
-        logger.debug("Exiting getLoadBalancerHealthMonitors, Found {} OpenStackLoadBalancerHealthMonitor", allLoadBalancerHealthMonitors.size());
+        LOGGER.debug("Exiting getLoadBalancerHealthMonitors, Found {} OpenStackLoadBalancerHealthMonitor", allLoadBalancerHealthMonitors.size());
         List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
         ans.addAll(allLoadBalancerHealthMonitors);
         return ans;
@@ -181,7 +181,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
         if (healthMonitor.getLoadBalancerHealthMonitorID() != null) {
             healthmonitorsBuilder.setUuid(toUuid(healthMonitor.getLoadBalancerHealthMonitorID()));
         } else {
-            logger.warn("Attempting to write neutron laod balancer health monitor without UUID");
+            LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
         return healthmonitorsBuilder.build();
     }

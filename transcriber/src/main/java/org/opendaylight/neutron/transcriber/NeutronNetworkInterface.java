@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,NeutronNetwork> implements INeutronNetworkCRUD {
-    private static final Logger logger = LoggerFactory.getLogger(NeutronNetworkInterface.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
     private ConcurrentMap<String, NeutronNetwork> networkDB = new ConcurrentHashMap<String, NeutronNetwork>();
 
 
@@ -58,7 +58,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    logger.error(e.getMessage());
+                    LOGGER.error(e.getMessage());
                     return false;
                 }
             }
@@ -88,7 +88,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             NeutronNetwork network = entry.getValue();
             allNetworks.add(network);
         }
-        logger.debug("Exiting getAllNetworks, Found {} OpenStackNetworks", allNetworks.size());
+        LOGGER.debug("Exiting getAllNetworks, Found {} OpenStackNetworks", allNetworks.size());
         List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
         ans.addAll(allNetworks);
         return ans;
@@ -166,7 +166,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (network.getNetworkUUID() != null) {
             networkBuilder.setUuid(toUuid(network.getNetworkUUID()));
         } else {
-            logger.warn("Attempting to write neutron network without UUID");
+            LOGGER.warn("Attempting to write neutron network without UUID");
         }
         return networkBuilder.build();
     }
