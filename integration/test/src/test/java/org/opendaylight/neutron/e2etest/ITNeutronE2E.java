@@ -9,6 +9,7 @@
 package org.opendaylight.neutron.e2etest;
 
 import static org.ops4j.pax.exam.CoreOptions.maven;
+import static org.ops4j.pax.exam.CoreOptions.vmOption;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.debugConfiguration;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
@@ -64,6 +65,7 @@ public class ITNeutronE2E {
                 .useDeployFolder(false),
        // It is really nice if the container sticks around after the test so you can check the contents
        // of the data directory when things go wrong.
+            vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"),
             keepRuntimeFolder(),
        // Don't bother with local console output as it just ends up cluttering the logs
             configureConsole().ignoreLocalConsole(),
