@@ -55,7 +55,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

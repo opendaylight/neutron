@@ -59,7 +59,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
@@ -161,8 +161,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             List<Uuid> listUuid = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : healthMonitor.getLoadBalancerHealthMonitorPools()) {
-                listUuid.add(toUuid(neutron_id.getID()));
+            for (Neutron_ID neutronId : healthMonitor.getLoadBalancerHealthMonitorPools()) {
+                listUuid.add(toUuid(neutronId.getID()));
             }
             healthmonitorsBuilder.setPools(listUuid);
         }

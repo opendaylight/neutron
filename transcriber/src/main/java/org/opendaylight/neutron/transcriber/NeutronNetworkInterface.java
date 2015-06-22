@@ -58,7 +58,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

@@ -62,7 +62,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
@@ -162,8 +162,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         }
         if (pools.getLoadBalancerPoolListeners() != null) {
             List<Uuid> listListener = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : pools.getLoadBalancerPoolListeners()) {
-                listListener.add(toUuid(neutron_id.getID()));
+            for (Neutron_ID neutronId : pools.getLoadBalancerPoolListeners()) {
+                listListener.add(toUuid(neutronId.getID()));
             }
             poolsBuilder.setListeners(listListener);
         }

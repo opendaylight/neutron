@@ -59,7 +59,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
@@ -159,8 +159,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         }
         if (listeners.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
             List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : listeners.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
-                listLoadBalancers.add(toUuid(neutron_id.getID()));
+            for (Neutron_ID neutronId : listeners.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
+                listLoadBalancers.add(toUuid(neutronId.getID()));
             }
             listenersBuilder.setLoadbalancers(listLoadBalancers);
         }

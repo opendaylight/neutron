@@ -33,6 +33,10 @@ import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
+import org.opendaylight.neutron.spi.NeutronRouter;
+
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.routers.attributes.routers.Router;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -45,132 +49,38 @@ public class Activator implements BundleActivator {
         this.providerContext = providerContext;
     }
 
+    private void addInterface(Class crudClazz, Class<? extends AbstractNeutronInterface> interfaceClazz, BundleContext context) throws Exception {
+        AbstractNeutronInterface myInterface = interfaceClazz.newInstance();
+        myInterface.setProviderContext(providerContext);
+        ServiceRegistration<?> registration = context.registerService(crudClazz, myInterface, null);
+        if(registration != null) {
+            registrations.add(registration);
+        }
+    }
+
     @Override
     public void start(BundleContext context) throws Exception {
-        NeutronRouterInterface neutronRouterInterface = new NeutronRouterInterface(providerContext);
-        ServiceRegistration<INeutronRouterCRUD> neutronRouterInterfaceRegistration = context.registerService(INeutronRouterCRUD.class, neutronRouterInterface, null);
-        if(neutronRouterInterfaceRegistration != null) {
-            registrations.add(neutronRouterInterfaceRegistration);
-        }
-        NeutronPortInterface neutronPortInterface = new NeutronPortInterface(providerContext);
-        ServiceRegistration<INeutronPortCRUD> neutronPortInterfaceRegistration = context.registerService(INeutronPortCRUD.class, neutronPortInterface, null);
-        if(neutronPortInterfaceRegistration != null) {
-            registrations.add(neutronPortInterfaceRegistration);
-        }
-
-        NeutronSubnetInterface neutronSubnetInterface = new NeutronSubnetInterface(providerContext);
-        ServiceRegistration<INeutronSubnetCRUD> neutronSubnetInterfaceRegistration = context.registerService(INeutronSubnetCRUD.class, neutronSubnetInterface, null);
-        if(neutronSubnetInterfaceRegistration != null) {
-            registrations.add(neutronSubnetInterfaceRegistration);
-        }
-
-        NeutronNetworkInterface neutronNetworkInterface = new NeutronNetworkInterface(providerContext);
-        ServiceRegistration<INeutronNetworkCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronNetworkCRUD.class, neutronNetworkInterface, null);
-        if(neutronNetworkInterfaceRegistration != null) {
-            registrations.add(neutronNetworkInterfaceRegistration);
-        }
-
-        NeutronSecurityGroupInterface neutronSecurityGroupInterface = new NeutronSecurityGroupInterface(providerContext);
-        ServiceRegistration<INeutronSecurityGroupCRUD> neutronSecurityGroupInterfaceRegistration = context.registerService(INeutronSecurityGroupCRUD.class, neutronSecurityGroupInterface, null);
-        if(neutronSecurityGroupInterfaceRegistration != null) {
-            registrations.add(neutronSecurityGroupInterfaceRegistration);
-        }
-
-        NeutronSecurityRuleInterface neutronSecurityRuleInterface = new NeutronSecurityRuleInterface(providerContext);
-        ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
-        if(neutronSecurityRuleInterfaceRegistration != null) {
-            registrations.add(neutronSecurityRuleInterfaceRegistration);
-        }
-
-        NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
-        ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
-        if(neutronFirewallInterfaceRegistration != null) {
-            registrations.add(neutronFirewallInterfaceRegistration);
-        }
-
-        NeutronFirewallPolicyInterface neutronFirewallPolicyInterface = new NeutronFirewallPolicyInterface(providerContext);
-        ServiceRegistration<INeutronFirewallPolicyCRUD> neutronFirewallPolicyInterfaceRegistration = context.registerService(INeutronFirewallPolicyCRUD.class, neutronFirewallPolicyInterface, null);
-        if(neutronFirewallPolicyInterfaceRegistration != null) {
-            registrations.add(neutronFirewallPolicyInterfaceRegistration);
-        }
-
-        NeutronFirewallRuleInterface neutronFirewallRuleInterface = new NeutronFirewallRuleInterface(providerContext);
-        ServiceRegistration<INeutronFirewallRuleCRUD> neutronFirewallRuleInterfaceRegistration = context.registerService(INeutronFirewallRuleCRUD.class, neutronFirewallRuleInterface, null);
-        if(neutronFirewallRuleInterfaceRegistration != null) {
-            registrations.add(neutronFirewallRuleInterfaceRegistration);
-        }
-
-        NeutronLoadBalancerInterface neutronLoadBalancerInterface = new NeutronLoadBalancerInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerCRUD> neutronLoadBalancerInterfaceRegistration = context.registerService(INeutronLoadBalancerCRUD.class, neutronLoadBalancerInterface, null);
-        if(neutronLoadBalancerInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerInterfaceRegistration);
-        }
-
-        NeutronLoadBalancerPoolInterface neutronLoadBalancerPoolInterface = new NeutronLoadBalancerPoolInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerPoolCRUD> neutronLoadBalancerPoolInterfaceRegistration = context.registerService(INeutronLoadBalancerPoolCRUD.class, neutronLoadBalancerPoolInterface, null);
-        if(neutronLoadBalancerPoolInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerPoolInterfaceRegistration);
-        }
-
-        NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
-        if(neutronLoadBalancerListenerInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerListenerInterfaceRegistration);
-        }
-
-        NeutronLoadBalancerHealthMonitorInterface neutronLoadBalancerHealthMonitorInterface = new NeutronLoadBalancerHealthMonitorInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerHealthMonitorCRUD> neutronLoadBalancerHealthMonitorInterfaceRegistration = context.registerService(INeutronLoadBalancerHealthMonitorCRUD.class, neutronLoadBalancerHealthMonitorInterface, null);
-        if(neutronLoadBalancerHealthMonitorInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerHealthMonitorInterfaceRegistration);
-        }
-
-        NeutronLoadBalancerPoolMemberInterface neutronLoadBalancerPoolMemberInterface = new NeutronLoadBalancerPoolMemberInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerPoolMemberCRUD> neutronLoadBalancerPoolMemberInterfaceRegistration = context.registerService(INeutronLoadBalancerPoolMemberCRUD.class, neutronLoadBalancerPoolMemberInterface, null);
-        if(neutronLoadBalancerPoolMemberInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerPoolMemberInterfaceRegistration);
-        }
-
-        NeutronMeteringLabelInterface neutronMeteringLabelInterface = new NeutronMeteringLabelInterface(providerContext);
-        ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
-        if(neutronMeteringLabelInterfaceRegistration != null) {
-            registrations.add(neutronMeteringLabelInterfaceRegistration);
-        }
-
-        NeutronMeteringLabelRuleInterface neutronMeteringLabelRuleInterface = new NeutronMeteringLabelRuleInterface(providerContext);
-        ServiceRegistration<INeutronMeteringLabelRuleCRUD> neutronMeteringLabelRuleInterfaceRegistration = context.registerService(INeutronMeteringLabelRuleCRUD.class, neutronMeteringLabelRuleInterface, null);
-        if(neutronMeteringLabelRuleInterfaceRegistration != null) {
-            registrations.add(neutronMeteringLabelRuleInterfaceRegistration);
-        }
-
-        NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface(providerContext);
-        ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
-        if(neutronVPNServiceInterfaceRegistration != null) {
-            registrations.add(neutronVPNServiceInterfaceRegistration);
-        }
-
-        NeutronVPNIKEPolicyInterface neutronVPNIKEPolicyInterface = new NeutronVPNIKEPolicyInterface(providerContext);
-        ServiceRegistration<INeutronVPNIKEPolicyCRUD> neutronVPNIKEPolicyInterfaceRegistration = context.registerService(INeutronVPNIKEPolicyCRUD.class, neutronVPNIKEPolicyInterface, null);
-        if(neutronVPNIKEPolicyInterfaceRegistration != null) {
-            registrations.add(neutronVPNIKEPolicyInterfaceRegistration);
-        }
-
-        NeutronVPNIPSECPolicyInterface neutronVPNIPSECPolicyInterface = new NeutronVPNIPSECPolicyInterface(providerContext);
-        ServiceRegistration<INeutronVPNIPSECPolicyCRUD> neutronVPNIPSECPolicyInterfaceRegistration = context.registerService(INeutronVPNIPSECPolicyCRUD.class, neutronVPNIPSECPolicyInterface, null);
-        if(neutronVPNIPSECPolicyInterfaceRegistration != null) {
-            registrations.add(neutronVPNIPSECPolicyInterfaceRegistration);
-        }
-
-        NeutronVPNIPSECSiteConnectionsInterface neutronVPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(providerContext);
-        ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
-        if (neutronVPNIPSECSiteConnectionsInterfaceRegistration != null) {
-            registrations.add(neutronVPNIPSECSiteConnectionsInterfaceRegistration);
-        }
-
-        NeutronFloatingIPInterface neutronFloatingIPInterface = new NeutronFloatingIPInterface(providerContext);
-        ServiceRegistration<INeutronFloatingIPCRUD> neutronFloatingIPInterfaceRegistration = context.registerService(INeutronFloatingIPCRUD.class, neutronFloatingIPInterface, null);
-        if (neutronFloatingIPInterfaceRegistration != null) {
-            registrations.add(neutronFloatingIPInterfaceRegistration);
-        }
+        addInterface(INeutronRouterCRUD.class, NeutronRouterInterface.class, context);
+        addInterface(INeutronPortCRUD.class, NeutronPortInterface.class, context);
+        addInterface(INeutronSubnetCRUD.class, NeutronSubnetInterface.class, context);
+        addInterface(INeutronNetworkCRUD.class, NeutronNetworkInterface.class, context);
+        addInterface(INeutronSecurityGroupCRUD.class, NeutronSecurityGroupInterface.class, context);
+        addInterface(INeutronSecurityRuleCRUD.class, NeutronSecurityRuleInterface.class, context);
+        addInterface(INeutronFirewallCRUD.class, NeutronFirewallInterface.class, context);
+        addInterface(INeutronFirewallPolicyCRUD.class, NeutronFirewallPolicyInterface.class, context);
+        addInterface(INeutronFirewallRuleCRUD.class, NeutronFirewallRuleInterface.class, context);
+        addInterface(INeutronLoadBalancerCRUD.class, NeutronLoadBalancerInterface.class, context);
+        addInterface(INeutronLoadBalancerPoolCRUD.class, NeutronLoadBalancerPoolInterface.class, context);
+        addInterface(INeutronLoadBalancerListenerCRUD.class, NeutronLoadBalancerListenerInterface.class, context);
+        addInterface(INeutronLoadBalancerHealthMonitorCRUD.class, NeutronLoadBalancerHealthMonitorInterface.class, context);
+        addInterface(INeutronLoadBalancerPoolMemberCRUD.class, NeutronLoadBalancerPoolMemberInterface.class, context);
+        addInterface(INeutronMeteringLabelCRUD.class, NeutronMeteringLabelInterface.class, context);
+        addInterface(INeutronMeteringLabelRuleCRUD.class, NeutronMeteringLabelRuleInterface.class, context);
+        addInterface(INeutronVPNServiceCRUD.class, NeutronVPNServiceInterface.class, context);
+        addInterface(INeutronVPNIKEPolicyCRUD.class, NeutronVPNIKEPolicyInterface.class, context);
+        addInterface(INeutronVPNIPSECPolicyCRUD.class, NeutronVPNIPSECPolicyInterface.class, context);
+        addInterface(INeutronVPNIPSECSiteConnectionsCRUD.class, NeutronVPNIPSECSiteConnectionsInterface.class, context);
+        addInterface(INeutronFloatingIPCRUD.class, NeutronFloatingIPInterface.class, context);
     }
 
     @Override

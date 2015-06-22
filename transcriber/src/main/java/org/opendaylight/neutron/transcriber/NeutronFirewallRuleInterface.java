@@ -61,7 +61,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface imple
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

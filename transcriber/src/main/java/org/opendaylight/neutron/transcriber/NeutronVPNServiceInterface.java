@@ -54,7 +54,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
@@ -80,8 +80,8 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
     public List<NeutronVPNService> getAllVPNService() {
         Set<NeutronVPNService> allVPNService = new HashSet<NeutronVPNService>();
         for (Entry<String, NeutronVPNService> entry : VPNServiceDB.entrySet()) {
-            NeutronVPNService VPNService = entry.getValue();
-            allVPNService.add(VPNService);
+            NeutronVPNService vpnService = entry.getValue();
+            allVPNService.add(vpnService);
         }
         LOGGER.debug("Exiting getVPNService, Found {} OpenStackVPNService", allVPNService.size());
         List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
