@@ -38,6 +38,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerPool> loadBalancerPoolDB = new ConcurrentHashMap<String, NeutronLoadBalancerPool>();
 
+    NeutronLoadBalancerPoolInterface() { super(); }
 
     NeutronLoadBalancerPoolInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -62,7 +63,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
@@ -162,8 +163,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         }
         if (pools.getLoadBalancerPoolListeners() != null) {
             List<Uuid> listListener = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : pools.getLoadBalancerPoolListeners()) {
-                listListener.add(toUuid(neutron_id.getID()));
+            for (Neutron_ID neutronId : pools.getLoadBalancerPoolListeners()) {
+                listListener.add(toUuid(neutronId.getID()));
             }
             poolsBuilder.setListeners(listListener);
         }

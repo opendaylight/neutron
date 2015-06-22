@@ -37,6 +37,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface imple
 
     private ConcurrentMap<String, NeutronFirewallRule> firewallRuleDB = new ConcurrentHashMap<String, NeutronFirewallRule>();
 
+    NeutronFirewallRuleInterface() { super(); }
 
     NeutronFirewallRuleInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -61,7 +62,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface imple
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

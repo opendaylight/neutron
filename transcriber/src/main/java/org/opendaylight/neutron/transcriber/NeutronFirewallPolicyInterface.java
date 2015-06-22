@@ -37,6 +37,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
 
     private ConcurrentMap<String, NeutronFirewallPolicy> firewallPolicyDB  = new ConcurrentHashMap<String, NeutronFirewallPolicy>();
 
+    NeutronFirewallPolicyInterface() { super(); }
 
     NeutronFirewallPolicyInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -61,7 +62,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

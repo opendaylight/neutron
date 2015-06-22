@@ -36,6 +36,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
     private ConcurrentMap<String, NeutronSecurityGroup> securityGroupDB  = new ConcurrentHashMap<String, NeutronSecurityGroup>();
 
+    NeutronSecurityGroupInterface() { super(); }
 
     NeutronSecurityGroupInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -60,7 +61,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

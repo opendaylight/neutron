@@ -50,6 +50,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
     private ConcurrentMap<String, NeutronPort> portDB = new ConcurrentHashMap<String, NeutronPort>();
 
+    NeutronPortInterface() { super(); }
 
     NeutronPortInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -74,7 +75,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("overwrite via reflectipon", e);
                     return false;
                 }
             }
@@ -228,10 +229,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         while (portIterator.hasNext()) {
             NeutronPort port = portIterator.next();
             List<Neutron_IPs> fixedIPs = port.getFixedIPs();
-            if (fixedIPs.size() == 1) {
-                if (subnet.getGatewayIP().equals(fixedIPs.get(0).getIpAddress())) {
-                    return port;
-                }
+            if (fixedIPs.size() == 1 &&
+                subnet.getGatewayIP().equals(fixedIPs.get(0).getIpAddress())) {
+                return port;
             }
         }
         return null;
@@ -280,10 +280,10 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         }
         if (neutronPort.getFixedIPs() != null) {
             List<FixedIps> listNeutronIPs = new ArrayList<FixedIps>();
-            for (Neutron_IPs neutron_IPs : neutronPort.getFixedIPs()) {
+            for (Neutron_IPs neutronIPs : neutronPort.getFixedIPs()) {
                 FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
-                fixedIpsBuilder.setIpAddress(new IpAddress(neutron_IPs.getIpAddress().toCharArray()));
-                fixedIpsBuilder.setSubnetId(toUuid(neutron_IPs.getSubnetUUID()));
+                fixedIpsBuilder.setIpAddress(new IpAddress(neutronIPs.getIpAddress().toCharArray()));
+                fixedIpsBuilder.setSubnetId(toUuid(neutronIPs.getSubnetUUID()));
                 listNeutronIPs.add(fixedIpsBuilder.build());
             }
             portBuilder.setFixedIps(listNeutronIPs);

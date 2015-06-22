@@ -35,6 +35,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabelRule> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronMeteringLabelRule>();
 
+    NeutronMeteringLabelRuleInterface() { super(); }
+
     NeutronMeteringLabelRuleInterface(ProviderContext providerContext) {
         super(providerContext);
     }
@@ -57,7 +59,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

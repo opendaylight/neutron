@@ -30,7 +30,14 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
     private ProviderContext providerContext;
     private DataBroker db;
 
+    AbstractNeutronInterface() { }
+
     AbstractNeutronInterface(ProviderContext providerContext) {
+        this.providerContext = providerContext;
+        this.db = providerContext.getSALService(DataBroker.class);
+    }
+
+    public void setProviderContext(ProviderContext providerContext) {
         this.providerContext = providerContext;
         this.db = providerContext.getSALService(DataBroker.class);
     }
@@ -80,7 +87,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
         WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
+        // CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
         return true;
     }
 

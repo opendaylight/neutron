@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,6 +41,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
     private ConcurrentMap<String, NeutronRouter> routerDB  = new ConcurrentHashMap<String, NeutronRouter>();
     // methods needed for creating caches
 
+    NeutronRouterInterface() { super(); }
 
     NeutronRouterInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -64,7 +66,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
@@ -174,9 +176,9 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
         }
         if (router.getExternalGatewayInfo() != null) {
             ExternalGatewayInfo externalGatewayInfo = null;
-            List<NeutronRouter_NetworkReference> neutronRouter_NetworkReferences = new ArrayList<NeutronRouter_NetworkReference>();
-            neutronRouter_NetworkReferences.add(router.getExternalGatewayInfo());
-            for (NeutronRouter_NetworkReference externalGatewayInfos : neutronRouter_NetworkReferences) {
+            List<NeutronRouter_NetworkReference> neutronRouterNetworkReferences = new ArrayList<NeutronRouter_NetworkReference>();
+            neutronRouterNetworkReferences.add(router.getExternalGatewayInfo());
+            for (NeutronRouter_NetworkReference externalGatewayInfos : neutronRouterNetworkReferences) {
                 ExternalGatewayInfoBuilder builder = new ExternalGatewayInfoBuilder();
                 builder.setEnableSnat(externalGatewayInfos.getEnableSNAT());
                 builder.setExternalNetworkId(toUuid(externalGatewayInfos.getNetworkID()));
@@ -190,7 +192,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
             routerBuilder.setExternalGatewayInfo(externalGatewayInfo);
         }
         if (router.getInterfaces() != null) {
-            HashMap<String, NeutronRouter_Interface> mapInterfaces = new HashMap<String, NeutronRouter_Interface>();
+            Map<String, NeutronRouter_Interface> mapInterfaces = new HashMap<String, NeutronRouter_Interface>();
             List<Interfaces> interfaces = new ArrayList<Interfaces>();
             for (Entry<String, NeutronRouter_Interface> entry : mapInterfaces.entrySet()) {
                 interfaces.add((Interfaces) entry.getValue());

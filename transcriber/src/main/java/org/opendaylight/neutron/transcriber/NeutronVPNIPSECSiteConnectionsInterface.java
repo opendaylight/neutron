@@ -33,6 +33,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     private ConcurrentMap<String, NeutronVPNIPSECSiteConnection> neutronVPNIPSECSiteConnectionDB = new ConcurrentHashMap<String, NeutronVPNIPSECSiteConnection>();
 
 
+    NeutronVPNIPSECSiteConnectionsInterface() { super(); }
+
     NeutronVPNIPSECSiteConnectionsInterface(ProviderContext providerContext) {
         super(providerContext);
     }
@@ -55,7 +57,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

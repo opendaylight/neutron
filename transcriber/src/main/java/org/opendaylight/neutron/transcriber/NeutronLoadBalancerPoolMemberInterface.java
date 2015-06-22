@@ -33,6 +33,8 @@ public class NeutronLoadBalancerPoolMemberInterface extends
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMemberInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerPoolMember> loadBalancerPoolMemberDB = new ConcurrentHashMap<String, NeutronLoadBalancerPoolMember>();
 
+    NeutronLoadBalancerPoolMemberInterface() { super(); }
+
     NeutronLoadBalancerPoolMemberInterface(ProviderContext providerContext) {
         super(providerContext);
     }
@@ -55,7 +57,7 @@ public class NeutronLoadBalancerPoolMemberInterface extends
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

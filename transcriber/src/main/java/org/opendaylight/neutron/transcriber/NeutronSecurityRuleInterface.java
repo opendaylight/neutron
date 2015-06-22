@@ -36,6 +36,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
     private ConcurrentMap<String, NeutronSecurityRule> securityRuleDB = new ConcurrentHashMap<String, NeutronSecurityRule>();
 
+    NeutronSecurityRuleInterface() { super(); }
 
     NeutronSecurityRuleInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -59,7 +60,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

@@ -33,6 +33,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIKEPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIKEPolicy>();
 
+    NeutronVPNIKEPolicyInterface() { super(); }
 
     NeutronVPNIKEPolicyInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -58,7 +59,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

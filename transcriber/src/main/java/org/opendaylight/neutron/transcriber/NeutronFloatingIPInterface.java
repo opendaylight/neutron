@@ -42,6 +42,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     private ConcurrentMap<String, NeutronFloatingIP> floatingIPDB  = new ConcurrentHashMap<String, NeutronFloatingIP>();
 
+    NeutronFloatingIPInterface() { super(); }
 
     NeutronFloatingIPInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -67,7 +68,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }

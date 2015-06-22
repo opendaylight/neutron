@@ -33,7 +33,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
     private ConcurrentMap<String, NeutronNetwork> networkDB = new ConcurrentHashMap<String, NeutronNetwork>();
 
-
+    NeutronNetworkInterface() { super(); }
 
     NeutronNetworkInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -58,7 +58,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Overwrite via reflection", e);
                     return false;
                 }
             }
