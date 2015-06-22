@@ -61,6 +61,7 @@ public class NeutronMeteringLabelsNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "MeteringLabel CRUD Interface";
 
     private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
         return o.extractFields(fields);
@@ -135,7 +136,7 @@ public class NeutronMeteringLabelsNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronMeteringLabelCRUD labelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
         if (labelInterface == null) {
-            throw new ServiceUnavailableException("MeteringLabel CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!labelInterface.neutronMeteringLabelExists(labelUUID)) {
@@ -166,7 +167,7 @@ public class NeutronMeteringLabelsNorthbound {
     public Response createMeteringLabel(final NeutronMeteringLabelRequest input) {
         INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
         if (meteringLabelInterface == null) {
-            throw new ServiceUnavailableException("MeteringLabel CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -231,7 +232,7 @@ public class NeutronMeteringLabelsNorthbound {
             @PathParam("labelUUID") String labelUUID) {
         INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
         if (meteringLabelInterface == null) {
-            throw new ServiceUnavailableException("MeteringLabel CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 

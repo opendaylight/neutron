@@ -60,6 +60,10 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 public class NeutronVPNIKEPoliciesNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "VPNIKEPolicy CRUD Interface";
+    private static final String UUID_NO_EXIST = "VPNIKEPolicy UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronVPNIKEPolicy extractFields(NeutronVPNIKEPolicy o, List<String> fields) {
         return o.extractFields(fields);
@@ -144,11 +148,11 @@ public class NeutronVPNIKEPoliciesNorthbound {
             ) {
         INeutronVPNIKEPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
         if (policyInterface == null) {
-            throw new ServiceUnavailableException("VPNIKEPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException("VPNIKEPolicy UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronVPNIKEPolicy ans = policyInterface.getNeutronVPNIKEPolicy(policyUUID);
@@ -175,7 +179,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
     public Response createVPNIKEPolicy(final NeutronVPNIKEPolicyRequest input) {
         INeutronVPNIKEPolicyCRUD ikePolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
         if (ikePolicyInterface == null) {
-            throw new ServiceUnavailableException("VPNIKEPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -198,10 +202,10 @@ public class NeutronVPNIKEPoliciesNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             /*
@@ -242,7 +246,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             ) {
         INeutronVPNIKEPolicyCRUD ikePolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
         if (ikePolicyInterface == null) {
-            throw new ServiceUnavailableException("VPNIKEPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -250,7 +254,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
          * ikePolicy has to exist and only a single delta can be supplied
          */
         if (!ikePolicyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException("VPNIKEPolicy UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only single ikePolicy deltas supported");
@@ -276,10 +280,10 @@ public class NeutronVPNIKEPoliciesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         /*
          * update the ikePolicy entry and return the modified object
@@ -312,7 +316,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             @PathParam("policyID") String policyUUID) {
         INeutronVPNIKEPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
         if (policyInterface == null) {
-            throw new ServiceUnavailableException("VPNIKEPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -320,7 +324,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
          * verify that the policy exists and is not in use before removing it
          */
         if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException("VPNIKEPolicy UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         NeutronVPNIKEPolicy singleton = policyInterface.getNeutronVPNIKEPolicy(policyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
@@ -334,10 +338,10 @@ public class NeutronVPNIKEPoliciesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         policyInterface.removeNeutronVPNIKEPolicy(policyUUID);
         if (instances != null) {

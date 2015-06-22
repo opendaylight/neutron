@@ -56,6 +56,10 @@ public class NeutronFirewallPolicyNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Firewall Policy CRUD Interface";
+    private static final String UUID_NO_EXIST = "Firewall Policy UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronFirewallPolicy extractFields(NeutronFirewallPolicy o, List<String> fields) {
         return o.extractFields(fields);
@@ -91,7 +95,7 @@ public class NeutronFirewallPolicyNorthbound {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = NeutronCRUDInterfaces.getINeutronFirewallPolicyCRUD(this);
 
         if (firewallPolicyInterface == null) {
-            throw new ServiceUnavailableException("Firewall Policy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                 + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronFirewallPolicy> allFirewallPolicies = firewallPolicyInterface.getAllNeutronFirewallPolicies();
@@ -142,11 +146,11 @@ public class NeutronFirewallPolicyNorthbound {
                                       @QueryParam("fields") List<String> fields) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = NeutronCRUDInterfaces.getINeutronFirewallPolicyCRUD(this);
         if (firewallPolicyInterface == null) {
-            throw new ServiceUnavailableException("Firewall Policy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException("Firewall Policy UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronFirewallPolicy ans = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
@@ -175,7 +179,7 @@ public class NeutronFirewallPolicyNorthbound {
     public Response createFirewallPolicies(final NeutronFirewallPolicyRequest input) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = NeutronCRUDInterfaces.getINeutronFirewallPolicyCRUD(this);
         if (firewallPolicyInterface == null) {
-            throw new ServiceUnavailableException("Firewall Policy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -200,10 +204,10 @@ public class NeutronFirewallPolicyNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             firewallPolicyInterface.addNeutronFirewallPolicy(singleton);
             if (instances != null) {
@@ -240,10 +244,10 @@ public class NeutronFirewallPolicyNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
             /*
@@ -284,7 +288,7 @@ public class NeutronFirewallPolicyNorthbound {
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID, final NeutronFirewallPolicyRequest input) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = NeutronCRUDInterfaces.getINeutronFirewallPolicyCRUD(this);
         if (firewallPolicyInterface == null) {
-            throw new ServiceUnavailableException("Firewall Policy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -292,7 +296,7 @@ public class NeutronFirewallPolicyNorthbound {
          * verify the Firewall Policy exists and there is only one delta provided
          */
         if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException("Firewall Policy UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -324,10 +328,10 @@ public class NeutronFirewallPolicyNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -360,7 +364,7 @@ public class NeutronFirewallPolicyNorthbound {
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = NeutronCRUDInterfaces.getINeutronFirewallPolicyCRUD(this);
         if (firewallPolicyInterface == null) {
-            throw new ServiceUnavailableException("Firewall Policy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -368,7 +372,7 @@ public class NeutronFirewallPolicyNorthbound {
          * verify the Firewall Policy exists and it isn't currently in use
          */
         if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException("Firewall Policy UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (firewallPolicyInterface.neutronFirewallPolicyInUse(firewallPolicyUUID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -385,10 +389,10 @@ public class NeutronFirewallPolicyNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         firewallPolicyInterface.removeNeutronFirewallPolicy(firewallPolicyUUID);

@@ -61,6 +61,10 @@ public class NeutronVPNServicesNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "VPNService CRUD Interface";
+    private static final String UUID_NO_EXIST = "VPNService UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronVPNService extractFields(NeutronVPNService o, List<String> fields) {
         return o.extractFields(fields);
@@ -98,7 +102,7 @@ public class NeutronVPNServicesNorthbound {
     ) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException("VPNService CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronVPNService> allVPNService = VPNServiceInterface.getAllVPNService();
@@ -141,11 +145,11 @@ public class NeutronVPNServicesNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException("VPNService CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
-            throw new ResourceNotFoundException("VPNService UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronVPNService ans = VPNServiceInterface.getVPNService(serviceID);
@@ -174,7 +178,7 @@ public class NeutronVPNServicesNorthbound {
     public Response createVPNService(final NeutronVPNServiceRequest input) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException("VPNService CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -197,10 +201,10 @@ public class NeutronVPNServicesNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             VPNServiceInterface.addVPNService(singleton);
@@ -238,10 +242,10 @@ public class NeutronVPNServicesNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
             /*
@@ -279,7 +283,7 @@ public class NeutronVPNServicesNorthbound {
     public Response updateVPNService(@PathParam("serviceID") String serviceID, final NeutronVPNServiceRequest input) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException("VPNService CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -287,7 +291,7 @@ public class NeutronVPNServicesNorthbound {
          * verify the VPNService exists and there is only one delta provided
          */
         if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
-            throw new ResourceNotFoundException("VPNService UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -315,10 +319,10 @@ public class NeutronVPNServicesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -351,7 +355,7 @@ public class NeutronVPNServicesNorthbound {
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
         INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
         if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException("VPNService CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -359,7 +363,7 @@ public class NeutronVPNServicesNorthbound {
          * verify the VPNService exists and it isn't currently in use
          */
         if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
-            throw new ResourceNotFoundException("VPNService UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (VPNServiceInterface.neutronVPNServiceInUse(serviceID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -376,10 +380,10 @@ public class NeutronVPNServicesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         VPNServiceInterface.removeVPNService(serviceID);

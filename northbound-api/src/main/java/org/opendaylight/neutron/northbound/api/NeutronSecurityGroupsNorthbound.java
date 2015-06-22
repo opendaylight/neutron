@@ -55,6 +55,10 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 public class NeutronSecurityGroupsNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Security Group CRUD Interface";
+    private static final String UUID_NO_EXIST = "Security Group UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronSecurityGroup extractFields(NeutronSecurityGroup o, List<String> fields) {
         return o.extractFields(fields);
@@ -86,7 +90,7 @@ public class NeutronSecurityGroupsNorthbound {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
 
         if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException("Security Group CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAllNeutronSecurityGroups();
@@ -131,11 +135,11 @@ public class NeutronSecurityGroupsNorthbound {
                                       @QueryParam ("fields") List<String> fields) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
         if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException("Security Group CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException("Security Group UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!fields.isEmpty()) {
             NeutronSecurityGroup ans = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
@@ -165,7 +169,7 @@ public class NeutronSecurityGroupsNorthbound {
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
         if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException("Security Group CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -190,10 +194,10 @@ public class NeutronSecurityGroupsNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             // Add to Neutron cache
             securityGroupInterface.addNeutronSecurityGroup(singleton);
@@ -228,10 +232,10 @@ public class NeutronSecurityGroupsNorthbound {
                             }
                         }
                     } else {
-                        throw new BadRequestException("No providers registered.  Please try again later");
+                        throw new BadRequestException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -273,7 +277,7 @@ public class NeutronSecurityGroupsNorthbound {
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
         if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException("Security Group CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -281,7 +285,7 @@ public class NeutronSecurityGroupsNorthbound {
          * verify the Security Group exists and there is only one delta provided
          */
         if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException("Security Group UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -307,10 +311,10 @@ public class NeutronSecurityGroupsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -344,7 +348,7 @@ public class NeutronSecurityGroupsNorthbound {
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
         if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException("Security Group CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -352,7 +356,7 @@ public class NeutronSecurityGroupsNorthbound {
          * verify the Security Group exists and it isn't currently in use
          */
         if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException("Security Group UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (securityGroupInterface.neutronSecurityGroupInUse(securityGroupUUID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -369,10 +373,10 @@ public class NeutronSecurityGroupsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*

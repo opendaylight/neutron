@@ -62,6 +62,9 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "VPNIPSECSiteConnections CRUD Interface";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronVPNIPSECSiteConnection extractFields(NeutronVPNIPSECSiteConnection o, List<String> fields) {
         return o.extractFields(fields);
@@ -98,7 +101,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         INeutronVPNIPSECSiteConnectionsCRUD labelInterface = NeutronCRUDInterfaces
                 .getINeutronVPNIPSECSiteConnectionsCRUD(this);
         if (labelInterface == null) {
-            throw new ServiceUnavailableException("NeutronVPNIPSECSiteConnections CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnection = labelInterface
@@ -154,7 +157,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         INeutronVPNIPSECSiteConnectionsCRUD connectionInterface = NeutronCRUDInterfaces
                 .getINeutronVPNIPSECSiteConnectionsCRUD(this);
         if (connectionInterface == null) {
-            throw new ServiceUnavailableException("NeutronVPNIPSECSiteConnections CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!connectionInterface.neutronVPNIPSECSiteConnectionsExists(policyID)) {
@@ -212,10 +215,10 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             /*
              * add ipsecSiteConnections to the cache
@@ -292,10 +295,10 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         /*
          * update the ipsecSiteConnections entry and return the modified object
@@ -331,7 +334,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
                 .getINeutronVPNIPSECSiteConnectionsCRUD(this);
         if (ipsecSiteConnectionsInterface == null) {
-            throw new ServiceUnavailableException("NeutronVPNIPSECSiteConnections CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -355,10 +358,10 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(policyID);
         if (instances != null) {
