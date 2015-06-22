@@ -62,6 +62,11 @@ import org.opendaylight.neutron.spi.Neutron_IPs;
 public class NeutronFloatingIPsNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Floating IP CRUD Interface";
+    private static final String UUID_NO_EXIST = "Floating IP UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronFloatingIP extractFields(NeutronFloatingIP o, List<String> fields) {
         return o.extractFields(fields);
@@ -97,7 +102,7 @@ public class NeutronFloatingIPsNorthbound {
             ) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
         if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException("Floating IP CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAllFloatingIPs();
@@ -144,11 +149,11 @@ public class NeutronFloatingIPsNorthbound {
             @QueryParam("fields") List<String> fields ) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
         if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException("Floating IP CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
-            throw new ResourceNotFoundException("Floating IP UUID doesn't exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronFloatingIP ans = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -176,7 +181,7 @@ public class NeutronFloatingIPsNorthbound {
     public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
         if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException("Floating IP CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -278,10 +283,10 @@ public class NeutronFloatingIPsNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             floatingIPInterface.addFloatingIP(singleton);
             if (instances != null) {
@@ -317,7 +322,7 @@ public class NeutronFloatingIPsNorthbound {
             ) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
         if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException("Floating IP CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -336,7 +341,7 @@ public class NeutronFloatingIPsNorthbound {
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
-            throw new ResourceNotFoundException("Floating IP UUID doesn't exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
 
         NeutronFloatingIP sourceFloatingIP = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -421,10 +426,10 @@ public class NeutronFloatingIPsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         floatingIPInterface.updateFloatingIP(floatingipUUID, singleton);
         target = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -454,11 +459,11 @@ public class NeutronFloatingIPsNorthbound {
             @PathParam("floatingipUUID") String floatingipUUID) {
         INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
         if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException("Floating IP CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
-            throw new ResourceNotFoundException("Floating IP UUID doesn't exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         // TODO: need to undo port association if it exists
         NeutronFloatingIP singleton = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -473,10 +478,10 @@ public class NeutronFloatingIPsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         floatingIPInterface.removeFloatingIP(floatingipUUID);
         if (instances != null) {

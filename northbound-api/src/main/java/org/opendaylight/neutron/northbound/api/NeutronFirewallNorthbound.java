@@ -60,6 +60,10 @@ public class NeutronFirewallNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Firewall CRUD Interface";
+    private static final String UUID_NO_EXIST = "Firewall UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronFirewall extractFields(NeutronFirewall o, List<String> fields) {
         return o.extractFields(fields);
@@ -97,7 +101,7 @@ public class NeutronFirewallNorthbound {
         INeutronFirewallRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronFirewallRuleCRUD(this);
 
         if (firewallInterface == null) {
-            throw new ServiceUnavailableException("Firewall CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronFirewall> allFirewalls = firewallInterface.getAllNeutronFirewalls();
@@ -150,11 +154,11 @@ public class NeutronFirewallNorthbound {
                                       @QueryParam("fields") List<String> fields) {
         INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
         if (firewallInterface == null) {
-            throw new ServiceUnavailableException("Firewall CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!firewallInterface.neutronFirewallExists(firewallUUID)) {
-            throw new ResourceNotFoundException("Firewall UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronFirewall ans = firewallInterface.getNeutronFirewall(firewallUUID);
@@ -183,7 +187,7 @@ public class NeutronFirewallNorthbound {
     public Response createFirewalls(final NeutronFirewallRequest input) {
         INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
         if (firewallInterface == null) {
-            throw new ServiceUnavailableException("Firewall CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -207,10 +211,10 @@ public class NeutronFirewallNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             firewallInterface.addNeutronFirewall(singleton);
             if (instances != null) {
@@ -246,10 +250,10 @@ public class NeutronFirewallNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -290,7 +294,7 @@ public class NeutronFirewallNorthbound {
             @PathParam("firewallUUID") String firewallUUID, final NeutronFirewallRequest input) {
         INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
         if (firewallInterface == null) {
-            throw new ServiceUnavailableException("Firewall CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -298,7 +302,7 @@ public class NeutronFirewallNorthbound {
          * verify the Firewall exists and there is only one delta provided
          */
         if (!firewallInterface.neutronFirewallExists(firewallUUID)) {
-            throw new ResourceNotFoundException("Firewall UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -331,10 +335,10 @@ public class NeutronFirewallNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -367,7 +371,7 @@ public class NeutronFirewallNorthbound {
             @PathParam("firewallUUID") String firewallUUID) {
         INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
         if (firewallInterface == null) {
-            throw new ServiceUnavailableException("Firewall CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -375,7 +379,7 @@ public class NeutronFirewallNorthbound {
          * verify the Firewall exists and it isn't currently in use
          */
         if (!firewallInterface.neutronFirewallExists(firewallUUID)) {
-            throw new ResourceNotFoundException("Firewall UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (firewallInterface.neutronFirewallInUse(firewallUUID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -392,10 +396,10 @@ public class NeutronFirewallNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*

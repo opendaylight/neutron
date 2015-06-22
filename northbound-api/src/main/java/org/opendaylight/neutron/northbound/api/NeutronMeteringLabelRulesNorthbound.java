@@ -61,6 +61,7 @@ public class NeutronMeteringLabelRulesNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "MeteringLabelRule CRUD Interface";
 
     private NeutronMeteringLabelRule extractFields(NeutronMeteringLabelRule o, List<String> fields) {
         return o.extractFields(fields);
@@ -135,7 +136,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronMeteringLabelRuleCRUD ruleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
         if (ruleInterface == null) {
-            throw new ServiceUnavailableException("MeteringLabelRule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!ruleInterface.neutronMeteringLabelRuleExists(ruleUUID)) {
@@ -166,7 +167,7 @@ public class NeutronMeteringLabelRulesNorthbound {
     public Response createMeteringLabelRule(final NeutronMeteringLabelRuleRequest input) {
         INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
         if (meteringLabelRuleInterface == null) {
-            throw new ServiceUnavailableException("MeteringLabelRule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -231,7 +232,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             @PathParam("ruleUUID") String ruleUUID) {
         INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
         if (meteringLabelRuleInterface == null) {
-            throw new ServiceUnavailableException("MeteringLabelRule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 

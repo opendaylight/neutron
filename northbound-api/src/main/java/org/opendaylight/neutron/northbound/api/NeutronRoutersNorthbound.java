@@ -65,6 +65,10 @@ public class NeutronRoutersNorthbound {
     static final String ROUTER_GATEWAY_STR = "network:router_gateway";
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Router CRUD Interface";
+    private static final String UUID_NO_EXIST = "Router UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronRouter extractFields(NeutronRouter o, List<String> fields) {
         return o.extractFields(fields);
@@ -99,7 +103,7 @@ public class NeutronRoutersNorthbound {
             ) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronRouter> allRouters = routerInterface.getAllRouters();
@@ -145,11 +149,11 @@ public class NeutronRoutersNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!routerInterface.routerExists(routerUUID)) {
-            throw new ResourceNotFoundException("Router UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronRouter ans = routerInterface.getRouter(routerUUID);
@@ -176,7 +180,7 @@ public class NeutronRoutersNorthbound {
     public Response createRouters(final NeutronRouterRequest input) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -216,10 +220,10 @@ public class NeutronRoutersNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             /*
@@ -263,7 +267,7 @@ public class NeutronRoutersNorthbound {
             ) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -276,7 +280,7 @@ public class NeutronRoutersNorthbound {
          * router has to exist and only a single delta can be supplied
          */
         if (!routerInterface.routerExists(routerUUID)) {
-            throw new ResourceNotFoundException("Router UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only single router deltas supported");
@@ -303,10 +307,10 @@ public class NeutronRoutersNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         /*
          * if the external gateway info is being changed, verify that the new network
@@ -355,7 +359,7 @@ public class NeutronRoutersNorthbound {
             @PathParam("routerUUID") String routerUUID) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -363,7 +367,7 @@ public class NeutronRoutersNorthbound {
          * verify that the router exists and is not in use before removing it
          */
         if (!routerInterface.routerExists(routerUUID)) {
-            throw new ResourceNotFoundException("Router UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (routerInterface.routerInUse(routerUUID)) {
             throw new ResourceConflictException("Router UUID in Use");
@@ -380,10 +384,10 @@ public class NeutronRoutersNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         routerInterface.removeRouter(routerUUID);
         if (instances != null) {
@@ -417,7 +421,7 @@ public class NeutronRoutersNorthbound {
             ) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
@@ -436,7 +440,7 @@ public class NeutronRoutersNorthbound {
          *  or a port id, but not both, this code assumes that the plugin has filled everything in for us and so both must be present
          */
         if (!routerInterface.routerExists(routerUUID)) {
-            throw new BadRequestException("Router UUID doesn't exist");
+            throw new BadRequestException(UUID_NO_EXIST);
         }
         NeutronRouter target = routerInterface.getRouter(routerUUID);
         if (input.getSubnetUUID() == null ||
@@ -479,10 +483,10 @@ public class NeutronRoutersNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         //mark the port device id and device owner fields
@@ -524,7 +528,7 @@ public class NeutronRoutersNorthbound {
             ) {
         INeutronRouterCRUD routerInterface = NeutronCRUDInterfaces.getINeutronRouterCRUD(this);
         if (routerInterface == null) {
-            throw new ServiceUnavailableException("Router CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
@@ -569,10 +573,10 @@ public class NeutronRoutersNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // reset the port ownership
@@ -613,10 +617,10 @@ public class NeutronRoutersNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             NeutronPort port = portInterface.getPort(input.getPortUUID());
             port.setDeviceID(null);
@@ -661,10 +665,10 @@ public class NeutronRoutersNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             input.setID(target.getID());
             input.setTenantID(target.getTenantID());

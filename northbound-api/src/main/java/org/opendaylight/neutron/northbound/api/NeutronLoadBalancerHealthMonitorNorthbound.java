@@ -57,6 +57,11 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "LoadBalancerHealthMonitor CRUD Interface";
+    private static final String UUID_NO_EXIST = "LoadBalancerHealthMonitor UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
         return o.extractFields(fields);
@@ -96,7 +101,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces
                 .getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerHealthMonitor CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface.getAllNeutronLoadBalancerHealthMonitors();
@@ -161,11 +166,11 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerHealthMonitor CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException("LoadBalancerHealthMonitor UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronLoadBalancerHealthMonitor ans = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
@@ -194,7 +199,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     public Response createLoadBalancerHealthMonitors(final NeutronLoadBalancerHealthMonitorRequest input) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerHealthMonitor CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -218,10 +223,10 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             loadBalancerHealthMonitorInterface.addNeutronLoadBalancerHealthMonitor(singleton);
             if (instances != null) {
@@ -259,10 +264,10 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
             /*
@@ -304,7 +309,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces
                 .getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerHealthMonitor CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -312,7 +317,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
          * verify the LoadBalancerHealthMonitor exists and there is only one delta provided
          */
         if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException("LoadBalancerHealthMonitor UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -348,10 +353,10 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -389,14 +394,14 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
         if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerHealthMonitor CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         /*
          * verify the LoadBalancerHealthMonitor exists and it isn't currently in use
          */
         if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException("LoadBalancerHealthMonitor UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorInUse(loadBalancerHealthMonitorID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -413,10 +418,10 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         loadBalancerHealthMonitorInterface.removeNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
         if (instances != null) {

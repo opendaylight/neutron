@@ -60,6 +60,11 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 public class NeutronSubnetsNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Subnet CRUD Interface";
+    private static final String UUID_NO_EXIST = "Subnet UUID does not exist.";
+    private static final String UUID_EXISTS = "Subnet UUID already exists.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronSubnet extractFields(NeutronSubnet o, List<String> fields) {
         return o.extractFields(fields);
@@ -100,7 +105,7 @@ public class NeutronSubnetsNorthbound {
             ) {
         INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
         if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronSubnet> allNetworks = subnetInterface.getAllSubnets();
@@ -156,11 +161,11 @@ public class NeutronSubnetsNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
         if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!subnetInterface.subnetExists(subnetUUID)) {
-            throw new ResourceNotFoundException("subnet UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronSubnet ans = subnetInterface.getSubnet(subnetUUID);
@@ -191,7 +196,7 @@ public class NeutronSubnetsNorthbound {
     public Response createSubnets(final NeutronSubnetRequest input) {
         INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
         if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -209,7 +214,7 @@ public class NeutronSubnetsNorthbound {
              *  *then* add the subnet to the cache
              */
             if (subnetInterface.subnetExists(singleton.getID())) {
-                throw new BadRequestException("subnet UUID already exists");
+                throw new BadRequestException(UUID_EXISTS);
             }
             if (!networkInterface.networkExists(singleton.getNetworkUUID())) {
                 throw new ResourceNotFoundException("network UUID does not exist.");
@@ -234,10 +239,10 @@ public class NeutronSubnetsNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             subnetInterface.addSubnet(singleton);
             if (instances != null) {
@@ -265,10 +270,10 @@ public class NeutronSubnetsNorthbound {
                     throw new InternalServerErrorException("subnet object could not be initialized properly");
                 }
                 if (subnetInterface.subnetExists(test.getID())) {
-                    throw new BadRequestException("subnet UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException("subnet UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 testMap.put(test.getID(), test);
                 if (!networkInterface.networkExists(test.getNetworkUUID())) {
@@ -290,10 +295,10 @@ public class NeutronSubnetsNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -336,7 +341,7 @@ public class NeutronSubnetsNorthbound {
             ) {
         INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
         if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -344,7 +349,7 @@ public class NeutronSubnetsNorthbound {
          * verify the subnet exists and there is only one delta provided
          */
         if (!subnetInterface.subnetExists(subnetUUID)) {
-            throw new ResourceNotFoundException("subnet UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -372,10 +377,10 @@ public class NeutronSubnetsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -417,7 +422,7 @@ public class NeutronSubnetsNorthbound {
          * verify the subnet exists and it isn't currently in use
          */
         if (!subnetInterface.subnetExists(subnetUUID)) {
-            throw new ResourceNotFoundException("subnet UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (subnetInterface.subnetInUse(subnetUUID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -434,10 +439,10 @@ public class NeutronSubnetsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*

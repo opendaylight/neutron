@@ -57,6 +57,11 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 public class NeutronSecurityRulesNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Security Rule CRUD Interface";
+    private static final String UUID_NO_EXIST = "Security Rule UUID does not exist.";
+    private static final String UUID_EXISTS = "Security Rule UUID already exists.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronSecurityRule extractFields(NeutronSecurityRule o, List<String> fields) {
         return o.extractFields(fields);
@@ -92,7 +97,7 @@ public class NeutronSecurityRulesNorthbound {
     ) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException("Security Rule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAllNeutronSecurityRules();
@@ -149,11 +154,11 @@ public class NeutronSecurityRulesNorthbound {
                                      @QueryParam ("fields") List<String> fields) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException("Security Rule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
-            throw new ResourceNotFoundException("Security Rule UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!fields.isEmpty()) {
             NeutronSecurityRule ans = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
@@ -183,7 +188,7 @@ public class NeutronSecurityRulesNorthbound {
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException("Security Rule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
@@ -200,7 +205,7 @@ public class NeutronSecurityRulesNorthbound {
             NeutronSecurityRule singleton = input.getSingleton();
 
             if (securityRuleInterface.neutronSecurityRuleExists(singleton.getSecurityRuleUUID())) {
-                throw new BadRequestException("Security Rule UUID already exists");
+                throw new BadRequestException(UUID_EXISTS);
             }
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
             if (instances != null) {
@@ -213,10 +218,10 @@ public class NeutronSecurityRulesNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add rule to cache
@@ -241,10 +246,10 @@ public class NeutronSecurityRulesNorthbound {
                  */
 
                 if (securityRuleInterface.neutronSecurityRuleExists(test.getSecurityRuleUUID())) {
-                    throw new BadRequestException("Security Rule UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 if (testMap.containsKey(test.getSecurityRuleUUID())) {
-                    throw new BadRequestException("Security Rule UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 if (instances != null) {
                     if (instances.length > 0) {
@@ -256,10 +261,10 @@ public class NeutronSecurityRulesNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -301,7 +306,7 @@ public class NeutronSecurityRulesNorthbound {
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException("Security Rule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -309,7 +314,7 @@ public class NeutronSecurityRulesNorthbound {
          * verify the Security Rule exists and there is only one delta provided
          */
         if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
-            throw new ResourceNotFoundException("Security Rule UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -345,10 +350,10 @@ public class NeutronSecurityRulesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -382,7 +387,7 @@ public class NeutronSecurityRulesNorthbound {
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
         INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
         if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException("Security Rule CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -390,7 +395,7 @@ public class NeutronSecurityRulesNorthbound {
          * verify the Security Rule exists and it isn't currently in use
          */
         if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
-            throw new ResourceNotFoundException("Security Rule UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (securityRuleInterface.neutronSecurityRuleInUse(securityRuleUUID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -407,10 +412,10 @@ public class NeutronSecurityRulesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
 
