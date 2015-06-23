@@ -163,5 +163,95 @@ public class NeutronE2ETest {
 
         NeutronIPSECSiteConnectionTests ipsec_siteConnection_test = new NeutronIPSECSiteConnectionTests(base);
         ipsec_siteConnection_test.ipsecSiteConnection_collection_get_test();
+
+    // tests related to bug 3812
+       Neutron_Bug3812_Tests bugTest = new Neutron_Bug3812_Tests(base);
+       bugTest.check_bug3812();
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryGet(URL url) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("GET");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        return(httpConn);
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryDelete(URL url) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("DELETE");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        return(httpConn);
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryPost(URL url, String content) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("POST");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        httpConn.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(
+            httpConn.getOutputStream());
+        out.write(content);
+        out.close();
+        return(httpConn);
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryPut(URL url, String content) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("PUT");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        httpConn.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(
+            httpConn.getOutputStream());
+        out.write(content);
+        out.close();
+        return(httpConn);
+    }
+
+    static void test_create(String url_s, String content, String context) {
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryPost(url, content);
+            Assert.assertEquals(context, 201, httpConn.getResponseCode());
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+    }
+
+    static void test_modify(String url_s, String content, String context) {
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryPut(url, content);
+            Assert.assertEquals(context, 200, httpConn.getResponseCode());
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+    }
+
+    static void test_fetch(String url_s, String context) {
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
+            Assert.assertEquals(context, 200, httpConn.getResponseCode());
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+    }
+
+    static void test_delete(String url_s, String context) {
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryDelete(url);
+            Assert.assertEquals(context, 204, httpConn.getResponseCode());
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
     }
 }

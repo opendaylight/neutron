@@ -25,17 +25,7 @@ public class NeutronFloatingIPTests {
     }
 
     public void floatingIP_collection_get_test() {
-        String url_s = base + "/floatingips";
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            Assert.assertEquals("FloatingIP Collection GET failed",
-                        200, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        String url = base + "/floatingips";
+        ITNeutronE2E.test_fetch(url,"FloatingIP Collection GET failed");
     }
 }

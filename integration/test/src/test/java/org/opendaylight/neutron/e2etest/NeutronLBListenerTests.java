@@ -25,23 +25,13 @@ public class NeutronLBListenerTests {
     }
 
     public void listener_collection_get_test() {
-        String url_s = base + "/lbaas/listeners";
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            Assert.assertEquals("LB Listener Collection GET failed",
-                        200, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        String url = base + "/lbaas/listeners";
+        ITNeutronE2E.test_fetch(url, "LB Listener Collection GET failed");
     }
 
     //TODO handle SB check
     public void singleton_lb_listener_create_test() {
-        String url_s = base + "/lbaas/listeners";
+        String url = base + "/lbaas/listeners";
         String content = "{ \"listener\": { " +
             "\"admin_state_up\": true, " +
             "\"connection_limit\": 100, " +
@@ -54,22 +44,6 @@ public class NeutronLBListenerTests {
             "\"protocol\": \"HTTP\", " +
             "\"protocol_port\": 80, " +
             "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
-
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
-            Assert.assertEquals("Singleton LB Listener Post Failed NB",
-                201, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        ITNeutronE2E.test_create(url, content, "Singleton LB Listener Post Failed NB");
     }
 }

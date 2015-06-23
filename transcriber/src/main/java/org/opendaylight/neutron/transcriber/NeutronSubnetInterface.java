@@ -159,7 +159,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
             return true;
         }
         NeutronSubnet target = subnetDB.get(subnetUUID);
-        return (target.getPortsInSubnet().size() > 0);
+	// note: we want to ignore the DHCP ports, so...
+        return (target.getPortsInSubnet("network:dhcp").size() > 0);
     }
 
         protected Subnet toMd(NeutronSubnet subnet) {
