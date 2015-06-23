@@ -25,17 +25,7 @@ public class NeutronSecurityGroupTests {
     }
 
     public void securityGroup_collection_get_test() {
-        String url_s = base + "/security-groups";
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            Assert.assertEquals("Security Group Collection GET failed",
-                        200, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        String url = base + "/security-groups";
+        ITNeutronE2E.test_fetch(url, "Security Group Collection GET failed");
     }
 }

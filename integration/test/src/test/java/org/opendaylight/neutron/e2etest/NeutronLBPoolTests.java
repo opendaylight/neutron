@@ -25,23 +25,13 @@ public class NeutronLBPoolTests {
     }
 
     public void pool_collection_get_test() {
-        String url_s = base + "/lbaas/pools";
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            Assert.assertEquals("LB Pool Collection GET failed",
-                        200, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        String url = base + "/lbaas/pools";
+        ITNeutronE2E.test_fetch(url, "LB Pool Collection GET failed");
     }
 
     //TODO handle SB check
     public void singleton_lb_pool_create_test() {
-        String url_s = base + "/lbaas/pools";
+        String url = base + "/lbaas/pools";
         String content = "{ \"pool\": { " +
             "\"admin_state_up\": true, " +
             "\"description\": \"simple pool\", " +
@@ -57,23 +47,7 @@ public class NeutronLBPoolTests {
                 "\"cookie_name\": \"my_cookie\", " +
                 "\"type\": \"APP_COOKIE\" }, " +
             "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
-
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
-            Assert.assertEquals("Singleton LB Pool Post Failed NB",
-                201, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        ITNeutronE2E.test_create(url, content, "Singleton LB Pool Post Failed NB");
     }
 
 }
