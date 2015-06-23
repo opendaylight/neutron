@@ -30,10 +30,7 @@ public class NeutronNetworkTests {
             int i = 0;
             while (i < 60) {
                 URL url = new URL(url_s);
-                HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-                httpConn.setRequestMethod("GET");
-                httpConn.setRequestProperty("Content-Type", "application/json");
-                httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+                HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
                 if (httpConn.getResponseCode() != 200) {
                     System.out.println("trial "+Integer.toString(i)+": failed with: " +
                                        Integer.toString(httpConn.getResponseCode()));
@@ -53,7 +50,7 @@ public class NeutronNetworkTests {
 
     //TODO handle SB check
     public void singleton_network_create_test() {
-        String url_s = base + "/networks";
+        String url = base + "/networks";
         String content = "{ \"network\": {" +
             " \"status\": \"ACTIVE\", \"subnets\": [], " +
             " \"name\": \"net1\", \"admin_state_up\": true, " +
@@ -67,50 +64,18 @@ public class NeutronNetworkTests {
             " \"provider:network_type\": \"stt\" } ], " +
             " \"shared\": false, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " +
             " } } ";
-
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
-            Assert.assertEquals("Singleton Network Post Failed NB",
-                201, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        ITNeutronE2E.test_create(url, content,"Singleton Network Post Failed NB");
     }
 
     //TODO handle SB check
     public void external_network_create_test() {
-        String url_s = base + "/networks";
+        String url = base + "/networks";
         String content = "{ \"network\": {" +
             " \"status\": \"ACTIVE\", \"subnets\": [], " +
             " \"name\": \"external1\", \"admin_state_up\": true, " +
             " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", " +
             " \"router:external\": true, \"shared\": false, " +
             " \"id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" } } ";
-
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
-            Assert.assertEquals("External Network Post Failed NB",
-                201, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        ITNeutronE2E.test_create(url, content,"External Network Post Failed NB");
     }
 }

@@ -25,44 +25,18 @@ public class NeutronMeteringLabelTests {
     }
 
     public void meteringLabel_collection_get_test() {
-        String url_s = base + "/metering/metering-labels";
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            Assert.assertEquals("Metering Label Collection GET failed",
-                        200, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        String url = base + "/metering/metering-labels";
+        ITNeutronE2E.test_fetch(url, "Metering Label Collection GET failed");
     }
 
     //TODO handle SB check
     public void singleton_meteringLabel_create_test() {
-        String url_s = base + "/metering/metering-labels";
+        String url = base + "/metering/metering-labels";
         String content = "{ \"metering_label\": { " +
             "\"tenant_id\": \"45345b0ee1ea477fac0f541b2cb79cd4\", " +
             "\"description\": \"description of label1\", " +
             "\"name\": \"label1\", " +
             "\"id\": \"bc91b832-8465-40a7-a5d8-ba87de442266\" } }";
-
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
-            Assert.assertEquals("Singleton Metering Label Post Failed NB",
-                201, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        ITNeutronE2E.test_create(url, content, "Singleton Metering Label Post Failed NB");
     }
 }

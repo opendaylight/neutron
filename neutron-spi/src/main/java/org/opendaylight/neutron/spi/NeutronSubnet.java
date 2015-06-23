@@ -392,6 +392,16 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         return myPorts;
     }
 
+    public List<NeutronPort> getPortsInSubnet(String ignore) {
+        List<NeutronPort> ans = new ArrayList<NeutronPort>();
+        for (NeutronPort port : myPorts) {
+            if (!port.getDeviceOwner().equalsIgnoreCase(ignore)) {
+                ans.add(port);
+            }
+        }
+        return ans;
+    }
+
     public void addPort(NeutronPort port) {
         myPorts.add(port);
     }

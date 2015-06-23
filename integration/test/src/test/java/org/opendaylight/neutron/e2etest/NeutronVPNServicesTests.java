@@ -25,17 +25,7 @@ public class NeutronVPNServicesTests {
     }
 
     public void vpnService_collection_get_test() {
-        String url_s = base + "/vpn/vpnservices";
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            Assert.assertEquals("VPN Services GET failed",
-                        200, httpConn.getResponseCode());
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        String url = base + "/vpn/vpnservices";
+        ITNeutronE2E.test_fetch(url, "VPN Services GET failed");
     }
 }
