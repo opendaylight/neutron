@@ -28,10 +28,7 @@ public class NeutronIKEPoliciesTests {
         String url_s = base + "/vpn/ikepolicies";
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
             Assert.assertEquals("IKE Policy GET failed",
                         200, httpConn.getResponseCode());
         } catch (Exception e) {

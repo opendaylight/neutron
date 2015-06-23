@@ -148,5 +148,42 @@ public class ITNeutronE2E {
 
         NeutronIPSECSiteConnectionTests ipsec_siteConnection_test = new NeutronIPSECSiteConnectionTests(base);
         ipsec_siteConnection_test.ipsecSiteConnection_collection_get_test();
+
+    // tests related to bug 3812
+    //    Neutron_Bug3812_Tests bug3812Test = new Neutron_Bug3812_Tests(base);
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryGet(URL url) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("GET");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        return(httpConn);
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryPost(URL url, String content) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("POST");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        httpConn.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(
+            httpConn.getOutputStream());
+        out.write(content);
+        out.close();
+        return(httpConn);
+    }
+
+    static HttpURLConnection HttpURLConnectionFactoryPut(URL url, String content) throws Exception {
+        HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+        httpConn.setRequestMethod("PUT");
+        httpConn.setRequestProperty("Content-Type", "application/json");
+        httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+        httpConn.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(
+            httpConn.getOutputStream());
+        out.write(content);
+        out.close();
+        return(httpConn);
     }
 }

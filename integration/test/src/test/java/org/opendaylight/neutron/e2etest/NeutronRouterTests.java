@@ -30,10 +30,7 @@ public class NeutronRouterTests {
         String url_s = base + "/routers";
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
             Assert.assertEquals("Router Collection GET failed",
                         200, httpConn.getResponseCode());
         } catch (Exception e) {
@@ -55,15 +52,7 @@ public class NeutronRouterTests {
 
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryPost(url, content);
             Assert.assertEquals("Singleton Router Post Failed NB",
                 201, httpConn.getResponseCode());
         } catch (Exception e) {
@@ -82,15 +71,7 @@ public class NeutronRouterTests {
 
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("PUT");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryPut(url, content);
             Assert.assertEquals("Add Interface to Router Put Failed NB",
                 200, httpConn.getResponseCode());
         } catch (Exception e) {

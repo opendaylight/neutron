@@ -28,10 +28,7 @@ public class NeutronMeteringRuleTests {
         String url_s = base + "/metering/metering-label-rules";
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
             Assert.assertEquals("Metering Rule Collection GET failed",
                         200, httpConn.getResponseCode());
         } catch (Exception e) {
@@ -51,15 +48,7 @@ public class NeutronMeteringRuleTests {
 
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryPost(url, content);
             Assert.assertEquals("Singleton Metering Rule Post Failed NB",
                 201, httpConn.getResponseCode());
         } catch (Exception e) {

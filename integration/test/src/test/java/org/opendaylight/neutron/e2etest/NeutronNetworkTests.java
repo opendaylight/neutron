@@ -30,10 +30,7 @@ public class NeutronNetworkTests {
             int i = 0;
             while (i < 60) {
                 URL url = new URL(url_s);
-                HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-                httpConn.setRequestMethod("GET");
-                httpConn.setRequestProperty("Content-Type", "application/json");
-                httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+                HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
                 if (httpConn.getResponseCode() != 200) {
                     System.out.println("trial "+Integer.toString(i)+": failed with: " +
                                        Integer.toString(httpConn.getResponseCode()));
@@ -70,15 +67,7 @@ public class NeutronNetworkTests {
 
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryPost(url, content);
             Assert.assertEquals("Singleton Network Post Failed NB",
                 201, httpConn.getResponseCode());
         } catch (Exception e) {
@@ -98,15 +87,7 @@ public class NeutronNetworkTests {
 
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("POST");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-            httpConn.setDoOutput(true);
-            OutputStreamWriter out = new OutputStreamWriter(
-                httpConn.getOutputStream());
-            out.write(content);
-            out.close();
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryPost(url, content);
             Assert.assertEquals("External Network Post Failed NB",
                 201, httpConn.getResponseCode());
         } catch (Exception e) {

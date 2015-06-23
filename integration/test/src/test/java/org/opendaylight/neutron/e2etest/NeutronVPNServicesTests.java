@@ -28,10 +28,7 @@ public class NeutronVPNServicesTests {
         String url_s = base + "/vpn/vpnservices";
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
             Assert.assertEquals("VPN Services GET failed",
                         200, httpConn.getResponseCode());
         } catch (Exception e) {

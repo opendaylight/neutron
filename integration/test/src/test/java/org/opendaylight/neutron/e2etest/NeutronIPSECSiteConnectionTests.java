@@ -28,10 +28,7 @@ public class NeutronIPSECSiteConnectionTests {
         String url_s = base + "/vpn/ipsecsiteconnections";
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod("GET");
-            httpConn.setRequestProperty("Content-Type", "application/json");
-            httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
+            HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
             Assert.assertEquals("IPSEC Site Connection Collection GET failed",
                         200, httpConn.getResponseCode());
         } catch (Exception e) {
