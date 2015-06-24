@@ -66,6 +66,12 @@ public class NeutronPortsNorthbound {
 
     static private final int HTTP_OK_BOTTOM = 200;
     static private final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Port CRUD Interface";
+    private static final String UUID_NO_EXIST = "Port UUID does not exist.";
+    private static final String UUID_EXISTS = "Port UUID already exists.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String NET_UUID_MATCH = "Network UUID must match that of subnet";
 
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
@@ -106,7 +112,7 @@ public class NeutronPortsNorthbound {
             ) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronPort> allPorts = portInterface.getAllPorts();
@@ -161,11 +167,11 @@ public class NeutronPortsNorthbound {
             @QueryParam("fields") List<String> fields ) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException("port UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronPort ans = portInterface.getPort(portUUID);
@@ -197,7 +203,7 @@ public class NeutronPortsNorthbound {
     public Response createPorts(final NeutronPortRequest input) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
@@ -221,7 +227,7 @@ public class NeutronPortsNorthbound {
                 throw new BadRequestException("network UUID musy be specified");
             }
             if (portInterface.portExists(singleton.getID())) {
-                throw new BadRequestException("port UUID already exists");
+                throw new BadRequestException(UUID_EXISTS);
             }
             if (!networkInterface.networkExists(singleton.getNetworkUUID())) {
                 throw new ResourceNotFoundException("network UUID does not exist.");
@@ -252,7 +258,7 @@ public class NeutronPortsNorthbound {
                         throw new BadRequestException("subnet UUID must exist");
                     }
                     if (!singleton.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
-                        throw new BadRequestException("network UUID must match that of subnet");
+                        throw new BadRequestException(NET_UUID_MATCH);
                     }
                     if (ip.getIpAddress() != null) {
                         if (!subnet.isValidIP(ip.getIpAddress())) {
@@ -276,10 +282,10 @@ public class NeutronPortsNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add the port to the cache
@@ -304,10 +310,10 @@ public class NeutronPortsNorthbound {
                  * can't already contain a new port with the same UUID
                  */
                 if (portInterface.portExists(test.getID())) {
-                    throw new BadRequestException("port UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException("port UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 for (NeutronPort check : testMap.values()) {
                     if (test.getMacAddress().equalsIgnoreCase(check.getMacAddress())) {
@@ -353,7 +359,7 @@ public class NeutronPortsNorthbound {
                         }
                         NeutronSubnet subnet = subnetInterface.getSubnet(ip.getSubnetUUID());
                         if (!test.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
-                            throw new BadRequestException("network UUID must match that of subnet");
+                            throw new BadRequestException(NET_UUID_MATCH);
                         }
                         if (ip.getIpAddress() != null) {
                             if (!subnet.isValidIP(ip.getIpAddress())) {
@@ -377,10 +383,10 @@ public class NeutronPortsNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -423,7 +429,7 @@ public class NeutronPortsNorthbound {
             ) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
@@ -434,7 +440,7 @@ public class NeutronPortsNorthbound {
 
         // port has to exist and only a single delta is supported
         if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException("port UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         NeutronPort target = portInterface.getPort(portUUID);
         if (!input.isSingleton()) {
@@ -460,10 +466,10 @@ public class NeutronPortsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         // Verify the new fixed ips are valid
@@ -480,7 +486,7 @@ public class NeutronPortsNorthbound {
                 }
                 NeutronSubnet subnet = subnetInterface.getSubnet(ip.getSubnetUUID());
                 if (!target.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
-                    throw new BadRequestException("network UUID must match that of subnet");
+                    throw new BadRequestException(NET_UUID_MATCH);
                 }
                 if (ip.getIpAddress() != null) {
                     if (!subnet.isValidIP(ip.getIpAddress())) {
@@ -524,13 +530,13 @@ public class NeutronPortsNorthbound {
             @PathParam("portUUID") String portUUID) {
         INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
         if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
         // port has to exist and not be owned by anyone.  then it can be removed from the cache
         if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException("port UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         NeutronPort port = portInterface.getPort(portUUID);
         if (port.getDeviceID() != null ||
@@ -549,10 +555,10 @@ public class NeutronPortsNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         portInterface.removePort(portUUID);
         if (instances != null) {

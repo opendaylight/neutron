@@ -64,6 +64,11 @@ public class NeutronNetworksNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "Network CRUD Interface";
+    private static final String UUID_NO_EXIST = "Network UUID does not exist.";
+    private static final String UUID_EXISTS = "Network UUID already exists.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
         return o.extractFields(fields);
@@ -102,7 +107,7 @@ public class NeutronNetworksNorthbound {
             ) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
         if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronNetwork> allNetworks = networkInterface.getAllNetworks();
@@ -169,11 +174,11 @@ public class NeutronNetworksNorthbound {
             ) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
         if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException("network UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronNetwork ans = networkInterface.getNetwork(netUUID);
@@ -200,7 +205,7 @@ public class NeutronNetworksNorthbound {
     public Response createNetworks(final NeutronNetworkRequest input) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
         if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -210,7 +215,7 @@ public class NeutronNetworksNorthbound {
              * network ID can't already exist
              */
             if (networkInterface.networkExists(singleton.getID())) {
-                throw new BadRequestException("network UUID already exists");
+                throw new BadRequestException(UUID_EXISTS);
             }
 
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
@@ -224,10 +229,10 @@ public class NeutronNetworksNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add network to cache
@@ -253,10 +258,10 @@ public class NeutronNetworksNorthbound {
                  * already in this bulk request
                  */
                 if (networkInterface.networkExists(test.getID())) {
-                    throw new BadRequestException("network UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException("network UUID already exists");
+                    throw new BadRequestException(UUID_EXISTS);
                 }
                 if (instances != null) {
                     if (instances.length > 0) {
@@ -268,10 +273,10 @@ public class NeutronNetworksNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
                 testMap.put(test.getID(),test);
             }
@@ -312,7 +317,7 @@ public class NeutronNetworksNorthbound {
             ) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
         if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -320,7 +325,7 @@ public class NeutronNetworksNorthbound {
          * network has to exist and only a single delta is supported
          */
         if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException("network UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("only singleton edits supported");
@@ -347,10 +352,10 @@ public class NeutronNetworksNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         // update network object and return the modified object
@@ -382,7 +387,7 @@ public class NeutronNetworksNorthbound {
             @PathParam("netUUID") String netUUID) {
         INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
         if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -390,7 +395,7 @@ public class NeutronNetworksNorthbound {
          * network has to exist and not be in use before it can be removed
          */
         if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException("network UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (networkInterface.networkInUse(netUUID)) {
             throw new ResourceConflictException("Network ID in use");
@@ -408,10 +413,10 @@ public class NeutronNetworksNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         networkInterface.removeNetwork(netUUID);

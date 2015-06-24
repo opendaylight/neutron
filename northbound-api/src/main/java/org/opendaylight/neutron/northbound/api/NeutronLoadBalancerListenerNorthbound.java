@@ -56,6 +56,11 @@ public class NeutronLoadBalancerListenerNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "LoadBalancerListener CRUD Interface";
+    private static final String UUID_NO_EXIST = "LoadBalancerListener UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronLoadBalancerListener extractFields(NeutronLoadBalancerListener o, List<String> fields) {
         return o.extractFields(fields);
@@ -93,7 +98,7 @@ public class NeutronLoadBalancerListenerNorthbound {
         //        INeutronLoadBalancerListenerRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerRuleCRUD(this);
 
         if (loadBalancerListenerInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerListener CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAllNeutronLoadBalancerListeners();
@@ -147,11 +152,11 @@ public class NeutronLoadBalancerListenerNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
         if (loadBalancerListenerInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerListener CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!loadBalancerListenerInterface.neutronLoadBalancerListenerExists(loadBalancerListenerID)) {
-            throw new ResourceNotFoundException("LoadBalancerListener UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronLoadBalancerListener ans = loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID);
@@ -180,7 +185,7 @@ public class NeutronLoadBalancerListenerNorthbound {
     public Response createLoadBalancerListeners(final NeutronLoadBalancerListenerRequest input) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
         if (loadBalancerListenerInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerListener CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -205,10 +210,10 @@ public class NeutronLoadBalancerListenerNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             loadBalancerListenerInterface.addNeutronLoadBalancerListener(singleton);
             if (instances != null) {
@@ -245,10 +250,10 @@ public class NeutronLoadBalancerListenerNorthbound {
                             }
                         }
                     } else {
-                        throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
                 } else {
-                    throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
             /*
@@ -288,7 +293,7 @@ public class NeutronLoadBalancerListenerNorthbound {
             @PathParam("loadBalancerListenerID") String loadBalancerListenerID, final NeutronLoadBalancerListenerRequest input) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
         if (loadBalancerListenerInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerListener CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -296,7 +301,7 @@ public class NeutronLoadBalancerListenerNorthbound {
          * verify the LoadBalancerListener exists and there is only one delta provided
          */
         if (!loadBalancerListenerInterface.neutronLoadBalancerListenerExists(loadBalancerListenerID)) {
-            throw new ResourceNotFoundException("LoadBalancerListener UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
@@ -329,10 +334,10 @@ public class NeutronLoadBalancerListenerNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -365,7 +370,7 @@ public class NeutronLoadBalancerListenerNorthbound {
             @PathParam("loadBalancerListenerID") String loadBalancerListenerID) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
         if (loadBalancerListenerInterface == null) {
-            throw new ServiceUnavailableException("LoadBalancerListener CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -373,7 +378,7 @@ public class NeutronLoadBalancerListenerNorthbound {
          * verify the LoadBalancerListener exists and it isn't currently in use
          */
         if (!loadBalancerListenerInterface.neutronLoadBalancerListenerExists(loadBalancerListenerID)) {
-            throw new ResourceNotFoundException("LoadBalancerListener UUID does not exist.");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (loadBalancerListenerInterface.neutronLoadBalancerListenerInUse(loadBalancerListenerID)) {
             return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
@@ -390,10 +395,10 @@ public class NeutronLoadBalancerListenerNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         loadBalancerListenerInterface.removeNeutronLoadBalancerListener(loadBalancerListenerID);

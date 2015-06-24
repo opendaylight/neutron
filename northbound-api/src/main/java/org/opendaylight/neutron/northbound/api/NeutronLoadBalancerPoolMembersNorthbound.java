@@ -40,6 +40,10 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 public class NeutronLoadBalancerPoolMembersNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "LoadBalancerPool CRUD Interface";
+    private static final String UUID_NO_EXIST = "LoadBalancerPool UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronLoadBalancerPoolMember extractFields(NeutronLoadBalancerPoolMember o, List<String> fields) {
         return o.extractFields(fields);
@@ -80,11 +84,11 @@ public Response listMembers(
     INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces
             .getINeutronLoadBalancerPoolCRUD(this);
     if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException("LoadBalancerPool CRUD Interface "
+        throw new ServiceUnavailableException(INTERFACE_NAME
                 + RestMessages.SERVICEUNAVAILABLE.toString());
     }
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-        throw new ResourceNotFoundException("loadBalancerPool UUID does not exist.");
+        throw new ResourceNotFoundException(UUID_NO_EXIST);
     }
     List<NeutronLoadBalancerPoolMember> members =
                 loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
@@ -139,11 +143,11 @@ public Response showLoadBalancerPoolMember(
     INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces
             .getINeutronLoadBalancerPoolCRUD(this);
     if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException("LoadBalancerPool CRUD Interface "
+        throw new ServiceUnavailableException(INTERFACE_NAME
                 + RestMessages.SERVICEUNAVAILABLE.toString());
     }
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-        throw new ResourceNotFoundException("loadBalancerPool UUID does not exist.");
+        throw new ResourceNotFoundException(UUID_NO_EXIST);
     }
     List<NeutronLoadBalancerPoolMember> members =
                 loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
@@ -181,12 +185,12 @@ public Response createLoadBalancerPoolMember(
 
     INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerPoolCRUD(this);
     if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException("LoadBalancerPool CRUD Interface "
+        throw new ServiceUnavailableException(INTERFACE_NAME
                 + RestMessages.SERVICEUNAVAILABLE.toString());
     }
     // Verify that the loadBalancerPool exists, for the member to be added to its cache
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-        throw new ResourceNotFoundException("loadBalancerPool UUID does not exist.");
+        throw new ResourceNotFoundException(UUID_NO_EXIST);
     }
     NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
 
@@ -218,10 +222,10 @@ public Response createLoadBalancerPoolMember(
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         if (instances != null) {
@@ -268,10 +272,10 @@ public Response createLoadBalancerPoolMember(
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
         }
         /*
@@ -334,13 +338,13 @@ public Response deleteLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID) {
     INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerPoolCRUD(this);
     if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException("LoadBalancerPool CRUD Interface "
+        throw new ServiceUnavailableException(INTERFACE_NAME
                 + RestMessages.SERVICEUNAVAILABLE.toString());
     }
 
     // Verify that the loadBalancerPool exists, for the member to be removed from its cache
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-        throw new ResourceNotFoundException("loadBalancerPool UUID does not exist.");
+        throw new ResourceNotFoundException(UUID_NO_EXIST);
     }
 
     //Verify that the LB pool member exists
@@ -368,10 +372,10 @@ public Response deleteLoadBalancerPoolMember(
                 }
             }
         } else {
-            throw new ServiceUnavailableException("No providers registered.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDERS);
         }
     } else {
-        throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+        throw new ServiceUnavailableException(NO_PROVIDER_LIST);
     }
 
     if (instances != null) {

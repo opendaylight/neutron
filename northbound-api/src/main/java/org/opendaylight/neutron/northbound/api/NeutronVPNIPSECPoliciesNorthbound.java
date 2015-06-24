@@ -61,6 +61,10 @@ public class NeutronVPNIPSECPoliciesNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
+    private static final String INTERFACE_NAME = "VPNIPSECPolicy CRUD Interface";
+    private static final String UUID_NO_EXIST = "VPNIPSECPolicy UUID does not exist.";
+    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
+    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronVPNIPSECPolicy extractFields(NeutronVPNIPSECPolicy o, List<String> fields) {
         return o.extractFields(fields);
@@ -145,11 +149,11 @@ public class NeutronVPNIPSECPoliciesNorthbound {
             ) {
         INeutronVPNIPSECPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
         if (policyInterface == null) {
-            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (!policyInterface.neutronVPNIPSECPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException("VPNIPSECPolicy UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (fields.size() > 0) {
             NeutronVPNIPSECPolicy ans = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
@@ -176,7 +180,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     public Response createVPNIPSECPolicy(final NeutronVPNIPSECPolicyRequest input) {
         INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
         if (ipsecPolicyInterface == null) {
-            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (input.isSingleton()) {
@@ -199,10 +203,10 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                         }
                     }
                 } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             /*
@@ -243,7 +247,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
             ) {
         INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
         if (ipsecPolicyInterface == null) {
-            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -251,7 +255,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
          * ipsecPolicy has to exist and only a single delta can be supplied
          */
         if (!ipsecPolicyInterface.neutronVPNIPSECPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException("VPNIPSECPolicy UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only single ipsecPolicy deltas supported");
@@ -277,10 +281,10 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         /*
          * update the ipsecPolicy entry and return the modified object
@@ -313,7 +317,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
             @PathParam("policyID") String policyUUID) {
         INeutronVPNIPSECPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIPSECPolicyCRUD(this);
         if (policyInterface == null) {
-            throw new ServiceUnavailableException("VPNIPSECPolicy CRUD Interface "
+            throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
 
@@ -321,7 +325,7 @@ public class NeutronVPNIPSECPoliciesNorthbound {
          * verify that the policy exists and is not in use before removing it
          */
         if (!policyInterface.neutronVPNIPSECPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException("VPNIPSECPolicy UUID not found");
+            throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
         NeutronVPNIPSECPolicy singleton = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
@@ -335,10 +339,10 @@ public class NeutronVPNIPSECPoliciesNorthbound {
                     }
                 }
             } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
+                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
         } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
+            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         policyInterface.removeNeutronVPNIPSECPolicy(policyUUID);
         if (instances != null) {
