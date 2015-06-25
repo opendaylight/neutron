@@ -93,15 +93,15 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
             // OK... someone didn't follow RFC 4122... lets try this the hard way
             String dedashed = uuid.replace("-", "");
             if(dedashed.length() == DEDASHED_UUID_LENGTH) {
-                String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1) // 8 chars
+                String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1)
                         + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV1, DEDASHED_UUID_DIV2) // 4 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV1, DEDASHED_UUID_DIV2)
                         + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV2, DEDASHED_UUID_DIV3) // 4 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV2, DEDASHED_UUID_DIV3)
                         + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV3, DEDASHED_UUID_DIV4) // 4 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV3, DEDASHED_UUID_DIV4)
                         + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV4, DEDASHED_UUID_LENGTH); // 12 chars
+                        + dedashed.substring(DEDASHED_UUID_DIV4, DEDASHED_UUID_LENGTH);
                 result = new Uuid(redashed);
             } else {
                 throw e;

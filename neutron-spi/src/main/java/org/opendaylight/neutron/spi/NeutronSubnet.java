@@ -294,7 +294,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 // convert to byte array
                 byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
                 int i;
-                for (i = length; i < IPV6_LENGTH; i++) { // offset is to ensure proper comparison
+                for (i = length; i < IPV6_LENGTH; i++) {
                     if (((((int) addrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) != 0) {
                         return(false);
                     }
@@ -457,7 +457,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
                 byte[] ipBytes =  ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
                 int i;
-                for (i = 0; i < length; i++) { // offset is to ensure proper comparison
+                for (i = 0; i < length; i++) {
                     if (((((int) cidrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) !=
                         ((((int) ipBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES))))) {
                         return(false);
@@ -529,7 +529,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
      */
     public void allocateIP(String ipAddress) {
         Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
-        List<NeutronSubnet_IPAllocationPool> newList = new ArrayList<NeutronSubnet_IPAllocationPool>();    // we have to modify a separate list
+        List<NeutronSubnet_IPAllocationPool> newList = new ArrayList<NeutronSubnet_IPAllocationPool>();
         while (i.hasNext()) {
             NeutronSubnet_IPAllocationPool pool = i.next();
             /* if the pool contains a single address element and we are allocating it
