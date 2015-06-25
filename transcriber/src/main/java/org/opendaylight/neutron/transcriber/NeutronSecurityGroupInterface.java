@@ -20,6 +20,8 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
+import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
@@ -100,6 +102,10 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     public boolean addNeutronSecurityGroup(NeutronSecurityGroup input) {
         if (neutronSecurityGroupExists(input.getSecurityGroupUUID())) {
             return false;
+        }
+        INeutronSecurityRuleCRUD sgrCrud = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
+        for(NeutronSecurityRule sgr : input.getSecurityRules()) {
+            sgrCrud.addNeutronSecurityRule(sgr);
         }
         securityGroupDB.putIfAbsent(input.getSecurityGroupUUID(), input);
         addMd(input);
