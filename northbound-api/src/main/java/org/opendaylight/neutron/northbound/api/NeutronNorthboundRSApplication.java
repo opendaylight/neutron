@@ -72,8 +72,9 @@ public class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setValueWrapper("$");
 
         Map<String, String> namespacePrefixMapper = new HashMap<String, String>(HASHMAP_SIZE);
-        namespacePrefixMapper.put("router", "router");        // FIXME: fill in with XSD
-        namespacePrefixMapper.put("provider", "provider");    // FIXME: fill in with XSD
+        // FIXME: fill in next two with XSD
+        namespacePrefixMapper.put("router", "router");
+        namespacePrefixMapper.put("provider", "provider");
         namespacePrefixMapper.put("binding", "binding");
         moxyJsonProvider.setNamespacePrefixMapper(namespacePrefixMapper);
         moxyJsonProvider.setNamespaceSeparator(':');

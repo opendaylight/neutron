@@ -123,7 +123,7 @@ public class NeutronFirewallPolicyNorthbound {
                     ans.add(nsg);
                 }
             }
-        } // ans.add((NeutronFirewallPolicy) rules);
+        }
         //TODO: apply pagination to results
         return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronFirewallPolicyRequest(ans)).build();
