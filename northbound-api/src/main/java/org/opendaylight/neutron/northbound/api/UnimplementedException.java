@@ -8,32 +8,30 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.net.HttpURLConnection;
+
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Status Code 503 (Service Unavailable Error)
+ * Status Code 501 (Not Implemented Error)
  *
- * The server is currently unable to handle the request due to a temporary
- * overloading or maintenance of the server.
- * The implication is that this is a temporary condition which will be alleviated
- * after some delay.
- *
+ * The function is not implemented.
  *
  */
 public class UnimplementedException extends WebApplicationException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for the SERVICE_UNAVAILABLE custom handler
+     * Constructor for the NOT_IMPLEMENTED custom handler
      *
      * @param string Error message to specify further the
      * SERVICE_UNAVAILABLE response
      *
      */
     public UnimplementedException(String string) {
-        super(Response.status(501).entity(
+        super(Response.status(HttpURLConnection.HTTP_NOT_IMPLEMENTED).entity(
                 string).type(MediaType.TEXT_PLAIN).build());
     }
 }

@@ -24,6 +24,8 @@ import java.util.Set;
  *
  */
 public class NeutronNorthboundRSApplication extends Application {
+    private static final int HASHMAP_SIZE = 3;
+
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<Class<?>>();
@@ -69,7 +71,7 @@ public class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setMarshalEmptyCollections(true);
         moxyJsonProvider.setValueWrapper("$");
 
-        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(3);
+        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(HASHMAP_SIZE);
         namespacePrefixMapper.put("router", "router");        // FIXME: fill in with XSD
         namespacePrefixMapper.put("provider", "provider");    // FIXME: fill in with XSD
         namespacePrefixMapper.put("binding", "binding");
