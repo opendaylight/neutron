@@ -28,42 +28,42 @@ public class NeutronNetwork implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement (name = "id")
-    String networkUUID;              // network UUID
+    String networkUUID;
 
     @XmlElement (name = "name")
-    String networkName;              // name
+    String networkName;
 
     @XmlElement (defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;             // admin state up (true/false)
+    Boolean adminStateUp;
 
     @XmlElement (defaultValue = "false", name = "shared")
-    Boolean shared;                   // shared network or not
+    Boolean shared;
 
     @XmlElement (name = "tenant_id")
-    String tenantID;                 // tenant for this network
+    String tenantID;
 
     //    @XmlElement (defaultValue = "false", name = "router:external")
     @XmlElement (defaultValue="false", namespace="router", name="external")
-    Boolean routerExternal;           // network external or not
+    Boolean routerExternal;
 
     //    @XmlElement (defaultValue = "flat", name = "provider:network_type")
     @XmlElement (namespace="provider", name="network_type")
-    String providerNetworkType;      // provider network type (flat or vlan)
+    String providerNetworkType;
 
     //    @XmlElement (name = "provider:physical_network")
     @XmlElement (namespace="provider", name="physical_network")
-    String providerPhysicalNetwork;  // provider physical network (name)
+    String providerPhysicalNetwork;
 
     //    @XmlElement (name = "provider:segmentation_id")
     @XmlElement (namespace="provider", name="segmentation_id")
 
-    String providerSegmentationID;   // provide segmentation ID (vlan ID)
+    String providerSegmentationID;
 
     @XmlElement (name = "status")
-    String status;                   // status (read-only)
+    String status;
 
     @XmlElement (name = "subnets")
-    List<String> subnets;            // subnets (read-only)
+    List<String> subnets;
 
     @XmlElement (name="segments")
     List<NeutronNetwork_Segment> segments;

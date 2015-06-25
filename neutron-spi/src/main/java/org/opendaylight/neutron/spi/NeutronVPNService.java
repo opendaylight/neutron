@@ -37,7 +37,7 @@ public class NeutronVPNService implements Serializable, INeutronObject {
     String name;
 
     @XmlElement (defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;             // admin state up (true/false)
+    Boolean adminStateUp;
 
     @XmlElement (name = "subnet_id")
     String subnetUUID;

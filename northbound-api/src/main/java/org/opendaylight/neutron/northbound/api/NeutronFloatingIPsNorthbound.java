@@ -234,7 +234,7 @@ public class NeutronFloatingIPsNorthbound {
             // if port_id is specified, then check that the port exists and has at least one IP
             String port_id = singleton.getPortUUID();
             if (port_id != null) {
-                String fixedIP = null;        // used for the fixedIP calculation
+                String fixedIP = null;
                 if (!portInterface.portExists(port_id)) {
                     throw new ResourceNotFoundException("Port UUID doesn't exist.");
                 }
@@ -374,7 +374,7 @@ public class NeutronFloatingIPsNorthbound {
         // if port_id is specified, then check that the port exists and has at least one IP
         String port_id = singleton.getPortUUID();
         if (port_id != null) {
-            String fixedIP = null;        // used for the fixedIP calculation
+            String fixedIP = null;
             if (!portInterface.portExists(port_id)) {
                 throw new ResourceNotFoundException("Port UUID doesn't exist.");
             }

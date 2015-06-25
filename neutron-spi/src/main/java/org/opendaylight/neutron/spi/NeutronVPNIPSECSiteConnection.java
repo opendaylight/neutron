@@ -63,10 +63,10 @@ public class NeutronVPNIPSECSiteConnection implements Serializable, INeutronObje
     String initiator;
 
     @XmlElement (defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;             // admin state up (true/false)
+    Boolean adminStateUp;
 
     @XmlElement (name = "status")
-    String status;                   // status (read-only)
+    String status;
 
     @XmlElement (name = "ikepolicy_id")
     String ikePolicyID;
