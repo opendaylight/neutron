@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicates;
 import com.google.common.util.concurrent.CheckedFuture;
 
 public abstract class AbstractNeutronInterface<T extends DataObject,S> implements AutoCloseable {
@@ -26,12 +25,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
     private static final int DEDASHED_UUID_DIV3 = 16;
     private static final int DEDASHED_UUID_DIV4 = 20;
 
-
-    private ProviderContext providerContext;
     private DataBroker db;
 
     AbstractNeutronInterface(ProviderContext providerContext) {
-        this.providerContext = providerContext;
         this.db = providerContext.getSALService(DataBroker.class);
     }
 

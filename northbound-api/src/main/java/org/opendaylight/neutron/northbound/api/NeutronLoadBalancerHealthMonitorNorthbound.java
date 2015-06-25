@@ -32,7 +32,6 @@ import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronLoadBalancer;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 
 /**

@@ -8,9 +8,6 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
-import java.util.Hashtable;
-import java.util.Dictionary;
-
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
 
@@ -42,8 +39,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Activator extends DependencyActivatorBase {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Activator.class);
 
     @Override
     public void init(BundleContext context, DependencyManager manager) throws Exception {
