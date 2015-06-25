@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.lang.Exception;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.Inet6Address;

@@ -62,16 +62,16 @@ import org.opendaylight.neutron.spi.Neutron_IPs;
 @Path("/ports")
 public class NeutronPortsNorthbound {
 
-    final String mac_regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
-
-    static private final int HTTP_OK_BOTTOM = 200;
-    static private final int HTTP_OK_TOP = 299;
+    private static final int HTTP_OK_BOTTOM = 200;
+    private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Port CRUD Interface";
     private static final String UUID_NO_EXIST = "Port UUID does not exist.";
     private static final String UUID_EXISTS = "Port UUID already exists.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
     private static final String NET_UUID_MATCH = "Network UUID must match that of subnet";
+
+    final String mac_regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
 
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
