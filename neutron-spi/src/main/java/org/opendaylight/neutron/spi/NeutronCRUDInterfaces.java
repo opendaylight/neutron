@@ -53,21 +53,6 @@ public class NeutronCRUDInterfaces {
         return answer;
     }
 
-    public static INeutronFirewallCRUD getINeutronFirewallCRUD(Object o) {
-        INeutronFirewallCRUD answer = (INeutronFirewallCRUD) getInstances(INeutronFirewallCRUD.class, o);
-        return answer;
-    }
-
-    public static INeutronFirewallPolicyCRUD getINeutronFirewallPolicyCRUD(Object o) {
-        INeutronFirewallPolicyCRUD answer = (INeutronFirewallPolicyCRUD) getInstances(INeutronFirewallPolicyCRUD.class, o);
-        return answer;
-    }
-
-    public static INeutronFirewallRuleCRUD getINeutronFirewallRuleCRUD(Object o) {
-        INeutronFirewallRuleCRUD answer = (INeutronFirewallRuleCRUD) getInstances(INeutronFirewallRuleCRUD.class, o);
-        return answer;
-    }
-
     public static INeutronLoadBalancerCRUD getINeutronLoadBalancerCRUD(Object o) {
         INeutronLoadBalancerCRUD answer = (INeutronLoadBalancerCRUD) getInstances(INeutronLoadBalancerCRUD.class, o);
         return answer;

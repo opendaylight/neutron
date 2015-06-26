@@ -14,9 +14,6 @@ import java.util.Dictionary;
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
 
-import org.opendaylight.neutron.spi.INeutronFirewallAware;
-import org.opendaylight.neutron.spi.INeutronFirewallPolicyAware;
-import org.opendaylight.neutron.spi.INeutronFirewallRuleAware;
 import org.opendaylight.neutron.spi.INeutronFloatingIPAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorAware;
@@ -47,15 +44,6 @@ public class Activator extends DependencyActivatorBase {
 
     @Override
     public void init(BundleContext context, DependencyManager manager) throws Exception {
-       manager.add(createComponent().setInterface(new String[] {
-           INeutronFirewallAware.class.getName()}, null)
-           .setImplementation(NeutronFirewallDummyProvider.class));
-       manager.add(createComponent().setInterface(new String[] {
-           INeutronFirewallPolicyAware.class.getName()}, null)
-           .setImplementation(NeutronFirewallPolicyDummyProvider.class));
-       manager.add(createComponent().setInterface(new String[] {
-           INeutronFirewallRuleAware.class.getName()}, null)
-           .setImplementation(NeutronFirewallRuleDummyProvider.class));
        manager.add(createComponent().setInterface(new String[] {
            INeutronFloatingIPAware.class.getName()}, null)
            .setImplementation(NeutronFloatingIPDummyProvider.class));

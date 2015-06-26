@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
-import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
-import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
-import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
@@ -80,24 +77,6 @@ public class Activator implements BundleActivator {
         ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
         if(neutronSecurityRuleInterfaceRegistration != null) {
             registrations.add(neutronSecurityRuleInterfaceRegistration);
-        }
-
-        NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
-        ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
-        if(neutronFirewallInterfaceRegistration != null) {
-            registrations.add(neutronFirewallInterfaceRegistration);
-        }
-
-        NeutronFirewallPolicyInterface neutronFirewallPolicyInterface = new NeutronFirewallPolicyInterface(providerContext);
-        ServiceRegistration<INeutronFirewallPolicyCRUD> neutronFirewallPolicyInterfaceRegistration = context.registerService(INeutronFirewallPolicyCRUD.class, neutronFirewallPolicyInterface, null);
-        if(neutronFirewallPolicyInterfaceRegistration != null) {
-            registrations.add(neutronFirewallPolicyInterfaceRegistration);
-        }
-
-        NeutronFirewallRuleInterface neutronFirewallRuleInterface = new NeutronFirewallRuleInterface(providerContext);
-        ServiceRegistration<INeutronFirewallRuleCRUD> neutronFirewallRuleInterfaceRegistration = context.registerService(INeutronFirewallRuleCRUD.class, neutronFirewallRuleInterface, null);
-        if(neutronFirewallRuleInterfaceRegistration != null) {
-            registrations.add(neutronFirewallRuleInterfaceRegistration);
         }
 
         NeutronLoadBalancerInterface neutronLoadBalancerInterface = new NeutronLoadBalancerInterface(providerContext);

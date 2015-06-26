@@ -35,9 +35,6 @@ public class NeutronNorthboundRSApplication extends Application {
         classes.add(NeutronFloatingIPsNorthbound.class);
         classes.add(NeutronSecurityGroupsNorthbound.class);
         classes.add(NeutronSecurityRulesNorthbound.class);
-        classes.add(NeutronFirewallNorthbound.class);
-        classes.add(NeutronFirewallPolicyNorthbound.class);
-        classes.add(NeutronFirewallRulesNorthbound.class);
         classes.add(NeutronLoadBalancerNorthbound.class);
         classes.add(NeutronLoadBalancerListenerNorthbound.class);
         classes.add(NeutronLoadBalancerPoolNorthbound.class);
