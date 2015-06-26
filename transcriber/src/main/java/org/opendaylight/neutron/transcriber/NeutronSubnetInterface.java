@@ -73,7 +73,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }

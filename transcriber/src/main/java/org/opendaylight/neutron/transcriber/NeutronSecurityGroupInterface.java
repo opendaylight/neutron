@@ -63,7 +63,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }

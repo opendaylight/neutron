@@ -58,7 +58,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage());
                     return false;
                 }
             }
