@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronVPNServiceAware;
 import org.opendaylight.neutron.spi.NeutronVPNService;
 
@@ -17,32 +19,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNServiceDummyProvider implements INeutronVPNServiceAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronVPNServiceDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceDummyProvider.class);
 
     public NeutronVPNServiceDummyProvider() {
     }
 
     public int canCreateNeutronVPNService(NeutronVPNService vpnService) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNServiceCreated(NeutronVPNService vpnService) {
-        logger.info(vpnService.toString());
+        LOGGER.info(vpnService.toString());
     }
 
     public int canUpdateNeutronVPNService(NeutronVPNService delta, NeutronVPNService original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNServiceUpdated(NeutronVPNService vpnService) {
-        logger.info(vpnService.toString());
+        LOGGER.info(vpnService.toString());
     }
 
     public int canDeleteNeutronVPNService(NeutronVPNService vpnService) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronVPNServiceDeleted(NeutronVPNService vpnService) {
-        logger.info(vpnService.toString());
+        LOGGER.info(vpnService.toString());
     }
 }

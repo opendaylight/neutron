@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.dummyprovider;
 
+import java.net.HttpURLConnection;
+
 import org.opendaylight.neutron.spi.INeutronNetworkAware;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 
@@ -17,32 +19,32 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronNetworkDummyProvider implements INeutronNetworkAware {
 
-    private static final Logger logger = LoggerFactory.getLogger(NeutronNetworkDummyProvider.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkDummyProvider.class);
 
     public NeutronNetworkDummyProvider() {
     }
 
     public int canCreateNetwork(NeutronNetwork network) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronNetworkCreated(NeutronNetwork network) {
-        logger.info(network.toString());
+        LOGGER.info(network.toString());
     }
 
     public int canUpdateNetwork(NeutronNetwork delta, NeutronNetwork original) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronNetworkUpdated(NeutronNetwork network) {
-        logger.info(network.toString());
+        LOGGER.info(network.toString());
     }
 
     public int canDeleteNetwork(NeutronNetwork network) {
-        return(200);
+        return(HttpURLConnection.HTTP_OK);
     }
 
     public void neutronNetworkDeleted(NeutronNetwork network) {
-        logger.info(network.toString());
+        LOGGER.info(network.toString());
     }
 }

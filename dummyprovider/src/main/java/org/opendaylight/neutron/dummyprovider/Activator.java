@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 
 public class Activator extends DependencyActivatorBase {
 
-    private static final Logger logger = LoggerFactory.getLogger(Activator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Activator.class);
 
     @Override
     public void init(BundleContext context, DependencyManager manager) throws Exception {
