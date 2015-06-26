@@ -242,11 +242,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
             while (i.hasNext()) {
                 NeutronLoadBalancerHealthMonitor test = i.next();
-
-                /*
-                 *  Verify that the firewall policy doesn't already exist
-                 */
-
                 if (loadBalancerHealthMonitorInterface
                         .neutronLoadBalancerHealthMonitorExists(test.getLoadBalancerHealthMonitorID())) {
                     throw new BadRequestException("LoadBalancerHealthMonitor UUID already is already created");

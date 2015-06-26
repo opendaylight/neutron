@@ -95,14 +95,12 @@ public class NeutronLoadBalancerListenerNorthbound {
             // sorting not supported
     ) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerCRUD(this);
-        //        INeutronLoadBalancerListenerRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerListenerRuleCRUD(this);
 
         if (loadBalancerListenerInterface == null) {
             throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAllNeutronLoadBalancerListeners();
-        //        List<NeutronLoadBalancerListenerRule> allLoadBalancerListenerRules = firewallRuleInterface.getAllNeutronLoadBalancerListenerRules();
         List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
         //        List<NeutronLoadBalancerListenerRule> rules = new ArrayList<NeutronLoadBalancerListenerRule>();
         Iterator<NeutronLoadBalancerListener> i = allLoadBalancerListeners.iterator();
@@ -229,10 +227,6 @@ public class NeutronLoadBalancerListenerNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerListenerAware.class, this);
             while (i.hasNext()) {
                 NeutronLoadBalancerListener test = i.next();
-
-                /*
-                 *  Verify that the firewall policy doesn't already exist
-                 */
 
                 if (loadBalancerListenerInterface.neutronLoadBalancerListenerExists(test.getLoadBalancerListenerID())) {
                     throw new BadRequestException("LoadBalancerListener UUID already is already created");
