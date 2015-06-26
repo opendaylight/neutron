@@ -25,7 +25,7 @@ public interface INeutronNetworkAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNetwork(NeutronNetwork network);
+    int canCreateNetwork(NeutronNetwork network);
 
     /**
      * Services provide this interface method for taking action after a network has been created
@@ -33,7 +33,7 @@ public interface INeutronNetworkAware {
      * @param network
      *            instance of new Neutron Network object
      */
-    public void neutronNetworkCreated(NeutronNetwork network);
+    void neutronNetworkCreated(NeutronNetwork network);
 
     /**
      * Services provide this interface method to indicate if the specified network can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronNetworkAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNetwork(NeutronNetwork delta, NeutronNetwork original);
+    int canUpdateNetwork(NeutronNetwork delta, NeutronNetwork original);
 
     /**
      * Services provide this interface method for taking action after a network has been updated
@@ -56,7 +56,7 @@ public interface INeutronNetworkAware {
      * @param network
      *            instance of modified Neutron Network object
      */
-    public void neutronNetworkUpdated(NeutronNetwork network);
+    void neutronNetworkUpdated(NeutronNetwork network);
 
     /**
      * Services provide this interface method to indicate if the specified network can be deleted
@@ -68,7 +68,7 @@ public interface INeutronNetworkAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNetwork(NeutronNetwork network);
+    int canDeleteNetwork(NeutronNetwork network);
 
     /**
      * Services provide this interface method for taking action after a network has been deleted
@@ -76,5 +76,5 @@ public interface INeutronNetworkAware {
      * @param network
      *            instance of deleted Neutron Network object
      */
-    public void neutronNetworkDeleted(NeutronNetwork network);
+    void neutronNetworkDeleted(NeutronNetwork network);
 }

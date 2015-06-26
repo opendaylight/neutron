@@ -25,7 +25,7 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      * @return boolean
      */
 
-    public boolean neutronLoadBalancerHealthMonitorExists(String uuid);
+    boolean neutronLoadBalancerHealthMonitorExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -37,7 +37,7 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      *          OpenStackLoadBalancerHealthMonitor class
      */
 
-    public NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid);
+    NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid);
 
     /**
      * Applications call this interface method to return all LoadBalancerHealthMonitor objects
@@ -45,7 +45,7 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors();
+    List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors();
 
     /**
      * Applications call this interface method to add a LoadBalancerHealthMonitor object to the
@@ -56,7 +56,7 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor input);
+    boolean addNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor input);
 
     /**
      * Applications call this interface method to remove a Neutron LoadBalancerHealthMonitor object to the
@@ -67,7 +67,7 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronLoadBalancerHealthMonitor(String uuid);
+    boolean removeNeutronLoadBalancerHealthMonitor(String uuid);
 
     /**
      * Applications call this interface method to edit a LoadBalancerHealthMonitor object
@@ -79,7 +79,7 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronLoadBalancerHealthMonitor(String uuid, NeutronLoadBalancerHealthMonitor delta);
+    boolean updateNeutronLoadBalancerHealthMonitor(String uuid, NeutronLoadBalancerHealthMonitor delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -90,6 +90,6 @@ public interface INeutronLoadBalancerHealthMonitorCRUD {
      * port or not
      */
 
-    public boolean neutronLoadBalancerHealthMonitorInUse(String uuid);
+    boolean neutronLoadBalancerHealthMonitorInUse(String uuid);
 
 }

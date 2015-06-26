@@ -25,7 +25,7 @@ public interface INeutronVPNServiceAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronVPNService(NeutronVPNService vpnService);
+    int canCreateNeutronVPNService(NeutronVPNService vpnService);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNService has been created
@@ -33,7 +33,7 @@ public interface INeutronVPNServiceAware {
      * @param vpnService
      *            instance of new NeutronVPNService object
      */
-    public void neutronVPNServiceCreated(NeutronVPNService vpnService);
+    void neutronVPNServiceCreated(NeutronVPNService vpnService);
 
     /**
      * Services provide this interface method to indicate if the
@@ -49,7 +49,7 @@ public interface INeutronVPNServiceAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronVPNService(NeutronVPNService delta, NeutronVPNService original);
+    int canUpdateNeutronVPNService(NeutronVPNService delta, NeutronVPNService original);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNService has been updated
@@ -57,7 +57,7 @@ public interface INeutronVPNServiceAware {
      * @param vpnService
      *            instance of modified NeutronVPNService object
      */
-    public void neutronVPNServiceUpdated(NeutronVPNService vpnService);
+    void neutronVPNServiceUpdated(NeutronVPNService vpnService);
 
     /**
      * Services provide this interface method to indicate if the specified NeutronVPNService can be deleted
@@ -69,7 +69,7 @@ public interface INeutronVPNServiceAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronVPNService(NeutronVPNService vpnService);
+    int canDeleteNeutronVPNService(NeutronVPNService vpnService);
 
     /**
      * Services provide this interface method for taking action after a NeutronVPNService has been deleted
@@ -77,5 +77,5 @@ public interface INeutronVPNServiceAware {
      * @param vpnService
      *            instance of deleted NeutronVPNService object
      */
-    public void neutronVPNServiceDeleted(NeutronVPNService vpnService);
+    void neutronVPNServiceDeleted(NeutronVPNService vpnService);
 }

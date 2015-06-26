@@ -25,7 +25,7 @@ public interface INeutronPortAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreatePort(NeutronPort port);
+    int canCreatePort(NeutronPort port);
 
     /**
      * Services provide this interface method for taking action after a port has been created
@@ -33,7 +33,7 @@ public interface INeutronPortAware {
      * @param port
      *            instance of new Neutron Port object
      */
-    public void neutronPortCreated(NeutronPort port);
+    void neutronPortCreated(NeutronPort port);
 
     /**
      * Services provide this interface method to indicate if the specified port can be changed using the specified
@@ -48,7 +48,7 @@ public interface INeutronPortAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdatePort(NeutronPort delta, NeutronPort original);
+    int canUpdatePort(NeutronPort delta, NeutronPort original);
 
     /**
      * Services provide this interface method for taking action after a port has been updated
@@ -56,7 +56,7 @@ public interface INeutronPortAware {
      * @param port
      *            instance of modified Neutron Port object
      */
-    public void neutronPortUpdated(NeutronPort port);
+    void neutronPortUpdated(NeutronPort port);
 
     /**
      * Services provide this interface method to indicate if the specified port can be deleted
@@ -68,7 +68,7 @@ public interface INeutronPortAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeletePort(NeutronPort port);
+    int canDeletePort(NeutronPort port);
 
     /**
      * Services provide this interface method for taking action after a port has been deleted
@@ -76,5 +76,5 @@ public interface INeutronPortAware {
      * @param port
      *            instance of deleted Port Network object
      */
-    public void neutronPortDeleted(NeutronPort port);
+    void neutronPortDeleted(NeutronPort port);
 }

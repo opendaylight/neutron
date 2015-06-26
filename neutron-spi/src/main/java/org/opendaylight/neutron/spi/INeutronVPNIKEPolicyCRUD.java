@@ -21,7 +21,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      * @return boolean
      */
 
-    public boolean neutronVPNIKEPolicyExists(String uuid);
+    boolean neutronVPNIKEPolicyExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -33,7 +33,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      *          OpenStackNeutronVPNIKEPolicy class
      */
 
-    public NeutronVPNIKEPolicy getNeutronVPNIKEPolicy(String uuid);
+    NeutronVPNIKEPolicy getNeutronVPNIKEPolicy(String uuid);
 
     /**
      * Applications call this interface method to return all NeutronVPNIKEPolicy objects
@@ -41,7 +41,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies();
+    List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies();
 
     /**
      * Applications call this interface method to add a NeutronVPNIKEPolicy object to the
@@ -52,7 +52,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronVPNIKEPolicy(NeutronVPNIKEPolicy input);
+    boolean addNeutronVPNIKEPolicy(NeutronVPNIKEPolicy input);
 
     /**
      * Applications call this interface method to remove a Neutron NeutronVPNIKEPolicy object to the
@@ -63,7 +63,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronVPNIKEPolicy(String uuid);
+    boolean removeNeutronVPNIKEPolicy(String uuid);
 
     /**
      * Applications call this interface method to edit a NeutronVPNIKEPolicy object
@@ -75,7 +75,7 @@ public interface INeutronVPNIKEPolicyCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronVPNIKEPolicy(String uuid, NeutronVPNIKEPolicy delta);
+    boolean updateNeutronVPNIKEPolicy(String uuid, NeutronVPNIKEPolicy delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -86,6 +86,6 @@ public interface INeutronVPNIKEPolicyCRUD {
      * port or not
      */
 
-    public boolean neutronVPNIKEPolicyInUse(String uuid);
+    boolean neutronVPNIKEPolicyInUse(String uuid);
 
 }

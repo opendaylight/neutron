@@ -25,7 +25,7 @@ public interface INeutronLoadBalancerAware {
      *            results in the create operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canCreateNeutronLoadBalancer(NeutronLoadBalancer loadBalancer);
+    int canCreateNeutronLoadBalancer(NeutronLoadBalancer loadBalancer);
 
     /**
      * Services provide this interface method for taking action after a loadBalancer has been created
@@ -33,7 +33,7 @@ public interface INeutronLoadBalancerAware {
      * @param loadBalancer
      *            instance of new LoadBalancer object
      */
-    public void neutronLoadBalancerCreated(NeutronLoadBalancer loadBalancer);
+    void neutronLoadBalancerCreated(NeutronLoadBalancer loadBalancer);
 
     /**
      * Services provide this interface method to indicate if the
@@ -49,7 +49,7 @@ public interface INeutronLoadBalancerAware {
      *            results in the update operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canUpdateNeutronLoadBalancer(NeutronLoadBalancer delta, NeutronLoadBalancer original);
+    int canUpdateNeutronLoadBalancer(NeutronLoadBalancer delta, NeutronLoadBalancer original);
 
     /**
      * Services provide this interface method for taking action after a loadBalancer has been updated
@@ -57,7 +57,7 @@ public interface INeutronLoadBalancerAware {
      * @param loadBalancer
      *            instance of modified LoadBalancer object
      */
-    public void neutronLoadBalancerUpdated(NeutronLoadBalancer loadBalancer);
+    void neutronLoadBalancerUpdated(NeutronLoadBalancer loadBalancer);
 
     /**
      * Services provide this interface method to indicate if the specified loadBalancer can be deleted
@@ -69,7 +69,7 @@ public interface INeutronLoadBalancerAware {
      *            results in the delete operation being interrupted and the returned status value reflected in the
      *            HTTP response.
      */
-    public int canDeleteNeutronLoadBalancer(NeutronLoadBalancer loadBalancer);
+    int canDeleteNeutronLoadBalancer(NeutronLoadBalancer loadBalancer);
 
     /**
      * Services provide this interface method for taking action after a loadBalancer has been deleted
@@ -77,5 +77,5 @@ public interface INeutronLoadBalancerAware {
      * @param loadBalancer
      *            instance of deleted LoadBalancer object
      */
-    public void neutronLoadBalancerDeleted(NeutronLoadBalancer loadBalancer);
+    void neutronLoadBalancerDeleted(NeutronLoadBalancer loadBalancer);
 }

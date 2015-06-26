@@ -21,7 +21,7 @@ public interface INeutronVPNIPSECPolicyCRUD {
      * @return boolean
      */
 
-    public boolean neutronVPNIPSECPolicyExists(String uuid);
+    boolean neutronVPNIPSECPolicyExists(String uuid);
 
     /**
      * Applications call this interface method to return if a particular
@@ -33,7 +33,7 @@ public interface INeutronVPNIPSECPolicyCRUD {
      *          OpenStackNeutronVPNIPSECPolicy class
      */
 
-    public NeutronVPNIPSECPolicy getNeutronVPNIPSECPolicy(String uuid);
+    NeutronVPNIPSECPolicy getNeutronVPNIPSECPolicy(String uuid);
 
     /**
      * Applications call this interface method to return all NeutronVPNIPSECPolicy objects
@@ -41,7 +41,7 @@ public interface INeutronVPNIPSECPolicyCRUD {
      * @return List of OpenStackNetworks objects
      */
 
-    public List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies();
+    List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies();
 
     /**
      * Applications call this interface method to add a NeutronVPNIPSECPolicy object to the
@@ -52,7 +52,7 @@ public interface INeutronVPNIPSECPolicyCRUD {
      * @return boolean on whether the object was added or not
      */
 
-    public boolean addNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy input);
+    boolean addNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy input);
 
     /**
      * Applications call this interface method to remove a Neutron NeutronVPNIPSECPolicy object to the
@@ -63,7 +63,7 @@ public interface INeutronVPNIPSECPolicyCRUD {
      * @return boolean on whether the object was removed or not
      */
 
-    public boolean removeNeutronVPNIPSECPolicy(String uuid);
+    boolean removeNeutronVPNIPSECPolicy(String uuid);
 
     /**
      * Applications call this interface method to edit a NeutronVPNIPSECPolicy object
@@ -75,7 +75,7 @@ public interface INeutronVPNIPSECPolicyCRUD {
      * @return boolean on whether the object was updated or not
      */
 
-    public boolean updateNeutronVPNIPSECPolicy(String uuid, NeutronVPNIPSECPolicy delta);
+    boolean updateNeutronVPNIPSECPolicy(String uuid, NeutronVPNIPSECPolicy delta);
 
     /**
      * Applications call this interface method to see if a MAC address is in use
@@ -86,6 +86,6 @@ public interface INeutronVPNIPSECPolicyCRUD {
      * port or not
      */
 
-    public boolean neutronVPNIPSECPolicyInUse(String uuid);
+    boolean neutronVPNIPSECPolicyInUse(String uuid);
 
 }
