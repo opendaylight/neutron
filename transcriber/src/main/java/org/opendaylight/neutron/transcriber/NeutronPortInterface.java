@@ -138,10 +138,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
             if (ip.getIpAddress() == null) {
                 ip.setIpAddress(subnet.getLowAddr());
             }
-            if (!ip.getIpAddress().equals(subnet.getGatewayIP())) {
-                subnet.allocateIP(ip.getIpAddress());
-            }
-            else {
+            if (ip.getIpAddress().equals(subnet.getGatewayIP())) {
                 subnet.setGatewayIPAllocated();
             }
             subnet.addPort(input);
@@ -169,10 +166,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         while (fixedIPIterator.hasNext()) {
             Neutron_IPs ip = fixedIPIterator.next();
             NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
-            if (!ip.getIpAddress().equals(subnet.getGatewayIP())) {
-                subnet.releaseIP(ip.getIpAddress());
-            }
-            else {
+            if (ip.getIpAddress().equals(subnet.getGatewayIP())) {
                 subnet.resetGatewayIPAllocated();
             }
             subnet.removePort(port);
@@ -186,22 +180,14 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
             return false;
         }
         NeutronPort target = portDB.get(uuid);
-        // remove old Fixed_IPs
         if (delta.getFixedIPs() != null) {
             NeutronPort port = getPort(uuid);
             INeutronSubnetCRUD systemCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
-            for (Neutron_IPs ip: port.getFixedIPs()) {
-                NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
-                subnet.releaseIP(ip.getIpAddress());
-            }
-
-            // allocate new Fixed_IPs
             for (Neutron_IPs ip: delta.getFixedIPs()) {
                 NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
                 if (ip.getIpAddress() == null) {
                     ip.setIpAddress(subnet.getLowAddr());
                 }
-                subnet.allocateIP(ip.getIpAddress());
             }
         }
         return overwrite(target, delta);
