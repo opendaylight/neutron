@@ -169,6 +169,10 @@ public class ITNeutronE2E {
     // tests related to bug 3812
        Neutron_Bug3812_Tests bugTest = new Neutron_Bug3812_Tests(base);
        bugTest.check_bug3812();
+
+    // tempest PortsIpV6TestJSON.test_create_port_in_allowd_allocation_pools
+       Tempest_PortsIpV6TestJSON tpv6runner = new Tempest_PortsIpV6TestJSON(base);
+       tpv6runner.test_create_port_in_allowed_allocation_pools();
     }
 
     static HttpURLConnection HttpURLConnectionFactoryGet(URL url) throws Exception {
