@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_d1897ccb",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronLoadBalancerHealthMonitorNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove this line",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_919304fa",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronMeteringLabelRulesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove this line",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_b19080ed",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronMeteringLabelRulesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove this line",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_51bd6c67",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronMeteringLabelsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_71c2e8ea",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronMeteringLabelsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_31bc7069",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNIKEPoliciesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_d1b09c8d",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNIKEPoliciesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_f1ad9832",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNIPSECPoliciesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_91aa2418",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNIPSECPoliciesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_b1a7204f",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNIPSECSiteConnectionsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_51648c21",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNIPSECSiteConnectionsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_716988f8",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronVPNServicesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_116e1402",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_317310eb",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityGroupInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_d1773cd3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSubnetInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "r",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_9181c491",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSubnetInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-06-29T14:15:40Z",
+      "side": 1,
+      "message": "r them all",
+      "revId": "2feea45b435238ca0f8c40ecb32d292ec7f8338e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
