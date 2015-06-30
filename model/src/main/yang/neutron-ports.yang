@@ -54,12 +54,19 @@ module neutron-ports {
         list extra-dhcp-opts {
             description "Extra DHCP options";
             reference "http://developer.openstack.org/api-ref-networking-v2.html";
+            key "opt-name ip-version";
             leaf opt-name {
                 type string;
             }
             leaf opt-value {
                 type string;
             }
+            leaf ip-version {
+		type enumeration {
+		    enum 4;
+		    enum 6;
+		}
+	    }
         }
         leaf device-owner {
             type string;
