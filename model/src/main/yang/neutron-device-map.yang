@@ -1,0 +1,139 @@
+/*
+ * Copyright (c) 2015 Cisco Systems, Inc. All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-device-map {
+
+	yang-version 1;
+
+	namespace "urn:odl:yang:neutron:network:device:map";
+
+    prefix "device-map";
+
+    import ietf-yang-types {
+        prefix "yang";
+        revision-date "2013-07-15";
+    }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "wdec@cisco.com";
+
+    revision 2015-06-30 {
+         description  "Initial revision.";
+    }
+
+//General definitions
+
+  typedef device-type {
+      type enumeration {
+          enum vhostuser;
+          enum ovs;
+      }
+  }
+
+    typedef vlan-tag {
+        type uint16 {
+          range "1..4094";
+        }
+    }
+    typedef vni-tag {
+        type uint32 {
+          range "1..16777215";
+        }
+    }
+
+//Main module begins
+
+  container neutron_net_map {
+
+      list physicalNetwork {
+        key name;
+
+        leaf name {
+          description "Neutron Physical Provider name";
+          type string;
+        }
+
+        leaf networkUUID {
+          type yang:uuid;
+        }
+
+        container network-type {
+          choice network-type {
+            case network-type-vlan {
+              container vlan-range {
+                leaf start {
+                type vlan-tag;
+                }
+                leaf end {
+                  type vlan-tag;
+                  must "current() >= ../start"{}
+                }
+              }
+            }
+            case network-type-flat {
+              container network-type-flat {
+                presence "Flat network";
+              }
+            }
+            case network-type-vxlan {
+              container vni-range {
+                leaf start {
+                type vni-tag;
+                }
+                leaf end {
+                  type vni-tag;
+                  must "current() >= ../start"{}
+                }
+              }
+            }
+          }
+        }
+
+        list device {
+          key device-name;
+
+          leaf device-name {
+            type string;
+          }
+          leaf device-type {
+            type device-type;
+            mandatory true;
+          }
+
+          leaf int-bridge-name {
+          //Only Applicable to OVS
+            type string;
+            default "br-int";
+          }
+
+          leaf ext-bridge-name {
+          //Only Applicable to OVS
+            type string;
+            default "br-ex";
+          }
+
+          list interface {
+            key macAddress;
+
+            leaf macAddress {
+              description "MAC address of the physical interface";
+              //type string;
+              type yang:mac-address;
+            }
+
+            leaf interface-name {
+              description "Physical interface name on the device";
+              type string;
+            }
+          }
+        }
+      }
+  }
+}
+
