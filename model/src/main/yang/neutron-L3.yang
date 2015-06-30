@@ -154,6 +154,7 @@ module neutron-L3 {
                 }
                 list interfaces {
                     description "List of interfaces associated with this router object.";
+                    key "uuid";
                     uses interface-attrs;
                 }
             }

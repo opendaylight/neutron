@@ -78,6 +78,7 @@ module neutron-metering {
         container metering-labels {
             description "Container for metering labels.";
             list metering-label {
+                key "uuid";
                 uses attrs:base-attrs;
                 uses metering-label-attrs;
                 description "List of Metering Labels.";
@@ -88,6 +89,7 @@ module neutron-metering {
         container metering-rules {
             description " Container for metering rules.";
             list metering-rule {
+                key "id";
                 uses metering-rule-attrs;
                 description "List of Metering Rules.";
             }
