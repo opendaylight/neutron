@@ -166,7 +166,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         while (fixedIPIterator.hasNext()) {
             Neutron_IPs ip = fixedIPIterator.next();
             NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
-            if (ip.getIpAddress().equals(subnet.getGatewayIP())) {
+            if (subnet != null && ip.getIpAddress().equals(subnet.getGatewayIP())) {
                 subnet.resetGatewayIPAllocated();
             }
             subnet.removePort(port);
