@@ -44,6 +44,6 @@ public class NeutronFirewallDummyProvider implements INeutronFirewallAware {
     }
   
     public void neutronFirewallDeleted(NeutronFirewall firewall) {
-        LOGGER.info(firewall.toString());
+        LOGGER.info(firewall.getFirewallUUID()+" deleted");
     }
 }

@@ -41,6 +41,6 @@ public class NeutronFirewallRuleDummyProvider implements INeutronFirewallRuleAwa
     }
 
     public void neutronFirewallRuleDeleted(NeutronFirewallRule firewallRule) {
-        LOGGER.info(firewallRule.toString());
+        LOGGER.info(firewallRule.getFirewallRuleUUID()+" deleted");
     }
 }

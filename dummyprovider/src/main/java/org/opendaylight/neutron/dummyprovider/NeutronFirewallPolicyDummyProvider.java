@@ -45,6 +45,6 @@ public class NeutronFirewallPolicyDummyProvider implements INeutronFirewallPolic
     }
 
     public void neutronFirewallPolicyDeleted(NeutronFirewallPolicy firewallPolicy) {
-        LOGGER.info(firewallPolicy.toString());
+        LOGGER.info(firewallPolicy.getFirewallPolicyUUID()+" deleted");
     }
 }

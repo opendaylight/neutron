@@ -45,7 +45,7 @@ public class NeutronRouterDummyProvider implements INeutronRouterAware {
     }
 
     public void neutronRouterDeleted(NeutronRouter router) {
-        LOGGER.info(router.toString());
+        LOGGER.info(router.getID()+" deleted");
     }
 
     public int canAttachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface) {

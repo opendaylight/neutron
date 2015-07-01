@@ -37,6 +37,6 @@ public class NeutronMeteringLabelDummyProvider implements INeutronMeteringLabelA
     }
 
     public void neutronMeteringLabelDeleted(NeutronMeteringLabel meteringLabel) {
-        LOGGER.info(meteringLabel.toString());
+        LOGGER.info(meteringLabel.getMeteringLabelUUID()+" deleted");
     }
 }

@@ -44,6 +44,6 @@ public class NeutronFloatingIPDummyProvider implements INeutronFloatingIPAware {
     }
 
     public void neutronFloatingIPDeleted(NeutronFloatingIP floatingIP) {
-        LOGGER.info(floatingIP.toString());
+        LOGGER.info(floatingIP.getID()+" deleted");
     }
 }
