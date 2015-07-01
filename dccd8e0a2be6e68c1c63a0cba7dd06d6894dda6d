@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_68ad1288",
+        "filename": "dummyprovider/src/main/java/org/opendaylight/neutron/dummyprovider/NeutronLoadBalancerPoolDummyProvider.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-01T18:41:31Z",
+      "side": 1,
+      "message": "\"neutron pool deleted\"",
+      "range": {
+        "startLine": 46,
+        "startChar": 63,
+        "endLine": 46,
+        "endChar": 70
+      },
+      "revId": "dccd8e0a2be6e68c1c63a0cba7dd06d6894dda6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
