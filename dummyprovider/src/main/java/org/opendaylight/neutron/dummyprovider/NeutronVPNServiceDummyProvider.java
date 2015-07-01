@@ -45,6 +45,6 @@ public class NeutronVPNServiceDummyProvider implements INeutronVPNServiceAware {
     }
 
     public void neutronVPNServiceDeleted(NeutronVPNService vpnService) {
-        LOGGER.info(vpnService.toString());
+        LOGGER.info(vpnService.getID()+" deleted");
     }
 }

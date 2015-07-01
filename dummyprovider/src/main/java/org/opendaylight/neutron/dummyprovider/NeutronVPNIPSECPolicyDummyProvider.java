@@ -45,6 +45,6 @@ public class NeutronVPNIPSECPolicyDummyProvider implements INeutronVPNIPSECPolic
     }
 
     public void neutronVPNIPSECPolicyDeleted(NeutronVPNIPSECPolicy ipsecPolicy) {
-        LOGGER.info(ipsecPolicy.toString());
+        LOGGER.info(ipsecPolicy.getID()+" deleted");
     }
 }

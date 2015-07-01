@@ -45,6 +45,6 @@ public class NeutronNetworkDummyProvider implements INeutronNetworkAware {
     }
 
     public void neutronNetworkDeleted(NeutronNetwork network) {
-        LOGGER.info(network.toString());
+        LOGGER.info(network.getID()+" deleted");
     }
 }
