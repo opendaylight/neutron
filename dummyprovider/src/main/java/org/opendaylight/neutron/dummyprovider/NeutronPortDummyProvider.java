@@ -44,6 +44,6 @@ public class NeutronPortDummyProvider implements INeutronPortAware {
     }
 
     public void neutronPortDeleted(NeutronPort port) {
-        LOGGER.info(port.toString());
+        LOGGER.info(port.getID()+" deleted");
     }
 }

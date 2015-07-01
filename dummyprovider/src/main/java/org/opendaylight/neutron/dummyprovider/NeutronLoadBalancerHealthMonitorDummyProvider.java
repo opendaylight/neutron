@@ -45,7 +45,6 @@ public class NeutronLoadBalancerHealthMonitorDummyProvider implements INeutronLo
     }
 
     public void neutronLoadBalancerHealthMonitorDeleted(NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor) {
-        LOGGER.info(loadBalancerHealthMonitor.toString());
+        LOGGER.info(loadBalancerHealthMonitor.getLoadBalancerHealthMonitorID()+" deleted");
     }
-
 }
