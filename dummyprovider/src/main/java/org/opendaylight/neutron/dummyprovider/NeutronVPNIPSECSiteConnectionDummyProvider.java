@@ -45,6 +45,6 @@ public class NeutronVPNIPSECSiteConnectionDummyProvider implements INeutronVPNIP
     }
 
     public void neutronVPNIPSECSiteConnectionDeleted(NeutronVPNIPSECSiteConnection ikeSiteConnection) {
-        LOGGER.info(ikeSiteConnection.toString());
+        LOGGER.info(ikeSiteConnection.getID()+" deleted");
     }
 }
