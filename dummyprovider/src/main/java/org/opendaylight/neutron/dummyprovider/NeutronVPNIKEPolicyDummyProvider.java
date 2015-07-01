@@ -45,6 +45,6 @@ public class NeutronVPNIKEPolicyDummyProvider implements INeutronVPNIKEPolicyAwa
     }
 
     public void neutronVPNIKEPolicyDeleted(NeutronVPNIKEPolicy ikePolicy) {
-        LOGGER.info(ikePolicy.toString());
+        LOGGER.info(ikePolicy.getID()+" deleted");
     }
 }

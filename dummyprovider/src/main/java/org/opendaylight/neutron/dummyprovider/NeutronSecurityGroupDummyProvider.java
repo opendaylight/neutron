@@ -44,6 +44,6 @@ public class NeutronSecurityGroupDummyProvider implements INeutronSecurityGroupA
     }
 
     public void neutronSecurityGroupDeleted(NeutronSecurityGroup securityGroup) {
-        LOGGER.info(securityGroup.toString());
+        LOGGER.info(securityGroup.getSecurityGroupUUID()+" deleted");
     }
 }

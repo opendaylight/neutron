@@ -45,7 +45,7 @@ public class NeutronSubnetDummyProvider implements INeutronSubnetAware {
     }
 
     public void neutronSubnetDeleted(NeutronSubnet subnet) {
-        LOGGER.info(subnet.toString());
+        LOGGER.info(subnet.getID()+" deleted");
     }
 
 }
