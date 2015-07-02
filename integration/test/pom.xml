@@ -14,7 +14,7 @@
   <packaging>jar</packaging>
 
   <properties>
-    <sonar.jacoco.itReportPath>target/coverage-reports/jacoco-it.exec</sonar.jacoco.itReportPath>
+    <sonar.jacoco.itReportPath>target/jacoco-it.exec</sonar.jacoco.itReportPath>
   </properties>
   <dependencies>
     <dependency>
@@ -106,8 +106,8 @@
             </goals>
             <configuration>
               <target>
-                <copy todir="${project.build.directory}/coverage-reports" flatten="true" overwrite="true">
-                  <fileset dir="target" casesensitive="yes">
+                <copy todir="${project.build.directory}" flatten="true" overwrite="true">
+                  <fileset dir="target/pax" casesensitive="yes">
                     <include name="**/jacoco-it.exec" />
                   </fileset>
                 </copy>
