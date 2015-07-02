@@ -25,6 +25,7 @@
     <yang.binding.version>0.8.0-SNAPSHOT</yang.binding.version>
     <yangtools.version>0.8.0-SNAPSHOT</yangtools.version>
     <yang-ext.version>2013.09.07.7-SNAPSHOT</yang-ext.version>
+    <sonar.jacoco.Reportpath>target/jacoco.exec</sonar.jacoco.Reportpath>
   </properties>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
@@ -90,7 +91,7 @@
           <artifactId>maven-bundle-plugin</artifactId>
           <version>${maven.bundle.version}</version>
         </plugin>
-        <plugin>
+<!--        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>${maven.surefire.version}</version>
@@ -101,38 +102,36 @@
                <exclude>**/IT*.java</exclude>
             </excludes>
           </configuration>
-        </plugin>
+        </plugin> -->
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <configuration>
+        <!-- <configuration>
           <includes>
             <include>org.opendaylight.neutron.*</include>
           </includes>
-        </configuration>
+        </configuration> -->
         <executions>
           <execution>
-            <id>pre-test</id>
+            <id>pre-unit-test</id>
             <goals>
               <goal>prepare-agent</goal>
             </goals>
-           <!-- <configuration>
-              <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
-              <propertyName>surefireArgLine</propertyName>
-            </configuration> -->
+            <configuration>
+              <destFile>${sonar.jacoco.Reportpath}</destFile>
+            </configuration>
           </execution>
           <execution>
-            <id>post-test</id>
+            <id>post-unit-test</id>
             <goals>
               <goal>report</goal>
             </goals>
-            <!-- <configuration>
-                <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-            </configuration> -->
-            <phase>test</phase>
+            <configuration>
+                <dataFile>${sonar.jacoco.Reportpath}</dataFile>
+            </configuration>
           </execution>
         </executions>
       </plugin>
