@@ -120,7 +120,7 @@
               <goal>prepare-agent</goal>
             </goals>
             <configuration>
-              <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+              <destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
               <propertyName>surefireArgLine</propertyName>
             </configuration>
           </execution>
@@ -131,7 +131,6 @@
             </goals>
             <configuration>
                 <dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
-                <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
             </configuration>
             <phase>test</phase>
           </execution>

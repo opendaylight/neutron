@@ -131,7 +131,6 @@
             </goals>
             <configuration>
               <dataFile>${project.build.directory}/coverage-reports/jacoco-it.exec</dataFile>
-              <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
             </configuration>
           </execution>
         </executions>
