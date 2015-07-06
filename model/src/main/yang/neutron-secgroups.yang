@@ -78,18 +78,21 @@ module neutron-secgroups {
             type inet:ip-address;
         }
         leaf protocol {
-            type enumeration {
-                enum null {
-                    description "NULL protocol.";
-                }
-                enum icmp {
-                    description "ICMP protocol.";
-                }
-                enum udp {
-                    description "UDP protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
+            type union {
+                type uint8;
+                type enumeration {
+                    enum null {
+                        description "NULL protocol.";
+                    }
+                    enum icmp {
+                        description "ICMP protocol.";
+                    }
+                    enum udp {
+                        description "UDP protocol.";
+                    }
+                    enum tcp {
+                        description "TCP protocol.";
+                    }
                 }
             }
             description "The protocol that is matched by the security group rule.";
@@ -107,14 +110,14 @@ module neutron-secgroups {
             }
         }
         leaf port-range-min {
-            type uint32;
+            type uint16;
             description "The minimum port number in the range that is matched by the
                 security group rule. If the protocol is TCP or UDP, this value must
                 be less than or equal to the value of the attribute. If the protocol
                 is ICMP, this value must be an ICMP type.";
         }
         leaf port-range-max {
-            type uint32;
+            type uint16;
             description "The maximum port number in the range that is matched by the
                 security group rule. If the protocol is TCP or UDP, this value must
                 be less than or equal to the value of the attribute. If the protocol
