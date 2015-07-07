@@ -14,8 +14,9 @@
   <packaging>jar</packaging>
 
   <properties>
-    <sonar.binaries>../../neutron-spi/target/classes,../../transcriber/target/classes,../../northbound-api/target/classes</sonar.binaries>
     <sonar.jacoco.itReportPath>target/jacoco-it.exec</sonar.jacoco.itReportPath>
+    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.sources>pom.xml,target/generated-sources/dependency</sonar.sources>
   </properties>
   <dependencies>
     <dependency>
@@ -54,6 +55,38 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-classes</id>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>neutron-spi</artifactId>
+                  <version>${project.version}</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>northbound-api</artifactId>
+                  <version>${project.version}</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>${project.groupId}</groupId>
+                  <artifactId>transcriber</artifactId>
+                  <version>${project.version}</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>target/classes</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.ops4j.pax.exam</groupId>
         <artifactId>maven-paxexam-plugin</artifactId>
@@ -96,6 +129,11 @@
               <target>
                 <copy file="${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar"
                       tofile="target/pax/jars/org.jacoco.agent.jar" />
+                <copy todir="target/generated-sources/dependency" overwrite="true">
+                  <fileset dir="../../neutron-spi/src/main/java" casesensitive="yes" />
+                  <fileset dir="../../northbound-api/src/main/java" casesensitive="yes" />
+                  <fileset dir="../../transcriber/src/main/java" casesensitive="yes" />
+                </copy>
               </target>
             </configuration>
           </execution>
@@ -120,11 +158,6 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <configuration>
-          <includes>
-            <include>org.opendaylight.neutron.*</include>
-          </includes>
-        </configuration>
         <executions>
           <execution>
             <id>post-integration-test</id>
@@ -134,12 +167,13 @@
             </goals>
             <configuration>
               <dataFile>${sonar.jacoco.itReportPath}</dataFile>
+              <outputDirectory>${project.reporting.outputDirectory}/jacoco-it</outputDirectory>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
-  </build>  
+  </build>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
     <developerConnection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</developerConnection>
