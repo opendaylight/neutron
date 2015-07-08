@@ -10,10 +10,6 @@ package org.opendaylight.neutron.spi;
 
 /**
  * This interface defines the methods a service that wishes to be aware of Firewall Policys needs to implement
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
- * the scope of neutron northbound
- *
- * @deprecated
  *
  */
 
@@ -21,10 +17,6 @@ public interface INeutronFirewallPolicyAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewallPolicy can be created
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallPolicy
      *            instance of proposed new Firewall Policy object
@@ -37,10 +29,6 @@ public interface INeutronFirewallPolicyAware {
 
     /**
      * Services provide this interface method for taking action after a firewallPolicy has been created
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallPolicy
      *            instance of new Firewall Policy object
@@ -50,10 +38,6 @@ public interface INeutronFirewallPolicyAware {
     /**
      * Services provide this interface method to indicate if the specified firewallPolicy can be changed using the specified
      * delta
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param delta
      *            updates to the firewallPolicy object using patch semantics
@@ -68,10 +52,6 @@ public interface INeutronFirewallPolicyAware {
 
     /**
      * Services provide this interface method for taking action after a firewallPolicy has been updated
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallPolicy
      *            instance of modified Firewall Policy object
@@ -80,10 +60,6 @@ public interface INeutronFirewallPolicyAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewallPolicy can be deleted
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallPolicy
      *            instance of the Firewall Policy object to be deleted
@@ -96,10 +72,6 @@ public interface INeutronFirewallPolicyAware {
 
     /**
      * Services provide this interface method for taking action after a firewallPolicy has been deleted
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallPolicy
      *            instance of deleted Firewall Policy object

@@ -25,10 +25,6 @@ public class NeutronFirewallPolicyRequest {
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
      *
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      */
 
     @XmlElement(name="firewall_policy")

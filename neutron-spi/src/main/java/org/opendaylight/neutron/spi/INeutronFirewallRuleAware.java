@@ -10,10 +10,6 @@ package org.opendaylight.neutron.spi;
 
 /**
  * This interface defines the methods a service that wishes to be aware of Firewall Rules needs to implement
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
- * the scope of neutron northbound
- *
- * @deprecated
  *
  */
 
@@ -21,10 +17,6 @@ public interface INeutronFirewallRuleAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewallRule can be created
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallRule
      *            instance of proposed new Firewall Rule object
@@ -37,10 +29,6 @@ public interface INeutronFirewallRuleAware {
 
     /**
      * Services provide this interface method for taking action after a firewallRule has been created
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallRule
      *            instance of new Firewall Rule object
@@ -50,10 +38,6 @@ public interface INeutronFirewallRuleAware {
     /**
      * Services provide this interface method to indicate if the specified firewallRule can be changed using the specified
      * delta
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param delta
      *            updates to the firewallRule object using patch semantics
@@ -68,10 +52,6 @@ public interface INeutronFirewallRuleAware {
 
     /**
      * Services provide this interface method for taking action after a firewallRule has been updated
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallRule
      *            instance of modified Firewall Rule object
@@ -80,10 +60,6 @@ public interface INeutronFirewallRuleAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewallRule can be deleted
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallRule
      *            instance of the Firewall Rule object to be deleted
@@ -96,10 +72,6 @@ public interface INeutronFirewallRuleAware {
 
     /**
      * Services provide this interface method for taking action after a firewallRule has been deleted
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param firewallRule
      *            instance of deleted Firewall Rule object
