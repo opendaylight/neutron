@@ -200,15 +200,20 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
             boolean foundMatch = false;
-            for (SecurityRuleAttrs.Protocol protocol : SecurityRuleAttrs.Protocol.values()) {
+            for (SecurityRuleAttrs.Protocol.Enumeration protocol : SecurityRuleAttrs.Protocol.Enumeration.values()) {
                 if (protocol.toString().equalsIgnoreCase(securityRule.getSecurityRuleProtocol())) {
-                    securityRuleBuilder.setProtocol(protocol);
+                    securityRuleBuilder.setProtocol(new SecurityRuleAttrs.Protocol(protocol));
                     foundMatch = true;
                     break;
                 }
             }
             if (!foundMatch) {
-                LOGGER.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
+                try {
+                    java.lang.Short protocol = Short.valueOf(securityRule.getSecurityRuleProtocol());
+                    securityRuleBuilder.setProtocol(new SecurityRuleAttrs.Protocol(protocol));
+                } catch (NumberFormatException e) {
+                    LOGGER.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
+                }
             }
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
@@ -225,10 +230,10 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             }
         }
         if (securityRule.getSecurityRulePortMin() != null) {
-            securityRuleBuilder.setPortRangeMin(new Long(securityRule.getSecurityRulePortMin()));
+            securityRuleBuilder.setPortRangeMin(new Integer(securityRule.getSecurityRulePortMin()));
         }
         if (securityRule.getSecurityRulePortMax() != null) {
-            securityRuleBuilder.setPortRangeMax(new Long(securityRule.getSecurityRulePortMax()));
+            securityRuleBuilder.setPortRangeMax(new Integer(securityRule.getSecurityRulePortMax()));
         }
         if (securityRule.getSecurityRuleUUID() != null) {
             securityRuleBuilder.setId(toUuid(securityRule.getSecurityRuleUUID()));
