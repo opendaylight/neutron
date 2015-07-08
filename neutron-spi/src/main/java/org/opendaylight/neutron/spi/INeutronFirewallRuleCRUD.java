@@ -12,10 +12,6 @@ import java.util.List;
 
 /**
  * This interface defines the methods for CRUD of NB OpenStack Firewall Rule objects
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
- * the scope of neutron northbound
- *
- * @deprecated
  *
  */
 
@@ -23,10 +19,6 @@ public interface INeutronFirewallRuleCRUD {
     /**
      * Applications call this interface method to determine if a particular
      *FirewallRule object exists
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param uuid
      *            UUID of the Firewall Rule object
@@ -38,10 +30,6 @@ public interface INeutronFirewallRuleCRUD {
     /**
      * Applications call this interface method to return if a particular
      * FirewallRule object exists
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param uuid
      *            UUID of the Firewall Rule object
@@ -53,10 +41,6 @@ public interface INeutronFirewallRuleCRUD {
 
     /**
      * Applications call this interface method to return all Firewall Rule objects
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @return List of OpenStackNetworks objects
      */
@@ -66,10 +50,6 @@ public interface INeutronFirewallRuleCRUD {
     /**
      * Applications call this interface method to add a Firewall Rule object to the
      * concurrent map
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param input
      *            OpenStackNetwork object
@@ -81,10 +61,6 @@ public interface INeutronFirewallRuleCRUD {
     /**
      * Applications call this interface method to remove a Neutron FirewallRule object to the
      * concurrent map
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param uuid
      *            identifier for the Firewall Rule object
@@ -95,10 +71,6 @@ public interface INeutronFirewallRuleCRUD {
 
     /**
      * Applications call this interface method to edit a FirewallRule object
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param uuid
      *            identifier of the Firewall Rule object
@@ -111,10 +83,6 @@ public interface INeutronFirewallRuleCRUD {
 
     /**
      * Applications call this interface method to see if a MAC address is in use
-     * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
-     * the scope of neutron northbound
-     *
-     * @deprecated
      *
      * @param uuid
      *            identifier of the Firewall Rule object
