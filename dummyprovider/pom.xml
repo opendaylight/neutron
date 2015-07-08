@@ -12,6 +12,9 @@
   <artifactId>dummyprovider</artifactId>
   <version>0.6.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
+  <properties>
+    <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
