@@ -97,6 +97,30 @@
     <module>integration/test</module>
     <module>model</module>
   </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>move-it-reports</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <target>
+                <move todir="target/site">
+                  <fileset dir="integration/test/target/site" />
+                </move>
+                <move file="integration/test/target/jacoco-it.exec" todir="target" />
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
     <developerConnection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</developerConnection>

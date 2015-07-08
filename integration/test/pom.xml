@@ -14,7 +14,7 @@
   <packaging>jar</packaging>
 
   <properties>
-    <sonar.jacoco.itReportPath>../../target/jacoco-it.exec</sonar.jacoco.itReportPath>
+    <sonar.jacoco.itReportPath>target/jacoco-it.exec</sonar.jacoco.itReportPath>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.sources>pom.xml,target/generated-sources/dependency</sonar.sources>
   </properties>
@@ -145,7 +145,7 @@
             </goals>
             <configuration>
               <target>
-                <copy todir="${project.basedir}/../../target" flatten="true" overwrite="true">
+                <copy todir="${project.basedir}/target" flatten="true" overwrite="true">
                   <fileset dir="target/pax" casesensitive="yes">
                     <include name="**/jacoco-it.exec" />
                   </fileset>
@@ -181,7 +181,7 @@
             </goals>
             <configuration>
               <dataFile>${sonar.jacoco.itReportPath}</dataFile>
-              <outputDirectory>${project.basedir}/../../target/site/jacoco-it</outputDirectory>
+              <outputDirectory>${project.basedir}/target/site/jacoco-it</outputDirectory>
             </configuration>
           </execution>
         </executions>
