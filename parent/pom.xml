@@ -27,6 +27,7 @@
     <yang-ext.version>2013.09.07.7-SNAPSHOT</yang-ext.version>
     <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.jacoco.itReportPath>../target/jacoco-it.exec</sonar.jacoco.itReportPath>
+    <checkstyle.location>${project.build.resources[0].directory}</checkstyle.location>
   </properties>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
@@ -67,6 +68,22 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <configuration>
+            <configLocation>${checkstyle.location}/java_rules.xml</configLocation>
+            <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
+            <consoleOutput>true</consoleOutput>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <phase>process-sources</phase>
+            </execution>
+          </executions>
+        </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>

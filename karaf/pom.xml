@@ -22,6 +22,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
   </prerequisites>
   <properties>
     <karaf.localFeature>odl-neutron-dummyprovider-test</karaf.localFeature>
+    <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
   </properties>
   <dependencies>
     <dependency>

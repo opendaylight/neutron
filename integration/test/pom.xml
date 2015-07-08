@@ -14,6 +14,7 @@
   <packaging>jar</packaging>
 
   <properties>
+    <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
     <sonar.jacoco.itReportPath>target/jacoco-it.exec</sonar.jacoco.itReportPath>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.sources>pom.xml,target/generated-sources/dependency</sonar.sources>
