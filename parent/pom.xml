@@ -26,6 +26,7 @@
     <yangtools.version>0.8.0-SNAPSHOT</yangtools.version>
     <yang-ext.version>2013.09.07.7-SNAPSHOT</yang-ext.version>
     <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
+    <sonar.jacoco.itReportPath>../target/jacoco-it.exec</sonar.jacoco.itReportPath>
   </properties>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
