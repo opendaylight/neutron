@@ -50,10 +50,6 @@ import java.util.List;
  * More info :
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  *
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
- * the scope of neutron northbound
- *
- * @deprecated
  */
 @Path("/fw/firewalls")
 public class NeutronFirewallNorthbound {

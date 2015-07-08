@@ -32,10 +32,6 @@ import java.util.List;
  * audited        Boolean
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
  *
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet 
- * the scope of neutron northbound
- *
- * @deprecated
  */
 
 @XmlRootElement
