@@ -58,13 +58,21 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 public class NeutronVPNIKEPoliciesNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "VPNIKEPolicy CRUD Interface";
     private static final String UUID_NO_EXIST = "VPNIKEPolicy UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
     private NeutronVPNIKEPolicy extractFields(NeutronVPNIKEPolicy o, List<String> fields) {
         return o.extractFields(fields);
+    }
+
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIKEPolicyCRUD(this);
+        if (answer.getVPNIKEPolicyInterface() == null) {
+            throw new ServiceUnavailableException("NeutronVPNIKEPolicy CRUD Interface "
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
     }
 
     @Context
@@ -95,11 +103,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             @QueryParam("ike_version") String queryIKEVersion
             // pagination and sorting are TODO
             ) {
-        INeutronVPNIKEPolicyCRUD labelInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
-        if (labelInterface == null) {
-            throw new ServiceUnavailableException("NeutronVPNIKEPolicy CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIKEPolicyCRUD labelInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
         List<NeutronVPNIKEPolicy> allNeutronVPNIKEPolicies = labelInterface.getAllNeutronVPNIKEPolicies();
         List<NeutronVPNIKEPolicy> ans = new ArrayList<NeutronVPNIKEPolicy>();
         Iterator<NeutronVPNIKEPolicy> i = allNeutronVPNIKEPolicies.iterator();
@@ -144,11 +148,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        INeutronVPNIKEPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
-        if (policyInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIKEPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
         if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -175,11 +175,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIKEPolicy(final NeutronVPNIKEPolicyRequest input) {
-        INeutronVPNIKEPolicyCRUD ikePolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
-        if (ikePolicyInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIKEPolicyCRUD ikePolicyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
         if (input.isSingleton()) {
             NeutronVPNIKEPolicy singleton = input.getSingleton();
 
@@ -242,11 +238,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
     public Response updateVPNIKEPolicy(
             @PathParam("policyID") String policyUUID, final NeutronVPNIKEPolicyRequest input
             ) {
-        INeutronVPNIKEPolicyCRUD ikePolicyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
-        if (ikePolicyInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIKEPolicyCRUD ikePolicyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
 
         /*
          * ikePolicy has to exist and only a single delta can be supplied
@@ -312,11 +304,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIKEPolicy(
             @PathParam("policyID") String policyUUID) {
-        INeutronVPNIKEPolicyCRUD policyInterface = NeutronCRUDInterfaces.getINeutronVPNIKEPolicyCRUD(this);
-        if (policyInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIKEPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
 
         /*
          * verify that the policy exists and is not in use before removing it

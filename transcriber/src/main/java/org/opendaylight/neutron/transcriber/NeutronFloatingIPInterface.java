@@ -42,7 +42,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     private ConcurrentMap<String, NeutronFloatingIP> floatingIPDB  = new ConcurrentHashMap<String, NeutronFloatingIP>();
 
-
     NeutronFloatingIPInterface(ProviderContext providerContext) {
         super(providerContext);
     }
@@ -105,9 +104,13 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean addFloatingIP(NeutronFloatingIP input) {
-        INeutronNetworkCRUD networkCRUD = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
-        INeutronSubnetCRUD subnetCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
-        INeutronPortCRUD portCRUD = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronNetworkCRUD(this)
+            .fetchINeutronSubnetCRUD(this)
+            .fetchINeutronPortCRUD(this);
+        INeutronNetworkCRUD networkCRUD = interfaces.getNetworkInterface();
+        INeutronSubnetCRUD subnetCRUD = interfaces.getSubnetInterface();
+        INeutronPortCRUD portCRUD = interfaces.getPortInterface();
 
         if (floatingIPExists(input.getID())) {
             return false;
@@ -130,9 +133,13 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean removeFloatingIP(String uuid) {
-        INeutronNetworkCRUD networkCRUD = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
-        INeutronSubnetCRUD subnetCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
-        INeutronPortCRUD portCRUD = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronNetworkCRUD(this)
+            .fetchINeutronSubnetCRUD(this)
+            .fetchINeutronPortCRUD(this);
+        INeutronNetworkCRUD networkCRUD = interfaces.getNetworkInterface();
+        INeutronSubnetCRUD subnetCRUD = interfaces.getSubnetInterface();
+        INeutronPortCRUD portCRUD = interfaces.getPortInterface();
 
         if (!floatingIPExists(uuid)) {
             return false;
@@ -150,7 +157,9 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta) {
-        INeutronPortCRUD portCRUD = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronPortCRUD(this);
+        INeutronPortCRUD portCRUD = interfaces.getPortInterface();
 
         if (!floatingIPExists(uuid)) {
             return false;

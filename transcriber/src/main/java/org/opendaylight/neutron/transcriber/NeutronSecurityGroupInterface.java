@@ -102,7 +102,9 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (neutronSecurityGroupExists(input.getSecurityGroupUUID())) {
             return false;
         }
-        INeutronSecurityRuleCRUD sgrCrud = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronSecurityRuleCRUD(this);
+        INeutronSecurityRuleCRUD sgrCrud = interfaces.getSecurityRuleInterface();
         for(NeutronSecurityRule sgr : input.getSecurityRules()) {
             sgrCrud.addNeutronSecurityRule(sgr);
         }

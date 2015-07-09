@@ -77,6 +77,29 @@ public class NeutronPortsNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetworks, boolean needSubnets) {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronPortCRUD(this);
+        if (answer.getPortInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (needNetworks) {
+            answer = answer.fetchINeutronNetworkCRUD( this);
+            if (answer.getNetworkInterface() == null) {
+                throw new ServiceUnavailableException("Network CRUD Interface "
+                        + RestMessages.SERVICEUNAVAILABLE.toString());
+            }
+        }
+        if (needSubnets) {
+            answer = answer.fetchINeutronSubnetCRUD( this);
+            if (answer.getSubnetInterface() == null) {
+                throw new ServiceUnavailableException("Subnet CRUD Interface "
+                        + RestMessages.SERVICEUNAVAILABLE.toString());
+            }
+        }
+        return answer;
+    }
+
     @Context
     UriInfo uriInfo;
 
@@ -110,11 +133,7 @@ public class NeutronPortsNorthbound {
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
             // sorting not supported
             ) {
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
         List<NeutronPort> allPorts = portInterface.getAllPorts();
         List<NeutronPort> ans = new ArrayList<NeutronPort>();
         Iterator<NeutronPort> i = allPorts.iterator();
@@ -165,11 +184,7 @@ public class NeutronPortsNorthbound {
             @PathParam("portUUID") String portUUID,
             // return fields
             @QueryParam("fields") List<String> fields ) {
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
         if (!portInterface.portExists(portUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -201,21 +216,10 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "MAC generation failure"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true, true);
+        INeutronPortCRUD portInterface = interfaces.getPortInterface();
+        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
+        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
         if (input.isSingleton()) {
             NeutronPort singleton = input.getSingleton();
 
@@ -427,16 +431,9 @@ public class NeutronPortsNorthbound {
             @PathParam("portUUID") String portUUID,
             NeutronPortRequest input
             ) {
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(false, true);
+        INeutronPortCRUD portInterface = interfaces.getPortInterface();
+        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
 
         // port has to exist and only a single delta is supported
         if (!portInterface.portExists(portUUID)) {
@@ -528,11 +525,7 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD(this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
 
         // port has to exist and not be owned by anyone.  then it can be removed from the cache
         if (!portInterface.portExists(portUUID)) {

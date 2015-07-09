@@ -71,7 +71,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     }
 
     private void updateSecGroupRuleInSecurityGroup(NeutronSecurityRule input) {
-        INeutronSecurityGroupCRUD sgCrud = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronSecurityGroupCRUD(this);
+        INeutronSecurityGroupCRUD sgCrud = interfaces.getSecurityGroupInterface();
         NeutronSecurityGroup sg = sgCrud.getNeutronSecurityGroup(input.getSecurityRuleGroupID());
         if(sg != null && sg.getSecurityRules() != null) {
             for(NeutronSecurityRule sgr :sg.getSecurityRules()) {
@@ -87,7 +89,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     }
 
     private void removeSecGroupRuleFromSecurityGroup(NeutronSecurityRule input) {
-        INeutronSecurityGroupCRUD sgCrud = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronSecurityGroupCRUD(this);
+        INeutronSecurityGroupCRUD sgCrud = interfaces.getSecurityGroupInterface();
         NeutronSecurityGroup sg = sgCrud.getNeutronSecurityGroup(input.getSecurityRuleGroupID());
         if(sg != null && sg.getSecurityRules() != null) {
             List<NeutronSecurityRule> toRemove = new ArrayList<NeutronSecurityRule>();

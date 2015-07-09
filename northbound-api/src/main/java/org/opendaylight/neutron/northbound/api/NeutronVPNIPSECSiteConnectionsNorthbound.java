@@ -68,6 +68,15 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIPSECSiteConnectionsCRUD(this);
+        if (answer.getVPNIPSECSiteConnectionsInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     @Context
     UriInfo uriInfo;
 
@@ -96,12 +105,8 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
             @QueryParam("vpnservice_id") String queryVpnServiceID
     // pagination and sorting are TODO
     ) {
-        INeutronVPNIPSECSiteConnectionsCRUD labelInterface = NeutronCRUDInterfaces
-                .getINeutronVPNIPSECSiteConnectionsCRUD(this);
-        if (labelInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIPSECSiteConnectionsCRUD labelInterface = getNeutronInterfaces()
+                .getVPNIPSECSiteConnectionsInterface();
         List<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnection = labelInterface
                 .getAllNeutronVPNIPSECSiteConnections();
         List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
@@ -152,12 +157,8 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     public Response showVPNIPSECSiteConnection(@PathParam("policyID") String policyID,
     // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronVPNIPSECSiteConnectionsCRUD connectionInterface = NeutronCRUDInterfaces
-                .getINeutronVPNIPSECSiteConnectionsCRUD(this);
-        if (connectionInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIPSECSiteConnectionsCRUD connectionInterface = getNeutronInterfaces()
+                .getVPNIPSECSiteConnectionsInterface();
         if (!connectionInterface.neutronVPNIPSECSiteConnectionsExists(policyID)) {
             throw new ResourceNotFoundException("NeutronVPNIPSECSiteConnections ID not found");
         }
@@ -186,12 +187,8 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIPSECSiteConnection(final NeutronVPNIPSECSiteConnectionRequest input) {
-        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
-                .getINeutronVPNIPSECSiteConnectionsCRUD(this);
-        if (ipsecSiteConnectionsInterface == null) {
-            throw new ServiceUnavailableException("VPNIPSECSiteConnections CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
+                .getVPNIPSECSiteConnectionsInterface();
         if (input.isSingleton()) {
             NeutronVPNIPSECSiteConnection singleton = input.getSingleton();
 
@@ -253,13 +250,8 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNIPSECSiteConnection(@PathParam("policyID") String policyID,
             final NeutronVPNIPSECSiteConnectionRequest input) {
-        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
-                .getINeutronVPNIPSECSiteConnectionsCRUD(this);
-
-        if (ipsecSiteConnectionsInterface == null) {
-            throw new ServiceUnavailableException("VPNIPSECSiteConnections CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
+                .getVPNIPSECSiteConnectionsInterface();
 
         /*
          * ipsecSiteConnection has to exist and only a single delta can be
@@ -329,12 +321,8 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECSiteConnection(@PathParam("policyID") String policyID) {
-        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = NeutronCRUDInterfaces
-                .getINeutronVPNIPSECSiteConnectionsCRUD(this);
-        if (ipsecSiteConnectionsInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
+                .getVPNIPSECSiteConnectionsInterface();
 
         /*
          * verify that the iSiteConnections exists and is not in use before

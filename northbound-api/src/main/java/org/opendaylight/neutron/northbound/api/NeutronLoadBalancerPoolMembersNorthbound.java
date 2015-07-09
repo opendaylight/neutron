@@ -48,6 +48,16 @@ public class NeutronLoadBalancerPoolMembersNorthbound {
     private NeutronLoadBalancerPoolMember extractFields(NeutronLoadBalancerPoolMember o, List<String> fields) {
         return o.extractFields(fields);
     }
+
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerPoolCRUD(this);
+        if (answer.getLoadBalancerPoolInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
 /**
  * Returns a list of all LoadBalancerPoolMembers in specified pool
  */
@@ -81,12 +91,7 @@ public Response listMembers(
         @QueryParam("page_reverse") String pageReverse
         // sorting not supported
 ) {
-    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces
-            .getINeutronLoadBalancerPoolCRUD(this);
-    if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
-    }
+    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
         throw new ResourceNotFoundException(UUID_NO_EXIST);
     }
@@ -140,12 +145,7 @@ public Response showLoadBalancerPoolMember(
         // return fields
         @QueryParam("fields") List<String> fields ) {
 
-    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces
-            .getINeutronLoadBalancerPoolCRUD(this);
-    if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
-    }
+    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
         throw new ResourceNotFoundException(UUID_NO_EXIST);
     }
@@ -183,11 +183,7 @@ public Response createLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
         final NeutronLoadBalancerPoolMemberRequest input) {
 
-    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerPoolCRUD(this);
-    if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
-    }
+    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
     // Verify that the loadBalancerPool exists, for the member to be added to its cache
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
         throw new ResourceNotFoundException(UUID_NO_EXIST);
@@ -336,11 +332,7 @@ public Response updateLoadBalancerPoolMember(
 public Response deleteLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
         @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID) {
-    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerPoolCRUD(this);
-    if (loadBalancerPoolInterface == null) {
-        throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
-    }
+    INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
 
     // Verify that the loadBalancerPool exists, for the member to be removed from its cache
     if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {

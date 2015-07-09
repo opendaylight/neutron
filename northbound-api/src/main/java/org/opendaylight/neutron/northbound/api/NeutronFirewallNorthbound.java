@@ -14,7 +14,6 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronFirewallAware;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
-import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 
@@ -69,6 +68,15 @@ public class NeutronFirewallNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallCRUD(this);
+        if (answer.getFirewallInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all Firewalls */
     @GET
@@ -97,13 +105,7 @@ public class NeutronFirewallNorthbound {
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
-        INeutronFirewallRuleCRUD firewallRuleInterface = NeutronCRUDInterfaces.getINeutronFirewallRuleCRUD(this);
-
-        if (firewallInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
         List<NeutronFirewall> allFirewalls = firewallInterface.getAllNeutronFirewalls();
         List<NeutronFirewall> ans = new ArrayList<NeutronFirewall>();
         Iterator<NeutronFirewall> i = allFirewalls.iterator();
@@ -152,11 +154,7 @@ public class NeutronFirewallNorthbound {
     public Response showFirewall(@PathParam("firewallUUID") String firewallUUID,
                                       // return fields
                                       @QueryParam("fields") List<String> fields) {
-        INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
-        if (firewallInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
         if (!firewallInterface.neutronFirewallExists(firewallUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -185,11 +183,7 @@ public class NeutronFirewallNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFirewalls(final NeutronFirewallRequest input) {
-        INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
-        if (firewallInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
         if (input.isSingleton()) {
             NeutronFirewall singleton = input.getSingleton();
 
@@ -292,11 +286,7 @@ public class NeutronFirewallNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateFirewall(
             @PathParam("firewallUUID") String firewallUUID, final NeutronFirewallRequest input) {
-        INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
-        if (firewallInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
 
         /*
          * verify the Firewall exists and there is only one delta provided
@@ -369,11 +359,7 @@ public class NeutronFirewallNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewall(
             @PathParam("firewallUUID") String firewallUUID) {
-        INeutronFirewallCRUD firewallInterface = NeutronCRUDInterfaces.getINeutronFirewallCRUD(this);
-        if (firewallInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
 
         /*
          * verify the Firewall exists and it isn't currently in use

@@ -64,6 +64,15 @@ public class NeutronSecurityGroupsNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
+        if (answer.getSecurityGroupInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all Security Groups
      */
@@ -87,12 +96,7 @@ public class NeutronSecurityGroupsNorthbound {
             @QueryParam ("marker") String marker,
             @QueryParam ("page_reverse") String pageReverse
     ) {
-        INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
-
-        if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
         List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAllNeutronSecurityGroups();
         List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
         Iterator<NeutronSecurityGroup> i = allSecurityGroups.iterator();
@@ -133,11 +137,7 @@ public class NeutronSecurityGroupsNorthbound {
     public Response showSecurityGroup(@PathParam ("securityGroupUUID") String securityGroupUUID,
                                       // return fields
                                       @QueryParam ("fields") List<String> fields) {
-        INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
-        if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
         if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -167,11 +167,7 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
-        INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
-        if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
 
         if (input.isSingleton()) {
             NeutronSecurityGroup singleton = input.getSingleton();
@@ -275,11 +271,7 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
-        INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
-        if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
 
         /*
          * verify the Security Group exists and there is only one delta provided
@@ -346,11 +338,7 @@ public class NeutronSecurityGroupsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
-        INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
-        if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
 
         /*
          * verify the Security Group exists and it isn't currently in use

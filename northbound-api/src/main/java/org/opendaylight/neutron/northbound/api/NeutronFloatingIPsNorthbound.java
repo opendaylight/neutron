@@ -72,6 +72,29 @@ public class NeutronFloatingIPsNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFloatingIPCRUD(this);
+        if (answer.getFloatingIPInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (flag) {
+            answer = answer.fetchINeutronNetworkCRUD(this).fetchINeutronSubnetCRUD(this).fetchINeutronPortCRUD(this);
+            if (answer.getNetworkInterface() == null) {
+                throw new ServiceUnavailableException("Network CRUD Interface "
+                        + RestMessages.SERVICEUNAVAILABLE.toString());
+            }
+            if (answer.getSubnetInterface() == null) {
+                throw new ServiceUnavailableException("Subnet CRUD Interface "
+                        + RestMessages.SERVICEUNAVAILABLE.toString());
+            }
+            if (answer.getPortInterface() == null) {
+                throw new ServiceUnavailableException("Port CRUD Interface "
+                        + RestMessages.SERVICEUNAVAILABLE.toString());
+            }
+        }
+        return answer;
+    }
     /**
      * Returns a list of all FloatingIPs */
 
@@ -100,11 +123,7 @@ public class NeutronFloatingIPsNorthbound {
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
             ) {
-        INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
-        if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
         List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAllFloatingIPs();
         List<NeutronFloatingIP> ans = new ArrayList<NeutronFloatingIP>();
         Iterator<NeutronFloatingIP> i = allFloatingIPs.iterator();
@@ -147,11 +166,7 @@ public class NeutronFloatingIPsNorthbound {
             @PathParam("floatingipUUID") String floatingipUUID,
             // return fields
             @QueryParam("fields") List<String> fields ) {
-        INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
-        if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
         if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -179,26 +194,11 @@ public class NeutronFloatingIPsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
-        INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
-        if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD( this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
+        INeutronFloatingIPCRUD floatingIPInterface = interfaces.getFloatingIPInterface();
+        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
+        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
+        INeutronPortCRUD portInterface = interfaces.getPortInterface();
         if (input.isSingleton()) {
             NeutronFloatingIP singleton = input.getSingleton();
             // check existence of id in cache and return badrequest if exists
@@ -320,26 +320,11 @@ public class NeutronFloatingIPsNorthbound {
             @PathParam("floatingipUUID") String floatingipUUID,
             NeutronFloatingIPRequest input
             ) {
-        INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
-        if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronPortCRUD portInterface = NeutronCRUDInterfaces.getINeutronPortCRUD( this);
-        if (portInterface == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
+        INeutronFloatingIPCRUD floatingIPInterface = interfaces.getFloatingIPInterface();
+        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
+        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
+        INeutronPortCRUD portInterface = interfaces.getPortInterface();
         if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -456,11 +441,7 @@ public class NeutronFloatingIPsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID) {
-        INeutronFloatingIPCRUD floatingIPInterface = NeutronCRUDInterfaces.getINeutronFloatingIPCRUD(this);
-        if (floatingIPInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
         if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }

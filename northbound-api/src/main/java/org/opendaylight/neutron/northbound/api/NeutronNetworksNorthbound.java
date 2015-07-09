@@ -74,6 +74,15 @@ public class NeutronNetworksNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronNetworkCRUD(this);
+        if (answer.getNetworkInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all Networks */
 
@@ -105,11 +114,7 @@ public class NeutronNetworksNorthbound {
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
             // sorting not supported
             ) {
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
         List<NeutronNetwork> allNetworks = networkInterface.getAllNetworks();
         List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
         Iterator<NeutronNetwork> i = allNetworks.iterator();
@@ -172,11 +177,7 @@ public class NeutronNetworksNorthbound {
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
         if (!networkInterface.networkExists(netUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -203,11 +204,7 @@ public class NeutronNetworksNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createNetworks(final NeutronNetworkRequest input) {
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
         if (input.isSingleton()) {
             NeutronNetwork singleton = input.getSingleton();
 
@@ -315,11 +312,7 @@ public class NeutronNetworksNorthbound {
     public Response updateNetwork(
             @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
             ) {
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
 
         /*
          * network has to exist and only a single delta is supported
@@ -385,11 +378,7 @@ public class NeutronNetworksNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
 
         /*
          * network has to exist and not be in use before it can be removed

@@ -72,6 +72,15 @@ public class NeutronVPNServicesNorthbound {
     @Context
     UriInfo uriInfo;
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNServiceCRUD(this);
+        if (answer.getVPNServiceInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all VPN Services
      */
@@ -99,11 +108,7 @@ public class NeutronVPNServicesNorthbound {
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
-        INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
-        if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
         List<NeutronVPNService> allVPNService = VPNServiceInterface.getAllVPNService();
         List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
         Iterator<NeutronVPNService> i = allVPNService.iterator();
@@ -142,11 +147,7 @@ public class NeutronVPNServicesNorthbound {
     public Response showVPNService(@PathParam("serviceID") String serviceID,
     // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
-        if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
         if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -175,11 +176,7 @@ public class NeutronVPNServicesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNService(final NeutronVPNServiceRequest input) {
-        INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
-        if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
         if (input.isSingleton()) {
             NeutronVPNService singleton = input.getSingleton();
 
@@ -280,11 +277,7 @@ public class NeutronVPNServicesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNService(@PathParam("serviceID") String serviceID, final NeutronVPNServiceRequest input) {
-        INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
-        if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
 
         /*
          * verify the VPNService exists and there is only one delta provided
@@ -352,11 +345,7 @@ public class NeutronVPNServicesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
-        INeutronVPNServiceCRUD VPNServiceInterface = NeutronCRUDInterfaces.getINeutronVPNServiceCRUD(this);
-        if (VPNServiceInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
 
         /*
          * verify the VPNService exists and it isn't currently in use

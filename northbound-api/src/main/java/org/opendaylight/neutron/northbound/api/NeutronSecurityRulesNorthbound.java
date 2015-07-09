@@ -30,7 +30,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleAware;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
@@ -67,6 +66,15 @@ public class NeutronSecurityRulesNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityRuleCRUD(this);
+        if (answer.getSecurityRuleInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all Security Rules
      */
@@ -95,11 +103,7 @@ public class NeutronSecurityRulesNorthbound {
             @QueryParam ("marker") String marker,
             @QueryParam ("page_reverse") String pageReverse
     ) {
-        INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
-        if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
         List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAllNeutronSecurityRules();
         List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
         Iterator<NeutronSecurityRule> i = allSecurityRules.iterator();
@@ -152,11 +156,7 @@ public class NeutronSecurityRulesNorthbound {
     public Response showSecurityRule(@PathParam ("securityRuleUUID") String securityRuleUUID,
                                      // return fields
                                      @QueryParam ("fields") List<String> fields) {
-        INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
-        if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
         if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -186,16 +186,7 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
-        INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
-        if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronSecurityGroupCRUD securityGroupInterface = NeutronCRUDInterfaces.getINeutronSecurityGroupCRUD(this);
-        if (securityGroupInterface == null) {
-            throw new ServiceUnavailableException("Security Group CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
         /*
          * Existing entry checks
@@ -304,11 +295,7 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
-        INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
-        if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
         /*
          * verify the Security Rule exists and there is only one delta provided
@@ -385,11 +372,7 @@ public class NeutronSecurityRulesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
-        INeutronSecurityRuleCRUD securityRuleInterface = NeutronCRUDInterfaces.getINeutronSecurityRuleCRUD(this);
-        if (securityRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
         /*
          * verify the Security Rule exists and it isn't currently in use

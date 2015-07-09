@@ -70,6 +70,22 @@ public class NeutronSubnetsNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetwork) {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSubnetCRUD(this);
+        if (answer.getSubnetInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        if (needNetwork) {
+            answer = answer.fetchINeutronNetworkCRUD(this);
+            if (answer.getNetworkInterface() == null) {
+                throw new ServiceUnavailableException("Network CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+            }
+        }
+        return answer;
+    }
+
     @Context
     UriInfo uriInfo;
 
@@ -103,11 +119,7 @@ public class NeutronSubnetsNorthbound {
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
             // sorting not supported
             ) {
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
         List<NeutronSubnet> allNetworks = subnetInterface.getAllSubnets();
         List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
         Iterator<NeutronSubnet> i = allNetworks.iterator();
@@ -159,11 +171,7 @@ public class NeutronSubnetsNorthbound {
             @PathParam("subnetUUID") String subnetUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
         if (!subnetInterface.subnetExists(subnetUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -194,16 +202,9 @@ public class NeutronSubnetsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSubnets(final NeutronSubnetRequest input) {
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        INeutronNetworkCRUD networkInterface = NeutronCRUDInterfaces.getINeutronNetworkCRUD( this);
-        if (networkInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
+        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
+        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
         if (input.isSingleton()) {
             NeutronSubnet singleton = input.getSingleton();
 
@@ -339,11 +340,7 @@ public class NeutronSubnetsNorthbound {
     public Response updateSubnet(
             @PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input
             ) {
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
 
         /*
          * verify the subnet exists and there is only one delta provided
@@ -412,11 +409,7 @@ public class NeutronSubnetsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSubnet(
             @PathParam("subnetUUID") String subnetUUID) {
-        INeutronSubnetCRUD subnetInterface = NeutronCRUDInterfaces.getINeutronSubnetCRUD( this);
-        if (subnetInterface == null) {
-            throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
 
         /*
          * verify the subnet exists and it isn't currently in use

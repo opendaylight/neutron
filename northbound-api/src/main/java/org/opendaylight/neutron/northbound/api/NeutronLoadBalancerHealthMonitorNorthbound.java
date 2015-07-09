@@ -66,6 +66,15 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerHealthMonitorCRUD(this);
+        if (answer.getLoadBalancerHealthMonitorInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all LoadBalancerHealthMonitor */
     @GET
@@ -97,12 +106,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces
-                .getINeutronLoadBalancerHealthMonitorCRUD(this);
-        if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface.getAllNeutronLoadBalancerHealthMonitors();
         List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
         Iterator<NeutronLoadBalancerHealthMonitor> i = allLoadBalancerHealthMonitors.iterator();
@@ -163,11 +167,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     public Response showLoadBalancerHealthMonitor(@PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
-        if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -196,11 +196,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerHealthMonitors(final NeutronLoadBalancerHealthMonitorRequest input) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
-        if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         if (input.isSingleton()) {
             NeutronLoadBalancerHealthMonitor singleton = input.getSingleton();
 
@@ -305,12 +301,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     public Response updateLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             final NeutronLoadBalancerHealthMonitorRequest input) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces
-                .getINeutronLoadBalancerHealthMonitorCRUD(this);
-        if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
 
         /*
          * verify the LoadBalancerHealthMonitor exists and there is only one delta provided
@@ -391,11 +382,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerHealthMonitorCRUD(this);
-        if (loadBalancerHealthMonitorInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         /*
          * verify the LoadBalancerHealthMonitor exists and it isn't currently in use
          */

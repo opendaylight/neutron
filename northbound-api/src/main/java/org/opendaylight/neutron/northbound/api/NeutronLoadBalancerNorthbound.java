@@ -65,6 +65,15 @@ public class NeutronLoadBalancerNorthbound {
         return o.extractFields(fields);
     }
 
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerCRUD(this);
+        if (answer.getLoadBalancerInterface() == null) {
+            throw new ServiceUnavailableException(INTERFACE_NAME
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
+    }
+
     /**
      * Returns a list of all LoadBalancer */
     @GET
@@ -92,12 +101,7 @@ public class NeutronLoadBalancerNorthbound {
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerCRUD(this);
-
-        if (loadBalancerInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
         List<NeutronLoadBalancer> allLoadBalancers = loadBalancerInterface.getAllNeutronLoadBalancers();
         //        List<NeutronLoadBalancerRule> allLoadBalancerRules = firewallRuleInterface.getAllNeutronLoadBalancerRules();
         List<NeutronLoadBalancer> ans = new ArrayList<NeutronLoadBalancer>();
@@ -144,12 +148,7 @@ public class NeutronLoadBalancerNorthbound {
     public Response showLoadBalancer(@PathParam("loadBalancerID") String loadBalancerID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerCRUD(
-                this);
-        if (loadBalancerInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
         if (!loadBalancerInterface.neutronLoadBalancerExists(loadBalancerID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
@@ -180,12 +179,7 @@ public class NeutronLoadBalancerNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancers(final NeutronLoadBalancerRequest input) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerCRUD(
-                this);
-        if (loadBalancerInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
         if (input.isSingleton()) {
             NeutronLoadBalancer singleton = input.getSingleton();
 
@@ -289,12 +283,7 @@ public class NeutronLoadBalancerNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateLoadBalancer(
             @PathParam("loadBalancerID") String loadBalancerID, final NeutronLoadBalancerRequest input) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerCRUD(
-                this);
-        if (loadBalancerInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
 
         /*
          * verify the LoadBalancer exists and there is only one delta provided
@@ -368,12 +357,7 @@ public class NeutronLoadBalancerNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancer(
             @PathParam("loadBalancerID") String loadBalancerID) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = NeutronCRUDInterfaces.getINeutronLoadBalancerCRUD(
-                this);
-        if (loadBalancerInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
 
         /*
          * verify the LoadBalancer exists and it isn't currently in use

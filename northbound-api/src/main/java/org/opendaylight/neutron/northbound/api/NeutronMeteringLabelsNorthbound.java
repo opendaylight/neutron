@@ -59,10 +59,18 @@ public class NeutronMeteringLabelsNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "MeteringLabel CRUD Interface";
 
     private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
         return o.extractFields(fields);
+    }
+
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronMeteringLabelCRUD(this);
+        if (answer.getMeteringLabelInterface() == null) {
+            throw new ServiceUnavailableException("NeutronMeteringLabel CRUD Interface "
+                + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
     }
 
     @Context
@@ -89,11 +97,7 @@ public class NeutronMeteringLabelsNorthbound {
             @QueryParam("description") String queryDescription
             // pagination and sorting are TODO
             ) {
-        INeutronMeteringLabelCRUD labelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
-        if (labelInterface == null) {
-            throw new ServiceUnavailableException("NeutronMeteringLabel CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelCRUD labelInterface = getNeutronInterfaces().getMeteringLabelInterface();
         List<NeutronMeteringLabel> allNeutronMeteringLabels = labelInterface.getAllNeutronMeteringLabels();
         List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
         Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabels.iterator();
@@ -132,11 +136,7 @@ public class NeutronMeteringLabelsNorthbound {
             @PathParam("labelUUID") String labelUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronMeteringLabelCRUD labelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
-        if (labelInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelCRUD labelInterface = getNeutronInterfaces().getMeteringLabelInterface();
         if (!labelInterface.neutronMeteringLabelExists(labelUUID)) {
             throw new ResourceNotFoundException("MeteringLabel UUID not found");
         }
@@ -163,11 +163,7 @@ public class NeutronMeteringLabelsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabel(final NeutronMeteringLabelRequest input) {
-        INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
-        if (meteringLabelInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelCRUD meteringLabelInterface = getNeutronInterfaces().getMeteringLabelInterface();
         if (input.isSingleton()) {
             NeutronMeteringLabel singleton = input.getSingleton();
 
@@ -228,11 +224,7 @@ public class NeutronMeteringLabelsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabel(
             @PathParam("labelUUID") String labelUUID) {
-        INeutronMeteringLabelCRUD meteringLabelInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelCRUD(this);
-        if (meteringLabelInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelCRUD meteringLabelInterface = getNeutronInterfaces().getMeteringLabelInterface();
 
         /*
          * verify that the meteringLabel exists and is not in use before removing it

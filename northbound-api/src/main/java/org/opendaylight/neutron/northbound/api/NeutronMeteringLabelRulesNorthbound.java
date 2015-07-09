@@ -59,10 +59,18 @@ public class NeutronMeteringLabelRulesNorthbound {
 
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "MeteringLabelRule CRUD Interface";
 
     private NeutronMeteringLabelRule extractFields(NeutronMeteringLabelRule o, List<String> fields) {
         return o.extractFields(fields);
+    }
+
+    private NeutronCRUDInterfaces getNeutronInterfaces() {
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronMeteringLabelRuleCRUD(this);
+        if (answer.getMeteringLabelRuleInterface() == null) {
+            throw new ServiceUnavailableException("NeutronMeteringLabelRule CRUD Interface "
+                    + RestMessages.SERVICEUNAVAILABLE.toString());
+        }
+        return answer;
     }
 
     @Context
@@ -89,11 +97,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             @QueryParam("metering_label_id") String queryLabelID
             // pagination and sorting are TODO
             ) {
-        INeutronMeteringLabelRuleCRUD ruleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
-        if (ruleInterface == null) {
-            throw new ServiceUnavailableException("NeutronMeteringLabelRule CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelRuleCRUD ruleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
         List<NeutronMeteringLabelRule> allNeutronMeteringLabelRules = ruleInterface.getAllNeutronMeteringLabelRules();
         List<NeutronMeteringLabelRule> ans = new ArrayList<NeutronMeteringLabelRule>();
         Iterator<NeutronMeteringLabelRule> i = allNeutronMeteringLabelRules.iterator();
@@ -132,11 +136,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             @PathParam("ruleUUID") String ruleUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronMeteringLabelRuleCRUD ruleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
-        if (ruleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelRuleCRUD ruleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
         if (!ruleInterface.neutronMeteringLabelRuleExists(ruleUUID)) {
             throw new ResourceNotFoundException("MeteringLabelRule UUID not found");
         }
@@ -163,11 +163,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabelRule(final NeutronMeteringLabelRuleRequest input) {
-        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
-        if (meteringLabelRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
         if (input.isSingleton()) {
             NeutronMeteringLabelRule singleton = input.getSingleton();
 
@@ -228,11 +224,7 @@ public class NeutronMeteringLabelRulesNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabelRule(
             @PathParam("ruleUUID") String ruleUUID) {
-        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = NeutronCRUDInterfaces.getINeutronMeteringLabelRuleCRUD(this);
-        if (meteringLabelRuleInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
 
         /*
          * verify that the meteringLabelRule exists and is not in use before removing it

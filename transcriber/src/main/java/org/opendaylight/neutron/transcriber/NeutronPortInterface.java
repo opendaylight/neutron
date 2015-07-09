@@ -117,7 +117,11 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         }
         portDB.putIfAbsent(input.getID(), input);
         // if there are no fixed IPs, allocate one for each subnet in the network
-        INeutronSubnetCRUD systemCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronNetworkCRUD(this)
+            .fetchINeutronSubnetCRUD(this);
+        INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
+        INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
         if (input.getFixedIPs() == null){
            input.setFixedIPs(new ArrayList<Neutron_IPs>());
         }
@@ -143,7 +147,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
             }
             subnet.addPort(input);
         }
-        INeutronNetworkCRUD networkIf = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
 
         NeutronNetwork network = networkIf.getNetwork(input.getNetworkUUID());
         network.addPort(input);
@@ -157,8 +160,11 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         }
         NeutronPort port = getPort(uuid);
         portDB.remove(uuid);
-        INeutronNetworkCRUD networkCRUD = NeutronCRUDInterfaces.getINeutronNetworkCRUD(this);
-        INeutronSubnetCRUD systemCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronNetworkCRUD(this)
+            .fetchINeutronSubnetCRUD(this);
+        INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
+        INeutronNetworkCRUD networkCRUD = interfaces.getNetworkInterface();
 
         NeutronNetwork network = networkCRUD.getNetwork(port.getNetworkUUID());
         network.removePort(port);
@@ -184,7 +190,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         NeutronPort target = portDB.get(uuid);
         if (delta.getFixedIPs() != null) {
             NeutronPort port = getPort(uuid);
-            INeutronSubnetCRUD systemCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
+            NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+                .fetchINeutronSubnetCRUD(this);
+            INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
             for (Neutron_IPs ip: delta.getFixedIPs()) {
                 NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
                 if (ip.getIpAddress() == null) {
@@ -210,7 +218,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     @Override
     public NeutronPort getGatewayPort(String subnetUUID) {
-        INeutronSubnetCRUD systemCRUD = NeutronCRUDInterfaces.getINeutronSubnetCRUD(this);
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronSubnetCRUD(this);
+        INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
         NeutronSubnet subnet = systemCRUD.getSubnet(subnetUUID);
         Iterator<NeutronPort> portIterator = getAllPorts().iterator();
         while (portIterator.hasNext()) {
