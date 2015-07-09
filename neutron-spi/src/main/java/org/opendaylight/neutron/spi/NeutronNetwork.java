@@ -118,7 +118,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
     }
 
     public boolean isAdminStateUp() {
-        return adminStateUp;
+        return Boolean.TRUE.equals(adminStateUp);
     }
 
     public Boolean getAdminStateUp() { return adminStateUp; }
@@ -127,7 +127,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         adminStateUp = newValue;
     }
 
-    public boolean isShared() { return shared; }
+    public boolean isShared() { return Boolean.TRUE.equals(shared); }
 
     public Boolean getShared() { return shared; }
 
@@ -143,7 +143,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         this.tenantID = tenantID;
     }
 
-    public boolean isRouterExternal() { return routerExternal; }
+    public boolean isRouterExternal() { return Boolean.TRUE.equals(routerExternal); }
 
     public Boolean getRouterExternal() { return routerExternal; }
 
