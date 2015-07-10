@@ -14,8 +14,6 @@ public class NeutronTranscriberProvider implements BindingAwareProvider, AutoClo
 
     private BundleContext bundleContext;
 
-    private List<ServiceRegistration<?>> registrations;
-
     private Activator activator;
 
     public NeutronTranscriberProvider(BundleContext bundleContext) {
