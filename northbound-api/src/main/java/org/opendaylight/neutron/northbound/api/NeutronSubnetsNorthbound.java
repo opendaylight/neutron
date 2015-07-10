@@ -226,7 +226,7 @@ public class NeutronSubnetsNorthbound {
             if (!singleton.initDefaults()) {
                 throw new InternalServerErrorException("subnet object could not be initialized properly");
             }
-            if (singleton.gatewayIP_Pool_overlap()) {
+            if (singleton.gatewayIpPoolOverlap()) {
                 throw new ResourceConflictException("IP pool overlaps with gateway");
             }
             Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
@@ -283,7 +283,7 @@ public class NeutronSubnetsNorthbound {
                 if (!test.isValidCIDR()) {
                     throw new BadRequestException("Invalid CIDR");
                 }
-                if (test.gatewayIP_Pool_overlap()) {
+                if (test.gatewayIpPoolOverlap()) {
                     throw new ResourceConflictException("IP pool overlaps with gateway");
                 }
                 if (instances != null) {

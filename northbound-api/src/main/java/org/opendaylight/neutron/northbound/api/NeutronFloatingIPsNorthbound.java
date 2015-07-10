@@ -214,7 +214,7 @@ public class NeutronFloatingIPsNorthbound {
                 throw new BadRequestException("external network UUID doesn't exist.");
             }
             NeutronNetwork externNetwork = networkInterface.getNetwork(externalNetworkUUID);
-            if (!externNetwork.isRouterExternal()) {
+            if (!Boolean.TRUE.equals(externNetwork.getRouterExternal())) {
                 throw new BadRequestException("external network isn't marked router:external");
             }
             // if floating IP is specified, make sure it can come from the network

@@ -25,12 +25,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.net.util.SubnetUtils;
 import org.apache.commons.net.util.SubnetUtils.SubnetInfo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
 public class NeutronSubnet implements Serializable, INeutronObject {
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(NeutronCRUDInterfaces.class);
+
     private static final long serialVersionUID = 1L;
 
+    private static final int CIDR_PARTS = 2;
     private static final int IPV4_VERSION = 4;
     private static final int IPV6_VERSION = 6;
     private static final int IPV6_LENGTH = 128;
@@ -91,9 +98,13 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         myPorts = new ArrayList<NeutronPort>();
     }
 
-    public String getID() { return subnetUUID; }
+    public String getID() {
+        return subnetUUID;
+    }
 
-    public void setID(String id) { this.subnetUUID = id; }
+    public void setID(String id) {
+        this.subnetUUID = id;
+    }
 
     public String getSubnetUUID() {
         return subnetUUID;
@@ -174,7 +185,9 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         return enableDHCP;
     }
 
-    public Boolean getEnableDHCP() { return enableDHCP; }
+    public Boolean getEnableDHCP() {
+        return enableDHCP;
+    }
 
     public void setEnableDHCP(Boolean newValue) {
             enableDHCP = newValue;
@@ -188,13 +201,21 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         this.tenantID = tenantID;
     }
 
-    public String getIpV6AddressMode() { return ipV6AddressMode; }
+    public String getIpV6AddressMode() {
+        return ipV6AddressMode;
+    }
 
-    public void setIpV6AddressMode(String ipV6AddressMode) { this.ipV6AddressMode = ipV6AddressMode; }
+    public void setIpV6AddressMode(String ipV6AddressMode) {
+        this.ipV6AddressMode = ipV6AddressMode;
+    }
 
-    public String getIpV6RaMode() { return ipV6RaMode; }
+    public String getIpV6RaMode() {
+        return ipV6RaMode;
+    }
 
-    public void setIpV6RaMode(String ipV6RaMode) { this.ipV6RaMode = ipV6RaMode; }
+    public void setIpV6RaMode(String ipV6RaMode) {
+        this.ipV6RaMode = ipV6RaMode;
+    }
 
     /**
      * This method copies selected fields from the object and returns them
@@ -208,56 +229,95 @@ public class NeutronSubnet implements Serializable, INeutronObject {
 
     public NeutronSubnet extractFields(List<String> fields) {
         NeutronSubnet ans = new NeutronSubnet();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
+        for (String field: fields) {
+            if ("id".equals(field)) {
                 ans.setSubnetUUID(this.getSubnetUUID());
             }
-            if (s.equals("network_id")) {
+            if ("network_id".equals(field)) {
                 ans.setNetworkUUID(this.getNetworkUUID());
             }
-            if (s.equals("name")) {
+            if ("name".equals(field)) {
                 ans.setName(this.getName());
             }
-            if (s.equals("ip_version")) {
+            if ("ip_version".equals(field)) {
                 ans.setIpVersion(this.getIpVersion());
             }
-            if (s.equals("cidr")) {
+            if ("cidr".equals(field)) {
                 ans.setCidr(this.getCidr());
             }
-            if (s.equals("gateway_ip")) {
+            if ("gateway_ip".equals(field)) {
                 ans.setGatewayIP(this.getGatewayIP());
             }
-            if (s.equals("dns_nameservers")) {
+            if ("dns_nameservers".equals(field)) {
                 List<String> nsList = new ArrayList<String>();
                 nsList.addAll(this.getDnsNameservers());
                 ans.setDnsNameservers(nsList);
             }
-            if (s.equals("allocation_pools")) {
+            if ("allocation_pools".equals(field)) {
                 List<NeutronSubnet_IPAllocationPool> aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
                 aPools.addAll(this.getAllocationPools());
                 ans.setAllocationPools(aPools);
             }
-            if (s.equals("host_routes")) {
+            if ("host_routes".equals(field)) {
                 List<NeutronSubnet_HostRoute> hRoutes = new ArrayList<NeutronSubnet_HostRoute>();
                 hRoutes.addAll(this.getHostRoutes());
                 ans.setHostRoutes(hRoutes);
             }
-            if (s.equals("enable_dhcp")) {
+            if ("enable_dhcp".equals(field)) {
                 ans.setEnableDHCP(this.getEnableDHCP());
             }
-            if (s.equals("tenant_id")) {
+            if ("tenant_id".equals(field)) {
                 ans.setTenantID(this.getTenantID());
             }
-            if (s.equals("ipv6_address_mode")) {
+            if ("ipv6_address_mode".equals(field)) {
                 ans.setIpV6AddressMode(this.getIpV6AddressMode());
             }
-            if (s.equals("ipv6_ra_mode")) {
+            if ("ipv6_ra_mode".equals(field)) {
                 ans.setIpV6RaMode(this.getIpV6RaMode());
             }
         }
         return ans;
+    }
+
+
+    private boolean isValidCIDRV4() {
+       try {
+           SubnetUtils util = new SubnetUtils(cidr);
+           SubnetInfo info = util.getInfo();
+           if (!info.getNetworkAddress().equals(info.getAddress())) {
+               return false;
+           }
+       } catch (IllegalArgumentException e) {
+           LOGGER.info("isValidCIDR", e);
+           return false;
+       }
+       return true;
+   }
+    
+    private boolean isValidCIDRV6() { 
+        // fix for Bug2290 - this is custom code because no classes
+        // with ODL-friendly licenses have been found
+        // extract address (in front of /) and length (after /)
+        String[] parts = cidr.split("/");
+        if (parts.length != CIDR_PARTS) {
+            return false;
+        }
+        try {
+            int length = Integer.parseInt(parts[1]);
+            //TODO?: limit check on length
+            // convert to byte array
+            byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
+            int i;
+            for (i = length; i < IPV6_LENGTH; i++) {
+                if (((((int) addrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) != 0) {
+                return false;
+                }
+            }
+            return true;
+        } catch (UnknownHostException e) {
+            LOGGER.info("isValidCIDR", e);
+            return false;
+        }
     }
 
     /* test to see if the cidr address used to define this subnet
@@ -268,40 +328,10 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         // fix for Bug 2290 - need to wrap the existing test as
         // IPv4 because SubnetUtils doesn't support IPv6
         if (ipVersion == IPV4_VERSION) {
-            try {
-                SubnetUtils util = new SubnetUtils(cidr);
-                SubnetInfo info = util.getInfo();
-                if (!info.getNetworkAddress().equals(info.getAddress())) {
-                    return false;
-                }
-            } catch (IllegalArgumentException e) {
-                return false;
-            }
-            return true;
+            return isValidCIDRV4();
         }
         if (ipVersion == IPV6_VERSION) {
-            // fix for Bug2290 - this is custom code because no classes
-            // with ODL-friendly licenses have been found
-            // extract address (in front of /) and length (after /)
-            String[] parts = cidr.split("/");
-            if (parts.length != 2) {
-                return false;
-            }
-            try {
-                int length = Integer.parseInt(parts[1]);
-                //TODO?: limit check on length
-                // convert to byte array
-                byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
-                int i;
-                for (i = length; i < IPV6_LENGTH; i++) {
-                    if (((((int) addrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) != 0) {
-                        return(false);
-                    }
-                }
-                return(true);
-            } catch (UnknownHostException e) {
-                return(false);
-            }
+            return isValidCIDRV6();
         }
         return false;
     }
@@ -310,22 +340,63 @@ public class NeutronSubnet implements Serializable, INeutronObject {
      * allocation pools (an error condition when creating a new subnet
      * or assigning a gateway IP)
      */
-    public boolean gatewayIP_Pool_overlap() {
-        Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
-        while (i.hasNext()) {
-            NeutronSubnet_IPAllocationPool pool = i.next();
-            if (ipVersion == IPV4_VERSION) {
-                if (pool.contains(gatewayIP)) {
-                    return true;
-                }
+    public boolean gatewayIpPoolOverlap() {
+        for (NeutronSubnet_IPAllocationPool pool : allocationPools) {
+            if (ipVersion == IPV4_VERSION && pool.contains(gatewayIP)) {
+                return true;
             }
-            if (ipVersion == IPV6_VERSION) {
-                if (pool.contains_V6(gatewayIP)) {
-                    return true;
-                }
+            if (ipVersion == IPV6_VERSION && pool.contains_V6(gatewayIP)) {
+                return true;
             }
         }
         return false;
+    }
+
+    private boolean initV4Defaults() {
+        try {
+            SubnetUtils util = new SubnetUtils(cidr);
+            SubnetInfo info = util.getInfo();
+            if (gatewayIP == null || "".equals(gatewayIP)) {
+                gatewayIP = info.getLowAddress();
+            }
+            if (allocationPools.isEmpty()) {
+                NeutronSubnet_IPAllocationPool source =
+                    new NeutronSubnet_IPAllocationPool(info.getLowAddress(),
+                            info.getHighAddress());
+                allocationPools = source.splitPool(gatewayIP);
+            }
+        } catch (IllegalArgumentException e) {
+            LOGGER.info("initV4Defaults", e);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean initV6Defaults() {
+        String[] parts = cidr.split("/");
+        if (parts.length != CIDR_PARTS) {
+            return false;
+        }
+        try {
+            int length = Integer.parseInt(parts[1]);
+            BigInteger lowAddressBI = NeutronSubnet_IPAllocationPool.convert_V6(parts[0]);
+            String lowAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddressBI.add(BigInteger.ONE));
+            BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
+            String highAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddressBI.add(mask).subtract(BigInteger.ONE));
+            if (gatewayIP == null || "".equals(gatewayIP)) {
+                gatewayIP = lowAddress;
+            }
+            if (allocationPools.isEmpty()) {
+                NeutronSubnet_IPAllocationPool source =
+                    new NeutronSubnet_IPAllocationPool(lowAddress,
+                            highAddress);
+                allocationPools = source.splitPool_V6(gatewayIP);
+            }
+        } catch (Exception e) {
+            LOGGER.info("initV6Defaults", e);
+            return false;
+        }
+        return true;
     }
 
     public boolean initDefaults() {
@@ -342,46 +413,11 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         }
         if (allocationPools == null) {
             allocationPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
-            if (ipVersion == IPV4_VERSION) {
-                try {
-                    SubnetUtils util = new SubnetUtils(cidr);
-                    SubnetInfo info = util.getInfo();
-                    if (gatewayIP == null || ("").equals(gatewayIP)) {
-                        gatewayIP = info.getLowAddress();
-                    }
-                    if (allocationPools.size() < 1) {
-                        NeutronSubnet_IPAllocationPool source =
-                            new NeutronSubnet_IPAllocationPool(info.getLowAddress(),
-                                    info.getHighAddress());
-                        allocationPools = source.splitPool(gatewayIP);
-                    }
-                } catch (IllegalArgumentException e) {
-                    return false;
-                }
+            if (ipVersion == IPV4_VERSION && !initV4Defaults()) {
+                return false;
             }
-            if (ipVersion == IPV6_VERSION) {
-                String[] parts = cidr.split("/");
-                if (parts.length != 2) {
-                    return false;
-                }
-                try {
-                    int length = Integer.parseInt(parts[1]);
-                    BigInteger lowAddress_bi = NeutronSubnet_IPAllocationPool.convert_V6(parts[0]);
-                    String lowAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
-                    BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
-                    String highAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
-                    if (gatewayIP == null || ("").equals(gatewayIP)) {
-                        gatewayIP = lowAddress;
-                    }
-                    if (allocationPools.size() < 1) {
-                        NeutronSubnet_IPAllocationPool source =
-                            new NeutronSubnet_IPAllocationPool(lowAddress,
-                                    highAddress);
-                        allocationPools = source.splitPool_V6(gatewayIP);
-                    }
-                } catch (Exception e) {
-                    return false;
-                }
+            if (ipVersion == IPV6_VERSION && !initV6Defaults()) {
+               return false;
             }
         }
         return true;
@@ -413,7 +449,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         List<NeutronPort> result = new ArrayList<NeutronPort>();
         List<NeutronPort> ports = getPortsInSubnet();
         for(NeutronPort port: ports) {
-            if(port.getDeviceOwner().equals("network:floatingip")) {
+            if("network:floatingip".equals(port.getDeviceOwner())) {
                 result.add(port);
             }
         }
@@ -435,37 +471,46 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         return result;
     }
 
+    private boolean isValidIPV4(String ipAddress) {
+        try {
+            SubnetUtils util = new SubnetUtils(cidr);
+            SubnetInfo info = util.getInfo();
+            return info.isInRange(ipAddress);
+        } catch (IllegalArgumentException e) {
+            LOGGER.info("isValidIP", e);
+            return false;
+        }
+    }
+    
+    private boolean isValidIPV6(String ipAddress) {
+        String[] parts = cidr.split("/");
+        try {
+            int length = Integer.parseInt(parts[1]);
+            byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
+            byte[] ipBytes =  ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
+            int i;
+            for (i = 0; i < length; i++) {
+                if (((((int) cidrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) !=
+                    ((((int) ipBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES))))) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (UnknownHostException e) {
+            LOGGER.info("isValidIP", e);
+            return false;
+        }
+    }
+
     /* this method tests to see if the supplied IPv4 address
      * is valid for this subnet or not
      */
     public boolean isValidIP(String ipAddress) {
         if (ipVersion == IPV4_VERSION) {
-            try {
-                SubnetUtils util = new SubnetUtils(cidr);
-                SubnetInfo info = util.getInfo();
-                return info.isInRange(ipAddress);
-            } catch (IllegalArgumentException e) {
-                return false;
-            }
+            return isValidIPV4(ipAddress);
         }
-
         if (ipVersion == IPV6_VERSION) {
-            String[] parts = cidr.split("/");
-            try {
-                int length = Integer.parseInt(parts[1]);
-                byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
-                byte[] ipBytes =  ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
-                int i;
-                for (i = 0; i < length; i++) {
-                    if (((((int) cidrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) !=
-                        ((((int) ipBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES))))) {
-                        return(false);
-                    }
-                }
-                return(true);
-            } catch (UnknownHostException e) {
-                return(false);
-            }
+            return isValidIPV6(ipAddress);
         }
         return false;
     }
@@ -477,13 +522,9 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         if (ipAddress.equals(gatewayIP) && !gatewayIPAssigned ) {
             return false;
         }
-        Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
-        while (i.hasNext()) {
-            NeutronSubnet_IPAllocationPool pool = i.next();
-            if (ipVersion == IPV4_VERSION && pool.contains(ipAddress)) {
-                return false;
-            }
-            if (ipVersion == IPV6_VERSION && pool.contains_V6(ipAddress)) {
+        for (NeutronSubnet_IPAllocationPool pool : allocationPools) {
+            if ((ipVersion == IPV4_VERSION && pool.contains(ipAddress)) ||
+                (ipVersion == IPV6_VERSION && pool.contains_V6(ipAddress))) {
                 return false;
             }
         }
@@ -501,18 +542,15 @@ public class NeutronSubnet implements Serializable, INeutronObject {
             NeutronSubnet_IPAllocationPool pool = i.next();
             if (ans == null) {
                 ans = pool.getPoolStart();
-            }
-            else {
-                if (ipVersion == IPV4_VERSION) {
-                    if (NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart()) <
-                            NeutronSubnet_IPAllocationPool.convert(ans)) {
-                        ans = pool.getPoolStart();
-                    }
+            } else {
+                if (ipVersion == IPV4_VERSION &&
+                    NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart()) <
+                        NeutronSubnet_IPAllocationPool.convert(ans)) {
+                    ans = pool.getPoolStart();
                 }
-                if (ipVersion == IPV6_VERSION) {
-                    if (NeutronSubnet_IPAllocationPool.convert_V6(pool.getPoolStart()).compareTo(NeutronSubnet_IPAllocationPool.convert_V6(ans)) < 0) {
-                        ans = pool.getPoolStart();
-                    }
+                if (ipVersion == IPV6_VERSION &&
+                    NeutronSubnet_IPAllocationPool.convert_V6(pool.getPoolStart()).compareTo(NeutronSubnet_IPAllocationPool.convert_V6(ans)) < 0) {
+                    ans = pool.getPoolStart();
                 }
            }
         }

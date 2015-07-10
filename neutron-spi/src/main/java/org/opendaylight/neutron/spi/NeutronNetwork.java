@@ -10,7 +10,6 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -97,16 +96,12 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         }
     }
 
-    public String getID() { return networkUUID; }
-
-    public void setID(String id) { this.networkUUID = id; }
-
-    public String getNetworkUUID() {
+    public String getID() {
         return networkUUID;
     }
 
-    public void setNetworkUUID(String networkUUID) {
-        this.networkUUID = networkUUID;
+    public void setID(String id) {
+        this.networkUUID = id;
     }
 
     public String getNetworkName() {
@@ -117,19 +112,17 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         this.networkName = networkName;
     }
 
-    public boolean isAdminStateUp() {
+    public Boolean getAdminStateUp() {
         return adminStateUp;
     }
-
-    public Boolean getAdminStateUp() { return adminStateUp; }
 
     public void setAdminStateUp(boolean newValue) {
         adminStateUp = newValue;
     }
 
-    public boolean isShared() { return shared; }
-
-    public Boolean getShared() { return shared; }
+    public Boolean getShared() {
+        return shared;
+    }
 
     public void setShared(boolean newValue) {
         shared = newValue;
@@ -143,9 +136,9 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         this.tenantID = tenantID;
     }
 
-    public boolean isRouterExternal() { return routerExternal; }
-
-    public Boolean getRouterExternal() { return routerExternal; }
+    public Boolean getRouterExternal() {
+        return routerExternal;
+    }
 
     public void setRouterExternal(boolean newValue) {
         routerExternal = newValue;
@@ -231,42 +224,40 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     public NeutronNetwork extractFields(List<String> fields) {
         NeutronNetwork ans = new NeutronNetwork();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setNetworkUUID(this.getNetworkUUID());
+        for (String field: fields) {
+            if ("id".equals(field)) {
+                ans.setID(this.getID());
             }
-            if (s.equals("name")) {
+            if ("name".equals(field)) {
                 ans.setNetworkName(this.getNetworkName());
             }
-            if (s.equals("admin_state_up")) {
+            if ("admin_state_up".equals(field)) {
                 ans.setAdminStateUp(adminStateUp);
             }
-            if (s.equals("status")) {
+            if ("status".equals(field)) {
                 ans.setStatus(this.getStatus());
             }
-            if (s.equals("subnets")) {
+            if ("subnets".equals(field)) {
                 List<String> subnetList = new ArrayList<String>();
                 subnetList.addAll(this.getSubnets());
                 ans.setSubnets(subnetList);
             }
-            if (s.equals("shared")) {
+            if ("shared".equals(field)) {
                 ans.setShared(shared);
             }
-            if (s.equals("tenant_id")) {
+            if ("tenant_id".equals(field)) {
                 ans.setTenantID(this.getTenantID());
             }
-            if (s.equals("external")) {
+            if ("external".equals(field)) {
                 ans.setRouterExternal(this.getRouterExternal());
             }
-            if (s.equals("segmentation_id")) {
+            if ("segmentation_id".equals(field)) {
                 ans.setProviderSegmentationID(this.getProviderSegmentationID());
             }
-            if (s.equals("physical_network")) {
+            if ("physical_network".equals(field)) {
                 ans.setProviderPhysicalNetwork(this.getProviderPhysicalNetwork());
             }
-            if (s.equals("network_type")) {
+            if ("network_type".equals(field)) {
                 ans.setProviderNetworkType(this.getProviderNetworkType());
             }
         }
