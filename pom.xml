@@ -113,10 +113,10 @@
             </goals>
             <configuration>
               <target>
-                <move todir="target/site">
+                <move todir="target/site" failonerror="false">
                   <fileset dir="integration/test/target/site" />
                 </move>
-                <move file="integration/test/target/jacoco-it.exec" todir="target" />
+                <move file="integration/test/target/jacoco-it.exec" todir="target" failonerror="false" />
               </target>
             </configuration>
           </execution>
