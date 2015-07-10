@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_b52feca0",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-10T20:36:37Z",
+      "side": 1,
+      "message": "how about leaving old signature alone and in its body call this flavor of \u0027test_fetch\u0027 providing \u0027true\u0027?\n\nthat would save you from changing all the existing callers with explicit \u0027true\u0027.",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 230,
+        "endChar": 80
+      },
+      "revId": "1f5c1211f9225c023f27f142c62391e1d059467e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
