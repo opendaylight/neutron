@@ -45,7 +45,7 @@ public class NeutronSubnetTest {
     }
 
     @Test
-    public void gatewayIP_PoolOverlapTest() {
+    public void gatewayIpPoolOverlapTest() {
         NeutronSubnet objectUT = new NeutronSubnet();
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/16");
@@ -58,16 +58,16 @@ public class NeutronSubnetTest {
         objectUT.setAllocationPools(aPools);
 
         objectUT.setGatewayIP("10.18.0.1");
-        Assert.assertFalse("gatewayIP_Pool_overlap Test 1: test with address below allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+        Assert.assertFalse("gatewayIpPoolOverlap Test 1: test with address below allocation pool failed",
+              objectUT.gatewayIpPoolOverlap());
 
         objectUT.setGatewayIP("10.18.0.4");
-        Assert.assertTrue("gatewayIP_Pool_overlap Test 2: test with address in allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+        Assert.assertTrue("gatewayIpPoolOverlap Test 2: test with address in allocation pool failed",
+              objectUT.gatewayIpPoolOverlap());
 
         objectUT.setGatewayIP("10.18.0.7");
-        Assert.assertFalse("gatewayIP_Pool_overlap Test 3: test with address above allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+        Assert.assertFalse("gatewayIpPoolOverlap Test 3: test with address above allocation pool failed",
+              objectUT.gatewayIpPoolOverlap());
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
@@ -80,16 +80,16 @@ public class NeutronSubnetTest {
         objectUT.setAllocationPools(aPools);
 
         objectUT.setGatewayIP("2015::1");
-        Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 1: test with address below allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+        Assert.assertFalse("gatewayIpPoolOverlap v6 Test 1: test with address below allocation pool failed",
+              objectUT.gatewayIpPoolOverlap());
 
         objectUT.setGatewayIP("2015::4");
-        Assert.assertTrue("gatewayIP_Pool_overlap v6 Test 2: test with address in allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+        Assert.assertTrue("gatewayIpPoolOverlap v6 Test 2: test with address in allocation pool failed",
+              objectUT.gatewayIpPoolOverlap());
 
         objectUT.setGatewayIP("2015::7");
-        Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 3: test with address above allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+        Assert.assertFalse("gatewayIpPoolOverlap v6 Test 3: test with address above allocation pool failed",
+              objectUT.gatewayIpPoolOverlap());
     }
 
     @Test

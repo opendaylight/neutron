@@ -117,9 +117,7 @@ public class NeutronNetworksNorthbound {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
         List<NeutronNetwork> allNetworks = networkInterface.getAllNetworks();
         List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
-        Iterator<NeutronNetwork> i = allNetworks.iterator();
-        while (i.hasNext()) {
-            NeutronNetwork oSN = i.next();
+        for ( NeutronNetwork oSN : allNetworks ) {
             //match filters: TODO provider extension
             Boolean bAdminStateUp = null;
             Boolean bShared = null;
@@ -135,10 +133,10 @@ public class NeutronNetworksNorthbound {
             }
             if ((queryID == null || queryID.equals(oSN.getID())) &&
                     (queryName == null || queryName.equals(oSN.getNetworkName())) &&
-                    (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp()) &&
+                    (bAdminStateUp == null || bAdminStateUp.equals(oSN.getAdminStateUp())) &&
                     (queryStatus == null || queryStatus.equals(oSN.getStatus())) &&
-                    (bShared == null || bShared.booleanValue() == oSN.isShared()) &&
-                    (bRouterExternal == null || bRouterExternal.booleanValue() == oSN.isRouterExternal()) &&
+                    (bShared == null || bShared.equals(oSN.getShared())) &&
+                    (bRouterExternal == null || bRouterExternal.equals(oSN.getRouterExternal())) &&
                     (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSN,fields));

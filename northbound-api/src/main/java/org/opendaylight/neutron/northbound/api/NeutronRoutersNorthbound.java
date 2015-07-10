@@ -232,7 +232,7 @@ public class NeutronRoutersNorthbound {
                     throw new BadRequestException("External Network Pointer doesn't exist");
                 }
                 NeutronNetwork externNetwork = networkInterface.getNetwork(externNetworkPtr);
-                if (!externNetwork.isRouterExternal()) {
+                if (!Boolean.TRUE.equals(externNetwork.getRouterExternal())) {
                     throw new BadRequestException("External Network Pointer isn't marked as router:external");
                 }
             }
@@ -342,7 +342,7 @@ public class NeutronRoutersNorthbound {
                 throw new BadRequestException("External Network Pointer does not exist");
             }
             NeutronNetwork externNetwork = networkInterface.getNetwork(externNetworkPtr);
-            if (!externNetwork.isRouterExternal()) {
+            if (!Boolean.TRUE.equals(externNetwork.getRouterExternal())) {
                 throw new BadRequestException("External Network Pointer isn't marked as router:external");
             }
         }
