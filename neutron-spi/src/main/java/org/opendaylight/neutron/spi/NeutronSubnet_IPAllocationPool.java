@@ -175,7 +175,7 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
     /*
      * helper routine used by longToIP
      */
-    public static String join(String r[],String d)
+    public static String join(String r[],String separator)
     {
         if (r.length == 0) {
             return "";
@@ -183,7 +183,8 @@ public class NeutronSubnet_IPAllocationPool implements Serializable {
         StringBuilder sb = new StringBuilder();
         int i;
         for(i = 0;i < r.length - 1;i++) {
-            sb.append(r[i] + d);
+            sb.append(r[i]);
+            sb.append(separator);
         }
         return sb.toString() + r[i];
     }
