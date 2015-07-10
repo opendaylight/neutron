@@ -78,4 +78,62 @@ public class NeutronNetworkTests {
             " \"id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" } } ";
         ITNeutronE2E.test_create(url, content,"External Network Post Failed NB");
     }
+
+    //TODO handle SB check
+    public void bulk_network_create_test() {
+        String url = base + "/networks";
+        String content = "{ \"networks\": [ { "
+            + "\"status\": \"ACTIVE\", \"subnets\": [], "
+            + "\"name\": \"sample_network3\", "
+            + "\"provider:physical_network\": null, "
+            + "\"admin_state_up\": true, "
+            + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
+            + "\"provider:network_type\": \"local\", "
+            + "\"shared\": false, "
+            + "\"id\": \"bc1a76cb-8767-4c3a-bb95-018b822f2130\", "
+            + "\"provider:segmentation_id\": null }, { "
+            + "\"status\": \"ACTIVE\", "
+            + "\"subnets\": [], "
+            + "\"name\": \"sample_network4\", "
+            + "\"provider:physical_network\": null, "
+            + "\"admin_state_up\": true, "
+            + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
+            + "\"provider:network_type\": \"local\", "
+            + "\"shared\": false, "
+            + "\"id\": \"af374017-c9ae-4a1d-b799-ab73111476e2\", "
+            + "\"provider:segmentation_id\": null } ] } ";
+        ITNeutronE2E.test_create(url, content,"Bulk Network Post Failed");
+    }
+
+    //TODO handle SB check
+    public void network_update_test() {
+        String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
+        String content = " { \"network\": { "
+            +"\"status\": \"ACTIVE\", "
+            +"\"subnets\": [], "
+            +"\"name\": \"sample_network_5_updated\", "
+            +"\"provider:physical_network\": null, "
+            +"\"admin_state_up\": true, "
+            +"\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
+            +"\"provider:network_type\": \"local\", "
+            +"\"router:external\": false, "
+            +"\"shared\": false, "
+            +"\"provider:segmentation_id\": null } } ";
+        ITNeutronE2E.test_modify(url, content,"Network Put Failed");
+    }
+   
+    public void network_element_get_test() {
+        String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
+        ITNeutronE2E.test_fetch(url, true ,"Network Element Get Failed");
+    }
+
+    public void network_element_negative_get_test() {
+        String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
+        ITNeutronE2E.test_fetch(url, false ,"Network Element Negative Get Failed");
+    }
+
+    public void network_delete_test() {
+        String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
+        ITNeutronE2E.test_delete(url, "Network Element Delete Failed");
+    }
 }

@@ -89,6 +89,11 @@ public class ITNeutronE2E {
         network_tester.network_collection_get_test();
         network_tester.singleton_network_create_test();
 	network_tester.external_network_create_test(); //needed for router test
+        network_tester.bulk_network_create_test();
+        network_tester.network_update_test();
+        network_tester.network_element_get_test();
+        network_tester.network_delete_test();
+        network_tester.network_element_negative_get_test();
 
         NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
         subnet_tester.subnet_collection_get_test();
@@ -227,6 +232,21 @@ public class ITNeutronE2E {
             URL url = new URL(url_s);
             HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
             Assert.assertEquals(context, 200, httpConn.getResponseCode());
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+    }
+
+    static void test_fetch(String url_s, boolean positiveTest, String context) {
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
+            if (positiveTest) {
+                Assert.assertEquals(context, 200, httpConn.getResponseCode());
+            } else {
+                Assert.assertEquals(context, 404, httpConn.getResponseCode());
+            }
         } catch (Exception e) {
             e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
