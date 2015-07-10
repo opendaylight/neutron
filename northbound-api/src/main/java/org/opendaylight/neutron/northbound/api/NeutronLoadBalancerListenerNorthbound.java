@@ -105,9 +105,7 @@ public class NeutronLoadBalancerListenerNorthbound {
     ) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronInterfaces().getLoadBalancerListenerInterface();
         List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAllNeutronLoadBalancerListeners();
-        //        List<NeutronLoadBalancerListenerRule> allLoadBalancerListenerRules = firewallRuleInterface.getAllNeutronLoadBalancerListenerRules();
         List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
-        //        List<NeutronLoadBalancerListenerRule> rules = new ArrayList<NeutronLoadBalancerListenerRule>();
         Iterator<NeutronLoadBalancerListener> i = allLoadBalancerListeners.iterator();
         while (i.hasNext()) {
             NeutronLoadBalancerListener nsg = i.next();
