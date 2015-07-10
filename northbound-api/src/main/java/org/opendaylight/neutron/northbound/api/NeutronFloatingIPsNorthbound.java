@@ -174,10 +174,10 @@ public class NeutronFloatingIPsNorthbound {
             NeutronFloatingIP ans = floatingIPInterface.getFloatingIP(floatingipUUID);
             return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronFloatingIPRequest(extractFields(ans, fields))).build();
-        } else
+        } else {
             return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronFloatingIPRequest(floatingIPInterface.getFloatingIP(floatingipUUID))).build();
-
+        }
     }
 
     /**

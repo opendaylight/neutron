@@ -193,9 +193,10 @@ public class NeutronRoutersNorthbound {
             NeutronRouter ans = routerInterface.getRouter(routerUUID);
             return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronRouterRequest(extractFields(ans, fields))).build();
-        } else
+        } else {
             return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronRouterRequest(routerInterface.getRouter(routerUUID))).build();
+        }
     }
 
     /**
