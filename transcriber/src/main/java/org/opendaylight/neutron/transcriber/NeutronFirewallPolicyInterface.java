@@ -26,10 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Deprecated as all Neutron FWaaS is experimental and so doesn't meet
- * the scope of neutron northbound
- *
- * @deprecated
  */
 
 public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface implements INeutronFirewallPolicyCRUD {
