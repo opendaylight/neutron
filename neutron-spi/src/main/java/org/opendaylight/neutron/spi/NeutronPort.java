@@ -12,8 +12,8 @@ package org.opendaylight.neutron.spi;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -89,7 +89,7 @@ public class NeutronPort implements Serializable, INeutronObject {
      * each fixed IP address
      */
 
-    HashMap<String, NeutronFloatingIP> floatingIPMap;
+    Map<String, NeutronFloatingIP> floatingIPMap;
 
     public NeutronPort() {
         floatingIPMap = new HashMap<String, NeutronFloatingIP>();
@@ -269,45 +269,39 @@ public class NeutronPort implements Serializable, INeutronObject {
 
     public NeutronPort extractFields(List<String> fields) {
         NeutronPort ans = new NeutronPort();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
+        for (String field: fields) {
+            if (fields.equals("id")) {
                 ans.setPortUUID(this.getPortUUID());
             }
-            if (s.equals("network_id")) {
+            if (fields.equals("network_id")) {
                 ans.setNetworkUUID(this.getNetworkUUID());
             }
-            if (s.equals("name")) {
+            if (fields.equals("name")) {
                 ans.setName(this.getName());
             }
-            if (s.equals("admin_state_up")) {
+            if (fields.equals("admin_state_up")) {
                 ans.setAdminStateUp(this.getAdminStateUp());
             }
-            if (s.equals("status")) {
+            if (fields.equals("status")) {
                 ans.setStatus(this.getStatus());
             }
-            if (s.equals("mac_address")) {
+            if (fields.equals("mac_address")) {
                 ans.setMacAddress(this.getMacAddress());
             }
-            if (s.equals("fixed_ips")) {
-                List<Neutron_IPs> fixedIPs = new ArrayList<Neutron_IPs>();
-                fixedIPs.addAll(this.getFixedIPs());
-                ans.setFixedIPs(fixedIPs);
+            if (fields.equals("fixed_ips")) {
+                ans.setFixedIPs(new ArrayList<Neutron_IPs>(this.getFixedIPs()));
             }
-            if (s.equals("device_id")) {
+            if (fields.equals("device_id")) {
                 ans.setDeviceID(this.getDeviceID());
             }
-            if (s.equals("device_owner")) {
+            if (fields.equals("device_owner")) {
                 ans.setDeviceOwner(this.getDeviceOwner());
             }
-            if (s.equals("tenant_id")) {
+            if (fields.equals("tenant_id")) {
                 ans.setTenantID(this.getTenantID());
             }
-            if (s.equals("security_groups")) {
-                List<NeutronSecurityGroup> securityGroups = new ArrayList<NeutronSecurityGroup>();
-                securityGroups.addAll(this.getSecurityGroups());
-                ans.setSecurityGroups(securityGroups);
+            if (fields.equals("security_groups")) {
+                ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
             }
         }
         return ans;
