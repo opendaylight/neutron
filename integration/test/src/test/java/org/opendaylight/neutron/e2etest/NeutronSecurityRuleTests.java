@@ -26,6 +26,6 @@ public class NeutronSecurityRuleTests {
 
     public void securityRule_collection_get_test() {
         String url = base + "/security-group-rules";
-        ITNeutronE2E.test_fetch(url, "Security Rule Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Security Rule Collection GET failed");
     }
 }

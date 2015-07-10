@@ -26,6 +26,6 @@ public class NeutronIPSECPoliciesTests {
 
     public void ipsecPolicy_collection_get_test() {
         String url = base + "/vpn/ipsecpolicies";
-        ITNeutronE2E.test_fetch(url, "IPSEC Policy Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "IPSEC Policy Collection GET failed");
     }
 }

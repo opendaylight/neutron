@@ -26,6 +26,6 @@ public class NeutronSecurityGroupTests {
 
     public void securityGroup_collection_get_test() {
         String url = base + "/security-groups";
-        ITNeutronE2E.test_fetch(url, "Security Group Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Security Group Collection GET failed");
     }
 }

@@ -26,7 +26,7 @@ public class NeutronLoadBalancerTests {
 
     public void loadBalancer_collection_get_test() {
         String url = base + "/lbaas/loadbalancers";
-        ITNeutronE2E.test_fetch(url, "Load Balancer Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Load Balancer Collection GET failed");
     }
 
     //TODO handle SB check

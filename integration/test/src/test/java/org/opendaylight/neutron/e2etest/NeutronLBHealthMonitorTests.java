@@ -26,6 +26,6 @@ public class NeutronLBHealthMonitorTests {
 
     public void healthMonitor_collection_get_test() {
         String url = base + "/lbaas/healthmonitors";
-        ITNeutronE2E.test_fetch(url, "LB Health Monitor Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "LB Health Monitor Collection GET failed");
     }
 }

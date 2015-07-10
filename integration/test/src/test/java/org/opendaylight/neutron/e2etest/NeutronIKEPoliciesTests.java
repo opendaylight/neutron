@@ -26,6 +26,6 @@ public class NeutronIKEPoliciesTests {
 
     public void ikePolicy_collection_get_test() {
         String url = base + "/vpn/ikepolicies";
-        ITNeutronE2E.test_fetch(url, "IKE Policy GET failed");
+        ITNeutronE2E.test_fetch(url, true, "IKE Policy GET failed");
     }
 }

@@ -315,7 +315,7 @@ public class NeutronNetworksNorthbound {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
 
         /*
-         * network has to exist and only a single delta is supported
+         * network has to exist and only a single object is supported
          */
         if (!networkInterface.networkExists(netUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
@@ -323,23 +323,23 @@ public class NeutronNetworksNorthbound {
         if (!input.isSingleton()) {
             throw new BadRequestException("only singleton edits supported");
         }
-        NeutronNetwork delta = input.getSingleton();
+        NeutronNetwork updatedObject = input.getSingleton();
 
         /*
-         * transitions forbidden by Neutron
+         *  note: what we get appears to not be a delta but 
+         * rather an incomplete updated object.  So we need to set
+         * the ID to complete the object and then send that down
+         * for folks to check
          */
-        if (delta.getID() != null || delta.getTenantID() != null ||
-                delta.getStatus() != null) {
-            throw new BadRequestException("attribute edit blocked by Neutron");
-        }
 
+        updatedObject.setID(netUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
                 for (Object instance : instances) {
                     INeutronNetworkAware service = (INeutronNetworkAware) instance;
                     NeutronNetwork original = networkInterface.getNetwork(netUUID);
-                    int status = service.canUpdateNetwork(delta, original);
+                    int status = service.canUpdateNetwork(updatedObject, original);
                     if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
@@ -351,17 +351,16 @@ public class NeutronNetworksNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        // update network object and return the modified object
-                networkInterface.updateNetwork(netUUID, delta);
-                NeutronNetwork updatedSingleton = networkInterface.getNetwork(netUUID);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                        service.neutronNetworkUpdated(updatedSingleton);
-                    }
-                }
-                return Response.status(HttpURLConnection.HTTP_OK).entity(
-                        new NeutronNetworkRequest(networkInterface.getNetwork(netUUID))).build();
+        // update network object 
+        networkInterface.updateNetwork(netUUID, updatedObject);
+        if (instances != null) {
+            for (Object instance : instances) {
+                INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                service.neutronNetworkUpdated(updatedObject);
+            }
+        }
+        return Response.status(HttpURLConnection.HTTP_OK).entity(
+                new NeutronNetworkRequest(networkInterface.getNetwork(netUUID))).build();
     }
 
     /**

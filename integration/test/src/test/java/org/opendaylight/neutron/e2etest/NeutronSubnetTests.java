@@ -26,7 +26,7 @@ public class NeutronSubnetTests {
 
     public void subnet_collection_get_test() {
         String url = base + "/subnets";
-        ITNeutronE2E.test_fetch(url, "Subnet Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Subnet Collection GET failed");
     }
 
     //TODO handle SB check

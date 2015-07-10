@@ -26,6 +26,6 @@ public class NeutronIPSECSiteConnectionTests {
 
     public void ipsecSiteConnection_collection_get_test() {
         String url = base + "/vpn/ipsecsiteconnections";
-        ITNeutronE2E.test_fetch(url, "IPSEC Site Connection Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "IPSEC Site Connection Collection GET failed");
     }
 }

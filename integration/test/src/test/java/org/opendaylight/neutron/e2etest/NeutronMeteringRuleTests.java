@@ -26,7 +26,7 @@ public class NeutronMeteringRuleTests {
 
     public void meteringRule_collection_get_test() {
         String url = base + "/metering/metering-label-rules";
-        ITNeutronE2E.test_fetch(url, "Metering Rule Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Metering Rule Collection GET failed");
     }
 
     //TODO handle SB check

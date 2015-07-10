@@ -91,12 +91,12 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (!networkExists(uuid)) {
             return false;
         }
-        NeutronNetwork target = networkDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(networkDB.get(uuid));
-        }
-        return rc;
+/* note: because what we get is *not* a delta but (at this point) the updated
+ * object, this is much simpler - just replace the value and update the mdsal
+ * with it */
+        networkDB.replace(uuid, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override

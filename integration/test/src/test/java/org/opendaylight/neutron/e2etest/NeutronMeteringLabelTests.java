@@ -26,7 +26,7 @@ public class NeutronMeteringLabelTests {
 
     public void meteringLabel_collection_get_test() {
         String url = base + "/metering/metering-labels";
-        ITNeutronE2E.test_fetch(url, "Metering Label Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Metering Label Collection GET failed");
     }
 
     //TODO handle SB check

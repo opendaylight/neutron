@@ -26,7 +26,7 @@ public class NeutronPortTests {
 
     public void port_collection_get_test() {
         String url = base + "/ports";
-        ITNeutronE2E.test_fetch(url, "Ports Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Ports Collection GET failed");
     }
 
     //TODO handle SB check

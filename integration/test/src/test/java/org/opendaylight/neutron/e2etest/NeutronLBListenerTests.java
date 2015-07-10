@@ -26,7 +26,7 @@ public class NeutronLBListenerTests {
 
     public void listener_collection_get_test() {
         String url = base + "/lbaas/listeners";
-        ITNeutronE2E.test_fetch(url, "LB Listener Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "LB Listener Collection GET failed");
     }
 
     //TODO handle SB check

@@ -26,7 +26,7 @@ public class NeutronLBPoolTests {
 
     public void pool_collection_get_test() {
         String url = base + "/lbaas/pools";
-        ITNeutronE2E.test_fetch(url, "LB Pool Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "LB Pool Collection GET failed");
     }
 
     //TODO handle SB check

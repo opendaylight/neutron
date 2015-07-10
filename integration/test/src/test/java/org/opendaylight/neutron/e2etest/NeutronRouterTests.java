@@ -28,7 +28,7 @@ public class NeutronRouterTests {
 
     public void router_collection_get_test() {
         String url = base + "/routers";
-        ITNeutronE2E.test_fetch(url, "Router Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true, "Router Collection GET failed");
     }
 
     //TODO handle SB check

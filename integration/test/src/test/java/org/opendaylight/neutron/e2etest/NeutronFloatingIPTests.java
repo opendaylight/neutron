@@ -26,6 +26,6 @@ public class NeutronFloatingIPTests {
 
     public void floatingIP_collection_get_test() {
         String url = base + "/floatingips";
-        ITNeutronE2E.test_fetch(url,"FloatingIP Collection GET failed");
+        ITNeutronE2E.test_fetch(url, true,"FloatingIP Collection GET failed");
     }
 }
