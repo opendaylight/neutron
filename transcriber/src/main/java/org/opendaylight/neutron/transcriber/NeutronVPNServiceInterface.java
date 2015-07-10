@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnService,NeutronVPNService> implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
-    private ConcurrentMap<String, NeutronVPNService> VPNServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
+    private ConcurrentMap<String, NeutronVPNService> vpnServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
 
 
     NeutronVPNServiceInterface(ProviderContext providerContext) {
@@ -37,7 +37,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
 
     @Override
     public boolean neutronVPNServiceExists(String uuid) {
-        return VPNServiceDB.containsKey(uuid);
+        return vpnServiceDB.containsKey(uuid);
     }
 
     @Override
@@ -46,13 +46,13 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
             LOGGER.debug("No VPNService Have Been Defined");
             return null;
         }
-        return VPNServiceDB.get(uuid);
+        return vpnServiceDB.get(uuid);
     }
 
     @Override
     public List<NeutronVPNService> getAllVPNService() {
         Set<NeutronVPNService> allVPNService = new HashSet<NeutronVPNService>();
-        for (Entry<String, NeutronVPNService> entry : VPNServiceDB.entrySet()) {
+        for (Entry<String, NeutronVPNService> entry : vpnServiceDB.entrySet()) {
             NeutronVPNService VPNService = entry.getValue();
             allVPNService.add(VPNService);
         }
@@ -67,7 +67,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
         if (neutronVPNServiceExists(input.getID())) {
             return false;
         }
-        VPNServiceDB.putIfAbsent(input.getID(), input);
+        vpnServiceDB.putIfAbsent(input.getID(), input);
         addMd(input);
         return true;
     }
@@ -77,7 +77,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
         if (!neutronVPNServiceExists(uuid)) {
             return false;
         }
-        VPNServiceDB.remove(uuid);
+        vpnServiceDB.remove(uuid);
         removeMd(toMd(uuid));
         return true;
     }
@@ -87,10 +87,10 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
         if (!neutronVPNServiceExists(uuid)) {
             return false;
         }
-        NeutronVPNService target = VPNServiceDB.get(uuid);
+        NeutronVPNService target = vpnServiceDB.get(uuid);
         boolean rc = overwrite(target, delta);
         if (rc) {
-            updateMd(VPNServiceDB.get(uuid));
+            updateMd(vpnServiceDB.get(uuid));
         }
         return rc;
     }
