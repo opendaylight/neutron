@@ -71,7 +71,7 @@ public class NeutronPortsNorthbound {
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
     private static final String NET_UUID_MATCH = "Network UUID must match that of subnet";
 
-    final String mac_regex="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
+    private static final String MAC_REGEX="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
 
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
@@ -237,7 +237,7 @@ public class NeutronPortsNorthbound {
                 throw new ResourceNotFoundException("network UUID does not exist.");
             }
             if (singleton.getMacAddress() == null ||
-                    !singleton.getMacAddress().matches(mac_regex)) {
+                    !singleton.getMacAddress().matches(MAC_REGEX)) {
                 throw new BadRequestException("MAC address not properly formatted");
             }
             if (portInterface.macInUse(singleton.getMacAddress())) {
@@ -337,7 +337,7 @@ public class NeutronPortsNorthbound {
                 if (!networkInterface.networkExists(test.getNetworkUUID())) {
                     throw new ResourceNotFoundException("network UUID does not exist.");
                 }
-                if (!test.getMacAddress().matches(mac_regex)) {
+                if (!test.getMacAddress().matches(MAC_REGEX)) {
                     throw new BadRequestException("MAC address not properly formatted");
                 }
                 if (portInterface.macInUse(test.getMacAddress())) {
