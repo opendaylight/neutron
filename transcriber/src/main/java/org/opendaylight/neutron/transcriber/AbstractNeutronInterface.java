@@ -1,5 +1,7 @@
 package org.opendaylight.neutron.transcriber;
 
+import java.lang.reflect.Method;
+
 import java.util.concurrent.ExecutionException;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
@@ -104,6 +106,33 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
             }
         }
         return result;
+    }
+
+    // this method uses reflection to update an object from it's delta.
+
+    protected boolean overwrite(Object target, Object delta) {
+        Method[] methods = target.getClass().getMethods();
+
+        for(Method toMethod: methods){
+            if(toMethod.getDeclaringClass().equals(target.getClass())
+                    && toMethod.getName().startsWith("set")){
+
+                String toName = toMethod.getName();
+                String fromName = toName.replace("set", "get");
+
+                try {
+                    Method fromMethod = delta.getClass().getMethod(fromName);
+                    Object value = fromMethod.invoke(delta, (Object[])null);
+                    if(value != null){
+                        toMethod.invoke(target, value);
+                    }
+                } catch (Exception e) {
+                    LOGGER.error(e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override

@@ -9,7 +9,6 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -42,32 +41,6 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     NeutronSecurityRuleInterface(ProviderContext providerContext) {
         super(providerContext);
-    }
-
-    // this method uses reflection to update an object from it's delta.
-    private boolean overwrite(Object target, Object delta) {
-        Method[] methods = target.getClass().getMethods();
-
-        for (Method toMethod : methods) {
-            if (toMethod.getDeclaringClass().equals(target.getClass())
-                && toMethod.getName().startsWith("set")) {
-
-                String toName = toMethod.getName();
-                String fromName = toName.replace("set", "get");
-
-                try {
-                    Method fromMethod = delta.getClass().getMethod(fromName);
-                    Object value = fromMethod.invoke(delta, (Object[]) null);
-                    if (value != null) {
-                        toMethod.invoke(target, value);
-                    }
-                } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     private void updateSecGroupRuleInSecurityGroup(NeutronSecurityRule input) {
