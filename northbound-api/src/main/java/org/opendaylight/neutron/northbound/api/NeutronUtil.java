@@ -9,6 +9,10 @@ import org.slf4j.LoggerFactory;
 public class NeutronUtil {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NeutronUtil.class);
+
+    private NeutronUtil() {
+    }
+
     public static Object[] getInstances(Class<?> clazz,Object bundle) {
         Object instances[] = null;
         try {

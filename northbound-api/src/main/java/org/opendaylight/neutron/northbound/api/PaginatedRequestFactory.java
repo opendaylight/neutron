@@ -22,6 +22,7 @@ import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 
 public class PaginatedRequestFactory {
+
     private static final Comparator<INeutronObject> NEUTRON_OBJECT_COMPARATOR = new Comparator<INeutronObject>() {
         @Override
         public int compare(INeutronObject o1, INeutronObject o2) {
@@ -55,6 +56,9 @@ public class PaginatedRequestFactory {
         public void setID(String id) {
             throw new UnsupportedOperationException("Marker has constant ID");
         }
+    }
+
+    private PaginatedRequestFactory() {
     }
 
     /*
