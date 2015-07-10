@@ -207,10 +207,10 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             }
         }
         if (securityRule.getSecurityRulePortMin() != null) {
-            securityRuleBuilder.setPortRangeMin(new Integer(securityRule.getSecurityRulePortMin()));
+            securityRuleBuilder.setPortRangeMin(Integer.valueOf(securityRule.getSecurityRulePortMin()));
         }
         if (securityRule.getSecurityRulePortMax() != null) {
-            securityRuleBuilder.setPortRangeMax(new Integer(securityRule.getSecurityRulePortMax()));
+            securityRuleBuilder.setPortRangeMax(Integer.valueOf(securityRule.getSecurityRulePortMax()));
         }
         if (securityRule.getSecurityRuleUUID() != null) {
             securityRuleBuilder.setId(toUuid(securityRule.getSecurityRuleUUID()));
