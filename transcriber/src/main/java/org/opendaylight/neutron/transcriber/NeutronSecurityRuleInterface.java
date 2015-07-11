@@ -25,7 +25,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.SecurityRuleAttrs;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.SecurityRuleAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRuleBuilder;
@@ -156,7 +156,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         }
         if (securityRule.getSecurityRuleDirection() != null) {
             boolean foundMatch = false;
-            for (SecurityRuleAttrs.Direction direction : SecurityRuleAttrs.Direction.values()) {
+            for (SecurityRuleAttributes.Direction direction : SecurityRuleAttributes.Direction.values()) {
                 if (direction.toString().equalsIgnoreCase(securityRule.getSecurityRuleDirection())) {
                     securityRuleBuilder.setDirection(direction);
                     foundMatch = true;
@@ -179,9 +179,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
             boolean foundMatch = false;
-            for (SecurityRuleAttrs.Protocol.Enumeration protocol : SecurityRuleAttrs.Protocol.Enumeration.values()) {
+            for (SecurityRuleAttributes.Protocol.Enumeration protocol : SecurityRuleAttributes.Protocol.Enumeration.values()) {
                 if (protocol.toString().equalsIgnoreCase(securityRule.getSecurityRuleProtocol())) {
-                    securityRuleBuilder.setProtocol(new SecurityRuleAttrs.Protocol(protocol));
+                    securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(protocol));
                     foundMatch = true;
                     break;
                 }
@@ -189,7 +189,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             if (!foundMatch) {
                 try {
                     java.lang.Short protocol = Short.valueOf(securityRule.getSecurityRuleProtocol());
-                    securityRuleBuilder.setProtocol(new SecurityRuleAttrs.Protocol(protocol));
+                    securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(protocol));
                 } catch (NumberFormatException e) {
                     LOGGER.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
                 }
@@ -197,7 +197,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
             boolean foundMatch = false;
-            for (SecurityRuleAttrs.Ethertype etherType : SecurityRuleAttrs.Ethertype.values()) {
+            for (SecurityRuleAttributes.Ethertype etherType : SecurityRuleAttributes.Ethertype.values()) {
                 if (etherType.toString().equalsIgnoreCase(securityRule.getSecurityRuleEthertype())) {
                     securityRuleBuilder.setEthertype(etherType);
                     foundMatch = true;
