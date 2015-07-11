@@ -27,7 +27,7 @@ module neutron-vpnaas {
                 "Initial version";
     }
 
-    grouping vpnservices-attrs {
+    grouping vpnservices-attributes {
         leaf descr {
             type string;
             description "Detailed description of the vpn service.";
@@ -42,7 +42,7 @@ module neutron-vpnaas {
         }
     }
 
-    grouping ikepolicy-attrs {
+    grouping ikepolicy-attributes {
         leaf descr {
             type string;
             description "Detailed description of the ike policy.";
@@ -80,7 +80,7 @@ module neutron-vpnaas {
         }
     }
 
-    grouping ipsecpolicy-attrs {
+    grouping ipsecpolicy-attributes {
         leaf descr {
             type string;
             description "Detailed description of the ipsec policy.";
@@ -118,7 +118,7 @@ module neutron-vpnaas {
         }
     }
 
-    grouping ipsecconnection-attrs {
+    grouping ipsecconnection-attributes {
         leaf descr {
             type string;
             description "Detailed description of the ipsec policy.";
@@ -190,21 +190,21 @@ module neutron-vpnaas {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses vpnservices-attrs;
+                uses vpnservices-attributes;
             }
         }
         container ike-policies {
             list ike-policy {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses ikepolicy-attrs;
+                uses ikepolicy-attributes;
             }
         }
         container ipsec-policies {
             list ipsec-policy {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses ipsecpolicy-attrs;
+                uses ipsecpolicy-attributes;
             }
         }
         container ipsec-site-connections {
@@ -212,7 +212,7 @@ module neutron-vpnaas {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses ipsecconnection-attrs;
+                uses ipsecconnection-attributes;
             }
         }
     }
