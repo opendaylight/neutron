@@ -31,7 +31,7 @@ module neutron-lbaasv2 {
                 models";
     }
 
-    grouping loadbalancer-attrs {
+    grouping loadbalancer-attributes {
         description "LBaaSV2.0 load balancer attributes.";
         leaf descr {
             type string;
@@ -47,7 +47,7 @@ module neutron-lbaasv2 {
             description "The ID of the subnet on which to allocate the VIP address.";
         }
     }
-    grouping listener-attrs {
+    grouping listener-attributes {
         description "LBaaSV2.0 listener attributes.";
         leaf default-pool-d {
             type yang:uuid;
@@ -95,7 +95,7 @@ module neutron-lbaasv2 {
             default "-1";
         }
     }
-    grouping pool-attrs {
+    grouping pool-attributes {
         leaf admin-state-up {
             type boolean;
             description "The administrative state of the pool, which is up (true) or
@@ -151,7 +151,7 @@ module neutron-lbaasv2 {
             }
         }
     }
-    grouping member-attrs {
+    grouping member-attributes {
         leaf uuid {
             type yang:uuid;
             description "The unique ID for the member.";
@@ -189,7 +189,7 @@ module neutron-lbaasv2 {
             default "true";
         }
     }
-    grouping healthmonitor-attrs {
+    grouping healthmonitor-attributes {
         leaf uuid {
             type yang:uuid;
             description "The unique ID for the healthmonitor.";
@@ -268,7 +268,7 @@ module neutron-lbaasv2 {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses loadbalancer-attrs;
+                uses loadbalancer-attributes;
                 description "List of Loadbalancers.";
             }
         }
@@ -277,7 +277,7 @@ module neutron-lbaasv2 {
             list listeners {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses listener-attrs;
+                uses listener-attributes;
                 description "List of Listeners";
             }
         }
@@ -286,13 +286,13 @@ module neutron-lbaasv2 {
             list pools {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses pool-attrs;
+                uses pool-attributes;
                 description "List of Pools";
                 container member {
                     description "Container for pool members.";
                     list members {
                         key "uuid";
-                        uses member-attrs;
+                        uses member-attributes;
                         description "List of members.";
                     }
                 }
@@ -302,7 +302,7 @@ module neutron-lbaasv2 {
             description "Container for LBaaSV2.0 healthmonitors.";
             list healthmonitors {
                 key "uuid";
-                uses healthmonitor-attrs;
+                uses healthmonitor-attributes;
                 description "List of healthmonitors.";
             }
         }
