@@ -6,7 +6,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronUtil {
+final public class NeutronUtil {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NeutronUtil.class);
 
@@ -29,7 +29,7 @@ public class NeutronUtil {
                 }
             }
         } catch (Exception e) {
-            LOGGER.error("Instance reference is NULL");
+            LOGGER.error("Instance reference is NULL", e);
         }
         return instances;
     }

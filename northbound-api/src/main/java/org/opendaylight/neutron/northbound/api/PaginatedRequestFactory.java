@@ -21,7 +21,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 
-public class PaginatedRequestFactory {
+final public class PaginatedRequestFactory {
 
     private static final Comparator<INeutronObject> NEUTRON_OBJECT_COMPARATOR = new Comparator<INeutronObject>() {
         @Override
@@ -73,7 +73,7 @@ public class PaginatedRequestFactory {
                                                                            UriInfo uriInfo,
                                                                            List<T> collection,
                                                                            Class<T> clazz) {
-        PaginationResults<T> results = _paginate(limit, marker, pageReverse, uriInfo, collection);
+        PaginationResults<T> results = paginate(limit, marker, pageReverse, uriInfo, collection);
 
         if (clazz.equals(NeutronNetwork.class)){
             return (INeutronRequest<T>) new NeutronNetworkRequest((List<NeutronNetwork>) results.collection, results.links);
@@ -87,18 +87,19 @@ public class PaginatedRequestFactory {
         return null;
     }
 
-    private static <T extends INeutronObject> PaginationResults<T> _paginate(Integer limit, String marker, Boolean pageReverse, UriInfo uriInfo, List<T> collection) {
+    private static <T extends INeutronObject> PaginationResults<T> paginate(Integer limit, String marker, Boolean pageReverse, UriInfo uriInfo, List<T> collection) {
         List<NeutronPageLink> links = new ArrayList<>();
         final int startPos;
         String startMarker;
         String endMarker;
         Boolean firstPage = false;
         Boolean lastPage = false;
+        List<T> lCollection = collection;
 
-        Collections.sort(collection, NEUTRON_OBJECT_COMPARATOR);
+        Collections.sort(lCollection, NEUTRON_OBJECT_COMPARATOR);
 
         if (marker != null) {
-            int offset = Collections.binarySearch(collection, new MarkerObject(marker), NEUTRON_OBJECT_COMPARATOR);
+            int offset = Collections.binarySearch(lCollection, new MarkerObject(marker), NEUTRON_OBJECT_COMPARATOR);
             if (offset < 0) {
                 throw new ResourceNotFoundException("UUID for marker: " + marker + " could not be found");
             }
@@ -118,17 +119,17 @@ public class PaginatedRequestFactory {
             firstPage = true;
         }
 
-        if (startPos + limit >= collection.size()) {
-            collection = collection.subList(startPos, collection.size());
-            startMarker = collection.get(0).getID();
-            endMarker = collection.get(collection.size() - 1).getID();
+        if (startPos + limit >= lCollection.size()) {
+            lCollection = lCollection.subList(startPos, lCollection.size());
+            startMarker = lCollection.get(0).getID();
+            endMarker = lCollection.get(lCollection.size() - 1).getID();
             lastPage = true;
         }
         else if (startPos < 0) {
             if (startPos + limit > 0) {
-                collection = collection.subList(0, startPos + limit);
-                startMarker = collection.get(0).getID();
-                endMarker = collection.get(collection.size() - 1).getID();
+                lCollection = lCollection.subList(0, startPos + limit);
+                startMarker = lCollection.get(0).getID();
+                endMarker = lCollection.get(lCollection.size() - 1).getID();
                 firstPage = true;
             }
             else {
@@ -136,9 +137,9 @@ public class PaginatedRequestFactory {
             }
         }
         else {
-            collection = collection.subList(startPos, startPos + limit);
-            startMarker = collection.get(0).getID();
-            endMarker = collection.get(limit-1).getID();
+            lCollection = lCollection.subList(startPos, startPos + limit);
+            startMarker = lCollection.get(0).getID();
+            endMarker = lCollection.get(limit-1).getID();
         }
 
         if (!lastPage) {
@@ -155,6 +156,6 @@ public class PaginatedRequestFactory {
             links.add(previous);
         }
 
-        return new PaginationResults<T>(collection, links);
+        return new PaginationResults<T>(lCollection, links);
     }
 }
