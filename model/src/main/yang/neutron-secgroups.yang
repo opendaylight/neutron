@@ -31,14 +31,14 @@ module neutron-secgroups {
                 models";
     }
 
-    grouping security-group-attrs {
+    grouping security-group-attributes {
         description "OpenStack Layer3 Security group information.";
         leaf description {
             type string;
             description "Description for the security group.";
         }
     }
-    grouping security-rule-attrs {
+    grouping security-rule-attributes {
         description "OpenStack Layer3 Security Group rules.";
         leaf id {
             type yang:uuid;
@@ -131,7 +131,7 @@ module neutron-secgroups {
             list security-group {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses security-group-attrs;
+                uses security-group-attributes;
                 description "List of Metering Labels.";
                 leaf-list security-rules {
                     type yang:uuid;
@@ -145,7 +145,7 @@ module neutron-secgroups {
             description "Container for security group rules.";
             list security-rule {
                 key "id";
-                uses security-rule-attrs;
+                uses security-rule-attributes;
                 description "List of Security Group Rules.";
             }
         }

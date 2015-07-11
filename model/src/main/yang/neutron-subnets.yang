@@ -29,7 +29,7 @@ module neutron-subnets {
                 "Initial version of Openstack Neutron Ice House Subnets model.";
     }
 
-    grouping subnet-attrs {
+    grouping subnet-attributes {
         leaf network-id {
             type yang:uuid;
             description "network this subnet is associated with.";
@@ -115,7 +115,7 @@ module neutron-subnets {
             list subnet {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses subnet-attrs;
+                uses subnet-attributes;
             }
         }
     }
