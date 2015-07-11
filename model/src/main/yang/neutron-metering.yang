@@ -31,14 +31,14 @@ module neutron-metering {
                 models";
     }
 
-    grouping metering-label-attrs {
+    grouping metering-label-attributes {
         description "OpenStack Layer3 Metering label information.";
         leaf description {
             type string;
             description "Description for the metering label.";
         }
     }
-    grouping metering-rule-attrs {
+    grouping metering-rule-attributes {
         description "OpenStack Layer3 Metering label rules.";
         leaf id {
             type yang:uuid;
@@ -80,7 +80,7 @@ module neutron-metering {
             list metering-label {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses metering-label-attrs;
+                uses metering-label-attributes;
                 description "List of Metering Labels.";
             }
         }
@@ -90,7 +90,7 @@ module neutron-metering {
             description " Container for metering rules.";
             list metering-rule {
                 key "id";
-                uses metering-rule-attrs;
+                uses metering-rule-attributes;
                 description "List of Metering Rules.";
             }
         }
