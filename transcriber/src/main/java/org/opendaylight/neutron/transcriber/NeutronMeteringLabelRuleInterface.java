@@ -20,7 +20,7 @@ import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderCo
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.MeteringRuleAttrs;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.MeteringRuleAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.MeteringRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRuleBuilder;
@@ -124,7 +124,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLableRule.getMeteringLabelRuleUUID()));
         }
         if (meteringLableRule.getMeteringLabelRuleDirection() != null) {
-            meteringRuleBuilder.setDirection((MeteringRuleAttrs.Direction.valueOf(meteringLableRule
+            meteringRuleBuilder.setDirection((MeteringRuleAttributes.Direction.valueOf(meteringLableRule
                     .getMeteringLabelRuleDirection())));
         }
         if (meteringLableRule.getMeteringLabelRuleRemoteIPPrefix() != null) {

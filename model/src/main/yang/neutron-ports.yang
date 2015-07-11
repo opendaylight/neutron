@@ -29,7 +29,7 @@ module neutron-ports {
                 "Initial version of Openstack Neutron Ice House Ports model.";
     }
 
-    grouping port-attrs {
+    grouping port-attributes {
         list allowed-address-pairs {
             description "Allowed address pairs for this port. For example: neutron port-create
                         net1 --allowed-address-pairs type=dict list=true mac_address=<mac_address>,ip_address=<ip_cidr>
@@ -103,7 +103,7 @@ module neutron-ports {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses port-attrs;
+                uses port-attributes;
             }
         }
     }
