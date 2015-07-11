@@ -29,7 +29,7 @@ module neutron-binding {
                 "Initial version";
     }
 
-    grouping binding-attrs {
+    grouping binding-attributes {
         leaf host-id {
             type yang:uuid;
             description "The ID of the host where the port is allocated. In some cases,
@@ -64,6 +64,6 @@ module neutron-binding {
           This module augments the ports container in the neutron-ports
           module with binding information.
           ";
-        uses binding-attrs;
+        uses binding-attributes;
     }
 }
