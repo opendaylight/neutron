@@ -22,7 +22,7 @@ import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.NeutronSubnet_IPAllocationPool;
+import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.SubnetAttrs;
@@ -181,7 +181,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                 subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
                 if (subnet.getAllocationPools() != null) {
                         List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
-                        for (NeutronSubnet_IPAllocationPool allocationPool : subnet
+                        for (NeutronSubnetIPAllocationPool allocationPool : subnet
                                         .getAllocationPools()) {
                                 AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
                                 builder.setStart(allocationPool.getPoolStart());

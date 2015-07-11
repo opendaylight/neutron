@@ -63,7 +63,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
     List<String> dnsNameservers;
 
     @XmlElement (name = "allocation_pools")
-    List<NeutronSubnet_IPAllocationPool> allocationPools;
+    List<NeutronSubnetIPAllocationPool> allocationPools;
 
     @XmlElement (name = "host_routes")
     List<NeutronSubnet_HostRoute> hostRoutes;
@@ -151,11 +151,11 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         this.dnsNameservers = dnsNameservers;
     }
 
-    public List<NeutronSubnet_IPAllocationPool> getAllocationPools() {
+    public List<NeutronSubnetIPAllocationPool> getAllocationPools() {
         return allocationPools;
     }
 
-    public void setAllocationPools(List<NeutronSubnet_IPAllocationPool> allocationPools) {
+    public void setAllocationPools(List<NeutronSubnetIPAllocationPool> allocationPools) {
         this.allocationPools = allocationPools;
     }
 
@@ -235,7 +235,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 ans.setDnsNameservers(nsList);
             }
             if (s.equals("allocation_pools")) {
-                List<NeutronSubnet_IPAllocationPool> aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+                List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
                 aPools.addAll(this.getAllocationPools());
                 ans.setAllocationPools(aPools);
             }
@@ -311,16 +311,16 @@ public class NeutronSubnet implements Serializable, INeutronObject {
      * or assigning a gateway IP)
      */
     public boolean gatewayIP_Pool_overlap() {
-        Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
+        Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
         while (i.hasNext()) {
-            NeutronSubnet_IPAllocationPool pool = i.next();
+            NeutronSubnetIPAllocationPool pool = i.next();
             if (ipVersion == IPV4_VERSION) {
                 if (pool.contains(gatewayIP)) {
                     return true;
                 }
             }
             if (ipVersion == IPV6_VERSION) {
-                if (pool.contains_V6(gatewayIP)) {
+                if (pool.containsV6(gatewayIP)) {
                     return true;
                 }
             }
@@ -341,7 +341,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
             hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
         }
         if (allocationPools == null) {
-            allocationPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+            allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
             if (ipVersion == IPV4_VERSION) {
                 try {
                     SubnetUtils util = new SubnetUtils(cidr);
@@ -350,8 +350,8 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                         gatewayIP = info.getLowAddress();
                     }
                     if (allocationPools.size() < 1) {
-                        NeutronSubnet_IPAllocationPool source =
-                            new NeutronSubnet_IPAllocationPool(info.getLowAddress(),
+                        NeutronSubnetIPAllocationPool source =
+                            new NeutronSubnetIPAllocationPool(info.getLowAddress(),
                                     info.getHighAddress());
                         allocationPools = source.splitPool(gatewayIP);
                     }
@@ -366,18 +366,18 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 }
                 try {
                     int length = Integer.parseInt(parts[1]);
-                    BigInteger lowAddress_bi = NeutronSubnet_IPAllocationPool.convert_V6(parts[0]);
-                    String lowAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
+                    BigInteger lowAddress_bi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
+                    String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
                     BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
-                    String highAddress = NeutronSubnet_IPAllocationPool.bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
+                    String highAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
                     if (gatewayIP == null || ("").equals(gatewayIP)) {
                         gatewayIP = lowAddress;
                     }
                     if (allocationPools.size() < 1) {
-                        NeutronSubnet_IPAllocationPool source =
-                            new NeutronSubnet_IPAllocationPool(lowAddress,
+                        NeutronSubnetIPAllocationPool source =
+                            new NeutronSubnetIPAllocationPool(lowAddress,
                                     highAddress);
-                        allocationPools = source.splitPool_V6(gatewayIP);
+                        allocationPools = source.splitPoolV6(gatewayIP);
                     }
                 } catch (Exception e) {
                     return false;
@@ -477,13 +477,13 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         if (ipAddress.equals(gatewayIP) && !gatewayIPAssigned ) {
             return false;
         }
-        Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
+        Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
         while (i.hasNext()) {
-            NeutronSubnet_IPAllocationPool pool = i.next();
+            NeutronSubnetIPAllocationPool pool = i.next();
             if (ipVersion == IPV4_VERSION && pool.contains(ipAddress)) {
                 return false;
             }
-            if (ipVersion == IPV6_VERSION && pool.contains_V6(ipAddress)) {
+            if (ipVersion == IPV6_VERSION && pool.containsV6(ipAddress)) {
                 return false;
             }
         }
@@ -496,21 +496,21 @@ public class NeutronSubnet implements Serializable, INeutronObject {
      */
     public String getLowAddr() {
         String ans = null;
-        Iterator<NeutronSubnet_IPAllocationPool> i = allocationPools.iterator();
+        Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
         while (i.hasNext()) {
-            NeutronSubnet_IPAllocationPool pool = i.next();
+            NeutronSubnetIPAllocationPool pool = i.next();
             if (ans == null) {
                 ans = pool.getPoolStart();
             }
             else {
                 if (ipVersion == IPV4_VERSION) {
-                    if (NeutronSubnet_IPAllocationPool.convert(pool.getPoolStart()) <
-                            NeutronSubnet_IPAllocationPool.convert(ans)) {
+                    if (NeutronSubnetIPAllocationPool.convert(pool.getPoolStart()) <
+                            NeutronSubnetIPAllocationPool.convert(ans)) {
                         ans = pool.getPoolStart();
                     }
                 }
                 if (ipVersion == IPV6_VERSION) {
-                    if (NeutronSubnet_IPAllocationPool.convert_V6(pool.getPoolStart()).compareTo(NeutronSubnet_IPAllocationPool.convert_V6(ans)) < 0) {
+                    if (NeutronSubnetIPAllocationPool.convertV6(pool.getPoolStart()).compareTo(NeutronSubnetIPAllocationPool.convertV6(ans)) < 0) {
                         ans = pool.getPoolStart();
                     }
                 }

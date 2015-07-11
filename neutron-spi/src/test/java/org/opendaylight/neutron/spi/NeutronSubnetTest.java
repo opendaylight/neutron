@@ -15,7 +15,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.NeutronSubnet_IPAllocationPool;
+import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 
 public class NeutronSubnetTest {
 
@@ -50,10 +50,10 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/16");
 
-        NeutronSubnet_IPAllocationPool allocationPool = new NeutronSubnet_IPAllocationPool();
+        NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnet_IPAllocationPool> aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+        List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
         aPools.add(allocationPool);
         objectUT.setAllocationPools(aPools);
 
@@ -72,10 +72,10 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
 
-        allocationPool = new NeutronSubnet_IPAllocationPool();
+        allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+        aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
         aPools.add(allocationPool);
         objectUT.setAllocationPools(aPools);
 
@@ -120,10 +120,10 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/24");
 
-        NeutronSubnet_IPAllocationPool allocationPool = new NeutronSubnet_IPAllocationPool();
+        NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnet_IPAllocationPool> aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+        List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
         aPools.add(allocationPool);
         objectUT.setAllocationPools(aPools);
 
@@ -148,10 +148,10 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
 
-        allocationPool = new NeutronSubnet_IPAllocationPool();
+        allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+        aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
         aPools.add(allocationPool);
         objectUT.setAllocationPools(aPools);
 
@@ -180,12 +180,12 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/24");
 
-        NeutronSubnet_IPAllocationPool allocationPool = new NeutronSubnet_IPAllocationPool();
+        NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnet_IPAllocationPool> aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+        List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
         aPools.add(allocationPool);
-        allocationPool = new NeutronSubnet_IPAllocationPool();
+        allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.10");
         allocationPool.setPoolEnd("10.18.0.15");
         objectUT.setAllocationPools(aPools);
@@ -196,12 +196,12 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/24");
 
-        allocationPool = new NeutronSubnet_IPAllocationPool();
+        allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        aPools = new ArrayList<NeutronSubnet_IPAllocationPool>();
+        aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
         aPools.add(allocationPool);
-        allocationPool = new NeutronSubnet_IPAllocationPool();
+        allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::10");
         allocationPool.setPoolEnd("2015::15");
         objectUT.setAllocationPools(aPools);
