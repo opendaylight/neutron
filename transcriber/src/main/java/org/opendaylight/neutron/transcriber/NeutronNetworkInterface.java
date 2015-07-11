@@ -147,6 +147,25 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         return networkBuilder.build();
     }
 
+    protected Network readMd(String uuid) {
+        final ListenableFuture<Optional<Network>> listenableFuture = readNodeData(
+            createInstanceIdentifier(toMd(uuid)));
+        if (listenableFuture != null) {
+            Optional<Network> optional;
+            try {
+                optional = listenableFuture.get();
+            } catch (InterruptedException | ExecutionException e) {
+                LOGGER.warn ("Exception reading network "+uuid+" from data store", e);
+                return null;
+            }
+            if (optional != null && optional.isPresent()) {
+                return optional.get();
+            }
+        }
+        return null;
+    }
+
+
     @Override
     protected InstanceIdentifier<Network> createInstanceIdentifier(Network network) {
         return InstanceIdentifier.create(Neutron.class)

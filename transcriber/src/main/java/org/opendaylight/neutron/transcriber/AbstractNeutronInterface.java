@@ -43,6 +43,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
 
     protected abstract T toMd(String uuid);
 
+    protected ListenableFuture<Optional<T>> readNodeData(
+            InstanceIndentifier<T> path) {
+        return transaction.read(LogicalDatastoreType.CONFIGURATION, path);
+    }
+
     protected boolean addMd(S neutronObject) {
         // TODO think about adding existence logic
         WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
