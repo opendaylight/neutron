@@ -31,7 +31,7 @@ module neutron-L3 {
                 models";
     }
 
-    grouping L3-attrs {
+    grouping L3-attributes {
         leaf distribted {
             description "whether this router is distributed or not.";
             type boolean;
@@ -51,7 +51,7 @@ module neutron-L3 {
         }
     }
 
-    grouping L3-floatingip-attrs {
+    grouping L3-floatingip-attributes {
         leaf uuid {
             type yang:uuid;
             description "UUID to index this object.";
@@ -99,7 +99,7 @@ module neutron-L3 {
         }
     }
 
-    grouping interface-attrs {
+    grouping interface-attributes {
         leaf uuid {
             type yang:uuid;
             description "UUID to index this object.";
@@ -129,7 +129,7 @@ module neutron-L3 {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses L3-attrs;
+                uses L3-attributes;
                 container external_gateway_info {
                     leaf external-network-id {
                         description "The network_id, for the external gateways. If this is empty, then this
@@ -155,7 +155,7 @@ module neutron-L3 {
                 list interfaces {
                     description "List of interfaces associated with this router object.";
                     key "uuid";
-                    uses interface-attrs;
+                    uses interface-attributes;
                 }
             }
         }
@@ -168,7 +168,7 @@ module neutron-L3 {
                     attached to an internal network.";
 
                 key "uuid";
-                uses L3-floatingip-attrs;
+                uses L3-floatingip-attributes;
             }
         }
     }
