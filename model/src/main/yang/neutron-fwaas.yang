@@ -29,7 +29,7 @@ module neutron-fwaas {
                 "Initial version";
     }
 
-    grouping firewall-attrs {
+    grouping firewall-attributes {
         leaf descr {
             type string;
             description "Detailed description of the firewall.";
@@ -44,7 +44,7 @@ module neutron-fwaas {
         }
     }
 
-    grouping firewallpolicy-attrs {
+    grouping firewallpolicy-attributes {
         leaf descr {
             type string;
             description "Detailed description of the firewall policy.";
@@ -63,7 +63,7 @@ module neutron-fwaas {
         }
     }
 
-    grouping firewallrule-attrs {
+    grouping firewallrule-attributes {
         leaf descr {
             type string;
             description "Detailed description of the firewall rule.";
@@ -124,21 +124,21 @@ module neutron-fwaas {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses firewall-attrs;
+                uses firewall-attributes;
             }
         }
         container firewall-policies {
             list firewall-policy {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses firewallpolicy-attrs;
+                uses firewallpolicy-attributes;
             }
         }
         container firewall-rules {
             list firewall-rule {
                 key "uuid";
                 uses attrs:base-attributes;
-                uses firewallrule-attrs;
+                uses firewallrule-attributes;
             }
         }
     }
