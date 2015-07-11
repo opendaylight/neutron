@@ -25,9 +25,9 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.NeutronSubnet_IPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.SubnetAttrs;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attrs.AllocationPools;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attrs.AllocationPoolsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.SubnetAttributes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attributes.AllocationPools;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attributes.AllocationPoolsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.Subnets;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.subnets.SubnetBuilder;
@@ -141,7 +141,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
                 }
                 if (subnet.getIpVersion() != null) {
-                        subnetBuilder.setIpVersion(SubnetAttrs.IpVersion.forValue(subnet
+                        subnetBuilder.setIpVersion(SubnetAttributes.IpVersion.forValue(subnet
                                         .getIpVersion()));
                 }
                 if (subnet.getCidr() != null) {
@@ -154,7 +154,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                 }
                 if (subnet.getIpV6RaMode() != null) {
                     boolean foundMatch = false;
-                    for (SubnetAttrs.Ipv6RaMode ipv6RaMode : SubnetAttrs.Ipv6RaMode.values()) {
+                    for (SubnetAttributes.Ipv6RaMode ipv6RaMode : SubnetAttributes.Ipv6RaMode.values()) {
                         if (ipv6RaMode.toString().equalsIgnoreCase(subnet.getIpV6RaMode())) {
                             subnetBuilder.setIpv6RaMode(ipv6RaMode);
                             foundMatch = true;
@@ -167,7 +167,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                 }
                 if (subnet.getIpV6AddressMode() != null) {
                     boolean foundMatch = false;
-                    for (SubnetAttrs.Ipv6AddressMode ipv6AddressMode : SubnetAttrs.Ipv6AddressMode.values()) {
+                    for (SubnetAttributes.Ipv6AddressMode ipv6AddressMode : SubnetAttributes.Ipv6AddressMode.values()) {
                         if (ipv6AddressMode.toString().equalsIgnoreCase(subnet.getIpV6AddressMode())) {
                             subnetBuilder.setIpv6AddressMode(ipv6AddressMode);
                             foundMatch = true;
