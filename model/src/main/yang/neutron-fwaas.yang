@@ -122,22 +122,22 @@ module neutron-fwaas {
         container firewalls {
             list firewall {
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
                 uses firewall-attrs;
             }
         }
         container firewall-policies {
             list firewall-policy {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses firewallpolicy-attrs;
             }
         }
         container firewall-rules {
             list firewall-rule {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses firewallrule-attrs;
             }
         }
