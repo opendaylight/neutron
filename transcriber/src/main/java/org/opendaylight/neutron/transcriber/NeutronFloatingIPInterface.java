@@ -29,8 +29,8 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.Floatingips;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.floatingips.Floatingip;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.floatingips.FloatingipBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attrs.FixedIpAddress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attrs.FixedIpAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attributes.FixedIpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attributes.FixedIpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
