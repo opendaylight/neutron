@@ -188,30 +188,30 @@ module neutron-vpnaas {
         container vpn-services {
             list vpn-service {
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
                 uses vpnservices-attrs;
             }
         }
         container ike-policies {
             list ike-policy {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses ikepolicy-attrs;
             }
         }
         container ipsec-policies {
             list ipsec-policy {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses ipsecpolicy-attrs;
             }
         }
         container ipsec-site-connections {
             list ipsec-site-connection {
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
                 uses ipsecconnection-attrs;
             }
         }

@@ -114,7 +114,7 @@ module neutron-subnets {
         container subnets {
             list subnet {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses subnet-attrs;
             }
         }

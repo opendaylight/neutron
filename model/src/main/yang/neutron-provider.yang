@@ -28,7 +28,7 @@ module neutron-provider {
                 models";
     }
 
-    grouping provider-attrs {
+    grouping provider-attributes {
         leaf physical-network {
             type string;
             description "The physical network where this network object is implemented.

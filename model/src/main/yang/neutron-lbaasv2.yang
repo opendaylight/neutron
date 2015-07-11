@@ -266,8 +266,8 @@ module neutron-lbaasv2 {
             description "Container for Loadbalancers.";
             list loadbalancers {
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
                 uses loadbalancer-attrs;
                 description "List of Loadbalancers.";
             }
@@ -276,7 +276,7 @@ module neutron-lbaasv2 {
             description "Container for Listeners.";
             list listeners {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses listener-attrs;
                 description "List of Listeners";
             }
@@ -285,7 +285,7 @@ module neutron-lbaasv2 {
             description "Container for LBaaSV2.0 pools.";
             list pools {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses pool-attrs;
                 description "List of Pools";
                 container member {
