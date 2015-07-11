@@ -101,8 +101,8 @@ module neutron-ports {
         container ports {
             list port {
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
                 uses port-attrs;
             }
         }
