@@ -56,7 +56,6 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     //    @XmlElement (name = "provider:segmentation_id")
     @XmlElement (namespace="provider", name="segmentation_id")
-
     String providerSegmentationID;
 
     @XmlElement (name = "status")
