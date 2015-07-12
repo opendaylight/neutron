@@ -93,14 +93,14 @@ public class NeutronPortTests {
             + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", "
             + " \"security_groups\": [], "
             + " \"device_id\": \"\" } ] } ";
-        ITNeutronE2E.test_create(url, content, "Bulk Subnet Post Failed");
+        ITNeutronE2E.test_create(url, content, "Bulk Port Post Failed");
     }
 
     public void port_update_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
         String content = " { \"port\": { "
         + " \"status\": \"DOWN\", "
-        + " \"binding:host_id\": \"test_for_port_update_host\", "
+        + " \"binding:host_id\": \"00000000-1111-2222-3333-444444444444\", "
         + " \"allowed_address_pairs\": [], "
         + " \"extra_dhcp_opts\": [], "
         + " \"device_owner\": \"compute:nova\", "
@@ -119,22 +119,22 @@ public class NeutronPortTests {
         + " \"binding:vnic_type\": \"normal\", "
         + " \"binding:vif_type\": \"binding_failed\", "
         + " \"mac_address\": \"fa:16:3e:11:11:5e\" } } ";
-        ITNeutronE2E.test_modify(url, content,"Subnet Put Failed");
+        ITNeutronE2E.test_modify(url, content,"Port Put Failed");
     }
 
     public void port_element_get_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        ITNeutronE2E.test_fetch(url, true, "Subnet Element Get Failed");
+        ITNeutronE2E.test_fetch(url, true, "Port Element Get Failed");
     }
 
     public void port_delete_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        ITNeutronE2E.test_delete(url, "Subnet Element Delete Failed");
+        ITNeutronE2E.test_delete(url, "Port Element Delete Failed");
     }
 
     public void port_element_negative_get_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        ITNeutronE2E.test_fetch(url, false, "Subnet Element Get Failed");
+        ITNeutronE2E.test_fetch(url, false, "Port Element Get Failed");
     }
 
     public static void runTests(String base) {
