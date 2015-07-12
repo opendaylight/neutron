@@ -63,9 +63,8 @@ module neutron-ports {
                 type string;
             }
             leaf ip-version {
-                type enumeration {
-                    enum 4;
-                    enum 6;
+                type identityref {
+                    base ip-version-base;
                 }
             }
         }
@@ -106,5 +105,19 @@ module neutron-ports {
                 uses port-attributes;
             }
         }
+    }
+
+    identity ip-version-base {
+        description "the base identity for ip versions";
+    }
+
+    identity ip-version-v4 {
+        description "IP v4";
+        base ip-version-base;
+    }
+
+    identity ip-version-v6 {
+        description "IP v6";
+        base ip-version-base;
     }
 }
