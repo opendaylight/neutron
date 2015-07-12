@@ -13,10 +13,10 @@ import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.firewalls.attributes.Firewalls;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.firewalls.attributes.firewalls.Firewall;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.firewalls.attributes.firewalls.FirewallBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.Firewalls;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.Firewall;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.FirewallBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;

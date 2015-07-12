@@ -20,10 +20,10 @@ import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
 
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.policies.attributes.FirewallPolicies;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.policies.attributes.firewall.policies.FirewallPolicy;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.policies.attributes.firewall.policies.FirewallPolicyBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.FirewallPolicies;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 
 
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
