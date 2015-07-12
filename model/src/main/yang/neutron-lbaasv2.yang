@@ -55,7 +55,7 @@ module neutron-lbaasv2 {
         }
         leaf admin-state-up {
             type boolean;
-            description "The administrative state of the listner, which is up (true) or
+            description "The administrative state of the listener, which is up (true) or
                         down (false).";
             default "true";
         }
@@ -65,16 +65,8 @@ module neutron-lbaasv2 {
         }
         leaf protocol {
             description "The protocol the front end listens for.";
-            type enumeration {
-                enum http {
-                    description "HTTP protocol.";
-                }
-                enum https {
-                    description "HTTPS protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
-                }
+            type identityref {
+                base protocol-base;
             }
         }
         leaf protocol-port {
@@ -107,16 +99,8 @@ module neutron-lbaasv2 {
         }
         leaf protocol {
             description "The protocol the front end listens for.";
-            type enumeration {
-                enum http {
-                    description "HTTP protocol.";
-                }
-                enum https {
-                    description "HTTPS protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
-                }
+            type identityref {
+                base protocol-base;
             }
         }
         leaf lb-algorithm {
@@ -202,19 +186,8 @@ module neutron-lbaasv2 {
         leaf type {
             description "The type of probe, which is PING, TCP, HTTP, or HTTPS, that
                 is sent by the load balancer to verify the member state.";
-            type enumeration {
-                enum http {
-                    description "HTTP protocol.";
-                }
-                enum https {
-                    description "HTTPS protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
-                }
-                enum ping {
-                    description "ICMP protocol.";
-                }
+            type identityref {
+                base probe-base;
             }
         }
         leaf admin-state-up {
@@ -306,5 +279,48 @@ module neutron-lbaasv2 {
                 description "List of healthmonitors.";
             }
         }
+    }
+
+    identity protocol-base {
+        description "Base identity for all front end protocols";
+    }
+
+    identity protocol-http {
+        description "HTTP protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-https {
+        description "HTTPS protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-tcp {
+        description "TCP protocol.";
+        base protocol-base;
+    }
+
+    identity probe-base {
+        description "Base identity for all probes";
+    }
+
+    identity probe-http {
+        description "HTTP protocol.";
+        base probe-base;
+    }
+
+    identity probe-https {
+        description "HTTPS protocol.";
+        base probe-base;
+    }
+
+    identity probe-tcp {
+        description "TCP protocol.";
+        base probe-base;
+    }
+
+    identity probe-icmp {
+        description "ICMP protocol.";
+        base probe-base;
     }
 }

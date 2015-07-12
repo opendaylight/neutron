@@ -38,6 +38,21 @@ module neutron-metering {
             description "Description for the metering label.";
         }
     }
+
+    identity direction-base {
+        description "Base identity for direction";
+    }
+
+    identity direction-ingress {
+        description "Ingress direction.";
+        base direction-base;
+    }
+
+    identity direction-egress {
+        description "Egress direction.";
+        base direction-base;
+    }
+
     grouping metering-rule-attributes {
         description "OpenStack Layer3 Metering label rules.";
         leaf id {
@@ -45,16 +60,10 @@ module neutron-metering {
             description "Metering Rule ID.";
         }
         leaf direction {
-            type enumeration {
-                enum ingress {
-                    description "Ingress direction.";
-                  }
-                  enum egress {
-                    description "Egress direction.";
-                  }
+            type identityref {
+                base direction-base;
             }
             description "The direction in which metering rule is applied.";
-            default "ingress";
         }
         leaf metering-label-id {
             type yang:uuid;
@@ -85,6 +94,7 @@ module neutron-metering {
             }
         }
     }
+
     grouping metering-rules-attributes {
         container metering-rules {
             description " Container for metering rules.";

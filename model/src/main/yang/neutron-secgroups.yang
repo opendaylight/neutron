@@ -49,19 +49,13 @@ module neutron-secgroups {
             description "UUID of the tenant.";
         }
         leaf direction {
-            type enumeration {
-                enum ingress {
-                    description "Ingress direction.";
-                  }
-                  enum egress {
-                    description "Egress direction.";
-                  }
+            type identityref {
+                base direction-base;
             }
             description "The direction in which metering rule is applied.
                 For a compute instance, an ingress security group rule is
                 applied to incoming (ingress) traffic for that instance.
                 An egress rule is applied to traffic leaving the instance.";
-            default "ingress";
         }
         leaf security-group-id {
             type yang:uuid;
@@ -78,35 +72,16 @@ module neutron-secgroups {
             type inet:ip-address;
         }
         leaf protocol {
-            type union {
-                type uint8;
-                type enumeration {
-                    enum null {
-                        description "NULL protocol.";
-                    }
-                    enum icmp {
-                        description "ICMP protocol.";
-                    }
-                    enum udp {
-                        description "UDP protocol.";
-                    }
-                    enum tcp {
-                        description "TCP protocol.";
-                    }
-                }
+            type identityref {
+                base protocol-base;
             }
             description "The protocol that is matched by the security group rule.";
         }
         leaf ethertype {
             description "Must be IPv4 or IPv6, and addresses represented in CIDR must
                 match the ingress or egress rules.";
-            type enumeration {
-                enum ipv4 {
-                    description "ipv4 type.";
-                }
-                enum ipv6 {
-                    description "ipv6 type.";
-                }
+            type identityref {
+                base ethertype-base;
             }
         }
         leaf port-range-min {
@@ -149,5 +124,57 @@ module neutron-secgroups {
                 description "List of Security Group Rules.";
             }
         }
+    }
+
+    identity ethertype-base {
+        description "the base identity for ethertype versions";
+    }
+
+    identity ethertype-v4 {
+        description "IP v4";
+        base ethertype-base;
+    }
+
+    identity ethertype-v6 {
+        description "IP v6";
+        base ethertype-base;
+    }
+
+    identity direction-base {
+        description "Base identity for direction";
+    }
+
+    identity direction-ingress {
+        description "Ingress direction.";
+        base direction-base;
+    }
+
+    identity direction-egress {
+        description "Egress direction.";
+        base direction-base;
+    }
+
+    identity protocol-base {
+        description "Base identity for all front end protocols";
+    }
+
+    identity protocol-http {
+        description "HTTP protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-https {
+        description "HTTPS protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-tcp {
+        description "TCP protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-icmp {
+        description "ICMP protocol.";
+        base protocol-base;
     }
 }

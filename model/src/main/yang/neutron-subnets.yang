@@ -36,9 +36,8 @@ module neutron-subnets {
         }
         leaf ip-version {
             description "IP version";
-            type enumeration {
-                enum 4;
-                enum 6;
+            type identityref {
+                base ip-version-base;
             }
         }
         leaf cidr {
@@ -65,22 +64,15 @@ module neutron-subnets {
                         --ip-version 6 --ipv6_ra_mode dhcpv6-stateless --ipv6_address_mode
                         dhcpv6-stateless NETWORK CIDR Note: can't find this in the spec
                         but OS is sending it with a null value.";
-            // ?? Do we make this an enumeration for validation or require the writer to write good values?
-            type enumeration {
-                enum off;
-                enum dhcpv6-stateful;
-                enum slaac;
-                enum dhcpv6-stateless;
+            type identityref {
+                base dhcpv6-base;
             }
         }
         leaf ipv6-ra-mode {
             description "TODO can't find this in the spec but OS sends it with a null
                         value.";
-            type enumeration {
-                enum off;
-                enum dhcpv6-stateful;
-                enum slaac;
-                enum dhcpv6-stateless;
+            type identityref {
+                base dhcpv6-base;
             }
         }
         list allocation-pools {
@@ -118,5 +110,43 @@ module neutron-subnets {
                 uses subnet-attributes;
             }
         }
+    }
+
+    identity ip-version-base {
+        description "the base identity for ip versions";
+    }
+
+    identity ip-version-v4 {
+        description "IP v4";
+        base ip-version-base;
+    }
+
+    identity ip-version-v6 {
+        description "IP v6";
+        base ip-version-base;
+    }
+
+    identity dhcpv6-base {
+        description "the base identity for DHCP v6 information";
+    }
+
+    identity dhcpv6-off {
+        description "DHCP v6 off";
+        base dhcpv6-base;
+    }
+
+    identity dhcpv6-stateful {
+        description "DHCP v6 stateful";
+        base dhcpv6-base;
+    }
+
+    identity dhcpv6-slaac {
+        description "SLAAC";
+        base dhcpv6-base;
+    }
+
+    identity dhcpv6-stateless {
+        description "DHCP v6 stateless";
+        base dhcpv6-base;
     }
 }

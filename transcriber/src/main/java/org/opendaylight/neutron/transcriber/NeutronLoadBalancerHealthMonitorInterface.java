@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +23,11 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 import org.opendaylight.neutron.spi.Neutron_ID;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.HealthmonitorAttributes.Type;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProbeBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProbeHttp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProbeHttps;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProbeIcmp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProbeTcp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Healthmonitor;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitor.Healthmonitors;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitor.HealthmonitorsBuilder;
@@ -35,6 +41,14 @@ import org.slf4j.LoggerFactory;
 public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitors, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerHealthMonitor> loadBalancerHealthMonitorDB = new ConcurrentHashMap<String, NeutronLoadBalancerHealthMonitor>();
+
+    private static final ImmutableBiMap<Class<? extends ProbeBase>,String> PROBE_MAP
+            = new ImmutableBiMap.Builder<Class<? extends ProbeBase>,String>()
+            .put(ProbeHttp.class,"HTTP")
+            .put(ProbeHttps.class,"HTTPS")
+            .put(ProbeIcmp.class,"ICMP")
+            .put(ProbeTcp.class,"TCP")
+            .build();
 
 
     NeutronLoadBalancerHealthMonitorInterface(ProviderContext providerContext) {
@@ -147,7 +161,9 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             healthmonitorsBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
-            healthmonitorsBuilder.setType(Type.valueOf(healthMonitor.getLoadBalancerHealthMonitorType()));
+            ImmutableBiMap<String, Class<? extends ProbeBase>> mapper = 
+                    PROBE_MAP.inverse();
+            healthmonitorsBuilder.setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
             healthmonitorsBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
