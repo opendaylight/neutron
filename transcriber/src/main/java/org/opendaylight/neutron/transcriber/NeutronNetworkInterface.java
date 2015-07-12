@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -19,10 +21,22 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
+import org.opendaylight.neutron.spi.NeutronNetwork_Segment;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev141002.NetworkL3Extension;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev141002.NetworkL3ExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.Networks;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.networks.Network;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.networks.NetworkBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev141002.neutron.networks.network.Segments;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev141002.neutron.networks.network.SegmentsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.NetworkTypeBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.NetworkTypeFlat;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.NetworkTypeGre;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.NetworkTypeVlan;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.NetworkTypeVxlan;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev141002.NetworkProviderExtension;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev141002.NetworkProviderExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
@@ -31,6 +45,14 @@ import org.slf4j.LoggerFactory;
 public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,NeutronNetwork> implements INeutronNetworkCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
     private ConcurrentMap<String, NeutronNetwork> networkDB = new ConcurrentHashMap<String, NeutronNetwork>();
+
+    private static final ImmutableBiMap<Class<? extends NetworkTypeBase>,String> NETWORK_MAP
+            = new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>,String>()
+            .put(NetworkTypeFlat.class,"flat")
+            .put(NetworkTypeGre.class,"gre")
+            .put(NetworkTypeVlan.class,"vlan")
+            .put(NetworkTypeVxlan.class,"vxlan")
+            .build();
 
     NeutronNetworkInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -112,7 +134,56 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
     }
 
     protected Network toMd(NeutronNetwork network) {
+
+        NetworkL3ExtensionBuilder l3ExtensionBuilder = new NetworkL3ExtensionBuilder();
+        if (network.getRouterExternal() != null) {
+            l3ExtensionBuilder.setExternal(network.getRouterExternal());
+        }
+
+        NetworkProviderExtensionBuilder providerExtensionBuilder = new NetworkProviderExtensionBuilder();
+        if (network.getProviderPhysicalNetwork() != null) {
+            providerExtensionBuilder.setPhysicalNetwork(network.getProviderPhysicalNetwork());
+        }
+        if (network.getProviderSegmentationID() != null) {
+            providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
+        }
+        if (network.getProviderNetworkType() != null) {
+            ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
+                NETWORK_MAP.inverse();
+            providerExtensionBuilder.setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
+        }
+        if (network.getSegments() != null) {
+            List<Segments> segments = new ArrayList<Segments>();
+            long count = 0;
+            for( NeutronNetwork_Segment segment : network.getSegments()) {
+                count++;
+                SegmentsBuilder segmentsBuilder = new SegmentsBuilder();
+                if (segment.getProviderPhysicalNetwork() != null) {
+                    segmentsBuilder.setPhysicalNetwork(segment.getProviderPhysicalNetwork());
+                }
+                if (segment.getProviderSegmentationID() != null) {
+                    segmentsBuilder.setSegmentationId(segment.getProviderSegmentationID());
+                }
+                if (segment.getProviderNetworkType() != null) {
+                    ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
+                        NETWORK_MAP.inverse();
+                    segmentsBuilder.setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(segment.getProviderNetworkType()));
+                }
+                segmentsBuilder.setSegmentationIndex(Long.valueOf(count));
+                segments.add(segmentsBuilder.build());
+            }
+            providerExtensionBuilder.setSegments(segments);
+        }
+        if (network.getProviderSegmentationID() != null) {
+            providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
+        }
+
         NetworkBuilder networkBuilder = new NetworkBuilder();
+        networkBuilder.addAugmentation(NetworkL3Extension.class,
+                                       l3ExtensionBuilder.build());
+        networkBuilder.addAugmentation(NetworkProviderExtension.class,
+                                       providerExtensionBuilder.build());
+
         networkBuilder.setAdminStateUp(network.getAdminStateUp());
         if (network.getNetworkName() != null) {
             networkBuilder.setName(network.getNetworkName());
