@@ -23,13 +23,11 @@ module neutron-secgroups {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines Security group objects that are used by Openstack
-        Juno House Neutron YANG modules.";
+    description "This YANG module defines OpenStack Neutron security group model";
 
-    revision "2014-10-02" {
+    revision "2015-07-12" {
         description
-                "Initial version of Security group objects used by OpenStack Ice House Neutron
-                models";
+                "OpenDaylight Beryllium release";
     }
 
     grouping security-group-attributes {

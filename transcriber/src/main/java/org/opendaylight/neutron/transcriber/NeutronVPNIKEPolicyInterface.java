@@ -18,11 +18,11 @@ import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderCo
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 import org.opendaylight.neutron.spi.NeutronVPNLifetime;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicy.attributes.LifetimeBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicies.attributes.IkePolicies;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicies.attributes.ike.policies.Ikepolicy;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicy.attributes.LifetimeBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.IkePolicies;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.Ikepolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;

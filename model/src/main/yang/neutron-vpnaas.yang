@@ -21,11 +21,11 @@ module neutron-vpnaas {
 
     contact "R. Moats <rmoats@us.ibm.com>";
 
-    description "This YANG module defines Openstack Juno House Neutron VPNaaS model";
-    
-    revision "2014-10-02" {
+    description "This YANG module defines Openstack Neutron VPNaaS model";
+
+    revision "2015-07-12" {
         description
-                "Initial version";
+                "OpenDaylight Beryllium release";
     }
 
     grouping vpnservice-attributes {

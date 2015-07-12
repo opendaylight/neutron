@@ -10,7 +10,7 @@ module neutron-constants {
 
     contact "Ryan Moats <rmoats@us.ibm.com>";
 
-    revision "2015-20-07" {
+    revision "2015-07-12" {
         description "Initial revision";
     }
 
