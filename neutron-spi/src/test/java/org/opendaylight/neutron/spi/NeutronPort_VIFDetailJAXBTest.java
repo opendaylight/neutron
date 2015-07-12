@@ -26,10 +26,10 @@ public class NeutronPort_VIFDetailJAXBTest {
                     NeutronPort_VIFDetail_sourceJson);
 
             Assert.assertEquals("NeutronPort_VIFDetail JAXB Test 1: Testing port_filter failed", true,
-                    testObject.getPortID());
+                    testObject.getPortFilter());
 
             Assert.assertEquals("NeutronPort_VIFDetail JAXB Test 10: Testing ovs_hybrid_plug failed", true,
-                    testObject.getMacAddress());
+                    testObject.getOvsHybridPlug());
 
         } catch (Exception e) {
             Assert.assertFalse("Tests Failed", true);
