@@ -19,13 +19,11 @@ module neutron-provider {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines provider attributes that are used by Openstack
-        Juno House Neutron YANG modules.";
+    description "This YANG module defines Openstack Neutron Provider extension attributes";
 
-    revision "2014-10-02" {
+    revision "2015-07-12" {
         description
-                "Initial version of provider attributes used by OpenStack Ice House Neutron
-                models";
+                "OpenDaylight Beryllium release";
     }
 
     grouping provider-attributes {

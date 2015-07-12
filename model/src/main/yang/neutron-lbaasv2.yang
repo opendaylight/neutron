@@ -23,13 +23,11 @@ module neutron-lbaasv2 {
 
     contact "Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines LBaaSV2.0 objects that are used by Openstack
-        Ice House Neutron YANG modules.";
+    description "This YANG module defines OpenStack Neutron LBaaSV2.0 modules";
 
-    revision "2014-10-02" {
+    revision "2015-07-12" {
         description
-                "Initial version of LBaaSV2.0 objects used by OpenStack Ice House Neutron
-                models";
+                "OpenDaylight Beryllium release";
     }
 
     grouping loadbalancer-attributes {

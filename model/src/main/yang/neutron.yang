@@ -31,9 +31,9 @@ module neutron {
 
     description "This YANG module defines a top level for the neutron models in opendaylight.";
 
-    revision "2015-03-25" {
+    revision "2015-07-12" {
         description
-                "Initial version of top level neutron model";
+                "OpenDaylight Beryllium release";
     }
 
     container neutron {
