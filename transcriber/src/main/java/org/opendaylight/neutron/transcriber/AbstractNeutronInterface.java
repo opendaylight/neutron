@@ -5,8 +5,10 @@ import java.lang.reflect.Method;
 import java.util.concurrent.ExecutionException;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
@@ -15,6 +17,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.CheckedFuture;
 
@@ -42,6 +45,25 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
     protected abstract T toMd(S neutronObject);
 
     protected abstract T toMd(String uuid);
+
+    protected <T extends org.opendaylight.yangtools.yang.binding.DataObject> T readMd(InstanceIdentifier<T> path) {
+        T result = null;
+        final ReadOnlyTransaction transaction = getDataBroker().newReadOnlyTransaction();
+        CheckedFuture<Optional<T>, ReadFailedException> future = transaction.read(LogicalDatastoreType.CONFIGURATION, path);
+        if (future != null) {
+            Optional<T> optional;
+            try {
+                optional = future.checkedGet();
+                if (optional.isPresent()) {
+                    result = optional.get();
+                }
+            } catch (ReadFailedException e) {
+                LOGGER.warn("Failed to read {}", path, e);
+            }
+        }
+        transaction.close();
+        return result;
+    }
 
     protected boolean addMd(S neutronObject) {
         // TODO think about adding existence logic
