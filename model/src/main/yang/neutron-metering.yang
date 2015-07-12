@@ -23,13 +23,11 @@ module neutron-metering {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines metering attributes that are used by Openstack
-        Juno House Neutron YANG modules.";
+    description "This YANG module defines Openstack Neutron Metering attributes";
 
-    revision "2014-10-02" {
+    revision "2015-07-12" {
         description
-                "Initial version of metering attributes used by OpenStack Ice House Neutron
-                models";
+                "OpenDaylight Beryllium release";
     }
 
     grouping metering-label-attributes {
