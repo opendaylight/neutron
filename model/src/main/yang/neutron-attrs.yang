@@ -19,13 +19,12 @@ module neutron-attrs {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines groupings that are used by Openstack
-        Juno House Neutron YANG modules.";
+    description "This YANG module defines groupings that are used
+        by OpenDaylight Neutron YANG modules.";
 
-    revision "2014-10-02" {
+    revision "2015-07-12" {
         description
-                "Initial version of attributes used by OpenStack Icehouse House Neutron
-                models";
+                "OpenDaylight Beryllium release";
     }
 
     grouping base-attributes {

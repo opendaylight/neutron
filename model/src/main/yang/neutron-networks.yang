@@ -20,11 +20,11 @@ module neutron-networks {
 
     contact "J. Gregory Hall <ghall@brocade.com>, Kiran Sreenivasa <kkoushik@brocade.com>";
 
-    description "This YANG module defines Openstack Juno House Neutron Network model";
+    description "This YANG module defines Openstack Neutron Network model";
 
-    revision "2014-10-02" {
+    revision "2015-07-12" {
         description
-                "Initial version of Openstack Neutron Ice House Network model.";
+                "OpenDaylight Beryllium release";
     }
     identity network-type-base {
         description

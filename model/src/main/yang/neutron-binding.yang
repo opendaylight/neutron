@@ -22,12 +22,12 @@ module neutron-binding {
 
     contact "Ryan Moats <rmoats@us.ibm.com>";
 
-    description "This YANG module defines binding attributes that are used by Openstack
-        Juno Port YANG modules.";
-    
-    revision "2014-10-02" {
+    description "This YANG module defines binding attributes that are used
+        by OpenDaylight Neutron YANG modules.";
+
+    revision "2015-07-12" {
         description
-                "Initial version";
+                "OpenDaylight Beryllium release";
     }
 
     grouping binding-attributes {
