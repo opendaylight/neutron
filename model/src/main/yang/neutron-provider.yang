@@ -49,5 +49,10 @@ module neutron-provider {
                         is vlan, this ID is a vlan identifier. If network-type is gre,
                         this ID is a gre key.";
         }
+        leaf segmentation-index {
+            type uint32;
+            description "A hidden counter to act as a key, because
+                        segmentation id is not required.";
+        }
     }
 }

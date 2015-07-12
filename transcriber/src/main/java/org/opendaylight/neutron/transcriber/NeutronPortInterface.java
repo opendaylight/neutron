@@ -26,11 +26,16 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronPort_AllowedAddressPairs;
 import org.opendaylight.neutron.spi.NeutronPort_ExtraDHCPOption;
+import org.opendaylight.neutron.spi.NeutronPort_VIFDetail;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.Neutron_IPs;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev141002.binding.attributes.VifDetails;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev141002.binding.attributes.VifDetailsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev141002.PortBindingExtension;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev141002.PortBindingExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attributes.AllowedAddressPairs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attributes.AllowedAddressPairsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.port.attributes.ExtraDhcpOpts;
@@ -215,7 +220,34 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     @Override
     protected Port toMd(NeutronPort neutronPort) {
+        PortBindingExtensionBuilder bindingBuilder = new PortBindingExtensionBuilder();
+        if (neutronPort.getBindinghostID() != null) {
+            bindingBuilder.setHostId(toUuid(neutronPort.getBindinghostID()));
+        }
+        if (neutronPort.getVIFDetail() != null) {
+            List<VifDetails> listVifDetail = new ArrayList<VifDetails>();
+            for (NeutronPort_VIFDetail detail: neutronPort.getVIFDetail()) {
+                VifDetailsBuilder vifDetailsBuilder = new VifDetailsBuilder();
+                if (detail.getPortFilter() != null) {
+                    vifDetailsBuilder.setPortFilter(detail.getPortFilter());
+                } 
+                if (detail.getOvsHybridPlug() != null) {
+                    vifDetailsBuilder.setOvsHybridPlug(detail.getOvsHybridPlug());
+                } 
+                listVifDetail.add(vifDetailsBuilder.build());
+            }
+            bindingBuilder.setVifDetails(listVifDetail);
+        }
+        if (neutronPort.getBindingvifType() != null) {
+            bindingBuilder.setVifType(neutronPort.getBindingvifType());
+        }
+        if (neutronPort.getBindingvnicType() != null) {
+            bindingBuilder.setVnicType(neutronPort.getBindingvnicType());
+        }
+
         PortBuilder portBuilder = new PortBuilder();
+        portBuilder.addAugmentation(PortBindingExtension.class,
+                                    bindingBuilder.build());
         portBuilder.setAdminStateUp(neutronPort.isAdminStateUp());
         if(neutronPort.getAllowedAddressPairs() != null) {
             List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
