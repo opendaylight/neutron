@@ -34,11 +34,11 @@ public class NeutronPort_VIFDetail implements Serializable {
         this.ovsHybridPlug = ovsHybridPlug;
     }
 
-    public Boolean getPortID() { return(portFilter); }
+    public Boolean getPortFilter() { return(portFilter); }
 
-    public void setPortID(Boolean portFilter) { this.portFilter = portFilter; }
+    public void setPortFilter(Boolean portFilter) { this.portFilter = portFilter; }
 
-    public Boolean getMacAddress() { return(ovsHybridPlug); }
+    public Boolean getOvsHybridPlug() { return(ovsHybridPlug); }
 
-    public void setMacAddress(Boolean ovsHybridPlug) { this.ovsHybridPlug = ovsHybridPlug; }
+    public void setOvsHybridPlug(Boolean ovsHybridPlug) { this.ovsHybridPlug = ovsHybridPlug; }
 }
