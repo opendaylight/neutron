@@ -9,6 +9,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +27,17 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.DirectionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.DirectionEgress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.DirectionIngress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.EthertypeBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.EthertypeV4;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.EthertypeV6;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.ProtocolBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.ProtocolHttp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.ProtocolHttps;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.ProtocolIcmp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.ProtocolTcp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.SecurityRuleAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRule;
@@ -40,6 +53,23 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
     private ConcurrentMap<String, NeutronSecurityRule> securityRuleDB = new ConcurrentHashMap<String, NeutronSecurityRule>();
 
+    private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
+            = new ImmutableBiMap.Builder<Class<? extends DirectionBase>,String>()
+            .put(DirectionEgress.class,"egress")
+            .put(DirectionIngress.class,"ingress")
+            .build();
+    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
+            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
+            .put(ProtocolHttp.class,"HTTP")
+            .put(ProtocolHttps.class,"HTTPS")
+            .put(ProtocolIcmp.class,"ICMP")
+            .put(ProtocolTcp.class,"TCP")
+            .build();
+    private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
+            = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
+            .put(EthertypeV4.class,"v4")
+            .put(EthertypeV6.class,"v6")
+            .build();
 
     NeutronSecurityRuleInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -155,17 +185,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setTenantId(toUuid(securityRule.getSecurityRuleTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {
-            boolean foundMatch = false;
-            for (SecurityRuleAttributes.Direction direction : SecurityRuleAttributes.Direction.values()) {
-                if (direction.toString().equalsIgnoreCase(securityRule.getSecurityRuleDirection())) {
-                    securityRuleBuilder.setDirection(direction);
-                    foundMatch = true;
-                    break;
-                }
-            }
-            if (!foundMatch) {
-                LOGGER.warn("Unable to find direction value for {}", securityRule.getSecurityRuleDirection());
-            }
+            ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = 
+                    DIRECTION_MAP.inverse();
+            securityRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(securityRule.getSecurityRuleDirection()));
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
@@ -178,35 +200,14 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteIpPrefix(ipAddress);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            boolean foundMatch = false;
-            for (SecurityRuleAttributes.Protocol.Enumeration protocol : SecurityRuleAttributes.Protocol.Enumeration.values()) {
-                if (protocol.toString().equalsIgnoreCase(securityRule.getSecurityRuleProtocol())) {
-                    securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(protocol));
-                    foundMatch = true;
-                    break;
-                }
-            }
-            if (!foundMatch) {
-                try {
-                    java.lang.Short protocol = Short.valueOf(securityRule.getSecurityRuleProtocol());
-                    securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(protocol));
-                } catch (NumberFormatException e) {
-                    LOGGER.warn("Unable to find protocol value for {}", securityRule.getSecurityRuleProtocol());
-                }
-            }
+            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = 
+                    PROTOCOL_MAP.inverse();
+            securityRuleBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(securityRule.getSecurityRuleProtocol()));
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
-            boolean foundMatch = false;
-            for (SecurityRuleAttributes.Ethertype etherType : SecurityRuleAttributes.Ethertype.values()) {
-                if (etherType.toString().equalsIgnoreCase(securityRule.getSecurityRuleEthertype())) {
-                    securityRuleBuilder.setEthertype(etherType);
-                    foundMatch = true;
-                    break;
-                }
-            }
-            if (!foundMatch) {
-                LOGGER.warn("Unable to find ethertype value for {}", securityRule.getSecurityRuleEthertype());
-            }
+            ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = 
+                    ETHERTYPE_MAP.inverse();
+            securityRuleBuilder.setEthertype((Class<? extends EthertypeBase>) mapper.get(securityRule.getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
             securityRuleBuilder.setPortRangeMin(Integer.valueOf(securityRule.getSecurityRulePortMin()));

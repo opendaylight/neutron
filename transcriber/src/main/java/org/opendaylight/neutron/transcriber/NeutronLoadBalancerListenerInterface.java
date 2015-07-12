@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +23,10 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 import org.opendaylight.neutron.spi.Neutron_ID;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ListenerAttributes.Protocol;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProtocolBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProtocolHttp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProtocolHttps;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.ProtocolTcp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Listener;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listener.Listeners;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listener.ListenersBuilder;
@@ -36,6 +41,12 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerListener> loadBalancerListenerDB  = new ConcurrentHashMap<String, NeutronLoadBalancerListener>();
 
+    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
+            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
+            .put(ProtocolHttp.class,"HTTP")
+            .put(ProtocolHttps.class,"HTTPS")
+            .put(ProtocolTcp.class,"TCP")
+            .build();
 
     NeutronLoadBalancerListenerInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -142,7 +153,9 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             listenersBuilder.setName(listeners.getLoadBalancerListenerName());
         }
         if (listeners.getNeutronLoadBalancerListenerProtocol() != null) {
-            listenersBuilder.setProtocol(Protocol.valueOf(listeners.getNeutronLoadBalancerListenerProtocol()));
+            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
+                PROTOCOL_MAP.inverse();
+            listenersBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(listeners.getNeutronLoadBalancerListenerProtocol()));
         }
         if (listeners.getNeutronLoadBalancerListenerProtocolPort() != null) {
             listenersBuilder.setProtocolPort(Integer.valueOf(listeners.getNeutronLoadBalancerListenerProtocolPort()));
