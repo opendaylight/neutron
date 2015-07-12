@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
@@ -46,7 +44,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,NeutronNetwork> implements INeutronNetworkCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
-    private ConcurrentMap<String, NeutronNetwork> networkDB = new ConcurrentHashMap<String, NeutronNetwork>();
 
     private static final ImmutableBiMap<Class<? extends NetworkTypeBase>,String> NETWORK_MAP
             = new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>,String>()
@@ -64,23 +61,30 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 
     @Override
     public boolean networkExists(String uuid) {
-        return networkDB.containsKey(uuid);
+        Network network = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (network == null) {
+            return false;
+        }
+        return true; 
     }
 
     @Override
     public NeutronNetwork getNetwork(String uuid) {
-        if (!networkExists(uuid)) {
+        Network network = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (network == null) {
             return null;
         }
-        return networkDB.get(uuid);
+        return fromMd(network);
     }
 
     @Override
     public List<NeutronNetwork> getAllNetworks() {
         Set<NeutronNetwork> allNetworks = new HashSet<NeutronNetwork>();
-        for (Entry<String, NeutronNetwork> entry : networkDB.entrySet()) {
-            NeutronNetwork network = entry.getValue();
-            allNetworks.add(network);
+        Networks networks = readMd(createInstanceIdentifier());
+        if (networks != null) {
+            for (Network network: networks.getNetwork()) {
+                allNetworks.add(fromMd(network));
+            }
         }
         LOGGER.debug("Exiting getAllNetworks, Found {} OpenStackNetworks", allNetworks.size());
         List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
@@ -93,7 +97,6 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (networkExists(input.getID())) {
             return false;
         }
-        networkDB.putIfAbsent(input.getID(), input);
         addMd(input);
       //TODO: add code to find INeutronNetworkAware services and call newtorkCreated on them
         return true;
@@ -104,7 +107,6 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (!networkExists(uuid)) {
             return false;
         }
-        networkDB.remove(uuid);
         removeMd(toMd(uuid));
       //TODO: add code to find INeutronNetworkAware services and call newtorkDeleted on them
         return true;
@@ -118,7 +120,6 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        networkDB.replace(uuid, delta);
         updateMd(delta);
         return true;
     }
@@ -128,11 +129,45 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (!networkExists(netUUID)) {
             return true;
         }
-        NeutronNetwork target = networkDB.get(netUUID);
-        if (target.getPortsOnNetwork().size() > 0) {
-            return true;
-        }
         return false;
+    }
+
+    protected NeutronNetwork fromMd(Network network) {
+        NeutronNetwork result = new NeutronNetwork();
+        result.setAdminStateUp(network.isAdminStateUp());
+        result.setNetworkName(network.getName());
+        result.setShared(network.isShared());
+        result.setStatus(network.getStatus());
+        if (network.getSubnets() != null) {
+            List<String> neutronSubnets = new ArrayList<String>();
+            for( Uuid subnet : network.getSubnets()) {
+               neutronSubnets.add(String.valueOf(subnet));
+            }
+            result.setSubnets(neutronSubnets);
+        }
+// todo remove '-' chars as tenant id doesn't use them
+        result.setTenantID(String.valueOf(network.getTenantId()));
+        result.setID(String.valueOf(network.getUuid()));
+
+        NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
+        result.setRouterExternal(l3Extension.isExternal());
+
+        NetworkProviderExtension providerExtension = network.getAugmentation(NetworkProviderExtension.class);
+        result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());
+        result.setProviderSegmentationID(providerExtension.getSegmentationId());
+        result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
+        List<NeutronNetwork_Segment> segments = new ArrayList<NeutronNetwork_Segment>();
+        if (providerExtension.getSegments() != null) {
+            for (Segments segment: providerExtension.getSegments()) {
+                NeutronNetwork_Segment neutronSegment = new NeutronNetwork_Segment();
+                neutronSegment.setProviderPhysicalNetwork(segment.getPhysicalNetwork());
+                neutronSegment.setProviderSegmentationID(segment.getSegmentationId());
+                neutronSegment.setProviderNetworkType(NETWORK_MAP.get(segment.getNetworkType()));
+                segments.add(neutronSegment);
+            }
+        }
+        result.setSegments(segments);
+        return result;
     }
 
     protected Network toMd(NeutronNetwork network) {
@@ -226,6 +261,12 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
                 .child(Networks.class)
                 .child(Network.class,network.getKey());
     }
+
+//TODO: mark override
+    protected InstanceIdentifier<Networks> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Networks.class);
+    } 
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
