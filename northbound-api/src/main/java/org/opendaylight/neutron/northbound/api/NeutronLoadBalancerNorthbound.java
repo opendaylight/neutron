@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -214,7 +215,7 @@ public class NeutronLoadBalancerNorthbound {
         } else {
             List<NeutronLoadBalancer> bulk = input.getBulk();
             Iterator<NeutronLoadBalancer> i = bulk.iterator();
-            HashMap<String, NeutronLoadBalancer> testMap = new HashMap<String, NeutronLoadBalancer>();
+            Map<String, NeutronLoadBalancer> testMap = new HashMap<String, NeutronLoadBalancer>();
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
             while (i.hasNext()) {
                 NeutronLoadBalancer test = i.next();

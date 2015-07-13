@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -162,7 +163,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
             routerBuilder.setExternalGatewayInfo(externalGatewayInfo);
         }
         if (router.getInterfaces() != null) {
-            HashMap<String, NeutronRouter_Interface> mapInterfaces = new HashMap<String, NeutronRouter_Interface>();
+            Map<String, NeutronRouter_Interface> mapInterfaces = new HashMap<String, NeutronRouter_Interface>();
             List<Interfaces> interfaces = new ArrayList<Interfaces>();
             for (Entry<String, NeutronRouter_Interface> entry : mapInterfaces.entrySet()) {
                 interfaces.add((Interfaces) entry.getValue());
