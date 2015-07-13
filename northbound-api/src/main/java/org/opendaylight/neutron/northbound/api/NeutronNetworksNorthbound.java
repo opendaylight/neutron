@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -245,7 +246,7 @@ public class NeutronNetworksNorthbound {
         } else {
             List<NeutronNetwork> bulk = input.getBulk();
             Iterator<NeutronNetwork> i = bulk.iterator();
-            HashMap<String, NeutronNetwork> testMap = new HashMap<String, NeutronNetwork>();
+            Map<String, NeutronNetwork> testMap = new HashMap<String, NeutronNetwork>();
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
             while (i.hasNext()) {
                 NeutronNetwork test = i.next();

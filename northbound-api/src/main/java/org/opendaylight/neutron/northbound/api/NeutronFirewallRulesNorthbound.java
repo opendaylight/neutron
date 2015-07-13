@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -246,7 +247,7 @@ public class NeutronFirewallRulesNorthbound {
         } else {
             List<NeutronFirewallRule> bulk = input.getBulk();
             Iterator<NeutronFirewallRule> i = bulk.iterator();
-            HashMap<String, NeutronFirewallRule> testMap = new HashMap<String, NeutronFirewallRule>();
+            Map<String, NeutronFirewallRule> testMap = new HashMap<String, NeutronFirewallRule>();
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
             while (i.hasNext()) {
                 NeutronFirewallRule test = i.next();

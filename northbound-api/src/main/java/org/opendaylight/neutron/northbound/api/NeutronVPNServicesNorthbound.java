@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -213,7 +214,7 @@ public class NeutronVPNServicesNorthbound {
         } else {
             List<NeutronVPNService> bulk = input.getBulk();
             Iterator<NeutronVPNService> i = bulk.iterator();
-            HashMap<String, NeutronVPNService> testMap = new HashMap<String, NeutronVPNService>();
+            Map<String, NeutronVPNService> testMap = new HashMap<String, NeutronVPNService>();
             Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
             while (i.hasNext()) {
                 NeutronVPNService test = i.next();
