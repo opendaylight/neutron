@@ -314,15 +314,11 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
         while (i.hasNext()) {
             NeutronSubnetIPAllocationPool pool = i.next();
-            if (ipVersion == IPV4_VERSION) {
-                if (pool.contains(gatewayIP)) {
-                    return true;
-                }
+            if (ipVersion == IPV4_VERSION && pool.contains(gatewayIP)) {
+                return true;
             }
-            if (ipVersion == IPV6_VERSION) {
-                if (pool.containsV6(gatewayIP)) {
-                    return true;
-                }
+            if (ipVersion == IPV6_VERSION && pool.containsV6(gatewayIP)) {
+                return true;
             }
         }
         return false;
@@ -503,16 +499,14 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 ans = pool.getPoolStart();
             }
             else {
-                if (ipVersion == IPV4_VERSION) {
-                    if (NeutronSubnetIPAllocationPool.convert(pool.getPoolStart()) <
+                if (ipVersion == IPV4_VERSION &&
+                    NeutronSubnetIPAllocationPool.convert(pool.getPoolStart()) <
                             NeutronSubnetIPAllocationPool.convert(ans)) {
-                        ans = pool.getPoolStart();
-                    }
+                    ans = pool.getPoolStart();
                 }
-                if (ipVersion == IPV6_VERSION) {
-                    if (NeutronSubnetIPAllocationPool.convertV6(pool.getPoolStart()).compareTo(NeutronSubnetIPAllocationPool.convertV6(ans)) < 0) {
-                        ans = pool.getPoolStart();
-                    }
+                if (ipVersion == IPV6_VERSION &&
+                    NeutronSubnetIPAllocationPool.convertV6(pool.getPoolStart()).compareTo(NeutronSubnetIPAllocationPool.convertV6(ans)) < 0) {
+                    ans = pool.getPoolStart();
                 }
            }
         }

@@ -197,10 +197,8 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         while (portIterator.hasNext()) {
             NeutronPort port = portIterator.next();
             List<Neutron_IPs> fixedIPs = port.getFixedIPs();
-            if (fixedIPs.size() == 1) {
-                if (subnet.getGatewayIP().equals(fixedIPs.get(0).getIpAddress())) {
-                    return port;
-                }
+            if (fixedIPs.size() == 1 && subnet.getGatewayIP().equals(fixedIPs.get(0).getIpAddress())) {
+                return port;
             }
         }
         return null;
