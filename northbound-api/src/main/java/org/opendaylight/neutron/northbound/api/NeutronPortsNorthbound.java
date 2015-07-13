@@ -325,10 +325,9 @@ public class NeutronPortsNorthbound {
                     }
                     for (Neutron_IPs test_fixedIP : test.getFixedIPs()) {
                         for (Neutron_IPs check_fixedIP : check.getFixedIPs()) {
-                            if (test_fixedIP.getSubnetUUID().equals(check_fixedIP.getSubnetUUID())) {
-                                if (test_fixedIP.getIpAddress().equals(check_fixedIP.getIpAddress())) {
-                                    throw new ResourceConflictException("IP address already allocated");
-                                }
+                            if (test_fixedIP.getSubnetUUID().equals(check_fixedIP.getSubnetUUID()) &&
+                                (test_fixedIP.getIpAddress().equals(check_fixedIP.getIpAddress()))) {
+                                throw new ResourceConflictException("IP address already allocated");
                             }
                         }
                     }
