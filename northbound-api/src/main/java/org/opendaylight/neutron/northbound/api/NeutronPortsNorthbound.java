@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -303,7 +304,7 @@ public class NeutronPortsNorthbound {
         } else {
             List<NeutronPort> bulk = input.getBulk();
             Iterator<NeutronPort> i = bulk.iterator();
-            HashMap<String, NeutronPort> testMap = new HashMap<String, NeutronPort>();
+            Map<String, NeutronPort> testMap = new HashMap<String, NeutronPort>();
             Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
             while (i.hasNext()) {
                 NeutronPort test = i.next();

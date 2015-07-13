@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Neutron Northbound REST APIs for Firewall.<br>
@@ -216,7 +217,7 @@ public class NeutronFirewallNorthbound {
         } else {
             List<NeutronFirewall> bulk = input.getBulk();
             Iterator<NeutronFirewall> i = bulk.iterator();
-            HashMap<String, NeutronFirewall> testMap = new HashMap<String, NeutronFirewall>();
+            Map<String, NeutronFirewall> testMap = new HashMap<String, NeutronFirewall>();
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
             while (i.hasNext()) {
                 NeutronFirewall test = i.next();

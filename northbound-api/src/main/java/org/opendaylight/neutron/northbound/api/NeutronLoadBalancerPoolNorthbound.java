@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -227,7 +228,7 @@ public class NeutronLoadBalancerPoolNorthbound {
         } else {
             List<NeutronLoadBalancerPool> bulk = input.getBulk();
             Iterator<NeutronLoadBalancerPool> i = bulk.iterator();
-            HashMap<String, NeutronLoadBalancerPool> testMap = new HashMap<String, NeutronLoadBalancerPool>();
+            Map<String, NeutronLoadBalancerPool> testMap = new HashMap<String, NeutronLoadBalancerPool>();
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolAware.class, this);
             while (i.hasNext()) {
                 NeutronLoadBalancerPool test = i.next();

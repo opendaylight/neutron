@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -56,7 +57,7 @@ public class NeutronRouter implements Serializable, INeutronObject {
     /* Holds a map of OpenStackRouterInterfaces by subnet UUID
      * used for internal mapping to DOVE
      */
-    HashMap<String, NeutronRouter_Interface> interfaces;
+    Map<String, NeutronRouter_Interface> interfaces;
 
     public NeutronRouter() {
         interfaces = new HashMap<String, NeutronRouter_Interface>();
@@ -188,7 +189,7 @@ public class NeutronRouter implements Serializable, INeutronObject {
         return ans;
     }
 
-    public HashMap<String, NeutronRouter_Interface> getInterfaces() {
+    public Map<String, NeutronRouter_Interface> getInterfaces() {
         return interfaces;
     }
 

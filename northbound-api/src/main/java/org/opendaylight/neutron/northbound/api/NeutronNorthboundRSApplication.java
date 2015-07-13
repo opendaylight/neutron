@@ -74,7 +74,7 @@ public class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setNamespacePrefixMapper(namespacePrefixMapper);
         moxyJsonProvider.setNamespaceSeparator(':');
 
-        HashSet<Object> set = new HashSet<Object>(1);
+        Set<Object> set = new HashSet<Object>(1);
         set.add(moxyJsonProvider);
         return set;
     }

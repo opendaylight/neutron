@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -255,7 +256,7 @@ public class NeutronSubnetsNorthbound {
         } else {
             List<NeutronSubnet> bulk = input.getBulk();
             Iterator<NeutronSubnet> i = bulk.iterator();
-            HashMap<String, NeutronSubnet> testMap = new HashMap<String, NeutronSubnet>();
+            Map<String, NeutronSubnet> testMap = new HashMap<String, NeutronSubnet>();
             Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
             while (i.hasNext()) {
                 NeutronSubnet test = i.next();

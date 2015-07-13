@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -206,7 +207,7 @@ public class NeutronSecurityGroupsNorthbound {
         } else {
             List<NeutronSecurityGroup> bulk = input.getBulk();
             Iterator<NeutronSecurityGroup> i = bulk.iterator();
-            HashMap<String, NeutronSecurityGroup> testMap = new HashMap<String, NeutronSecurityGroup>();
+            Map<String, NeutronSecurityGroup> testMap = new HashMap<String, NeutronSecurityGroup>();
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
             while (i.hasNext()) {
                 NeutronSecurityGroup test = i.next();
