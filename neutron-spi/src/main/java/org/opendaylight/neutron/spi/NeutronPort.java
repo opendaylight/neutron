@@ -270,37 +270,37 @@ public class NeutronPort implements Serializable, INeutronObject {
     public NeutronPort extractFields(List<String> fields) {
         NeutronPort ans = new NeutronPort();
         for (String field: fields) {
-            if (fields.equals("id")) {
+            if ("id".equals(field)) {
                 ans.setPortUUID(this.getPortUUID());
             }
-            if (fields.equals("network_id")) {
+            if ("network_id".equals(field)) {
                 ans.setNetworkUUID(this.getNetworkUUID());
             }
-            if (fields.equals("name")) {
+            if ("name".equals(field)) {
                 ans.setName(this.getName());
             }
-            if (fields.equals("admin_state_up")) {
+            if ("admin_state_up".equals(field)) {
                 ans.setAdminStateUp(this.getAdminStateUp());
             }
-            if (fields.equals("status")) {
+            if ("status".equals(field)) {
                 ans.setStatus(this.getStatus());
             }
-            if (fields.equals("mac_address")) {
+            if ("mac_address".equals(field)) {
                 ans.setMacAddress(this.getMacAddress());
             }
-            if (fields.equals("fixed_ips")) {
+            if ("fixed_ips".equals(field)) {
                 ans.setFixedIPs(new ArrayList<Neutron_IPs>(this.getFixedIPs()));
             }
-            if (fields.equals("device_id")) {
+            if ("device_id".equals(field)) {
                 ans.setDeviceID(this.getDeviceID());
             }
-            if (fields.equals("device_owner")) {
+            if ("device_owner".equals(field)) {
                 ans.setDeviceOwner(this.getDeviceOwner());
             }
-            if (fields.equals("tenant_id")) {
+            if ("tenant_id".equals(field)) {
                 ans.setTenantID(this.getTenantID());
             }
-            if (fields.equals("security_groups")) {
+            if ("security_groups".equals(field)) {
                 ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
             }
         }

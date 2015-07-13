@@ -206,7 +206,6 @@ public class NeutronSecurityGroupsNorthbound {
         } else {
             List<NeutronSecurityGroup> bulk = input.getBulk();
             Iterator<NeutronSecurityGroup> i = bulk.iterator();
-            HashMap<String, NeutronSecurityGroup> testMap = new HashMap<String, NeutronSecurityGroup>();
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
             while (i.hasNext()) {
                 NeutronSecurityGroup test = i.next();

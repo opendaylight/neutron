@@ -116,8 +116,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             return false;
         }
         NeutronFloatingIP floatIP = getFloatingIP(uuid);
-        //if floating_ip_address isn't there, allocate from the subnet pool
-        NeutronSubnet subnet = subnetCRUD.getSubnet(networkCRUD.getNetwork(floatIP.getFloatingNetworkUUID()).getSubnets().get(0));
         if (floatIP.getPortUUID() != null) {
             NeutronPort port = portCRUD.getPort(floatIP.getPortUUID());
             port.removeFloatingIP(floatIP.getFixedIPAddress());

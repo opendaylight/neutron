@@ -56,7 +56,7 @@ public class NeutronSecurityGroup implements Serializable {
 
     public NeutronSecurityGroup() {
         neutronPorts = new ArrayList<NeutronPort> ();
-        List<NeutronSecurityRule> securityRules;
+        neutronSecurityRule = new ArrayList<NeutronSecurityRule>();
 
     }
 
