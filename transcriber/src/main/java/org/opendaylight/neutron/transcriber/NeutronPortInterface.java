@@ -161,7 +161,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         }
         NeutronPort target = portDB.get(uuid);
         if (delta.getFixedIPs() != null) {
-            NeutronPort port = getPort(uuid);
             NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
                 .fetchINeutronSubnetCRUD(this);
             INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();

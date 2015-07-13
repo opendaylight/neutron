@@ -71,7 +71,6 @@ public class NeutronSecurityRule implements Serializable {
     String securityRuleTenantID;
 
     public NeutronSecurityRule() {
-        List<NeutronSecurityRule> securityRules;
     }
 
     public String getSecurityRuleUUID() {
