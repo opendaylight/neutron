@@ -98,7 +98,6 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             return false;
         }
         addMd(input);
-      //TODO: add code to find INeutronNetworkAware services and call newtorkCreated on them
         return true;
     }
 
@@ -107,9 +106,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (!networkExists(uuid)) {
             return false;
         }
-        removeMd(toMd(uuid));
-      //TODO: add code to find INeutronNetworkAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -262,7 +259,6 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
                 .child(Network.class,network.getKey());
     }
 
-//TODO: mark override
     protected InstanceIdentifier<Networks> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Networks.class);
