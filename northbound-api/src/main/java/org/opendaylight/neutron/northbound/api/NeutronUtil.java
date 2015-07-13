@@ -6,7 +6,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-final public class NeutronUtil {
+public final class NeutronUtil {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NeutronUtil.class);
 

@@ -21,7 +21,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 
-final public class PaginatedRequestFactory {
+public final class PaginatedRequestFactory {
 
     private static final Comparator<INeutronObject> NEUTRON_OBJECT_COMPARATOR = new Comparator<INeutronObject>() {
         @Override
