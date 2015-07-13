@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_330f7130",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-13T21:50:03Z",
+      "side": 1,
+      "message": "Those are unrelated clean ups.\nPlease split this patch or mention it in commit log.",
+      "revId": "82205d925ae8d4f00d3b4e4e728da64dc84d1ede",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_c1018607",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSecurityGroup.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-13T21:50:03Z",
+      "side": 1,
+      "message": "This should be class member. Not local variable.\nPlease look at line 53.",
+      "revId": "82205d925ae8d4f00d3b4e4e728da64dc84d1ede",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_a106ca1e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronFloatingIPInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-13T21:50:03Z",
+      "side": 1,
+      "message": "This comments seems stale. Please remove at the same time.",
+      "revId": "82205d925ae8d4f00d3b4e4e728da64dc84d1ede",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
