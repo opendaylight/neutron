@@ -101,6 +101,12 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
         InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
         CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
+        try {
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.warn("Transation failed ",e);
+            return false;
+        }
         return true;
     }
 
