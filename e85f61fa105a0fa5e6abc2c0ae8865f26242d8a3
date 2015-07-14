@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_a930f09e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-14T14:22:42Z",
+      "side": 1,
+      "message": "is that the proper default? I wonder if false would make more sense here.",
+      "range": {
+        "startLine": 122,
+        "startChar": 19,
+        "endLine": 122,
+        "endChar": 23
+      },
+      "revId": "e85f61fa105a0fa5e6abc2c0ae8865f26242d8a3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
