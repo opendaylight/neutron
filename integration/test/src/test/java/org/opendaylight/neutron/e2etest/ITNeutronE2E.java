@@ -99,6 +99,11 @@ public class ITNeutronE2E {
         subnet_tester.subnet_collection_get_test();
         subnet_tester.singleton_subnet_create_test();
         subnet_tester.external_subnet_create_test(); //needed for router test
+        subnet_tester.bulk_subnet_create_test();
+        subnet_tester.subnet_update_test();
+        subnet_tester.subnet_element_get_test();
+        subnet_tester.subnet_delete_test();
+        subnet_tester.subnet_element_negative_get_test();
 
         NeutronPortTests port_tester = new NeutronPortTests(base);
         port_tester.port_collection_get_test();
