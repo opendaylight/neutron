@@ -246,7 +246,7 @@ public class NeutronCRUDInterfaces {
                 return bCtx.getService(services[0]);
             }
         } catch (Exception e) {
-            LOGGER.error("Instance reference is NULL");
+            LOGGER.error("Error in getInstances", e);
         }
         return null;
     }

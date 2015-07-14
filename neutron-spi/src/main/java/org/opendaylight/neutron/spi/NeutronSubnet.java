@@ -25,12 +25,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.net.util.SubnetUtils;
 import org.apache.commons.net.util.SubnetUtils.SubnetInfo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
 public class NeutronSubnet implements Serializable, INeutronObject {
-    private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(NeutronCRUDInterfaces.class);
 
+    private static final long serialVersionUID = 1L;
     private static final int IPV4_VERSION = 4;
     private static final int IPV6_VERSION = 6;
     private static final int IPV6_LENGTH = 128;
@@ -275,6 +280,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                     return false;
                 }
             } catch (IllegalArgumentException e) {
+                LOGGER.warn("Failure in isValidCIDR()", e);
                 return false;
             }
             return true;
@@ -300,6 +306,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 }
                 return(true);
             } catch (UnknownHostException e) {
+                LOGGER.warn("Failure in isValidCIDR()", e);
                 return(false);
             }
         }
@@ -352,6 +359,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                         allocationPools = source.splitPool(gatewayIP);
                     }
                 } catch (IllegalArgumentException e) {
+                    LOGGER.warn("Failure in initDefault()", e);
                     return false;
                 }
             }
@@ -376,6 +384,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                         allocationPools = source.splitPoolV6(gatewayIP);
                     }
                 } catch (Exception e) {
+                    LOGGER.warn("Failure in initDefault()", e);
                     return false;
                 }
             }
@@ -441,6 +450,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 SubnetInfo info = util.getInfo();
                 return info.isInRange(ipAddress);
             } catch (IllegalArgumentException e) {
+                LOGGER.warn("Failure in isValidIP()", e);
                 return false;
             }
         }
@@ -460,6 +470,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
                 }
                 return(true);
             } catch (UnknownHostException e) {
+                LOGGER.warn("Failure in isValidIP()", e);
                 return(false);
             }
         }

@@ -127,7 +127,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
                         toMethod.invoke(target, value);
                     }
                 } catch (Exception e) {
-                    LOGGER.error(e.getMessage());
+                    LOGGER.error("Error in overwrite", e);
                     return false;
                 }
             }
