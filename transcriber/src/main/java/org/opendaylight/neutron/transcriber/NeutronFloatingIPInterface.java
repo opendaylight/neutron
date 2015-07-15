@@ -107,11 +107,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     @Override
     public boolean removeFloatingIP(String uuid) {
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronNetworkCRUD(this)
-            .fetchINeutronSubnetCRUD(this)
             .fetchINeutronPortCRUD(this);
-        INeutronNetworkCRUD networkCRUD = interfaces.getNetworkInterface();
-        INeutronSubnetCRUD subnetCRUD = interfaces.getSubnetInterface();
         INeutronPortCRUD portCRUD = interfaces.getPortInterface();
 
         if (!floatingIPExists(uuid)) {
