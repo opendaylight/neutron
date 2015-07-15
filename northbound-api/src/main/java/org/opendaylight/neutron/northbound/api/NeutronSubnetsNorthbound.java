@@ -352,24 +352,22 @@ public class NeutronSubnetsNorthbound {
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
         }
-        NeutronSubnet delta = input.getSingleton();
-        NeutronSubnet original = subnetInterface.getSubnet(subnetUUID);
 
         /*
-         * updates restricted by Neutron
+         * note: what we get appears to not be a delta, but rather a
+         * complete updated object.  So, that needs to be sent down to
+         * folks to check 
          */
-        if (delta.getID() != null || delta.getTenantID() != null ||
-                delta.getIpVersion() != null || delta.getCidr() != null ||
-                delta.getAllocationPools() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
+
+        NeutronSubnet updatedObject = input.getSingleton();
 
         Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
                 for (Object instance : instances) {
                     INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    int status = service.canUpdateSubnet(delta, original);
+                    NeutronSubnet original = subnetInterface.getSubnet(subnetUUID);
+                    int status = service.canUpdateSubnet(updatedObject, original);
                     if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
@@ -384,12 +382,11 @@ public class NeutronSubnetsNorthbound {
         /*
          * update the object and return it
          */
-        subnetInterface.updateSubnet(subnetUUID, delta);
-        NeutronSubnet updatedSubnet = subnetInterface.getSubnet(subnetUUID);
+        subnetInterface.updateSubnet(subnetUUID, updatedObject);
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                service.neutronSubnetUpdated(updatedSubnet);
+                service.neutronSubnetUpdated(updatedObject);
             }
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(

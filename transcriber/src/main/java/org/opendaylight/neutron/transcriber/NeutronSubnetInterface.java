@@ -113,12 +113,12 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
         if (!subnetExists(uuid)) {
             return false;
         }
-        NeutronSubnet target = subnetDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(subnetDB.get(uuid));
-        }
-        return rc;
+/* note: because what we get is *not* a delta but (at this point) the updated
+ * object, this is much simpler - just replace the value and update the mdsal
+ * with it */
+        subnetDB.replace(uuid, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
