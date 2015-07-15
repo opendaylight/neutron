@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_275ac750",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/Activator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-15T16:18:37Z",
+      "side": 1,
+      "message": "nice and clean!",
+      "revId": "41afc942526b4d644d1ce590954cca31dc59d495",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
