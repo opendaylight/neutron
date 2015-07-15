@@ -24,6 +24,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vp
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ipsec.site.connections.IpsecSiteConnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ipsec.site.connections.IpsecSiteConnectionBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -184,5 +186,15 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         IpsecSiteConnectionBuilder ipsecSiteConnectionBuilder = new IpsecSiteConnectionBuilder();
         ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
         return ipsecSiteConnectionBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronVPNIPSECSiteConnectionsInterface neutronVPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(providerContext);
+        ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
+        if (neutronVPNIPSECSiteConnectionsInterfaceRegistration != null) {
+            registrations.add(neutronVPNIPSECSiteConnectionsInterfaceRegistration);
+        }
     }
 }

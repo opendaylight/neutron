@@ -27,6 +27,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitor.HealthmonitorsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -156,5 +158,15 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
         return healthmonitorsBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronLoadBalancerHealthMonitorInterface neutronLoadBalancerHealthMonitorInterface = new NeutronLoadBalancerHealthMonitorInterface(providerContext);
+        ServiceRegistration<INeutronLoadBalancerHealthMonitorCRUD> neutronLoadBalancerHealthMonitorInterfaceRegistration = context.registerService(INeutronLoadBalancerHealthMonitorCRUD.class, neutronLoadBalancerHealthMonitorInterface, null);
+        if(neutronLoadBalancerHealthMonitorInterfaceRegistration != null) {
+            registrations.add(neutronLoadBalancerHealthMonitorInterfaceRegistration);
+        }
     }
 }

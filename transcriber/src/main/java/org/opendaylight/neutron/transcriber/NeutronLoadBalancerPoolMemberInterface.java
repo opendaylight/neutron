@@ -24,6 +24,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.pools.member.Members;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.pools.member.MembersBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -135,5 +137,15 @@ public class NeutronLoadBalancerPoolMemberInterface extends
         MembersBuilder membersBuilder = new MembersBuilder();
         membersBuilder.setUuid(toUuid(uuid));
         return membersBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronLoadBalancerPoolMemberInterface neutronLoadBalancerPoolMemberInterface = new NeutronLoadBalancerPoolMemberInterface(providerContext);
+        ServiceRegistration<INeutronLoadBalancerPoolMemberCRUD> neutronLoadBalancerPoolMemberInterfaceRegistration = context.registerService(INeutronLoadBalancerPoolMemberCRUD.class, neutronLoadBalancerPoolMemberInterface, null);
+        if(neutronLoadBalancerPoolMemberInterfaceRegistration != null) {
+            registrations.add(neutronLoadBalancerPoolMemberInterfaceRegistration);
+        }
     }
 }

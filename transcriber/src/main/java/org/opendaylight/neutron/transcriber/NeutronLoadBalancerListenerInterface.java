@@ -27,6 +27,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listener.ListenersBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -154,5 +156,15 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             LOGGER.warn("Attempting to write neutron load balancer listener without UUID");
         }
         return listenersBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
+        ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
+        if(neutronLoadBalancerListenerInterfaceRegistration != null) {
+            registrations.add(neutronLoadBalancerListenerInterfaceRegistration);
+        }
     }
 }

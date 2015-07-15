@@ -32,6 +32,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.s
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.subnets.SubnetBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -219,4 +221,14 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                 subnetBuilder.setUuid(toUuid(uuid));
                 return subnetBuilder.build();
         }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronSubnetInterface neutronSubnetInterface = new NeutronSubnetInterface(providerContext);
+        ServiceRegistration<INeutronSubnetCRUD> neutronSubnetInterfaceRegistration = context.registerService(INeutronSubnetCRUD.class, neutronSubnetInterface, null);
+        if(neutronSubnetInterfaceRegistration != null) {
+            registrations.add(neutronSubnetInterfaceRegistration);
+        }
+    }
 }
