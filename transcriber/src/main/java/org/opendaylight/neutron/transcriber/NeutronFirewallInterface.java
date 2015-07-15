@@ -117,7 +117,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) throws Exception {
+                                            List<ServiceRegistration<?>> registrations) {
         NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
         ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
         if(neutronFirewallInterfaceRegistration != null) {
