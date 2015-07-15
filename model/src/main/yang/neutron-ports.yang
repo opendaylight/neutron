@@ -93,7 +93,7 @@ module neutron-ports {
             type yang:uuid;
         }
         leaf device-id {
-            type yang:uuid;
+            type string;
         }
     }
 
