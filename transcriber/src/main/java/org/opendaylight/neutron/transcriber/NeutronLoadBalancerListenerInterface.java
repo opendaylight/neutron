@@ -160,7 +160,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) throws Exception {
+                                            List<ServiceRegistration<?>> registrations) {
         NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
         ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
         if(neutronLoadBalancerListenerInterfaceRegistration != null) {

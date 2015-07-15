@@ -144,7 +144,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) throws Exception {
+                                            List<ServiceRegistration<?>> registrations) {
         NeutronMeteringLabelRuleInterface neutronMeteringLabelRuleInterface = new NeutronMeteringLabelRuleInterface(providerContext);
         ServiceRegistration<INeutronMeteringLabelRuleCRUD> neutronMeteringLabelRuleInterfaceRegistration = context.registerService(INeutronMeteringLabelRuleCRUD.class, neutronMeteringLabelRuleInterface, null);
         if(neutronMeteringLabelRuleInterfaceRegistration != null) {

@@ -237,7 +237,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) throws Exception {
+                                            List<ServiceRegistration<?>> registrations) {
         NeutronSecurityRuleInterface neutronSecurityRuleInterface = new NeutronSecurityRuleInterface(providerContext);
         ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
         if(neutronSecurityRuleInterfaceRegistration != null) {

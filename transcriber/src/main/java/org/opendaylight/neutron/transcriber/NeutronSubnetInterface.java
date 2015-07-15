@@ -224,7 +224,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) throws Exception {
+                                            List<ServiceRegistration<?>> registrations) {
         NeutronSubnetInterface neutronSubnetInterface = new NeutronSubnetInterface(providerContext);
         ServiceRegistration<INeutronSubnetCRUD> neutronSubnetInterfaceRegistration = context.registerService(INeutronSubnetCRUD.class, neutronSubnetInterface, null);
         if(neutronSubnetInterfaceRegistration != null) {

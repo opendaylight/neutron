@@ -296,7 +296,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) throws Exception {
+                                            List<ServiceRegistration<?>> registrations) {
         NeutronPortInterface neutronPortInterface = new NeutronPortInterface(providerContext);
         ServiceRegistration<INeutronPortCRUD> neutronPortInterfaceRegistration = context.registerService(INeutronPortCRUD.class, neutronPortInterface, null);
         if(neutronPortInterfaceRegistration != null) {
