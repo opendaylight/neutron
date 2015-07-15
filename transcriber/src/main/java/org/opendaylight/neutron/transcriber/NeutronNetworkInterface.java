@@ -25,6 +25,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.networks.attributes.networks.NetworkBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -152,5 +154,15 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         return InstanceIdentifier.create(Neutron.class)
                 .child(Networks.class)
                 .child(Network.class,network.getKey());
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronNetworkInterface neutronNetworkInterface = new NeutronNetworkInterface(providerContext);
+        ServiceRegistration<INeutronNetworkCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronNetworkCRUD.class, neutronNetworkInterface, null);
+        if(neutronNetworkInterfaceRegistration != null) {
+            registrations.add(neutronNetworkInterfaceRegistration);
+        }
     }
 }

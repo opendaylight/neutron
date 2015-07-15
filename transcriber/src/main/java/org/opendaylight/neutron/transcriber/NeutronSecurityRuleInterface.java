@@ -30,6 +30,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.security.rules.SecurityRuleBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -231,5 +233,15 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
         securityRuleBuilder.setId(toUuid(uuid));
         return securityRuleBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronSecurityRuleInterface neutronSecurityRuleInterface = new NeutronSecurityRuleInterface(providerContext);
+        ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
+        if(neutronSecurityRuleInterfaceRegistration != null) {
+            registrations.add(neutronSecurityRuleInterfaceRegistration);
+        }
     }
 }

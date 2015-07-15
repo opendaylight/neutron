@@ -33,6 +33,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.flo
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attrs.FixedIpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -200,5 +202,15 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             LOGGER.warn("Attempting to write neutron floating IP without UUID");
         }
         return floatingipBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronFloatingIPInterface neutronFloatingIPInterface = new NeutronFloatingIPInterface(providerContext);
+        ServiceRegistration<INeutronFloatingIPCRUD> neutronFloatingIPInterfaceRegistration = context.registerService(INeutronFloatingIPCRUD.class, neutronFloatingIPInterface, null);
+        if (neutronFloatingIPInterfaceRegistration != null) {
+            registrations.add(neutronFloatingIPInterfaceRegistration);
+        }
     }
 }

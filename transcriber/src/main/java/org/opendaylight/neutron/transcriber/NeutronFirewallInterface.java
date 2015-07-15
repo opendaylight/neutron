@@ -13,6 +13,9 @@ import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,5 +115,13 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
         return null;
     }
 
-
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
+        ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
+        if(neutronFirewallInterfaceRegistration != null) {
+            registrations.add(neutronFirewallInterfaceRegistration);
+        }
+    }
 }

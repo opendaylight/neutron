@@ -26,6 +26,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -138,5 +140,15 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
         meteringRuleBuilder.setId((toUuid(uuid)));
         return meteringRuleBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronMeteringLabelRuleInterface neutronMeteringLabelRuleInterface = new NeutronMeteringLabelRuleInterface(providerContext);
+        ServiceRegistration<INeutronMeteringLabelRuleCRUD> neutronMeteringLabelRuleInterfaceRegistration = context.registerService(INeutronMeteringLabelRuleCRUD.class, neutronMeteringLabelRuleInterface, null);
+        if(neutronMeteringLabelRuleInterfaceRegistration != null) {
+            registrations.add(neutronMeteringLabelRuleInterfaceRegistration);
+        }
     }
 }

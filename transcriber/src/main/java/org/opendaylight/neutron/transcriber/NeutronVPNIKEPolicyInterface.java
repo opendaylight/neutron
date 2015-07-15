@@ -25,6 +25,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vp
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ike.policies.IkePolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ike.policies.IkePolicyBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -163,5 +165,15 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
         IkePolicyBuilder ikePolicyBuilder = new IkePolicyBuilder();
         ikePolicyBuilder.setUuid(toUuid(uuid));
         return ikePolicyBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronVPNIKEPolicyInterface neutronVPNIKEPolicyInterface = new NeutronVPNIKEPolicyInterface(providerContext);
+        ServiceRegistration<INeutronVPNIKEPolicyCRUD> neutronVPNIKEPolicyInterfaceRegistration = context.registerService(INeutronVPNIKEPolicyCRUD.class, neutronVPNIKEPolicyInterface, null);
+        if(neutronVPNIKEPolicyInterfaceRegistration != null) {
+            registrations.add(neutronVPNIKEPolicyInterfaceRegistration);
+        }
     }
 }

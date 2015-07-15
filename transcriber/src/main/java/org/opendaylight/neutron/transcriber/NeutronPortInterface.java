@@ -42,6 +42,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.por
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev141002.ports.attributes.ports.PortBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -290,5 +292,15 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         PortBuilder portBuilder = new PortBuilder();
         portBuilder.setUuid(toUuid(uuid));
         return portBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronPortInterface neutronPortInterface = new NeutronPortInterface(providerContext);
+        ServiceRegistration<INeutronPortCRUD> neutronPortInterfaceRegistration = context.registerService(INeutronPortCRUD.class, neutronPortInterface, null);
+        if(neutronPortInterfaceRegistration != null) {
+            registrations.add(neutronPortInterfaceRegistration);
+        }
     }
 }

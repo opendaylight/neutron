@@ -23,6 +23,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vp
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.vpn.services.VpnService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.vpn.services.VpnServiceBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -140,5 +142,15 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
         VpnServiceBuilder vpnServiceBuilder = new VpnServiceBuilder();
         vpnServiceBuilder.setUuid(toUuid(uuid));
         return vpnServiceBuilder.build();
+    }
+
+    public static void registerNewInterface(BundleContext context,
+                                            ProviderContext providerContext,
+                                            List<ServiceRegistration<?>> registrations) throws Exception {
+        NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface(providerContext);
+        ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
+        if(neutronVPNServiceInterfaceRegistration != null) {
+            registrations.add(neutronVPNServiceInterfaceRegistration);
+        }
     }
 }
