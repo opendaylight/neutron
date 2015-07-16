@@ -41,7 +41,10 @@ public class NeutronSubnetTests {
             "\"allocation_pools\": [ { "+
                 "\"start\": \"10.0.0.2\", "+
                 "\"end\": \"10.0.0.254\" } ], "+
-            "\"host_routes\": [], "+
+            "\"host_routes\":[ { \"destination\":\"0.0.0.0/0\", " +
+               " \"nexthop\":\"123.456.78.9\" }, " +
+            " { \"destination\":\"192.168.0.0/24\", " +
+               " \"nexthop\":\"192.168.0.1\" } ], " +
             "\"ip_version\": 4, "+
             "\"gateway_ip\": \"10.0.0.1\", "+
             "\"cidr\": \"10.0.0.0/24\", "+
