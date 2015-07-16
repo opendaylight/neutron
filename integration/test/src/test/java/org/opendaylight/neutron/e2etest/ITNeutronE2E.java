@@ -109,6 +109,11 @@ public class ITNeutronE2E {
         port_tester.port_collection_get_test();
         port_tester.singleton_port_create_test();
         port_tester.router_interface_port_create_test(); //needed for router test
+        port_tester.bulk_port_create_test();
+        port_tester.port_update_test();
+        port_tester.port_element_get_test();
+        port_tester.port_delete_test();
+        port_tester.port_element_negative_get_test();
 
         NeutronRouterTests router_tester = new NeutronRouterTests(base);
         router_tester.router_collection_get_test();

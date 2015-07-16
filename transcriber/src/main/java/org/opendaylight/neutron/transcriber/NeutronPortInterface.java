@@ -232,7 +232,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
             portBuilder.setBindingProfile(neutronPort.getBindinghostID());
         }
         if (neutronPort.getDeviceID() != null) {
-            portBuilder.setDeviceId(toUuid(neutronPort.getDeviceID()));
+            portBuilder.setDeviceId(neutronPort.getDeviceID());
         }
         if (neutronPort.getDeviceOwner() != null) {
         portBuilder.setDeviceOwner(neutronPort.getDeviceOwner());

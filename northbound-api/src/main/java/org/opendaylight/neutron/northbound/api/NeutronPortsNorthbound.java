@@ -433,31 +433,30 @@ public class NeutronPortsNorthbound {
             ) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(false, true);
         INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
-
         // port has to exist and only a single delta is supported
         if (!portInterface.portExists(portUUID)) {
             throw new ResourceNotFoundException(UUID_NO_EXIST);
         }
-        NeutronPort target = portInterface.getPort(portUUID);
+        NeutronPort original = portInterface.getPort(portUUID);
         if (!input.isSingleton()) {
             throw new BadRequestException("only singleton edit suported");
         }
-        NeutronPort singleton = input.getSingleton();
-        NeutronPort original = portInterface.getPort(portUUID);
 
-        // deltas restricted by Neutron
-        if (singleton.getID() != null || singleton.getTenantID() != null ||
-                singleton.getStatus() != null) {
-            throw new BadRequestException("attribute change blocked by Neutron");
-        }
+        /*
+         * note: what we get appears to not be a delta, but rather a possibly
+         * complete updated object.  So, that needs to be sent down to
+         * folks to check 
+         */
+
+        NeutronPort updatedObject = input.getSingleton();
+        updatedObject.setID(portUUID);
 
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
                 for (Object instance : instances) {
                     INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canUpdatePort(singleton, original);
+                    int status = service.canUpdatePort(updatedObject, original);
                     if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();
                     }
@@ -469,45 +468,17 @@ public class NeutronPortsNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        // Verify the new fixed ips are valid
-        List<Neutron_IPs> fixedIPs = singleton.getFixedIPs();
-        if (fixedIPs != null && fixedIPs.size() > 0) {
-            Iterator<Neutron_IPs> fixedIPIterator = fixedIPs.iterator();
-            while (fixedIPIterator.hasNext()) {
-                Neutron_IPs ip = fixedIPIterator.next();
-                if (ip.getSubnetUUID() == null) {
-                    throw new BadRequestException("subnet UUID must be specified");
-                }
-                if (!subnetInterface.subnetExists(ip.getSubnetUUID())) {
-                    throw new BadRequestException("subnet UUID doesn't exist.");
-                }
-                NeutronSubnet subnet = subnetInterface.getSubnet(ip.getSubnetUUID());
-                if (!target.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
-                    throw new BadRequestException(NET_UUID_MATCH);
-                }
-                if (ip.getIpAddress() != null) {
-                    if (!subnet.isValidIP(ip.getIpAddress())) {
-                        throw new BadRequestException("invalid IP address");
-                    }
-                    if (subnet.isIPInUse(ip.getIpAddress())) {
-                        throw new ResourceConflictException("IP address in use");
-                    }
-                }
-            }
-        }
-
         //        TODO: Support change of security groups
         // update the port and return the modified object
-        portInterface.updatePort(portUUID, singleton);
-        NeutronPort updatedPort = portInterface.getPort(portUUID);
+        portInterface.updatePort(portUUID, updatedObject);
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronPortAware service = (INeutronPortAware) instance;
-                service.neutronPortUpdated(updatedPort);
+                service.neutronPortUpdated(updatedObject);
             }
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronPortRequest(updatedPort)).build();
+                new NeutronPortRequest(updatedObject)).build();
 
     }
 
