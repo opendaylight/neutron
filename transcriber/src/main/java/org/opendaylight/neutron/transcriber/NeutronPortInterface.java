@@ -173,7 +173,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
                 }
             }
         }
-        return overwrite(target, delta);
+        portDB.put(uuid, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
