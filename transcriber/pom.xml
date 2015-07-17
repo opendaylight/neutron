@@ -13,6 +13,7 @@
   <packaging>bundle</packaging>
   <properties>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
+    <sonar.jacoco.itReportPath>../target/jacoco-it.exec</sonar.jacoco.itReportPath>
   </properties>
   <dependencies>
     <dependency>
