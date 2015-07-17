@@ -16,6 +16,24 @@
       "revId": "13c328f0f98dc7658c60679d16c74686e2338640",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_25b07cf3",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSubnetTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-07-17T17:52:38Z",
+      "side": 1,
+      "message": "we already have that in the external network create test below",
+      "parentUuid": "7a7fa997_18504c5d",
+      "revId": "13c328f0f98dc7658c60679d16c74686e2338640",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
