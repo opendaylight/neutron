@@ -136,4 +136,16 @@ public class NeutronNetworkTests {
         String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
         ITNeutronE2E.test_delete(url, "Network Element Delete Failed");
     }
+
+    public static void runTests(String base) {
+        NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
+        network_tester.network_collection_get_test();
+        network_tester.singleton_network_create_test();
+        network_tester.external_network_create_test(); //needed for router test
+        network_tester.bulk_network_create_test();
+        network_tester.network_update_test();
+        network_tester.network_element_get_test();
+        network_tester.network_delete_test();
+        network_tester.network_element_negative_get_test();
+    }
 }

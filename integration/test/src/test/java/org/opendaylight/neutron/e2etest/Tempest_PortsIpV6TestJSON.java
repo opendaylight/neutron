@@ -43,4 +43,9 @@ public class Tempest_PortsIpV6TestJSON {
         ITNeutronE2E.test_create(url_p, content_p2, "test_create_port_in_allowed_allocation_pools Port Post 2 Failed");
 
     }
+
+    public static void runTests(String base) {
+       Tempest_PortsIpV6TestJSON tpv6runner = new Tempest_PortsIpV6TestJSON(base);
+       tpv6runner.test_create_port_in_allowed_allocation_pools();
+    }
 }

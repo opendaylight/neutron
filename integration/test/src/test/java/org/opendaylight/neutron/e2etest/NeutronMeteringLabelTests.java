@@ -39,4 +39,9 @@ public class NeutronMeteringLabelTests {
             "\"id\": \"bc91b832-8465-40a7-a5d8-ba87de442266\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Metering Label Post Failed NB");
     }
+
+    public static void runTests(String base) {
+        NeutronMeteringLabelTests meteringLabel_tester = new NeutronMeteringLabelTests(base);
+        meteringLabel_tester.meteringLabel_collection_get_test();
+    }
 }

@@ -50,4 +50,9 @@ public class NeutronLBPoolTests {
         ITNeutronE2E.test_create(url, content, "Singleton LB Pool Post Failed NB");
     }
 
+    public static void runTests(String base) {
+        NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
+        pool_tester.pool_collection_get_test();
+        pool_tester.singleton_lb_pool_create_test();
+    }
 }
