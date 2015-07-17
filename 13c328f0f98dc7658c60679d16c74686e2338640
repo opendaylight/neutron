@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_18504c5d",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSubnetTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-17T01:26:34Z",
+      "side": 1,
+      "message": "How about having two test cases?\none having empty list host_routes.\nsecond having this host_routes.",
+      "revId": "13c328f0f98dc7658c60679d16c74686e2338640",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
