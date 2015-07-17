@@ -119,6 +119,13 @@ public class ITNeutronE2E {
         router_tester.router_collection_get_test();
         router_tester.singleton_router_create_test();
         router_tester.router_add_interface_test();
+        router_tester.update_router_test();
+        router_tester.create_router(); // needed for following tests
+        router_tester.router_add_interface();
+        router_tester.router_element_get_test();
+        router_tester.router_remove_interface_test();
+        router_tester.router_delete_test();
+        router_tester.router_element_negative_get_test();
 
         NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
         floatingIP_tester.floatingIP_collection_get_test();

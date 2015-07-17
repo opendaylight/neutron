@@ -101,12 +101,9 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
         if (!routerExists(uuid)) {
             return false;
         }
-        NeutronRouter target = routerDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(routerDB.get(uuid));
-        }
-        return rc;
+        routerDB.put(uuid,delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
