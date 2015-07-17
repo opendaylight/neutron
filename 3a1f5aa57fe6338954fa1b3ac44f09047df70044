@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_18d7ecc0",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronRoutersNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-07-17T01:31:18Z",
+      "side": 0,
+      "message": "This check was not that the value was the same as initially, it was that it was even there.\n\nThe check you are asking for has already been made by neutron and so I don\u0027t see a reason for repeating it",
+      "parentUuid": "7a7fa997_d872d410",
+      "revId": "3a1f5aa57fe6338954fa1b3ac44f09047df70044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a7fa997_78614038",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronRoutersNorthbound.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-17T01:23:50Z",
       "side": 0,
       "message": "Why is this check deleted?\nShouldn\u0027t test pre-create external net?",
+      "revId": "3a1f5aa57fe6338954fa1b3ac44f09047df70044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_b8e598a9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronRoutersNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-07-17T01:31:18Z",
+      "side": 0,
+      "message": "Yes - test, must pre-create external network for IT tests to pass.  However, this check has already been made by OpenStack neutron, and so there is no reason to repeat it here",
+      "parentUuid": "7a7fa997_78614038",
       "revId": "3a1f5aa57fe6338954fa1b3ac44f09047df70044",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
