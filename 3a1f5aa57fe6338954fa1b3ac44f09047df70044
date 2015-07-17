@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_d872d410",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronRoutersNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-17T01:23:50Z",
+      "side": 0,
+      "message": "Why?\nIf we accepts ID or tenantID, shouldn\u0027t we check that given one is same to the existing one?",
+      "revId": "3a1f5aa57fe6338954fa1b3ac44f09047df70044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_78614038",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronRoutersNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-17T01:23:50Z",
+      "side": 0,
+      "message": "Why is this check deleted?\nShouldn\u0027t test pre-create external net?",
+      "revId": "3a1f5aa57fe6338954fa1b3ac44f09047df70044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
