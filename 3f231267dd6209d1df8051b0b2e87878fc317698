@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_25eddc8b",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-18T02:01:08Z",
+      "side": 1,
+      "message": "Wrong indent.",
+      "revId": "3f231267dd6209d1df8051b0b2e87878fc317698",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
