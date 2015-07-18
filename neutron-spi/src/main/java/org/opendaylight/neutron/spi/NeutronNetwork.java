@@ -68,6 +68,12 @@ public class NeutronNetwork implements Serializable, INeutronObject {
     @XmlElement (name="segments")
     List<NeutronNetwork_Segment> segments;
 
+    @XmlElement (name="vlan_transparent")
+    Boolean vlanTransparent;
+
+    @XmlElement (name="mtu")
+    Integer mtu;
+
     /* This attribute lists the ports associated with an instance
      * which is needed for determining if that instance can be deleted
      */
@@ -205,6 +211,22 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     public List<NeutronNetwork_Segment> getSegments() {
         return segments;
+    }
+
+    public Boolean getVlanTransparent() {
+        return vlanTransparent;
+    }
+
+    public void setVlanTransparent(Boolean input) {
+        this.vlanTransparent = input;
+    }
+
+    public Integer getMtu() {
+        return mtu;
+    }
+
+    public void setMtu(Integer input) {
+        mtu = input;
     }
 
     public List<NeutronPort> getPortsOnNetwork() {
