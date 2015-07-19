@@ -16,6 +16,24 @@
       "revId": "3f231267dd6209d1df8051b0b2e87878fc317698",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_e80fbb2c",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-07-19T18:46:43Z",
+      "side": 1,
+      "message": "Unlike python, java doesn\u0027t really care about indent levels on comments.\n\nFeel free to push an amended/new patch to fix",
+      "parentUuid": "7a7fa997_25eddc8b",
+      "revId": "3f231267dd6209d1df8051b0b2e87878fc317698",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
