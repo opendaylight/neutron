@@ -34,6 +34,24 @@
       "revId": "3b61c1bdf927e3d21d0100372db159207b221034",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_0b70f1a3",
+        "filename": "model/src/main/yang/neutron-provider-ext.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3675
+      },
+      "writtenOn": "2015-07-20T14:04:55Z",
+      "side": 1,
+      "message": "Understood.\nI was talking about consistency within this yang file: for instance having segment:segment-attributes instead of provider:provider:attributes, segment instead of provider in descriptions, and so on..\nI think this would avoid mixing up terms.\n\nThat\u0027s a suggestion, I might be missing something.",
+      "parentUuid": "7a7fa997_eb3d75bc",
+      "revId": "3b61c1bdf927e3d21d0100372db159207b221034",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
