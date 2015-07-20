@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_2b25adaa",
+        "filename": "model/src/main/yang/neutron-provider-ext.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3675
+      },
+      "writtenOn": "2015-07-20T13:47:26Z",
+      "side": 1,
+      "message": "The augmentation\u0027s scope is all about providers. I understand the network terminology for provider is a segment, but why not updating it everywhere to have a more consistent terminology?",
+      "revId": "3b61c1bdf927e3d21d0100372db159207b221034",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
