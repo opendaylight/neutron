@@ -70,6 +70,24 @@
       "revId": "3b61c1bdf927e3d21d0100372db159207b221034",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_3673d4b2",
+        "filename": "model/src/main/yang/neutron-provider-ext.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3675
+      },
+      "writtenOn": "2015-07-20T20:28:14Z",
+      "side": 1,
+      "message": "cool, I think I\u0027ll be able to do that once I have your ack, if you want to.",
+      "parentUuid": "7a7fa997_eb92559e",
+      "revId": "3b61c1bdf927e3d21d0100372db159207b221034",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
