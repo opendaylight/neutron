@@ -1,0 +1,92 @@
+module neutron-constants {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-constants";
+
+    prefix neutron-constants;
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Ryan Moats <rmoats@us.ibm.com>";
+    
+    revision "2015-20-07" {
+        description "Initial revision";
+    }
+    
+    // PROTOCOL
+    identity protocol-base {
+        description "Base identity for all front end protocols";
+    }
+
+    identity protocol-http {
+        description "HTTP protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-https {
+        description "HTTPS protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-tcp {
+        description "TCP protocol.";
+        base protocol-base;
+    }
+
+    // PROBE
+    identity probe-base {
+        description "Base identity for all probes";
+    }
+
+    identity probe-http {
+        description "HTTP protocol.";
+        base probe-base;
+    }
+
+    identity probe-https {
+        description "HTTPS protocol.";
+        base probe-base;
+    }
+
+    identity probe-tcp {
+        description "TCP protocol.";
+        base probe-base;
+    }
+
+    identity probe-icmp {
+        description "ICMP protocol.";
+        base probe-base;
+    }
+    
+    // DIRECTION
+    identity direction-base {
+        description "Base identity for direction";
+    }
+
+    identity direction-ingress {
+        description "Ingress direction.";
+        base direction-base;
+    }
+    
+    identity direction-egress {
+        description "Egress direction.";
+        base direction-base;
+
+    }
+    
+    // IP VERSION
+    identity ip-version-base {
+        description "the base identity for ip versions";
+    }
+
+    identity ip-version-v4 {
+        description "IP v4";
+        base ip-version-base;
+    }
+
+    identity ip-version-v6 {
+        description "IP v6";
+        base ip-version-base;
+    }
+}

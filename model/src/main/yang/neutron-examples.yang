@@ -1,0 +1,48 @@
+module neutron-exemple {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-examples";
+
+    prefix neutron-exemple;
+    
+    import neutron-constants { prefix "constants"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Ryan Moats <rmoats@us.ibm.com>";
+
+    description "This YANG module defines attributes that are used by Openstack Juno YANG modules.";
+    
+    revision "2015-20-07" {
+        description "Initial revision";
+    }
+    
+    leaf ip-version {
+        type identityref {
+            base "constants:ip-version-base";
+        }
+    }
+    
+    leaf direction {
+        type identityref {
+            base "constants:direction-base";
+        }
+        description "The direction in which metering rule is applied.";
+    }
+    
+    leaf protocol {
+        description "The protocol the front end listens for.";
+        type identityref {
+            base "constants:protocol-base";
+        }
+    }
+    
+    leaf type {
+        description "The type of probe, which is PING, TCP, HTTP, or HTTPS, that
+            is sent by the load balancer to verify the member state.";
+        type identityref {
+            base "constants:probe-base";
+        }
+    }
+}
