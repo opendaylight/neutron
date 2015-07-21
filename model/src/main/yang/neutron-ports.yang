@@ -17,6 +17,7 @@ module neutron-ports {
     // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -63,9 +64,8 @@ module neutron-ports {
                 type string;
             }
             leaf ip-version {
-                type enumeration {
-                    enum 4;
-                    enum 6;
+                type identityref {
+                    base "constants:ip-version-base";
                 }
             }
         }
@@ -93,7 +93,7 @@ module neutron-ports {
             type yang:uuid;
         }
         leaf device-id {
-            type string;
+            type yang:uuid;
         }
     }
 

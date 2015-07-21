@@ -24,8 +24,15 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.Dhcpv6Base;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.Dhcpv6Off;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.Dhcpv6Slaac;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.Dhcpv6Stateful;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.Dhcpv6Stateless;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.IpVersionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.IpVersionV4;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.IpVersionV6;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.SubnetAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attributes.AllocationPools;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnet.attributes.AllocationPoolsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev141002.subnets.attributes.Subnets;
@@ -37,10 +44,25 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.ImmutableBiMap;
+
 public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, NeutronSubnet> implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
     private ConcurrentMap<String, NeutronSubnet> subnetDB  = new ConcurrentHashMap<String, NeutronSubnet>();
 
+    private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
+            = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
+            .put(IpVersionV4.class,Integer.valueOf(4))
+            .put(IpVersionV6.class,Integer.valueOf(6))
+            .build();
+
+    private static final ImmutableBiMap<Class<? extends Dhcpv6Base>,String> DHCPV6_MAP
+            = new ImmutableBiMap.Builder<Class<? extends Dhcpv6Base>,String>()
+            .put(Dhcpv6Off.class,"off")
+            .put(Dhcpv6Stateful.class,"dhcpv6-stateful")
+            .put(Dhcpv6Slaac.class,"slaac")
+            .put(Dhcpv6Stateless.class,"dhcpv6-stateless")
+            .build();
 
     NeutronSubnetInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -143,8 +165,10 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
                 }
                 if (subnet.getIpVersion() != null) {
-                        subnetBuilder.setIpVersion(SubnetAttributes.IpVersion.forValue(subnet
-                                        .getIpVersion()));
+                    ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper =
+                            IPV_MAP.inverse();
+                    subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet
+                            .getIpVersion()));
                 }
                 if (subnet.getCidr() != null) {
                         subnetBuilder.setCidr(subnet.getCidr());
@@ -155,30 +179,14 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                         subnetBuilder.setGatewayIp(ipAddress);
                 }
                 if (subnet.getIpV6RaMode() != null) {
-                    boolean foundMatch = false;
-                    for (SubnetAttributes.Ipv6RaMode ipv6RaMode : SubnetAttributes.Ipv6RaMode.values()) {
-                        if (ipv6RaMode.toString().equalsIgnoreCase(subnet.getIpV6RaMode())) {
-                            subnetBuilder.setIpv6RaMode(ipv6RaMode);
-                            foundMatch = true;
-                            break;
-                        }
-                    }
-                    if (! foundMatch) {
-                        LOGGER.warn("Unable to find Ipv6RaMode value for {}", subnet.getIpV6RaMode());
-                    }
+                    ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
+                            DHCPV6_MAP.inverse();
+                    subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
                 }
                 if (subnet.getIpV6AddressMode() != null) {
-                    boolean foundMatch = false;
-                    for (SubnetAttributes.Ipv6AddressMode ipv6AddressMode : SubnetAttributes.Ipv6AddressMode.values()) {
-                        if (ipv6AddressMode.toString().equalsIgnoreCase(subnet.getIpV6AddressMode())) {
-                            subnetBuilder.setIpv6AddressMode(ipv6AddressMode);
-                            foundMatch = true;
-                            break;
-                        }
-                    }
-                    if (! foundMatch) {
-                        LOGGER.warn("Unable to find IpV6AddressMode value for {}", subnet.getIpV6AddressMode());
-                    }
+                    ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
+                            DHCPV6_MAP.inverse();
+                    subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
                 }
                 subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
                 if (subnet.getAllocationPools() != null) {

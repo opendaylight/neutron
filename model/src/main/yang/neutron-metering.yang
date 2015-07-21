@@ -17,6 +17,7 @@ module neutron-metering {
     // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -38,6 +39,7 @@ module neutron-metering {
             description "Description for the metering label.";
         }
     }
+
     grouping metering-rule-attributes {
         description "OpenStack Layer3 Metering label rules.";
         leaf id {
@@ -45,16 +47,10 @@ module neutron-metering {
             description "Metering Rule ID.";
         }
         leaf direction {
-            type enumeration {
-                enum ingress {
-                    description "Ingress direction.";
-                  }
-                  enum egress {
-                    description "Egress direction.";
-                  }
+            type identityref {
+                base "constants:direction-base";
             }
             description "The direction in which metering rule is applied.";
-            default "ingress";
         }
         leaf metering-label-id {
             type yang:uuid;
@@ -85,6 +81,7 @@ module neutron-metering {
             }
         }
     }
+
     grouping metering-rules-attributes {
         container metering-rules {
             description " Container for metering rules.";
