@@ -127,8 +127,8 @@ module neutron-L3 {
                     gateway.";
 
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
                 uses L3-attrs;
                 container external_gateway_info {
                     leaf external-network-id {

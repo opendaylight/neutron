@@ -28,7 +28,7 @@ module neutron-attrs {
                 models";
     }
 
-    grouping base-attrs {
+    grouping base-attributes {
 
         leaf uuid {
             type yang:uuid;
@@ -50,7 +50,7 @@ module neutron-attrs {
         }
     }
 
-    grouping admin-attrs {
+    grouping admin-attributes {
         leaf admin-state-up {
             type boolean;
             description "The administrative state of the network, which is up (true) or

@@ -59,22 +59,6 @@ module neutron-networks {
         description
                 "This type is used to refer to a Network Type.";
     }
-    grouping network-attrs {
-
-        leaf-list subnets {
-            description "The associated subnets.";
-            type yang:uuid;
-        }
-
-        leaf shared {
-            type boolean;
-            default "false";
-            description "Indicates whether this network or subnet is shared across all
-                        tenants. By default, only administrative users can change this
-                        value.";
-        }
-
-    }
 
     grouping networks-attributes {
         container networks {
@@ -89,9 +73,22 @@ module neutron-networks {
                             with a network.";
 
                 key "uuid";
-                uses attrs:base-attrs;
-                uses attrs:admin-attrs;
-                uses network-attrs;
+
+                leaf-list subnets {
+                    description "The associated subnets.";
+                    type yang:uuid;
+                }
+
+                leaf shared {
+                    type boolean;
+                    default "false";
+                    description "Indicates whether this network or subnet is shared across all
+                                tenants. By default, only administrative users can change this
+                                value.";
+                }
+
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
             }
         }
     }

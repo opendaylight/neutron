@@ -130,7 +130,7 @@ module neutron-secgroups {
             description "Container for security groups.";
             list security-group {
                 key "uuid";
-                uses attrs:base-attrs;
+                uses attrs:base-attributes;
                 uses security-group-attrs;
                 description "List of Metering Labels.";
                 leaf-list security-rules {
