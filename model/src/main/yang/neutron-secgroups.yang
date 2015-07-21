@@ -17,6 +17,7 @@ module neutron-secgroups {
     // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -49,19 +50,13 @@ module neutron-secgroups {
             description "UUID of the tenant.";
         }
         leaf direction {
-            type enumeration {
-                enum ingress {
-                    description "Ingress direction.";
-                  }
-                  enum egress {
-                    description "Egress direction.";
-                  }
+            type identityref {
+                base "constants:direction-base";
             }
             description "The direction in which metering rule is applied.
                 For a compute instance, an ingress security group rule is
                 applied to incoming (ingress) traffic for that instance.
                 An egress rule is applied to traffic leaving the instance.";
-            default "ingress";
         }
         leaf security-group-id {
             type yang:uuid;
@@ -78,35 +73,16 @@ module neutron-secgroups {
             type inet:ip-address;
         }
         leaf protocol {
-            type union {
-                type uint8;
-                type enumeration {
-                    enum null {
-                        description "NULL protocol.";
-                    }
-                    enum icmp {
-                        description "ICMP protocol.";
-                    }
-                    enum udp {
-                        description "UDP protocol.";
-                    }
-                    enum tcp {
-                        description "TCP protocol.";
-                    }
-                }
+            type identityref {
+                base "constants:protocol-base";
             }
             description "The protocol that is matched by the security group rule.";
         }
         leaf ethertype {
             description "Must be IPv4 or IPv6, and addresses represented in CIDR must
                 match the ingress or egress rules.";
-            type enumeration {
-                enum ipv4 {
-                    description "ipv4 type.";
-                }
-                enum ipv6 {
-                    description "ipv6 type.";
-                }
+            type identityref {
+                base "constants:ethertype-base";
             }
         }
         leaf port-range-min {

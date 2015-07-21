@@ -34,6 +34,11 @@ module neutron-constants {
         base protocol-base;
     }
 
+    identity protocol-icmp {
+        description "ICMP protocol.";
+        base protocol-base;
+    }
+
     // PROBE
     identity probe-base {
         description "Base identity for all probes";
@@ -88,5 +93,45 @@ module neutron-constants {
     identity ip-version-v6 {
         description "IP v6";
         base ip-version-base;
+    }
+
+    // ETHERTYPE
+    identity ethertype-base {
+        description "the base identity for ethertype versions";
+    }
+
+    identity ethertype-v4 {
+        description "IP v4";
+        base ethertype-base;
+    }
+
+    identity ethertype-v6 {
+        description "IP v6";
+        base ethertype-base;
+    }
+
+    // DHCP
+    identity dhcpv6-base {
+        description "the base identity for DHCP v6 information";
+    }
+
+    identity dhcpv6-off {
+        description "DHCP v6 off";
+        base dhcpv6-base;
+    }
+
+    identity dhcpv6-stateful {
+        description "DHCP v6 stateful";
+        base dhcpv6-base;
+    }
+
+    identity dhcpv6-slaac {
+        description "SLAAC";
+        base dhcpv6-base;
+    }
+
+    identity dhcpv6-stateless {
+        description "DHCP v6 stateless";
+        base dhcpv6-base;
     }
 }

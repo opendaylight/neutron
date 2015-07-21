@@ -20,7 +20,9 @@ import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderCo
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.MeteringRuleAttributes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionEgress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionIngress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.MeteringRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev141002.metering.rules.attributes.metering.rules.MeteringRuleBuilder;
@@ -31,10 +33,19 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.ImmutableBiMap;
+
 public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
     private ConcurrentMap<String, NeutronMeteringLabelRule> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronMeteringLabelRule>();
+
+    private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
+            = new ImmutableBiMap.Builder<Class<? extends DirectionBase>,String>()
+            .put(DirectionEgress.class,"egress")
+            .put(DirectionIngress.class,"ingress")
+            .build();
+
 
     NeutronMeteringLabelRuleInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -115,23 +126,24 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     }
 
     @Override
-    protected MeteringRule toMd(NeutronMeteringLabelRule meteringLableRule) {
+    protected MeteringRule toMd(NeutronMeteringLabelRule meteringLabelRule) {
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        if (meteringLableRule.getMeteringLabelRuleLabelID() != null) {
-            meteringRuleBuilder.setId((toUuid(meteringLableRule.getMeteringLabelRuleLabelID())));
+        if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
+            meteringRuleBuilder.setId((toUuid(meteringLabelRule.getMeteringLabelRuleLabelID())));
         }
-        if (meteringLableRule.getMeteringLabelRuleUUID() != null) {
-            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLableRule.getMeteringLabelRuleUUID()));
+        if (meteringLabelRule.getMeteringLabelRuleUUID() != null) {
+            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleUUID()));
         }
-        if (meteringLableRule.getMeteringLabelRuleDirection() != null) {
-            meteringRuleBuilder.setDirection((MeteringRuleAttributes.Direction.valueOf(meteringLableRule
-                    .getMeteringLabelRuleDirection())));
+        if (meteringLabelRule.getMeteringLabelRuleDirection() != null) {
+            ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =
+                    DIRECTION_MAP.inverse();
+            meteringRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
-        if (meteringLableRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
-            IpAddress ipAddress = new IpAddress(meteringLableRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
+        if (meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
+            IpAddress ipAddress = new IpAddress(meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
             meteringRuleBuilder.setRemoteIpPrefix(ipAddress);
         }
-        meteringRuleBuilder.setExcluded(meteringLableRule.getMeteringLabelRuleExcluded());
+        meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
         return meteringRuleBuilder.build();
     }
 

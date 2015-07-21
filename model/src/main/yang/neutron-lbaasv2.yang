@@ -17,6 +17,7 @@ module neutron-lbaasv2 {
     // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -55,7 +56,7 @@ module neutron-lbaasv2 {
         }
         leaf admin-state-up {
             type boolean;
-            description "The administrative state of the listner, which is up (true) or
+            description "The administrative state of the listener, which is up (true) or
                         down (false).";
             default "true";
         }
@@ -65,16 +66,8 @@ module neutron-lbaasv2 {
         }
         leaf protocol {
             description "The protocol the front end listens for.";
-            type enumeration {
-                enum http {
-                    description "HTTP protocol.";
-                }
-                enum https {
-                    description "HTTPS protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
-                }
+            type identityref {
+                base "constants:protocol-base";
             }
         }
         leaf protocol-port {
@@ -107,16 +100,8 @@ module neutron-lbaasv2 {
         }
         leaf protocol {
             description "The protocol the front end listens for.";
-            type enumeration {
-                enum http {
-                    description "HTTP protocol.";
-                }
-                enum https {
-                    description "HTTPS protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
-                }
+            type identityref {
+                base "constants:protocol-base";
             }
         }
         leaf lb-algorithm {
@@ -202,19 +187,8 @@ module neutron-lbaasv2 {
         leaf type {
             description "The type of probe, which is PING, TCP, HTTP, or HTTPS, that
                 is sent by the load balancer to verify the member state.";
-            type enumeration {
-                enum http {
-                    description "HTTP protocol.";
-                }
-                enum https {
-                    description "HTTPS protocol.";
-                }
-                enum tcp {
-                    description "TCP protocol.";
-                }
-                enum ping {
-                    description "ICMP protocol.";
-                }
+            type identityref {
+                base "constants:probe-base";
             }
         }
         leaf admin-state-up {

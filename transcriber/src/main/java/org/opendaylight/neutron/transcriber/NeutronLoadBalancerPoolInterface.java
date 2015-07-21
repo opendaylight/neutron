@@ -23,7 +23,10 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer_SessionPersistence;
 import org.opendaylight.neutron.spi.Neutron_ID;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.PoolAttributes.Protocol;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttps;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolTcp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Pool;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.Pools;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pool.PoolsBuilder;
@@ -35,10 +38,18 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.ImmutableBiMap;
+
 public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pools, NeutronLoadBalancerPool> implements INeutronLoadBalancerPoolCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerPool> loadBalancerPoolDB = new ConcurrentHashMap<String, NeutronLoadBalancerPool>();
 
+    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
+            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
+            .put(ProtocolHttp.class,"HTTP")
+            .put(ProtocolHttps.class,"HTTPS")
+            .put(ProtocolTcp.class,"TCP")
+            .build();
 
     NeutronLoadBalancerPoolInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -153,7 +164,9 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             poolsBuilder.setName(pools.getLoadBalancerPoolName());
         }
         if (pools.getLoadBalancerPoolProtocol() != null) {
-            poolsBuilder.setProtocol(Protocol.valueOf(pools.getLoadBalancerPoolProtocol()));
+            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
+                PROTOCOL_MAP.inverse();
+            poolsBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(pools.getLoadBalancerPoolProtocol()));
         }
         if (pools.getLoadBalancerPoolSessionPersistence() != null) {
             NeutronLoadBalancer_SessionPersistence sessionPersistence = pools.getLoadBalancerPoolSessionPersistence();
