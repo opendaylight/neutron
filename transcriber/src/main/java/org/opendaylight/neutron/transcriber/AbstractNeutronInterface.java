@@ -45,18 +45,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject,S> implement
 
     protected boolean addMd(S neutronObject) {
         // TODO think about adding existence logic
-        WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
-        T item = toMd(neutronObject);
-        InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
-        CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ",e);
-            return false;
-        }
-        return true;
+        return updateMd(neutronObject);
     }
 
     protected boolean updateMd(S neutronObject) {
