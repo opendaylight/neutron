@@ -14,6 +14,7 @@ module neutron-binding {
     prefix neutron-binding;
 
     import ietf-yang-types { prefix "yang"; }
+    import yang-ext { prefix "ext"; }
     import neutron { prefix "neutron"; }
 
 
@@ -60,10 +61,9 @@ module neutron-binding {
     }
 
     augment "/neutron:neutron/neutron:ports/neutron:port"{
-        description "
-          This module augments the ports container in the neutron-ports
-          module with binding information.
-          ";
+        description "This module augments the ports container in
+                the neutron-ports module with binding information.";
+        ext:augment-identifier "port-binding-extension";
         uses binding-attributes;
     }
 }

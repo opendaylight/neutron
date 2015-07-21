@@ -15,6 +15,7 @@ module neutron-provider-ext {
 
     import neutron { prefix "neutron"; }
     import neutron-provider { prefix "provider"; }
+    import yang-ext { prefix "ext"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -30,13 +31,12 @@ module neutron-provider-ext {
     }
 
     augment "/neutron:neutron/neutron:networks/neutron:network"{
-        description "
-          This module augments the networks container in the neutron-networks
-          module with provider information.
-          ";
+        description "This module augments the networks container
+                in the neutron-networks module with provider information.";
+        ext:augment-identifier "network-provider-extension";
         list segments {
             description "List of provider network(s) associated with this network.";
-            key segmentation-id;
+            key segmentation-index;
             uses provider:provider-attributes;
         }
         uses provider:provider-attributes;

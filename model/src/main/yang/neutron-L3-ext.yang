@@ -14,6 +14,7 @@ module neutron-L3-ext {
     prefix neutron-L3-ext;
 
     import neutron { prefix "neutron"; }
+    import yang-ext { prefix "ext"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -29,10 +30,9 @@ module neutron-L3-ext {
     }
 
     augment "/neutron:neutron/neutron:networks/neutron:network"{
-        description "
-          This module augments the networks container in the neutron-networks
-          module with router information.
-          ";
+        description "This module augments the networks container
+                in the neutron-networks module with router information.";
+        ext:augment-identifier "network-l3-extension";
         leaf external {
             description "If true, it indicates that the router is externally accessible.";
             type boolean;
