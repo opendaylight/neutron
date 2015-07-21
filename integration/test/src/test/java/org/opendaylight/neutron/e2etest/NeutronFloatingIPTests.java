@@ -28,4 +28,9 @@ public class NeutronFloatingIPTests {
         String url = base + "/floatingips";
         ITNeutronE2E.test_fetch(url,"FloatingIP Collection GET failed");
     }
+
+    public static void runTests(String base) {
+        NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
+        floatingIP_tester.floatingIP_collection_get_test();
+    }
 }

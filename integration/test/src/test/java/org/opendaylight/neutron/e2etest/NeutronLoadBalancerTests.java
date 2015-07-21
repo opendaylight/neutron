@@ -45,4 +45,10 @@ public class NeutronLoadBalancerTests {
             "\"vip_subnet_id\": \"013d3059-87a4-45a5-91e9-d721068ae0b2\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Load Balancer Post Failed NB");
     }
+
+    public static void runTests(String base) {
+        NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
+        loadBalancer_tester.loadBalancer_collection_get_test();
+        loadBalancer_tester.singleton_loadbalancer_create_test();
+    }
 }

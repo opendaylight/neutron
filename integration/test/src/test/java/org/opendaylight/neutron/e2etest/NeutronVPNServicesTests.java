@@ -28,4 +28,9 @@ public class NeutronVPNServicesTests {
         String url = base + "/vpn/vpnservices";
         ITNeutronE2E.test_fetch(url, "VPN Services GET failed");
     }
+
+    public static void runTests(String base) {
+        NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
+        vpnService_tester.vpnService_collection_get_test();
+    }
 }

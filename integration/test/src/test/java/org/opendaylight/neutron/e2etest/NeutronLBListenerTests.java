@@ -46,4 +46,10 @@ public class NeutronLBListenerTests {
             "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton LB Listener Post Failed NB");
     }
+
+    public static void runTests(String base) {
+        NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
+        listener_tester.listener_collection_get_test();
+        listener_tester.singleton_lb_listener_create_test();
+    }
 }

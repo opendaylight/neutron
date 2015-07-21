@@ -85,99 +85,27 @@ public class ITNeutronE2E {
 
     @Test
     public void test() {
-        NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
-        network_tester.network_collection_get_test();
-        network_tester.singleton_network_create_test();
-	network_tester.external_network_create_test(); //needed for router test
-        network_tester.bulk_network_create_test();
-        network_tester.network_update_test();
-        network_tester.network_element_get_test();
-        network_tester.network_delete_test();
-        network_tester.network_element_negative_get_test();
-
-        NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
-        subnet_tester.subnet_collection_get_test();
-        subnet_tester.singleton_subnet_create_test();
-        subnet_tester.external_subnet_create_test(); //needed for router test
-        subnet_tester.bulk_subnet_create_test();
-        subnet_tester.subnet_update_test();
-        subnet_tester.subnet_element_get_test();
-        subnet_tester.subnet_delete_test();
-        subnet_tester.subnet_element_negative_get_test();
-
-        NeutronPortTests port_tester = new NeutronPortTests(base);
-        port_tester.port_collection_get_test();
-        port_tester.singleton_port_create_test();
-        port_tester.router_interface_port_create_test(); //needed for router test
-        port_tester.bulk_port_create_test();
-        port_tester.port_update_test();
-        port_tester.port_element_get_test();
-        port_tester.port_delete_test();
-        port_tester.port_element_negative_get_test();
-
-        NeutronRouterTests router_tester = new NeutronRouterTests(base);
-        router_tester.router_collection_get_test();
-        router_tester.singleton_router_create_test();
-        router_tester.router_add_interface_test();
-        router_tester.update_router_test();
-        router_tester.create_router(); // needed for following tests
-        router_tester.router_add_interface();
-        router_tester.router_element_get_test();
-        router_tester.router_remove_interface_test();
-        router_tester.router_delete_test();
-        router_tester.router_element_negative_get_test();
-
-        NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
-        floatingIP_tester.floatingIP_collection_get_test();
-
-        NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
-        securityGroup_tester.securityGroup_collection_get_test();
-
-        NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
-        securityRule_tester.securityRule_collection_get_test();
-
-        NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
-        loadBalancer_tester.loadBalancer_collection_get_test();
-        loadBalancer_tester.singleton_loadbalancer_create_test();
-
-        NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
-        listener_tester.listener_collection_get_test();
-        listener_tester.singleton_lb_listener_create_test();
-
-        NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
-        pool_tester.pool_collection_get_test();
-        pool_tester.singleton_lb_pool_create_test();
-
-        NeutronLBHealthMonitorTests healthMonitor_tester = new NeutronLBHealthMonitorTests(base);
-        healthMonitor_tester.healthMonitor_collection_get_test();
-
+        NeutronNetworkTests.runTests(base);
+        NeutronSubnetTests.runTests(base);
+        NeutronPortTests.runTests(base);
+        NeutronRouterTests.runTests(base);
+        NeutronFloatingIPTests.runTests(base);
+        NeutronSecurityGroupTests.runTests(base);
+        NeutronSecurityRuleTests.runTests(base);
+        NeutronLoadBalancerTests.runTests(base);
+        NeutronLBListenerTests.runTests(base);
+        NeutronLBPoolTests.runTests(base);
+        NeutronLBHealthMonitorTests.runTests(base);
 //  TODO: add LoadBalancerPoolMembers testing
+        NeutronMeteringLabelTests.runTests(base);
+        NeutronMeteringRuleTests.runTests(base);
+        NeutronIKEPoliciesTests.runTests(base);
+        NeutronIPSECPoliciesTests.runTests(base);
+        NeutronIPSECSiteConnectionTests.runTests(base);
 
-        NeutronMeteringLabelTests meteringLabel_tester = new NeutronMeteringLabelTests(base);
-        meteringLabel_tester.meteringLabel_collection_get_test();
-
-        NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
-        meteringRule_tester.meteringRule_collection_get_test();
-
-        NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
-        vpnService_tester.vpnService_collection_get_test();
-
-        NeutronIKEPoliciesTests ike_policy_tester = new NeutronIKEPoliciesTests(base);
-        ike_policy_tester.ikePolicy_collection_get_test();
-
-        NeutronIPSECPoliciesTests ipsec_policy_tester = new NeutronIPSECPoliciesTests(base);
-        ipsec_policy_tester.ipsecPolicy_collection_get_test();
-
-        NeutronIPSECSiteConnectionTests ipsec_siteConnection_test = new NeutronIPSECSiteConnectionTests(base);
-        ipsec_siteConnection_test.ipsecSiteConnection_collection_get_test();
-
-    // tests related to bug 3812
-       Neutron_Bug3812_Tests bugTest = new Neutron_Bug3812_Tests(base);
-       bugTest.check_bug3812();
-
-    // tempest PortsIpV6TestJSON.test_create_port_in_allowd_allocation_pools
-       Tempest_PortsIpV6TestJSON tpv6runner = new Tempest_PortsIpV6TestJSON(base);
-       tpv6runner.test_create_port_in_allowed_allocation_pools();
+    // tests related to bugs
+        Neutron_Bug3812_Tests.runTests(base);
+        Tempest_PortsIpV6TestJSON.runTests(base);
     }
 
     static HttpURLConnection HttpURLConnectionFactoryGet(URL url) throws Exception {

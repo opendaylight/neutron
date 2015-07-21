@@ -28,4 +28,9 @@ public class NeutronSecurityGroupTests {
         String url = base + "/security-groups";
         ITNeutronE2E.test_fetch(url, "Security Group Collection GET failed");
     }
+
+    public static void runTests(String base) {
+        NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
+        securityGroup_tester.securityGroup_collection_get_test();
+    }
 }

@@ -132,4 +132,16 @@ public class NeutronSubnetTests {
         String url = base + "/subnets/b0e7435c-1512-45fb-aa9e-9a7c5932fb30";
         ITNeutronE2E.test_fetch(url, false, "Subnet Element Get Failed");
     }
+
+    public static void runTests(String base) {
+        NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
+        subnet_tester.subnet_collection_get_test();
+        subnet_tester.singleton_subnet_create_test();
+        subnet_tester.external_subnet_create_test(); //needed for router test
+        subnet_tester.bulk_subnet_create_test();
+        subnet_tester.subnet_update_test();
+        subnet_tester.subnet_element_get_test();
+        subnet_tester.subnet_delete_test();
+        subnet_tester.subnet_element_negative_get_test();
+    }
 }

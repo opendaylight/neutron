@@ -40,4 +40,9 @@ public class NeutronMeteringRuleTests {
             "\"excluded\": false } }";
         ITNeutronE2E.test_create(url, content, "Singleton Metering Rule Post Failed NB");
     }
+
+    public static void runTests(String base) {
+        NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
+        meteringRule_tester.meteringRule_collection_get_test();
+    }
 }

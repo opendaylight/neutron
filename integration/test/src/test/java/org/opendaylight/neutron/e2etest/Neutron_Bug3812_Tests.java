@@ -60,4 +60,9 @@ public class Neutron_Bug3812_Tests {
         String url_s2 = url_s + "/dd9b62eb-d9a3-42b5-b2f1-bffa43475614";
         ITNeutronE2E.test_delete(url_s2, "Bug 3812 Subnet 2 Delete Failed");
     }
+
+    public static void runTests(String base) {
+       Neutron_Bug3812_Tests bugTest = new Neutron_Bug3812_Tests(base);
+       bugTest.check_bug3812();
+    }
 }
