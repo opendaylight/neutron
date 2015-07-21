@@ -72,6 +72,20 @@ public class NeutronFloatingIPsNorthbound {
         return o.extractFields(fields);
     }
 
+    private boolean isIpV4Network(NeutronNetwork externNetwork,
+                                  INeutronSubnetCRUD subnetInterface) {
+        for (String subnetUUID: externNetwork.getSubnets()) {
+            if (!subnetInterface.subnetExists(subnetUUID)) {
+                continue;
+            }
+            NeutronSubnet subnet = subnetInterface.getSubnet(subnetUUID);
+            if (subnet.getIpVersion() == 4) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFloatingIPCRUD(this);
         if (answer.getFloatingIPInterface() == null) {
@@ -220,8 +234,8 @@ public class NeutronFloatingIPsNorthbound {
             // if floating IP is specified, make sure it can come from the network
             String floatingIP = singleton.getFloatingIPAddress();
             if (floatingIP != null) {
-                if (externNetwork.getSubnets().size() != 1) {
-                    throw new BadRequestException("external network doesn't have a subnet");
+                if (!isIpV4Network(externNetwork, subnetInterface)) {
+                    throw new BadRequestException("external network doesn't have a ipv4 subnet");
                 }
                 NeutronSubnet externSubnet = subnetInterface.getSubnet(externNetwork.getSubnets().get(0));
                 if (!externSubnet.isValidIP(floatingIP)) {
@@ -344,8 +358,8 @@ public class NeutronFloatingIPsNorthbound {
         // if floating IP is specified, make sure it can come from the network
         String floatingIP = singleton.getFloatingIPAddress();
         if (floatingIP != null) {
-            if (externNetwork.getSubnets().size() != 1) {
-                throw new BadRequestException("external network doesn't have a subnet.");
+            if (!isIpV4Network(externNetwork, subnetInterface)) {
+                throw new BadRequestException("external network doesn't have any ipv4 subnet.");
             }
             NeutronSubnet externSubnet = subnetInterface.getSubnet(externNetwork.getSubnets().get(0));
             if (!externSubnet.isValidIP(floatingIP)) {
