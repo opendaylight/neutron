@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_315d1eea",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronFloatingIPsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3675
+      },
+      "writtenOn": "2015-07-21T13:02:09Z",
+      "side": 1,
+      "message": "There might be a constant somewhere defining ip versions, would look clearer if there were.\n(I looked in NN and OVSDB, couldn\u0027t find any, it has always been hardcoded so maybe there isn\u0027t)",
+      "revId": "54ab8f827f9c02b737625b5d405c925f08b1d78b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
