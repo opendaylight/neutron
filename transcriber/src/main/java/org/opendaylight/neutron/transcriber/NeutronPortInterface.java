@@ -224,7 +224,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
     protected Port toMd(NeutronPort neutronPort) {
         PortBindingExtensionBuilder bindingBuilder = new PortBindingExtensionBuilder();
         if (neutronPort.getBindinghostID() != null) {
-            bindingBuilder.setHostId(toUuid(neutronPort.getBindinghostID()));
+            bindingBuilder.setHostId(neutronPort.getBindinghostID());
         }
         if (neutronPort.getVIFDetail() != null) {
             List<VifDetails> listVifDetail = new ArrayList<VifDetails>();
