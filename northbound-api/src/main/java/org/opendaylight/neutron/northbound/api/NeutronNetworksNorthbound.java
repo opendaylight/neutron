@@ -408,7 +408,9 @@ public class NeutronNetworksNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        networkInterface.removeNetwork(netUUID);
+        if (!networkInterface.removeNetwork(netUUID)) {
+            throw new InternalServerErrorException("Could not delete network");
+        }
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronNetworkAware service = (INeutronNetworkAware) instance;
