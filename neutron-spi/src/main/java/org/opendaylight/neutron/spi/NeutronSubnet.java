@@ -85,7 +85,21 @@ public class NeutronSubnet implements Serializable, INeutronObject {
     @XmlElement (name = "ipv6_ra_mode", nillable = true)
     String ipV6RaMode;
 
+    /* stores the OpenStackPorts associated with an instance
+     * used to determine if that instance can be deleted.
+     * 
+     * @deprecated, will be removed in Boron
+     */
+
+    List<NeutronPort> myPorts;
+
     public NeutronSubnet() {
+        myPorts = new ArrayList<NeutronPort>();
+    }
+
+    // @deprecated - will be removed in Boron
+    public void setPorts(List<NeutronPort> arg) {
+        myPorts = arg;
     }
 
     public String getID() { return subnetUUID; }
@@ -255,6 +269,22 @@ public class NeutronSubnet implements Serializable, INeutronObject {
             }
         }
         return ans;
+    }
+
+    // @deprecated - will be removed in Boron
+    public List<NeutronPort> getPortsInSubnet() {
+        return myPorts;
+    }
+    
+    // @deprecated - will be removed in Boron
+    public List<NeutronPort> getPortsInSubnet(String ignore) {
+       List<NeutronPort> answer = new ArrayList<NeutronPort>();
+       for (NeutronPort port : myPorts) {
+           if (!port.getDeviceOwner().equalsIgnoreCase(ignore)) {
+                answer.add(port);
+            }
+        }
+        return answer;
     }
 
     /* test to see if the cidr address used to define this subnet
