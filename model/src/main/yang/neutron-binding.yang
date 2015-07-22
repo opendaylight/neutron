@@ -31,7 +31,7 @@ module neutron-binding {
 
     grouping binding-attrs {
         leaf host-id {
-            type yang:uuid;
+            type string;
             description "The ID of the host where the port is allocated. In some cases,
                         different implementations can run on different hosts.";
         }
