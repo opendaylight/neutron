@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
@@ -48,7 +46,6 @@ import com.google.common.collect.ImmutableBiMap;
 
 public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, NeutronSubnet> implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
-    private ConcurrentMap<String, NeutronSubnet> subnetDB  = new ConcurrentHashMap<String, NeutronSubnet>();
 
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
             = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
@@ -72,23 +69,30 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public boolean subnetExists(String uuid) {
-        return subnetDB.containsKey(uuid);
+        Subnet subnet = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (subnet == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronSubnet getSubnet(String uuid) {
-        if (!subnetExists(uuid)) {
+        Subnet subnet = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (subnet == null) {
             return null;
         }
-        return subnetDB.get(uuid);
+        return fromMd(subnet);
     }
 
     @Override
     public List<NeutronSubnet> getAllSubnets() {
         Set<NeutronSubnet> allSubnets = new HashSet<NeutronSubnet>();
-        for (Entry<String, NeutronSubnet> entry : subnetDB.entrySet()) {
-            NeutronSubnet subnet = entry.getValue();
-            allSubnets.add(subnet);
+        Subnets subnets = readMd(createInstanceIdentifier());
+        if (subnets != null) {
+            for (Subnet subnet: subnets.getSubnet()) {
+                allSubnets.add(fromMd(subnet));
+            }
         }
         LOGGER.debug("Exiting getAllSubnets, Found {} OpenStackSubnets", allSubnets.size());
         List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
@@ -102,7 +106,6 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
         if (subnetExists(id)) {
             return false;
         }
-        subnetDB.putIfAbsent(id, input);
         addMd(input);
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronNetworkCRUD(this);
@@ -115,18 +118,17 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public boolean removeSubnet(String uuid) {
-        if (!subnetExists(uuid)) {
+        NeutronSubnet target = getSubnet(uuid);
+        if (target == null) {
             return false;
         }
-        NeutronSubnet target = subnetDB.get(uuid);
+        removeMd(toMd(uuid));
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronNetworkCRUD(this);
         INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
 
         NeutronNetwork targetNet = networkIf.getNetwork(target.getNetworkUUID());
         targetNet.removeSubnet(uuid);
-        subnetDB.remove(uuid);
-        removeMd(toMd(uuid));
         return true;
     }
 
@@ -138,97 +140,136 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        subnetDB.replace(uuid, delta);
         updateMd(delta);
         return true;
     }
 
     @Override
     public boolean subnetInUse(String subnetUUID) {
-        if (!subnetExists(subnetUUID)) {
+        NeutronSubnet target = getSubnet(subnetUUID);
+        if (target == null) {
             return true;
         }
-        NeutronSubnet target = subnetDB.get(subnetUUID);
 	// note: we want to ignore the DHCP ports, so...
         return (target.getPortsInSubnet("network:dhcp").size() > 0);
     }
 
-        protected Subnet toMd(NeutronSubnet subnet) {
-                SubnetBuilder subnetBuilder = new SubnetBuilder();
-                if (subnet.getName() != null) {
-                        subnetBuilder.setName(subnet.getName());
-                }
-                if (subnet.getTenantID() != null) {
-                        subnetBuilder.setTenantId(toUuid(subnet.getTenantID()));
-                }
-                if (subnet.getNetworkUUID() != null) {
-                        subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
-                }
-                if (subnet.getIpVersion() != null) {
-                    ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper =
-                            IPV_MAP.inverse();
-                    subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet
-                            .getIpVersion()));
-                }
-                if (subnet.getCidr() != null) {
-                        subnetBuilder.setCidr(subnet.getCidr());
-                }
-                if (subnet.getGatewayIP() != null) {
-                        IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
-                                        .toCharArray());
-                        subnetBuilder.setGatewayIp(ipAddress);
-                }
-                if (subnet.getIpV6RaMode() != null) {
-                    ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
-                            DHCPV6_MAP.inverse();
-                    subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
-                }
-                if (subnet.getIpV6AddressMode() != null) {
-                    ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
-                            DHCPV6_MAP.inverse();
-                    subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
-                }
-                subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
-                if (subnet.getAllocationPools() != null) {
-                        List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
-                        for (NeutronSubnetIPAllocationPool allocationPool : subnet
-                                        .getAllocationPools()) {
-                                AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
-                                builder.setStart(allocationPool.getPoolStart());
-                                builder.setEnd(allocationPool.getPoolEnd());
-                                AllocationPools temp = builder.build();
-                                allocationPools.add(temp);
-                        }
-                        subnetBuilder.setAllocationPools(allocationPools);
-                }
-                if (subnet.getDnsNameservers() != null) {
-                        List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
-                        for (String dnsNameServer : subnet.getDnsNameservers()) {
-                                IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
-                                dnsNameServers.add(ipAddress);
-                        }
-                        subnetBuilder.setDnsNameservers(dnsNameServers);
-                }
-                if (subnet.getID() != null) {
-                        subnetBuilder.setUuid(toUuid(subnet.getID()));
-                } else {
-                        LOGGER.warn("Attempting to write neutron subnet without UUID");
-                }
-                return subnetBuilder.build();
+    protected NeutronSubnet fromMd(Subnet subnet) {
+        NeutronSubnet result = new NeutronSubnet();
+        result.setName(subnet.getName());
+// todo: remove '-' chars as tenant id doesn't use them
+        LOGGER.info("tenant "+subnet.getTenantId().getValue());
+        result.setTenantID(subnet.getTenantId().getValue());
+        LOGGER.info("network "+subnet.getNetworkId().getValue());
+        result.setNetworkUUID(subnet.getNetworkId().getValue());
+        result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
+        result.setCidr(subnet.getCidr());
+        result.setGatewayIP(String.valueOf(subnet.getGatewayIp().getValue()));
+        result.setIpV6RaMode(DHCPV6_MAP.get(subnet.getIpv6RaMode()));
+        result.setIpV6AddressMode(DHCPV6_MAP.get(subnet.getIpv6AddressMode()));
+        result.setEnableDHCP(subnet.isEnableDhcp());
+        if (subnet.getAllocationPools() != null) {
+            List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
+            for (AllocationPools allocationPool : subnet.getAllocationPools()) {
+                NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
+                pool.setPoolStart(allocationPool.getStart());
+                pool.setPoolEnd(allocationPool.getEnd());
+                allocationPools.add(pool);
+            }
+            result.setAllocationPools(allocationPools);
         }
+        if (subnet.getDnsNameservers() != null) {
+            List<String> dnsNameServers = new ArrayList<String>();
+            for (IpAddress dnsNameServer : subnet.getDnsNameservers()) {
+                dnsNameServers.add(String.valueOf(dnsNameServer.getValue()));
+            }
+            result.setDnsNameservers(dnsNameServers);
+        }
+        result.setID(subnet.getUuid().getValue());
+        return result;
+    }
 
-        @Override
-        protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
-                return InstanceIdentifier.create(Neutron.class).child(Subnets.class)
-                                .child(Subnet.class, subnet.getKey());
+    protected Subnet toMd(NeutronSubnet subnet) {
+        SubnetBuilder subnetBuilder = new SubnetBuilder();
+        if (subnet.getName() != null) {
+            subnetBuilder.setName(subnet.getName());
         }
+        if (subnet.getTenantID() != null) {
+            subnetBuilder.setTenantId(toUuid(subnet.getTenantID()));
+        }
+        if (subnet.getNetworkUUID() != null) {
+            subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
+        }
+        if (subnet.getIpVersion() != null) {
+            ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper =
+                    IPV_MAP.inverse();
+            subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet
+                    .getIpVersion()));
+        }
+        if (subnet.getCidr() != null) {
+            subnetBuilder.setCidr(subnet.getCidr());
+        }
+        if (subnet.getGatewayIP() != null) {
+            IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
+                    .toCharArray());
+            subnetBuilder.setGatewayIp(ipAddress);
+        }
+        if (subnet.getIpV6RaMode() != null) {
+            ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
+                    DHCPV6_MAP.inverse();
+            subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
+        }
+        if (subnet.getIpV6AddressMode() != null) {
+            ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
+                    DHCPV6_MAP.inverse();
+            subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
+        }
+        subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
+        if (subnet.getAllocationPools() != null) {
+            List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
+            for (NeutronSubnetIPAllocationPool allocationPool : subnet
+                    .getAllocationPools()) {
+                AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
+                builder.setStart(allocationPool.getPoolStart());
+                builder.setEnd(allocationPool.getPoolEnd());
+                AllocationPools temp = builder.build();
+                allocationPools.add(temp);
+            }
+            subnetBuilder.setAllocationPools(allocationPools);
+        }
+        if (subnet.getDnsNameservers() != null) {
+            List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
+            for (String dnsNameServer : subnet.getDnsNameservers()) {
+                IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
+                dnsNameServers.add(ipAddress);
+            }
+            subnetBuilder.setDnsNameservers(dnsNameServers);
+        }
+        if (subnet.getID() != null) {
+            subnetBuilder.setUuid(toUuid(subnet.getID()));
+        } else {
+            LOGGER.warn("Attempting to write neutron subnet without UUID");
+        }
+        return subnetBuilder.build();
+    }
 
-        @Override
-        protected Subnet toMd(String uuid) {
-                SubnetBuilder subnetBuilder = new SubnetBuilder();
-                subnetBuilder.setUuid(toUuid(uuid));
-                return subnetBuilder.build();
-        }
+    @Override
+    protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
+        return InstanceIdentifier.create(Neutron.class).child(Subnets.class)
+                .child(Subnet.class, subnet.getKey());
+    }
+
+    protected InstanceIdentifier<Subnets> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Subnets.class);
+    }
+
+    @Override
+    protected Subnet toMd(String uuid) {
+        SubnetBuilder subnetBuilder = new SubnetBuilder();
+        subnetBuilder.setUuid(toUuid(uuid));
+        return subnetBuilder.build();
+    }
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,

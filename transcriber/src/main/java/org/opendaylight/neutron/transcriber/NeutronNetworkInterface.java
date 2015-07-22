@@ -138,13 +138,13 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (network.getSubnets() != null) {
             List<String> neutronSubnets = new ArrayList<String>();
             for( Uuid subnet : network.getSubnets()) {
-               neutronSubnets.add(String.valueOf(subnet));
+               neutronSubnets.add(subnet.getValue());
             }
             result.setSubnets(neutronSubnets);
         }
 // todo remove '-' chars as tenant id doesn't use them
-        result.setTenantID(String.valueOf(network.getTenantId()));
-        result.setID(String.valueOf(network.getUuid()));
+        result.setTenantID(network.getTenantId().getValue());
+        result.setID(network.getUuid().getValue());
 
         NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
         result.setRouterExternal(l3Extension.isExternal());
