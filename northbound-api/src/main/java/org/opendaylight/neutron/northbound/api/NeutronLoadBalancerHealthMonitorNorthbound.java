@@ -201,13 +201,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         if (input.isSingleton()) {
             NeutronLoadBalancerHealthMonitor singleton = input.getSingleton();
 
-            /*
-             *  Verify that the LoadBalancerHealthMonitor doesn't already exist.
-             */
-            if (loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(singleton.getLoadBalancerHealthMonitorID())) {
-                throw new BadRequestException("LoadBalancerHealthMonitor UUID already exists");
-            }
-
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -232,24 +225,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                 }
             }
         } else {
-            List<NeutronLoadBalancerHealthMonitor> bulk = input.getBulk();
-            Iterator<NeutronLoadBalancerHealthMonitor> i = bulk.iterator();
-            Map<String, NeutronLoadBalancerHealthMonitor> testMap = new HashMap<String, NeutronLoadBalancerHealthMonitor>();
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
-            while (i.hasNext()) {
-                NeutronLoadBalancerHealthMonitor test = i.next();
-
-                /*
-                 *  Verify that the firewall policy doesn't already exist
-                 */
-
-                if (loadBalancerHealthMonitorInterface
-                        .neutronLoadBalancerHealthMonitorExists(test.getLoadBalancerHealthMonitorID())) {
-                    throw new BadRequestException("LoadBalancerHealthMonitor UUID already is already created");
-                }
-                if (testMap.containsKey(test.getLoadBalancerHealthMonitorID())) {
-                    throw new BadRequestException("LoadBalancerHealthMonitor UUID already exists");
-                }
+            for (NeutronLoadBalancerHealthMonitor test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -269,9 +246,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronLoadBalancerHealthMonitor test = i.next();
+            for (NeutronLoadBalancerHealthMonitor test : input.getBulk()) {
                 loadBalancerHealthMonitorInterface.addNeutronLoadBalancerHealthMonitor(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -304,34 +279,9 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             final NeutronLoadBalancerHealthMonitorRequest input) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
 
-        /*
-         * verify the LoadBalancerHealthMonitor exists and there is only one delta provided
-         */
-        if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronLoadBalancerHealthMonitor delta = input.getSingleton();
         NeutronLoadBalancerHealthMonitor original = loadBalancerHealthMonitorInterface
                 .getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
-
-        /*
-         * updates restricted by Neutron
-         */
-        if (delta.getLoadBalancerHealthMonitorID() != null ||
-                delta.getLoadBalancerHealthMonitorTenantID() != null ||
-                delta.getLoadBalancerHealthMonitorType() != null ||
-                delta.getLoadBalancerHealthMonitorDelay() != null ||
-                delta.getLoadBalancerHealthMonitorTimeout() != null ||
-                delta.getLoadBalancerHealthMonitorMaxRetries() != null ||
-                delta.getLoadBalancerHealthMonitorHttpMethod() != null ||
-                delta.getLoadBalancerHealthMonitorUrlPath() != null ||
-                delta.getLoadBalancerHealthMonitorExpectedCodes() != null ||
-                delta.getLoadBalancerHealthMonitorAdminStateIsUp() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
         if (instances != null) {
@@ -384,16 +334,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
-        /*
-         * verify the LoadBalancerHealthMonitor exists and it isn't currently in use
-         */
-        if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorInUse(loadBalancerHealthMonitorID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronLoadBalancerHealthMonitor singleton = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
+
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {

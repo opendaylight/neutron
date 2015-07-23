@@ -186,28 +186,12 @@ public Response createLoadBalancerPoolMember(
         final NeutronLoadBalancerPoolMemberRequest input) {
 
     INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
-    // Verify that the loadBalancerPool exists, for the member to be added to its cache
-    if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-        throw new ResourceNotFoundException(UUID_NO_EXIST);
-    }
     NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
 
     if (input.isSingleton()) {
         NeutronLoadBalancerPoolMember singleton = input.getSingleton();
         singleton.setPoolID(loadBalancerPoolUUID);
         String loadBalancerPoolMemberUUID = singleton.getPoolMemberID();
-
-        /*
-         *  Verify that the LoadBalancerPoolMember doesn't already exist.
-         */
-        if (singletonPool.getLoadBalancerPoolMembers() != null) {
-            List<NeutronLoadBalancerPoolMember> members = singletonPool.getLoadBalancerPoolMembers();
-            for (NeutronLoadBalancerPoolMember member: members) {
-                if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
-                    throw new BadRequestException("LoadBalancerPoolMember UUID already exists");
-                }
-            }
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
         if (instances != null) {
@@ -239,27 +223,10 @@ public Response createLoadBalancerPoolMember(
         singletonPool.addLoadBalancerPoolMember(singleton);
 
     } else {
-        List<NeutronLoadBalancerPoolMember> bulk = input.getBulk();
-        Iterator<NeutronLoadBalancerPoolMember> i = bulk.iterator();
-        Map<String, NeutronLoadBalancerPoolMember> testMap = new HashMap<String, NeutronLoadBalancerPoolMember>();
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
-        while (i.hasNext()) {
-            NeutronLoadBalancerPoolMember test = i.next();
+        for (NeutronLoadBalancerPoolMember test : input.getBulk()) {
             String loadBalancerPoolMemberUUID = test.getPoolMemberID();
 
-            /*
-             *  Verify that the LoadBalancerPoolMember doesn't already exist.
-             */
-            List<NeutronLoadBalancerPoolMember> members = singletonPool.getLoadBalancerPoolMembers();
-            for (NeutronLoadBalancerPoolMember member: members) {
-                if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
-                    throw new BadRequestException("LoadBalancerPoolMember UUID already exists");
-                }
-            }
-
-            if (testMap.containsKey(test.getPoolMemberID())) {
-                throw new BadRequestException("Load Balancer PoolMember UUID already exists");
-            }
             if (instances != null) {
                 if (instances.length > 0) {
                     for (Object instance : instances) {
@@ -279,9 +246,7 @@ public Response createLoadBalancerPoolMember(
         /*
          * now, each element of the bulk request can be added to the cache
          */
-        i = bulk.iterator();
-        while (i.hasNext()) {
-            NeutronLoadBalancerPoolMember test = i.next();
+        for (NeutronLoadBalancerPoolMember test : input.getBulk()) {
             if (instances != null) {
                 for (Object instance : instances) {
                     INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
@@ -335,11 +300,6 @@ public Response deleteLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
         @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID) {
     INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
-
-    // Verify that the loadBalancerPool exists, for the member to be removed from its cache
-    if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-        throw new ResourceNotFoundException(UUID_NO_EXIST);
-    }
 
     //Verify that the LB pool member exists
     NeutronLoadBalancerPoolMember singleton = null;

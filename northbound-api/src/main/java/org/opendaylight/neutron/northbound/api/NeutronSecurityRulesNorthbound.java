@@ -189,16 +189,8 @@ public class NeutronSecurityRulesNorthbound {
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
-        /*
-         * Existing entry checks
-        */
-
         if (input.isSingleton()) {
             NeutronSecurityRule singleton = input.getSingleton();
-
-            if (securityRuleInterface.neutronSecurityRuleExists(singleton.getSecurityRuleUUID())) {
-                throw new BadRequestException(UUID_EXISTS);
-            }
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -226,23 +218,8 @@ public class NeutronSecurityRulesNorthbound {
                 }
             }
         } else {
-            List<NeutronSecurityRule> bulk = input.getBulk();
-            Iterator<NeutronSecurityRule> i = bulk.iterator();
-            Map<String, NeutronSecurityRule> testMap = new HashMap<String, NeutronSecurityRule>();
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
-            while (i.hasNext()) {
-                NeutronSecurityRule test = i.next();
-
-                /*
-                 *  Verify that the security rule doesn't already exist
-                 */
-
-                if (securityRuleInterface.neutronSecurityRuleExists(test.getSecurityRuleUUID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                if (testMap.containsKey(test.getSecurityRuleUUID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
+            for (NeutronSecurityRule test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -263,9 +240,7 @@ public class NeutronSecurityRulesNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronSecurityRule test = i.next();
+            for (NeutronSecurityRule test : input.getBulk()) {
                 securityRuleInterface.addNeutronSecurityRule(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -298,34 +273,8 @@ public class NeutronSecurityRulesNorthbound {
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
         INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
-        /*
-         * verify the Security Rule exists and there is only one delta provided
-         */
-        if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronSecurityRule delta = input.getSingleton();
         NeutronSecurityRule original = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
-
-        /*
-         * updates restricted by Neutron
-         *
-         */
-        if (delta.getSecurityRuleUUID() != null ||
-                delta.getSecurityRuleDirection() != null ||
-                delta.getSecurityRuleProtocol() != null ||
-                delta.getSecurityRulePortMin() != null ||
-                delta.getSecurityRulePortMax() != null ||
-                delta.getSecurityRuleEthertype() != null ||
-                delta.getSecurityRuleRemoteIpPrefix() != null ||
-                delta.getSecurityRuleGroupID() != null ||
-                delta.getSecurityRemoteGroupID() != null ||
-                delta.getSecurityRuleTenantID() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
         if (instances != null) {
@@ -375,15 +324,6 @@ public class NeutronSecurityRulesNorthbound {
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
         INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
-        /*
-         * verify the Security Rule exists and it isn't currently in use
-         */
-        if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (securityRuleInterface.neutronSecurityRuleInUse(securityRuleUUID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronSecurityRule singleton = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
         if (instances != null) {

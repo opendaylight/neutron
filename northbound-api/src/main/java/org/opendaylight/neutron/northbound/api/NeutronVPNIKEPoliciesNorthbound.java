@@ -179,12 +179,6 @@ public class NeutronVPNIKEPoliciesNorthbound {
         if (input.isSingleton()) {
             NeutronVPNIKEPolicy singleton = input.getSingleton();
 
-            /*
-             * verify that the ikePolicy doesn't already exist (issue: is deeper inspection necessary?)
-             */
-            if (ikePolicyInterface.neutronVPNIKEPolicyExists(singleton.getID())) {
-                throw new BadRequestException("ikePolicy UUID already exists");
-            }
             Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -240,24 +234,8 @@ public class NeutronVPNIKEPoliciesNorthbound {
             ) {
         INeutronVPNIKEPolicyCRUD ikePolicyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
 
-        /*
-         * ikePolicy has to exist and only a single delta can be supplied
-         */
-        if (!ikePolicyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only single ikePolicy deltas supported");
-        }
         NeutronVPNIKEPolicy singleton = input.getSingleton();
         NeutronVPNIKEPolicy original = ikePolicyInterface.getNeutronVPNIKEPolicy(policyUUID);
-
-        /*
-         * attribute changes blocked by Neutron
-         */
-        if (singleton.getID() != null || singleton.getTenantID() != null) {
-            throw new BadRequestException("Request attribute change not allowed");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {
@@ -306,12 +284,6 @@ public class NeutronVPNIKEPoliciesNorthbound {
             @PathParam("policyID") String policyUUID) {
         INeutronVPNIKEPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
 
-        /*
-         * verify that the policy exists and is not in use before removing it
-         */
-        if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
         NeutronVPNIKEPolicy singleton = policyInterface.getNeutronVPNIKEPolicy(policyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {

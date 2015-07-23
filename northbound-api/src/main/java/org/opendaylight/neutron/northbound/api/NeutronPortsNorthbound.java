@@ -224,58 +224,6 @@ public class NeutronPortsNorthbound {
         if (input.isSingleton()) {
             NeutronPort singleton = input.getSingleton();
 
-            /*
-             * the port must be part of an existing network, must not already exist,
-             * have a valid MAC and the MAC not be in use
-             */
-            if (singleton.getNetworkUUID() == null) {
-                throw new BadRequestException("network UUID musy be specified");
-            }
-            if (portInterface.portExists(singleton.getID())) {
-                throw new BadRequestException(UUID_EXISTS);
-            }
-            if (!networkInterface.networkExists(singleton.getNetworkUUID())) {
-                throw new ResourceNotFoundException("network UUID does not exist.");
-            }
-            if (singleton.getMacAddress() == null ||
-                    !singleton.getMacAddress().matches(MAC_REGEX)) {
-                throw new BadRequestException("MAC address not properly formatted");
-            }
-            if (portInterface.macInUse(singleton.getMacAddress())) {
-                throw new ResourceConflictException("MAC Address is in use.");
-            }
-            /*
-             * if fixed IPs are specified, each one has to have an existing subnet ID
-             * that is in the same scoping network as the port.  In addition, if an IP
-             * address is specified it has to be a valid address for the subnet and not
-             * already in use
-             */
-            List<Neutron_IPs> fixedIPs = singleton.getFixedIPs();
-            if (fixedIPs != null && fixedIPs.size() > 0) {
-                Iterator<Neutron_IPs> fixedIPIterator = fixedIPs.iterator();
-                while (fixedIPIterator.hasNext()) {
-                    Neutron_IPs ip = fixedIPIterator.next();
-                    if (ip.getSubnetUUID() == null) {
-                        throw new BadRequestException("subnet UUID not specified");
-                    }
-                    NeutronSubnet subnet = subnetInterface.getSubnet(ip.getSubnetUUID());
-                    if (subnet == null) {
-                        throw new BadRequestException("subnet UUID must exist");
-                    }
-                    if (!singleton.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
-                        throw new BadRequestException(NET_UUID_MATCH);
-                    }
-                    if (ip.getIpAddress() != null) {
-                        if (!subnet.isValidIP(ip.getIpAddress())) {
-                            throw new BadRequestException("IP address is not valid");
-                        }
-                        if (subnet.isIPInUse(ip.getIpAddress())) {
-                            throw new ResourceConflictException("IP address is in use.");
-                        }
-                    }
-                }
-            }
-
             Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -302,81 +250,9 @@ public class NeutronPortsNorthbound {
                 }
             }
         } else {
-            List<NeutronPort> bulk = input.getBulk();
-            Iterator<NeutronPort> i = bulk.iterator();
-            Map<String, NeutronPort> testMap = new HashMap<String, NeutronPort>();
             Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-            while (i.hasNext()) {
-                NeutronPort test = i.next();
+            for (NeutronPort test : input.getBulk()) {
 
-                /*
-                 * the port must be part of an existing network, must not already exist,
-                 * have a valid MAC and the MAC not be in use.  Further the bulk request
-                 * can't already contain a new port with the same UUID
-                 */
-                if (portInterface.portExists(test.getID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                for (NeutronPort check : testMap.values()) {
-                    if (test.getMacAddress().equalsIgnoreCase(check.getMacAddress())) {
-                        throw new ResourceConflictException("MAC address already allocated");
-                    }
-                    for (Neutron_IPs test_fixedIP : test.getFixedIPs()) {
-                        for (Neutron_IPs check_fixedIP : check.getFixedIPs()) {
-                            if (test_fixedIP.getSubnetUUID().equals(check_fixedIP.getSubnetUUID()) &&
-                                (test_fixedIP.getIpAddress().equals(check_fixedIP.getIpAddress()))) {
-                                throw new ResourceConflictException("IP address already allocated");
-                            }
-                        }
-                    }
-                }
-                testMap.put(test.getID(), test);
-                if (!networkInterface.networkExists(test.getNetworkUUID())) {
-                    throw new ResourceNotFoundException("network UUID does not exist.");
-                }
-                if (!test.getMacAddress().matches(MAC_REGEX)) {
-                    throw new BadRequestException("MAC address not properly formatted");
-                }
-                if (portInterface.macInUse(test.getMacAddress())) {
-                    throw new ResourceConflictException("MAC address in use");
-                }
-
-                /*
-                 * if fixed IPs are specified, each one has to have an existing subnet ID
-                 * that is in the same scoping network as the port.  In addition, if an IP
-                 * address is specified it has to be a valid address for the subnet and not
-                 * already in use (or be the gateway IP address of the subnet)
-                 */
-                List<Neutron_IPs> fixedIPs = test.getFixedIPs();
-                if (fixedIPs != null && fixedIPs.size() > 0) {
-                    Iterator<Neutron_IPs> fixedIPIterator = fixedIPs.iterator();
-                    while (fixedIPIterator.hasNext()) {
-                        Neutron_IPs ip = fixedIPIterator.next();
-                        if (ip.getSubnetUUID() == null) {
-                            throw new BadRequestException("subnet UUID must be specified");
-                        }
-                        if (!subnetInterface.subnetExists(ip.getSubnetUUID())) {
-                            throw new BadRequestException("subnet UUID doesn't exists");
-                        }
-                        NeutronSubnet subnet = subnetInterface.getSubnet(ip.getSubnetUUID());
-                        if (!test.getNetworkUUID().equalsIgnoreCase(subnet.getNetworkUUID())) {
-                            throw new BadRequestException(NET_UUID_MATCH);
-                        }
-                        if (ip.getIpAddress() != null) {
-                            if (!subnet.isValidIP(ip.getIpAddress())) {
-                                throw new BadRequestException("ip address not valid");
-                            }
-                            //TODO: need to add consideration for a fixed IP being assigned the same address as a allocated IP in the
-                            //same bulk create
-                            if (subnet.isIPInUse(ip.getIpAddress())) {
-                                throw new ResourceConflictException("IP address in use");
-                            }
-                        }
-                    }
-                }
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -395,9 +271,7 @@ public class NeutronPortsNorthbound {
             }
 
             //once everything has passed, then we can add to the cache
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronPort test = i.next();
+            for (NeutronPort test : input.getBulk()) {
                 portInterface.addPort(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -433,15 +307,7 @@ public class NeutronPortsNorthbound {
             ) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(false, true);
         INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        // port has to exist and only a single delta is supported
-        if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
         NeutronPort original = portInterface.getPort(portUUID);
-        if (!input.isSingleton()) {
-            throw new BadRequestException("only singleton edit suported");
-        }
-
         /*
          * note: what we get appears to not be a delta, but rather a possibly
          * complete updated object.  So, that needs to be sent down to
@@ -498,15 +364,6 @@ public class NeutronPortsNorthbound {
             @PathParam("portUUID") String portUUID) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
 
-        // port has to exist and not be owned by anyone.  then it can be removed from the cache
-        if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        NeutronPort port = portInterface.getPort(portUUID);
-        if (port.getDeviceID() != null ||
-                port.getDeviceOwner() != null) {
-            Response.status(HttpURLConnection.HTTP_FORBIDDEN).build();
-        }
         NeutronPort singleton = portInterface.getPort(portUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
