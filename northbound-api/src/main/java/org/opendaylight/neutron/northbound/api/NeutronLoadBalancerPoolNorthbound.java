@@ -195,13 +195,6 @@ public class NeutronLoadBalancerPoolNorthbound {
         if (input.isSingleton()) {
             NeutronLoadBalancerPool singleton = input.getSingleton();
 
-            /*
-             *  Verify that the LoadBalancerPool doesn't already exist.
-             */
-            if (loadBalancerPoolInterface.neutronLoadBalancerPoolExists(singleton.getLoadBalancerPoolID())) {
-                throw new BadRequestException("LoadBalancerPool UUID already exists");
-            }
-
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -226,23 +219,9 @@ public class NeutronLoadBalancerPoolNorthbound {
                 }
             }
         } else {
-            List<NeutronLoadBalancerPool> bulk = input.getBulk();
-            Iterator<NeutronLoadBalancerPool> i = bulk.iterator();
-            Map<String, NeutronLoadBalancerPool> testMap = new HashMap<String, NeutronLoadBalancerPool>();
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolAware.class, this);
-            while (i.hasNext()) {
-                NeutronLoadBalancerPool test = i.next();
+            for (NeutronLoadBalancerPool test : input.getBulk()) {
 
-                /*
-                 *  Verify that the loadBalancerPool doesn't already exist
-                 */
-
-                if (loadBalancerPoolInterface.neutronLoadBalancerPoolExists(test.getLoadBalancerPoolID())) {
-                    throw new BadRequestException("Load Balancer Pool UUID already is already created");
-                }
-                if (testMap.containsKey(test.getLoadBalancerPoolID())) {
-                    throw new BadRequestException("Load Balancer Pool UUID already exists");
-                }
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -262,9 +241,7 @@ public class NeutronLoadBalancerPoolNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronLoadBalancerPool test = i.next();
+            for (NeutronLoadBalancerPool test : input.getBulk()) {
                 loadBalancerPoolInterface.addNeutronLoadBalancerPool(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -296,32 +273,8 @@ public class NeutronLoadBalancerPoolNorthbound {
             @PathParam("loadBalancerPoolID") String loadBalancerPoolID, final NeutronLoadBalancerPoolRequest input) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
 
-        /*
-         * verify the LoadBalancerPool exists and there is only one delta provided
-         */
-        if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronLoadBalancerPool delta = input.getSingleton();
         NeutronLoadBalancerPool original = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolID);
-
-        /*
-         * updates restricted by Neutron
-         */
-        if (delta.getLoadBalancerPoolID() != null ||
-                delta.getLoadBalancerPoolTenantID() != null ||
-                delta.getLoadBalancerPoolName() != null ||
-                delta.getLoadBalancerPoolDescription() != null ||
-                delta.getLoadBalancerPoolProtocol() != null ||
-                delta.getLoadBalancerPoolLbAlgorithm() != null ||
-                delta.getNeutronLoadBalancerPoolHealthMonitorID() != null ||
-                delta.getLoadBalancerPoolAdminIsStateIsUp() != null ||
-                delta.getLoadBalancerPoolMembers() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolAware.class, this);
         if (instances != null) {
@@ -371,15 +324,6 @@ public class NeutronLoadBalancerPoolNorthbound {
             @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
 
-        /*
-         * verify the LoadBalancerPool exists and it isn't currently in use
-         */
-        if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (loadBalancerPoolInterface.neutronLoadBalancerPoolInUse(loadBalancerPoolUUID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronLoadBalancerPool singleton = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolAware.class, this);
         if (instances != null) {

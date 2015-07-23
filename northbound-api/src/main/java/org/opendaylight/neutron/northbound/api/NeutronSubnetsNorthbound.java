@@ -209,27 +209,6 @@ public class NeutronSubnetsNorthbound {
         if (input.isSingleton()) {
             NeutronSubnet singleton = input.getSingleton();
 
-            /*
-             *  Verify that the subnet doesn't already exist (Issue: is a deeper check necessary?)
-             *  the specified network exists, the subnet has a valid network address,
-             *  and that the gateway IP doesn't overlap with the allocation pools
-             *  *then* add the subnet to the cache
-             */
-            if (subnetInterface.subnetExists(singleton.getID())) {
-                throw new BadRequestException(UUID_EXISTS);
-            }
-            if (!networkInterface.networkExists(singleton.getNetworkUUID())) {
-                throw new ResourceNotFoundException("network UUID does not exist.");
-            }
-            if (!singleton.isValidCIDR()) {
-                throw new BadRequestException("invaild CIDR");
-            }
-            if (!singleton.initDefaults()) {
-                throw new InternalServerErrorException("subnet object could not be initialized properly");
-            }
-            if (singleton.gatewayIP_Pool_overlap()) {
-                throw new ResourceConflictException("IP pool overlaps with gateway");
-            }
             Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -254,39 +233,8 @@ public class NeutronSubnetsNorthbound {
                 }
             }
         } else {
-            List<NeutronSubnet> bulk = input.getBulk();
-            Iterator<NeutronSubnet> i = bulk.iterator();
-            Map<String, NeutronSubnet> testMap = new HashMap<String, NeutronSubnet>();
             Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
-            while (i.hasNext()) {
-                NeutronSubnet test = i.next();
-
-                /*
-                 *  Verify that the subnet doesn't already exist (Issue: is a deeper check necessary?)
-                 *  the specified network exists, the subnet has a valid network address,
-                 *  and that the gateway IP doesn't overlap with the allocation pools,
-                 *  and that the bulk request doesn't already contain a subnet with this id
-                 */
-
-                if (!test.initDefaults()) {
-                    throw new InternalServerErrorException("subnet object could not be initialized properly");
-                }
-                if (subnetInterface.subnetExists(test.getID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                testMap.put(test.getID(), test);
-                if (!networkInterface.networkExists(test.getNetworkUUID())) {
-                    throw new ResourceNotFoundException("network UUID does not exist.");
-                }
-                if (!test.isValidCIDR()) {
-                    throw new BadRequestException("Invalid CIDR");
-                }
-                if (test.gatewayIP_Pool_overlap()) {
-                    throw new ResourceConflictException("IP pool overlaps with gateway");
-                }
+            for (NeutronSubnet test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -307,9 +255,7 @@ public class NeutronSubnetsNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronSubnet test = i.next();
+            for (NeutronSubnet test : input.getBulk()) {
                 subnetInterface.addSubnet(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -342,16 +288,6 @@ public class NeutronSubnetsNorthbound {
             @PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input
             ) {
         INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
-
-        /*
-         * verify the subnet exists and there is only one delta provided
-         */
-        if (!subnetInterface.subnetExists(subnetUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
 
         /*
          * note: what we get appears to not be a delta, but rather a
@@ -409,15 +345,6 @@ public class NeutronSubnetsNorthbound {
             @PathParam("subnetUUID") String subnetUUID) {
         INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
 
-        /*
-         * verify the subnet exists and it isn't currently in use
-         */
-        if (!subnetInterface.subnetExists(subnetUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (subnetInterface.subnetInUse(subnetUUID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronSubnet singleton = subnetInterface.getSubnet(subnetUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
         if (instances != null) {

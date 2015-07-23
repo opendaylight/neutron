@@ -143,14 +143,10 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
         return true;
     }
 
+// note: this is being set to false in preparation for deprecation and removal
     @Override
     public boolean subnetInUse(String subnetUUID) {
-        if (!subnetExists(subnetUUID)) {
-            return true;
-        }
-        NeutronSubnet target = subnetDB.get(subnetUUID);
-	// note: we want to ignore the DHCP ports, so...
-        return (target.getPortsInSubnet("network:dhcp").size() > 0);
+        return false;
     }
 
         protected Subnet toMd(NeutronSubnet subnet) {

@@ -95,40 +95,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
             return false;
         }
         portDB.putIfAbsent(input.getID(), input);
-        // if there are no fixed IPs, allocate one for each subnet in the network
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronNetworkCRUD(this)
-            .fetchINeutronSubnetCRUD(this);
-        INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
-        INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
-        if (input.getFixedIPs() == null){
-           input.setFixedIPs(new ArrayList<Neutron_IPs>());
-        }
-        if (input.getFixedIPs().size() == 0) {
-            List<Neutron_IPs> list = input.getFixedIPs();
-            Iterator<NeutronSubnet> subnetIterator = systemCRUD.getAllSubnets().iterator();
-            while (subnetIterator.hasNext()) {
-                NeutronSubnet subnet = subnetIterator.next();
-                if (subnet.getNetworkUUID().equals(input.getNetworkUUID())) {
-                    list.add(new Neutron_IPs(subnet.getID()));
-                }
-            }
-        }
-        Iterator<Neutron_IPs> fixedIPIterator = input.getFixedIPs().iterator();
-        while (fixedIPIterator.hasNext()) {
-            Neutron_IPs ip = fixedIPIterator.next();
-            NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
-            if (ip.getIpAddress() == null) {
-                ip.setIpAddress(subnet.getLowAddr());
-            }
-            if (ip.getIpAddress().equals(subnet.getGatewayIP())) {
-                subnet.setGatewayIPAllocated();
-            }
-            subnet.addPort(input);
-        }
-
-        NeutronNetwork network = networkIf.getNetwork(input.getNetworkUUID());
-        network.addPort(input);
         return true;
     }
 
@@ -137,27 +103,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (!portExists(uuid)) {
             return false;
         }
-        NeutronPort port = getPort(uuid);
         portDB.remove(uuid);
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronNetworkCRUD(this)
-            .fetchINeutronSubnetCRUD(this);
-        INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
-        INeutronNetworkCRUD networkCRUD = interfaces.getNetworkInterface();
-
-        NeutronNetwork network = networkCRUD.getNetwork(port.getNetworkUUID());
-        network.removePort(port);
-        Iterator<Neutron_IPs> fixedIPIterator = port.getFixedIPs().iterator();
-        while (fixedIPIterator.hasNext()) {
-            Neutron_IPs ip = fixedIPIterator.next();
-            NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
-            if (subnet != null) {
-                if (ip.getIpAddress().equals(subnet.getGatewayIP())) {
-                    subnet.resetGatewayIPAllocated();
-                }
-                subnet.removePort(port);
-            }
-        }
         return true;
     }
 

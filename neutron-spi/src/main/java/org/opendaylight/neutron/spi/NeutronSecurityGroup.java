@@ -52,10 +52,7 @@ public class NeutronSecurityGroup implements Serializable {
     @XmlElement(name = "security_group_rules")
     List<NeutronSecurityRule> neutronSecurityRule;
 
-    List<NeutronPort> neutronPorts;
-
     public NeutronSecurityGroup() {
-        neutronPorts = new ArrayList<NeutronPort> ();
         neutronSecurityRule = new ArrayList<NeutronSecurityRule>();
 
     }

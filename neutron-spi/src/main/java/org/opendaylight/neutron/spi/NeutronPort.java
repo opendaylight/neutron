@@ -85,14 +85,7 @@ public class NeutronPort implements Serializable, INeutronObject {
     @XmlElement (name = "extra_dhcp_opts")
     List<NeutronPort_ExtraDHCPOption> extraDHCPOptions;
 
-    /* this attribute stores the floating IP address assigned to
-     * each fixed IP address
-     */
-
-    Map<String, NeutronFloatingIP> floatingIPMap;
-
     public NeutronPort() {
-        floatingIPMap = new HashMap<String, NeutronFloatingIP>();
     }
 
     public String getID() { return portUUID; }
@@ -240,23 +233,6 @@ public class NeutronPort implements Serializable, INeutronObject {
     this.bindingvifType = bindingvifType;
   }
 
-    public NeutronFloatingIP getFloatingIP(String key) {
-        if (!floatingIPMap.containsKey(key)) {
-            return null;
-        }
-        return floatingIPMap.get(key);
-    }
-
-    public void removeFloatingIP(String key) {
-        floatingIPMap.remove(key);
-    }
-
-    public void addFloatingIP(String key, NeutronFloatingIP floatingIP) {
-        if (!floatingIPMap.containsKey(key)) {
-            floatingIPMap.put(key, floatingIP);
-        }
-    }
-
     /**
      * This method copies selected fields from the object and returns them
      * as a new object, suitable for marshaling.
@@ -317,26 +293,12 @@ public class NeutronPort implements Serializable, INeutronObject {
         }
     }
 
-    /**
-     * This method checks to see if the port has a floating IPv4 address
-     * associated with the supplied fixed IPv4 address
-     *
-     * @param fixedIP
-     *            fixed IPv4 address in dotted decimal format
-     * @return a boolean indicating if there is a floating IPv4 address bound
-     * to the fixed IPv4 address
-     */
-
-    public boolean isBoundToFloatingIP(String fixedIP) {
-        return floatingIPMap.containsKey(fixedIP);
-    }
-
     @Override
     public String toString() {
         return "NeutronPort [portUUID=" + portUUID + ", networkUUID=" + networkUUID + ", name=" + name
                 + ", adminStateUp=" + adminStateUp + ", status=" + status + ", macAddress=" + macAddress
                 + ", fixedIPs=" + fixedIPs + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID="
-                + tenantID + ", floatingIPMap=" + floatingIPMap + ", securityGroups=" + securityGroups
+                + tenantID + ", securityGroups=" + securityGroups
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType
                 + ", bindingvnicType=" + bindingvnicType + "]";
     }
