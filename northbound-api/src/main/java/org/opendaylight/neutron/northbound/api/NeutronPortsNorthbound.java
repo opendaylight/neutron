@@ -292,7 +292,15 @@ public class NeutronPortsNorthbound {
          */
 
         NeutronPort updatedObject = input.getSingleton();
-        updatedObject.setID(portUUID);
+        if (updatedObject.getID() == null) {
+            updatedObject.setID(portUUID);
+        }
+        if (updatedObject.getTenantID() == null) {
+            updatedObject.setTenantID(original.getTenantID());
+        }
+        if (updatedObject.getNetworkUUID() == null) {
+            updatedObject.setNetworkUUID(original.getNetworkUUID());
+        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
