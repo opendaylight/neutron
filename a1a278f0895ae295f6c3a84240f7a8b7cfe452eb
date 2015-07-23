@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_7fe35c33",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronLoadBalancerPoolMembersNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-23T02:52:24Z",
+      "side": 1,
+      "message": "WHOA! this deserves its own gerrit and should be merged to stable lithium.",
+      "range": {
+        "startLine": 175,
+        "startChar": 1,
+        "endLine": 175,
+        "endChar": 5
+      },
+      "revId": "a1a278f0895ae295f6c3a84240f7a8b7cfe452eb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_1fd2685c",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronLoadBalancerPoolNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-23T02:52:24Z",
+      "side": 1,
+      "message": "this comment applies to all files, actually:\nre-visit the @ResponseCode, now that there are\nfewer throws in the function.\nunless, of course... that is part II of this effort. ;)",
+      "range": {
+        "startLine": 188,
+        "startChar": 13,
+        "endLine": 188,
+        "endChar": 25
+      },
+      "revId": "a1a278f0895ae295f6c3a84240f7a8b7cfe452eb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
