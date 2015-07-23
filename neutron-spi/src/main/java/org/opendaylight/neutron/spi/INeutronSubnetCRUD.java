@@ -89,6 +89,8 @@ public interface INeutronSubnetCRUD {
      *            identifier of the subnet object
      *
      * @return boolean on whether the subnet is in use or not
+     *
+     * @deprecated - will be removed in Boron
      */
 
     boolean subnetInUse(String subnetUUID);

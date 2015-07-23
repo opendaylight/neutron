@@ -93,13 +93,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (input.getFloatingIPAddress() == null) {
             input.setFloatingIPAddress(subnet.getLowAddr());
         }
-
-        //if port_id is there, bind port to this floating ip
-        if (input.getPortUUID() != null) {
-            NeutronPort port = portCRUD.getPort(input.getPortUUID());
-            port.addFloatingIP(input.getFixedIPAddress(), input);
-        }
-
         floatingIPDB.putIfAbsent(input.getID(), input);
         return true;
     }
@@ -112,11 +105,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
         if (!floatingIPExists(uuid)) {
             return false;
-        }
-        NeutronFloatingIP floatIP = getFloatingIP(uuid);
-        if (floatIP.getPortUUID() != null) {
-            NeutronPort port = portCRUD.getPort(floatIP.getPortUUID());
-            port.removeFloatingIP(floatIP.getFixedIPAddress());
         }
         floatingIPDB.remove(uuid);
         return true;
@@ -132,17 +120,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             return false;
         }
         NeutronFloatingIP target = floatingIPDB.get(uuid);
-        if (target.getPortUUID() != null) {
-            NeutronPort port = portCRUD.getPort(target.getPortUUID());
-            port.removeFloatingIP(target.getFixedIPAddress());
-        }
-
-        //if port_id is there, bind port to this floating ip
-        if (delta.getPortUUID() != null) {
-            NeutronPort port = portCRUD.getPort(delta.getPortUUID());
-            port.addFloatingIP(delta.getFixedIPAddress(), delta);
-        }
-
         target.setPortUUID(delta.getPortUUID());
         target.setFixedIPAddress(delta.getFixedIPAddress());
         return true;

@@ -85,15 +85,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
     @XmlElement (name = "ipv6_ra_mode", nillable = true)
     String ipV6RaMode;
 
-    /* stores the OpenStackPorts associated with an instance
-     * used to determine if that instance can be deleted.
-     */
-    List<NeutronPort> myPorts;
-
-    Boolean gatewayIPAssigned;
-
     public NeutronSubnet() {
-        myPorts = new ArrayList<NeutronPort>();
     }
 
     public String getID() { return subnetUUID; }
@@ -338,7 +330,6 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         if (ipVersion == null) {
             ipVersion = IPV4_VERSION;
         }
-        gatewayIPAssigned = false;
         dnsNameservers = new ArrayList<String>();
         if (hostRoutes == null) {
             hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
@@ -392,54 +383,6 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         return true;
     }
 
-    public List<NeutronPort> getPortsInSubnet() {
-        return myPorts;
-    }
-
-    public List<NeutronPort> getPortsInSubnet(String ignore) {
-        List<NeutronPort> ans = new ArrayList<NeutronPort>();
-        for (NeutronPort port : myPorts) {
-            if (!port.getDeviceOwner().equalsIgnoreCase(ignore)) {
-                ans.add(port);
-            }
-        }
-        return ans;
-    }
-
-    public void addPort(NeutronPort port) {
-        myPorts.add(port);
-    }
-
-    public void removePort(NeutronPort port) {
-        myPorts.remove(port);
-    }
-
-    public List<NeutronPort> getFloatingIpPortsInSubnet() {
-        List<NeutronPort> result = new ArrayList<NeutronPort>();
-        List<NeutronPort> ports = getPortsInSubnet();
-        for(NeutronPort port: ports) {
-            if(port.getDeviceOwner().equals("network:floatingip")) {
-                result.add(port);
-            }
-        }
-        return result;
-    }
-
-    public List<NeutronPort> getFloatingIpPortsInSubnet(String floatingIPaddress) {
-        List<NeutronPort> result = new ArrayList<NeutronPort>();
-        List<NeutronPort> floatingIpPorts = getFloatingIpPortsInSubnet();
-        for(NeutronPort port: floatingIpPorts) {
-            List<Neutron_IPs> fixedIps = port.getFixedIPs();
-            for(Neutron_IPs fixedIp: fixedIps) {
-                if(fixedIp.getIpAddress() != null && fixedIp.getIpAddress().equals(floatingIPaddress)) {
-                    result.add(port);
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
     /* this method tests to see if the supplied IPv4 address
      * is valid for this subnet or not
      */
@@ -477,26 +420,6 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         return false;
     }
 
-    /* test to see if the supplied IPv4 address is part of one of the
-     * available allocation pools or not
-     */
-    public boolean isIPInUse(String ipAddress) {
-        if (ipAddress.equals(gatewayIP) && !gatewayIPAssigned ) {
-            return false;
-        }
-        Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
-        while (i.hasNext()) {
-            NeutronSubnetIPAllocationPool pool = i.next();
-            if (ipVersion == IPV4_VERSION && pool.contains(ipAddress)) {
-                return false;
-            }
-            if (ipVersion == IPV6_VERSION && pool.containsV6(ipAddress)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /* method to get the lowest available address of the subnet.
      * go through all the allocation pools and keep the lowest of their
      * low addresses.
@@ -524,25 +447,13 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         return ans;
     }
 
-    public void setGatewayIPAllocated() {
-        gatewayIPAssigned = true;
-    }
-
-    public void resetGatewayIPAllocated() {
-        gatewayIPAssigned = false;
-    }
-
-    public Boolean getGatewayIPAllocated() {
-        return gatewayIPAssigned;
-    }
-
     @Override
     public String toString() {
         return "NeutronSubnet [subnetUUID=" + subnetUUID + ", networkUUID=" + networkUUID + ", name=" + name
                 + ", ipVersion=" + ipVersion + ", cidr=" + cidr + ", gatewayIP=" + gatewayIP + ", dnsNameservers="
                 + dnsNameservers + ", allocationPools=" + allocationPools + ", hostRoutes=" + hostRoutes
-                + ", enableDHCP=" + enableDHCP + ", tenantID=" + tenantID + ", myPorts=" + myPorts
-                + ", gatewayIPAssigned=" + gatewayIPAssigned + ", ipv6AddressMode=" + ipV6AddressMode
+                + ", enableDHCP=" + enableDHCP + ", tenantID=" + tenantID
+                + ", ipv6AddressMode=" + ipV6AddressMode
                 + ", ipv6RaMode=" + ipV6RaMode + "]";
     }
 }
