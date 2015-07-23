@@ -11,10 +11,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -39,8 +37,6 @@ import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronPort;
-import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.Neutron_IPs;
 
 /**
  * Neutron Northbound REST APIs.<br>
@@ -67,12 +63,8 @@ public class NeutronPortsNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Port CRUD Interface";
     private static final String UUID_NO_EXIST = "Port UUID does not exist.";
-    private static final String UUID_EXISTS = "Port UUID already exists.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
-    private static final String NET_UUID_MATCH = "Network UUID must match that of subnet";
-
-    private static final String MAC_REGEX="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
 
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
@@ -208,19 +200,10 @@ public class NeutronPortsNorthbound {
     //@TypeHint(OpenStackPorts.class)
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "MAC generation failure"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true, true);
         INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
         if (input.isSingleton()) {
             NeutronPort singleton = input.getSingleton();
 
@@ -294,12 +277,6 @@ public class NeutronPortsNorthbound {
     //@TypeHint(OpenStackPorts.class)
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updatePort(
             @PathParam("portUUID") String portUUID,
@@ -355,10 +332,6 @@ public class NeutronPortsNorthbound {
     @DELETE
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {

@@ -34,11 +34,8 @@ import org.opendaylight.neutron.spi.INeutronRouterAware;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronNetwork;
-import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouter_Interface;
-import org.opendaylight.neutron.spi.NeutronSubnet;
 
 
 /**
@@ -208,14 +205,10 @@ public class NeutronRoutersNorthbound {
     //@TypeHint(OpenStackRouters.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createRouters(final NeutronRouterRequest input) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
         INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
         if (input.isSingleton()) {
             NeutronRouter singleton = input.getSingleton();
 
@@ -266,10 +259,6 @@ public class NeutronRoutersNorthbound {
     //@TypeHint(OpenStackRouters.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateRouter(
             @PathParam("routerUUID") String routerUUID,
@@ -321,10 +310,6 @@ public class NeutronRoutersNorthbound {
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteRouter(
             @PathParam("routerUUID") String routerUUID) {
@@ -367,11 +352,6 @@ public class NeutronRoutersNorthbound {
     //@TypeHint(OpenStackRouterInterfaces.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response addRouterInterface(
             @PathParam("routerUUID") String routerUUID,
@@ -379,8 +359,6 @@ public class NeutronRoutersNorthbound {
             ) {
         NeutronCRUDInterfaces interfaces = getAttachInterfaces();
         INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
 
         NeutronRouter target = routerInterface.getRouter(routerUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
@@ -442,11 +420,6 @@ public class NeutronRoutersNorthbound {
     //@TypeHint(OpenStackRouterInterfaces.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response removeRouterInterface(
             @PathParam("routerUUID") String routerUUID,
@@ -454,8 +427,6 @@ public class NeutronRoutersNorthbound {
             ) {
         NeutronCRUDInterfaces interfaces = getAttachInterfaces();
         INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
 
         NeutronRouter target = routerInterface.getRouter(routerUUID);

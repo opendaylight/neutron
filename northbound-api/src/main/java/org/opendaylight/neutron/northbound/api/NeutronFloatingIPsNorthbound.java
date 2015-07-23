@@ -36,9 +36,6 @@ import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronFloatingIP;
 import org.opendaylight.neutron.spi.NeutronNetwork;
-import org.opendaylight.neutron.spi.NeutronPort;
-import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.Neutron_IPs;
 
 /**
  * Neutron Northbound REST APIs.<br>
@@ -70,20 +67,6 @@ public class NeutronFloatingIPsNorthbound {
 
     private NeutronFloatingIP extractFields(NeutronFloatingIP o, List<String> fields) {
         return o.extractFields(fields);
-    }
-
-    private boolean isIpV4Network(NeutronNetwork externNetwork,
-                                  INeutronSubnetCRUD subnetInterface) {
-        for (String subnetUUID: externNetwork.getSubnets()) {
-            if (!subnetInterface.subnetExists(subnetUUID)) {
-                continue;
-            }
-            NeutronSubnet subnet = subnetInterface.getSubnet(subnetUUID);
-            if (subnet.getIpVersion() == 4) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
@@ -202,17 +185,10 @@ public class NeutronFloatingIPsNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
         INeutronFloatingIPCRUD floatingIPInterface = interfaces.getFloatingIPInterface();
-        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
-        INeutronPortCRUD portInterface = interfaces.getPortInterface();
         if (input.isSingleton()) {
             Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
             if (instances != null) {
@@ -252,11 +228,6 @@ public class NeutronFloatingIPsNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID,
@@ -264,9 +235,6 @@ public class NeutronFloatingIPsNorthbound {
             ) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
         INeutronFloatingIPCRUD floatingIPInterface = interfaces.getFloatingIPInterface();
-        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
-        INeutronPortCRUD portInterface = interfaces.getPortInterface();
 
         NeutronFloatingIP singleton = input.getSingleton();
         NeutronFloatingIP target = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -306,9 +274,6 @@ public class NeutronFloatingIPsNorthbound {
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID) {

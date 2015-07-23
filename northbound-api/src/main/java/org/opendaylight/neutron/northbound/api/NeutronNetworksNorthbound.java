@@ -11,10 +11,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -67,7 +65,6 @@ public class NeutronNetworksNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Network CRUD Interface";
     private static final String UUID_NO_EXIST = "Network UUID does not exist.";
-    private static final String UUID_EXISTS = "Network UUID already exists.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
@@ -200,9 +197,6 @@ public class NeutronNetworksNorthbound {
     @TypeHint(NeutronNetwork.class)
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createNetworks(final NeutronNetworkRequest input) {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
@@ -280,10 +274,6 @@ public class NeutronNetworksNorthbound {
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateNetwork(
             @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
@@ -337,10 +327,6 @@ public class NeutronNetworksNorthbound {
     @DELETE
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Network In Use"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
