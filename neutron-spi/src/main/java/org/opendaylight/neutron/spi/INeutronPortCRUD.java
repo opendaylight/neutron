@@ -88,6 +88,8 @@ public interface INeutronPortCRUD {
      *            mac Address to be tested
      * @return boolean on whether the macAddress is already associated with a
      * port or not
+     *
+     * @deprecated - will be removed in Boron
      */
 
     boolean macInUse(String macAddress);
@@ -99,6 +101,8 @@ public interface INeutronPortCRUD {
      * @param subnetUUID
      *            identifier of the subnet
      * @return OpenStackPorts object if the port exists and null if it does not
+     * 
+     * @deprecated - will be removed in Boron
      */
 
     NeutronPort getGatewayPort(String subnetUUID);
