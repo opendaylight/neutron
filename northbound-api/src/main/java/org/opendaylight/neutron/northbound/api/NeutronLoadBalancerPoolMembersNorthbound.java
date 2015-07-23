@@ -13,10 +13,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -177,9 +175,6 @@ public Response showLoadBalancerPoolMember(
 @Consumes({MediaType.APPLICATION_JSON})
 @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 public Response createLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
@@ -191,7 +186,6 @@ public Response createLoadBalancerPoolMember(
     if (input.isSingleton()) {
         NeutronLoadBalancerPoolMember singleton = input.getSingleton();
         singleton.setPoolID(loadBalancerPoolUUID);
-        String loadBalancerPoolMemberUUID = singleton.getPoolMemberID();
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
         if (instances != null) {
@@ -225,7 +219,6 @@ public Response createLoadBalancerPoolMember(
     } else {
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
         for (NeutronLoadBalancerPoolMember test : input.getBulk()) {
-            String loadBalancerPoolMemberUUID = test.getPoolMemberID();
 
             if (instances != null) {
                 if (instances.length > 0) {
@@ -269,10 +262,6 @@ public Response createLoadBalancerPoolMember(
 @Consumes({ MediaType.APPLICATION_JSON })
 @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
         @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented") })
 public Response updateLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
@@ -291,10 +280,6 @@ public Response updateLoadBalancerPoolMember(
 @DELETE
 @StatusCodes({
     @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-    @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-    @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-    @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-    @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
     @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 public Response deleteLoadBalancerPoolMember(
         @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,

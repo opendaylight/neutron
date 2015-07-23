@@ -23,7 +23,6 @@ import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronFloatingIP;
-import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.Floatingips;
@@ -77,21 +76,8 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean addFloatingIP(NeutronFloatingIP input) {
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronNetworkCRUD(this)
-            .fetchINeutronSubnetCRUD(this)
-            .fetchINeutronPortCRUD(this);
-        INeutronNetworkCRUD networkCRUD = interfaces.getNetworkInterface();
-        INeutronSubnetCRUD subnetCRUD = interfaces.getSubnetInterface();
-        INeutronPortCRUD portCRUD = interfaces.getPortInterface();
-
         if (floatingIPExists(input.getID())) {
             return false;
-        }
-        //if floating_ip_address isn't there, allocate from the subnet pool
-        NeutronSubnet subnet = subnetCRUD.getSubnet(networkCRUD.getNetwork(input.getFloatingNetworkUUID()).getSubnets().get(0));
-        if (input.getFloatingIPAddress() == null) {
-            input.setFloatingIPAddress(subnet.getLowAddr());
         }
         floatingIPDB.putIfAbsent(input.getID(), input);
         return true;
@@ -99,10 +85,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean removeFloatingIP(String uuid) {
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronPortCRUD(this);
-        INeutronPortCRUD portCRUD = interfaces.getPortInterface();
-
         if (!floatingIPExists(uuid)) {
             return false;
         }
@@ -112,10 +94,6 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta) {
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronPortCRUD(this);
-        INeutronPortCRUD portCRUD = interfaces.getPortInterface();
-
         if (!floatingIPExists(uuid)) {
             return false;
         }

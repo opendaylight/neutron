@@ -13,7 +13,6 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
@@ -167,8 +166,8 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         return result;
     }
 
-    protected Network toMd(NeutronNetwork network) {
-
+    private void fillExtensions(NetworkBuilder networkBuilder,
+                                NeutronNetwork network) {
         NetworkL3ExtensionBuilder l3ExtensionBuilder = new NetworkL3ExtensionBuilder();
         if (network.getRouterExternal() != null) {
             l3ExtensionBuilder.setExternal(network.getRouterExternal());
@@ -212,11 +211,15 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
 
-        NetworkBuilder networkBuilder = new NetworkBuilder();
         networkBuilder.addAugmentation(NetworkL3Extension.class,
                                        l3ExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkProviderExtension.class,
                                        providerExtensionBuilder.build());
+    }
+
+    protected Network toMd(NeutronNetwork network) {
+        NetworkBuilder networkBuilder = new NetworkBuilder();
+        fillExtensions(networkBuilder, network);
 
         networkBuilder.setAdminStateUp(network.getAdminStateUp());
         if (network.getNetworkName() != null) {

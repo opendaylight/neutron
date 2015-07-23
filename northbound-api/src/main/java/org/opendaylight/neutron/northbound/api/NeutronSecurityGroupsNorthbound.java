@@ -158,12 +158,6 @@ public class NeutronSecurityGroupsNorthbound {
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode (code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode (code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode (code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
@@ -241,11 +235,6 @@ public class NeutronSecurityGroupsNorthbound {
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode (code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode (code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
@@ -293,10 +282,6 @@ public class NeutronSecurityGroupsNorthbound {
     @DELETE
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode (code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {

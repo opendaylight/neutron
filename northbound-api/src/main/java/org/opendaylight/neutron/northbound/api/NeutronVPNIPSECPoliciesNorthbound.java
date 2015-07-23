@@ -171,9 +171,6 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @TypeHint(NeutronVPNIPSECPolicy.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIPSECPolicy(final NeutronVPNIPSECPolicyRequest input) {
         INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
@@ -225,10 +222,6 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID, final NeutronVPNIPSECPolicyRequest input
@@ -276,10 +269,6 @@ public class NeutronVPNIPSECPoliciesNorthbound {
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID) {

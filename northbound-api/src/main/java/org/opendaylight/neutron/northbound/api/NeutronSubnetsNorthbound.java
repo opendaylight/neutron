@@ -11,10 +11,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -63,7 +61,6 @@ public class NeutronSubnetsNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Subnet CRUD Interface";
     private static final String UUID_NO_EXIST = "Subnet UUID does not exist.";
-    private static final String UUID_EXISTS = "Subnet UUID already exists.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
@@ -195,17 +192,10 @@ public class NeutronSubnetsNorthbound {
     //@TypeHint(OpenStackSubnets.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSubnets(final NeutronSubnetRequest input) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
         INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
-        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
         if (input.isSingleton()) {
             NeutronSubnet singleton = input.getSingleton();
 
@@ -278,11 +268,6 @@ public class NeutronSubnetsNorthbound {
     //@TypeHint(OpenStackSubnets.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSubnet(
             @PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input
@@ -336,10 +321,6 @@ public class NeutronSubnetsNorthbound {
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSubnet(
             @PathParam("subnetUUID") String subnetUUID) {
