@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_22914747",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSubnetInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-23T13:57:08Z",
+      "side": 1,
+      "message": "info or debug?",
+      "range": {
+        "startLine": 157,
+        "startChar": 15,
+        "endLine": 157,
+        "endChar": 19
+      },
+      "revId": "0be40b8611a0586477451d80d9382ea01b8cdfdd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_42948336",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSubnetInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-07-23T13:57:08Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 159,
+        "startChar": 15,
+        "endLine": 159,
+        "endChar": 19
+      },
+      "revId": "0be40b8611a0586477451d80d9382ea01b8cdfdd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
