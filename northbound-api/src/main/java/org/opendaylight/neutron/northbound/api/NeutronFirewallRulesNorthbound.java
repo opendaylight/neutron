@@ -113,11 +113,8 @@ public class NeutronFirewallRulesNorthbound {
             // sorting not supported
     ) {
         INeutronFirewallRuleCRUD firewallRuleInterface = getNeutronInterfaces().getFirewallRuleInterface();
-        List<NeutronFirewallRule> allFirewallRules = firewallRuleInterface.getAllNeutronFirewallRules();
         List<NeutronFirewallRule> ans = new ArrayList<NeutronFirewallRule>();
-        Iterator<NeutronFirewallRule> i = allFirewallRules.iterator();
-        while (i.hasNext()) {
-            NeutronFirewallRule nsr = i.next();
+        for (NeutronFirewallRule nsr : firewallRuleInterface.getAllNeutronFirewallRules()) {
             if ((queryFirewallRuleUUID == null ||
                     queryFirewallRuleUUID.equals(nsr.getFirewallRuleUUID())) &&
                     (queryFirewallRuleTenantID == null ||
@@ -215,10 +212,6 @@ public class NeutronFirewallRulesNorthbound {
 
         if (input.isSingleton()) {
             NeutronFirewallRule singleton = input.getSingleton();
-            if (firewallRuleInterface.neutronFirewallRuleExists(singleton.getFirewallRuleUUID())) {
-                throw new BadRequestException(UUID_EXISTS);
-            }
-            firewallRuleInterface.addNeutronFirewallRule(singleton);
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -245,23 +238,9 @@ public class NeutronFirewallRulesNorthbound {
                 }
             }
         } else {
-            List<NeutronFirewallRule> bulk = input.getBulk();
-            Iterator<NeutronFirewallRule> i = bulk.iterator();
             Map<String, NeutronFirewallRule> testMap = new HashMap<String, NeutronFirewallRule>();
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
-            while (i.hasNext()) {
-                NeutronFirewallRule test = i.next();
-
-                /*
-                 *  Verify that the Firewall rule doesn't already exist
-                 */
-
-                if (firewallRuleInterface.neutronFirewallRuleExists(test.getFirewallRuleUUID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                if (testMap.containsKey(test.getFirewallRuleUUID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
+            for (NeutronFirewallRule test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -278,12 +257,7 @@ public class NeutronFirewallRulesNorthbound {
                     throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronFirewallRule test = i.next();
+            for (NeutronFirewallRule test : input.getBulk()) {
                 firewallRuleInterface.addNeutronFirewallRule(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -314,40 +288,11 @@ public class NeutronFirewallRulesNorthbound {
     public Response updateFirewallRule(
             @PathParam("firewallRuleUUID") String firewallRuleUUID, final NeutronFirewallRuleRequest input) {
         INeutronFirewallRuleCRUD firewallRuleInterface = getNeutronInterfaces().getFirewallRuleInterface();
-        /*
-         * verify the Firewall Rule exists
-         */
-        if (!firewallRuleInterface.neutronFirewallRuleExists(firewallRuleUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
         }
         NeutronFirewallRule delta = input.getSingleton();
         NeutronFirewallRule original = firewallRuleInterface.getNeutronFirewallRule(firewallRuleUUID);
-
-        /*
-         * updates restricted by Neutron
-         *
-         */
-        if (delta.getFirewallRuleUUID() != null ||
-                delta.getFirewallRuleTenantID() != null ||
-                delta.getFirewallRuleName() != null ||
-                delta.getFirewallRuleDescription() != null ||
-                delta.getFirewallRuleStatus() != null ||
-                delta.getFirewallRuleIsShared() != null ||
-                delta.getFirewallRulePolicyID() != null ||
-                delta.getFirewallRuleProtocol() != null ||
-                delta.getFirewallRuleIpVer() != null ||
-                delta.getFirewallRuleSrcIpAddr() != null ||
-                delta.getFirewallRuleDstIpAddr() != null ||
-                delta.getFirewallRuleSrcPort() != null ||
-                delta.getFirewallRuleDstPort() != null ||
-                delta.getFirewallRulePosition() != null ||
-                delta.getFirewallRuleAction() != null ||
-                delta.getFirewallRuleIsEnabled() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
         if (instances != null) {
@@ -399,15 +344,6 @@ public class NeutronFirewallRulesNorthbound {
             @PathParam("firewallRuleUUID") String firewallRuleUUID) {
         INeutronFirewallRuleCRUD firewallRuleInterface = getNeutronInterfaces().getFirewallRuleInterface();
 
-        /*
-         * verify the Firewall Rule exists and it isn't currently in use
-         */
-        if (!firewallRuleInterface.neutronFirewallRuleExists(firewallRuleUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (firewallRuleInterface.neutronFirewallRuleInUse(firewallRuleUUID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronFirewallRule singleton = firewallRuleInterface.getNeutronFirewallRule(firewallRuleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
         if (instances != null) {

@@ -209,13 +209,6 @@ public class NeutronNetworksNorthbound {
         if (input.isSingleton()) {
             NeutronNetwork singleton = input.getSingleton();
 
-            /*
-             * network ID can't already exist
-             */
-            if (networkInterface.networkExists(singleton.getID())) {
-                throw new BadRequestException(UUID_EXISTS);
-            }
-
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -244,23 +237,8 @@ public class NeutronNetworksNorthbound {
             }
 
         } else {
-            List<NeutronNetwork> bulk = input.getBulk();
-            Iterator<NeutronNetwork> i = bulk.iterator();
-            Map<String, NeutronNetwork> testMap = new HashMap<String, NeutronNetwork>();
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-            while (i.hasNext()) {
-                NeutronNetwork test = i.next();
-
-                /*
-                 * network ID can't already exist, nor can there be an entry for this UUID
-                 * already in this bulk request
-                 */
-                if (networkInterface.networkExists(test.getID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
-                if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException(UUID_EXISTS);
-                }
+            for (NeutronNetwork test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance: instances) {
@@ -276,13 +254,10 @@ public class NeutronNetworksNorthbound {
                 } else {
                     throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
-                testMap.put(test.getID(),test);
             }
 
             // now that everything passed, add items to the cache
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronNetwork test = i.next();
+            for (NeutronNetwork test : input.getBulk()) {
                 test.initDefaults();
                 networkInterface.addNetwork(test);
                 if (instances != null) {
@@ -315,15 +290,6 @@ public class NeutronNetworksNorthbound {
             ) {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
 
-        /*
-         * network has to exist and only a single object is supported
-         */
-        if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("only singleton edits supported");
-        }
         NeutronNetwork updatedObject = input.getSingleton();
 
         /*
@@ -379,16 +345,6 @@ public class NeutronNetworksNorthbound {
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
-
-        /*
-         * network has to exist and not be in use before it can be removed
-         */
-        if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (networkInterface.networkInUse(netUUID)) {
-            throw new ResourceConflictException("Network ID in use");
-        }
 
         NeutronNetwork singleton = networkInterface.getNetwork(netUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);

@@ -181,12 +181,6 @@ public class NeutronVPNServicesNorthbound {
         if (input.isSingleton()) {
             NeutronVPNService singleton = input.getSingleton();
 
-            /*
-             * Verify that the VPNService doesn't already exist.
-             */
-            if (VPNServiceInterface.neutronVPNServiceExists(singleton.getID())) {
-                throw new BadRequestException("VPNService UUID already exists");
-            }
             Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -212,23 +206,8 @@ public class NeutronVPNServicesNorthbound {
                 }
             }
         } else {
-            List<NeutronVPNService> bulk = input.getBulk();
-            Iterator<NeutronVPNService> i = bulk.iterator();
-            Map<String, NeutronVPNService> testMap = new HashMap<String, NeutronVPNService>();
             Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
-            while (i.hasNext()) {
-                NeutronVPNService test = i.next();
-
-                /*
-                 * Verify that the VPNService doesn't already exist
-                 */
-
-                if (VPNServiceInterface.neutronVPNServiceExists(test.getID())) {
-                    throw new BadRequestException("VPN Service UUID already is already created");
-                }
-                if (testMap.containsKey(test.getID())) {
-                    throw new BadRequestException("VPN Service UUID already exists");
-                }
+            for (NeutronVPNService test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -248,9 +227,7 @@ public class NeutronVPNServicesNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronVPNService test = i.next();
+            for (NeutronVPNService test : input.getBulk()) {
                 VPNServiceInterface.addVPNService(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -280,26 +257,8 @@ public class NeutronVPNServicesNorthbound {
     public Response updateVPNService(@PathParam("serviceID") String serviceID, final NeutronVPNServiceRequest input) {
         INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
 
-        /*
-         * verify the VPNService exists and there is only one delta provided
-         */
-        if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronVPNService delta = input.getSingleton();
         NeutronVPNService original = VPNServiceInterface.getVPNService(serviceID);
-
-        /*
-         * updates restricted by Neutron
-         */
-        if (delta.getID() != null || delta.getTenantID() != null || delta.getName() != null
-                || delta.getRouterUUID() != null || delta.getStatus() != null || delta.getAdminStateUp() != null
-                || delta.getSubnetUUID() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
         if (instances != null) {
@@ -348,15 +307,6 @@ public class NeutronVPNServicesNorthbound {
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
         INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
 
-        /*
-         * verify the VPNService exists and it isn't currently in use
-         */
-        if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (VPNServiceInterface.neutronVPNServiceInUse(serviceID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronVPNService singleton = VPNServiceInterface.getVPNService(serviceID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
         if (instances != null) {

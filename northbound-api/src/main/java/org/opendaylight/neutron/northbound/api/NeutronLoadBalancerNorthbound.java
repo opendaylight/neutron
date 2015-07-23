@@ -182,12 +182,6 @@ public class NeutronLoadBalancerNorthbound {
         if (input.isSingleton()) {
             NeutronLoadBalancer singleton = input.getSingleton();
 
-            /*
-             *  Verify that the LoadBalancer doesn't already exist.
-             */
-            if (loadBalancerInterface.neutronLoadBalancerExists(singleton.getLoadBalancerID())) {
-                throw new BadRequestException("LoadBalancer UUID already exists");
-            }
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -213,23 +207,8 @@ public class NeutronLoadBalancerNorthbound {
                 }
             }
         } else {
-            List<NeutronLoadBalancer> bulk = input.getBulk();
-            Iterator<NeutronLoadBalancer> i = bulk.iterator();
-            Map<String, NeutronLoadBalancer> testMap = new HashMap<String, NeutronLoadBalancer>();
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
-            while (i.hasNext()) {
-                NeutronLoadBalancer test = i.next();
-
-                /*
-                 *  Verify that the loadbalancer doesn't already exist
-                 */
-
-                if (loadBalancerInterface.neutronLoadBalancerExists(test.getLoadBalancerID())) {
-                    throw new BadRequestException("Load Balancer Pool UUID already is already created");
-                }
-                if (testMap.containsKey(test.getLoadBalancerID())) {
-                    throw new BadRequestException("Load Balancer Pool UUID already exists");
-                }
+            for (NeutronLoadBalancer test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -249,9 +228,7 @@ public class NeutronLoadBalancerNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronLoadBalancer test = i.next();
+            for (NeutronLoadBalancer test : input.getBulk()) {
                 loadBalancerInterface.addNeutronLoadBalancer(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -284,30 +261,8 @@ public class NeutronLoadBalancerNorthbound {
             @PathParam("loadBalancerID") String loadBalancerID, final NeutronLoadBalancerRequest input) {
         INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
 
-        /*
-         * verify the LoadBalancer exists and there is only one delta provided
-         */
-        if (!loadBalancerInterface.neutronLoadBalancerExists(loadBalancerID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronLoadBalancer delta = input.getSingleton();
         NeutronLoadBalancer original = loadBalancerInterface.getNeutronLoadBalancer(loadBalancerID);
-
-        /*
-         * updates restricted by Neutron
-         */
-        if (delta.getLoadBalancerID() != null ||
-                delta.getLoadBalancerTenantID() != null ||
-                delta.getLoadBalancerName() != null ||
-                delta.getLoadBalancerDescription() != null ||
-                delta.getLoadBalancerStatus() != null ||
-                delta.getLoadBalancerVipAddress() != null ||
-                delta.getLoadBalancerVipSubnetID() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
         if (instances != null) {
@@ -358,15 +313,6 @@ public class NeutronLoadBalancerNorthbound {
             @PathParam("loadBalancerID") String loadBalancerID) {
         INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
 
-        /*
-         * verify the LoadBalancer exists and it isn't currently in use
-         */
-        if (!loadBalancerInterface.neutronLoadBalancerExists(loadBalancerID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (loadBalancerInterface.neutronLoadBalancerInUse(loadBalancerID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronLoadBalancer singleton = loadBalancerInterface.getNeutronLoadBalancer(loadBalancerID);
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
         if (instances != null) {

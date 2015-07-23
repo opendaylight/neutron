@@ -171,13 +171,6 @@ public class NeutronSecurityGroupsNorthbound {
         if (input.isSingleton()) {
             NeutronSecurityGroup singleton = input.getSingleton();
 
-            /*
-             *  Verify that the Security Group doesn't already exist.
-             */
-            if (securityGroupInterface.neutronSecurityGroupExists(singleton.getSecurityGroupUUID())) {
-                throw new BadRequestException("Security Group UUID already exists");
-            }
-
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -203,19 +196,8 @@ public class NeutronSecurityGroupsNorthbound {
                 }
             }
         } else {
-            List<NeutronSecurityGroup> bulk = input.getBulk();
-            Iterator<NeutronSecurityGroup> i = bulk.iterator();
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
-            while (i.hasNext()) {
-                NeutronSecurityGroup test = i.next();
-
-                /*
-                 *  Verify that the security group doesn't already exist
-                 */
-
-                if (securityGroupInterface.neutronSecurityGroupExists(test.getSecurityGroupUUID())) {
-                    throw new BadRequestException("Security Group UUID already is already created");
-                }
+            for (NeutronSecurityGroup test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -236,9 +218,7 @@ public class NeutronSecurityGroupsNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronSecurityGroup test = i.next();
+            for (NeutronSecurityGroup test : input.getBulk()) {
                 securityGroupInterface.addNeutronSecurityGroup(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -271,24 +251,8 @@ public class NeutronSecurityGroupsNorthbound {
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
 
-        /*
-         * verify the Security Group exists and there is only one delta provided
-         */
-        if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronSecurityGroup delta = input.getSingleton();
         NeutronSecurityGroup original = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
-
-        if (delta.getSecurityGroupUUID() != null ||
-                delta.getSecurityGroupTenantID() != null ||
-                delta.getSecurityGroupName() != null ||
-                delta.getSecurityGroupDescription() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances =  NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
         if (instances != null) {
@@ -338,15 +302,6 @@ public class NeutronSecurityGroupsNorthbound {
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
 
-        /*
-         * verify the Security Group exists and it isn't currently in use
-         */
-        if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (securityGroupInterface.neutronSecurityGroupInUse(securityGroupUUID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronSecurityGroup singleton = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
         if (instances != null) {

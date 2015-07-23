@@ -103,11 +103,8 @@ public class NeutronFirewallPolicyNorthbound {
             // sorting not supported
     ) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
-        List<NeutronFirewallPolicy> allFirewallPolicies = firewallPolicyInterface.getAllNeutronFirewallPolicies();
         List<NeutronFirewallPolicy> ans = new ArrayList<NeutronFirewallPolicy>();
-        Iterator<NeutronFirewallPolicy> i = allFirewallPolicies.iterator();
-        while (i.hasNext()) {
-            NeutronFirewallPolicy nsg = i.next();
+        for (NeutronFirewallPolicy nsg : firewallPolicyInterface.getAllNeutronFirewallPolicies()) {
             if ((queryFirewallPolicyUUID == null ||
                 queryFirewallPolicyUUID.equals(nsg.getFirewallPolicyUUID())) &&
                 (queryFirewallPolicyTenantID == null ||
@@ -182,14 +179,6 @@ public class NeutronFirewallPolicyNorthbound {
         if (input.isSingleton()) {
             NeutronFirewallPolicy singleton = input.getSingleton();
 
-            /*
-             *  Verify that the Firewall Policy doesn't already exist.
-             */
-            if (firewallPolicyInterface.neutronFirewallPolicyExists(singleton.getFirewallPolicyUUID())) {
-                throw new BadRequestException("Firewall Policy UUID already exists");
-            }
-            firewallPolicyInterface.addNeutronFirewallPolicy(singleton);
-
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -214,23 +203,8 @@ public class NeutronFirewallPolicyNorthbound {
                 }
             }
         } else {
-            List<NeutronFirewallPolicy> bulk = input.getBulk();
-            Iterator<NeutronFirewallPolicy> i = bulk.iterator();
-            Map<String, NeutronFirewallPolicy> testMap = new HashMap<String, NeutronFirewallPolicy>();
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
-            while (i.hasNext()) {
-                NeutronFirewallPolicy test = i.next();
-
-                /*
-                 *  Verify that the firewall policy doesn't already exist
-                 */
-
-                if (firewallPolicyInterface.neutronFirewallPolicyExists(test.getFirewallPolicyUUID())) {
-                    throw new BadRequestException("Firewall Policy UUID already is already created");
-                }
-                if (testMap.containsKey(test.getFirewallPolicyUUID())) {
-                    throw new BadRequestException("Firewall Policy UUID already exists");
-                }
+            for (NeutronFirewallPolicy test : input.getBulk()) {
                 if (instances != null) {
                     if (instances.length > 0) {
                         for (Object instance : instances) {
@@ -250,9 +224,7 @@ public class NeutronFirewallPolicyNorthbound {
             /*
              * now, each element of the bulk request can be added to the cache
              */
-            i = bulk.iterator();
-            while (i.hasNext()) {
-                NeutronFirewallPolicy test = i.next();
+            for (NeutronFirewallPolicy test : input.getBulk()) {
                 firewallPolicyInterface.addNeutronFirewallPolicy(test);
                 if (instances != null) {
                     for (Object instance : instances) {
@@ -285,30 +257,8 @@ public class NeutronFirewallPolicyNorthbound {
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID, final NeutronFirewallPolicyRequest input) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
 
-        /*
-         * verify the Firewall Policy exists and there is only one delta provided
-         */
-        if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (!input.isSingleton()) {
-            throw new BadRequestException("Only singleton edit supported");
-        }
         NeutronFirewallPolicy delta = input.getSingleton();
         NeutronFirewallPolicy original = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
-
-        /*
-         * updates restricted by Neutron
-         */
-        if (delta.getFirewallPolicyUUID() != null ||
-                delta.getFirewallPolicyTenantID() != null ||
-                delta.getFirewallPolicyName() != null ||
-                delta.getFirewallPolicyDescription() != null ||
-                delta.getFirewallPolicyIsShared() != null ||
-                delta.getFirewallPolicyRules().size() > 0 ||
-                delta.getFirewallPolicyIsAudited() != null) {
-            throw new BadRequestException("Attribute edit blocked by Neutron");
-        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
         if (instances != null) {
@@ -357,15 +307,6 @@ public class NeutronFirewallPolicyNorthbound {
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
 
-        /*
-         * verify the Firewall Policy exists and it isn't currently in use
-         */
-        if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (firewallPolicyInterface.neutronFirewallPolicyInUse(firewallPolicyUUID)) {
-            return Response.status(HttpURLConnection.HTTP_CONFLICT).build();
-        }
         NeutronFirewallPolicy singleton = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
         if (instances != null) {

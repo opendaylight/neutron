@@ -167,12 +167,6 @@ public class NeutronMeteringLabelRulesNorthbound {
         if (input.isSingleton()) {
             NeutronMeteringLabelRule singleton = input.getSingleton();
 
-            /*
-             * verify that the meteringLabelRule doesn't already exist (issue: is deeper inspection necessary?)
-             */
-            if (meteringLabelRuleInterface.neutronMeteringLabelRuleExists(singleton.getMeteringLabelRuleUUID())) {
-                throw new BadRequestException("meteringLabelRule UUID already exists");
-            }
             Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
             if (instances != null) {
                 if (instances.length > 0) {
@@ -226,12 +220,6 @@ public class NeutronMeteringLabelRulesNorthbound {
             @PathParam("ruleUUID") String ruleUUID) {
         INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
 
-        /*
-         * verify that the meteringLabelRule exists and is not in use before removing it
-         */
-        if (!meteringLabelRuleInterface.neutronMeteringLabelRuleExists(ruleUUID)) {
-            throw new ResourceNotFoundException("MeteringLabelRule UUID not found");
-        }
         NeutronMeteringLabelRule singleton = meteringLabelRuleInterface.getNeutronMeteringLabelRule(ruleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
         if (instances != null) {
