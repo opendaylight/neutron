@@ -14,8 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
@@ -52,8 +50,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronPortInterface extends AbstractNeutronInterface<Port, NeutronPort> implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
-    private ConcurrentMap<String, NeutronPort> portDB = new ConcurrentHashMap<String, NeutronPort>();
-
 
     NeutronPortInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -63,23 +59,30 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     @Override
     public boolean portExists(String uuid) {
-        return portDB.containsKey(uuid);
+        Port port = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (port == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronPort getPort(String uuid) {
-        if (!portExists(uuid)) {
+        Port port = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (port == null) {
             return null;
         }
-        return portDB.get(uuid);
+        return fromMd(port);
     }
 
     @Override
     public List<NeutronPort> getAllPorts() {
         Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        for (Entry<String, NeutronPort> entry : portDB.entrySet()) {
-            NeutronPort port = entry.getValue();
-            allPorts.add(port);
+	Ports ports = readMd(createInstanceIdentifier());
+        if (ports != null) {
+            for (Port port : ports.getPort()) {
+                allPorts.add(fromMd(port));
+            }
         }
         LOGGER.debug("Exiting getAllPorts, Found {} OpenStackPorts", allPorts.size());
         List<NeutronPort> ans = new ArrayList<NeutronPort>();
@@ -92,7 +95,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (portExists(input.getID())) {
             return false;
         }
-        portDB.putIfAbsent(input.getID(), input);
+        addMd(input);
         return true;
     }
 
@@ -101,8 +104,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (!portExists(uuid)) {
             return false;
         }
-        portDB.remove(uuid);
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -110,50 +112,19 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (!portExists(uuid)) {
             return false;
         }
-        NeutronPort target = portDB.get(uuid);
-        if (delta.getFixedIPs() != null) {
-            NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-                .fetchINeutronSubnetCRUD(this);
-            INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
-            for (Neutron_IPs ip: delta.getFixedIPs()) {
-                NeutronSubnet subnet = systemCRUD.getSubnet(ip.getSubnetUUID());
-                if (ip.getIpAddress() == null) {
-                    ip.setIpAddress(subnet.getLowAddr());
-                }
-            }
-        }
-        portDB.put(uuid, delta);
         updateMd(delta);
         return true;
     }
 
+    // @deprecated, will be removed in Boron
     @Override
     public boolean macInUse(String macAddress) {
-        List<NeutronPort> ports = getAllPorts();
-        Iterator<NeutronPort> portIterator = ports.iterator();
-        while (portIterator.hasNext()) {
-            NeutronPort port = portIterator.next();
-            if (macAddress.equalsIgnoreCase(port.getMacAddress())) {
-                return true;
-            }
-        }
         return false;
     }
 
+    // @deprecated, will be removed in Boron
     @Override
     public NeutronPort getGatewayPort(String subnetUUID) {
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronSubnetCRUD(this);
-        INeutronSubnetCRUD systemCRUD = interfaces.getSubnetInterface();
-        NeutronSubnet subnet = systemCRUD.getSubnet(subnetUUID);
-        Iterator<NeutronPort> portIterator = getAllPorts().iterator();
-        while (portIterator.hasNext()) {
-            NeutronPort port = portIterator.next();
-            List<Neutron_IPs> fixedIPs = port.getFixedIPs();
-            if (fixedIPs.size() == 1 && subnet.getGatewayIP().equals(fixedIPs.get(0).getIpAddress())) {
-                return port;
-            }
-        }
         return null;
     }
 
@@ -162,6 +133,57 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         return InstanceIdentifier.create(Neutron.class)
                 .child(Ports.class)
                 .child(Port.class, port.getKey());
+    }
+
+    protected InstanceIdentifier<Ports> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Ports.class);
+    }
+
+    protected void addExtensions(Port port, NeutronPort result) {
+        PortBindingExtension binding = port.getAugmentation(PortBindingExtension.class);
+        result.setBindinghostID(binding.getHostId);
+        if (binding.getVifDetails() != null) {
+            List<NeutronPort_VIFDetail> details = new ArrayList<NeutronPort_VIFDetails>();
+            for (VifDetail vifDetail : binding.getVifDetail()) {
+                NeutronPort_VIFDetail detail = new NeutronPort_VIFDetail();
+                detail.setPortFilter(vifDetail.isPortFilter());
+                detail.setOvsHybridPlug(vifDetail.isOvsHybridPlug());
+                details.add(detail);
+            }
+            result.setVIFDetail(details);
+        }
+        result.setBindingvifType(binding.getVifType());
+        result.setBindingvnicType(binding.getVnicType());
+    }
+
+    protected NeutronPort fromMd(Port port) {
+        NeutronPort result = new NeutronPort();
+        result.setAdminStateUp(port.isAdminStateUp());
+        if (port.getAllowedAddressPairs() != null) {
+            List<NeutronPort_AllowedAddressPairs> pairs = new ArrayList<NeutronPort_AllowedAddressPairs>();
+            for (AllowedAddressPair mdPair : port.getAllowedAddressPairs()) {
+                NeutronPort_AllowedAddressPairs pair = new NeutronPort_AllowedAddressPairs();
+                pair.setIpAddress(mdPair.getIpAddress().value());
+                pair.setMacAddress(mdPair.getMacAddress());
+                pair.setPortID(mdPair.getPortId());
+                pairs.add(pair);
+            }
+            result.setAllowedAddressPairs(pairs);
+        }
+        result.setDeviceID(port.getDeviceId());
+        result.setDeviceOwner(port.getDeviceOwner());
+        // dhcp options
+        // fixed ips
+        result.setMacAddress(port.getMacAddress());
+        result.setName(port.getName());
+        result.setNetworkUUID(String.valueOf(port.getNetworkId().getValue()));
+        // security groups
+        result.setStatus(port.getStatus());
+        result.setTenantID(String.valueOf(port.getTenantId().getValue()).replace("-",""));
+        result.setPortUUID(String.valueOf(port.getUuid().getValue()));
+        addExtensions(port, result);
+        return result;
     }
 
     @Override
@@ -205,9 +227,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
                     listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
             }
             portBuilder.setAllowedAddressPairs(listAllowedAddressPairs);
-        }
-        if (neutronPort.getBindinghostID() != null) {
-            portBuilder.setBindingProfile(neutronPort.getBindinghostID());
         }
         if (neutronPort.getDeviceID() != null) {
             portBuilder.setDeviceId(neutronPort.getDeviceID());
