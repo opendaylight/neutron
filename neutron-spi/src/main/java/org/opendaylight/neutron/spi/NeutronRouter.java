@@ -217,6 +217,7 @@ public class NeutronRouter implements Serializable, INeutronObject {
             ", distributed=" + distributed +
             ", gw_port_id=" + gatewayPortId +
             ", routes=" + routes +
+            ", interfaces=" + interfaces +
             "]";
     }
 

@@ -77,10 +77,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
      * which is needed for determining if that instance can be deleted
      */
 
-    List<NeutronPort> myPorts;
-
     public NeutronNetwork() {
-        myPorts = new ArrayList<NeutronPort>();
     }
 
     public void initDefaults() {
@@ -228,18 +225,6 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         mtu = input;
     }
 
-    public List<NeutronPort> getPortsOnNetwork() {
-        return myPorts;
-    }
-
-    public void addPort(NeutronPort port) {
-        myPorts.add(port);
-    }
-
-    public void removePort(NeutronPort port) {
-        myPorts.remove(port);
-    }
-
     /**
      * This method copies selected fields from the object and returns them
      * as a new object, suitable for marshaling.
@@ -300,8 +285,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
                 + adminStateUp + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
-                + ", subnets=" + subnets + ", myPorts=" + myPorts
-            + ", segments = " + segments + "]";
+                + ", subnets=" + subnets + ", segments = " + segments + "]";
     }
 }
 

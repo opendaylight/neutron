@@ -115,66 +115,6 @@ public class NeutronSubnetTest {
     }
 
     @Test
-    public void isIPInUseTest() {
-        NeutronSubnet objectUT = new NeutronSubnet();
-        objectUT.setIpVersion(4);
-        objectUT.setCidr("10.18.0.0/24");
-
-        NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
-        allocationPool.setPoolStart("10.18.0.2");
-        allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-        aPools.add(allocationPool);
-        objectUT.setAllocationPools(aPools);
-
-        objectUT.setGatewayIP("10.18.0.1");
-        objectUT.resetGatewayIPAllocated();
-        Assert.assertFalse("isIPInUse Test 1: test of unallocated gateway IP address failed",
-              objectUT.isIPInUse("10.18.0.1"));
-
-        objectUT.setGatewayIPAllocated();
-        Assert.assertTrue("isIPInUse Test 2: test of allocated gateway IP address failed",
-              objectUT.isIPInUse("10.18.0.1"));
-
-        Assert.assertFalse("isIPInUse Test 3: test of address in allocation pool failed",
-              objectUT.isIPInUse("10.18.0.4"));
-
-        Assert.assertTrue("isIPInUse Test 4: test of address outside of allocation pool failed",
-              objectUT.isIPInUse("10.18.0.10"));
-
-        Assert.assertTrue("isIPInUse Test 5: test of address outside of CIDR block failed",
-              objectUT.isIPInUse("10.18.1.10"));
-
-        objectUT.setIpVersion(6);
-        objectUT.setCidr("2015::0/64");
-
-        allocationPool = new NeutronSubnetIPAllocationPool();
-        allocationPool.setPoolStart("2015::2");
-        allocationPool.setPoolEnd("2015::6");
-        aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-        aPools.add(allocationPool);
-        objectUT.setAllocationPools(aPools);
-
-        objectUT.setGatewayIP("2015::1");
-        objectUT.resetGatewayIPAllocated();
-        Assert.assertFalse("isIPInUse v6 Test 1: test of unallocated gateway IP address failed",
-              objectUT.isIPInUse("2015::1"));
-
-        objectUT.setGatewayIPAllocated();
-        Assert.assertTrue("isIPInUse v6 Test 2: test of allocated gateway IP address failed",
-              objectUT.isIPInUse("2015::1"));
-
-        Assert.assertFalse("isIPInUse v6 Test 3: test of address in allocation pool failed",
-              objectUT.isIPInUse("2015::4"));
-
-        Assert.assertTrue("isIPInUse v6 Test 4: test of address outside of allocation pool failed",
-              objectUT.isIPInUse("2015::10"));
-
-        Assert.assertTrue("isIPInUse v6 Test 5: test of address outside of CIDR block failed",
-              objectUT.isIPInUse("2016::10"));
-    }
-
-    @Test
     public void getLowAddrTest() {
         NeutronSubnet objectUT = new NeutronSubnet();
         objectUT.setIpVersion(4);
