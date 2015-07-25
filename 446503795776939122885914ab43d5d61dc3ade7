@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_ae69c0bf",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronPortCRUD.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-25T01:11:29Z",
+      "side": 1,
+      "message": "nitpick: trailing white space",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_6ebac824",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronPortsNorthbound.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-25T01:11:29Z",
+      "side": 1,
+      "message": "Can you please add a comment on those.\nIs updatedObject supposed to be full value or delta?\nSo why only uuid is set?\n\nGiven uuid, tenantid, network id can\u0027t be changed, those can be set unconditionally. Are those are for optimization?",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_ce643ce7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-25T01:11:29Z",
+      "side": 1,
+      "message": "return port \u003d\u003d null;",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_6e63a8dc",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-07-25T01:11:29Z",
+      "side": 1,
+      "message": "return addMd(input); ?",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
