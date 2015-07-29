@@ -22,6 +22,7 @@ module neutron {
     import neutron-metering { prefix "metering"; }
     import neutron-lbaasv2 { prefix "lbaasv2"; }
     import neutron-provider { prefix "provider"; }
+    import neutron-l2gateways { prefix "l2gateways"; }
     import neutron-vpnaas { prefix "vpnaas"; }
     import neutron-fwaas { prefix "fwaas"; }
     import neutron-bgpvpns { prefix "bgpvpns"; }
@@ -57,5 +58,7 @@ module neutron {
         uses vpnaas:ipsecpolicies-attributes;
         uses vpnaas:ipsecconnections-attributes;
         uses bgpvpns:bgpvpns-attributes;
+        uses l2gateways:l2gateways-attributes;
+        uses l2gateways:l2gateway-connections-attributes;
     }
 }
