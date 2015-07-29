@@ -10,11 +10,12 @@ package org.opendaylight.neutron.dummyprovider;
 
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
-
 import org.opendaylight.neutron.spi.INeutronFirewallAware;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyAware;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleAware;
 import org.opendaylight.neutron.spi.INeutronFloatingIPAware;
+import org.opendaylight.neutron.spi.INeutronL2gatewayAware;
+import org.opendaylight.neutron.spi.INeutronL2gatewayConnectionAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerAware;
@@ -32,9 +33,7 @@ import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionAware;
 import org.opendaylight.neutron.spi.INeutronVPNServiceAware;
-
 import org.osgi.framework.BundleContext;
-
 
 public class Activator extends DependencyActivatorBase {
 
@@ -105,6 +104,12 @@ public class Activator extends DependencyActivatorBase {
        manager.add(createComponent().setInterface(new String[] {
            INeutronVPNServiceAware.class.getName()}, null)
            .setImplementation(NeutronVPNServiceDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+               INeutronL2gatewayAware.class.getName()}, null)
+               .setImplementation(NeutronL2gatewayDummyProvider.class));
+       manager.add(createComponent().setInterface(new String[] {
+               INeutronL2gatewayConnectionAware.class.getName()}, null)
+               .setImplementation(NeutronL2gatewayConnectionDummyProvider.class));
     }
 
     /**
@@ -115,5 +120,4 @@ public class Activator extends DependencyActivatorBase {
     @Override
     public void destroy(BundleContext context, DependencyManager manager) throws Exception {
     }
-
 }
