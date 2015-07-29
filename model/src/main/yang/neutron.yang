@@ -22,6 +22,7 @@ module neutron {
     import neutron-metering { prefix "metering"; }
     import neutron-lbaasv2 { prefix "lbaasv2"; }
     import neutron-provider { prefix "provider"; }
+    import neutron-l2gateways { prefix "l2gateways"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -46,5 +47,7 @@ module neutron {
         uses subnets:subnets-attributes;
         uses lbaasv2:lbaas-attributes;
         uses provider:provider-attributes;
+        uses l2gateways:l2gateways-attributes;
+        uses l2gateways:l2gatewayConnections-attributes;
     }
 }

@@ -39,6 +39,8 @@ public class NeutronCRUDInterfaces {
     private INeutronVPNIPSECPolicyCRUD ipsecpInterface;
     private INeutronVPNServiceCRUD vpnInterface;
     private INeutronVPNIPSECSiteConnectionsCRUD ipsecScInterface;
+    private INeutronL2GatewayCRUD l2gatewayInterface;
+    private INeutronL2GatewayConnectionCRUD l2gatewayConnectionInterface;
 
     public NeutronCRUDInterfaces() {
     }
@@ -125,6 +127,14 @@ public class NeutronCRUDInterfaces {
 
     public INeutronVPNServiceCRUD getVPNServiceInterface() {
         return vpnInterface;
+    }
+
+    public INeutronL2GatewayCRUD getL2gatewayInterface() {
+        return l2gatewayInterface;
+    }
+
+    public INeutronL2GatewayConnectionCRUD getL2gatewayConnectionInterface() {
+        return l2gatewayConnectionInterface;
     }
 
     public INeutronVPNIPSECSiteConnectionsCRUD getVPNIPSECSiteConnectionsInterface() {
@@ -235,6 +245,16 @@ public class NeutronCRUDInterfaces {
         ipsecScInterface = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(INeutronVPNIPSECSiteConnectionsCRUD.class, obj);
         return this;
     }
+
+    public NeutronCRUDInterfaces fetchINeutronL2GatewayCRUD(Object obj) {
+        l2gatewayInterface = (INeutronL2GatewayCRUD) getInstances(INeutronL2GatewayCRUD.class, obj);
+        return this;
+    }
+
+    public NeutronCRUDInterfaces fetchINeutronL2GatewayConnectionCRUD(Object obj) {
+        l2gatewayConnectionInterface = (INeutronL2GatewayConnectionCRUD) getInstances(INeutronL2GatewayConnectionCRUD.class, obj);
+        return this;
+    }    
 
     public Object getInstances(Class<?> clazz, Object bundle) {
         try {
