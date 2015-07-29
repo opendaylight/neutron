@@ -46,6 +46,8 @@ public class Activator implements BundleActivator {
         NeutronVPNIPSECPolicyInterface.registerNewInterface(context, providerContext, registrations);
         NeutronVPNIPSECSiteConnectionsInterface.registerNewInterface(context, providerContext, registrations);
         NeutronFloatingIPInterface.registerNewInterface(context, providerContext, registrations);
+        NeutronL2GatewayInterface.registerNewInterface(context, providerContext, registrations);
+        NeutronL2GatewayConnectionInterface.registerNewInterface(context, providerContext, registrations);
     }
 
     @Override

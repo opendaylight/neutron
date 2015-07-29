@@ -10,7 +10,6 @@ package org.opendaylight.neutron.dummyprovider;
 
 import org.apache.felix.dm.DependencyActivatorBase;
 import org.apache.felix.dm.DependencyManager;
-
 import org.opendaylight.neutron.spi.INeutronFirewallAware;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyAware;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleAware;
@@ -32,9 +31,7 @@ import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionAware;
 import org.opendaylight.neutron.spi.INeutronVPNServiceAware;
-
 import org.osgi.framework.BundleContext;
-
 
 public class Activator extends DependencyActivatorBase {
 
@@ -115,5 +112,4 @@ public class Activator extends DependencyActivatorBase {
     @Override
     public void destroy(BundleContext context, DependencyManager manager) throws Exception {
     }
-
 }
