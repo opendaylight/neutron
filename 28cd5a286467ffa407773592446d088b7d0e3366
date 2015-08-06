@@ -1,0 +1,293 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7ca5a3_63f801e6",
+        "filename": "dummyprovider/src/main/java/org/opendaylight/neutron/dummyprovider/Activator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "please don\u0027t remove the whitespace in the imports",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_03dd8d70",
+        "filename": "model/src/main/yang/neutron-l2gateways.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "please replace tailing whitespace on Ls 13,17,19, 22 and 71",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_23da0979",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2GatewayConnectionCRUD.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove trailing whitespace",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_83d0bd54",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2gatewayAware.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "the I*Aware classes are being deprecated and will go away in B - therefore, the provider that will use L2Gateway information should be getting data from MD-SAL and not via this interface",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_a3d5b944",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2gatewayConnectionAware.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "the I*Aware classes are being deprecated and will go away in B - therefore, the provider that will use L2Gateway information should be getting data from MD-SAL and not via this interface",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_43caa5a2",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronCRUDInterfaces.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove trailing space",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_03c4ad90",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDeviceInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "this is missing the XmlElement augmentation - the documentation indicates that it should be \"segmentation-id\"???",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_e3bad109",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2GatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "documentation indicates this is gateway_id????",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_c3bd5504",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2GatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "documentation indicates this is \"default_segmentation_id\"????",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_4341450a",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove trailing space",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_034b4d2c",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "the documentation doesn\u0027t show that bulk creates are supported, so why is this code here?",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_6346c125",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove trailing space",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_c35475cc",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2GatewayConnectionInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove trailing space",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_835e7de8",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2GatewayConnectionInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "please don\u0027t implement concurrenthashmap - that is going away in Be - see how the updated network interface works",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_e35171d9",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2GatewayConnectionInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove trailing space",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_a36379b0",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2GatewayInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "remove railing whitespace here and Ls 40, 67 and 120",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_435865fa",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2GatewayInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-06T13:04:41Z",
+      "side": 1,
+      "message": "please do not implement ConcurrentHashMap",
+      "revId": "28cd5a286467ffa407773592446d088b7d0e3366",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
