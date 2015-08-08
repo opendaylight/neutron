@@ -38,7 +38,7 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerPool implements Serializable {
+public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -75,6 +75,14 @@ public class NeutronLoadBalancerPool implements Serializable {
     List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers;
 
     public NeutronLoadBalancerPool() {
+    }
+
+    public String getID() {
+        return loadBalancerPoolID;
+    }
+
+    public void setID(String id) {
+        loadBalancerPoolID = id;
     }
 
     public String getLoadBalancerPoolID() {

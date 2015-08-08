@@ -18,6 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
+import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
 import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
@@ -105,7 +106,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
+    protected DataObject toMd(INeutronObject neutronObject) {
         // TODO Auto-generated method stub
         return null;
     }
