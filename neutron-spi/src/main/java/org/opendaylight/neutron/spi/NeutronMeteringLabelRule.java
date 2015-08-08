@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronMeteringLabelRule implements Serializable {
+public class NeutronMeteringLabelRule implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement (name = "id")
@@ -41,6 +41,14 @@ public class NeutronMeteringLabelRule implements Serializable {
     /*
      *  getters and setters
      */
+
+    public String getID() {
+        return meteringLabelRuleUUID;
+    }
+
+    public void setID(String id) {
+        meteringLabelRuleUUID = id;
+    }
 
     public String getMeteringLabelRuleUUID() {
         return meteringLabelRuleUUID;

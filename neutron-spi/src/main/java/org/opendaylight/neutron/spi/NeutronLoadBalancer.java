@@ -35,7 +35,7 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancer implements Serializable {
+public class NeutronLoadBalancer implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -61,6 +61,14 @@ public class NeutronLoadBalancer implements Serializable {
 
     @XmlElement (name = "vip_subnet_id")
     String loadBalancerVipSubnetID;
+
+    public String getID() {
+        return loadBalancerID;
+    }
+
+    public void setID(String id) {
+        loadBalancerID = id;
+    }
 
     public String getLoadBalancerID() {
         return loadBalancerID;
