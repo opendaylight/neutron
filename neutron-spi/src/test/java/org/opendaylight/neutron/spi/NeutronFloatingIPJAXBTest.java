@@ -34,7 +34,7 @@ public class NeutronFloatingIPJAXBTest {
         try {
             NeutronFloatingIP testObject = (NeutronFloatingIP) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronFloatingIP_sourceJson);
             Assert.assertEquals("NeutronFloatingIP JAXB Test 1: Testing id failed",
-                  "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getFloatingIPUUID());
+                  "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
             Assert.assertEquals("NeutronFloatingIP JAXB Test 2: Testing tenant_id failed",
                   "4969c491a3c74ee4af974e6d800c62de", testObject.getTenantUUID());

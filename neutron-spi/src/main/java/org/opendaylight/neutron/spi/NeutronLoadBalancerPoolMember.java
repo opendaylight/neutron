@@ -20,7 +20,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerPoolMember implements Serializable {
+public class NeutronLoadBalancerPoolMember
+    implements Serializable, INeutronObject {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,10 +63,20 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
         this.poolID = poolID;
     }
 
+    public String getID() {
+        return poolMemberID;
+    }
+
+    public void setID(String id) {
+        poolMemberID = id;
+    }
+
+    // @deprecated use getID()
     public String getPoolMemberID() {
         return poolMemberID;
     }
 
+    // @deprecated use setID()
     public void setPoolMemberID(String poolMemberID) {
         this.poolMemberID = poolMemberID;
     }
@@ -124,7 +135,7 @@ public class NeutronLoadBalancerPoolMember implements Serializable {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setPoolMemberID(this.getPoolMemberID());
+                ans.setID(this.getID());
             }
             if (s.equals("pool_id")) {
                 ans.setPoolID(this.getPoolID());

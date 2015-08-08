@@ -46,7 +46,7 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFirewallRule implements Serializable {
+public class NeutronFirewallRule implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -217,11 +217,21 @@ public class NeutronFirewallRule implements Serializable {
         this.firewallRuleTenantID = firewallRuleTenantID;
     }
 
+    public String getID() {
+        return firewallRuleUUID;
+    }
+
+    public void setID(String id) {
+        firewallRuleUUID = id;
+    }
+
+    // @deprecated use getID()
     public String getFirewallRuleUUID() {
         return firewallRuleUUID;
     }
 
-    public void setFirewallRuleUUID(String firewallRuleUUID) {
+    // @deprecated use setID()
+    public void setFireWallRuleID(String firewallRuleUUID) {
         this.firewallRuleUUID = firewallRuleUUID;
     }
 
@@ -231,7 +241,7 @@ public class NeutronFirewallRule implements Serializable {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setFirewallRuleUUID(this.getFirewallRuleUUID());
+                ans.setID(this.getID());
             }
             if (s.equals("tenant_id")) {
                 ans.setFirewallRuleTenantID(this.getFirewallRuleTenantID());

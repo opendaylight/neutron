@@ -28,7 +28,7 @@ public class NeutronMeteringLabelJAXBTest {
             NeutronMeteringLabel testObject = (NeutronMeteringLabel) JaxbTestHelper.jaxbUnmarshall(meteringObject,
                     NeutronMeteringLabel_sourceJson);
             Assert.assertEquals("NeutronMeteringLabel JAXB Test 1: Testing id failed",
-                    "4e8e5957-649f-477b-9e5b-f1f75b21c03c", testObject.getMeteringLabelUUID());
+                    "4e8e5957-649f-477b-9e5b-f1f75b21c03c", testObject.getID());
 
             Assert.assertEquals("NeutronMeteringLabel JAXB Test 2: Testing name failed", "net1",
                     testObject.getMeteringLabelName());

@@ -67,10 +67,10 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
 
     @Override
     public boolean addNeutronMeteringLabel(NeutronMeteringLabel input) {
-        if (neutronMeteringLabelExists(input.getMeteringLabelUUID())) {
+        if (neutronMeteringLabelExists(input.getID())) {
             return false;
         }
-        meteringLabelDB.putIfAbsent(input.getMeteringLabelUUID(), input);
+        meteringLabelDB.putIfAbsent(input.getID(), input);
       //TODO: add code to find INeutronMeteringLabelAware services and call newtorkCreated on them
         return true;
     }
@@ -121,8 +121,8 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
       if (meteringLabel.getMeteringLabelTenantID()!=null) {
                         meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getMeteringLabelTenantID()));
                 }
-      if (meteringLabel.getMeteringLabelUUID()!=null) {
-                        meteringLabelBuilder.setUuid(toUuid(meteringLabel.getMeteringLabelUUID()));
+      if (meteringLabel.getID()!=null) {
+                        meteringLabelBuilder.setUuid(toUuid(meteringLabel.getID()));
                 }
                 return meteringLabelBuilder.build();
         }

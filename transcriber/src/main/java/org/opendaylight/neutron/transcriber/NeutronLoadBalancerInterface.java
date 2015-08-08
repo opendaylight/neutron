@@ -68,10 +68,10 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     public boolean addNeutronLoadBalancer(NeutronLoadBalancer input) {
-        if (neutronLoadBalancerExists(input.getLoadBalancerID())) {
+        if (neutronLoadBalancerExists(input.getID())) {
             return false;
         }
-        loadBalancerDB.putIfAbsent(input.getLoadBalancerID(), input);
+        loadBalancerDB.putIfAbsent(input.getID(), input);
         //TODO: add code to find INeutronLoadBalancerAware services and call newtorkCreated on them
         return true;
     }
@@ -137,8 +137,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (loadBalancer.getLoadBalancerVipSubnetID() != null) {
             loadBalancersBuilder.setVipSubnetId(toUuid(loadBalancer.getLoadBalancerVipSubnetID()));
         }
-        if (loadBalancer.getLoadBalancerID() != null) {
-            loadBalancersBuilder.setUuid(toUuid(loadBalancer.getLoadBalancerID()));
+        if (loadBalancer.getID() != null) {
+            loadBalancersBuilder.setUuid(toUuid(loadBalancer.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron load balancer without UUID");
         }

@@ -40,7 +40,7 @@ public class NeutronMeteringLabelRuleJAXBTest {
                     testObject.getMeteringLabelRuleExcluded());
 
             Assert.assertEquals("NeutronMeteringLabelRule JAXB Test 5: Testing id failed",
-                    "4e8e5957-649f-477b-9e5b-f1f75b21c03c", testObject.getMeteringLabelRuleUUID());
+                    "4e8e5957-649f-477b-9e5b-f1f75b21c03c", testObject.getID());
         } catch (Exception e) {
             Assert.fail("Test failed");
         }

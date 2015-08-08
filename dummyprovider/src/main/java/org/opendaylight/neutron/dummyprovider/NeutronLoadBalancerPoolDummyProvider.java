@@ -43,6 +43,6 @@ public class NeutronLoadBalancerPoolDummyProvider implements INeutronLoadBalance
     }
 
     public void neutronLoadBalancerPoolDeleted(NeutronLoadBalancerPool loadBalancerPool) {
-        LOGGER.info(loadBalancerPool.getLoadBalancerPoolID()+" deleted");
+        LOGGER.info(loadBalancerPool.getID()+" deleted");
     }
 }

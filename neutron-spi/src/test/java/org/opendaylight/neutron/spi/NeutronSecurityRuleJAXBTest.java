@@ -33,7 +33,7 @@ public class NeutronSecurityRuleJAXBTest {
         try {
             NeutronSecurityRule testObject = (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronSecurityRule_sourceJson);
             Assert.assertEquals("NeutronSecurityRule JAXB Test 1: Testing id failed",
-                  "2bc0accf-312e-429a-956e-e4407625eb62", testObject.getSecurityRuleUUID());
+                  "2bc0accf-312e-429a-956e-e4407625eb62", testObject.getID());
 
             Assert.assertEquals("NeutronSecurityRule JAXB Test 2: Testing direction failed",
                   "ingress", testObject.getSecurityRuleDirection());

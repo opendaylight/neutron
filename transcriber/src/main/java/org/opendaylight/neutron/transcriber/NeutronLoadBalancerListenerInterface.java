@@ -81,10 +81,10 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     public boolean addNeutronLoadBalancerListener(NeutronLoadBalancerListener input) {
-        if (neutronLoadBalancerListenerExists(input.getLoadBalancerListenerID())) {
+        if (neutronLoadBalancerListenerExists(input.getID())) {
             return false;
         }
-        loadBalancerListenerDB.putIfAbsent(input.getLoadBalancerListenerID(), input);
+        loadBalancerListenerDB.putIfAbsent(input.getID(), input);
         //TODO: add code to find INeutronLoadBalancerListenerAware services and call newtorkCreated on them
         return true;
     }
@@ -163,8 +163,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (listeners.getLoadBalancerListenerTenantID() != null) {
             listenersBuilder.setTenantId(toUuid(listeners.getLoadBalancerListenerTenantID()));
         }
-        if (listeners.getLoadBalancerListenerID() != null) {
-            listenersBuilder.setUuid(toUuid(listeners.getLoadBalancerListenerID()));
+        if (listeners.getID() != null) {
+            listenersBuilder.setUuid(toUuid(listeners.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron load balancer listener without UUID");
         }

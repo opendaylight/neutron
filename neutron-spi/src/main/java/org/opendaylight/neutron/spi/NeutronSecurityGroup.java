@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSecurityGroup implements Serializable {
+public class NeutronSecurityGroup implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -57,10 +57,20 @@ public class NeutronSecurityGroup implements Serializable {
 
     }
 
+    public String getID() {
+        return securityGroupUUID;
+    }
+
+    public void setID(String id) {
+        securityGroupUUID = id;
+    }
+
+    // @deprecated use getID()
     public String getSecurityGroupUUID() {
         return securityGroupUUID;
     }
 
+    // @deprecated use setID()
     public void setSecurityGroupUUID(String securityGroupUUID) {
         this.securityGroupUUID = securityGroupUUID;
     }
@@ -104,7 +114,7 @@ public class NeutronSecurityGroup implements Serializable {
         while (i.hasNext ()) {
             String s = i.next ();
             if (s.equals ("id")) {
-                ans.setSecurityGroupUUID (this.getSecurityGroupUUID ());
+                ans.setID (this.getID ());
             }
             if (s.equals ("name")) {
                 ans.setSecurityGroupName (this.getSecurityGroupName ());

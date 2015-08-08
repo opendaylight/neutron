@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFloatingIP implements Serializable {
+public class NeutronFloatingIP implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -53,12 +53,20 @@ public class NeutronFloatingIP implements Serializable {
     public NeutronFloatingIP() {
     }
 
-    public String getID() { return floatingIPUUID; }
+    public String getID() {
+        return floatingIPUUID;
+    }
 
+    public void setID(String id) {
+        floatingIPUUID = id;
+    }
+
+    // @deprecated use getID()
     public String getFloatingIPUUID() {
         return floatingIPUUID;
     }
 
+    // @deprecated use setID()
     public void setFloatingIPUUID(String floatingIPUUID) {
         this.floatingIPUUID = floatingIPUUID;
     }
@@ -135,7 +143,7 @@ public class NeutronFloatingIP implements Serializable {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setFloatingIPUUID(this.getFloatingIPUUID());
+                ans.setID(this.getID());
             }
             if (s.equals("floating_network_id")) {
                 ans.setFloatingNetworkUUID(this.getFloatingNetworkUUID());

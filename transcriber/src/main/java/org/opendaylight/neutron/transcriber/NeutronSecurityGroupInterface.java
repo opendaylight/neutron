@@ -73,7 +73,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     public boolean addNeutronSecurityGroup(NeutronSecurityGroup input) {
-        if (neutronSecurityGroupExists(input.getSecurityGroupUUID())) {
+        if (neutronSecurityGroupExists(input.getID())) {
             return false;
         }
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
@@ -82,7 +82,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         for(NeutronSecurityRule sgr : input.getSecurityRules()) {
             sgrCrud.addNeutronSecurityRule(sgr);
         }
-        securityGroupDB.putIfAbsent(input.getSecurityGroupUUID(), input);
+        securityGroupDB.putIfAbsent(input.getID(), input);
         addMd(input);
         return true;
     }
@@ -130,14 +130,14 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (securityGroup.getSecurityRules() != null) {
             List<Uuid> neutronSecurityRule = new ArrayList<>();
             for (NeutronSecurityRule securityRule : securityGroup.getSecurityRules()) {
-                if (securityRule.getSecurityRuleUUID() != null) {
-                    neutronSecurityRule.add(toUuid(securityRule.getSecurityRuleUUID()));
+                if (securityRule.getID() != null) {
+                    neutronSecurityRule.add(toUuid(securityRule.getID()));
                 }
             }
             securityGroupBuilder.setSecurityRules(neutronSecurityRule);
         }
-        if (securityGroup.getSecurityGroupUUID() != null) {
-            securityGroupBuilder.setUuid(toUuid(securityGroup.getSecurityGroupUUID()));
+        if (securityGroup.getID() != null) {
+            securityGroupBuilder.setUuid(toUuid(securityGroup.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron securityGroup without UUID");
         }

@@ -28,7 +28,7 @@ public class NeutronFirewallJAXBTest {
         try {
             NeutronFirewall testObject = (NeutronFirewall) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronFirewall_sourceJson);
             Assert.assertEquals("NeutronFirewall JAXB Test 1: Testing id failed",
-                  "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getFirewallUUID());
+                  "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getID());
 
             Assert.assertEquals("NeutronFirewall JAXB Test 2: Testing tenant_id failed",
                   "aa902936679e4ea29bfe1158e3450a13", testObject.getFirewallTenantID());
@@ -63,7 +63,7 @@ public class NeutronFirewallJAXBTest {
         try {
             NeutronFirewallPolicy testObject = (NeutronFirewallPolicy) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronFirewallPolicy_sourceJson);
             Assert.assertEquals("NeutronFirewallPolicy JAXB Test 1: Testing id failed",
-                  "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getFirewallPolicyUUID());
+                  "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getID());
 
             Assert.assertEquals("NeutronFirewallPolicy JAXB Test 2: Testing tenant_id failed",
                   "aa902936679e4ea29bfe1158e3450a13", testObject.getFirewallPolicyTenantID());
@@ -98,7 +98,7 @@ public class NeutronFirewallJAXBTest {
         try {
             NeutronFirewallRule testObject = (NeutronFirewallRule) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronFirewallRule_sourceJson);
             Assert.assertEquals("NeutronFirewallRule JAXB Test 1: Testing id failed",
-                  "8722e0e0-9cc9-4490-9660-8c9a5732fbb0", testObject.getFirewallRuleUUID());
+                  "8722e0e0-9cc9-4490-9660-8c9a5732fbb0", testObject.getID());
 
             Assert.assertEquals("NeutronFirewallRule JAXB Test 2: Testing tenant_id failed",
                   "45977fa2dbd7482098dd68d0d8970117", testObject.getFirewallRuleTenantID());

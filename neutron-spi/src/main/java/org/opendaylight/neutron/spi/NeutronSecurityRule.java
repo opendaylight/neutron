@@ -37,7 +37,7 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSecurityRule implements Serializable {
+public class NeutronSecurityRule implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "id")
@@ -73,10 +73,20 @@ public class NeutronSecurityRule implements Serializable {
     public NeutronSecurityRule() {
     }
 
+    public String getID() {
+        return securityRuleUUID;
+    }
+
+    public void setID(String id) {
+        securityRuleUUID = id;
+    }
+
+    // @deprecated use getID()
     public String getSecurityRuleUUID() {
         return securityRuleUUID;
     }
 
+    // @deprecated use setID()
     public void setSecurityRuleUUID(String securityRuleUUID) {
         this.securityRuleUUID = securityRuleUUID;
     }
@@ -159,7 +169,7 @@ public class NeutronSecurityRule implements Serializable {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setSecurityRuleUUID(this.getSecurityRuleUUID());
+                ans.setID(this.getID());
             }
             if (s.equals("direction")) {
                 ans.setSecurityRuleDirection(this.getSecurityRuleDirection());

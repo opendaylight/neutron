@@ -103,7 +103,7 @@ public class NeutronMeteringLabelRulesNorthbound {
         Iterator<NeutronMeteringLabelRule> i = allNeutronMeteringLabelRules.iterator();
         while (i.hasNext()) {
             NeutronMeteringLabelRule oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getMeteringLabelRuleUUID())) &&
+            if ((queryID == null || queryID.equals(oSS.getID())) &&
                     (queryDirection == null || queryDirection.equals(oSS.getMeteringLabelRuleDirection())) &&
                     (queryRemoteIPPrefix == null || queryRemoteIPPrefix.equals(oSS.getMeteringLabelRuleRemoteIPPrefix())) &&
                     (queryLabelID == null || queryLabelID.equals(oSS.getMeteringLabelRuleLabelID()))) {

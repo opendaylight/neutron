@@ -21,7 +21,9 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.CheckedFuture;
 
-public abstract class AbstractNeutronInterface<T extends DataObject,S> implements AutoCloseable {
+import org.opendaylight.neutron.spi.INeutronObject;
+
+public abstract class AbstractNeutronInterface<T extends DataObject, S extends INeutronObject> implements AutoCloseable {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
