@@ -87,6 +87,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
         return true;
     }
 
+    protected boolean updateMd(String uuid, S neutronObject) {
+        neutronObject.setID(uuid);
+        return updateMd(neutronObject);
+    }
+
     protected boolean removeMd(T item) {
         WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         InstanceIdentifier<T> iid = createInstanceIdentifier(item);

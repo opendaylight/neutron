@@ -123,7 +123,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
             }
         }
         portDB.put(uuid, delta);
-        updateMd(delta);
+        updateMd(uuid, delta);
         return true;
     }
 

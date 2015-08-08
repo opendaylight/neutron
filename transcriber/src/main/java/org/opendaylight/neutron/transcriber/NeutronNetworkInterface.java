@@ -116,7 +116,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        updateMd(delta);
+        updateMd(uuid, delta);
         return true;
     }
 
