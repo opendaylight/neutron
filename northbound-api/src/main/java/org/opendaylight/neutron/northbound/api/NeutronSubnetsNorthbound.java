@@ -281,13 +281,18 @@ public class NeutronSubnetsNorthbound {
          */
 
         NeutronSubnet updatedObject = input.getSingleton();
+        NeutronSubnet original = subnetInterface.getSubnet(subnetUUID);
+        updatedObject.setID(subnetUUID);
+        updatedObject.setNetworkUUID(original.getNetworkUUID());
+        updatedObject.setTenantID(original.getTenantID());
+        updatedObject.setIpVersion(original.getIpVersion());
+        updatedObject.setCidr(original.getCidr());
 
         Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
                 for (Object instance : instances) {
                     INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    NeutronSubnet original = subnetInterface.getSubnet(subnetUUID);
                     int status = service.canUpdateSubnet(updatedObject, original);
                     if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();

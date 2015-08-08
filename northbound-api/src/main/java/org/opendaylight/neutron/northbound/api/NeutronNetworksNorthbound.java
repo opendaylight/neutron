@@ -281,6 +281,7 @@ public class NeutronNetworksNorthbound {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
 
         NeutronNetwork updatedObject = input.getSingleton();
+        NeutronNetwork original = networkInterface.getNetwork(netUUID);
 
         /*
          *  note: what we get appears to not be a delta but
@@ -290,12 +291,12 @@ public class NeutronNetworksNorthbound {
          */
 
         updatedObject.setID(netUUID);
+        updatedObject.setTenantID(original.getTenantID());
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
                 for (Object instance : instances) {
                     INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    NeutronNetwork original = networkInterface.getNetwork(netUUID);
                     int status = service.canUpdateNetwork(updatedObject, original);
                     if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
                         return Response.status(status).build();

@@ -270,6 +270,8 @@ public class NeutronRoutersNorthbound {
 
         NeutronRouter updatedRouter = input.getSingleton();
         NeutronRouter original = routerInterface.getRouter(routerUUID);
+        updatedRouter.setID(routerUUID);
+        updatedRouter.setTenantID(original.getTenantID());
 
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
         if (instances != null) {

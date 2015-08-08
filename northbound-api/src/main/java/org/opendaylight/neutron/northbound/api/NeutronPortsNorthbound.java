@@ -302,6 +302,12 @@ public class NeutronPortsNorthbound {
         if (updatedObject.getNetworkUUID() == null) {
             updatedObject.setNetworkUUID(original.getNetworkUUID());
         }
+        if (updatedObject.getMacAddress() == null) {
+            updatedObject.setMacAddress(original.getMacAddress());
+        }
+        if (updatedObject.getFixedIPs() == null) {
+            updatedObject.setFixedIPs(original.getFixedIPs());
+        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
