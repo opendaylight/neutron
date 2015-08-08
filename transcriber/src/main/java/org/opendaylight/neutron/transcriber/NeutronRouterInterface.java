@@ -102,7 +102,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
             return false;
         }
         routerDB.put(uuid,delta);
-        updateMd(delta);
+        updateMd(uuid, delta);
         return true;
     }
 
