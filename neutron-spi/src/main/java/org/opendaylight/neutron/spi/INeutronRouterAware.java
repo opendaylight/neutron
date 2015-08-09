@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation, 2013.  All rights reserved.
+ * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -79,7 +79,7 @@ public interface INeutronRouterAware {
     void neutronRouterDeleted(NeutronRouter router);
 
     /**
-     * Services provide this interface method to indicate if the 
+     * Services provide this interface method to indicate if the
      * specified interface can be attached to the specified router
      *
      * @param router
@@ -94,7 +94,7 @@ public interface INeutronRouterAware {
     int canAttachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface);
 
     /**
-     * Services provide this interface method for taking action 
+     * Services provide this interface method for taking action
      * after an interface has been added to a router
      *
      * @param router

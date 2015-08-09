@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation and others, 2013.  All rights reserved.
+ * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -87,7 +87,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
 
     /* stores the OpenStackPorts associated with an instance
      * used to determine if that instance can be deleted.
-     * 
+     *
      * @deprecated, will be removed in Boron
      */
 
@@ -275,7 +275,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
     public List<NeutronPort> getPortsInSubnet() {
         return myPorts;
     }
-    
+
     // @deprecated - will be removed in Boron
     public List<NeutronPort> getPortsInSubnet(String ignore) {
        List<NeutronPort> answer = new ArrayList<NeutronPort>();

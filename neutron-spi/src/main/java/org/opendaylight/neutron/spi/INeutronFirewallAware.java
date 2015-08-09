@@ -17,7 +17,7 @@ public interface INeutronFirewallAware {
 
     /**
      * Services provide this interface method to indicate if the specified firewall can be created
-     * 
+     *
      * @param firewall
      *            instance of proposed new Firewall object
      * @return integer
