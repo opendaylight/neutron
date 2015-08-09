@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation and others, 2013.  All rights reserved.
+ * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -277,7 +277,7 @@ public class NeutronSubnetsNorthbound {
         /*
          * note: what we get appears to not be a delta, but rather a
          * complete updated object.  So, that needs to be sent down to
-         * folks to check 
+         * folks to check
          */
 
         NeutronSubnet updatedObject = input.getSingleton();

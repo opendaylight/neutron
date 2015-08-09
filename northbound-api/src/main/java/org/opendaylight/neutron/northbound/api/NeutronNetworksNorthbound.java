@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation, 2013.  All rights reserved.
+ * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -283,7 +283,7 @@ public class NeutronNetworksNorthbound {
         NeutronNetwork updatedObject = input.getSingleton();
 
         /*
-         *  note: what we get appears to not be a delta but 
+         *  note: what we get appears to not be a delta but
          * rather an incomplete updated object.  So we need to set
          * the ID to complete the object and then send that down
          * for folks to check
@@ -308,7 +308,7 @@ public class NeutronNetworksNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        // update network object 
+        // update network object
         networkInterface.updateNetwork(netUUID, updatedObject);
         if (instances != null) {
             for (Object instance : instances) {
