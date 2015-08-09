@@ -1,5 +1,5 @@
 /*
- * Copyright IBM Corporation, 2013.  All rights reserved.
+ * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -64,7 +64,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (network == null) {
             return false;
         }
-        return true; 
+        return true;
     }
 
     @Override
@@ -265,7 +265,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
     protected InstanceIdentifier<Networks> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Networks.class);
-    } 
+    }
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
