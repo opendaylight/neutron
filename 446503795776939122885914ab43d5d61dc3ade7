@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_7e609e35",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronPortCRUD.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-11T13:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a7fa997_ae69c0bf",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a7fa997_6ebac824",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronPortsNorthbound.java",
         "patchSetId": 4
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_9ecc9a37",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronPortsNorthbound.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-11T13:44:41Z",
+      "side": 1,
+      "message": "We are in the middle of changing from having networking-odl return deltas to having it return the objects as known by neutron.  Once the change is finished, then we can get rid of this section.  Comment changed to reflect this",
+      "parentUuid": "7a7fa997_6ebac824",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a7fa997_ce643ce7",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
         "patchSetId": 4
@@ -47,6 +83,24 @@
       "writtenOn": "2015-07-25T01:11:29Z",
       "side": 1,
       "message": "return port \u003d\u003d null;",
+      "revId": "446503795776939122885914ab43d5d61dc3ade7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_3e5a2684",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-11T13:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a7fa997_ce643ce7",
       "revId": "446503795776939122885914ab43d5d61dc3ade7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
