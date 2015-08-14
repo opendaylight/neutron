@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_40e4d40c",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-14T21:34:52Z",
+      "side": 1,
+      "message": "nice catch.",
+      "revId": "3be5cac235288b94040eacb141f4fde009168cb1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_00eedcec",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronRouterInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-14T21:34:52Z",
+      "side": 1,
+      "message": "result.setExternalFixedIPs()",
+      "revId": "3be5cac235288b94040eacb141f4fde009168cb1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
