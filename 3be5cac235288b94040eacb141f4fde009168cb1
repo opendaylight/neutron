@@ -33,6 +33,24 @@
       "revId": "3be5cac235288b94040eacb141f4fde009168cb1",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_a02b68ea",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronRouterInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-08-14T23:49:35Z",
+      "side": 1,
+      "message": "oops, I forgot that part in chasing the other things that were wrong...",
+      "parentUuid": "3a79b1b5_00eedcec",
+      "revId": "3be5cac235288b94040eacb141f4fde009168cb1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
