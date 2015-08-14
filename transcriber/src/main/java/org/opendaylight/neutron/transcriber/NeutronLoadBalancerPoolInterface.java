@@ -84,10 +84,10 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
 
     @Override
     public boolean addNeutronLoadBalancerPool(NeutronLoadBalancerPool input) {
-        if (neutronLoadBalancerPoolExists(input.getLoadBalancerPoolID())) {
+        if (neutronLoadBalancerPoolExists(input.getID())) {
             return false;
         }
-        loadBalancerPoolDB.putIfAbsent(input.getLoadBalancerPoolID(), input);
+        loadBalancerPoolDB.putIfAbsent(input.getID(), input);
         //TODO: add code to find INeutronLoadBalancerPoolAware services and call newtorkCreated on them
         return true;
     }
@@ -155,7 +155,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         if (pools.getLoadBalancerPoolMembers() != null) {
             List<Uuid> listMember = new ArrayList<Uuid>();
             for (NeutronLoadBalancerPoolMember laodBalancerPoolMember : pools.getLoadBalancerPoolMembers()) {
-                listMember.add(toUuid(laodBalancerPoolMember.getPoolMemberID()));
+                listMember.add(toUuid(laodBalancerPoolMember.getID()));
 
             }
             poolsBuilder.setMembers(listMember);
@@ -178,8 +178,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         if (pools.getLoadBalancerPoolTenantID() != null) {
             poolsBuilder.setTenantId(toUuid(pools.getLoadBalancerPoolTenantID()));
         }
-        if (pools.getLoadBalancerPoolID() != null) {
-            poolsBuilder.setUuid(toUuid(pools.getLoadBalancerPoolID()));
+        if (pools.getID() != null) {
+            poolsBuilder.setUuid(toUuid(pools.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron load balancer pool without UUID");
         }

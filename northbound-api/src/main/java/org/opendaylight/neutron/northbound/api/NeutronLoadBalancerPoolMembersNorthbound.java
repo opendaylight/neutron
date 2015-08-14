@@ -100,7 +100,7 @@ public Response listMembers(
     while (i.hasNext()) {
         NeutronLoadBalancerPoolMember nsg = i.next();
         if ((queryLoadBalancerPoolMemberID == null ||
-                queryLoadBalancerPoolMemberID.equals(nsg.getPoolMemberID())) &&
+                queryLoadBalancerPoolMemberID.equals(nsg.getID())) &&
                 loadBalancerPoolUUID.equals(nsg.getPoolID()) &&
                 (queryLoadBalancerPoolMemberTenantID == null ||
                         queryLoadBalancerPoolMemberTenantID.equals(nsg.getPoolMemberTenantID())) &&
@@ -150,7 +150,7 @@ public Response showLoadBalancerPoolMember(
     List<NeutronLoadBalancerPoolMember> members =
                 loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
     for (NeutronLoadBalancerPoolMember ans: members) {
-        if (!ans.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
+        if (!ans.getID().equals(loadBalancerPoolMemberUUID)) {
             continue;
         }
 
@@ -289,7 +289,7 @@ public Response deleteLoadBalancerPoolMember(
     List<NeutronLoadBalancerPoolMember> members =
             loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
     for (NeutronLoadBalancerPoolMember member: members) {
-        if (member.getPoolMemberID().equals(loadBalancerPoolMemberUUID)) {
+        if (member.getID().equals(loadBalancerPoolMemberUUID)) {
             singleton = member;
             break;
         }

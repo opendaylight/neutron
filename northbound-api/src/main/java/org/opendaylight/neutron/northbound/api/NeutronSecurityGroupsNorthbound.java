@@ -101,7 +101,7 @@ public class NeutronSecurityGroupsNorthbound {
         while (i.hasNext()) {
             NeutronSecurityGroup nsg = i.next();
             if ((querySecurityGroupUUID == null ||
-                    querySecurityGroupUUID.equals(nsg.getSecurityGroupUUID())) &&
+                    querySecurityGroupUUID.equals(nsg.getID())) &&
                     (querySecurityGroupName == null ||
                             querySecurityGroupName.equals(nsg.getSecurityGroupName())) &&
                     (querySecurityDescription == null ||

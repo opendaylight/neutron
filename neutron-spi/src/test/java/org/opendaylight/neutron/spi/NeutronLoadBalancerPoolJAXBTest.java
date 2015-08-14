@@ -44,7 +44,7 @@ public class NeutronLoadBalancerPoolJAXBTest {
             NeutronLoadBalancerPool testObject = (NeutronLoadBalancerPool) JaxbTestHelper.jaxbUnmarshall(dummyObject,
                     NeutronLoadBalancerPool_sourceJson);
             Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 1: Testing id failed",
-                    "12ff63af-4127-4074-a251-bcb2ecc53ebe", testObject.getLoadBalancerPoolID());
+                    "12ff63af-4127-4074-a251-bcb2ecc53ebe", testObject.getID());
 
             Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 2: Testing name failed", "pool1",
                     testObject.getLoadBalancerPoolName());

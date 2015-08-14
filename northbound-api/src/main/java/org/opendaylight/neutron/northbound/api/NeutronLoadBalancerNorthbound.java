@@ -107,7 +107,7 @@ public class NeutronLoadBalancerNorthbound {
         while (i.hasNext()) {
             NeutronLoadBalancer nsg = i.next();
             if ((queryLoadBalancerID == null ||
-                    queryLoadBalancerID.equals(nsg.getLoadBalancerID())) &&
+                    queryLoadBalancerID.equals(nsg.getID())) &&
                     (queryLoadBalancerTenantID == null ||
                             queryLoadBalancerTenantID.equals(nsg.getLoadBalancerTenantID())) &&
                     (queryLoadBalancerName == null ||

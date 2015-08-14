@@ -80,7 +80,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         NeutronSecurityGroup sg = sgCrud.getNeutronSecurityGroup(input.getSecurityRuleGroupID());
         if(sg != null && sg.getSecurityRules() != null) {
             for(NeutronSecurityRule sgr :sg.getSecurityRules()) {
-                if(sgr.getSecurityRuleUUID() != null && sgr.getSecurityRuleUUID().equals(input.getSecurityRuleUUID())) {
+                if(sgr.getID() != null && sgr.getID().equals(input.getID())) {
                     int index = sg.getSecurityRules().indexOf(sgr);
                     sg.getSecurityRules().set(index, input);
                 }
@@ -99,7 +99,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if(sg != null && sg.getSecurityRules() != null) {
             List<NeutronSecurityRule> toRemove = new ArrayList<NeutronSecurityRule>();
             for(NeutronSecurityRule sgr :sg.getSecurityRules()) {
-                if(sgr.getSecurityRuleUUID() != null && sgr.getSecurityRuleUUID().equals(input.getSecurityRuleUUID())) {
+                if(sgr.getID() != null && sgr.getID().equals(input.getID())) {
                     toRemove.add(sgr);
                 }
             }
@@ -136,10 +136,10 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public boolean addNeutronSecurityRule(NeutronSecurityRule input) {
-        if (neutronSecurityRuleExists(input.getSecurityRuleUUID())) {
+        if (neutronSecurityRuleExists(input.getID())) {
             return false;
         }
-        securityRuleDB.putIfAbsent(input.getSecurityRuleUUID(), input);
+        securityRuleDB.putIfAbsent(input.getID(), input);
         updateSecGroupRuleInSecurityGroup(input);
         addMd(input);
         return true;
@@ -213,8 +213,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (securityRule.getSecurityRulePortMax() != null) {
             securityRuleBuilder.setPortRangeMax(Integer.valueOf(securityRule.getSecurityRulePortMax()));
         }
-        if (securityRule.getSecurityRuleUUID() != null) {
-            securityRuleBuilder.setId(toUuid(securityRule.getSecurityRuleUUID()));
+        if (securityRule.getID() != null) {
+            securityRuleBuilder.setId(toUuid(securityRule.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }

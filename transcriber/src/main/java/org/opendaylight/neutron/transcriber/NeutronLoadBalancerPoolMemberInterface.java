@@ -68,10 +68,10 @@ public class NeutronLoadBalancerPoolMemberInterface extends
 
     @Override
     public boolean addNeutronLoadBalancerPoolMember(NeutronLoadBalancerPoolMember input) {
-        if (neutronLoadBalancerPoolMemberExists(input.getPoolMemberID())) {
+        if (neutronLoadBalancerPoolMemberExists(input.getID())) {
             return false;
         }
-        loadBalancerPoolMemberDB.putIfAbsent(input.getPoolMemberID(), input);
+        loadBalancerPoolMemberDB.putIfAbsent(input.getID(), input);
         return true;
     }
 
@@ -117,8 +117,8 @@ public class NeutronLoadBalancerPoolMemberInterface extends
         if (member.getPoolMemberProtoPort() != null) {
             membersBuilder.setProtocolPort(member.getPoolMemberProtoPort());
         }
-        if (member.getPoolMemberID() != null) {
-            membersBuilder.setUuid(toUuid(member.getPoolMemberID()));
+        if (member.getID() != null) {
+            membersBuilder.setUuid(toUuid(member.getID()));
         }
         if (member.getPoolMemberSubnetID() != null) {
             membersBuilder.setSubnetId(toUuid(member.getPoolMemberSubnetID()));

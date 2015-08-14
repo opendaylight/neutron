@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronMeteringLabel implements Serializable {
+public class NeutronMeteringLabel implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement (name = "id")
@@ -39,10 +39,20 @@ public class NeutronMeteringLabel implements Serializable {
      * getters and setters
      */
 
+    public String getID() {
+        return meteringLabelUUID;
+    }
+
+    public void setID(String id) {
+        meteringLabelUUID = id;
+    }
+
+    // @deprecated use getID()
     public String getMeteringLabelUUID() {
         return meteringLabelUUID;
     }
 
+    // @deprecated use setID()
     public void setMeteringLabelUUID(String uuid) {
         this.meteringLabelUUID = uuid;
     }
@@ -99,7 +109,7 @@ public class NeutronMeteringLabel implements Serializable {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setMeteringLabelUUID(this.getMeteringLabelUUID());
+                ans.setID(this.getID());
             }
             if (s.equals("name")) {
                 ans.setMeteringLabelName(this.getMeteringLabelName());

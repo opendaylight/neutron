@@ -44,6 +44,6 @@ public class NeutronLoadBalancerDummyProvider implements INeutronLoadBalancerAwa
     }
 
     public void neutronLoadBalancerDeleted(NeutronLoadBalancer loadBalancer) {
-        LOGGER.info(loadBalancer.getLoadBalancerID()+" deleted");
+        LOGGER.info(loadBalancer.getID()+" deleted");
     }
 }

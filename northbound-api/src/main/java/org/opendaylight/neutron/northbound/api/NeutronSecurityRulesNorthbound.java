@@ -107,7 +107,7 @@ public class NeutronSecurityRulesNorthbound {
         while (i.hasNext()) {
             NeutronSecurityRule nsr = i.next();
             if ((querySecurityRuleUUID == null ||
-                    querySecurityRuleUUID.equals(nsr.getSecurityRuleUUID())) &&
+                    querySecurityRuleUUID.equals(nsr.getID())) &&
                     (querySecurityRuleDirection == null ||
                             querySecurityRuleDirection.equals(nsr.getSecurityRuleDirection())) &&
                     (querySecurityRuleProtocol == null ||

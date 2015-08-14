@@ -44,6 +44,6 @@ public class NeutronSecurityRuleDummyProvider implements INeutronSecurityRuleAwa
     }
 
     public void neutronSecurityRuleDeleted(NeutronSecurityRule securityRule) {
-        LOGGER.info(securityRule.getSecurityRuleUUID()+" deleted");
+        LOGGER.info(securityRule.getID()+" deleted");
     }
 }

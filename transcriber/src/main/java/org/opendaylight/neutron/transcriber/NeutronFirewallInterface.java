@@ -10,6 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
+import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
@@ -67,10 +68,10 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
 
     @Override
     public boolean addNeutronFirewall(NeutronFirewall input) {
-        if (neutronFirewallExists(input.getFirewallUUID())) {
+        if (neutronFirewallExists(input.getID())) {
             return false;
         }
-        firewallDB.putIfAbsent(input.getFirewallUUID(), input);
+        firewallDB.putIfAbsent(input.getID(), input);
         return true;
     }
 
@@ -104,7 +105,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface implement
     }
 
     @Override
-    protected DataObject toMd(Object neutronObject) {
+    protected DataObject toMd(INeutronObject neutronObject) {
         // TODO Auto-generated method stub
         return null;
     }

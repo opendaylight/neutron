@@ -45,6 +45,6 @@ public class NeutronLoadBalancerListenerDummyProvider implements INeutronLoadBal
     }
 
     public void neutronLoadBalancerListenerDeleted(NeutronLoadBalancerListener loadBalancerListener) {
-        LOGGER.info(loadBalancerListener.getLoadBalancerListenerID()+" deleted");
+        LOGGER.info(loadBalancerListener.getID()+" deleted");
     }
 }

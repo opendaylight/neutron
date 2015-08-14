@@ -82,10 +82,10 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     public boolean addNeutronMeteringLabelRule(NeutronMeteringLabelRule input) {
-        if (neutronMeteringLabelRuleExists(input.getMeteringLabelRuleUUID())) {
+        if (neutronMeteringLabelRuleExists(input.getID())) {
             return false;
         }
-        meteringLabelRuleDB.putIfAbsent(input.getMeteringLabelRuleUUID(), input);
+        meteringLabelRuleDB.putIfAbsent(input.getID(), input);
         // TODO: add code to find INeutronMeteringLabelRuleAware services and
         // call newtorkCreated on them
         return true;
@@ -131,8 +131,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
         if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
             meteringRuleBuilder.setId((toUuid(meteringLabelRule.getMeteringLabelRuleLabelID())));
         }
-        if (meteringLabelRule.getMeteringLabelRuleUUID() != null) {
-            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleUUID()));
+        if (meteringLabelRule.getID() != null) {
+            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getID()));
         }
         if (meteringLabelRule.getMeteringLabelRuleDirection() != null) {
             ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =

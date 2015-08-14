@@ -247,7 +247,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (neutronPort.getSecurityGroups() != null) {
             List<Uuid> listSecurityGroups = new ArrayList<Uuid>();
             for (NeutronSecurityGroup neutronSecurityGroup : neutronPort.getSecurityGroups()) {
-                listSecurityGroups.add(toUuid(neutronSecurityGroup.getSecurityGroupUUID()));
+                listSecurityGroups.add(toUuid(neutronSecurityGroup.getID()));
             }
             portBuilder.setSecurityGroups(listSecurityGroups);
         }

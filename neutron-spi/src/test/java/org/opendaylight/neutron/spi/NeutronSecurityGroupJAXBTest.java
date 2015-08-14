@@ -39,7 +39,7 @@ public class NeutronSecurityGroupJAXBTest {
             NeutronSecurityGroup testObject = (NeutronSecurityGroup) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronSecurityGroup_sourceJson);
             List<NeutronSecurityRule> securityRules = testObject.getSecurityRules();
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 1: Testing id failed",
-                  "2076db17-a522-4506-91de-c6dd8e837028", testObject.getSecurityGroupUUID());
+                  "2076db17-a522-4506-91de-c6dd8e837028", testObject.getID());
 
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 2: Testing direction failed",
                   "new-webservers", testObject.getSecurityGroupName());

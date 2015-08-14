@@ -29,7 +29,7 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
             NeutronLoadBalancerHealthMonitor testObject = (NeutronLoadBalancerHealthMonitor) JaxbTestHelper
                     .jaxbUnmarshall(dummyObject, NeutronLoadBalancerHealthMonitor_sourceJson);
             Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 1: Testing id failed",
-                    "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerHealthMonitorID());
+                    "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
             Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 2: Testing  Type failed", "HTTP",
                     testObject.getLoadBalancerHealthMonitorType());

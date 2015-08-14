@@ -112,7 +112,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         while (i.hasNext()) {
             NeutronLoadBalancerHealthMonitor nsg = i.next();
             if ((queryLoadBalancerHealthMonitorID == null ||
-                    queryLoadBalancerHealthMonitorID.equals(nsg.getLoadBalancerHealthMonitorID())) &&
+                    queryLoadBalancerHealthMonitorID.equals(nsg.getID())) &&
                     (queryLoadBalancerHealthMonitorTenantID == null ||
                             queryLoadBalancerHealthMonitorTenantID.equals
                                     (nsg.getLoadBalancerHealthMonitorTenantID())) &&

@@ -84,10 +84,10 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     public boolean addNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor input) {
-        if (neutronLoadBalancerHealthMonitorExists(input.getLoadBalancerHealthMonitorID())) {
+        if (neutronLoadBalancerHealthMonitorExists(input.getID())) {
             return false;
         }
-        loadBalancerHealthMonitorDB.putIfAbsent(input.getLoadBalancerHealthMonitorID(), input);
+        loadBalancerHealthMonitorDB.putIfAbsent(input.getID(), input);
         //TODO: add code to find INeutronLoadBalancerHealthMonitorAware services and call newtorkCreated on them
         return true;
     }
@@ -168,8 +168,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
             healthmonitorsBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
         }
-        if (healthMonitor.getLoadBalancerHealthMonitorID() != null) {
-            healthmonitorsBuilder.setUuid(toUuid(healthMonitor.getLoadBalancerHealthMonitorID()));
+        if (healthMonitor.getID() != null) {
+            healthmonitorsBuilder.setUuid(toUuid(healthMonitor.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
