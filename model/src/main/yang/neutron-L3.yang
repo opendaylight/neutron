@@ -77,7 +77,7 @@ module neutron-L3 {
             description "The floating IP address.";
             type inet:ip-address;
         }
-        list fixed-ip-address {
+        leaf fixed-ip-address {
             description "The fixed IP address associated with the floating IP.
                 If you intend to associate the floating IP with a fixed IP at
                 creation time, then you must indicate the identifier of the
@@ -85,13 +85,7 @@ module neutron-L3 {
                 multiple associated IP addresses, the service chooses the first
                 IP unless you explicitly specify the parameter fixed_ip_address
                 to select a specific IP.";
-            key subnet-id;
-            leaf subnet-id {
-                type yang:uuid;
-            }
-            leaf ip-address {
-                type inet:ip-address;
-            }
+            type inet:ip-address;
         }
         leaf status {
             type string;
