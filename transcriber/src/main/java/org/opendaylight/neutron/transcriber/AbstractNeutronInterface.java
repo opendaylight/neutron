@@ -16,6 +16,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
@@ -81,16 +82,32 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
     }
 
     protected boolean updateMd(S neutronObject) {
-        WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
-        T item = toMd(neutronObject);
-        InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
-        CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ",e);
-            return false;
+        /*
+         * retry for transaction conflict.
+         * see the comment
+         * org.opendaylight.controller.sal.restconf.impl.RestconfImpl#updateConfigurationData
+         */
+        int retries = 2;
+        while (true) {
+            WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
+            T item = toMd(neutronObject);
+            InstanceIdentifier<T> iid = createInstanceIdentifier(item);
+            transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
+            CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
+            try {
+                future.get();
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    if(--retries >= 0) {
+                        LOGGER.debug("Got OptimisticLockFailedException - trying again {}", neutronObject);
+                        continue;
+                    }
+                    LOGGER.warn("Got OptimisticLockFailedException on last try - failing {}", neutronObject);
+                }
+                LOGGER.warn("Transation failed ", e);
+                return false;
+            }
+            break;
         }
         return true;
     }
