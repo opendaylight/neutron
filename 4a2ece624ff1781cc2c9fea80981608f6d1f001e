@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_7bed018b",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-16T22:50:19Z",
+      "side": 1,
+      "message": "Good catch!",
+      "revId": "4a2ece624ff1781cc2c9fea80981608f6d1f001e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
