@@ -30,7 +30,7 @@ public class NeutronMeteringRuleTests {
     }
 
     //TODO handle SB check
-    public void singleton_meteringLabel_create_test() {
+    public void singleton_meteringRule_create_test() {
         String url = base + "/metering/metering-label-rules";
         String content = "{ \"metering_label_rule\": { " +
             "\"remote_ip_prefix\": \"10.0.1.0/24\", " +
@@ -41,8 +41,27 @@ public class NeutronMeteringRuleTests {
         ITNeutronE2E.test_create(url, content, "Singleton Metering Rule Post Failed NB");
     }
 
+    public void meteringRule_element_get_test() {
+        String url = base + "/metering/metering-labels-rules/00e13b58-b4f2-4579-9c9c-7ac94615f9ae";
+        ITNeutronE2E.test_fetch(url, true ,"Metering Rule Element Get Failed");
+    }
+
+    public void meteringRule_delete_test() {
+        String url = base + "/metering/metering-labels-rules/00e13b58-b4f2-4579-9c9c-7ac94615f9ae";
+        ITNeutronE2E.test_delete(url, "Metering Rule Element Delete Failed");
+    }
+
+    public void meteringRule_element_negative_get_test() {
+        String url = base + "/metering/metering-labels-rules/00e13b58-b4f2-4579-9c9c-7ac94615f9ae";
+        ITNeutronE2E.test_fetch(url, false ,"Metering Rule Element Negative Get Failed");
+    }
+
     public static void runTests(String base) {
         NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
         meteringRule_tester.meteringRule_collection_get_test();
+        meteringRule_tester.singleton_meteringRule_create_test();
+        meteringRule_tester.meteringRule_element_get_test();
+        meteringRule_tester.meteringRule_delete_test();
+        meteringRule_tester.meteringRule_element_negative_get_test();
     }
 }
