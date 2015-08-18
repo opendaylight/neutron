@@ -285,14 +285,23 @@ public class NeutronPortsNorthbound {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(false, true);
         INeutronPortCRUD portInterface = interfaces.getPortInterface();
         NeutronPort original = portInterface.getPort(portUUID);
+
         /*
-         * note: what we get appears to not be a delta, but rather a possibly
-         * complete updated object.  So, that needs to be sent down to
-         * folks to check
+         * note: what we would like to get is the complete object as it
+         * is known by neutron.  Until then, patch what we *do* get
+         * so that we don't lose already known information
          */
 
         NeutronPort updatedObject = input.getSingleton();
-        updatedObject.setID(portUUID);
+        if (updatedObject.getID() == null) {
+            updatedObject.setID(portUUID);
+        }
+        if (updatedObject.getTenantID() == null) {
+            updatedObject.setTenantID(original.getTenantID());
+        }
+        if (updatedObject.getNetworkUUID() == null) {
+            updatedObject.setNetworkUUID(original.getNetworkUUID());
+        }
 
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
