@@ -14,6 +14,7 @@ module neutron-vpnaas {
     prefix neutron-vpnaas;
 
     import ietf-yang-types { prefix "yang"; }
+    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
 
     organization "OpenDaylight Neutron Group";
@@ -27,7 +28,7 @@ module neutron-vpnaas {
                 "Initial version";
     }
 
-    grouping vpnservices-attributes {
+    grouping vpnservice-attributes {
         leaf descr {
             type string;
             description "Detailed description of the vpn service.";
@@ -184,31 +185,37 @@ module neutron-vpnaas {
         }
     }
 
-    grouping vpnaas-attributes {
+    grouping vpnservices-attributes {
         container vpn-services {
-            list vpn-service {
+            list vpnservice {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
-                uses vpnservices-attributes;
+                uses vpnservice-attributes;
             }
         }
+    }
+    grouping ikepolicies-attributes {
         container ike-policies {
-            list ike-policy {
+            list ikepolicy {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses ikepolicy-attributes;
             }
         }
+    }
+    grouping ipsecpolicies-attributes {
         container ipsec-policies {
-            list ipsec-policy {
+            list ipsecpolicy {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses ipsecpolicy-attributes;
             }
         }
+    }
+    grouping ipsecconnections-attributes {
         container ipsec-site-connections {
-            list ipsec-site-connection {
+            list ipsecsiteconnection {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;

@@ -21,16 +21,17 @@ import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 import org.opendaylight.neutron.spi.NeutronVPNLifetime;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecpolicy.attributes.LifetimeBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.IpsecPolicies;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ipsec.policies.IpsecPolicy;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ipsec.policies.IpsecPolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecpolicies.attributes.IpsecPolicies;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecpolicies.attributes.ipsec.policies.Ipsecpolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<IpsecPolicy, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
+public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ipsecpolicy, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIPSECPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIPSECPolicy>();
 
@@ -112,8 +113,8 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
 
     @Override
-    protected IpsecPolicy toMd(NeutronVPNIPSECPolicy ipsecPolicy) {
-        IpsecPolicyBuilder ipsecPolicyBuilder = new IpsecPolicyBuilder();
+    protected Ipsecpolicy toMd(NeutronVPNIPSECPolicy ipsecPolicy) {
+        IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
         if (ipsecPolicy.getName() != null) {
             ipsecPolicyBuilder.setName(ipsecPolicy.getName());
         }
@@ -155,14 +156,16 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
 
     @Override
-    protected InstanceIdentifier<IpsecPolicy> createInstanceIdentifier(IpsecPolicy ipsecPolicy) {
-        return InstanceIdentifier.create(IpsecPolicies.class).child(IpsecPolicy.class, ipsecPolicy.getKey());
+    protected InstanceIdentifier<Ipsecpolicy> createInstanceIdentifier(Ipsecpolicy ipsecPolicy) {
+        return InstanceIdentifier.create(Neutron.class)
+                 .create(IpsecPolicies.class)
+                 .child(Ipsecpolicy.class, ipsecPolicy.getKey());
     }
 
 
     @Override
-    protected IpsecPolicy toMd(String uuid) {
-        IpsecPolicyBuilder ipsecPolicyBuilder = new IpsecPolicyBuilder();
+    protected Ipsecpolicy toMd(String uuid) {
+        IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
         ipsecPolicyBuilder.setUuid(toUuid(uuid));
         return ipsecPolicyBuilder.build();
     }
