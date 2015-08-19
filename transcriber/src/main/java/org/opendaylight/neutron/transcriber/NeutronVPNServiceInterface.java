@@ -19,16 +19,16 @@ import java.util.concurrent.ConcurrentMap;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.VpnServices;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.vpn.services.VpnService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.vpn.services.VpnServiceBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnservices.attributes.VpnServices;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnservices.attributes.vpn.services.Vpnservice;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnservices.attributes.vpn.services.VpnserviceBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnService,NeutronVPNService> implements INeutronVPNServiceCRUD {
+public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice,NeutronVPNService> implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
     private ConcurrentMap<String, NeutronVPNService> vpnServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
 
@@ -103,8 +103,8 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
     }
 
     @Override
-    protected VpnService toMd(NeutronVPNService vpnService) {
-        VpnServiceBuilder vpnServiceBuilder = new VpnServiceBuilder();
+    protected Vpnservice toMd(NeutronVPNService vpnService) {
+        VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
         if (vpnService.getName() != null) {
             vpnServiceBuilder.setName(vpnService.getName());
         }
@@ -133,13 +133,13 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<VpnServ
     }
 
     @Override
-    protected InstanceIdentifier<VpnService> createInstanceIdentifier(VpnService vpnService) {
-        return InstanceIdentifier.create(VpnServices.class).child(VpnService.class, vpnService.getKey());
+    protected InstanceIdentifier<Vpnservice> createInstanceIdentifier(Vpnservice vpnService) {
+        return InstanceIdentifier.create(VpnServices.class).child(Vpnservice.class, vpnService.getKey());
     }
 
     @Override
-    protected VpnService toMd(String uuid) {
-        VpnServiceBuilder vpnServiceBuilder = new VpnServiceBuilder();
+    protected Vpnservice toMd(String uuid) {
+        VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
         vpnServiceBuilder.setUuid(toUuid(uuid));
         return vpnServiceBuilder.build();
     }

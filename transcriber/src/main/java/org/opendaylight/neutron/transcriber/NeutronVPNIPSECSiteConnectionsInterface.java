@@ -21,16 +21,16 @@ import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNDeadPeerDetection;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecconnection.attributes.DpdBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.IpsecSiteConnections;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ipsec.site.connections.IpsecSiteConnection;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ipsec.site.connections.IpsecSiteConnectionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecconnections.attributes.IpsecSiteConnections;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecconnections.attributes.ipsec.site.connections.Ipsecsiteconnection;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionBuilder;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<IpsecSiteConnection, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
+public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIPSECSiteConnection> neutronVPNIPSECSiteConnectionDB = new ConcurrentHashMap<String, NeutronVPNIPSECSiteConnection>();
 
@@ -109,8 +109,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     @Override
-    protected IpsecSiteConnection toMd(NeutronVPNIPSECSiteConnection ipsecSiteConnection) {
-        IpsecSiteConnectionBuilder ipsecSiteConnectionBuilder = new IpsecSiteConnectionBuilder();
+    protected Ipsecsiteconnection toMd(NeutronVPNIPSECSiteConnection ipsecSiteConnection) {
+        IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
         if (ipsecSiteConnection.getName() != null) {
             ipsecSiteConnectionBuilder.setName(ipsecSiteConnection.getName());
         }
@@ -178,13 +178,13 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     @Override
-    protected InstanceIdentifier<IpsecSiteConnection> createInstanceIdentifier(IpsecSiteConnection ipsecSiteConnection) {
-        return InstanceIdentifier.create(IpsecSiteConnections.class).child(IpsecSiteConnection.class, ipsecSiteConnection.getKey());
+    protected InstanceIdentifier<Ipsecsiteconnection> createInstanceIdentifier(Ipsecsiteconnection ipsecSiteConnection) {
+        return InstanceIdentifier.create(IpsecSiteConnections.class).child(Ipsecsiteconnection.class, ipsecSiteConnection.getKey());
     }
 
     @Override
-    protected IpsecSiteConnection toMd(String uuid) {
-        IpsecSiteConnectionBuilder ipsecSiteConnectionBuilder = new IpsecSiteConnectionBuilder();
+    protected Ipsecsiteconnection toMd(String uuid) {
+        IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
         ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
         return ipsecSiteConnectionBuilder.build();
     }
