@@ -57,7 +57,7 @@ module neutron-L3 {
             description "UUID to index this object.";
         }
         leaf tenant-id {
-            type yang:uuid;
+            type string;
             description "The Tenant ID of this object.";
         }
         leaf router-id {
@@ -105,7 +105,7 @@ module neutron-L3 {
             description "UUID to index this object.";
         }
         leaf tenant-id {
-            type yang:uuid;
+            type string;
             description "The Tenant ID of this object.";
         }
         leaf subnet-id {

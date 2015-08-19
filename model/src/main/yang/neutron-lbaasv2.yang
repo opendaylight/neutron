@@ -142,7 +142,7 @@ module neutron-lbaasv2 {
             description "The unique ID for the member.";
         }
         leaf tenant-id {
-            type yang:uuid;
+            type string;
             description "Owner of the member. Only an administrative user can specify
                 a tenant ID other than its own.";
         }
@@ -180,7 +180,7 @@ module neutron-lbaasv2 {
             description "The unique ID for the healthmonitor.";
         }
         leaf tenant-id {
-            type yang:uuid;
+            type string;
             description "Owner of the VIP. Only an administrative user can specify
                 a tenant ID other than its own.";
         }

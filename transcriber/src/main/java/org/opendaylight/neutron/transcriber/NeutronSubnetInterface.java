@@ -156,7 +156,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
     protected NeutronSubnet fromMd(Subnet subnet) {
         NeutronSubnet result = new NeutronSubnet();
         result.setName(subnet.getName());
-        result.setTenantID(String.valueOf(subnet.getTenantId().getValue()).replace("-",""));
+        result.setTenantID(subnet.getTenantId());
         result.setNetworkUUID(subnet.getNetworkId().getValue());
         result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
         result.setCidr(subnet.getCidr());
@@ -210,7 +210,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
             subnetBuilder.setName(subnet.getName());
         }
         if (subnet.getTenantID() != null) {
-            subnetBuilder.setTenantId(toUuid(subnet.getTenantID()));
+            subnetBuilder.setTenantId(subnet.getTenantID());
         }
         if (subnet.getNetworkUUID() != null) {
             subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));

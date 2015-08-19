@@ -141,8 +141,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             }
             result.setSubnets(neutronSubnets);
         }
-// todo remove '-' chars as tenant id doesn't use them
-        result.setTenantID(network.getTenantId().getValue());
+        result.setTenantID(network.getTenantId());
         result.setID(network.getUuid().getValue());
 
         NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
@@ -239,7 +238,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             networkBuilder.setSubnets(subnets);
         }
         if (network.getTenantID() != null) {
-            networkBuilder.setTenantId(toUuid(network.getTenantID()));
+            networkBuilder.setTenantId(network.getTenantID());
         }
         if (network.getNetworkUUID() != null) {
             networkBuilder.setUuid(toUuid(network.getNetworkUUID()));

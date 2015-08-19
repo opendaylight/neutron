@@ -124,7 +124,7 @@ public class NeutronLoadBalancerPoolMemberInterface extends
             membersBuilder.setSubnetId(toUuid(member.getPoolMemberSubnetID()));
         }
         if (member.getPoolMemberTenantID() != null) {
-            membersBuilder.setTenantId(toUuid(member.getPoolMemberTenantID()));
+            membersBuilder.setTenantId(member.getPoolMemberTenantID());
         }
         if (member.getPoolMemberWeight() != null) {
             membersBuilder.setWeight(member.getPoolMemberWeight());

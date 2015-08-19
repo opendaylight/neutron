@@ -46,8 +46,8 @@ module neutron-secgroups {
             description "Security Rule ID.";
         }
         leaf tenant-id {
-            type yang:uuid;
-            description "UUID of the tenant.";
+            type string;
+            description "ID of the tenant.";
         }
         leaf direction {
             type identityref {

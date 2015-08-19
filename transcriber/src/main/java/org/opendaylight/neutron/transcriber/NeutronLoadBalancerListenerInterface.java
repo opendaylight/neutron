@@ -161,7 +161,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             listenersBuilder.setProtocolPort(Integer.valueOf(listeners.getNeutronLoadBalancerListenerProtocolPort()));
         }
         if (listeners.getLoadBalancerListenerTenantID() != null) {
-            listenersBuilder.setTenantId(toUuid(listeners.getLoadBalancerListenerTenantID()));
+            listenersBuilder.setTenantId(listeners.getLoadBalancerListenerTenantID());
         }
         if (listeners.getID() != null) {
             listenersBuilder.setUuid(toUuid(listeners.getID()));

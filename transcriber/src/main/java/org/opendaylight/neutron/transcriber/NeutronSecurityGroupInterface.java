@@ -124,7 +124,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
             securityGroupBuilder.setDescription(securityGroup.getSecurityGroupDescription());
         }
         if (securityGroup.getSecurityGroupTenantID() != null) {
-            securityGroupBuilder.setTenantId(toUuid(securityGroup.getSecurityGroupTenantID()));
+            securityGroupBuilder.setTenantId(securityGroup.getSecurityGroupTenantID());
         }
         if (securityGroup.getSecurityRules() != null) {
             List<Uuid> neutronSecurityRule = new ArrayList<>();

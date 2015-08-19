@@ -41,8 +41,8 @@ module neutron-attrs {
         }
 
         leaf tenant-id {
-            type yang:uuid;
-            description "Admin-only. The UUID of the tenant that will own the network.
+            type string;
+            description "Admin-only. The ID of the tenant that will own the network.
                         This tenant can be different from the tenant that makes the create
                         network request. However, only administrative users can specify
                         a tenant ID other than their own. You cannot change this value

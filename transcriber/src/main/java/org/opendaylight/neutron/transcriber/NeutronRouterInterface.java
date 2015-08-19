@@ -127,7 +127,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
             routerBuilder.setName(router.getName());
         }
         if (router.getTenantID() != null && !router.getTenantID().isEmpty()) {
-            routerBuilder.setTenantId(toUuid(router.getTenantID()));
+            routerBuilder.setTenantId(router.getTenantID());
         }
         if (router.getStatus() != null) {
             routerBuilder.setStatus(router.getStatus());
