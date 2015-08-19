@@ -31,7 +31,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
-import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
@@ -154,23 +153,23 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showVPNIPSECSiteConnection(@PathParam("policyID") String policyID,
+    public Response showVPNIPSECSiteConnection(@PathParam("connectionID") String connectionID,
     // return fields
             @QueryParam("fields") List<String> fields) {
         INeutronVPNIPSECSiteConnectionsCRUD connectionInterface = getNeutronInterfaces()
                 .getVPNIPSECSiteConnectionsInterface();
-        if (!connectionInterface.neutronVPNIPSECSiteConnectionsExists(policyID)) {
+        if (!connectionInterface.neutronVPNIPSECSiteConnectionsExists(connectionID)) {
             throw new ResourceNotFoundException("NeutronVPNIPSECSiteConnections ID not found");
         }
         if (fields.size() > 0) {
-            NeutronVPNIPSECSiteConnection ans = connectionInterface.getNeutronVPNIPSECSiteConnections(policyID);
+            NeutronVPNIPSECSiteConnection ans = connectionInterface.getNeutronVPNIPSECSiteConnections(connectionID);
             return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNIPSECSiteConnectionRequest(extractFields(ans, fields)))
                     .build();
         } else {
             return Response
                     .status(HttpURLConnection.HTTP_OK)
                     .entity(new NeutronVPNIPSECSiteConnectionRequest(connectionInterface
-                            .getNeutronVPNIPSECSiteConnections(policyID))).build();
+                            .getNeutronVPNIPSECSiteConnections(connectionID))).build();
         }
     }
 
@@ -227,22 +226,22 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     /**
      * Updates a VPN IPSEC SiteConnection
      */
-    @Path("{policyID}")
+    @Path("{connectionID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateVPNIPSECSiteConnection(@PathParam("policyID") String policyID,
+    public Response updateVPNIPSECSiteConnection(@PathParam("connectionID") String connectionID,
             final NeutronVPNIPSECSiteConnectionRequest input) {
         INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
                 .getVPNIPSECSiteConnectionsInterface();
 
         NeutronVPNIPSECSiteConnection singleton = input.getSingleton();
         NeutronVPNIPSECSiteConnection original = ipsecSiteConnectionsInterface
-                .getNeutronVPNIPSECSiteConnections(policyID);
+                .getNeutronVPNIPSECSiteConnections(connectionID);
 
-        Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
+        Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECSiteConnectionAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
                 for (Object instance : instances) {
@@ -261,9 +260,9 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         /*
          * update the ipsecSiteConnections entry and return the modified object
          */
-        ipsecSiteConnectionsInterface.updateNeutronVPNIPSECSiteConnections(policyID, singleton);
+        ipsecSiteConnectionsInterface.updateNeutronVPNIPSECSiteConnections(connectionID, singleton);
         NeutronVPNIPSECSiteConnection updatedVPNIKEPolicy = ipsecSiteConnectionsInterface
-                .getNeutronVPNIPSECSiteConnections(policyID);
+                .getNeutronVPNIPSECSiteConnections(connectionID);
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
@@ -273,23 +272,23 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         return Response
                 .status(HttpURLConnection.HTTP_OK)
                 .entity(new NeutronVPNIPSECSiteConnectionRequest(ipsecSiteConnectionsInterface
-                        .getNeutronVPNIPSECSiteConnections(policyID))).build();
+                        .getNeutronVPNIPSECSiteConnections(connectionID))).build();
     }
 
     /**
      * Deletes a VPN IPSEC SiteConnection
      */
 
-    @Path("{policyID}")
+    @Path("{connectionID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteVPNIPSECSiteConnection(@PathParam("policyID") String policyID) {
+    public Response deleteVPNIPSECSiteConnection(@PathParam("connectionID") String connectionID) {
         INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
                 .getVPNIPSECSiteConnectionsInterface();
 
         NeutronVPNIPSECSiteConnection singleton = ipsecSiteConnectionsInterface
-                .getNeutronVPNIPSECSiteConnections(policyID);
+                .getNeutronVPNIPSECSiteConnections(connectionID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECSiteConnectionAware.class, this);
         if (instances != null) {
             if (instances.length > 0) {
@@ -306,7 +305,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(policyID);
+        ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(connectionID);
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
