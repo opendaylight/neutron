@@ -48,13 +48,6 @@ public class NeutronNetworkJAXBTest {
             Assert.assertEquals("NeutronNetwork JAXB Test 4: Testing status failed",
                   "ACTIVE", testObject.getStatus());
 
-            List<String> subnets = testObject.getSubnets();
-            Assert.assertEquals("NeutronNetwork JAXB Test 5.1: Testing subnets list length failed",
-                  1, subnets.size());
-
-            Assert.assertEquals("NeutronNetwork JAXB Test 5.2: Testing subnets value failed",
-                                "3b80198d-4f7b-4f77-9ef5-774d54e17126", subnets.get(0));
-
             Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing name failed",
                                 "net1", testObject.getNetworkName());
 
@@ -107,13 +100,6 @@ public class NeutronNetworkJAXBTest {
 
             Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing status failed",
                   "ACTIVE", testObject.getStatus());
-
-            List<String> subnets = testObject.getSubnets();
-            Assert.assertEquals("NeutronNetwork JAXB Test 4.1: Testing subnets list length failed",
-                  1, subnets.size());
-
-            Assert.assertEquals("NeutronNetwork JAXB Test 4.2: Testing subnets value failed",
-                                "3b80198d-4f7b-4f77-9ef5-774d54e17126", subnets.get(0));
 
             Assert.assertEquals("NeutronNetwork JAXB Test 5: Testing name failed",
                                 "net1", testObject.getNetworkName());
