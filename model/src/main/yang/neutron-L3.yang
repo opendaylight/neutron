@@ -32,7 +32,7 @@ module neutron-L3 {
     }
 
     grouping L3-attributes {
-        leaf distribted {
+        leaf distributed {
             description "whether this router is distributed or not.";
             type boolean;
             default "false";

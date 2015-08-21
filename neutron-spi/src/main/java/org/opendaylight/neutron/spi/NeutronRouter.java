@@ -189,6 +189,10 @@ public class NeutronRouter implements Serializable, INeutronObject {
         return ans;
     }
 
+    public void setInterfaces(Map<String, NeutronRouter_Interface> input) {
+        interfaces = input;
+    }
+
     public Map<String, NeutronRouter_Interface> getInterfaces() {
         return interfaces;
     }
