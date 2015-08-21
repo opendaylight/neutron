@@ -21,16 +21,17 @@ import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 import org.opendaylight.neutron.spi.NeutronVPNLifetime;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicy.attributes.LifetimeBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.IkePolicies;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ike.policies.IkePolicy;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.vpnaas.attributes.ike.policies.IkePolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicies.attributes.IkePolicies;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicies.attributes.ike.policies.Ikepolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev141002.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePolicy, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
+public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
     private ConcurrentMap<String, NeutronVPNIKEPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIKEPolicy>();
 
@@ -112,8 +113,8 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
 
 
     @Override
-    protected IkePolicy toMd(NeutronVPNIKEPolicy ikePolicy) {
-        IkePolicyBuilder ikePolicyBuilder = new IkePolicyBuilder();
+    protected Ikepolicy toMd(NeutronVPNIKEPolicy ikePolicy) {
+        IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
         if (ikePolicy.getName() != null) {
             ikePolicyBuilder.setName(ikePolicy.getName());
         }
@@ -155,14 +156,16 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<IkePo
 
 
     @Override
-    protected InstanceIdentifier<IkePolicy> createInstanceIdentifier(IkePolicy ikePolicy) {
-        return InstanceIdentifier.create(IkePolicies.class).child(IkePolicy.class, ikePolicy.getKey());
+    protected InstanceIdentifier<Ikepolicy> createInstanceIdentifier(Ikepolicy ikePolicy) {
+        return InstanceIdentifier.create(Neutron.class)
+                 .child(IkePolicies.class)
+                 .child(Ikepolicy.class, ikePolicy.getKey());
     }
 
 
     @Override
-    protected IkePolicy toMd(String uuid) {
-        IkePolicyBuilder ikePolicyBuilder = new IkePolicyBuilder();
+    protected Ikepolicy toMd(String uuid) {
+        IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
         ikePolicyBuilder.setUuid(toUuid(uuid));
         return ikePolicyBuilder.build();
     }

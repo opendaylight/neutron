@@ -99,9 +99,10 @@ public class ITNeutronE2E {
 //  TODO: add LoadBalancerPoolMembers testing
         NeutronMeteringLabelTests.runTests(base);
         NeutronMeteringRuleTests.runTests(base);
-        NeutronIKEPoliciesTests.runTests(base);
+        NeutronVPNServicesTests.runTests(base);
         NeutronIPSECPoliciesTests.runTests(base);
         NeutronIPSECSiteConnectionTests.runTests(base);
+        NeutronIKEPoliciesTests.runTests(base);
 
     // tests related to bugs
         Neutron_Bug3812_Tests.runTests(base);
