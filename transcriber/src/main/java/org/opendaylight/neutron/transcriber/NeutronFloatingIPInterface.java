@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
@@ -28,8 +26,6 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.Floatingips;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.floatingips.Floatingip;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.floatingips.attributes.floatingips.FloatingipBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attributes.FixedIpAddress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev141002.l3.floatingip.attributes.FixedIpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
@@ -40,8 +36,6 @@ import org.slf4j.LoggerFactory;
 public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, NeutronFloatingIP> implements INeutronFloatingIPCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
-    private ConcurrentMap<String, NeutronFloatingIP> floatingIPDB  = new ConcurrentHashMap<String, NeutronFloatingIP>();
-
     NeutronFloatingIPInterface(ProviderContext providerContext) {
         super(providerContext);
     }
@@ -50,23 +44,27 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean floatingIPExists(String uuid) {
-        return floatingIPDB.containsKey(uuid);
+        Floatingip fip = readMd(createInstanceIdentifier(toMd(uuid)));
+        return (fip != null);
     }
 
     @Override
     public NeutronFloatingIP getFloatingIP(String uuid) {
-        if (!floatingIPExists(uuid)) {
+        Floatingip fip = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (fip == null) {
             return null;
         }
-        return floatingIPDB.get(uuid);
+        return fromMd(fip);
     }
 
     @Override
     public List<NeutronFloatingIP> getAllFloatingIPs() {
         Set<NeutronFloatingIP> allIPs = new HashSet<NeutronFloatingIP>();
-        for (Entry<String, NeutronFloatingIP> entry : floatingIPDB.entrySet()) {
-            NeutronFloatingIP floatingip = entry.getValue();
-            allIPs.add(floatingip);
+        Floatingips fips = readMd(createInstanceIdentifier());
+        if (fips != null) {
+            for (Floatingip fip: fips.getFloatingip()) {
+                allIPs.add(fromMd(fip));
+            }
         }
         LOGGER.debug("Exiting getAllFloatingIPs, Found {} FloatingIPs", allIPs.size());
         List<NeutronFloatingIP> ans = new ArrayList<NeutronFloatingIP>();
@@ -79,28 +77,27 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (floatingIPExists(input.getID())) {
             return false;
         }
-        floatingIPDB.putIfAbsent(input.getID(), input);
-        return true;
+        return addMd(input);
     }
 
     @Override
     public boolean removeFloatingIP(String uuid) {
-        if (!floatingIPExists(uuid)) {
+        NeutronFloatingIP fip = getFloatingIP(uuid);
+        if (fip == null) {
             return false;
         }
-        floatingIPDB.remove(uuid);
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
     public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta) {
-        if (!floatingIPExists(uuid)) {
+        NeutronFloatingIP target = getFloatingIP(uuid);
+        if (target == null) {
             return false;
         }
-        NeutronFloatingIP target = floatingIPDB.get(uuid);
-        target.setPortUUID(delta.getPortUUID());
-        target.setFixedIPAddress(delta.getFixedIPAddress());
-        return true;
+        delta.setPortUUID(target.getPortUUID());
+        delta.setFixedIPAddress(target.getFixedIPAddress());
+        return updateMd(delta);
     }
 
     @Override
@@ -111,22 +108,10 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     }
 
     @Override
-    protected InstanceIdentifier<Floatingip> createInstanceIdentifier(
-            Floatingip item) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Floatingips.class)
-                .child(Floatingip.class,item.getKey());
-    }
-
-    @Override
     protected Floatingip toMd(NeutronFloatingIP floatingIp) {
         FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
         if (floatingIp.getFixedIPAddress() != null) {
-            List<FixedIpAddress> listFixedIpAddress = new ArrayList<FixedIpAddress>();
-            FixedIpAddressBuilder fixedIpAddressBuilder = new FixedIpAddressBuilder();
-            fixedIpAddressBuilder.setIpAddress(new IpAddress(floatingIp.getFixedIPAddress().toCharArray()));
-            listFixedIpAddress.add(fixedIpAddressBuilder.build());
-            floatingipBuilder.setFixedIpAddress(listFixedIpAddress );
+            floatingipBuilder.setFixedIpAddress(new IpAddress(floatingIp.getFixedIPAddress().toCharArray()));
         }
         if(floatingIp.getFloatingIPAddress() != null) {
             floatingipBuilder.setFloatingIpAddress(new IpAddress(floatingIp.getFloatingIPAddress().toCharArray()));
@@ -153,6 +138,44 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             LOGGER.warn("Attempting to write neutron floating IP without UUID");
         }
         return floatingipBuilder.build();
+    }
+
+    protected NeutronFloatingIP fromMd(Floatingip fip) {
+        NeutronFloatingIP result = new NeutronFloatingIP();
+        result.setID(String.valueOf(fip.getUuid().getValue()));
+        if (fip.getFloatingNetworkId() != null) {
+            result.setFloatingNetworkUUID(String.valueOf(fip.getFloatingNetworkId().getValue()));
+        }
+        if (fip.getPortId() != null) {
+            result.setPortUUID(String.valueOf(fip.getPortId().getValue()));
+        }
+        if (fip.getFixedIpAddress() != null ) {
+            result.setFixedIPAddress(String.valueOf(fip.getFixedIpAddress().getValue()));
+        }
+        if (fip.getFloatingIpAddress() != null) {
+            result.setFloatingIPAddress(String.valueOf(fip.getFloatingIpAddress().getValue()));
+        }
+        if (fip.getTenantId() != null) {
+            result.setTenantUUID(String.valueOf(fip.getTenantId().getValue()));
+        }
+        if (fip.getRouterId() != null) {
+            result.setRouterUUID(String.valueOf(fip.getRouterId().getValue()));
+        }
+        result.setStatus(fip.getStatus());
+        return result;
+    }
+
+    @Override
+    protected InstanceIdentifier<Floatingip> createInstanceIdentifier(
+            Floatingip item) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Floatingips.class)
+                .child(Floatingip.class,item.getKey());
+    }
+
+    protected InstanceIdentifier<Floatingips> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Floatingips.class);
     }
 
     public static void registerNewInterface(BundleContext context,
