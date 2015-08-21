@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_92f8f07d",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-08-21T16:04:19Z",
+      "side": 1,
+      "message": "Please do not use enums, enums are non-extensible, and this is manifestly a field that will need to be extensible.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_122ce001",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-08-21T16:04:19Z",
+      "side": 1,
+      "message": "Could you help me understand why all this information is here in a simple mapping, rather than with the thing being mapped to?",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_3231dc5a",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-08-21T16:04:19Z",
+      "side": 1,
+      "message": "Why isn\u0027t all of this stuff simply an instance identifier pointing to the termination point in question?",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
