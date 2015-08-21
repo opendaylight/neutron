@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a79b1b5_4d063d22",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "use space instead of tab.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_6d03f90f",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "ditt",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_ff048c16",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Please put the description on this model and its high level goal.\nOtherwise reviewer doesn\u0027t understand this model.\n\nI\u0027m assuming that the goal is to support neutron providernetwork by ODL.\nCorrect?",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_dfff5000",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "wrong indent",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_92f8f07d",
         "filename": "model/src/main/yang/neutron-device-map.yang",
         "patchSetId": 3
@@ -13,6 +81,91 @@
       "writtenOn": "2015-08-21T16:04:19Z",
       "side": 1,
       "message": "Please do not use enums, enums are non-extensible, and this is manifestly a field that will need to be extensible.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_3f31a4ec",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "More precise name for the purpose, please.\nMaybe similar terminology used by Neutron.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_df4d1074",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Nameing: physical-network",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_ff524c12",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Naming.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_5f13405c",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Who assigns this?\nPer my understanding, the name of physical network is used for identifier in configuration file in compute node.\nAt the moment, neutron server doesn\u0027t directly manage it.\n\nI personally think neutron should manage it. But it\u0027s another story.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_8d0c5544",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "The network-type-base in neutron-network.yang should be shared",
       "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -36,6 +189,40 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_1f1dc866",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Does this correspond to compute host?\nIsn\u0027t id for ovsdb-server necessary?\nI mean, uuid of Open_vSwitch table or something.",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_bf25b4ac",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Do we care?\nHow does ODL(netvirt) suppose to use this?",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_3231dc5a",
         "filename": "model/src/main/yang/neutron-device-map.yang",
         "patchSetId": 3
@@ -47,6 +234,40 @@
       "writtenOn": "2015-08-21T16:04:19Z",
       "side": 1,
       "message": "Why isn\u0027t all of this stuff simply an instance identifier pointing to the termination point in question?",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_1f34e8dc",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "Naming: mac-address",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_7f371ce4",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-08-21T21:27:47Z",
+      "side": 1,
+      "message": "How is mac address supposed to be used?",
       "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
