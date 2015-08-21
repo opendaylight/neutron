@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_d282e8ff",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-08-21T15:30:36Z",
+      "side": 1,
+      "message": "A better solution to this would be to use TransactionChains, which would prevent us stepping on our own feet, and also preserver order in which things happen.",
+      "revId": "ca806fe1739a3dbd1d3ca35dd7b81f07da5b3c28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
