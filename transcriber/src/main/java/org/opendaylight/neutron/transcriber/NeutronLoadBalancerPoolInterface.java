@@ -98,7 +98,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             return false;
         }
         loadBalancerPoolDB.remove(uuid);
-        //TODO: add code to find INeutronLoadBalancerPoolAware services and call newtorkDeleted on them
         return true;
     }
 
@@ -107,8 +106,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         if (!neutronLoadBalancerPoolExists(uuid)) {
             return false;
         }
-        NeutronLoadBalancerPool target = loadBalancerPoolDB.get(uuid);
-        return overwrite(target, delta);
+        loadBalancerPoolDB.putIfAbsent(uuid, delta);
+        return true;
     }
 
     @Override

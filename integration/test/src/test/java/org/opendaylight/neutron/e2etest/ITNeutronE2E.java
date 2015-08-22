@@ -95,8 +95,8 @@ public class ITNeutronE2E {
         NeutronLoadBalancerTests.runTests(base);
         NeutronLBListenerTests.runTests(base);
         NeutronLBPoolTests.runTests(base);
+        NeutronLBPoolMembersTests.runTests(base);
         NeutronLBHealthMonitorTests.runTests(base);
-//  TODO: add LoadBalancerPoolMembers testing
         NeutronMeteringLabelTests.runTests(base);
         NeutronMeteringRuleTests.runTests(base);
         NeutronVPNServicesTests.runTests(base);
