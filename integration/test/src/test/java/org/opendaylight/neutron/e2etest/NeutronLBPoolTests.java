@@ -50,9 +50,48 @@ public class NeutronLBPoolTests {
         ITNeutronE2E.test_create(url, content, "Singleton LB Pool Post Failed NB");
     }
 
+    public void pool_update_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
+        String content = " { \"pool\": { \"admin_state_up\": false," +
+            "\"description\": \"pool two\"," +
+            "\"healthmonitor_id\": null," +
+            "\"id\": \"12ff63af-4127-4074-a251-bcb2ecc53ebe\"," +
+            "\"lb_algorithm\": \"LEAST_CONNECTIONS\"," +
+            "\"listeners\": [ {" +
+                    "\"id\": \"39de4d56-d663-46e5-85a1-5b9d5fa17829\" } ]," +
+            "\"members\": []," +
+            "\"name\": \"pool2\"," +
+            "\"protocol\": \"HTTP\"," +
+            "\"session_persistence\": { \"cookie_name\": null," +
+                "\"type\": \"HTTP_COOKIE\" }," +
+            "\"tenant_id\": \"1a3e005cf9ce40308c900bcb08e5320c\" } }";
+        ITNeutronE2E.test_modify(url, content,"LB Pool Put Failed");
+    }
+   
+    public void pool_element_get_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
+        ITNeutronE2E.test_fetch(url, true ,"LB Pool Element Get Failed");
+    }
+
+    public void pool_element_negative_get_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
+        ITNeutronE2E.test_fetch(url, false ,"LB Pool Element Negative Get Failed");
+    }
+
+    public void pool_delete_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
+        ITNeutronE2E.test_delete(url, "LB Pool Element Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
         pool_tester.pool_collection_get_test();
+        pool_tester.singleton_lb_pool_create_test();
+        pool_tester.pool_update_test();
+        pool_tester.pool_element_get_test();
+        pool_tester.pool_delete_test();
+        pool_tester.pool_element_negative_get_test();
+        // needed for pool member testing
         pool_tester.singleton_lb_pool_create_test();
     }
 }
