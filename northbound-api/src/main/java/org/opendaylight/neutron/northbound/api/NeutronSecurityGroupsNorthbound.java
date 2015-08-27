@@ -50,13 +50,8 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 @Path ("/security-groups")
-public class NeutronSecurityGroupsNorthbound {
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "Security Group CRUD Interface";
-    private static final String UUID_NO_EXIST = "Security Group UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
+    private static final String RESOURCE_NAME = "Security Group";
 
     private NeutronSecurityGroup extractFields(NeutronSecurityGroup o, List<String> fields) {
         return o.extractFields(fields);
@@ -65,8 +60,7 @@ public class NeutronSecurityGroupsNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
         if (answer.getSecurityGroupInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -137,7 +131,7 @@ public class NeutronSecurityGroupsNorthbound {
                                       @QueryParam ("fields") List<String> fields) {
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
         if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (!fields.isEmpty()) {
             NeutronSecurityGroup ans = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);

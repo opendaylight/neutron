@@ -59,14 +59,9 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
  */
 
 @Path("/lbaas/pools")
-public class NeutronLoadBalancerPoolNorthbound {
+public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "LoadBalancerPool CRUD Interface";
-    private static final String UUID_NO_EXIST = "LoadBalancerPool UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "LoadBalancerPool";
 
     private NeutronLoadBalancerPool extractFields(NeutronLoadBalancerPool o, List<String> fields) {
         return o.extractFields(fields);
@@ -76,8 +71,7 @@ public class NeutronLoadBalancerPoolNorthbound {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().
             fetchINeutronLoadBalancerPoolCRUD(this);
         if (answer.getLoadBalancerPoolInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -163,7 +157,7 @@ public class NeutronLoadBalancerPoolNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
         if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronLoadBalancerPool ans = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolID);
@@ -377,7 +371,7 @@ public class NeutronLoadBalancerPoolNorthbound {
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
         if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         List<NeutronLoadBalancerPoolMember> members =
                     loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
@@ -429,7 +423,7 @@ public class NeutronLoadBalancerPoolNorthbound {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
         if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         List<NeutronLoadBalancerPoolMember> members =
                     loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
@@ -446,7 +440,7 @@ public class NeutronLoadBalancerPoolNorthbound {
                     new NeutronLoadBalancerPoolMemberRequest(ans)).build();
             }
         }
-        throw new ResourceNotFoundException(UUID_NO_EXIST);
+        throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
     }
 
     /**

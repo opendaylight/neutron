@@ -50,14 +50,9 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
  *
  */
 @Path("/fw/firewall_policies")
-public class NeutronFirewallPolicyNorthbound {
+public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "Firewall Policy CRUD Interface";
-    private static final String UUID_NO_EXIST = "Firewall Policy UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "Firewall Policy";
 
     private NeutronFirewallPolicy extractFields(NeutronFirewallPolicy o, List<String> fields) {
         return o.extractFields(fields);
@@ -66,8 +61,7 @@ public class NeutronFirewallPolicyNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallPolicyCRUD(this);
         if (answer.getFirewallPolicyInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -145,7 +139,7 @@ public class NeutronFirewallPolicyNorthbound {
                                       @QueryParam("fields") List<String> fields) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
         if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronFirewallPolicy ans = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);

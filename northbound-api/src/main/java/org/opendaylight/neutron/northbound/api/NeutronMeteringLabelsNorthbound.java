@@ -55,10 +55,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
  */
 
 @Path("/metering/metering-labels")
-public class NeutronMeteringLabelsNorthbound {
-
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
+public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
 
     private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
         return o.extractFields(fields);
