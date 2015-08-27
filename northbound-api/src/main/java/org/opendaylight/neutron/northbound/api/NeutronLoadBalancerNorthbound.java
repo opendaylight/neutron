@@ -51,10 +51,8 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancer;
  *
  */
 @Path("/lbaas/loadbalancers")
-public class NeutronLoadBalancerNorthbound {
+public class NeutronLoadBalancerNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "LoadBalancer CRUD Interface";
     private static final String UUID_NO_EXIST = "LoadBalancer UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";

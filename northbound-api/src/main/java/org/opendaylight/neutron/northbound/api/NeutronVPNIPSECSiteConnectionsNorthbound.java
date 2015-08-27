@@ -55,10 +55,8 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
  */
 
 @Path("/vpn/ipsecsiteconnections")
-public class NeutronVPNIPSECSiteConnectionsNorthbound {
+public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "VPNIPSECSiteConnections CRUD Interface";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";

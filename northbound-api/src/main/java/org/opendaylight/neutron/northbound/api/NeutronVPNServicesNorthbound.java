@@ -55,10 +55,8 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
  */
 
 @Path("/vpn/vpnservices")
-public class NeutronVPNServicesNorthbound {
+public class NeutronVPNServicesNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "VPNService CRUD Interface";
     private static final String UUID_NO_EXIST = "VPNService UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";

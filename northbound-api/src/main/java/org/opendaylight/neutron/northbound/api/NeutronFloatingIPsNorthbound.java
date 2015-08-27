@@ -56,9 +56,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
  */
 
 @Path("/floatingips")
-public class NeutronFloatingIPsNorthbound {
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
+public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
     private static final String INTERFACE_NAME = "Floating IP CRUD Interface";
     private static final String UUID_NO_EXIST = "Floating IP UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";

@@ -57,11 +57,9 @@ import org.opendaylight.neutron.spi.NeutronRouter_Interface;
  */
 
 @Path("/routers")
-public class NeutronRoutersNorthbound {
+public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
     static final String ROUTER_INTERFACE_STR = "network:router_interface";
     static final String ROUTER_GATEWAY_STR = "network:router_gateway";
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Router CRUD Interface";
     private static final String UUID_NO_EXIST = "Router UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";

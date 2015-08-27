@@ -55,9 +55,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
  */
 
 @Path("/vpn/ikepolicies")
-public class NeutronVPNIKEPoliciesNorthbound {
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
+public class NeutronVPNIKEPoliciesNorthbound extends AbstractNeutronNorthbound {
     private static final String UUID_NO_EXIST = "VPNIKEPolicy UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
     private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";

@@ -50,9 +50,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 @Path ("/security-groups")
-public class NeutronSecurityGroupsNorthbound {
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
+public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
     private static final String INTERFACE_NAME = "Security Group CRUD Interface";
     private static final String UUID_NO_EXIST = "Security Group UUID does not exist.";
     private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
