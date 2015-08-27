@@ -56,17 +56,12 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
  */
 
 @Path("/networks")
-public class NeutronNetworksNorthbound {
+public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
 
     @Context
     UriInfo uriInfo;
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "Network CRUD Interface";
-    private static final String UUID_NO_EXIST = "Network UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "Network";
 
     private NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
         return o.extractFields(fields);
@@ -75,8 +70,7 @@ public class NeutronNetworksNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronNetworkCRUD(this);
         if (answer.getNetworkInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -177,7 +171,7 @@ public class NeutronNetworksNorthbound {
             ) {
         INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
         if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronNetwork ans = networkInterface.getNetwork(netUUID);

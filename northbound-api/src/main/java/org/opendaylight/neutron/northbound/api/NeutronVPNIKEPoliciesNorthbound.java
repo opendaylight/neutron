@@ -55,12 +55,8 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
  */
 
 @Path("/vpn/ikepolicies")
-public class NeutronVPNIKEPoliciesNorthbound {
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String UUID_NO_EXIST = "VPNIKEPolicy UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+public class NeutronVPNIKEPoliciesNorthbound extends AbstractNeutronNorthbound {
+    private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     private NeutronVPNIKEPolicy extractFields(NeutronVPNIKEPolicy o, List<String> fields) {
         return o.extractFields(fields);
@@ -150,7 +146,7 @@ public class NeutronVPNIKEPoliciesNorthbound {
             ) {
         INeutronVPNIKEPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIKEPolicyInterface();
         if (!policyInterface.neutronVPNIKEPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronVPNIKEPolicy ans = policyInterface.getNeutronVPNIKEPolicy(policyUUID);
