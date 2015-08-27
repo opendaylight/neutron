@@ -287,7 +287,7 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewall(
             @PathParam("firewallUUID") String firewallUUID) {
-        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
+        final INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
 
         NeutronFirewall singleton = firewallInterface.getNeutronFirewall(firewallUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
@@ -310,7 +310,12 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
         /*
          * remove it and return 204 status
          */
-        firewallInterface.removeNeutronFirewall(firewallUUID);
+        deleteUuid("firewall", firewallUUID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return firewallInterface.removeNeutronFirewall(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronFirewallAware service = (INeutronFirewallAware) instance;

@@ -327,7 +327,7 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSubnet(
             @PathParam("subnetUUID") String subnetUUID) {
-        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
+        final INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
 
         NeutronSubnet singleton = subnetInterface.getSubnet(subnetUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
@@ -350,7 +350,12 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
         /*
          * remove it and return 204 status
          */
-        subnetInterface.removeSubnet(subnetUUID);
+        deleteUuid("subnet", subnetUUID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return subnetInterface.removeSubnet(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronSubnetAware service = (INeutronSubnetAware) instance;

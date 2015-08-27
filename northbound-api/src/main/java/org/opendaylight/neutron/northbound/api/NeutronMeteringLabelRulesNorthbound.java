@@ -208,7 +208,7 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabelRule(
             @PathParam("ruleUUID") String ruleUUID) {
-        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
+        final INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
 
         NeutronMeteringLabelRule singleton = meteringLabelRuleInterface.getNeutronMeteringLabelRule(ruleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
@@ -227,7 +227,12 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
         } else {
             throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
         }
-        meteringLabelRuleInterface.removeNeutronMeteringLabelRule(ruleUUID);
+        deleteUuid("meteringLabelRule", ruleUUID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return meteringLabelRuleInterface.removeNeutronMeteringLabelRule(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;

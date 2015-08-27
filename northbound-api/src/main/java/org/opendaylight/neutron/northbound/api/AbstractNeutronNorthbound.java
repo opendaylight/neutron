@@ -11,7 +11,35 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class AbstractNeutronNorthbound {
+    private static final Logger LOGGER = LoggerFactory
+        .getLogger(AbstractNeutronNorthbound.class);
+
     protected static final int HTTP_OK_BOTTOM = 200;
     protected static final int HTTP_OK_TOP = 299;
+
+    protected static final String UUID_NO_EXIST = "UUID does not exist.";
+
+    protected interface Remover {
+        abstract public boolean remove(String uuid);
+    }
+
+    public void deleteUuid(String resourceName, String uuid,
+                           String noExistMsg, Remover remover) {
+        boolean exist = false;
+        try {
+            exist = remover.remove(uuid);
+        } catch (Exception e) {
+            LOGGER.debug("exception during remove {} {} {}",
+                         resourceName, uuid, e);
+            throw new InternalServerErrorException("Could not delete " +
+                                                   resourceName);
+        }
+        if (!exist) {
+            throw new ResourceNotFoundException(noExistMsg);
+        }
+    }
 }

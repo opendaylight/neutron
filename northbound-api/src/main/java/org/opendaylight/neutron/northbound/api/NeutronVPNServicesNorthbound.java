@@ -286,7 +286,7 @@ public class NeutronVPNServicesNorthbound extends AbstractNeutronNorthbound {
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
-        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
+        final INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
 
         NeutronVPNService singleton = VPNServiceInterface.getVPNService(serviceID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
@@ -306,7 +306,12 @@ public class NeutronVPNServicesNorthbound extends AbstractNeutronNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        VPNServiceInterface.removeVPNService(serviceID);
+        deleteUuid("VPNService", serviceID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return VPNServiceInterface.removeVPNService(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;

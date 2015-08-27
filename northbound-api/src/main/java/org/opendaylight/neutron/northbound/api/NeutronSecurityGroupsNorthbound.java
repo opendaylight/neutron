@@ -282,7 +282,7 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
-        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
+        final INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
 
         NeutronSecurityGroup singleton = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
@@ -305,7 +305,12 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
         /*
          * remove it and return 204 status
          */
-        securityGroupInterface.removeNeutronSecurityGroup(securityGroupUUID);
+        deleteUuid("securityGroup", securityGroupUUID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return securityGroupInterface.removeNeutronSecurityGroup(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;

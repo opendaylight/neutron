@@ -329,7 +329,7 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
-        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
+        final INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
 
         NeutronNetwork singleton = networkInterface.getNetwork(netUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
@@ -349,9 +349,12 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        if (!networkInterface.removeNetwork(netUUID)) {
-            throw new InternalServerErrorException("Could not delete network");
-        }
+        deleteUuid("network", netUUID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return networkInterface.removeNetwork(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronNetworkAware service = (INeutronNetworkAware) instance;

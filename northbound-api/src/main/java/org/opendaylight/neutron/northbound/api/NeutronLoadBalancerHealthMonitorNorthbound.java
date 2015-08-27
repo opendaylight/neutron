@@ -314,7 +314,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
+        final INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         NeutronLoadBalancerHealthMonitor singleton = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
@@ -333,7 +333,12 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        loadBalancerHealthMonitorInterface.removeNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
+        deleteUuid("loadBalancerHealthMonitor", loadBalancerHealthMonitorID, UUID_NO_EXIST,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return loadBalancerHealthMonitorInterface.removeNeutronLoadBalancerHealthMonitor(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
