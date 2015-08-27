@@ -279,7 +279,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECSiteConnection(@PathParam("connectionID") String connectionID) {
-        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
+        final INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
                 .getVPNIPSECSiteConnectionsInterface();
 
         NeutronVPNIPSECSiteConnection singleton = ipsecSiteConnectionsInterface
@@ -300,7 +300,12 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(connectionID);
+        deleteUuid(RESOURCE_NAME, connectionID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;

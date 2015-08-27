@@ -288,7 +288,7 @@ public class NeutronLoadBalancerNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancer(
             @PathParam("loadBalancerID") String loadBalancerID) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
+        final INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
 
         NeutronLoadBalancer singleton = loadBalancerInterface.getNeutronLoadBalancer(loadBalancerID);
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
@@ -308,8 +308,12 @@ public class NeutronLoadBalancerNorthbound extends AbstractNeutronNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-
-        loadBalancerInterface.removeNeutronLoadBalancer(loadBalancerID);
+        deleteUuid(RESOURCE_NAME, loadBalancerID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return loadBalancerInterface.removeNeutronLoadBalancer(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;

@@ -297,7 +297,7 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
-        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
+        final INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
 
         NeutronSecurityRule singleton = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
@@ -321,7 +321,12 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
         /*
          * remove it and return 204 status
          */
-        securityRuleInterface.removeNeutronSecurityRule(securityRuleUUID);
+        deleteUuid(RESOURCE_NAME, securityRuleUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return securityRuleInterface.removeNeutronSecurityRule(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
