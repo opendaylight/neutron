@@ -56,6 +56,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 
 @Path("/metering/metering-labels")
 public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
+    private static final String RESOURCE_NAME = "Metering Label";
 
     private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
         return o.extractFields(fields);
@@ -208,7 +209,7 @@ public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabel(
             @PathParam("labelUUID") String labelUUID) {
-        INeutronMeteringLabelCRUD meteringLabelInterface = getNeutronInterfaces().getMeteringLabelInterface();
+        final INeutronMeteringLabelCRUD meteringLabelInterface = getNeutronInterfaces().getMeteringLabelInterface();
 
         NeutronMeteringLabel singleton = meteringLabelInterface.getNeutronMeteringLabel(labelUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
@@ -227,7 +228,12 @@ public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
         } else {
             throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
         }
-        meteringLabelInterface.removeNeutronMeteringLabel(labelUUID);
+        deleteUuid(RESOURCE_NAME, labelUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return meteringLabelInterface.removeNeutronMeteringLabel(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;

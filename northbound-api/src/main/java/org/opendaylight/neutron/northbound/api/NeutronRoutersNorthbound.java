@@ -306,7 +306,7 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteRouter(
             @PathParam("routerUUID") String routerUUID) {
-        INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
+        final INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
 
         NeutronRouter singleton = routerInterface.getRouter(routerUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
@@ -325,7 +325,12 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        routerInterface.removeRouter(routerUUID);
+        deleteUuid(RESOURCE_NAME, routerUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return routerInterface.removeRouter(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronRouterAware service = (INeutronRouterAware) instance;

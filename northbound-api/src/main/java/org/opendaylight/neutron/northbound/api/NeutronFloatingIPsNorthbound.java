@@ -271,7 +271,7 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID) {
-        INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
+        final INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
         NeutronFloatingIP singleton = floatingIPInterface.getFloatingIP(floatingipUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
         if (instances != null) {
@@ -289,7 +289,12 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        floatingIPInterface.removeFloatingIP(floatingipUUID);
+        deleteUuid(RESOURCE_NAME, floatingipUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return floatingIPInterface.removeFloatingIP(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;

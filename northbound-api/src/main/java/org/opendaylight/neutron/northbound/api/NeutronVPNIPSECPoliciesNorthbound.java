@@ -268,7 +268,7 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID) {
-        INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
+        final INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
 
         NeutronVPNIPSECPolicy singleton = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
@@ -287,7 +287,12 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        policyInterface.removeNeutronVPNIPSECPolicy(policyUUID);
+        deleteUuid(RESOURCE_NAME, policyUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return policyInterface.removeNeutronVPNIPSECPolicy(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;

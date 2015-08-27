@@ -344,7 +344,7 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {
-        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
+        final INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
 
         NeutronPort singleton = portInterface.getPort(portUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
@@ -363,7 +363,12 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        portInterface.removePort(portUUID);
+        deleteUuid(RESOURCE_NAME, portUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return portInterface.removePort(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronPortAware service = (INeutronPortAware) instance;
