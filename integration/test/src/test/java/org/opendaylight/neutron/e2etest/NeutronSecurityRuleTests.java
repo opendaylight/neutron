@@ -95,6 +95,40 @@ public class NeutronSecurityRuleTests {
         ITNeutronE2E.test_fetch(url, false, "Security Rule Element Negative Get Failed");
     }
 
+    public void bug4043_ipv4_test() {
+        String url = base + "/security-group-rules";
+        String content = " {\"security_group_rule\": " +
+            "{\"remote_group_id\": null, \"direction\": \"ingress\", " +
+            "\"remote_ip_prefix\": \"10.10.10.10/16\", \"protocol\": \"tcp\", " +
+            "\"ethertype\": \"IPv4\", \"tenant_id\": " +
+            "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " +
+            "\"port_range_min\": 77, " +
+            "\"id\": \"01234567-0123-0123-0123-01234567890a\", " +
+            "\"security_group_id\": " +
+            "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
+        ITNeutronE2E.test_create(url, content, "Security Rule bug4043 IPv4 Failed");
+
+        url = url + "/01234567-0123-0123-0123-01234567890a";
+        ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
+    }
+
+    public void bug4043_ipv6_test() {
+        String url = base + "/security-group-rules";
+        String content = " {\"security_group_rule\": " +
+            "{\"remote_group_id\": null, \"direction\": \"ingress\", " +
+            "\"remote_ip_prefix\": \"fe80::1/10\", \"protocol\": \"tcp\", " +
+            "\"ethertype\": \"IPv6\", \"tenant_id\": " +
+            "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " +
+            "\"port_range_min\": 77, " +
+            "\"id\": \"01234567-0123-0123-0123-01234567890a\", " +
+            "\"security_group_id\": " +
+            "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
+        ITNeutronE2E.test_create(url, content, "Security Rule Bug4043 IPv6 Failed");
+
+        url = url + "/01234567-0123-0123-0123-01234567890a";
+        ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
         securityRule_tester.securityRule_collection_get_test();
@@ -103,5 +137,7 @@ public class NeutronSecurityRuleTests {
         securityRule_tester.sr_element_get_test();
         securityRule_tester.sr_delete_test();
         securityRule_tester.sr_element_negative_get_test();
+        securityRule_tester.bug4043_ipv4_test();
+        securityRule_tester.bug4043_ipv6_test();
     }
 }
