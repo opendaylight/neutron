@@ -17,6 +17,7 @@ import java.util.Set;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionEgress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionIngress;
@@ -144,7 +145,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             meteringRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
         if (meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
-            meteringRuleBuilder.setRemoteIpPrefix(meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix());
+            IpPrefix ipPrefix = new IpPrefix(meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
+            meteringRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
         return meteringRuleBuilder.build();
@@ -163,7 +165,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
                 DIRECTION_MAP.get(rule.getDirection()));
         }
         if (rule.getRemoteIpPrefix() != null) {
-            answer.setMeteringLabelRuleRemoteIPPrefix(rule.getRemoteIpPrefix());
+            answer.setMeteringLabelRuleRemoteIPPrefix(new String(rule.getRemoteIpPrefix().getValue()));
         }
         answer.setMeteringLabelRuleExcluded(rule.isExcluded());
         return answer;
