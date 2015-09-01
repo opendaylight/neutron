@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_6bde6541",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-09-01T16:10:20Z",
+      "side": 1,
+      "message": "remove line 25? I\u0027m assuming IpAddress type is no\nlonger used, thus no need for this import.",
+      "range": {
+        "startLine": 25,
+        "startChar": 90,
+        "endLine": 25,
+        "endChar": 99
+      },
+      "revId": "2cdc0af78b0f20510fe944931c9c43f69cd7ba30",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
