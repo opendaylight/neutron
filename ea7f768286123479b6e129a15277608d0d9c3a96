@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_6bb505ed",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-09-01T16:30:22Z",
+      "side": 0,
+      "message": "should this be deprecated instead of removed?\nWill it break code that uses it today?",
+      "revId": "ea7f768286123479b6e129a15277608d0d9c3a96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
