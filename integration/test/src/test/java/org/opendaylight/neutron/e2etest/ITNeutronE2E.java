@@ -107,6 +107,7 @@ public class ITNeutronE2E {
     // tests related to bugs
         Neutron_Bug3812_Tests.runTests(base);
         Tempest_PortsIpV6TestJSON.runTests(base);
+        Neutron_Bug4027_Tests.runTests(base);
     }
 
     static HttpURLConnection HttpURLConnectionFactoryGet(URL url) throws Exception {
