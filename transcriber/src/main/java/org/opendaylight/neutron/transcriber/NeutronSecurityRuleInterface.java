@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
@@ -49,7 +47,6 @@ import com.google.common.collect.ImmutableBiMap;
 
 public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
-    private ConcurrentMap<String, NeutronSecurityRule> securityRuleDB = new ConcurrentHashMap<String, NeutronSecurityRule>();
 
     private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
             = new ImmutableBiMap.Builder<Class<? extends DirectionBase>,String>()
@@ -109,24 +106,30 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public boolean neutronSecurityRuleExists(String uuid) {
-        return securityRuleDB.containsKey(uuid);
+        SecurityRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (rule == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronSecurityRule getNeutronSecurityRule(String uuid) {
-        if (!neutronSecurityRuleExists(uuid)) {
-            LOGGER.debug("No Security Rules Have Been Defined");
+        SecurityRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (rule == null) {
             return null;
         }
-        return securityRuleDB.get(uuid);
+        return fromMd(rule);
     }
 
     @Override
     public List<NeutronSecurityRule> getAllNeutronSecurityRules() {
         Set<NeutronSecurityRule> allSecurityRules = new HashSet<NeutronSecurityRule>();
-        for (Entry<String, NeutronSecurityRule> entry : securityRuleDB.entrySet()) {
-            NeutronSecurityRule securityRule = entry.getValue();
-            allSecurityRules.add(securityRule);
+        SecurityRules rules = readMd(createInstanceIdentifier());
+        if (rules != null) {
+            for (SecurityRule rule: rules.getSecurityRule()) {
+                allSecurityRules.add(fromMd(rule));
+            }
         }
         LOGGER.debug("Exiting getSecurityRule, Found {} OpenStackSecurityRule", allSecurityRules.size());
         List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
@@ -139,7 +142,6 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (neutronSecurityRuleExists(input.getID())) {
             return false;
         }
-        securityRuleDB.putIfAbsent(input.getID(), input);
         updateSecGroupRuleInSecurityGroup(input);
         addMd(input);
         return true;
@@ -150,8 +152,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (!neutronSecurityRuleExists(uuid)) {
             return false;
         }
-        removeSecGroupRuleFromSecurityGroup(securityRuleDB.get(uuid));
-        securityRuleDB.remove(uuid);
+        removeSecGroupRuleFromSecurityGroup(getNeutronSecurityRule(uuid));
         removeMd(toMd(uuid));
         return true;
     }
@@ -161,18 +162,49 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (!neutronSecurityRuleExists(uuid)) {
             return false;
         }
-        NeutronSecurityRule target = securityRuleDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        updateSecGroupRuleInSecurityGroup(securityRuleDB.get(uuid));
-        if (rc) {
-            updateMd(securityRuleDB.get(uuid));
-        }
-        return rc;
+        updateSecGroupRuleInSecurityGroup(delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
     public boolean neutronSecurityRuleInUse(String securityRuleUUID) {
         return !neutronSecurityRuleExists(securityRuleUUID);
+    }
+
+    protected NeutronSecurityRule fromMd(SecurityRule rule) {
+        NeutronSecurityRule answer = new NeutronSecurityRule();
+        if (rule.getTenantId() != null) {
+            answer.setSecurityRuleTenantID(rule.getTenantId().getValue().replace("-",""));
+        }
+        if (rule.getDirection() != null) {
+            answer.setSecurityRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
+        }
+        if (rule.getSecurityGroupId() != null) {
+            answer.setSecurityRuleGroupID(rule.getSecurityGroupId().getValue());
+        }
+        if (rule.getRemoteGroupId() != null) {
+            answer.setSecurityRemoteGroupID(rule.getRemoteGroupId().getValue());
+        }
+        if (rule.getRemoteIpPrefix() != null) {
+            answer.setSecurityRuleRemoteIpPrefix(rule.getRemoteIpPrefix());
+        }
+        if (rule.getProtocol() != null) {
+            answer.setSecurityRuleProtocol(PROTOCOL_MAP.get(rule.getProtocol()));
+        }
+        if (rule.getEthertype() != null) {
+            answer.setSecurityRuleEthertype(ETHERTYPE_MAP.get(rule.getEthertype()));
+        }
+        if (rule.getPortRangeMin() != null) {
+            answer.setSecurityRulePortMin(Integer.valueOf(rule.getPortRangeMin()));
+        }
+        if (rule.getPortRangeMax() != null) {
+            answer.setSecurityRulePortMax(Integer.valueOf(rule.getPortRangeMax()));
+        }
+        if (rule.getId() != null) {
+            answer.setID(rule.getId().getValue());
+        }
+        return answer;
     }
 
     @Override
@@ -194,8 +226,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteGroupId(toUuid(securityRule.getSecurityRemoteGroupID()));
         }
         if (securityRule.getSecurityRuleRemoteIpPrefix() != null) {
-            IpAddress ipAddress = new IpAddress(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
-            securityRuleBuilder.setRemoteIpPrefix(ipAddress);
+            securityRuleBuilder.setRemoteIpPrefix(securityRule.getSecurityRuleRemoteIpPrefix());
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
             ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
@@ -223,8 +254,14 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     protected InstanceIdentifier<SecurityRule> createInstanceIdentifier(SecurityRule securityRule) {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
-                securityRule.getKey());
+        return InstanceIdentifier.create(Neutron.class)
+            .child(SecurityRules.class).child(SecurityRule.class,
+                                              securityRule.getKey());
+    }
+
+    protected InstanceIdentifier<SecurityRules> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+            .child(SecurityRules.class);
     }
 
     @Override
