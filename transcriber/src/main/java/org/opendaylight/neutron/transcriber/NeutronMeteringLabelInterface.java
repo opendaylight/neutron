@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
@@ -31,7 +29,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, NeutronMeteringLabel>  implements INeutronMeteringLabelCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
-    private ConcurrentMap<String, NeutronMeteringLabel> meteringLabelDB = new ConcurrentHashMap<String, NeutronMeteringLabel>();
 
     NeutronMeteringLabelInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -41,23 +38,30 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
 
     @Override
     public boolean neutronMeteringLabelExists(String uuid) {
-        return meteringLabelDB.containsKey(uuid);
+        MeteringLabel label = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (label == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronMeteringLabel getNeutronMeteringLabel(String uuid) {
-        if (!neutronMeteringLabelExists(uuid)) {
+        MeteringLabel label = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (label == null) {
             return null;
         }
-        return meteringLabelDB.get(uuid);
+        return fromMd(label);
     }
 
     @Override
     public List<NeutronMeteringLabel> getAllNeutronMeteringLabels() {
         Set<NeutronMeteringLabel> allMeteringLabels = new HashSet<NeutronMeteringLabel>();
-        for (Entry<String, NeutronMeteringLabel> entry : meteringLabelDB.entrySet()) {
-            NeutronMeteringLabel meteringLabel = entry.getValue();
-            allMeteringLabels.add(meteringLabel);
+        MeteringLabels labels = readMd(createInstanceIdentifier());
+        if (labels != null) {
+            for (MeteringLabel label: labels.getMeteringLabel()) {
+                allMeteringLabels.add(fromMd(label));
+            }
         }
         LOGGER.debug("Exiting getAllMeteringLabels, Found {} OpenStackMeteringLabels", allMeteringLabels.size());
         List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
@@ -70,8 +74,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         if (neutronMeteringLabelExists(input.getID())) {
             return false;
         }
-        meteringLabelDB.putIfAbsent(input.getID(), input);
-      //TODO: add code to find INeutronMeteringLabelAware services and call newtorkCreated on them
+        addMd(input);
         return true;
     }
 
@@ -80,9 +83,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         if (!neutronMeteringLabelExists(uuid)) {
             return false;
         }
-        meteringLabelDB.remove(uuid);
-      //TODO: add code to find INeutronMeteringLabelAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -90,8 +91,8 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         if (!neutronMeteringLabelExists(uuid)) {
             return false;
         }
-        NeutronMeteringLabel target = meteringLabelDB.get(uuid);
-        return overwrite(target, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -103,36 +104,60 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
     }
 
     @Override
-        protected InstanceIdentifier<MeteringLabel> createInstanceIdentifier(
-                        MeteringLabel item) {
-                return InstanceIdentifier.create(Neutron.class).child(MeteringLabels.class).child(MeteringLabel.class);
+    protected InstanceIdentifier<MeteringLabel> createInstanceIdentifier(
+            MeteringLabel item) {
+        return InstanceIdentifier.create(Neutron.class)
+            .child(MeteringLabels.class)
+            .child(MeteringLabel.class,item.getKey());
+    }
 
-        }
+    protected InstanceIdentifier<MeteringLabels> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+            .child(MeteringLabels.class);
+    }
 
-        @Override
-        protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
-      MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-      if (meteringLabel.getMeteringLabelName()!=null) {
-                        meteringLabelBuilder.setName(meteringLabel.getMeteringLabelName());
-                }
-      if (meteringLabel.getMeteringLabelDescription()!=null) {
-                        meteringLabelBuilder.setDescription(meteringLabel.getMeteringLabelDescription());
-                }
-      if (meteringLabel.getMeteringLabelTenantID()!=null) {
-                        meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getMeteringLabelTenantID()));
-                }
-      if (meteringLabel.getID()!=null) {
-                        meteringLabelBuilder.setUuid(toUuid(meteringLabel.getID()));
-                }
-                return meteringLabelBuilder.build();
+    @Override
+    protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
+        MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+        if (meteringLabel.getMeteringLabelName()!=null) {
+            meteringLabelBuilder.setName(meteringLabel.getMeteringLabelName());
         }
+        if (meteringLabel.getMeteringLabelDescription()!=null) {
+            meteringLabelBuilder.setDescription(meteringLabel.getMeteringLabelDescription());
+        }
+        if (meteringLabel.getMeteringLabelTenantID()!=null) {
+            meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getMeteringLabelTenantID()));
+        }
+        if (meteringLabel.getID()!=null) {
+            meteringLabelBuilder.setUuid(toUuid(meteringLabel.getID()));
+        }
+        return meteringLabelBuilder.build();
+    }
 
-        @Override
-        protected MeteringLabel toMd(String uuid) {
-            MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-      meteringLabelBuilder.setUuid(toUuid(uuid));
-      return meteringLabelBuilder.build();
+    protected NeutronMeteringLabel fromMd(MeteringLabel label) {
+        NeutronMeteringLabel answer = new NeutronMeteringLabel();
+        if (label.getName() != null) {
+            answer.setMeteringLabelName(label.getName());
         }
+        if (label.getDescription() != null) {
+            answer.setMeteringLabelDescription(label.getName());
+        }
+//todo: remove '-' chars as tenant id doesn't use them
+        if (label.getTenantId() != null) {
+            answer.setMeteringLabelTenantID(label.getTenantId().getValue());
+        }
+        if (label.getUuid() != null) {
+            answer.setID(label.getUuid().getValue());
+        }
+        return answer;
+    }
+
+    @Override
+    protected MeteringLabel toMd(String uuid) {
+        MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+        meteringLabelBuilder.setUuid(toUuid(uuid));
+        return meteringLabelBuilder.build();
+    }
 
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,

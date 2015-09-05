@@ -13,13 +13,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionEgress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.DirectionIngress;
@@ -38,7 +35,6 @@ import com.google.common.collect.ImmutableBiMap;
 public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
-    private ConcurrentMap<String, NeutronMeteringLabelRule> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronMeteringLabelRule>();
 
     private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
             = new ImmutableBiMap.Builder<Class<? extends DirectionBase>,String>()
@@ -55,23 +51,30 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     public boolean neutronMeteringLabelRuleExists(String uuid) {
-        return meteringLabelRuleDB.containsKey(uuid);
+        MeteringRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (rule == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronMeteringLabelRule getNeutronMeteringLabelRule(String uuid) {
-        if (!neutronMeteringLabelRuleExists(uuid)) {
+        MeteringRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (rule == null) {
             return null;
         }
-        return meteringLabelRuleDB.get(uuid);
+        return fromMd(rule);
     }
 
     @Override
     public List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules() {
         Set<NeutronMeteringLabelRule> allMeteringLabelRules = new HashSet<NeutronMeteringLabelRule>();
-        for (Entry<String, NeutronMeteringLabelRule> entry : meteringLabelRuleDB.entrySet()) {
-            NeutronMeteringLabelRule meteringLabelRule = entry.getValue();
-            allMeteringLabelRules.add(meteringLabelRule);
+        MeteringRules rules = readMd(createInstanceIdentifier());
+        if (rules != null) {
+            for (MeteringRule rule: rules.getMeteringRule()) {
+                allMeteringLabelRules.add(fromMd(rule));
+            }
         }
         LOGGER.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules",
                 allMeteringLabelRules.size());
@@ -85,9 +88,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
         if (neutronMeteringLabelRuleExists(input.getID())) {
             return false;
         }
-        meteringLabelRuleDB.putIfAbsent(input.getID(), input);
-        // TODO: add code to find INeutronMeteringLabelRuleAware services and
-        // call newtorkCreated on them
+        addMd(input);
         return true;
     }
 
@@ -96,10 +97,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
         if (!neutronMeteringLabelRuleExists(uuid)) {
             return false;
         }
-        meteringLabelRuleDB.remove(uuid);
-        // TODO: add code to find INeutronMeteringLabelRuleAware services and
-        // call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -107,8 +105,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
         if (!neutronMeteringLabelRuleExists(uuid)) {
             return false;
         }
-        NeutronMeteringLabelRule target = meteringLabelRuleDB.get(uuid);
-        return overwrite(target, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -121,18 +119,24 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     protected InstanceIdentifier<MeteringRule> createInstanceIdentifier(MeteringRule item) {
-        return InstanceIdentifier.create(Neutron.class).child(MeteringRules.class).child(MeteringRule.class);
+        return InstanceIdentifier.create(Neutron.class)
+            .child(MeteringRules.class)
+            .child(MeteringRule.class, item.getKey());
+    }
 
+    protected InstanceIdentifier<MeteringRules> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+            .child(MeteringRules.class);
     }
 
     @Override
     protected MeteringRule toMd(NeutronMeteringLabelRule meteringLabelRule) {
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
-            meteringRuleBuilder.setId((toUuid(meteringLabelRule.getMeteringLabelRuleLabelID())));
-        }
         if (meteringLabelRule.getID() != null) {
-            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getID()));
+            meteringRuleBuilder.setId(toUuid(meteringLabelRule.getID()));
+        }
+        if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
+            meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleLabelID()));
         }
         if (meteringLabelRule.getMeteringLabelRuleDirection() != null) {
             ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =
@@ -140,11 +144,29 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             meteringRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
         if (meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
-            IpAddress ipAddress = new IpAddress(meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
-            meteringRuleBuilder.setRemoteIpPrefix(ipAddress);
+            meteringRuleBuilder.setRemoteIpPrefix(meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix());
         }
         meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
         return meteringRuleBuilder.build();
+    }
+
+    protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
+        NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
+        if (rule.getId() != null) {
+            answer.setID(rule.getId().getValue());
+        }
+        if (rule.getMeteringLabelId() != null) {
+            answer.setMeteringLabelRuleLabelID(rule.getMeteringLabelId().getValue());
+        }
+        if (rule.getDirection() != null) {
+            answer.setMeteringLabelRuleDirection(
+                DIRECTION_MAP.get(rule.getDirection()));
+        }
+        if (rule.getRemoteIpPrefix() != null) {
+            answer.setMeteringLabelRuleRemoteIPPrefix(rule.getRemoteIpPrefix());
+        }
+        answer.setMeteringLabelRuleExcluded(rule.isExcluded());
+        return answer;
     }
 
     @Override
@@ -159,7 +181,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
                                             List<ServiceRegistration<?>> registrations) {
         NeutronMeteringLabelRuleInterface neutronMeteringLabelRuleInterface = new NeutronMeteringLabelRuleInterface(providerContext);
         ServiceRegistration<INeutronMeteringLabelRuleCRUD> neutronMeteringLabelRuleInterfaceRegistration = context.registerService(INeutronMeteringLabelRuleCRUD.class, neutronMeteringLabelRuleInterface, null);
-        if(neutronMeteringLabelRuleInterfaceRegistration != null) {
+        if (neutronMeteringLabelRuleInterfaceRegistration != null) {
             registrations.add(neutronMeteringLabelRuleInterfaceRegistration);
         }
     }
