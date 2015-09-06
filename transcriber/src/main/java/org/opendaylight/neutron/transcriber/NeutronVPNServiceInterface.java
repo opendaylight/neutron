@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
@@ -31,8 +29,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice,NeutronVPNService> implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
-    private ConcurrentMap<String, NeutronVPNService> vpnServiceDB = new ConcurrentHashMap<String, NeutronVPNService>();
-
 
     NeutronVPNServiceInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -40,24 +36,30 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     public boolean neutronVPNServiceExists(String uuid) {
-        return vpnServiceDB.containsKey(uuid);
+        Vpnservice service = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (service == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronVPNService getVPNService(String uuid) {
-        if (!neutronVPNServiceExists(uuid)) {
-            LOGGER.debug("No VPNService Have Been Defined");
+        Vpnservice service = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (service == null) {
             return null;
         }
-        return vpnServiceDB.get(uuid);
+        return fromMd(service);
     }
 
     @Override
     public List<NeutronVPNService> getAllVPNService() {
         Set<NeutronVPNService> allVPNService = new HashSet<NeutronVPNService>();
-        for (Entry<String, NeutronVPNService> entry : vpnServiceDB.entrySet()) {
-            NeutronVPNService VPNService = entry.getValue();
-            allVPNService.add(VPNService);
+        VpnServices services = readMd(createInstanceIdentifier());
+        if (services != null) {
+            for (Vpnservice service: services.getVpnservice()) {
+                allVPNService.add(fromMd(service));
+            }
         }
         LOGGER.debug("Exiting getVPNService, Found {} OpenStackVPNService", allVPNService.size());
         List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
@@ -70,7 +72,6 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         if (neutronVPNServiceExists(input.getID())) {
             return false;
         }
-        vpnServiceDB.putIfAbsent(input.getID(), input);
         addMd(input);
         return true;
     }
@@ -80,9 +81,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         if (!neutronVPNServiceExists(uuid)) {
             return false;
         }
-        vpnServiceDB.remove(uuid);
-        removeMd(toMd(uuid));
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -90,17 +89,40 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         if (!neutronVPNServiceExists(uuid)) {
             return false;
         }
-        NeutronVPNService target = vpnServiceDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(vpnServiceDB.get(uuid));
-        }
-        return rc;
+        updateMd(delta);
+        return true;
     }
 
     @Override
     public boolean neutronVPNServiceInUse(String uuid) {
         return !neutronVPNServiceExists(uuid);
+    }
+
+    protected NeutronVPNService fromMd(Vpnservice vpnService) {
+        NeutronVPNService answer = new NeutronVPNService();
+        if (vpnService.getName() != null) {
+            answer.setName(vpnService.getName());
+        }
+        if (vpnService.getTenantId() != null) {
+            answer.setTenantID(vpnService.getTenantId().getValue().replace("-",""));
+        }
+        if (vpnService.getStatus() != null) {
+            answer.setStatus(vpnService.getStatus());
+        }
+        if (vpnService.getDescr() != null) {
+            answer.setDescription(vpnService.getDescr());
+        }
+        if (vpnService.getSubnetId() != null) {
+            answer.setSubnetUUID(vpnService.getSubnetId().getValue());
+        }
+        if (vpnService.getRouterId() != null) {
+            answer.setRouterUUID(vpnService.getRouterId().getValue());
+        }
+        answer.setAdminStateUp(vpnService.isAdminStateUp());
+        if (vpnService.getUuid() != null) {
+            answer.setID(vpnService.getUuid().getValue());
+        }
+        return answer;
     }
 
     @Override
@@ -138,6 +160,11 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         return InstanceIdentifier.create(Neutron.class)
                  .child(VpnServices.class)
                  .child(Vpnservice.class, vpnService.getKey());
+    }
+
+    protected InstanceIdentifier<VpnServices> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                 .child(VpnServices.class);
     }
 
     @Override
