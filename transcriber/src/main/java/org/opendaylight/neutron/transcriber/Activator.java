@@ -39,7 +39,6 @@ public class Activator implements BundleActivator {
         NeutronLoadBalancerPoolInterface.registerNewInterface(context, providerContext, registrations);
         NeutronLoadBalancerListenerInterface.registerNewInterface(context, providerContext, registrations);
         NeutronLoadBalancerHealthMonitorInterface.registerNewInterface(context, providerContext, registrations);
-        NeutronLoadBalancerPoolMemberInterface.registerNewInterface(context, providerContext, registrations);
         NeutronMeteringLabelInterface.registerNewInterface(context, providerContext, registrations);
         NeutronMeteringLabelRuleInterface.registerNewInterface(context, providerContext, registrations);
         NeutronVPNServiceInterface.registerNewInterface(context, providerContext, registrations);

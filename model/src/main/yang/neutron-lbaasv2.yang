@@ -50,7 +50,7 @@ module neutron-lbaasv2 {
     }
     grouping listener-attributes {
         description "LBaaSV2.0 listener attributes.";
-        leaf default-pool-d {
+        leaf default-pool-id {
             type yang:uuid;
             description "ID of default pool. Must have compatible protocol with listener.";
         }
@@ -111,13 +111,9 @@ module neutron-lbaasv2 {
                 is dependent on the load-balancer provider. Round-robin
                 must be supported.";
         }
-        leaf-list healthmonitor-ids {
+        leaf healthmonitor-id {
             type yang:uuid;
             description "List of healthmonitors associated with this pool.";
-        }
-        leaf-list members {
-            type yang:uuid;
-            description "List of members that belong to the pool.";
         }
         leaf-list listeners {
             type yang:uuid;
@@ -236,9 +232,9 @@ module neutron-lbaasv2 {
         }
     }
     grouping lbaas-attributes {
-        container loadbalancer {
+        container loadbalancers {
             description "Container for Loadbalancers.";
-            list loadbalancers {
+            list loadbalancer {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
@@ -246,25 +242,25 @@ module neutron-lbaasv2 {
                 description "List of Loadbalancers.";
             }
         }
-        container listener {
+        container listeners {
             description "Container for Listeners.";
-            list listeners {
+            list listener {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses listener-attributes;
                 description "List of Listeners";
             }
         }
-        container pool {
+        container pools {
             description "Container for LBaaSV2.0 pools.";
-            list pools {
+            list pool {
                 key "uuid";
                 uses attrs:base-attributes;
                 uses pool-attributes;
                 description "List of Pools";
-                container member {
+                container members {
                     description "Container for pool members.";
-                    list members {
+                    list member {
                         key "uuid";
                         uses member-attributes;
                         description "List of members.";
@@ -272,9 +268,9 @@ module neutron-lbaasv2 {
                 }
             }
         }
-        container healthmonitor {
+        container healthmonitors {
             description "Container for LBaaSV2.0 healthmonitors.";
-            list healthmonitors {
+            list healthmonitor {
                 key "uuid";
                 uses healthmonitor-attributes;
                 description "List of healthmonitors.";

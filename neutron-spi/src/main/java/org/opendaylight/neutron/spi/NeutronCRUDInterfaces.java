@@ -32,7 +32,6 @@ public class NeutronCRUDInterfaces {
     private INeutronLoadBalancerPoolCRUD lbpInterface;
     private INeutronLoadBalancerListenerCRUD lblInterface;
     private INeutronLoadBalancerHealthMonitorCRUD lbhmInterface;
-    private INeutronLoadBalancerPoolMemberCRUD lbpmInterface;
     private INeutronMeteringLabelCRUD mlInterface;
     private INeutronMeteringLabelRuleCRUD mlrInterface;
     private INeutronVPNIKEPolicyCRUD ikepInterface;
@@ -97,10 +96,6 @@ public class NeutronCRUDInterfaces {
 
     public INeutronLoadBalancerHealthMonitorCRUD getLoadBalancerHealthMonitorInterface() {
         return lbhmInterface;
-    }
-
-    public INeutronLoadBalancerPoolMemberCRUD getLoadBalancerPoolMemberInterface() {
-        return lbpmInterface;
     }
 
     public INeutronMeteringLabelCRUD getMeteringLabelInterface() {
@@ -198,11 +193,6 @@ public class NeutronCRUDInterfaces {
 
     public NeutronCRUDInterfaces fetchINeutronLoadBalancerHealthMonitorCRUD(Object obj) {
         lbhmInterface = (INeutronLoadBalancerHealthMonitorCRUD) getInstances(INeutronLoadBalancerHealthMonitorCRUD.class, obj);
-        return this;
-    }
-
-    public NeutronCRUDInterfaces fetchINeutronLoadBalancerPoolMemberCRUD(Object obj) {
-        lbpmInterface = (INeutronLoadBalancerPoolMemberCRUD) getInstances(INeutronLoadBalancerPoolMemberCRUD.class, obj);
         return this;
     }
 
