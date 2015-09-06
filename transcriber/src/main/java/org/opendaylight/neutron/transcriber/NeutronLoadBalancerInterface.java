@@ -13,16 +13,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Loadbalancer;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.loadbalancer.Loadbalancers;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.loadbalancer.LoadbalancersBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Loadbalancers;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.loadbalancers.Loadbalancer;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.loadbalancers.LoadbalancerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
@@ -30,9 +28,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
+public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancer, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
-    private ConcurrentMap<String, NeutronLoadBalancer> loadBalancerDB  = new ConcurrentHashMap<String, NeutronLoadBalancer>();
 
 
     NeutronLoadBalancerInterface(ProviderContext providerContext) {
@@ -41,24 +38,30 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     public boolean neutronLoadBalancerExists(String uuid) {
-        return loadBalancerDB.containsKey(uuid);
+        Loadbalancer lb = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (lb == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronLoadBalancer getNeutronLoadBalancer(String uuid) {
-        if (!neutronLoadBalancerExists(uuid)) {
-            LOGGER.debug("No LoadBalancer Have Been Defined");
+        Loadbalancer lb = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (lb == null) {
             return null;
         }
-        return loadBalancerDB.get(uuid);
+        return fromMd(lb);
     }
 
     @Override
     public List<NeutronLoadBalancer> getAllNeutronLoadBalancers() {
         Set<NeutronLoadBalancer> allLoadBalancers = new HashSet<NeutronLoadBalancer>();
-        for (Entry<String, NeutronLoadBalancer> entry : loadBalancerDB.entrySet()) {
-            NeutronLoadBalancer loadBalancer = entry.getValue();
-            allLoadBalancers.add(loadBalancer);
+        Loadbalancers lbs = readMd(createInstanceIdentifier());
+        if (lbs != null) {
+            for (Loadbalancer lb: lbs.getLoadbalancer()) {
+                allLoadBalancers.add(fromMd(lb));
+            }
         }
         LOGGER.debug("Exiting getLoadBalancers, Found {} OpenStackLoadBalancer", allLoadBalancers.size());
         List<NeutronLoadBalancer> ans = new ArrayList<NeutronLoadBalancer>();
@@ -71,8 +74,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (neutronLoadBalancerExists(input.getID())) {
             return false;
         }
-        loadBalancerDB.putIfAbsent(input.getID(), input);
-        //TODO: add code to find INeutronLoadBalancerAware services and call newtorkCreated on them
+        addMd(input);
         return true;
     }
 
@@ -81,9 +83,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (!neutronLoadBalancerExists(uuid)) {
             return false;
         }
-        loadBalancerDB.remove(uuid);
-        //TODO: add code to find INeutronLoadBalancerAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -91,8 +91,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (!neutronLoadBalancerExists(uuid)) {
             return false;
         }
-        NeutronLoadBalancer target = loadBalancerDB.get(uuid);
-        return overwrite(target, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -101,48 +101,82 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     }
 
     @Override
-    protected Loadbalancers toMd(String uuid) {
-        LoadbalancersBuilder loadBalancersBuilder = new LoadbalancersBuilder();
-        loadBalancersBuilder.setUuid(toUuid(uuid));
-        return loadBalancersBuilder.build();
+    protected Loadbalancer toMd(String uuid) {
+        LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
+        loadBalancerBuilder.setUuid(toUuid(uuid));
+        return loadBalancerBuilder.build();
     }
 
     @Override
-    protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier(
-            Loadbalancers loadBalancers) {
+    protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(
+            Loadbalancer loadBalancer) {
         return InstanceIdentifier.create(Neutron.class)
-                .child(Loadbalancer.class)
-                .child(Loadbalancers.class, loadBalancers.getKey());
+                .child(Loadbalancers.class)
+                .child(Loadbalancer.class, loadBalancer.getKey());
+    }
+
+    protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Loadbalancers.class);
+    }
+
+    protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
+        NeutronLoadBalancer answer = new NeutronLoadBalancer();
+        if (loadBalancer.isAdminStateUp() != null) {
+            answer.setLoadBalancerAdminStateUp(loadBalancer.isAdminStateUp());
+        }
+        if (loadBalancer.getDescr() != null) {
+            answer.setLoadBalancerDescription(loadBalancer.getDescr());
+        }
+        if (loadBalancer.getName() != null) {
+            answer.setLoadBalancerName(loadBalancer.getName());
+        }
+        if (loadBalancer.getStatus() != null) {
+            answer.setLoadBalancerStatus(loadBalancer.getStatus());
+        }
+        if (loadBalancer.getTenantId() != null) {
+            answer.setLoadBalancerTenantID(loadBalancer.getTenantId().getValue().replace("-",""));
+        }
+        if (loadBalancer.getVipAddress() != null) {
+            answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
+        }
+        if (loadBalancer.getVipSubnetId() != null) {
+            answer.setLoadBalancerVipSubnetID(loadBalancer.getVipSubnetId().getValue());
+        }
+        if (loadBalancer.getUuid() != null) {
+            answer.setID(loadBalancer.getUuid().getValue());
+        }
+        return answer;
     }
 
     @Override
-    protected Loadbalancers toMd(NeutronLoadBalancer loadBalancer) {
-        LoadbalancersBuilder loadBalancersBuilder = new LoadbalancersBuilder();
-        loadBalancersBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
+    protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
+        LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
+        loadBalancerBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
         if (loadBalancer.getLoadBalancerDescription() != null) {
-            loadBalancersBuilder.setDescr(loadBalancer.getLoadBalancerDescription());
+            loadBalancerBuilder.setDescr(loadBalancer.getLoadBalancerDescription());
         }
         if (loadBalancer.getLoadBalancerName() != null) {
-            loadBalancersBuilder.setName(loadBalancer.getLoadBalancerName());
+            loadBalancerBuilder.setName(loadBalancer.getLoadBalancerName());
         }
         if (loadBalancer.getLoadBalancerStatus() != null) {
-            loadBalancersBuilder.setStatus(loadBalancer.getLoadBalancerStatus());
+            loadBalancerBuilder.setStatus(loadBalancer.getLoadBalancerStatus());
         }
         if (loadBalancer.getLoadBalancerTenantID() != null) {
-            loadBalancersBuilder.setTenantId(toUuid(loadBalancer.getLoadBalancerTenantID()));
+            loadBalancerBuilder.setTenantId(toUuid(loadBalancer.getLoadBalancerTenantID()));
         }
         if (loadBalancer.getLoadBalancerVipAddress() != null) {
-            loadBalancersBuilder.setVipAddress(new IpAddress(loadBalancer.getLoadBalancerVipAddress().toCharArray()));
+            loadBalancerBuilder.setVipAddress(new IpAddress(loadBalancer.getLoadBalancerVipAddress().toCharArray()));
         }
         if (loadBalancer.getLoadBalancerVipSubnetID() != null) {
-            loadBalancersBuilder.setVipSubnetId(toUuid(loadBalancer.getLoadBalancerVipSubnetID()));
+            loadBalancerBuilder.setVipSubnetId(toUuid(loadBalancer.getLoadBalancerVipSubnetID()));
         }
         if (loadBalancer.getID() != null) {
-            loadBalancersBuilder.setUuid(toUuid(loadBalancer.getID()));
+            loadBalancerBuilder.setUuid(toUuid(loadBalancer.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron load balancer without UUID");
         }
-        return loadBalancersBuilder.build();
+        return loadBalancerBuilder.build();
     }
 
     public static void registerNewInterface(BundleContext context,
