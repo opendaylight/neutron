@@ -38,6 +38,7 @@ public class NeutronCRUDInterfaces {
     private INeutronVPNIPSECPolicyCRUD ipsecpInterface;
     private INeutronVPNServiceCRUD vpnInterface;
     private INeutronVPNIPSECSiteConnectionsCRUD ipsecScInterface;
+    private INeutronBgpvpnCRUD bgpvpnInterface;
 
     public NeutronCRUDInterfaces() {
     }
@@ -124,6 +125,10 @@ public class NeutronCRUDInterfaces {
 
     public INeutronVPNIPSECSiteConnectionsCRUD getVPNIPSECSiteConnectionsInterface() {
         return ipsecScInterface;
+    }
+
+    public INeutronBgpvpnCRUD getBgpvpnInterface() {
+        return bgpvpnInterface;
     }
 
     public NeutronCRUDInterfaces fetchINeutronNetworkCRUD(Object obj) {
@@ -223,6 +228,11 @@ public class NeutronCRUDInterfaces {
 
     public NeutronCRUDInterfaces fetchINeutronVPNIPSECSiteConnectionsCRUD(Object obj) {
         ipsecScInterface = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(INeutronVPNIPSECSiteConnectionsCRUD.class, obj);
+        return this;
+    }
+
+    public NeutronCRUDInterfaces fetchINeutronBgpvpnCRUD(Object obj) {
+        bgpvpnInterface = (INeutronBgpvpnCRUD) getInstances(INeutronBgpvpnCRUD.class, obj);
         return this;
     }
 
