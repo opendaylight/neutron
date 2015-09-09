@@ -23,6 +23,7 @@ module neutron {
     import neutron-lbaasv2 { prefix "lbaasv2"; }
     import neutron-provider { prefix "provider"; }
     import neutron-vpnaas { prefix "vpnaas"; }
+    import neutron-bgpvpns { prefix "bgpvpns"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -51,5 +52,6 @@ module neutron {
         uses vpnaas:ikepolicies-attributes;
         uses vpnaas:ipsecpolicies-attributes;
         uses vpnaas:ipsecconnections-attributes;
+        uses bgpvpns:bgpvpns-attributes;
     }
 }
