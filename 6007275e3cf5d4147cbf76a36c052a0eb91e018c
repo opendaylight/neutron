@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_ba558cc7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityGroupInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-10T00:06:39Z",
+      "side": 1,
+      "message": "return group !\u003d null;",
+      "revId": "6007275e3cf5d4147cbf76a36c052a0eb91e018c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_da5088d6",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityGroupInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-10T00:06:39Z",
+      "side": 1,
+      "message": "tailing white space.",
+      "revId": "6007275e3cf5d4147cbf76a36c052a0eb91e018c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_7a5ff4e5",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityGroupInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-10T00:06:39Z",
+      "side": 1,
+      "message": "tailing white space.",
+      "revId": "6007275e3cf5d4147cbf76a36c052a0eb91e018c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_9a6210ac",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityGroupInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-10T00:06:39Z",
+      "side": 1,
+      "message": "unnecessary change?",
+      "revId": "6007275e3cf5d4147cbf76a36c052a0eb91e018c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_1a6e0097",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-10T00:06:39Z",
+      "side": 1,
+      "message": "return rule !\u003d null;",
+      "revId": "6007275e3cf5d4147cbf76a36c052a0eb91e018c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
