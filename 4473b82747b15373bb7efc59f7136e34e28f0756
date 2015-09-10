@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_4301f403",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronMeteringLabelInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-10T13:26:44Z",
+      "side": 1,
+      "message": "The above pattern is consistent across all of the code sets.  If we are going to change it in one place, let\u0027s change it in all as a separate PS.",
+      "parentUuid": "3a79b1b5_9a30d09f",
+      "revId": "4473b82747b15373bb7efc59f7136e34e28f0756",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_3a273c66",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronMeteringLabelRuleInterface.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-10T00:29:58Z",
       "side": 1,
       "message": "return rule !\u003d null;",
+      "revId": "4473b82747b15373bb7efc59f7136e34e28f0756",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_63043015",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronMeteringLabelRuleInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-10T13:26:44Z",
+      "side": 1,
+      "message": "see comment on previous file",
+      "parentUuid": "3a79b1b5_3a273c66",
       "revId": "4473b82747b15373bb7efc59f7136e34e28f0756",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
