@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_3a109c00",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronFirewallRulesNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-10T00:23:50Z",
+      "side": 1,
+      "message": "nice catch!",
+      "revId": "8f0ced538376ea047fafd9250588eb43db9c61fc",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
