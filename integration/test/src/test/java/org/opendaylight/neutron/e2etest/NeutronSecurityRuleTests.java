@@ -43,6 +43,43 @@ public class NeutronSecurityRuleTests {
         ITNeutronE2E.test_create(url, content, "Security Rule Singleton Post Failed");
     }
 
+    public void multiple_sr_create_test() {
+        String url = base + "/security-group-rules";
+        String content = " {\"security_group_rules\": [" +
+                "{" +
+                "  \"id\": \"35fb0f34-c8d3-416d-a205-a2c75f7b8e22\"," +
+                "  \"direction\": \"egress\"," +
+                "  \"ethertype\": \"IPv6\"," +
+                "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\"," +
+                "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" +
+                "}," +
+                "{" +
+                "  \"id\": \"63814eed-bc12-4fe4-8b17-2af178224c71\"," +
+                "  \"direction\": \"egress\"," +
+                "  \"ethertype\": \"IPv4\"," +
+                "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\"," +
+                "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" +
+                "}," +
+                "{" +
+                "  \"id\": \"ccb9823e-559b-4d84-b656-2739f8e56d89\"," +
+                "  \"direction\": \"ingress\"," +
+                "  \"ethertype\": \"IPv6\"," +
+                "  \"remote_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\"," +
+                "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\"," +
+                "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" +
+                "}," +
+                "{" +
+                "  \"id\": \"fbc3f809-7378-40a4-822f-7a70f6ccba98\"," +
+                "  \"direction\": \"ingress\"," +
+                "  \"ethertype\": \"IPv4\"," +
+                "  \"remote_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\"," +
+                "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\"," +
+                "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" +
+                "}" +
+                "]}";
+        ITNeutronE2E.test_create(url, content, "Security Rule Multiple Post Failed");
+    }
+
     public void sr_element_get_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
         ITNeutronE2E.test_fetch(url, true, "Security Rule Element Get Failed");
