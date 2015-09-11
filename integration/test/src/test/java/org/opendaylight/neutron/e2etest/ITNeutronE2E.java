@@ -92,6 +92,9 @@ public class ITNeutronE2E {
         NeutronFloatingIPTests.runTests(base);
         NeutronSecurityGroupTests.runTests(base);
         NeutronSecurityRuleTests.runTests(base);
+        NeutronFirewallTests.runTests(base);
+        NeutronFirewallPolicyTests.runTests(base);
+        NeutronFirewallRuleTests.runTests(base);
         NeutronLoadBalancerTests.runTests(base);
         NeutronLBListenerTests.runTests(base);
         NeutronLBPoolTests.runTests(base);

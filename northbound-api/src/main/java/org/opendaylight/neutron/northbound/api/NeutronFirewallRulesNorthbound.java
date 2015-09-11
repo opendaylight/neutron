@@ -49,7 +49,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallRule;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 
-@Path("fw/firewalls_rules")
+@Path("fw/firewall_rules")
 public class NeutronFirewallRulesNorthbound {
     private static final int HTTP_OK_BOTTOM = 200;
     private static final int HTTP_OK_TOP = 299;
