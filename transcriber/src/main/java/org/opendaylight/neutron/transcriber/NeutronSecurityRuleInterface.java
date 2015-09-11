@@ -77,7 +77,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         NeutronSecurityGroup sg = sgCrud.getNeutronSecurityGroup(input.getSecurityRuleGroupID());
         if(sg != null && sg.getSecurityRules() != null) {
             for(NeutronSecurityRule sgr :sg.getSecurityRules()) {
-                if(sgr.getID() != null && sgr.getID().equals(input.getID())) {
+                if(sgr != null && sgr.getID() != null && sgr.getID().equals(input.getID())) {
                     int index = sg.getSecurityRules().indexOf(sgr);
                     sg.getSecurityRules().set(index, input);
                 }
