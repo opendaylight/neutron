@@ -13,14 +13,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
-import org.opendaylight.yangtools.yang.binding.DataObject;
+
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.policies.attributes.FirewallPolicies;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.policies.attributes.firewall.policies.FirewallPolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.policies.attributes.firewall.policies.FirewallPolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+
+
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -30,11 +35,8 @@ import org.slf4j.LoggerFactory;
 /**
  */
 
-public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface implements INeutronFirewallPolicyCRUD {
+public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<FirewallPolicy,NeutronFirewallPolicy> implements INeutronFirewallPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
-
-    private ConcurrentMap<String, NeutronFirewallPolicy> firewallPolicyDB  = new ConcurrentHashMap<String, NeutronFirewallPolicy>();
-
 
     NeutronFirewallPolicyInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -42,24 +44,30 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
 
     @Override
     public boolean neutronFirewallPolicyExists(String uuid) {
-        return firewallPolicyDB.containsKey(uuid);
+        FirewallPolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (policy == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronFirewallPolicy getNeutronFirewallPolicy(String uuid) {
-        if (!neutronFirewallPolicyExists(uuid)) {
-            LOGGER.debug("No Firewall Rule Have Been Defined");
+        FirewallPolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (policy == null) {
             return null;
         }
-        return firewallPolicyDB.get(uuid);
+        return fromMd(policy);
     }
 
     @Override
     public List<NeutronFirewallPolicy> getAllNeutronFirewallPolicies() {
         Set<NeutronFirewallPolicy> allFirewallPolicies = new HashSet<NeutronFirewallPolicy>();
-        for (Entry<String, NeutronFirewallPolicy> entry : firewallPolicyDB.entrySet()) {
-            NeutronFirewallPolicy firewallPolicy = entry.getValue();
-            allFirewallPolicies.add(firewallPolicy);
+        FirewallPolicies policies = readMd(createInstanceIdentifier());
+        if (policies != null) {
+            for (FirewallPolicy policy: policies.getFirewallPolicy()) {
+                allFirewallPolicies.add(fromMd(policy));
+            }
         }
         LOGGER.debug("Exiting getFirewallPolicies, Found {} OpenStackFirewallPolicy", allFirewallPolicies.size());
         List<NeutronFirewallPolicy> ans = new ArrayList<NeutronFirewallPolicy>();
@@ -72,7 +80,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
         if (neutronFirewallPolicyExists(input.getID())) {
             return false;
         }
-        firewallPolicyDB.putIfAbsent(input.getID(), input);
+        addMd(input);
         return true;
     }
 
@@ -81,8 +89,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
         if (!neutronFirewallPolicyExists(uuid)) {
             return false;
         }
-        firewallPolicyDB.remove(uuid);
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -90,8 +97,8 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
         if (!neutronFirewallPolicyExists(uuid)) {
             return false;
         }
-        NeutronFirewallPolicy target = firewallPolicyDB.get(uuid);
-        return overwrite(target, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -100,21 +107,83 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface imp
     }
 
     @Override
-    protected InstanceIdentifier createInstanceIdentifier(DataObject item) {
-        // TODO Auto-generated method stub
-        return null;
+    protected InstanceIdentifier<FirewallPolicy> createInstanceIdentifier(FirewallPolicy item) {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(FirewallPolicies.class)
+                .child(FirewallPolicy.class, item.getKey());
+    }
+
+    protected InstanceIdentifier<FirewallPolicies> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(FirewallPolicies.class);
+    }
+
+    protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {
+        NeutronFirewallPolicy answer = new NeutronFirewallPolicy();
+        if (policy.getUuid() != null) {
+            answer.setID(policy.getUuid().getValue());
+        }
+        if (policy.getName() != null) {
+            answer.setFirewallPolicyName(policy.getName());
+        }
+        if (policy.getTenantId() != null) {
+            answer.setFirewallPolicyTenantID(policy.getTenantId().getValue().replace("-",""));
+        }
+        if (policy.getDescr() != null) {
+            answer.setFirewallPolicyDescription(policy.getDescr());
+        }
+        if (policy.isShared() != null) {
+            answer.setFirewallPolicyIsShared(policy.isShared());
+        }
+        if (policy.isAudited() != null) {
+            answer.setFirewallPolicyIsAudited(policy.isAudited());
+        }
+        if (policy.getFirewallRules() != null) {
+            List<String> rules = new ArrayList<String>();
+            for (Uuid rule: policy.getFirewallRules()) {
+                rules.add(rule.getValue());
+            }
+            answer.setFirewallPolicyRules(rules);
+        }
+        return answer;
     }
 
     @Override
-    protected DataObject toMd(INeutronObject neutronObject) {
-        // TODO Auto-generated method stub
-        return null;
+    protected FirewallPolicy toMd(NeutronFirewallPolicy policy) {
+        FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
+        if (policy.getID() != null) {
+            policyBuilder.setUuid(toUuid(policy.getID()));
+        }
+        if (policy.getFirewallPolicyName() != null) {
+            policyBuilder.setName(policy.getFirewallPolicyName());
+        }
+        if (policy.getFirewallPolicyTenantID() != null) {
+            policyBuilder.setTenantId(toUuid(policy.getFirewallPolicyTenantID()));
+        }
+        if (policy.getFirewallPolicyDescription() != null) {
+            policyBuilder.setDescr(policy.getFirewallPolicyDescription());
+        }
+        if (policy.getFirewallPolicyIsShared() != null) {
+            policyBuilder.setShared(policy.getFirewallPolicyIsShared());
+        }
+        if (policy.getFirewallPolicyIsAudited() != null) {
+            policyBuilder.setAudited(policy.getFirewallPolicyIsAudited());
+        }
+        if (policy.getFirewallPolicyRules() != null) {
+            List<Uuid> rules = new ArrayList<Uuid>();
+            for (String rule: policy.getFirewallPolicyRules()) {
+                rules.add(toUuid(rule));
+            }
+            policyBuilder.setFirewallRules(rules);
+        }
+        return policyBuilder.build();
     }
 
     @Override
-    protected DataObject toMd(String uuid) {
-        // TODO Auto-generated method stub
-        return null;
+    protected FirewallPolicy toMd(String uuid) {
+        FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
+        policyBuilder.setUuid(toUuid(uuid));
+        return policyBuilder.build();
     }
 
     public static void registerNewInterface(BundleContext context,

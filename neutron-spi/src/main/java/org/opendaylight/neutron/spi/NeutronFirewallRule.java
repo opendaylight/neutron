@@ -173,7 +173,7 @@ public class NeutronFirewallRule implements Serializable, INeutronObject {
         return firewallRulePolicyID;
     }
 
-    public void setFirewallRulesPolicyID(String firewallRulePolicyID) {
+    public void setFirewallRulePolicyID(String firewallRulePolicyID) {
         this.firewallRulePolicyID = firewallRulePolicyID;
     }
 
@@ -259,7 +259,7 @@ public class NeutronFirewallRule implements Serializable, INeutronObject {
                 ans.setFirewallRuleIsShared(firewallRuleIsShared);
             }
             if (s.equals("firewall_policy_id")) {
-                ans.setFirewallRulesPolicyID(this.getFirewallRulePolicyID());
+                ans.setFirewallRulePolicyID(this.getFirewallRulePolicyID());
             }
             if (s.equals("protocol")) {
                 ans.setFirewallRuleProtocol(this.getFirewallRuleProtocol());

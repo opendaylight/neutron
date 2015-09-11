@@ -23,6 +23,7 @@ module neutron {
     import neutron-lbaasv2 { prefix "lbaasv2"; }
     import neutron-provider { prefix "provider"; }
     import neutron-vpnaas { prefix "vpnaas"; }
+    import neutron-fwaas { prefix "fwaas"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -37,16 +38,19 @@ module neutron {
 
     container neutron {
         uses networks:networks-attributes;
+        uses provider:provider-attributes;
+        uses subnets:subnets-attributes;
+        uses ports:ports-attributes;
         uses l3:routers-attributes;
         uses l3:floatingips-attributes;
         uses metering:metering-labels-attributes;
         uses metering:metering-rules-attributes;
-        uses ports:ports-attributes;
         uses secgroups:security-groups-attributes;
         uses secgroups:security-rules-attributes;
-        uses subnets:subnets-attributes;
+        uses fwaas:firewalls-attributes;
+        uses fwaas:policies-attributes;
+        uses fwaas:rules-attributes;
         uses lbaasv2:lbaas-attributes;
-        uses provider:provider-attributes;
         uses vpnaas:vpnservices-attributes;
         uses vpnaas:ikepolicies-attributes;
         uses vpnaas:ipsecpolicies-attributes;
