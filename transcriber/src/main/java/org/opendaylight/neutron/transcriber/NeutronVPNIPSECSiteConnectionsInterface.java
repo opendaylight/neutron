@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
@@ -33,8 +31,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
-    private ConcurrentMap<String, NeutronVPNIPSECSiteConnection> neutronVPNIPSECSiteConnectionDB = new ConcurrentHashMap<String, NeutronVPNIPSECSiteConnection>();
-
 
     NeutronVPNIPSECSiteConnectionsInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -43,24 +39,31 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     // INeutronVPNIPSECSiteConnectionsCRUD methods
 
     @Override
-    public boolean neutronVPNIPSECSiteConnectionsExists(String policyID) {
-        return neutronVPNIPSECSiteConnectionDB.containsKey(policyID);
+    public boolean neutronVPNIPSECSiteConnectionsExists(String uuid) {
+        Ipsecsiteconnection connection = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (connection == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String policyID) {
-        if (!neutronVPNIPSECSiteConnectionsExists(policyID)) {
+    public NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String uuid) {
+        Ipsecsiteconnection connection = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (connection == null) {
             return null;
         }
-        return neutronVPNIPSECSiteConnectionDB.get(policyID);
+        return fromMd(connection);
     }
 
     @Override
     public List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections() {
         Set<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnections = new HashSet<NeutronVPNIPSECSiteConnection>();
-        for (Entry<String, NeutronVPNIPSECSiteConnection> entry : neutronVPNIPSECSiteConnectionDB.entrySet()) {
-            NeutronVPNIPSECSiteConnection meteringLabelRule = entry.getValue();
-            allNeutronVPNIPSECSiteConnections.add(meteringLabelRule);
+        IpsecSiteConnections connections = readMd(createInstanceIdentifier());
+        if (connections != null) {
+            for (Ipsecsiteconnection connection: connections.getIpsecsiteconnection()) {
+                allNeutronVPNIPSECSiteConnections.add(fromMd(connection));
+            }
         }
         LOGGER.debug("Exiting getAllNeutronVPNIPSECSiteConnections, Found {} OpenStackVPNIPSECSiteConnections", allNeutronVPNIPSECSiteConnections.size());
         List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
@@ -73,7 +76,6 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         if (neutronVPNIPSECSiteConnectionsExists(input.getID())) {
             return false;
         }
-        neutronVPNIPSECSiteConnectionDB.putIfAbsent(input.getID(), input);
         addMd(input);
         return true;
     }
@@ -83,9 +85,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         if (!neutronVPNIPSECSiteConnectionsExists(policyID)) {
             return false;
         }
-        neutronVPNIPSECSiteConnectionDB.remove(policyID);
-        removeMd(toMd(policyID));
-        return true;
+        return removeMd(toMd(policyID));
     }
 
     @Override
@@ -93,12 +93,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         if (!neutronVPNIPSECSiteConnectionsExists(policyID)) {
             return false;
         }
-        NeutronVPNIPSECSiteConnection target = neutronVPNIPSECSiteConnectionDB.get(policyID);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(neutronVPNIPSECSiteConnectionDB.get(policyID));
-        }
-        return rc;
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -107,6 +103,71 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             return true;
         }
         return false;
+    }
+
+    protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
+        NeutronVPNIPSECSiteConnection answer = new NeutronVPNIPSECSiteConnection();
+        if (ipsecSiteConnection.getName() != null) {
+            answer.setName(ipsecSiteConnection.getName());
+        }
+        if (ipsecSiteConnection.getTenantId() != null) {
+            answer.setTenantID(ipsecSiteConnection.getTenantId().getValue().replace("-",""));
+        }
+        answer.setStatus(ipsecSiteConnection.getStatus());
+        if (ipsecSiteConnection.isAdminStateUp() != null) {
+            answer.setAdminStateUp(ipsecSiteConnection.isAdminStateUp());
+        }
+        if (ipsecSiteConnection.getDescr() != null) {
+            answer.setDescription(ipsecSiteConnection.getDescr());
+        }
+        if (ipsecSiteConnection.getPeerAddress() != null) {
+            answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
+        }
+        if (ipsecSiteConnection.getPeerCidrs() != null) {
+            List<String> peerCidrs = new ArrayList<String>();
+            for( String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
+                peerCidrs.add(peerCidr);
+            }
+            answer.setPeerCidrs(peerCidrs);
+        }
+        if (ipsecSiteConnection.getPeerId() != null) {
+            answer.setPeerID(ipsecSiteConnection.getPeerId());
+        }
+        if (ipsecSiteConnection.getRouteMode() != null) {
+            answer.setRouteMode(ipsecSiteConnection.getRouteMode());
+        }
+        if (ipsecSiteConnection.getMtu() != null) {
+            answer.setMtu((ipsecSiteConnection.getMtu()).intValue());
+        }
+        if (ipsecSiteConnection.getAuthMode() != null) {
+            answer.setAuthMode(ipsecSiteConnection.getAuthMode());
+        }
+        if (ipsecSiteConnection.getPsk() != null) {
+            answer.setPreSharedKey(ipsecSiteConnection.getPsk());
+        }
+        if (ipsecSiteConnection.getInitiator() != null) {
+            answer.setInitiator(ipsecSiteConnection.getInitiator());
+        }
+        if (ipsecSiteConnection.getIkepolicyId() != null) {
+            answer.setIkePolicyID(ipsecSiteConnection.getIkepolicyId().getValue());
+        }
+        if (ipsecSiteConnection.getIpsecpolicyId() != null) {
+            answer.setIpsecPolicyID(ipsecSiteConnection.getIpsecpolicyId().getValue());
+        }
+        if (ipsecSiteConnection.getVpnserviceId() != null) {
+            answer.setVpnServiceID(ipsecSiteConnection.getVpnserviceId().getValue());
+        }
+        if (ipsecSiteConnection.getDpd() != null) {
+            NeutronVPNDeadPeerDetection deadPeerDetection = new NeutronVPNDeadPeerDetection();
+            deadPeerDetection.setAction(ipsecSiteConnection.getDpd().getAction());
+            deadPeerDetection.setInterval(ipsecSiteConnection.getDpd().getInterval());
+            deadPeerDetection.setTimeout(ipsecSiteConnection.getDpd().getTimeout());
+            answer.setDeadPeerDetection(deadPeerDetection);
+        }
+        if (ipsecSiteConnection.getUuid() != null) {
+            answer.setID(ipsecSiteConnection.getUuid().getValue());
+        }
+        return answer;
     }
 
     @Override
@@ -176,6 +237,11 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             LOGGER.warn("Attempting to write neutron vpnIPSECSiteConnection without UUID");
         }
         return ipsecSiteConnectionBuilder.build();
+    }
+
+    protected InstanceIdentifier<IpsecSiteConnections> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                 .child(IpsecSiteConnections.class);
     }
 
     @Override

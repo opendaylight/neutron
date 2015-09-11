@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
@@ -33,8 +31,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ipsecpolicy, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
-    private ConcurrentMap<String, NeutronVPNIPSECPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIPSECPolicy>();
-
 
     NeutronVPNIPSECPolicyInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -44,23 +40,30 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
     @Override
     public boolean neutronVPNIPSECPolicyExists(String uuid) {
-        return meteringLabelRuleDB.containsKey(uuid);
+        Ipsecpolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (policy == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronVPNIPSECPolicy getNeutronVPNIPSECPolicy(String uuid) {
-        if (!neutronVPNIPSECPolicyExists(uuid)) {
+        Ipsecpolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (policy == null) {
             return null;
         }
-        return meteringLabelRuleDB.get(uuid);
+        return fromMd(policy);
     }
 
     @Override
     public List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies() {
         Set<NeutronVPNIPSECPolicy> allVPNIPSECPolicies = new HashSet<NeutronVPNIPSECPolicy>();
-        for (Entry<String, NeutronVPNIPSECPolicy> entry : meteringLabelRuleDB.entrySet()) {
-            NeutronVPNIPSECPolicy meteringLabelRule = entry.getValue();
-            allVPNIPSECPolicies.add(meteringLabelRule);
+        IpsecPolicies policies = readMd(createInstanceIdentifier());
+        if (policies != null) {
+            for (Ipsecpolicy policy: policies.getIpsecpolicy()) {
+                allVPNIPSECPolicies.add(fromMd(policy));
+            }
         }
         LOGGER.debug("Exiting getAllVPNIPSECPolicies, Found {} OpenStackVPNIPSECPolicies", allVPNIPSECPolicies.size());
         List<NeutronVPNIPSECPolicy> ans = new ArrayList<NeutronVPNIPSECPolicy>();
@@ -73,9 +76,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (neutronVPNIPSECPolicyExists(input.getID())) {
             return false;
         }
-        meteringLabelRuleDB.putIfAbsent(input.getID(), input);
         addMd(input);
-      //TODO: add code to find INeutronVPNIPSECPolicyAware services and call newtorkCreated on them
         return true;
     }
 
@@ -84,10 +85,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (!neutronVPNIPSECPolicyExists(uuid)) {
             return false;
         }
-        meteringLabelRuleDB.remove(uuid);
-        removeMd(toMd(uuid));
-      //TODO: add code to find INeutronVPNIPSECPolicyAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -95,12 +93,8 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (!neutronVPNIPSECPolicyExists(uuid)) {
             return false;
         }
-        NeutronVPNIPSECPolicy target = meteringLabelRuleDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(meteringLabelRuleDB.get(uuid));
-        }
-        return rc;
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -111,6 +105,43 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         return false;
     }
 
+    protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {
+        NeutronVPNIPSECPolicy answer = new NeutronVPNIPSECPolicy();
+        if (ipsecPolicy.getName() != null) {
+            answer.setName(ipsecPolicy.getName());
+        }
+        if (ipsecPolicy.getTenantId() != null) {
+            answer.setTenantID(ipsecPolicy.getTenantId().getValue().replace("-",""));
+        }
+        if (ipsecPolicy.getDescr() != null) {
+            answer.setDescription(ipsecPolicy.getDescr());
+        }
+        if (ipsecPolicy.getAuthAlgorithm() != null) {
+            answer.setAuthAlgorithm(ipsecPolicy.getAuthAlgorithm());
+        }
+        if (ipsecPolicy.getEncryptionAlgorithm() != null) {
+            answer.setEncryptionAlgorithm(ipsecPolicy.getEncryptionAlgorithm());
+        }
+        if (ipsecPolicy.getTransformProtocol() != null) {
+            answer.setTransformProtocol(ipsecPolicy.getTransformProtocol());
+        }
+        if (ipsecPolicy.getEncapsulationMode() != null) {
+            answer.setEncapsulationMode(ipsecPolicy.getEncapsulationMode());
+        }
+        if (ipsecPolicy.getPfs() != null) {
+            answer.setPerfectForwardSecrecy(ipsecPolicy.getPfs());
+        }
+        if (ipsecPolicy.getLifetime() !=null) {
+            NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
+            vpnLifetime.setUnits(ipsecPolicy.getLifetime().getUnits());
+            vpnLifetime.setValue(ipsecPolicy.getLifetime().getValue());
+            answer.setLifetime(vpnLifetime);
+        }
+        if (ipsecPolicy.getUuid() != null) {
+            answer.setID(ipsecPolicy.getUuid().getValue());
+        }
+        return answer;
+    }
 
     @Override
     protected Ipsecpolicy toMd(NeutronVPNIPSECPolicy ipsecPolicy) {
@@ -162,6 +193,10 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
                  .child(Ipsecpolicy.class, ipsecPolicy.getKey());
     }
 
+    protected InstanceIdentifier<IpsecPolicies> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                 .child(IpsecPolicies.class);
+    }
 
     @Override
     protected Ipsecpolicy toMd(String uuid) {

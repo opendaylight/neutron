@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
@@ -33,8 +31,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
-    private ConcurrentMap<String, NeutronVPNIKEPolicy> meteringLabelRuleDB = new ConcurrentHashMap<String, NeutronVPNIKEPolicy>();
-
 
     NeutronVPNIKEPolicyInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -44,23 +40,31 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
 
     @Override
     public boolean neutronVPNIKEPolicyExists(String uuid) {
-        return meteringLabelRuleDB.containsKey(uuid);
+        Ikepolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (policy == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronVPNIKEPolicy getNeutronVPNIKEPolicy(String uuid) {
-        if (!neutronVPNIKEPolicyExists(uuid)) {
+        Ikepolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (policy == null) {
             return null;
         }
-        return meteringLabelRuleDB.get(uuid);
+        return fromMd(policy);
     }
 
     @Override
     public List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies() {
         Set<NeutronVPNIKEPolicy> allVPNIKEPolicies = new HashSet<NeutronVPNIKEPolicy>();
-        for (Entry<String, NeutronVPNIKEPolicy> entry : meteringLabelRuleDB.entrySet()) {
-            NeutronVPNIKEPolicy meteringLabelRule = entry.getValue();
-            allVPNIKEPolicies.add(meteringLabelRule);
+        IkePolicies policies = readMd(createInstanceIdentifier());
+
+        if (policies != null) { 
+            for (Ikepolicy policy: policies.getIkepolicy()) {
+                allVPNIKEPolicies.add(fromMd(policy));
+            }
         }
         LOGGER.debug("Exiting getAllVPNIKEPolicies, Found {} OpenStackVPNIKEPolicies", allVPNIKEPolicies.size());
         List<NeutronVPNIKEPolicy> ans = new ArrayList<NeutronVPNIKEPolicy>();
@@ -73,9 +77,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         if (neutronVPNIKEPolicyExists(input.getID())) {
             return false;
         }
-        meteringLabelRuleDB.putIfAbsent(input.getID(), input);
         addMd(input);
-      //TODO: add code to find INeutronVPNIKEPolicyAware services and call newtorkCreated on them
         return true;
     }
 
@@ -84,10 +86,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         if (!neutronVPNIKEPolicyExists(uuid)) {
             return false;
         }
-        meteringLabelRuleDB.remove(uuid);
-        removeMd(toMd(uuid));
-      //TODO: add code to find INeutronVPNIKEPolicyAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -95,12 +94,8 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         if (!neutronVPNIKEPolicyExists(uuid)) {
             return false;
         }
-        NeutronVPNIKEPolicy target = meteringLabelRuleDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(meteringLabelRuleDB.get(uuid));
-        }
-        return rc;
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -111,6 +106,44 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         return false;
     }
 
+    protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {
+        NeutronVPNIKEPolicy answer = new NeutronVPNIKEPolicy();
+        if (ikePolicy.getName() != null) {
+            answer.setName(ikePolicy.getName());
+        }
+        if (ikePolicy.getTenantId() != null) {
+            answer.setTenantID(ikePolicy.getTenantId().getValue().replace("-",""));
+        }
+        if (ikePolicy.getDescr() != null) {
+            answer.setDescription(ikePolicy.getDescr());
+        }
+        if (ikePolicy.getAuthAlgorithm() != null) {
+            answer.setAuthAlgorithm(ikePolicy.getAuthAlgorithm());
+        }
+        if (ikePolicy.getEncryptionAlgorithm() != null) {
+            answer.setEncryptionAlgorithm(ikePolicy.getEncryptionAlgorithm());
+        }
+        if (ikePolicy.getPhaseNegotiationMode() != null) {
+            answer.setPhase1NegotiationMode(ikePolicy.getPhaseNegotiationMode());
+        }
+        if (ikePolicy.getPfs() != null) {
+            answer.setPerfectForwardSecrecy(ikePolicy.getPfs());
+        }
+        if (ikePolicy.getIkeVersion() != null) {
+            answer.setIkeVersion(ikePolicy.getIkeVersion());
+        }
+        if (ikePolicy.getLifetime() != null) {
+            NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
+ikePolicy.getLifetime();
+            vpnLifetime.setUnits(ikePolicy.getLifetime().getUnits());
+            vpnLifetime.setValue(ikePolicy.getLifetime().getValue());
+            answer.setLifetime(vpnLifetime);
+        }
+        if (ikePolicy.getUuid() != null) {
+            answer.setID(ikePolicy.getUuid().getValue());
+        }
+        return answer;
+    }
 
     @Override
     protected Ikepolicy toMd(NeutronVPNIKEPolicy ikePolicy) {
@@ -154,7 +187,6 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         return ikePolicyBuilder.build();
     }
 
-
     @Override
     protected InstanceIdentifier<Ikepolicy> createInstanceIdentifier(Ikepolicy ikePolicy) {
         return InstanceIdentifier.create(Neutron.class)
@@ -162,6 +194,10 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
                  .child(Ikepolicy.class, ikePolicy.getKey());
     }
 
+    protected InstanceIdentifier<IkePolicies> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                 .child(IkePolicies.class);
+    }
 
     @Override
     protected Ikepolicy toMd(String uuid) {
