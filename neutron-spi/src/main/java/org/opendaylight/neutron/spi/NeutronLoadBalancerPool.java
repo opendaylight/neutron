@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,6 +75,7 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
     List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers;
 
     public NeutronLoadBalancerPool() {
+        loadBalancerPoolMembers = new ArrayList<NeutronLoadBalancerPoolMember>();
     }
 
     public String getID() {
@@ -171,13 +172,23 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
         /*
          * Update the pool_id of the member to that this.loadBalancerPoolID
          */
+        List<NeutronLoadBalancerPoolMember> answer = new ArrayList<NeutronLoadBalancerPoolMember>();
         if (loadBalancerPoolMembers != null) {
             for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers) {
                 member.setPoolID(loadBalancerPoolID);
+                answer.add(member);
             }
-            return loadBalancerPoolMembers;
         }
-        return loadBalancerPoolMembers;
+        return answer;
+    }
+
+    public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String uuid) {
+        for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers) {
+            if (uuid.equals(member.getID())) {
+                return member;
+            }
+        }
+        return null;
     }
 
     public void setLoadBalancerPoolMembers(List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers) {
@@ -194,9 +205,7 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
 
     public NeutronLoadBalancerPool extractFields(List<String> fields) {
         NeutronLoadBalancerPool ans = new NeutronLoadBalancerPool();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
+        for (String s: fields) {
             if (s.equals("id")) {
                 ans.setID(this.getID());
             }

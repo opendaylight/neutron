@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
@@ -25,9 +23,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolTcp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Listener;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listener.Listeners;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listener.ListenersBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Listeners;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listeners.Listener;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listeners.ListenerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
@@ -37,9 +35,8 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listeners, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
+public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listener, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
-    private ConcurrentMap<String, NeutronLoadBalancerListener> loadBalancerListenerDB  = new ConcurrentHashMap<String, NeutronLoadBalancerListener>();
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
             = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
@@ -54,24 +51,30 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     public boolean neutronLoadBalancerListenerExists(String uuid) {
-        return loadBalancerListenerDB.containsKey(uuid);
+        Listener listener = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (listener == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronLoadBalancerListener getNeutronLoadBalancerListener(String uuid) {
-        if (!neutronLoadBalancerListenerExists(uuid)) {
-            LOGGER.debug("No LoadBalancerListener Have Been Defined");
+        Listener listener = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (listener == null) {
             return null;
         }
-        return loadBalancerListenerDB.get(uuid);
+        return fromMd(listener);
     }
 
     @Override
     public List<NeutronLoadBalancerListener> getAllNeutronLoadBalancerListeners() {
         Set<NeutronLoadBalancerListener> allLoadBalancerListeners = new HashSet<NeutronLoadBalancerListener>();
-        for (Entry<String, NeutronLoadBalancerListener> entry : loadBalancerListenerDB.entrySet()) {
-            NeutronLoadBalancerListener loadBalancerListener = entry.getValue();
-            allLoadBalancerListeners.add(loadBalancerListener);
+        Listeners listeners = readMd(createInstanceIdentifier());
+        if (listeners != null) {
+            for (Listener listener: listeners.getListener()) {
+                allLoadBalancerListeners.add(fromMd(listener));
+            }
         }
         LOGGER.debug("Exiting getLoadBalancerListeners, Found {} OpenStackLoadBalancerListener", allLoadBalancerListeners.size());
         List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
@@ -84,8 +87,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (neutronLoadBalancerListenerExists(input.getID())) {
             return false;
         }
-        loadBalancerListenerDB.putIfAbsent(input.getID(), input);
-        //TODO: add code to find INeutronLoadBalancerListenerAware services and call newtorkCreated on them
+        addMd(input);
         return true;
     }
 
@@ -94,9 +96,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (!neutronLoadBalancerListenerExists(uuid)) {
             return false;
         }
-        loadBalancerListenerDB.remove(uuid);
-        //TODO: add code to find INeutronLoadBalancerListenerAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -104,8 +104,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (!neutronLoadBalancerListenerExists(uuid)) {
             return false;
         }
-        NeutronLoadBalancerListener target = loadBalancerListenerDB.get(uuid);
-        return overwrite(target, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -115,60 +115,104 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
 
     @Override
-    protected Listeners toMd(String uuid) {
-        ListenersBuilder listenersBuilder = new ListenersBuilder();
-        listenersBuilder.setUuid(toUuid(uuid));
-        return listenersBuilder.build();
+    protected Listener toMd(String uuid) {
+        ListenerBuilder listenerBuilder = new ListenerBuilder();
+        listenerBuilder.setUuid(toUuid(uuid));
+        return listenerBuilder.build();
     }
 
     @Override
-    protected InstanceIdentifier<Listeners> createInstanceIdentifier(
-            Listeners listeners) {
+    protected InstanceIdentifier<Listener> createInstanceIdentifier(
+            Listener listener) {
         return InstanceIdentifier.create(Neutron.class)
-                .child(Listener.class)
-                .child(Listeners.class, listeners.getKey());
+                .child(Listeners.class)
+                .child(Listener.class, listener.getKey());
+    }
+
+    protected InstanceIdentifier<Listeners> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Listeners.class);
     }
 
     @Override
-    protected Listeners toMd(NeutronLoadBalancerListener listeners) {
-        ListenersBuilder listenersBuilder = new ListenersBuilder();
-        listenersBuilder.setAdminStateUp(listeners.getLoadBalancerListenerAdminStateIsUp());
-        if (listeners.getNeutronLoadBalancerListenerConnectionLimit() != null) {
-            listenersBuilder.setConnectionLimit(listeners.getNeutronLoadBalancerListenerConnectionLimit());
+    protected Listener toMd(NeutronLoadBalancerListener listener) {
+        ListenerBuilder listenerBuilder = new ListenerBuilder();
+        listenerBuilder.setAdminStateUp(listener.getLoadBalancerListenerAdminStateIsUp());
+        if (listener.getNeutronLoadBalancerListenerConnectionLimit() != null) {
+            listenerBuilder.setConnectionLimit(listener.getNeutronLoadBalancerListenerConnectionLimit());
         }
-        if (listeners.getNeutronLoadBalancerListenerDefaultPoolID() != null) {
-            listenersBuilder.setDefaultPoolD(toUuid(listeners.getNeutronLoadBalancerListenerDefaultPoolID()));
+        if (listener.getNeutronLoadBalancerListenerDefaultPoolID() != null) {
+            listenerBuilder.setDefaultPoolId(toUuid(listener.getNeutronLoadBalancerListenerDefaultPoolID()));
         }
-        if (listeners.getLoadBalancerListenerDescription() != null) {
-            listenersBuilder.setDescr(listeners.getLoadBalancerListenerDescription());
+        if (listener.getLoadBalancerListenerDescription() != null) {
+            listenerBuilder.setDescr(listener.getLoadBalancerListenerDescription());
         }
-        if (listeners.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
+        if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
             List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : listeners.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
+            for (Neutron_ID neutron_id : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
                 listLoadBalancers.add(toUuid(neutron_id.getID()));
             }
-            listenersBuilder.setLoadbalancers(listLoadBalancers);
+            listenerBuilder.setLoadbalancers(listLoadBalancers);
         }
-        if (listeners.getLoadBalancerListenerName() != null) {
-            listenersBuilder.setName(listeners.getLoadBalancerListenerName());
+        if (listener.getLoadBalancerListenerName() != null) {
+            listenerBuilder.setName(listener.getLoadBalancerListenerName());
         }
-        if (listeners.getNeutronLoadBalancerListenerProtocol() != null) {
+        if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
             ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
                 PROTOCOL_MAP.inverse();
-            listenersBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(listeners.getNeutronLoadBalancerListenerProtocol()));
+            listenerBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
         }
-        if (listeners.getNeutronLoadBalancerListenerProtocolPort() != null) {
-            listenersBuilder.setProtocolPort(Integer.valueOf(listeners.getNeutronLoadBalancerListenerProtocolPort()));
+        if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
+            listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
         }
-        if (listeners.getLoadBalancerListenerTenantID() != null) {
-            listenersBuilder.setTenantId(toUuid(listeners.getLoadBalancerListenerTenantID()));
+        if (listener.getLoadBalancerListenerTenantID() != null) {
+            listenerBuilder.setTenantId(toUuid(listener.getLoadBalancerListenerTenantID()));
         }
-        if (listeners.getID() != null) {
-            listenersBuilder.setUuid(toUuid(listeners.getID()));
+        if (listener.getID() != null) {
+            listenerBuilder.setUuid(toUuid(listener.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron load balancer listener without UUID");
         }
-        return listenersBuilder.build();
+        return listenerBuilder.build();
+    }
+
+    protected NeutronLoadBalancerListener fromMd(Listener listener) {
+        NeutronLoadBalancerListener answer = new NeutronLoadBalancerListener();
+        if (listener.isAdminStateUp() != null) {
+            answer.setLoadBalancerListenerAdminStateIsUp(listener.isAdminStateUp());
+        }
+        if (listener.getConnectionLimit() != null) {
+            answer.setNeutronLoadBalancerListenerConnectionLimit(listener.getConnectionLimit());
+        }
+        if (listener.getDefaultPoolId() != null) {
+            answer.setNeutronLoadBalancerListenerDefaultPoolID(listener.getDefaultPoolId().getValue());
+        }
+        if (listener.getDescr() != null) {
+            answer.setLoadBalancerListenerDescription(listener.getDescr());
+        }
+        if (listener.getLoadbalancers() != null) {
+            List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            for (Uuid id : listener.getLoadbalancers()) {
+                list.add(new Neutron_ID(id.getValue()));
+            }
+            answer.setNeutronLoadBalancerListenerLoadBalancerIDs(list);
+        }
+        if (listener.getName() != null) {
+            answer.setLoadBalancerListenerName(listener.getName());
+        }
+        if (listener.getProtocol() != null) {
+            answer.setNeutronLoadBalancerListenerProtocol(PROTOCOL_MAP.get(listener.getProtocol()));
+        }
+        if (listener.getProtocolPort() != null) {
+            answer.setNeutronLoadBalancerListenerProtocolPort(String.valueOf(listener.getProtocolPort()));
+        }
+        if (listener.getTenantId() != null) {
+            answer.setLoadBalancerListenerTenantID(listener.getTenantId().getValue().replace("-",""));
+        }
+        if (listener.getUuid() != null) {
+            answer.setID(listener.getUuid().getValue());
+        }
+        return answer;
     }
 
     public static void registerNewInterface(BundleContext context,

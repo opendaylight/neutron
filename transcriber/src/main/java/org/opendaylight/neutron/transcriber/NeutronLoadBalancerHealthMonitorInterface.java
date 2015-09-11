@@ -26,9 +26,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeHttps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeIcmp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeTcp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Healthmonitor;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitor.Healthmonitors;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitor.HealthmonitorsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Healthmonitors;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitors.Healthmonitor;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitors.HealthmonitorBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitors, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
+public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitor, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerHealthMonitor> loadBalancerHealthMonitorDB = new ConcurrentHashMap<String, NeutronLoadBalancerHealthMonitor>();
 
@@ -57,24 +57,30 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     public boolean neutronLoadBalancerHealthMonitorExists(String uuid) {
-        return loadBalancerHealthMonitorDB.containsKey(uuid);
+        Healthmonitor healthMonitor = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (healthMonitor == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid) {
-        if (!neutronLoadBalancerHealthMonitorExists(uuid)) {
-            LOGGER.debug("No LoadBalancerHealthMonitor has Been Defined");
+        Healthmonitor healthMonitor = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (healthMonitor == null) {
             return null;
         }
-        return loadBalancerHealthMonitorDB.get(uuid);
+        return fromMd(healthMonitor);
     }
 
     @Override
     public List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors() {
         Set<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = new HashSet<NeutronLoadBalancerHealthMonitor>();
-        for (Entry<String, NeutronLoadBalancerHealthMonitor> entry : loadBalancerHealthMonitorDB.entrySet()) {
-            NeutronLoadBalancerHealthMonitor loadBalancerHealthMonitor = entry.getValue();
-            allLoadBalancerHealthMonitors.add(loadBalancerHealthMonitor);
+        Healthmonitors healthMonitors = readMd(createInstanceIdentifier());
+        if (healthMonitors != null) {
+            for (Healthmonitor healthMonitor : healthMonitors.getHealthmonitor()) {
+                allLoadBalancerHealthMonitors.add(fromMd(healthMonitor));
+            }
         }
         LOGGER.debug("Exiting getLoadBalancerHealthMonitors, Found {} OpenStackLoadBalancerHealthMonitor", allLoadBalancerHealthMonitors.size());
         List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
@@ -87,8 +93,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
         if (neutronLoadBalancerHealthMonitorExists(input.getID())) {
             return false;
         }
-        loadBalancerHealthMonitorDB.putIfAbsent(input.getID(), input);
-        //TODO: add code to find INeutronLoadBalancerHealthMonitorAware services and call newtorkCreated on them
+        addMd(input);
         return true;
     }
 
@@ -97,9 +102,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
         if (!neutronLoadBalancerHealthMonitorExists(uuid)) {
             return false;
         }
-        loadBalancerHealthMonitorDB.remove(uuid);
-        //TODO: add code to find INeutronLoadBalancerHealthMonitorAware services and call newtorkDeleted on them
-        return true;
+        return removeMd(toMd(uuid));
     }
 
     @Override
@@ -107,8 +110,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
         if (!neutronLoadBalancerHealthMonitorExists(uuid)) {
             return false;
         }
-        NeutronLoadBalancerHealthMonitor target = loadBalancerHealthMonitorDB.get(uuid);
-        return overwrite(target, delta);
+        updateMd(delta);
+        return true;
     }
 
     @Override
@@ -117,63 +120,112 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     }
 
     @Override
-    protected Healthmonitors toMd(String uuid) {
-        HealthmonitorsBuilder healthmonitorsBuilder = new HealthmonitorsBuilder();
-        healthmonitorsBuilder.setUuid(toUuid(uuid));
-        return healthmonitorsBuilder.build();
+    protected Healthmonitor toMd(String uuid) {
+        HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        healthmonitorBuilder.setUuid(toUuid(uuid));
+        return healthmonitorBuilder.build();
     }
 
     @Override
-    protected InstanceIdentifier<Healthmonitors> createInstanceIdentifier(
-            Healthmonitors healthMonitors) {
+    protected InstanceIdentifier<Healthmonitor> createInstanceIdentifier(
+            Healthmonitor healthMonitor) {
         return InstanceIdentifier.create(Neutron.class)
-                .child(Healthmonitor.class )
-                .child(Healthmonitors.class, healthMonitors.getKey());
+                .child(Healthmonitors.class )
+                .child(Healthmonitor.class, healthMonitor.getKey());
+    }
+
+    protected InstanceIdentifier<Healthmonitors> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+                .child(Healthmonitors.class);
     }
 
     @Override
-    protected Healthmonitors toMd(NeutronLoadBalancerHealthMonitor healthMonitor) {
-        HealthmonitorsBuilder healthmonitorsBuilder = new HealthmonitorsBuilder();
-        healthmonitorsBuilder.setAdminStateUp(healthMonitor.getLoadBalancerHealthMonitorAdminStateIsUp());
+    protected Healthmonitor toMd(NeutronLoadBalancerHealthMonitor healthMonitor) {
+        HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        healthmonitorBuilder.setAdminStateUp(healthMonitor.getLoadBalancerHealthMonitorAdminStateIsUp());
         if (healthMonitor.getLoadBalancerHealthMonitorDelay() != null) {
-            healthmonitorsBuilder.setDelay(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorDelay()));
+            healthmonitorBuilder.setDelay(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorDelay()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorExpectedCodes() != null) {
-            healthmonitorsBuilder.setExpectedCodes(healthMonitor.getLoadBalancerHealthMonitorExpectedCodes());
+            healthmonitorBuilder.setExpectedCodes(healthMonitor.getLoadBalancerHealthMonitorExpectedCodes());
         }
         if (healthMonitor.getLoadBalancerHealthMonitorHttpMethod() != null) {
-            healthmonitorsBuilder.setHttpMethod(healthMonitor.getLoadBalancerHealthMonitorHttpMethod());
+            healthmonitorBuilder.setHttpMethod(healthMonitor.getLoadBalancerHealthMonitorHttpMethod());
         }
         if (healthMonitor.getLoadBalancerHealthMonitorMaxRetries() != null) {
-            healthmonitorsBuilder.setMaxRetries(Integer.valueOf(healthMonitor.getLoadBalancerHealthMonitorMaxRetries()));
+            healthmonitorBuilder.setMaxRetries(Integer.valueOf(healthMonitor.getLoadBalancerHealthMonitorMaxRetries()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             List<Uuid> listUuid = new ArrayList<Uuid>();
             for (Neutron_ID neutron_id : healthMonitor.getLoadBalancerHealthMonitorPools()) {
                 listUuid.add(toUuid(neutron_id.getID()));
             }
-            healthmonitorsBuilder.setPools(listUuid);
+            healthmonitorBuilder.setPools(listUuid);
         }
         if (healthMonitor.getLoadBalancerHealthMonitorTenantID() != null) {
-            healthmonitorsBuilder.setTenantId(toUuid(healthMonitor.getLoadBalancerHealthMonitorTenantID()));
+            healthmonitorBuilder.setTenantId(toUuid(healthMonitor.getLoadBalancerHealthMonitorTenantID()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorTimeout() != null) {
-            healthmonitorsBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
+            healthmonitorBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
             ImmutableBiMap<String, Class<? extends ProbeBase>> mapper =
                     PROBE_MAP.inverse();
-            healthmonitorsBuilder.setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
+            healthmonitorBuilder.setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
-            healthmonitorsBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
+            healthmonitorBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
         }
         if (healthMonitor.getID() != null) {
-            healthmonitorsBuilder.setUuid(toUuid(healthMonitor.getID()));
+            healthmonitorBuilder.setUuid(toUuid(healthMonitor.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
-        return healthmonitorsBuilder.build();
+        return healthmonitorBuilder.build();
+    }
+
+    protected NeutronLoadBalancerHealthMonitor fromMd(Healthmonitor healthMonitor) {
+        NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
+        if (healthMonitor.isAdminStateUp() != null) {
+             answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.isAdminStateUp());
+        }
+        if (healthMonitor.getDelay() != null) {
+            answer.setLoadBalancerHealthMonitorDelay(healthMonitor.getDelay().intValue());
+        }
+        if (healthMonitor.getExpectedCodes() != null) {
+            answer.setLoadBalancerHealthMonitorExpectedCodes(healthMonitor.getExpectedCodes());
+        }
+        if (healthMonitor.getHttpMethod() != null) {
+            answer.setLoadBalancerHealthMonitorHttpMethod(healthMonitor.getHttpMethod());
+        }
+        if (healthMonitor.getMaxRetries() != null) {
+            answer.setLoadBalancerHealthMonitorMaxRetries(Integer.valueOf(healthMonitor.getMaxRetries()));
+        }
+        if (healthMonitor.getPools() != null) {
+            List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            for (Uuid id : healthMonitor.getPools()) {
+                list.add(new Neutron_ID(id.getValue()));
+            }
+            answer.setLoadBalancerHealthMonitorPools(list);
+        }
+        if (healthMonitor.getTenantId() != null) {
+            answer.setLoadBalancerHealthMonitorTenantID(healthMonitor.getTenantId().getValue().replace("-",""));
+        }
+        if (healthMonitor.getTimeout() != null) {
+            answer.setLoadBalancerHealthMonitorTimeout(healthMonitor.getTimeout().intValue());
+        }
+        if (healthMonitor.getType() != null) {
+            answer.setLoadBalancerHealthMonitorType(PROBE_MAP.get(healthMonitor.getType()));
+        }
+        if (healthMonitor.getUrlPath() != null) {
+            answer.setLoadBalancerHealthMonitorUrlPath(healthMonitor.getUrlPath());
+        }
+        if (healthMonitor.getUuid() != null) {
+            answer.setID(healthMonitor.getUuid().getValue());
+        } else {
+            LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
+        }
+        return answer;
     }
 
     public static void registerNewInterface(BundleContext context,

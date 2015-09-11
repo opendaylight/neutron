@@ -31,7 +31,6 @@ import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberAware;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -75,15 +74,10 @@ public class NeutronLoadBalancerPoolNorthbound {
 
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().
-            fetchINeutronLoadBalancerPoolCRUD(this).
-            fetchINeutronLoadBalancerPoolMemberCRUD(this);
+            fetchINeutronLoadBalancerPoolCRUD(this);
         if (answer.getLoadBalancerPoolInterface() == null) {
             throw new ServiceUnavailableException(INTERFACE_NAME
                     + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        if (answer.getLoadBalancerPoolMemberInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         return answer;
     }
@@ -503,8 +497,8 @@ public class NeutronLoadBalancerPoolNorthbound {
             /**
              * Add the member from the neutron load balancer pool as well
              */
-            singletonPool.addLoadBalancerPoolMember(singleton);
 
+            loadBalancerPoolInterface.addNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, singleton);
         } else {
             Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
             for (NeutronLoadBalancerPoolMember test : input.getBulk()) {
@@ -535,7 +529,7 @@ public class NeutronLoadBalancerPoolNorthbound {
                         service.neutronLoadBalancerPoolMemberCreated(test);
                     }
                 }
-                singletonPool.addLoadBalancerPoolMember(test);
+                loadBalancerPoolInterface.addNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, test);
             }
         }
         return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
@@ -556,12 +550,14 @@ public class NeutronLoadBalancerPoolNorthbound {
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID,
             final NeutronLoadBalancerPoolMemberRequest input) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronInterfaces().getLoadBalancerPoolInterface();
-        INeutronLoadBalancerPoolMemberCRUD loadBalancerPoolMemberInterface = getNeutronInterfaces().getLoadBalancerPoolMemberInterface();
         NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
-
         NeutronLoadBalancerPoolMember singleton = input.getSingleton();
         singleton.setPoolID(loadBalancerPoolUUID);
-        NeutronLoadBalancerPoolMember original = loadBalancerPoolMemberInterface.getNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID);
+
+        if (singletonPool == null) {
+            throw new ResourceNotFoundException("Pool doesn't Exist");
+        }
+        NeutronLoadBalancerPoolMember original = singletonPool.getNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID);
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
         if (instances != null) {
@@ -580,7 +576,7 @@ public class NeutronLoadBalancerPoolNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        loadBalancerPoolMemberInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID, singleton);
+        loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID, singleton);
 
         if (instances != null) {
             for (Object instance : instances) {
@@ -646,8 +642,7 @@ public class NeutronLoadBalancerPoolNorthbound {
         /**
          * Remove the member from the neutron load balancer pool
          */
-        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
-        singletonPool.removeLoadBalancerPoolMember(singleton);
+        loadBalancerPoolInterface.removeNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID);
 
         return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
