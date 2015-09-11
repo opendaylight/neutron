@@ -13,8 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
@@ -36,7 +34,6 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<SecurityGroup,NeutronSecurityGroup> implements INeutronSecurityGroupCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
-    private ConcurrentMap<String, NeutronSecurityGroup> securityGroupDB  = new ConcurrentHashMap<String, NeutronSecurityGroup>();
 
 
     NeutronSecurityGroupInterface(ProviderContext providerContext) {
@@ -45,44 +42,43 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     public boolean neutronSecurityGroupExists(String uuid) {
-        return securityGroupDB.containsKey(uuid);
+        SecurityGroup group = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (group == null) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public NeutronSecurityGroup getNeutronSecurityGroup(String uuid) {
-        if (!neutronSecurityGroupExists(uuid)) {
-            LOGGER.debug("No Security Groups Have Been Defined");
+        SecurityGroup group = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (group == null) {
             return null;
         }
-        return securityGroupDB.get(uuid);
+        return fromMd(group);
     }
 
     @Override
     public List<NeutronSecurityGroup> getAllNeutronSecurityGroups() {
         Set<NeutronSecurityGroup> allSecurityGroups = new HashSet<NeutronSecurityGroup>();
-        for (Entry<String, NeutronSecurityGroup> entry : securityGroupDB.entrySet()) {
-            NeutronSecurityGroup securityGroup = entry.getValue();
-            allSecurityGroups.add(securityGroup);
+        SecurityGroups groups = readMd(createInstanceIdentifier());
+        if (groups != null) {
+            for (SecurityGroup group: groups.getSecurityGroup()) {
+                allSecurityGroups.add(fromMd(group));
+            }
         }
         LOGGER.debug("Exiting getSecurityGroups, Found {} OpenStackSecurityGroup", allSecurityGroups.size());
         List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
         ans.addAll(allSecurityGroups);
         return ans;
     }
-
+ 
     @Override
     public boolean addNeutronSecurityGroup(NeutronSecurityGroup input) {
         if (neutronSecurityGroupExists(input.getID())) {
             return false;
         }
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronSecurityRuleCRUD(this);
-        INeutronSecurityRuleCRUD sgrCrud = interfaces.getSecurityRuleInterface();
-        for(NeutronSecurityRule sgr : input.getSecurityRules()) {
-            sgrCrud.addNeutronSecurityRule(sgr);
-        }
-        securityGroupDB.putIfAbsent(input.getID(), input);
-        addMd(input);
+        addMd(input);       
         return true;
     }
 
@@ -91,7 +87,6 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (!neutronSecurityGroupExists(uuid)) {
             return false;
         }
-        securityGroupDB.remove(uuid);
         removeMd(toMd(uuid));
         return true;
     }
@@ -101,17 +96,41 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (!neutronSecurityGroupExists(uuid)) {
             return false;
         }
-        NeutronSecurityGroup target = securityGroupDB.get(uuid);
-        boolean rc = overwrite(target, delta);
-        if (rc) {
-            updateMd(securityGroupDB.get(uuid));
-        }
-        return rc;
+        updateMd(delta);
+        return true;
     }
 
     @Override
     public boolean neutronSecurityGroupInUse(String securityGroupUUID) {
         return !neutronSecurityGroupExists(securityGroupUUID);
+    }
+
+    protected NeutronSecurityGroup fromMd(SecurityGroup group) {
+        NeutronSecurityGroup answer = new NeutronSecurityGroup();
+        if (group.getName() != null) {
+            answer.setSecurityGroupName(group.getName());
+        }
+        if (group.getDescription() != null) {
+            answer.setSecurityGroupDescription(group.getDescription());
+        }
+        if (group.getTenantId() != null) {
+            answer.setSecurityGroupTenantID(group.getTenantId().getValue().replace("-",""));
+        }
+        if (group.getSecurityRules() != null) {
+            NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+                .fetchINeutronSecurityRuleCRUD(this);
+            INeutronSecurityRuleCRUD srCrud = interfaces.getSecurityRuleInterface();
+
+            List<NeutronSecurityRule> rules = new ArrayList<NeutronSecurityRule>();
+            for (Uuid uuid: group.getSecurityRules()) {
+                 rules.add(srCrud.getNeutronSecurityRule(uuid.getValue()));
+            }
+            answer.setSecurityRules(rules);
+        }
+        if (group.getUuid() != null) {
+            answer.setID(group.getUuid().getValue());
+        } 
+        return answer;
     }
 
     @Override
@@ -127,7 +146,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
             securityGroupBuilder.setTenantId(toUuid(securityGroup.getSecurityGroupTenantID()));
         }
         if (securityGroup.getSecurityRules() != null) {
-            List<Uuid> neutronSecurityRule = new ArrayList<>();
+            List<Uuid> neutronSecurityRule = new ArrayList<Uuid>();
             for (NeutronSecurityRule securityRule : securityGroup.getSecurityRules()) {
                 if (securityRule.getID() != null) {
                     neutronSecurityRule.add(toUuid(securityRule.getID()));
@@ -146,8 +165,14 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     protected InstanceIdentifier<SecurityGroup> createInstanceIdentifier(SecurityGroup securityGroup) {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class).child(SecurityGroup.class,
-                securityGroup.getKey());
+        return InstanceIdentifier.create(Neutron.class)
+            .child(SecurityGroups.class).child(SecurityGroup.class,
+                                               securityGroup.getKey());
+    }
+
+    protected InstanceIdentifier<SecurityGroups> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class)
+            .child(SecurityGroups.class);
     }
 
     @Override
