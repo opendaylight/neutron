@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_f578ee2c",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "Let\u0027s fix this copyright",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_95773a3a",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "red thingy (trailing spaces)",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 3
+      },
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_b5727647",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "who is the contact?",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_7594de36",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronBgpvpnCRUD.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "Let\u0027s fix this copyright",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_159b2a68",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "Let\u0027s fix this copyright",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_359e6657",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "Let\u0027s fix this copyright",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_d5a4d2a7",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "let\u0027s fix this copyright",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_f59f8e4e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronBgpvpnInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "change this copyright",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_95ae5a84",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronBgpvpnInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "let\u0027s fix this now and remove this comment - on the next line, use .replace(\"-\",\"\") after the .getValue()",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_b5a9167d",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronBgpvpnInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 590
+      },
+      "writtenOn": "2015-09-13T02:30:41Z",
+      "side": 1,
+      "message": "fix the above message - it\u0027s not a network being written",
+      "revId": "158dcce86bb72dd66b22705a43d0b76b83f0d2bb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
