@@ -16,6 +16,7 @@ import java.util.Set;
 
 import java.util.concurrent.ExecutionException;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
@@ -53,6 +54,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.util.concurrent.CheckedFuture;
 
@@ -79,18 +81,20 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
 
     @Override
     public boolean neutronLoadBalancerPoolExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronLoadBalancerPool getNeutronLoadBalancerPool(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronLoadBalancerPool> getAll() {
+    protected List<NeutronLoadBalancerPool> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronLoadBalancerPool> allLoadBalancerPools = new HashSet<NeutronLoadBalancerPool>();
-        Pools pools = readMd(createInstanceIdentifier());
+        Pools pools = readMd(createInstanceIdentifier(), chain);
         if (pools != null) {
             for (Pool pool: pools.getPool()) {
                 allLoadBalancerPools.add(fromMd(pool));
@@ -104,28 +108,28 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
 
     @Override
     public List<NeutronLoadBalancerPool> getAllNeutronLoadBalancerPools() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronLoadBalancerPool(NeutronLoadBalancerPool input) {
         //TODO: add code to find INeutronLoadBalancerPoolAware services and call newtorkCreated on them
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronLoadBalancerPool(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronLoadBalancerPool(String uuid, NeutronLoadBalancerPool delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronLoadBalancerPoolInUse(String loadBalancerPoolUUID) {
-        return !exists(loadBalancerPoolUUID);
+        return !exists(loadBalancerPoolUUID, null);
     }
 
     @Override

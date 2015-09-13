@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
@@ -72,18 +74,20 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public boolean subnetExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronSubnet getSubnet(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronSubnet> getAll() {
+    protected List<NeutronSubnet> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronSubnet> allSubnets = new HashSet<NeutronSubnet>();
-        Subnets subnets = readMd(createInstanceIdentifier());
+        Subnets subnets = readMd(createInstanceIdentifier(), chain);
         if (subnets != null) {
             for (Subnet subnet: subnets.getSubnet()) {
                 allSubnets.add(fromMd(subnet));
@@ -97,16 +101,16 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public List<NeutronSubnet> getAllSubnets() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addSubnet(NeutronSubnet input) {
         String id = input.getID();
-        if (subnetExists(id)) {
+        if (exists(id, null)) {
             return false;
         }
-        addMd(input);
+        addMd(input, null);
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronNetworkCRUD(this);
         INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
@@ -118,11 +122,11 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public boolean removeSubnet(String uuid) {
-        NeutronSubnet target = getSubnet(uuid);
+        NeutronSubnet target = get(uuid, null);
         if (target == null) {
             return false;
         }
-        removeMd(toMd(uuid));
+        removeMd(toMd(uuid), null);
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronNetworkCRUD(this);
         INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
@@ -137,7 +141,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
 // note: this is being set to false in preparation for deprecation and removal

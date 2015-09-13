@@ -28,6 +28,18 @@
 
   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
     <bundle>mvn:org.opendaylight.neutron/neutron-spi/${project.version}</bundle>
+    <bundle>mvn:org.opendaylight.controller/config-api/0.4.0-SNAPSHOT</bundle>
+    <bundle>mvn:org.opendaylight.controller/sal-binding-api/${mdsal.version}</bundle>
+    <bundle>mvn:org.opendaylight.controller/sal-common-api/${mdsal.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/concepts/${yangtools.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/object-cache-api/${yangtools.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/yang-binding/${yangtools.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/yang-common/${yangtools.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/yang-data-api/${yangtools.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/yang-model-api/${yangtools.version}</bundle>
+    <bundle>mvn:org.opendaylight.yangtools/util/${yangtools.version}</bundle>
+    <bundle>mvn:com.github.romix/java-concurrent-hash-trie-map/0.2.23</bundle>
+    <bundle>mvn:com.google.guava/guava/18.0</bundle>
     <bundle>mvn:commons-net/commons-net/${commons.net.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
   </feature>

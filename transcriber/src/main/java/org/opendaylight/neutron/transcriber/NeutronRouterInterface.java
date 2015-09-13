@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.Neutron_IPs;
@@ -38,7 +40,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, NeutronRouter> implements INeutronRouterCRUD {
+public class NeutronRouterInterface extends AbstractNeutronInterface<Router, NeutronRouter> implements INeutronRouterCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     // methods needed for creating caches
 
@@ -52,18 +54,20 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
 
     @Override
     public boolean routerExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronRouter getRouter(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronRouter> getAll() {
+    protected List<NeutronRouter> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronRouter> allRouters = new HashSet<NeutronRouter>();
-        Routers routers = readMd(createInstanceIdentifier());
+        Routers routers = readMd(createInstanceIdentifier(), chain);
         if (routers != null) {
             for (Router router: routers.getRouter()) {
                 allRouters.add(fromMd(router));
@@ -77,30 +81,30 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
 
     @Override
     public List<NeutronRouter> getAllRouters() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addRouter(NeutronRouter input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeRouter(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateRouter(String uuid, NeutronRouter delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean routerInUse(String routerUUID) {
-        if (!exists(routerUUID)) {
+        if (!exists(routerUUID, null)) {
             return true;
         }
-        NeutronRouter target = getRouter(routerUUID);
+        NeutronRouter target = get(routerUUID, null);
         return (target.getInterfaces().size() > 0);
     }
 

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNDeadPeerDetection;
@@ -40,18 +42,20 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
 
     @Override
     public boolean neutronVPNIPSECSiteConnectionsExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronVPNIPSECSiteConnection> getAll() {
+    protected List<NeutronVPNIPSECSiteConnection> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnections = new HashSet<NeutronVPNIPSECSiteConnection>();
-        IpsecSiteConnections connections = readMd(createInstanceIdentifier());
+        IpsecSiteConnections connections = readMd(createInstanceIdentifier(), chain);
         if (connections != null) {
             for (Ipsecsiteconnection connection: connections.getIpsecsiteconnection()) {
                 allNeutronVPNIPSECSiteConnections.add(fromMd(connection));
@@ -65,27 +69,27 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
 
     @Override
     public List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronVPNIPSECSiteConnections(NeutronVPNIPSECSiteConnection input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronVPNIPSECSiteConnections(String policyID) {
-        return remove(policyID);
+        return remove(policyID, null);
     }
 
     @Override
     public boolean updateNeutronVPNIPSECSiteConnections(String policyID, NeutronVPNIPSECSiteConnection delta) {
-        return update(policyID, delta);
+        return update(policyID, delta, null);
     }
 
     @Override
     public boolean neutronVPNIPSECSiteConnectionsInUse(String policyID) {
-        return !exists(policyID);
+        return !exists(policyID, null);
     }
 
     protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {

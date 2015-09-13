@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
@@ -40,18 +42,20 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
     @Override
     public boolean neutronVPNIPSECPolicyExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronVPNIPSECPolicy getNeutronVPNIPSECPolicy(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronVPNIPSECPolicy> getAll() {
+    protected List<NeutronVPNIPSECPolicy> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronVPNIPSECPolicy> allVPNIPSECPolicies = new HashSet<NeutronVPNIPSECPolicy>();
-        IpsecPolicies policies = readMd(createInstanceIdentifier());
+        IpsecPolicies policies = readMd(createInstanceIdentifier(), chain);
         if (policies != null) {
             for (Ipsecpolicy policy: policies.getIpsecpolicy()) {
                 allVPNIPSECPolicies.add(fromMd(policy));
@@ -65,27 +69,27 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
     @Override
     public List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronVPNIPSECPolicy(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronVPNIPSECPolicy(String uuid, NeutronVPNIPSECPolicy delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronVPNIPSECPolicyInUse(String netUUID) {
-        return !exists(netUUID);
+        return !exists(netUUID, null);
     }
 
     protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {

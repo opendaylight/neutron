@@ -322,40 +322,94 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
         return exists(uuid, null);
     }
 
-    public S get(String uuid) {
-        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)));
+    protected S _get(String uuid, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
         if (dataObject == null) {
             return null;
         }
         return fromMd(dataObject);
     }
 
-    public abstract List<S> getAll();
+    public S get(String uuid, BindingTransactionChain chain) {
+        return chainWrapper1(uuid, chain,
+                             new Action1<S, String>() {
+                                 @Override
+                                 public S action(String uuid, BindingTransactionChain chain) {
+                                     return _get(uuid, chain);
+                                 }
+                             });
+    }
 
-    public boolean add(S input) {
-        if (exists(input.getID())) {
+    protected abstract List<S> _getAll(BindingTransactionChain chain);
+
+    public List<S> getAll(BindingTransactionChain chain) {
+        return chainWrapper0(chain,
+                             new Action0<List<S>>() {
+                                 @Override
+                                 public List<S> action(BindingTransactionChain chain) {
+                                     return _getAll(chain);
+                                 }
+                             });
+    }
+
+    protected boolean _add(S input, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        if (exists(input.getID(), chain)) {
             return false;
         }
-        addMd(input);
+        addMd(input, chain);
         return true;
     }
 
-    public boolean remove(String uuid) {
-        if (!exists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+    public boolean add(S input, BindingTransactionChain chain) {
+        return chainWrapper1(input, chain,
+                             new Action1<Boolean, S>() {
+                                 @Override
+                                 public Boolean action(S input, BindingTransactionChain chain) {
+                                     return _add(input, chain);
+                                 }
+                             }).booleanValue();
     }
 
-    public boolean update(String uuid, S delta) {
-        if (!exists(uuid)) {
+    protected boolean _remove(String uuid, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        if (!exists(uuid, chain)) {
             return false;
         }
-        updateMd(delta);
+        return removeMd(toMd(uuid), chain);
+    }
+
+    public boolean remove(String uuid, BindingTransactionChain chain) {
+        return chainWrapper1(uuid, chain,
+                             new Action1<Boolean, String>() {
+                                 @Override
+                                 public Boolean action(String uuid, BindingTransactionChain chain) {
+                                     return _remove(uuid, chain);
+                                 }
+                             }).booleanValue();
+    }
+
+    protected boolean _update(String uuid, S delta, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        if (!exists(uuid, chain)) {
+            return false;
+        }
+        updateMd(delta, chain);
         return true;
     }
 
-    public boolean inUse(String uuid) {
+    public boolean update(String uuid, S delta, BindingTransactionChain chain) {
+        return chainWrapper2(uuid, delta, chain,
+                             new Action2<Boolean, String, S>() {
+                                 @Override
+                                 public Boolean action(String uuid, S delta, BindingTransactionChain chain) {
+                                     return _update(uuid, delta, chain);
+                                 }
+                             }).booleanValue();
+    }
+
+    public boolean inUse(String uuid, BindingTransactionChain chain) {
         return false;
     }
 }
