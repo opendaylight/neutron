@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
@@ -49,6 +50,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
+
 public class NeutronPortInterface extends AbstractNeutronInterface<Port, NeutronPort> implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
 
@@ -64,19 +67,36 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         return port != null;
     }
 
-    @Override
-    public NeutronPort getPort(String uuid) {
-        Port port = readMd(createInstanceIdentifier(toMd(uuid)));
+    private NeutronPort _getPort(String uuid, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
+        Port port = readMd(createInstanceIdentifier(toMd(uuid)), chain);
         if (port == null) {
             return null;
         }
         return fromMd(port);
     }
 
+    public NeutronPort getPort(String uuid, BindingTransactionChain chain) {
+        return chainWrapper1(uuid, chain,
+                             new Action1<NeutronPort, String>() {
+                                 @Override
+                                 public NeutronPort action(String uuid, BindingTransactionChain chain) {
+                                     return _getPort(uuid, chain);
+                                 }
+                             });
+    }
+
     @Override
-    public List<NeutronPort> getAllPorts() {
+    public NeutronPort getPort(String uuid) {
+        return getPort(uuid, null);
+    }
+
+    private List<NeutronPort> _getAllPorts(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        Ports ports = readMd(createInstanceIdentifier());
+        Ports ports = readMd(createInstanceIdentifier(), chain);
         if (ports != null) {
             for (Port port : ports.getPort()) {
                 allPorts.add(fromMd(port));
@@ -88,30 +108,90 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         return ans;
     }
 
+    public List<NeutronPort> getAllPorts(BindingTransactionChain chain) {
+        return chainWrapper0(chain,
+                             new Action0<List<NeutronPort>>() {
+                                 @Override
+                                 public List<NeutronPort> action(BindingTransactionChain chain) {
+                                     return _getAllPorts(chain);
+                                 }
+                             });
+    }
+
     @Override
-    public boolean addPort(NeutronPort input) {
-        if (portExists(input.getID())) {
+    public List<NeutronPort> getAllPorts() {
+        return getAllPorts(null);
+    }
+
+    private boolean _addPort(NeutronPort input, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
+        if (exists(input.getID(), chain)) {
             return false;
         }
-        addMd(input);
+        addMd(input, chain);
         return true;
+    }
+
+    public boolean addPort(NeutronPort input, BindingTransactionChain chain) {
+        return chainWrapper1(input, chain,
+                             new Action1<Boolean, NeutronPort>() {
+                                @Override
+                                public Boolean action(NeutronPort input, BindingTransactionChain chain) {
+                                     return _addPort(input, chain);
+                                }
+                            }).booleanValue();
+    }
+
+    @Override
+    public boolean addPort(NeutronPort input) {
+        return addPort(input, null);
+    }
+
+    private boolean _removePort(String uuid, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
+        if (!exists(uuid, chain)) {
+            return false;
+        }
+        return removeMd(toMd(uuid), chain);
+    }
+
+    public boolean removePort(String uuid, BindingTransactionChain chain) {
+        return chainWrapper1(uuid, chain,
+                             new Action1<Boolean, String>() {
+                                 @Override
+                                 public Boolean action(String uuid, BindingTransactionChain chain) {
+                                     return _removePort(uuid, chain);
+                                 }
+                             }).booleanValue();
     }
 
     @Override
     public boolean removePort(String uuid) {
-        if (!portExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return removePort(uuid, null);
     }
 
-    @Override
-    public boolean updatePort(String uuid, NeutronPort delta) {
-        if (!portExists(uuid)) {
+    private boolean _updatePort(String uuid, NeutronPort delta, BindingTransactionChain chain) {
+        if (!exists(uuid, chain)) {
             return false;
         }
-        updateMd(delta);
+        updateMd(delta, chain);
         return true;
+    }
+
+    public boolean updatePort(String uuid, NeutronPort delta, BindingTransactionChain chain) {
+        return chainWrapper2(uuid, delta, chain,
+                             new Action2<Boolean, String, NeutronPort>() {
+                                 @Override
+                                 public Boolean action(String uuid, NeutronPort delta, BindingTransactionChain chain) {
+                                     return _updatePort(uuid, delta, chain);
+                                 }
+                             });
+    }
+
+    public boolean updatePort(String uuid, NeutronPort delta) {
+        return updatePort(uuid, delta, null);
     }
 
     // @deprecated, will be removed in Boron
