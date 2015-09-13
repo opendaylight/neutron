@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
@@ -33,6 +34,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
 
 public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listener, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
@@ -51,18 +53,20 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     public boolean neutronLoadBalancerListenerExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronLoadBalancerListener getNeutronLoadBalancerListener(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronLoadBalancerListener> getAll() {
+    protected List<NeutronLoadBalancerListener> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronLoadBalancerListener> allLoadBalancerListeners = new HashSet<NeutronLoadBalancerListener>();
-        Listeners listeners = readMd(createInstanceIdentifier());
+        Listeners listeners = readMd(createInstanceIdentifier(), chain);
         if (listeners != null) {
             for (Listener listener: listeners.getListener()) {
                 allLoadBalancerListeners.add(fromMd(listener));
@@ -76,27 +80,27 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     public List<NeutronLoadBalancerListener> getAllNeutronLoadBalancerListeners() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronLoadBalancerListener(NeutronLoadBalancerListener input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronLoadBalancerListener(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronLoadBalancerListener(String uuid, NeutronLoadBalancerListener delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronLoadBalancerListenerInUse(String loadBalancerListenerUUID) {
-        return !exists(loadBalancerListenerUUID);
+        return !exists(loadBalancerListenerUUID, null);
     }
 
 

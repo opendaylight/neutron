@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
@@ -26,6 +27,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.rul
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.rules.attributes.firewall.rules.FirewallRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 
+import com.google.common.base.Preconditions;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -41,18 +43,20 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
 
     @Override
     public boolean neutronFirewallRuleExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronFirewallRule getNeutronFirewallRule(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronFirewallRule> getAll() {
+    protected List<NeutronFirewallRule> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronFirewallRule> allFirewallRules = new HashSet<NeutronFirewallRule>();
-        FirewallRules rules = readMd(createInstanceIdentifier());
+        FirewallRules rules = readMd(createInstanceIdentifier(), chain);
         if (rules != null) {
             for (FirewallRule rule: rules.getFirewallRule()) {
                 allFirewallRules.add(fromMd(rule));
@@ -66,27 +70,27 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
 
     @Override
     public List<NeutronFirewallRule> getAllNeutronFirewallRules() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronFirewallRule(NeutronFirewallRule input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronFirewallRule(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronFirewallRule(String uuid, NeutronFirewallRule delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronFirewallRuleInUse(String firewallRuleUUID) {
-        return !exists(firewallRuleUUID);
+        return !exists(firewallRuleUUID, null);
     }
 
     @Override

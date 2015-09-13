@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
@@ -44,18 +46,20 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean floatingIPExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronFloatingIP getFloatingIP(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronFloatingIP> getAll() {
+    protected List<NeutronFloatingIP> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronFloatingIP> allIPs = new HashSet<NeutronFloatingIP>();
-        Floatingips fips = readMd(createInstanceIdentifier());
+        Floatingips fips = readMd(createInstanceIdentifier(), chain);
         if (fips != null) {
             for (Floatingip fip: fips.getFloatingip()) {
                 allIPs.add(fromMd(fip));
@@ -69,28 +73,28 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public List<NeutronFloatingIP> getAllFloatingIPs() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addFloatingIP(NeutronFloatingIP input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeFloatingIP(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta) {
-        NeutronFloatingIP target = getFloatingIP(uuid);
+        NeutronFloatingIP target = get(uuid, null);
         if (target == null) {
             return false;
         }
         target.setPortUUID(delta.getPortUUID());
         target.setFixedIPAddress(delta.getFixedIPAddress());
-        return updateMd(target);
+        return updateMd(target, null);
     }
 
     @Override

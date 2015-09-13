@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
@@ -38,18 +40,20 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     public boolean neutronLoadBalancerExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronLoadBalancer getNeutronLoadBalancer(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronLoadBalancer> getAll() {
+    protected List<NeutronLoadBalancer> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronLoadBalancer> allLoadBalancers = new HashSet<NeutronLoadBalancer>();
-        Loadbalancers lbs = readMd(createInstanceIdentifier());
+        Loadbalancers lbs = readMd(createInstanceIdentifier(), chain);
         if (lbs != null) {
             for (Loadbalancer lb: lbs.getLoadbalancer()) {
                 allLoadBalancers.add(fromMd(lb));
@@ -63,27 +67,27 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     public List<NeutronLoadBalancer> getAllNeutronLoadBalancers() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronLoadBalancer(NeutronLoadBalancer input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronLoadBalancer(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronLoadBalancer(String uuid, NeutronLoadBalancer delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronLoadBalancerInUse(String loadBalancerUUID) {
-        return !exists(loadBalancerUUID);
+        return !exists(loadBalancerUUID, null);
     }
 
     @Override

@@ -27,6 +27,7 @@
   </feature>
 
   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
+    <feature version='${mdsal.version}'>odl-mdsal-broker-local</feature>
     <bundle>mvn:org.opendaylight.neutron/neutron-spi/${project.version}</bundle>
     <bundle>mvn:commons-net/commons-net/${commons.net.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>

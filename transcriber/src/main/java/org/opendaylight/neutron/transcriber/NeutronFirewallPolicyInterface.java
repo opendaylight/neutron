@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
@@ -26,6 +27,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev141002.pol
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 
 
+import com.google.common.base.Preconditions;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -44,18 +46,20 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
 
     @Override
     public boolean neutronFirewallPolicyExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronFirewallPolicy getNeutronFirewallPolicy(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronFirewallPolicy> getAll() {
+    protected List<NeutronFirewallPolicy> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronFirewallPolicy> allFirewallPolicies = new HashSet<NeutronFirewallPolicy>();
-        FirewallPolicies policies = readMd(createInstanceIdentifier());
+        FirewallPolicies policies = readMd(createInstanceIdentifier(), chain);
         if (policies != null) {
             for (FirewallPolicy policy: policies.getFirewallPolicy()) {
                 allFirewallPolicies.add(fromMd(policy));
@@ -69,27 +73,27 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
 
     @Override
     public List<NeutronFirewallPolicy> getAllNeutronFirewallPolicies() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronFirewallPolicy(NeutronFirewallPolicy input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronFirewallPolicy(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronFirewallPolicy(String uuid, NeutronFirewallPolicy delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronFirewallPolicyInUse(String firewallPolicyUUID) {
-            return !exists(firewallPolicyUUID);
+        return !exists(firewallPolicyUUID, null);
     }
 
     @Override

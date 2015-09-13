@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
@@ -42,18 +44,20 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     public boolean neutronSecurityGroupExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronSecurityGroup getNeutronSecurityGroup(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronSecurityGroup> getAll() {
+    protected List<NeutronSecurityGroup> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronSecurityGroup> allSecurityGroups = new HashSet<NeutronSecurityGroup>();
-        SecurityGroups groups = readMd(createInstanceIdentifier());
+        SecurityGroups groups = readMd(createInstanceIdentifier(), chain);
         if (groups != null) {
             for (SecurityGroup group: groups.getSecurityGroup()) {
                 allSecurityGroups.add(fromMd(group));
@@ -67,27 +71,27 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     public List<NeutronSecurityGroup> getAllNeutronSecurityGroups() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronSecurityGroup(NeutronSecurityGroup input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronSecurityGroup(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronSecurityGroup(String uuid, NeutronSecurityGroup delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronSecurityGroupInUse(String securityGroupUUID) {
-        return !exists(securityGroupUUID);
+        return !exists(securityGroupUUID, null);
     }
 
     protected NeutronSecurityGroup fromMd(SecurityGroup group) {

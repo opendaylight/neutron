@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNService;
@@ -36,18 +38,20 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     public boolean neutronVPNServiceExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronVPNService getVPNService(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronVPNService> getAll() {
+    protected List<NeutronVPNService> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronVPNService> allVPNService = new HashSet<NeutronVPNService>();
-        VpnServices services = readMd(createInstanceIdentifier());
+        VpnServices services = readMd(createInstanceIdentifier(), chain);
         if (services != null) {
             for (Vpnservice service: services.getVpnservice()) {
                 allVPNService.add(fromMd(service));
@@ -61,27 +65,27 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     public List<NeutronVPNService> getAllVPNService() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addVPNService(NeutronVPNService input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeVPNService(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateVPNService(String uuid, NeutronVPNService delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronVPNServiceInUse(String uuid) {
-        return !exists(uuid);
+        return !exists(uuid, null);
     }
 
     protected NeutronVPNService fromMd(Vpnservice vpnService) {

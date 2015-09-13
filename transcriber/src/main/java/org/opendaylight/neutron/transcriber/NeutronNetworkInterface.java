@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
@@ -60,22 +62,20 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 
     @Override
     public boolean networkExists(String uuid) {
-        Network network = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (network == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronNetwork getNetwork(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronNetwork> getAll() {
+    protected List<NeutronNetwork> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronNetwork> allNetworks = new HashSet<NeutronNetwork>();
-        Networks networks = readMd(createInstanceIdentifier());
+        Networks networks = readMd(createInstanceIdentifier(), chain);
         if (networks != null) {
             for (Network network: networks.getNetwork()) {
                 allNetworks.add(fromMd(network));
@@ -89,17 +89,17 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 
     @Override
     public List<NeutronNetwork> getAllNetworks() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNetwork(NeutronNetwork input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNetwork(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
@@ -107,12 +107,12 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean networkInUse(String netUUID) {
-        return !exists(netUUID);
+        return !exists(netUUID, null);
     }
 
     protected NeutronNetwork fromMd(Network network) {

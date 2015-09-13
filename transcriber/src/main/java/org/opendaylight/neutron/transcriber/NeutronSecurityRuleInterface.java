@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
@@ -106,18 +108,20 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public boolean neutronSecurityRuleExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronSecurityRule getNeutronSecurityRule(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronSecurityRule> getAll() {
+    protected List<NeutronSecurityRule> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronSecurityRule> allSecurityRules = new HashSet<NeutronSecurityRule>();
-        SecurityRules rules = readMd(createInstanceIdentifier());
+        SecurityRules rules = readMd(createInstanceIdentifier(), chain);
         if (rules != null) {
             for (SecurityRule rule: rules.getSecurityRule()) {
                 allSecurityRules.add(fromMd(rule));
@@ -131,42 +135,42 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public List<NeutronSecurityRule> getAllNeutronSecurityRules() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronSecurityRule(NeutronSecurityRule input) {
-        if (neutronSecurityRuleExists(input.getID())) {
+        if (exists(input.getID(), null)) {
             return false;
         }
         updateSecGroupRuleInSecurityGroup(input);
-        addMd(input);
+        addMd(input, null);
         return true;
     }
 
     @Override
     public boolean removeNeutronSecurityRule(String uuid) {
-        if (!neutronSecurityRuleExists(uuid)) {
+        if (!exists(uuid, null)) {
             return false;
         }
         removeSecGroupRuleFromSecurityGroup(getNeutronSecurityRule(uuid));
-        removeMd(toMd(uuid));
+        removeMd(toMd(uuid), null);
         return true;
     }
 
     @Override
     public boolean updateNeutronSecurityRule(String uuid, NeutronSecurityRule delta) {
-        if (!neutronSecurityRuleExists(uuid)) {
+        if (!exists(uuid, null)) {
             return false;
         }
         updateSecGroupRuleInSecurityGroup(delta);
-        updateMd(delta);
+        updateMd(delta, null);
         return true;
     }
 
     @Override
     public boolean neutronSecurityRuleInUse(String securityRuleUUID) {
-        return !exists(securityRuleUUID);
+        return !exists(securityRuleUUID, null);
     }
 
     protected NeutronSecurityRule fromMd(SecurityRule rule) {

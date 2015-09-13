@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
@@ -49,6 +50,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
+
 public class NeutronPortInterface extends AbstractNeutronInterface<Port, NeutronPort> implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
 
@@ -60,18 +63,20 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     @Override
     public boolean portExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronPort getPort(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronPort> getAll() {
+    protected List<NeutronPort> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        Ports ports = readMd(createInstanceIdentifier());
+        Ports ports = readMd(createInstanceIdentifier(), chain);
         if (ports != null) {
             for (Port port : ports.getPort()) {
                 allPorts.add(fromMd(port));
@@ -85,22 +90,22 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     @Override
     public List<NeutronPort> getAllPorts() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addPort(NeutronPort input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removePort(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updatePort(String uuid, NeutronPort delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     // @deprecated, will be removed in Boron

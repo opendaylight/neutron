@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
@@ -38,18 +40,20 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
 
     @Override
     public boolean neutronMeteringLabelExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronMeteringLabel getNeutronMeteringLabel(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronMeteringLabel> getAll() {
+    protected List<NeutronMeteringLabel> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronMeteringLabel> allMeteringLabels = new HashSet<NeutronMeteringLabel>();
-        MeteringLabels labels = readMd(createInstanceIdentifier());
+        MeteringLabels labels = readMd(createInstanceIdentifier(), chain);
         if (labels != null) {
             for (MeteringLabel label: labels.getMeteringLabel()) {
                 allMeteringLabels.add(fromMd(label));
@@ -63,27 +67,27 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
 
     @Override
     public List<NeutronMeteringLabel> getAllNeutronMeteringLabels() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronMeteringLabel(NeutronMeteringLabel input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronMeteringLabel(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronMeteringLabel(String uuid, NeutronMeteringLabel delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronMeteringLabelInUse(String netUUID) {
-        return !exists(netUUID);
+        return !exists(netUUID, null);
     }
 
     @Override

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
@@ -40,20 +42,22 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
 
     @Override
     public boolean neutronVPNIKEPolicyExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronVPNIKEPolicy getNeutronVPNIKEPolicy(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronVPNIKEPolicy> getAll() {
-        Set<NeutronVPNIKEPolicy> allVPNIKEPolicies = new HashSet<NeutronVPNIKEPolicy>();
-        IkePolicies policies = readMd(createInstanceIdentifier());
+    protected List<NeutronVPNIKEPolicy> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
 
-        if (policies != null) { 
+        Set<NeutronVPNIKEPolicy> allVPNIKEPolicies = new HashSet<NeutronVPNIKEPolicy>();
+        IkePolicies policies = readMd(createInstanceIdentifier(), chain);
+
+        if (policies != null) {
             for (Ikepolicy policy: policies.getIkepolicy()) {
                 allVPNIKEPolicies.add(fromMd(policy));
             }
@@ -66,27 +70,27 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
 
     @Override
     public List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronVPNIKEPolicy(NeutronVPNIKEPolicy input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronVPNIKEPolicy(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronVPNIKEPolicy(String uuid, NeutronVPNIKEPolicy delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronVPNIKEPolicyInUse(String netUUID) {
-        return !exists(netUUID);
+        return !exists(netUUID, null);
     }
 
     protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {

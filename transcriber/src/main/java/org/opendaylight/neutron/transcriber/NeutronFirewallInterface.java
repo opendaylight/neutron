@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
@@ -25,6 +26,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,18 +44,20 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     @Override
     public boolean neutronFirewallExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronFirewall getNeutronFirewall(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronFirewall> getAll() {
+    protected List<NeutronFirewall> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronFirewall> allFirewalls = new HashSet<NeutronFirewall>();
-        Firewalls firewalls = readMd(createInstanceIdentifier());
+        Firewalls firewalls = readMd(createInstanceIdentifier(), chain);
         if (firewalls != null) {
             for (Firewall firewall: firewalls.getFirewall()) {
                 allFirewalls.add(fromMd(firewall));
@@ -66,27 +71,27 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     @Override
     public List<NeutronFirewall> getAllNeutronFirewalls() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronFirewall(NeutronFirewall input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronFirewall(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronFirewall(String uuid, NeutronFirewall delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronFirewallInUse(String firewallUUID) {
-        return !exists(firewallUUID);
+        return !exists(firewallUUID, null);
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
@@ -30,6 +31,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
 
 public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
@@ -51,18 +53,20 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     public boolean neutronMeteringLabelRuleExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronMeteringLabelRule getNeutronMeteringLabelRule(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronMeteringLabelRule> getAll() {
+    protected List<NeutronMeteringLabelRule> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronMeteringLabelRule> allMeteringLabelRules = new HashSet<NeutronMeteringLabelRule>();
-        MeteringRules rules = readMd(createInstanceIdentifier());
+        MeteringRules rules = readMd(createInstanceIdentifier(), chain);
         if (rules != null) {
             for (MeteringRule rule: rules.getMeteringRule()) {
                 allMeteringLabelRules.add(fromMd(rule));
@@ -77,27 +81,27 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     public List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronMeteringLabelRule(NeutronMeteringLabelRule input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronMeteringLabelRule(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronMeteringLabelRule(String uuid, NeutronMeteringLabelRule delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronMeteringLabelRuleInUse(String netUUID) {
-        return !exists(netUUID);
+        return !exists(netUUID, null);
     }
 
     @Override

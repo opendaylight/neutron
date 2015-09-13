@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
@@ -36,6 +37,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
 
 public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitor, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
@@ -57,18 +59,20 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     public boolean neutronLoadBalancerHealthMonitorExists(String uuid) {
-        return exists(uuid);
+        return exists(uuid, null);
     }
 
     @Override
     public NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid) {
-        return get(uuid);
+        return get(uuid, null);
     }
 
     @Override
-    public List<NeutronLoadBalancerHealthMonitor> getAll() {
+    protected List<NeutronLoadBalancerHealthMonitor> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
         Set<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = new HashSet<NeutronLoadBalancerHealthMonitor>();
-        Healthmonitors healthMonitors = readMd(createInstanceIdentifier());
+        Healthmonitors healthMonitors = readMd(createInstanceIdentifier(), chain);
         if (healthMonitors != null) {
             for (Healthmonitor healthMonitor : healthMonitors.getHealthmonitor()) {
                 allLoadBalancerHealthMonitors.add(fromMd(healthMonitor));
@@ -82,27 +86,27 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     public List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors() {
-        return getAll();
+        return getAll(null);
     }
 
     @Override
     public boolean addNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor input) {
-        return add(input);
+        return add(input, null);
     }
 
     @Override
     public boolean removeNeutronLoadBalancerHealthMonitor(String uuid) {
-        return remove(uuid);
+        return remove(uuid, null);
     }
 
     @Override
     public boolean updateNeutronLoadBalancerHealthMonitor(String uuid, NeutronLoadBalancerHealthMonitor delta) {
-        return update(uuid, delta);
+        return update(uuid, delta, null);
     }
 
     @Override
     public boolean neutronLoadBalancerHealthMonitorInUse(String loadBalancerHealthMonitorUUID) {
-        return !exists(loadBalancerHealthMonitorUUID);
+        return !exists(loadBalancerHealthMonitorUUID, null);
     }
 
     @Override
