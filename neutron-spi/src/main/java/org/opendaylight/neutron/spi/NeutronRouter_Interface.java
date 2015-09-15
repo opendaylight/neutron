@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronRouter_Interface implements Serializable {
+public class NeutronRouter_Interface extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -28,12 +28,6 @@ public class NeutronRouter_Interface implements Serializable {
 
     @XmlElement (name = "port_id")
     String portUUID;
-
-    @XmlElement (name = "id")
-    String id;
-
-    @XmlElement (name = "tenant_id")
-    String tenantID;
 
     public NeutronRouter_Interface() {
     }
@@ -59,24 +53,12 @@ public class NeutronRouter_Interface implements Serializable {
         this.portUUID = portUUID;
     }
 
-    public String getID() {
-        return id;
-    }
-
-    public void setID(String id) {
-        this.id = id;
-    }
-
-    public void setTenantID(String tenantID) {
-        this.tenantID = tenantID;
-    }
-
     @Override
     public String toString() {
         return "NeutronRouterInterface [" +
             "subnetUUID=" + subnetUUID +
             ", portUUID=" + portUUID +
-            ", id=" + id +
+            ", id=" + uuid +
             ", tenantID=" + tenantID + "]";
     }
 }

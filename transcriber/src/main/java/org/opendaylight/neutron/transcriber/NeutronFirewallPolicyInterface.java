@@ -113,7 +113,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
             answer.setFirewallPolicyName(policy.getName());
         }
         if (policy.getTenantId() != null) {
-            answer.setTenantID(policy.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(policy.getTenantId());
         }
         if (policy.getDescr() != null) {
             answer.setFirewallPolicyDescription(policy.getDescr());

@@ -95,7 +95,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
             answer.setName(ikePolicy.getName());
         }
         if (ikePolicy.getTenantId() != null) {
-            answer.setTenantID(ikePolicy.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(ikePolicy.getTenantId());
         }
         if (ikePolicy.getDescr() != null) {
             answer.setDescription(ikePolicy.getDescr());

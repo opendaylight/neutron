@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -29,12 +30,19 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
         super();
     }
 
+    @Override
     public String getTenantID() {
         return tenantID;
     }
 
+    @Override
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
+    }
+
+    @Override
+    public void setTenantID(Uuid tenantID) {
+        this.tenantID = tenantID.getValue().replace("-", "");
     }
 
     @Override

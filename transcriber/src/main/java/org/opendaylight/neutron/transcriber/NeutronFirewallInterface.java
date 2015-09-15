@@ -110,7 +110,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
             answer.setFirewallName(firewall.getName());
         }
         if (firewall.getTenantId() != null) {
-            answer.setTenantID(firewall.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(firewall.getTenantId());
         }
         answer.setFirewallAdminStateIsUp(firewall.isAdminStateUp());
         if (firewall.getStatus() != null) {
