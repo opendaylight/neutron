@@ -33,20 +33,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSecurityGroup implements Serializable, INeutronObject {
+public class NeutronSecurityGroup extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String securityGroupUUID;
 
     @XmlElement(name = "name")
     String securityGroupName;
 
     @XmlElement(name = "description")
     String securityGroupDescription;
-
-    @XmlElement(name = "tenant_id")
-    String securityGroupTenantID;
 
     @XmlElement(name = "security_group_rules")
     List<NeutronSecurityRule> neutronSecurityRule;
@@ -56,22 +50,14 @@ public class NeutronSecurityGroup implements Serializable, INeutronObject {
 
     }
 
-    public String getID() {
-        return securityGroupUUID;
-    }
-
-    public void setID(String id) {
-        securityGroupUUID = id;
-    }
-
     // @deprecated use getID()
     public String getSecurityGroupUUID() {
-        return securityGroupUUID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setSecurityGroupUUID(String securityGroupUUID) {
-        this.securityGroupUUID = securityGroupUUID;
+    public void setSecurityGroupUUID(String uuid) {
+        setID(uuid);
     }
 
     public String getSecurityGroupName() {
@@ -90,12 +76,14 @@ public class NeutronSecurityGroup implements Serializable, INeutronObject {
         this.securityGroupDescription = securityGroupDescription;
     }
 
+    @Deprecated
     public String getSecurityGroupTenantID() {
-        return securityGroupTenantID;
+        return getTenantID();
     }
 
-    public void setSecurityGroupTenantID(String securityGroupTenantID) {
-        this.securityGroupTenantID = securityGroupTenantID;
+    @Deprecated
+    public void setSecurityGroupTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     // Rules In Group
@@ -122,7 +110,7 @@ public class NeutronSecurityGroup implements Serializable, INeutronObject {
                 ans.setSecurityGroupDescription (this.getSecurityGroupDescription ());
             }
             if (s.equals ("tenant_id")) {
-                ans.setSecurityGroupTenantID (this.getSecurityGroupTenantID ());
+                ans.setTenantID (this.getTenantID ());
             }
             if (s.equals ("security_group_rules")) {
                 ans.setSecurityRules (this.getSecurityRules ());
@@ -134,10 +122,10 @@ public class NeutronSecurityGroup implements Serializable, INeutronObject {
     @Override
     public String toString() {
         return "NeutronSecurityGroup{" +
-                "securityGroupUUID='" + securityGroupUUID + '\'' +
+                "securityGroupUUID='" + uuid + '\'' +
                 ", securityGroupName='" + securityGroupName + '\'' +
                 ", securityGroupDescription='" + securityGroupDescription + '\'' +
-                ", securityGroupTenantID='" + securityGroupTenantID + '\'' +
+                ", securityGroupTenantID='" + tenantID + '\'' +
                 ", securityRules=" + neutronSecurityRule + "]";
     }
 

@@ -21,14 +21,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronNetwork implements Serializable, INeutronObject {
+public class NeutronNetwork extends NeutronObject implements Serializable, INeutronObject {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     private static final long serialVersionUID = 1L;
-
-    @XmlElement (name = "id")
-    String networkUUID;
 
     @XmlElement (name = "name")
     String networkName;
@@ -38,9 +35,6 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     @XmlElement (defaultValue = "false", name = "shared")
     Boolean shared;
-
-    @XmlElement (name = "tenant_id")
-    String tenantID;
 
     //    @XmlElement (defaultValue = "false", name = "router:external")
     @XmlElement (defaultValue="false", namespace="router", name="external")
@@ -99,16 +93,14 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         }
     }
 
-    public String getID() { return networkUUID; }
-
-    public void setID(String id) { this.networkUUID = id; }
-
+    @Deprecated
     public String getNetworkUUID() {
-        return networkUUID;
+        return getID();
     }
 
-    public void setNetworkUUID(String networkUUID) {
-        this.networkUUID = networkUUID;
+    @Deprecated
+    public void setNetworkUUID(String uuid) {
+        setID(uuid);
     }
 
     public String getNetworkName() {
@@ -135,14 +127,6 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     public void setShared(boolean newValue) {
         shared = newValue;
-    }
-
-    public String getTenantID() {
-        return tenantID;
-    }
-
-    public void setTenantID(String tenantID) {
-        this.tenantID = tenantID;
     }
 
     public boolean isRouterExternal() { return routerExternal; }
@@ -241,7 +225,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setNetworkUUID(this.getNetworkUUID());
+                ans.setID(this.getID());
             }
             if (s.equals("name")) {
                 ans.setNetworkName(this.getNetworkName());
@@ -281,7 +265,7 @@ public class NeutronNetwork implements Serializable, INeutronObject {
 
     @Override
     public String toString() {
-        return "NeutronNetwork [networkUUID=" + networkUUID + ", networkName=" + networkName + ", adminStateUp="
+        return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + networkName + ", adminStateUp="
                 + adminStateUp + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status

@@ -165,8 +165,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
             listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
         }
-        if (listener.getLoadBalancerListenerTenantID() != null) {
-            listenerBuilder.setTenantId(toUuid(listener.getLoadBalancerListenerTenantID()));
+        if (listener.getTenantID() != null) {
+            listenerBuilder.setTenantId(toUuid(listener.getTenantID()));
         }
         if (listener.getID() != null) {
             listenerBuilder.setUuid(toUuid(listener.getID()));
@@ -207,7 +207,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             answer.setNeutronLoadBalancerListenerProtocolPort(String.valueOf(listener.getProtocolPort()));
         }
         if (listener.getTenantId() != null) {
-            answer.setLoadBalancerListenerTenantID(listener.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(listener.getTenantId().getValue().replace("-",""));
         }
         if (listener.getUuid() != null) {
             answer.setID(listener.getUuid().getValue());

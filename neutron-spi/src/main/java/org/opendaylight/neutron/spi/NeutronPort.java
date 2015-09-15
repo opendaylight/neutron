@@ -22,14 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronPort implements Serializable, INeutronObject {
+public class NeutronPort extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement (name = "id")
-    String portUUID;
 
     @XmlElement (name = "network_id")
     String networkUUID;
@@ -54,9 +51,6 @@ public class NeutronPort implements Serializable, INeutronObject {
 
     @XmlElement (name = "device_owner")
     String deviceOwner;
-
-    @XmlElement (name = "tenant_id")
-    String tenantID;
 
     @XmlElement (name = "security_groups")
     List<NeutronSecurityGroup> securityGroups;
@@ -86,16 +80,14 @@ public class NeutronPort implements Serializable, INeutronObject {
     public NeutronPort() {
     }
 
-    public String getID() { return portUUID; }
-
-    public void setID(String id) { this.portUUID = id; }
-
+    @Deprecated
     public String getPortUUID() {
-        return portUUID;
+        return getID();
     }
 
-    public void setPortUUID(String portUUID) {
-        this.portUUID = portUUID;
+    @Deprecated
+    public void setPortUUID(String uuid) {
+        setID(uuid);
     }
 
     public String getNetworkUUID() {
@@ -165,14 +157,6 @@ public class NeutronPort implements Serializable, INeutronObject {
 
     public void setDeviceOwner(String deviceOwner) {
         this.deviceOwner = deviceOwner;
-    }
-
-    public String getTenantID() {
-        return tenantID;
-    }
-
-    public void setTenantID(String tenantID) {
-        this.tenantID = tenantID;
     }
 
     public List<NeutronSecurityGroup> getSecurityGroups() {
@@ -245,7 +229,7 @@ public class NeutronPort implements Serializable, INeutronObject {
         NeutronPort ans = new NeutronPort();
         for (String field: fields) {
             if ("id".equals(field)) {
-                ans.setPortUUID(this.getPortUUID());
+                ans.setID(this.getID());
             }
             if ("network_id".equals(field)) {
                 ans.setNetworkUUID(this.getNetworkUUID());
@@ -293,7 +277,7 @@ public class NeutronPort implements Serializable, INeutronObject {
 
     @Override
     public String toString() {
-        return "NeutronPort [portUUID=" + portUUID + ", networkUUID=" + networkUUID + ", name=" + name
+        return "NeutronPort [portUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name
                 + ", adminStateUp=" + adminStateUp + ", status=" + status + ", macAddress=" + macAddress
                 + ", fixedIPs=" + fixedIPs + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID="
                 + tenantID + ", securityGroups=" + securityGroups

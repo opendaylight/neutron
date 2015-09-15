@@ -135,7 +135,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
             answer.setLoadBalancerStatus(loadBalancer.getStatus());
         }
         if (loadBalancer.getTenantId() != null) {
-            answer.setLoadBalancerTenantID(loadBalancer.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(loadBalancer.getTenantId().getValue().replace("-",""));
         }
         if (loadBalancer.getVipAddress() != null) {
             answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
@@ -162,8 +162,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (loadBalancer.getLoadBalancerStatus() != null) {
             loadBalancerBuilder.setStatus(loadBalancer.getLoadBalancerStatus());
         }
-        if (loadBalancer.getLoadBalancerTenantID() != null) {
-            loadBalancerBuilder.setTenantId(toUuid(loadBalancer.getLoadBalancerTenantID()));
+        if (loadBalancer.getTenantID() != null) {
+            loadBalancerBuilder.setTenantId(toUuid(loadBalancer.getTenantID()));
         }
         if (loadBalancer.getLoadBalancerVipAddress() != null) {
             loadBalancerBuilder.setVipAddress(new IpAddress(loadBalancer.getLoadBalancerVipAddress().toCharArray()));

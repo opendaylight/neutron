@@ -60,7 +60,7 @@ public class NeutronSecurityRuleJAXBTest {
                     "a7734e61-b545-452d-a3cd-0189cbd9747a", testObject.getSecurityRuleGroupID());
 
             Assert.assertEquals("NeutronSecurityRule JAXB Test 10: Testing tenant id failed",
-                    "e4f50856753b4dc6afee5fa6b9b6c550", testObject.getSecurityRuleTenantID());
+                    "e4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());
         } catch (Exception e) {
             Assert.fail("Tests failed");
         }

@@ -198,8 +198,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             sessionPersistenceBuilder.setType(sessionPersistence.getType());
             poolBuilder.setSessionPersistence(sessionPersistenceBuilder.build());
         }
-        if (pool.getLoadBalancerPoolTenantID() != null) {
-            poolBuilder.setTenantId(toUuid(pool.getLoadBalancerPoolTenantID()));
+        if (pool.getTenantID() != null) {
+            poolBuilder.setTenantId(toUuid(pool.getTenantID()));
         }
         if (pool.getID() != null) {
             poolBuilder.setUuid(toUuid(pool.getID()));
@@ -251,7 +251,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             answer.setLoadBalancerSessionPersistence(sessionPersistence);
         }
         if (pool.getTenantId() != null) {
-            answer.setLoadBalancerPoolTenantID(pool.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(pool.getTenantId().getValue().replace("-",""));
         }
         if (pool.getUuid() != null) {
             answer.setID(pool.getUuid().getValue());
@@ -370,7 +370,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             answer.setPoolMemberSubnetID(member.getSubnetId().getValue());
         }
         if (member.getTenantId() != null) {
-            answer.setPoolMemberTenantID(member.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(member.getTenantId().getValue().replace("-",""));
         }
         if (member.getWeight() != null) {
             answer.setPoolMemberWeight(member.getWeight());
@@ -394,8 +394,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         if (member.getPoolMemberSubnetID() != null) {
             memberBuilder.setSubnetId(toUuid(member.getPoolMemberSubnetID()));
         }
-        if (member.getPoolMemberTenantID() != null) {
-            memberBuilder.setTenantId(toUuid(member.getPoolMemberTenantID()));
+        if (member.getTenantID() != null) {
+            memberBuilder.setTenantId(toUuid(member.getTenantID()));
         }
         if (member.getPoolMemberWeight() != null) {
             memberBuilder.setWeight(member.getPoolMemberWeight());
