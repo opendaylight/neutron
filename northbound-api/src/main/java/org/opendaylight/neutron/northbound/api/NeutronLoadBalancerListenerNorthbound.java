@@ -113,7 +113,7 @@ public class NeutronLoadBalancerListenerNorthbound {
                     (queryLoadBalancerListenerDefaultPoolID == null ||
                             queryLoadBalancerListenerDefaultPoolID.equals(nsg.getNeutronLoadBalancerListenerDefaultPoolID())) &&
                     (queryLoadBalancerListenerTenantID == null ||
-                            queryLoadBalancerListenerTenantID.equals(nsg.getLoadBalancerListenerTenantID())) &&
+                            queryLoadBalancerListenerTenantID.equals(nsg.getTenantID())) &&
                     (queryLoadBalancerListenerName == null ||
                             queryLoadBalancerListenerName.equals(nsg.getLoadBalancerListenerName())) &&
                     (queryLoadBalancerListenerDescription == null ||

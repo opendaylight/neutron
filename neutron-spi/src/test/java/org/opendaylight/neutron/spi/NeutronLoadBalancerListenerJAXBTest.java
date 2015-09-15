@@ -59,7 +59,7 @@ public class NeutronLoadBalancerListenerJAXBTest {
                     testObject.getNeutronLoadBalancerListenerProtocolPort());
 
             Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 9: Testing tenant_id failed",
-                    "11145a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerListenerTenantID());
+                    "11145a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getTenantID());
 
             Neutron_ID neutron_id = new Neutron_ID();
             neutron_id.setID("2f245a7b-0000-4f26-9cf9-9e82d248fda7");

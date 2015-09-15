@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSubnet implements Serializable, INeutronObject {
+public class NeutronSubnet extends NeutronObject implements Serializable, INeutronObject {
     private static final Logger LOGGER = LoggerFactory
             .getLogger(NeutronCRUDInterfaces.class);
 
@@ -45,9 +45,6 @@ public class NeutronSubnet implements Serializable, INeutronObject {
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement (name = "id")
-    String subnetUUID;
 
     @XmlElement (name = "network_id")
     String networkUUID;
@@ -76,9 +73,6 @@ public class NeutronSubnet implements Serializable, INeutronObject {
     @XmlElement (defaultValue = "true", name = "enable_dhcp")
     Boolean enableDHCP;
 
-    @XmlElement (name = "tenant_id")
-    String tenantID;
-
     @XmlElement (name = "ipv6_address_mode", nillable = true)
     String ipV6AddressMode;
 
@@ -102,16 +96,14 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         myPorts = arg;
     }
 
-    public String getID() { return subnetUUID; }
-
-    public void setID(String id) { this.subnetUUID = id; }
-
+    @Deprecated
     public String getSubnetUUID() {
-        return subnetUUID;
+        return getID();
     }
 
-    public void setSubnetUUID(String subnetUUID) {
-        this.subnetUUID = subnetUUID;
+    @Deprecated
+    public void setSubnetUUID(String uuid) {
+        setID(uuid);
     }
 
     public String getNetworkUUID() {
@@ -191,14 +183,6 @@ public class NeutronSubnet implements Serializable, INeutronObject {
             enableDHCP = newValue;
     }
 
-    public String getTenantID() {
-        return tenantID;
-    }
-
-    public void setTenantID(String tenantID) {
-        this.tenantID = tenantID;
-    }
-
     public String getIpV6AddressMode() { return ipV6AddressMode; }
 
     public void setIpV6AddressMode(String ipV6AddressMode) { this.ipV6AddressMode = ipV6AddressMode; }
@@ -223,7 +207,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
         while (i.hasNext()) {
             String s = i.next();
             if (s.equals("id")) {
-                ans.setSubnetUUID(this.getSubnetUUID());
+                ans.setID(this.getID());
             }
             if (s.equals("network_id")) {
                 ans.setNetworkUUID(this.getNetworkUUID());
@@ -479,7 +463,7 @@ public class NeutronSubnet implements Serializable, INeutronObject {
 
     @Override
     public String toString() {
-        return "NeutronSubnet [subnetUUID=" + subnetUUID + ", networkUUID=" + networkUUID + ", name=" + name
+        return "NeutronSubnet [subnetUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name
                 + ", ipVersion=" + ipVersion + ", cidr=" + cidr + ", gatewayIP=" + gatewayIP + ", dnsNameservers="
                 + dnsNameservers + ", allocationPools=" + allocationPools + ", hostRoutes=" + hostRoutes
                 + ", enableDHCP=" + enableDHCP + ", tenantID=" + tenantID

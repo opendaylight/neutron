@@ -124,7 +124,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
             answer.setFirewallRuleName(rule.getName());
         }
         if (rule.getTenantId() != null) {
-            answer.setFirewallRuleTenantID(rule.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(rule.getTenantId().getValue().replace("-",""));
         }
         if (rule.getDescr() != null) {
             answer.setFirewallRuleDescription(rule.getDescr());
@@ -177,8 +177,8 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
         if (rule.getFirewallRuleName() != null) {
             ruleBuilder.setName(rule.getFirewallRuleName());
         }
-        if (rule.getFirewallRuleTenantID() != null) {
-            ruleBuilder.setTenantId(toUuid(rule.getFirewallRuleTenantID()));
+        if (rule.getTenantID() != null) {
+            ruleBuilder.setTenantId(toUuid(rule.getTenantID()));
         }
         if (rule.getFirewallRuleDescription() != null) {
             ruleBuilder.setDescr(rule.getFirewallRuleDescription());

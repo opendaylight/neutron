@@ -120,8 +120,8 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
 
         RouterBuilder routerBuilder = new RouterBuilder();
 
-        if (router.getRouterUUID() != null) {
-            routerBuilder.setUuid(toUuid(router.getRouterUUID()));
+        if (router.getID() != null) {
+            routerBuilder.setUuid(toUuid(router.getID()));
         }
         if (router.getName() != null) {
             routerBuilder.setName(router.getName());

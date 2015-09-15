@@ -37,7 +37,7 @@ public class NeutronFloatingIPJAXBTest {
                   "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
             Assert.assertEquals("NeutronFloatingIP JAXB Test 2: Testing tenant_id failed",
-                  "4969c491a3c74ee4af974e6d800c62de", testObject.getTenantUUID());
+                  "4969c491a3c74ee4af974e6d800c62de", testObject.getTenantID());
 
             Assert.assertEquals("NeutronFloatingIP JAXB Test 3: Testing router id failed",
                   "d23abc8d-2991-4a55-ba98-2aaea84cc72f", testObject.getRouterUUID());

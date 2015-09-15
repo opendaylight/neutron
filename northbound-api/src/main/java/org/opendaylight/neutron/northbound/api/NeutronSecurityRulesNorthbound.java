@@ -125,7 +125,7 @@ public class NeutronSecurityRulesNorthbound {
                     (querySecurityRemoteGroupID == null ||
                             querySecurityRemoteGroupID.equals(nsr.getSecurityRemoteGroupID())) &&
                     (querySecurityRuleTenantID == null ||
-                            querySecurityRuleTenantID.equals(nsr.getSecurityRuleTenantID()))) {
+                            querySecurityRuleTenantID.equals(nsr.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsr, fields));
                 } else {

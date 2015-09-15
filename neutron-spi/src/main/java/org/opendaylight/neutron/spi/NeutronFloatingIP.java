@@ -20,14 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFloatingIP implements Serializable, INeutronObject {
+public class NeutronFloatingIP extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement (name = "id")
-    String floatingIPUUID;
 
     @XmlElement (name = "floating_network_id")
     String floatingNetworkUUID;
@@ -41,9 +38,6 @@ public class NeutronFloatingIP implements Serializable, INeutronObject {
     @XmlElement (name = "floating_ip_address")
     String floatingIPAddress;
 
-    @XmlElement (name = "tenant_id")
-    String tenantUUID;
-
     @XmlElement (name="router_id")
     String routerUUID;
 
@@ -53,22 +47,14 @@ public class NeutronFloatingIP implements Serializable, INeutronObject {
     public NeutronFloatingIP() {
     }
 
-    public String getID() {
-        return floatingIPUUID;
-    }
-
-    public void setID(String id) {
-        floatingIPUUID = id;
-    }
-
     // @deprecated use getID()
     public String getFloatingIPUUID() {
-        return floatingIPUUID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setFloatingIPUUID(String floatingIPUUID) {
-        this.floatingIPUUID = floatingIPUUID;
+    public void setFloatingIPUUID(String uuid) {
+        setID(uuid);
     }
 
     public String getFloatingNetworkUUID() {
@@ -107,12 +93,14 @@ public class NeutronFloatingIP implements Serializable, INeutronObject {
         this.floatingIPAddress = floatingIPAddress;
     }
 
+    @Deprecated
     public String getTenantUUID() {
-        return tenantUUID;
+        return getTenantID();
     }
 
-    public void setTenantUUID(String tenantUUID) {
-        this.tenantUUID = tenantUUID;
+    @Deprecated
+    public void setTenantUUID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public void setRouterUUID(String routerUUID) {
@@ -158,7 +146,7 @@ public class NeutronFloatingIP implements Serializable, INeutronObject {
                 ans.setFloatingIPAddress(this.getFloatingIPAddress());
             }
             if (s.equals("tenant_id")) {
-                ans.setTenantUUID(this.getTenantUUID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("router_id")) {
                 ans.setRouterUUID(this.getRouterUUID());
@@ -173,12 +161,12 @@ public class NeutronFloatingIP implements Serializable, INeutronObject {
     @Override
     public String toString() {
         return "NeutronFloatingIP{" +
-            "fipUUID='" + floatingIPUUID + '\'' +
+            "fipUUID='" + uuid + '\'' +
             ", fipFloatingNetworkId='" + floatingNetworkUUID + '\'' +
             ", fipPortUUID='" + portUUID + '\'' +
             ", fipFixedIPAddress='" + fixedIPAddress + '\'' +
             ", fipFloatingIPAddress=" + floatingIPAddress +
-            ", fipTenantId='" + tenantUUID + '\'' +
+            ", fipTenantId='" + tenantID + '\'' +
             ", fipRouterId='" + routerUUID + '\'' +
             ", fipStatus='" + status + '\'' +
             '}';
