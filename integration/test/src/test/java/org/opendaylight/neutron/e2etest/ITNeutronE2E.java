@@ -10,6 +10,7 @@ package org.opendaylight.neutron.e2etest;
 
 import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.vmOption;
+import static org.ops4j.pax.exam.CoreOptions.when;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.debugConfiguration;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
@@ -34,6 +35,7 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.junit.PaxExam;
 
+import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
 
@@ -52,6 +54,8 @@ public class ITNeutronE2E {
             // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
             // FIXME: need to *NOT* hardcode the version here - it breaks on
             // version bumps
+            when(Boolean.getBoolean("karaf.debug"))
+                    .useOptions(KarafDistributionOption.debugConfiguration("5005", true)),
             karafDistributionConfiguration()
                 .frameworkUrl(
                     maven()
@@ -66,7 +70,7 @@ public class ITNeutronE2E {
        // It is really nice if the container sticks around after the test so you can check the contents
        // of the data directory when things go wrong.
             vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"),
-            keepRuntimeFolder(),
+            when(Boolean.getBoolean("karaf.keep.unpack")).useOptions(keepRuntimeFolder()),
        // Don't bother with local console output as it just ends up cluttering the logs
             configureConsole().ignoreLocalConsole(),
        // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
