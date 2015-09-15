@@ -51,24 +51,16 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     public boolean neutronLoadBalancerListenerExists(String uuid) {
-        Listener listener = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (listener == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronLoadBalancerListener getNeutronLoadBalancerListener(String uuid) {
-        Listener listener = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (listener == null) {
-            return null;
-        }
-        return fromMd(listener);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronLoadBalancerListener> getAllNeutronLoadBalancerListeners() {
+    public List<NeutronLoadBalancerListener> getAll() {
         Set<NeutronLoadBalancerListener> allLoadBalancerListeners = new HashSet<NeutronLoadBalancerListener>();
         Listeners listeners = readMd(createInstanceIdentifier());
         if (listeners != null) {
@@ -83,34 +75,28 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     }
 
     @Override
+    public List<NeutronLoadBalancerListener> getAllNeutronLoadBalancerListeners() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronLoadBalancerListener(NeutronLoadBalancerListener input) {
-        if (neutronLoadBalancerListenerExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronLoadBalancerListener(String uuid) {
-        if (!neutronLoadBalancerListenerExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronLoadBalancerListener(String uuid, NeutronLoadBalancerListener delta) {
-        if (!neutronLoadBalancerListenerExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronLoadBalancerListenerInUse(String loadBalancerListenerUUID) {
-        return !neutronLoadBalancerListenerExists(loadBalancerListenerUUID);
+        return !exists(loadBalancerListenerUUID);
     }
 
 

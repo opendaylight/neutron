@@ -79,24 +79,16 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
 
     @Override
     public boolean neutronLoadBalancerPoolExists(String uuid) {
-        Pool pool = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (pool == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronLoadBalancerPool getNeutronLoadBalancerPool(String uuid) {
-        Pool pool = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (pool == null) {
-            return null;
-        }
-        return fromMd(pool);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronLoadBalancerPool> getAllNeutronLoadBalancerPools() {
+    public List<NeutronLoadBalancerPool> getAll() {
         Set<NeutronLoadBalancerPool> allLoadBalancerPools = new HashSet<NeutronLoadBalancerPool>();
         Pools pools = readMd(createInstanceIdentifier());
         if (pools != null) {
@@ -111,35 +103,29 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     }
 
     @Override
+    public List<NeutronLoadBalancerPool> getAllNeutronLoadBalancerPools() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronLoadBalancerPool(NeutronLoadBalancerPool input) {
-        if (neutronLoadBalancerPoolExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
         //TODO: add code to find INeutronLoadBalancerPoolAware services and call newtorkCreated on them
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronLoadBalancerPool(String uuid) {
-        if (!neutronLoadBalancerPoolExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronLoadBalancerPool(String uuid, NeutronLoadBalancerPool delta) {
-        if (!neutronLoadBalancerPoolExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronLoadBalancerPoolInUse(String loadBalancerPoolUUID) {
-        return !neutronLoadBalancerPoolExists(loadBalancerPoolUUID);
+        return !exists(loadBalancerPoolUUID);
     }
 
     @Override

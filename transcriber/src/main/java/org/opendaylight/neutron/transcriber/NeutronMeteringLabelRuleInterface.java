@@ -51,24 +51,16 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     public boolean neutronMeteringLabelRuleExists(String uuid) {
-        MeteringRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (rule == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronMeteringLabelRule getNeutronMeteringLabelRule(String uuid) {
-        MeteringRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (rule == null) {
-            return null;
-        }
-        return fromMd(rule);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules() {
+    public List<NeutronMeteringLabelRule> getAll() {
         Set<NeutronMeteringLabelRule> allMeteringLabelRules = new HashSet<NeutronMeteringLabelRule>();
         MeteringRules rules = readMd(createInstanceIdentifier());
         if (rules != null) {
@@ -84,37 +76,28 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     }
 
     @Override
+    public List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronMeteringLabelRule(NeutronMeteringLabelRule input) {
-        if (neutronMeteringLabelRuleExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronMeteringLabelRule(String uuid) {
-        if (!neutronMeteringLabelRuleExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronMeteringLabelRule(String uuid, NeutronMeteringLabelRule delta) {
-        if (!neutronMeteringLabelRuleExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronMeteringLabelRuleInUse(String netUUID) {
-        if (!neutronMeteringLabelRuleExists(netUUID)) {
-            return true;
-        }
-        return false;
+        return !exists(netUUID);
     }
 
     @Override

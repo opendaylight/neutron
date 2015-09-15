@@ -106,24 +106,16 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public boolean neutronSecurityRuleExists(String uuid) {
-        SecurityRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (rule == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronSecurityRule getNeutronSecurityRule(String uuid) {
-        SecurityRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (rule == null) {
-            return null;
-        }
-        return fromMd(rule);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronSecurityRule> getAllNeutronSecurityRules() {
+    public List<NeutronSecurityRule> getAll() {
         Set<NeutronSecurityRule> allSecurityRules = new HashSet<NeutronSecurityRule>();
         SecurityRules rules = readMd(createInstanceIdentifier());
         if (rules != null) {
@@ -135,6 +127,11 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
         ans.addAll(allSecurityRules);
         return ans;
+    }
+
+    @Override
+    public List<NeutronSecurityRule> getAllNeutronSecurityRules() {
+        return getAll();
     }
 
     @Override
@@ -169,7 +166,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public boolean neutronSecurityRuleInUse(String securityRuleUUID) {
-        return !neutronSecurityRuleExists(securityRuleUUID);
+        return !exists(securityRuleUUID);
     }
 
     protected NeutronSecurityRule fromMd(SecurityRule rule) {

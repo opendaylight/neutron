@@ -44,21 +44,16 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean floatingIPExists(String uuid) {
-        Floatingip fip = readMd(createInstanceIdentifier(toMd(uuid)));
-        return (fip != null);
+        return exists(uuid);
     }
 
     @Override
     public NeutronFloatingIP getFloatingIP(String uuid) {
-        Floatingip fip = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (fip == null) {
-            return null;
-        }
-        return fromMd(fip);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronFloatingIP> getAllFloatingIPs() {
+    public List<NeutronFloatingIP> getAll() {
         Set<NeutronFloatingIP> allIPs = new HashSet<NeutronFloatingIP>();
         Floatingips fips = readMd(createInstanceIdentifier());
         if (fips != null) {
@@ -73,20 +68,18 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     }
 
     @Override
+    public List<NeutronFloatingIP> getAllFloatingIPs() {
+        return getAll();
+    }
+
+    @Override
     public boolean addFloatingIP(NeutronFloatingIP input) {
-        if (floatingIPExists(input.getID())) {
-            return false;
-        }
-        return addMd(input);
+        return add(input);
     }
 
     @Override
     public boolean removeFloatingIP(String uuid) {
-        NeutronFloatingIP fip = getFloatingIP(uuid);
-        if (fip == null) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override

@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronLoadBalancerListenerCRUD {
+public interface INeutronLoadBalancerListenerCRUD
+    extends INeutronCRUD<NeutronLoadBalancerListener> {
     /**
      * Applications call this interface method to determine if a particular
      *LoadBalancerListener object exists

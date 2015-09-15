@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronVPNServiceCRUD {
+public interface INeutronVPNServiceCRUD
+    extends INeutronCRUD<NeutronVPNService> {
 
     /**
      * Applications call this interface method to determine if a particular

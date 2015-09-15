@@ -10,7 +10,8 @@ package org.opendaylight.neutron.spi;
 
 import java.util.List;
 
-public interface INeutronMeteringLabelRuleCRUD {
+public interface INeutronMeteringLabelRuleCRUD
+    extends INeutronCRUD<NeutronMeteringLabelRule> {
 
     /**
      * Applications call this interface method to determine if a particular

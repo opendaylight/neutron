@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronFloatingIPCRUD {
+public interface INeutronFloatingIPCRUD
+    extends INeutronCRUD<NeutronFloatingIP> {
     /**
      * Applications call this interface method to determine if a particular
      * FloatingIP object exists

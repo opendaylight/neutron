@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronSubnetCRUD {
+public interface INeutronSubnetCRUD
+    extends INeutronCRUD<NeutronSubnet> {
     /**
      * Applications call this interface method to determine if a particular
      * Subnet object exists

@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronNetworkCRUD {
+public interface INeutronNetworkCRUD
+    extends INeutronCRUD<NeutronNetwork> {
     /**
      * Applications call this interface method to determine if a particular
      * Network object exists

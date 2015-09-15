@@ -9,6 +9,10 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import java.util.concurrent.ExecutionException;
 
@@ -29,9 +33,10 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.CheckedFuture;
 
+import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 
-public abstract class AbstractNeutronInterface<T extends DataObject, S extends INeutronObject> implements AutoCloseable {
+public abstract class AbstractNeutronInterface<T extends DataObject, S extends INeutronObject> implements AutoCloseable, INeutronCRUD<S> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
@@ -56,7 +61,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
 
     protected abstract T toMd(String uuid);
 
-    protected <T extends org.opendaylight.yangtools.yang.binding.DataObject> T readMd(InstanceIdentifier<T> path) {
+    protected abstract S fromMd(T dataObject);
+
+    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path) {
         T result = null;
         final ReadOnlyTransaction transaction = getDataBroker().newReadOnlyTransaction();
         CheckedFuture<Optional<T>, ReadFailedException> future = transaction.read(LogicalDatastoreType.CONFIGURATION, path);
@@ -168,4 +175,45 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
 
     }
 
+    public boolean exists(String uuid) {
+        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)));
+        return dataObject != null;
+    }
+
+    public S get(String uuid) {
+        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)));
+        if (dataObject == null) {
+            return null;
+        }
+        return fromMd(dataObject);
+    }
+
+    public abstract List<S> getAll();
+
+    public boolean add(S input) {
+        if (exists(input.getID())) {
+            return false;
+        }
+        addMd(input);
+        return true;
+    }
+
+    public boolean remove(String uuid) {
+        if (!exists(uuid)) {
+            return false;
+        }
+        return removeMd(toMd(uuid));
+    }
+
+    public boolean update(String uuid, S delta) {
+        if (!exists(uuid)) {
+            return false;
+        }
+        updateMd(delta);
+        return true;
+    }
+
+    public boolean inUse(String uuid) {
+        return false;
+    }
 }

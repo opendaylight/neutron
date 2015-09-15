@@ -14,7 +14,8 @@ import java.util.List;
  * This interface defines the methods for CRUD of NB OpenStack Firewall objects
  */
 
-public interface INeutronFirewallCRUD {
+public interface INeutronFirewallCRUD
+    extends INeutronCRUD<NeutronFirewall> {
     /**
      * Applications call this interface method to determine if a particular
      *Firewall object exists

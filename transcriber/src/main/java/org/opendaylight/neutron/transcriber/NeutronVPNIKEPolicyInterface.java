@@ -40,24 +40,16 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
 
     @Override
     public boolean neutronVPNIKEPolicyExists(String uuid) {
-        Ikepolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (policy == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronVPNIKEPolicy getNeutronVPNIKEPolicy(String uuid) {
-        Ikepolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (policy == null) {
-            return null;
-        }
-        return fromMd(policy);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies() {
+    public List<NeutronVPNIKEPolicy> getAll() {
         Set<NeutronVPNIKEPolicy> allVPNIKEPolicies = new HashSet<NeutronVPNIKEPolicy>();
         IkePolicies policies = readMd(createInstanceIdentifier());
 
@@ -73,37 +65,28 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
     }
 
     @Override
+    public List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronVPNIKEPolicy(NeutronVPNIKEPolicy input) {
-        if (neutronVPNIKEPolicyExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronVPNIKEPolicy(String uuid) {
-        if (!neutronVPNIKEPolicyExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronVPNIKEPolicy(String uuid, NeutronVPNIKEPolicy delta) {
-        if (!neutronVPNIKEPolicyExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronVPNIKEPolicyInUse(String netUUID) {
-        if (!neutronVPNIKEPolicyExists(netUUID)) {
-            return true;
-        }
-        return false;
+        return !exists(netUUID);
     }
 
     protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {

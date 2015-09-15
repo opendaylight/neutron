@@ -10,7 +10,8 @@ package org.opendaylight.neutron.spi;
 
 import java.util.List;
 
-public interface INeutronVPNIKEPolicyCRUD {
+public interface INeutronVPNIKEPolicyCRUD
+    extends INeutronCRUD<NeutronVPNIKEPolicy> {
 
     /**yes
      * Applications call this interface method to determine if a particular

@@ -52,21 +52,16 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
 
     @Override
     public boolean routerExists(String uuid) {
-        Router router = readMd(createInstanceIdentifier(toMd(uuid)));
-        return router != null;
+        return exists(uuid);
     }
 
     @Override
     public NeutronRouter getRouter(String uuid) {
-        Router router = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (router == null) {
-            return null;
-        }
-        return fromMd(router);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronRouter> getAllRouters() {
+    public List<NeutronRouter> getAll() {
         Set<NeutronRouter> allRouters = new HashSet<NeutronRouter>();
         Routers routers = readMd(createInstanceIdentifier());
         if (routers != null) {
@@ -81,34 +76,28 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
     }
 
     @Override
+    public List<NeutronRouter> getAllRouters() {
+        return getAll();
+    }
+
+    @Override
     public boolean addRouter(NeutronRouter input) {
-        if (routerExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeRouter(String uuid) {
-        if (!routerExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateRouter(String uuid, NeutronRouter delta) {
-        if (!routerExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean routerInUse(String routerUUID) {
-        if (!routerExists(routerUUID)) {
+        if (!exists(routerUUID)) {
             return true;
         }
         NeutronRouter target = getRouter(routerUUID);

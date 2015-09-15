@@ -40,24 +40,16 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
 
     @Override
     public boolean neutronVPNIPSECSiteConnectionsExists(String uuid) {
-        Ipsecsiteconnection connection = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (connection == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String uuid) {
-        Ipsecsiteconnection connection = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (connection == null) {
-            return null;
-        }
-        return fromMd(connection);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections() {
+    public List<NeutronVPNIPSECSiteConnection> getAll() {
         Set<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnections = new HashSet<NeutronVPNIPSECSiteConnection>();
         IpsecSiteConnections connections = readMd(createInstanceIdentifier());
         if (connections != null) {
@@ -72,37 +64,28 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     @Override
+    public List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronVPNIPSECSiteConnections(NeutronVPNIPSECSiteConnection input) {
-        if (neutronVPNIPSECSiteConnectionsExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronVPNIPSECSiteConnections(String policyID) {
-        if (!neutronVPNIPSECSiteConnectionsExists(policyID)) {
-            return false;
-        }
-        return removeMd(toMd(policyID));
+        return remove(policyID);
     }
 
     @Override
     public boolean updateNeutronVPNIPSECSiteConnections(String policyID, NeutronVPNIPSECSiteConnection delta) {
-        if (!neutronVPNIPSECSiteConnectionsExists(policyID)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(policyID, delta);
     }
 
     @Override
     public boolean neutronVPNIPSECSiteConnectionsInUse(String policyID) {
-        if (!neutronVPNIPSECSiteConnectionsExists(policyID)) {
-            return true;
-        }
-        return false;
+        return !exists(policyID);
     }
 
     protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {

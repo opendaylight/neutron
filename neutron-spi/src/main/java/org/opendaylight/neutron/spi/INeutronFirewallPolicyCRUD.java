@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronFirewallPolicyCRUD {
+public interface INeutronFirewallPolicyCRUD
+    extends INeutronCRUD<NeutronFirewallPolicy> {
     /**
      * Applications call this interface method to determine if a particular
      *FirewallPolicy object exists

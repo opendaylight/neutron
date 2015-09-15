@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronRouterCRUD {
+public interface INeutronRouterCRUD
+    extends INeutronCRUD<NeutronRouter> {
     /**
      * Applications call this interface method to determine if a particular
      * Router object exists
