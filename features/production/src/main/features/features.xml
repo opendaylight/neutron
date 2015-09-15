@@ -5,6 +5,7 @@
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
    <repository>mvn:org.opendaylight.aaa/features-aaa/${aaa.version}/xml/features</repository>
    <repository>mvn:org.opendaylight.yangtools/features-yangtools/${yangtools.version}/xml/features</repository>
+   <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/${yangtools.version}/xml/features</repository>
    <repository>mvn:org.opendaylight.controller/features-mdsal/${mdsal.version}/xml/features</repository>
    <repository>mvn:org.opendaylight.netconf/features-restconf/${restconf.version}/xml/features</repository>
    <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
@@ -27,6 +28,7 @@
   </feature>
 
   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
+    <feature version='${yangtools.version}'>odl-mdsal-models</feature>
     <bundle>mvn:org.opendaylight.neutron/neutron-spi/${project.version}</bundle>
     <bundle>mvn:commons-net/commons-net/${commons.net.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
