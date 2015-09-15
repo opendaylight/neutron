@@ -20,17 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNIKEPolicy implements Serializable, INeutronObject {
+public class NeutronVPNIKEPolicy extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement (name = "id")
-    String id;
-
-    @XmlElement (name = "tenant_id")
-    String tenantID;
 
     @XmlElement (name = "name")
     String name;
@@ -57,22 +51,6 @@ public class NeutronVPNIKEPolicy implements Serializable, INeutronObject {
     NeutronVPNLifetime lifetime;
 
     public NeutronVPNIKEPolicy() {
-    }
-
-    public String getID() {
-        return id;
-    }
-
-    public void setID(String id) {
-        this.id = id;
-    }
-
-    public String getTenantID() {
-        return tenantID;
-    }
-
-    public void setTenantID(String tenantID) {
-        this.tenantID = tenantID;
     }
 
     public String getName() {

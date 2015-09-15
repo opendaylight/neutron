@@ -106,7 +106,7 @@ public class NeutronMeteringLabelsNorthbound {
             if ((queryID == null || queryID.equals(oSS.getID())) &&
                     (queryName == null || queryName.equals(oSS.getMeteringLabelName())) &&
                     (queryDescription == null || queryDescription.equals(oSS.getMeteringLabelDescription())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getMeteringLabelTenantID()))) {
+                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
                 } else {

@@ -241,8 +241,8 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         if (network.getTenantID() != null) {
             networkBuilder.setTenantId(toUuid(network.getTenantID()));
         }
-        if (network.getNetworkUUID() != null) {
-            networkBuilder.setUuid(toUuid(network.getNetworkUUID()));
+        if (network.getID() != null) {
+            networkBuilder.setUuid(toUuid(network.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron network without UUID");
         }

@@ -36,11 +36,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSecurityRule implements Serializable, INeutronObject {
+public class NeutronSecurityRule extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String securityRuleUUID;
 
     @XmlElement(name = "direction")
     String securityRuleDirection;
@@ -66,28 +63,17 @@ public class NeutronSecurityRule implements Serializable, INeutronObject {
     @XmlElement(name = "security_group_id")
     String securityRuleGroupID;
 
-    @XmlElement(name = "tenant_id")
-    String securityRuleTenantID;
-
     public NeutronSecurityRule() {
-    }
-
-    public String getID() {
-        return securityRuleUUID;
-    }
-
-    public void setID(String id) {
-        securityRuleUUID = id;
     }
 
     // @deprecated use getID()
     public String getSecurityRuleUUID() {
-        return securityRuleUUID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setSecurityRuleUUID(String securityRuleUUID) {
-        this.securityRuleUUID = securityRuleUUID;
+    public void setSecurityRuleUUID(String uuid) {
+        setID(uuid);
     }
 
     public String getSecurityRuleDirection() {
@@ -154,12 +140,14 @@ public class NeutronSecurityRule implements Serializable, INeutronObject {
         this.securityRuleGroupID = securityRuleGroupID;
     }
 
+    @Deprecated
     public String getSecurityRuleTenantID() {
-        return securityRuleTenantID;
+        return getTenantID();
     }
 
-    public void setSecurityRuleTenantID(String securityRuleTenantID) {
-        this.securityRuleTenantID = securityRuleTenantID;
+    @Deprecated
+    public void setSecurityRuleTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public NeutronSecurityRule extractFields(List<String> fields) {
@@ -195,7 +183,7 @@ public class NeutronSecurityRule implements Serializable, INeutronObject {
                 ans.setSecurityRuleGroupID(this.getSecurityRuleGroupID());
             }
             if (s.equals("tenant_id")) {
-                ans.setSecurityRuleTenantID(this.getSecurityRuleTenantID());
+                ans.setTenantID(this.getTenantID());
             }
         }
         return ans;
@@ -204,7 +192,7 @@ public class NeutronSecurityRule implements Serializable, INeutronObject {
     @Override
     public String toString() {
         return "NeutronSecurityRule{" +
-            "securityRuleUUID='" + securityRuleUUID + '\'' +
+            "securityRuleUUID='" + uuid + '\'' +
             ", securityRuleDirection='" + securityRuleDirection + '\'' +
             ", securityRuleProtocol='" + securityRuleProtocol + '\'' +
             ", securityRulePortMin=" + securityRulePortMin +
@@ -213,7 +201,7 @@ public class NeutronSecurityRule implements Serializable, INeutronObject {
             ", securityRuleRemoteIpPrefix='" + securityRuleRemoteIpPrefix + '\'' +
             ", securityRemoteGroupID=" + securityRemoteGroupID +
             ", securityRuleGroupID='" + securityRuleGroupID + '\'' +
-            ", securityRuleTenantID='" + securityRuleTenantID + '\'' +
+            ", securityRuleTenantID='" + tenantID + '\'' +
             '}';
     }
 

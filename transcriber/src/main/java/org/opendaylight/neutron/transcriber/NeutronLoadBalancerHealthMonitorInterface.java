@@ -162,8 +162,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             }
             healthmonitorBuilder.setPools(listUuid);
         }
-        if (healthMonitor.getLoadBalancerHealthMonitorTenantID() != null) {
-            healthmonitorBuilder.setTenantId(toUuid(healthMonitor.getLoadBalancerHealthMonitorTenantID()));
+        if (healthMonitor.getTenantID() != null) {
+            healthmonitorBuilder.setTenantId(toUuid(healthMonitor.getTenantID()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorTimeout() != null) {
             healthmonitorBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
@@ -209,7 +209,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             answer.setLoadBalancerHealthMonitorPools(list);
         }
         if (healthMonitor.getTenantId() != null) {
-            answer.setLoadBalancerHealthMonitorTenantID(healthMonitor.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(healthMonitor.getTenantId().getValue().replace("-",""));
         }
         if (healthMonitor.getTimeout() != null) {
             answer.setLoadBalancerHealthMonitorTimeout(healthMonitor.getTimeout().intValue());

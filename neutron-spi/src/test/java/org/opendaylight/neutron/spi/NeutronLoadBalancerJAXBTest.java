@@ -29,7 +29,7 @@ public class NeutronLoadBalancerJAXBTest {
             NeutronLoadBalancer testObject = (NeutronLoadBalancer) JaxbTestHelper.jaxbUnmarshall(dummyObject,
                     NeutronLoadBalancer_sourceJson);
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
-                    "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.loadBalancerID);
+                    "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.uuid);
 
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed",
                     "NeutronLoadBalancer", testObject.getLoadBalancerName());
@@ -50,7 +50,7 @@ public class NeutronLoadBalancerJAXBTest {
                     "d23abc8d-2991-4a55-ba98-2aaea84cc72f", testObject.loadBalancerVipSubnetID);
 
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 8: Testing tenant_id failed",
-                    "4969c491a3c74ee4af974e6d800c62de", testObject.getLoadBalancerTenantID());
+                    "4969c491a3c74ee4af974e6d800c62de", testObject.getTenantID());
         } catch (Exception e) {
             Assert.assertTrue("Tests failed", false);
         }

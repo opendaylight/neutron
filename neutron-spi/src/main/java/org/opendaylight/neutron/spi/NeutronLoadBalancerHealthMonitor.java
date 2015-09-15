@@ -41,14 +41,9 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 
 public class NeutronLoadBalancerHealthMonitor
+    extends NeutronObject
     implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String loadBalancerHealthMonitorID;
-
-    @XmlElement (name = "tenant_id")
-    String loadBalancerHealthMonitorTenantID;
 
     @XmlElement (name = "type")
     String loadBalancerHealthMonitorType;
@@ -77,30 +72,24 @@ public class NeutronLoadBalancerHealthMonitor
     @XmlElement (name = "pools")
     List<Neutron_ID> loadBalancerHealthMonitorPools;
 
-    public String getID() {
-        return loadBalancerHealthMonitorID;
-    }
-
-    public void setID(String id) {
-        loadBalancerHealthMonitorID = id;
-    }
-
     // @deprecated use getID()
     public String getLoadBalancerHealthMonitorID() {
-        return loadBalancerHealthMonitorID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setLoadBalancerHealthMonitorID(String loadBalancerHealthMonitorID) {
-        this.loadBalancerHealthMonitorID = loadBalancerHealthMonitorID;
+    public void setLoadBalancerHealthMonitorID(String uuid) {
+        setID(uuid);
     }
 
+    @Deprecated
     public String getLoadBalancerHealthMonitorTenantID() {
-        return loadBalancerHealthMonitorTenantID;
+        return getTenantID();
     }
 
-    public void setLoadBalancerHealthMonitorTenantID(String loadBalancerHealthMonitorTenantID) {
-        this.loadBalancerHealthMonitorTenantID = loadBalancerHealthMonitorTenantID;
+    @Deprecated
+    public void setLoadBalancerHealthMonitorTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public String getLoadBalancerHealthMonitorType() {
@@ -184,7 +173,7 @@ public class NeutronLoadBalancerHealthMonitor
                 ans.setID(this.getID());
             }
             if (s.equals("tenant_id")) {
-                ans.setLoadBalancerHealthMonitorTenantID(this.getLoadBalancerHealthMonitorTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("type")) {
                 ans.setLoadBalancerHealthMonitorType(this.getLoadBalancerHealthMonitorType());
@@ -216,8 +205,8 @@ public class NeutronLoadBalancerHealthMonitor
 
     @Override public String toString() {
         return "NeutronLoadBalancerHealthMonitor{" +
-                "loadBalancerHealthMonitorID='" + loadBalancerHealthMonitorID + '\'' +
-                ", loadBalancerHealthMonitorTenantID='" + loadBalancerHealthMonitorTenantID + '\'' +
+                "loadBalancerHealthMonitorID='" + uuid + '\'' +
+                ", loadBalancerHealthMonitorTenantID='" + tenantID + '\'' +
                 ", loadBalancerHealthMonitorType='" + loadBalancerHealthMonitorType + '\'' +
                 ", loadBalancerHealthMonitorDelay=" + loadBalancerHealthMonitorDelay +
                 ", loadBalancerHealthMonitorTimeout=" + loadBalancerHealthMonitorTimeout +

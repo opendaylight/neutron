@@ -16,6 +16,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronNetwork;
+import org.opendaylight.neutron.spi.NeutronObject;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 
@@ -38,10 +39,11 @@ public final class PaginatedRequestFactory {
         }
     }
 
-    private static final class MarkerObject implements INeutronObject {
+    private static final class MarkerObject extends NeutronObject implements INeutronObject {
         private final String id;
 
         MarkerObject(String id) {
+            super();
             this.id = id;
         }
 

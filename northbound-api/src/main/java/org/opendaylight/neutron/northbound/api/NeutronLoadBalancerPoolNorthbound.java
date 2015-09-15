@@ -122,7 +122,7 @@ public class NeutronLoadBalancerPoolNorthbound {
             if ((queryLoadBalancerPoolID == null ||
                     queryLoadBalancerPoolID.equals(nsg.getID())) &&
                     (queryLoadBalancerPoolTenantID == null ||
-                            queryLoadBalancerPoolTenantID.equals(nsg.getLoadBalancerPoolTenantID())) &&
+                            queryLoadBalancerPoolTenantID.equals(nsg.getTenantID())) &&
                     (queryLoadBalancerPoolName == null ||
                             queryLoadBalancerPoolName.equals(nsg.getLoadBalancerPoolName())) &&
                     (queryLoadBalancerDescription == null ||
@@ -389,7 +389,7 @@ public class NeutronLoadBalancerPoolNorthbound {
                 queryLoadBalancerPoolMemberID.equals(nsg.getID())) &&
                 loadBalancerPoolUUID.equals(nsg.getPoolID()) &&
                 (queryLoadBalancerPoolMemberTenantID == null ||
-                        queryLoadBalancerPoolMemberTenantID.equals(nsg.getPoolMemberTenantID())) &&
+                        queryLoadBalancerPoolMemberTenantID.equals(nsg.getTenantID())) &&
                 (queryLoadBalancerPoolMemberAddress == null ||
                         queryLoadBalancerPoolMemberAddress.equals(nsg.getPoolMemberAddress())) &&
                 (queryLoadBalancerPoolMemberAdminStateUp == null ||

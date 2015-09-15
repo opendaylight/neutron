@@ -114,7 +114,7 @@ public class NeutronFirewallRulesNorthbound {
             if ((queryFirewallRuleUUID == null ||
                     queryFirewallRuleUUID.equals(nsr.getID())) &&
                     (queryFirewallRuleTenantID == null ||
-                            queryFirewallRuleTenantID.equals(nsr.getFirewallRuleTenantID())) &&
+                            queryFirewallRuleTenantID.equals(nsr.getTenantID())) &&
                     (queryFirewallRuleName == null ||
                             queryFirewallRuleName.equals(nsr.getFirewallRuleName())) &&
                     (queryFirewallRuleDescription == null ||

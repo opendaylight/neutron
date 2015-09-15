@@ -109,7 +109,7 @@ public class NeutronLoadBalancerNorthbound {
             if ((queryLoadBalancerID == null ||
                     queryLoadBalancerID.equals(nsg.getID())) &&
                     (queryLoadBalancerTenantID == null ||
-                            queryLoadBalancerTenantID.equals(nsg.getLoadBalancerTenantID())) &&
+                            queryLoadBalancerTenantID.equals(nsg.getTenantID())) &&
                     (queryLoadBalancerName == null ||
                             queryLoadBalancerName.equals(nsg.getLoadBalancerName())) &&
                     (queryLoadBalancerDescription == null ||

@@ -37,14 +37,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFirewallPolicy implements Serializable, INeutronObject {
+public class NeutronFirewallPolicy extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String firewallPolicyUUID;
-
-    @XmlElement (name = "tenant_id")
-    String firewallPolicyTenantID;
 
     @XmlElement (name = "name")
     String firewallPolicyName;
@@ -101,30 +95,24 @@ public class NeutronFirewallPolicy implements Serializable, INeutronObject {
         this.firewallPolicyName = firewallPolicyName;
     }
 
+    @Deprecated
     public String getFirewallPolicyTenantID() {
-        return firewallPolicyTenantID;
+        return getTenantID();
     }
 
-    public void setFirewallPolicyTenantID(String firewallPolicyTenantID) {
-        this.firewallPolicyTenantID = firewallPolicyTenantID;
-    }
-
-    public String getID() {
-        return firewallPolicyUUID;
-    }
-
-    public void setID(String id) {
-        firewallPolicyUUID = id;
+    @Deprecated
+    public void setFirewallPolicyTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     // @deprecated use getID()
     public String getFirewallPolicyUUID() {
-        return firewallPolicyUUID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setFirewallPolicyUUID(String firewallPolicyUUID) {
-        this.firewallPolicyUUID = firewallPolicyUUID;
+    public void setFirewallPolicyUUID(String uuid) {
+        setID(uuid);
     }
 
     public NeutronFirewallPolicy extractFields(List<String> fields) {
@@ -136,7 +124,7 @@ public class NeutronFirewallPolicy implements Serializable, INeutronObject {
                 ans.setID(this.getID());
             }
             if (s.equals("tenant_id")) {
-                ans.setFirewallPolicyTenantID(this.getFirewallPolicyTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("name")) {
                 ans.setFirewallPolicyName(this.getFirewallPolicyName());
@@ -162,8 +150,8 @@ public class NeutronFirewallPolicy implements Serializable, INeutronObject {
     @Override
     public String toString() {
         return "NeutronFirewallPolicy{" +
-            "firewallPolicyUUID='" + firewallPolicyUUID + '\'' +
-            ", firewallPolicyTenantID='" + firewallPolicyTenantID + '\'' +
+            "firewallPolicyUUID='" + uuid + '\'' +
+            ", firewallPolicyTenantID='" + tenantID + '\'' +
             ", firewallPolicyName='" + firewallPolicyName + '\'' +
             ", firewallPolicyDescription='" + firewallPolicyDescription + '\'' +
             ", firewallPolicyIsShared=" + firewallPolicyIsShared +

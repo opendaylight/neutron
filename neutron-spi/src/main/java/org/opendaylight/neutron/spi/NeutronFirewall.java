@@ -37,14 +37,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFirewall implements Serializable, INeutronObject {
+public class NeutronFirewall extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String firewallUUID;
-
-    @XmlElement (name = "tenant_id")
-    String firewallTenantID;
 
     @XmlElement (name = "name")
     String firewallName;
@@ -64,30 +58,24 @@ public class NeutronFirewall implements Serializable, INeutronObject {
     @XmlElement (name = "firewall_policy_id")
     String neutronFirewallPolicyID;
 
-    public String getID() {
-        return firewallUUID;
-    }
-
-    public void setID(String id) {
-        firewallUUID = id;
-    }
-
     // @deprecated use getID()
     public String getFirewallUUID() {
-        return firewallUUID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setFirewallUUID(String firewallUUID) {
-        this.firewallUUID = firewallUUID;
+    public void setFirewallUUID(String uuid) {
+        setID(uuid);
     }
 
+    @Deprecated
     public String getFirewallTenantID() {
-        return firewallTenantID;
+        return getTenantID();
     }
 
-    public void setFirewallTenantID(String firewallTenantID) {
-        this.firewallTenantID = firewallTenantID;
+    @Deprecated
+    public void setFirewallTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public String getFirewallName() {
@@ -147,7 +135,7 @@ public class NeutronFirewall implements Serializable, INeutronObject {
                 ans.setID(this.getID());
             }
             if (s.equals("tenant_id")) {
-                ans.setFirewallTenantID(this.getFirewallTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("name")) {
                 ans.setFirewallName(this.getFirewallName());
@@ -174,8 +162,8 @@ public class NeutronFirewall implements Serializable, INeutronObject {
     @Override
     public String toString() {
         return "NeutronFirewall{" +
-            "firewallUUID='" + firewallUUID + '\'' +
-            ", firewallTenantID='" + firewallTenantID + '\'' +
+            "firewallUUID='" + uuid + '\'' +
+            ", firewallTenantID='" + tenantID + '\'' +
             ", firewallName='" + firewallName + '\'' +
             ", firewallDescription='" + firewallDescription + '\'' +
             ", firewallAdminStateIsUp=" + firewallAdminStateIsUp +

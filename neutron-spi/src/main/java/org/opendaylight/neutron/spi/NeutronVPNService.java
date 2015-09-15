@@ -21,7 +21,7 @@ import org.opendaylight.neutron.spi.INeutronObject;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNService implements Serializable, INeutronObject {
+public class NeutronVPNService extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -41,12 +41,6 @@ public class NeutronVPNService implements Serializable, INeutronObject {
 
     @XmlElement (name = "subnet_id")
     String subnetUUID;
-
-    @XmlElement (name = "tenant_id")
-    String tenantID;
-
-    @XmlElement (name = "id")
-    String id;
 
     @XmlElement (name = "description")
     String description;
@@ -90,22 +84,6 @@ public class NeutronVPNService implements Serializable, INeutronObject {
 
     public void setSubnetUUID(String subnetUUID) {
         this.subnetUUID = subnetUUID;
-    }
-
-    public String getTenantID() {
-        return tenantID;
-    }
-
-    public void setTenantID(String tenantID) {
-        this.tenantID = tenantID;
-    }
-
-    public String getID() {
-        return id;
-    }
-
-    public void setID(String id) {
-        this.id = id;
     }
 
     public String getDescription() {

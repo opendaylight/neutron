@@ -35,14 +35,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancer implements Serializable, INeutronObject {
+public class NeutronLoadBalancer extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String loadBalancerID;
-
-    @XmlElement (name = "tenant_id")
-    String loadBalancerTenantID;
 
     @XmlElement (name = "name")
     String loadBalancerName;
@@ -62,30 +56,24 @@ public class NeutronLoadBalancer implements Serializable, INeutronObject {
     @XmlElement (name = "vip_subnet_id")
     String loadBalancerVipSubnetID;
 
-    public String getID() {
-        return loadBalancerID;
-    }
-
-    public void setID(String id) {
-        loadBalancerID = id;
-    }
-
     // @deprecated use getID()
     public String getLoadBalancerID() {
-        return loadBalancerID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setLoadBalancerID(String loadBalancerID) {
-        this.loadBalancerID = loadBalancerID;
+    public void setLoadBalancerID(String uuid) {
+        setID(uuid);
     }
 
-    public String getLoadBalancerTenantID() {
-        return loadBalancerTenantID;
+    @Deprecated
+    public String getLoadBlancerTenantID() {
+        return getTenantID();
     }
 
-    public void setLoadBalancerTenantID(String loadBalancerTenantID) {
-        this.loadBalancerTenantID = loadBalancerTenantID;
+    @Deprecated
+    public void setLoadBalancerTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public String getLoadBalancerName() {
@@ -145,7 +133,7 @@ public class NeutronLoadBalancer implements Serializable, INeutronObject {
                 ans.setID(this.getID());
             }
             if (s.equals("tenant_id")) {
-                ans.setLoadBalancerTenantID(this.getLoadBalancerTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("name")) {
                 ans.setLoadBalancerName(this.getLoadBalancerName());
@@ -171,8 +159,8 @@ public class NeutronLoadBalancer implements Serializable, INeutronObject {
 
     @Override public String toString() {
         return "NeutronLoadBalancer{" +
-                "loadBalancerID='" + loadBalancerID + '\'' +
-                ", loadBalancerTenantID='" + loadBalancerTenantID + '\'' +
+                "loadBalancerID='" + uuid + '\'' +
+                ", loadBalancerTenantID='" + tenantID + '\'' +
                 ", loadBalancerName='" + loadBalancerName + '\'' +
                 ", loadBalancerDescription='" + loadBalancerDescription + '\'' +
                 ", loadBalancerStatus='" + loadBalancerStatus + '\'' +

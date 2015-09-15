@@ -16,4 +16,8 @@ public interface INeutronObject {
     String getID();
 
     void setID(String id);
+
+    String getTenantID();
+
+    void setTenantID(String tenantID);
 }

@@ -38,14 +38,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
+public class NeutronLoadBalancerPool extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String loadBalancerPoolID;
-
-    @XmlElement (name = "tenant_id")
-    String loadBalancerPoolTenantID;
 
     @XmlElement (name = "name")
     String loadBalancerPoolName;
@@ -78,30 +72,24 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
         loadBalancerPoolMembers = new ArrayList<NeutronLoadBalancerPoolMember>();
     }
 
-    public String getID() {
-        return loadBalancerPoolID;
-    }
-
-    public void setID(String id) {
-        loadBalancerPoolID = id;
-    }
-
     // @deprecated use getID()
     public String getLoadBalancerPoolID() {
-        return loadBalancerPoolID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setLoadBalancerPoolID(String loadBalancerPoolID) {
-        this.loadBalancerPoolID = loadBalancerPoolID;
+    public void setLoadBalancerPoolID(String uuid) {
+        setID(uuid);
     }
 
+    @Deprecated
     public String getLoadBalancerPoolTenantID() {
-        return loadBalancerPoolTenantID;
+        return getTenantID();
     }
 
-    public void setLoadBalancerPoolTenantID(String loadBalancerPoolTenantID) {
-        this.loadBalancerPoolTenantID = loadBalancerPoolTenantID;
+    @Deprecated
+    public void setLoadBalancerPoolTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public String getLoadBalancerPoolName() {
@@ -170,12 +158,12 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
 
     public List<NeutronLoadBalancerPoolMember> getLoadBalancerPoolMembers() {
         /*
-         * Update the pool_id of the member to that this.loadBalancerPoolID
+         * Update the pool_id of the member to that this.id
          */
         List<NeutronLoadBalancerPoolMember> answer = new ArrayList<NeutronLoadBalancerPoolMember>();
         if (loadBalancerPoolMembers != null) {
             for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers) {
-                member.setPoolID(loadBalancerPoolID);
+                member.setPoolID(uuid);
                 answer.add(member);
             }
         }
@@ -210,7 +198,7 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
                 ans.setID(this.getID());
             }
             if (s.equals("tenant_id")) {
-                ans.setLoadBalancerPoolTenantID(this.getLoadBalancerPoolTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("name")) {
                 ans.setLoadBalancerPoolName(this.getLoadBalancerPoolName());
@@ -240,8 +228,8 @@ public class NeutronLoadBalancerPool implements Serializable, INeutronObject {
     @Override
     public String toString() {
         return "NeutronLoadBalancerPool{" +
-            "id='" + loadBalancerPoolID + '\'' +
-            ", tenantID='" + loadBalancerPoolTenantID + '\'' +
+            "id='" + uuid + '\'' +
+            ", tenantID='" + tenantID + '\'' +
             ", name='" + loadBalancerPoolName + '\'' +
             ", description='" + loadBalancerPoolDescription + '\'' +
             ", protocol=" + loadBalancerPoolProtocol +'\''+

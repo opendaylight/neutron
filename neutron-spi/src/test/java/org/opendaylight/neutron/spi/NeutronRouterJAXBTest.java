@@ -37,7 +37,7 @@ public class NeutronRouterJAXBTest {
             List<String> routes = testObject.getRoutes();
 
             Assert.assertEquals("NeutronRouter JAXB Test 1: Testing router_uuid failed",
-                    "e9330b1f-a2ef-4160-a991-169e56ab17f5", testObject.getRouterUUID());
+                    "e9330b1f-a2ef-4160-a991-169e56ab17f5", testObject.getID());
 
             Assert.assertEquals("NeutronRouter JAXB Test 2: Testing name failed", "jaxb-test", testObject.getName());
 

@@ -48,12 +48,12 @@ public class NeutronSecurityGroupJAXBTest {
                   "security group for webservers", testObject.getSecurityGroupDescription());
 
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 4: Testing port range min failed",
-                    "b4f50856753b4dc6afee5fa6b9b6c550", testObject.getSecurityGroupTenantID());
+                    "b4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());
 
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 5.1: Testing security group rules list length failed",
                     1, securityRules.size());
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 5.2: Testing security group rules id value failed",
-                    "2bc0accf-312e-429a-956e-e4407625eb62", securityRules.get(0).securityRuleUUID);
+                    "2bc0accf-312e-429a-956e-e4407625eb62", securityRules.get(0).uuid);
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 5.3: Testing security group rules direction value failed",
                     "ingress", securityRules.get(0).securityRuleDirection);
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 5.4: Testing security group rules protocol value failed",
@@ -71,7 +71,7 @@ public class NeutronSecurityGroupJAXBTest {
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 5.10: Testing security group rules security group id value failed",
                     "a7734e61-b545-452d-a3cd-0189cbd9747a", securityRules.get(0).securityRuleGroupID);
             Assert.assertEquals("NeutronSecurityGroup JAXB Test 5.11: Testing security group rules tenant id value failed",
-                    "e4f50856753b4dc6afee5fa6b9b6c550", securityRules.get(0).securityRuleTenantID);
+                    "e4f50856753b4dc6afee5fa6b9b6c550", securityRules.get(0).tenantID);
         } catch (Exception e) {
             Assert.fail("Tests failed");
         }

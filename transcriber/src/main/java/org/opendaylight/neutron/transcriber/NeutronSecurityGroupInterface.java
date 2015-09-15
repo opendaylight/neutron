@@ -114,7 +114,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
             answer.setSecurityGroupDescription(group.getDescription());
         }
         if (group.getTenantId() != null) {
-            answer.setSecurityGroupTenantID(group.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(group.getTenantId().getValue().replace("-",""));
         }
         if (group.getSecurityRules() != null) {
             NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
@@ -142,8 +142,8 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (securityGroup.getSecurityGroupDescription() != null) {
             securityGroupBuilder.setDescription(securityGroup.getSecurityGroupDescription());
         }
-        if (securityGroup.getSecurityGroupTenantID() != null) {
-            securityGroupBuilder.setTenantId(toUuid(securityGroup.getSecurityGroupTenantID()));
+        if (securityGroup.getTenantID() != null) {
+            securityGroupBuilder.setTenantId(toUuid(securityGroup.getTenantID()));
         }
         if (securityGroup.getSecurityRules() != null) {
             List<Uuid> neutronSecurityRule = new ArrayList<Uuid>();

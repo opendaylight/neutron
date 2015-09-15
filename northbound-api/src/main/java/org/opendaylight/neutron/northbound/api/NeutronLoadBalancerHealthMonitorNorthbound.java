@@ -115,7 +115,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
                     queryLoadBalancerHealthMonitorID.equals(nsg.getID())) &&
                     (queryLoadBalancerHealthMonitorTenantID == null ||
                             queryLoadBalancerHealthMonitorTenantID.equals
-                                    (nsg.getLoadBalancerHealthMonitorTenantID())) &&
+                                    (nsg.getTenantID())) &&
                     (queryLoadBalancerHealthMonitorType == null ||
                             queryLoadBalancerHealthMonitorType.equals
                                     (nsg.getLoadBalancerHealthMonitorType())) &&

@@ -107,7 +107,7 @@ public class NeutronSecurityGroupsNorthbound {
                     (querySecurityDescription == null ||
                             querySecurityDescription.equals(nsg.getSecurityGroupDescription())) &&
                     (querySecurityTenantID == null ||
-                            querySecurityTenantID.equals(nsg.getSecurityGroupTenantID()))) {
+                            querySecurityTenantID.equals(nsg.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsg, fields));
                 } else {

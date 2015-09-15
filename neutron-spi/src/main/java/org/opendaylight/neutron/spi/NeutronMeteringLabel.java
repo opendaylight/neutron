@@ -20,17 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronMeteringLabel implements Serializable, INeutronObject {
+public class NeutronMeteringLabel extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement (name = "id")
-    String meteringLabelUUID;
 
     @XmlElement (name = "name")
     String meteringLabelName;
-
-    @XmlElement (name = "tenant_id")
-    String tenantID;
 
     @XmlElement (name = "description")
     String description;
@@ -39,22 +33,14 @@ public class NeutronMeteringLabel implements Serializable, INeutronObject {
      * getters and setters
      */
 
-    public String getID() {
-        return meteringLabelUUID;
-    }
-
-    public void setID(String id) {
-        meteringLabelUUID = id;
-    }
-
     // @deprecated use getID()
     public String getMeteringLabelUUID() {
-        return meteringLabelUUID;
+        return getID();
     }
 
     // @deprecated use setID()
     public void setMeteringLabelUUID(String uuid) {
-        this.meteringLabelUUID = uuid;
+        setID(uuid);
     }
 
     public String getMeteringLabelName() {
@@ -65,12 +51,14 @@ public class NeutronMeteringLabel implements Serializable, INeutronObject {
         this.meteringLabelName = name;
     }
 
+    @Deprecated
     public String getMeteringLabelTenantID() {
-        return tenantID;
+        return getTenantID();
     }
 
+    @Deprecated
     public void setMeteringLabelTenantID(String tenantID) {
-        this.tenantID = tenantID;
+        setTenantID(tenantID);
     }
 
     public String getMeteringLabelDescription() {
@@ -88,7 +76,7 @@ public class NeutronMeteringLabel implements Serializable, INeutronObject {
 
     @Override
     public String toString() {
-        return "NeutronMeteringLabel [id=" + meteringLabelUUID +
+        return "NeutronMeteringLabel [id=" + uuid +
             ", name=" + meteringLabelName +
             ", description=" + description +
             ", tenant_id=" + tenantID + "]";
@@ -115,7 +103,7 @@ public class NeutronMeteringLabel implements Serializable, INeutronObject {
                 ans.setMeteringLabelName(this.getMeteringLabelName());
             }
             if (s.equals("tenant_id")) {
-                ans.setMeteringLabelTenantID(this.getMeteringLabelTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("description")) {
                 ans.setMeteringLabelDescription(this.getMeteringLabelDescription());
