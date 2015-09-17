@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_af7d3470",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-09-17T20:09:44Z",
+      "side": 1,
+      "message": "Shoul add: \n\nBug 4143 - Transation failed with OptimisticLockFailedException  ?!?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "3a3fc437ea23a1b1593d2b038caf8455e30dd120",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
