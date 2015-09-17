@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_67bae60b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-17T05:46:38Z",
+      "side": 1,
+      "message": "Doesn\u0027t line 209 in fromMd() needs corresponding change?",
+      "revId": "10bbc501f743b4accc5a37a6f7710711fd0f1577",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
