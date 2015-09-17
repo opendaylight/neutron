@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_0c4c799d",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnTests.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-17T01:10:27Z",
+      "side": 1,
+      "message": "Very nice to have tests from day one!",
+      "revId": "d431a47c9f988a243716a794455042c858fdc1fe",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
