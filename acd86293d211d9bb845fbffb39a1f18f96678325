@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_0c9d59bc",
+        "filename": "dummyprovider/src/main/java/org/opendaylight/neutron/dummyprovider/Activator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-17T00:55:23Z",
+      "side": 0,
+      "message": "Unrelated changes.\nCan you please send such clean up patch as independent patches?",
+      "revId": "acd86293d211d9bb845fbffb39a1f18f96678325",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
