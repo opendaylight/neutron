@@ -16,6 +16,24 @@
       "revId": "5acd62fdba008db27135c3b82fdc355833bfaa8c",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_2f5604d3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronFloatingIPInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-09-17T20:52:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_aff454f2",
+      "revId": "5acd62fdba008db27135c3b82fdc355833bfaa8c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
