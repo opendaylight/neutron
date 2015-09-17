@@ -95,8 +95,8 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (target == null) {
             return false;
         }
-        delta.setPortUUID(target.getPortUUID());
-        delta.setFixedIPAddress(target.getFixedIPAddress());
+        target.setPortUUID(delta.getPortUUID());
+        target.setFixedIPAddress(delta.getFixedIPAddress());
         return updateMd(delta);
     }
 
