@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_e8832254",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2015-09-18T16:02:49Z",
+      "side": 1,
+      "message": "Yes, makes sense to use identities. Will do that in subsequent patch.",
+      "parentUuid": "3a79b1b5_28635add",
+      "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_8864eee5",
         "filename": "model/src/main/yang/neutron-bgpvpns.yang",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-18T15:48:27Z",
       "side": 1,
       "message": "Could we define a type for this with restrictions matching:\nhttps://review.openstack.org/#/c/177740/32/specs/liberty/bgpvpn.rst",
+      "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_08877e62",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2015-09-18T16:02:49Z",
+      "side": 1,
+      "message": "Alas, my yang-fu is not strong enough. Could you suggest on how to do this? For now relying on OpenStack plugin code to do the validations on proper format.",
+      "parentUuid": "3a79b1b5_8864eee5",
       "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -64,6 +100,24 @@
       "writtenOn": "2015-09-18T15:48:27Z",
       "side": 1,
       "message": "Why is this a string and not a list as the description indicates?\n\nAlso, in https://review.openstack.org/#/c/177740/32/specs/liberty/bgpvpn.rst gives a format for valid route distinguisher strings, why are we not defining a type that enforces that?",
+      "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_a87d2a70",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2015-09-18T16:02:49Z",
+      "side": 1,
+      "message": "Won\u0027t leaf-list result in a list of strings? \n\nRelying on bgpvpn plugin to enforce the type. Can add checks in code to validate but not sure how to do that with yang. Suggestions? Not looking for answer, but where to look to figure out how (:",
+      "parentUuid": "3a79b1b5_0879be92",
       "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
