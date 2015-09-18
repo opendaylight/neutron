@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_e83802a2",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-09-18T16:23:29Z",
+      "side": 1,
+      "message": "Lots of good examples here:\n\nhttps://github.com/opendaylight/mdsal/blob/master/model/ietf/ietf-inet-types/src/main/yang/ietf-inet-types.yang",
+      "parentUuid": "3a79b1b5_08877e62",
+      "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_686952bd",
         "filename": "model/src/main/yang/neutron-bgpvpns.yang",
         "patchSetId": 6
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Won\u0027t leaf-list result in a list of strings? \n\nRelying on bgpvpn plugin to enforce the type. Can add checks in code to validate but not sure how to do that with yang. Suggestions? Not looking for answer, but where to look to figure out how (:",
       "parentUuid": "3a79b1b5_0879be92",
+      "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_48ba560b",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 9
+      },
+      "writtenOn": "2015-09-18T16:23:29Z",
+      "side": 1,
+      "message": "I missed the leaf-list... misread it as leaf ;)",
+      "parentUuid": "3a79b1b5_a87d2a70",
       "revId": "4bf962b6d2a6b71b653c29197392682af4e8e589",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
