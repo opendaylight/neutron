@@ -47,18 +47,12 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
 
             Object[] instances = this.getInstances();
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        int status = this.canCreate(instance, singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    int status = this.canCreate(instance, singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             singleton.initDefaults();
             neutronCRUD.add(singleton);
@@ -71,18 +65,12 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
             Object[] instances = this.getInstances();
             for (T test : input.getBulk()) {
                 if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            int status = canCreate(instance, test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+                    for (Object instance : instances) {
+                        int status = canCreate(instance, test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -117,18 +105,12 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
 
         Object[] instances = getInstances();
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    int status = canUpdate(instance, delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                int status = canUpdate(instance, delta, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -151,18 +133,12 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
         T singleton = neutronCRUD.get(uuid);
         Object[] instances = getInstances();
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    int status = canDelete(instance, singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                int status = canDelete(instance, singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
