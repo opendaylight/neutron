@@ -15,7 +15,8 @@ import java.util.List;
  *
  */
 
-public interface INeutronPortCRUD {
+public interface INeutronPortCRUD
+    extends INeutronCRUD<NeutronPort> {
     /**
      * Applications call this interface method to determine if a particular
      * Port object exists

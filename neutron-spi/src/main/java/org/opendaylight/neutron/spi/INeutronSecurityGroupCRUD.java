@@ -14,7 +14,8 @@ import java.util.List;
  * This interface defines the methods for CRUD of NB OpenStack Security Group objects
  */
 
-public interface INeutronSecurityGroupCRUD {
+public interface INeutronSecurityGroupCRUD
+    extends INeutronCRUD<NeutronSecurityGroup> {
     /**
      * Applications call this interface method to determine if a particular
      * Security Group object exists

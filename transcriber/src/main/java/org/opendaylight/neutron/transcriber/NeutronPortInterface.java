@@ -60,21 +60,16 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
 
     @Override
     public boolean portExists(String uuid) {
-        Port port = readMd(createInstanceIdentifier(toMd(uuid)));
-        return port != null;
+        return exists(uuid);
     }
 
     @Override
     public NeutronPort getPort(String uuid) {
-        Port port = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (port == null) {
-            return null;
-        }
-        return fromMd(port);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronPort> getAllPorts() {
+    public List<NeutronPort> getAll() {
         Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
         Ports ports = readMd(createInstanceIdentifier());
         if (ports != null) {
@@ -89,29 +84,23 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
     }
 
     @Override
+    public List<NeutronPort> getAllPorts() {
+        return getAll();
+    }
+
+    @Override
     public boolean addPort(NeutronPort input) {
-        if (portExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removePort(String uuid) {
-        if (!portExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updatePort(String uuid, NeutronPort delta) {
-        if (!portExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     // @deprecated, will be removed in Boron

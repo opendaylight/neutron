@@ -38,24 +38,16 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     public boolean neutronLoadBalancerExists(String uuid) {
-        Loadbalancer lb = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (lb == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronLoadBalancer getNeutronLoadBalancer(String uuid) {
-        Loadbalancer lb = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (lb == null) {
-            return null;
-        }
-        return fromMd(lb);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronLoadBalancer> getAllNeutronLoadBalancers() {
+    public List<NeutronLoadBalancer> getAll() {
         Set<NeutronLoadBalancer> allLoadBalancers = new HashSet<NeutronLoadBalancer>();
         Loadbalancers lbs = readMd(createInstanceIdentifier());
         if (lbs != null) {
@@ -70,34 +62,28 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     }
 
     @Override
+    public List<NeutronLoadBalancer> getAllNeutronLoadBalancers() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronLoadBalancer(NeutronLoadBalancer input) {
-        if (neutronLoadBalancerExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronLoadBalancer(String uuid) {
-        if (!neutronLoadBalancerExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronLoadBalancer(String uuid, NeutronLoadBalancer delta) {
-        if (!neutronLoadBalancerExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronLoadBalancerInUse(String loadBalancerUUID) {
-        return !neutronLoadBalancerExists(loadBalancerUUID);
+        return !exists(loadBalancerUUID);
     }
 
     @Override

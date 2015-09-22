@@ -36,24 +36,16 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     public boolean neutronVPNServiceExists(String uuid) {
-        Vpnservice service = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (service == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronVPNService getVPNService(String uuid) {
-        Vpnservice service = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (service == null) {
-            return null;
-        }
-        return fromMd(service);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronVPNService> getAllVPNService() {
+    public List<NeutronVPNService> getAll() {
         Set<NeutronVPNService> allVPNService = new HashSet<NeutronVPNService>();
         VpnServices services = readMd(createInstanceIdentifier());
         if (services != null) {
@@ -68,34 +60,28 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
     }
 
     @Override
+    public List<NeutronVPNService> getAllVPNService() {
+        return getAll();
+    }
+
+    @Override
     public boolean addVPNService(NeutronVPNService input) {
-        if (neutronVPNServiceExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeVPNService(String uuid) {
-        if (!neutronVPNServiceExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateVPNService(String uuid, NeutronVPNService delta) {
-        if (!neutronVPNServiceExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronVPNServiceInUse(String uuid) {
-        return !neutronVPNServiceExists(uuid);
+        return !exists(uuid);
     }
 
     protected NeutronVPNService fromMd(Vpnservice vpnService) {

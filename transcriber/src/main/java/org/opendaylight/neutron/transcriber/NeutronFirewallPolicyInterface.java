@@ -44,24 +44,16 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
 
     @Override
     public boolean neutronFirewallPolicyExists(String uuid) {
-        FirewallPolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (policy == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronFirewallPolicy getNeutronFirewallPolicy(String uuid) {
-        FirewallPolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (policy == null) {
-            return null;
-        }
-        return fromMd(policy);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronFirewallPolicy> getAllNeutronFirewallPolicies() {
+    public List<NeutronFirewallPolicy> getAll() {
         Set<NeutronFirewallPolicy> allFirewallPolicies = new HashSet<NeutronFirewallPolicy>();
         FirewallPolicies policies = readMd(createInstanceIdentifier());
         if (policies != null) {
@@ -76,34 +68,28 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
     }
 
     @Override
+    public List<NeutronFirewallPolicy> getAllNeutronFirewallPolicies() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronFirewallPolicy(NeutronFirewallPolicy input) {
-        if (neutronFirewallPolicyExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronFirewallPolicy(String uuid) {
-        if (!neutronFirewallPolicyExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronFirewallPolicy(String uuid, NeutronFirewallPolicy delta) {
-        if (!neutronFirewallPolicyExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronFirewallPolicyInUse(String firewallPolicyUUID) {
-        return !neutronFirewallPolicyExists(firewallPolicyUUID);
+            return !exists(firewallPolicyUUID);
     }
 
     @Override

@@ -57,24 +57,16 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     public boolean neutronLoadBalancerHealthMonitorExists(String uuid) {
-        Healthmonitor healthMonitor = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (healthMonitor == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid) {
-        Healthmonitor healthMonitor = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (healthMonitor == null) {
-            return null;
-        }
-        return fromMd(healthMonitor);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors() {
+    public List<NeutronLoadBalancerHealthMonitor> getAll() {
         Set<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = new HashSet<NeutronLoadBalancerHealthMonitor>();
         Healthmonitors healthMonitors = readMd(createInstanceIdentifier());
         if (healthMonitors != null) {
@@ -89,34 +81,28 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     }
 
     @Override
+    public List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor input) {
-        if (neutronLoadBalancerHealthMonitorExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronLoadBalancerHealthMonitor(String uuid) {
-        if (!neutronLoadBalancerHealthMonitorExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronLoadBalancerHealthMonitor(String uuid, NeutronLoadBalancerHealthMonitor delta) {
-        if (!neutronLoadBalancerHealthMonitorExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronLoadBalancerHealthMonitorInUse(String loadBalancerHealthMonitorUUID) {
-        return !neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorUUID);
+        return !exists(loadBalancerHealthMonitorUUID);
     }
 
     @Override

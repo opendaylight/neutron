@@ -41,24 +41,16 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
 
     @Override
     public boolean neutronFirewallRuleExists(String uuid) {
-        FirewallRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (rule == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronFirewallRule getNeutronFirewallRule(String uuid) {
-        FirewallRule rule = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (rule == null) {
-            return null;
-        }
-        return fromMd(rule);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronFirewallRule> getAllNeutronFirewallRules() {
+    public List<NeutronFirewallRule> getAll() {
         Set<NeutronFirewallRule> allFirewallRules = new HashSet<NeutronFirewallRule>();
         FirewallRules rules = readMd(createInstanceIdentifier());
         if (rules != null) {
@@ -73,34 +65,28 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
     }
 
     @Override
+    public List<NeutronFirewallRule> getAllNeutronFirewallRules() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronFirewallRule(NeutronFirewallRule input) {
-        if (neutronFirewallRuleExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronFirewallRule(String uuid) {
-        if (!neutronFirewallRuleExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronFirewallRule(String uuid, NeutronFirewallRule delta) {
-        if (!neutronFirewallRuleExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronFirewallRuleInUse(String firewallRuleUUID) {
-        return !neutronFirewallRuleExists(firewallRuleUUID);
+        return !exists(firewallRuleUUID);
     }
 
     @Override

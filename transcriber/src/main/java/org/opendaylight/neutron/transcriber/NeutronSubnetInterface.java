@@ -72,24 +72,16 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public boolean subnetExists(String uuid) {
-        Subnet subnet = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (subnet == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronSubnet getSubnet(String uuid) {
-        Subnet subnet = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (subnet == null) {
-            return null;
-        }
-        return fromMd(subnet);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronSubnet> getAllSubnets() {
+    public List<NeutronSubnet> getAll() {
         Set<NeutronSubnet> allSubnets = new HashSet<NeutronSubnet>();
         Subnets subnets = readMd(createInstanceIdentifier());
         if (subnets != null) {
@@ -101,6 +93,11 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
         List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
         ans.addAll(allSubnets);
         return ans;
+    }
+
+    @Override
+    public List<NeutronSubnet> getAllSubnets() {
+        return getAll();
     }
 
     @Override
@@ -137,14 +134,10 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
 
     @Override
     public boolean updateSubnet(String uuid, NeutronSubnet delta) {
-        if (!subnetExists(uuid)) {
-            return false;
-        }
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
 // note: this is being set to false in preparation for deprecation and removal

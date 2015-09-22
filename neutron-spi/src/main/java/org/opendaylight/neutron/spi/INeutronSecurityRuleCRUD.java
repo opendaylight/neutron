@@ -14,7 +14,8 @@ import java.util.List;
  * This interface defines the methods for CRUD of NB OpenStack Security Rule objects
  */
 
-public interface INeutronSecurityRuleCRUD {
+public interface INeutronSecurityRuleCRUD
+    extends INeutronCRUD<NeutronSecurityRule> {
     /**
      * Applications call this interface method to determine if a particular
      * Security Rule object exists

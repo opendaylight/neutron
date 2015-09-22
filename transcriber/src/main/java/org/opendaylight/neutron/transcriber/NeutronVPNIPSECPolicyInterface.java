@@ -40,24 +40,16 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
     @Override
     public boolean neutronVPNIPSECPolicyExists(String uuid) {
-        Ipsecpolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (policy == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronVPNIPSECPolicy getNeutronVPNIPSECPolicy(String uuid) {
-        Ipsecpolicy policy = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (policy == null) {
-            return null;
-        }
-        return fromMd(policy);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies() {
+    public List<NeutronVPNIPSECPolicy> getAll() {
         Set<NeutronVPNIPSECPolicy> allVPNIPSECPolicies = new HashSet<NeutronVPNIPSECPolicy>();
         IpsecPolicies policies = readMd(createInstanceIdentifier());
         if (policies != null) {
@@ -72,37 +64,28 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
     }
 
     @Override
+    public List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy input) {
-        if (neutronVPNIPSECPolicyExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronVPNIPSECPolicy(String uuid) {
-        if (!neutronVPNIPSECPolicyExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronVPNIPSECPolicy(String uuid, NeutronVPNIPSECPolicy delta) {
-        if (!neutronVPNIPSECPolicyExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronVPNIPSECPolicyInUse(String netUUID) {
-        if (!neutronVPNIPSECPolicyExists(netUUID)) {
-            return true;
-        }
-        return false;
+        return !exists(netUUID);
     }
 
     protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {

@@ -69,15 +69,11 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
 
     @Override
     public NeutronNetwork getNetwork(String uuid) {
-        Network network = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (network == null) {
-            return null;
-        }
-        return fromMd(network);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronNetwork> getAllNetworks() {
+    public List<NeutronNetwork> getAll() {
         Set<NeutronNetwork> allNetworks = new HashSet<NeutronNetwork>();
         Networks networks = readMd(createInstanceIdentifier());
         if (networks != null) {
@@ -92,40 +88,31 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
     }
 
     @Override
+    public List<NeutronNetwork> getAllNetworks() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNetwork(NeutronNetwork input) {
-        if (networkExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNetwork(String uuid) {
-        if (!networkExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNetwork(String uuid, NeutronNetwork delta) {
-        if (!networkExists(uuid)) {
-            return false;
-        }
 /* note: because what we get is *not* a delta but (at this point) the updated
  * object, this is much simpler - just replace the value and update the mdsal
  * with it */
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean networkInUse(String netUUID) {
-        if (!networkExists(netUUID)) {
-            return true;
-        }
-        return false;
+        return !exists(netUUID);
     }
 
     protected NeutronNetwork fromMd(Network network) {

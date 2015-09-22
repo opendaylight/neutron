@@ -41,24 +41,16 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     @Override
     public boolean neutronFirewallExists(String uuid) {
-        Firewall firewall = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (firewall == null) {
-            return false;
-        }
-        return true;
+        return exists(uuid);
     }
 
     @Override
     public NeutronFirewall getNeutronFirewall(String uuid) {
-        Firewall firewall = readMd(createInstanceIdentifier(toMd(uuid)));
-        if (firewall == null) {
-            return null;
-        }
-        return fromMd(firewall);
+        return get(uuid);
     }
 
     @Override
-    public List<NeutronFirewall> getAllNeutronFirewalls() {
+    public List<NeutronFirewall> getAll() {
         Set<NeutronFirewall> allFirewalls = new HashSet<NeutronFirewall>();
         Firewalls firewalls = readMd(createInstanceIdentifier());
         if (firewalls != null) {
@@ -73,34 +65,28 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
     }
 
     @Override
+    public List<NeutronFirewall> getAllNeutronFirewalls() {
+        return getAll();
+    }
+
+    @Override
     public boolean addNeutronFirewall(NeutronFirewall input) {
-        if (neutronFirewallExists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronFirewall(String uuid) {
-        if (!neutronFirewallExists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronFirewall(String uuid, NeutronFirewall delta) {
-        if (!neutronFirewallExists(uuid)) {
-            return false;
-        }
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
     public boolean neutronFirewallInUse(String firewallUUID) {
-        return !neutronFirewallExists(firewallUUID);
+        return !exists(firewallUUID);
     }
 
     @Override
