@@ -7,6 +7,7 @@
  */
 package org.opendaylight.neutron.spi;
 
+@Deprecated
 public interface INeutronLoadBalancerPoolMemberAware {
 
 

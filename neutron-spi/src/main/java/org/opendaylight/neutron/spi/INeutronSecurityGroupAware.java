@@ -11,7 +11,7 @@ package org.opendaylight.neutron.spi;
 /**
  * This interface defines the methods a service that wishes to be aware of Neutron Security Groups needs to implement
  */
-
+@Deprecated
 public interface INeutronSecurityGroupAware {
 
     /**
