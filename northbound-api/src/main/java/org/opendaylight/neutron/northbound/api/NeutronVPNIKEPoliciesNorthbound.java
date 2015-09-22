@@ -174,25 +174,20 @@ public class NeutronVPNIKEPoliciesNorthbound extends AbstractNeutronNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-                        int status = service.canCreateNeutronVPNIKEPolicy(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
+                    int status = service.canCreateNeutronVPNIKEPolicy(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             /*
              * add ikePolicy to the cache
              */
             ikePolicyInterface.addNeutronVPNIKEPolicy(singleton);
+
             if (instances != null) {
                 for (Object instance : instances) {
                     INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
@@ -228,24 +223,19 @@ public class NeutronVPNIKEPoliciesNorthbound extends AbstractNeutronNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-                    int status = service.canUpdateNeutronVPNIKEPolicy(singleton, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
+                int status = service.canUpdateNeutronVPNIKEPolicy(singleton, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         /*
          * update the ikePolicy entry and return the modified object
          */
         ikePolicyInterface.updateNeutronVPNIKEPolicy(policyUUID, singleton);
+
         NeutronVPNIKEPolicy updatedVPNIKEPolicy = ikePolicyInterface.getNeutronVPNIKEPolicy(policyUUID);
         if (instances != null) {
             for (Object instance : instances) {
@@ -272,19 +262,13 @@ public class NeutronVPNIKEPoliciesNorthbound extends AbstractNeutronNorthbound {
         NeutronVPNIKEPolicy singleton = policyInterface.getNeutronVPNIKEPolicy(policyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-                    int status = service.canDeleteNeutronVPNIKEPolicy(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
+                int status = service.canDeleteNeutronVPNIKEPolicy(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         deleteUuid(RESOURCE_NAME, policyUUID,
                    new Remover() {

@@ -177,19 +177,13 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             NeutronSecurityRule singleton = input.getSingleton();
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                        int status = service.canCreateNeutronSecurityRule(singleton);
-                        if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+                    int status = service.canCreateNeutronSecurityRule(singleton);
+                    if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add rule to cache
@@ -205,19 +199,13 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
             for (NeutronSecurityRule test : input.getBulk()) {
                 if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                            int status = service.canCreateNeutronSecurityRule(test);
-                            if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                                return Response.status(status).build();
-                            }
+                    for (Object instance : instances) {
+                        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+                        int status = service.canCreateNeutronSecurityRule(test);
+                        if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -257,19 +245,13 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                    int status = service.canUpdateNeutronSecurityRule(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+                int status = service.canUpdateNeutronSecurityRule(delta, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -302,19 +284,13 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
         NeutronSecurityRule singleton = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                    int status = service.canDeleteNeutronSecurityRule(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+                int status = service.canDeleteNeutronSecurityRule(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
 

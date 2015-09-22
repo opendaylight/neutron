@@ -197,19 +197,13 @@ public class NeutronFirewallRulesNorthbound extends AbstractNeutronNorthbound {
             NeutronFirewallRule singleton = input.getSingleton();
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
-                        int status = service.canCreateNeutronFirewallRule(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
+                    int status = service.canCreateNeutronFirewallRule(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             // add rule to cache
             singleton.initDefaults();
@@ -224,19 +218,13 @@ public class NeutronFirewallRulesNorthbound extends AbstractNeutronNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
             for (NeutronFirewallRule test : input.getBulk()) {
                 if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
-                            int status = service.canCreateNeutronFirewallRule(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+                    for (Object instance : instances) {
+                        INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
+                        int status = service.canCreateNeutronFirewallRule(test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
             for (NeutronFirewallRule test : input.getBulk()) {
@@ -273,19 +261,13 @@ public class NeutronFirewallRulesNorthbound extends AbstractNeutronNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
-                    int status = service.canUpdateNeutronFirewallRule(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
+                int status = service.canUpdateNeutronFirewallRule(delta, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -320,19 +302,13 @@ public class NeutronFirewallRulesNorthbound extends AbstractNeutronNorthbound {
         NeutronFirewallRule singleton = firewallRuleInterface.getNeutronFirewallRule(firewallRuleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallRuleAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
-                    int status = service.canDeleteNeutronFirewallRule(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronFirewallRuleAware service = (INeutronFirewallRuleAware) instance;
+                int status = service.canDeleteNeutronFirewallRule(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*

@@ -205,19 +205,13 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronRouterAware service = (INeutronRouterAware) instance;
-                        int status = service.canCreateRouter(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronRouterAware service = (INeutronRouterAware) instance;
+                    int status = service.canCreateRouter(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             /*
@@ -266,19 +260,13 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canUpdateRouter(updatedRouter, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                int status = service.canUpdateRouter(updatedRouter, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -311,19 +299,13 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
         NeutronRouter singleton = routerInterface.getRouter(routerUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canDeleteRouter(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                int status = service.canDeleteRouter(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         deleteUuid(RESOURCE_NAME, routerUUID,
                    new Remover() {
@@ -361,19 +343,13 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
         NeutronRouter target = routerInterface.getRouter(routerUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canAttachInterface(target, input);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                int status = service.canAttachInterface(target, input);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         target.addInterface(input.getPortUUID(), input);
@@ -391,19 +367,13 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
     private int checkDownstreamDetach(NeutronRouter target, NeutronRouter_Interface input) {
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canDetachInterface(target, input);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return status;
-                    }
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                int status = service.canDetachInterface(target, input);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return status;
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         return HTTP_OK_BOTTOM;
     }
@@ -435,9 +405,11 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             return Response.status(status).build();
         }
         target.removeInterface(input.getPortUUID());
-        for (Object instance : instances) {
-            INeutronRouterAware service = (INeutronRouterAware) instance;
-            service.neutronRouterInterfaceDetached(target, input);
+        if (instances != null) {
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                service.neutronRouterInterfaceDetached(target, input);
+            }
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }

@@ -199,19 +199,13 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                        int status = service.canCreateNetwork(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                    int status = service.canCreateNetwork(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add network to cache
@@ -226,21 +220,15 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
 
         } else {
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-            for (NeutronNetwork test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance: instances) {
-                            INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                            int status = service.canCreateNetwork(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+            if (instances != null) {
+                for (NeutronNetwork test : input.getBulk()) {
+                    for (Object instance: instances) {
+                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                        int status = service.canCreateNetwork(test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -288,19 +276,13 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
         updatedObject.setTenantID(original.getTenantID());
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    int status = service.canUpdateNetwork(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                int status = service.canUpdateNetwork(updatedObject, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         // update network object
@@ -330,19 +312,13 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
         NeutronNetwork singleton = networkInterface.getNetwork(netUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    int status = service.canDeleteNetwork(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                int status = service.canDeleteNetwork(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         deleteUuid(RESOURCE_NAME, netUUID,

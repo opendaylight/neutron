@@ -160,19 +160,13 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                        int status = service.canCreateNeutronSecurityGroup(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+                    int status = service.canCreateNeutronSecurityGroup(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             // Add to Neutron cache
             securityGroupInterface.addNeutronSecurityGroup(singleton);
@@ -186,19 +180,13 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
             for (NeutronSecurityGroup test : input.getBulk()) {
                 if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                            int status = service.canCreateNeutronSecurityGroup(test);
-                            if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                                return Response.status(status).build();
-                            }
+                    for (Object instance : instances) {
+                        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+                        int status = service.canCreateNeutronSecurityGroup(test);
+                        if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new BadRequestException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -238,19 +226,13 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
 
         Object[] instances =  NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                    int status = service.canUpdateNeutronSecurityGroup(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+                int status = service.canUpdateNeutronSecurityGroup(delta, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -283,19 +265,13 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
         NeutronSecurityGroup singleton = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                    int status = service.canDeleteNeutronSecurityGroup(singleton);
-                    if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+                int status = service.canDeleteNeutronSecurityGroup(singleton);
+                if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
