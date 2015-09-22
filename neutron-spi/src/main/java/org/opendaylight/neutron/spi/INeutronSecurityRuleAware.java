@@ -11,7 +11,7 @@ package org.opendaylight.neutron.spi;
 /**
  * This interface defines the methods required to be aware of Neutron Security Rules
  */
-
+@Deprecated
 public interface INeutronSecurityRuleAware {
 
     /**
