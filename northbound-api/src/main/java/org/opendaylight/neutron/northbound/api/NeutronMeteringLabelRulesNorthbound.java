@@ -29,7 +29,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.codehaus.enunciate.jaxrs.TypeHint;
 
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleAware;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
@@ -166,19 +165,13 @@ public class NeutronMeteringLabelRulesNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                        int status = service.canCreateMeteringLabelRule(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+                    int status = service.canCreateMeteringLabelRule(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
                 }
-            } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
             }
 
             /*
@@ -216,19 +209,13 @@ public class NeutronMeteringLabelRulesNorthbound {
         NeutronMeteringLabelRule singleton = meteringLabelRuleInterface.getNeutronMeteringLabelRule(ruleUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                    int status = service.canDeleteMeteringLabelRule(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+                int status = service.canDeleteMeteringLabelRule(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
             }
-        } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
         }
         meteringLabelRuleInterface.removeNeutronMeteringLabelRule(ruleUUID);
         if (instances != null) {

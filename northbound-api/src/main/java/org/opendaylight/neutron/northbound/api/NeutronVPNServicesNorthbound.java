@@ -61,8 +61,7 @@ public class NeutronVPNServicesNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "VPNService CRUD Interface";
     private static final String UUID_NO_EXIST = "VPNService UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronVPNService extractFields(NeutronVPNService o, List<String> fields) {
         return o.extractFields(fields);
@@ -175,19 +174,13 @@ public class NeutronVPNServicesNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-                        int status = service.canCreateNeutronVPNService(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
+                    int status = service.canCreateNeutronVPNService(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             VPNServiceInterface.addVPNService(singleton);
@@ -201,19 +194,13 @@ public class NeutronVPNServicesNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
             for (NeutronVPNService test : input.getBulk()) {
                 if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-                            int status = service.canCreateNeutronVPNService(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+                    for (Object instance : instances) {
+                        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
+                        int status = service.canCreateNeutronVPNService(test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
             /*
@@ -249,19 +236,13 @@ public class NeutronVPNServicesNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-                    int status = service.canUpdateNeutronVPNService(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
+                int status = service.canUpdateNeutronVPNService(delta, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -293,19 +274,13 @@ public class NeutronVPNServicesNorthbound {
         NeutronVPNService singleton = VPNServiceInterface.getVPNService(serviceID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-                    int status = service.canDeleteNeutronVPNService(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
+                int status = service.canDeleteNeutronVPNService(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         VPNServiceInterface.removeVPNService(serviceID);

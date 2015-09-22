@@ -65,8 +65,7 @@ public class NeutronNetworksNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Network CRUD Interface";
     private static final String UUID_NO_EXIST = "Network UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
         return o.extractFields(fields);
@@ -205,19 +204,13 @@ public class NeutronNetworksNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                        int status = service.canCreateNetwork(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                    int status = service.canCreateNetwork(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add network to cache
@@ -232,21 +225,15 @@ public class NeutronNetworksNorthbound {
 
         } else {
             Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-            for (NeutronNetwork test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance: instances) {
-                            INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                            int status = service.canCreateNetwork(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+            if (instances != null) {
+                for (NeutronNetwork test : input.getBulk()) {
+                    for (Object instance: instances) {
+                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                        int status = service.canCreateNetwork(test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -294,19 +281,13 @@ public class NeutronNetworksNorthbound {
         updatedObject.setTenantID(original.getTenantID());
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    int status = service.canUpdateNetwork(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                int status = service.canUpdateNetwork(updatedObject, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         // update network object
@@ -336,19 +317,13 @@ public class NeutronNetworksNorthbound {
         NeutronNetwork singleton = networkInterface.getNetwork(netUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    int status = service.canDeleteNetwork(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronNetworkAware service = (INeutronNetworkAware) instance;
+                int status = service.canDeleteNetwork(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         if (!networkInterface.removeNetwork(netUUID)) {
