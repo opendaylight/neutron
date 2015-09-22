@@ -29,6 +29,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
@@ -127,7 +128,7 @@ public class NeutronPortsNorthbound {
             // sorting not supported
             ) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
-        List<NeutronPort> allPorts = portInterface.getAllPorts();
+        List<NeutronPort> allPorts = portInterface.getAll(null);
         List<NeutronPort> ans = new ArrayList<NeutronPort>();
         Iterator<NeutronPort> i = allPorts.iterator();
         while (i.hasNext()) {
@@ -178,16 +179,18 @@ public class NeutronPortsNorthbound {
             // return fields
             @QueryParam("fields") List<String> fields ) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
-        if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
-        }
-        if (fields.size() > 0) {
-            NeutronPort ans = portInterface.getPort(portUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
+        try (BindingTransactionChain chain = portInterface.createTransactionChain()) {
+            if (!portInterface.exists(portUUID, chain)) {
+                throw new ResourceNotFoundException(UUID_NO_EXIST);
+            }
+            if (fields.size() > 0) {
+                NeutronPort ans = portInterface.get(portUUID, chain);
+                return Response.status(HttpURLConnection.HTTP_OK).entity(
                     new NeutronPortRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronPortRequest(portInterface.getPort(portUUID))).build();
+            } else {
+                return Response.status(HttpURLConnection.HTTP_OK).entity(
+                    new NeutronPortRequest(portInterface.get(portUUID, chain))).build();
+            }
         }
     }
 
@@ -225,7 +228,7 @@ public class NeutronPortsNorthbound {
             }
 
             // add the port to the cache
-            portInterface.addPort(singleton);
+            portInterface.add(singleton, null);
             if (instances != null) {
                 for (Object instance : instances) {
                     INeutronPortAware service = (INeutronPortAware) instance;
@@ -254,12 +257,14 @@ public class NeutronPortsNorthbound {
             }
 
             //once everything has passed, then we can add to the cache
-            for (NeutronPort test : input.getBulk()) {
-                portInterface.addPort(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronPortAware service = (INeutronPortAware) instance;
-                        service.neutronPortCreated(test);
+            try (BindingTransactionChain chain = portInterface.createTransactionChain()) {
+                for (NeutronPort test : input.getBulk()) {
+                    portInterface.add(test, chain);
+                    if (instances != null) {
+                        for (Object instance : instances) {
+                            INeutronPortAware service = (INeutronPortAware) instance;
+                            service.neutronPortCreated(test);
+                        }
                     }
                 }
             }
@@ -284,60 +289,61 @@ public class NeutronPortsNorthbound {
             ) {
         NeutronCRUDInterfaces interfaces = getNeutronInterfaces(false, true);
         INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        NeutronPort original = portInterface.getPort(portUUID);
+        try (BindingTransactionChain chain = portInterface.createTransactionChain()) {
+            NeutronPort original = portInterface.get(portUUID, chain);
 
-        /*
-         * note: what we would like to get is the complete object as it
-         * is known by neutron.  Until then, patch what we *do* get
-         * so that we don't lose already known information
-         */
+            /*
+             * note: what we would like to get is the complete object as it
+             * is known by neutron.  Until then, patch what we *do* get
+             * so that we don't lose already known information
+             */
 
-        NeutronPort updatedObject = input.getSingleton();
-        if (updatedObject.getID() == null) {
-            updatedObject.setID(portUUID);
-        }
-        if (updatedObject.getTenantID() == null) {
-            updatedObject.setTenantID(original.getTenantID());
-        }
-        if (updatedObject.getNetworkUUID() == null) {
-            updatedObject.setNetworkUUID(original.getNetworkUUID());
-        }
-        if (updatedObject.getMacAddress() == null) {
-            updatedObject.setMacAddress(original.getMacAddress());
-        }
-        if (updatedObject.getFixedIPs() == null) {
-            updatedObject.setFixedIPs(original.getFixedIPs());
-        }
+            NeutronPort updatedObject = input.getSingleton();
+            if (updatedObject.getID() == null) {
+                updatedObject.setID(portUUID);
+            }
+            if (updatedObject.getTenantID() == null) {
+                updatedObject.setTenantID(original.getTenantID());
+            }
+            if (updatedObject.getNetworkUUID() == null) {
+                updatedObject.setNetworkUUID(original.getNetworkUUID());
+            }
+            if (updatedObject.getMacAddress() == null) {
+                updatedObject.setMacAddress(original.getMacAddress());
+            }
+            if (updatedObject.getFixedIPs() == null) {
+                updatedObject.setFixedIPs(original.getFixedIPs());
+            }
 
-        Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canUpdatePort(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
+            Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
+            if (instances != null) {
+                if (instances.length > 0) {
+                    for (Object instance : instances) {
+                        INeutronPortAware service = (INeutronPortAware) instance;
+                        int status = service.canUpdatePort(updatedObject, original);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
+                        }
                     }
+                } else {
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
 
-        //        TODO: Support change of security groups
-        // update the port and return the modified object
-        portInterface.updatePort(portUUID, updatedObject);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronPortAware service = (INeutronPortAware) instance;
-                service.neutronPortUpdated(updatedObject);
+            //        TODO: Support change of security groups
+            // update the port and return the modified object
+            portInterface.update(portUUID, updatedObject, chain);
+            if (instances != null) {
+                for (Object instance : instances) {
+                    INeutronPortAware service = (INeutronPortAware) instance;
+                    service.neutronPortUpdated(updatedObject);
+                }
             }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
+            return Response.status(HttpURLConnection.HTTP_OK).entity(
                 new NeutronPortRequest(updatedObject)).build();
-
+        }
     }
 
     /**
@@ -352,28 +358,30 @@ public class NeutronPortsNorthbound {
             @PathParam("portUUID") String portUUID) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
 
-        NeutronPort singleton = portInterface.getPort(portUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canDeletePort(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
+        try (BindingTransactionChain chain = portInterface.createTransactionChain()) {
+            NeutronPort singleton = portInterface.get(portUUID, chain);
+            Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
+            if (instances != null) {
+                if (instances.length > 0) {
+                    for (Object instance : instances) {
+                        INeutronPortAware service = (INeutronPortAware) instance;
+                        int status = service.canDeletePort(singleton);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
+                        }
                     }
+                } else {
+                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
             } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
+                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        portInterface.removePort(portUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronPortAware service = (INeutronPortAware) instance;
-                service.neutronPortDeleted(singleton);
+            portInterface.remove(portUUID, chain);
+            if (instances != null) {
+                for (Object instance : instances) {
+                    INeutronPortAware service = (INeutronPortAware) instance;
+                    service.neutronPortDeleted(singleton);
+                }
             }
         }
         return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
