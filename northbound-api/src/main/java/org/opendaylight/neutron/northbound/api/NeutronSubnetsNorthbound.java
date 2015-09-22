@@ -61,8 +61,7 @@ public class NeutronSubnetsNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Subnet CRUD Interface";
     private static final String UUID_NO_EXIST = "Subnet UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronSubnet extractFields(NeutronSubnet o, List<String> fields) {
         return o.extractFields(fields);
@@ -201,19 +200,13 @@ public class NeutronSubnetsNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                        int status = service.canCreateSubnet(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronSubnetAware service = (INeutronSubnetAware) instance;
+                    int status = service.canCreateSubnet(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             subnetInterface.addSubnet(singleton);
             if (instances != null) {
@@ -226,19 +219,13 @@ public class NeutronSubnetsNorthbound {
             Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
             for (NeutronSubnet test : input.getBulk()) {
                 if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                            int status = service.canCreateSubnet(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+                    for (Object instance : instances) {
+                        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+                        int status = service.canCreateSubnet(test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -290,19 +277,13 @@ public class NeutronSubnetsNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    int status = service.canUpdateSubnet(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronSubnetAware service = (INeutronSubnetAware) instance;
+                int status = service.canUpdateSubnet(updatedObject, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
@@ -334,19 +315,13 @@ public class NeutronSubnetsNorthbound {
         NeutronSubnet singleton = subnetInterface.getSubnet(subnetUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    int status = service.canDeleteSubnet(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronSubnetAware service = (INeutronSubnetAware) instance;
+                int status = service.canDeleteSubnet(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         /*
