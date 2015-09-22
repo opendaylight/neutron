@@ -10,7 +10,6 @@ package org.opendaylight.neutron.e2etest;
 
 import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.vmOption;
-import static org.ops4j.pax.exam.CoreOptions.when;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.debugConfiguration;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
@@ -35,16 +34,11 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.junit.PaxExam;
 
-import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
 
 @RunWith(PaxExam.class)
 public class ITNeutronE2E {
-
-    private static final String KARAF_DEBUG_PORT = "5005";
-    private static final String KARAF_DEBUG_PROP = "karaf.debug";
-    private static final String KEEP_UNPACK_DIRECTORY_PROP = "karaf.keep.unpack";
 
     @Inject
     private BundleContext bundleContext;
@@ -58,8 +52,6 @@ public class ITNeutronE2E {
             // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
             // FIXME: need to *NOT* hardcode the version here - it breaks on
             // version bumps
-            when(Boolean.getBoolean(KARAF_DEBUG_PROP))
-                    .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)),
             karafDistributionConfiguration()
                 .frameworkUrl(
                     maven()
@@ -74,7 +66,7 @@ public class ITNeutronE2E {
        // It is really nice if the container sticks around after the test so you can check the contents
        // of the data directory when things go wrong.
             vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"),
-            when(Boolean.getBoolean(KEEP_UNPACK_DIRECTORY_PROP)).useOptions(keepRuntimeFolder()),
+            keepRuntimeFolder(),
        // Don't bother with local console output as it just ends up cluttering the logs
             configureConsole().ignoreLocalConsole(),
        // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
