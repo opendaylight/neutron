@@ -166,19 +166,13 @@ public class NeutronMeteringLabelsNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-                        int status = service.canCreateMeteringLabel(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+                    int status = service.canCreateMeteringLabel(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
                 }
-            } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
             }
 
             /*
@@ -216,19 +210,13 @@ public class NeutronMeteringLabelsNorthbound {
         NeutronMeteringLabel singleton = meteringLabelInterface.getNeutronMeteringLabel(labelUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-                    int status = service.canDeleteMeteringLabel(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+                int status = service.canDeleteMeteringLabel(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
             }
-        } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
         }
         meteringLabelInterface.removeNeutronMeteringLabel(labelUUID);
         if (instances != null) {

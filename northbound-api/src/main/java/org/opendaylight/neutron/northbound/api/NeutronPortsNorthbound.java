@@ -63,8 +63,7 @@ public class NeutronPortsNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Port CRUD Interface";
     private static final String UUID_NO_EXIST = "Port UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+
 
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
@@ -209,19 +208,13 @@ public class NeutronPortsNorthbound {
 
             Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronPortAware service = (INeutronPortAware) instance;
-                        int status = service.canCreatePort(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronPortAware service = (INeutronPortAware) instance;
+                    int status = service.canCreatePort(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
 
             // add the port to the cache
@@ -234,22 +227,15 @@ public class NeutronPortsNorthbound {
             }
         } else {
             Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-            for (NeutronPort test : input.getBulk()) {
-
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronPortAware service = (INeutronPortAware) instance;
-                            int status = service.canCreatePort(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
+            if (instances != null) {
+                for (NeutronPort test : input.getBulk()) {
+                    for (Object instance : instances) {
+                        INeutronPortAware service = (INeutronPortAware) instance;
+                        int status = service.canCreatePort(test);
+                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                            return Response.status(status).build();
                         }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
                 }
             }
 
@@ -311,19 +297,13 @@ public class NeutronPortsNorthbound {
 
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canUpdatePort(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronPortAware service = (INeutronPortAware) instance;
+                int status = service.canUpdatePort(updatedObject, original);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         //        TODO: Support change of security groups
@@ -355,19 +335,13 @@ public class NeutronPortsNorthbound {
         NeutronPort singleton = portInterface.getPort(portUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canDeletePort(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronPortAware service = (INeutronPortAware) instance;
+                int status = service.canDeletePort(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         portInterface.removePort(portUUID);
         if (instances != null) {

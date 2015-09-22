@@ -61,8 +61,6 @@ public class NeutronFloatingIPsNorthbound {
     private static final int HTTP_OK_TOP = 299;
     private static final String INTERFACE_NAME = "Floating IP CRUD Interface";
     private static final String UUID_NO_EXIST = "Floating IP UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
 
 
     private NeutronFloatingIP extractFields(NeutronFloatingIP o, List<String> fields) {
@@ -192,19 +190,13 @@ public class NeutronFloatingIPsNorthbound {
         if (input.isSingleton()) {
             Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                        int status = service.canCreateFloatingIP(input.getSingleton());
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+                    int status = service.canCreateFloatingIP(input.getSingleton());
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
             }
             floatingIPInterface.addFloatingIP(input.getSingleton());
             if (instances != null) {
@@ -240,19 +232,13 @@ public class NeutronFloatingIPsNorthbound {
         NeutronFloatingIP target = floatingIPInterface.getFloatingIP(floatingipUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                    int status = service.canUpdateFloatingIP(singleton, target);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+                int status = service.canUpdateFloatingIP(singleton, target);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         floatingIPInterface.updateFloatingIP(floatingipUUID, singleton);
         target = floatingIPInterface.getFloatingIP(floatingipUUID);
@@ -281,19 +267,13 @@ public class NeutronFloatingIPsNorthbound {
         NeutronFloatingIP singleton = floatingIPInterface.getFloatingIP(floatingipUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                    int status = service.canDeleteFloatingIP(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+                int status = service.canDeleteFloatingIP(singleton);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         floatingIPInterface.removeFloatingIP(floatingipUUID);
         if (instances != null) {
