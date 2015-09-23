@@ -198,7 +198,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (port.getTenantId() != null) {
             result.setTenantID(String.valueOf(port.getTenantId().getValue()).replace("-", ""));
         }
-        result.setPortUUID(String.valueOf(port.getUuid().getValue()));
+        result.setID(String.valueOf(port.getUuid().getValue()));
         addExtensions(port, result);
         return result;
     }
@@ -293,8 +293,8 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         if (neutronPort.getTenantID() != null && neutronPort.getTenantID() != "") {
             portBuilder.setTenantId(toUuid(neutronPort.getTenantID()));
         }
-        if (neutronPort.getPortUUID() != null) {
-            portBuilder.setUuid(toUuid(neutronPort.getPortUUID()));
+        if (neutronPort.getID() != null) {
+            portBuilder.setUuid(toUuid(neutronPort.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron port without UUID");
         }

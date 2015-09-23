@@ -37,7 +37,7 @@ public class NeutronMeteringLabelJAXBTest {
                     "Provides allowed address pairs", testObject.getMeteringLabelDescription());
 
             Assert.assertEquals("NeutronMeteringLabel JAXB Test 4: Testing tenant_id failed",
-                    "9bacb3c5d39d41a79512987f338cf177", testObject.getMeteringLabelTenantID());
+                    "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
         } catch (Exception e) {
             Assert.fail("Test failed");
         }

@@ -108,8 +108,8 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         if (meteringLabel.getMeteringLabelDescription()!=null) {
             meteringLabelBuilder.setDescription(meteringLabel.getMeteringLabelDescription());
         }
-        if (meteringLabel.getMeteringLabelTenantID()!=null) {
-            meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getMeteringLabelTenantID()));
+        if (meteringLabel.getTenantID()!=null) {
+            meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getTenantID()));
         }
         if (meteringLabel.getID()!=null) {
             meteringLabelBuilder.setUuid(toUuid(meteringLabel.getID()));
@@ -127,7 +127,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         }
 //todo: remove '-' chars as tenant id doesn't use them
         if (label.getTenantId() != null) {
-            answer.setMeteringLabelTenantID(label.getTenantId().getValue());
+            answer.setTenantID(label.getTenantId().getValue());
         }
         if (label.getUuid() != null) {
             answer.setID(label.getUuid().getValue());

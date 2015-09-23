@@ -172,7 +172,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     protected NeutronSecurityRule fromMd(SecurityRule rule) {
         NeutronSecurityRule answer = new NeutronSecurityRule();
         if (rule.getTenantId() != null) {
-            answer.setSecurityRuleTenantID(rule.getTenantId().getValue().replace("-",""));
+            answer.setTenantID(rule.getTenantId().getValue().replace("-",""));
         }
         if (rule.getDirection() != null) {
             answer.setSecurityRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
@@ -208,8 +208,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     protected SecurityRule toMd(NeutronSecurityRule securityRule) {
         SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
 
-        if (securityRule.getSecurityRuleTenantID() != null) {
-            securityRuleBuilder.setTenantId(toUuid(securityRule.getSecurityRuleTenantID()));
+        if (securityRule.getTenantID() != null) {
+            securityRuleBuilder.setTenantId(toUuid(securityRule.getTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {
             ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =

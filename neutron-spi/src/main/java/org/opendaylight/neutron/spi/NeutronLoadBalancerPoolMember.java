@@ -21,6 +21,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 
 public class NeutronLoadBalancerPoolMember
+    extends NeutronObject
     implements Serializable, INeutronObject {
 
     private static final long serialVersionUID = 1L;
@@ -28,12 +29,6 @@ public class NeutronLoadBalancerPoolMember
     /**
      * TODO: Plumb into LBaaS Pool. Members are nested underneath Pool CRUD.
      */
-    @XmlElement (name = "id")
-    String poolMemberID;
-
-    @XmlElement (name = "tenant_id")
-    String poolMemberTenantID;
-
     @XmlElement (name = "address")
     String poolMemberAddress;
 
@@ -63,30 +58,24 @@ public class NeutronLoadBalancerPoolMember
         this.poolID = poolID;
     }
 
-    public String getID() {
-        return poolMemberID;
-    }
-
-    public void setID(String id) {
-        poolMemberID = id;
-    }
-
     // @deprecated use getID()
     public String getPoolMemberID() {
-        return poolMemberID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setPoolMemberID(String poolMemberID) {
-        this.poolMemberID = poolMemberID;
+    public void setPoolMemberID(String uuid) {
+        setID(uuid);
     }
 
+    @Deprecated
     public String getPoolMemberTenantID() {
-        return poolMemberTenantID;
+        return getTenantID();
     }
 
-    public void setPoolMemberTenantID(String poolMemberTenantID) {
-        this.poolMemberTenantID = poolMemberTenantID;
+    @Deprecated
+    public void setPoolMemberTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public String getPoolMemberAddress() {
@@ -141,7 +130,7 @@ public class NeutronLoadBalancerPoolMember
                 ans.setPoolID(this.getPoolID());
             }
             if (s.equals("tenant_id")) {
-                ans.setPoolMemberTenantID(this.getPoolMemberTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("address")) {
                 ans.setPoolMemberAddress(this.getPoolMemberAddress());
@@ -163,9 +152,9 @@ public class NeutronLoadBalancerPoolMember
     }
     @Override public String toString() {
         return "NeutronLoadBalancerPoolMember{" +
-                "poolMemberID='" + poolMemberID + '\'' +
+                "poolMemberID='" + uuid + '\'' +
                 ", poolID='" + poolID + '\'' +
-                ", poolMemberTenantID='" + poolMemberTenantID + '\'' +
+                ", poolMemberTenantID='" + tenantID + '\'' +
                 ", poolMemberAddress='" + poolMemberAddress + '\'' +
                 ", poolMemberProtoPort=" + poolMemberProtoPort +
                 ", poolMemberAdminStateIsUp=" + poolMemberAdminStateIsUp +

@@ -105,7 +105,7 @@ public class NeutronFirewallNorthbound {
             if ((queryFirewallUUID == null ||
                 queryFirewallUUID.equals(nsg.getID())) &&
                 (queryFirewallTenantID == null ||
-                    queryFirewallTenantID.equals(nsg.getFirewallTenantID())) &&
+                    queryFirewallTenantID.equals(nsg.getTenantID())) &&
                 (queryFirewallName == null ||
                     queryFirewallName.equals(nsg.getFirewallName())) &&
                 (queryFirewallDescription == null ||

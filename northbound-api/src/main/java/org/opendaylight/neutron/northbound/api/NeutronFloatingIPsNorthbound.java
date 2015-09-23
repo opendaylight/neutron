@@ -134,7 +134,7 @@ public class NeutronFloatingIPsNorthbound {
                     (queryFloatingIPAddress == null || queryFloatingIPAddress.equals(oSS.getFloatingIPAddress())) &&
                     (queryStatus == null || queryStatus.equals(oSS.getStatus())) &&
                     (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantUUID()))) {
+                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
                 } else {

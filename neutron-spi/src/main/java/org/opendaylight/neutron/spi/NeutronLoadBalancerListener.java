@@ -41,20 +41,15 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 
 public class NeutronLoadBalancerListener
+    extends NeutronObject
     implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "id")
-    String loadBalancerListenerID;
 
     @XmlElement (name = "default_pool_id")
     String neutronLoadBalancerListenerDefaultPoolID;
 
     @XmlElement (name = "connection_limit")
     Integer neutronLoadBalancerListenerConnectionLimit;
-
-    @XmlElement (name = "tenant_id")
-    String loadBalancerListenerTenantID;
 
     @XmlElement (name = "name")
     String loadBalancerListenerName;
@@ -74,30 +69,24 @@ public class NeutronLoadBalancerListener
     @XmlElement (name = "load_balancers")
     List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs;
 
-    public String getID() {
-        return loadBalancerListenerID;
-    }
-
-    public void setID(String id) {
-        loadBalancerListenerID = id;
-    }
-
     // @deprecated use getID()
     public String getLoadBalancerListenerID() {
-        return loadBalancerListenerID;
+        return getID();
     }
 
     // @deprecated use setID()
-    public void setLoadBalancerListenerID(String loadBalancerListenerID) {
-        this.loadBalancerListenerID = loadBalancerListenerID;
+    public void setLoadBalancerListenerID(String uuid) {
+        setID(uuid);
     }
 
+    @Deprecated
     public String getLoadBalancerListenerTenantID() {
-        return loadBalancerListenerTenantID;
+        return getTenantID();
     }
 
-    public void setLoadBalancerListenerTenantID(String loadBalancerListenerTenantID) {
-        this.loadBalancerListenerTenantID = loadBalancerListenerTenantID;
+    @Deprecated
+    public void setLoadBalancerListenerTenantID(String tenantID) {
+        setTenantID(tenantID);
     }
 
     public String getLoadBalancerListenerName() {
@@ -176,7 +165,7 @@ public class NeutronLoadBalancerListener
                 ans.setNeutronLoadBalancerListenerDefaultPoolID(this.getNeutronLoadBalancerListenerDefaultPoolID());
             }
             if (s.equals("tenant_id")) {
-                ans.setLoadBalancerListenerTenantID(this.getLoadBalancerListenerTenantID());
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("name")) {
                 ans.setLoadBalancerListenerName(this.getLoadBalancerListenerName());
@@ -199,10 +188,10 @@ public class NeutronLoadBalancerListener
 
     @Override public String toString() {
         return "NeutronLoadBalancerListener{" +
-                "loadBalancerListenerID='" + loadBalancerListenerID + '\'' +
+                "loadBalancerListenerID='" + uuid + '\'' +
                 ", neutronLoadBalancerListenerDefaultPoolID='" + neutronLoadBalancerListenerDefaultPoolID + '\'' +
                 ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\'' +
-                ", loadBalancerListenerTenantID='" + loadBalancerListenerTenantID + '\'' +
+                ", loadBalancerListenerTenantID='" + tenantID + '\'' +
                 ", loadBalancerListenerName='" + loadBalancerListenerName + '\'' +
                 ", loadBalancerListenerDescription='" + loadBalancerListenerDescription + '\'' +
                 ", loadBalancerListenerAdminStateIsUp=" + loadBalancerListenerAdminStateIsUp +

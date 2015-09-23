@@ -121,8 +121,8 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (floatingIp.getStatus() != null) {
             floatingipBuilder.setStatus(floatingIp.getStatus());
         }
-        if (floatingIp.getTenantUUID() != null) {
-            floatingipBuilder.setTenantId(toUuid(floatingIp.getTenantUUID()));
+        if (floatingIp.getTenantID() != null) {
+            floatingipBuilder.setTenantId(toUuid(floatingIp.getTenantID()));
         }
         if (floatingIp.getID() != null) {
             floatingipBuilder.setUuid(toUuid(floatingIp.getID()));
@@ -149,7 +149,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
             result.setFloatingIPAddress(String.valueOf(fip.getFloatingIpAddress().getValue()));
         }
         if (fip.getTenantId() != null) {
-            result.setTenantUUID(String.valueOf(fip.getTenantId().getValue()));
+            result.setTenantID(String.valueOf(fip.getTenantId().getValue()));
         }
         if (fip.getRouterId() != null) {
             result.setRouterUUID(String.valueOf(fip.getRouterId().getValue()));
