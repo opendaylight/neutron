@@ -29,7 +29,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice,NeutronVPNService> implements INeutronVPNServiceCRUD {
+public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice, VpnServices, NeutronVPNService> implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
 
     NeutronVPNServiceInterface(ProviderContext providerContext) {
@@ -46,21 +46,8 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         return get(uuid, null);
     }
 
-    @Override
-    protected List<NeutronVPNService> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronVPNService> allVPNService = new HashSet<NeutronVPNService>();
-        VpnServices services = readMd(createInstanceIdentifier(), chain);
-        if (services != null) {
-            for (Vpnservice service: services.getVpnservice()) {
-                allVPNService.add(fromMd(service));
-            }
-        }
-        LOGGER.debug("Exiting getVPNService, Found {} OpenStackVPNService", allVPNService.size());
-        List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
-        ans.addAll(allVPNService);
-        return ans;
+    protected List<Vpnservice> getDataObjectList(VpnServices services) {
+        return services.getVpnservice();
     }
 
     @Override

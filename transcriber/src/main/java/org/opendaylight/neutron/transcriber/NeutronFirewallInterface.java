@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,NeutronFirewall> implements INeutronFirewallCRUD {
+public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall, Firewalls, NeutronFirewall> implements INeutronFirewallCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
@@ -52,21 +52,8 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
         return get(uuid, null);
     }
 
-    @Override
-    protected List<NeutronFirewall> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronFirewall> allFirewalls = new HashSet<NeutronFirewall>();
-        Firewalls firewalls = readMd(createInstanceIdentifier(), chain);
-        if (firewalls != null) {
-            for (Firewall firewall: firewalls.getFirewall()) {
-                allFirewalls.add(fromMd(firewall));
-            }
-        }
-        LOGGER.debug("Exiting getFirewalls, Found {} OpenStackFirewall", allFirewalls.size());
-        List<NeutronFirewall> ans = new ArrayList<NeutronFirewall>();
-        ans.addAll(allFirewalls);
-        return ans;
+    protected List<Firewall> getDataObjectList(Firewalls firewalls) {
+        return firewalls.getFirewall();
     }
 
     @Override

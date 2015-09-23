@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 
-public class NeutronPortInterface extends AbstractNeutronInterface<Port, NeutronPort> implements INeutronPortCRUD {
+public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort> implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
 
     NeutronPortInterface(ProviderContext providerContext) {
@@ -71,23 +71,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
         return get(uuid, null);
     }
 
-    @Override
-    protected List<NeutronPort> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        Ports ports = readMd(createInstanceIdentifier(), chain);
-        if (ports != null) {
-            for (Port port : ports.getPort()) {
-                allPorts.add(fromMd(port));
-            }
-        }
-        LOGGER.debug("Exiting getAllPorts, Found {} OpenStackPorts", allPorts.size());
-        List<NeutronPort> ans = new ArrayList<NeutronPort>();
-        ans.addAll(allPorts);
-        return ans;
+    protected List<Port> getDataObjectList(Ports ports) {
+        return ports.getPort();
     }
-
     @Override
     public List<NeutronPort> getAllPorts() {
         return getAll(null);

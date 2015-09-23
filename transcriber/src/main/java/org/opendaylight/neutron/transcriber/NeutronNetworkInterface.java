@@ -43,7 +43,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,NeutronNetwork> implements INeutronNetworkCRUD {
+public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, Networks, NeutronNetwork> implements INeutronNetworkCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
 
     private static final ImmutableBiMap<Class<? extends NetworkTypeBase>,String> NETWORK_MAP
@@ -70,21 +70,8 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
         return get(uuid, null);
     }
 
-    @Override
-    protected List<NeutronNetwork> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronNetwork> allNetworks = new HashSet<NeutronNetwork>();
-        Networks networks = readMd(createInstanceIdentifier(), chain);
-        if (networks != null) {
-            for (Network network: networks.getNetwork()) {
-                allNetworks.add(fromMd(network));
-            }
-        }
-        LOGGER.debug("Exiting getAllNetworks, Found {} OpenStackNetworks", allNetworks.size());
-        List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
-        ans.addAll(allNetworks);
-        return ans;
+    protected List<Network> getDataObjectList(Networks networks) {
+        return networks.getNetwork();
     }
 
     @Override
