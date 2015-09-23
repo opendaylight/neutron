@@ -32,7 +32,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<FirewallRule,NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
+public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<FirewallRule, FirewallRules, NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
 
     NeutronFirewallRuleInterface(ProviderContext providerContext) {
@@ -50,18 +50,8 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
     }
 
     @Override
-    public List<NeutronFirewallRule> getAll() {
-        Set<NeutronFirewallRule> allFirewallRules = new HashSet<NeutronFirewallRule>();
-        FirewallRules rules = readMd(createInstanceIdentifier());
-        if (rules != null) {
-            for (FirewallRule rule: rules.getFirewallRule()) {
-                allFirewallRules.add(fromMd(rule));
-            }
-        }
-        LOGGER.debug("Exiting getFirewallRules, Found {} OpenStackFirewallRule", allFirewallRules.size());
-        List<NeutronFirewallRule> ans = new ArrayList<NeutronFirewallRule>();
-        ans.addAll(allFirewallRules);
-        return ans;
+    protected List<FirewallRule> getDataObjectList(FirewallRules rules) {
+        return rules.getFirewallRule();
     }
 
     @Override

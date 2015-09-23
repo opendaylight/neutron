@@ -49,7 +49,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronPortInterface extends AbstractNeutronInterface<Port, NeutronPort> implements INeutronPortCRUD {
+public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort> implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
 
     NeutronPortInterface(ProviderContext providerContext) {
@@ -69,18 +69,8 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Neutron
     }
 
     @Override
-    public List<NeutronPort> getAll() {
-        Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        Ports ports = readMd(createInstanceIdentifier());
-        if (ports != null) {
-            for (Port port : ports.getPort()) {
-                allPorts.add(fromMd(port));
-            }
-        }
-        LOGGER.debug("Exiting getAllPorts, Found {} OpenStackPorts", allPorts.size());
-        List<NeutronPort> ans = new ArrayList<NeutronPort>();
-        ans.addAll(allPorts);
-        return ans;
+    protected List<Port> getDataObjectList(Ports ports) {
+        return ports.getPort();
     }
 
     @Override

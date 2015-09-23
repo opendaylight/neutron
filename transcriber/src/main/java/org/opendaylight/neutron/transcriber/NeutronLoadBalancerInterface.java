@@ -28,7 +28,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancer, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
+public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancer, Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
 
 
@@ -47,18 +47,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     }
 
     @Override
-    public List<NeutronLoadBalancer> getAll() {
-        Set<NeutronLoadBalancer> allLoadBalancers = new HashSet<NeutronLoadBalancer>();
-        Loadbalancers lbs = readMd(createInstanceIdentifier());
-        if (lbs != null) {
-            for (Loadbalancer lb: lbs.getLoadbalancer()) {
-                allLoadBalancers.add(fromMd(lb));
-            }
-        }
-        LOGGER.debug("Exiting getLoadBalancers, Found {} OpenStackLoadBalancer", allLoadBalancers.size());
-        List<NeutronLoadBalancer> ans = new ArrayList<NeutronLoadBalancer>();
-        ans.addAll(allLoadBalancers);
-        return ans;
+    protected List<Loadbalancer> getDataObjectList(Loadbalancers lbs) {
+        return lbs.getLoadbalancer();
     }
 
     @Override
