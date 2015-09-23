@@ -31,7 +31,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
+public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIPSECSiteConnectionsInterface(ProviderContext providerContext) {
@@ -51,20 +51,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     @Override
-    protected List<NeutronVPNIPSECSiteConnection> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnections = new HashSet<NeutronVPNIPSECSiteConnection>();
-        IpsecSiteConnections connections = readMd(createInstanceIdentifier(), chain);
-        if (connections != null) {
-            for (Ipsecsiteconnection connection: connections.getIpsecsiteconnection()) {
-                allNeutronVPNIPSECSiteConnections.add(fromMd(connection));
-            }
-        }
-        LOGGER.debug("Exiting getAllNeutronVPNIPSECSiteConnections, Found {} OpenStackVPNIPSECSiteConnections", allNeutronVPNIPSECSiteConnections.size());
-        List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
-        ans.addAll(allNeutronVPNIPSECSiteConnections);
-        return ans;
+    protected List<Ipsecsiteconnection> getDataObjectList(IpsecSiteConnections connections) {
+        return connections.getIpsecsiteconnection();
     }
 
     @Override

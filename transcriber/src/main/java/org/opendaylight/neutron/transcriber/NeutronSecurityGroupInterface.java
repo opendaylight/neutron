@@ -34,7 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<SecurityGroup,NeutronSecurityGroup> implements INeutronSecurityGroupCRUD {
+public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, NeutronSecurityGroup> implements INeutronSecurityGroupCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
 
 
@@ -53,20 +53,8 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     }
 
     @Override
-    protected List<NeutronSecurityGroup> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronSecurityGroup> allSecurityGroups = new HashSet<NeutronSecurityGroup>();
-        SecurityGroups groups = readMd(createInstanceIdentifier(), chain);
-        if (groups != null) {
-            for (SecurityGroup group: groups.getSecurityGroup()) {
-                allSecurityGroups.add(fromMd(group));
-            }
-        }
-        LOGGER.debug("Exiting getSecurityGroups, Found {} OpenStackSecurityGroup", allSecurityGroups.size());
-        List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
-        ans.addAll(allSecurityGroups);
-        return ans;
+    protected List<SecurityGroup> getDataObjectList(SecurityGroups groups) {
+        return groups.getSecurityGroup();
     }
 
     @Override

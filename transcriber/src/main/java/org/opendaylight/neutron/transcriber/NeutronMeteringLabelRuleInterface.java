@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
+public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, MeteringRules, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
 
@@ -62,21 +62,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     }
 
     @Override
-    protected List<NeutronMeteringLabelRule> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronMeteringLabelRule> allMeteringLabelRules = new HashSet<NeutronMeteringLabelRule>();
-        MeteringRules rules = readMd(createInstanceIdentifier(), chain);
-        if (rules != null) {
-            for (MeteringRule rule: rules.getMeteringRule()) {
-                allMeteringLabelRules.add(fromMd(rule));
-            }
-        }
-        LOGGER.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules",
-                allMeteringLabelRules.size());
-        List<NeutronMeteringLabelRule> ans = new ArrayList<NeutronMeteringLabelRule>();
-        ans.addAll(allMeteringLabelRules);
-        return ans;
+    protected List<MeteringRule> getDataObjectList(MeteringRules rules) {
+        return rules.getMeteringRule();
     }
 
     @Override

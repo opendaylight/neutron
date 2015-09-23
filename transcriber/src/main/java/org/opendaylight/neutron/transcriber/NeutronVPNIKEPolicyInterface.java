@@ -31,7 +31,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
+public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, IkePolicies, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIKEPolicyInterface(ProviderContext providerContext) {
@@ -51,21 +51,8 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
     }
 
     @Override
-    protected List<NeutronVPNIKEPolicy> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronVPNIKEPolicy> allVPNIKEPolicies = new HashSet<NeutronVPNIKEPolicy>();
-        IkePolicies policies = readMd(createInstanceIdentifier(), chain);
-
-        if (policies != null) {
-            for (Ikepolicy policy: policies.getIkepolicy()) {
-                allVPNIKEPolicies.add(fromMd(policy));
-            }
-        }
-        LOGGER.debug("Exiting getAllVPNIKEPolicies, Found {} OpenStackVPNIKEPolicies", allVPNIKEPolicies.size());
-        List<NeutronVPNIKEPolicy> ans = new ArrayList<NeutronVPNIKEPolicy>();
-        ans.addAll(allVPNIKEPolicies);
-        return ans;
+    protected List<Ikepolicy> getDataObjectList(IkePolicies policies) {
+        return policies.getIkepolicy();
     }
 
     @Override

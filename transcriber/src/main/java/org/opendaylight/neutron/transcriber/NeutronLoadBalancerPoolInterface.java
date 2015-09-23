@@ -58,7 +58,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.util.concurrent.CheckedFuture;
 
-public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pool, NeutronLoadBalancerPool> implements INeutronLoadBalancerPoolCRUD {
+public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pool, Pools, NeutronLoadBalancerPool> implements INeutronLoadBalancerPoolCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
@@ -90,20 +90,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     }
 
     @Override
-    protected List<NeutronLoadBalancerPool> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronLoadBalancerPool> allLoadBalancerPools = new HashSet<NeutronLoadBalancerPool>();
-        Pools pools = readMd(createInstanceIdentifier(), chain);
-        if (pools != null) {
-            for (Pool pool: pools.getPool()) {
-                allLoadBalancerPools.add(fromMd(pool));
-            }
-        }
-        LOGGER.debug("Exiting getLoadBalancerPools, Found {} OpenStackLoadBalancerPool", allLoadBalancerPools.size());
-        List<NeutronLoadBalancerPool> ans = new ArrayList<NeutronLoadBalancerPool>();
-        ans.addAll(allLoadBalancerPools);
-        return ans;
+    protected List<Pool> getDataObjectList(Pools pools) {
+        return pools.getPool();
     }
 
     @Override

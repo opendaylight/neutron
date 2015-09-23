@@ -35,7 +35,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, NeutronFloatingIP> implements INeutronFloatingIPCRUD {
+public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, Floatingips, NeutronFloatingIP> implements INeutronFloatingIPCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     NeutronFloatingIPInterface(ProviderContext providerContext) {
@@ -55,20 +55,8 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     }
 
     @Override
-    protected List<NeutronFloatingIP> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronFloatingIP> allIPs = new HashSet<NeutronFloatingIP>();
-        Floatingips fips = readMd(createInstanceIdentifier(), chain);
-        if (fips != null) {
-            for (Floatingip fip: fips.getFloatingip()) {
-                allIPs.add(fromMd(fip));
-            }
-        }
-        LOGGER.debug("Exiting getAllFloatingIPs, Found {} FloatingIPs", allIPs.size());
-        List<NeutronFloatingIP> ans = new ArrayList<NeutronFloatingIP>();
-        ans.addAll(allIPs);
-        return ans;
+    protected List<Floatingip> getDataObjectList(Floatingips fips) {
+        return fips.getFloatingip();
     }
 
     @Override

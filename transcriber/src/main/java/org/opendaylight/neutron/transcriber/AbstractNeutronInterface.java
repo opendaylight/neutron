@@ -29,6 +29,8 @@ import org.opendaylight.controller.md.sal.common.api.data.TransactionChainListen
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yangtools.yang.binding.Augmentable;
+import org.opendaylight.yangtools.yang.binding.ChildOf;
 import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
@@ -41,7 +43,7 @@ import com.google.common.util.concurrent.CheckedFuture;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 
-public abstract class AbstractNeutronInterface<T extends DataObject, S extends INeutronObject> implements AutoCloseable, INeutronCRUD<S>, TransactionChainListener {
+public abstract class AbstractNeutronInterface<T extends DataObject, U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject> implements AutoCloseable, INeutronCRUD<S>, TransactionChainListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
@@ -117,6 +119,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
     }
 
     protected abstract InstanceIdentifier<T> createInstanceIdentifier(T item);
+
+    protected abstract InstanceIdentifier<U> createInstanceIdentifier();
 
     protected abstract T toMd(S neutronObject);
 
@@ -339,7 +343,23 @@ public abstract class AbstractNeutronInterface<T extends DataObject, S extends I
                              });
     }
 
-    protected abstract List<S> _getAll(BindingTransactionChain chain);
+    protected abstract List<T> getDataObjectList(U dataObjects);
+
+    protected List<S> _getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+
+        Set<S> allNeutronObjects = new HashSet<S>();
+        U dataObjects = readMd(createInstanceIdentifier(), chain);
+        if (dataObjects != null) {
+            for (T dataObject: getDataObjectList(dataObjects)) {
+                allNeutronObjects.add(fromMd(dataObject));
+            }
+        }
+        LOGGER.debug("Exiting _getAll, Found {} OpenStackFirewall", allNeutronObjects.size());
+        List<S> ans = new ArrayList<S>();
+        ans.addAll(allNeutronObjects);
+        return ans;
+    }
 
     @Override
     public List<S> getAll(BindingTransactionChain chain) {

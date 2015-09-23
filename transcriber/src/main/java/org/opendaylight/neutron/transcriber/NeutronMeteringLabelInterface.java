@@ -29,7 +29,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, NeutronMeteringLabel>  implements INeutronMeteringLabelCRUD {
+public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, NeutronMeteringLabel> implements INeutronMeteringLabelCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
 
     NeutronMeteringLabelInterface(ProviderContext providerContext) {
@@ -49,20 +49,8 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
     }
 
     @Override
-    protected List<NeutronMeteringLabel> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronMeteringLabel> allMeteringLabels = new HashSet<NeutronMeteringLabel>();
-        MeteringLabels labels = readMd(createInstanceIdentifier(), chain);
-        if (labels != null) {
-            for (MeteringLabel label: labels.getMeteringLabel()) {
-                allMeteringLabels.add(fromMd(label));
-            }
-        }
-        LOGGER.debug("Exiting getAllMeteringLabels, Found {} OpenStackMeteringLabels", allMeteringLabels.size());
-        List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
-        ans.addAll(allMeteringLabels);
-        return ans;
+    protected List<MeteringLabel> getDataObjectList(MeteringLabels labels) {
+        return labels.getMeteringLabel();
     }
 
     @Override

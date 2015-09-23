@@ -31,7 +31,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ipsecpolicy, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
+public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
 
     NeutronVPNIPSECPolicyInterface(ProviderContext providerContext) {
@@ -51,20 +51,8 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
     }
 
     @Override
-    protected List<NeutronVPNIPSECPolicy> _getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-
-        Set<NeutronVPNIPSECPolicy> allVPNIPSECPolicies = new HashSet<NeutronVPNIPSECPolicy>();
-        IpsecPolicies policies = readMd(createInstanceIdentifier(), chain);
-        if (policies != null) {
-            for (Ipsecpolicy policy: policies.getIpsecpolicy()) {
-                allVPNIPSECPolicies.add(fromMd(policy));
-            }
-        }
-        LOGGER.debug("Exiting getAllVPNIPSECPolicies, Found {} OpenStackVPNIPSECPolicies", allVPNIPSECPolicies.size());
-        List<NeutronVPNIPSECPolicy> ans = new ArrayList<NeutronVPNIPSECPolicy>();
-        ans.addAll(allVPNIPSECPolicies);
-        return ans;
+    protected List<Ipsecpolicy> getDataObjectList(IpsecPolicies policies) {
+        return policies.getIpsecpolicy();
     }
 
     @Override
