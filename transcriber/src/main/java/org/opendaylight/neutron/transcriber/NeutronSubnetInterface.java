@@ -47,7 +47,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, NeutronSubnet> implements INeutronSubnetCRUD {
+public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet> implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
 
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
@@ -81,18 +81,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
     }
 
     @Override
-    public List<NeutronSubnet> getAll() {
-        Set<NeutronSubnet> allSubnets = new HashSet<NeutronSubnet>();
-        Subnets subnets = readMd(createInstanceIdentifier());
-        if (subnets != null) {
-            for (Subnet subnet: subnets.getSubnet()) {
-                allSubnets.add(fromMd(subnet));
-            }
-        }
-        LOGGER.debug("Exiting getAllSubnets, Found {} OpenStackSubnets", allSubnets.size());
-        List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
-        ans.addAll(allSubnets);
-        return ans;
+    protected List<Subnet> getDataObjectList(Subnets subnets) {
+        return subnets.getSubnet();
     }
 
     @Override
@@ -267,6 +257,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Neu
                 .child(Subnet.class, subnet.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<Subnets> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Subnets.class);

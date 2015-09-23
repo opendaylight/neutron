@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitor, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
+public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
     private ConcurrentMap<String, NeutronLoadBalancerHealthMonitor> loadBalancerHealthMonitorDB = new ConcurrentHashMap<String, NeutronLoadBalancerHealthMonitor>();
 
@@ -66,18 +66,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     }
 
     @Override
-    public List<NeutronLoadBalancerHealthMonitor> getAll() {
-        Set<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = new HashSet<NeutronLoadBalancerHealthMonitor>();
-        Healthmonitors healthMonitors = readMd(createInstanceIdentifier());
-        if (healthMonitors != null) {
-            for (Healthmonitor healthMonitor : healthMonitors.getHealthmonitor()) {
-                allLoadBalancerHealthMonitors.add(fromMd(healthMonitor));
-            }
-        }
-        LOGGER.debug("Exiting getLoadBalancerHealthMonitors, Found {} OpenStackLoadBalancerHealthMonitor", allLoadBalancerHealthMonitors.size());
-        List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
-        ans.addAll(allLoadBalancerHealthMonitors);
-        return ans;
+    protected List<Healthmonitor> getDataObjectList(Healthmonitors healthMonitors) {
+        return healthMonitors.getHealthmonitor();
     }
 
     @Override
@@ -120,6 +110,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
                 .child(Healthmonitor.class, healthMonitor.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<Healthmonitors> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Healthmonitors.class);

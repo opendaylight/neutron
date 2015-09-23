@@ -38,7 +38,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, NeutronRouter> implements INeutronRouterCRUD {
+public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, NeutronRouter> implements INeutronRouterCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     // methods needed for creating caches
 
@@ -61,18 +61,8 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
     }
 
     @Override
-    public List<NeutronRouter> getAll() {
-        Set<NeutronRouter> allRouters = new HashSet<NeutronRouter>();
-        Routers routers = readMd(createInstanceIdentifier());
-        if (routers != null) {
-            for (Router router: routers.getRouter()) {
-                allRouters.add(fromMd(router));
-            }
-        }
-        LOGGER.debug("Exiting getAllRouters, Found {} Routers", allRouters.size());
-        List<NeutronRouter> ans = new ArrayList<NeutronRouter>();
-        ans.addAll(allRouters);
-        return ans;
+    protected List<Router> getDataObjectList(Routers routers) {
+        return routers.getRouter();
     }
 
     @Override
@@ -178,6 +168,7 @@ public class NeutronRouterInterface extends  AbstractNeutronInterface<Router, Ne
                  .child(Router.class, router.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<Routers> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(Routers.class);
     }

@@ -29,7 +29,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
+public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIPSECSiteConnectionsInterface(ProviderContext providerContext) {
@@ -49,18 +49,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     @Override
-    public List<NeutronVPNIPSECSiteConnection> getAll() {
-        Set<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnections = new HashSet<NeutronVPNIPSECSiteConnection>();
-        IpsecSiteConnections connections = readMd(createInstanceIdentifier());
-        if (connections != null) {
-            for (Ipsecsiteconnection connection: connections.getIpsecsiteconnection()) {
-                allNeutronVPNIPSECSiteConnections.add(fromMd(connection));
-            }
-        }
-        LOGGER.debug("Exiting getAllNeutronVPNIPSECSiteConnections, Found {} OpenStackVPNIPSECSiteConnections", allNeutronVPNIPSECSiteConnections.size());
-        List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
-        ans.addAll(allNeutronVPNIPSECSiteConnections);
-        return ans;
+    protected List<Ipsecsiteconnection> getDataObjectList(IpsecSiteConnections connections) {
+        return connections.getIpsecsiteconnection();
     }
 
     @Override
@@ -222,6 +212,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         return ipsecSiteConnectionBuilder.build();
     }
 
+    @Override
     protected InstanceIdentifier<IpsecSiteConnections> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                  .child(IpsecSiteConnections.class);

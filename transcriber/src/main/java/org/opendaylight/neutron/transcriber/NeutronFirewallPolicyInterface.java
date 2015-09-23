@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 /**
  */
 
-public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<FirewallPolicy,NeutronFirewallPolicy> implements INeutronFirewallPolicyCRUD {
+public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, NeutronFirewallPolicy> implements INeutronFirewallPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
 
     NeutronFirewallPolicyInterface(ProviderContext providerContext) {
@@ -53,18 +53,8 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
     }
 
     @Override
-    public List<NeutronFirewallPolicy> getAll() {
-        Set<NeutronFirewallPolicy> allFirewallPolicies = new HashSet<NeutronFirewallPolicy>();
-        FirewallPolicies policies = readMd(createInstanceIdentifier());
-        if (policies != null) {
-            for (FirewallPolicy policy: policies.getFirewallPolicy()) {
-                allFirewallPolicies.add(fromMd(policy));
-            }
-        }
-        LOGGER.debug("Exiting getFirewallPolicies, Found {} OpenStackFirewallPolicy", allFirewallPolicies.size());
-        List<NeutronFirewallPolicy> ans = new ArrayList<NeutronFirewallPolicy>();
-        ans.addAll(allFirewallPolicies);
-        return ans;
+    protected List<FirewallPolicy> getDataObjectList(FirewallPolicies policies) {
+        return policies.getFirewallPolicy();
     }
 
     @Override
@@ -99,6 +89,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
                 .child(FirewallPolicy.class, item.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<FirewallPolicies> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(FirewallPolicies.class);
