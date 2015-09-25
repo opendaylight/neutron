@@ -50,14 +50,9 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
  *
  */
 @Path("/fw/firewall_policies")
-public class NeutronFirewallPolicyNorthbound {
+public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "Firewall Policy CRUD Interface";
-    private static final String UUID_NO_EXIST = "Firewall Policy UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "Firewall Policy";
 
     private NeutronFirewallPolicy extractFields(NeutronFirewallPolicy o, List<String> fields) {
         return o.extractFields(fields);
@@ -66,8 +61,7 @@ public class NeutronFirewallPolicyNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallPolicyCRUD(this);
         if (answer.getFirewallPolicyInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -145,7 +139,7 @@ public class NeutronFirewallPolicyNorthbound {
                                       @QueryParam("fields") List<String> fields) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
         if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronFirewallPolicy ans = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
@@ -287,7 +281,7 @@ public class NeutronFirewallPolicyNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewallPolicy(
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID) {
-        INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
+        final INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
 
         NeutronFirewallPolicy singleton = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
@@ -307,7 +301,13 @@ public class NeutronFirewallPolicyNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        firewallPolicyInterface.removeNeutronFirewallPolicy(firewallPolicyUUID);
+        deleteUuid(RESOURCE_NAME, firewallPolicyUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return firewallPolicyInterface.removeNeutronFirewallPolicy(uuid);
+                       }
+                   });
+
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;

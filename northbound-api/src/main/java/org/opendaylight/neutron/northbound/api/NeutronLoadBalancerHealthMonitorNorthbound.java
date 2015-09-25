@@ -51,15 +51,9 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
  *
  */
 @Path("/lbaas/healthmonitors")
-public class NeutronLoadBalancerHealthMonitorNorthbound {
+public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "LoadBalancerHealthMonitor CRUD Interface";
-    private static final String UUID_NO_EXIST = "LoadBalancerHealthMonitor UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
-
+    private static final String RESOURCE_NAME = "LoadBalancerHealthMonitor";
 
     private NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
         return o.extractFields(fields);
@@ -68,8 +62,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerHealthMonitorCRUD(this);
         if (answer.getLoadBalancerHealthMonitorInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -168,7 +161,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronLoadBalancerHealthMonitor ans = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
@@ -316,7 +309,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
+        final INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
         NeutronLoadBalancerHealthMonitor singleton = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
 
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
@@ -335,7 +328,12 @@ public class NeutronLoadBalancerHealthMonitorNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        loadBalancerHealthMonitorInterface.removeNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
+        deleteUuid(RESOURCE_NAME, loadBalancerHealthMonitorID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return loadBalancerHealthMonitorInterface.removeNeutronLoadBalancerHealthMonitor(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;

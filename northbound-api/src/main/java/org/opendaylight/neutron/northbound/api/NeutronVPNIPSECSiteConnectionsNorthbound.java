@@ -55,13 +55,9 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
  */
 
 @Path("/vpn/ipsecsiteconnections")
-public class NeutronVPNIPSECSiteConnectionsNorthbound {
+public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "VPNIPSECSiteConnections CRUD Interface";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "VPNIPSECSiteConnections";
 
     private NeutronVPNIPSECSiteConnection extractFields(NeutronVPNIPSECSiteConnection o, List<String> fields) {
         return o.extractFields(fields);
@@ -70,8 +66,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIPSECSiteConnectionsCRUD(this);
         if (answer.getVPNIPSECSiteConnectionsInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -284,7 +279,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECSiteConnection(@PathParam("connectionID") String connectionID) {
-        INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
+        final INeutronVPNIPSECSiteConnectionsCRUD ipsecSiteConnectionsInterface = getNeutronInterfaces()
                 .getVPNIPSECSiteConnectionsInterface();
 
         NeutronVPNIPSECSiteConnection singleton = ipsecSiteConnectionsInterface
@@ -305,7 +300,12 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(connectionID);
+        deleteUuid(RESOURCE_NAME, connectionID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return ipsecSiteConnectionsInterface.removeNeutronVPNIPSECSiteConnections(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;

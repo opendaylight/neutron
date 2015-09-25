@@ -51,14 +51,9 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancer;
  *
  */
 @Path("/lbaas/loadbalancers")
-public class NeutronLoadBalancerNorthbound {
+public class NeutronLoadBalancerNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "LoadBalancer CRUD Interface";
-    private static final String UUID_NO_EXIST = "LoadBalancer UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "LoadBalancer";
 
     private NeutronLoadBalancer extractFields(NeutronLoadBalancer o, List<String> fields) {
         return o.extractFields(fields);
@@ -67,8 +62,7 @@ public class NeutronLoadBalancerNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerCRUD(this);
         if (answer.getLoadBalancerInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -147,7 +141,7 @@ public class NeutronLoadBalancerNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
         if (!loadBalancerInterface.neutronLoadBalancerExists(loadBalancerID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronLoadBalancer ans = loadBalancerInterface.getNeutronLoadBalancer(loadBalancerID);
@@ -294,7 +288,7 @@ public class NeutronLoadBalancerNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancer(
             @PathParam("loadBalancerID") String loadBalancerID) {
-        INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
+        final INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronInterfaces().getLoadBalancerInterface();
 
         NeutronLoadBalancer singleton = loadBalancerInterface.getNeutronLoadBalancer(loadBalancerID);
         Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
@@ -314,8 +308,12 @@ public class NeutronLoadBalancerNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-
-        loadBalancerInterface.removeNeutronLoadBalancer(loadBalancerID);
+        deleteUuid(RESOURCE_NAME, loadBalancerID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return loadBalancerInterface.removeNeutronLoadBalancer(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;

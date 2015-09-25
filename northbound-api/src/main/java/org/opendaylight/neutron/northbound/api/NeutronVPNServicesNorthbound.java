@@ -55,14 +55,9 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
  */
 
 @Path("/vpn/vpnservices")
-public class NeutronVPNServicesNorthbound {
+public class NeutronVPNServicesNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "VPNService CRUD Interface";
-    private static final String UUID_NO_EXIST = "VPNService UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "VPNService";
 
     private NeutronVPNService extractFields(NeutronVPNService o, List<String> fields) {
         return o.extractFields(fields);
@@ -74,8 +69,7 @@ public class NeutronVPNServicesNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNServiceCRUD(this);
         if (answer.getVPNServiceInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -148,7 +142,7 @@ public class NeutronVPNServicesNorthbound {
             @QueryParam("fields") List<String> fields) {
         INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
         if (!VPNServiceInterface.neutronVPNServiceExists(serviceID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronVPNService ans = VPNServiceInterface.getVPNService(serviceID);
@@ -288,7 +282,7 @@ public class NeutronVPNServicesNorthbound {
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
-        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
+        final INeutronVPNServiceCRUD VPNServiceInterface = getNeutronInterfaces().getVPNServiceInterface();
 
         NeutronVPNService singleton = VPNServiceInterface.getVPNService(serviceID);
         Object[] instances = NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
@@ -308,7 +302,12 @@ public class NeutronVPNServicesNorthbound {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
-        VPNServiceInterface.removeVPNService(serviceID);
+        deleteUuid(RESOURCE_NAME, serviceID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return VPNServiceInterface.removeVPNService(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;

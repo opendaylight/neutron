@@ -49,14 +49,9 @@ import java.util.List;
  *
  */
 @Path("/fw/firewalls")
-public class NeutronFirewallNorthbound {
+public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "Firewall CRUD Interface";
-    private static final String UUID_NO_EXIST = "Firewall UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "Firewall";
 
     private NeutronFirewall extractFields(NeutronFirewall o, List<String> fields) {
         return o.extractFields(fields);
@@ -65,8 +60,7 @@ public class NeutronFirewallNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallCRUD(this);
         if (answer.getFirewallInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         return answer;
     }
@@ -147,7 +141,7 @@ public class NeutronFirewallNorthbound {
                                       @QueryParam("fields") List<String> fields) {
         INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
         if (!firewallInterface.neutronFirewallExists(firewallUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronFirewall ans = firewallInterface.getNeutronFirewall(firewallUUID);
@@ -289,7 +283,7 @@ public class NeutronFirewallNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewall(
             @PathParam("firewallUUID") String firewallUUID) {
-        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
+        final INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
 
         NeutronFirewall singleton = firewallInterface.getNeutronFirewall(firewallUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
@@ -312,7 +306,12 @@ public class NeutronFirewallNorthbound {
         /*
          * remove it and return 204 status
          */
-        firewallInterface.removeNeutronFirewall(firewallUUID);
+        deleteUuid(RESOURCE_NAME, firewallUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return firewallInterface.removeNeutronFirewall(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronFirewallAware service = (INeutronFirewallAware) instance;

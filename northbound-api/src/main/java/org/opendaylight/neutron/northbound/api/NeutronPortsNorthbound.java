@@ -57,14 +57,9 @@ import org.opendaylight.neutron.spi.NeutronPort;
  */
 
 @Path("/ports")
-public class NeutronPortsNorthbound {
+public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
 
-    private static final int HTTP_OK_BOTTOM = 200;
-    private static final int HTTP_OK_TOP = 299;
-    private static final String INTERFACE_NAME = "Port CRUD Interface";
-    private static final String UUID_NO_EXIST = "Port UUID does not exist.";
-    private static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    private static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
+    private static final String RESOURCE_NAME = "Port";
 
     private NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
@@ -73,8 +68,7 @@ public class NeutronPortsNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetworks, boolean needSubnets) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronPortCRUD(this);
         if (answer.getPortInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
         }
         if (needNetworks) {
             answer = answer.fetchINeutronNetworkCRUD( this);
@@ -179,7 +173,7 @@ public class NeutronPortsNorthbound {
             @QueryParam("fields") List<String> fields ) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
         if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException(UUID_NO_EXIST);
+            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
         }
         if (fields.size() > 0) {
             NeutronPort ans = portInterface.getPort(portUUID);
@@ -350,7 +344,7 @@ public class NeutronPortsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {
-        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
+        final INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
 
         NeutronPort singleton = portInterface.getPort(portUUID);
         Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
@@ -369,7 +363,12 @@ public class NeutronPortsNorthbound {
         } else {
             throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
-        portInterface.removePort(portUUID);
+        deleteUuid(RESOURCE_NAME, portUUID,
+                   new Remover() {
+                       public boolean remove(String uuid) {
+                           return portInterface.removePort(uuid);
+                       }
+                   });
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronPortAware service = (INeutronPortAware) instance;
