@@ -71,7 +71,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         LOGGER.debug("Chain {} closed successfully", chain);
     }
 
-    public BindingTransactionChain createTransactionChain() {
+    protected BindingTransactionChain createTransactionChain() {
         return getDataBroker().createTransactionChain(this);
     }
 
@@ -79,13 +79,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         public U action(BindingTransactionChain chain);
     }
 
-    protected <U> U chainWrapper0(BindingTransactionChain chain,
-                                  Action0<U> action) {
-        if (chain != null) {
+    protected <U> U chainWrapper0(Action0<U> action) {
+        try (BindingTransactionChain chain = this.createTransactionChain()) {
             return action.action(chain);
-        }
-        try (BindingTransactionChain newChain = this.createTransactionChain()) {
-            return action.action(newChain);
         }
     }
 
@@ -93,13 +89,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         public U action(V input, BindingTransactionChain chain);
     }
 
-    protected <U, V> U chainWrapper1(V input, BindingTransactionChain chain,
-                                     Action1<U, V> action) {
-        if (chain != null) {
+    protected <U, V> U chainWrapper1(V input, Action1<U, V> action) {
+        try (BindingTransactionChain chain = this.createTransactionChain()) {
             return action.action(input, chain);
-        }
-        try (BindingTransactionChain newChain = this.createTransactionChain()) {
-            return action.action(input, newChain);
         }
     }
 
@@ -108,13 +100,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     }
 
     protected <U, V, W> U chainWrapper2(V input0, W input1,
-                                        BindingTransactionChain chain,
                                         Action2<U, V, W> action) {
-        if (chain != null) {
+        try (BindingTransactionChain chain = this.createTransactionChain()) {
             return action.action(input0, input1, chain);
-        }
-        try (BindingTransactionChain newChain = this.createTransactionChain()) {
-            return action.action(input0, input1, newChain);
         }
     }
 
@@ -128,7 +116,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     protected abstract S fromMd(T dataObject);
 
-    private <T extends DataObject> T _readMd(InstanceIdentifier<T> path, BindingTransactionChain chain) {
+    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         T result = null;
         final ReadOnlyTransaction transaction = chain.newReadOnlyTransaction();
@@ -148,18 +136,14 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         return result;
     }
 
-    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path, BindingTransactionChain chain) {
-        return chainWrapper1(path, chain,
+    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path) {
+        return chainWrapper1(path,
                              new Action1<T, InstanceIdentifier<T>>() {
                                  @Override
                                  public T action(InstanceIdentifier<T> path, BindingTransactionChain chain) {
-                                     return _readMd(path, chain);
+                                     return readMd(path, chain);
                                  }
                              });
-    }
-
-    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path) {
-        return readMd(path, null);
     }
 
     protected boolean addMd(S neutronObject, BindingTransactionChain chain) {
@@ -168,10 +152,16 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     }
 
     protected boolean addMd(S neutronObject) {
-        return addMd(neutronObject, null);
+        return chainWrapper1(neutronObject,
+                             new Action1<Boolean, S>() {
+                                 @Override
+                                 public Boolean action(S path, BindingTransactionChain chain) {
+                                     return addMd(path, chain);
+                                 }
+                             }).booleanValue();
     }
 
-   protected boolean _updateMd(S neutronObject, BindingTransactionChain chain) {
+    protected boolean updateMd(S neutronObject, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
 
         /*
@@ -204,21 +194,17 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         return true;
     }
 
-    protected boolean updateMd(S neutronObject, BindingTransactionChain chain) {
-        return chainWrapper1(neutronObject, chain,
+    protected boolean updateMd(S neutronObject) {
+        return chainWrapper1(neutronObject,
                              new Action1<Boolean, S>() {
                                  @Override
                                  public Boolean action(S neutronObject, BindingTransactionChain chain) {
-                                     return _updateMd(neutronObject, chain);
+                                     return updateMd(neutronObject, chain);
                                  }
                              }).booleanValue();
     }
 
-    protected boolean updateMd(S neutronObject) {
-        return updateMd(neutronObject, null);
-    }
-
-    private boolean _removeMd(T item, BindingTransactionChain chain) {
+    private boolean removeMd(T item, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         WriteTransaction transaction = chain.newWriteOnlyTransaction();
         InstanceIdentifier<T> iid = createInstanceIdentifier(item);
@@ -233,18 +219,14 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         return true;
     }
 
-    protected boolean removeMd(T item, BindingTransactionChain chain) {
-        return chainWrapper1(item, chain,
+    protected boolean removeMd(T item) {
+        return chainWrapper1(item,
                              new Action1<Boolean, T>() {
                                  @Override
                                  public Boolean action(T item, BindingTransactionChain chain) {
-                                     return _removeMd(item, chain);
+                                     return removeMd(item, chain);
                                  }
                              }).booleanValue();
-    }
-
-    protected boolean removeMd(T item) {
-        return removeMd(item, null);
     }
 
     protected Uuid toUuid(String uuid) {
@@ -306,39 +288,49 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     }
 
-    protected boolean _exists(String uuid, BindingTransactionChain chain) {
+    protected boolean exists(String uuid, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
         return dataObject != null;
     }
 
-    public boolean exists(String uuid, BindingTransactionChain chain) {
-        return chainWrapper1(uuid, chain,
+    @Override
+    public boolean exists(String uuid) {
+        return chainWrapper1(uuid,
                              new Action1<Boolean, String>() {
                                  @Override
                                  public Boolean action(String uuid, BindingTransactionChain chain) {
-                                     return _exists(uuid, chain);
+                                     return exists(uuid, chain);
                                  }
                              }).booleanValue();
     }
 
-    public boolean exists(String uuid) {
-        return exists(uuid, null);
-    }
-
-    public S get(String uuid) {
-        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)));
+    protected S get(String uuid, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
         if (dataObject == null) {
             return null;
         }
         return fromMd(dataObject);
     }
 
+    @Override
+    public S get(String uuid) {
+        return chainWrapper1(uuid,
+                             new Action1<S, String>() {
+                                 @Override
+                                 public S action(String uuid, BindingTransactionChain chain) {
+                                     return get(uuid, chain);
+                                 }
+                             });
+    }
+
     protected abstract List<T> getDataObjectList(U dataObjects);
 
-    public List<S> getAll() {
+    protected List<S> getAll(BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
         Set<S> allNeutronObjects = new HashSet<S>();
-        U dataObjects = readMd(createInstanceIdentifier());
+        U dataObjects = readMd(createInstanceIdentifier(), chain);
         if (dataObjects != null) {
             for (T dataObject: getDataObjectList(dataObjects)) {
                 allNeutronObjects.add(fromMd(dataObject));
@@ -350,29 +342,76 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         return ans;
     }
 
+    @Override
+    public List<S> getAll() {
+        return chainWrapper0(new Action0<List<S>>() {
+                                 @Override
+                                 public List<S> action(BindingTransactionChain chain) {
+                                     return getAll(chain);
+                                 }
+                             });
+    }
+
+    protected boolean add(S input, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        if (exists(input.getID(), chain)) {
+            return false;
+        }
+        addMd(input, chain);
+        return true;
+    }
+
+    @Override
     public boolean add(S input) {
-        if (exists(input.getID())) {
-            return false;
-        }
-        addMd(input);
-        return true;
+        return chainWrapper1(input,
+                             new Action1<Boolean, S>() {
+                                 @Override
+                                 public Boolean action(S input, BindingTransactionChain chain) {
+                                     return add(input, chain);
+                                 }
+                             }).booleanValue();
     }
 
+    protected boolean remove(String uuid, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        if (!exists(uuid, chain)) {
+            return false;
+        }
+        return removeMd(toMd(uuid), chain);
+    }
+
+    @Override
     public boolean remove(String uuid) {
-        if (!exists(uuid)) {
-            return false;
-        }
-        return removeMd(toMd(uuid));
-    }
+        return chainWrapper1(uuid,
+                             new Action1<Boolean, String>() {
+                                 @Override
+                                 public Boolean action(String uuid, BindingTransactionChain chain) {
+                                     return remove(uuid, chain);
+                                 }
+                             }).booleanValue();
+     }
 
-    public boolean update(String uuid, S delta) {
-        if (!exists(uuid)) {
+    protected boolean update(String uuid, S delta, BindingTransactionChain chain) {
+        Preconditions.checkNotNull(chain);
+        if (!exists(uuid, chain)) {
             return false;
         }
-        updateMd(delta);
+        updateMd(delta, chain);
         return true;
     }
 
+    @Override
+    public boolean update(String uuid, S delta) {
+        return chainWrapper2(uuid, delta,
+                             new Action2<Boolean, String, S>() {
+                                 @Override
+                                 public Boolean action(String uuid, S delta, BindingTransactionChain chain) {
+                                     return update(uuid, delta, chain);
+                                 }
+                             }).booleanValue();
+    }
+
+    @Override
     public boolean inUse(String uuid) {
         return false;
     }
