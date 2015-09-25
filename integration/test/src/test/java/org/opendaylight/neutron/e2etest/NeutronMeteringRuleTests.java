@@ -56,6 +56,19 @@ public class NeutronMeteringRuleTests {
         ITNeutronE2E.test_fetch(url, false ,"Metering Rule Element Negative Get Failed");
     }
 
+    public void bug4224_ipv6_test() {
+        String url = base + "/metering/metering-label-rules";
+        String content = "{ \"metering_label_rule\": { " +
+            "\"remote_ip_prefix\": \"fe80::1/10\", " +
+            "\"direction\": \"ingress\", " +
+            "\"metering_label_id\": \"bc91b832-8465-40a7-a5d8-ba87de442266\", " +
+            "\"id\": \"00e13b58-b4f2-4579-9c9c-7ac94615f9ae\", " +
+            "\"excluded\": false } }";
+        ITNeutronE2E.test_create(url, content, "Metering Rule Bug4224 IPv6 Failed NB");
+        url = url + "/00e13b58-b4f2-4579-9c9c-7ac94615f9ae";
+        ITNeutronE2E.test_delete(url, "Metering Rule Element Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
         meteringRule_tester.meteringRule_collection_get_test();

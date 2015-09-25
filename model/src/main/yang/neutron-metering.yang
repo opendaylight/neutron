@@ -58,7 +58,7 @@ module neutron-metering {
         }
         leaf remote-ip-prefix {
             description "The remote IP prefix to be associated with this metering rule. packet.";
-            type string;
+            type inet:ip-prefix;
         }
         leaf excluded {
             type boolean;
