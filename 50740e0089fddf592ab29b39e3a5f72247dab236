@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_5d6594df",
+        "filename": "model/src/main/yang/neutron-fwaas.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-29T16:47:33Z",
+      "side": 1,
+      "message": "nitpick: trailing white space.",
+      "revId": "50740e0089fddf592ab29b39e3a5f72247dab236",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
