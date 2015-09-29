@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a76adc5_1db63c3e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-29T16:52:23Z",
+      "side": 1,
+      "message": "Please put meaningful comment as one line summary.\nThose changelog should be put as a part of commit log.",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_eca9fddf",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2GatewayCRUD.java",
         "patchSetId": 4
