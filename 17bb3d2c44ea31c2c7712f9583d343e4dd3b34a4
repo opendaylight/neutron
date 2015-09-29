@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_bd05c8c3",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-29T17:16:16Z",
+      "side": 1,
+      "message": "Unnecessary blank line",
+      "revId": "17bb3d2c44ea31c2c7712f9583d343e4dd3b34a4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_5df6f4d8",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-29T17:16:16Z",
+      "side": 1,
+      "message": "Please rebase this patch to use AbstractNeutronNorthbound class.",
+      "revId": "17bb3d2c44ea31c2c7712f9583d343e4dd3b34a4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_1d007ca9",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronBgpvpnInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-29T17:16:16Z",
+      "side": 1,
+      "message": "return exists(uuid);",
+      "revId": "17bb3d2c44ea31c2c7712f9583d343e4dd3b34a4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
