@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, NeutronMeteringLabelRule>
+public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, MeteringRules, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
 
@@ -61,19 +61,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     }
 
     @Override
-    public List<NeutronMeteringLabelRule> getAll() {
-        Set<NeutronMeteringLabelRule> allMeteringLabelRules = new HashSet<NeutronMeteringLabelRule>();
-        MeteringRules rules = readMd(createInstanceIdentifier());
-        if (rules != null) {
-            for (MeteringRule rule: rules.getMeteringRule()) {
-                allMeteringLabelRules.add(fromMd(rule));
-            }
-        }
-        LOGGER.debug("Exiting getAllMeteringLabelRules, Found {} OpenStackMeteringLabelRules",
-                allMeteringLabelRules.size());
-        List<NeutronMeteringLabelRule> ans = new ArrayList<NeutronMeteringLabelRule>();
-        ans.addAll(allMeteringLabelRules);
-        return ans;
+    protected List<MeteringRule> getDataObjectList(MeteringRules rules) {
+        return rules.getMeteringRule();
     }
 
     @Override
@@ -108,6 +97,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             .child(MeteringRule.class, item.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<MeteringRules> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
             .child(MeteringRules.class);

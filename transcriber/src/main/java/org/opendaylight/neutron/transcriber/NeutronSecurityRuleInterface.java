@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.ImmutableBiMap;
 
 
-public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
+public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 
     private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
@@ -115,18 +115,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     }
 
     @Override
-    public List<NeutronSecurityRule> getAll() {
-        Set<NeutronSecurityRule> allSecurityRules = new HashSet<NeutronSecurityRule>();
-        SecurityRules rules = readMd(createInstanceIdentifier());
-        if (rules != null) {
-            for (SecurityRule rule: rules.getSecurityRule()) {
-                allSecurityRules.add(fromMd(rule));
-            }
-        }
-        LOGGER.debug("Exiting getSecurityRule, Found {} OpenStackSecurityRule", allSecurityRules.size());
-        List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
-        ans.addAll(allSecurityRules);
-        return ans;
+    protected List<SecurityRule> getDataObjectList(SecurityRules rules) {
+        return rules.getSecurityRule();
     }
 
     @Override
@@ -257,6 +247,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
                                               securityRule.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<SecurityRules> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
             .child(SecurityRules.class);

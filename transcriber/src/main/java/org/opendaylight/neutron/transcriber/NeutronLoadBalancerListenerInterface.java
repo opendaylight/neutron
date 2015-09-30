@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
 
-public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listener, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
+public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listener, Listeners, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
@@ -60,18 +60,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     }
 
     @Override
-    public List<NeutronLoadBalancerListener> getAll() {
-        Set<NeutronLoadBalancerListener> allLoadBalancerListeners = new HashSet<NeutronLoadBalancerListener>();
-        Listeners listeners = readMd(createInstanceIdentifier());
-        if (listeners != null) {
-            for (Listener listener: listeners.getListener()) {
-                allLoadBalancerListeners.add(fromMd(listener));
-            }
-        }
-        LOGGER.debug("Exiting getLoadBalancerListeners, Found {} OpenStackLoadBalancerListener", allLoadBalancerListeners.size());
-        List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
-        ans.addAll(allLoadBalancerListeners);
-        return ans;
+    protected List<Listener> getDataObjectList(Listeners listeners) {
+        return listeners.getListener();
     }
 
     @Override
@@ -115,6 +105,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
                 .child(Listener.class, listener.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<Listeners> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Listeners.class);
