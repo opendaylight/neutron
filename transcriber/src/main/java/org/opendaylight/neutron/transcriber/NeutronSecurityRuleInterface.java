@@ -55,10 +55,10 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             .build();
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
             = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolHttp.class,"HTTP")
-            .put(ProtocolHttps.class,"HTTPS")
-            .put(ProtocolIcmp.class,"ICMP")
-            .put(ProtocolTcp.class,"TCP")
+            .put(ProtocolIcmp.class,"icmpv6")
+            .put(ProtocolIcmp.class,"icmp")
+            .put(ProtocolTcp.class,"tcp")
+            .put(ProtocolTcp.class,"udp")
             .build();
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
             = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
