@@ -1,0 +1,7 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+2: Flavio Fernandes <ffernand@redhat.com>
+Submitted-by: Flavio Fernandes <ffernand@redhat.com>
+Submitted-at: Wed, 30 Sep 2015 16:30:03 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/27646
+Project: neutron
+Branch: refs/heads/stable/lithium
