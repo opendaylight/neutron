@@ -57,8 +57,6 @@ public class ITNeutronE2E {
             // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
             // FIXME: need to *NOT* hardcode the version here - it breaks on
             // version bumps
-            when(Boolean.getBoolean(KARAF_DEBUG_PROP))
-                    .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)),
             karafDistributionConfiguration()
                 .frameworkUrl(
                     maven()
@@ -84,7 +82,8 @@ public class ITNeutronE2E {
        // Remember that the test executes in another process.  If you want to debug it, you need
        // to tell Pax Exam to launch that process with debugging enabled.  Launching the test class itself with
        // debugging enabled (for example in Eclipse) will not get you the desired results.
-       //   debugConfiguration("5000", true),
+            when(Boolean.getBoolean(KARAF_DEBUG_PROP))
+                    .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)),
        };
     }
 
