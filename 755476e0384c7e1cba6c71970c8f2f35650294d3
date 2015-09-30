@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a76adc5_9d48072f",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-09-30T20:01:46Z",
+      "side": 1,
+      "message": "http and https isn\u0027t supported by neutron security group rule.",
+      "revId": "755476e0384c7e1cba6c71970c8f2f35650294d3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_5dbb4f0e",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 1
