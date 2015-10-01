@@ -337,7 +337,8 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
         return false;
     }
 
-    public boolean initDefaults() {
+    @Override
+    public void initDefaults() {
         if (enableDHCP == null) {
             enableDHCP = true;
         }
@@ -365,13 +366,13 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
                     }
                 } catch (IllegalArgumentException e) {
                     LOGGER.warn("Failure in initDefault()", e);
-                    return false;
+                    return;
                 }
             }
             if (ipVersion == IPV6_VERSION) {
                 String[] parts = cidr.split("/");
                 if (parts.length != 2) {
-                    return false;
+                    return;
                 }
                 try {
                     int length = Integer.parseInt(parts[1]);
@@ -390,11 +391,10 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
                     }
                 } catch (Exception e) {
                     LOGGER.warn("Failure in initDefault()", e);
-                    return false;
+                    return;
                 }
             }
         }
-        return true;
     }
 
     /* this method tests to see if the supplied IPv4 address

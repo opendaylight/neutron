@@ -300,6 +300,7 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
             '}';
     }
 
+    @Override
     public void initDefaults() {
     }
 }

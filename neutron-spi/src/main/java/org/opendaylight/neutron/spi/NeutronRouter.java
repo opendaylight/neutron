@@ -189,6 +189,7 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
         interfaces.remove(s);
     }
 
+    @Override
     public void initDefaults() {
         adminStateUp = true;
     }

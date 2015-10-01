@@ -171,7 +171,4 @@ public class NeutronFloatingIP extends NeutronObject implements Serializable, IN
             ", fipStatus='" + status + '\'' +
             '}';
     }
-
-    public void initDefaults() {
-    }
 }

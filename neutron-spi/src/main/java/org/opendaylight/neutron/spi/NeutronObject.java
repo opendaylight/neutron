@@ -41,4 +41,7 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
     public String toString() {
         return "NeutronObject [id=" + uuid + ", tenantID=" + tenantID + "]";
     }
+
+    public void initDefaults() {
+    }
 }
