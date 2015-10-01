@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_ac1d9311",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-01T22:49:58Z",
+      "side": 1,
+      "message": "only 4365?\nPlease use the format Bug \u003cnumber\u003e so that the gerrit can create a link to bugzilla.",
+      "revId": "73aa5fa946b0ce88915bf2130db046964749f088",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
