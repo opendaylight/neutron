@@ -39,6 +39,11 @@ module neutron-constants {
         base protocol-base;
     }
 
+    identity protocol-udp {
+        description "UDP protocol.";
+        base protocol-base;
+    }
+
     // PROBE
     identity probe-base {
         description "Base identity for all probes";
@@ -59,8 +64,8 @@ module neutron-constants {
         base probe-base;
     }
 
-    identity probe-icmp {
-        description "ICMP protocol.";
+    identity probe-ping {
+        description "PING protocol.";
         base probe-base;
     }
 
