@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
-
 import java.util.concurrent.ExecutionException;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
@@ -22,7 +21,6 @@ import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
-
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
@@ -30,14 +28,13 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer_SessionPersistence;
 import org.opendaylight.neutron.spi.Neutron_ID;
-
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolTcp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolTerminatedHttps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Pools;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pools.Pool;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.pools.PoolBuilder;
@@ -64,6 +61,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             .put(ProtocolHttp.class,"HTTP")
             .put(ProtocolHttps.class,"HTTPS")
             .put(ProtocolTcp.class,"TCP")
+            .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
     private static final int DEDASHED_UUID_LENGTH = 32;
@@ -233,7 +231,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             NeutronLoadBalancer_SessionPersistence sessionPersistence = new NeutronLoadBalancer_SessionPersistence();
             sessionPersistence.setCookieName(pool.getSessionPersistence().getCookieName());
             sessionPersistence.setType(pool.getSessionPersistence().getType());
-            
+
             answer.setLoadBalancerSessionPersistence(sessionPersistence);
         }
         if (pool.getTenantId() != null) {

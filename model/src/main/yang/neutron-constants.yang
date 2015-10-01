@@ -24,6 +24,11 @@ module neutron-constants {
         base protocol-base;
     }
 
+    identity protocol-terminated-https {
+        description "TERMINATED HTTPS protocol.";
+        base protocol-base;
+    }
+
     identity protocol-https {
         description "HTTPS protocol.";
         base protocol-base;
@@ -36,6 +41,16 @@ module neutron-constants {
 
     identity protocol-icmp {
         description "ICMP protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-icmp-v6 {
+        description "ICMPV6 protocol.";
+        base protocol-base;
+    }
+
+    identity protocol-udp {
+        description "UDP protocol.";
         base protocol-base;
     }
 
@@ -59,8 +74,8 @@ module neutron-constants {
         base probe-base;
     }
 
-    identity probe-icmp {
-        description "ICMP protocol.";
+    identity probe-ping {
+        description "PING protocol.";
         base probe-base;
     }
 
