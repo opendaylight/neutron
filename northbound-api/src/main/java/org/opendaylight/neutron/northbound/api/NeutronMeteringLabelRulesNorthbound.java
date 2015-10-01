@@ -55,20 +55,71 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
  */
 
 @Path("/metering/metering-label-rules")
-public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbound {
+public class NeutronMeteringLabelRulesNorthbound
+    extends AbstractNeutronNorthbound<NeutronMeteringLabelRule, NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD, INeutronMeteringLabelRuleAware> {
     private static final String RESOURCE_NAME = "Metering Label Rule";
 
-    private NeutronMeteringLabelRule extractFields(NeutronMeteringLabelRule o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronMeteringLabelRule extractFields(NeutronMeteringLabelRule o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected INeutronMeteringLabelRuleCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronMeteringLabelRuleCRUD(this);
         if (answer.getMeteringLabelRuleInterface() == null) {
-            throw new ServiceUnavailableException("NeutronMeteringLabelRule CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getMeteringLabelRuleInterface();
+    }
+
+    @Override
+    protected NeutronMeteringLabelRuleRequest newNeutronRequest(NeutronMeteringLabelRule o) {
+        return new NeutronMeteringLabelRuleRequest(o);
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronMeteringLabelRule singleton) {
+        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+        return service.canCreateMeteringLabelRule(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronMeteringLabelRule singleton) {
+        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+        service.neutronMeteringLabelRuleCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronMeteringLabelRule delta, NeutronMeteringLabelRule original) {
+        return 0;
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronMeteringLabelRule updated) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronMeteringLabelRule singleton) {
+        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+        return service.canDeleteMeteringLabelRule(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronMeteringLabelRule singleton) {
+        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+        service.neutronMeteringLabelRuleDeleted(singleton);
     }
 
     @Context
@@ -95,10 +146,10 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
             @QueryParam("metering_label_id") String queryLabelID
             // pagination and sorting are TODO
             ) {
-        INeutronMeteringLabelRuleCRUD ruleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
-        List<NeutronMeteringLabelRule> allNeutronMeteringLabelRules = ruleInterface.getAllNeutronMeteringLabelRules();
+        INeutronMeteringLabelRuleCRUD ruleInterface = getNeutronCRUD();
+        List<NeutronMeteringLabelRule> allNeutronMeteringLabelRule = ruleInterface.getAll();
         List<NeutronMeteringLabelRule> ans = new ArrayList<NeutronMeteringLabelRule>();
-        Iterator<NeutronMeteringLabelRule> i = allNeutronMeteringLabelRules.iterator();
+        Iterator<NeutronMeteringLabelRule> i = allNeutronMeteringLabelRule.iterator();
         while (i.hasNext()) {
             NeutronMeteringLabelRule oSS = i.next();
             if ((queryID == null || queryID.equals(oSS.getID())) &&
@@ -134,18 +185,7 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
             @PathParam("ruleUUID") String ruleUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronMeteringLabelRuleCRUD ruleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
-        if (!ruleInterface.neutronMeteringLabelRuleExists(ruleUUID)) {
-            throw new ResourceNotFoundException("MeteringLabelRule UUID not found");
-        }
-        if (fields.size() > 0) {
-            NeutronMeteringLabelRule ans = ruleInterface.getNeutronMeteringLabelRule(ruleUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronMeteringLabelRuleRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronMeteringLabelRuleRequest(ruleInterface.getNeutronMeteringLabelRule(ruleUUID))).build();
-        }
+        return show(ruleUUID, fields);
     }
 
     /**
@@ -158,7 +198,7 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabelRule(final NeutronMeteringLabelRuleRequest input) {
-        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
+        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronCRUD();
         if (input.isSingleton()) {
             NeutronMeteringLabelRule singleton = input.getSingleton();
 
@@ -209,37 +249,6 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabelRule(
             @PathParam("ruleUUID") String ruleUUID) {
-        final INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronInterfaces().getMeteringLabelRuleInterface();
-
-        NeutronMeteringLabelRule singleton = meteringLabelRuleInterface.getNeutronMeteringLabelRule(ruleUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                    int status = service.canDeleteMeteringLabelRule(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
-            }
-        } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
-        }
-        deleteUuid(RESOURCE_NAME, ruleUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return meteringLabelRuleInterface.removeNeutronMeteringLabelRule(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                service.neutronMeteringLabelRuleDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(ruleUUID);
     }
 }

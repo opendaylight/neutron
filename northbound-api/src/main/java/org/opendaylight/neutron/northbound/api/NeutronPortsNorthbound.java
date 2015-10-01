@@ -57,18 +57,25 @@ import org.opendaylight.neutron.spi.NeutronPort;
  */
 
 @Path("/ports")
-public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
+public class NeutronPortsNorthbound
+    extends AbstractNeutronNorthbound<NeutronPort, NeutronPortRequest, INeutronPortCRUD, INeutronPortAware> {
 
     private static final String RESOURCE_NAME = "Port";
 
-    private NeutronPort extractFields(NeutronPort o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronPort extractFields(NeutronPort o, List<String> fields) {
         return o.extractFields(fields);
     }
 
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetworks, boolean needSubnets) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronPortCRUD(this);
         if (answer.getPortInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
         if (needNetworks) {
             answer = answer.fetchINeutronNetworkCRUD( this);
@@ -85,6 +92,57 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
             }
         }
         return answer;
+    }
+
+    @Override
+    protected INeutronPortCRUD getNeutronCRUD() {
+        return getNeutronInterfaces(false, false).getPortInterface();
+    }
+
+    @Override
+    protected NeutronPortRequest newNeutronRequest(NeutronPort o) {
+        return new NeutronPortRequest(o);
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronPortAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronPort singleton) {
+        INeutronPortAware service = (INeutronPortAware) instance;
+        return service.canCreatePort(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronPort singleton) {
+        INeutronPortAware service = (INeutronPortAware) instance;
+        service.neutronPortCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronPort delta, NeutronPort original) {
+        INeutronPortAware service = (INeutronPortAware) instance;
+        return service.canUpdatePort(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronPort updated) {
+        INeutronPortAware service = (INeutronPortAware) instance;
+        service.neutronPortUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronPort singleton) {
+        INeutronPortAware service = (INeutronPortAware) instance;
+        return service.canDeletePort(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronPort singleton) {
+        INeutronPortAware service = (INeutronPortAware) instance;
+        service.neutronPortDeleted(singleton);
     }
 
     @Context
@@ -171,18 +229,7 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
             @PathParam("portUUID") String portUUID,
             // return fields
             @QueryParam("fields") List<String> fields ) {
-        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
-        if (!portInterface.portExists(portUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronPort ans = portInterface.getPort(portUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronPortRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronPortRequest(portInterface.getPort(portUUID))).build();
-        }
+        return show(portUUID, fields);
     }
 
     /**
@@ -196,69 +243,32 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true, true);
-        INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        if (input.isSingleton()) {
-            NeutronPort singleton = input.getSingleton();
+        getNeutronInterfaces(true, true); // Ensure that services for networks and subnets are loaded
+        return create(input);
+    }
 
-            Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronPortAware service = (INeutronPortAware) instance;
-                        int status = service.canCreatePort(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-
-            // add the port to the cache
-            portInterface.addPort(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    service.neutronPortCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-            for (NeutronPort test : input.getBulk()) {
-
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronPortAware service = (INeutronPortAware) instance;
-                            int status = service.canCreatePort(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-
-            //once everything has passed, then we can add to the cache
-            for (NeutronPort test : input.getBulk()) {
-                portInterface.addPort(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronPortAware service = (INeutronPortAware) instance;
-                        service.neutronPortCreated(test);
-                    }
-                }
-            }
+    @Override
+    protected void updateDelta(String uuid, NeutronPort delta, NeutronPort original) {
+        /*
+         * note: what we would like to get is the complete object as it
+         * is known by neutron.  Until then, patch what we *do* get
+         * so that we don't lose already known information
+         */
+        if (delta.getID() == null) {
+            delta.setID(uuid);
         }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        if (delta.getTenantID() == null) {
+            delta.setTenantID(original.getTenantID());
+        }
+        if (delta.getNetworkUUID() == null) {
+            delta.setNetworkUUID(original.getNetworkUUID());
+        }
+        if (delta.getMacAddress() == null) {
+            delta.setMacAddress(original.getMacAddress());
+        }
+        if (delta.getFixedIPs() == null) {
+            delta.setFixedIPs(original.getFixedIPs());
+        }
     }
 
     /**
@@ -276,62 +286,9 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
             @PathParam("portUUID") String portUUID,
             NeutronPortRequest input
             ) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(false, true);
-        INeutronPortCRUD portInterface = interfaces.getPortInterface();
-        NeutronPort original = portInterface.getPort(portUUID);
-
-        /*
-         * note: what we would like to get is the complete object as it
-         * is known by neutron.  Until then, patch what we *do* get
-         * so that we don't lose already known information
-         */
-
-        NeutronPort updatedObject = input.getSingleton();
-        if (updatedObject.getID() == null) {
-            updatedObject.setID(portUUID);
-        }
-        if (updatedObject.getTenantID() == null) {
-            updatedObject.setTenantID(original.getTenantID());
-        }
-        if (updatedObject.getNetworkUUID() == null) {
-            updatedObject.setNetworkUUID(original.getNetworkUUID());
-        }
-        if (updatedObject.getMacAddress() == null) {
-            updatedObject.setMacAddress(original.getMacAddress());
-        }
-        if (updatedObject.getFixedIPs() == null) {
-            updatedObject.setFixedIPs(original.getFixedIPs());
-        }
-
-        Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canUpdatePort(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
         //        TODO: Support change of security groups
         // update the port and return the modified object
-        portInterface.updatePort(portUUID, updatedObject);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronPortAware service = (INeutronPortAware) instance;
-                service.neutronPortUpdated(updatedObject);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronPortRequest(updatedObject)).build();
-
+        return update(portUUID, input);
     }
 
     /**
@@ -344,37 +301,6 @@ public class NeutronPortsNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deletePort(
             @PathParam("portUUID") String portUUID) {
-        final INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
-
-        NeutronPort singleton = portInterface.getPort(portUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronPortAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronPortAware service = (INeutronPortAware) instance;
-                    int status = service.canDeletePort(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        deleteUuid(RESOURCE_NAME, portUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return portInterface.removePort(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronPortAware service = (INeutronPortAware) instance;
-                service.neutronPortDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(portUUID);
     }
 }

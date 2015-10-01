@@ -56,23 +56,77 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
  */
 
 @Path("/networks")
-public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
+public class NeutronNetworksNorthbound
+    extends AbstractNeutronNorthbound<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD, INeutronNetworkAware> {
 
     @Context
     UriInfo uriInfo;
 
     private static final String RESOURCE_NAME = "Network";
 
-    private NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronNetworkRequest newNeutronRequest(NeutronNetwork o) {
+        return new NeutronNetworkRequest(o);
+    }
+
+    @Override
+    protected INeutronNetworkCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronNetworkCRUD(this);
         if (answer.getNetworkInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getNetworkInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronNetworkAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronNetwork singleton) {
+        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+        return service.canCreateNetwork(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronNetwork singleton) {
+        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+        service.neutronNetworkCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronNetwork delta, NeutronNetwork original) {
+        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+        return service.canUpdateNetwork(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronNetwork updated) {
+        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+        service.neutronNetworkUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronNetwork singleton) {
+        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+        return service.canDeleteNetwork(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronNetwork singleton) {
+        INeutronNetworkAware service = (INeutronNetworkAware) instance;
+        service.neutronNetworkDeleted(singleton);
     }
 
     /**
@@ -106,7 +160,7 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
             // sorting not supported
             ) {
-        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
+        INeutronNetworkCRUD networkInterface = getNeutronCRUD();
         List<NeutronNetwork> allNetworks = networkInterface.getAllNetworks();
         List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
         Iterator<NeutronNetwork> i = allNetworks.iterator();
@@ -169,18 +223,7 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
-        if (!networkInterface.networkExists(netUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronNetwork ans = networkInterface.getNetwork(netUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronNetworkRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronNetworkRequest(networkInterface.getNetwork(netUUID))).build();
-        }
+        return show(netUUID, fields);
     }
 
     /**
@@ -193,70 +236,20 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createNetworks(final NeutronNetworkRequest input) {
-        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
-        if (input.isSingleton()) {
-            NeutronNetwork singleton = input.getSingleton();
+        return create(input);
+    }
 
-            Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                        int status = service.canCreateNetwork(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
+    @Override
+    protected void updateDelta(String uuid, NeutronNetwork delta, NeutronNetwork original) {
+        /*
+         *  note: what we get appears to not be a delta but
+         * rather an incomplete updated object.  So we need to set
+         * the ID to complete the object and then send that down
+         * for folks to check
+         */
 
-            // add network to cache
-            singleton.initDefaults();
-            networkInterface.addNetwork(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    service.neutronNetworkCreated(singleton);
-                }
-            }
-
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-            for (NeutronNetwork test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance: instances) {
-                            INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                            int status = service.canCreateNetwork(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-
-            // now that everything passed, add items to the cache
-            for (NeutronNetwork test : input.getBulk()) {
-                test.initDefaults();
-                networkInterface.addNetwork(test);
-                if (instances != null) {
-                    for (Object instance: instances) {
-                        INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                        service.neutronNetworkCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        delta.setID(uuid);
+        delta.setTenantID(original.getTenantID());
     }
 
     /**
@@ -272,47 +265,7 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
     public Response updateNetwork(
             @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
             ) {
-        INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
-
-        NeutronNetwork updatedObject = input.getSingleton();
-        NeutronNetwork original = networkInterface.getNetwork(netUUID);
-
-        /*
-         *  note: what we get appears to not be a delta but
-         * rather an incomplete updated object.  So we need to set
-         * the ID to complete the object and then send that down
-         * for folks to check
-         */
-
-        updatedObject.setID(netUUID);
-        updatedObject.setTenantID(original.getTenantID());
-        Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    int status = service.canUpdateNetwork(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        // update network object
-        networkInterface.updateNetwork(netUUID, updatedObject);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                service.neutronNetworkUpdated(updatedObject);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronNetworkRequest(networkInterface.getNetwork(netUUID))).build();
+        return update(netUUID, input);
     }
 
     /**
@@ -325,38 +278,6 @@ public class NeutronNetworksNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
-        final INeutronNetworkCRUD networkInterface = getNeutronInterfaces().getNetworkInterface();
-
-        NeutronNetwork singleton = networkInterface.getNetwork(netUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronNetworkAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                    int status = service.canDeleteNetwork(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        deleteUuid(RESOURCE_NAME, netUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return networkInterface.removeNetwork(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronNetworkAware service = (INeutronNetworkAware) instance;
-                service.neutronNetworkDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(netUUID);
     }
 }

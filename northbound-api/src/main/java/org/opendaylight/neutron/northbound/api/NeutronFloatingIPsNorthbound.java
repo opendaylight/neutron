@@ -56,18 +56,29 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
  */
 
 @Path("/floatingips")
-public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
+public class NeutronFloatingIPsNorthbound
+    extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD, INeutronFloatingIPAware> {
     private static final String RESOURCE_NAME = "Floating IP";
 
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
 
-    private NeutronFloatingIP extractFields(NeutronFloatingIP o, List<String> fields) {
+    @Override
+    protected NeutronFloatingIP extractFields(NeutronFloatingIP o, List<String> fields) {
         return o.extractFields(fields);
+    }
+
+    @Override
+    protected NeutronFloatingIPRequest newNeutronRequest(NeutronFloatingIP o) {
+        return new NeutronFloatingIPRequest(o);
     }
 
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFloatingIPCRUD(this);
         if (answer.getFloatingIPInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
         if (flag) {
             answer = answer.fetchINeutronNetworkCRUD(this).fetchINeutronSubnetCRUD(this).fetchINeutronPortCRUD(this);
@@ -85,6 +96,53 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
             }
         }
         return answer;
+    }
+
+    @Override
+    protected INeutronFloatingIPCRUD getNeutronCRUD() {
+        NeutronCRUDInterfaces answer = getNeutronInterfaces(false);
+        return answer.getFloatingIPInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronFloatingIP singleton) {
+        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+        return service.canCreateFloatingIP(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronFloatingIP singleton) {
+        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+        service.neutronFloatingIPCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronFloatingIP delta, NeutronFloatingIP original) {
+        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+        return service.canUpdateFloatingIP(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronFloatingIP updated) {
+        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+        service.neutronFloatingIPUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronFloatingIP singleton) {
+        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+        return service.canDeleteFloatingIP(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronFloatingIP singleton) {
+        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
+        service.neutronFloatingIPDeleted(singleton);
     }
     /**
      * Returns a list of all FloatingIPs */
@@ -157,18 +215,7 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
             @PathParam("floatingipUUID") String floatingipUUID,
             // return fields
             @QueryParam("fields") List<String> fields ) {
-        INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
-        if (!floatingIPInterface.floatingIPExists(floatingipUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronFloatingIP ans = floatingIPInterface.getFloatingIP(floatingipUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronFloatingIPRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronFloatingIPRequest(floatingIPInterface.getFloatingIP(floatingipUUID))).build();
-        }
+        return show(floatingipUUID, fields);
     }
 
     /**
@@ -181,36 +228,7 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
-        INeutronFloatingIPCRUD floatingIPInterface = interfaces.getFloatingIPInterface();
-        if (input.isSingleton()) {
-            Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                        int status = service.canCreateFloatingIP(input.getSingleton());
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            floatingIPInterface.addFloatingIP(input.getSingleton());
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                    service.neutronFloatingIPCreated(input.getSingleton());
-                }
-            }
-        } else {
-            throw new BadRequestException("only singleton requests allowed.");
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -227,38 +245,7 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
             @PathParam("floatingipUUID") String floatingipUUID,
             NeutronFloatingIPRequest input
             ) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
-        INeutronFloatingIPCRUD floatingIPInterface = interfaces.getFloatingIPInterface();
-
-        NeutronFloatingIP singleton = input.getSingleton();
-        NeutronFloatingIP target = floatingIPInterface.getFloatingIP(floatingipUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                    int status = service.canUpdateFloatingIP(singleton, target);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        floatingIPInterface.updateFloatingIP(floatingipUUID, singleton);
-        target = floatingIPInterface.getFloatingIP(floatingipUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                service.neutronFloatingIPUpdated(target);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronFloatingIPRequest(target)).build();
-
+        return update(floatingipUUID, input);
     }
 
     /**
@@ -271,36 +258,6 @@ public class NeutronFloatingIPsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFloatingIP(
             @PathParam("floatingipUUID") String floatingipUUID) {
-        final INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
-        NeutronFloatingIP singleton = floatingIPInterface.getFloatingIP(floatingipUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                    int status = service.canDeleteFloatingIP(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        deleteUuid(RESOURCE_NAME, floatingipUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return floatingIPInterface.removeFloatingIP(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-                service.neutronFloatingIPDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(floatingipUUID);
     }
 }
