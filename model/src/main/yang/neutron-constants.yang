@@ -38,6 +38,11 @@ module neutron-constants {
         description "ICMP protocol.";
         base protocol-base;
     }
+    
+    identity protocol-udp {
+        description "UDP protocol.";
+        base protocol-base;
+    }
 
     // PROBE
     identity probe-base {
