@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a76adc5_c0e8d87e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 4269
+      },
+      "writtenOn": "2015-10-01T10:54:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a76adc5_9d48072f",
+      "revId": "755476e0384c7e1cba6c71970c8f2f35650294d3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a76adc5_5dbb4f0e",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-30T19:59:39Z",
       "side": 1,
       "message": "icmpv6",
+      "revId": "755476e0384c7e1cba6c71970c8f2f35650294d3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_8002e03c",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4269
+      },
+      "writtenOn": "2015-10-01T10:54:27Z",
+      "side": 1,
+      "message": "icmpv6 should have ethertype as IPv6. I did not see a icmpv6 listed in neutron api  reference.",
+      "parentUuid": "1a76adc5_5dbb4f0e",
       "revId": "755476e0384c7e1cba6c71970c8f2f35650294d3",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
