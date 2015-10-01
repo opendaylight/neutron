@@ -20,7 +20,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerPoolRequest {
+public class NeutronLoadBalancerPoolRequest
+    implements INeutronRequest<NeutronLoadBalancerPool> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
@@ -44,14 +45,17 @@ public class NeutronLoadBalancerPoolRequest {
         singletonLoadBalancerPool = group;
     }
 
+    @Override
     public List<NeutronLoadBalancerPool> getBulk() {
         return bulkRequest;
     }
 
+    @Override
     public NeutronLoadBalancerPool getSingleton() {
         return singletonLoadBalancerPool;
     }
 
+    @Override
     public boolean isSingleton() {
         return (singletonLoadBalancerPool != null);
     }

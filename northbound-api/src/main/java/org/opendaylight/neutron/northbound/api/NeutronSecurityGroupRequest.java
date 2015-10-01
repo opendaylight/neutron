@@ -20,7 +20,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType (XmlAccessType.NONE)
 
-public class NeutronSecurityGroupRequest {
+public class NeutronSecurityGroupRequest
+    implements INeutronRequest<NeutronSecurityGroup> {
     /**
     * See OpenStack Network API v2.0 Reference for a
     * description of annotated attributes and operations
@@ -44,14 +45,17 @@ public class NeutronSecurityGroupRequest {
         singletonSecurityGroup = group;
     }
 
+    @Override
     public List<NeutronSecurityGroup> getBulk() {
         return bulkRequest;
     }
 
+    @Override
     public NeutronSecurityGroup getSingleton() {
         return singletonSecurityGroup;
     }
 
+    @Override
     public boolean isSingleton() {
         return (singletonSecurityGroup != null);
     }

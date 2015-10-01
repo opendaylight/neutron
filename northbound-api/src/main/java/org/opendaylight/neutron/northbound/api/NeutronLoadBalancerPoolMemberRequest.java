@@ -13,7 +13,8 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
-public class NeutronLoadBalancerPoolMemberRequest {
+public class NeutronLoadBalancerPoolMemberRequest
+    implements INeutronRequest<NeutronLoadBalancerPoolMember> {
 
     /**
      * See OpenStack Network API v2.0 Reference for description of
@@ -38,14 +39,17 @@ public class NeutronLoadBalancerPoolMemberRequest {
         singletonLoadBalancerPoolMember = group;
     }
 
+    @Override
     public List<NeutronLoadBalancerPoolMember> getBulk() {
         return bulkRequest;
     }
 
+    @Override
     public NeutronLoadBalancerPoolMember getSingleton() {
         return singletonLoadBalancerPoolMember;
     }
 
+    @Override
     public boolean isSingleton() {
         return (singletonLoadBalancerPoolMember != null);
     }

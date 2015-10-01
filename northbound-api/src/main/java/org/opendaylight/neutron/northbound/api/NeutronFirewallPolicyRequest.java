@@ -20,7 +20,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFirewallPolicyRequest {
+public class NeutronFirewallPolicyRequest
+    implements INeutronRequest<NeutronFirewallPolicy> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
@@ -45,14 +46,17 @@ public class NeutronFirewallPolicyRequest {
         singletonFirewallPolicy = group;
     }
 
+    @Override
     public List<NeutronFirewallPolicy> getBulk() {
         return bulkRequest;
     }
 
+    @Override
     public NeutronFirewallPolicy getSingleton() {
         return singletonFirewallPolicy;
     }
 
+    @Override
     public boolean isSingleton() {
         return (singletonFirewallPolicy != null);
     }
