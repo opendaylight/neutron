@@ -51,19 +51,73 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
  */
 
 @Path ("/security-group-rules")
-public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
+public class NeutronSecurityRulesNorthbound
+    extends AbstractNeutronNorthbound<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD, INeutronSecurityRuleAware> {
     private static final String RESOURCE_NAME = "Security Rule";
 
-    private NeutronSecurityRule extractFields(NeutronSecurityRule o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronSecurityRule extractFields(NeutronSecurityRule o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronSecurityRuleRequest newNeutronRequest(NeutronSecurityRule o) {
+        return new NeutronSecurityRuleRequest(o);
+    }
+
+    @Override
+    protected INeutronSecurityRuleCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityRuleCRUD(this);
         if (answer.getSecurityRuleInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getSecurityRuleInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronSecurityRule singleton) {
+        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+        return service.canCreateNeutronSecurityRule(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronSecurityRule singleton) {
+        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+        service.neutronSecurityRuleCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronSecurityRule delta, NeutronSecurityRule original) {
+        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+        return service.canUpdateNeutronSecurityRule(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronSecurityRule updated) {
+        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+        service.neutronSecurityRuleUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronSecurityRule singleton) {
+        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+        return service.canDeleteNeutronSecurityRule(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronSecurityRule singleton) {
+        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
+        service.neutronSecurityRuleDeleted(singleton);
     }
 
     /**
@@ -94,7 +148,7 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             @QueryParam ("marker") String marker,
             @QueryParam ("page_reverse") String pageReverse
     ) {
-        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
+        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronCRUD();
         List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAllNeutronSecurityRules();
         List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
         Iterator<NeutronSecurityRule> i = allSecurityRules.iterator();
@@ -147,17 +201,7 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
     public Response showSecurityRule(@PathParam ("securityRuleUUID") String securityRuleUUID,
                                      // return fields
                                      @QueryParam ("fields") List<String> fields) {
-        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
-        if (!securityRuleInterface.neutronSecurityRuleExists(securityRuleUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (!fields.isEmpty()) {
-            NeutronSecurityRule ans = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronSecurityRuleRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityRuleRequest(securityRuleInterface.getNeutronSecurityRule(securityRuleUUID))).build();
-        }
+        return show(securityRuleUUID, fields);
     }
 
     /**
@@ -171,70 +215,7 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
-        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
-
-        if (input.isSingleton()) {
-            NeutronSecurityRule singleton = input.getSingleton();
-            Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                        int status = service.canCreateNeutronSecurityRule(singleton);
-                        if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-
-            // add rule to cache
-            singleton.initDefaults();
-            securityRuleInterface.addNeutronSecurityRule(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                    service.neutronSecurityRuleCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
-            for (NeutronSecurityRule test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                            int status = service.canCreateNeutronSecurityRule(test);
-                            if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronSecurityRule test : input.getBulk()) {
-                securityRuleInterface.addNeutronSecurityRule(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                        service.neutronSecurityRuleCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -250,40 +231,7 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
-        INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
-
-        NeutronSecurityRule delta = input.getSingleton();
-        NeutronSecurityRule original = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                    int status = service.canUpdateNeutronSecurityRule(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        securityRuleInterface.updateNeutronSecurityRule(securityRuleUUID, delta);
-        NeutronSecurityRule updatedSecurityRule = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                service.neutronSecurityRuleUpdated(updatedSecurityRule);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityRuleRequest(securityRuleInterface.getNeutronSecurityRule(securityRuleUUID))).build();
+        return update(securityRuleUUID, input);
     }
 
     /**
@@ -297,42 +245,6 @@ public class NeutronSecurityRulesNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID) {
-        final INeutronSecurityRuleCRUD securityRuleInterface = getNeutronInterfaces().getSecurityRuleInterface();
-
-        NeutronSecurityRule singleton = securityRuleInterface.getNeutronSecurityRule(securityRuleUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                    int status = service.canDeleteNeutronSecurityRule(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-
-        /*
-         * remove it and return 204 status
-         */
-        deleteUuid(RESOURCE_NAME, securityRuleUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return securityRuleInterface.removeNeutronSecurityRule(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-                service.neutronSecurityRuleDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(securityRuleUUID);
     }
 }

@@ -50,19 +50,73 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 @Path ("/security-groups")
-public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
+public class NeutronSecurityGroupsNorthbound
+    extends AbstractNeutronNorthbound<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD, INeutronSecurityGroupAware> {
     private static final String RESOURCE_NAME = "Security Group";
 
-    private NeutronSecurityGroup extractFields(NeutronSecurityGroup o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronSecurityGroup extractFields(NeutronSecurityGroup o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronSecurityGroupRequest newNeutronRequest(NeutronSecurityGroup o) {
+        return new NeutronSecurityGroupRequest(o);
+    }
+
+    @Override
+    protected INeutronSecurityGroupCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
         if (answer.getSecurityGroupInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getSecurityGroupInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronSecurityGroup singleton) {
+        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+        return service.canCreateNeutronSecurityGroup(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronSecurityGroup singleton) {
+        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+        service.neutronSecurityGroupCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronSecurityGroup delta, NeutronSecurityGroup original) {
+        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+        return service.canUpdateNeutronSecurityGroup(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronSecurityGroup updated) {
+        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+        service.neutronSecurityGroupUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronSecurityGroup singleton) {
+        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+        return service.canDeleteNeutronSecurityGroup(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronSecurityGroup singleton) {
+        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
+        service.neutronSecurityGroupDeleted(singleton);
     }
 
     /**
@@ -88,7 +142,7 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
             @QueryParam ("marker") String marker,
             @QueryParam ("page_reverse") String pageReverse
     ) {
-        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
+        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronCRUD();
         List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAllNeutronSecurityGroups();
         List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
         Iterator<NeutronSecurityGroup> i = allSecurityGroups.iterator();
@@ -129,17 +183,7 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
     public Response showSecurityGroup(@PathParam ("securityGroupUUID") String securityGroupUUID,
                                       // return fields
                                       @QueryParam ("fields") List<String> fields) {
-        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
-        if (!securityGroupInterface.neutronSecurityGroupExists(securityGroupUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (!fields.isEmpty()) {
-            NeutronSecurityGroup ans = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronSecurityGroupRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityGroupRequest(securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID))).build();
-        }
+        return show(securityGroupUUID, fields);
     }
 
     /**
@@ -153,69 +197,7 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
-        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
-
-        if (input.isSingleton()) {
-            NeutronSecurityGroup singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                        int status = service.canCreateNeutronSecurityGroup(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            // Add to Neutron cache
-            securityGroupInterface.addNeutronSecurityGroup(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                    service.neutronSecurityGroupCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
-            for (NeutronSecurityGroup test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                            int status = service.canCreateNeutronSecurityGroup(test);
-                            if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new BadRequestException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronSecurityGroup test : input.getBulk()) {
-                securityGroupInterface.addNeutronSecurityGroup(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                        service.neutronSecurityGroupCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -231,40 +213,7 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
-        INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
-
-        NeutronSecurityGroup delta = input.getSingleton();
-        NeutronSecurityGroup original = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
-
-        Object[] instances =  NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                    int status = service.canUpdateNeutronSecurityGroup(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        securityGroupInterface.updateNeutronSecurityGroup(securityGroupUUID, delta);
-        NeutronSecurityGroup updatedSecurityGroup = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                service.neutronSecurityGroupUpdated(updatedSecurityGroup);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityGroupRequest(securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID))).build();
+        return update(securityGroupUUID, input);
     }
 
     /**
@@ -278,41 +227,6 @@ public class NeutronSecurityGroupsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
-        final INeutronSecurityGroupCRUD securityGroupInterface = getNeutronInterfaces().getSecurityGroupInterface();
-
-        NeutronSecurityGroup singleton = securityGroupInterface.getNeutronSecurityGroup(securityGroupUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                    int status = service.canDeleteNeutronSecurityGroup(singleton);
-                    if ((status < HTTP_OK_BOTTOM) || (status > HTTP_OK_TOP)) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * remove it and return 204 status
-         */
-        deleteUuid(RESOURCE_NAME, securityGroupUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return securityGroupInterface.removeNeutronSecurityGroup(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-                service.neutronSecurityGroupDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(securityGroupUUID);
     }
 }

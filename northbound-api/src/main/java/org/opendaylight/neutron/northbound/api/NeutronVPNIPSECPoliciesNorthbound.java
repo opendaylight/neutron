@@ -55,21 +55,74 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
  */
 
 @Path("/vpn/ipsecpolicies")
-public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound {
+public class NeutronVPNIPSECPoliciesNorthbound
+    extends AbstractNeutronNorthbound<NeutronVPNIPSECPolicy, NeutronVPNIPSECPolicyRequest, INeutronVPNIPSECPolicyCRUD, INeutronVPNIPSECPolicyAware> {
 
     private static final String RESOURCE_NAME = "VPNIPSECPolicy";
 
-    private NeutronVPNIPSECPolicy extractFields(NeutronVPNIPSECPolicy o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronVPNIPSECPolicy extractFields(NeutronVPNIPSECPolicy o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected INeutronVPNIPSECPolicyCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIPSECPolicyCRUD(this);
         if (answer.getVPNIPSECPolicyInterface() == null) {
-            throw new ServiceUnavailableException("NeutronVPNIPSECPolicy CRUD Interface "
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getVPNIPSECPolicyInterface();
+    }
+
+    @Override
+    protected NeutronVPNIPSECPolicyRequest newNeutronRequest(NeutronVPNIPSECPolicy o) {
+        return new NeutronVPNIPSECPolicyRequest(o);
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronVPNIPSECPolicy singleton) {
+        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+        return service.canCreateNeutronVPNIPSECPolicy(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronVPNIPSECPolicy singleton) {
+        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+        service.neutronVPNIPSECPolicyCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronVPNIPSECPolicy delta, NeutronVPNIPSECPolicy original) {
+        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+        return service.canUpdateNeutronVPNIPSECPolicy(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronVPNIPSECPolicy updated) {
+        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+        service.neutronVPNIPSECPolicyUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronVPNIPSECPolicy singleton) {
+        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+        return service.canDeleteNeutronVPNIPSECPolicy(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronVPNIPSECPolicy singleton) {
+        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
+        service.neutronVPNIPSECPolicyDeleted(singleton);
     }
 
     @Context
@@ -100,7 +153,7 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
             @QueryParam("pfs") String queryPFS
             // pagination and sorting are TODO
             ) {
-        INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
+        INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronCRUD();
         List<NeutronVPNIPSECPolicy> allNeutronVPNIPSECPolicies = policyInterface.getAllNeutronVPNIPSECPolicies();
         List<NeutronVPNIPSECPolicy> ans = new ArrayList<NeutronVPNIPSECPolicy>();
         Iterator<NeutronVPNIPSECPolicy> i = allNeutronVPNIPSECPolicies.iterator();
@@ -145,18 +198,7 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
-        if (!policyInterface.neutronVPNIPSECPolicyExists(policyUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronVPNIPSECPolicy ans = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronVPNIPSECPolicyRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronVPNIPSECPolicyRequest(policyInterface.getNeutronVPNIPSECPolicy(policyUUID))).build();
-        }
+        return show(policyUUID, fields);
     }
 
     /**
@@ -169,45 +211,7 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIPSECPolicy(final NeutronVPNIPSECPolicyRequest input) {
-        INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
-        if (input.isSingleton()) {
-            NeutronVPNIPSECPolicy singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
-                        int status = service.canCreateNeutronVPNIPSECPolicy(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-
-            /*
-             * add ipsecPolicy to the cache
-             */
-            ipsecPolicyInterface.addNeutronVPNIPSECPolicy(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
-                    service.neutronVPNIPSECPolicyCreated(singleton);
-                }
-            }
-        } else {
-
-            /*
-             * only singleton ipsecPolicy creates supported
-             */
-            throw new BadRequestException("Only singleton ipsecPolicy creates supported");
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -222,40 +226,7 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
     public Response updateVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID, final NeutronVPNIPSECPolicyRequest input
             ) {
-        INeutronVPNIPSECPolicyCRUD ipsecPolicyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
-
-        NeutronVPNIPSECPolicy singleton = input.getSingleton();
-        NeutronVPNIPSECPolicy original = ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
-                    int status = service.canUpdateNeutronVPNIPSECPolicy(singleton, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        /*
-         * update the ipsecPolicy entry and return the modified object
-         */
-        ipsecPolicyInterface.updateNeutronVPNIPSECPolicy(policyUUID, singleton);
-        NeutronVPNIPSECPolicy updatedVPNIPSECPolicy = ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
-                service.neutronVPNIPSECPolicyUpdated(updatedVPNIPSECPolicy);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronVPNIPSECPolicyRequest(ipsecPolicyInterface.getNeutronVPNIPSECPolicy(policyUUID))).build();
+        return update(policyUUID, input);
     }
 
     /**
@@ -268,37 +239,6 @@ public class NeutronVPNIPSECPoliciesNorthbound extends AbstractNeutronNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNIPSECPolicy(
             @PathParam("policyID") String policyUUID) {
-        final INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronInterfaces().getVPNIPSECPolicyInterface();
-
-        NeutronVPNIPSECPolicy singleton = policyInterface.getNeutronVPNIPSECPolicy(policyUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronVPNIPSECPolicyAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
-                    int status = service.canDeleteNeutronVPNIPSECPolicy(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        deleteUuid(RESOURCE_NAME, policyUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return policyInterface.removeNeutronVPNIPSECPolicy(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronVPNIPSECPolicyAware service = (INeutronVPNIPSECPolicyAware) instance;
-                service.neutronVPNIPSECPolicyDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(policyUUID);
     }
 }

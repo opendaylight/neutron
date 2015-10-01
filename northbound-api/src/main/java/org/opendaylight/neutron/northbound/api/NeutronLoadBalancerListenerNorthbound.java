@@ -51,20 +51,74 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
  *
  */
 @Path("/lbaas/listeners")
-public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthbound {
+public class NeutronLoadBalancerListenerNorthbound
+    extends AbstractNeutronNorthbound<NeutronLoadBalancerListener, NeutronLoadBalancerListenerRequest, INeutronLoadBalancerListenerCRUD, INeutronLoadBalancerListenerAware> {
 
     private static final String RESOURCE_NAME = "LoadBalancerListener";
 
-    private NeutronLoadBalancerListener extractFields(NeutronLoadBalancerListener o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronLoadBalancerListener extractFields(NeutronLoadBalancerListener o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronLoadBalancerListenerRequest newNeutronRequest(NeutronLoadBalancerListener o) {
+        return new NeutronLoadBalancerListenerRequest(o);
+    }
+
+    @Override
+    protected INeutronLoadBalancerListenerCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerListenerCRUD(this);
         if (answer.getLoadBalancerListenerInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getLoadBalancerListenerInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronLoadBalancerListenerAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronLoadBalancerListener singleton) {
+        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
+        return service.canCreateNeutronLoadBalancerListener(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronLoadBalancerListener singleton) {
+        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
+        service.neutronLoadBalancerListenerCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronLoadBalancerListener delta, NeutronLoadBalancerListener original) {
+        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
+        return service.canUpdateNeutronLoadBalancerListener(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronLoadBalancerListener updated) {
+        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
+        service.neutronLoadBalancerListenerUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronLoadBalancerListener singleton) {
+        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
+        return service.canDeleteNeutronLoadBalancerListener(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronLoadBalancerListener singleton) {
+        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
+        service.neutronLoadBalancerListenerDeleted(singleton);
     }
 
     /**
@@ -95,7 +149,7 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronInterfaces().getLoadBalancerListenerInterface();
+        INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronCRUD();
         List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAllNeutronLoadBalancerListeners();
         List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
         Iterator<NeutronLoadBalancerListener> i = allLoadBalancerListeners.iterator();
@@ -143,17 +197,7 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
     public Response showLoadBalancerListener(@PathParam("loadBalancerListenerID") String loadBalancerListenerID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronInterfaces().getLoadBalancerListenerInterface();
-        if (!loadBalancerListenerInterface.neutronLoadBalancerListenerExists(loadBalancerListenerID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronLoadBalancerListener ans = loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronLoadBalancerListenerRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerListenerRequest(loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID))).build();
-        }
+        return show(loadBalancerListenerID, fields);
     }
 
     /**
@@ -166,66 +210,7 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerListeners(final NeutronLoadBalancerListenerRequest input) {
-        INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronInterfaces().getLoadBalancerListenerInterface();
-        if (input.isSingleton()) {
-            NeutronLoadBalancerListener singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerListenerAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                        int status = service.canCreateNeutronLoadBalancerListener(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            loadBalancerListenerInterface.addNeutronLoadBalancerListener(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                    service.neutronLoadBalancerListenerCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerListenerAware.class, this);
-            for (NeutronLoadBalancerListener test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                            int status = service.canCreateNeutronLoadBalancerListener(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronLoadBalancerListener test : input.getBulk()) {
-                loadBalancerListenerInterface.addNeutronLoadBalancerListener(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                        service.neutronLoadBalancerListenerCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -240,40 +225,7 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateLoadBalancerListener(
             @PathParam("loadBalancerListenerID") String loadBalancerListenerID, final NeutronLoadBalancerListenerRequest input) {
-        INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronInterfaces().getLoadBalancerListenerInterface();
-
-        NeutronLoadBalancerListener delta = input.getSingleton();
-        NeutronLoadBalancerListener original = loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerListenerAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                    int status = service.canUpdateNeutronLoadBalancerListener(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        loadBalancerListenerInterface.updateNeutronLoadBalancerListener(loadBalancerListenerID, delta);
-        NeutronLoadBalancerListener updatedLoadBalancerListener = loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                service.neutronLoadBalancerListenerUpdated(updatedLoadBalancerListener);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerListenerRequest(loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID))).build();
+        return update(loadBalancerListenerID, input);
     }
 
     /**
@@ -286,38 +238,6 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerListener(
             @PathParam("loadBalancerListenerID") String loadBalancerListenerID) {
-        final INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronInterfaces().getLoadBalancerListenerInterface();
-
-        NeutronLoadBalancerListener singleton = loadBalancerListenerInterface.getNeutronLoadBalancerListener(loadBalancerListenerID);
-        Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerListenerAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                    int status = service.canDeleteNeutronLoadBalancerListener(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        deleteUuid(RESOURCE_NAME, loadBalancerListenerID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return loadBalancerListenerInterface.removeNeutronLoadBalancerListener(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerListenerAware service = (INeutronLoadBalancerListenerAware) instance;
-                service.neutronLoadBalancerListenerDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(loadBalancerListenerID);
     }
 }

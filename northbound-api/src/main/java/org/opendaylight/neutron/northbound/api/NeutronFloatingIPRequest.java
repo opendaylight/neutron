@@ -43,6 +43,10 @@ public class NeutronFloatingIPRequest
         singletonFloatingIP = singleton;
     }
 
+    public List<NeutronFloatingIP> getBulk() {
+        return bulkRequest;
+    }
+
     public NeutronFloatingIP getSingleton() {
         return singletonFloatingIP;
     }

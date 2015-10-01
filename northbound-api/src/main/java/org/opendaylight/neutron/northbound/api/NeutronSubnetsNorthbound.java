@@ -56,17 +56,24 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
  */
 
 @Path("/subnets")
-public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
+public class NeutronSubnetsNorthbound
+    extends AbstractNeutronNorthbound<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD, INeutronSubnetAware> {
     private static final String RESOURCE_NAME = "Subnet";
 
-    private NeutronSubnet extractFields(NeutronSubnet o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronSubnet extractFields(NeutronSubnet o, List<String> fields) {
         return o.extractFields(fields);
     }
 
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetwork) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSubnetCRUD(this);
         if (answer.getSubnetInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
         if (needNetwork) {
             answer = answer.fetchINeutronNetworkCRUD(this);
@@ -76,6 +83,57 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
             }
         }
         return answer;
+    }
+
+    @Override
+    protected INeutronSubnetCRUD getNeutronCRUD() {
+        return getNeutronInterfaces(false).getSubnetInterface();
+    }
+
+    @Override
+    protected NeutronSubnetRequest newNeutronRequest(NeutronSubnet o) {
+        return new NeutronSubnetRequest(o);
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronSubnetAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronSubnet singleton) {
+        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+        return service.canCreateSubnet(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronSubnet singleton) {
+        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+        service.neutronSubnetCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronSubnet delta, NeutronSubnet original) {
+        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+        return service.canUpdateSubnet(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronSubnet updated) {
+        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+        service.neutronSubnetUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronSubnet singleton) {
+        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+        return service.canDeleteSubnet(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronSubnet singleton) {
+        INeutronSubnetAware service = (INeutronSubnetAware) instance;
+        service.neutronSubnetDeleted(singleton);
     }
 
     @Context
@@ -163,18 +221,7 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
             @PathParam("subnetUUID") String subnetUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
-        if (!subnetInterface.subnetExists(subnetUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronSubnet ans = subnetInterface.getSubnet(subnetUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronSubnetRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronSubnetRequest(subnetInterface.getSubnet(subnetUUID))).build();
-        }
+        return show(subnetUUID, fields);
     }
 
     /**
@@ -188,68 +235,23 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSubnets(final NeutronSubnetRequest input) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
-        INeutronSubnetCRUD subnetInterface = interfaces.getSubnetInterface();
-        if (input.isSingleton()) {
-            NeutronSubnet singleton = input.getSingleton();
+        getNeutronInterfaces(true); // Ensure that network service is loaded
+        return create(input);
+    }
 
-            Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                        int status = service.canCreateSubnet(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            subnetInterface.addSubnet(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    service.neutronSubnetCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
-            for (NeutronSubnet test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                            int status = service.canCreateSubnet(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
+    @Override
+    protected void updateDelta(String uuid, NeutronSubnet delta, NeutronSubnet original) {
+        /*
+         * note: what we get appears to not be a delta, but rather a
+         * complete updated object.  So, that needs to be sent down to
+         * folks to check
+         */
 
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronSubnet test : input.getBulk()) {
-                subnetInterface.addSubnet(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                        service.neutronSubnetCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        delta.setID(uuid);
+        delta.setNetworkUUID(original.getNetworkUUID());
+        delta.setTenantID(original.getTenantID());
+        delta.setIpVersion(original.getIpVersion());
+        delta.setCidr(original.getCidr());
     }
 
     /**
@@ -266,51 +268,7 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
     public Response updateSubnet(
             @PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input
             ) {
-        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
-
-        /*
-         * note: what we get appears to not be a delta, but rather a
-         * complete updated object.  So, that needs to be sent down to
-         * folks to check
-         */
-
-        NeutronSubnet updatedObject = input.getSingleton();
-        NeutronSubnet original = subnetInterface.getSubnet(subnetUUID);
-        updatedObject.setID(subnetUUID);
-        updatedObject.setNetworkUUID(original.getNetworkUUID());
-        updatedObject.setTenantID(original.getTenantID());
-        updatedObject.setIpVersion(original.getIpVersion());
-        updatedObject.setCidr(original.getCidr());
-
-        Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    int status = service.canUpdateSubnet(updatedObject, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        subnetInterface.updateSubnet(subnetUUID, updatedObject);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                service.neutronSubnetUpdated(updatedObject);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronSubnetRequest(subnetInterface.getSubnet(subnetUUID))).build();
+        return update(subnetUUID, input);
     }
 
     /**
@@ -323,41 +281,6 @@ public class NeutronSubnetsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSubnet(
             @PathParam("subnetUUID") String subnetUUID) {
-        final INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
-
-        NeutronSubnet singleton = subnetInterface.getSubnet(subnetUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronSubnetAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                    int status = service.canDeleteSubnet(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * remove it and return 204 status
-         */
-        deleteUuid(RESOURCE_NAME, subnetUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return subnetInterface.removeSubnet(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronSubnetAware service = (INeutronSubnetAware) instance;
-                service.neutronSubnetDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(subnetUUID);
     }
 }

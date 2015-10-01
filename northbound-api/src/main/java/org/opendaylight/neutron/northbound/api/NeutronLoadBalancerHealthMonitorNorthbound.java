@@ -51,20 +51,74 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
  *
  */
 @Path("/lbaas/healthmonitors")
-public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronNorthbound {
+public class NeutronLoadBalancerHealthMonitorNorthbound
+    extends AbstractNeutronNorthbound<NeutronLoadBalancerHealthMonitor, NeutronLoadBalancerHealthMonitorRequest, INeutronLoadBalancerHealthMonitorCRUD, INeutronLoadBalancerHealthMonitorAware> {
 
     private static final String RESOURCE_NAME = "LoadBalancerHealthMonitor";
 
-    private NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronLoadBalancerHealthMonitorRequest newNeutronRequest(NeutronLoadBalancerHealthMonitor o) {
+        return new NeutronLoadBalancerHealthMonitorRequest(o);
+    }
+
+    @Override
+    protected INeutronLoadBalancerHealthMonitorCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerHealthMonitorCRUD(this);
         if (answer.getLoadBalancerHealthMonitorInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getLoadBalancerHealthMonitorInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronLoadBalancerHealthMonitor singleton) {
+        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
+        return service.canCreateNeutronLoadBalancerHealthMonitor(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronLoadBalancerHealthMonitor singleton) {
+        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
+        service.neutronLoadBalancerHealthMonitorCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronLoadBalancerHealthMonitor delta, NeutronLoadBalancerHealthMonitor original) {
+        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
+        return service.canUpdateNeutronLoadBalancerHealthMonitor(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronLoadBalancerHealthMonitor updated) {
+        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
+        service.neutronLoadBalancerHealthMonitorUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronLoadBalancerHealthMonitor singleton) {
+        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
+        return service.canDeleteNeutronLoadBalancerHealthMonitor(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronLoadBalancerHealthMonitor singleton) {
+        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
+        service.neutronLoadBalancerHealthMonitorDeleted(singleton);
     }
 
     /**
@@ -98,7 +152,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
+        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronCRUD();
         List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface.getAllNeutronLoadBalancerHealthMonitors();
         List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
         Iterator<NeutronLoadBalancerHealthMonitor> i = allLoadBalancerHealthMonitors.iterator();
@@ -159,17 +213,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
     public Response showLoadBalancerHealthMonitor(@PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
-        if (!loadBalancerHealthMonitorInterface.neutronLoadBalancerHealthMonitorExists(loadBalancerHealthMonitorID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronLoadBalancerHealthMonitor ans = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronLoadBalancerHealthMonitorRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerHealthMonitorRequest(loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID))).build();
-        }
+        return show(loadBalancerHealthMonitorID, fields);
     }
 
     /**
@@ -182,66 +226,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerHealthMonitors(final NeutronLoadBalancerHealthMonitorRequest input) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
-        if (input.isSingleton()) {
-            NeutronLoadBalancerHealthMonitor singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                        int status = service.canCreateNeutronLoadBalancerHealthMonitor(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            loadBalancerHealthMonitorInterface.addNeutronLoadBalancerHealthMonitor(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                    service.neutronLoadBalancerHealthMonitorCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
-            for (NeutronLoadBalancerHealthMonitor test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                            int status = service.canCreateNeutronLoadBalancerHealthMonitor(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronLoadBalancerHealthMonitor test : input.getBulk()) {
-                loadBalancerHealthMonitorInterface.addNeutronLoadBalancerHealthMonitor(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                        service.neutronLoadBalancerHealthMonitorCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -257,46 +242,8 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
     public Response updateLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             final NeutronLoadBalancerHealthMonitorRequest input) {
-        INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
-
-        NeutronLoadBalancerHealthMonitor delta = input.getSingleton();
-        NeutronLoadBalancerHealthMonitor original = loadBalancerHealthMonitorInterface
-                .getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                    int status = service.canUpdateNeutronLoadBalancerHealthMonitor(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        loadBalancerHealthMonitorInterface.updateNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID, delta);
-        NeutronLoadBalancerHealthMonitor updatedLoadBalancerHealthMonitor = loadBalancerHealthMonitorInterface
-                .getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                service.neutronLoadBalancerHealthMonitorUpdated(updatedLoadBalancerHealthMonitor);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerHealthMonitorRequest
-                (loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor
-                        (loadBalancerHealthMonitorID))).build();
+        return update(loadBalancerHealthMonitorID, input);
     }
-
 
 
     /**
@@ -309,37 +256,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound extends AbstractNeutronN
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(
             @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID) {
-        final INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronInterfaces().getLoadBalancerHealthMonitorInterface();
-        NeutronLoadBalancerHealthMonitor singleton = loadBalancerHealthMonitorInterface.getNeutronLoadBalancerHealthMonitor(loadBalancerHealthMonitorID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronLoadBalancerHealthMonitorAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                    int status = service.canDeleteNeutronLoadBalancerHealthMonitor(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        deleteUuid(RESOURCE_NAME, loadBalancerHealthMonitorID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return loadBalancerHealthMonitorInterface.removeNeutronLoadBalancerHealthMonitor(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerHealthMonitorAware service = (INeutronLoadBalancerHealthMonitorAware) instance;
-                service.neutronLoadBalancerHealthMonitorDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(loadBalancerHealthMonitorID);
     }
 }
