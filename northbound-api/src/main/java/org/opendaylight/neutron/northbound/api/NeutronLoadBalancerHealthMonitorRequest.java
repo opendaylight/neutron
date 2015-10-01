@@ -20,7 +20,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerHealthMonitorRequest {
+public class NeutronLoadBalancerHealthMonitorRequest
+    implements INeutronRequest<NeutronLoadBalancerHealthMonitor> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/

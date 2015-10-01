@@ -19,7 +19,8 @@ import org.opendaylight.neutron.spi.NeutronFloatingIP;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronFloatingIPRequest {
+public class NeutronFloatingIPRequest
+    implements INeutronRequest<NeutronFloatingIP> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

@@ -20,7 +20,8 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSecurityRuleRequest {
+public class NeutronSecurityRuleRequest
+    implements INeutronRequest<NeutronSecurityRule> {
     /**
      * See OpenStack Network API v2.0 Reference for a
      * description of annotated attributes and operations

@@ -21,7 +21,8 @@ import org.opendaylight.neutron.spi.NeutronRouter;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronRouterRequest {
+public class NeutronRouterRequest
+    implements INeutronRequest<NeutronRouter> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

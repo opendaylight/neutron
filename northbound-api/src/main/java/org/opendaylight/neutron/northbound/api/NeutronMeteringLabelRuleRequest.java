@@ -21,7 +21,8 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronMeteringLabelRuleRequest {
+public class NeutronMeteringLabelRuleRequest
+    implements INeutronRequest<NeutronMeteringLabelRule> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
