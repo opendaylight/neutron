@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_1df945e9",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "For both routers and networks, we are mostly done finalizing a change of the API to that we represent an association between a bgpvpn and a network with its own uuid (same for routers).  This will allow us to give properties to an association between a network and a bgpvpn (later), or to to an association between a router and a bgpvpn (we\u0027ll have this very soon), or to an association between a port and a bgpvpn (later).\n\nThe Yang modelling should reflect that and make network_associations and router_associations first class citizen.\n\nThe discussion to validate this change is in progress at:\nhttps://review.openstack.org/177740",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_7d62b9d9",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "s/bgpvpns/bgpvpn/ ?\n\nThe API root for the BGP VPN interconnect API is \u0027bgpvpn\u0027 without the terminal \u0027s\u0027; \u0027bgpvpns\u0027 appears under this root to refer to the plurality of bgpvpn resources.",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_9d5f950e",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "s/bgpvpns/bgppvn/ ?",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_5d881d71",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronBgpvpnCRUD.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "I\u0027m curious to what is the semantic of \"inUse\" ? and what it\u0027s expected to be used for.",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_dddaed77",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "You probably don\u0027t need to persist \u0027route_targets\u0027.\nPlease read section \"Database design\" at https://review.openstack.org/#/c/177740/32/specs/liberty/bgpvpn.rst,cm",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_7de71941",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "Note that networks and routers are particular: they aim at reflecting the network associations and router associations that have been defined.  They probably need their own NeutroObject for being persisted (?).",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_bdddb172",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "This look duplicated from the default defined above in annotations.",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a76adc5_bdc4d192",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4872
+      },
+      "writtenOn": "2015-10-06T16:14:32Z",
+      "side": 1,
+      "message": "s/NeutronBgpvpnsNorthbound/NeutronBgpvpnNorthbound/ ?",
+      "revId": "aafe31458a9990f50023566aed7f7b296b95067c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
