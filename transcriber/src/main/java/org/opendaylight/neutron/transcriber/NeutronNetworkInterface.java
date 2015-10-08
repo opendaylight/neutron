@@ -103,6 +103,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
 
     protected NeutronNetwork fromMd(Network network) {
         NeutronNetwork result = new NeutronNetwork();
+        result.initDefaults();
         result.setAdminStateUp(network.isAdminStateUp());
         result.setNetworkName(network.getName());
         result.setShared(network.isShared());
