@@ -62,8 +62,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             .build();
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
             = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
-            .put(EthertypeV4.class,"v4")
-            .put(EthertypeV6.class,"v6")
+            .put(EthertypeV4.class,"IPv4")
+            .put(EthertypeV6.class,"IPv6")
             .build();
 
     NeutronSecurityRuleInterface(ProviderContext providerContext) {
