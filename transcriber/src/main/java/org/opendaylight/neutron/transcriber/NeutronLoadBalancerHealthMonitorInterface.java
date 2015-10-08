@@ -24,7 +24,7 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeHttp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeHttps;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeIcmp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbePing;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProbeTcp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Healthmonitors;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.healthmonitors.Healthmonitor;
@@ -46,7 +46,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             = new ImmutableBiMap.Builder<Class<? extends ProbeBase>,String>()
             .put(ProbeHttp.class,"HTTP")
             .put(ProbeHttps.class,"HTTPS")
-            .put(ProbeIcmp.class,"ICMP")
+            .put(ProbePing.class,"PING")
             .put(ProbeTcp.class,"TCP")
             .build();
 

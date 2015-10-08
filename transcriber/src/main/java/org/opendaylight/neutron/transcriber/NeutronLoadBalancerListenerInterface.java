@@ -23,6 +23,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolHttps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolTcp;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev160807.ProtocolTerminatedHttps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.Listeners;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listeners.Listener;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev141002.lbaas.attributes.listeners.ListenerBuilder;
@@ -43,6 +44,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             .put(ProtocolHttp.class,"HTTP")
             .put(ProtocolHttps.class,"HTTPS")
             .put(ProtocolTcp.class,"TCP")
+            .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
     NeutronLoadBalancerListenerInterface(ProviderContext providerContext) {
