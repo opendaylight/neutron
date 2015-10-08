@@ -24,6 +24,7 @@
     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/${eclipse.persistence.version}</bundle>
     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/${eclipse.persistence.version}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
+    <bundle>mvn:javax.validation/validation-api/1.1.0.Final</bundle>
   </feature>
 
   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
