@@ -118,7 +118,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         }
 //todo: remove '-' chars as tenant id doesn't use them
         if (label.getTenantId() != null) {
-            answer.setTenantID(label.getTenantId().getValue());
+            answer.setTenantID(label.getTenantId());
         }
         if (label.getUuid() != null) {
             answer.setID(label.getUuid().getValue());
