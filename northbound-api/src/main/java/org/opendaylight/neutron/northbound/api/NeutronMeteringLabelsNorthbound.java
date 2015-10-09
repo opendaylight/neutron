@@ -55,20 +55,71 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
  */
 
 @Path("/metering/metering-labels")
-public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
+public class NeutronMeteringLabelsNorthbound
+    extends AbstractNeutronNorthbound<NeutronMeteringLabel, NeutronMeteringLabelRequest, INeutronMeteringLabelCRUD, INeutronMeteringLabelAware> {
     private static final String RESOURCE_NAME = "Metering Label";
 
-    private NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected INeutronMeteringLabelCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronMeteringLabelCRUD(this);
         if (answer.getMeteringLabelInterface() == null) {
-            throw new ServiceUnavailableException("NeutronMeteringLabel CRUD Interface "
-                + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getMeteringLabelInterface();
+    }
+
+    @Override
+    protected NeutronMeteringLabelRequest newNeutronRequest(NeutronMeteringLabel o) {
+        return new NeutronMeteringLabelRequest(o);
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronMeteringLabel singleton) {
+        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+        return service.canCreateMeteringLabel(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronMeteringLabel singleton) {
+        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+        service.neutronMeteringLabelCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronMeteringLabel delta, NeutronMeteringLabel original) {
+        return 0;
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronMeteringLabel updated) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronMeteringLabel singleton) {
+        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+        return service.canDeleteMeteringLabel(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronMeteringLabel singleton) {
+        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
+        service.neutronMeteringLabelDeleted(singleton);
     }
 
     @Context
@@ -95,10 +146,10 @@ public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
             @QueryParam("description") String queryDescription
             // pagination and sorting are TODO
             ) {
-        INeutronMeteringLabelCRUD labelInterface = getNeutronInterfaces().getMeteringLabelInterface();
-        List<NeutronMeteringLabel> allNeutronMeteringLabels = labelInterface.getAllNeutronMeteringLabels();
+        INeutronMeteringLabelCRUD labelInterface = getNeutronCRUD();
+        List<NeutronMeteringLabel> allNeutronMeteringLabel = labelInterface.getAllNeutronMeteringLabels();
         List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
-        Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabels.iterator();
+        Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabel.iterator();
         while (i.hasNext()) {
             NeutronMeteringLabel oSS = i.next();
             if ((queryID == null || queryID.equals(oSS.getID())) &&
@@ -134,18 +185,7 @@ public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
             @PathParam("labelUUID") String labelUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronMeteringLabelCRUD labelInterface = getNeutronInterfaces().getMeteringLabelInterface();
-        if (!labelInterface.neutronMeteringLabelExists(labelUUID)) {
-            throw new ResourceNotFoundException("MeteringLabel UUID not found");
-        }
-        if (fields.size() > 0) {
-            NeutronMeteringLabel ans = labelInterface.getNeutronMeteringLabel(labelUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronMeteringLabelRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronMeteringLabelRequest(labelInterface.getNeutronMeteringLabel(labelUUID))).build();
-        }
+        return show(labelUUID, fields);
     }
 
     /**
@@ -158,45 +198,7 @@ public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabel(final NeutronMeteringLabelRequest input) {
-        INeutronMeteringLabelCRUD meteringLabelInterface = getNeutronInterfaces().getMeteringLabelInterface();
-        if (input.isSingleton()) {
-            NeutronMeteringLabel singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-                        int status = service.canCreateMeteringLabel(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
-                }
-            } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
-            }
-
-            /*
-             * add meteringLabel to the cache
-             */
-            meteringLabelInterface.addNeutronMeteringLabel(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-                    service.neutronMeteringLabelCreated(singleton);
-                }
-            }
-        } else {
-
-            /*
-             * only singleton meteringLabel creates supported
-             */
-            throw new BadRequestException("Only singleton meteringLabel creates supported");
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -209,37 +211,6 @@ public class NeutronMeteringLabelsNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabel(
             @PathParam("labelUUID") String labelUUID) {
-        final INeutronMeteringLabelCRUD meteringLabelInterface = getNeutronInterfaces().getMeteringLabelInterface();
-
-        NeutronMeteringLabel singleton = meteringLabelInterface.getNeutronMeteringLabel(labelUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-                    int status = service.canDeleteMeteringLabel(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException("No providers registered.  Please try again later");
-            }
-        } else {
-            throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
-        }
-        deleteUuid(RESOURCE_NAME, labelUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return meteringLabelInterface.removeNeutronMeteringLabel(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-                service.neutronMeteringLabelDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(labelUUID);
     }
 }

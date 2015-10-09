@@ -49,20 +49,74 @@ import java.util.List;
  *
  */
 @Path("/fw/firewalls")
-public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
+public class NeutronFirewallNorthbound
+    extends AbstractNeutronNorthbound<NeutronFirewall, NeutronFirewallRequest, INeutronFirewallCRUD, INeutronFirewallAware> {
 
     private static final String RESOURCE_NAME = "Firewall";
 
-    private NeutronFirewall extractFields(NeutronFirewall o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronFirewall extractFields(NeutronFirewall o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronFirewallRequest newNeutronRequest(NeutronFirewall o) {
+        return new NeutronFirewallRequest(o);
+    }
+
+    @Override
+    protected INeutronFirewallCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallCRUD(this);
         if (answer.getFirewallInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getFirewallInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronFirewallAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronFirewall singleton) {
+        INeutronFirewallAware service = (INeutronFirewallAware) instance;
+        return service.canCreateNeutronFirewall(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronFirewall singleton) {
+        INeutronFirewallAware service = (INeutronFirewallAware) instance;
+        service.neutronFirewallCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronFirewall delta, NeutronFirewall original) {
+        INeutronFirewallAware service = (INeutronFirewallAware) instance;
+        return service.canUpdateNeutronFirewall(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronFirewall updated) {
+        INeutronFirewallAware service = (INeutronFirewallAware) instance;
+        service.neutronFirewallUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronFirewall singleton) {
+        INeutronFirewallAware service = (INeutronFirewallAware) instance;
+        return service.canDeleteNeutronFirewall(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronFirewall singleton) {
+        INeutronFirewallAware service = (INeutronFirewallAware) instance;
+        service.neutronFirewallDeleted(singleton);
     }
 
     /**
@@ -93,7 +147,7 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
+        INeutronFirewallCRUD firewallInterface = getNeutronCRUD();
         List<NeutronFirewall> ans = new ArrayList<NeutronFirewall>();
         for (NeutronFirewall nsg : firewallInterface.getAllNeutronFirewalls()) {
             if ((queryFirewallUUID == null ||
@@ -139,17 +193,7 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
     public Response showFirewall(@PathParam("firewallUUID") String firewallUUID,
                                       // return fields
                                       @QueryParam("fields") List<String> fields) {
-        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
-        if (!firewallInterface.neutronFirewallExists(firewallUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronFirewall ans = firewallInterface.getNeutronFirewall(firewallUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronFirewallRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFirewallRequest(firewallInterface.getNeutronFirewall(firewallUUID))).build();
-        }
+        return show(firewallUUID, fields);
     }
 
     /**
@@ -162,67 +206,7 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFirewalls(final NeutronFirewallRequest input) {
-        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
-        if (input.isSingleton()) {
-            NeutronFirewall singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                        int status = service.canCreateNeutronFirewall(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            firewallInterface.addNeutronFirewall(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                    service.neutronFirewallCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
-            for (NeutronFirewall test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                            int status = service.canCreateNeutronFirewall(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronFirewall test : input.getBulk()) {
-                firewallInterface.addNeutronFirewall(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                        service.neutronFirewallCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -237,40 +221,7 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateFirewall(
             @PathParam("firewallUUID") String firewallUUID, final NeutronFirewallRequest input) {
-        INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
-
-        NeutronFirewall delta = input.getSingleton();
-        NeutronFirewall original = firewallInterface.getNeutronFirewall(firewallUUID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                    int status = service.canUpdateNeutronFirewall(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        firewallInterface.updateNeutronFirewall(firewallUUID, delta);
-        NeutronFirewall updatedFirewall = firewallInterface.getNeutronFirewall(firewallUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                service.neutronFirewallUpdated(updatedFirewall);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFirewallRequest(firewallInterface.getNeutronFirewall(firewallUUID))).build();
+        return update(firewallUUID, input);
     }
 
     /**
@@ -283,41 +234,6 @@ public class NeutronFirewallNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewall(
             @PathParam("firewallUUID") String firewallUUID) {
-        final INeutronFirewallCRUD firewallInterface = getNeutronInterfaces().getFirewallInterface();
-
-        NeutronFirewall singleton = firewallInterface.getNeutronFirewall(firewallUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronFirewallAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                    int status = service.canDeleteNeutronFirewall(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * remove it and return 204 status
-         */
-        deleteUuid(RESOURCE_NAME, firewallUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return firewallInterface.removeNeutronFirewall(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronFirewallAware service = (INeutronFirewallAware) instance;
-                service.neutronFirewallDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(firewallUUID);
     }
 }

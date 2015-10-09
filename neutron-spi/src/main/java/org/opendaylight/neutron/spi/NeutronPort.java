@@ -265,6 +265,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
         return ans;
     }
 
+    @Override
     public void initDefaults() {
         adminStateUp = true;
         if (status == null) {

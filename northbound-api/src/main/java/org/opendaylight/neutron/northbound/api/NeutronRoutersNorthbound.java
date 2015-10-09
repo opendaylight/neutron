@@ -57,19 +57,26 @@ import org.opendaylight.neutron.spi.NeutronRouter_Interface;
  */
 
 @Path("/routers")
-public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
+public class NeutronRoutersNorthbound
+    extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD, INeutronRouterAware> {
     static final String ROUTER_INTERFACE_STR = "network:router_interface";
     static final String ROUTER_GATEWAY_STR = "network:router_gateway";
     private static final String RESOURCE_NAME = "Router";
 
-    private NeutronRouter extractFields(NeutronRouter o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronRouter extractFields(NeutronRouter o, List<String> fields) {
         return o.extractFields(fields);
     }
 
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronRouterCRUD(this);
         if (answer.getRouterInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
         if (flag) {
             answer = answer.fetchINeutronNetworkCRUD(this);
@@ -81,10 +88,15 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
         return answer;
     }
 
+    @Override
+    protected INeutronRouterCRUD getNeutronCRUD() {
+        return getNeutronInterfaces(false).getRouterInterface();
+    }
+
     private NeutronCRUDInterfaces getAttachInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronRouterCRUD(this);
         if (answer.getRouterInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
         answer = answer.fetchINeutronPortCRUD(this).fetchINeutronSubnetCRUD(this);
         if (answer.getPortInterface() == null) {
@@ -96,6 +108,52 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
                     + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         return answer;
+    }
+
+    @Override
+    protected NeutronRouterRequest newNeutronRequest(NeutronRouter o) {
+        return new NeutronRouterRequest(o);
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronRouterAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronRouter singleton) {
+        INeutronRouterAware service = (INeutronRouterAware) instance;
+        return service.canCreateRouter(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronRouter singleton) {
+        INeutronRouterAware service = (INeutronRouterAware) instance;
+        service.neutronRouterCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronRouter delta, NeutronRouter original) {
+        INeutronRouterAware service = (INeutronRouterAware) instance;
+        return service.canUpdateRouter(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronRouter updated) {
+        INeutronRouterAware service = (INeutronRouterAware) instance;
+        service.neutronRouterUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronRouter singleton) {
+        INeutronRouterAware service = (INeutronRouterAware) instance;
+        return service.canDeleteRouter(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronRouter singleton) {
+        INeutronRouterAware service = (INeutronRouterAware) instance;
+        service.neutronRouterDeleted(singleton);
     }
 
     /**
@@ -127,7 +185,7 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             ) {
         INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
         if (routerInterface == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
         List<NeutronRouter> allRouters = routerInterface.getAllRouters();
         List<NeutronRouter> ans = new ArrayList<NeutronRouter>();
@@ -170,21 +228,7 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             @PathParam("routerUUID") String routerUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
-        if (routerInterface == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
-        }
-        if (!routerInterface.routerExists(routerUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronRouter ans = routerInterface.getRouter(routerUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronRouterRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronRouterRequest(routerInterface.getRouter(routerUUID))).build();
-        }
+        return show(routerUUID, fields);
     }
 
     /**
@@ -198,46 +242,14 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createRouters(final NeutronRouterRequest input) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
-        INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        if (input.isSingleton()) {
-            NeutronRouter singleton = input.getSingleton();
+        getNeutronInterfaces(true); // ensure that network service is loaded
+        return create(input);
+    }
 
-            Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronRouterAware service = (INeutronRouterAware) instance;
-                        int status = service.canCreateRouter(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-
-            /*
-             * add router to the cache
-             */
-            routerInterface.addRouter(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    service.neutronRouterCreated(singleton);
-                }
-            }
-        } else {
-
-            /*
-             * only singleton router creates supported
-             */
-            throw new BadRequestException("Only singleton router creates supported");
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+    @Override
+    protected void updateDelta(String uuid, NeutronRouter delta, NeutronRouter original) {
+        delta.setID(uuid);
+        delta.setTenantID(original.getTenantID());
     }
 
     /**
@@ -255,45 +267,8 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             @PathParam("routerUUID") String routerUUID,
             NeutronRouterRequest input
             ) {
-        NeutronCRUDInterfaces interfaces = getNeutronInterfaces(true);
-        INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        INeutronNetworkCRUD networkInterface = interfaces.getNetworkInterface();
-
-        NeutronRouter updatedRouter = input.getSingleton();
-        NeutronRouter original = routerInterface.getRouter(routerUUID);
-        updatedRouter.setID(routerUUID);
-        updatedRouter.setTenantID(original.getTenantID());
-
-        Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canUpdateRouter(updatedRouter, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the router entry and return the modified object
-         */
-        routerInterface.updateRouter(routerUUID, updatedRouter);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                service.neutronRouterUpdated(updatedRouter);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronRouterRequest(routerInterface.getRouter(routerUUID))).build();
-
+        getNeutronInterfaces(true); // ensure that network service is loaded
+        return update(routerUUID, input);
     }
 
     /**
@@ -306,38 +281,7 @@ public class NeutronRoutersNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteRouter(
             @PathParam("routerUUID") String routerUUID) {
-        final INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
-
-        NeutronRouter singleton = routerInterface.getRouter(routerUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canDeleteRouter(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-        deleteUuid(RESOURCE_NAME, routerUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return routerInterface.removeRouter(uuid);
-                       }
-                   });
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                service.neutronRouterDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(routerUUID);
     }
 
     /**

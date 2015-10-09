@@ -50,20 +50,74 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
  *
  */
 @Path("/fw/firewall_policies")
-public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
+public class NeutronFirewallPolicyNorthbound
+    extends AbstractNeutronNorthbound<NeutronFirewallPolicy, NeutronFirewallPolicyRequest, INeutronFirewallPolicyCRUD, INeutronFirewallPolicyAware> {
 
     private static final String RESOURCE_NAME = "Firewall Policy";
 
-    private NeutronFirewallPolicy extractFields(NeutronFirewallPolicy o, List<String> fields) {
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronFirewallPolicy extractFields(NeutronFirewallPolicy o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronFirewallPolicyRequest newNeutronRequest(NeutronFirewallPolicy o) {
+        return new NeutronFirewallPolicyRequest(o);
+    }
+
+    @Override
+    protected INeutronFirewallPolicyCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallPolicyCRUD(this);
         if (answer.getFirewallPolicyInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getFirewallPolicyInterface();
+    }
+
+    @Override
+    protected Object[] getInstances() {
+        return NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
+    }
+
+    @Override
+    protected int canCreate(Object instance, NeutronFirewallPolicy singleton) {
+        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
+        return service.canCreateNeutronFirewallPolicy(singleton);
+    }
+
+    @Override
+    protected void created(Object instance, NeutronFirewallPolicy singleton) {
+        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
+        service.neutronFirewallPolicyCreated(singleton);
+    }
+
+    @Override
+    protected int canUpdate(Object instance, NeutronFirewallPolicy delta, NeutronFirewallPolicy original) {
+        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
+        return service.canUpdateNeutronFirewallPolicy(delta, original);
+    }
+
+    @Override
+    protected void updated(Object instance, NeutronFirewallPolicy updated) {
+        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
+        service.neutronFirewallPolicyUpdated(updated);
+    }
+
+    @Override
+    protected int canDelete(Object instance, NeutronFirewallPolicy singleton) {
+        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
+        return service.canDeleteNeutronFirewallPolicy(singleton);
+    }
+
+    @Override
+    protected void deleted(Object instance, NeutronFirewallPolicy singleton) {
+        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
+        service.neutronFirewallPolicyDeleted(singleton);
     }
 
     /**
@@ -93,7 +147,7 @@ public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
             @QueryParam("page_reverse") String pageReverse
             // sorting not supported
     ) {
-        INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
+        INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronCRUD();
         List<NeutronFirewallPolicy> ans = new ArrayList<NeutronFirewallPolicy>();
         for (NeutronFirewallPolicy nsg : firewallPolicyInterface.getAllNeutronFirewallPolicies()) {
             if ((queryFirewallPolicyUUID == null ||
@@ -137,17 +191,7 @@ public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
     public Response showFirewallPolicy(@PathParam("firewallPolicyUUID") String firewallPolicyUUID,
                                       // return fields
                                       @QueryParam("fields") List<String> fields) {
-        INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
-        if (!firewallPolicyInterface.neutronFirewallPolicyExists(firewallPolicyUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
-        }
-        if (fields.size() > 0) {
-            NeutronFirewallPolicy ans = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronFirewallPolicyRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFirewallPolicyRequest(firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID))).build();
-        }
+        return show(firewallPolicyUUID, fields);
     }
 
     /**
@@ -160,66 +204,7 @@ public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFirewallPolicies(final NeutronFirewallPolicyRequest input) {
-        INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
-        if (input.isSingleton()) {
-            NeutronFirewallPolicy singleton = input.getSingleton();
-
-            Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
-            if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                        int status = service.canCreateNeutronFirewallPolicy(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDERS);
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-            }
-            firewallPolicyInterface.addNeutronFirewallPolicy(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                    service.neutronFirewallPolicyCreated(singleton);
-                }
-            }
-        } else {
-            Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
-            for (NeutronFirewallPolicy test : input.getBulk()) {
-                if (instances != null) {
-                    if (instances.length > 0) {
-                        for (Object instance : instances) {
-                            INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                            int status = service.canCreateNeutronFirewallPolicy(test);
-                            if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                                return Response.status(status).build();
-                            }
-                        }
-                    } else {
-                        throw new ServiceUnavailableException(NO_PROVIDERS);
-                    }
-                } else {
-                    throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-                }
-            }
-            /*
-             * now, each element of the bulk request can be added to the cache
-             */
-            for (NeutronFirewallPolicy test : input.getBulk()) {
-                firewallPolicyInterface.addNeutronFirewallPolicy(test);
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                        service.neutronFirewallPolicyCreated(test);
-                    }
-                }
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
@@ -235,40 +220,7 @@ public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateFirewallPolicy(
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID, final NeutronFirewallPolicyRequest input) {
-        INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
-
-        NeutronFirewallPolicy delta = input.getSingleton();
-        NeutronFirewallPolicy original = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
-
-        Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                    int status = service.canUpdateNeutronFirewallPolicy(delta, original);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        /*
-         * update the object and return it
-         */
-        firewallPolicyInterface.updateNeutronFirewallPolicy(firewallPolicyUUID, delta);
-        NeutronFirewallPolicy updatedFirewallPolicy = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                service.neutronFirewallPolicyUpdated(updatedFirewallPolicy);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFirewallPolicyRequest(firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID))).build();
+        return update(firewallPolicyUUID, input);
     }
 
     /**
@@ -281,39 +233,6 @@ public class NeutronFirewallPolicyNorthbound extends AbstractNeutronNorthbound {
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewallPolicy(
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID) {
-        final INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronInterfaces().getFirewallPolicyInterface();
-
-        NeutronFirewallPolicy singleton = firewallPolicyInterface.getNeutronFirewallPolicy(firewallPolicyUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
-        if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                    int status = service.canDeleteNeutronFirewallPolicy(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
-            }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
-        }
-
-        deleteUuid(RESOURCE_NAME, firewallPolicyUUID,
-                   new Remover() {
-                       public boolean remove(String uuid) {
-                           return firewallPolicyInterface.removeNeutronFirewallPolicy(uuid);
-                       }
-                   });
-
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-                service.neutronFirewallPolicyDeleted(singleton);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(firewallPolicyUUID);
     }
 }
