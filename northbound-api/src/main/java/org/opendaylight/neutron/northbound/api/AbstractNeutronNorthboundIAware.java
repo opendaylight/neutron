@@ -14,7 +14,7 @@ import java.util.List;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
-import org.opendaylight.neutron.spi.NeutronObject;
+import org.opendaylight.neutron.spi.INeutronObject;
 
 import javax.ws.rs.core.Response;
 
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 // When INeutron*Aware interfaces are deleted, this class should be deleted for BORON
 @Deprecated
-public abstract class AbstractNeutronNorthboundIAware<T extends NeutronObject, NeutronRequest extends INeutronRequest<T>, I extends INeutronCRUD<T>, INeutronAware>
+public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, NeutronRequest extends INeutronRequest<T>, I extends INeutronCRUD<T>, INeutronAware>
     extends AbstractNeutronNorthbound<T, NeutronRequest, I> {
     private static final Logger LOGGER = LoggerFactory
         .getLogger(AbstractNeutronNorthboundIAware.class);
