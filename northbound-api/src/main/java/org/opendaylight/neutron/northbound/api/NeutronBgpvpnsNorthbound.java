@@ -54,7 +54,7 @@ import org.opendaylight.neutron.spi.NeutronBgpvpn;
  */
 
 @Path("/bgpvpns")
-public class NeutronBgpvpnsNorthbound extends AbstractNeutronNorthbound {
+public class NeutronBgpvpnsNorthbound {
 
     @Context
     UriInfo uriInfo;
@@ -67,7 +67,7 @@ public class NeutronBgpvpnsNorthbound extends AbstractNeutronNorthbound {
     private NeutronCRUDInterfaces getNeutronInterfaces() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronBgpvpnCRUD(this);
         if (answer.getBgpvpnInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable(RESOURCE_NAME));
+            throw new ServiceUnavailableException("Service is unavailable");
         }
         return answer;
     }
@@ -160,7 +160,7 @@ public class NeutronBgpvpnsNorthbound extends AbstractNeutronNorthbound {
             ) {
         INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
         if (!bgpvpnInterface.bgpvpnExists(bgpvpnUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist(RESOURCE_NAME));
+            throw new ResourceNotFoundException("UUID does not exist");
         }
         if (fields.size() > 0) {
             NeutronBgpvpn ans = bgpvpnInterface.getBgpvpn(bgpvpnUUID);

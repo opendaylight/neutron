@@ -25,15 +25,15 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.B
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.Bgpvpns;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.Bgpvpn;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev141002.NetworkTypeBase;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn,NeutronBgpvpn> implements INeutronBgpvpnCRUD {
+public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, NeutronBgpvpn> implements INeutronBgpvpnCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpnInterface.class);
 
     private static final ImmutableBiMap<Class<? extends BgpvpnTypeBase>,String> BGPVPN_TYPE_MAP
@@ -57,18 +57,8 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn,Neut
     }
 
     @Override
-    public List<NeutronBgpvpn> getAll() {
-        Set<NeutronBgpvpn> allBgpvpns = new HashSet<NeutronBgpvpn>();
-        Bgpvpns bgpvpns = readMd(createInstanceIdentifier());
-        if (bgpvpns != null) {
-            for (Bgpvpn bgpvpn: bgpvpns.getBgpvpn()) {
-                allBgpvpns.add(fromMd(bgpvpn));
-            }
-        }
-        LOGGER.debug("Exiting getAllBgpvpns, Found {} OpenStackBgpvpns", allBgpvpns.size());
-        List<NeutronBgpvpn> ans = new ArrayList<NeutronBgpvpn>();
-        ans.addAll(allBgpvpns);
-        return ans;
+    protected List<Bgpvpn> getDataObjectList(Bgpvpns bgpvpns) {
+        return bgpvpns.getBgpvpn();
     }
 
     @Override
