@@ -56,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 
 @Path("/vpn/ipsecpolicies")
 public class NeutronVPNIPSECPoliciesNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNIPSECPolicy, NeutronVPNIPSECPolicyRequest, INeutronVPNIPSECPolicyCRUD, INeutronVPNIPSECPolicyAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronVPNIPSECPolicy, NeutronVPNIPSECPolicyRequest, INeutronVPNIPSECPolicyCRUD, INeutronVPNIPSECPolicyAware> {
 
     private static final String RESOURCE_NAME = "VPNIPSECPolicy";
 
