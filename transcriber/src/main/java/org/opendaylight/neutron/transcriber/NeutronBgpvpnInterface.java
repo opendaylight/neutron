@@ -47,52 +47,23 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
     }
 
     @Override
-    public boolean bgpvpnExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronBgpvpn getBgpvpn(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Bgpvpn> getDataObjectList(Bgpvpns bgpvpns) {
         return bgpvpns.getBgpvpn();
     }
 
     @Override
-    public List<NeutronBgpvpn> getAllBgpvpns() {
-        return getAll();
+    public boolean inUse(String uuid) {
+        return !exists(uuid);
     }
 
     @Override
-    public boolean addBgpvpn(NeutronBgpvpn input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeBgpvpn(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateBgpvpn(String uuid, NeutronBgpvpn delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean bgpvpnInUse(String bgpvpnUUID) {
-        return !exists(bgpvpnUUID);
-    }
-
     protected NeutronBgpvpn fromMd(Bgpvpn bgpvpn) {
         NeutronBgpvpn result = new NeutronBgpvpn();
         result.setAdminStateUp(bgpvpn.isAdminStateUp());
         result.setBgpvpnName(bgpvpn.getName());
         result.setAutoAggregate(bgpvpn.isAutoAggregate());
         result.setStatus(bgpvpn.getStatus());
-        result.setTenantID(bgpvpn.getTenantId().getValue().replace("-", ""));
+        result.setTenantID(bgpvpn.getTenantId());
         result.setID(bgpvpn.getUuid().getValue());
         if(bgpvpn.getVnid() != null) {
             result.setVnid(bgpvpn.getVnid());
@@ -148,6 +119,7 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
         return result;
     }
 
+    @Override
     protected Bgpvpn toMd(NeutronBgpvpn bgpvpn) {
         BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
 
@@ -224,6 +196,7 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
         return bgpvpnBuilder.build();
     }
 
+    @Override
     protected Bgpvpn toMd(String uuid) {
         BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
         bgpvpnBuilder.setUuid(toUuid(uuid));
@@ -237,6 +210,7 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
                 .child(Bgpvpn.class, bgpvpn.getKey());
     }
 
+    @Override
     protected InstanceIdentifier<Bgpvpns> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Bgpvpns.class);
