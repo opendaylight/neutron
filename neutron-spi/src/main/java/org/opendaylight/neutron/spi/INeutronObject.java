@@ -24,4 +24,6 @@ public interface INeutronObject {
     void setTenantID(String tenantID);
 
     void setTenantID(Uuid tenantID);
+
+    void initDefaults();
 }

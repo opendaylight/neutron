@@ -50,6 +50,7 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
         return "NeutronObject [id=" + uuid + ", tenantID=" + tenantID + "]";
     }
 
+    @Override
     public void initDefaults() {
     }
 }

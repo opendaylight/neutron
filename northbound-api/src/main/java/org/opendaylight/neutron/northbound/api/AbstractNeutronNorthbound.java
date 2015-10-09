@@ -15,14 +15,14 @@ import java.util.List;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
-import org.opendaylight.neutron.spi.NeutronObject;
+import org.opendaylight.neutron.spi.INeutronObject;
 
 import javax.ws.rs.core.Response;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractNeutronNorthbound<T extends NeutronObject, NeutronRequest extends INeutronRequest<T>, I extends INeutronCRUD<T>> {
+public abstract class AbstractNeutronNorthbound<T extends INeutronObject, NeutronRequest extends INeutronRequest<T>, I extends INeutronCRUD<T>> {
     private static final Logger LOGGER = LoggerFactory
         .getLogger(AbstractNeutronNorthbound.class);
 
