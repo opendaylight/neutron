@@ -58,7 +58,7 @@ import org.opendaylight.neutron.spi.NeutronPort;
 
 @Path("/ports")
 public class NeutronPortsNorthbound
-    extends AbstractNeutronNorthbound<NeutronPort, NeutronPortRequest, INeutronPortCRUD, INeutronPortAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronPort, NeutronPortRequest, INeutronPortCRUD, INeutronPortAware> {
 
     private static final String RESOURCE_NAME = "Port";
 

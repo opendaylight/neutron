@@ -60,7 +60,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
 @Path("/lbaas/pools")
 public class NeutronLoadBalancerPoolNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancerPool, NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD, INeutronLoadBalancerPoolAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronLoadBalancerPool, NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD, INeutronLoadBalancerPoolAware> {
 
     private static final String RESOURCE_NAME = "LoadBalancerPool";
 

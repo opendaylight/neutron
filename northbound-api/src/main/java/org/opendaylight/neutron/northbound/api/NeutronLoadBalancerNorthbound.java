@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancer;
  */
 @Path("/lbaas/loadbalancers")
 public class NeutronLoadBalancerNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancer, NeutronLoadBalancerRequest, INeutronLoadBalancerCRUD, INeutronLoadBalancerAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronLoadBalancer, NeutronLoadBalancerRequest, INeutronLoadBalancerCRUD, INeutronLoadBalancerAware> {
 
     private static final String RESOURCE_NAME = "LoadBalancer";
 

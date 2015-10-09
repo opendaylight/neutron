@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 
 @Path ("/security-group-rules")
 public class NeutronSecurityRulesNorthbound
-    extends AbstractNeutronNorthbound<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD, INeutronSecurityRuleAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD, INeutronSecurityRuleAware> {
     private static final String RESOURCE_NAME = "Security Rule";
 
     @Override

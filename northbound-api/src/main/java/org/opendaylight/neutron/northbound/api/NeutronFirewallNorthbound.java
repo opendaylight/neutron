@@ -50,7 +50,7 @@ import java.util.List;
  */
 @Path("/fw/firewalls")
 public class NeutronFirewallNorthbound
-    extends AbstractNeutronNorthbound<NeutronFirewall, NeutronFirewallRequest, INeutronFirewallCRUD, INeutronFirewallAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronFirewall, NeutronFirewallRequest, INeutronFirewallCRUD, INeutronFirewallAware> {
 
     private static final String RESOURCE_NAME = "Firewall";
 

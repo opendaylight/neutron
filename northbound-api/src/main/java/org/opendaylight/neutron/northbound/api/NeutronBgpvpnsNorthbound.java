@@ -54,22 +54,36 @@ import org.opendaylight.neutron.spi.NeutronBgpvpn;
  */
 
 @Path("/bgpvpns")
-public class NeutronBgpvpnsNorthbound {
+public class NeutronBgpvpnsNorthbound
+    extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
 
     @Context
     UriInfo uriInfo;
 
     private static final String RESOURCE_NAME = "Bgpvpn";
-    private NeutronBgpvpn extractFields(NeutronBgpvpn o, List<String> fields) {
+
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronBgpvpn extractFields(NeutronBgpvpn o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronBgpvpnRequest newNeutronRequest(NeutronBgpvpn o) {
+        return new NeutronBgpvpnRequest(o);
+    }
+
+    @Override
+    protected INeutronBgpvpnCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronBgpvpnCRUD(this);
         if (answer.getBgpvpnInterface() == null) {
-            throw new ServiceUnavailableException("Service is unavailable");
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getBgpvpnInterface();
     }
 
     /**
@@ -100,7 +114,7 @@ public class NeutronBgpvpnsNorthbound {
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
             // sorting not supported
             ) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
+        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
         List<NeutronBgpvpn> allBgpvpns = bgpvpnInterface.getAllBgpvpns();
         List<NeutronBgpvpn> ans = new ArrayList<NeutronBgpvpn>();
         Iterator<NeutronBgpvpn> i = allBgpvpns.iterator();
@@ -158,9 +172,9 @@ public class NeutronBgpvpnsNorthbound {
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
+        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
         if (!bgpvpnInterface.bgpvpnExists(bgpvpnUUID)) {
-            throw new ResourceNotFoundException("UUID does not exist");
+            throw new ResourceNotFoundException(uuidNoExist());
         }
         if (fields.size() > 0) {
             NeutronBgpvpn ans = bgpvpnInterface.getBgpvpn(bgpvpnUUID);
@@ -182,7 +196,7 @@ public class NeutronBgpvpnsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createBgpvpns(final NeutronBgpvpnRequest input) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
+        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
         if (input.isSingleton()) {
             NeutronBgpvpn singleton = input.getSingleton();
 
@@ -212,7 +226,7 @@ public class NeutronBgpvpnsNorthbound {
     public Response updateBgpvpn(
             @PathParam("bgpvpnUUID") String bgpvpnUUID, final NeutronBgpvpnRequest input
             ) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
+        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
 
         NeutronBgpvpn updatedObject = input.getSingleton();
         NeutronBgpvpn original = bgpvpnInterface.getBgpvpn(bgpvpnUUID);
@@ -246,7 +260,7 @@ public class NeutronBgpvpnsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteBgpvpn(
             @PathParam("bgpvpnUUID") String bgpvpnUUID) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
+        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
 
         if (!bgpvpnInterface.removeBgpvpn(bgpvpnUUID)) {
             throw new InternalServerErrorException("Could not delete bgpvpn");

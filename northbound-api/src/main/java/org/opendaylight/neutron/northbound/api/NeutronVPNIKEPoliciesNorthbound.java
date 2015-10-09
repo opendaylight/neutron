@@ -56,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 
 @Path("/vpn/ikepolicies")
 public class NeutronVPNIKEPoliciesNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD, INeutronVPNIKEPolicyAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD, INeutronVPNIKEPolicyAware> {
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     @Override
