@@ -125,7 +125,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     protected NeutronFloatingIP fromMd(Floatingip fip) {
         NeutronFloatingIP result = new NeutronFloatingIP();
-        result.setID(String.valueOf(fip.getUuid().getValue()));
+        result.setID(fip.getUuid().getValue());
         if (fip.getFloatingNetworkId() != null) {
             result.setFloatingNetworkUUID(String.valueOf(fip.getFloatingNetworkId().getValue()));
         }

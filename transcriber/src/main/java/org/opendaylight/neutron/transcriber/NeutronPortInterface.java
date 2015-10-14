@@ -189,7 +189,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         if (port.getTenantId() != null) {
             result.setTenantID(port.getTenantId());
         }
-        result.setID(String.valueOf(port.getUuid().getValue()));
+        result.setID(port.getUuid().getValue());
         addExtensions(port, result);
         return result;
     }

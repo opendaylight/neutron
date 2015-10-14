@@ -192,7 +192,7 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
 
     public NeutronRouter fromMd(Router router) {
         NeutronRouter result = new NeutronRouter();
-        result.setID(String.valueOf(router.getUuid().getValue()));
+        result.setID(router.getUuid().getValue());
         result.setName(router.getName());
         result.setTenantID(router.getTenantId());
         result.setAdminStateUp(router.isAdminStateUp());
@@ -230,7 +230,7 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             Map<String, NeutronRouter_Interface> interfaces = new HashMap<String, NeutronRouter_Interface>();
             for (Interfaces mdInterface : router.getInterfaces()) {
                 NeutronRouter_Interface pojoInterface = new NeutronRouter_Interface();
-                String id = String.valueOf(mdInterface.getUuid().getValue());
+                String id = mdInterface.getUuid().getValue();
                 pojoInterface.setID(id);
                 pojoInterface.setTenantID(mdInterface.getTenantId());
                 pojoInterface.setSubnetUUID(String.valueOf(mdInterface.getSubnetId().getValue()));

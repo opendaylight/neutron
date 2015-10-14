@@ -8,7 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import com.google.common.base.Preconditions;
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,6 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Neutron_ID implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final String UUID_PATTERN_REGEX = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
+    private static final Pattern UUID_PATTERN = Pattern.compile(UUID_PATTERN_REGEX);
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
@@ -27,9 +31,17 @@ public class Neutron_ID implements Serializable {
     @XmlElement(name = "id")
     String uuid;
 
+    private void checkUuidPattern(String uuid) {
+        Preconditions.checkNotNull(uuid, "Supplied value may not be null");
+        Preconditions.checkArgument(UUID_PATTERN.matcher(uuid).matches(),
+                                    "Supplied value \"%s\" does not match uuid pattern \"%s\"",
+                                    uuid, UUID_PATTERN_REGEX);
+    }
+
     public Neutron_ID() { }
 
     public Neutron_ID(String uuid) {
+        checkUuidPattern(uuid);
         this.uuid = uuid;
     }
 
@@ -38,6 +50,7 @@ public class Neutron_ID implements Serializable {
     }
 
     public void setID(String uuid) {
+        checkUuidPattern(uuid);
         this.uuid = uuid;
     }
 
