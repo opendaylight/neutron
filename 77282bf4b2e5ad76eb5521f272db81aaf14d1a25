@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad0f9df_bb45dbb4",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthboundIAware.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-10-15T20:29:29Z",
+      "side": 1,
+      "message": "use format:\n* Copyright © 2015 Intel Corporation and others.  All rights reserved.",
+      "range": {
+        "startLine": 2,
+        "startChar": 22,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "77282bf4b2e5ad76eb5521f272db81aaf14d1a25",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_5b12afb5",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthboundIAware.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-10-15T20:29:29Z",
+      "side": 1,
+      "message": "remove line 3",
+      "range": {
+        "startLine": 3,
+        "startChar": 22,
+        "endLine": 3,
+        "endChar": 27
+      },
+      "revId": "77282bf4b2e5ad76eb5521f272db81aaf14d1a25",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
