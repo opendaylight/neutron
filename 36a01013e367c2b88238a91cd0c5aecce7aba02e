@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad0f9df_bb1cfbc2",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2015-10-15T20:31:50Z",
+      "side": 1,
+      "message": "move this to line 196",
+      "range": {
+        "startLine": 199,
+        "startChar": 14,
+        "endLine": 199,
+        "endChar": 26
+      },
+      "revId": "36a01013e367c2b88238a91cd0c5aecce7aba02e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
