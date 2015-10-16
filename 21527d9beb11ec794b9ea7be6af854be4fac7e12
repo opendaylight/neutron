@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_ecae47e7",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2GatewayCRUD.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_eca9fddf",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_4cba7124",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2GatewayConnectionCRUD.java",
         "patchSetId": 4
@@ -47,6 +65,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "inconsistent naming.",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_0cacebec",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2GatewayConnectionCRUD.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_4cba7124",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_acb83f2b",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDevice.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "changed the name as suggested.",
+      "parentUuid": "3a79b1b5_6c8c0d80",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_0ceb1914",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDevice.java",
         "patchSetId": 4
@@ -81,6 +135,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "Inconsistent camel case.\nneturondevice or neutronDevice?",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_ccb58332",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDevice.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Addressed.",
+      "parentUuid": "3a79b1b5_0ceb1914",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_2c7c4f72",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDevice.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_ccf441f4",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_ecf7bdf3",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDevice.java",
         "patchSetId": 4
@@ -115,6 +205,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "ditto",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_4c819349",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDevice.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_ecf7bdf3",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_ec95e788",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDeviceInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Changed as suggested.",
+      "parentUuid": "3a79b1b5_0cd2395c",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_0c39d9a3",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2Gateway.java",
         "patchSetId": 4
@@ -149,6 +275,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "Inconsistent naming.\ngateway vs l2gateway",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_0c938ba4",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2Gateway.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_0c39d9a3",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -189,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_ac8fdf74",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2Gateway.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_acc0e57c",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_ec457d17",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2GatewayConnection.java",
         "patchSetId": 4
@@ -200,6 +362,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "Please don\u0027t introduce deprecated interface.",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_cc8ca382",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2GatewayConnection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Addressed",
+      "parentUuid": "3a79b1b5_ec457d17",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -223,6 +403,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_6ce9f719",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionNorthbound.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Comment added.",
+      "parentUuid": "3a79b1b5_acac6536",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_0c65591d",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionNorthbound.java",
         "patchSetId": 4
@@ -234,6 +432,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "Inconsistent naming. L2Gateway or L2gateway?",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_8cee9b21",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionNorthbound.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_0c65591d",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -257,6 +473,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_ecdc0777",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayConnectionRequest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "At this point of time Singleton request is supported. Can think of bulk request later. L2gateway Api doesn\u0027t support it as of now.\nref:https://github.com/openstack/networking-l2gw/blob/a58a8d800df45d948c13ee85fb9d527316b6a5fd/specs/kilo/l2-gateway-api.rst",
+      "parentUuid": "3a79b1b5_2c6855f4",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_8c7889c5",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayNorthbound.java",
         "patchSetId": 4
@@ -274,6 +508,24 @@
     },
     {
       "key": {
+        "uuid": "fad0f9df_0cdaab78",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayNorthbound.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_8c7889c5",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_ac7305e6",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayNorthbound.java",
         "patchSetId": 4
@@ -285,6 +537,24 @@
       "writtenOn": "2015-09-17T00:55:23Z",
       "side": 1,
       "message": "method name of lasting \u0027UUID\u0027 is inconsistent",
+      "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_ace6ff42",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2GatewayNorthbound.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 1,
+      "message": "Corrected",
+      "parentUuid": "3a79b1b5_ac7305e6",
       "revId": "21527d9beb11ec794b9ea7be6af854be4fac7e12",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false

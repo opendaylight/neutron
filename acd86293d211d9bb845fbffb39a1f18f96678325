@@ -16,6 +16,24 @@
       "revId": "acd86293d211d9bb845fbffb39a1f18f96678325",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_4caaf3d5",
+        "filename": "dummyprovider/src/main/java/org/opendaylight/neutron/dummyprovider/Activator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4328
+      },
+      "writtenOn": "2015-10-16T07:41:31Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_0c9d59bc",
+      "revId": "acd86293d211d9bb845fbffb39a1f18f96678325",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
