@@ -1,0 +1,480 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fad0f9df_7c2686bc",
+        "filename": "model/src/main/yang/neutron-l2gateways.yang",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Ice House? copy-and-paste bug?\nPlease update it to match it with actual release.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_fc403637",
+        "filename": "model/src/main/yang/neutron-l2gateways.yang",
+        "patchSetId": 5
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "l2gateway-connection-attributes",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_3cf31e0c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2gatewayCRUD.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Now INeutronCRUD defines exists, add, ...\nPlease use them and not add aliased interface.\n\nPlease refer to https://git.opendaylight.org/gerrit/#/c/28233/",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_5cf862e5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2gatewayConnectionCRUD.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "extends INeutronCURD\u003c\u003e",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_bce62e43",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronL2gatewayConnectionCRUD.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Please use INeutronCRUD.{exists, add, ...}\nPlease refer to https://git.opendaylight.org/gerrit/#/c/28233/",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_5caaa2d5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "\"l2gatewayConnection\"? (trailing \u0027s\u0027)\nor do you intentionally apend \u0027s\u0027?\n\n@XmlAccessorType(XmlAccessType.NONE) for consistency",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_7c74469c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "This isn\u0027t necessary. NeutronObject.id.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_fc67d6e8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "What\u0027s the reason to prefix \"default_\"?\nMaybe I don\u0027t understand the details of l2gw...",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_1c65fae0",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gwDevice.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "implements Serializable?",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_bc614ed5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gwDeviceInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "serializable?",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_dce3f231",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Please use INeutronCRUD.add() method.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_7cd0c653",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "As the direction of transparent, those checks aren\u0027t done.\ne.g. the changeset of a1a278f0895ae295f6c3a84240f7a8b7cfe452eb\nMake NN more transparent, part I",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_9cd56a45",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "please use INeutronCRUD.get() method",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_3cca3ea2",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Please use INeutronCRUD.delete() method.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_bcbdce04",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionRequest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "implements INeutronRequest\u003c...\u003e\n\nFor consistency please add\n@XmlRootElement\n@XmlAccessorType(XmlAccessType.NONE)\n\nThis isn\u0027t necessary, though.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_dcba120a",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Please refer to https://git.opendaylight.org/gerrit/#/c/28233/",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_7c3766b1",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayRequest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "implements INeutronRequest\u003c...\u003e",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_9c3c8a95",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayConnectionInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Those trivial methods aren\u0027t necessary.\nPlease refer to https://git.opendaylight.org/gerrit/#/c/28233/",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_dc51b2d9",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayConnectionInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "getUuid() !\u003d null?\nsame to the following if clases.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_fc4a7626",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayConnectionInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "String.valueOf isn\u0027t necessary.\nplease refer to https://git.opendaylight.org/gerrit/#/c/28365/",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_1c489a2c",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayConnectionInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_5c5dc2e8",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "Those trivial methods aren\u0027t necessary.\nPlease refer to https://git.opendaylight.org/gerrit/#/c/28233/",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_1c6f3a94",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "getUuid() !\u003d null?",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_bc6b8e84",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "String.vauleOf is not needed.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_dc68d289",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "\" : \" space around \":\" colon.",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_7c0526c1",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_9c0a4ad1",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fad0f9df_3c0f9ee3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-10-16T21:48:15Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9f57624da4052dda51eac6eb27238e89d30b9044",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
