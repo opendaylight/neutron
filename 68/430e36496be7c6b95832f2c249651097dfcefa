@@ -1,0 +1,7 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+2: Flavio Fernandes <ffernand@redhat.com>
+Submitted-by: Flavio Fernandes <ffernand@redhat.com>
+Submitted-at: Fri, 23 Oct 2015 17:25:29 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/28529
+Project: neutron
+Branch: refs/heads/master
