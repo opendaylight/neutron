@@ -57,7 +57,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 
 @Path("/floatingips")
 public class NeutronFloatingIPsNorthbound
-    extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD, INeutronFloatingIPAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD, INeutronFloatingIPAware> {
     private static final String RESOURCE_NAME = "Floating IP";
 
     @Override

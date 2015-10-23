@@ -54,22 +54,36 @@ import org.opendaylight.neutron.spi.NeutronBgpvpn;
  */
 
 @Path("/bgpvpns")
-public class NeutronBgpvpnsNorthbound {
+public class NeutronBgpvpnsNorthbound
+    extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
 
     @Context
     UriInfo uriInfo;
 
     private static final String RESOURCE_NAME = "Bgpvpn";
-    private NeutronBgpvpn extractFields(NeutronBgpvpn o, List<String> fields) {
+
+    @Override
+    protected String getResourceName() {
+        return RESOURCE_NAME;
+    }
+
+    @Override
+    protected NeutronBgpvpn extractFields(NeutronBgpvpn o, List<String> fields) {
         return o.extractFields(fields);
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
+    @Override
+    protected NeutronBgpvpnRequest newNeutronRequest(NeutronBgpvpn o) {
+        return new NeutronBgpvpnRequest(o);
+    }
+
+    @Override
+    protected INeutronBgpvpnCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronBgpvpnCRUD(this);
         if (answer.getBgpvpnInterface() == null) {
-            throw new ServiceUnavailableException("Service is unavailable");
+            throw new ServiceUnavailableException(serviceUnavailable());
         }
-        return answer;
+        return answer.getBgpvpnInterface();
     }
 
     /**
@@ -100,8 +114,8 @@ public class NeutronBgpvpnsNorthbound {
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
             // sorting not supported
             ) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
-        List<NeutronBgpvpn> allBgpvpns = bgpvpnInterface.getAllBgpvpns();
+        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
+        List<NeutronBgpvpn> allBgpvpns = bgpvpnInterface.getAll();
         List<NeutronBgpvpn> ans = new ArrayList<NeutronBgpvpn>();
         Iterator<NeutronBgpvpn> i = allBgpvpns.iterator();
         while (i.hasNext()) {
@@ -158,18 +172,7 @@ public class NeutronBgpvpnsNorthbound {
             // return fields
             @QueryParam("fields") List<String> fields
             ) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
-        if (!bgpvpnInterface.bgpvpnExists(bgpvpnUUID)) {
-            throw new ResourceNotFoundException("UUID does not exist");
-        }
-        if (fields.size() > 0) {
-            NeutronBgpvpn ans = bgpvpnInterface.getBgpvpn(bgpvpnUUID);
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronBgpvpnRequest(extractFields(ans, fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronBgpvpnRequest(bgpvpnInterface.getBgpvpn(bgpvpnUUID))).build();
-        }
+        return show(bgpvpnUUID, fields);
     }
 
     /**
@@ -182,25 +185,20 @@ public class NeutronBgpvpnsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createBgpvpns(final NeutronBgpvpnRequest input) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
-        if (input.isSingleton()) {
-            NeutronBgpvpn singleton = input.getSingleton();
-
-            // add bgpvpn to MDSAL
-            singleton.initDefaults();
-            bgpvpnInterface.addBgpvpn(singleton);
-        } else {
-            // add items to MDSAL
-            for (NeutronBgpvpn test : input.getBulk()) {
-                test.initDefaults();
-                bgpvpnInterface.addBgpvpn(test);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        return create(input);
     }
 
     /**
      * Updates a Bgpvpn */
+    @Override
+    protected void updateDelta(String uuid,
+                               NeutronBgpvpn delta, NeutronBgpvpn original) {
+        //Fill in defaults if they're missing in update
+        delta.initDefaults();
+        delta.setID(uuid);
+        delta.setTenantID(original.getTenantID());
+    }
+
     @Path("{bgpvpnUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -212,28 +210,7 @@ public class NeutronBgpvpnsNorthbound {
     public Response updateBgpvpn(
             @PathParam("bgpvpnUUID") String bgpvpnUUID, final NeutronBgpvpnRequest input
             ) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
-
-        NeutronBgpvpn updatedObject = input.getSingleton();
-        NeutronBgpvpn original = bgpvpnInterface.getBgpvpn(bgpvpnUUID);
-
-        /*
-         *  note: what we get appears to not be a delta but
-         * rather an incomplete updated object.  So we need to set
-         * the ID to complete the object and then send that down
-         * for folks to check
-         */
-
-        updatedObject.setID(bgpvpnUUID);
-        updatedObject.setTenantID(original.getTenantID());
-        //Fill in defaults if they're missing in update
-        updatedObject.initDefaults();
-
-        // update bgpvpn object
-        bgpvpnInterface.updateBgpvpn(bgpvpnUUID, updatedObject);
-
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronBgpvpnRequest(bgpvpnInterface.getBgpvpn(bgpvpnUUID))).build();
+        return update(bgpvpnUUID, input);
     }
 
     /**
@@ -246,11 +223,6 @@ public class NeutronBgpvpnsNorthbound {
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteBgpvpn(
             @PathParam("bgpvpnUUID") String bgpvpnUUID) {
-        INeutronBgpvpnCRUD bgpvpnInterface = getNeutronInterfaces().getBgpvpnInterface();
-
-        if (!bgpvpnInterface.removeBgpvpn(bgpvpnUUID)) {
-            throw new InternalServerErrorException("Could not delete bgpvpn");
-        }
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        return delete(bgpvpnUUID);
     }
 }

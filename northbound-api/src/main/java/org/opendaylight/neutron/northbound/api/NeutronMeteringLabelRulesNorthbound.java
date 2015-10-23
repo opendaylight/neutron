@@ -56,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 
 @Path("/metering/metering-label-rules")
 public class NeutronMeteringLabelRulesNorthbound
-    extends AbstractNeutronNorthbound<NeutronMeteringLabelRule, NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD, INeutronMeteringLabelRuleAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronMeteringLabelRule, NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD, INeutronMeteringLabelRuleAware> {
     private static final String RESOURCE_NAME = "Metering Label Rule";
 
     @Override

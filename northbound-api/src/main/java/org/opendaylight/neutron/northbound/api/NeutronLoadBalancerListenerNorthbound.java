@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
  */
 @Path("/lbaas/listeners")
 public class NeutronLoadBalancerListenerNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancerListener, NeutronLoadBalancerListenerRequest, INeutronLoadBalancerListenerCRUD, INeutronLoadBalancerListenerAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronLoadBalancerListener, NeutronLoadBalancerListenerRequest, INeutronLoadBalancerListenerCRUD, INeutronLoadBalancerListenerAware> {
 
     private static final String RESOURCE_NAME = "LoadBalancerListener";
 

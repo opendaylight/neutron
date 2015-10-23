@@ -51,7 +51,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  */
 @Path ("/security-groups")
 public class NeutronSecurityGroupsNorthbound
-    extends AbstractNeutronNorthbound<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD, INeutronSecurityGroupAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD, INeutronSecurityGroupAware> {
     private static final String RESOURCE_NAME = "Security Group";
 
     @Override

@@ -56,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
 
 @Path("/vpn/vpnservices")
 public class NeutronVPNServicesNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNService, NeutronVPNServiceRequest, INeutronVPNServiceCRUD, INeutronVPNServiceAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronVPNService, NeutronVPNServiceRequest, INeutronVPNServiceCRUD, INeutronVPNServiceAware> {
 
     private static final String RESOURCE_NAME = "VPNService";
 

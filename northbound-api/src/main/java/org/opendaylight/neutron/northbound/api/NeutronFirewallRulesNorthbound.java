@@ -51,7 +51,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallRule;
 
 @Path("fw/firewall_rules")
 public class NeutronFirewallRulesNorthbound
-    extends AbstractNeutronNorthbound<NeutronFirewallRule, NeutronFirewallRuleRequest, INeutronFirewallRuleCRUD, INeutronFirewallRuleAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronFirewallRule, NeutronFirewallRuleRequest, INeutronFirewallRuleCRUD, INeutronFirewallRuleAware> {
     private static final String RESOURCE_NAME = "Firewall Rule";
 
     @Override

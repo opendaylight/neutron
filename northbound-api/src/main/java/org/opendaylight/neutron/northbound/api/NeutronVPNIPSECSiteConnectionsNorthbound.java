@@ -56,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 
 @Path("/vpn/ipsecsiteconnections")
 public class NeutronVPNIPSECSiteConnectionsNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNIPSECSiteConnection, NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD, INeutronVPNIPSECSiteConnectionAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronVPNIPSECSiteConnection, NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD, INeutronVPNIPSECSiteConnectionAware> {
 
     private static final String RESOURCE_NAME = "VPNIPSECSiteConnections";
 

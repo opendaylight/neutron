@@ -57,7 +57,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 
 @Path("/networks")
 public class NeutronNetworksNorthbound
-    extends AbstractNeutronNorthbound<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD, INeutronNetworkAware> {
+    extends AbstractNeutronNorthboundIAware<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD, INeutronNetworkAware> {
 
     @Context
     UriInfo uriInfo;
