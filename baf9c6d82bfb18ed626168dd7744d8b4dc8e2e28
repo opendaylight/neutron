@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_ea8fe673",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "Can you please add links to the l2gateway project and related documents?",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_aa4d6e74",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "no points to override only to call super class.",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_ca522a13",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_6a6e96cb",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "extends AbstractNeutronNorthbound\n\nPlease see NeutronBgpvpnsNorthbound.java as reference.",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_2a689eb9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "Please use AbstractNeutronNorthbound.add() method.\nsimilar for PUT/GET/DELETE",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_6aa53603",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "AbstractNeutronNorthbound.create()\nsimilar for the following methods.",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_0ab6023e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayConnectionInterface.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2015-11-19T19:11:18Z",
+      "side": 1,
+      "message": "Inconsistent naming. Why did you change C -\u003e c?",
+      "revId": "baf9c6d82bfb18ed626168dd7744d8b4dc8e2e28",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
