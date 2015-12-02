@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5aaae553_39c7a947",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gateway.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done. changed to l2gateway and made consistent.",
+      "parentUuid": "5aaae553_98cc9c37",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aaae553_58d624c7",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-12-01T10:33:43Z",
       "side": 1,
       "message": "nitpick: trailing whitespace",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_19950d40",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_58d624c7",
       "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5aaae553_d99e9563",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_98f33c73",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aaae553_d8e1b49b",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-12-01T10:33:43Z",
       "side": 1,
       "message": "useless comment.\nIt would make sense to add a comment that l2gwconnection api doesn\u0027t have update method.",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_f99b5170",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayConnectionNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_d8e1b49b",
       "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "5aaae553_99881d24",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_18ff4c36",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aaae553_789520e3",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2015-12-01T10:33:43Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_b98dd933",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_789520e3",
       "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "5aaae553_79876110",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_989a5c13",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aaae553_f88830c8",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
         "patchSetId": 8
@@ -132,6 +258,24 @@
       "writtenOn": "2015-12-01T10:33:43Z",
       "side": 1,
       "message": "nitpick: trailing white space",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_197c2d20",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_f88830c8",
       "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "5aaae553_19a3cd9f",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_b892b8f4",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5aaae553_18866cba",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
         "patchSetId": 8
@@ -166,6 +328,24 @@
       "writtenOn": "2015-12-01T10:33:43Z",
       "side": 1,
       "message": "Please follow the layout of there *Northbound.java.",
+      "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aaae553_799e8158",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronL2gatewayNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 4313
+      },
+      "writtenOn": "2015-12-02T05:50:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5aaae553_18866cba",
       "revId": "a4fca21a1e30e30e1bf6bbddc6833de0b5ab2c6e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
