@@ -4,17 +4,17 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>features-parent</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.3-Lithium-SR3</version>
     <relativePath/>
   </parent>
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>features-neutron</artifactId>
-  <version>0.5.3-SNAPSHOT</version>
+  <version>0.5.3-Lithium-SR3</version>
   <packaging>jar</packaging>
   <properties>
-      <aaa.version>0.2.3-SNAPSHOT</aaa.version>
-      <yangtools.version>0.7.3-SNAPSHOT</yangtools.version>
-      <mdsal.version>1.2.3-SNAPSHOT</mdsal.version>
+      <aaa.version>0.2.3-Lithium-SR3</aaa.version>
+      <yangtools.version>0.7.3-Lithium-SR3</yangtools.version>
+      <mdsal.version>1.2.3-Lithium-SR3</mdsal.version>
   </properties>
   <dependencyManagement>
     <dependencies>

@@ -8,23 +8,23 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>odlparent</artifactId>
-    <version>1.5.3-SNAPSHOT</version>
+    <version>1.5.3-Lithium-SR3</version>
     <relativePath/>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>project-neutron-parent</artifactId>
-  <version>0.5.3-SNAPSHOT</version>
+  <version>0.5.3-Lithium-SR3</version>
   <packaging>pom</packaging>
 
   <properties>
-    <aaa.version>0.1.6-SNAPSHOT</aaa.version>
-    <ietf-yang-types.version>2010.09.24.7.3-SNAPSHOT</ietf-yang-types.version>
-    <ietf-inet-types.version>2010.09.24.7.3-SNAPSHOT</ietf-inet-types.version>
+    <aaa.version>0.1.6-Lithium-SR3</aaa.version>
+    <ietf-yang-types.version>2010.09.24.7.3-Lithium-SR3</ietf-yang-types.version>
+    <ietf-inet-types.version>2010.09.24.7.3-Lithium-SR3</ietf-inet-types.version>
     <salGeneratorPath>src/main/yang-gen-sal</salGeneratorPath>
-    <yang.binding.version>0.7.3-SNAPSHOT</yang.binding.version>
-    <yangtools.version>0.7.3-SNAPSHOT</yangtools.version>
-    <yang-ext.version>2013.09.07.7.3-SNAPSHOT</yang-ext.version>
+    <yang.binding.version>0.7.3-Lithium-SR3</yang.binding.version>
+    <yangtools.version>0.7.3-Lithium-SR3</yangtools.version>
+    <yang-ext.version>2013.09.07.7.3-Lithium-SR3</yang-ext.version>
   </properties>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
