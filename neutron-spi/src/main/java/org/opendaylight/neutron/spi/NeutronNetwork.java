@@ -55,6 +55,9 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
     @XmlElement (name = "status")
     String status;
 
+    @XmlElement (name = "subnets")
+    List<String> subnets;
+
     @XmlElement (name="segments")
     List<NeutronNetwork_Segment> segments;
 
@@ -73,6 +76,7 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
 
     @Override
     public void initDefaults() {
+        subnets = new ArrayList<String>();
         if (status == null) {
             status = "ACTIVE";
         }
@@ -166,6 +170,22 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
         this.status = status;
     }
 
+    public List<String> getSubnets() {
+        return subnets;
+    }
+
+    public void setSubnets(List<String> subnets) {
+        this.subnets = subnets;
+    }
+
+    public void addSubnet(String uuid) {
+        subnets.add(uuid);
+    }
+
+    public void removeSubnet(String uuid) {
+        subnets.remove(uuid);
+    }
+
     public void setSegments(List<NeutronNetwork_Segment> segments) {
         this.segments = segments;
     }
@@ -217,6 +237,11 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
             if (s.equals("status")) {
                 ans.setStatus(this.getStatus());
             }
+            if (s.equals("subnets")) {
+                List<String> subnetList = new ArrayList<String>();
+                subnetList.addAll(this.getSubnets());
+                ans.setSubnets(subnetList);
+            }
             if (s.equals("shared")) {
                 ans.setShared(shared);
             }
@@ -245,7 +270,7 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
                 + adminStateUp + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
-                + ", segments = " + segments + "]";
+                + ", subnets=" + subnets + ", segments = " + segments + "]";
     }
 }
 

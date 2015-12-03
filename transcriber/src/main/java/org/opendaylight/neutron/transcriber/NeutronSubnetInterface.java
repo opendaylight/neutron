@@ -100,6 +100,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronNetworkCRUD(this);
         INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
+
+        NeutronNetwork targetNet = networkIf.getNetwork(input.getNetworkUUID());
+        targetNet.addSubnet(id);
         return true;
     }
 
@@ -113,6 +116,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronNetworkCRUD(this);
         INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
+
+        NeutronNetwork targetNet = networkIf.getNetwork(target.getNetworkUUID());
+        targetNet.removeSubnet(uuid);
         return true;
     }
 

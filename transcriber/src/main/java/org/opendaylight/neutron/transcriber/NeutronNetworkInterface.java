@@ -108,6 +108,13 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
         result.setNetworkName(network.getName());
         result.setShared(network.isShared());
         result.setStatus(network.getStatus());
+        if (network.getSubnets() != null) {
+            List<String> neutronSubnets = new ArrayList<String>();
+            for( Uuid subnet : network.getSubnets()) {
+               neutronSubnets.add(subnet.getValue());
+            }
+            result.setSubnets(neutronSubnets);
+        }
         result.setTenantID(network.getTenantId());
         result.setID(network.getUuid().getValue());
 
@@ -196,6 +203,13 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
         }
         if (network.getStatus() != null) {
             networkBuilder.setStatus(network.getStatus());
+        }
+        if (network.getSubnets() != null) {
+            List<Uuid> subnets = new ArrayList<Uuid>();
+            for( String subnet : network.getSubnets()) {
+                subnets.add(toUuid(subnet));
+            }
+            networkBuilder.setSubnets(subnets);
         }
         if (network.getTenantID() != null) {
             networkBuilder.setTenantId(toUuid(network.getTenantID()));
