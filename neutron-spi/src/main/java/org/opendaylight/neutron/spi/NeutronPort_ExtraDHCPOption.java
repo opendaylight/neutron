@@ -26,12 +26,16 @@ public class NeutronPort_ExtraDHCPOption implements Serializable {
     @XmlElement (name = "opt_name")
     String name;
 
+    @XmlElement (name = "ip_version", defaultValue = "4", required = false, nillable = true)
+    Integer ipVersion = 4;
+
     public NeutronPort_ExtraDHCPOption() {
     }
 
-    public NeutronPort_ExtraDHCPOption(String value, String name) {
+    public NeutronPort_ExtraDHCPOption(String value, String name, Integer ipVersion) {
         this.value = value;
         this.name = name;
+        this.ipVersion = ipVersion;
     }
 
     public String getValue() { return(value); }
@@ -42,4 +46,7 @@ public class NeutronPort_ExtraDHCPOption implements Serializable {
 
     public void setName(String name) { this.name = name; }
 
+    public Integer getIpVersion() { return ipVersion; }
+
+    public void setIpVersion(Integer ipVersion) { this.ipVersion = ipVersion; }
 }

@@ -33,6 +33,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.b
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetailsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtensionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV4;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV6;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.AllowedAddressPairs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.AllowedAddressPairsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.ExtraDhcpOpts;
@@ -49,8 +52,17 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.ImmutableBiMap;
+
 public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort> implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
+
+    // TODO: consolidate this map with NeutronSubnetInterface.IPV_MAP
+    private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
+            = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
+            .put(IpVersionV4.class, Integer.valueOf(4))
+            .put(IpVersionV6.class, Integer.valueOf(6))
+            .build();
 
     NeutronPortInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -157,6 +169,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
                 NeutronPort_ExtraDHCPOption arg = new NeutronPort_ExtraDHCPOption();
                 arg.setName(opt.getOptName());
                 arg.setValue(opt.getOptValue());
+                arg.setIpVersion(IPV_MAP.get(opt.getIpVersion()));
                 options.add(arg);
             }
             result.setExtraDHCPOptions(options);
@@ -244,10 +257,16 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         }
         if (neutronPort.getExtraDHCPOptions() != null) {
             List<ExtraDhcpOpts> listExtraDHCPOptions = new ArrayList<ExtraDhcpOpts>();
+            ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
             for (NeutronPort_ExtraDHCPOption extraDHCPOption : neutronPort.getExtraDHCPOptions()) {
                 ExtraDhcpOptsBuilder extraDHCPOptsBuilder = new ExtraDhcpOptsBuilder();
                 extraDHCPOptsBuilder.setOptName(extraDHCPOption.getName());
                 extraDHCPOptsBuilder.setOptValue(extraDHCPOption.getValue());
+                Integer ipVersion = extraDHCPOption.getIpVersion();
+                if (ipVersion == null) {
+                    ipVersion = 4;      // default as v4 for neutron api evolves
+                }
+                extraDHCPOptsBuilder.setIpVersion((Class<? extends IpVersionBase>)mapper.get(ipVersion));
                 listExtraDHCPOptions.add(extraDHCPOptsBuilder.build());
             }
             portBuilder.setExtraDhcpOpts(listExtraDHCPOptions);
