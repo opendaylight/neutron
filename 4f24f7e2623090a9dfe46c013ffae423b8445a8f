@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_20d8d3ee",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort_ExtraDHCPOption.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2015-12-10T00:57:03Z",
+      "side": 1,
+      "message": "Default value already specified in the annotation.",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "4f24f7e2623090a9dfe46c013ffae423b8445a8f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
