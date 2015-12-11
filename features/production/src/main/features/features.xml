@@ -3,11 +3,11 @@
 <features name="odl-neutron-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
-   <repository>mvn:org.opendaylight.aaa/features-aaa/${aaa.version}/xml/features</repository>
-   <repository>mvn:org.opendaylight.yangtools/features-yangtools/${yangtools.version}/xml/features</repository>
-   <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/${yangtools.version}/xml/features</repository>
-   <repository>mvn:org.opendaylight.controller/features-mdsal/${mdsal.version}/xml/features</repository>
-   <repository>mvn:org.opendaylight.netconf/features-restconf/${restconf.version}/xml/features</repository>
+   <repository>mvn:org.opendaylight.aaa/features-aaa/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.yangtools/features-yangtools/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.controller/features-mdsal/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.netconf/features-restconf/{{VERSION}}/xml/features</repository>
    <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
@@ -17,30 +17,30 @@
     <feature version='${aaa.version}'>odl-aaa-authn</feature>
     <feature>war</feature>
     <feature version='${project.version}'>odl-neutron-spi</feature>
-    <bundle>mvn:org.opendaylight.neutron/northbound-api/${project.version}</bundle>
-    <bundle>mvn:com.sun.jersey/jersey-core/${jersey.version}</bundle>
-    <bundle>mvn:com.sun.jersey/jersey-server/${jersey.version}</bundle>
-    <bundle>mvn:com.sun.jersey/jersey-servlet/${jersey.version}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/${eclipse.persistence.version}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/${eclipse.persistence.version}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/${eclipse.persistence.version}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
-    <bundle>mvn:javax.validation/validation-api/1.1.0.Final</bundle>
+    <bundle>mvn:org.opendaylight.neutron/northbound-api/{{VERSION}}</bundle>
+    <bundle>mvn:com.sun.jersey/jersey-core/{{VERSION}}</bundle>
+    <bundle>mvn:com.sun.jersey/jersey-server/{{VERSION}}</bundle>
+    <bundle>mvn:com.sun.jersey/jersey-servlet/{{VERSION}}</bundle>
+    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/{{VERSION}}</bundle>
+    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/{{VERSION}}</bundle>
+    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/{{VERSION}}</bundle>
+    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+    <bundle>mvn:javax.validation/validation-api/{{VERSION}}</bundle>
   </feature>
 
   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
     <feature version='${yangtools.version}'>odl-mdsal-models</feature>
-    <bundle>mvn:org.opendaylight.neutron/neutron-spi/${project.version}</bundle>
-    <bundle>mvn:commons-net/commons-net/${commons.net.version}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/neutron-spi/{{VERSION}}</bundle>
+    <bundle>mvn:commons-net/commons-net/{{VERSION}}</bundle>
+    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
   </feature>
   <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature>war</feature>
     <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
-    <bundle>mvn:org.opendaylight.neutron/transcriber/${project.version}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/model/${project.version}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/${osgi.core.version}</bundle>
-    <configfile finalname="etc/opendaylight/karaf/neutron-transcriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/${project.version}/xml/config</configfile>
+    <bundle>mvn:org.opendaylight.neutron/transcriber/{{VERSION}}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
+    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+    <configfile finalname="etc/opendaylight/karaf/neutron-transcriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/{{VERSION}}/xml/config</configfile>
   </feature>
 </features>
