@@ -32,6 +32,11 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
 
     @Override
     public String getTenantID() {
+        if (tenantID != null && tenantID.isEmpty()) {
+            // Bug 4775 - Treat empty string tenantId as null, so no attempt is made
+            //            to turn it into a uuid.
+            return null;
+        }
         return tenantID;
     }
 
