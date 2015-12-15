@@ -166,7 +166,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             }
             healthmonitorsBuilder.setPools(listUuid);
         }
-        if (healthMonitor.getLoadBalancerHealthMonitorTenantID() != null) {
+        if (healthMonitor.getLoadBalancerHealthMonitorTenantID() != null && !healthMonitor.getLoadBalancerHealthMonitorTenantID().isEmpty()) {
             healthmonitorsBuilder.setTenantId(toUuid(healthMonitor.getLoadBalancerHealthMonitorTenantID()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorTimeout() != null) {
