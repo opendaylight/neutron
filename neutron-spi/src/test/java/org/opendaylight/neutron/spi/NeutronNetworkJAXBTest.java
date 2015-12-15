@@ -138,4 +138,49 @@ public class NeutronNetworkJAXBTest {
             Assert.assertTrue("Tests failed", false);
         }
     }
+
+    private static final String NeutronNetwork_L3_HA_sourceJson="{" +
+            "\"name\": \"HA network tenant c15340eb65804b20af2dd0fd3beddc8c\", " +
+            "\"provider:physical_network\": null, " +
+            "\"admin_state_up\": true, " +
+            "\"tenant_id\": \"\", " +
+            "\"mtu\": 0, " +
+            "\"router:external\": false, " +
+            "\"shared\": false, " +
+            "\"vlan_transparent\": null, " +
+            "\"port_security_enabled\": true, " +
+            "\"provider:network_type\": \"vxlan\", " +
+            "\"id\": \"d3a2beea-c6ca-4e76-ba7d-e947c5df0c0e\", " +
+            "\"provider:segmentation_id\": 1018 " + "}";
+
+    @Test
+    public void test_NeutronNetwork_L3_HA_JAXB() {
+        NeutronNetwork dummyObject = new NeutronNetwork();
+        try {
+            NeutronNetwork testObject = (NeutronNetwork) JaxbTestHelper.jaxbUnmarshall(dummyObject, NeutronNetwork_L3_HA_sourceJson);
+            Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed",
+                    "d3a2beea-c6ca-4e76-ba7d-e947c5df0c0e", testObject.getID());
+
+            // Bug 4775: tenantId is null when json provides it as empty string
+            Assert.assertNull("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
+                    testObject.getTenantID());
+
+            Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing name failed",
+                    "HA network tenant c15340eb65804b20af2dd0fd3beddc8c", testObject.getNetworkName());
+
+            Assert.assertEquals("NeutronNetwork JAXB Test 4: Testing admin state up failed",
+                    true, testObject.getAdminStateUp());
+
+            Assert.assertEquals("NeutronNetwork JAXB Test 5: Testing router external failed",
+                    false, testObject.getRouterExternal());
+
+            Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing shared failed",
+                    false, testObject.getShared());
+
+            Assert.assertEquals("NeutronNetwork JAXB Test 7: Testing provider segmentation id failed",
+                    "1018", testObject.getProviderSegmentationID());
+        } catch (Exception e) {
+            Assert.assertTrue("Tests failed", false);
+        }
+    }
 }
