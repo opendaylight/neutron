@@ -3,9 +3,9 @@
 <features name="odl-neutron-test-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
-   <repository>mvn:org.opendaylight.neutron/features-neutron/${project.version}/xml/features</repository>
+   <repository>mvn:org.opendaylight.neutron/features-neutron/{{VERSION}}/xml/features</repository>
    <feature name='odl-neutron-dummyprovider-test' version='${project.version}' description="OpenDaylight :: Neutron :: Dummy Provider Test">
     <feature version='${project.version}'>odl-neutron-service</feature>
-    <bundle>mvn:org.opendaylight.neutron/dummyprovider/${project.version}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/dummyprovider/{{VERSION}}</bundle>
   </feature>
 </features>
