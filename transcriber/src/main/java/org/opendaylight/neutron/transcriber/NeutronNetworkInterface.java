@@ -160,7 +160,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network,Ne
             }
             networkBuilder.setSubnets(subnets);
         }
-        if (network.getTenantID() != null) {
+        if (network.getTenantID() != null && !network.getTenantID().isEmpty()) {
             networkBuilder.setTenantId(toUuid(network.getTenantID()));
         }
         if (network.getNetworkUUID() != null) {

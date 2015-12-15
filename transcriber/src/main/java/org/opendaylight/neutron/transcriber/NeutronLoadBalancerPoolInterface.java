@@ -188,7 +188,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             sessionPersistenceBuilder.setType(sessionPersistence.getType());
             poolsBuilder.setSessionPersistence(sessionPersistenceBuilder.build());
         }
-        if (pools.getLoadBalancerPoolTenantID() != null) {
+        if (pools.getLoadBalancerPoolTenantID() != null && !pools.getLoadBalancerPoolTenantID().isEmpty()) {
             poolsBuilder.setTenantId(toUuid(pools.getLoadBalancerPoolTenantID()));
         }
         if (pools.getLoadBalancerPoolID() != null) {
