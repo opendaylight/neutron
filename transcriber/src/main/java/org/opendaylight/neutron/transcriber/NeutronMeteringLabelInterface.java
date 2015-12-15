@@ -99,7 +99,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         if (meteringLabel.getMeteringLabelDescription()!=null) {
             meteringLabelBuilder.setDescription(meteringLabel.getMeteringLabelDescription());
         }
-        if (meteringLabel.getTenantID()!=null) {
+        if (meteringLabel.getTenantID()!=null && !meteringLabel.getTenantID().isEmpty()) {
             meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getTenantID()));
         }
         if (meteringLabel.getID()!=null) {

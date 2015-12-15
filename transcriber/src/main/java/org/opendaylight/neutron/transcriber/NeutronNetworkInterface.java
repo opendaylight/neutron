@@ -197,7 +197,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
         if (network.getStatus() != null) {
             networkBuilder.setStatus(network.getStatus());
         }
-        if (network.getTenantID() != null) {
+        if (network.getTenantID() != null && !network.getTenantID().isEmpty()) {
             networkBuilder.setTenantId(toUuid(network.getTenantID()));
         }
         if (network.getID() != null) {

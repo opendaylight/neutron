@@ -123,7 +123,7 @@ ikePolicy.getLifetime();
         if (ikePolicy.getName() != null) {
             ikePolicyBuilder.setName(ikePolicy.getName());
         }
-        if (ikePolicy.getTenantID() != null) {
+        if (ikePolicy.getTenantID() != null && !ikePolicy.getTenantID().isEmpty()) {
             ikePolicyBuilder.setTenantId(toUuid(ikePolicy.getTenantID()));
         }
         if (ikePolicy.getDescription() != null) {

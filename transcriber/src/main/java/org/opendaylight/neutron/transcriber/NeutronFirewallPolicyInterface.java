@@ -134,7 +134,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
         if (policy.getFirewallPolicyName() != null) {
             policyBuilder.setName(policy.getFirewallPolicyName());
         }
-        if (policy.getTenantID() != null) {
+        if (policy.getTenantID() != null && !policy.getTenantID().isEmpty()) {
             policyBuilder.setTenantId(toUuid(policy.getTenantID()));
         }
         if (policy.getFirewallPolicyDescription() != null) {

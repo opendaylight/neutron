@@ -192,7 +192,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         if (subnet.getName() != null) {
             subnetBuilder.setName(subnet.getName());
         }
-        if (subnet.getTenantID() != null) {
+        if (subnet.getTenantID() != null && !subnet.getTenantID().isEmpty()) {
             subnetBuilder.setTenantId(toUuid(subnet.getTenantID()));
         }
         if (subnet.getNetworkUUID() != null) {

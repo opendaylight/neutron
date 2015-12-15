@@ -122,7 +122,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (ipsecPolicy.getName() != null) {
             ipsecPolicyBuilder.setName(ipsecPolicy.getName());
         }
-        if (ipsecPolicy.getTenantID() != null) {
+        if (ipsecPolicy.getTenantID() != null && !ipsecPolicy.getTenantID().isEmpty()) {
             ipsecPolicyBuilder.setTenantId(toUuid(ipsecPolicy.getTenantID()));
         }
         if (ipsecPolicy.getDescription() != null) {

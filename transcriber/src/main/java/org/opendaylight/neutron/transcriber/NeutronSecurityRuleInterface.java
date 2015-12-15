@@ -200,7 +200,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     protected SecurityRule toMd(NeutronSecurityRule securityRule) {
         SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
 
-        if (securityRule.getTenantID() != null) {
+        if (securityRule.getTenantID() != null && !securityRule.getTenantID().isEmpty()) {
             securityRuleBuilder.setTenantId(toUuid(securityRule.getTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {

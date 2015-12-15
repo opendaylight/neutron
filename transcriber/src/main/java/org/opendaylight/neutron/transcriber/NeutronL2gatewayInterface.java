@@ -123,7 +123,7 @@ public class NeutronL2gatewayInterface extends
         if (neutronObject.getID() != null){
             l2gatewayBuilder.setUuid(toUuid(neutronObject.getID()));
         }
-        if (neutronObject.getTenantID() != null){
+        if (neutronObject.getTenantID() != null && !neutronObject.getTenantID().isEmpty()){
             l2gatewayBuilder.setTenantId(toUuid(neutronObject.getTenantID()));
         }
 

@@ -98,7 +98,7 @@ implements INeutronL2gatewayConnectionCRUD {
         if (neutronObject.getSegmentID() != null){
             l2gatewayConnectionBuilder.setSegmentId((neutronObject.getSegmentID()));
         }
-        if (neutronObject.getTenantID() != null){
+        if (neutronObject.getTenantID() != null && !neutronObject.getTenantID().isEmpty()){
             l2gatewayConnectionBuilder.setTenantId(toUuid(neutronObject.getTenantID()));
         }
         if (neutronObject.getPortID() != null){

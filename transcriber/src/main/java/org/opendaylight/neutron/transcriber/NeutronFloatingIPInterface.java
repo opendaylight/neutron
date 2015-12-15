@@ -111,7 +111,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (floatingIp.getStatus() != null) {
             floatingipBuilder.setStatus(floatingIp.getStatus());
         }
-        if (floatingIp.getTenantID() != null) {
+        if (floatingIp.getTenantID() != null && !floatingIp.getTenantID().isEmpty()) {
             floatingipBuilder.setTenantId(toUuid(floatingIp.getTenantID()));
         }
         if (floatingIp.getID() != null) {
