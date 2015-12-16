@@ -38,10 +38,7 @@ module neutron-ports {
                         ip_address of a port is prevented. This is because that would
                         have no effect since traffic matching the mac_address and ip_address
                         is already allowed to pass through the port";
-            key "port-id";
-            leaf port-id {
-                type string;
-            }
+            key "mac-address ip-address";
             leaf mac-address {
                 type string;
             }
