@@ -91,7 +91,8 @@ module neutron-subnets {
                         (not including local subnet route).";
             key destination;
             leaf destination {
-                type inet:ip-address;
+                description "Specifies a destination in CIDR format";
+                type string;
             }
             leaf nexthop {
                 type inet:ip-address;
