@@ -52,6 +52,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     private static final int DEDASHED_UUID_DIV3 = 16;
     private static final int DEDASHED_UUID_DIV4 = 20;
 
+    private static final int RETRY_MAX = 2;
+
     private DataBroker db;
 
     AbstractNeutronInterface(ProviderContext providerContext) {
@@ -71,38 +73,17 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         LOGGER.debug("Chain {} closed successfully", chain);
     }
 
-    protected BindingTransactionChain createTransactionChain() {
+    private BindingTransactionChain createTransactionChain() {
         return getDataBroker().createTransactionChain(this);
     }
 
-    protected interface Action0<U> {
-        public U action(BindingTransactionChain chain);
-    }
-
-    protected <U> U chainWrapper0(Action0<U> action) {
-        try (BindingTransactionChain chain = this.createTransactionChain()) {
-            return action.action(chain);
-        }
-    }
-
-    protected interface Action1<U, V> {
+    private interface Action1<U, V> {
         public U action(V input, BindingTransactionChain chain);
     }
 
-    protected <U, V> U chainWrapper1(V input, Action1<U, V> action) {
+    private <U, V> U chainWrapper1(V input, Action1<U, V> action) {
         try (BindingTransactionChain chain = this.createTransactionChain()) {
             return action.action(input, chain);
-        }
-    }
-
-    protected interface Action2<U, V, W> {
-        public U action(V input0, W input1, BindingTransactionChain chain);
-    }
-
-    protected <U, V, W> U chainWrapper2(V input0, W input1,
-                                        Action2<U, V, W> action) {
-        try (BindingTransactionChain chain = this.createTransactionChain()) {
-            return action.action(input0, input1, chain);
         }
     }
 
@@ -116,7 +97,10 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     protected abstract S fromMd(T dataObject);
 
-    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path, BindingTransactionChain chain) {
+    // TODO: rethink to eliminate protected {read,add,update,remove}Md() without chain
+    //       The caller should pass chain.
+
+    private <T extends DataObject> T readMd(InstanceIdentifier<T> path, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         T result = null;
         final ReadOnlyTransaction transaction = chain.newReadOnlyTransaction();
@@ -146,62 +130,49 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
                              });
     }
 
-    protected boolean addMd(S neutronObject, BindingTransactionChain chain) {
+    private void addMd(S neutronObject, BindingTransactionChain chain) throws InterruptedException, ExecutionException {
         // TODO think about adding existence logic
-        return updateMd(neutronObject, chain);
+        updateMd(neutronObject, chain);
     }
 
     protected boolean addMd(S neutronObject) {
-        return chainWrapper1(neutronObject,
-                             new Action1<Boolean, S>() {
-                                 @Override
-                                 public Boolean action(S path, BindingTransactionChain chain) {
-                                     return addMd(path, chain);
-                                 }
-                             }).booleanValue();
+        try (BindingTransactionChain chain = this.createTransactionChain()) {
+            addMd(neutronObject, chain);
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.warn("Transaction failed", e);
+        }
+        return false;
     }
 
-    protected boolean updateMd(S neutronObject, BindingTransactionChain chain) {
+    private void updateMd(S neutronObject, BindingTransactionChain chain) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(chain);
 
-        /*
-         * retry for transaction conflict.
-         * see the comment
-         * org.opendaylight.controller.sal.restconf.impl.RestconfImpl#updateConfigurationData
-         */
-        int retries = 2;
-        while (true) {
-            WriteTransaction transaction = chain.newWriteOnlyTransaction();
-            T item = toMd(neutronObject);
-            InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-            transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-            CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-            try {
-                future.get();
-            } catch (InterruptedException | ExecutionException e) {
-                if (e.getCause() instanceof OptimisticLockFailedException) {
-                    if(--retries >= 0) {
-                        LOGGER.debug("Got OptimisticLockFailedException - trying again {}", neutronObject);
-                        continue;
-                    }
-                    LOGGER.warn("Got OptimisticLockFailedException on last try - failing {}", neutronObject);
-                }
-                LOGGER.warn("Transation failed ", e);
-                return false;
-            }
-            break;
-        }
-        return true;
+        WriteTransaction transaction = chain.newWriteOnlyTransaction();
+        T item = toMd(neutronObject);
+        InstanceIdentifier<T> iid = createInstanceIdentifier(item);
+        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
+        CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
+        future.get();   // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
     protected boolean updateMd(S neutronObject) {
-        return chainWrapper1(neutronObject,
-                             new Action1<Boolean, S>() {
-                                 @Override
-                                 public Boolean action(S neutronObject, BindingTransactionChain chain) {
-                                     return updateMd(neutronObject, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            try (BindingTransactionChain chain = this.createTransactionChain()) {
+                updateMd(neutronObject, chain);
+                return true;
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", neutronObject, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
     }
 
     private boolean removeMd(T item, BindingTransactionChain chain) {
@@ -213,7 +184,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ",e);
+            LOGGER.warn("Transaction failed", e);
             return false;
         }
         return true;
@@ -288,7 +259,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     }
 
-    protected boolean exists(String uuid, BindingTransactionChain chain) {
+    private boolean exists(String uuid, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
         return dataObject != null;
@@ -305,7 +276,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
                              }).booleanValue();
     }
 
-    protected S get(String uuid, BindingTransactionChain chain) {
+    private S get(String uuid, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
         if (dataObject == null) {
@@ -327,7 +298,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     protected abstract List<T> getDataObjectList(U dataObjects);
 
-    protected List<S> getAll(BindingTransactionChain chain) {
+    private List<S> getAll(BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         Set<S> allNeutronObjects = new HashSet<S>();
         U dataObjects = readMd(createInstanceIdentifier(), chain);
@@ -344,15 +315,12 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     @Override
     public List<S> getAll() {
-        return chainWrapper0(new Action0<List<S>>() {
-                                 @Override
-                                 public List<S> action(BindingTransactionChain chain) {
-                                     return getAll(chain);
-                                 }
-                             });
+        try (BindingTransactionChain chain = this.createTransactionChain()) {
+            return getAll(chain);
+        }
     }
 
-    protected boolean add(S input, BindingTransactionChain chain) {
+    private boolean add(S input, BindingTransactionChain chain) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(chain);
         if (exists(input.getID(), chain)) {
             return false;
@@ -363,16 +331,24 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     @Override
     public boolean add(S input) {
-        return chainWrapper1(input,
-                             new Action1<Boolean, S>() {
-                                 @Override
-                                 public Boolean action(S input, BindingTransactionChain chain) {
-                                     return add(input, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            try (BindingTransactionChain chain = this.createTransactionChain()) {
+                return add(input, chain);
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", input, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
     }
 
-    protected boolean remove(String uuid, BindingTransactionChain chain) {
+    private boolean remove(String uuid, BindingTransactionChain chain) {
         Preconditions.checkNotNull(chain);
         if (!exists(uuid, chain)) {
             return false;
@@ -391,7 +367,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
                              }).booleanValue();
      }
 
-    protected boolean update(String uuid, S delta, BindingTransactionChain chain) {
+    private boolean update(String uuid, S delta, BindingTransactionChain chain) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(chain);
         if (!exists(uuid, chain)) {
             return false;
@@ -402,13 +378,21 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     @Override
     public boolean update(String uuid, S delta) {
-        return chainWrapper2(uuid, delta,
-                             new Action2<Boolean, String, S>() {
-                                 @Override
-                                 public Boolean action(String uuid, S delta, BindingTransactionChain chain) {
-                                     return update(uuid, delta, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            try (BindingTransactionChain chain = this.createTransactionChain()) {
+                return update(uuid, delta, chain);
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
     }
 
     @Override
