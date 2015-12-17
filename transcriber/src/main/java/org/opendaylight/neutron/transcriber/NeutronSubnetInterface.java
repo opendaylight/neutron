@@ -23,8 +23,10 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
+import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
 import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Base;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Off;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Slaac;
@@ -36,6 +38,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.AllocationPools;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.AllocationPoolsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.HostRoutes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.HostRoutesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.Subnets;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetBuilder;
@@ -164,6 +168,16 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             }
             result.setDnsNameservers(dnsNameServers);
         }
+        if(subnet.getHostRoutes() != null){
+            List<NeutronSubnet_HostRoute> hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
+            for(HostRoutes hostRoute : subnet.getHostRoutes()) {
+                NeutronSubnet_HostRoute nsHostRoute = new NeutronSubnet_HostRoute();
+                nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
+                nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
+                hostRoutes.add(nsHostRoute);
+            }
+            result.setHostRoutes(hostRoutes);
+        }
         result.setID(subnet.getUuid().getValue());
 // read through the ports and put the ones in this subnet into the internal
 // myPorts object.
@@ -242,6 +256,16 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
                 dnsNameServers.add(ipAddress);
             }
             subnetBuilder.setDnsNameservers(dnsNameServers);
+        }
+        if(subnet.getHostRoutes() != null) {
+            List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
+            for(NeutronSubnet_HostRoute hostRoute: subnet.getHostRoutes()) {
+                HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
+                hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
+                hrBuilder.setNexthop(new IpAddress(hostRoute.getNextHop().toCharArray()));
+                hostRoutes.add(hrBuilder.build());
+            }
+            subnetBuilder.setHostRoutes(hostRoutes);
         }
         if (subnet.getID() != null) {
             subnetBuilder.setUuid(toUuid(subnet.getID()));
