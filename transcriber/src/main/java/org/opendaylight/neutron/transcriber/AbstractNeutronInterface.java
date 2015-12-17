@@ -16,16 +16,14 @@ import java.util.Set;
 
 import java.util.concurrent.ExecutionException;
 
-import org.opendaylight.controller.md.sal.binding.api.BindingTransactionChain;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.binding.api.ReadWriteTransaction;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.AsyncTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionChain;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionChainListener;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
@@ -43,7 +41,7 @@ import com.google.common.util.concurrent.CheckedFuture;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 
-public abstract class AbstractNeutronInterface<T extends DataObject, U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject> implements AutoCloseable, INeutronCRUD<S>, TransactionChainListener {
+public abstract class AbstractNeutronInterface<T extends DataObject, U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject> implements AutoCloseable, INeutronCRUD<S> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
@@ -52,6 +50,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     private static final int DEDASHED_UUID_DIV3 = 16;
     private static final int DEDASHED_UUID_DIV4 = 20;
 
+    private static final int RETRY_MAX = 2;
+
     private DataBroker db;
 
     AbstractNeutronInterface(ProviderContext providerContext) {
@@ -59,51 +59,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     }
 
     public DataBroker getDataBroker() {
+        Preconditions.checkNotNull(db);
         return db;
-    }
-
-    public void onTransactionChainFailed(TransactionChain<?, ?> chain, AsyncTransaction<?, ?> transaction, Throwable cause) {
-        LOGGER.error("Broken chain {} in TxchainDomWrite, transaction {}, cause {}",
-                     chain, transaction.getIdentifier(), cause);
-    }
-
-    public void onTransactionChainSuccessful(TransactionChain<?, ?> chain) {
-        LOGGER.debug("Chain {} closed successfully", chain);
-    }
-
-    protected BindingTransactionChain createTransactionChain() {
-        return getDataBroker().createTransactionChain(this);
-    }
-
-    protected interface Action0<U> {
-        public U action(BindingTransactionChain chain);
-    }
-
-    protected <U> U chainWrapper0(Action0<U> action) {
-        try (BindingTransactionChain chain = this.createTransactionChain()) {
-            return action.action(chain);
-        }
-    }
-
-    protected interface Action1<U, V> {
-        public U action(V input, BindingTransactionChain chain);
-    }
-
-    protected <U, V> U chainWrapper1(V input, Action1<U, V> action) {
-        try (BindingTransactionChain chain = this.createTransactionChain()) {
-            return action.action(input, chain);
-        }
-    }
-
-    protected interface Action2<U, V, W> {
-        public U action(V input0, W input1, BindingTransactionChain chain);
-    }
-
-    protected <U, V, W> U chainWrapper2(V input0, W input1,
-                                        Action2<U, V, W> action) {
-        try (BindingTransactionChain chain = this.createTransactionChain()) {
-            return action.action(input0, input1, chain);
-        }
     }
 
     protected abstract InstanceIdentifier<T> createInstanceIdentifier(T item);
@@ -116,11 +73,10 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     protected abstract S fromMd(T dataObject);
 
-    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
+    private <T extends DataObject> T readMd(InstanceIdentifier<T> path, ReadTransaction tx) {
+        Preconditions.checkNotNull(tx);
         T result = null;
-        final ReadOnlyTransaction transaction = chain.newReadOnlyTransaction();
-        CheckedFuture<Optional<T>, ReadFailedException> future = transaction.read(LogicalDatastoreType.CONFIGURATION, path);
+        CheckedFuture<Optional<T>, ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
         if (future != null) {
             Optional<T> optional;
             try {
@@ -132,101 +88,78 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
                 LOGGER.warn("Failed to read {}", path, e);
             }
         }
-        transaction.close();
         return result;
     }
 
     protected <T extends DataObject> T readMd(InstanceIdentifier<T> path) {
-        return chainWrapper1(path,
-                             new Action1<T, InstanceIdentifier<T>>() {
-                                 @Override
-                                 public T action(InstanceIdentifier<T> path, BindingTransactionChain chain) {
-                                     return readMd(path, chain);
-                                 }
-                             });
+        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+            return readMd(path, tx);
+        }
     }
 
-    protected boolean addMd(S neutronObject, BindingTransactionChain chain) {
+    private void addMd(S neutronObject, WriteTransaction tx) throws InterruptedException, ExecutionException {
         // TODO think about adding existence logic
-        return updateMd(neutronObject, chain);
+        updateMd(neutronObject, tx);
     }
 
     protected boolean addMd(S neutronObject) {
-        return chainWrapper1(neutronObject,
-                             new Action1<Boolean, S>() {
-                                 @Override
-                                 public Boolean action(S path, BindingTransactionChain chain) {
-                                     return addMd(path, chain);
-                                 }
-                             }).booleanValue();
+        try {
+            WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
+            addMd(neutronObject, tx);
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.warn("Transaction failed", e);
+        }
+        return false;
     }
 
-    protected boolean updateMd(S neutronObject, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
+    private void updateMd(S neutronObject, WriteTransaction tx) throws InterruptedException, ExecutionException {
+        Preconditions.checkNotNull(tx);
 
-        /*
-         * retry for transaction conflict.
-         * see the comment
-         * org.opendaylight.controller.sal.restconf.impl.RestconfImpl#updateConfigurationData
-         */
-        int retries = 2;
-        while (true) {
-            WriteTransaction transaction = chain.newWriteOnlyTransaction();
-            T item = toMd(neutronObject);
-            InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-            transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-            CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-            try {
-                future.get();
-            } catch (InterruptedException | ExecutionException e) {
-                if (e.getCause() instanceof OptimisticLockFailedException) {
-                    if(--retries >= 0) {
-                        LOGGER.debug("Got OptimisticLockFailedException - trying again {}", neutronObject);
-                        continue;
-                    }
-                    LOGGER.warn("Got OptimisticLockFailedException on last try - failing {}", neutronObject);
-                }
-                LOGGER.warn("Transation failed ", e);
-                return false;
-            }
-            break;
-        }
-        return true;
+        T item = toMd(neutronObject);
+        InstanceIdentifier<T> iid = createInstanceIdentifier(item);
+        tx.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
+        CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
+        future.get();   // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
     protected boolean updateMd(S neutronObject) {
-        return chainWrapper1(neutronObject,
-                             new Action1<Boolean, S>() {
-                                 @Override
-                                 public Boolean action(S neutronObject, BindingTransactionChain chain) {
-                                     return updateMd(neutronObject, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            try {
+                WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
+                updateMd(neutronObject, tx);
+                return true;
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", neutronObject, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
     }
 
-    private boolean removeMd(T item, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-        WriteTransaction transaction = chain.newWriteOnlyTransaction();
+    private void removeMd(T item, WriteTransaction tx) throws InterruptedException, ExecutionException {
+        Preconditions.checkNotNull(tx);
         InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ",e);
-            return false;
-        }
-        return true;
+        tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
+        CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
+        future.get();  // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
     protected boolean removeMd(T item) {
-        return chainWrapper1(item,
-                             new Action1<Boolean, T>() {
-                                 @Override
-                                 public Boolean action(T item, BindingTransactionChain chain) {
-                                     return removeMd(item, chain);
-                                 }
-                             }).booleanValue();
+        ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+        try {
+            removeMd(item, tx);
+            return true;
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.warn("Transaction failed", e);
+        }
+        return false;
     }
 
     protected Uuid toUuid(String uuid) {
@@ -288,26 +221,22 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     }
 
-    protected boolean exists(String uuid, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
+    private boolean exists(String uuid, ReadTransaction tx) {
+        Preconditions.checkNotNull(tx);
+        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         return dataObject != null;
     }
 
     @Override
     public boolean exists(String uuid) {
-        return chainWrapper1(uuid,
-                             new Action1<Boolean, String>() {
-                                 @Override
-                                 public Boolean action(String uuid, BindingTransactionChain chain) {
-                                     return exists(uuid, chain);
-                                 }
-                             }).booleanValue();
+        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+            return exists(uuid, tx);
+        }
     }
 
-    protected S get(String uuid, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), chain);
+    private S get(String uuid, ReadTransaction tx) {
+        Preconditions.checkNotNull(tx);
+        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         if (dataObject == null) {
             return null;
         }
@@ -316,21 +245,17 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     @Override
     public S get(String uuid) {
-        return chainWrapper1(uuid,
-                             new Action1<S, String>() {
-                                 @Override
-                                 public S action(String uuid, BindingTransactionChain chain) {
-                                     return get(uuid, chain);
-                                 }
-                             });
+        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+            return get(uuid, tx);
+        }
     }
 
     protected abstract List<T> getDataObjectList(U dataObjects);
 
-    protected List<S> getAll(BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
+    private List<S> getAll(ReadTransaction tx) {
+        Preconditions.checkNotNull(tx);
         Set<S> allNeutronObjects = new HashSet<S>();
-        U dataObjects = readMd(createInstanceIdentifier(), chain);
+        U dataObjects = readMd(createInstanceIdentifier(), tx);
         if (dataObjects != null) {
             for (T dataObject: getDataObjectList(dataObjects)) {
                 allNeutronObjects.add(fromMd(dataObject));
@@ -344,71 +269,96 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     @Override
     public List<S> getAll() {
-        return chainWrapper0(new Action0<List<S>>() {
-                                 @Override
-                                 public List<S> action(BindingTransactionChain chain) {
-                                     return getAll(chain);
-                                 }
-                             });
+        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+            return getAll(tx);
+        }
     }
 
-    protected boolean add(S input, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-        if (exists(input.getID(), chain)) {
+    private boolean add(S input, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+        Preconditions.checkNotNull(tx);
+        if (exists(input.getID(), tx)) {
             return false;
         }
-        addMd(input, chain);
+        addMd(input, tx);
         return true;
     }
 
     @Override
     public boolean add(S input) {
-        return chainWrapper1(input,
-                             new Action1<Boolean, S>() {
-                                 @Override
-                                 public Boolean action(S input, BindingTransactionChain chain) {
-                                     return add(input, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+            try {
+                return add(input, tx);
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", input, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
     }
 
-    protected boolean remove(String uuid, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-        if (!exists(uuid, chain)) {
+    private boolean remove(String uuid, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+        Preconditions.checkNotNull(tx);
+        if (!exists(uuid, tx)) {
             return false;
         }
-        return removeMd(toMd(uuid), chain);
+        removeMd(toMd(uuid), tx);
+        return true;
     }
 
     @Override
     public boolean remove(String uuid) {
-        return chainWrapper1(uuid,
-                             new Action1<Boolean, String>() {
-                                 @Override
-                                 public Boolean action(String uuid, BindingTransactionChain chain) {
-                                     return remove(uuid, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+            try {
+                return remove(uuid, tx);
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", uuid, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
      }
 
-    protected boolean update(String uuid, S delta, BindingTransactionChain chain) {
-        Preconditions.checkNotNull(chain);
-        if (!exists(uuid, chain)) {
+    private boolean update(String uuid, S delta, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+        Preconditions.checkNotNull(tx);
+        if (!exists(uuid, tx)) {
             return false;
         }
-        updateMd(delta, chain);
+        updateMd(delta, tx);
         return true;
     }
 
     @Override
     public boolean update(String uuid, S delta) {
-        return chainWrapper2(uuid, delta,
-                             new Action2<Boolean, String, S>() {
-                                 @Override
-                                 public Boolean action(String uuid, S delta, BindingTransactionChain chain) {
-                                     return update(uuid, delta, chain);
-                                 }
-                             }).booleanValue();
+        int retries = RETRY_MAX;
+        while (retries-- >= 0) {
+            ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+            try {
+                return update(uuid, delta, tx);
+            } catch (InterruptedException | ExecutionException e) {
+                if (e.getCause() instanceof OptimisticLockFailedException) {
+                    LOGGER.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
+                    continue;
+                }
+                // TODO: rethrow exception. don't mask exception
+                LOGGER.error("Transaction failed", e);
+            }
+            break;
+        }
+        return false;
     }
 
     @Override
