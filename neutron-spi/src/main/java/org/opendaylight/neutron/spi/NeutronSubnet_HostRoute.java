@@ -34,6 +34,22 @@ public class NeutronSubnet_HostRoute implements Serializable {
      */
     public NeutronSubnet_HostRoute() { }
 
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getNextHop() {
+        return nextHop;
+    }
+
+    public void setNextHop(String nextHop) {
+        this.nextHop = nextHop;
+    }
+
     @Override
     public String toString() {
         return "NeutronSubnetHostRoute [" +
