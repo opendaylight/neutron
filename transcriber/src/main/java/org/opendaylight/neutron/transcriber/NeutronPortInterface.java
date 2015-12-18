@@ -156,7 +156,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
                 NeutronPort_AllowedAddressPairs pair = new NeutronPort_AllowedAddressPairs();
                 pair.setIpAddress(mdPair.getIpAddress());
                 pair.setMacAddress(mdPair.getMacAddress());
-                pair.setPortID(mdPair.getPortId());
                 pairs.add(pair);
             }
             result.setAllowedAddressPairs(pairs);
@@ -244,7 +243,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
                     AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
                     allowedAddressPairsBuilder.setIpAddress(allowedAddressPairs.getIpAddress());
                     allowedAddressPairsBuilder.setMacAddress(allowedAddressPairs.getMacAddress());
-                    allowedAddressPairsBuilder.setPortId(allowedAddressPairs.getPortID());
                     listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
             }
             portBuilder.setAllowedAddressPairs(listAllowedAddressPairs);

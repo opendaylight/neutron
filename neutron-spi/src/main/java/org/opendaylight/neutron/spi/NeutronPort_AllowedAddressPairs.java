@@ -20,9 +20,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronPort_AllowedAddressPairs implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "port_id")
-    String portID;
-
     @XmlElement (name = "mac_address")
     String macAddress;
 
@@ -32,15 +29,10 @@ public class NeutronPort_AllowedAddressPairs implements Serializable {
     public NeutronPort_AllowedAddressPairs() {
     }
 
-    public NeutronPort_AllowedAddressPairs(String portID, String macAddress, String ipAddress) {
-        this.portID = portID;
+    public NeutronPort_AllowedAddressPairs(String macAddress, String ipAddress) {
         this.macAddress = macAddress;
         this.ipAddress = ipAddress;
     }
-
-    public String getPortID() { return(portID); }
-
-    public void setPortID(String portID) { this.portID = portID; }
 
     public String getMacAddress() { return(macAddress); }
 
