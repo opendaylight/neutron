@@ -34,6 +34,24 @@
       "revId": "9baafc48ace56be0a4b7d29acc00ef1f2b58619f",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_baaa8cd2",
+        "filename": "model/src/main/yang/neutron-subnets.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2015-12-18T07:29:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_9f7c6274",
+      "revId": "9baafc48ace56be0a4b7d29acc00ef1f2b58619f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
