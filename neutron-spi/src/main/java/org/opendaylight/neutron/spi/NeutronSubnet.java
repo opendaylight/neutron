@@ -345,7 +345,9 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
         if (ipVersion == null) {
             ipVersion = IPV4_VERSION;
         }
-        dnsNameservers = new ArrayList<String>();
+        if (dnsNameservers == null) {
+            dnsNameservers = new ArrayList<String>();
+        }
         if (hostRoutes == null) {
             hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
         }
