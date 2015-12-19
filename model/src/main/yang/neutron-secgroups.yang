@@ -75,7 +75,7 @@ module neutron-secgroups {
         leaf remote-ip-prefix {
             description "The remote IP Prefix to be associated with this security group rule.
                 You can specify either remote-ip-prefix or remote-group-id in the request body.";
-            type inet:ip-address;
+            type inet:ip-prefix;
         }
         leaf protocol {
             type union {
