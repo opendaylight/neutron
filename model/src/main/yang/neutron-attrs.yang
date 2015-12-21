@@ -41,23 +41,19 @@ module neutron-attrs {
 
         leaf tenant-id {
             type yang:uuid;
-            description "Admin-only. The UUID of the tenant that will own the network.
-                        This tenant can be different from the tenant that makes the create
-                        network request. However, only administrative users can specify
-                        a tenant ID other than their own. You cannot change this value
-                        through authorization policies.";
+            description "The UUID of the tenant that will own the object.";
         }
     }
 
     grouping admin-attributes {
         leaf admin-state-up {
             type boolean;
-            description "The administrative state of the network, which is up (true) or
+            description "The administrative state of the object, which is up (true) or
                         down (false).";
         }
         leaf status {
             type string;
-            description "The network status.";
+            description "The object status.";
         }
     }
 }
