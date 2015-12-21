@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1aa4ed85_1374e697",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5327
+      },
+      "writtenOn": "2015-12-21T16:21:51Z",
+      "side": 1,
+      "message": "I understand the need for this and it is important we find a convenient way to provide this information to ODL so it can properly program the vswitch on the host.",
+      "range": {
+        "startLine": 9,
+        "startChar": 7,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_4d063d22",
         "filename": "model/src/main/yang/neutron-device-map.yang",
         "patchSetId": 3
@@ -172,6 +195,29 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_33756298",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5327
+      },
+      "writtenOn": "2015-12-21T16:21:51Z",
+      "side": 1,
+      "message": "when this is used with openstack much of this information is defined by the admin via the Neutron APIs.   We should avoid duplicating it to prevent possible synchronization issues due to mis-configuration.  If this is intended for non-openstack scenarios then I understand why these have to be left as options.",
+      "range": {
+        "startLine": 66,
+        "startChar": 21,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_122ce001",
         "filename": "model/src/main/yang/neutron-device-map.yang",
         "patchSetId": 3
@@ -251,6 +297,29 @@
       "writtenOn": "2015-08-21T21:27:47Z",
       "side": 1,
       "message": "Naming: mac-address",
+      "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_734bda59",
+        "filename": "model/src/main/yang/neutron-device-map.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5327
+      },
+      "writtenOn": "2015-12-21T16:21:51Z",
+      "side": 1,
+      "message": "Requiring the MAC address in all cases is a bit tedious for the people managing the installation.   It would be better to support only the interface name as a option. Most installations will have homogeneous naming of the interfaces",
+      "range": {
+        "startLine": 122,
+        "startChar": 16,
+        "endLine": 122,
+        "endChar": 26
+      },
       "revId": "68a8c501e24c974ef2a3808429ec6eed25953d41",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
