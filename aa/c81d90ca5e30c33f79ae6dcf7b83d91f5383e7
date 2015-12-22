@@ -1,0 +1,8 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+1: Flavio Fernandes <ffernand@redhat.com>
+Code-Review+2: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-by: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-at: Tue, 22 Dec 2015 17:08:44 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/31361
+Project: neutron
+Branch: refs/heads/stable/lithium
