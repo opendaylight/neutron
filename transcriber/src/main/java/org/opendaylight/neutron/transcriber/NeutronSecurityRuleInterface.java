@@ -24,7 +24,7 @@ import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150325.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.SecurityRuleAttrs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev141002.security.rules.attributes.SecurityRules;
@@ -195,8 +195,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteGroupId(toUuid(securityRule.getSecurityRemoteGroupID()));
         }
         if (securityRule.getSecurityRuleRemoteIpPrefix() != null) {
-            IpAddress ipAddress = new IpAddress(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
-            securityRuleBuilder.setRemoteIpPrefix(ipAddress);
+            IpPrefix ipPrefix = new IpPrefix(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
+            securityRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
             boolean foundMatch = false;
