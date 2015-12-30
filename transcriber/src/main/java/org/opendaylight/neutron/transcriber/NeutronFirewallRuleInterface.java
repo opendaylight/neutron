@@ -100,9 +100,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
         if (rule.getName() != null) {
             answer.setFirewallRuleName(rule.getName());
         }
-        if (rule.getTenantId() != null) {
-            answer.setTenantID(rule.getTenantId());
-        }
+        answer.setTenantID(rule.getTenantId());
         if (rule.getDescr() != null) {
             answer.setFirewallRuleDescription(rule.getDescr());
         }

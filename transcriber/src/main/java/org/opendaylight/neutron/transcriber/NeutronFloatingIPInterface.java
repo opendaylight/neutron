@@ -138,9 +138,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (fip.getFloatingIpAddress() != null) {
             result.setFloatingIPAddress(String.valueOf(fip.getFloatingIpAddress().getValue()));
         }
-        if (fip.getTenantId() != null) {
-            result.setTenantID(fip.getTenantId());
-        }
+        result.setTenantID(fip.getTenantId());
         if (fip.getRouterId() != null) {
             result.setRouterUUID(String.valueOf(fip.getRouterId().getValue()));
         }

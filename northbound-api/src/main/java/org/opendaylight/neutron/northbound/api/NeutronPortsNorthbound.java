@@ -257,9 +257,7 @@ public class NeutronPortsNorthbound
         if (delta.getID() == null) {
             delta.setID(uuid);
         }
-        if (delta.getTenantID() == null) {
-            delta.setTenantID(original.getTenantID());
-        }
+        delta.setTenantID(original.getTenantID());
         if (delta.getNetworkUUID() == null) {
             delta.setNetworkUUID(original.getNetworkUUID());
         }

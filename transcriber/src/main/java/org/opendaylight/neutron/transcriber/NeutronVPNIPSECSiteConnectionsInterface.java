@@ -83,9 +83,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         if (ipsecSiteConnection.getName() != null) {
             answer.setName(ipsecSiteConnection.getName());
         }
-        if (ipsecSiteConnection.getTenantId() != null) {
-            answer.setTenantID(ipsecSiteConnection.getTenantId());
-        }
+        answer.setTenantID(ipsecSiteConnection.getTenantId());
         answer.setStatus(ipsecSiteConnection.getStatus());
         if (ipsecSiteConnection.isAdminStateUp() != null) {
             answer.setAdminStateUp(ipsecSiteConnection.isAdminStateUp());
