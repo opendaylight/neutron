@@ -47,7 +47,10 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
 
     @Override
     public void setTenantID(Uuid tenantID) {
-        this.tenantID = tenantID.getValue().replace("-", "");
+        if (tenantID != null) {
+            this.tenantID = tenantID.getValue().replace("-", "");
+        }else
+            this.tenantID = null;
     }
 
     @Override
