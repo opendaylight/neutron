@@ -182,9 +182,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             }
             answer.setLoadBalancerHealthMonitorPools(list);
         }
-        if (healthMonitor.getTenantId() != null) {
-            answer.setTenantID(healthMonitor.getTenantId());
-        }
+        answer.setTenantID(healthMonitor.getTenantId());
         if (healthMonitor.getTimeout() != null) {
             answer.setLoadBalancerHealthMonitorTimeout(healthMonitor.getTimeout().intValue());
         }

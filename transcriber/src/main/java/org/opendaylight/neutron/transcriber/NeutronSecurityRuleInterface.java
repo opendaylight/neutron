@@ -163,9 +163,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     protected NeutronSecurityRule fromMd(SecurityRule rule) {
         NeutronSecurityRule answer = new NeutronSecurityRule();
-        if (rule.getTenantId() != null) {
-            answer.setTenantID(rule.getTenantId());
-        }
+        answer.setTenantID(rule.getTenantId());
         if (rule.getDirection() != null) {
             answer.setSecurityRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
         }

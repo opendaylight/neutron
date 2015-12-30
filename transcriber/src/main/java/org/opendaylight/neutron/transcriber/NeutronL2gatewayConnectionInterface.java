@@ -67,9 +67,7 @@ implements INeutronL2gatewayConnectionCRUD {
         if (l2gatewayConnection.getL2gatewayId().getValue() != null){
             result.setL2gatewayID(String.valueOf(l2gatewayConnection.getL2gatewayId().getValue()));
         }
-        if (l2gatewayConnection.getTenantId().getValue() != null){
-            result.setTenantID(String.valueOf(l2gatewayConnection.getTenantId().getValue()));
-        }
+        result.setTenantID(l2gatewayConnection.getTenantId());
         if (l2gatewayConnection.getNetworkId().getValue() != null){
             result.setNetworkID(String.valueOf(l2gatewayConnection.getNetworkId().getValue()));
         }

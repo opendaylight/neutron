@@ -225,9 +225,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
 
             answer.setLoadBalancerSessionPersistence(sessionPersistence);
         }
-        if (pool.getTenantId() != null) {
-            answer.setTenantID(pool.getTenantId());
-        }
+        answer.setTenantID(pool.getTenantId());
         if (pool.getUuid() != null) {
             answer.setID(pool.getUuid().getValue());
         }
@@ -344,9 +342,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         if (member.getSubnetId() != null) {
             answer.setPoolMemberSubnetID(member.getSubnetId().getValue());
         }
-        if (member.getTenantId() != null) {
-            answer.setTenantID(member.getTenantId());
-        }
+        answer.setTenantID(member.getTenantId());
         if (member.getWeight() != null) {
             answer.setPoolMemberWeight(member.getWeight());
         }

@@ -88,9 +88,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (group.getDescription() != null) {
             answer.setSecurityGroupDescription(group.getDescription());
         }
-        if (group.getTenantId() != null) {
-            answer.setTenantID(group.getTenantId());
-        }
+        answer.setTenantID(group.getTenantId());
         if (group.getSecurityRules() != null) {
             NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
                 .fetchINeutronSecurityRuleCRUD(this);

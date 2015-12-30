@@ -79,9 +79,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         if (vpnService.getName() != null) {
             answer.setName(vpnService.getName());
         }
-        if (vpnService.getTenantId() != null) {
-            answer.setTenantID(vpnService.getTenantId());
-        }
+        answer.setTenantID(vpnService.getTenantId());
         if (vpnService.getStatus() != null) {
             answer.setStatus(vpnService.getStatus());
         }

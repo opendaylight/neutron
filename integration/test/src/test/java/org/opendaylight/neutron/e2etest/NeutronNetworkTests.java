@@ -137,6 +137,22 @@ public class NeutronNetworkTests {
         ITNeutronE2E.test_delete(url, "Network Element Delete Failed");
     }
 
+    public void network_bug4847_test() {
+        // https://bugs.opendaylight.org/show_bug.cgi?id=4847
+        // null tenant id in MD model causes null pointer exception
+        String uuid = "8fff19c7-f008-42e2-a664-f409cf55e45b";
+
+        String url = base + "/networks";
+        String content = "{ \"networks\": [ { "
+            + "\"name\": \"private1\", "
+            + "\"id\": \"" + uuid + "\" } ] } ";
+        ITNeutronE2E.test_create(url, content,"Bug4847 Network Post Failed");
+
+        url = url + "/" + uuid;
+        ITNeutronE2E.test_fetch(url, "Bug4847 Network GET failed");
+        ITNeutronE2E.test_delete(url, "Bug4847 Network Element Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
         network_tester.network_collection_get_test();
@@ -147,5 +163,6 @@ public class NeutronNetworkTests {
         network_tester.network_element_get_test();
         network_tester.network_delete_test();
         network_tester.network_element_negative_get_test();
+        network_tester.network_bug4847_test();
     }
 }

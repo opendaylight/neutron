@@ -111,9 +111,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (loadBalancer.getStatus() != null) {
             answer.setLoadBalancerStatus(loadBalancer.getStatus());
         }
-        if (loadBalancer.getTenantId() != null) {
-            answer.setTenantID(loadBalancer.getTenantId());
-        }
+        answer.setTenantID(loadBalancer.getTenantId());
         if (loadBalancer.getVipAddress() != null) {
             answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
         }
