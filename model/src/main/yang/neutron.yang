@@ -21,7 +21,6 @@ module neutron {
     import neutron-L3 { prefix "l3"; }
     import neutron-metering { prefix "metering"; }
     import neutron-lbaasv2 { prefix "lbaasv2"; }
-    import neutron-provider { prefix "provider"; }
     import neutron-l2gateways { prefix "l2gateways"; }
     import neutron-vpnaas { prefix "vpnaas"; }
     import neutron-fwaas { prefix "fwaas"; }
@@ -40,7 +39,6 @@ module neutron {
 
     container neutron {
         uses networks:networks-attributes;
-        uses provider:provider-attributes;
         uses subnets:subnets-attributes;
         uses ports:ports-attributes;
         uses l3:routers-attributes;
