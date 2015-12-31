@@ -53,7 +53,9 @@ public class NeutronFirewallPolicyTests {
     }
 
     public void fw_policy_element_get_test() {
-        String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c";
+        String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c" +
+            "?fields=tenant_id&fields=name&fields=description" +
+            "&fields=shared&fields=firewall_rules&fields=audited";
         ITNeutronE2E.test_fetch(url, true, "Firewall Policy Element Get Failed");
     }
 

@@ -32,7 +32,7 @@ public class NeutronFirewallTests {
     public void singleton_fw_create_test() {
         String url = base + "/fw/firewalls";
         String content = " { \"firewall\": { \"admin_state_up\": true," +
-            "\"description\": \"\"," +
+            "\"description\": \"\", \"shared\": true," +
             "\"firewall_policy_id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\"," +
             "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\"," +
             "\"name\": \"\", \"status\": \"PENDING_CREATE\"," +
@@ -43,7 +43,7 @@ public class NeutronFirewallTests {
     public void fw_modify_test() {
         String url = base + "/fw/firewalls/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
         String content = " { \"firewall\": { \"admin_state_up\": false," +
-            "\"description\": \"\"," +
+            "\"description\": \"\",\"shared\": true," +
             "\"firewall_policy_id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\"," +
             "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\"," +
             "\"name\": \"\", \"status\": \"PENDING_CREATE\"," +
@@ -52,7 +52,10 @@ public class NeutronFirewallTests {
     }
 
     public void fw_element_get_test() {
-        String url = base + "/fw/firewalls/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
+        String url = base + "/fw/firewalls/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977" +
+            "?fields=tenant_id&fields=name&fields=description" +
+            "&fields=admin_state_up&fields=status&fields=shared" +
+            "&fields=firewall_policy_id";
         ITNeutronE2E.test_fetch(url, true, "Firewall Element Get Failed");
     }
 
