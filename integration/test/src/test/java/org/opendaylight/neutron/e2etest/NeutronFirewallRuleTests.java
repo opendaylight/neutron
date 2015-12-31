@@ -64,6 +64,16 @@ public class NeutronFirewallRuleTests {
         ITNeutronE2E.test_fetch(url, true, "Firewall Rule Element Get Failed");
     }
 
+    public void fw_rule_element_get_with_query_test() {
+        String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0" +
+            "?fields=id&fields=tenant_id&fields=name&fields=description&fields=status" +
+            "&fields=shared&fields=firewall_policy_id&fields=protocol&fields=enabled" +
+            "&fields=source_ip_address&fields=destination_ip_address" +
+            "&fields=destination_port&fields=position&fields=action&fields=source_port" +
+            "&fields=limit&fields=marker&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true, "Firewall Rule Element Get Failed");
+    }
+
     public void fw_rule_delete_test() {
         String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0";
         ITNeutronE2E.test_delete(url, "Firewall Rule Delete Failed");
@@ -76,9 +86,10 @@ public class NeutronFirewallRuleTests {
 
     public static void runTests(String base) {
         NeutronFirewallRuleTests fw_rule_tester = new NeutronFirewallRuleTests(base);
-        fw_rule_tester.fw_rule_collection_get_test();
         fw_rule_tester.singleton_fw_rule_create_test();
         fw_rule_tester.fw_rule_element_get_test();
+        fw_rule_tester.fw_rule_element_get_with_query_test();
+        fw_rule_tester.fw_rule_collection_get_test();
         fw_rule_tester.fw_rule_modify_test();
         fw_rule_tester.fw_rule_delete_test();
         fw_rule_tester.fw_rule_element_negative_get_test();
