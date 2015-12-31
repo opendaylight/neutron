@@ -57,6 +57,15 @@ public class NeutronFirewallPolicyTests {
         ITNeutronE2E.test_fetch(url, true, "Firewall Policy Element Get Failed");
     }
 
+    public void fw_policy_element_get_with_query_test() {
+        String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c" +
+            "?fields=tenant_id&field=id&fields=name&fields=description" +
+            "&fields=shared&fields=firewall_rules&fields=audited" +
+            "&fields=limit&fields=marker&fields=page_reverse";
+                ;
+        ITNeutronE2E.test_fetch(url, true, "Firewall Policy Element Get with Query Failed");
+    }
+
     public void fw_policy_delete_test() {
         String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c";
         ITNeutronE2E.test_delete(url, "Firewall Policy Delete Failed");
@@ -69,9 +78,10 @@ public class NeutronFirewallPolicyTests {
 
     public static void runTests(String base) {
         NeutronFirewallPolicyTests fw_policy_tester = new NeutronFirewallPolicyTests(base);
-        fw_policy_tester.fw_policy_collection_get_test();
         fw_policy_tester.singleton_fw_policy_create_test();
         fw_policy_tester.fw_policy_element_get_test();
+        fw_policy_tester.fw_policy_element_get_with_query_test();
+        fw_policy_tester.fw_policy_collection_get_test();
         fw_policy_tester.fw_policy_modify_test();
         fw_policy_tester.fw_policy_delete_test();
         fw_policy_tester.fw_policy_element_negative_get_test();
