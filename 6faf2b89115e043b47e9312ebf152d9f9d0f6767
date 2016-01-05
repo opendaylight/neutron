@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_8062a2ab",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:08:01Z",
+      "side": 1,
+      "message": "typo?",
+      "range": {
+        "startLine": 100,
+        "startChar": 24,
+        "endLine": 100,
+        "endChar": 34
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_405caaed",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:08:01Z",
+      "side": 1,
+      "message": "add a sub-second sleep here, so we may get luckier on retry?",
+      "range": {
+        "startLine": 168,
+        "startChar": 20,
+        "endLine": 168,
+        "endChar": 28
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_006eb296",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:08:01Z",
+      "side": 1,
+      "message": "i also think re-throw may be better.\n\notherwise, remove the \u0027{}\u0027, as that is not needed when last param is an exception. Similar to line 187 below.",
+      "range": {
+        "startLine": 171,
+        "startChar": 49,
+        "endLine": 171,
+        "endChar": 53
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_c0673ab6",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:08:01Z",
+      "side": 1,
+      "message": "missing a catch and a return?",
+      "range": {
+        "startLine": 320,
+        "startChar": 8,
+        "endLine": 320,
+        "endChar": 9
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_600686d0",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:08:01Z",
+      "side": 1,
+      "message": "missing {} ?",
+      "range": {
+        "startLine": 387,
+        "startChar": 72,
+        "endLine": 387,
+        "endChar": 76
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_800942df",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:08:01Z",
+      "side": 1,
+      "message": "remove {}",
+      "range": {
+        "startLine": 391,
+        "startChar": 49,
+        "endLine": 391,
+        "endChar": 53
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
