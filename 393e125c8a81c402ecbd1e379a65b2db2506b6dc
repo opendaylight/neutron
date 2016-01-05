@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_00f552ca",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-05T04:10:04Z",
+      "side": 1,
+      "message": "add { } to be consistent with coding convention",
+      "range": {
+        "startLine": 52,
+        "startChar": 9,
+        "endLine": 52,
+        "endChar": 13
+      },
+      "revId": "393e125c8a81c402ecbd1e379a65b2db2506b6dc",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
