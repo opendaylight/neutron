@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "1aa4ed85_a306c81e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2016-01-05T12:40:00Z",
+      "side": 1,
+      "message": "With an optimistic lock failure, there\u0027s nothing to wait for: this transaction lost a race previously and attempted to update stale data, the new data is already in place so the transaction version should be OK on the next attempt without needing to wait.",
+      "parentUuid": "1aa4ed85_405caaed",
+      "range": {
+        "startLine": 168,
+        "startChar": 20,
+        "endLine": 168,
+        "endChar": 28
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_006eb296",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
         "patchSetId": 4
@@ -82,6 +106,30 @@
       "writtenOn": "2016-01-05T04:08:01Z",
       "side": 1,
       "message": "missing a catch and a return?",
+      "range": {
+        "startLine": 320,
+        "startChar": 8,
+        "endLine": 320,
+        "endChar": 9
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_c3018407",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2016-01-05T12:40:00Z",
+      "side": 1,
+      "message": "This is a try-with-resources, so a catch or finally block isn\u0027t required (as used to be the case). If getAll() doesn\u0027t declare any exceptions there\u0027s no need to catch anything.",
+      "parentUuid": "1aa4ed85_c0673ab6",
       "range": {
         "startLine": 320,
         "startChar": 8,
