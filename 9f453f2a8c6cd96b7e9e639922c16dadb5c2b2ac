@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_6083e656",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFirewallPolicyTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-01-05T02:14:21Z",
+      "side": 1,
+      "message": "Can you please add another test instead of modifying existing one?\nlike fw_policy_element_get_test_with_query.\nIt will exercise different code path in get.\n\nSame to other two tests.",
+      "revId": "9f453f2a8c6cd96b7e9e639922c16dadb5c2b2ac",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
