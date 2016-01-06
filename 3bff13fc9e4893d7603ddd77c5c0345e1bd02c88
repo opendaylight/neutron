@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aa4ed85_ccaf71e2",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFirewallRuleTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-01-06T01:02:25Z",
+      "side": 1,
+      "message": "Whether these needs to be a new method as well?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 5
+      },
+      "revId": "3bff13fc9e4893d7603ddd77c5c0345e1bd02c88",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1aa4ed85_8cb97930",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFirewallTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-01-06T01:02:25Z",
+      "side": 1,
+      "message": "Same goes here. new method?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 5
+      },
+      "revId": "3bff13fc9e4893d7603ddd77c5c0345e1bd02c88",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
