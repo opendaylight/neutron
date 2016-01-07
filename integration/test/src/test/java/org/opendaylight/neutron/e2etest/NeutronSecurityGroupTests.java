@@ -81,6 +81,13 @@ public class NeutronSecurityGroupTests {
         ITNeutronE2E.test_fetch(url, true, "Security Group Element Get Failed");
     }
 
+    public void sg_element_get_with_query_test() {
+        String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333" +
+            "?fields=id&fields=name&fields=description&fields=tenant_id" +
+            "&fields=limit&fields=marker&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true, "Security Group Element Get Failed");
+    }
+
     public void sg_delete_test() {
         String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333";
         ITNeutronE2E.test_delete(url, "Security Group Delete Failed");
@@ -93,10 +100,11 @@ public class NeutronSecurityGroupTests {
 
     public static void runTests(String base) {
         NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
-        securityGroup_tester.securityGroup_collection_get_test();
         securityGroup_tester.singleton_sg_create_test();
         securityGroup_tester.sg_update_test();
         securityGroup_tester.sg_element_get_test();
+        securityGroup_tester.sg_element_get_with_query_test();
+        securityGroup_tester.securityGroup_collection_get_test();
         securityGroup_tester.sg_delete_test();
         securityGroup_tester.sg_element_negative_get_test();
     }
