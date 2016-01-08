@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da33351e_2130ee55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-01-08T01:41:16Z",
+      "side": 1,
+      "message": "Can you please explain why and what\u0027s the improvement in the log?\nOtherwise it\u0027s difficult to understand what this patch tries to achieve.",
+      "revId": "44db65d5223d75382857b2360b5b600e2f22fff5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da33351e_c13e6229",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSecurityGroupTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-01-08T01:41:16Z",
+      "side": 1,
+      "message": "Please explain why this reordering is \"improvement\" in the commit log.",
+      "revId": "44db65d5223d75382857b2360b5b600e2f22fff5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
