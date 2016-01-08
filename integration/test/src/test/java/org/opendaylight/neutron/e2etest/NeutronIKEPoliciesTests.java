@@ -65,6 +65,14 @@ public class NeutronIKEPoliciesTests {
         ITNeutronE2E.test_fetch(url, true, "IKE Policy Element GET failed");
     }
 
+    public void ikePolicy_element_get_with_query_test() {
+        String url = base + "/vpn/ikepolicies/5522aff7-1b3c-48dd-9c3c-b50f016b73db" +
+            "?fields=id&fields=tenant_id&fields=name&fields=description&fields=pfs" +
+            "&fields=auth_algorithm&fields=phase1_negotiation_mode" +
+            "&fields=ike_version&fields=encryption_algorithm";
+        ITNeutronE2E.test_fetch(url, true, "IKE Policy Element GET With Query failed");
+    }
+
     public void ikePolicy_delete_test() {
         String url = base + "/vpn/ikepolicies/5522aff7-1b3c-48dd-9c3c-b50f016b73db";
         ITNeutronE2E.test_delete(url, "IKE Policy DELETE failed");
@@ -77,10 +85,11 @@ public class NeutronIKEPoliciesTests {
 
     public static void runTests(String base) {
         NeutronIKEPoliciesTests ike_policy_tester = new NeutronIKEPoliciesTests(base);
-        ike_policy_tester.ikePolicy_collection_get_test();
         ike_policy_tester.singleton_ikePolicy_create_test();
         ike_policy_tester.ikePolicy_update_test();
         ike_policy_tester.ikePolicy_element_get_test();
+        ike_policy_tester.ikePolicy_element_get_with_query_test();
+        ike_policy_tester.ikePolicy_collection_get_test();
         ike_policy_tester.ikePolicy_delete_test();
         ike_policy_tester.ikePolicy_element_negative_get_test();
     }

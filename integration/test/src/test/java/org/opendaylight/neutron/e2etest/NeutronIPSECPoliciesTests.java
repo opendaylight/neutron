@@ -64,6 +64,14 @@ public class NeutronIPSECPoliciesTests {
         ITNeutronE2E.test_fetch(url, true, "IPSEC Policy Element GET failed");
     }
 
+    public void ipsecPolicy_element_get_with_query_test() {
+        String url = base + "/vpn/ipsecpolicies/5291b189-fd84-46e5-84bd-78f40c05d69c" +
+            "?fields=id&fields=tenant_id&fields=name&fields=description&fields=pfs" +
+            "&fields=encapsulation_mode&fields=transform_protocol" +
+            "&fields=auth_algorithm&fields=encryption_algorithm";
+        ITNeutronE2E.test_fetch(url, true, "IPSEC Policy Element GET With Query failed");
+    }
+
     public void ipsecPolicy_delete_test() {
         String url = base + "/vpn/ipsecpolicies/5291b189-fd84-46e5-84bd-78f40c05d69c";
         ITNeutronE2E.test_delete(url, "IPSEC Policy DELETE failed");
@@ -76,11 +84,12 @@ public class NeutronIPSECPoliciesTests {
 
     public static void runTests(String base) {
         NeutronIPSECPoliciesTests ipsec_policy_tester = new NeutronIPSECPoliciesTests(base);
-        ipsec_policy_tester.ipsecPolicy_collection_get_test();
 
         ipsec_policy_tester.singleton_ipsecPolicy_create_test();
         ipsec_policy_tester.ipsecPolicy_update_test();
         ipsec_policy_tester.ipsecPolicy_element_get_test();
+        ipsec_policy_tester.ipsecPolicy_element_get_with_query_test();
+        ipsec_policy_tester.ipsecPolicy_collection_get_test();
         ipsec_policy_tester.ipsecPolicy_delete_test();
         ipsec_policy_tester.ipsecPolicy_element_negative_get_test();
     }

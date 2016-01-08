@@ -62,6 +62,14 @@ public class NeutronVPNServicesTests {
         ITNeutronE2E.test_fetch(url, true, "VPN Services Element GET failed");
     }
 
+    public void vpnservice_element_get_with_query_test() {
+        String url = base + "/vpn/vpnservices/9faaf49f-dd89-4e39-a8c6-101839aa49bc" +
+            "?fields=id&fields=tenant_id&fields=name&fields=admin_state_up" +
+            "&fields=router_id&fields=status&fields=subnet_id" +
+            "&fields=limit&fields=marker&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true, "VPN Services Element GET failed");
+    }
+
     public void vpnservice_delete_test() {
         String url = base + "/vpn/vpnservices/9faaf49f-dd89-4e39-a8c6-101839aa49bc";
         ITNeutronE2E.test_delete(url, "VPN Services DELETE failed");
@@ -74,10 +82,11 @@ public class NeutronVPNServicesTests {
 
     public static void runTests(String base) {
         NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
-        vpnService_tester.vpnService_collection_get_test();
         vpnService_tester.singleton_vpnservice_create_test();
         vpnService_tester.vpnservice_update_test();
         vpnService_tester.vpnservice_element_get_test();
+        vpnService_tester.vpnservice_element_get_with_query_test();
+        vpnService_tester.vpnService_collection_get_test();
         vpnService_tester.vpnservice_delete_test();
         vpnService_tester.vpnservice_element_negative_get_test();
     }
