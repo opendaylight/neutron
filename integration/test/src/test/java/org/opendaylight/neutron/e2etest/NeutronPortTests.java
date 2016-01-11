@@ -127,6 +127,15 @@ public class NeutronPortTests {
         ITNeutronE2E.test_fetch(url, true, "Port Element Get Failed");
     }
 
+
+    public void port_element_get_with_query_test() {
+        String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b" +
+            "?fields=id&fields=network_id&fields=name&fields=admin_state_up" +
+            "&fields=status&fields=mac_address&fields=device_id&fields=tenant_id" +
+            "&fields=device_owner&fields=limit&fields=marker&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true, "Port Element Get With Query Failed");
+    }
+
     public void port_delete_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
         ITNeutronE2E.test_delete(url, "Port Element Delete Failed");
@@ -139,12 +148,13 @@ public class NeutronPortTests {
 
     public static void runTests(String base) {
         NeutronPortTests port_tester = new NeutronPortTests(base);
-        port_tester.port_collection_get_test();
         port_tester.singleton_port_create_test();
         port_tester.router_interface_port_create_test(); //needed for router test
         port_tester.bulk_port_create_test();
         port_tester.port_update_test();
         port_tester.port_element_get_test();
+        port_tester.port_element_get_with_query_test();
+        port_tester.port_collection_get_test();
         port_tester.port_delete_test();
         port_tester.port_element_negative_get_test();
     }

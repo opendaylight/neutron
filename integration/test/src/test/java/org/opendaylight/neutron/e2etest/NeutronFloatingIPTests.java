@@ -73,6 +73,14 @@ public class NeutronFloatingIPTests {
         ITNeutronE2E.test_fetch(url, true, "Floating IP Element Get Test");
     }
 
+    public void floatingIP_element_get_with_query_test() {
+        String url = base + "/floatingips/2f245a7b-796b-4f26-9cf9-9e82d248fda7" +
+            "?fields=id&fields=floating_network_id&fields=port_id&fields=status" +
+            "&fields=fixed_ip_address&fields=floating_ip_address&fields=tenant_id" +
+            "&fields=router_id&fields=limit&fields=marker&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true, "Floating IP Element Get Query Test");
+    }
+
     public void floatingIP_delete_test() {
         String url = base + "/floatingips/2f245a7b-796b-4f26-9cf9-9e82d248fda7";
         ITNeutronE2E.test_delete(url, "Floating IP Delete Test");
@@ -85,10 +93,11 @@ public class NeutronFloatingIPTests {
 
     public static void runTests(String base) {
         NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
-        floatingIP_tester.floatingIP_collection_get_test();
         floatingIP_tester.singleton_floatingIP_create_test();
         floatingIP_tester.update_floatingIP_test();
         floatingIP_tester.floatingIP_element_get_test();
+        floatingIP_tester.floatingIP_element_get_with_query_test();
+        floatingIP_tester.floatingIP_collection_get_test();
         floatingIP_tester.floatingIP_delete_test();
         floatingIP_tester.floatingIP_element_negative_get_test();
     }
