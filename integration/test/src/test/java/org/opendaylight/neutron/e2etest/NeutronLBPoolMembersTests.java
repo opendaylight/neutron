@@ -59,6 +59,14 @@ public class NeutronLBPoolMembersTests {
         ITNeutronE2E.test_fetch(url, true ,"LB Pool Member Element Get Failed");
     }
 
+    public void pool_member_element_get_with_query_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe/members/9a7aff27-fd41-4ec1-ba4c-3eb92c629313" +
+            "?fields=id&fields=tenant_id&fields=address&fields=protocol_port" +
+            "&fields=weight&fields=subnet_id&fields=admin_state_up" +
+            "&fields=limit&fields=marker&fields=page_reverse";    ;
+        ITNeutronE2E.test_fetch(url, true ,"LB Pool Member Element Get With Query Failed");
+    }
+
     public void pool_member_element_negative_get_test() {
         String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe/members/9a7aff27-fd41-4ec1-ba4c-3eb92c629313";
         ITNeutronE2E.test_fetch(url, false ,"LB Pool Member Element Negative Get Failed");
@@ -71,10 +79,11 @@ public class NeutronLBPoolMembersTests {
 
     public static void runTests(String base) {
         NeutronLBPoolMembersTests pool_member_tester = new NeutronLBPoolMembersTests(base);
-        pool_member_tester.pool_member_collection_get_test();
         pool_member_tester.singleton_lb_pool_member_create_test();
         pool_member_tester.pool_member_update_test();
         pool_member_tester.pool_member_element_get_test();
+        pool_member_tester.pool_member_element_get_with_query_test();
+        pool_member_tester.pool_member_collection_get_test();
         pool_member_tester.pool_member_delete_test();
         pool_member_tester.pool_member_element_negative_get_test();
     }

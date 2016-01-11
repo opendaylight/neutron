@@ -68,6 +68,14 @@ public class NeutronLBListenerTests {
         ITNeutronE2E.test_fetch(url, true ,"LB Listener Element Get Failed");
     }
 
+    public void listener_element_get_with_query_test() {
+        String url = base + "/lbaas/listeners/39de4d56-d663-46e5-85a1-5b9d5fa17829" +
+            "?fields=id&fields=tenant_id&fields=name&fields=description" +
+            "&fields=default_pool_id&fields=protocol&fields=protocol_port" +
+            "&fields=admin_state_up&fields=limit&fields=marker&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true ,"LB Listener Element Get With Query Failed");
+    }
+
     public void listener_element_negative_get_test() {
         String url = base + "/lbaas/listeners/39de4d56-d663-46e5-85a1-5b9d5fa17829";
         ITNeutronE2E.test_fetch(url, false ,"LB Listener Element Negative Get Failed");
@@ -80,10 +88,11 @@ public class NeutronLBListenerTests {
 
     public static void runTests(String base) {
         NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
-        listener_tester.listener_collection_get_test();
         listener_tester.singleton_lb_listener_create_test();
         listener_tester.listener_update_test();
         listener_tester.listener_element_get_test();
+        listener_tester.listener_element_get_with_query_test();
+        listener_tester.listener_collection_get_test();
         listener_tester.listener_delete_test();
         listener_tester.listener_element_negative_get_test();
     }

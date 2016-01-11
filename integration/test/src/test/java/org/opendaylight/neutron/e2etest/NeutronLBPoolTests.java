@@ -73,6 +73,15 @@ public class NeutronLBPoolTests {
         ITNeutronE2E.test_fetch(url, true ,"LB Pool Element Get Failed");
     }
 
+    public void pool_element_get_with_query_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe" +
+            "?fields=id&fields=tenant_id&fields=name&fields=description" +
+            "&fields=lb_algorithm&fields=protocol&fields=healthmonitor_id" +
+            "&fields=members&fields=admin_state_up&fields=limit&fields=marker" +
+            "&fields=page_reverse";
+        ITNeutronE2E.test_fetch(url, true ,"LB Pool Element Get With Query Failed");
+    }
+
     public void pool_element_negative_get_test() {
         String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
         ITNeutronE2E.test_fetch(url, false ,"LB Pool Element Negative Get Failed");
@@ -85,10 +94,11 @@ public class NeutronLBPoolTests {
 
     public static void runTests(String base) {
         NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
-        pool_tester.pool_collection_get_test();
         pool_tester.singleton_lb_pool_create_test();
         pool_tester.pool_update_test();
         pool_tester.pool_element_get_test();
+        pool_tester.pool_element_get_with_query_test();
+        pool_tester.pool_collection_get_test();
         pool_tester.pool_delete_test();
         pool_tester.pool_element_negative_get_test();
         // needed for pool member testing
