@@ -137,7 +137,7 @@ public class NeutronFirewallNorthbound
             @QueryParam("tenant_id") String queryFirewallTenantID,
             @QueryParam("name") String queryFirewallName,
             @QueryParam("description") String queryFirewallDescription,
-            @QueryParam("shared") Boolean queryFirewallAdminStateIsUp,
+            @QueryParam("admin_state_up") Boolean queryFirewallAdminStateIsUp,
             @QueryParam("status") String queryFirewallStatus,
             @QueryParam("shared") Boolean queryFirewallIsShared,
             @QueryParam("firewall_policy_id") String queryFirewallPolicyID,
