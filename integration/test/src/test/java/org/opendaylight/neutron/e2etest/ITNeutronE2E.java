@@ -20,12 +20,20 @@ import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -221,5 +229,35 @@ public class ITNeutronE2E {
             e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
+    }
+
+    static void test_fetch_collection_response(String url_s, String collectionName, String context) {
+        StringBuffer response = new StringBuffer();
+        String inputLine;
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
+            Assert.assertEquals(context, 200, httpConn.getResponseCode());
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(httpConn.getInputStream()));
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+        //Collection is returned in an array. Format - {"collectionName": [{...}, {....}]}
+        Gson gson = new Gson();
+        JsonObject jsonObjectOutput = gson.fromJson(response.toString(), JsonObject.class);
+        Set<Map.Entry<String, JsonElement>> entrySet = jsonObjectOutput.entrySet();
+        Assert.assertTrue("E2E Tests Failed - Json Error", (entrySet.size() > 0));
+        JsonElement jsonElementValue = entrySet.iterator().next().getValue();
+        String key = entrySet.iterator().next().getKey();
+        Assert.assertEquals(context, collectionName, key);
+        Assert.assertTrue("E2E Tests Failed - Collection not Array", (jsonElementValue.isJsonArray()));
+        JsonArray jsonArray = jsonElementValue.getAsJsonArray();
+        Assert.assertNotEquals(context, jsonArray.size(), 0);
     }
 }
