@@ -74,6 +74,19 @@ public class NeutronFirewallTests {
         ITNeutronE2E.test_fetch(url, false, "Firewall Element Negative Get Failed");
     }
 
+    public void fw_collection_bug4944_test() {
+        String url = base + "/fw/firewalls";
+        String content = " { \"firewall\": { \"admin_state_up\": true,\"shared\": false," +
+             "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\" } }";
+        ITNeutronE2E.test_create(url, content, "Firewall Singleton Post Failed");
+
+        url = base + "/fw/firewalls?shared=false";
+        ITNeutronE2E.test_fetch_collection_response(url, "firewalls", "Firewall Collection Get Response Failed");
+
+        url = base + "/fw/firewalls/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
+        ITNeutronE2E.test_delete(url, "Firewall Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronFirewallTests fw_tester = new NeutronFirewallTests(base);
         fw_tester.singleton_fw_create_test();
@@ -83,5 +96,6 @@ public class NeutronFirewallTests {
         fw_tester.fw_modify_test();
         fw_tester.fw_delete_test();
         fw_tester.fw_element_negative_get_test();
+        fw_tester.fw_collection_bug4944_test();
     }
 }
