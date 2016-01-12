@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da33351e_cf64bce7",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFirewallRuleTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-01-12T16:30:22Z",
+      "side": 1,
+      "message": "nitpick: \"with query\"",
+      "revId": "4369af79113c3bc5c291571c52a8aa7402a8b46f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
