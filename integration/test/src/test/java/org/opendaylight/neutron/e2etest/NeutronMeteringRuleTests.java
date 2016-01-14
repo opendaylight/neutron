@@ -46,6 +46,12 @@ public class NeutronMeteringRuleTests {
         ITNeutronE2E.test_fetch(url, true ,"Metering Rule Element Get Failed");
     }
 
+    public void meteringRule_element_get_with_query_test() {
+        String url = base + "/metering/metering-label-rules/00e13b58-b4f2-4579-9c9c-7ac94615f9ae" +
+            "?fields=id&fields=direction&fields=remote_ip_prefix&fields=metering_label_id";
+        ITNeutronE2E.test_fetch(url, true ,"Metering Rule Element Get Failed");
+    }
+
     public void meteringRule_delete_test() {
         String url = base + "/metering/metering-label-rules/00e13b58-b4f2-4579-9c9c-7ac94615f9ae";
         ITNeutronE2E.test_delete(url, "Metering Rule Element Delete Failed");
@@ -71,9 +77,10 @@ public class NeutronMeteringRuleTests {
 
     public static void runTests(String base) {
         NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
-        meteringRule_tester.meteringRule_collection_get_test();
         meteringRule_tester.singleton_meteringRule_create_test();
         meteringRule_tester.meteringRule_element_get_test();
+        meteringRule_tester.meteringRule_element_get_with_query_test();
+        meteringRule_tester.meteringRule_collection_get_test();
         meteringRule_tester.meteringRule_delete_test();
         meteringRule_tester.meteringRule_element_negative_get_test();
     }
