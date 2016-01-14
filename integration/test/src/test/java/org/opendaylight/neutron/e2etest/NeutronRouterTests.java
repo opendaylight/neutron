@@ -111,6 +111,14 @@ public class NeutronRouterTests {
         ITNeutronE2E.test_fetch(url, true, "Router Element Get Test");
     }
 
+    public void router_element_get_with_query_test() {
+        String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2f"+
+            "?fields=id&fields=admin_state_up&fields=name&fields=status" +
+            "&fields=tenant_id&fields=external_gateway_info" +
+            "&fields=limit&fields=marker&fields=page_reverse";;
+        ITNeutronE2E.test_fetch(url, true, "Router Element Get With Query Test");
+    }
+
     public void router_delete_test() {
         String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2f";
         ITNeutronE2E.test_delete(url, "Router Delete Test");
@@ -123,13 +131,14 @@ public class NeutronRouterTests {
 
     public static void runTests(String base) {
         NeutronRouterTests router_tester = new NeutronRouterTests(base);
-        router_tester.router_collection_get_test();
         router_tester.singleton_router_create_test();
         router_tester.router_add_interface_test();
         router_tester.update_router_test();
         router_tester.create_router(); // needed for following tests
         router_tester.router_add_interface();
         router_tester.router_element_get_test();
+        router_tester.router_element_get_with_query_test();
+        router_tester.router_collection_get_test();
         router_tester.router_remove_interface_test();
         router_tester.router_delete_test();
         router_tester.router_element_negative_get_test();
