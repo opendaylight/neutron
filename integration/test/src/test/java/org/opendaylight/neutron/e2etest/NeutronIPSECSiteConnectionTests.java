@@ -83,6 +83,15 @@ public class NeutronIPSECSiteConnectionTests {
         ITNeutronE2E.test_fetch(url, true, "IPSEC Site Connection Element GET failed");
     }
 
+    public void ipsecSiteConnection_element_get_with_query_test() {
+        String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc" +
+                "?fields=id&fields=tenant_id&fields=name&fields=description&fields=peer_address" +
+                "&fields=peer_id&fields=route_mode&fields=auth_mode&fields=initiator" +
+                "&fields=mtu&fields=psk&fields=admin_state_up&fields=status&fields=ikepolicy_id" +
+                "&fields=ipsecpolicy_id&fields=vpnservice_id";
+        ITNeutronE2E.test_fetch(url, true, "IPSEC Site Connection Element GET With Query failed");
+    }
+
     public void ipsecSiteConnection_delete_test() {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc";
         ITNeutronE2E.test_delete(url, "IPSEC Site Connection DELETE failed");
@@ -95,10 +104,11 @@ public class NeutronIPSECSiteConnectionTests {
 
     public static void runTests(String base) {
         NeutronIPSECSiteConnectionTests ipsec_siteConnection_tester = new NeutronIPSECSiteConnectionTests(base);
-        ipsec_siteConnection_tester.ipsecSiteConnection_collection_get_test();
         ipsec_siteConnection_tester.singleton_ipsecSiteConnection_create_test();
         ipsec_siteConnection_tester.ipsecSiteConnection_update_test();
         ipsec_siteConnection_tester.ipsecSiteConnection_element_get_test();
+        ipsec_siteConnection_tester.ipsecSiteConnection_element_get_with_query_test();
+        ipsec_siteConnection_tester.ipsecSiteConnection_collection_get_test();
         ipsec_siteConnection_tester.ipsecSiteConnection_delete_test();
         ipsec_siteConnection_tester.ipsecSiteConnection_element_negative_get_test();
     }
