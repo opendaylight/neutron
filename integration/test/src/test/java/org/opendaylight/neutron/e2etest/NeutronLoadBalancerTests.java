@@ -66,6 +66,14 @@ public class NeutronLoadBalancerTests {
         ITNeutronE2E.test_fetch(url, true ,"Load Balancer Element Get Failed");
     }
 
+    public void loadBalancer_element_get_with_query_test() {
+        String url = base + "/lbaas/loadbalancers/a36c20d0-18e9-42ce-88fd-82a35977ee8c" +
+                "?field=admin_state_up&field=description&field=id&field=listeners"+
+                "&field=name&field=operating_status&field=provisioning_status"+
+                "&field=tenant_id&field=vip_address&field=vip_subnet_id";
+        ITNeutronE2E.test_fetch(url, true ,"Load Balancer Element GET Failed");
+    }
+
     public void loadBalancer_element_negative_get_test() {
         String url = base + "/lbaas/loadbalancers/a36c20d0-18e9-42ce-88fd-82a35977ee8c";
         ITNeutronE2E.test_fetch(url, false ,"Load Balancer Element Negative Get Failed");
@@ -78,11 +86,14 @@ public class NeutronLoadBalancerTests {
 
     public static void runTests(String base) {
         NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
-        loadBalancer_tester.loadBalancer_collection_get_test();
+
         loadBalancer_tester.singleton_loadbalancer_create_test();
         loadBalancer_tester.loadBalancer_update_test();
         loadBalancer_tester.loadBalancer_element_get_test();
+        loadBalancer_tester.loadBalancer_element_get_with_query_test();
         loadBalancer_tester.loadBalancer_delete_test();
         loadBalancer_tester.loadBalancer_element_negative_get_test();
+        loadBalancer_tester.loadBalancer_collection_get_test();
+
     }
 }
