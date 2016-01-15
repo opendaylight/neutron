@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_31482e5b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronRouterInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-15T20:20:49Z",
+      "side": 1,
+      "message": "if tenantId \u003d\u003d \"\" this will cause touuid to hit exception. undo this change?",
+      "range": {
+        "startLine": 109,
+        "startChar": 38,
+        "endLine": 109,
+        "endChar": 44
+      },
+      "revId": "c8f03ee81e38176abfade7572df095a2af4cb4fc",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
