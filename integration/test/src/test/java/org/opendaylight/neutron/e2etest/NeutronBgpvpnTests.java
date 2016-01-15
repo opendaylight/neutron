@@ -26,7 +26,6 @@ public class NeutronBgpvpnTests {
         String url_s = base + "/bgpvpns";
         try {
             int i = 0;
-            while (i < 60) {
                 URL url = new URL(url_s);
                 HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
                 if (httpConn.getResponseCode() != 200) {
@@ -39,7 +38,7 @@ public class NeutronBgpvpnTests {
                         200, httpConn.getResponseCode());
                     return;
                 }
-            }
+
             Assert.assertFalse("BGPVPN Collection GET failed", true);
         } catch (Exception e) {
             Assert.assertFalse("E2E Tests Failed", true);
@@ -101,6 +100,11 @@ public class NeutronBgpvpnTests {
         ITNeutronE2E.test_fetch(url, true ,"Bgpvpn Element Get Failed");
     }
 
+    public void bgpvpn_element_get_test_with_added_query() {
+        String url = base + "/bgpvpns/bc1a76cb-8767-4c3a-bb95-018b822f2130"+"?fields=id&fields=tenant_id&fields=name&fields=type";
+        ITNeutronE2E.test_fetch(url, true ,"Bgpvpn Element Get Failed");
+    }
+
     public void bgpvpn_element_negative_get_test() {
         String url = base + "/bgpvpns/bc1a76cb-8767-4c3a-bb95-018b822f2130";
         ITNeutronE2E.test_fetch(url, false ,"Bgpvpn Element Negative Get Failed");
@@ -118,6 +122,7 @@ public class NeutronBgpvpnTests {
         bgpvpn_tester.bulk_bgpvpn_create_test();
         bgpvpn_tester.bgpvpn_update_test();
         bgpvpn_tester.bgpvpn_element_get_test();
+        bgpvpn_tester.bgpvpn_element_get_test_with_added_query();
         bgpvpn_tester.bgpvpn_delete_test();
         bgpvpn_tester.bgpvpn_element_negative_get_test();
     }
