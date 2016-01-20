@@ -17,6 +17,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -82,7 +83,7 @@ public class NeutronL2gatewayConnectionNorthbound
     @Override
     protected INeutronL2gatewayConnectionCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayConnectionCRUD(this);
-        if (answer.getFirewallInterface() == null) {
+        if (answer.getL2gatewayConnectionInterface() == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getL2gatewayConnectionInterface();
@@ -203,6 +204,22 @@ public class NeutronL2gatewayConnectionNorthbound
     }
 
     /**
+     * Updates a L2 Gateway Connection ID */
+
+    @Path("{l2gatewayConnectionID}")
+    @PUT
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response updateL2gatewayConnection(
+            @PathParam("l2gatewayConnectionID") String l2gatewayConnectionID,
+                                                final NeutronL2gatewayConnectionRequest input) {
+        return update(l2gatewayConnectionID, input);
+    }
+
+    /**
      * Deletes a L2gateway Connection
      * @param  l2gatewayConnectionID  connection ID to delete
      * @return status
@@ -227,6 +244,4 @@ public class NeutronL2gatewayConnectionNorthbound
         }
         return answer;
     }
-
-    // l2gwconnection API doesn't have update method
 }
