@@ -29,7 +29,7 @@
   </feature>
 
   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
-    <feature version='${yangtools.version}'>odl-mdsal-models</feature>
+    <feature version='${mdsal.model.version}'>odl-mdsal-models</feature>
     <bundle>mvn:org.opendaylight.neutron/neutron-spi/{{VERSION}}</bundle>
     <bundle>mvn:commons-net/commons-net/{{VERSION}}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
