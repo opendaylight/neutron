@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_e21a5216",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronLoadBalancerTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-01-25T23:07:11Z",
+      "side": 1,
+      "message": "Similar patches move doesn collection_get_test for better code coverage?\nDoesn\u0027t similar change help to increase the coverage?",
+      "revId": "49c887ca758983a46fe0617ef65289e6a2ca6f4e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
