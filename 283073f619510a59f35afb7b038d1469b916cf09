@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_22d43a1f",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-01-25T23:08:16Z",
+      "side": 1,
+      "message": "like other similar patch moves down this collection_get_get to increase coverage.\nDoesn\u0027t it help for better coverage?",
+      "revId": "283073f619510a59f35afb7b038d1469b916cf09",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
