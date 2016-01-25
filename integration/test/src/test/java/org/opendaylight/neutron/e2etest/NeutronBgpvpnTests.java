@@ -83,8 +83,9 @@ public class NeutronBgpvpnTests {
     }
 
     public void bgpvpn_element_get_test_with_added_query() {
-        String url = base + "/bgpvpns/bc1a76cb-8767-4c3a-bb95-018b822f2130"+"?fields=id&fields=tenant_id&fields=name&fields=type"
-                +"fields=route_targets&fields=status&fields=admin_state_up&fields=tenant_id&fields=auto_aggregate";
+        String url = base + "/bgpvpns/bc1a76cb-8767-4c3a-bb95-018b822f2130"+
+                "?fields=id&fields=tenant_id&fields=name&fields=type" +
+                "fields=route_targets&fields=status&fields=admin_state_up&fields=tenant_id&fields=auto_aggregate";
         ITNeutronE2E.test_fetch(url, true ,"Bgpvpn Element Get Failed");
     }
 
@@ -100,13 +101,17 @@ public class NeutronBgpvpnTests {
 
     public static void runTests(String base) {
         NeutronBgpvpnTests bgpvpn_tester = new NeutronBgpvpnTests(base);
-        bgpvpn_tester.bgpvpn_collection_get_test();
+
         bgpvpn_tester.singleton_bgpvpn_create_test();
         bgpvpn_tester.bulk_bgpvpn_create_test();
         bgpvpn_tester.bgpvpn_update_test();
         bgpvpn_tester.bgpvpn_element_get_test();
         bgpvpn_tester.bgpvpn_element_get_test_with_added_query();
+        bgpvpn_tester.bgpvpn_collection_get_test();
         bgpvpn_tester.bgpvpn_delete_test();
         bgpvpn_tester.bgpvpn_element_negative_get_test();
+
+
+
     }
 }
