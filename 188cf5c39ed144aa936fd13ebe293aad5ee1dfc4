@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a3d3df0_fb82f450",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronLoadBalancerTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1450
+      },
+      "writtenOn": "2016-01-27T16:01:51Z",
+      "side": 1,
+      "message": "nitpick: space",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 3
+      },
+      "revId": "188cf5c39ed144aa936fd13ebe293aad5ee1dfc4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a3d3df0_f6797394",
         "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronLoadBalancerTests.java",
         "patchSetId": 2
