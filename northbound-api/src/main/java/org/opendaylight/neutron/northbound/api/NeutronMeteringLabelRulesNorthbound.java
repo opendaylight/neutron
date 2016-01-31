@@ -202,21 +202,15 @@ public class NeutronMeteringLabelRulesNorthbound
         if (input.isSingleton()) {
             NeutronMeteringLabelRule singleton = input.getSingleton();
 
-            Object[] instances = NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
+            Object[] instances = getInstances();
             if (instances != null) {
-                if (instances.length > 0) {
-                    for (Object instance : instances) {
-                        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                        int status = service.canCreateMeteringLabelRule(singleton);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
+                for (Object instance : instances) {
+                    INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
+                    int status = service.canCreateMeteringLabelRule(singleton);
+                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                        return Response.status(status).build();
                     }
-                } else {
-                    throw new ServiceUnavailableException("No providers registered.  Please try again later");
                 }
-            } else {
-                throw new ServiceUnavailableException("Couldn't get providers list.  Please try again later");
             }
 
             /*
