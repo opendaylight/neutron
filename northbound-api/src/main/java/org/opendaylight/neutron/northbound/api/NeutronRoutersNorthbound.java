@@ -303,21 +303,15 @@ public class NeutronRoutersNorthbound
         INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
 
         NeutronRouter target = routerInterface.getRouter(routerUUID);
-        Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
+        Object[] instances = getInstances()
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canAttachInterface(target, input);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                int status = service.canAttachInterface(target, input);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return Response.status(status).build();
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
 
         target.addInterface(input.getPortUUID(), input);
@@ -333,21 +327,15 @@ public class NeutronRoutersNorthbound
 
 
     private int checkDownstreamDetach(NeutronRouter target, NeutronRouter_Interface input) {
-        Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
+        Object[] instances = getInstances()
         if (instances != null) {
-            if (instances.length > 0) {
-                for (Object instance : instances) {
-                    INeutronRouterAware service = (INeutronRouterAware) instance;
-                    int status = service.canDetachInterface(target, input);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return status;
-                    }
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                int status = service.canDetachInterface(target, input);
+                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
+                    return status;
                 }
-            } else {
-                throw new ServiceUnavailableException(NO_PROVIDERS);
             }
-        } else {
-            throw new ServiceUnavailableException(NO_PROVIDER_LIST);
         }
         return HTTP_OK_BOTTOM;
     }
@@ -369,7 +357,7 @@ public class NeutronRoutersNorthbound
             ) {
         NeutronCRUDInterfaces interfaces = getAttachInterfaces();
         INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
+        Object[] instances = getInstances()
 
         NeutronRouter target = routerInterface.getRouter(routerUUID);
         input.setID(target.getID());
@@ -379,9 +367,11 @@ public class NeutronRoutersNorthbound
             return Response.status(status).build();
         }
         target.removeInterface(input.getPortUUID());
-        for (Object instance : instances) {
-            INeutronRouterAware service = (INeutronRouterAware) instance;
-            service.neutronRouterInterfaceDetached(target, input);
+        if (instances != null) {
+            for (Object instance : instances) {
+                INeutronRouterAware service = (INeutronRouterAware) instance;
+                service.neutronRouterInterfaceDetached(target, input);
+            }
         }
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }

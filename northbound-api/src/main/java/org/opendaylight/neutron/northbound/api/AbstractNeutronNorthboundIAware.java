@@ -28,9 +28,6 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
     private static final Logger LOGGER = LoggerFactory
         .getLogger(AbstractNeutronNorthboundIAware.class);
 
-    protected static final String NO_PROVIDERS = "No providers registered.  Please try again later";
-    protected static final String NO_PROVIDER_LIST = "Couldn't get providers list.  Please try again later";
-
     protected abstract Object[] getInstances();
     protected abstract int canCreate(Object instance, T singleton);
     protected abstract void created(Object instance, T singleton);
