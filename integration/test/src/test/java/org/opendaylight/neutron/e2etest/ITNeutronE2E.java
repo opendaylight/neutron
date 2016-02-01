@@ -114,6 +114,7 @@ public class ITNeutronE2E {
         NeutronIKEPoliciesTests.runTests(base);
         NeutronBgpvpnTests.runTests(base);
         NeutronL2GatewayTests.runTests(base);
+        NeutronL2GatewayConnectionTests.runTests(base);
 
     // tests related to bugs
         Neutron_Bug3812_Tests.runTests(base);
