@@ -82,7 +82,7 @@ public class NeutronL2gatewayConnectionNorthbound
     @Override
     protected INeutronL2gatewayConnectionCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayConnectionCRUD(this);
-        if (answer.getFirewallInterface() == null) {
+        if (answer.getL2gatewayConnectionInterface() == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getL2gatewayConnectionInterface();
