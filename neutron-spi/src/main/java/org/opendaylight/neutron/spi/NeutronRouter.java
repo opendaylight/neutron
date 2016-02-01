@@ -46,7 +46,7 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
     String gatewayPortId;
 
     @XmlElement (name = "routes")
-    List<String> routes;
+    List<NeutronSubnet_HostRoute> routes;
 
     /* Holds a map of OpenStackRouterInterfaces by subnet UUID
      * used for internal mapping to DOVE
@@ -120,11 +120,11 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
         this.gatewayPortId = gatewayPortId;
     }
 
-    public List<String> getRoutes() {
+    public List<NeutronSubnet_HostRoute> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(List<String> routes) {
+    public void setRoutes(List<NeutronSubnet_HostRoute> routes) {
         this.routes = routes;
     }
 

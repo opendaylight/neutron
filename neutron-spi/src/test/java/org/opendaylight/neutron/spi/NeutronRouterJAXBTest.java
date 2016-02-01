@@ -34,7 +34,7 @@ public class NeutronRouterJAXBTest {
                     NeutronRouter_sourceJson);
 
             NeutronRouter_NetworkReference external_gateway_info = testObject.getExternalGatewayInfo();
-            List<String> routes = testObject.getRoutes();
+            List<NeutronSubnet_HostRoute> routes = testObject.getRoutes();
 
             Assert.assertEquals("NeutronRouter JAXB Test 1: Testing router_uuid failed",
                     "e9330b1f-a2ef-4160-a991-169e56ab17f5", testObject.getID());
