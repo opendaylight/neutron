@@ -130,10 +130,10 @@ public class NeutronL2gatewayConnectionNorthbound
                                 // return fields
                                 @QueryParam("fields") List<String> fields,
                                 @QueryParam("tenant_id") String queryTenantID,
-                                @QueryParam("connection_id") String queryConnectionID,
+                                @QueryParam("id") String queryConnectionID,
                                 @QueryParam("l2gateway_id") String queryL2gatewayID,
                                 @QueryParam("network_id") String queryNetworkID,
-                                @QueryParam("segment_id") String querySegmentID,
+                                @QueryParam("segmentation_id") String querySegmentID,
                                 @QueryParam("port_id") String queryPortID,
                                 @QueryParam ("limit") String limit,
                                 @QueryParam ("marker") String marker,
