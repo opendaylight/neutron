@@ -18,11 +18,15 @@ import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
+import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.Neutron_IPs;
 import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 import org.opendaylight.neutron.spi.NeutronRouter_NetworkReference;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.l3.attributes.Routes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.l3.attributes.RoutesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.Routers;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.Router;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.RouterBuilder;
@@ -117,9 +121,12 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
         routerBuilder.setAdminStateUp(router.getAdminStateUp());
         routerBuilder.setDistributed(router.getDistributed());
         if (router.getRoutes() != null) {
-            List<String> routes = new ArrayList<String>();
-            for (String route : router.getRoutes()) {
-                routes.add(route);
+            List<Routes> routes = new ArrayList<Routes>();
+            for (NeutronRoute route : router.getRoutes()) {
+                RoutesBuilder routeBuilder = new RoutesBuilder();
+                routeBuilder.setDestination(new IpPrefix(route.getDestination().toCharArray()));
+                routeBuilder.setNexthop(new IpAddress(route.getNextHop().toCharArray()));
+                routes.add(routeBuilder.build());
             }
             routerBuilder.setRoutes(routes);
         }
@@ -202,9 +209,12 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             result.setGatewayPortId(String.valueOf(router.getGatewayPortId().getValue()));
         }
         if (router.getRoutes() != null) {
-            List<String> routes = new ArrayList<String>();
-            for (String route : router.getRoutes()) {
-                routes.add(route);
+            List<NeutronRoute> routes = new ArrayList<NeutronRoute>();
+            for (Routes route : router.getRoutes()) {
+                NeutronRoute routerRoute = new NeutronRoute();
+                routerRoute.setDestination(String.valueOf(route.getDestination().getValue()));
+                routerRoute.setNextHop(String.valueOf(route.getNexthop().getValue()));
+                routes.add(routerRoute);
             }
             result.setRoutes(routes);
         }
