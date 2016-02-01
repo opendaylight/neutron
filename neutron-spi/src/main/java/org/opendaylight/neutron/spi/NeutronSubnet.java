@@ -68,7 +68,7 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
     List<NeutronSubnetIPAllocationPool> allocationPools;
 
     @XmlElement (name = "host_routes")
-    List<NeutronSubnet_HostRoute> hostRoutes;
+    List<NeutronRoute> hostRoutes;
 
     @XmlElement (defaultValue = "true", name = "enable_dhcp")
     Boolean enableDHCP;
@@ -162,11 +162,11 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
         this.allocationPools = allocationPools;
     }
 
-    public List<NeutronSubnet_HostRoute> getHostRoutes() {
+    public List<NeutronRoute> getHostRoutes() {
         return hostRoutes;
     }
 
-    public void setHostRoutes(List<NeutronSubnet_HostRoute> hostRoutes) {
+    public void setHostRoutes(List<NeutronRoute> hostRoutes) {
         this.hostRoutes = hostRoutes;
     }
 
@@ -235,7 +235,7 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
                 ans.setAllocationPools(aPools);
             }
             if (s.equals("host_routes")) {
-                List<NeutronSubnet_HostRoute> hRoutes = new ArrayList<NeutronSubnet_HostRoute>();
+                List<NeutronRoute> hRoutes = new ArrayList<NeutronRoute>();
                 hRoutes.addAll(this.getHostRoutes());
                 ans.setHostRoutes(hRoutes);
             }
@@ -349,7 +349,7 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
             dnsNameservers = new ArrayList<String>();
         }
         if (hostRoutes == null) {
-            hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
+            hostRoutes = new ArrayList<NeutronRoute>();
         }
         if (allocationPools == null) {
             allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();

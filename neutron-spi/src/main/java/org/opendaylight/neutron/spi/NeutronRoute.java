@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSubnet_HostRoute implements Serializable {
+public class NeutronRoute implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -32,7 +32,7 @@ public class NeutronSubnet_HostRoute implements Serializable {
     /**
      *  HostRoute constructor
      */
-    public NeutronSubnet_HostRoute() { }
+    public NeutronRoute() { }
 
     public String getDestination() {
         return destination;
@@ -52,7 +52,7 @@ public class NeutronSubnet_HostRoute implements Serializable {
 
     @Override
     public String toString() {
-        return "NeutronSubnetHostRoute [" +
+        return "NeutronRoute [" +
             "destination=" + destination +
             ", nextHop=" + nextHop + "]";
     }

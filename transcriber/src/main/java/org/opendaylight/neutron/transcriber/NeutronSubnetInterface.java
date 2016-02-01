@@ -23,7 +23,7 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
+import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
@@ -169,9 +169,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             result.setDnsNameservers(dnsNameServers);
         }
         if(subnet.getHostRoutes() != null){
-            List<NeutronSubnet_HostRoute> hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
+            List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
             for(HostRoutes hostRoute : subnet.getHostRoutes()) {
-                NeutronSubnet_HostRoute nsHostRoute = new NeutronSubnet_HostRoute();
+                NeutronRoute nsHostRoute = new NeutronRoute();
                 nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
                 nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
                 hostRoutes.add(nsHostRoute);
@@ -259,7 +259,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         }
         if(subnet.getHostRoutes() != null) {
             List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
-            for(NeutronSubnet_HostRoute hostRoute: subnet.getHostRoutes()) {
+            for(NeutronRoute hostRoute: subnet.getHostRoutes()) {
                 HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
                 hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
                 hrBuilder.setNexthop(new IpAddress(hostRoute.getNextHop().toCharArray()));

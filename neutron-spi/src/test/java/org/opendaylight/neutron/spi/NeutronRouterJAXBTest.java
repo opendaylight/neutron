@@ -24,7 +24,7 @@ public class NeutronRouterJAXBTest {
         "\"external_gateway_info\": {\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" }, " +
         "\"distributed\": false , " +
         "\"gw_port_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17127\", " +
-        "\"routes\": [ \"3b80198d-4f7b-4f77-9ef5-774d54e17126\" ] }";
+        "\"routes\": [ { \"destination\":\"10.0.0.0/24\",\"nexthop\":\"1.1.1.1\" } ] }";
 
     @Test
     public void test_NeutronRouter_JAXB() {
@@ -34,7 +34,7 @@ public class NeutronRouterJAXBTest {
                     NeutronRouter_sourceJson);
 
             NeutronRouter_NetworkReference external_gateway_info = testObject.getExternalGatewayInfo();
-            List<String> routes = testObject.getRoutes();
+            List<NeutronRoute> routes = testObject.getRoutes();
 
             Assert.assertEquals("NeutronRouter JAXB Test 1: Testing router_uuid failed",
                     "e9330b1f-a2ef-4160-a991-169e56ab17f5", testObject.getID());
@@ -61,7 +61,7 @@ public class NeutronRouterJAXBTest {
             Assert.assertEquals("NeutronRouter JAXB Test 9.1: Testing routes failed", 1, routes.size());
 
             Assert.assertEquals("NeutronRouter JAXB Test 9.2: Testing routes failed",
-                    "3b80198d-4f7b-4f77-9ef5-774d54e17126", routes.get(0));
+                    "10.0.0.0/24", routes.get(0).getDestination());
 
         } catch (Exception e) {
             Assert.fail("Tests failed");

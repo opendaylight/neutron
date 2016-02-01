@@ -39,9 +39,15 @@ module neutron-L3 {
             description "the port uuid holding the router's gateway address.";
             type yang:uuid;
         }
-        leaf-list routes {
+        list routes {
             description "list of routes for this router.";
-            type string;
+            leaf destination {
+                description "Specifies a destination in CIDR format";
+                type inet:ip-prefix;
+            }
+            leaf nexthop {
+                type inet:ip-address;
+            }
         }
         leaf router-status {
             description "Contains the Router status.";
