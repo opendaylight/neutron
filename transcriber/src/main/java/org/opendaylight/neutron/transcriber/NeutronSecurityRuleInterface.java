@@ -27,17 +27,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV6;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolHttp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolHttps;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolIcmp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolIcmpV6;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolTcp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolUdp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -45,7 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableBiMap;
-
+import com.google.common.collect.ImmutableList;
 
 public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
@@ -55,13 +49,11 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             .put(DirectionEgress.class,"egress")
             .put(DirectionIngress.class,"ingress")
             .build();
-    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolIcmp.class,"icmp")
-            .put(ProtocolTcp.class,"tcp")
-            .put(ProtocolUdp.class,"udp")
-            .put(ProtocolIcmpV6.class,"icmpv6")
-            .build();
+    private static final ImmutableList<String> PROTOCOL_LIST
+            = ImmutableList.of("icmp",
+                                "tcp",
+                                "udp",
+                                "icmpv6");
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
             = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
             .put(EthertypeV4.class,"IPv4")
@@ -179,7 +171,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             answer.setSecurityRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
         }
         if (rule.getProtocol() != null) {
-            answer.setSecurityRuleProtocol(PROTOCOL_MAP.get(rule.getProtocol()));
+            answer.setSecurityRuleProtocol(String.valueOf(rule.getProtocol().getValue()));
         }
         if (rule.getEthertype() != null) {
             answer.setSecurityRuleEthertype(ETHERTYPE_MAP.get(rule.getEthertype()));
@@ -219,9 +211,13 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
-                    PROTOCOL_MAP.inverse();
-            securityRuleBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(securityRule.getSecurityRuleProtocol()));
+            try {
+                securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(Short.valueOf(securityRule.getSecurityRuleProtocol())));
+            } catch (NumberFormatException e) {
+                if (PROTOCOL_LIST.contains(securityRule.getSecurityRuleProtocol())) {
+                    securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(securityRule.getSecurityRuleProtocol()));
+                }
+            }
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
             ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
