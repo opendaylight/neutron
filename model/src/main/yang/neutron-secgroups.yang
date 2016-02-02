@@ -71,9 +71,7 @@ module neutron-secgroups {
             type inet:ip-prefix;
         }
         leaf protocol {
-            type identityref {
-                base "constants:protocol-base";
-            }
+            type string;
             description "The protocol that is matched by the security group rule.";
         }
         leaf ethertype {
