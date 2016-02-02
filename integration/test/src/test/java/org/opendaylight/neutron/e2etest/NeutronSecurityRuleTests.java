@@ -152,6 +152,22 @@ public class NeutronSecurityRuleTests {
         ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
     }
 
+    public void sr_bug4257_test() {
+        String url = base + "/security-group-rules";
+        String content = " {\"security_group_rule\": " +
+                "{\"remote_group_id\": null, \"direction\": \"ingress\", " +
+                "\"remote_ip_prefix\": null, \"protocol\": 200, " +
+                "\"ethertype\": \"IPv6\", \"tenant_id\": " +
+                "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " +
+                "\"port_range_min\": 77, " +
+                "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\", " +
+                "\"security_group_id\": " +
+                "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
+        ITNeutronE2E.test_create(url, content, "Security Rule Bug4257 Singleton Post Failed");
+        url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
+        ITNeutronE2E.test_delete(url, "Security Rule Bug4257 Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
         securityRule_tester.singleton_sr_create_test();
@@ -164,5 +180,6 @@ public class NeutronSecurityRuleTests {
         securityRule_tester.sr_element_negative_get_test();
         securityRule_tester.bug4043_ipv4_test();
         securityRule_tester.bug4043_ipv6_test();
+        securityRule_tester.sr_bug4257_test();
     }
 }

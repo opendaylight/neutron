@@ -38,6 +38,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -179,7 +180,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             answer.setSecurityRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
         }
         if (rule.getProtocol() != null) {
-            answer.setSecurityRuleProtocol(PROTOCOL_MAP.get(rule.getProtocol()));
+            answer.setSecurityRuleProtocol(String.valueOf(rule.getProtocol().getValue()));
         }
         if (rule.getEthertype() != null) {
             answer.setSecurityRuleEthertype(ETHERTYPE_MAP.get(rule.getEthertype()));
@@ -219,9 +220,13 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
-                    PROTOCOL_MAP.inverse();
-            securityRuleBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(securityRule.getSecurityRuleProtocol()));
+            try {
+                securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(Short.valueOf(securityRule.getSecurityRuleProtocol())));
+            } catch (NumberFormatException e) {
+                if (PROTOCOL_MAP.containsValue(securityRule.getSecurityRuleProtocol())) {
+                    securityRuleBuilder.setProtocol(new SecurityRuleAttributes.Protocol(securityRule.getSecurityRuleProtocol()));
+                }
+            }
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
             ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
