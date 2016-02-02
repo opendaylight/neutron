@@ -71,8 +71,9 @@ module neutron-secgroups {
             type inet:ip-prefix;
         }
         leaf protocol {
-            type identityref {
-                base "constants:protocol-base";
+            type union {
+                type string;
+                type uint8;
             }
             description "The protocol that is matched by the security group rule.";
         }
