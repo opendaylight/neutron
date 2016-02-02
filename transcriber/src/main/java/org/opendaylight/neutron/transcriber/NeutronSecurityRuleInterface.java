@@ -55,13 +55,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             .put(DirectionEgress.class,"egress")
             .put(DirectionIngress.class,"ingress")
             .build();
-    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolIcmp.class,"icmp")
-            .put(ProtocolTcp.class,"tcp")
-            .put(ProtocolUdp.class,"udp")
-            .put(ProtocolIcmpV6.class,"icmpv6")
-            .build();
+
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
             = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
             .put(EthertypeV4.class,"IPv4")
@@ -179,7 +173,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             answer.setSecurityRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
         }
         if (rule.getProtocol() != null) {
-            answer.setSecurityRuleProtocol(PROTOCOL_MAP.get(rule.getProtocol()));
+            answer.setSecurityRuleProtocol(rule.getProtocol());
         }
         if (rule.getEthertype() != null) {
             answer.setSecurityRuleEthertype(ETHERTYPE_MAP.get(rule.getEthertype()));
@@ -219,9 +213,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
-                    PROTOCOL_MAP.inverse();
-            securityRuleBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(securityRule.getSecurityRuleProtocol()));
+            securityRuleBuilder.setProtocol(securityRule.getSecurityRuleProtocol());
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
             ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
