@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_6980cf46",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-02T14:13:25Z",
+      "side": 1,
+      "message": "comment for boron patch.\nFor beryllium, we are trying to keep the change minimum.\nSo this change is desirable.\nFor boron, there should be a yang definition for NeutronRoute to unify the definition for router and subnet.",
+      "revId": "59f3919dd01797fb056fa5dcdebda2076a936954",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
