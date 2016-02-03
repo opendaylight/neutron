@@ -20,7 +20,9 @@ import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 
 import java.io.File;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.BufferedReader;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -38,6 +40,9 @@ import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @RunWith(PaxExam.class)
 public class ITNeutronE2E {
@@ -220,5 +225,27 @@ public class ITNeutronE2E {
             e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
+    }
+
+    static JsonObject test_fetch_gson(String url_s, String context) {
+        StringBuffer response = new StringBuffer();
+
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
+            Assert.assertEquals(context, 200, httpConn.getResponseCode());
+            BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+        } catch (Exception e) {
+            e.printStackTrace(); // temporary, remove me
+            Assert.assertFalse("E2E Tests Failed", true);
+        }
+
+        Gson gson = new Gson();
+        return gson.fromJson(response.toString(), JsonObject.class);
     }
 }
