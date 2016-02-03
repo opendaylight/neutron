@@ -17,6 +17,10 @@ import java.net.URL;
 
 import org.junit.Assert;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 public class NeutronSecurityRuleTests {
     String base;
 
@@ -158,6 +162,38 @@ public class NeutronSecurityRuleTests {
         ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
     }
 
+    public void bug4550_sg_sr_test() {
+        String sg_uuid = "d55c7ec4-6189-4cbf-b136-3059dc2afd37";
+        String sg_url = base + "/security-groups";
+        String sg_content = "{\"security_group\": {\"tenant_id\": " +
+            "\"4693014ff2dd4485b32d778c4942b18f\", \"description\": \"\", " +
+            "\"id\": \"" + sg_uuid + "\", " +
+            "\"security_group_rules\": [], " +
+            "\"name\": \"tempest-secgroup-bug4550-sg-sr-test\"}}";
+        ITNeutronE2E.test_create(sg_url, sg_content, "Security Group Singleton Post Failed");
+
+        String rule_uuid = "19a72e11-783c-4baf-bf49-ed8053956d5e";
+        String rule_url = base + "/security-group-rules";
+        String rule_content = " {\"security_group_rules\": [" +
+                "{" +
+                "  \"id\": \"" + rule_uuid + "\"," +
+                "  \"direction\": \"egress\"," +
+                "  \"ethertype\": \"IPv4\"," +
+                "  \"security_group_id\": \"" + sg_uuid + "\"," +
+                "  \"tenant_id\": \"4693014ff2dd4485b32d778c4942b18f\"" +
+                "}" +
+                "]}";
+        ITNeutronE2E.test_create(rule_url, rule_content, "Security Rule bug4550 Failed");
+
+        String sg_one_url = sg_url + "/" + sg_uuid;
+        JsonObject jsonObject = ITNeutronE2E.test_fetch_gson(sg_one_url, "Security group bug4550 fetch");
+        JsonObject sg = jsonObject.getAsJsonObject("security_group");
+        JsonArray sgRules = sg.getAsJsonArray("security_group_rules");
+        Assert.assertEquals("security rule bug4550 array size", 1, sgRules.size());
+        Assert.assertEquals("security rule bug4550 uuid",
+                            rule_uuid, sgRules.get(0).getAsJsonObject().get("id").getAsString());
+    }
+
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
         String createJsonString = securityRule_tester.singleton_sr_create_test();
@@ -171,5 +207,6 @@ public class NeutronSecurityRuleTests {
         securityRule_tester.sr_element_negative_get_test();
         securityRule_tester.bug4043_ipv4_test();
         securityRule_tester.bug4043_ipv6_test();
+        securityRule_tester.bug4550_sg_sr_test();
     }
 }

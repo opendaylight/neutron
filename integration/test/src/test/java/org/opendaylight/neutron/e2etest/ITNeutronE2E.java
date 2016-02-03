@@ -47,6 +47,9 @@ import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.cm.ConfigurationAdmin;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 @RunWith(PaxExam.class)
 public class ITNeutronE2E {
 
@@ -231,15 +234,15 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_fetch_collection_response(String url_s, String collectionName, String context) {
+    static private String fetchResponse(String url_s, String context) {
         StringBuffer response = new StringBuffer();
-        String inputLine;
+
         try {
             URL url = new URL(url_s);
             HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
             Assert.assertEquals(context, 200, httpConn.getResponseCode());
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(httpConn.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
+            String inputLine;
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
@@ -247,10 +250,23 @@ public class ITNeutronE2E {
         } catch (Exception e) {
             e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
+
         }
+        return response.toString();
+    }
+
+    static JsonObject test_fetch_gson(String url_s, String context) {
+        String response = fetchResponse(url_s, context);
+        Gson gson = new Gson();
+        return gson.fromJson(response, JsonObject.class);
+    }
+
+    static void test_fetch_collection_response(String url_s, String collectionName, String context) {
+        String response = fetchResponse(url_s, context);
+
         //Collection is returned in an array. Format - {"collectionName": [{...}, {....}]}
         Gson gson = new Gson();
-        JsonObject jsonObjectOutput = gson.fromJson(response.toString(), JsonObject.class);
+        JsonObject jsonObjectOutput = gson.fromJson(response, JsonObject.class);
         Set<Map.Entry<String, JsonElement>> entrySet = jsonObjectOutput.entrySet();
         Assert.assertTrue("E2E Tests Failed - Json Error", (entrySet.size() > 0));
         JsonElement jsonElementValue = entrySet.iterator().next().getValue();
