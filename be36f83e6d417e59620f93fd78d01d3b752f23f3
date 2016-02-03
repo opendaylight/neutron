@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_defee7ad",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-02-03T23:10:34Z",
+      "side": 1,
+      "message": "Suggestion - To make it more intuitive, does the log needs to changed to reflect what the test indicates? since network_collection_get_test is a new method.",
+      "range": {
+        "startLine": 40,
+        "startChar": 40,
+        "endLine": 40,
+        "endChar": 70
+      },
+      "revId": "be36f83e6d417e59620f93fd78d01d3b752f23f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_9ef45fd0",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-02-03T23:10:34Z",
+      "side": 1,
+      "message": "Please change the log according to the test.",
+      "range": {
+        "startLine": 127,
+        "startChar": 46,
+        "endLine": 127,
+        "endChar": 72
+      },
+      "revId": "be36f83e6d417e59620f93fd78d01d3b752f23f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_3e2d5347",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-02-03T23:10:34Z",
+      "side": 1,
+      "message": "Trailing whitespace",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 3
+      },
+      "revId": "be36f83e6d417e59620f93fd78d01d3b752f23f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
