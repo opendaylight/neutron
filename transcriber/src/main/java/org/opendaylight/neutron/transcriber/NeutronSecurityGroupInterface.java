@@ -91,17 +91,21 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (group.getTenantId() != null) {
             answer.setTenantID(group.getTenantId());
         }
-        if (group.getSecurityRules() != null) {
-            NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-                .fetchINeutronSecurityRuleCRUD(this);
-            INeutronSecurityRuleCRUD srCrud = interfaces.getSecurityRuleInterface();
 
-            List<NeutronSecurityRule> rules = new ArrayList<NeutronSecurityRule>();
-            for (Uuid uuid: group.getSecurityRules()) {
-                 rules.add(srCrud.getNeutronSecurityRule(uuid.getValue()));
-            }
-            answer.setSecurityRules(rules);
+        // Bug 4550
+        // https://bugs.opendaylight.org/show_bug.cgi?id=4550
+        // Now SecurityGroup::securityGroupRule isn't updated.
+        // always rebuid it from security group rules
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+            .fetchINeutronSecurityRuleCRUD(this);
+        INeutronSecurityRuleCRUD srCrud = interfaces.getSecurityRuleInterface();
+
+        List<NeutronSecurityRule> rules = new ArrayList<NeutronSecurityRule>();
+        for (Uuid uuid: group.getSecurityRules()) {
+            rules.add(srCrud.getNeutronSecurityRule(uuid.getValue()));
         }
+        answer.setSecurityRules(rules);
+
         if (group.getUuid() != null) {
             answer.setID(group.getUuid().getValue());
         } 
@@ -120,15 +124,13 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (securityGroup.getTenantID() != null) {
             securityGroupBuilder.setTenantId(toUuid(securityGroup.getTenantID()));
         }
-        if (securityGroup.getSecurityRules() != null) {
-            List<Uuid> neutronSecurityRule = new ArrayList<Uuid>();
-            for (NeutronSecurityRule securityRule : securityGroup.getSecurityRules()) {
-                if (securityRule.getID() != null) {
-                    neutronSecurityRule.add(toUuid(securityRule.getID()));
-                }
-            }
-            securityGroupBuilder.setSecurityRules(neutronSecurityRule);
-        }
+
+        // don't update security group rule
+        // Bug 4550
+        // https://bugs.opendaylight.org/show_bug.cgi?id=4550
+        // Now SecurityGroup::securityGroupRule isn't updated.
+        // always rebuid it from security group rules
+
         if (securityGroup.getID() != null) {
             securityGroupBuilder.setUuid(toUuid(securityGroup.getID()));
         } else {
