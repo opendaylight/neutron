@@ -76,7 +76,7 @@ implements INeutronL2gatewayConnectionCRUD {
         if (l2gatewayConnection.getSegmentId() != null){
             result.setSegmentID(Integer.valueOf(l2gatewayConnection.getSegmentId()));
         }
-        if (l2gatewayConnection.getPortId().getValue() != null){
+        if (l2gatewayConnection.getPortId() != null){
             result.setPortID(String.valueOf(l2gatewayConnection.getPortId().getValue()));
         }
         return result;
