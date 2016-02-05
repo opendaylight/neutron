@@ -60,6 +60,27 @@ public class NeutronL2GatewayConnectionTests {
         ITNeutronE2E.test_fetch(url, false, "L2 Gateway Connection Element Negative Get Failed");
     }
 
+    public void l2gateway_connection_create_without_port_test() {
+        String url = base + "/l2gateway-connections";
+        String content = " { \"l2gateway_connection\": { " +
+                "\"gateway_id\": \"5227c228-6bba-4bbe-bdb8-6942768ff0f1\", " +
+                "\"segmentation_id\": 100," +
+                "\"network_id\": \"9227c228-6bba-4bbe-bdb8-6942768ff0f1\"," +
+                "\"id\": \"5227c228-6bba-4bbe-bdb8-6942768ff0e1\"," +
+                "\"tenant_id\": \"de0a7495-05c4-4be0-b796-1412835c6820\" } }";
+        ITNeutronE2E.test_create(url, content, "L2 Gateway Connection with No PortId - Singleton Post Failed");
+    }
+
+    public void l2gateway_connection_element_get_without_port_test() {
+        String url = base + "/l2gateway-connections/5227c228-6bba-4bbe-bdb8-6942768ff0e1";
+        ITNeutronE2E.test_fetch(url, true, "L2 Gateway Connection with No PortId - Element Get Failed");
+    }
+
+    public void l2gateway_connection_delete_without_port_test() {
+        String url = base + "/l2gateway-connections/5227c228-6bba-4bbe-bdb8-6942768ff0e1";
+        ITNeutronE2E.test_delete(url, "L2 Gateway Connection with No PortId - Delete Failed");
+    }
+
     public static void runTests(String base) {
         NeutronL2GatewayConnectionTests l2gateway_connection_tester = new NeutronL2GatewayConnectionTests(base);
         l2gateway_connection_tester.singleton_l2gateway_connection_create_test();
@@ -68,5 +89,8 @@ public class NeutronL2GatewayConnectionTests {
         l2gateway_connection_tester.l2gateway_connection_collection_get_test();
         l2gateway_connection_tester.l2gateway_connection_delete_test();
         l2gateway_connection_tester.l2gateway_connection_element_negative_get_test();
+        l2gateway_connection_tester.l2gateway_connection_create_without_port_test();
+        l2gateway_connection_tester.l2gateway_connection_element_get_without_port_test();
+        l2gateway_connection_tester.l2gateway_connection_delete_without_port_test();
     }
 }
