@@ -82,7 +82,7 @@ public class NeutronL2gatewayConnectionNorthbound
     @Override
     protected INeutronL2gatewayConnectionCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayConnectionCRUD(this);
-        if (answer.getFirewallInterface() == null) {
+        if (answer.getL2gatewayConnectionInterface() == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getL2gatewayConnectionInterface();
@@ -140,12 +140,7 @@ public class NeutronL2gatewayConnectionNorthbound
                                 @QueryParam ("page_reverse") String pageReverse
                                 // sorting not supported
     ) {
-        INeutronL2gatewayConnectionCRUD l2gatewayConnectionInterface = getNeutronInterfaces()
-            .getL2gatewayConnectionInterface();
-        if (l2gatewayConnectionInterface == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
+        INeutronL2gatewayConnectionCRUD l2gatewayConnectionInterface = getNeutronCRUD();
         List<NeutronL2gatewayConnection> allL2gatewayConnections = l2gatewayConnectionInterface.getAll();
         List<NeutronL2gatewayConnection> ans = new ArrayList<NeutronL2gatewayConnection>();
         Iterator<NeutronL2gatewayConnection> i = allL2gatewayConnections
@@ -217,15 +212,6 @@ public class NeutronL2gatewayConnectionNorthbound
     public Response deleteL2gatewayConnection(
             @PathParam("l2gatewayConnectionID") String l2gatewayConnectionID) {
         return delete(l2gatewayConnectionID);
-    }
-
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
-        logger.debug("Get Neutron interface");
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayConnectionCRUD(this);
-        if (answer.getL2gatewayConnectionInterface() == null) {
-            throw new ServiceUnavailableException(INTERFACE_NAME + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        return answer;
     }
 
     // l2gwconnection API doesn't have update method
