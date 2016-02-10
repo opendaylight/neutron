@@ -24,7 +24,7 @@ public class NeutronNetworkTests {
         this.base = base;
     }
 
-    public void network_collection_get_test() {
+    public void network_collection_get_test_with_wait() {
         String url_s = base + "/networks";
         try {
             int i = 0;
@@ -42,7 +42,7 @@ public class NeutronNetworkTests {
                     return;
                 }
             }
-            Assert.assertFalse("Network Collection GET failed", true);
+            Assert.assertFalse("Network Collection GET with wait failed", true);
         } catch (Exception e) {
             Assert.assertFalse("E2E Tests Failed", true);
         }
@@ -121,10 +121,24 @@ public class NeutronNetworkTests {
             +"\"provider:segmentation_id\": null } } ";
         ITNeutronE2E.test_modify(url, content,"Network Put Failed");
     }
+
+    public void network_collection_get_test(){
+        String url_s=base + "/networks";
+        ITNeutronE2E.test_fetch(url_s, true ,"Network collection Get Failed");
+    }
    
     public void network_element_get_test() {
         String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
         ITNeutronE2E.test_fetch(url, true ,"Network Element Get Failed");
+    }
+
+    public void network_element_get_test_with_query(){
+        String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130"+
+                "?fields=status&fields=subnets&fields=name"+
+                "&fields=provider:physical_network&fields=admin_state_up"+
+                "&fields=tenant_id&fields=provides:network_type"+
+                "&fields=router:external&fields=shared&fields=provider:segmentation_id";
+        ITNeutronE2E.test_fetch(url, true ,"Network Element with query Get Failed");
     }
 
     public void network_element_negative_get_test() {
@@ -139,12 +153,14 @@ public class NeutronNetworkTests {
 
     public static void runTests(String base) {
         NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
-        network_tester.network_collection_get_test();
+        network_tester.network_collection_get_test_with_wait();
         network_tester.singleton_network_create_test();
         network_tester.external_network_create_test(); //needed for router test
         network_tester.bulk_network_create_test();
         network_tester.network_update_test();
+        network_tester.network_collection_get_test();
         network_tester.network_element_get_test();
+        network_tester.network_element_get_test_with_query();
         network_tester.network_delete_test();
         network_tester.network_element_negative_get_test();
     }
