@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_eee15cff",
+        "filename": "model/src/main/yang/neutron-secgroups.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 612
+      },
+      "writtenOn": "2016-02-12T11:59:10Z",
+      "side": 1,
+      "message": "As Isaku Yamahata mentioned in an email, a solution could be to get ip-protocol as a number from networking-odl - in this case the type should be uint8.\nIn a case when networking-odl can send number or string, the type should be\ntype union {\n    type uint8;\n    type string;\n}\nGBP project would prefer to use the same type as is used in neutron database in case of feedback loop.",
+      "range": {
+        "startLine": 74,
+        "startChar": 17,
+        "endLine": 74,
+        "endChar": 23
+      },
+      "revId": "cfd22239ac9eb2fbf2a634e497a79831b28a989d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
