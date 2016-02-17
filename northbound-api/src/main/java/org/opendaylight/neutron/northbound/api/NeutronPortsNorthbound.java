@@ -172,6 +172,7 @@ public class NeutronPortsNorthbound
             @QueryParam("device_id") String queryDeviceID,
             @QueryParam("device_owner") String queryDeviceOwner,
             @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("port_security_enabled") Boolean queryPortSecurityEnabled,
             // linkTitle
             @QueryParam("limit") Integer limit,
             @QueryParam("marker") String marker,
@@ -192,7 +193,8 @@ public class NeutronPortsNorthbound
                     (queryMACAddress == null || queryMACAddress.equals(oSS.getMacAddress())) &&
                     (queryDeviceID == null || queryDeviceID.equals(oSS.getDeviceID())) &&
                     (queryDeviceOwner == null || queryDeviceOwner.equals(oSS.getDeviceOwner())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID())) &&
+                    (queryPortSecurityEnabled == null || queryPortSecurityEnabled.equals(oSS.getPortSecurityEnabled()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
                 } else {

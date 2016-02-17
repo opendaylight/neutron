@@ -77,6 +77,10 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     @XmlElement (name = "extra_dhcp_opts")
     List<NeutronPort_ExtraDHCPOption> extraDHCPOptions;
 
+    //Port security is enabled by default for backward compatibility.
+    @XmlElement (defaultValue = "true", name = "port_security_enabled")
+    Boolean portSecurityEnabled;
+
     public NeutronPort() {
     }
 
@@ -116,7 +120,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     public Boolean getAdminStateUp() { return adminStateUp; }
 
     public void setAdminStateUp(Boolean newValue) {
-            adminStateUp = newValue;
+        adminStateUp = newValue;
     }
 
     public String getStatus() {
@@ -192,28 +196,39 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     }
 
     public String getBindinghostID() {
-      return bindinghostID;
+        return bindinghostID;
     }
 
     public void setBindinghostID(String bindinghostID) {
-      this.bindinghostID = bindinghostID;
+        this.bindinghostID = bindinghostID;
     }
 
-  public String getBindingvnicType() {
-    return bindingvnicType;
-  }
+    public String getBindingvnicType() {
+        return bindingvnicType;
+    }
 
-  public void setBindingvnicType(String bindingvnicType) {
-    this.bindingvnicType = bindingvnicType;
-  }
+    public void setBindingvnicType(String bindingvnicType) {
+        this.bindingvnicType = bindingvnicType;
+    }
 
-  public String getBindingvifType() {
-    return bindingvifType;
-  }
+    public String getBindingvifType() {
+        return bindingvifType;
+    }
 
-  public void setBindingvifType(String bindingvifType) {
-    this.bindingvifType = bindingvifType;
-  }
+    public void setBindingvifType(String bindingvifType) {
+        this.bindingvifType = bindingvifType;
+    }
+
+    public Boolean getPortSecurityEnabled() {
+        if (portSecurityEnabled == null) {
+            return true;
+        }
+        return portSecurityEnabled;
+    }
+
+    public void setPortSecurityEnabled(Boolean newValue) {
+        portSecurityEnabled = newValue;
+    }
 
     /**
      * This method copies selected fields from the object and returns them
@@ -261,6 +276,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
             if ("security_groups".equals(field)) {
                 ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
             }
+            if ("port_security_enabled".equals(field)) {
+                ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
+            }
         }
         return ans;
     }
@@ -268,6 +286,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     @Override
     public void initDefaults() {
         adminStateUp = true;
+        portSecurityEnabled = true;
         if (status == null) {
             status = "ACTIVE";
         }
@@ -283,6 +302,6 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
                 + ", fixedIPs=" + fixedIPs + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID="
                 + tenantID + ", securityGroups=" + securityGroups
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType
-                + ", bindingvnicType=" + bindingvnicType + "]";
+                + ", bindingvnicType=" + bindingvnicType + ", portSecurityEnabled=" + portSecurityEnabled +"]";
     }
 }
