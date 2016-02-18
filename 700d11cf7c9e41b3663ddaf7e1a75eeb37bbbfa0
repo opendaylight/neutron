@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_9d9d4e69",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronRouterInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-02-18T08:07:25Z",
+      "side": 1,
+      "message": "Seeing a strange bug in testing. When I add more than one interface, only one stays in MDSAL. But if I debug I can see that at this point interfaces has both interfaces when passed to setInterfaces. Is this a bug in yangtools or way we\u0027re using transaction chains, not sure. Maybe need to create separate bug for it once this goes in?",
+      "revId": "700d11cf7c9e41b3663ddaf7e1a75eeb37bbbfa0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
