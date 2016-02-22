@@ -16,6 +16,24 @@
       "revId": "700d11cf7c9e41b3663ddaf7e1a75eeb37bbbfa0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_1f047f16",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronRouterInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-22T22:40:48Z",
+      "side": 1,
+      "message": "Given openstack neutron api, For boron fix, removeing routers-attributes::interfaces seems correct fix.\nFor Beryllium we need work around with the assumption that it can be easily maintained. (or apply for API breakage waiver.)",
+      "parentUuid": "9a3d3df0_9d9d4e69",
+      "revId": "700d11cf7c9e41b3663ddaf7e1a75eeb37bbbfa0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
