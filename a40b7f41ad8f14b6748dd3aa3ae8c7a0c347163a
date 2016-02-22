@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_9a07fd17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-22T22:57:16Z",
+      "side": 1,
+      "message": "Please add a link to neutron api spec.",
+      "revId": "a40b7f41ad8f14b6748dd3aa3ae8c7a0c347163a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_fa172943",
+        "filename": "model/src/main/yang/neutron-portsecurity.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-22T22:57:16Z",
+      "side": 1,
+      "message": "nitpick: space before \"{\"",
+      "revId": "a40b7f41ad8f14b6748dd3aa3ae8c7a0c347163a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_3a2d1196",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-22T22:57:16Z",
+      "side": 1,
+      "message": "For fixing white space, can you please send a independent patch?",
+      "revId": "a40b7f41ad8f14b6748dd3aa3ae8c7a0c347163a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
