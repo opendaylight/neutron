@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_39a356b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-24T17:17:12Z",
+      "side": 1,
+      "message": "nitpick. Please refer to the corresponding changeset of stable/beryllium.",
+      "revId": "996d8540b848a02a83b591be8bbd50b2fbdc2834",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_d9998a7a",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-24T17:17:12Z",
+      "side": 1,
+      "message": "nitpick: tailing space.",
+      "revId": "996d8540b848a02a83b591be8bbd50b2fbdc2834",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_398a361b",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-02-24T17:17:12Z",
+      "side": 1,
+      "message": "nitpick: trailing space.",
+      "revId": "996d8540b848a02a83b591be8bbd50b2fbdc2834",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
