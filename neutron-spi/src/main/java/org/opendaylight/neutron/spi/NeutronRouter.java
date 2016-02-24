@@ -51,6 +51,7 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
     /* Holds a map of OpenStackRouterInterfaces by subnet UUID
      * used for internal mapping to DOVE
      */
+    @Deprecated
     Map<String, NeutronRouter_Interface> interfaces;
 
     public NeutronRouter() {
@@ -173,18 +174,22 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
         return ans;
     }
 
+    @Deprecated
     public void setInterfaces(Map<String, NeutronRouter_Interface> input) {
         interfaces = input;
     }
 
+    @Deprecated
     public Map<String, NeutronRouter_Interface> getInterfaces() {
         return interfaces;
     }
 
+    @Deprecated
     public void addInterface(String s, NeutronRouter_Interface i) {
         interfaces.put(s, i);
     }
 
+    @Deprecated
     public void removeInterface(String s) {
         interfaces.remove(s);
     }
