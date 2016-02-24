@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,7 +20,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.Neutron_IPs;
 import org.opendaylight.neutron.spi.NeutronRouter;
@@ -46,6 +52,8 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     // methods needed for creating caches
 
+    private static final String DEVICE_OWNER_NETWORK_PREFIX = "network:";
+    private static final String DEVICE_OWNER_ROUTER_INTF = DEVICE_OWNER_NETWORK_PREFIX + "router_interface";
 
     NeutronRouterInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -152,14 +160,10 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             }
             routerBuilder.setExternalGatewayInfo(externalGatewayInfo);
         }
-        if (router.getInterfaces() != null) {
-            Map<String, NeutronRouter_Interface> mapInterfaces = new HashMap<String, NeutronRouter_Interface>();
-            List<Interfaces> interfaces = new ArrayList<Interfaces>();
-            for (Entry<String, NeutronRouter_Interface> entry : mapInterfaces.entrySet()) {
-                interfaces.add((Interfaces) entry.getValue());
-            }
-            routerBuilder.setInterfaces(interfaces);
-        }
+        // Bug Work around: bug 5363
+        // https://bugs.opendaylight.org/show_bug.cgi?id=5369
+        // always set empty list to interfaces
+        routerBuilder.setInterfaces(new ArrayList<Interfaces>());
         if (router.getID() != null) {
             routerBuilder.setUuid(toUuid(router.getID()));
         } else {
@@ -236,19 +240,42 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             result.setExternalGatewayInfo(extGwInfo);
         }
 
-        if (router.getInterfaces() != null) {
-            Map<String, NeutronRouter_Interface> interfaces = new HashMap<String, NeutronRouter_Interface>();
-            for (Interfaces mdInterface : router.getInterfaces()) {
-                NeutronRouter_Interface pojoInterface = new NeutronRouter_Interface();
-                String id = mdInterface.getUuid().getValue();
-                pojoInterface.setID(id);
-                pojoInterface.setTenantID(mdInterface.getTenantId());
-                pojoInterface.setSubnetUUID(String.valueOf(mdInterface.getSubnetId().getValue()));
-                pojoInterface.setPortUUID(String.valueOf(mdInterface.getPortId().getValue()));
-                interfaces.put(id, pojoInterface);
+        // Bug Work around: bug 5363
+        // https://bugs.opendaylight.org/show_bug.cgi?id=5369
+        // add_router_interface and remove_router_interface are action, not data update
+        // In neutron side, it doesn't update date. RouterPort is just for efficiency.
+        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces().fetchINeutronPortCRUD(this);
+        INeutronPortCRUD portCrud = interfaces.getPortInterface();
+        Map<String, NeutronRouter_Interface> routerInterfaces = new HashMap<String, NeutronRouter_Interface>();
+        String routerID = router.getUuid().getValue();
+        for (NeutronPort port : portCrud.getAll()) {
+            if (!(port.getDeviceID().equals(routerID) &&
+                  port.getDeviceOwner().equals(DEVICE_OWNER_ROUTER_INTF))) {
+                continue;
             }
-            result.setInterfaces(interfaces);
+
+            NeutronRouter_Interface pojoInterface = new NeutronRouter_Interface();
+            String id = port.getID();
+            pojoInterface.setID(id);  // BUG work around
+            pojoInterface.setTenantID(port.getTenantID());
+            for (Neutron_IPs neutronIPs : port.getFixedIPs()) {
+                InetAddress ipAddress;
+                try {
+                    ipAddress = InetAddress.getByAddress(neutronIPs.getIpAddress().getBytes());
+                } catch (UnknownHostException e) {
+                    LOGGER.warn("unknown host exception {}", e);
+                    continue;
+                }
+                if (!(ipAddress instanceof Inet4Address)) {
+                    continue;
+                }
+                pojoInterface.setSubnetUUID(neutronIPs.getSubnetUUID());
+                break;
+            }
+            pojoInterface.setPortUUID(port.getID());
+            routerInterfaces.put(id, pojoInterface);
         }
+        result.setInterfaces(routerInterfaces);
         return result;
     }
 }

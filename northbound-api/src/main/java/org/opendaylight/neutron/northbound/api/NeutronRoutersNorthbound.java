@@ -321,6 +321,7 @@ public class NeutronRoutersNorthbound
         }
 
         target.addInterface(input.getPortUUID(), input);
+        routerInterface.update(routerUUID, target);
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronRouterAware service = (INeutronRouterAware) instance;
@@ -372,13 +373,12 @@ public class NeutronRoutersNorthbound
         Object[] instances = NeutronUtil.getInstances(INeutronRouterAware.class, this);
 
         NeutronRouter target = routerInterface.getRouter(routerUUID);
-        input.setID(target.getID());
-        input.setTenantID(target.getTenantID());
         int status = checkDownstreamDetach(target, input);
         if (status != HTTP_OK_BOTTOM) {
             return Response.status(status).build();
         }
         target.removeInterface(input.getPortUUID());
+        routerInterface.update(routerUUID, target);
         for (Object instance : instances) {
             INeutronRouterAware service = (INeutronRouterAware) instance;
             service.neutronRouterInterfaceDetached(target, input);
