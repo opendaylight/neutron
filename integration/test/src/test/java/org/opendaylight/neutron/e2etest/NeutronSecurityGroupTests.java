@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronSecurityGroupTests {
     String base;
+    String createJsonString;
 
     public NeutronSecurityGroupTests(String base) {
         this.base = base;
@@ -50,6 +51,7 @@ public class NeutronSecurityGroupTests {
             "\"security_group_id\": \"d3329053-bae5-4bf4-a2d1-7330f11ba5db\"}], " +
             "\"name\": \"tempest-secgroup-1272206251\"}}";
         ITNeutronE2E.test_create(url, content, "Security Group Singleton Post Failed");
+        createJsonString = content;
     }
 
     public void sg_update_test() {
@@ -98,9 +100,15 @@ public class NeutronSecurityGroupTests {
         ITNeutronE2E.test_fetch(url, false, "Security Group Element Negative Get Failed");
     }
 
+    public void singleton_sg_get_with_one_query_item_test() {
+        String url = base + "/security-groups";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "security_groups");
+    }
+
     public static void runTests(String base) {
         NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
         securityGroup_tester.singleton_sg_create_test();
+        securityGroup_tester.singleton_sg_get_with_one_query_item_test();
         securityGroup_tester.sg_update_test();
         securityGroup_tester.sg_element_get_test();
         securityGroup_tester.sg_element_get_with_query_test();

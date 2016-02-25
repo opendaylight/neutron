@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronSecurityRuleTests {
     String base;
+    String createJsonString;
 
     public NeutronSecurityRuleTests(String base) {
         this.base = base;
@@ -41,6 +42,7 @@ public class NeutronSecurityRuleTests {
             "\"security_group_id\": " +
             "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
         ITNeutronE2E.test_create(url, content, "Security Rule Singleton Post Failed");
+        createJsonString = content;
     }
 
     public void multiple_sr_create_test() {
@@ -152,9 +154,15 @@ public class NeutronSecurityRuleTests {
         ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
     }
 
+    public void singleton_sr_get_with_one_query_item_test() {
+        String url = base + "/security-group-rules";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "security_group_rules");
+    }
+
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
         securityRule_tester.singleton_sr_create_test();
+        securityRule_tester.singleton_sr_get_with_one_query_item_test();
         securityRule_tester.multiple_sr_create_test();
         securityRule_tester.singleton_sr_modify_test();
         securityRule_tester.sr_element_get_test();
