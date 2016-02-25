@@ -260,4 +260,24 @@ public class ITNeutronE2E {
         JsonArray jsonArray = jsonElementValue.getAsJsonArray();
         Assert.assertNotEquals(context, jsonArray.size(), 0);
     }
+
+    // Helper function - content is json used during create. Format - {"Name": {...}}
+    static void test_fetch_with_one_query_item(String url_s, String content, String collectionName) {
+        Gson gson = new Gson();
+        JsonObject jsonObjectInput = gson.fromJson(content, JsonObject.class);
+        Set<Map.Entry<String, JsonElement>> entrySet = jsonObjectInput.entrySet();
+        JsonObject jsonObjectOutput = entrySet.iterator().next().getValue().getAsJsonObject();
+        for (Map.Entry<String, JsonElement> element: jsonObjectOutput.entrySet()) {
+            String key = element.getKey();
+            JsonElement jsonElementValue = element.getValue();
+            // Query only values that are non null Primitives - Integer,Strings,character and boolean
+            if (jsonElementValue.isJsonPrimitive() && (!jsonElementValue.isJsonNull())) {
+                String valueStr = jsonElementValue.getAsString();
+                valueStr = valueStr.replaceAll("\\s+", "+");
+                String queryUrl =  url_s + "?" + key + "=" + valueStr;
+                String context = collectionName + " " + key + "=" + jsonElementValue.toString() + " Get Failed";
+                test_fetch_collection_response(queryUrl, collectionName, context);
+            }
+        }
+    }
 }

@@ -29,7 +29,7 @@ public class NeutronSecurityGroupTests {
         ITNeutronE2E.test_fetch(url, "Security Group Collection GET failed");
     }
 
-    public void singleton_sg_create_test() {
+    public String singleton_sg_create_test() {
         String url = base + "/security-groups";
         String content = "{\"security_group\": {\"tenant_id\": " +
             "\"1dfe7dffa0624ae882cdbda397d1d276\", \"description\": \"\", " +
@@ -50,6 +50,12 @@ public class NeutronSecurityGroupTests {
             "\"security_group_id\": \"d3329053-bae5-4bf4-a2d1-7330f11ba5db\"}], " +
             "\"name\": \"tempest-secgroup-1272206251\"}}";
         ITNeutronE2E.test_create(url, content, "Security Group Singleton Post Failed");
+        return content;
+    }
+
+    public void singleton_sg_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/security-groups";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "security_groups");
     }
 
     public void sg_update_test() {
@@ -100,7 +106,8 @@ public class NeutronSecurityGroupTests {
 
     public static void runTests(String base) {
         NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
-        securityGroup_tester.singleton_sg_create_test();
+        String createJsonString = securityGroup_tester.singleton_sg_create_test();
+        securityGroup_tester.singleton_sg_get_with_one_query_item_test(createJsonString);
         securityGroup_tester.sg_update_test();
         securityGroup_tester.sg_element_get_test();
         securityGroup_tester.sg_element_get_with_query_test();
