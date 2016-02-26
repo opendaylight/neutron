@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronLBHealthMonitorTests {
     String base;
+    String createJsonString;
 
     public NeutronLBHealthMonitorTests(String base) {
         this.base = base;
@@ -41,6 +42,7 @@ public class NeutronLBHealthMonitorTests {
             "\"timeout\": 1, \"type\": \"HTTP\"," +
             "\"url_path\": \"/index.html\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton LB Health Monitor Post Failed NB");
+        createJsonString = content;
     }
 
     public void healthMonitor_update_test() {
@@ -80,9 +82,15 @@ public class NeutronLBHealthMonitorTests {
         ITNeutronE2E.test_delete(url, "LB Health Monitor Element Delete Failed");
     }
 
+    public void singleton_lb_healthMonitor_with_one_query_item_test() {
+        String url = base + "/lbaas/healthmonitors";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "healthmonitors");
+    }
+
     public static void runTests(String base) {
         NeutronLBHealthMonitorTests healthMonitor_tester = new NeutronLBHealthMonitorTests(base);
         healthMonitor_tester.singleton_lb_healthMonitor_create_test();
+        healthMonitor_tester.singleton_lb_healthMonitor_with_one_query_item_test();
         healthMonitor_tester.healthMonitor_update_test();
         healthMonitor_tester.healthMonitor_element_get_test();
         healthMonitor_tester.healthMonitor_element_get_with_query_test();

@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronLBListenerTests {
     String base;
+    String createJsonString;
 
     public NeutronLBListenerTests(String base) {
         this.base = base;
@@ -45,6 +46,7 @@ public class NeutronLBListenerTests {
             "\"protocol_port\": 80, " +
             "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton LB Listener Post Failed NB");
+        createJsonString = content;
     }
 
     public void listener_update_test() {
@@ -86,9 +88,15 @@ public class NeutronLBListenerTests {
         ITNeutronE2E.test_delete(url, "LB Listener Element Delete Failed");
     }
 
+    public void singleton_lb_listener_get_with_one_query_item_test() {
+        String url = base + "/lbaas/listeners";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "listeners");
+    }
+
     public static void runTests(String base) {
         NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
         listener_tester.singleton_lb_listener_create_test();
+        listener_tester.singleton_lb_listener_get_with_one_query_item_test();
         listener_tester.listener_update_test();
         listener_tester.listener_element_get_test();
         listener_tester.listener_element_get_with_query_test();

@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronLoadBalancerTests {
     String base;
+    String createJsonString;
 
     public NeutronLoadBalancerTests(String base) {
         this.base = base;
@@ -44,6 +45,7 @@ public class NeutronLoadBalancerTests {
             "\"vip_address\": \"10.0.0.4\", " +
             "\"vip_subnet_id\": \"013d3059-87a4-45a5-91e9-d721068ae0b2\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Load Balancer Post Failed NB");
+        createJsonString = content;
     }
 
     public void loadBalancer_update_test() {
@@ -84,9 +86,15 @@ public class NeutronLoadBalancerTests {
         ITNeutronE2E.test_delete(url, "Load Balancer Element Delete Failed");
     }
 
+    public void singleton_loadbalancer_get_with_one_query_item_test() {
+        String url = base + "/lbaas/loadbalancers";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "loadbalancers");
+    }
+
     public static void runTests(String base) {
         NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
         loadBalancer_tester.singleton_loadbalancer_create_test();
+        loadBalancer_tester.singleton_loadbalancer_get_with_one_query_item_test();
         loadBalancer_tester.loadBalancer_update_test();
         loadBalancer_tester.loadBalancer_element_get_test();
         loadBalancer_tester.loadBalancer_element_get_with_query_test();

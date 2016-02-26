@@ -142,7 +142,7 @@ public class NeutronLoadBalancerListenerNorthbound
             @QueryParam("description") String queryLoadBalancerListenerDescription,
             @QueryParam("protocol") String queryLoadBalancerListenerProtocol,
             @QueryParam("protocol_port") String queryLoadBalancerListenerProtocolPort,
-            @QueryParam("admin_state_up") String queryLoadBalancerListenerAdminIsUp,
+            @QueryParam("admin_state_up") Boolean queryLoadBalancerListenerAdminIsUp,
             // pagination
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,

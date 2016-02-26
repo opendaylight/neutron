@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronLBPoolMembersTests {
     String base;
+    String createJsonString;
 
     public NeutronLBPoolMembersTests(String base) {
         this.base = base;
@@ -40,6 +41,7 @@ public class NeutronLBPoolMembersTests {
             "\"tenant_id\": \"1a3e005cf9ce40308c900bcb08e5320c\"," +
             "\"weight\": 1 } }";
         ITNeutronE2E.test_create(url, content, "Singleton LB Pool Member Post Failed NB");
+        createJsonString = content;
     }
 
     public void pool_member_update_test() {
@@ -77,9 +79,15 @@ public class NeutronLBPoolMembersTests {
         ITNeutronE2E.test_delete(url, "LB Pool Member Element Delete Failed");
     }
 
+    public void singleton_lb_pool_member_get_with_one_query_item_test() {
+        String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe/members";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "members");
+    }
+
     public static void runTests(String base) {
         NeutronLBPoolMembersTests pool_member_tester = new NeutronLBPoolMembersTests(base);
         pool_member_tester.singleton_lb_pool_member_create_test();
+        pool_member_tester.singleton_lb_pool_member_get_with_one_query_item_test();
         pool_member_tester.pool_member_update_test();
         pool_member_tester.pool_member_element_get_test();
         pool_member_tester.pool_member_element_get_with_query_test();
