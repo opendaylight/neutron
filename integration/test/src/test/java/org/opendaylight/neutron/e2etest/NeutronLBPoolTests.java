@@ -30,7 +30,7 @@ public class NeutronLBPoolTests {
     }
 
     //TODO handle SB check
-    public void singleton_lb_pool_create_test() {
+    public String singleton_lb_pool_create_test() {
         String url = base + "/lbaas/pools";
         String content = "{ \"pool\": { " +
             "\"admin_state_up\": true, " +
@@ -48,6 +48,12 @@ public class NeutronLBPoolTests {
                 "\"type\": \"APP_COOKIE\" }, " +
             "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton LB Pool Post Failed NB");
+        return content;
+    }
+
+    public void singleton_lb_pool_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/lbaas/pools";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "pools");
     }
 
     public void pool_update_test() {
@@ -94,7 +100,8 @@ public class NeutronLBPoolTests {
 
     public static void runTests(String base) {
         NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
-        pool_tester.singleton_lb_pool_create_test();
+        String createJsonString = pool_tester.singleton_lb_pool_create_test();
+        pool_tester.singleton_lb_pool_get_with_one_query_item_test(createJsonString);
         pool_tester.pool_update_test();
         pool_tester.pool_element_get_test();
         pool_tester.pool_element_get_with_query_test();

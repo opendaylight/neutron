@@ -156,7 +156,7 @@ public class NeutronLoadBalancerPoolNorthbound
             @QueryParam("protocol") String queryLoadBalancerProtocol,
             @QueryParam("lb_algorithm") String queryLoadBalancerPoolLbAlgorithm,
             @QueryParam("healthmonitor_id") String queryLoadBalancerPoolHealthMonitorID,
-            @QueryParam("admin_state_up") String queryLoadBalancerIsAdminStateUp,
+            @QueryParam("admin_state_up") Boolean queryLoadBalancerIsAdminStateUp,
             @QueryParam("members") List<NeutronLoadBalancerPoolMember> queryLoadBalancerPoolMembers,
             // pagination
             @QueryParam("limit") String limit,
@@ -283,8 +283,8 @@ public class NeutronLoadBalancerPoolNorthbound
             @QueryParam("tenant_id") String queryLoadBalancerPoolMemberTenantID,
             @QueryParam("address") String queryLoadBalancerPoolMemberAddress,
             @QueryParam("protocol_port") String queryLoadBalancerPoolMemberProtoPort,
-            @QueryParam("admin_state_up") String queryLoadBalancerPoolMemberAdminStateUp,
-            @QueryParam("weight") String queryLoadBalancerPoolMemberWeight,
+            @QueryParam("admin_state_up") Boolean queryLoadBalancerPoolMemberAdminStateUp,
+            @QueryParam("weight") Integer queryLoadBalancerPoolMemberWeight,
             @QueryParam("subnet_id") String queryLoadBalancerPoolMemberSubnetID,
 
             // pagination

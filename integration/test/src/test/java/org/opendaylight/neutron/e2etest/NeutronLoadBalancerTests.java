@@ -30,7 +30,7 @@ public class NeutronLoadBalancerTests {
     }
 
     //TODO handle SB check
-    public void singleton_loadbalancer_create_test() {
+    public String singleton_loadbalancer_create_test() {
         String url = base + "/lbaas/loadbalancers";
         String content = "{ \"loadbalancer\": { " +
             "\"admin_state_up\": true, " +
@@ -44,6 +44,12 @@ public class NeutronLoadBalancerTests {
             "\"vip_address\": \"10.0.0.4\", " +
             "\"vip_subnet_id\": \"013d3059-87a4-45a5-91e9-d721068ae0b2\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Load Balancer Post Failed NB");
+        return content;
+    }
+
+    public void singleton_loadbalancer_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/lbaas/loadbalancers";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "loadbalancers");
     }
 
     public void loadBalancer_update_test() {
@@ -86,7 +92,8 @@ public class NeutronLoadBalancerTests {
 
     public static void runTests(String base) {
         NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
-        loadBalancer_tester.singleton_loadbalancer_create_test();
+        String createJsonString = loadBalancer_tester.singleton_loadbalancer_create_test();
+        loadBalancer_tester.singleton_loadbalancer_get_with_one_query_item_test(createJsonString);
         loadBalancer_tester.loadBalancer_update_test();
         loadBalancer_tester.loadBalancer_element_get_test();
         loadBalancer_tester.loadBalancer_element_get_with_query_test();
