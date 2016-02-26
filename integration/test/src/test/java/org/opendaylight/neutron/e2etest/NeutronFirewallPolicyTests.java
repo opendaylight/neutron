@@ -29,7 +29,7 @@ public class NeutronFirewallPolicyTests {
         ITNeutronE2E.test_fetch(url, "Firewall Policy Collection GET failed");
     }
 
-    public void singleton_fw_policy_create_test() {
+    public String singleton_fw_policy_create_test() {
         String url = base + "/fw/firewall_policies";
         String content = " { \"firewall_policy\": { \"audited\": false," +
             "\"description\": \"\", \"firewall_rules\": [" +
@@ -38,6 +38,12 @@ public class NeutronFirewallPolicyTests {
             "\"name\": \"test-policy\", \"shared\": false," +
             "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_create(url, content, "Firewall Policy Singleton Post Failed");
+        return content;
+    }
+
+    public void singleton_fw_policy_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/fw/firewall_policies";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "firewall_policies");
     }
 
     public void fw_policy_modify_test() {
@@ -78,7 +84,8 @@ public class NeutronFirewallPolicyTests {
 
     public static void runTests(String base) {
         NeutronFirewallPolicyTests fw_policy_tester = new NeutronFirewallPolicyTests(base);
-        fw_policy_tester.singleton_fw_policy_create_test();
+        String createJsonString = fw_policy_tester.singleton_fw_policy_create_test();
+        fw_policy_tester.singleton_fw_policy_get_with_one_query_item_test(createJsonString);
         fw_policy_tester.fw_policy_element_get_test();
         fw_policy_tester.fw_policy_element_get_with_query_test();
         fw_policy_tester.fw_policy_collection_get_test();

@@ -29,7 +29,7 @@ public class NeutronFirewallTests {
         ITNeutronE2E.test_fetch(url, "Firewall Collection GET failed");
     }
 
-    public void singleton_fw_create_test() {
+    public String singleton_fw_create_test() {
         String url = base + "/fw/firewalls";
         String content = " { \"firewall\": { \"admin_state_up\": true," +
             "\"description\": \"\"," +
@@ -38,6 +38,12 @@ public class NeutronFirewallTests {
             "\"name\": \"\", \"status\": \"PENDING_CREATE\"," +
             "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_create(url, content, "Firewall Singleton Post Failed");
+        return content;
+    }
+
+    public void singleton_fw_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/fw/firewalls";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "firewalls");
     }
 
     public void fw_modify_test() {
@@ -87,7 +93,8 @@ public class NeutronFirewallTests {
 
     public static void runTests(String base) {
         NeutronFirewallTests fw_tester = new NeutronFirewallTests(base);
-        fw_tester.singleton_fw_create_test();
+        String createJsonString = fw_tester.singleton_fw_create_test();
+        fw_tester.singleton_fw_get_with_one_query_item_test(createJsonString);
         fw_tester.fw_element_get_test();
         fw_tester.fw_element_get_with_query_test();
         fw_tester.fw_collection_get_test();

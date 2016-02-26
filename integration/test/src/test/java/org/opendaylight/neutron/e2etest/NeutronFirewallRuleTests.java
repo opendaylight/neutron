@@ -29,7 +29,7 @@ public class NeutronFirewallRuleTests {
         ITNeutronE2E.test_fetch(url, "Firewall Rule Collection GET failed");
     }
 
-    public void singleton_fw_rule_create_test() {
+    public String singleton_fw_rule_create_test() {
         String url = base + "/fw/firewall_rules";
         String content = "{ \"firewall_rule\": { \"action\": \"allow\"," +
             "\"description\": \"\", \"destination_ip_address\": null," +
@@ -42,6 +42,12 @@ public class NeutronFirewallRuleTests {
             "\"source_port\": null," +
             "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_create(url, content, "Firewall Rule Singleton Post Failed");
+        return content;
+    }
+
+    public void singleton_fw_rule_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/fw/firewall_rules";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "firewall_rules");
     }
 
     public void fw_rule_modify_test() {
@@ -86,7 +92,8 @@ public class NeutronFirewallRuleTests {
 
     public static void runTests(String base) {
         NeutronFirewallRuleTests fw_rule_tester = new NeutronFirewallRuleTests(base);
-        fw_rule_tester.singleton_fw_rule_create_test();
+        String createJsonString = fw_rule_tester.singleton_fw_rule_create_test();
+        fw_rule_tester.singleton_fw_rule_get_with_one_query_item_test(createJsonString);
         fw_rule_tester.fw_rule_element_get_test();
         fw_rule_tester.fw_rule_element_get_with_query_test();
         fw_rule_tester.fw_rule_collection_get_test();
