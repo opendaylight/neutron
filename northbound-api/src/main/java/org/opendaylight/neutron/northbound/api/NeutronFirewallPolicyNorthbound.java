@@ -138,7 +138,7 @@ public class NeutronFirewallPolicyNorthbound
             @QueryParam("tenant_id") String queryFirewallPolicyTenantID,
             @QueryParam("name") String queryFirewallPolicyName,
             @QueryParam("description") String querySecurityPolicyDescription,
-            @QueryParam("shared") String querySecurityPolicyIsShared,
+            @QueryParam("shared") Boolean querySecurityPolicyIsShared,
             @QueryParam("firewall_rules") List<String> querySecurityPolicyFirewallRules,
             @QueryParam("audited") Boolean querySecurityPolicyIsAudited,
             // pagination
