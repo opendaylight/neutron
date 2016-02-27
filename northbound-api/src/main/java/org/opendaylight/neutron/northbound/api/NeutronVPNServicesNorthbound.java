@@ -31,7 +31,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
-import org.opendaylight.neutron.spi.INeutronVPNServiceAware;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronVPNService;
@@ -56,7 +55,7 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
 
 @Path("/vpn/vpnservices")
 public class NeutronVPNServicesNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronVPNService, NeutronVPNServiceRequest, INeutronVPNServiceCRUD, INeutronVPNServiceAware> {
+    extends AbstractNeutronNorthbound<NeutronVPNService, NeutronVPNServiceRequest, INeutronVPNServiceCRUD> {
 
     private static final String RESOURCE_NAME = "VPNService";
 
@@ -85,47 +84,6 @@ public class NeutronVPNServicesNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getVPNServiceInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronVPNServiceAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronVPNService singleton) {
-        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-        return service.canCreateNeutronVPNService(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronVPNService singleton) {
-        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-        service.neutronVPNServiceCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronVPNService delta, NeutronVPNService original) {
-        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-        return service.canUpdateNeutronVPNService(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronVPNService updated) {
-        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-        service.neutronVPNServiceUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronVPNService singleton) {
-        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-        return service.canDeleteNeutronVPNService(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronVPNService singleton) {
-        INeutronVPNServiceAware service = (INeutronVPNServiceAware) instance;
-        service.neutronVPNServiceDeleted(singleton);
     }
 
     /**

@@ -32,7 +32,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
-import org.opendaylight.neutron.spi.INeutronSubnetAware;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSubnet;
@@ -57,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 
 @Path("/subnets")
 public class NeutronSubnetsNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD, INeutronSubnetAware> {
+    extends AbstractNeutronNorthbound<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD> {
     private static final String RESOURCE_NAME = "Subnet";
 
     @Override
@@ -93,47 +92,6 @@ public class NeutronSubnetsNorthbound
     @Override
     protected NeutronSubnetRequest newNeutronRequest(NeutronSubnet o) {
         return new NeutronSubnetRequest(o);
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronSubnetAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronSubnet singleton) {
-        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-        return service.canCreateSubnet(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronSubnet singleton) {
-        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-        service.neutronSubnetCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronSubnet delta, NeutronSubnet original) {
-        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-        return service.canUpdateSubnet(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronSubnet updated) {
-        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-        service.neutronSubnetUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronSubnet singleton) {
-        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-        return service.canDeleteSubnet(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronSubnet singleton) {
-        INeutronSubnetAware service = (INeutronSubnetAware) instance;
-        service.neutronSubnetDeleted(singleton);
     }
 
     @Context

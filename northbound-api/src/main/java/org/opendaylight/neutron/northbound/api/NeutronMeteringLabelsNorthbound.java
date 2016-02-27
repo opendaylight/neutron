@@ -31,7 +31,6 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 
-import org.opendaylight.neutron.spi.INeutronMeteringLabelAware;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
@@ -56,7 +55,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 
 @Path("/metering/metering-labels")
 public class NeutronMeteringLabelsNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronMeteringLabel, NeutronMeteringLabelRequest, INeutronMeteringLabelCRUD, INeutronMeteringLabelAware> {
+    extends AbstractNeutronNorthbound<NeutronMeteringLabel, NeutronMeteringLabelRequest, INeutronMeteringLabelCRUD> {
     private static final String RESOURCE_NAME = "Metering Label";
 
     @Override
@@ -81,45 +80,6 @@ public class NeutronMeteringLabelsNorthbound
     @Override
     protected NeutronMeteringLabelRequest newNeutronRequest(NeutronMeteringLabel o) {
         return new NeutronMeteringLabelRequest(o);
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronMeteringLabelAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronMeteringLabel singleton) {
-        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-        return service.canCreateMeteringLabel(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronMeteringLabel singleton) {
-        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-        service.neutronMeteringLabelCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronMeteringLabel delta, NeutronMeteringLabel original) {
-        return 0;
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronMeteringLabel updated) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronMeteringLabel singleton) {
-        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-        return service.canDeleteMeteringLabel(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronMeteringLabel singleton) {
-        INeutronMeteringLabelAware service = (INeutronMeteringLabelAware) instance;
-        service.neutronMeteringLabelDeleted(singleton);
     }
 
     @Context

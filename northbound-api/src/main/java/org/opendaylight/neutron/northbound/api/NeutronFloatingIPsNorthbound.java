@@ -28,7 +28,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronFloatingIPAware;
 import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
@@ -57,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 
 @Path("/floatingips")
 public class NeutronFloatingIPsNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD, INeutronFloatingIPAware> {
+    extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD> {
     private static final String RESOURCE_NAME = "Floating IP";
 
     @Override
@@ -104,46 +103,6 @@ public class NeutronFloatingIPsNorthbound
         return answer.getFloatingIPInterface();
     }
 
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronFloatingIPAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronFloatingIP singleton) {
-        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-        return service.canCreateFloatingIP(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronFloatingIP singleton) {
-        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-        service.neutronFloatingIPCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronFloatingIP delta, NeutronFloatingIP original) {
-        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-        return service.canUpdateFloatingIP(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronFloatingIP updated) {
-        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-        service.neutronFloatingIPUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronFloatingIP singleton) {
-        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-        return service.canDeleteFloatingIP(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronFloatingIP singleton) {
-        INeutronFloatingIPAware service = (INeutronFloatingIPAware) instance;
-        service.neutronFloatingIPDeleted(singleton);
-    }
     /**
      * Returns a list of all FloatingIPs */
 

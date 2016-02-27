@@ -31,7 +31,6 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 
-import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleAware;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
@@ -56,7 +55,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 
 @Path("/metering/metering-label-rules")
 public class NeutronMeteringLabelRulesNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronMeteringLabelRule, NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD, INeutronMeteringLabelRuleAware> {
+    extends AbstractNeutronNorthbound<NeutronMeteringLabelRule, NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD> {
     private static final String RESOURCE_NAME = "Metering Label Rule";
 
     @Override
@@ -81,45 +80,6 @@ public class NeutronMeteringLabelRulesNorthbound
     @Override
     protected NeutronMeteringLabelRuleRequest newNeutronRequest(NeutronMeteringLabelRule o) {
         return new NeutronMeteringLabelRuleRequest(o);
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronMeteringLabelRuleAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronMeteringLabelRule singleton) {
-        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-        return service.canCreateMeteringLabelRule(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronMeteringLabelRule singleton) {
-        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-        service.neutronMeteringLabelRuleCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronMeteringLabelRule delta, NeutronMeteringLabelRule original) {
-        return 0;
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronMeteringLabelRule updated) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronMeteringLabelRule singleton) {
-        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-        return service.canDeleteMeteringLabelRule(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronMeteringLabelRule singleton) {
-        INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-        service.neutronMeteringLabelRuleDeleted(singleton);
     }
 
     @Context
@@ -202,27 +162,10 @@ public class NeutronMeteringLabelRulesNorthbound
         if (input.isSingleton()) {
             NeutronMeteringLabelRule singleton = input.getSingleton();
 
-            Object[] instances = getInstances();
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                    int status = service.canCreateMeteringLabelRule(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            }
-
             /*
              * add meteringLabelRule to the cache
              */
             meteringLabelRuleInterface.addNeutronMeteringLabelRule(singleton);
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronMeteringLabelRuleAware service = (INeutronMeteringLabelRuleAware) instance;
-                    service.neutronMeteringLabelRuleCreated(singleton);
-                }
-            }
         } else {
 
             /*
