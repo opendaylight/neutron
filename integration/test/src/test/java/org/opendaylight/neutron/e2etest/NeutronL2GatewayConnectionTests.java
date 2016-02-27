@@ -18,6 +18,7 @@ import org.junit.Assert;
 
 public class NeutronL2GatewayConnectionTests {
     String base;
+    String createJsonString;
 
     public NeutronL2GatewayConnectionTests(String base) {
         this.base = base;
@@ -30,12 +31,13 @@ public class NeutronL2GatewayConnectionTests {
 
     public void singleton_l2gateway_connection_create_test() {
         String url = base + "/l2gateway-connections";
-        String content = " { \"l2gateway_connection\": { \"port_id\": \"9ea656c7c9b8447494f33b0bc741d9a9\"," +
+        String content = " { \"l2gateway_connection\": { \"port_id\": \"9ea656c7-c9b8-4474-94f3-3b0bc741d9a9\"," +
             "\"gateway_id\": \"d3590f37-b072-4358-9719-71964d84a31c\", \"segmentation_id\": 100," +
             "\"network_id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\"," +
             "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\"," +
             "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_create(url, content, "L2 Gateway Connection Singleton Post Failed");
+        createJsonString = content;
     }
 
     public void l2gateway_connection_element_get_test() {
@@ -60,9 +62,15 @@ public class NeutronL2GatewayConnectionTests {
         ITNeutronE2E.test_fetch(url, false, "L2 Gateway Connection Element Negative Get Failed");
     }
 
+    public void singleton_l2gateway_connection_get_with_one_query_test() {
+        String url = base + "/l2gateway-connections";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "l2gateway_connections");
+    }
+
     public static void runTests(String base) {
         NeutronL2GatewayConnectionTests l2gateway_connection_tester = new NeutronL2GatewayConnectionTests(base);
         l2gateway_connection_tester.singleton_l2gateway_connection_create_test();
+        l2gateway_connection_tester.singleton_l2gateway_connection_get_with_one_query_test();
         l2gateway_connection_tester.l2gateway_connection_element_get_test();
         l2gateway_connection_tester.l2gateway_connection_element_get_with_query_test();
         l2gateway_connection_tester.l2gateway_connection_collection_get_test();

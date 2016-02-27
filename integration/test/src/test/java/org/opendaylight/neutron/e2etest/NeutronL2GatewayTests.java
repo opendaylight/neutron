@@ -18,6 +18,7 @@ import org.junit.Assert;
 
 public class NeutronL2GatewayTests {
     String base;
+    String createJsonString;
 
     public NeutronL2GatewayTests(String base) {
         this.base = base;
@@ -37,6 +38,7 @@ public class NeutronL2GatewayTests {
             "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100] }] " +
             "}] } }";
         ITNeutronE2E.test_create(url, content, "L2 Gateway Singleton Post Failed");
+        createJsonString = content;
     }
 
     public void l2gateway_modify_test() {
@@ -72,9 +74,15 @@ public class NeutronL2GatewayTests {
         ITNeutronE2E.test_fetch(url, false, "L2 Gateway Element Negative Get Failed");
     }
 
+    public void singleton_l2gateway_get_with_one_query_item_test() {
+        String url = base + "/l2-gateways";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "l2_gateways");
+    }
+
     public static void runTests(String base) {
         NeutronL2GatewayTests l2gateway_tester = new NeutronL2GatewayTests(base);
         l2gateway_tester.singleton_l2gateway_create_test();
+        l2gateway_tester.singleton_l2gateway_get_with_one_query_item_test();
         l2gateway_tester.l2gateway_element_get_test();
         l2gateway_tester.l2gateway_element_get_with_query_test();
         l2gateway_tester.l2gateway_collection_get_test();
