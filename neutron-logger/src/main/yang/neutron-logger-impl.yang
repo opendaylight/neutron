@@ -1,0 +1,38 @@
+module neutron-logger-impl {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:neutron:logger:impl";
+    prefix "neutron-logger-impl";
+
+    import config { prefix config; revision-date 2013-04-05; }
+    import opendaylight-md-sal-binding { prefix md-sal-binding; revision-date 2013-10-28;}
+
+    description
+        "Service definition for Neutron event logger";
+
+    revision "2016-06-09" {
+        description
+            "Initial revision";
+    }
+
+    identity neutron-logger-impl {
+        base config:module-type;
+        config:java-name-prefix NeutronLoggerImpl;
+    }
+
+    augment "/config:modules/config:module/config:configuration" {
+        case neutron-logger-impl {
+            when "/config:modules/config:module/config:type = 'neutron-logger-impl'";
+            container data-broker {
+                uses config:service-ref {
+                    refine type {
+                        mandatory true;
+                        //config:required-identity md-sal-binding:binding-broker-osgi-registry;
+                        //config:required-identity mdsal:binding-async-data-broker;
+                        config:required-identity md-sal-binding:binding-async-data-broker;
+                        //config:required-identity mdsal:binding-data-consumer-broker;
+                    }
+                }
+            }
+        }
+    }
+}

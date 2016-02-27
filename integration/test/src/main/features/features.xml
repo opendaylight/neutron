@@ -7,5 +7,6 @@
    <feature name='odl-neutron-dummyprovider-test' version='${project.version}' description="OpenDaylight :: Neutron :: Dummy Provider Test">
     <feature version='${project.version}'>odl-neutron-service</feature>
     <bundle>mvn:org.opendaylight.neutron/dummyprovider/{{VERSION}}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}</bundle>
   </feature>
 </features>
