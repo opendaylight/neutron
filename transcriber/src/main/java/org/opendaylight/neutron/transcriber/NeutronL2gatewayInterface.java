@@ -75,8 +75,8 @@ public class NeutronL2gatewayInterface extends
         if (l2gateway.getL2gatewayName() != null){
             result.setL2gatewayName(String.valueOf(l2gateway.getL2gatewayName()));
         }
-        if (l2gateway.getTenantId().getValue() != null){
-            result.setTenantID(String.valueOf(l2gateway.getTenantId().getValue()));
+        if (l2gateway.getTenantId() != null){
+            result.setTenantID(l2gateway.getTenantId());
         }
         if (l2gateway.getDevices() != null){
             for (Devices device:l2gateway.getDevices()){
