@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronPortTests {
     String base;
+    String createJsonString;
 
     public NeutronPortTests(String base) {
         this.base = base;
@@ -52,6 +53,7 @@ public class NeutronPortTests {
             "\"security_groups\": [] ,"+
             "\"device_id\": \"\" } }";
         ITNeutronE2E.test_create(url, content,"Singleton Port Post Failed NB");
+        createJsonString = content;
     }
 
     //TODO handle SB check
@@ -146,9 +148,15 @@ public class NeutronPortTests {
         ITNeutronE2E.test_fetch(url, false, "Port Element Get Failed");
     }
 
+    public void singleton_port_get_with_one_query_item_test() {
+        String url = base + "/ports";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ports");
+    }
+
     public static void runTests(String base) {
         NeutronPortTests port_tester = new NeutronPortTests(base);
         port_tester.singleton_port_create_test();
+        port_tester.singleton_port_get_with_one_query_item_test();
         port_tester.router_interface_port_create_test(); //needed for router test
         port_tester.bulk_port_create_test();
         port_tester.port_update_test();

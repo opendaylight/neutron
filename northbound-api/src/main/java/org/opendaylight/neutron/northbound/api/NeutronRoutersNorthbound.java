@@ -173,7 +173,7 @@ public class NeutronRoutersNorthbound
             // note: openstack isn't clear about filtering on lists, so we aren't handling them
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
-            @QueryParam("admin_state_up") String queryAdminStateUp,
+            @QueryParam("admin_state_up") Boolean queryAdminStateUp,
             @QueryParam("status") String queryStatus,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("external_gateway_info") String queryExternalGatewayInfo,

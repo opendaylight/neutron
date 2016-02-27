@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronNetworkTests {
     String base;
+    String createJsonString;
 
     public NeutronNetworkTests(String base) {
         this.base = base;
@@ -65,6 +66,7 @@ public class NeutronNetworkTests {
             " \"shared\": false, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " +
             " } } ";
         ITNeutronE2E.test_create(url, content,"Singleton Network Post Failed NB");
+        createJsonString = content;
     }
 
     //TODO handle SB check
@@ -151,10 +153,16 @@ public class NeutronNetworkTests {
         ITNeutronE2E.test_delete(url, "Network Element Delete Failed");
     }
 
+    public void singleton_network_get_with_one_query_item_test() {
+        String url = base + "/networks";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "networks");
+    }
+
     public static void runTests(String base) {
         NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
         network_tester.network_collection_get_test_with_wait();
         network_tester.singleton_network_create_test();
+        network_tester.singleton_network_get_with_one_query_item_test();
         network_tester.external_network_create_test(); //needed for router test
         network_tester.bulk_network_create_test();
         network_tester.network_update_test();

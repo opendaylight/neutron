@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronVPNServicesTests {
     String base;
+    String createJsonString;
 
     public NeutronVPNServicesTests(String base) {
         this.base = base;
@@ -41,6 +42,7 @@ public class NeutronVPNServicesTests {
             "\"id\": \"9faaf49f-dd89-4e39-a8c6-101839aa49bc\"," +
             "\"description\": \"\" } }";
         ITNeutronE2E.test_create(url, content, "VPN Services POST failed");
+        createJsonString = content;
     }
 
     public void vpnservice_update_test() {
@@ -80,9 +82,15 @@ public class NeutronVPNServicesTests {
         ITNeutronE2E.test_fetch(url, false, "VPN Services Element Negative GET failed");
     }
 
+    public void singleton_vpnservice_get_with_one_query_item_test() {
+        String url = base + "/vpn/vpnservices";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "vpnservices");
+    }
+
     public static void runTests(String base) {
         NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
         vpnService_tester.singleton_vpnservice_create_test();
+        vpnService_tester.singleton_vpnservice_get_with_one_query_item_test();
         vpnService_tester.vpnservice_update_test();
         vpnService_tester.vpnservice_element_get_test();
         vpnService_tester.vpnservice_element_get_with_query_test();

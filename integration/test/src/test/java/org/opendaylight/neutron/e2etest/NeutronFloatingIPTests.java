@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronFloatingIPTests {
     String base;
+    String createJsonString;
 
     public NeutronFloatingIPTests(String base) {
         this.base = base;
@@ -41,6 +42,7 @@ public class NeutronFloatingIPTests {
             "\"status\": \"ACTIVE\"," +
             "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Floating IP Post Failed NB");
+        createJsonString = content;
     }
 
     public void update_floatingIP_test() {
@@ -91,9 +93,15 @@ public class NeutronFloatingIPTests {
         ITNeutronE2E.test_fetch(url, false, "Floating IP Element Negative Get Test");
     }
 
+    public void singleton_floatingIP_get_with_one_query_item_test() {
+        String url = base + "/floatingips";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "floatingips");
+    }
+
     public static void runTests(String base) {
         NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
         floatingIP_tester.singleton_floatingIP_create_test();
+        floatingIP_tester.singleton_floatingIP_get_with_one_query_item_test();
         floatingIP_tester.update_floatingIP_test();
         floatingIP_tester.floatingIP_element_get_test();
         floatingIP_tester.floatingIP_element_get_with_query_test();

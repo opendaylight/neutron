@@ -21,6 +21,7 @@ import org.junit.Assert;
 
 public class NeutronRouterTests {
     String base;
+    String createJsonString;
 
     public NeutronRouterTests(String base) {
         this.base = base;
@@ -43,6 +44,7 @@ public class NeutronRouterTests {
             "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", " +
             "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\" } } ";
         ITNeutronE2E.test_create(url, content, "Singleton Router Post Failed NB");
+        createJsonString = content;
     }
 
     //TODO handle SB check
@@ -129,9 +131,15 @@ public class NeutronRouterTests {
         ITNeutronE2E.test_fetch(url, false, "Router Element Negative Get Test");
     }
 
+    public void singleton_router_get_with_one_query_item_test() {
+        String url = base + "/routers";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "routers");
+    }
+
     public static void runTests(String base) {
         NeutronRouterTests router_tester = new NeutronRouterTests(base);
         router_tester.singleton_router_create_test();
+        router_tester.singleton_router_get_with_one_query_item_test();
         router_tester.router_add_interface_test();
         router_tester.update_router_test();
         router_tester.create_router(); // needed for following tests

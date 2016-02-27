@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronSubnetTests {
     String base;
+    String createJsonString;
 
     public NeutronSubnetTests(String base) {
         this.base = base;
@@ -50,6 +51,7 @@ public class NeutronSubnetTests {
             "\"cidr\": \"10.0.0.0/24\", "+
             "\"id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\" } } ";
         ITNeutronE2E.test_create(url, content, "Singleton Subnet Post Failed NB");
+        createJsonString = content;
     }
 
     //TODO handle SB check
@@ -149,9 +151,15 @@ public class NeutronSubnetTests {
         ITNeutronE2E.test_fetch(url, false, "Subnet Element Get Failed");
     }
 
+    public void singleton_subnet_get_with_one_query_item_test() {
+        String url = base + "/subnets";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "subnets");
+    }
+
     public static void runTests(String base) {
         NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
         subnet_tester.singleton_subnet_create_test();
+        subnet_tester.singleton_subnet_get_with_one_query_item_test();
         subnet_tester.external_subnet_create_test(); //needed for router test
         subnet_tester.bulk_subnet_create_test();
         subnet_tester.subnet_update_test();

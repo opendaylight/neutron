@@ -145,7 +145,7 @@ public class NeutronVPNServicesNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("name") String queryName,
-            @QueryParam("admin_state_up") String queryAdminStateUp,
+            @QueryParam("admin_state_up") Boolean queryAdminStateUp,
             @QueryParam("router_id") String queryRouterID,
             @QueryParam("status") String queryStatus,
             @QueryParam("subnet_id") String querySubnetID,
