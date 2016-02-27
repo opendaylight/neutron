@@ -43,4 +43,9 @@
     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
     <configfile finalname="etc/opendaylight/karaf/neutron-transcriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/{{VERSION}}/xml/config</configfile>
   </feature>
+  <feature name='odl-neutron-logger' version='${project.version}' description="OpenDaylight :: Neutron :: Logger">
+    <feature version='${project.version}'>odl-neutron-transcriber</feature>
+    <bundle>mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}</bundle>
+    <configfile finalname="etc/opendaylight/karaf/neutron-logger-default-config.xml">mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}/xml/config</configfile>
+  </feature>
 </features>
