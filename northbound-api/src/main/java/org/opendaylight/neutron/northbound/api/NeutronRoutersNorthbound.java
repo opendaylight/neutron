@@ -28,7 +28,8 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronRouterAware;
+import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
+import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronRouter;
@@ -55,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
 @Path("/routers")
 public class NeutronRoutersNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD, INeutronRouterAware> {
+    extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD> {
     static final String ROUTER_INTERFACE_STR = "network:router_interface";
     static final String ROUTER_GATEWAY_STR = "network:router_gateway";
     private static final String RESOURCE_NAME = "Router";
@@ -110,47 +111,6 @@ public class NeutronRoutersNorthbound
     @Override
     protected NeutronRouterRequest newNeutronRequest(NeutronRouter o) {
         return new NeutronRouterRequest(o);
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronRouterAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronRouter singleton) {
-        INeutronRouterAware service = (INeutronRouterAware) instance;
-        return service.canCreateRouter(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronRouter singleton) {
-        INeutronRouterAware service = (INeutronRouterAware) instance;
-        service.neutronRouterCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronRouter delta, NeutronRouter original) {
-        INeutronRouterAware service = (INeutronRouterAware) instance;
-        return service.canUpdateRouter(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronRouter updated) {
-        INeutronRouterAware service = (INeutronRouterAware) instance;
-        service.neutronRouterUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronRouter singleton) {
-        INeutronRouterAware service = (INeutronRouterAware) instance;
-        return service.canDeleteRouter(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronRouter singleton) {
-        INeutronRouterAware service = (INeutronRouterAware) instance;
-        service.neutronRouterDeleted(singleton);
     }
 
     /**
@@ -292,53 +252,14 @@ public class NeutronRoutersNorthbound
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouterInterfaces.class)
     @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
     public Response addRouterInterface(
             @PathParam("routerUUID") String routerUUID,
             NeutronRouter_Interface input
             ) {
-        NeutronCRUDInterfaces interfaces = getAttachInterfaces();
-        INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-
-        NeutronRouter target = routerInterface.getRouter(routerUUID);
-        Object[] instances = getInstances();
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                int status = service.canAttachInterface(target, input);
-                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                    return Response.status(status).build();
-                }
-            }
-        }
-
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                service.neutronRouterInterfaceAttached(target, input);
-            }
-        }
-
+        // Do nothing. Keep this interface for compatibility
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
-
-    private int checkDownstreamDetach(NeutronRouter target, NeutronRouter_Interface input) {
-        Object[] instances = getInstances();
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                int status = service.canDetachInterface(target, input);
-                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                    return status;
-                }
-            }
-        }
-        return HTTP_OK_BOTTOM;
-    }
-
-    /**
-     * Removes an interface to a router */
 
     @Path("{routerUUID}/remove_router_interface")
     @PUT
@@ -346,29 +267,12 @@ public class NeutronRoutersNorthbound
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouterInterfaces.class)
     @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
     public Response removeRouterInterface(
             @PathParam("routerUUID") String routerUUID,
             NeutronRouter_Interface input
             ) {
-        NeutronCRUDInterfaces interfaces = getAttachInterfaces();
-        INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        Object[] instances = getInstances();
-
-        NeutronRouter target = routerInterface.getRouter(routerUUID);
-        input.setID(target.getID());
-        input.setTenantID(target.getTenantID());
-        int status = checkDownstreamDetach(target, input);
-        if (status != HTTP_OK_BOTTOM) {
-            return Response.status(status).build();
-        }
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                service.neutronRouterInterfaceDetached(target, input);
-            }
-        }
+        // Do nothing. Keep this interface for compatibility
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 }
