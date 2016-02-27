@@ -30,7 +30,7 @@ public class NeutronPortTests {
     }
 
     //TODO handle SB check
-    public void singleton_port_create_test() {
+    public String singleton_port_create_test() {
         String url = base + "/ports";
         String content = "{ \"port\": { \"status\": \"DOWN\","+
             "\"binding:host_id\": \"\","+
@@ -52,6 +52,12 @@ public class NeutronPortTests {
             "\"security_groups\": [] ,"+
             "\"device_id\": \"\" } }";
         ITNeutronE2E.test_create(url, content,"Singleton Port Post Failed NB");
+        return content;
+    }
+
+    public void singleton_port_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/ports";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ports");
     }
 
     //TODO handle SB check
@@ -127,7 +133,6 @@ public class NeutronPortTests {
         ITNeutronE2E.test_fetch(url, true, "Port Element Get Failed");
     }
 
-
     public void port_element_get_with_query_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b" +
             "?fields=id&fields=network_id&fields=name&fields=admin_state_up" +
@@ -148,7 +153,8 @@ public class NeutronPortTests {
 
     public static void runTests(String base) {
         NeutronPortTests port_tester = new NeutronPortTests(base);
-        port_tester.singleton_port_create_test();
+        String createJsonString = port_tester.singleton_port_create_test();
+        port_tester.singleton_port_get_with_one_query_item_test(createJsonString);
         port_tester.router_interface_port_create_test(); //needed for router test
         port_tester.bulk_port_create_test();
         port_tester.port_update_test();

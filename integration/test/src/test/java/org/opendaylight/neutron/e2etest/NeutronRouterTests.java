@@ -32,7 +32,7 @@ public class NeutronRouterTests {
     }
 
     //TODO handle SB check
-    public void singleton_router_create_test() {
+    public String singleton_router_create_test() {
         String url = base + "/routers";
         String content = "{ \"router\": { " +
             "\"status\": \"ACTIVE\", " +
@@ -43,6 +43,12 @@ public class NeutronRouterTests {
             "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", " +
             "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\" } } ";
         ITNeutronE2E.test_create(url, content, "Singleton Router Post Failed NB");
+        return content;
+    }
+
+    public void singleton_router_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/routers";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "routers");
     }
 
     //TODO handle SB check
@@ -131,7 +137,8 @@ public class NeutronRouterTests {
 
     public static void runTests(String base) {
         NeutronRouterTests router_tester = new NeutronRouterTests(base);
-        router_tester.singleton_router_create_test();
+        String createJsonString = router_tester.singleton_router_create_test();
+        router_tester.singleton_router_get_with_one_query_item_test(createJsonString);
         router_tester.router_add_interface_test();
         router_tester.update_router_test();
         router_tester.create_router(); // needed for following tests

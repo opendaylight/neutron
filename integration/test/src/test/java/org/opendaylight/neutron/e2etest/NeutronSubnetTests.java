@@ -30,7 +30,7 @@ public class NeutronSubnetTests {
     }
 
     //TODO handle SB check
-    public void singleton_subnet_create_test() {
+    public String singleton_subnet_create_test() {
         String url = base + "/subnets";
         String content = " { \"subnet\": { "+
             "\"name\": \"\", "+
@@ -50,6 +50,12 @@ public class NeutronSubnetTests {
             "\"cidr\": \"10.0.0.0/24\", "+
             "\"id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\" } } ";
         ITNeutronE2E.test_create(url, content, "Singleton Subnet Post Failed NB");
+        return content;
+    }
+
+    public void singleton_subnet_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/subnets";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "subnets");
     }
 
     //TODO handle SB check
@@ -151,7 +157,8 @@ public class NeutronSubnetTests {
 
     public static void runTests(String base) {
         NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
-        subnet_tester.singleton_subnet_create_test();
+        String createJsonString = subnet_tester.singleton_subnet_create_test();
+        subnet_tester.singleton_subnet_get_with_one_query_item_test(createJsonString);
         subnet_tester.external_subnet_create_test(); //needed for router test
         subnet_tester.bulk_subnet_create_test();
         subnet_tester.subnet_update_test();
