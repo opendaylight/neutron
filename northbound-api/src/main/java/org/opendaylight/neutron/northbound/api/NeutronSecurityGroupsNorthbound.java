@@ -28,7 +28,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronSecurityGroupAware;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
@@ -51,7 +50,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  */
 @Path ("/security-groups")
 public class NeutronSecurityGroupsNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD, INeutronSecurityGroupAware> {
+    extends AbstractNeutronNorthbound<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD> {
     private static final String RESOURCE_NAME = "Security Group";
 
     @Override
@@ -76,47 +75,6 @@ public class NeutronSecurityGroupsNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getSecurityGroupInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronSecurityGroupAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronSecurityGroup singleton) {
-        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-        return service.canCreateNeutronSecurityGroup(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronSecurityGroup singleton) {
-        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-        service.neutronSecurityGroupCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronSecurityGroup delta, NeutronSecurityGroup original) {
-        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-        return service.canUpdateNeutronSecurityGroup(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronSecurityGroup updated) {
-        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-        service.neutronSecurityGroupUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronSecurityGroup singleton) {
-        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-        return service.canDeleteNeutronSecurityGroup(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronSecurityGroup singleton) {
-        INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
-        service.neutronSecurityGroupDeleted(singleton);
     }
 
     /**

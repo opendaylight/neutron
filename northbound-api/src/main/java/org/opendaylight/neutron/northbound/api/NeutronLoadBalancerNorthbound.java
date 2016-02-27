@@ -28,7 +28,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
@@ -52,7 +51,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancer;
  */
 @Path("/lbaas/loadbalancers")
 public class NeutronLoadBalancerNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronLoadBalancer, NeutronLoadBalancerRequest, INeutronLoadBalancerCRUD, INeutronLoadBalancerAware> {
+    extends AbstractNeutronNorthbound<NeutronLoadBalancer, NeutronLoadBalancerRequest, INeutronLoadBalancerCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancer";
 
@@ -78,47 +77,6 @@ public class NeutronLoadBalancerNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getLoadBalancerInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronLoadBalancerAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronLoadBalancer singleton) {
-        INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;
-        return service.canCreateNeutronLoadBalancer(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronLoadBalancer singleton) {
-        INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;
-        service.neutronLoadBalancerCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronLoadBalancer delta, NeutronLoadBalancer original) {
-        INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;
-        return service.canUpdateNeutronLoadBalancer(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronLoadBalancer updated) {
-        INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;
-        service.neutronLoadBalancerUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronLoadBalancer singleton) {
-        INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;
-        return service.canDeleteNeutronLoadBalancer(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronLoadBalancer singleton) {
-        INeutronLoadBalancerAware service = (INeutronLoadBalancerAware) instance;
-        service.neutronLoadBalancerDeleted(singleton);
     }
 
     /**

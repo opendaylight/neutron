@@ -31,7 +31,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
-import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyAware;
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
@@ -56,7 +55,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 
 @Path("/vpn/ikepolicies")
 public class NeutronVPNIKEPoliciesNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD, INeutronVPNIKEPolicyAware> {
+    extends AbstractNeutronNorthbound<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD> {
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     @Override
@@ -81,47 +80,6 @@ public class NeutronVPNIKEPoliciesNorthbound
     @Override
     protected NeutronVPNIKEPolicyRequest newNeutronRequest(NeutronVPNIKEPolicy o) {
         return new NeutronVPNIKEPolicyRequest(o);
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronVPNIKEPolicyAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronVPNIKEPolicy singleton) {
-        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-        return service.canCreateNeutronVPNIKEPolicy(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronVPNIKEPolicy singleton) {
-        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-        service.neutronVPNIKEPolicyCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronVPNIKEPolicy delta, NeutronVPNIKEPolicy original) {
-        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-        return service.canUpdateNeutronVPNIKEPolicy(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronVPNIKEPolicy updated) {
-        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-        service.neutronVPNIKEPolicyUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronVPNIKEPolicy singleton) {
-        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-        return service.canDeleteNeutronVPNIKEPolicy(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronVPNIKEPolicy singleton) {
-        INeutronVPNIKEPolicyAware service = (INeutronVPNIKEPolicyAware) instance;
-        service.neutronVPNIKEPolicyDeleted(singleton);
     }
 
     @Context

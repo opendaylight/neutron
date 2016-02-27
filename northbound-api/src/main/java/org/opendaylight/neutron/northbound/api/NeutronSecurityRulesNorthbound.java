@@ -28,7 +28,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronSecurityRuleAware;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
@@ -52,7 +51,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 
 @Path ("/security-group-rules")
 public class NeutronSecurityRulesNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD, INeutronSecurityRuleAware> {
+    extends AbstractNeutronNorthbound<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD> {
     private static final String RESOURCE_NAME = "Security Rule";
 
     @Override
@@ -77,47 +76,6 @@ public class NeutronSecurityRulesNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getSecurityRuleInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronSecurityRuleAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronSecurityRule singleton) {
-        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-        return service.canCreateNeutronSecurityRule(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronSecurityRule singleton) {
-        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-        service.neutronSecurityRuleCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronSecurityRule delta, NeutronSecurityRule original) {
-        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-        return service.canUpdateNeutronSecurityRule(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronSecurityRule updated) {
-        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-        service.neutronSecurityRuleUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronSecurityRule singleton) {
-        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-        return service.canDeleteNeutronSecurityRule(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronSecurityRule singleton) {
-        INeutronSecurityRuleAware service = (INeutronSecurityRuleAware) instance;
-        service.neutronSecurityRuleDeleted(singleton);
     }
 
     /**
