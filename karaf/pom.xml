@@ -21,7 +21,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
     <maven>3.1.1</maven>
   </prerequisites>
   <properties>
-    <karaf.localFeature>odl-neutron-dummyprovider-test</karaf.localFeature>
+    <karaf.localFeature>odl-neutron-neutron-logger-test</karaf.localFeature>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
   </properties>
   <dependencies>
