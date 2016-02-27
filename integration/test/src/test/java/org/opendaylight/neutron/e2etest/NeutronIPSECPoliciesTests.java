@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronIPSECPoliciesTests {
     String base;
+    String createJsonString;
 
     public NeutronIPSECPoliciesTests(String base) {
         this.base = base;
@@ -42,6 +43,7 @@ public class NeutronIPSECPoliciesTests {
             "\"id\": \"5291b189-fd84-46e5-84bd-78f40c05d69c\"," +
             "\"description\": \"\" } }";
         ITNeutronE2E.test_create(url, content, "IPSEC Policy POST failed");
+        createJsonString = content;
     }
 
     public void ipsecPolicy_update_test() {
@@ -82,10 +84,15 @@ public class NeutronIPSECPoliciesTests {
         ITNeutronE2E.test_fetch(url, false, "IPSEC Policy Element Negative GET failed");
     }
 
+    public void singleton_ipsecPolicy_get_with_one_query_item_test() {
+        String url = base + "/vpn/ipsecpolicies";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ipsecpolicies");
+    }
+
     public static void runTests(String base) {
         NeutronIPSECPoliciesTests ipsec_policy_tester = new NeutronIPSECPoliciesTests(base);
-
         ipsec_policy_tester.singleton_ipsecPolicy_create_test();
+        ipsec_policy_tester.singleton_ipsecPolicy_get_with_one_query_item_test();
         ipsec_policy_tester.ipsecPolicy_update_test();
         ipsec_policy_tester.ipsecPolicy_element_get_test();
         ipsec_policy_tester.ipsecPolicy_element_get_with_query_test();

@@ -19,6 +19,7 @@ import org.junit.Assert;
 
 public class NeutronIKEPoliciesTests {
     String base;
+    String createJsonString;
 
     public NeutronIKEPoliciesTests(String base) {
         this.base = base;
@@ -43,6 +44,7 @@ public class NeutronIKEPoliciesTests {
             "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\"," +
             "\"description\": \"\" } }";
         ITNeutronE2E.test_create(url, content, "IKE Policy POST failed");
+        createJsonString = content;
     }
 
     public void ikePolicy_update_test() {
@@ -83,9 +85,15 @@ public class NeutronIKEPoliciesTests {
         ITNeutronE2E.test_fetch(url, false, "IKE Policy Element Negative GET failed");
     }
 
+    public void singleton_ikePolicy_get_with_one_query_item_test() {
+        String url = base + "/vpn/ikepolicies";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ikepolicies");
+    }
+
     public static void runTests(String base) {
         NeutronIKEPoliciesTests ike_policy_tester = new NeutronIKEPoliciesTests(base);
         ike_policy_tester.singleton_ikePolicy_create_test();
+        ike_policy_tester.singleton_ikePolicy_get_with_one_query_item_test();
         ike_policy_tester.ikePolicy_update_test();
         ike_policy_tester.ikePolicy_element_get_test();
         ike_policy_tester.ikePolicy_element_get_with_query_test();

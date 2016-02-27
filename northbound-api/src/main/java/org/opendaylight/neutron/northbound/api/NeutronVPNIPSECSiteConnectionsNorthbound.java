@@ -147,7 +147,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
             @QueryParam("peer_address") String queryPeerAddress, @QueryParam("peer_id") String queryPeerID,
             @QueryParam("route_mode") String queryRouteMode, @QueryParam("mtu") Integer queryMtu,
             @QueryParam("auth_mode") String queryAuthMode, @QueryParam("psk") String queryPsk,
-            @QueryParam("initiator") String queryInitiator, @QueryParam("admin_state_up") String queryAdminStateUp,
+            @QueryParam("initiator") String queryInitiator, @QueryParam("admin_state_up") Boolean queryAdminStateUp,
             @QueryParam("status") String queryStatus, @QueryParam("ikepolicy_id") String queryIkePolicyID,
             @QueryParam("ipsecpolicy_id") String queryIpSecPolicyID,
             @QueryParam("vpnservice_id") String queryVpnServiceID

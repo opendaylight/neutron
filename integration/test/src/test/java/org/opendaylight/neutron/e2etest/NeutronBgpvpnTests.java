@@ -17,6 +17,7 @@ import org.junit.Assert;
 
 public class NeutronBgpvpnTests {
     String base;
+    String createJsonString;
 
     public NeutronBgpvpnTests(String base) {
         this.base = base;
@@ -58,6 +59,7 @@ public class NeutronBgpvpnTests {
             " \"auto_aggregate\": true, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " +
             " } } ";
         ITNeutronE2E.test_create(url, content,"Singleton Bgpvpn Post Failed NB");
+        createJsonString = content;
     }
 
     //TODO handle SB check
@@ -111,10 +113,16 @@ public class NeutronBgpvpnTests {
         ITNeutronE2E.test_delete(url, "bgpvpnElement Delete Failed");
     }
 
+    public void singleton_bgpvpn_get_with_one_query_item_test() {
+        String url = base + "/bgpvpns";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "bgpvpns");
+    }
+
     public static void runTests(String base) {
         NeutronBgpvpnTests bgpvpn_tester = new NeutronBgpvpnTests(base);
         bgpvpn_tester.bgpvpn_collection_get_test();
         bgpvpn_tester.singleton_bgpvpn_create_test();
+        bgpvpn_tester.singleton_bgpvpn_get_with_one_query_item_test();
         bgpvpn_tester.bulk_bgpvpn_create_test();
         bgpvpn_tester.bgpvpn_update_test();
         bgpvpn_tester.bgpvpn_element_get_test();
