@@ -29,7 +29,7 @@ public class NeutronVPNServicesTests {
         ITNeutronE2E.test_fetch(url, "VPN Services GET failed");
     }
 
-    public void singleton_vpnservice_create_test() {
+    public String singleton_vpnservice_create_test() {
         String url = base + "/vpn/vpnservices";
         String content = " { \"vpnservice\": {" +
             "\"router_id\": \"ec8619be-0ba8-4955-8835-3b49ddb76f89\"," +
@@ -41,6 +41,12 @@ public class NeutronVPNServicesTests {
             "\"id\": \"9faaf49f-dd89-4e39-a8c6-101839aa49bc\"," +
             "\"description\": \"\" } }";
         ITNeutronE2E.test_create(url, content, "VPN Services POST failed");
+        return content;
+    }
+
+    public void singleton_vpnservice_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/vpn/vpnservices";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "vpnservices");
     }
 
     public void vpnservice_update_test() {
@@ -82,7 +88,8 @@ public class NeutronVPNServicesTests {
 
     public static void runTests(String base) {
         NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
-        vpnService_tester.singleton_vpnservice_create_test();
+        String createJsonString = vpnService_tester.singleton_vpnservice_create_test();
+        vpnService_tester.singleton_vpnservice_get_with_one_query_item_test(createJsonString);
         vpnService_tester.vpnservice_update_test();
         vpnService_tester.vpnservice_element_get_test();
         vpnService_tester.vpnservice_element_get_with_query_test();
