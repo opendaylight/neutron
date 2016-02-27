@@ -31,7 +31,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
-import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionAware;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
@@ -56,7 +55,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 
 @Path("/vpn/ipsecsiteconnections")
 public class NeutronVPNIPSECSiteConnectionsNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronVPNIPSECSiteConnection, NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD, INeutronVPNIPSECSiteConnectionAware> {
+    extends AbstractNeutronNorthbound<NeutronVPNIPSECSiteConnection, NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD> {
 
     private static final String RESOURCE_NAME = "VPNIPSECSiteConnections";
 
@@ -82,47 +81,6 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getVPNIPSECSiteConnectionsInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronVPNIPSECSiteConnectionAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronVPNIPSECSiteConnection singleton) {
-        INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
-        return service.canCreateNeutronVPNIPSECSiteConnection(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronVPNIPSECSiteConnection singleton) {
-        INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
-        service.neutronVPNIPSECSiteConnectionCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronVPNIPSECSiteConnection delta, NeutronVPNIPSECSiteConnection original) {
-        INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
-        return service.canUpdateNeutronVPNIPSECSiteConnection(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronVPNIPSECSiteConnection updated) {
-        INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
-        service.neutronVPNIPSECSiteConnectionUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronVPNIPSECSiteConnection singleton) {
-        INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
-        return service.canDeleteNeutronVPNIPSECSiteConnection(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronVPNIPSECSiteConnection singleton) {
-        INeutronVPNIPSECSiteConnectionAware service = (INeutronVPNIPSECSiteConnectionAware) instance;
-        service.neutronVPNIPSECSiteConnectionDeleted(singleton);
     }
 
     @Context
