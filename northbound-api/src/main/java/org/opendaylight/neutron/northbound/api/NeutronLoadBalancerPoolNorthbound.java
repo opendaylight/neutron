@@ -28,9 +28,7 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolAware;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolMemberAware;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -60,7 +58,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
 @Path("/lbaas/pools")
 public class NeutronLoadBalancerPoolNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronLoadBalancerPool, NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD, INeutronLoadBalancerPoolAware> {
+    extends AbstractNeutronNorthbound<NeutronLoadBalancerPool, NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancerPool";
 
@@ -87,51 +85,6 @@ public class NeutronLoadBalancerPoolNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getLoadBalancerPoolInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronLoadBalancerPoolAware.class, this);
-    }
-
-    private Object[] getInstancesOfPoolMemberAware() {
-        return NeutronUtil.getInstances(INeutronLoadBalancerPoolMemberAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronLoadBalancerPool singleton) {
-        INeutronLoadBalancerPoolAware service = (INeutronLoadBalancerPoolAware) instance;
-        return service.canCreateNeutronLoadBalancerPool(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronLoadBalancerPool singleton) {
-        INeutronLoadBalancerPoolAware service = (INeutronLoadBalancerPoolAware) instance;
-        service.neutronLoadBalancerPoolCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronLoadBalancerPool delta, NeutronLoadBalancerPool original) {
-        INeutronLoadBalancerPoolAware service = (INeutronLoadBalancerPoolAware) instance;
-        return service.canUpdateNeutronLoadBalancerPool(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronLoadBalancerPool updated) {
-        INeutronLoadBalancerPoolAware service = (INeutronLoadBalancerPoolAware) instance;
-        service.neutronLoadBalancerPoolUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronLoadBalancerPool singleton) {
-        INeutronLoadBalancerPoolAware service = (INeutronLoadBalancerPoolAware) instance;
-        return service.canDeleteNeutronLoadBalancerPool(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronLoadBalancerPool singleton) {
-        INeutronLoadBalancerPoolAware service = (INeutronLoadBalancerPoolAware) instance;
-        service.neutronLoadBalancerPoolDeleted(singleton);
     }
 
     /**
@@ -386,53 +339,16 @@ public class NeutronLoadBalancerPoolNorthbound
         if (input.isSingleton()) {
             NeutronLoadBalancerPoolMember singleton = input.getSingleton();
             singleton.setPoolID(loadBalancerPoolUUID);
-
-            Object[] instances = getInstancesOfPoolMemberAware();
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                    int status = service.canCreateNeutronLoadBalancerPoolMember(singleton);
-                    if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                        return Response.status(status).build();
-                    }
-                }
-            }
-
-            if (instances != null) {
-                for (Object instance : instances) {
-                    INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                    service.neutronLoadBalancerPoolMemberCreated(singleton);
-                }
-            }
-
             /**
              * Add the member from the neutron load balancer pool as well
              */
 
             loadBalancerPoolInterface.addNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, singleton);
         } else {
-            Object[] instances = getInstancesOfPoolMemberAware();
-            if (instances != null) {
-                for (NeutronLoadBalancerPoolMember test : input.getBulk()) {
-                    for (Object instance : instances) {
-                        INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                        int status = service.canCreateNeutronLoadBalancerPoolMember(test);
-                        if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                            return Response.status(status).build();
-                        }
-                    }
-                }
-            }
             /*
              * now, each element of the bulk request can be added to the cache
              */
             for (NeutronLoadBalancerPoolMember test : input.getBulk()) {
-                if (instances != null) {
-                    for (Object instance : instances) {
-                        INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                        service.neutronLoadBalancerPoolMemberCreated(test);
-                    }
-                }
                 loadBalancerPoolInterface.addNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, test);
             }
         }
@@ -464,25 +380,7 @@ public class NeutronLoadBalancerPoolNorthbound
         }
         NeutronLoadBalancerPoolMember original = singletonPool.getNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID);
 
-        Object[] instances = getInstancesOfPoolMemberAware();
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                int status = service.canUpdateNeutronLoadBalancerPoolMember(singleton, original);
-                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                    return Response.status(status).build();
-                }
-            }
-        }
-
         loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID, singleton);
-
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                service.neutronLoadBalancerPoolMemberUpdated(singleton);
-            }
-        }
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 
@@ -513,24 +411,6 @@ public class NeutronLoadBalancerPoolNorthbound
         }
         if (singleton == null) {
             throw new BadRequestException("LoadBalancerPoolMember UUID does not exist.");
-        }
-
-        Object[] instances = getInstancesOfPoolMemberAware();
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                int status = service.canDeleteNeutronLoadBalancerPoolMember(singleton);
-                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                    return Response.status(status).build();
-                }
-            }
-        }
-
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronLoadBalancerPoolMemberAware service = (INeutronLoadBalancerPoolMemberAware) instance;
-                service.neutronLoadBalancerPoolMemberDeleted(singleton);
-            }
         }
 
         /**

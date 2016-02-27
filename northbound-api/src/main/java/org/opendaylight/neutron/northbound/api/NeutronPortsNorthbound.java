@@ -31,7 +31,7 @@ import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronPortAware;
+import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronPort;
@@ -56,7 +56,7 @@ import org.opendaylight.neutron.spi.NeutronPort;
 
 @Path("/ports")
 public class NeutronPortsNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronPort, NeutronPortRequest, INeutronPortCRUD, INeutronPortAware> {
+    extends AbstractNeutronNorthbound<NeutronPort, NeutronPortRequest, INeutronPortCRUD> {
 
     private static final String RESOURCE_NAME = "Port";
 
@@ -100,47 +100,6 @@ public class NeutronPortsNorthbound
     @Override
     protected NeutronPortRequest newNeutronRequest(NeutronPort o) {
         return new NeutronPortRequest(o);
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronPortAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronPort singleton) {
-        INeutronPortAware service = (INeutronPortAware) instance;
-        return service.canCreatePort(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronPort singleton) {
-        INeutronPortAware service = (INeutronPortAware) instance;
-        service.neutronPortCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronPort delta, NeutronPort original) {
-        INeutronPortAware service = (INeutronPortAware) instance;
-        return service.canUpdatePort(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronPort updated) {
-        INeutronPortAware service = (INeutronPortAware) instance;
-        service.neutronPortUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronPort singleton) {
-        INeutronPortAware service = (INeutronPortAware) instance;
-        return service.canDeletePort(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronPort singleton) {
-        INeutronPortAware service = (INeutronPortAware) instance;
-        service.neutronPortDeleted(singleton);
     }
 
     @Context
