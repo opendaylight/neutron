@@ -27,7 +27,6 @@ import javax.ws.rs.core.Response;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronFirewallPolicyAware;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
@@ -51,7 +50,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
  */
 @Path("/fw/firewall_policies")
 public class NeutronFirewallPolicyNorthbound
-    extends AbstractNeutronNorthboundIAware<NeutronFirewallPolicy, NeutronFirewallPolicyRequest, INeutronFirewallPolicyCRUD, INeutronFirewallPolicyAware> {
+    extends AbstractNeutronNorthbound<NeutronFirewallPolicy, NeutronFirewallPolicyRequest, INeutronFirewallPolicyCRUD> {
 
     private static final String RESOURCE_NAME = "Firewall Policy";
 
@@ -77,47 +76,6 @@ public class NeutronFirewallPolicyNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return answer.getFirewallPolicyInterface();
-    }
-
-    @Override
-    protected Object[] getInstances() {
-        return NeutronUtil.getInstances(INeutronFirewallPolicyAware.class, this);
-    }
-
-    @Override
-    protected int canCreate(Object instance, NeutronFirewallPolicy singleton) {
-        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-        return service.canCreateNeutronFirewallPolicy(singleton);
-    }
-
-    @Override
-    protected void created(Object instance, NeutronFirewallPolicy singleton) {
-        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-        service.neutronFirewallPolicyCreated(singleton);
-    }
-
-    @Override
-    protected int canUpdate(Object instance, NeutronFirewallPolicy delta, NeutronFirewallPolicy original) {
-        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-        return service.canUpdateNeutronFirewallPolicy(delta, original);
-    }
-
-    @Override
-    protected void updated(Object instance, NeutronFirewallPolicy updated) {
-        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-        service.neutronFirewallPolicyUpdated(updated);
-    }
-
-    @Override
-    protected int canDelete(Object instance, NeutronFirewallPolicy singleton) {
-        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-        return service.canDeleteNeutronFirewallPolicy(singleton);
-    }
-
-    @Override
-    protected void deleted(Object instance, NeutronFirewallPolicy singleton) {
-        INeutronFirewallPolicyAware service = (INeutronFirewallPolicyAware) instance;
-        service.neutronFirewallPolicyDeleted(singleton);
     }
 
     /**
