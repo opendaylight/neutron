@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_7675d662",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:37:46Z",
+      "side": 1,
+      "message": "nit: stale whitespace after \"(\"",
+      "revId": "be8b40cc496a1bea12be47a29bf83da24edab837",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_f62f263d",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSecurityGroupTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:37:46Z",
+      "side": 1,
+      "message": "How about returning the string instead of hiding the value in instance attribute?\nthen the caller passing the value to ingleton_sg_get_with_one_query_item_test",
+      "revId": "be8b40cc496a1bea12be47a29bf83da24edab837",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_b602beb1",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSecurityGroupTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:37:46Z",
+      "side": 1,
+      "message": "For consisteny, please put this method right after singleton_sg_create_test()",
+      "revId": "be8b40cc496a1bea12be47a29bf83da24edab837",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
