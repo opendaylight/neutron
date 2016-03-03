@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_36ab4e8a",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFloatingIPTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:47:08Z",
+      "side": 1,
+      "message": "same to the similar patches.",
+      "revId": "da6d7e3f9ca4e4b168346038d4492925959f7486",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
