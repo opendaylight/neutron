@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_f6bd66d9",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronLBHealthMonitorTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:43:27Z",
+      "side": 1,
+      "message": "this isn\u0027t necessary.",
+      "revId": "72bfedc05faf2ee8f8ad6eb110216e6c8b648495",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_d6c02252",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronLBHealthMonitorTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:43:27Z",
+      "side": 1,
+      "message": "Please layout this method consistently.",
+      "revId": "72bfedc05faf2ee8f8ad6eb110216e6c8b648495",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
