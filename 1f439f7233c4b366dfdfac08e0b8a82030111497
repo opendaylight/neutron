@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_76eaf6db",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFirewallPolicyTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:42:22Z",
+      "side": 1,
+      "message": "Let\u0027s make this function return this string instead of stashing this value into instance attribute.",
+      "revId": "1f439f7233c4b366dfdfac08e0b8a82030111497",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_b6f0fec9",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronFirewallPolicyTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:42:22Z",
+      "side": 1,
+      "message": "Please put this method right after singleton_fw_policy_create_test for consistency.",
+      "revId": "1f439f7233c4b366dfdfac08e0b8a82030111497",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_d6d94258",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronFirewallPolicyNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-03T22:42:22Z",
+      "side": 1,
+      "message": "Good catch!",
+      "revId": "1f439f7233c4b366dfdfac08e0b8a82030111497",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
