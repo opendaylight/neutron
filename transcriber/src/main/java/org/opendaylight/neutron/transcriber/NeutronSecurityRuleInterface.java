@@ -138,8 +138,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (rule.getPortRangeMax() != null) {
             answer.setSecurityRulePortMax(Integer.valueOf(rule.getPortRangeMax()));
         }
-        if (rule.getId() != null) {
-            answer.setID(rule.getId().getValue());
+        if (rule.getUuid() != null) {
+            answer.setID(rule.getUuid().getValue());
         }
         return answer;
     }
@@ -183,7 +183,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setPortRangeMax(Integer.valueOf(securityRule.getSecurityRulePortMax()));
         }
         if (securityRule.getID() != null) {
-            securityRuleBuilder.setId(toUuid(securityRule.getID()));
+            securityRuleBuilder.setUuid(toUuid(securityRule.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }
@@ -206,7 +206,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     @Override
     protected SecurityRule toMd(String uuid) {
         SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
-        securityRuleBuilder.setId(toUuid(uuid));
+        securityRuleBuilder.setUuid(toUuid(uuid));
         return securityRuleBuilder.build();
     }
 
