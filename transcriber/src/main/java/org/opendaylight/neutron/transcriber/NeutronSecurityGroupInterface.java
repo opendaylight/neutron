@@ -8,16 +8,11 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
-import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.opendaylight.neutron.spi.NeutronSecurityRule;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.SecurityGroups;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroup;
@@ -82,33 +77,12 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (group.getName() != null) {
             answer.setSecurityGroupName(group.getName());
         }
-        if (group.getDescription() != null) {
-            answer.setSecurityGroupDescription(group.getDescription());
-        }
         if (group.getTenantId() != null) {
             answer.setTenantID(group.getTenantId());
         }
-
-        // Bug 4550
-        // https://bugs.opendaylight.org/show_bug.cgi?id=4550
-        // Now SecurityGroup::securityGroupRule isn't updated.
-        // always rebuid it from security group rules
-        final NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronSecurityRuleCRUD(this);
-        final INeutronSecurityRuleCRUD srCrud = interfaces.getSecurityRuleInterface();
-
-        final List<NeutronSecurityRule> rules = new ArrayList<NeutronSecurityRule>();
-        final String sgId = group.getUuid().getValue();
-        for (final NeutronSecurityRule rule: srCrud.getAll()) {
-            if (rule.getSecurityRuleGroupID().equals(sgId)) {
-                rules.add(rule);
-            }
-        }
-        answer.setSecurityRules(rules);
-
         if (group.getUuid() != null) {
             answer.setID(group.getUuid().getValue());
-        } 
+        }
         return answer;
     }
 
@@ -118,18 +92,9 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (securityGroup.getSecurityGroupName() != null) {
             securityGroupBuilder.setName(securityGroup.getSecurityGroupName());
         }
-        if (securityGroup.getSecurityGroupDescription() != null) {
-            securityGroupBuilder.setDescription(securityGroup.getSecurityGroupDescription());
-        }
         if (securityGroup.getTenantID() != null) {
             securityGroupBuilder.setTenantId(toUuid(securityGroup.getTenantID()));
         }
-
-        // don't update security group rule, always empty list
-        // Bug 4550
-        // https://bugs.opendaylight.org/show_bug.cgi?id=4550
-        securityGroupBuilder.setSecurityRules(new ArrayList<Uuid>());
-
         if (securityGroup.getID() != null) {
             securityGroupBuilder.setUuid(toUuid(securityGroup.getID()));
         } else {
