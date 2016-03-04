@@ -42,7 +42,7 @@ module neutron-subnets {
             }
         }
         leaf cidr {
-            type string;
+            type inet:ip-prefix;
             description "cidr representing IP range for this subnet, based on IP version";
         }
         leaf gateway-ip {
@@ -80,10 +80,10 @@ module neutron-subnets {
             description "Sub-ranges of cidr available for dynamic allocation to ports";
             key start;
             leaf start {
-                type string;
+                type inet:ip-address;
             }
             leaf end {
-                type string;
+                type inet:ip-address;
             }
         }
         list host-routes {
