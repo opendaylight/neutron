@@ -25,7 +25,6 @@ import java.util.List;
  * id                 uuid-str
  * tenant_id          uuid-str
  * name               String
- * description        String
  * status             String
  * vip_address        IP address
  * vip_subnet         uuid-str
@@ -41,9 +40,6 @@ public class NeutronLoadBalancer extends NeutronObject implements Serializable, 
     @XmlElement (name = "name")
     String loadBalancerName;
 
-    @XmlElement (name = "description")
-    String loadBalancerDescription;
-
     @XmlElement (name = "status")
     String loadBalancerStatus;
 
@@ -56,40 +52,12 @@ public class NeutronLoadBalancer extends NeutronObject implements Serializable, 
     @XmlElement (name = "vip_subnet_id")
     String loadBalancerVipSubnetID;
 
-    // @deprecated use getID()
-    public String getLoadBalancerID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setLoadBalancerID(String uuid) {
-        setID(uuid);
-    }
-
-    @Deprecated
-    public String getLoadBlancerTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setLoadBalancerTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
     public String getLoadBalancerName() {
         return loadBalancerName;
     }
 
     public void setLoadBalancerName(String loadBalancerName) {
         this.loadBalancerName = loadBalancerName;
-    }
-
-    public String getLoadBalancerDescription() {
-        return loadBalancerDescription;
-    }
-
-    public void setLoadBalancerDescription(String loadBalancerDescription) {
-        this.loadBalancerDescription = loadBalancerDescription;
     }
 
     public String getLoadBalancerStatus() {
@@ -138,9 +106,6 @@ public class NeutronLoadBalancer extends NeutronObject implements Serializable, 
             if (s.equals("name")) {
                 ans.setLoadBalancerName(this.getLoadBalancerName());
             }
-            if(s.equals("description")) {
-                ans.setLoadBalancerDescription(this.getLoadBalancerDescription());
-            }
             if (s.equals("vip_address")) {
                 ans.setLoadBalancerVipAddress(this.getLoadBalancerVipAddress());
             }
@@ -162,7 +127,6 @@ public class NeutronLoadBalancer extends NeutronObject implements Serializable, 
                 "loadBalancerID='" + uuid + '\'' +
                 ", loadBalancerTenantID='" + tenantID + '\'' +
                 ", loadBalancerName='" + loadBalancerName + '\'' +
-                ", loadBalancerDescription='" + loadBalancerDescription + '\'' +
                 ", loadBalancerStatus='" + loadBalancerStatus + '\'' +
                 ", loadBalancerAdminStateUp='" + loadBalancerAdminStateUp + '\'' +
                 ", loadBalancerVipAddress='" + loadBalancerVipAddress + '\'' +

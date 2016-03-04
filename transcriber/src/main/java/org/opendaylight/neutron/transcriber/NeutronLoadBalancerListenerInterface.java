@@ -120,9 +120,6 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         if (listener.getNeutronLoadBalancerListenerDefaultPoolID() != null) {
             listenerBuilder.setDefaultPoolId(toUuid(listener.getNeutronLoadBalancerListenerDefaultPoolID()));
         }
-        if (listener.getLoadBalancerListenerDescription() != null) {
-            listenerBuilder.setDescr(listener.getLoadBalancerListenerDescription());
-        }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
             List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
             for (Neutron_ID neutron_id : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
@@ -162,9 +159,6 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
         }
         if (listener.getDefaultPoolId() != null) {
             answer.setNeutronLoadBalancerListenerDefaultPoolID(listener.getDefaultPoolId().getValue());
-        }
-        if (listener.getDescr() != null) {
-            answer.setLoadBalancerListenerDescription(listener.getDescr());
         }
         if (listener.getLoadbalancers() != null) {
             List<Neutron_ID> list = new ArrayList<Neutron_ID>();

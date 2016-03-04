@@ -43,10 +43,6 @@ public class NeutronLoadBalancerListenerJAXBTest {
             Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 4: Testing LoadBalancer listener name failed",
                     "LoadBalancerListener", testObject.getLoadBalancerListenerName());
 
-            Assert.assertEquals(
-                    "NeutronLoadBalancerListener JAXB Test 5: Testing LoadBalancer listener Description failed",
-                    "NeutronLoadBalancerListener_Description", testObject.getLoadBalancerListenerDescription());
-
             Assert.assertFalse(
                     "NeutronLoadBalancerListener JAXB Test 6: Testing LoadBalancer listener admin_state_up failed",
                     testObject.getLoadBalancerListenerAdminStateIsUp());

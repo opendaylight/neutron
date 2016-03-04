@@ -98,9 +98,6 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
         if (loadBalancer.isAdminStateUp() != null) {
             answer.setLoadBalancerAdminStateUp(loadBalancer.isAdminStateUp());
         }
-        if (loadBalancer.getDescr() != null) {
-            answer.setLoadBalancerDescription(loadBalancer.getDescr());
-        }
         if (loadBalancer.getName() != null) {
             answer.setLoadBalancerName(loadBalancer.getName());
         }
@@ -126,9 +123,6 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
         LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
         loadBalancerBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
-        if (loadBalancer.getLoadBalancerDescription() != null) {
-            loadBalancerBuilder.setDescr(loadBalancer.getLoadBalancerDescription());
-        }
         if (loadBalancer.getLoadBalancerName() != null) {
             loadBalancerBuilder.setName(loadBalancer.getLoadBalancerName());
         }

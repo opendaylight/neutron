@@ -34,9 +34,6 @@ public class NeutronLoadBalancerJAXBTest {
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed",
                     "NeutronLoadBalancer", testObject.getLoadBalancerName());
 
-            Assert.assertEquals("NeutronLoadBalancer JAXB Test 3: Testing LoadBalancer Description failed",
-                    "NeutronLoadBalancer_Description", testObject.getLoadBalancerDescription());
-
             Assert.assertEquals("NeutronLoadBalancer JAXB Test 4: Testing status failed", "ACTIVE",
                     testObject.getLoadBalancerStatus());
 

@@ -32,11 +32,6 @@ module neutron-lbaasv2 {
 
     grouping loadbalancer-attributes {
         description "LBaaSV2.0 load balancer attributes.";
-        leaf descr {
-            type string;
-            description "Load balancer description.";
-            default "";
-        }
         leaf vip-address {
             type inet:ip-address;
             description "The IP address of the VIP.";
@@ -58,10 +53,6 @@ module neutron-lbaasv2 {
                         down (false).";
             default "true";
         }
-        leaf descr {
-            type string;
-            description "Detailed description of the listener.";
-        }
         leaf protocol {
             description "The protocol the front end listens for.";
             type identityref {
@@ -71,7 +62,7 @@ module neutron-lbaasv2 {
         leaf protocol-port {
             description "The port on which the front end listens.";
             type uint16 {
-                range 1..65535;
+                range 0..65535;
             }
         }
         leaf-list loadbalancers {
@@ -91,10 +82,6 @@ module neutron-lbaasv2 {
             type boolean;
             description "The administrative state of the pool, which is up (true) or
                         down (false).";
-        }
-        leaf descr {
-            type string;
-            description "Detailed description of the listener.";
         }
         leaf protocol {
             description "The protocol the front end listens for.";
@@ -151,13 +138,13 @@ module neutron-lbaasv2 {
         leaf protocol-port {
             description "The port on which the application is hosted.";
             type uint16 {
-                range 1..65535;
+                range 0..65535;
             }
         }
         leaf weight {
             description "Weight of member.";
             type uint16 {
-                range 1..65535;
+                range 0..256;
             }
             default "1";
         }
