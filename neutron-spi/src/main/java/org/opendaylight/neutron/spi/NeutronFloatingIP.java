@@ -47,16 +47,6 @@ public class NeutronFloatingIP extends NeutronObject implements Serializable, IN
     public NeutronFloatingIP() {
     }
 
-    // @deprecated use getID()
-    public String getFloatingIPUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setFloatingIPUUID(String uuid) {
-        setID(uuid);
-    }
-
     public String getFloatingNetworkUUID() {
         return floatingNetworkUUID;
     }
@@ -91,16 +81,6 @@ public class NeutronFloatingIP extends NeutronObject implements Serializable, IN
 
     public void setFloatingIPAddress(String floatingIPAddress) {
         this.floatingIPAddress = floatingIPAddress;
-    }
-
-    @Deprecated
-    public String getTenantUUID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setTenantUUID(String tenantID) {
-        setTenantID(tenantID);
     }
 
     public void setRouterUUID(String routerUUID) {

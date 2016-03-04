@@ -35,7 +35,6 @@ import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronRouter;
-import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
 
 /**
@@ -267,7 +266,7 @@ public class NeutronRoutersNorthbound
     public Response updateRouter(
             @PathParam("routerUUID") String routerUUID,
             NeutronRouterRequest input
-            ) {
+    ) {
         getNeutronInterfaces(true); // ensure that network service is loaded
         return update(routerUUID, input);
     }
@@ -316,7 +315,6 @@ public class NeutronRoutersNorthbound
             }
         }
 
-        target.addInterface(input.getPortUUID(), input);
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronRouterAware service = (INeutronRouterAware) instance;
@@ -368,7 +366,6 @@ public class NeutronRoutersNorthbound
         if (status != HTTP_OK_BOTTOM) {
             return Response.status(status).build();
         }
-        target.removeInterface(input.getPortUUID());
         if (instances != null) {
             for (Object instance : instances) {
                 INeutronRouterAware service = (INeutronRouterAware) instance;
@@ -378,3 +375,4 @@ public class NeutronRoutersNorthbound
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 }
+
