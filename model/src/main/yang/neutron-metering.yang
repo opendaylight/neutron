@@ -32,17 +32,22 @@ module neutron-metering {
 
     grouping metering-label-attributes {
         description "OpenStack Layer3 Metering label information.";
-        leaf description {
-            type string;
-            description "Description for the metering label.";
+        leaf shared {
+            type boolean;
+            description "Indicates whether this metering label is shared across all tenants.";
+            default "false";
         }
     }
 
     grouping metering-rule-attributes {
         description "OpenStack Layer3 Metering label rules.";
-        leaf id {
+        leaf uuid {
             type yang:uuid;
             description "Metering Rule ID.";
+        }
+        leaf tenant-id {
+            type yang:uuid;
+            description "The UUID of the tenant that will own the object.";
         }
         leaf direction {
             type identityref {
@@ -60,7 +65,7 @@ module neutron-metering {
         }
         leaf excluded {
             type boolean;
-            description "Specify whether the remote_ip_prefix 
+            description "Specify whether the remote_ip_prefix
                 will be excluded or not from traffic counters of
                 the metering label, ie: to not count the traffic
                 of a specific IP address of a range.";
@@ -84,7 +89,7 @@ module neutron-metering {
         container metering-rules {
             description " Container for metering rules.";
             list metering-rule {
-                key "id";
+                key "uuid";
                 uses metering-rule-attributes;
                 description "List of Metering Rules.";
             }

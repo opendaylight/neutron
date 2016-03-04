@@ -141,8 +141,7 @@ public class NeutronMeteringLabelsNorthbound
             // filter fields
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
-            @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("description") String queryDescription
+            @QueryParam("tenant_id") String queryTenantID
             // pagination and sorting are TODO
             ) {
         INeutronMeteringLabelCRUD labelInterface = getNeutronCRUD();
@@ -153,7 +152,6 @@ public class NeutronMeteringLabelsNorthbound
             NeutronMeteringLabel oSS = i.next();
             if ((queryID == null || queryID.equals(oSS.getID())) &&
                     (queryName == null || queryName.equals(oSS.getMeteringLabelName())) &&
-                    (queryDescription == null || queryDescription.equals(oSS.getMeteringLabelDescription())) &&
                     (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSS,fields));
