@@ -8,11 +8,7 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
@@ -138,8 +134,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         if (rule.getPortRangeMax() != null) {
             answer.setSecurityRulePortMax(Integer.valueOf(rule.getPortRangeMax()));
         }
-        if (rule.getId() != null) {
-            answer.setID(rule.getId().getValue());
+        if (rule.getUuid() != null) {
+            answer.setID(rule.getUuid().getValue());
         }
         return answer;
     }
@@ -183,7 +179,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setPortRangeMax(Integer.valueOf(securityRule.getSecurityRulePortMax()));
         }
         if (securityRule.getID() != null) {
-            securityRuleBuilder.setId(toUuid(securityRule.getID()));
+            securityRuleBuilder.setUuid(toUuid(securityRule.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }
@@ -206,7 +202,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     @Override
     protected SecurityRule toMd(String uuid) {
         SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
-        securityRuleBuilder.setId(toUuid(uuid));
+        securityRuleBuilder.setUuid(toUuid(uuid));
         return securityRuleBuilder.build();
     }
 
