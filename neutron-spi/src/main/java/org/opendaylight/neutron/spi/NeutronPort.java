@@ -84,16 +84,6 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     public NeutronPort() {
     }
 
-    @Deprecated
-    public String getPortUUID() {
-        return getID();
-    }
-
-    @Deprecated
-    public void setPortUUID(String uuid) {
-        setID(uuid);
-    }
-
     public String getNetworkUUID() {
         return networkUUID;
     }
@@ -246,6 +236,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
             if ("id".equals(field)) {
                 ans.setID(this.getID());
             }
+            if ("tenant_id".equals(field)) {
+                ans.setTenantID(this.getTenantID());
+            }
             if ("network_id".equals(field)) {
                 ans.setNetworkUUID(this.getNetworkUUID());
             }
@@ -270,11 +263,26 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
             if ("device_owner".equals(field)) {
                 ans.setDeviceOwner(this.getDeviceOwner());
             }
-            if ("tenant_id".equals(field)) {
-                ans.setTenantID(this.getTenantID());
-            }
             if ("security_groups".equals(field)) {
                 ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
+            }
+            if ("allowed_address_pairs".equals(field)) {
+                ans.setAllowedAddressPairs(new ArrayList<NeutronPort_AllowedAddressPairs>(this.getAllowedAddressPairs()));
+            }
+            if ("binding:host_id".equals(field)) {
+                ans.setBindinghostID(this.getBindinghostID());
+            }
+            if ("binding:vnic_type".equals(field)) {
+                ans.setBindingvnicType(this.getBindingvnicType());
+            }
+            if ("binding:vif_type".equals(field)) {
+                ans.setBindingvifType(this.getBindingvifType());
+            }
+            if ("binding:vif_details".equals(field)) {
+                ans.setVIFDetail(new ArrayList<NeutronPort_VIFDetail>(this.getVIFDetail()));
+            }
+            if ("extra_dhcp_opts".equals(field)) {
+                ans.setExtraDHCPOptions(new ArrayList<NeutronPort_ExtraDHCPOption>(this.getExtraDHCPOptions()));
             }
             if ("port_security_enabled".equals(field)) {
                 ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
@@ -301,7 +309,11 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
                 + ", adminStateUp=" + adminStateUp + ", status=" + status + ", macAddress=" + macAddress
                 + ", fixedIPs=" + fixedIPs + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID="
                 + tenantID + ", securityGroups=" + securityGroups
+                + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType
-                + ", bindingvnicType=" + bindingvnicType + ", portSecurityEnabled=" + portSecurityEnabled +"]";
+                + ", bindingvifType=" + bindingvifType
+                + ", vifDetails=" + vifDetails
+                + ", extraDHCPOptions=" + extraDHCPOptions
+                + ", portSecurityEnabled=" + portSecurityEnabled +"]";
     }
 }
