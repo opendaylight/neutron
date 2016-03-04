@@ -133,9 +133,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     protected Pool toMd(NeutronLoadBalancerPool pool) {
         PoolBuilder poolBuilder = new PoolBuilder();
         poolBuilder.setAdminStateUp(pool.getLoadBalancerPoolAdminIsStateIsUp());
-        if (pool.getLoadBalancerPoolDescription() != null) {
-            poolBuilder.setDescr(pool.getLoadBalancerPoolDescription());
-        }
         if (pool.getNeutronLoadBalancerPoolHealthMonitorID() != null) {
             poolBuilder.setHealthmonitorId(toUuid(pool.getNeutronLoadBalancerPoolHealthMonitorID()));
         }
@@ -181,9 +178,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         NeutronLoadBalancerPool answer = new NeutronLoadBalancerPool();
         if (pool.isAdminStateUp() != null) {
             answer.setLoadBalancerPoolAdminStateIsUp(pool.isAdminStateUp());
-        }
-        if (pool.getDescr() != null) {
-            answer.setLoadBalancerPoolDescription(pool.getDescr());
         }
         if (pool.getHealthmonitorId() != null) {
             answer.setNeutronLoadBalancerPoolHealthMonitorID(pool.getHealthmonitorId().getValue());
