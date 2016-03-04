@@ -139,7 +139,6 @@ public class NeutronLoadBalancerListenerNorthbound
             @QueryParam("default_pool_id") String queryLoadBalancerListenerDefaultPoolID,
             @QueryParam("tenant_id") String queryLoadBalancerListenerTenantID,
             @QueryParam("name") String queryLoadBalancerListenerName,
-            @QueryParam("description") String queryLoadBalancerListenerDescription,
             @QueryParam("protocol") String queryLoadBalancerListenerProtocol,
             @QueryParam("protocol_port") String queryLoadBalancerListenerProtocolPort,
             @QueryParam("admin_state_up") Boolean queryLoadBalancerListenerAdminIsUp,
@@ -163,8 +162,6 @@ public class NeutronLoadBalancerListenerNorthbound
                             queryLoadBalancerListenerTenantID.equals(nsg.getTenantID())) &&
                     (queryLoadBalancerListenerName == null ||
                             queryLoadBalancerListenerName.equals(nsg.getLoadBalancerListenerName())) &&
-                    (queryLoadBalancerListenerDescription == null ||
-                            queryLoadBalancerListenerDescription.equals(nsg.getLoadBalancerListenerDescription())) &&
                     (queryLoadBalancerListenerProtocol == null ||
                             queryLoadBalancerListenerProtocol.equals(nsg.getNeutronLoadBalancerListenerProtocol())) &&
                     (queryLoadBalancerListenerProtocolPort == null ||

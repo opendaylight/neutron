@@ -72,26 +72,6 @@ public class NeutronLoadBalancerHealthMonitor
     @XmlElement (name = "pools")
     List<Neutron_ID> loadBalancerHealthMonitorPools;
 
-    // @deprecated use getID()
-    public String getLoadBalancerHealthMonitorID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setLoadBalancerHealthMonitorID(String uuid) {
-        setID(uuid);
-    }
-
-    @Deprecated
-    public String getLoadBalancerHealthMonitorTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setLoadBalancerHealthMonitorTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
     public String getLoadBalancerHealthMonitorType() {
         return loadBalancerHealthMonitorType;
     }

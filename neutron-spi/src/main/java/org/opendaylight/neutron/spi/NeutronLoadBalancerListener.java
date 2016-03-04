@@ -26,7 +26,6 @@ import java.util.List;
  * default_pool_id    String
  * tenant_id          uuid-str
  * name               String
- * description        String
  * shared             Bool
  * protocol           String
  * protocol_port      String
@@ -54,9 +53,6 @@ public class NeutronLoadBalancerListener
     @XmlElement (name = "name")
     String loadBalancerListenerName;
 
-    @XmlElement (name = "description")
-    String loadBalancerListenerDescription;
-
     @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerListenerAdminStateIsUp;
 
@@ -69,40 +65,12 @@ public class NeutronLoadBalancerListener
     @XmlElement (name = "load_balancers")
     List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs;
 
-    // @deprecated use getID()
-    public String getLoadBalancerListenerID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setLoadBalancerListenerID(String uuid) {
-        setID(uuid);
-    }
-
-    @Deprecated
-    public String getLoadBalancerListenerTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setLoadBalancerListenerTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
     public String getLoadBalancerListenerName() {
         return loadBalancerListenerName;
     }
 
     public void setLoadBalancerListenerName(String loadBalancerListenerName) {
         this.loadBalancerListenerName = loadBalancerListenerName;
-    }
-
-    public String getLoadBalancerListenerDescription() {
-        return loadBalancerListenerDescription;
-    }
-
-    public void setLoadBalancerListenerDescription(String loadBalancerListenerDescription) {
-        this.loadBalancerListenerDescription = loadBalancerListenerDescription;
     }
 
     public Boolean getLoadBalancerListenerAdminStateIsUp() {
@@ -170,9 +138,6 @@ public class NeutronLoadBalancerListener
             if (s.equals("name")) {
                 ans.setLoadBalancerListenerName(this.getLoadBalancerListenerName());
             }
-            if(s.equals("description")) {
-                ans.setLoadBalancerListenerDescription(this.getLoadBalancerListenerDescription());
-            }
             if (s.equals("protocol")) {
                 ans.setNeutronLoadBalancerListenerProtocol(this.getNeutronLoadBalancerListenerProtocol());
             }
@@ -193,7 +158,6 @@ public class NeutronLoadBalancerListener
                 ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\'' +
                 ", loadBalancerListenerTenantID='" + tenantID + '\'' +
                 ", loadBalancerListenerName='" + loadBalancerListenerName + '\'' +
-                ", loadBalancerListenerDescription='" + loadBalancerListenerDescription + '\'' +
                 ", loadBalancerListenerAdminStateIsUp=" + loadBalancerListenerAdminStateIsUp +
                 ", neutronLoadBalancerListenerProtocol='" + neutronLoadBalancerListenerProtocol + '\'' +
                 ", neutronLoadBalancerListenerProtocolPort='" + neutronLoadBalancerListenerProtocolPort + '\'' +

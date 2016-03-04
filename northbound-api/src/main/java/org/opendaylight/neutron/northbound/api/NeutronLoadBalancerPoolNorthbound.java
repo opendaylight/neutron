@@ -152,7 +152,6 @@ public class NeutronLoadBalancerPoolNorthbound
             @QueryParam("id") String queryLoadBalancerPoolID,
             @QueryParam("tenant_id") String queryLoadBalancerPoolTenantID,
             @QueryParam("name") String queryLoadBalancerPoolName,
-            @QueryParam("description") String queryLoadBalancerDescription,
             @QueryParam("protocol") String queryLoadBalancerProtocol,
             @QueryParam("lb_algorithm") String queryLoadBalancerPoolLbAlgorithm,
             @QueryParam("healthmonitor_id") String queryLoadBalancerPoolHealthMonitorID,
@@ -176,8 +175,6 @@ public class NeutronLoadBalancerPoolNorthbound
                             queryLoadBalancerPoolTenantID.equals(nsg.getTenantID())) &&
                     (queryLoadBalancerPoolName == null ||
                             queryLoadBalancerPoolName.equals(nsg.getLoadBalancerPoolName())) &&
-                    (queryLoadBalancerDescription == null ||
-                            queryLoadBalancerDescription.equals(nsg.getLoadBalancerPoolDescription())) &&
                     (queryLoadBalancerPoolLbAlgorithm == null ||
                             queryLoadBalancerPoolLbAlgorithm.equals(nsg.getLoadBalancerPoolLbAlgorithm())) &&
                     (queryLoadBalancerPoolHealthMonitorID == null ||
