@@ -111,7 +111,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
         if (group.getUuid() != null) {
             answer.setID(group.getUuid().getValue());
-        } 
+        }
         return answer;
     }
 
@@ -127,12 +127,6 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         if (securityGroup.getTenantID() != null) {
             securityGroupBuilder.setTenantId(toUuid(securityGroup.getTenantID()));
         }
-
-        // don't update security group rule, always empty list
-        // Bug 4550
-        // https://bugs.opendaylight.org/show_bug.cgi?id=4550
-        securityGroupBuilder.setSecurityRules(new ArrayList<Uuid>());
-
         if (securityGroup.getID() != null) {
             securityGroupBuilder.setUuid(toUuid(securityGroup.getID()));
         } else {
