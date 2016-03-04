@@ -25,7 +25,6 @@ import java.util.List;
  * id                 uuid-str
  * tenant_id          uuid-str
  * name               String
- * description        String
  * protocol           String
  * lb_algorithm       String
  * healthmonitor_id   String
@@ -43,9 +42,6 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
 
     @XmlElement (name = "name")
     String loadBalancerPoolName;
-
-    @XmlElement (name = "description")
-    String loadBalancerPoolDescription;
 
     @XmlElement (name = "protocol")
     String loadBalancerPoolProtocol;
@@ -72,40 +68,12 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
         loadBalancerPoolMembers = new ArrayList<NeutronLoadBalancerPoolMember>();
     }
 
-    // @deprecated use getID()
-    public String getLoadBalancerPoolID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setLoadBalancerPoolID(String uuid) {
-        setID(uuid);
-    }
-
-    @Deprecated
-    public String getLoadBalancerPoolTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setLoadBalancerPoolTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
     public String getLoadBalancerPoolName() {
         return loadBalancerPoolName;
     }
 
     public void setLoadBalancerPoolName(String loadBalancerPoolName) {
         this.loadBalancerPoolName = loadBalancerPoolName;
-    }
-
-    public String getLoadBalancerPoolDescription() {
-        return loadBalancerPoolDescription;
-    }
-
-    public void setLoadBalancerPoolDescription(String loadBalancerPoolDescription) {
-        this.loadBalancerPoolDescription = loadBalancerPoolDescription;
     }
 
     public String getLoadBalancerPoolProtocol() {
@@ -203,9 +171,6 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
             if (s.equals("name")) {
                 ans.setLoadBalancerPoolName(this.getLoadBalancerPoolName());
             }
-            if(s.equals("description")) {
-                ans.setLoadBalancerPoolDescription(this.getLoadBalancerPoolDescription());
-            }
             if(s.equals("protocol")) {
                 ans.setLoadBalancerPoolProtocol(this.getLoadBalancerPoolProtocol());
             }
@@ -231,7 +196,6 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
             "id='" + uuid + '\'' +
             ", tenantID='" + tenantID + '\'' +
             ", name='" + loadBalancerPoolName + '\'' +
-            ", description='" + loadBalancerPoolDescription + '\'' +
             ", protocol=" + loadBalancerPoolProtocol +'\''+
             ", lbAlgorithm='" + loadBalancerPoolLbAlgorithm + '\'' +
             ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID +
