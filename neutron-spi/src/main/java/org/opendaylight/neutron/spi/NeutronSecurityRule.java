@@ -21,10 +21,9 @@ import java.util.List;
  * annotated attributes. The current fields are as follows:
  * <p>
  * id                uuid (String) UUID for the security group rule.
- * security_rule_id  uuid (String) The security group to associate rule.
  * direction         String Direction the VM traffic  (ingress/egress).
  * security_group_id The security group to associate rule with.
- * protocol          String IP Protocol (icmp, tcp, udp, etc).
+ * protocol          String IP Protocol (icmp, tcp, udp, etc) or uint8.
  * port_range_min    Integer Port at start of range
  * port_range_max    Integer Port at end of range
  * ethertype         String ethertype in L2 packet (IPv4, IPv6, etc)
@@ -64,16 +63,6 @@ public class NeutronSecurityRule extends NeutronObject implements Serializable, 
     String securityRuleGroupID;
 
     public NeutronSecurityRule() {
-    }
-
-    // @deprecated use getID()
-    public String getSecurityRuleUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setSecurityRuleUUID(String uuid) {
-        setID(uuid);
     }
 
     public String getSecurityRuleDirection() {
@@ -138,16 +127,6 @@ public class NeutronSecurityRule extends NeutronObject implements Serializable, 
 
     public void setSecurityRuleGroupID(String securityRuleGroupID) {
         this.securityRuleGroupID = securityRuleGroupID;
-    }
-
-    @Deprecated
-    public String getSecurityRuleTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setSecurityRuleTenantID(String tenantID) {
-        setTenantID(tenantID);
     }
 
     public NeutronSecurityRule extractFields(List<String> fields) {
