@@ -28,6 +28,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.Neutron_IPs;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.MacAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetails;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetailsBuilder;
@@ -45,9 +46,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.por
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.ports.attributes.Ports;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.ports.attributes.ports.Port;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.ports.attributes.ports.PortBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.AllowedAddressPairsIpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150712.PortSecurityExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150712.PortSecurityExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -107,18 +110,6 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         return update(uuid, delta);
     }
 
-    // @deprecated, will be removed in Boron
-    @Override
-    public boolean macInUse(String macAddress) {
-        return false;
-    }
-
-    // @deprecated, will be removed in Boron
-    @Override
-    public NeutronPort getGatewayPort(String subnetUUID) {
-        return null;
-    }
-
     @Override
     protected InstanceIdentifier<Port> createInstanceIdentifier(Port port) {
         return InstanceIdentifier.create(Neutron.class)
@@ -147,6 +138,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         }
         result.setBindingvifType(binding.getVifType());
         result.setBindingvnicType(binding.getVnicType());
+        result.setBindingProfile(binding.getProfile());
     }
 
     private void portSecurityExtension(Port port, NeutronPort result) {
@@ -163,8 +155,8 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             List<NeutronPort_AllowedAddressPairs> pairs = new ArrayList<NeutronPort_AllowedAddressPairs>();
             for (AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
                 NeutronPort_AllowedAddressPairs pair = new NeutronPort_AllowedAddressPairs();
-                pair.setIpAddress(mdPair.getIpAddress());
-                pair.setMacAddress(mdPair.getMacAddress());
+                pair.setIpAddress(mdPair.getIpAddress().getValue().toString());
+                pair.setMacAddress(mdPair.getMacAddress().getValue());
                 pairs.add(pair);
             }
             result.setAllowedAddressPairs(pairs);
@@ -192,7 +184,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             }
             result.setFixedIPs(ips);
         }
-        result.setMacAddress(port.getMacAddress());
+        result.setMacAddress(port.getMacAddress().getValue());
         result.setName(port.getName());
         result.setNetworkUUID(String.valueOf(port.getNetworkId().getValue()));
         if (port.getSecurityGroups() != null) {
@@ -242,6 +234,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         if (neutronPort.getBindingvnicType() != null) {
             bindingBuilder.setVnicType(neutronPort.getBindingvnicType());
         }
+        if (neutronPort.getBindingProfile() != null) {
+            bindingBuilder.setProfile(neutronPort.getBindingProfile());
+        }
 
         PortSecurityExtensionBuilder portSecurityBuilder = new PortSecurityExtensionBuilder();
         if (neutronPort.getPortSecurityEnabled() != null) {
@@ -257,8 +252,8 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
             for (NeutronPort_AllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
                     AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
-                    allowedAddressPairsBuilder.setIpAddress(allowedAddressPairs.getIpAddress());
-                    allowedAddressPairsBuilder.setMacAddress(allowedAddressPairs.getMacAddress());
+                    allowedAddressPairsBuilder.setIpAddress(new IpPrefixOrAddress(allowedAddressPairs.getIpAddress().toCharArray()));
+                    allowedAddressPairsBuilder.setMacAddress(new MacAddress(allowedAddressPairs.getMacAddress()));
                     listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
             }
             portBuilder.setAllowedAddressPairs(listAllowedAddressPairs);
@@ -296,7 +291,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             portBuilder.setFixedIps(listNeutronIPs);
         }
         if (neutronPort.getMacAddress() != null) {
-            portBuilder.setMacAddress(neutronPort.getMacAddress());
+            portBuilder.setMacAddress(new MacAddress(neutronPort.getMacAddress()));
         }
         if (neutronPort.getName() != null) {
         portBuilder.setName(neutronPort.getName());
