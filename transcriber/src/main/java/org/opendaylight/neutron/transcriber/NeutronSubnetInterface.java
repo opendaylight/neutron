@@ -52,10 +52,13 @@ import com.google.common.collect.ImmutableBiMap;
 public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet> implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
 
+    private static final int IPV4_VERSION = 4;
+    private static final int IPV6_VERSION = 6;
+
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
             = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
-            .put(IpVersionV4.class,Integer.valueOf(4))
-            .put(IpVersionV6.class,Integer.valueOf(6))
+            .put(IpVersionV4.class,Integer.valueOf(IPV4_VERSION))
+            .put(IpVersionV6.class,Integer.valueOf(IPV6_VERSION))
             .build();
 
     private static final ImmutableBiMap<Class<? extends Dhcpv6Base>,String> DHCPV6_MAP
@@ -122,7 +125,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         result.setTenantID(subnet.getTenantId());
         result.setNetworkUUID(subnet.getNetworkId().getValue());
         result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
-        result.setCidr(subnet.getCidr());
+        result.setCidr(String.valueOf(subnet.getCidr().getValue()));
         if (subnet.getGatewayIp() != null) {
             result.setGatewayIP(String.valueOf(subnet.getGatewayIp().getValue()));
         }
@@ -137,8 +140,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
             for (AllocationPools allocationPool : subnet.getAllocationPools()) {
                 NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
-                pool.setPoolStart(allocationPool.getStart());
-                pool.setPoolEnd(allocationPool.getEnd());
+                pool.setPoolStart(String.valueOf(allocationPool.getStart().getValue()));
+                pool.setPoolEnd(String.valueOf(allocationPool.getEnd().getValue()));
                 allocationPools.add(pool);
             }
             result.setAllocationPools(allocationPools);
@@ -201,7 +204,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
                     .getIpVersion()));
         }
         if (subnet.getCidr() != null) {
-            subnetBuilder.setCidr(subnet.getCidr());
+            IpPrefix ipPrefix = new IpPrefix(subnet.getCidr().toCharArray());
+            subnetBuilder.setCidr(ipPrefix);
         }
         if (subnet.getGatewayIP() != null) {
             IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
@@ -224,8 +228,10 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             for (NeutronSubnetIPAllocationPool allocationPool : subnet
                     .getAllocationPools()) {
                 AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
-                builder.setStart(allocationPool.getPoolStart());
-                builder.setEnd(allocationPool.getPoolEnd());
+                IpAddress ipAddressStart = new IpAddress(allocationPool.getPoolStart().toCharArray());
+                IpAddress ipAddressEnd = new IpAddress(allocationPool.getPoolEnd().toCharArray());
+                builder.setStart(ipAddressStart);
+                builder.setEnd(ipAddressEnd);
                 AllocationPools temp = builder.build();
                 allocationPools.add(temp);
             }
