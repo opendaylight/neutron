@@ -24,17 +24,17 @@ import java.util.List;
  *
  * tenant_id               uuid-str
  * name                    String
- * description             String
  * admin_state_up          Bool
- * status                  String
  * shared                  Bool
  * firewall_policy_id      uuid-str
  * protocol                String
  * ip_version              Integer
  * source_ip_address       String (IP addr or CIDR)
  * destination_ip_address  String (IP addr or CIDR)
- * source_port             Integer
- * destination_port        Integer
+ * source_port_range_min    Integer
+ * source_port_range_max    Integer
+ * destination_port_range_min Integer
+ * destination_port_range_max Integer
  * position                Integer
  * action                  String
  * enabled                 Bool
@@ -51,12 +51,6 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
 
     @XmlElement(name = "name")
     String firewallRuleName;
-
-    @XmlElement(name = "description")
-    String firewallRuleDescription;
-
-    @XmlElement(name = "status")
-    String firewallRuleStatus;
 
     @XmlElement(defaultValue = "false", name = "shared")
     Boolean firewallRuleIsShared;
@@ -76,11 +70,17 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
     @XmlElement(name = "destination_ip_address")
     String firewallRuleDstIpAddr;
 
-    @XmlElement(name = "source_port")
-    Integer firewallRuleSrcPort;
+    @XmlElement(name = "source_port_range_min")
+    Integer firewallRuleSrcPortRangeMin;
 
-    @XmlElement(name = "destination_port")
-    Integer firewallRuleDstPort;
+    @XmlElement(name = "source_port_range_max")
+    Integer firewallRuleSrcPortRangeMax;
+
+    @XmlElement(name = "destination_port_range_min")
+    Integer firewallRuleDstPortRangeMin;
+
+    @XmlElement(name = "destination_port_range_max")
+    Integer firewallRuleDstPortRangeMax;
 
     @XmlElement(name = "position")
     Integer firewallRulePosition;
@@ -115,20 +115,36 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
         this.firewallRulePosition = firewallRulePosition;
     }
 
-    public Integer getFirewallRuleDstPort() {
-        return firewallRuleDstPort;
+    public Integer getFirewallRuleDstPortRangeMin() {
+        return firewallRuleDstPortRangeMin;
     }
 
-    public void setFirewallRuleDstPort(Integer firewallRuleDstPort) {
-        this.firewallRuleDstPort = firewallRuleDstPort;
+    public void setFirewallRuleDstPortRangeMin(Integer firewallRuleDstPortRangeMin) {
+        this.firewallRuleDstPortRangeMin = firewallRuleDstPortRangeMin;
     }
 
-    public Integer getFirewallRuleSrcPort() {
-        return firewallRuleSrcPort;
+    public Integer getFirewallRuleDstPortRangeMax() {
+        return firewallRuleDstPortRangeMax;
     }
 
-    public void setFirewallRuleSrcPort(Integer firewallRuleSrcPort) {
-        this.firewallRuleSrcPort = firewallRuleSrcPort;
+    public void setFirewallRuleDstPortRangeMax(Integer firewallRuleDstPortRangeMax) {
+        this.firewallRuleDstPortRangeMax = firewallRuleDstPortRangeMax;
+    }
+
+    public Integer getFirewallRuleSrcPortRangeMin() {
+        return firewallRuleSrcPortRangeMin;
+    }
+
+    public void setFirewallRuleSrcPortRangeMin(Integer firewallRuleSrcPortRangeMin) {
+        this.firewallRuleSrcPortRangeMin = firewallRuleSrcPortRangeMin;
+    }
+
+    public Integer getFirewallRuleSrcPortRangeMax() {
+        return firewallRuleSrcPortRangeMax;
+    }
+
+    public void setFirewallRuleSrcPortRangeMax(Integer firewallRuleSrcPortRangeMax) {
+        this.firewallRuleSrcPortRangeMax = firewallRuleSrcPortRangeMax;
     }
 
     public String getFirewallRuleDstIpAddr() {
@@ -179,48 +195,12 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
         this.firewallRuleIsShared = firewallRuleIsShared;
     }
 
-    public String getFirewallRuleStatus() {
-        return firewallRuleStatus;
-    }
-
-    public void setFirewallRuleStatus(String firewallRuleStatus) {
-        this.firewallRuleStatus = firewallRuleStatus;
-    }
-
-    public String getFirewallRuleDescription() {
-        return firewallRuleDescription;
-    }
-
-    public void setFirewallRuleDescription(String firewallRuleDescription) {
-        this.firewallRuleDescription = firewallRuleDescription;
-    }
-
     public String getFirewallRuleName() {
         return firewallRuleName;
     }
 
     public void setFirewallRuleName(String firewallRuleName) {
         this.firewallRuleName = firewallRuleName;
-    }
-
-    @Deprecated
-    public String getFirewallRuleTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setFirewallRuleTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
-    // @deprecated use getID()
-    public String getFirewallRuleUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setFireWallRuleID(String uuid) {
-        setID(uuid);
     }
 
     public NeutronFirewallRule extractFields(List<String> fields) {
@@ -237,12 +217,6 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
             if (s.equals("name")) {
                 ans.setFirewallRuleName(this.getFirewallRuleName());
             }
-            if (s.equals("description")) {
-                ans.setFirewallRuleDescription(this.getFirewallRuleDescription());
-            }
-            if (s.equals("status")) {
-                ans.setFirewallRuleStatus(this.getFirewallRuleStatus());
-            }
             if (s.equals("shared")) {
                 ans.setFirewallRuleIsShared(firewallRuleIsShared);
             }
@@ -258,11 +232,17 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
             if (s.equals("destination_ip_address")) {
                 ans.setFirewallRuleDstIpAddr(this.getFirewallRuleDstIpAddr());
             }
-            if (s.equals("source_port")) {
-                ans.setFirewallRuleSrcPort(this.getFirewallRuleSrcPort());
+            if (s.equals("source_port_range_min")) {
+                ans.setFirewallRuleSrcPortRangeMin(this.getFirewallRuleSrcPortRangeMin());
             }
-            if (s.equals("destination_port")) {
-                ans.setFirewallRuleDstPort(this.getFirewallRuleDstPort());
+            if (s.equals("source_port_range_max")) {
+                ans.setFirewallRuleSrcPortRangeMax(this.getFirewallRuleSrcPortRangeMax());
+            }
+            if (s.equals("destination_port_range_min")) {
+                ans.setFirewallRuleDstPortRangeMin(this.getFirewallRuleDstPortRangeMin());
+            }
+            if (s.equals("destination_port_range_max")) {
+                ans.setFirewallRuleDstPortRangeMax(this.getFirewallRuleDstPortRangeMax());
             }
             if (s.equals("position")) {
                 ans.setFirewallRulePosition(this.getFirewallRulePosition());
@@ -284,16 +264,14 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
             "firewallRuleUUID='" + uuid + '\'' +
             ", firewallRuleTenantID='" + tenantID + '\'' +
             ", firewallRuleName='" + firewallRuleName + '\'' +
-            ", firewallRuleDescription='" + firewallRuleDescription + '\'' +
-            ", firewallRuleStatus='" + firewallRuleStatus + '\'' +
             ", firewallRuleIsShared=" + firewallRuleIsShared +
             ", firewallRulePolicyID=" + firewallRulePolicyID +
             ", firewallRuleProtocol='" + firewallRuleProtocol + '\'' +
             ", firewallRuleIpVer=" + firewallRuleIpVer +
             ", firewallRuleSrcIpAddr='" + firewallRuleSrcIpAddr + '\'' +
             ", firewallRuleDstIpAddr='" + firewallRuleDstIpAddr + '\'' +
-            ", firewallRuleSrcPort=" + firewallRuleSrcPort +
-            ", firewallRuleDstPort=" + firewallRuleDstPort +
+            ", firewallRuleSrcPort=" + firewallRuleSrcPortRangeMin + ':' + firewallRuleSrcPortRangeMax +
+            ", firewallRuleDstPort=" + firewallRuleDstPortRangeMin + ':' + firewallRuleDstPortRangeMax +
             ", firewallRulePosition=" + firewallRulePosition +
             ", firewallRuleAction='" + firewallRuleAction + '\'' +
             ", firewallRuleIsEnabled=" + firewallRuleIsEnabled +

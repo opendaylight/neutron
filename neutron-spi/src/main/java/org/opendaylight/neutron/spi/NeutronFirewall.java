@@ -25,9 +25,7 @@ import java.util.List;
  * id                 uuid-str
  * tenant_id          uuid-str
  * name               String
- * description        String
  * admin_state_up     Bool
- * status             String
  * shared             Bool
  * firewall_policy_id uuid-str
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
@@ -43,40 +41,14 @@ public class NeutronFirewall extends NeutronObject implements Serializable, INeu
     @XmlElement (name = "name")
     String firewallName;
 
-    @XmlElement (name = "description")
-    String firewallDescription;
-
     @XmlElement (defaultValue = "true", name = "admin_state_up")
     Boolean firewallAdminStateIsUp;
-
-    @XmlElement (name = "status")
-    String firewallStatus;
 
     @XmlElement (defaultValue = "false", name = "shared")
     Boolean firewallIsShared;
 
     @XmlElement (name = "firewall_policy_id")
     String neutronFirewallPolicyID;
-
-    // @deprecated use getID()
-    public String getFirewallUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setFirewallUUID(String uuid) {
-        setID(uuid);
-    }
-
-    @Deprecated
-    public String getFirewallTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setFirewallTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
 
     public String getFirewallName() {
         return firewallName;
@@ -86,28 +58,12 @@ public class NeutronFirewall extends NeutronObject implements Serializable, INeu
         this.firewallName = firewallName;
     }
 
-    public String getFirewallDescription() {
-        return firewallDescription;
-    }
-
-    public void setFirewallDescription(String firewallDescription) {
-        this.firewallDescription = firewallDescription;
-    }
-
     public Boolean getFirewallAdminStateIsUp() {
         return firewallAdminStateIsUp;
     }
 
     public void setFirewallAdminStateIsUp(Boolean firewallAdminStateIsUp) {
         this.firewallAdminStateIsUp = firewallAdminStateIsUp;
-    }
-
-    public String getFirewallStatus() {
-        return firewallStatus;
-    }
-
-    public void setFirewallStatus(String firewallStatus) {
-        this.firewallStatus = firewallStatus;
     }
 
     public Boolean getFirewallIsShared() {
@@ -140,14 +96,8 @@ public class NeutronFirewall extends NeutronObject implements Serializable, INeu
             if (s.equals("name")) {
                 ans.setFirewallName(this.getFirewallName());
             }
-            if(s.equals("description")) {
-                ans.setFirewallDescription(this.getFirewallDescription());
-            }
             if (s.equals("admin_state_up")) {
                 ans.setFirewallAdminStateIsUp(firewallAdminStateIsUp);
-            }
-            if (s.equals("status")) {
-                ans.setFirewallStatus(this.getFirewallStatus());
             }
             if (s.equals("shared")) {
                 ans.setFirewallIsShared(firewallIsShared);
@@ -165,9 +115,7 @@ public class NeutronFirewall extends NeutronObject implements Serializable, INeu
             "firewallUUID='" + uuid + '\'' +
             ", firewallTenantID='" + tenantID + '\'' +
             ", firewallName='" + firewallName + '\'' +
-            ", firewallDescription='" + firewallDescription + '\'' +
             ", firewallAdminStateIsUp=" + firewallAdminStateIsUp +
-            ", firewallStatus='" + firewallStatus + '\'' +
             ", firewallIsShared=" + firewallIsShared +
             ", firewallRulePolicyID=" + neutronFirewallPolicyID +
             '}';

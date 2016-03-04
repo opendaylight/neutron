@@ -99,12 +99,6 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
             answer.setTenantID(firewall.getTenantId());
         }
         answer.setFirewallAdminStateIsUp(firewall.isAdminStateUp());
-        if (firewall.getStatus() != null) {
-            answer.setFirewallStatus(firewall.getStatus());
-        }
-        if (firewall.getDescr() != null) {
-            answer.setFirewallDescription(firewall.getDescr());
-        }
         if (firewall.isShared() != null) {
             answer.setFirewallIsShared(firewall.isShared());
         }
@@ -128,12 +122,6 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
         }
         if (firewall.getFirewallAdminStateIsUp() != null) {
             firewallBuilder.setAdminStateUp(firewall.getFirewallAdminStateIsUp());
-        }
-        if (firewall.getFirewallStatus() != null) {
-            firewallBuilder.setStatus(firewall.getFirewallStatus());
-        }
-        if (firewall.getFirewallDescription() != null) {
-            firewallBuilder.setDescr(firewall.getFirewallDescription());
         }
         if (firewall.getFirewallIsShared() != null) {
             firewallBuilder.setShared(firewall.getFirewallIsShared());

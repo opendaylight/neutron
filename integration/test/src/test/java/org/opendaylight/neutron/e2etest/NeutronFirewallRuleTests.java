@@ -32,14 +32,15 @@ public class NeutronFirewallRuleTests {
     public String singleton_fw_rule_create_test() {
         String url = base + "/fw/firewall_rules";
         String content = "{ \"firewall_rule\": { \"action\": \"allow\"," +
-            "\"description\": \"\", \"destination_ip_address\": null," +
-            "\"destination_port\": \"80\", \"enabled\": true," +
+            "\"destination_ip_address\": null," +
+            "\"destination_port_min\": \"80\", \"destination_port_max\": \"80\"," +
+            "\"enabled\": true," +
             "\"firewall_policy_id\": null," +
             "\"id\": \"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\"," +
             "\"ip_version\": 4, \"name\": \"ALLOW_HTTP\"," +
             "\"position\": null, \"protocol\": \"tcp\"," +
             "\"shared\": false, \"source_ip_address\": null," +
-            "\"source_port\": null," +
+            "\"source_port_min\": null, \"source_port_max\": null," +
             "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_create(url, content, "Firewall Rule Singleton Post Failed");
         return content;
@@ -53,16 +54,17 @@ public class NeutronFirewallRuleTests {
     public void fw_rule_modify_test() {
         String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0";
         String content = "{ \"firewall_rule\": { \"action\": \"allow\"," +
-            "\"description\": \"\", \"destination_ip_address\": null," +
-            "\"destination_port\": \"80\", \"enabled\": true," +
+            "\"destination_ip_address\": null," +
+            "\"destination_port_min\": \"80\", \"destination_port_max\": \"80\"," +
+            "\"enabled\": true," +
             "\"firewall_policy_id\": null," +
             "\"id\": \"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\"," +
             "\"ip_version\": 4, \"name\": \"ALLOW_HTTP\"," +
             "\"position\": null, \"protocol\": \"tcp\"," +
             "\"shared\": true, \"source_ip_address\": null," +
-            "\"source_port\": null," +
+            "\"source_port_min\": null, \"source_port_max\": null," +
             "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_modify(url, content, "Firewall Rule Singleton Post Failed");
+        ITNeutronE2E.test_modify(url, content, "Firewall Rule Singleton Put Failed");
     }
 
     public void fw_rule_element_get_test() {
@@ -72,10 +74,11 @@ public class NeutronFirewallRuleTests {
 
     public void fw_rule_element_get_with_query_test() {
         String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0" +
-            "?fields=id&fields=tenant_id&fields=name&fields=description&fields=status" +
+            "?fields=id&fields=tenant_id&fields=name" +
             "&fields=shared&fields=firewall_policy_id&fields=protocol&fields=enabled" +
             "&fields=source_ip_address&fields=destination_ip_address" +
-            "&fields=destination_port&fields=position&fields=action&fields=source_port" +
+            "&fields=destination_port_min&fields=destination_port_max&fields=position" +
+            "&fields=action&fields=source_port_min&fields=source_port_max" +
             "&fields=limit&fields=marker&fields=page_reverse";
         ITNeutronE2E.test_fetch(url, true, "Firewall Rule Element Get With Query Failed");
     }

@@ -79,6 +79,26 @@ module neutron-constants {
         base probe-base;
     }
 
+    // FWaaS v1
+    identity fw-protocol-base {
+        description "Base identity for firewall protocol";
+    }
+
+    identity fw-protocol-tcp {
+        description "TCP protocol.";
+        base fw-protocol-base;
+    }
+
+    identity fw-protocol-udp {
+        description "UDP protocol.";
+        base fw-protocol-base;
+    }
+
+    identity fw-protocol-icmp {
+        description "ICMP protocol.";
+        base fw-protocol-base;
+    }
+
     // DIRECTION
     identity direction-base {
         description "Base identity for direction";
