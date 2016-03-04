@@ -136,7 +136,6 @@ public class NeutronSecurityGroupsNorthbound
             // OpenStack security group attributes
             @QueryParam ("id") String querySecurityGroupUUID,
             @QueryParam ("name") String querySecurityGroupName,
-            @QueryParam ("description") String querySecurityDescription,
             @QueryParam ("tenant_id") String querySecurityTenantID,
             @QueryParam ("limit") String limit,
             @QueryParam ("marker") String marker,
@@ -152,8 +151,6 @@ public class NeutronSecurityGroupsNorthbound
                     querySecurityGroupUUID.equals(nsg.getID())) &&
                     (querySecurityGroupName == null ||
                             querySecurityGroupName.equals(nsg.getSecurityGroupName())) &&
-                    (querySecurityDescription == null ||
-                            querySecurityDescription.equals(nsg.getSecurityGroupDescription())) &&
                     (querySecurityTenantID == null ||
                             querySecurityTenantID.equals(nsg.getTenantID()))) {
                 if (fields.size() > 0) {
