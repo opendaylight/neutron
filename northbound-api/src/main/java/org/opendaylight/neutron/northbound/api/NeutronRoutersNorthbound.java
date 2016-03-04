@@ -35,7 +35,6 @@ import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronRouter;
-import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
 
 /**
@@ -267,7 +266,7 @@ public class NeutronRoutersNorthbound
     public Response updateRouter(
             @PathParam("routerUUID") String routerUUID,
             NeutronRouterRequest input
-            ) {
+    ) {
         getNeutronInterfaces(true); // ensure that network service is loaded
         return update(routerUUID, input);
     }
@@ -285,96 +284,5 @@ public class NeutronRoutersNorthbound
             @PathParam("routerUUID") String routerUUID) {
         return delete(routerUUID);
     }
-
-    /**
-     * Adds an interface to a router */
-
-    @Path("{routerUUID}/add_router_interface")
-    @PUT
-    @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_JSON })
-    //@TypeHint(OpenStackRouterInterfaces.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response addRouterInterface(
-            @PathParam("routerUUID") String routerUUID,
-            NeutronRouter_Interface input
-            ) {
-        NeutronCRUDInterfaces interfaces = getAttachInterfaces();
-        INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-
-        NeutronRouter target = routerInterface.getRouter(routerUUID);
-        Object[] instances = getInstances();
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                int status = service.canAttachInterface(target, input);
-                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                    return Response.status(status).build();
-                }
-            }
-        }
-
-        target.addInterface(input.getPortUUID(), input);
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                service.neutronRouterInterfaceAttached(target, input);
-            }
-        }
-
-        return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
-    }
-
-
-    private int checkDownstreamDetach(NeutronRouter target, NeutronRouter_Interface input) {
-        Object[] instances = getInstances();
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                int status = service.canDetachInterface(target, input);
-                if (status < HTTP_OK_BOTTOM || status > HTTP_OK_TOP) {
-                    return status;
-                }
-            }
-        }
-        return HTTP_OK_BOTTOM;
-    }
-
-    /**
-     * Removes an interface to a router */
-
-    @Path("{routerUUID}/remove_router_interface")
-    @PUT
-    @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_JSON })
-    //@TypeHint(OpenStackRouterInterfaces.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response removeRouterInterface(
-            @PathParam("routerUUID") String routerUUID,
-            NeutronRouter_Interface input
-            ) {
-        NeutronCRUDInterfaces interfaces = getAttachInterfaces();
-        INeutronRouterCRUD routerInterface = interfaces.getRouterInterface();
-        Object[] instances = getInstances();
-
-        NeutronRouter target = routerInterface.getRouter(routerUUID);
-        input.setID(target.getID());
-        input.setTenantID(target.getTenantID());
-        int status = checkDownstreamDetach(target, input);
-        if (status != HTTP_OK_BOTTOM) {
-            return Response.status(status).build();
-        }
-        target.removeInterface(input.getPortUUID());
-        if (instances != null) {
-            for (Object instance : instances) {
-                INeutronRouterAware service = (INeutronRouterAware) instance;
-                service.neutronRouterInterfaceDetached(target, input);
-            }
-        }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
-    }
 }
+

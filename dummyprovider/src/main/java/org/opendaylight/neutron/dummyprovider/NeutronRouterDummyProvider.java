@@ -12,7 +12,6 @@ import java.net.HttpURLConnection;
 
 import org.opendaylight.neutron.spi.INeutronRouterAware;
 import org.opendaylight.neutron.spi.NeutronRouter;
-import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,23 +45,5 @@ public class NeutronRouterDummyProvider implements INeutronRouterAware {
 
     public void neutronRouterDeleted(NeutronRouter router) {
         LOGGER.info(router.getID()+" deleted");
-    }
-
-    public int canAttachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface) {
-        return(HttpURLConnection.HTTP_OK);
-    }
-
-    public void neutronRouterInterfaceAttached(NeutronRouter router, NeutronRouter_Interface routerInterface) {
-        LOGGER.info(router.toString());
-        LOGGER.info(routerInterface.toString());
-    }
-
-    public int canDetachInterface(NeutronRouter router, NeutronRouter_Interface routerInterface) {
-        return(HttpURLConnection.HTTP_OK);
-    }
-
-    public void neutronRouterInterfaceDetached(NeutronRouter router, NeutronRouter_Interface routerInterface) {
-        LOGGER.info(router.toString());
-        LOGGER.info(routerInterface.toString());
     }
 }
