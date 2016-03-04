@@ -52,9 +52,6 @@ public class NeutronLoadBalancerPoolJAXBTest {
             Assert.assertTrue("NeutronLoadBalancerPool JAXB Test 3: Testing admin_state_up failed",
                     testObject.getLoadBalancerPoolAdminIsStateIsUp());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 4: Testing Description failed",
-                    "simple pool", testObject.getLoadBalancerPoolDescription());
-
             Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 5: Testing LbAlgorithm failed", "ROUND_ROBIN",
                     testObject.getLoadBalancerPoolLbAlgorithm());
 

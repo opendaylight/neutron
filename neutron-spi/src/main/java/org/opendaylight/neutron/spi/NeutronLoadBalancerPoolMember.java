@@ -58,26 +58,6 @@ public class NeutronLoadBalancerPoolMember
         this.poolID = poolID;
     }
 
-    // @deprecated use getID()
-    public String getPoolMemberID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setPoolMemberID(String uuid) {
-        setID(uuid);
-    }
-
-    @Deprecated
-    public String getPoolMemberTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setPoolMemberTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
     public String getPoolMemberAddress() {
         return poolMemberAddress;
     }

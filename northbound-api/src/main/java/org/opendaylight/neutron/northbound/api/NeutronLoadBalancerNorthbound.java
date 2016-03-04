@@ -138,7 +138,6 @@ public class NeutronLoadBalancerNorthbound
             @QueryParam("id") String queryLoadBalancerID,
             @QueryParam("tenant_id") String queryLoadBalancerTenantID,
             @QueryParam("name") String queryLoadBalancerName,
-            @QueryParam("description") String queryLoadBalancerDescription,
             @QueryParam("status") String queryLoadBalancerStatus,
             @QueryParam("vip_address") String queryLoadBalancerVipAddress,
             @QueryParam("vip_subnet") String queryLoadBalancerVipSubnet,
@@ -160,8 +159,6 @@ public class NeutronLoadBalancerNorthbound
                             queryLoadBalancerTenantID.equals(nsg.getTenantID())) &&
                     (queryLoadBalancerName == null ||
                             queryLoadBalancerName.equals(nsg.getLoadBalancerName())) &&
-                    (queryLoadBalancerDescription == null ||
-                            queryLoadBalancerDescription.equals(nsg.getLoadBalancerDescription())) &&
                     (queryLoadBalancerVipAddress == null ||
                             queryLoadBalancerVipAddress.equals(nsg.getLoadBalancerVipAddress())) &&
                     (queryLoadBalancerVipSubnet == null ||
