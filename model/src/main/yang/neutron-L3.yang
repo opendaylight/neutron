@@ -97,25 +97,6 @@ module neutron-L3 {
         }
     }
 
-    grouping interface-attributes {
-        leaf uuid {
-            type yang:uuid;
-            description "UUID to index this object.";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "The Tenant ID of this object.";
-        }
-        leaf subnet-id {
-            description "Contains the Subnet ID of the interface.";
-            type yang:uuid;
-        }
-        leaf port-id {
-            description "Contains the Port ID of the interface.";
-            type yang:uuid;
-        }
-    }
-
     grouping routers-attributes {
         container routers {
             list router {
@@ -149,11 +130,6 @@ module neutron-L3 {
                             type inet:ip-address;
                         }
                     }
-                }
-                list interfaces {
-                    description "List of interfaces associated with this router object.";
-                    key "uuid";
-                    uses interface-attributes;
                 }
             }
         }
