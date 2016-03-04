@@ -14,13 +14,23 @@ import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderCo
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallRule;
 
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV4;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV6;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.FwProtocolMapper;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.ActionAllow;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.ActionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.ActionDeny;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.FirewallRuleAttributes.Protocol;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.FirewallRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+
+
+import com.google.common.collect.ImmutableBiMap;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
@@ -28,6 +38,18 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<FirewallRule, FirewallRules, NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
+
+    private static final ImmutableBiMap<Class<? extends ActionBase>, String> ACTION_MAP
+            = new ImmutableBiMap.Builder<Class<? extends ActionBase>, String>()
+            .put(ActionAllow.class, "allow")
+            .put(ActionDeny.class, "deny")
+            .build();
+
+    private static final ImmutableBiMap<Class<? extends IpVersionBase>, Integer> IP_VERSION_MAP
+            = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
+            .put(IpVersionV4.class, Integer.valueOf(4))
+            .put(IpVersionV6.class, Integer.valueOf(6))
+            .build();
 
     NeutronFirewallRuleInterface(ProviderContext providerContext) {
         super(providerContext);
@@ -97,12 +119,6 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
         if (rule.getTenantId() != null) {
             answer.setTenantID(rule.getTenantId());
         }
-        if (rule.getDescr() != null) {
-            answer.setFirewallRuleDescription(rule.getDescr());
-        }
-        if (rule.getStatus() != null) {
-            answer.setFirewallRuleStatus(rule.getStatus());
-        }
         if (rule.isShared() != null) {
             answer.setFirewallRuleIsShared(rule.isShared());
         }
@@ -113,10 +129,17 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
             answer.setFirewallRulePolicyID(rule.getFirewallPolicyId().getValue());
         }
         if (rule.getProtocol() != null) {
-            answer.setFirewallRuleProtocol(rule.getProtocol());
+            final Protocol protocol = rule.getProtocol();
+            if (protocol.getUint8() != null) {
+                // uint8
+                answer.setFirewallRuleProtocol(protocol.getUint8().toString());
+            } else {
+                // symbolic protocol name
+                answer.setFirewallRuleProtocol(FwProtocolMapper.getName(protocol.getIdentityref()));
+            }
         }
         if (rule.getIpVersion() != null) {
-            answer.setFirewallRuleIpVer(rule.getIpVersion().intValue());
+            answer.setFirewallRuleIpVer(IP_VERSION_MAP.get(rule.getIpVersion()));
         }
         if (rule.getSourceIpAddr() != null) {
             answer.setFirewallRuleSrcIpAddr(String.valueOf(rule.getSourceIpAddr().getValue()));
@@ -124,17 +147,23 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
         if (rule.getDestinationIpAddr() != null) {
             answer.setFirewallRuleDstIpAddr(String.valueOf(rule.getDestinationIpAddr().getValue()));
         }
-        if (rule.getSourcePort() != null) {
-            answer.setFirewallRuleSrcPort(rule.getSourcePort().intValue());
+        if (rule.getSourcePortRangeMin() != null) {
+            answer.setFirewallRuleSrcPortRangeMin(rule.getSourcePortRangeMin());
         }
-        if (rule.getDestinationPort() != null) {
-            answer.setFirewallRuleDstPort(rule.getDestinationPort().intValue());
+        if (rule.getSourcePortRangeMax() != null) {
+            answer.setFirewallRuleSrcPortRangeMax(rule.getSourcePortRangeMax());
+        }
+        if (rule.getDestinationPortRangeMin() != null) {
+            answer.setFirewallRuleDstPortRangeMin(rule.getDestinationPortRangeMin());
+        }
+        if (rule.getDestinationPortRangeMax() != null) {
+            answer.setFirewallRuleDstPortRangeMax(rule.getDestinationPortRangeMax());
         }
         if (rule.getPosition() != null) {
-            answer.setFirewallRulePosition(rule.getPosition().intValue());
+            answer.setFirewallRulePosition(Integer.valueOf(rule.getPosition().intValue()));
         }
         if (rule.getAction() != null) {
-            answer.setFirewallRuleAction(rule.getAction());
+            answer.setFirewallRuleAction(ACTION_MAP.get(rule.getAction()));
         }
         return answer;
     }
@@ -151,12 +180,6 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
         if (rule.getTenantID() != null) {
             ruleBuilder.setTenantId(toUuid(rule.getTenantID()));
         }
-        if (rule.getFirewallRuleDescription() != null) {
-            ruleBuilder.setDescr(rule.getFirewallRuleDescription());
-        }
-        if (rule.getFirewallRuleStatus() != null) {
-            ruleBuilder.setStatus(rule.getFirewallRuleStatus());
-        }
         if (rule.getFirewallRuleIsShared() != null) {
             ruleBuilder.setShared(rule.getFirewallRuleIsShared());
         }
@@ -167,30 +190,40 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
             ruleBuilder.setFirewallPolicyId(toUuid(rule.getFirewallRulePolicyID()));
         }
         if (rule.getFirewallRuleProtocol() != null) {
-            ruleBuilder.setProtocol(rule.getFirewallRuleProtocol());
+            final String protocolString = rule.getFirewallRuleProtocol();
+            final Protocol protocol = new Protocol(protocolString.toCharArray());
+            ruleBuilder.setProtocol(protocol);
         }
         if (rule.getFirewallRuleIpVer() != null) {
-            ruleBuilder.setIpVersion(rule.getFirewallRuleIpVer().shortValue());
+            final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IP_VERSION_MAP.inverse();
+            ruleBuilder.setIpVersion(mapper.get(rule.getFirewallRuleIpVer()));
         }
         if (rule.getFirewallRuleSrcIpAddr() != null) {
-            final IpAddress ipAddress = new IpAddress(rule.getFirewallRuleSrcIpAddr().toCharArray());
+            final IpPrefixOrAddress ipAddress = new IpPrefixOrAddress(rule.getFirewallRuleSrcIpAddr().toCharArray());
             ruleBuilder.setSourceIpAddr(ipAddress);
         }
         if (rule.getFirewallRuleDstIpAddr() != null) {
-            final IpAddress ipAddress = new IpAddress(rule.getFirewallRuleDstIpAddr().toCharArray());
+            final IpPrefixOrAddress ipAddress = new IpPrefixOrAddress(rule.getFirewallRuleDstIpAddr().toCharArray());
             ruleBuilder.setDestinationIpAddr(ipAddress);
         }
-        if (rule.getFirewallRuleSrcPort() != null) {
-            ruleBuilder.setSourcePort(rule.getFirewallRuleSrcPort().shortValue());
+        if (rule.getFirewallRuleSrcPortRangeMin() != null) {
+            ruleBuilder.setSourcePortRangeMin(rule.getFirewallRuleSrcPortRangeMin());
         }
-        if (rule.getFirewallRuleDstPort() != null) {
-            ruleBuilder.setDestinationPort(rule.getFirewallRuleDstPort().shortValue());
+        if (rule.getFirewallRuleSrcPortRangeMax() != null) {
+            ruleBuilder.setSourcePortRangeMax(rule.getFirewallRuleSrcPortRangeMax());
+        }
+        if (rule.getFirewallRuleDstPortRangeMin() != null) {
+            ruleBuilder.setDestinationPortRangeMin(rule.getFirewallRuleDstPortRangeMin());
+        }
+        if (rule.getFirewallRuleDstPortRangeMax() != null) {
+            ruleBuilder.setDestinationPortRangeMax(rule.getFirewallRuleDstPortRangeMax());
         }
         if (rule.getFirewallRulePosition() != null) {
             ruleBuilder.setPosition(rule.getFirewallRulePosition().shortValue());
         }
         if (rule.getFirewallRuleAction() != null) {
-            ruleBuilder.setAction(rule.getFirewallRuleAction());
+            final ImmutableBiMap<String, Class<? extends ActionBase>> mapper = ACTION_MAP.inverse();
+            ruleBuilder.setAction(mapper.get(rule.getFirewallRuleAction()));
         }
         return ruleBuilder.build();
     }

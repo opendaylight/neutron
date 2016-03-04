@@ -8,14 +8,12 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
 
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.FirewallPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyBuilder;
@@ -102,21 +100,11 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
         if (policy.getTenantId() != null) {
             answer.setTenantID(policy.getTenantId());
         }
-        if (policy.getDescr() != null) {
-            answer.setFirewallPolicyDescription(policy.getDescr());
-        }
         if (policy.isShared() != null) {
             answer.setFirewallPolicyIsShared(policy.isShared());
         }
         if (policy.isAudited() != null) {
             answer.setFirewallPolicyIsAudited(policy.isAudited());
-        }
-        if (policy.getFirewallRules() != null) {
-            final List<String> rules = new ArrayList<String>();
-            for (final Uuid rule: policy.getFirewallRules()) {
-                rules.add(rule.getValue());
-            }
-            answer.setFirewallPolicyRules(rules);
         }
         return answer;
     }
@@ -133,21 +121,11 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
         if (policy.getTenantID() != null) {
             policyBuilder.setTenantId(toUuid(policy.getTenantID()));
         }
-        if (policy.getFirewallPolicyDescription() != null) {
-            policyBuilder.setDescr(policy.getFirewallPolicyDescription());
-        }
         if (policy.getFirewallPolicyIsShared() != null) {
             policyBuilder.setShared(policy.getFirewallPolicyIsShared());
         }
         if (policy.getFirewallPolicyIsAudited() != null) {
             policyBuilder.setAudited(policy.getFirewallPolicyIsAudited());
-        }
-        if (policy.getFirewallPolicyRules() != null) {
-            final List<Uuid> rules = new ArrayList<Uuid>();
-            for (final String rule: policy.getFirewallPolicyRules()) {
-                rules.add(toUuid(rule));
-            }
-            policyBuilder.setFirewallRules(rules);
         }
         return policyBuilder.build();
     }

@@ -136,9 +136,7 @@ public class NeutronFirewallNorthbound
             @QueryParam("id") String queryFirewallUUID,
             @QueryParam("tenant_id") String queryFirewallTenantID,
             @QueryParam("name") String queryFirewallName,
-            @QueryParam("description") String queryFirewallDescription,
             @QueryParam("admin_state_up") Boolean queryFirewallAdminStateIsUp,
-            @QueryParam("status") String queryFirewallStatus,
             @QueryParam("shared") Boolean queryFirewallIsShared,
             @QueryParam("firewall_policy_id") String queryFirewallPolicyID,
             // pagination
@@ -156,12 +154,8 @@ public class NeutronFirewallNorthbound
                     queryFirewallTenantID.equals(nsg.getTenantID())) &&
                 (queryFirewallName == null ||
                     queryFirewallName.equals(nsg.getFirewallName())) &&
-                (queryFirewallDescription == null ||
-                    queryFirewallDescription.equals(nsg.getFirewallDescription())) &&
                 (queryFirewallAdminStateIsUp == null ||
                     queryFirewallAdminStateIsUp.equals(nsg.getFirewallAdminStateIsUp())) &&
-                (queryFirewallStatus == null ||
-                    queryFirewallStatus.equals(nsg.getFirewallStatus())) &&
                 (queryFirewallIsShared == null ||
                     queryFirewallIsShared.equals(nsg.getFirewallIsShared())) &&
                 (queryFirewallPolicyID == null ||
