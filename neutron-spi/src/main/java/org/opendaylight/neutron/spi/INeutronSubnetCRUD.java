@@ -81,18 +81,4 @@ public interface INeutronSubnetCRUD
      */
 
     boolean updateSubnet(String uuid, NeutronSubnet delta);
-
-    /**
-     * Applications call this interface method to determine if a Subnet object
-     * is use
-     *
-     * @param subnetUUID
-     *            identifier of the subnet object
-     *
-     * @return boolean on whether the subnet is in use or not
-     *
-     * @deprecated - will be removed in Boron
-     */
-
-    boolean subnetInUse(String subnetUUID);
 }
