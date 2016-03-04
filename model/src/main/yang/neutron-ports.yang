@@ -18,6 +18,7 @@ module neutron-ports {
     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
     import neutron-constants { prefix "constants"; }
+    import neutron-types { prefix "types"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -40,10 +41,10 @@ module neutron-ports {
                         is already allowed to pass through the port";
             key "mac-address ip-address";
             leaf mac-address {
-                type string;
+                type yang:mac-address;
             }
             leaf ip-address {
-                type string;
+                type types:ip-prefix-or-address;
             }
         }
 
@@ -70,14 +71,10 @@ module neutron-ports {
             type string;
         }
         leaf mac-address {
-            type string;
+            type yang:mac-address;
         }
-        leaf binding-profile {
-            type string;
-        }
-
         list fixed-ips {
-            key subnet-id;
+            key "subnet-id ip-address";
             leaf subnet-id {
                 type yang:uuid;
             }
