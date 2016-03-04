@@ -15,16 +15,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
-import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
-import org.opendaylight.neutron.spi.Neutron_IPs;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
 import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefixBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Base;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Off;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Slaac;
@@ -52,10 +49,13 @@ import com.google.common.collect.ImmutableBiMap;
 public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet> implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
 
+    private static final int IPV4_VERSION = 4;
+    private static final int IPV6_VERSION = 6;
+
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
             = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
-            .put(IpVersionV4.class,Integer.valueOf(4))
-            .put(IpVersionV6.class,Integer.valueOf(6))
+            .put(IpVersionV4.class,Integer.valueOf(IPV4_VERSION))
+            .put(IpVersionV6.class,Integer.valueOf(IPV6_VERSION))
             .build();
 
     private static final ImmutableBiMap<Class<? extends Dhcpv6Base>,String> DHCPV6_MAP
@@ -110,19 +110,13 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         return update(uuid, delta);
     }
 
-// note: this is being set to false in preparation for deprecation and removal
-    @Override
-    public boolean subnetInUse(String subnetUUID) {
-        return false;
-    }
-
     protected NeutronSubnet fromMd(Subnet subnet) {
         NeutronSubnet result = new NeutronSubnet();
         result.setName(subnet.getName());
         result.setTenantID(subnet.getTenantId());
         result.setNetworkUUID(subnet.getNetworkId().getValue());
         result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
-        result.setCidr(subnet.getCidr());
+        result.setCidr(String.valueOf(subnet.getCidr().getValue()));
         if (subnet.getGatewayIp() != null) {
             result.setGatewayIP(String.valueOf(subnet.getGatewayIp().getValue()));
         }
@@ -137,8 +131,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
             for (AllocationPools allocationPool : subnet.getAllocationPools()) {
                 NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
-                pool.setPoolStart(allocationPool.getStart());
-                pool.setPoolEnd(allocationPool.getEnd());
+                pool.setPoolStart(String.valueOf(allocationPool.getStart().getValue()));
+                pool.setPoolEnd(String.valueOf(allocationPool.getEnd().getValue()));
                 allocationPools.add(pool);
             }
             result.setAllocationPools(allocationPools);
@@ -161,25 +155,6 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             result.setHostRoutes(hostRoutes);
         }
         result.setID(subnet.getUuid().getValue());
-// read through the ports and put the ones in this subnet into the internal
-// myPorts object.
-// @deprecated and will be removed in Boron
-        Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronPortCRUD(this);
-        INeutronPortCRUD portIf = interfaces.getPortInterface();
-        for (NeutronPort port : portIf.getAllPorts()) {
-            if (port.getFixedIPs() != null) {
-                for (Neutron_IPs ip : port.getFixedIPs()) {
-                    if (ip.getSubnetUUID().equals(result.getID())) {
-                        allPorts.add(port);
-                    }
-                }
-            }
-        }
-        List<NeutronPort> ports = new ArrayList<NeutronPort>();
-        ports.addAll(allPorts);
-        result.setPorts(ports);
         return result;
     }
 
@@ -201,7 +176,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
                     .getIpVersion()));
         }
         if (subnet.getCidr() != null) {
-            subnetBuilder.setCidr(subnet.getCidr());
+            IpPrefix ipPrefix = IpPrefixBuilder.getDefaultInstance(subnet.getCidr());
+            subnetBuilder.setCidr(ipPrefix);
         }
         if (subnet.getGatewayIP() != null) {
             IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
@@ -224,8 +200,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             for (NeutronSubnetIPAllocationPool allocationPool : subnet
                     .getAllocationPools()) {
                 AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
-                builder.setStart(allocationPool.getPoolStart());
-                builder.setEnd(allocationPool.getPoolEnd());
+                builder.setStart(new IpAddress(allocationPool.getPoolStart().toCharArray()));
+                builder.setEnd(new IpAddress(allocationPool.getPoolEnd().toCharArray()));
                 AllocationPools temp = builder.build();
                 allocationPools.add(temp);
             }
