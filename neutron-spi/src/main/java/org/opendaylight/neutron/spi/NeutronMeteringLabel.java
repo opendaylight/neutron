@@ -26,22 +26,12 @@ public class NeutronMeteringLabel extends NeutronObject implements Serializable,
     @XmlElement (name = "name")
     String meteringLabelName;
 
-    @XmlElement (name = "description")
-    String description;
+    @XmlElement (defaultValue = "false", name = "shared")
+    Boolean shared;
 
     /*
      * getters and setters
      */
-
-    // @deprecated use getID()
-    public String getMeteringLabelUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setMeteringLabelUUID(String uuid) {
-        setID(uuid);
-    }
 
     public String getMeteringLabelName() {
         return meteringLabelName;
@@ -51,22 +41,12 @@ public class NeutronMeteringLabel extends NeutronObject implements Serializable,
         this.meteringLabelName = name;
     }
 
-    @Deprecated
-    public String getMeteringLabelTenantID() {
-        return getTenantID();
+    public Boolean getMeteringLabelShared() {
+        return shared;
     }
 
-    @Deprecated
-    public void setMeteringLabelTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
-    public String getMeteringLabelDescription() {
-        return description;
-    }
-
-    public void setMeteringLabelDescription(String description) {
-        this.description = description;
+    public void setMeteringLabelShared(Boolean shared) {
+        this.shared = shared;
     }
 
     /*
@@ -78,8 +58,9 @@ public class NeutronMeteringLabel extends NeutronObject implements Serializable,
     public String toString() {
         return "NeutronMeteringLabel [id=" + uuid +
             ", name=" + meteringLabelName +
-            ", description=" + description +
-            ", tenant_id=" + tenantID + "]";
+            ", tenant_id=" + tenantID +
+            ", shared=" + shared +
+            "]";
     }
 
     /**
@@ -105,8 +86,8 @@ public class NeutronMeteringLabel extends NeutronObject implements Serializable,
             if (s.equals("tenant_id")) {
                 ans.setTenantID(this.getTenantID());
             }
-            if (s.equals("description")) {
-                ans.setMeteringLabelDescription(this.getMeteringLabelDescription());
+            if (s.equals("shared")) {
+                ans.setMeteringLabelShared(this.getMeteringLabelShared());
             }
         }
         return ans;
