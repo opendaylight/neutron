@@ -14,9 +14,9 @@ module neutron-fwaas {
     prefix neutron-fwaas;
 
     import ietf-yang-types { prefix "yang"; }
-    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
-    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
+    import neutron-types { prefix "types"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -26,14 +26,10 @@ module neutron-fwaas {
 
     revision "2015-07-12" {
         description
-                "OpenDaylight Beryllium release";    
+                "OpenDaylight Beryllium release";
     }
 
     grouping firewall-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the firewall.";
-        }
         leaf shared {
             description "whether the firewall is shared or not";
             type boolean;
@@ -45,10 +41,6 @@ module neutron-fwaas {
     }
 
     grouping firewall-policy-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the firewall policy.";
-        }
         leaf shared {
             description "whether the firewall policy is shared or not";
             type boolean;
@@ -57,21 +49,23 @@ module neutron-fwaas {
             description "whether the firewall policy is audited or not";
             type boolean;
         }
-        leaf-list firewall-rules {
-            description "whether the firewall policy is audited or not";
-            type yang:uuid;
-        }
+    }
+
+    identity action-base {
+        description "firewall rule action";
+    }
+
+    identity action-allow {
+        description "firewall rule allow";
+        base action-base;
+    }
+
+    identity action-deny {
+        description "firewall rule deny";
+        base action-base;
     }
 
     grouping firewall-rule-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the firewall rule.";
-        }
-        leaf status {
-            type string;
-            description "Status of the firewall rule.";
-        }
         leaf shared {
             description "whether the firewall rule is shared or not";
             type boolean;
@@ -86,26 +80,41 @@ module neutron-fwaas {
         }
         leaf protocol {
             description "the protocol this rule applies to";
-            type string;
+            type union {
+                type uint8;
+                type identityref {
+                    base "constants:fw-protocol-base";
+                }
+            }
         }
         leaf ip-version {
             description "the ip version this rule applies to";
-            type int16;
+            type identityref {
+                base "constants:ip-version-base";
+            }
         }
         leaf source-ip-addr {
-            type inet:ip-address;
+            type types:ip-prefix-or-address;
             description "the source ip address for this rule";
         }
         leaf destination-ip-addr {
-            type inet:ip-address;
+            type types:ip-prefix-or-address;
             description "the destination ip address for this rule";
         }
-        leaf source-port {
-            description "the source port for this rule";
+        leaf source-port-range-min {
+            description "the source port range min for this rule";
             type int16;
         }
-        leaf destination-port {
-            description "the destination port for this rule";
+        leaf source-port-range-max {
+            description "the source port range max for this rule";
+            type int16;
+        }
+        leaf destination-port-range-min {
+            description "the destination port range min for this rule";
+            type int16;
+        }
+        leaf destination-port-range-max {
+            description "the destination port range max for this rule";
             type int16;
         }
         leaf position {
@@ -114,7 +123,9 @@ module neutron-fwaas {
         }
         leaf action {
             description "the action fot this rule";
-            type string;
+            type identityref {
+                base "action-base";
+            }
         }
     }
 

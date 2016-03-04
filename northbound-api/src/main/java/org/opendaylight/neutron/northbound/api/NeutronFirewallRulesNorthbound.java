@@ -136,16 +136,16 @@ public class NeutronFirewallRulesNorthbound
             @QueryParam("id") String queryFirewallRuleUUID,
             @QueryParam("tenant_id") String queryFirewallRuleTenantID,
             @QueryParam("name") String queryFirewallRuleName,
-            @QueryParam("description") String queryFirewallRuleDescription,
-            @QueryParam("status") String queryFirewallRuleStatus,
             @QueryParam("shared") Boolean queryFirewallRuleIsShared,
             @QueryParam("firewall_policy_id") String queryFirewallRulePolicyID,
             @QueryParam("protocol") String queryFirewallRuleProtocol,
             @QueryParam("ip_version") Integer queryFirewallRuleIpVer,
             @QueryParam("source_ip_address") String queryFirewallRuleSrcIpAddr,
             @QueryParam("destination_ip_address") String queryFirewallRuleDstIpAddr,
-            @QueryParam("source_port") Integer queryFirewallRuleSrcPort,
-            @QueryParam("destination_port") Integer queryFirewallRuleDstPort,
+            @QueryParam("source_port_range_min") Integer queryFirewallRuleSrcPortRangeMin,
+            @QueryParam("source_port_range_max") Integer queryFirewallRuleSrcPortRangeMax,
+            @QueryParam("destination_port_range_min") Integer queryFirewallRuleDstPortRangeMin,
+            @QueryParam("destination_port_range_max") Integer queryFirewallRuleDstPortRangeMax,
             @QueryParam("position") Integer queryFirewallRulePosition,
             @QueryParam("action") String queryFirewallRuleAction,
             @QueryParam("enabled") Boolean queryFirewallRuleIsEnabled,
@@ -164,10 +164,6 @@ public class NeutronFirewallRulesNorthbound
                             queryFirewallRuleTenantID.equals(nsr.getTenantID())) &&
                     (queryFirewallRuleName == null ||
                             queryFirewallRuleName.equals(nsr.getFirewallRuleName())) &&
-                    (queryFirewallRuleDescription == null ||
-                            queryFirewallRuleDescription.equals(nsr.getFirewallRuleDescription())) &&
-                    (queryFirewallRuleStatus == null ||
-                            queryFirewallRuleStatus.equals(nsr.getFirewallRuleStatus())) &&
                     (queryFirewallRuleIsShared == null ||
                             queryFirewallRuleIsShared.equals(nsr.getFirewallRuleIsShared())) &&
                     (queryFirewallRulePolicyID == null ||
@@ -180,10 +176,14 @@ public class NeutronFirewallRulesNorthbound
                             queryFirewallRuleSrcIpAddr.equals(nsr.getFirewallRuleSrcIpAddr())) &&
                     (queryFirewallRuleDstIpAddr == null ||
                             queryFirewallRuleDstIpAddr.equals(nsr.getFirewallRuleDstIpAddr())) &&
-                    (queryFirewallRuleSrcPort == null ||
-                            queryFirewallRuleSrcPort.equals(nsr.getFirewallRuleSrcPort())) &&
-                    (queryFirewallRuleDstPort == null ||
-                            queryFirewallRuleDstPort.equals(nsr.getFirewallRuleDstPort())) &&
+                    (queryFirewallRuleSrcPortRangeMin == null ||
+                            queryFirewallRuleSrcPortRangeMin.equals(nsr.getFirewallRuleSrcPortRangeMin())) &&
+                    (queryFirewallRuleSrcPortRangeMax == null ||
+                            queryFirewallRuleSrcPortRangeMax.equals(nsr.getFirewallRuleSrcPortRangeMax())) &&
+                    (queryFirewallRuleDstPortRangeMin == null ||
+                            queryFirewallRuleDstPortRangeMin.equals(nsr.getFirewallRuleDstPortRangeMin())) &&
+                    (queryFirewallRuleDstPortRangeMax == null ||
+                            queryFirewallRuleDstPortRangeMax.equals(nsr.getFirewallRuleDstPortRangeMax())) &&
                     (queryFirewallRulePosition == null ||
                             queryFirewallRulePosition.equals(nsr.getFirewallRulePosition())) &&
                     (queryFirewallRuleAction == null ||

@@ -26,9 +26,7 @@ import java.util.List;
  * id             uuid-str
  * tenant_id      uuid-str
  * name           String
- * description    String
  * shared         Boolean
- * firewall_rules List
  * audited        Boolean
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
  *
@@ -43,14 +41,8 @@ public class NeutronFirewallPolicy extends NeutronObject implements Serializable
     @XmlElement (name = "name")
     String firewallPolicyName;
 
-    @XmlElement (name = "description")
-    String firewallPolicyDescription;
-
     @XmlElement (defaultValue = "false", name = "shared")
     Boolean firewallPolicyIsShared;
-
-    @XmlElement (name = "firewall_rules")
-    List<String> firewallPolicyRules;
 
     @XmlElement (defaultValue = "false", name = "audited")
     Boolean firewallPolicyIsAudited;
@@ -63,14 +55,6 @@ public class NeutronFirewallPolicy extends NeutronObject implements Serializable
         this.firewallPolicyIsAudited = firewallPolicyIsAudited;
     }
 
-    public void setFirewallPolicyRules(List<String> firewallPolicyRules) {
-        this.firewallPolicyRules = firewallPolicyRules;
-    }
-
-    public List<String> getFirewallPolicyRules() {
-        return firewallPolicyRules;
-    }
-
     public Boolean getFirewallPolicyIsShared() {
         return firewallPolicyIsShared;
     }
@@ -79,40 +63,12 @@ public class NeutronFirewallPolicy extends NeutronObject implements Serializable
         this.firewallPolicyIsShared = firewallPolicyIsShared;
     }
 
-    public String getFirewallPolicyDescription() {
-        return firewallPolicyDescription;
-    }
-
-    public void setFirewallPolicyDescription(String firewallPolicyDescription) {
-        this.firewallPolicyDescription = firewallPolicyDescription;
-    }
-
     public String getFirewallPolicyName() {
         return firewallPolicyName;
     }
 
     public void setFirewallPolicyName(String firewallPolicyName) {
         this.firewallPolicyName = firewallPolicyName;
-    }
-
-    @Deprecated
-    public String getFirewallPolicyTenantID() {
-        return getTenantID();
-    }
-
-    @Deprecated
-    public void setFirewallPolicyTenantID(String tenantID) {
-        setTenantID(tenantID);
-    }
-
-    // @deprecated use getID()
-    public String getFirewallPolicyUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setFirewallPolicyUUID(String uuid) {
-        setID(uuid);
     }
 
     public NeutronFirewallPolicy extractFields(List<String> fields) {
@@ -129,16 +85,8 @@ public class NeutronFirewallPolicy extends NeutronObject implements Serializable
             if (s.equals("name")) {
                 ans.setFirewallPolicyName(this.getFirewallPolicyName());
             }
-            if(s.equals("description")) {
-                ans.setFirewallPolicyDescription(this.getFirewallPolicyDescription());
-            }
             if (s.equals("shared")) {
                 ans.setFirewallPolicyIsShared(firewallPolicyIsShared);
-            }
-            if (s.equals("firewall_rules")) {
-                List<String> firewallRuleList = new ArrayList<String>();
-                firewallRuleList.addAll(this.getFirewallPolicyRules());
-                ans.setFirewallPolicyRules(firewallRuleList);
             }
             if (s.equals("audited")) {
                 ans.setFirewallPolicyIsAudited(firewallPolicyIsAudited);
@@ -153,9 +101,7 @@ public class NeutronFirewallPolicy extends NeutronObject implements Serializable
             "firewallPolicyUUID='" + uuid + '\'' +
             ", firewallPolicyTenantID='" + tenantID + '\'' +
             ", firewallPolicyName='" + firewallPolicyName + '\'' +
-            ", firewallPolicyDescription='" + firewallPolicyDescription + '\'' +
             ", firewallPolicyIsShared=" + firewallPolicyIsShared +
-            ", firewallPolicyRules=" + firewallPolicyRules +
             ", firewallPolicyIsAudited='" + firewallPolicyIsAudited + '\'' +
             '}';
     }
