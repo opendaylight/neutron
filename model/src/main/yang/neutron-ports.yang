@@ -40,10 +40,13 @@ module neutron-ports {
                         is already allowed to pass through the port";
             key "mac-address ip-address";
             leaf mac-address {
-                type string;
+                type inet:mac-address;
             }
             leaf ip-address {
-                type string;
+                type union {
+                    type inet:ip-prefix;
+                    type inet:ip-address;
+                }
             }
         }
 
@@ -70,12 +73,8 @@ module neutron-ports {
             type string;
         }
         leaf mac-address {
-            type string;
+            type inet:mac-address;
         }
-        leaf binding-profile {
-            type string;
-        }
-
         list fixed-ips {
             key subnet-id;
             leaf subnet-id {
