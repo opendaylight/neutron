@@ -8,11 +8,7 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
@@ -107,7 +103,10 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     protected MeteringRule toMd(NeutronMeteringLabelRule meteringLabelRule) {
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
         if (meteringLabelRule.getID() != null) {
-            meteringRuleBuilder.setId(toUuid(meteringLabelRule.getID()));
+            meteringRuleBuilder.setUuid(toUuid(meteringLabelRule.getID()));
+        }
+        if (meteringLabelRule.getTenantID() != null) {
+            meteringRuleBuilder.setTenantId(toUuid(meteringLabelRule.getTenantID()));
         }
         if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
             meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleLabelID()));
@@ -127,8 +126,11 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
         NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
-        if (rule.getId() != null) {
-            answer.setID(rule.getId().getValue());
+        if (rule.getUuid() != null) {
+            answer.setID(rule.getUuid().getValue());
+        }
+        if (rule.getTenantId() != null) {
+            answer.setTenantID(rule.getTenantId());
         }
         if (rule.getMeteringLabelId() != null) {
             answer.setMeteringLabelRuleLabelID(rule.getMeteringLabelId().getValue());
@@ -147,7 +149,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     @Override
     protected MeteringRule toMd(String uuid) {
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        meteringRuleBuilder.setId((toUuid(uuid)));
+        meteringRuleBuilder.setUuid(toUuid(uuid));
         return meteringRuleBuilder.build();
     }
 

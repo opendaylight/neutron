@@ -8,11 +8,7 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
@@ -93,16 +89,16 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
     @Override
     protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
         MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-        if (meteringLabel.getMeteringLabelName()!=null) {
+        if (meteringLabel.getMeteringLabelName() != null) {
             meteringLabelBuilder.setName(meteringLabel.getMeteringLabelName());
         }
-        if (meteringLabel.getMeteringLabelDescription()!=null) {
-            meteringLabelBuilder.setDescription(meteringLabel.getMeteringLabelDescription());
+        if (meteringLabel.getMeteringLabelShared() != null) {
+            meteringLabelBuilder.setShared(meteringLabel.getMeteringLabelShared());
         }
-        if (meteringLabel.getTenantID()!=null) {
+        if (meteringLabel.getTenantID() != null) {
             meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getTenantID()));
         }
-        if (meteringLabel.getID()!=null) {
+        if (meteringLabel.getID() != null) {
             meteringLabelBuilder.setUuid(toUuid(meteringLabel.getID()));
         }
         return meteringLabelBuilder.build();
@@ -113,10 +109,9 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         if (label.getName() != null) {
             answer.setMeteringLabelName(label.getName());
         }
-        if (label.getDescription() != null) {
-            answer.setMeteringLabelDescription(label.getName());
+        if (label.isShared() != null) {
+            answer.setMeteringLabelShared(label.isShared());
         }
-//todo: remove '-' chars as tenant id doesn't use them
         if (label.getTenantId() != null) {
             answer.setTenantID(label.getTenantId());
         }
