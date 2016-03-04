@@ -33,9 +33,6 @@ public class NeutronMeteringLabelJAXBTest {
             Assert.assertEquals("NeutronMeteringLabel JAXB Test 2: Testing name failed", "net1",
                     testObject.getMeteringLabelName());
 
-            Assert.assertEquals("NeutronMeteringLabel JAXB Test 3: Testing description failed",
-                    "Provides allowed address pairs", testObject.getMeteringLabelDescription());
-
             Assert.assertEquals("NeutronMeteringLabel JAXB Test 4: Testing tenant_id failed",
                     "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
         } catch (Exception e) {

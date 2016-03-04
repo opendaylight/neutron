@@ -39,16 +39,6 @@ public class NeutronMeteringLabelRule extends NeutronObject implements Serializa
      *  getters and setters
      */
 
-    // @deprecated use getID()
-    public String getMeteringLabelRuleUUID() {
-        return getID();
-    }
-
-    // @deprecated use setID()
-    public void setMeteringLabelRuleUUID(String uuid) {
-        setID(uuid);
-    }
-
     public String getMeteringLabelRuleDirection() {
         return meteringLabelRuleDirection;
     }
@@ -89,6 +79,7 @@ public class NeutronMeteringLabelRule extends NeutronObject implements Serializa
     @Override
     public String toString() {
         return "NeutronMeteringLabelRule [id=" + uuid +
+            ", tenantID=" + tenantID +
             ", direction=" + meteringLabelRuleDirection +
             ", excluded=" + meteringLabelRuleExcluded +
             ", remote_ip_prefix=" + meteringLabelRuleRemoteIPPrefix +
@@ -111,6 +102,9 @@ public class NeutronMeteringLabelRule extends NeutronObject implements Serializa
             String s = i.next();
             if (s.equals("id")) {
                 ans.setID(this.getID());
+            }
+            if (s.equals("tenant_id")) {
+                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("direction")) {
                 ans.setMeteringLabelRuleDirection(this.getMeteringLabelRuleDirection());
