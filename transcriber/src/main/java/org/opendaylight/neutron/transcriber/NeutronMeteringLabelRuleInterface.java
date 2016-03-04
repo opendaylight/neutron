@@ -107,7 +107,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     protected MeteringRule toMd(NeutronMeteringLabelRule meteringLabelRule) {
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
         if (meteringLabelRule.getID() != null) {
-            meteringRuleBuilder.setId(toUuid(meteringLabelRule.getID()));
+            meteringRuleBuilder.setUuid(toUuid(meteringLabelRule.getID()));
         }
         if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
             meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleLabelID()));
@@ -127,8 +127,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
         NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
-        if (rule.getId() != null) {
-            answer.setID(rule.getId().getValue());
+        if (rule.getUuid() != null) {
+            answer.setID(rule.getUuid().getValue());
         }
         if (rule.getMeteringLabelId() != null) {
             answer.setMeteringLabelRuleLabelID(rule.getMeteringLabelId().getValue());
@@ -147,7 +147,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     @Override
     protected MeteringRule toMd(String uuid) {
         MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        meteringRuleBuilder.setId((toUuid(uuid)));
+        meteringRuleBuilder.setUuid((toUuid(uuid)));
         return meteringRuleBuilder.build();
     }
 
