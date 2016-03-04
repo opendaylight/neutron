@@ -36,14 +36,8 @@ public class NeutronFirewallJAXBTest {
             Assert.assertEquals("NeutronFirewall JAXB Test 3: Testing name failed",
                   "jaxb-test", testObject.getFirewallName());
 
-            Assert.assertEquals("NeutronFirewall JAXB Test 4: Testing description failed",
-                  "Test of NeutronFirewall JAXB", testObject.getFirewallDescription());
-
             Assert.assertFalse("NeutronFirewall JAXB Test 5: Testing admin_state_up failed",
                   testObject.getFirewallAdminStateIsUp());
-
-            Assert.assertEquals("NeutronFirewall JAXB Test 6: Testing status failed",
-                  "DOWN", testObject.getFirewallStatus());
 
             Assert.assertTrue("NeutronFirewall JAXB Test 7: Testing shared failed",
                   testObject.getFirewallIsShared());
@@ -71,26 +65,17 @@ public class NeutronFirewallJAXBTest {
             Assert.assertEquals("NeutronFirewallPolicy JAXB Test 3: Testing name failed",
                   "jaxb-test", testObject.getFirewallPolicyName());
 
-            Assert.assertEquals("NeutronFirewallPolicy JAXB Test 4: Testing description failed",
-                  "Test of NeutronFirewallPolicy JAXB", testObject.getFirewallPolicyDescription());
-
             Assert.assertTrue("NeutronFirewallPolicy JAXB Test 5: Testing shared failed",
                   testObject.getFirewallPolicyIsShared());
 
             Assert.assertTrue("NeutronFirewallPolicy JAXB Test 6: Testing audited failed",
                   testObject.getFirewallPolicyIsAudited());
-
-            List<String> policyRules = testObject.getFirewallPolicyRules();
-            Assert.assertEquals("NeutronFirewallPolicy JAXB Test 7.1: Testing firewall policy rules length failed",
-                  1, policyRules.size());
-            Assert.assertEquals("NeutronFirewallPolicy JAXB Test 7.2: Testing firewall policy rules content failed", 
-                  "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", policyRules.get(0));
         } catch (Exception e) {
             Assert.assertTrue("Tests failed", false);
         }
     }
 
-    private static final String NeutronFirewallRule_sourceJson="{ \"action\": \"allow\", \"description\": \"Test of NeutronFirewallRule JAXB\", \"destination_ip_address\": \"10.10.10.10\", \"destination_port\": \"80\", \"enabled\": true, \"firewall_policy_id\": \"83ca694a-eeff-48e5-b2d8-fe5198cf2e86\", \"id\": \"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\", \"ip_version\": 4, \"name\": \"ALLOW_HTTP\", \"position\": 1, \"protocol\": \"tcp\", \"shared\": false, \"source_ip_address\": \"10.10.10.8\", \"source_port\": null, \"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" }";
+    private static final String NeutronFirewallRule_sourceJson="{ \"action\": \"allow\", \"description\": \"Test of NeutronFirewallRule JAXB\", \"destination_ip_address\": \"10.10.10.10\", \"destination_port_range_min\": \"80\", \"destination_port_range_max\": \"81\", \"enabled\": true, \"firewall_policy_id\": \"83ca694a-eeff-48e5-b2d8-fe5198cf2e86\", \"id\": \"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\", \"ip_version\": 4, \"name\": \"ALLOW_HTTP\", \"position\": 1, \"protocol\": \"tcp\", \"shared\": false, \"source_ip_address\": \"10.10.10.8\", \"source_port\": null, \"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" }";
 
     @Test
     public void test_NeutronFirewallRule_JAXB() {
@@ -105,9 +90,6 @@ public class NeutronFirewallJAXBTest {
 
             Assert.assertEquals("NeutronFirewallRule JAXB Test 3: Testing name failed",
                   "ALLOW_HTTP", testObject.getFirewallRuleName());
-
-            Assert.assertEquals("NeutronFirewallRule JAXB Test 4: Testing description failed",
-                  "Test of NeutronFirewallRule JAXB", testObject.getFirewallRuleDescription());
 
             Assert.assertEquals("NeutronFirewallRule JAXB Test 5: Testing firewaulPolicyRuleID failed",
                   "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", testObject.getFirewallRulePolicyID());
@@ -127,11 +109,17 @@ public class NeutronFirewallJAXBTest {
             Assert.assertEquals("NeutronFirewallRule JAXB Test 10: Testing destination IP address failed",
                   "10.10.10.10", testObject.getFirewallRuleDstIpAddr());
 
-            Assert.assertEquals("NeutronFirewallRule JAXB Test 11: Testing source port failed",
-                  null, testObject.getFirewallRuleSrcPort());
+            Assert.assertEquals("NeutronFirewallRule JAXB Test 11.1: Testing source port min failed",
+                  null, testObject.getFirewallRuleSrcPortRangeMin());
 
-            Assert.assertEquals("NeutronFirewallRule JAXB Test 12: Testing destination port failed",
-                  new Integer(80), testObject.getFirewallRuleDstPort());
+            Assert.assertEquals("NeutronFirewallRule JAXB Test 11.2: Testing source port failed",
+                  null, testObject.getFirewallRuleSrcPortRangeMax());
+
+            Assert.assertEquals("NeutronFirewallRule JAXB Test 12.1: Testing destination port min failed",
+                  new Integer(80), testObject.getFirewallRuleDstPortRangeMin());
+
+            Assert.assertEquals("NeutronFirewallRule JAXB Test 12.2: Testing destination port max failed",
+                  new Integer(81), testObject.getFirewallRuleDstPortRangeMax());
 
             Assert.assertEquals("NeutronFirewallRule JAXB Test 13: Testing position failed",
                   new Integer(1), testObject.getFirewallRulePosition());

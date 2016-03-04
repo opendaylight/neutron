@@ -137,9 +137,7 @@ public class NeutronFirewallPolicyNorthbound
             @QueryParam("id") String queryFirewallPolicyUUID,
             @QueryParam("tenant_id") String queryFirewallPolicyTenantID,
             @QueryParam("name") String queryFirewallPolicyName,
-            @QueryParam("description") String querySecurityPolicyDescription,
             @QueryParam("shared") Boolean querySecurityPolicyIsShared,
-            @QueryParam("firewall_rules") List<String> querySecurityPolicyFirewallRules,
             @QueryParam("audited") Boolean querySecurityPolicyIsAudited,
             // pagination
             @QueryParam("limit") String limit,
@@ -156,12 +154,8 @@ public class NeutronFirewallPolicyNorthbound
                     queryFirewallPolicyTenantID.equals(nsg.getTenantID())) &&
                 (queryFirewallPolicyName == null ||
                     queryFirewallPolicyName.equals(nsg.getFirewallPolicyName())) &&
-                (querySecurityPolicyDescription == null ||
-                    querySecurityPolicyDescription.equals(nsg.getFirewallPolicyDescription())) &&
                 (querySecurityPolicyIsShared == null ||
                     querySecurityPolicyIsShared.equals(nsg.getFirewallPolicyIsShared())) &&
-                (querySecurityPolicyFirewallRules.size() == 0 ||
-                    querySecurityPolicyFirewallRules.equals(nsg.getFirewallPolicyRules())) &&
                 (querySecurityPolicyIsAudited == null ||
                     querySecurityPolicyIsAudited.equals(nsg.getFirewallPolicyIsAudited()))) {
                 if (fields.size() > 0) {
