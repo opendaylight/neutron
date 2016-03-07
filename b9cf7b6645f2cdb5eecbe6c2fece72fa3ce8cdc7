@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_bae1f82b",
+        "filename": "model/src/main/yang/neutron-secgroups.yang",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 612
+      },
+      "writtenOn": "2016-03-07T10:52:46Z",
+      "side": 1,
+      "message": "I think the order should be uint8, string because of RFC6020:\n\nWhen a string representing a union data type is validated, the string\n   is validated against each member type, in the order they are\n   specified in the \"type\" statement, until a match is found.",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "b9cf7b6645f2cdb5eecbe6c2fece72fa3ce8cdc7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
