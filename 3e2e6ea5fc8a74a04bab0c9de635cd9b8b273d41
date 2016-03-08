@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_826bea83",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronPortSecurityJAXBTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-08T19:44:59Z",
+      "side": 1,
+      "message": "one white space between \"//\" and comment.",
+      "revId": "3e2e6ea5fc8a74a04bab0c9de635cd9b8b273d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_22701e71",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronPortSecurityJAXBTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-08T19:44:59Z",
+      "side": 1,
+      "message": "copy-and-pasted without update.",
+      "revId": "3e2e6ea5fc8a74a04bab0c9de635cd9b8b273d41",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
