@@ -22,6 +22,30 @@
       "revId": "cfd22239ac9eb2fbf2a634e497a79831b28a989d",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_02f35a0a",
+        "filename": "model/src/main/yang/neutron-secgroups.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-08T19:01:38Z",
+      "side": 1,
+      "message": "Regarding to Beryllium, the (this or respined) patch doesn\u0027t change SPI and I*Aware interface. So GBP doesn\u0027t need updates.",
+      "parentUuid": "9a3d3df0_eee15cff",
+      "range": {
+        "startLine": 74,
+        "startChar": 17,
+        "endLine": 74,
+        "endChar": 23
+      },
+      "revId": "cfd22239ac9eb2fbf2a634e497a79831b28a989d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
