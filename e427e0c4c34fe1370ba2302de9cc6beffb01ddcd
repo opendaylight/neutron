@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a3d3df0_22dbfe7c",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSecurityRuleTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-08T19:23:40Z",
+      "side": 1,
+      "message": "Can you please add a testcase with \\\"200\\\" (interger as string)?\nBecause networking-odl may send request in this format.",
+      "revId": "e427e0c4c34fe1370ba2302de9cc6beffb01ddcd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a3d3df0_82bdaa04",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-08T19:23:40Z",
+      "side": 1,
+      "message": "This isn\u0027t used any more.",
+      "revId": "e427e0c4c34fe1370ba2302de9cc6beffb01ddcd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
