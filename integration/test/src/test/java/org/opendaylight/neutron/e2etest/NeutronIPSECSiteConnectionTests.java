@@ -29,7 +29,7 @@ public class NeutronIPSECSiteConnectionTests {
         ITNeutronE2E.test_fetch(url, "IPSEC Site Connection Collection GET failed");
     }
 
-    public void singleton_ipsecSiteConnection_create_test() {
+    public String singleton_ipsecSiteConnection_create_test() {
         String url = base + "/vpn/ipsecsiteconnections";
         String content = " { \"ipsec_site_connection\": {" +
             "\"status\": \"PENDING_CREATE\"," +
@@ -52,6 +52,12 @@ public class NeutronIPSECSiteConnectionTests {
             "\"id\": \"af44dfd7-cf91-4451-be57-cd4fdd96b5dc\"," +
             "\"ipsecpolicy_id\": \"22b8abdc-e822-45b3-90dd-f2c8512acfa5\" } }";
         ITNeutronE2E.test_create(url, content, "IPSEC Site Connection POST failed");
+        return content;
+    }
+
+    public void singleton_ipsecSiteConnection_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/vpn/ipsecsiteconnections";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ipsec_site_connections");
     }
 
     public void ipsecSiteConnection_update_test() {
@@ -104,7 +110,8 @@ public class NeutronIPSECSiteConnectionTests {
 
     public static void runTests(String base) {
         NeutronIPSECSiteConnectionTests ipsec_siteConnection_tester = new NeutronIPSECSiteConnectionTests(base);
-        ipsec_siteConnection_tester.singleton_ipsecSiteConnection_create_test();
+        String createJsonString = ipsec_siteConnection_tester.singleton_ipsecSiteConnection_create_test();
+        ipsec_siteConnection_tester.singleton_ipsecSiteConnection_get_with_one_query_item_test(createJsonString);
         ipsec_siteConnection_tester.ipsecSiteConnection_update_test();
         ipsec_siteConnection_tester.ipsecSiteConnection_element_get_test();
         ipsec_siteConnection_tester.ipsecSiteConnection_element_get_with_query_test();
