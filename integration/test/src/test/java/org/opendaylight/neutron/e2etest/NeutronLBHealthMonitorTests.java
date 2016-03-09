@@ -29,7 +29,7 @@ public class NeutronLBHealthMonitorTests {
         ITNeutronE2E.test_fetch(url, "LB Health Monitor Collection GET failed");
     }
 
-    public void singleton_lb_healthMonitor_create_test() {
+    public String singleton_lb_healthMonitor_create_test() {
         String url = base + "/lbaas/healthmonitors";
         String content = " { \"healthmonitor\": { \"admin_state_up\": true," +
             "\"delay\": 1, \"expected_codes\": \"200,201,202\"," +
@@ -41,6 +41,12 @@ public class NeutronLBHealthMonitorTests {
             "\"timeout\": 1, \"type\": \"HTTP\"," +
             "\"url_path\": \"/index.html\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton LB Health Monitor Post Failed NB");
+        return content;
+    }
+
+    public void singleton_lb_healthMonitor_with_one_query_item_test(String createJsonString) {
+        String url = base + "/lbaas/healthmonitors";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "healthmonitors");
     }
 
     public void healthMonitor_update_test() {
@@ -82,7 +88,8 @@ public class NeutronLBHealthMonitorTests {
 
     public static void runTests(String base) {
         NeutronLBHealthMonitorTests healthMonitor_tester = new NeutronLBHealthMonitorTests(base);
-        healthMonitor_tester.singleton_lb_healthMonitor_create_test();
+        String createJsonString = healthMonitor_tester.singleton_lb_healthMonitor_create_test();
+        healthMonitor_tester.singleton_lb_healthMonitor_with_one_query_item_test(createJsonString);
         healthMonitor_tester.healthMonitor_update_test();
         healthMonitor_tester.healthMonitor_element_get_test();
         healthMonitor_tester.healthMonitor_element_get_with_query_test();
