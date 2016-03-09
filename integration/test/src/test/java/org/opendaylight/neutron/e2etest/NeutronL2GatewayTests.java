@@ -28,7 +28,7 @@ public class NeutronL2GatewayTests {
         ITNeutronE2E.test_fetch(url, "Firewall Collection GET failed");
     }
 
-    public void singleton_l2gateway_create_test() {
+    public String singleton_l2gateway_create_test() {
         String url = base + "/l2-gateways";
         String content = " { \"l2_gateway\": { \"name\": \"gateway1\"," +
             "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\"," +
@@ -37,6 +37,12 @@ public class NeutronL2GatewayTests {
             "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100] }] " +
             "}] } }";
         ITNeutronE2E.test_create(url, content, "L2 Gateway Singleton Post Failed");
+        return content;
+    }
+
+    public void singleton_l2gateway_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/l2-gateways";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "l2_gateways");
     }
 
     public void l2gateway_modify_test() {
@@ -74,7 +80,8 @@ public class NeutronL2GatewayTests {
 
     public static void runTests(String base) {
         NeutronL2GatewayTests l2gateway_tester = new NeutronL2GatewayTests(base);
-        l2gateway_tester.singleton_l2gateway_create_test();
+        String createJsonString = l2gateway_tester.singleton_l2gateway_create_test();
+        l2gateway_tester.singleton_l2gateway_get_with_one_query_item_test(createJsonString);
         l2gateway_tester.l2gateway_element_get_test();
         l2gateway_tester.l2gateway_element_get_with_query_test();
         l2gateway_tester.l2gateway_collection_get_test();
