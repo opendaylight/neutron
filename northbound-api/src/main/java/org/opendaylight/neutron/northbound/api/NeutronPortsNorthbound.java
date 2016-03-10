@@ -166,7 +166,7 @@ public class NeutronPortsNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("network_id") String queryNetworkID,
             @QueryParam("name") String queryName,
-            @QueryParam("admin_state_up") String queryAdminStateUp,
+            @QueryParam("admin_state_up") Boolean queryAdminStateUp,
             @QueryParam("status") String queryStatus,
             @QueryParam("mac_address") String queryMACAddress,
             @QueryParam("device_id") String queryDeviceID,

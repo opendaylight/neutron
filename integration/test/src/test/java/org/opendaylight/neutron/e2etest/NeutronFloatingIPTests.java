@@ -29,7 +29,7 @@ public class NeutronFloatingIPTests {
         ITNeutronE2E.test_fetch(url,"FloatingIP Collection GET failed");
     }
 
-    public void singleton_floatingIP_create_test() {
+    public String singleton_floatingIP_create_test() {
         String url = base + "/floatingips";
         String content = "{ \"floatingip\": { " +
             "\"fixed_ip_address\": \"10.0.0.3\"," +
@@ -41,6 +41,12 @@ public class NeutronFloatingIPTests {
             "\"status\": \"ACTIVE\"," +
             "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Floating IP Post Failed NB");
+        return content;
+    }
+
+    public void singleton_floatingIP_get_with_one_query_item_test(String createJsonString) {
+        String url = base + "/floatingips";
+        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "floatingips");
     }
 
     public void update_floatingIP_test() {
@@ -93,7 +99,8 @@ public class NeutronFloatingIPTests {
 
     public static void runTests(String base) {
         NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
-        floatingIP_tester.singleton_floatingIP_create_test();
+        String createJsonString = floatingIP_tester.singleton_floatingIP_create_test();
+        floatingIP_tester.singleton_floatingIP_get_with_one_query_item_test(createJsonString);
         floatingIP_tester.update_floatingIP_test();
         floatingIP_tester.floatingIP_element_get_test();
         floatingIP_tester.floatingIP_element_get_with_query_test();
