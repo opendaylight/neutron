@@ -37,7 +37,7 @@
   <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature>war</feature>
-    <feature version='${mdsal.version}'>odl-mdsal-broker</feature>
+    <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
     <bundle>mvn:org.opendaylight.neutron/transcriber/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
