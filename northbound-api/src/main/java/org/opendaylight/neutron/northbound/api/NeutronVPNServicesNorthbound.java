@@ -218,6 +218,7 @@ public class NeutronVPNServicesNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateVPNService(@PathParam("serviceID") String serviceID, final NeutronVPNServiceRequest input) {
         return update(serviceID, input);
@@ -230,6 +231,7 @@ public class NeutronVPNServicesNorthbound
     @Path("{serviceID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
         return delete(serviceID);

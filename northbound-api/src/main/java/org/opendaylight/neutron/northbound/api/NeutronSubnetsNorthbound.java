@@ -264,6 +264,7 @@ public class NeutronSubnetsNorthbound
     //@TypeHint(OpenStackSubnets.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSubnet(
             @PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input
@@ -278,6 +279,7 @@ public class NeutronSubnetsNorthbound
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSubnet(
             @PathParam("subnetUUID") String subnetUUID) {
