@@ -48,15 +48,16 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
                             // return fields
                             List<String> fields) {
         I neutronCRUD = getNeutronCRUD();
-        if (!neutronCRUD.exists(uuid)) {
+        T ans = neutronCRUD.get(uuid);
+        if (ans == null) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
+
         if (fields.size() > 0) {
-            T ans = neutronCRUD.get(uuid);
             return Response.status(HttpURLConnection.HTTP_OK).entity(
                     newNeutronRequest(extractFields(ans, fields))).build();
         } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(neutronCRUD.get(uuid))).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();
         }
     }
 
@@ -87,14 +88,16 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
         T delta = input.getSingleton();
         T original = neutronCRUD.get(uuid);
         if (original == null) {
-            throw new ResourceNotFoundException(getResourceName() + " doesn't Exist");
+            throw new ResourceNotFoundException(uuidNoExist());
         }
         updateDelta(uuid, delta, original);
 
         /*
          * update the object and return it
          */
-        neutronCRUD.update(uuid, delta);
+        if (!neutronCRUD.update(uuid, delta)) {
+            throw new ResourceNotFoundException(uuidNoExist());
+        }
         T updated = neutronCRUD.get(uuid);
         return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(neutronCRUD.get(uuid))).build();
     }
