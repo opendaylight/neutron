@@ -30,8 +30,10 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupAware;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
+import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
+import org.opendaylight.neutron.spi.NeutronSecurityRule;
 
 /**
  * Neutron Northbound REST APIs for Security Group.<br>
@@ -53,6 +55,8 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 public class NeutronSecurityGroupsNorthbound
     extends AbstractNeutronNorthboundIAware<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD, INeutronSecurityGroupAware> {
     private static final String RESOURCE_NAME = "Security Group";
+
+    private INeutronSecurityRuleCRUD securityRuleCRUD;
 
     @Override
     protected String getResourceName() {
@@ -93,6 +97,17 @@ public class NeutronSecurityGroupsNorthbound
     protected void created(Object instance, NeutronSecurityGroup singleton) {
         INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
         service.neutronSecurityGroupCreated(singleton);
+
+        /*
+            Get the list of Default security rules associated with security group
+         */
+        final List<NeutronSecurityRule> neutronSecurityRules = singleton.getSecurityRules();
+        securityRuleCRUD = getSecurityRuleCRUD();
+        if(neutronSecurityRules != null && !neutronSecurityRules.isEmpty()) {
+            for(NeutronSecurityRule neutronSecurityRule : neutronSecurityRules) {
+                securityRuleCRUD.addNeutronSecurityRule(neutronSecurityRule);
+            }
+        }
     }
 
     @Override
@@ -117,6 +132,18 @@ public class NeutronSecurityGroupsNorthbound
     protected void deleted(Object instance, NeutronSecurityGroup singleton) {
         INeutronSecurityGroupAware service = (INeutronSecurityGroupAware) instance;
         service.neutronSecurityGroupDeleted(singleton);
+
+        /*
+            Delete all the security rules associated with the group
+            when a security group is deleted.
+         */
+        String sgId = singleton.getID();
+        securityRuleCRUD = getSecurityRuleCRUD();
+        for (NeutronSecurityRule rule: securityRuleCRUD.getAll()) {
+            if (rule.getSecurityRuleGroupID().equals(sgId)) {
+                securityRuleCRUD.remove(rule.getID());
+            }
+        }
     }
 
     /**
@@ -228,5 +255,13 @@ public class NeutronSecurityGroupsNorthbound
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {
         return delete(securityGroupUUID);
+    }
+
+    private INeutronSecurityRuleCRUD getSecurityRuleCRUD() {
+        final NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityRuleCRUD(this);
+        if (answer.getSecurityRuleInterface() == null) {
+            throw new ServiceUnavailableException(serviceUnavailable());
+        }
+        return answer.getSecurityRuleInterface();
     }
 }
