@@ -217,6 +217,7 @@ public class NeutronFirewallPolicyNorthbound
     //@TypeHint(OpenStackSubnets.class)
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateFirewallPolicy(
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID, final NeutronFirewallPolicyRequest input) {
@@ -230,6 +231,7 @@ public class NeutronFirewallPolicyNorthbound
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewallPolicy(
             @PathParam("firewallPolicyUUID") String firewallPolicyUUID) {

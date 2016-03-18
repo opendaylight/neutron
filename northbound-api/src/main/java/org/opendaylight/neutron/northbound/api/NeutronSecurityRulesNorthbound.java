@@ -228,6 +228,7 @@ public class NeutronSecurityRulesNorthbound
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
@@ -242,6 +243,7 @@ public class NeutronSecurityRulesNorthbound
     @DELETE
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityRule(
             @PathParam ("securityRuleUUID") String securityRuleUUID) {

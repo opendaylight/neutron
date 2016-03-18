@@ -208,6 +208,7 @@ public class NeutronMeteringLabelsNorthbound
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteMeteringLabel(
             @PathParam("labelUUID") String labelUUID) {

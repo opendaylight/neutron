@@ -218,6 +218,7 @@ public class NeutronFirewallNorthbound
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateFirewall(
             @PathParam("firewallUUID") String firewallUUID, final NeutronFirewallRequest input) {
@@ -231,6 +232,7 @@ public class NeutronFirewallNorthbound
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteFirewall(
             @PathParam("firewallUUID") String firewallUUID) {

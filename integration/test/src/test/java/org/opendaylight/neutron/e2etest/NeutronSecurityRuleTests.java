@@ -118,6 +118,11 @@ public class NeutronSecurityRuleTests {
         ITNeutronE2E.test_fetch(url, false, "Security Rule Element Negative Get Failed");
     }
 
+    public void bug5478_rule_delete_negative_test() {
+        String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
+        ITNeutronE2E.test_delete_404(url, "Security Rule Delete 404 Failed");
+    }
+
     public void bug4043_ipv4_test() {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rule\": " +
@@ -194,6 +199,7 @@ public class NeutronSecurityRuleTests {
         securityRule_tester.securityRule_collection_get_test();
         securityRule_tester.sr_delete_test();
         securityRule_tester.sr_element_negative_get_test();
+        securityRule_tester.bug5478_rule_delete_negative_test();
         securityRule_tester.bug4043_ipv4_test();
         securityRule_tester.bug4043_ipv6_test();
         securityRule_tester.sr_bug4257_other_proto_short_test();

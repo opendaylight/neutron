@@ -261,6 +261,7 @@ public class NeutronNetworksNorthbound
     //@TypeHint(OpenStackNetworks.class)
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateNetwork(
             @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
@@ -275,6 +276,7 @@ public class NeutronNetworksNorthbound
     @DELETE
     @StatusCodes({
         @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
         @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteNetwork(
             @PathParam("netUUID") String netUUID) {
