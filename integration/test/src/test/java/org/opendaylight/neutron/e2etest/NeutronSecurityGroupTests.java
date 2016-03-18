@@ -104,6 +104,67 @@ public class NeutronSecurityGroupTests {
         ITNeutronE2E.test_fetch(url, false, "Security Group Element Negative Get Failed");
     }
 
+    public void security_group_default_rule_test() {
+        String url = base + "/security-groups";
+        String sgId = "dddd29d6-67b8-4b3c-8633-027d21195333";
+        String sRuleId1 = "ddddaaf7-175d-4f01-a271-0bf56fb1e7e6";
+        String sRuleId2 = "dddd29d6-67b8-4b3c-8633-027d21195333";
+
+        String content = "{\"security_group\": {\"tenant_id\": " +
+                "\"1dfe7dffa0624ae882cdbda397d1d276\", \"description\": \"\", " +
+                "\"id\": \"" + sgId + "\", " +
+                "\"security_group_rules\": [{\"remote_group_id\": null, " +
+                "\"direction\": \"egress\", \"remote_ip_prefix\": null, " +
+                "\"protocol\": null, \"ethertype\": \"IPv4\", " +
+                "\"tenant_id\": \"1dfe7dffa0624ae882cdbda397d1d276\", " +
+                "\"port_range_max\": null, \"port_range_min\": null, " +
+                "\"id\": \"" + sRuleId1 + "\", " +
+                "\"security_group_id\": \"" + sgId + "\"}, " +
+                "{\"remote_group_id\": null, \"direction\": \"egress\", " +
+                "\"remote_ip_prefix\": null, \"protocol\": null, " +
+                "\"ethertype\": \"IPv6\", \"tenant_id\": " +
+                "\"1dfe7dffa0624ae882cdbda397d1d276\", \"port_range_max\": null, " +
+                "\"port_range_min\": null, \"id\": \"" + sRuleId2 + "\", " +
+                "\"security_group_id\": \"" + sgId + "\"}], " +
+                "\"name\": \"tempest-secgroup-1272206251\"}}";
+
+        // Create Security Group and verify the default Egress rules are added by fetching it.
+        ITNeutronE2E.test_create(url, content, "Default rule Test1 - Security Group Singleton Post Failed");
+        fetchSecurityRule(sRuleId1, true);
+        fetchSecurityRule(sRuleId2, true);
+        // Delete Security Group. All associated rules should be deleted.
+        String deleteUrl = url + "/" + sgId;
+        ITNeutronE2E.test_delete(deleteUrl, "Security Group Delete Failed");
+        fetchSecurityRule(sRuleId1, false);
+        fetchSecurityRule(sRuleId2, false);
+
+        // Create Security Group, Delete the default Egress rules one by one.
+        // The corresponding rule should be removed.
+        ITNeutronE2E.test_create(url, content, "Default rule Test2 - Security Group Singleton Post Failed");
+        deleteSecurityRule(sRuleId1);
+        fetchSecurityRule(sRuleId1, false);
+        fetchSecurityRule(sRuleId2, true);
+        deleteSecurityRule(sRuleId2);
+        fetchSecurityRule(sRuleId1, false);
+        fetchSecurityRule(sRuleId2, false);
+    }
+
+    private void deleteSecurityRule(String sRuleId) {
+        String url = base + "/security-group-rules/" + sRuleId;
+        ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
+    }
+
+    private void fetchSecurityRule(String sRuleId, boolean isPositiveTest) {
+        String sRuleFetchUrl = base + "/security-group-rules/" + sRuleId;
+        String errorMsg = "";
+        if(isPositiveTest) {
+            errorMsg = "Security Rule Element Does Not Exists";
+        } else {
+            errorMsg = "Dangling Security Rule Element Exists";
+        }
+        ITNeutronE2E.test_fetch(sRuleFetchUrl, isPositiveTest, errorMsg);
+    }
+
     public static void runTests(String base) {
         NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
         String createJsonString = securityGroup_tester.singleton_sg_create_test();
@@ -114,5 +175,6 @@ public class NeutronSecurityGroupTests {
         securityGroup_tester.securityGroup_collection_get_test();
         securityGroup_tester.sg_delete_test();
         securityGroup_tester.sg_element_negative_get_test();
+        securityGroup_tester.security_group_default_rule_test();
     }
 }
