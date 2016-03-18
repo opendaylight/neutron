@@ -96,7 +96,7 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
         T delta = input.getSingleton();
         T original = neutronCRUD.get(uuid);
         if (original == null) {
-            throw new ResourceNotFoundException(getResourceName() + " doesn't Exist");
+            throw new ResourceNotFoundException(uuidNoExist());
         }
         updateDelta(uuid, delta, original);
 
@@ -113,7 +113,9 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
         /*
          * update the object and return it
          */
-        neutronCRUD.update(uuid, delta);
+        if (!neutronCRUD.update(uuid, delta)) {
+            throw new ResourceNotFoundException(uuidNoExist());
+        }
         T updated = neutronCRUD.get(uuid);
         if (instances != null) {
             for (Object instance : instances) {
@@ -128,6 +130,9 @@ public abstract class AbstractNeutronNorthboundIAware<T extends INeutronObject, 
         final I neutronCRUD = getNeutronCRUD();
 
         T singleton = neutronCRUD.get(uuid);
+        if (singleton == null) {
+            throw new ResourceNotFoundException(uuidNoExist());
+        }
         Object[] instances = getInstances();
         if (instances != null) {
             for (Object instance : instances) {
