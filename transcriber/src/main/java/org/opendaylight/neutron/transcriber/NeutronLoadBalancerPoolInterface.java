@@ -64,13 +64,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
-    private static final int DEDASHED_UUID_LENGTH = 32;
-    private static final int DEDASHED_UUID_START = 0;
-    private static final int DEDASHED_UUID_DIV1 = 8;
-    private static final int DEDASHED_UUID_DIV2 = 12;
-    private static final int DEDASHED_UUID_DIV3 = 16;
-    private static final int DEDASHED_UUID_DIV4 = 20;
-
     NeutronLoadBalancerPoolInterface(ProviderContext providerContext) {
         super(providerContext);
     }
