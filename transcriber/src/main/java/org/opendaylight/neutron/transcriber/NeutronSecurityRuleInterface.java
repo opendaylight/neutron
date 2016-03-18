@@ -15,10 +15,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
-import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionBase;
@@ -72,40 +69,6 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         super(providerContext);
     }
 
-    private void updateSecGroupRuleInSecurityGroup(NeutronSecurityRule input) {
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronSecurityGroupCRUD(this);
-        INeutronSecurityGroupCRUD sgCrud = interfaces.getSecurityGroupInterface();
-        NeutronSecurityGroup sg = sgCrud.getNeutronSecurityGroup(input.getSecurityRuleGroupID());
-        if(sg != null && sg.getSecurityRules() != null) {
-            for(NeutronSecurityRule sgr :sg.getSecurityRules()) {
-                if(sgr != null && sgr.getID() != null && sgr.getID().equals(input.getID())) {
-                    int index = sg.getSecurityRules().indexOf(sgr);
-                    sg.getSecurityRules().set(index, input);
-                }
-            }
-        }
-        if (sg != null) {
-            sg.getSecurityRules().add(input);
-        }
-    }
-
-    private void removeSecGroupRuleFromSecurityGroup(NeutronSecurityRule input) {
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronSecurityGroupCRUD(this);
-        INeutronSecurityGroupCRUD sgCrud = interfaces.getSecurityGroupInterface();
-        NeutronSecurityGroup sg = sgCrud.getNeutronSecurityGroup(input.getSecurityRuleGroupID());
-        if(sg != null && sg.getSecurityRules() != null) {
-            List<NeutronSecurityRule> toRemove = new ArrayList<NeutronSecurityRule>();
-            for(NeutronSecurityRule sgr :sg.getSecurityRules()) {
-                if(sgr.getID() != null && sgr.getID().equals(input.getID())) {
-                    toRemove.add(sgr);
-                }
-            }
-            sg.getSecurityRules().removeAll(toRemove);
-        }
-    }
-
     @Override
     public boolean neutronSecurityRuleExists(String uuid) {
         return exists(uuid);
@@ -128,32 +91,17 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     public boolean addNeutronSecurityRule(NeutronSecurityRule input) {
-        if (neutronSecurityRuleExists(input.getID())) {
-            return false;
-        }
-        updateSecGroupRuleInSecurityGroup(input);
-        addMd(input);
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeNeutronSecurityRule(String uuid) {
-        if (!neutronSecurityRuleExists(uuid)) {
-            return false;
-        }
-        removeSecGroupRuleFromSecurityGroup(getNeutronSecurityRule(uuid));
-        removeMd(toMd(uuid));
-        return true;
+        return remove(uuid);
     }
 
     @Override
     public boolean updateNeutronSecurityRule(String uuid, NeutronSecurityRule delta) {
-        if (!neutronSecurityRuleExists(uuid)) {
-            return false;
-        }
-        updateSecGroupRuleInSecurityGroup(delta);
-        updateMd(delta);
-        return true;
+        return update(uuid, delta);
     }
 
     @Override
