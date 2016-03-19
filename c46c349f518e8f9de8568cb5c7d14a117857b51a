@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_530506c1",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-19T00:24:20Z",
+      "side": 1,
+      "message": "Please don\u0027t use wildcard import.",
+      "revId": "c46c349f518e8f9de8568cb5c7d14a117857b51a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_330afad2",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-19T00:24:20Z",
+      "side": 1,
+      "message": "In order to avoid nasty initialization dependenty, please get this on demand like getNeturonCRUD().",
+      "revId": "c46c349f518e8f9de8568cb5c7d14a117857b51a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_930f8ee1",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-19T00:24:20Z",
+      "side": 1,
+      "message": "Please keep the creation/deltion order consistent.\ncreate group, then create rule.",
+      "revId": "c46c349f518e8f9de8568cb5c7d14a117857b51a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_d3f8f6c6",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-19T00:24:20Z",
+      "side": 1,
+      "message": "getID().",
+      "revId": "c46c349f518e8f9de8568cb5c7d14a117857b51a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a42497e_b3f56acd",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-19T00:24:20Z",
+      "side": 1,
+      "message": "getID()",
+      "revId": "c46c349f518e8f9de8568cb5c7d14a117857b51a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
