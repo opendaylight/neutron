@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_3dbacfe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-21T21:17:51Z",
+      "side": 1,
+      "message": "This isn\u0027t needed as the subject line says so.",
+      "revId": "e832c0c1ae1fe7f34ac06019951c84113bdd37de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_ddedabf1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-21T21:17:51Z",
+      "side": 1,
+      "message": "https://review.openstack.org/#/c/294451/\nPlease include the pointer to the patch.",
+      "revId": "e832c0c1ae1fe7f34ac06019951c84113bdd37de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_9de32305",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-21T21:17:51Z",
+      "side": 1,
+      "message": "For consistency, don\u0027t cache the result.\nSurrounding codes don\u0027t.",
+      "revId": "e832c0c1ae1fe7f34ac06019951c84113bdd37de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
