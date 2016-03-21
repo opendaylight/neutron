@@ -15,12 +15,10 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
-import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.Neutron_IPs;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
@@ -96,28 +94,12 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
 
     @Override
     public boolean addSubnet(NeutronSubnet input) {
-        String id = input.getID();
-        if (subnetExists(id)) {
-            return false;
-        }
-        addMd(input);
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronNetworkCRUD(this);
-        INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
-        return true;
+        return add(input);
     }
 
     @Override
     public boolean removeSubnet(String uuid) {
-        NeutronSubnet target = getSubnet(uuid);
-        if (target == null) {
-            return false;
-        }
-        removeMd(toMd(uuid));
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
-            .fetchINeutronNetworkCRUD(this);
-        INeutronNetworkCRUD networkIf = interfaces.getNetworkInterface();
-        return true;
+        return remove(uuid);
     }
 
     @Override
