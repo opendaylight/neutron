@@ -197,30 +197,24 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_fetch(String url_s, String context) {
+    static void test_fetch(String url_s, int responseCode, String context) {
         try {
             URL url = new URL(url_s);
             HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
-            Assert.assertEquals(context, 200, httpConn.getResponseCode());
+            Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (Exception e) {
             e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
 
+    static void test_fetch(String url_s, String context) {
+        test_fetch(url_s, 200, context);
+    }
+
     static void test_fetch(String url_s, boolean positiveTest, String context) {
-        try {
-            URL url = new URL(url_s);
-            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
-            if (positiveTest) {
-                Assert.assertEquals(context, 200, httpConn.getResponseCode());
-            } else {
-                Assert.assertEquals(context, 404, httpConn.getResponseCode());
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // temporary, remove me
-            Assert.assertFalse("E2E Tests Failed", true);
-        }
+        int responseCode = positiveTest ? 200 : 404;
+        test_fetch(url_s, responseCode, context);
     }
 
     static void test_delete(String url_s, String context) {
