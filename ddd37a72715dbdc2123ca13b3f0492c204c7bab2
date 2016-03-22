@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a3f45e8_4679c8fb",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-03-22T20:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a3f45e8_031a1217",
+      "revId": "ddd37a72715dbdc2123ca13b3f0492c204c7bab2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a3f45e8_e31606f1",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2016-03-22T13:57:09Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "ddd37a72715dbdc2123ca13b3f0492c204c7bab2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_267e3ce5",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-03-22T20:14:38Z",
+      "side": 1,
+      "message": "Not applicable here.",
+      "parentUuid": "5a3f45e8_e31606f1",
       "revId": "ddd37a72715dbdc2123ca13b3f0492c204c7bab2",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
