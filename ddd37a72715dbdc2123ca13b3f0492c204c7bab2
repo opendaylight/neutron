@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_031a1217",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-22T13:57:09Z",
+      "side": 1,
+      "message": "Please move down inside if clause because this variable is used only if clause.",
+      "revId": "ddd37a72715dbdc2123ca13b3f0492c204c7bab2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_e31606f1",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSecurityGroupsNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-22T13:57:09Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "ddd37a72715dbdc2123ca13b3f0492c204c7bab2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
