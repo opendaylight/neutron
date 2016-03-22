@@ -210,6 +210,7 @@ public class NeutronSecurityGroupsNorthbound
     @Consumes ({MediaType.APPLICATION_JSON})
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
@@ -224,6 +225,7 @@ public class NeutronSecurityGroupsNorthbound
     @DELETE
     @StatusCodes ({
             @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteSecurityGroup(
             @PathParam ("securityGroupUUID") String securityGroupUUID) {

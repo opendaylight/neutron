@@ -220,6 +220,7 @@ public class NeutronLoadBalancerNorthbound
 
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateLoadBalancer(
             @PathParam("loadBalancerID") String loadBalancerID, final NeutronLoadBalancerRequest input) {
@@ -233,6 +234,7 @@ public class NeutronLoadBalancerNorthbound
     @DELETE
     @StatusCodes({
             @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancer(
             @PathParam("loadBalancerID") String loadBalancerID) {
