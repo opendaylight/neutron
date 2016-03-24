@@ -212,14 +212,22 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_delete(String url_s, String context) {
+    static void test_delete(String url_s, int responseCode, String context) {
         try {
             URL url = new URL(url_s);
             HttpURLConnection httpConn = HttpURLConnectionFactoryDelete(url);
-            Assert.assertEquals(context, 204, httpConn.getResponseCode());
+            Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (Exception e) {
             e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
+    }
+
+    static void test_delete(String url_s, String context) {
+        test_delete(url_s, 204, context);
+    }
+
+    static void test_delete_404(String url_s, String context) {
+        test_delete(url_s, 404, context);
     }
 }
