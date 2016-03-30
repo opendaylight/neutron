@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a4c51b2_39a658c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:22:52Z",
+      "side": 1,
+      "message": "please update it to 4815 as 5621 is marked as duplicated.",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_39bf78d2",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
         "patchSetId": 2
