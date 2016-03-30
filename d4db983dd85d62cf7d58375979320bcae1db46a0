@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a4c51b2_ebc41d61",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T00:04:02Z",
+      "side": 1,
+      "message": "inconsistent naming. hostconfig vs host-config.\nPlease make them consistent.",
+      "revId": "d4db983dd85d62cf7d58375979320bcae1db46a0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_cbcde188",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T00:04:02Z",
+      "side": 1,
+      "message": "Please also mention about neutron agent_db and agent api.",
+      "revId": "d4db983dd85d62cf7d58375979320bcae1db46a0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_6bb92de9",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T00:04:02Z",
+      "side": 1,
+      "message": "Can you please add a link to neutron agent api.\n(if it exists.)",
+      "revId": "d4db983dd85d62cf7d58375979320bcae1db46a0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
