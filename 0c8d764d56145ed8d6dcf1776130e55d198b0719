@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a4c51b2_366308b3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-03-30T07:37:17Z",
+      "side": 1,
+      "message": "similar to update() method below, retry logic will call add() with new transaction chain, and it will again call exist() method for every retry, so i think it\u0027s unnecessary extra blocking read operation it will make. Blocking reads in clustering has latency, so it can cause scaling issues.",
+      "range": {
+        "startLine": 337,
+        "startChar": 23,
+        "endLine": 337,
+        "endChar": 26
+      },
+      "revId": "0c8d764d56145ed8d6dcf1776130e55d198b0719",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_565e94ea",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-03-30T07:37:17Z",
+      "side": 1,
+      "message": "this retry call will re-execute the exist() method as well, so it will make one more read call for every retry. By having this retry logic in updateMd() can avoid that.",
+      "revId": "0c8d764d56145ed8d6dcf1776130e55d198b0719",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
