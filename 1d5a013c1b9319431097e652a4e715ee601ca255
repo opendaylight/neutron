@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a4c51b2_39bf78d2",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:20:19Z",
+      "side": 1,
+      "message": "In order to get consistent view, readMd should be done in single transaction.",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_b9ca686c",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:20:19Z",
+      "side": 1,
+      "message": "exists test should be done in same transaction of addMd()",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_79b900e9",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:20:19Z",
+      "side": 1,
+      "message": "return addMd();",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_19c8bc73",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:20:19Z",
+      "side": 1,
+      "message": "exists() test should be done in the same transaction of removeMD() for consistent view.",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_f9c4f060",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:20:19Z",
+      "side": 1,
+      "message": "exist() test should be done in consistent view.",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_d9cdb488",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T20:20:19Z",
+      "side": 1,
+      "message": "return updateMd();",
+      "revId": "1d5a013c1b9319431097e652a4e715ee601ca255",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
