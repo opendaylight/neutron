@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3a4c51b2_562694bb",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T06:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_8062a2ab",
+      "range": {
+        "startLine": 100,
+        "startChar": 24,
+        "endLine": 100,
+        "endChar": 34
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_405caaed",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
         "patchSetId": 4
@@ -83,6 +107,30 @@
       "writtenOn": "2016-01-05T04:08:01Z",
       "side": 1,
       "message": "i also think re-throw may be better.\n\notherwise, remove the \u0027{}\u0027, as that is not needed when last param is an exception. Similar to line 187 below.",
+      "range": {
+        "startLine": 171,
+        "startChar": 49,
+        "endLine": 171,
+        "endChar": 53
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_d640e437",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T06:20:41Z",
+      "side": 1,
+      "message": "rethrow requires function sigunature change.\nSo it would be addressed by another patches.",
+      "parentUuid": "1aa4ed85_006eb296",
       "range": {
         "startLine": 171,
         "startChar": 49,
@@ -165,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3a4c51b2_362b0884",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T06:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_600686d0",
+      "range": {
+        "startLine": 387,
+        "startChar": 72,
+        "endLine": 387,
+        "endChar": 76
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1aa4ed85_800942df",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
         "patchSetId": 4
@@ -176,6 +248,30 @@
       "writtenOn": "2016-01-05T04:08:01Z",
       "side": 1,
       "message": "remove {}",
+      "range": {
+        "startLine": 391,
+        "startChar": 49,
+        "endLine": 391,
+        "endChar": 53
+      },
+      "revId": "6faf2b89115e043b47e9312ebf152d9f9d0f6767",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_96201c9d",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-03-30T06:20:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa4ed85_800942df",
       "range": {
         "startLine": 391,
         "startChar": 49,
