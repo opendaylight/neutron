@@ -26,6 +26,7 @@ module neutron {
     import neutron-fwaas { prefix "fwaas"; }
     import neutron-bgpvpns { prefix "bgpvpns"; }
     import neutron-hostconfig { prefix "hostconfig"; }
+    import neutron-qos { prefix "qos" ; }
     import neutron-sfc-flow-classifier { prefix "neutron-sfc-flow-classifier"; }
     import neutron-sfc { prefix "neutron-sfc"; }
 
@@ -62,6 +63,7 @@ module neutron {
         uses l2gateways:l2gateways-attributes;
         uses l2gateways:l2gateway-connections-attributes;
         uses hostconfig:hostconfig-attributes;
+        uses qos:policies-attributes;
         uses neutron-sfc-flow-classifier:sfc-flow-classifiers-attributes;
         uses neutron-sfc:sfc-attributes;
     }
