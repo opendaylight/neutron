@@ -1,0 +1,124 @@
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+module neutron-qos {
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-qos";
+
+    prefix neutron-qos;
+
+    import ietf-yang-types { prefix "yang"; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Pramod Raghavendra Jayathirth <pramod.rj07@gmail.com>";
+
+    description "This YANG module defines qos attributes that are used
+        by OpenDaylight Neutron YANG modules.";
+
+        revision "2016-06-13" {
+        description
+                "OpenDaylight Boron release";
+        }
+
+    grouping qos-policy-attributes {
+        leaf shared {
+            type boolean;
+            description "Whether the policy is shared or not";
+        }
+    }
+
+    grouping qos-rule-types {
+        leaf rule-type {
+            type string;
+            config false;
+            description "The type of the qos rule" ;
+        }
+    }
+
+    grouping bandwidthlimit-rule-attributes {
+        leaf tenant-id {
+            type yang:uuid;
+            description "The tenant Id of OpenStack Tenant";
+        }
+        leaf qos-rule-id {
+            type yang:uuid;
+            description "The rule id of the associated rule";
+        }
+        leaf max-kbps {
+            type uint64;
+            description "The maximum KBPS value";
+        }
+        leaf max-burst-kbps {
+            type uint64;
+            description "The burst over the maximum KBPS value";
+        }
+        leaf policy-id {
+            type yang:uuid;
+            description "The policy id to which the rule is associated";
+        }
+    }
+
+    grouping dscpmarking-rule-attributes {
+        leaf tenant-id {
+            type yang:uuid;
+            description "The tenant Id of OpenStack Tenant";
+        }
+        leaf qos-rule-id {
+            type yang:uuid;
+            description "The rule id of the associated rule";
+        }
+        leaf dscp-mark {
+            type uint8 {
+            range "0 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 | 26 | 28 | 30 | 32 | 34 | 36 | 38
+                    | 40 | 46 | 48 | 56 ";}
+            description "the value of dscp mark";
+        }
+        leaf policy-id {
+            type yang:uuid;
+            description "the policy id to which the rule is associated";
+        }
+    }
+
+    grouping qos-attributes {
+        container qos-policies {
+            list qos-policy {
+                key "uuid";
+                uses attrs:base-attributes;
+                uses qos-policy-attributes;
+                uses bandwidth-limit-attributes;
+                uses dscpmarking-attributes;
+            }
+        }
+        container qos-rule-types{
+            list rule-types {
+                key "rule-type";
+                uses qos-rule-types;
+            }
+        }
+    }
+
+    grouping bandwidth-limit-attributes {
+        container bandwidthlimit-attributes {
+            list bandwidthlimit-attributes {
+                key "qos-rule-id";
+                uses bandwidthlimit-rule-attributes;
+            }
+        }
+    }
+
+    grouping dscpmarking-attributes {
+        container dscpmarking-attributes {
+            list dscpmarking-attribute {
+                key "qos-rule-id";
+                uses dscpmarking-rule-attributes;
+            }
+        }
+    }
+}
