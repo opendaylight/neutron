@@ -1,0 +1,147 @@
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+module neutron-qos {
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-qos";
+<<<<<<< HEAD
+
+    prefix neutron-qos;
+
+    import ietf-yang-types { prefix "yang"; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Pramod Raghavendra Jayathirth <pramod.rj07@gmail.com>";
+
+    description "This YANG module defines qos attributes that are used
+        by OpenDaylight Neutron YANG modules.";
+
+        revision "2015-07-12" {
+        description
+                "OpenDaylight Boron release";
+        }
+
+    grouping qos-policy-attributes {
+        leaf descr {
+=======
+    prefix neutron-qos;
+    import ietf-yang-types { prefix "yang"; }
+    import neutron-attrs { prefix "attrs"; }
+    organization "OpenDaylight Neutron Group";
+    contact "Pramod Raghavendra Jayathirth <pramod.rj07@gmail.com>";
+    description "This YANG module defines qos attributes that are used
+        by OpenDaylight Neutron YANG modules.";
+    revision "2015-07-12" {
+        description
+                "OpenDaylight Beryllium release";
+        }
+    grouping qos-policy-attributes {
+        leaf description {
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+            type string;
+            description "detailed description about the qos-policy";
+        }
+        leaf shared {
+            type boolean;
+            description "Wheather the policy is shared or not";
+        }
+<<<<<<< HEAD
+     }
+=======
+    }
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+    grouping dscp-marking-rules-attributes {
+        leaf qos-rule-id {
+            type yang:uuid;
+            description "the rule UUID of the qos-policy";
+        }
+        leaf dscp-mark {
+<<<<<<< HEAD
+            type uint8;
+=======
+            type uint8{
+            range "0 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 | 26 | 28 | 30 | 32 | 34 | 36 | 38 | 40 | 46 | 48 | 56 ";}
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+            description "the value of dscp mark";
+        }
+        leaf policy-id {
+            type yang:uuid;
+            description "the policy id to which the rule is associated";
+        }
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+    grouping bandwidth-limit-rules-attributes {
+        leaf qos-rule-id {
+            type yang:uuid;
+            description "the rule UUID of the qos-policy";
+        }
+        leaf max-kbps {
+<<<<<<< HEAD
+            type uint32;
+            description "The maximum KBPS value";
+        }
+        leaf max-burst-kbps {
+            type uint32;
+=======
+            type uint64;
+            description "The maximum KBPS value";
+        }
+        leaf max-burst-kbps {
+            type uint64;
+            default 0;
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+            description "The burst over the maximum KBPS value";
+        }
+        leaf policy-id {
+            type yang:uuid;
+            description "The policy id to which the rule is associated";
+        }
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+    grouping policy-attributes {
+        container qospolicies {
+            list qospolicy {
+                key "uuid";
+                uses attrs:base-attributes;
+                uses qos-policy-attributes;
+            }
+        }
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+    grouping bandwidth-limit-attributes {
+        container bandwidthlimitattributes {
+            list bandwidthlimitattribute {
+                key "qos-rule-id";
+                uses bandwidth-limit-rules-attributes;
+            }
+        }
+    }
+<<<<<<< HEAD
+
+=======
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
+    grouping dscp-marking-attributes {
+        container dscpmarkingattributes {
+            list dscpmarkingattribute {
+                key "qos-rule-id";
+                uses dscp-marking-rules-attributes;
+            }
+        }
+    }
+}

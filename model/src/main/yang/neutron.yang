@@ -26,6 +26,11 @@ module neutron {
     import neutron-fwaas { prefix "fwaas"; }
     import neutron-bgpvpns { prefix "bgpvpns"; }
     import neutron-hostconfig { prefix "hostconfig"; }
+<<<<<<< HEAD
+    import neutron-qos { prefix "qos" ; }
+=======
+    import neutron-qos { prefix "qos" ; }	
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
 
     organization "OpenDaylight Neutron Group";
 
@@ -60,5 +65,14 @@ module neutron {
         uses l2gateways:l2gateways-attributes;
         uses l2gateways:l2gateway-connections-attributes;
         uses hostconfig:hostconfig-attributes;
+<<<<<<< HEAD
+        uses qos:policy-attributes;
+        uses qos:bandwidth-limit-attributes;
+        uses qos:dscp-marking-attributes;
+=======
+	uses qos:policy-attributes;
+	uses qos:bandwidth-limit-attributes;
+	uses qos:dscp-marking-attributes;
+>>>>>>> Defines Yang model for enabling Quality of Service feature in Neutron
     }
 }
