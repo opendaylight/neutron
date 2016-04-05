@@ -15,8 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronCRUDInterfaces {
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(NeutronCRUDInterfaces.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private INeutronNetworkCRUD networkInterface;
     private INeutronSubnetCRUD subnetInterface;
@@ -41,6 +40,7 @@ public class NeutronCRUDInterfaces {
     private INeutronBgpvpnCRUD bgpvpnInterface;
     private INeutronL2gatewayCRUD l2gatewayInterface;
     private INeutronL2gatewayConnectionCRUD l2gatewayConnectionInterface;
+    private INeutronQosPolicyCRUD qospInterface;
 
     public NeutronCRUDInterfaces() {
     }
@@ -141,6 +141,10 @@ public class NeutronCRUDInterfaces {
         return bgpvpnInterface;
     }
 
+    public INeutronQosPolicyCRUD getQosPolicyInterface() {
+        return qospInterface;
+    }
+
     public NeutronCRUDInterfaces fetchINeutronNetworkCRUD(Object obj) {
         networkInterface = (INeutronNetworkCRUD) getInstances(INeutronNetworkCRUD.class, obj);
         return this;
@@ -167,7 +171,8 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronSecurityGroupCRUD(Object obj) {
-        sgInterface = (INeutronSecurityGroupCRUD) getInstances(INeutronSecurityGroupCRUD.class, obj);
+        sgInterface =
+            (INeutronSecurityGroupCRUD) getInstances(INeutronSecurityGroupCRUD.class, obj);
         return this;
     }
 
@@ -182,7 +187,8 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronFirewallPolicyCRUD(Object obj) {
-        fwpInterface = (INeutronFirewallPolicyCRUD) getInstances(INeutronFirewallPolicyCRUD.class, obj);
+        fwpInterface =
+            (INeutronFirewallPolicyCRUD) getInstances(INeutronFirewallPolicyCRUD.class, obj);
         return this;
     }
 
@@ -197,37 +203,45 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronLoadBalancerPoolCRUD(Object obj) {
-        lbpInterface = (INeutronLoadBalancerPoolCRUD) getInstances(INeutronLoadBalancerPoolCRUD.class, obj);
+        lbpInterface =
+            (INeutronLoadBalancerPoolCRUD) getInstances(INeutronLoadBalancerPoolCRUD.class, obj);
         return this;
     }
 
     public NeutronCRUDInterfaces fetchINeutronLoadBalancerListenerCRUD(Object obj) {
-        lblInterface = (INeutronLoadBalancerListenerCRUD) getInstances(INeutronLoadBalancerListenerCRUD.class, obj);
+        lblInterface =
+            (INeutronLoadBalancerListenerCRUD) getInstances(INeutronLoadBalancerListenerCRUD.class,
+                obj);
         return this;
     }
 
     public NeutronCRUDInterfaces fetchINeutronLoadBalancerHealthMonitorCRUD(Object obj) {
-        lbhmInterface = (INeutronLoadBalancerHealthMonitorCRUD) getInstances(INeutronLoadBalancerHealthMonitorCRUD.class, obj);
+        lbhmInterface = (INeutronLoadBalancerHealthMonitorCRUD) getInstances(
+            INeutronLoadBalancerHealthMonitorCRUD.class, obj);
         return this;
     }
 
     public NeutronCRUDInterfaces fetchINeutronMeteringLabelCRUD(Object obj) {
-        mlInterface = (INeutronMeteringLabelCRUD) getInstances(INeutronMeteringLabelCRUD.class, obj);
+        mlInterface =
+            (INeutronMeteringLabelCRUD) getInstances(INeutronMeteringLabelCRUD.class, obj);
         return this;
     }
 
     public NeutronCRUDInterfaces fetchINeutronMeteringLabelRuleCRUD(Object obj) {
-        mlrInterface = (INeutronMeteringLabelRuleCRUD) getInstances(INeutronMeteringLabelRuleCRUD.class, obj);
+        mlrInterface =
+            (INeutronMeteringLabelRuleCRUD) getInstances(INeutronMeteringLabelRuleCRUD.class, obj);
         return this;
     }
 
     public NeutronCRUDInterfaces fetchINeutronVPNIKEPolicyCRUD(Object obj) {
-        ikepInterface = (INeutronVPNIKEPolicyCRUD) getInstances(INeutronVPNIKEPolicyCRUD.class, obj);
+        ikepInterface =
+            (INeutronVPNIKEPolicyCRUD) getInstances(INeutronVPNIKEPolicyCRUD.class, obj);
         return this;
     }
 
     public NeutronCRUDInterfaces fetchINeutronVPNIPSECPolicyCRUD(Object obj) {
-        ipsecpInterface = (INeutronVPNIPSECPolicyCRUD) getInstances(INeutronVPNIPSECPolicyCRUD.class, obj);
+        ipsecpInterface =
+            (INeutronVPNIPSECPolicyCRUD) getInstances(INeutronVPNIPSECPolicyCRUD.class, obj);
         return this;
     }
 
@@ -237,7 +251,8 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronVPNIPSECSiteConnectionsCRUD(Object obj) {
-        ipsecScInterface = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(INeutronVPNIPSECSiteConnectionsCRUD.class, obj);
+        ipsecScInterface = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(
+            INeutronVPNIPSECSiteConnectionsCRUD.class, obj);
         return this;
     }
 
@@ -252,7 +267,14 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronL2gatewayConnectionCRUD(Object obj) {
-        l2gatewayConnectionInterface = (INeutronL2gatewayConnectionCRUD) getInstances(INeutronL2gatewayConnectionCRUD.class, obj);
+        l2gatewayConnectionInterface =
+            (INeutronL2gatewayConnectionCRUD) getInstances(INeutronL2gatewayConnectionCRUD.class,
+                obj);
+        return this;
+    }
+
+    public NeutronCRUDInterfaces fetchINeutronQosPolicyCRUD(Object obj) {
+        qospInterface = (INeutronQosPolicyCRUD) getInstances(INeutronQosPolicyCRUD.class, obj);
         return this;
     }
 
