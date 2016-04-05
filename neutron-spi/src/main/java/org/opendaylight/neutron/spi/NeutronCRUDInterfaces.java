@@ -45,6 +45,7 @@ public class NeutronCRUDInterfaces {
     private INeutronSFCPortPairCRUD sfcPortPairInterface;
     private INeutronSFCPortPairGroupCRUD sfcPortPairGroupInterface;
     private INeutronSFCPortChainCRUD sfcPortChainInterface;
+    private INeutronQosPolicyCRUD qospInterface;
 
     public NeutronCRUDInterfaces() {
     }
@@ -159,6 +160,10 @@ public class NeutronCRUDInterfaces {
 
     public INeutronSFCPortChainCRUD getSFCPortChainInterface() {
         return sfcPortChainInterface;
+    }
+
+    public INeutronQosPolicyCRUD getQosPolicyInterface() {
+        return qospInterface;
     }
 
     public NeutronCRUDInterfaces fetchINeutronNetworkCRUD(Object obj) {
@@ -297,6 +302,11 @@ public class NeutronCRUDInterfaces {
     public NeutronCRUDInterfaces fetchINeutronSFCPortChainCRUD (Object obj) {
         sfcPortChainInterface =
                 (INeutronSFCPortChainCRUD) getInstances(INeutronSFCPortChainCRUD.class, obj);
+        return this;
+    }
+
+    public NeutronCRUDInterfaces fetchINeutronQosPolicyCRUD(Object obj) {
+        qospInterface = (INeutronQosPolicyCRUD) getInstances(INeutronQosPolicyCRUD.class, obj);
         return this;
     }
 
