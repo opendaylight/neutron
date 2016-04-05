@@ -1,0 +1,139 @@
+
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-qos {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-qos";
+
+    prefix neutron-qos;
+
+    import ietf-yang-types { prefix "yang"; }
+    import yang-ext { prefix "ext"; }
+    import neutron { prefix "neutron"; }
+    import neutron-attrs { prefix "attrs"; }
+
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Pramod Raghavendra Jayathirth <pramod.rj07@gmail.com>";
+
+    description "This YANG module defines qos attributes that are used
+        by OpenDaylight Neutron YANG modules.";
+
+    revision "2015-07-12" {
+        description
+                "OpenDaylight Beryllium release";
+    }
+
+    grouping qos-attributes{
+        leaf name{
+        type string;
+        description "The name of the qos";
+        }
+
+        leaf descr{
+        type string;
+        description "Detailed information about the qos";
+        }
+
+        leaf shared{
+        type boolean;
+        description "Wheather the qos policy is shared or not";
+         }
+    }
+
+    grouping qos-policy-attributes{
+        leaf name{
+        type string;
+        description "the name of the qos-policy";
+        }
+
+        leaf descr{
+        type string;
+        description "detailed description about the qos-policy";
+        }
+
+        leaf shared{
+        type boolean;
+        description "Wheather the policy is shared or not";
+        }
+
+        leaf-list bandwidth_limit_rules{
+        description "bandwidth limit rules associated with the QoS policy";
+        type yang:uuid;
+        }
+
+    }
+
+    grouping bandwidth_limit_rules attributes{
+        leaf descr{
+            type string;
+            description "detailed description of the qos-rule";
+            }
+
+        leaf qos-policy-id{
+            type yang:uuid;
+            description "the UUID of the qos-policy";
+            }
+
+        leaf qos-rule-id{
+            type yang:uuid;
+            description "the UUID of the rule in qos-policy";
+            }
+
+        leaf max_kbps{
+            type integer;
+            description "The maximum KBPS value";
+            }
+
+
+        leaf max_burst_kbps{
+            type integer;
+            description "The burst over the maximum KBPS value";
+            }
+    }
+
+
+        grouping qos-attributes {
+            container qos-attributes {
+                list qos-attributes {
+                key "uuid";
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
+                uses qos-attributes;
+            }
+        }
+    }
+
+        grouping qos-policy-attributes {
+            container qos-policy {
+                list qos-policy {
+                    key "uuid";
+                    uses attrs:base-attributes;
+                    uses attrs:admin-attributes;
+                    uses qos-policy-attributes;
+            }
+         }
+    }
+
+        grouping bandwidth_limit_rules attributes {
+            container bandwidth_limit_rules attributes  {
+                list bandwidth_limit_rules attributes  {
+                        key "uuid";
+                        uses attrs:base-attributes;
+                        uses attrs:admin-attributes;
+                        uses bandwidth_limit_rules attributes;
+            }
+        }
+    }
+
+}
+
