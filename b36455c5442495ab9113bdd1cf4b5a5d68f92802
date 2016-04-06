@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a4c51b2_9f63fa19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-06T17:34:17Z",
+      "side": 1,
+      "message": "In the body of commit message, please include the links to neutron qos api and its data model.\n\nThe next step is to implemement/update REST related to QoS.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_7a3c3c94",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-06T17:34:17Z",
+      "side": 1,
+      "message": "unnecessary blank line",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_ba46c421",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-06T17:34:17Z",
+      "side": 1,
+      "message": "space before \"{\" brace.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_da41100d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-06T17:34:17Z",
+      "side": 1,
+      "message": "indent.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_fa47ac1b",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-06T17:34:17Z",
+      "side": 1,
+      "message": "Please be consistent. type, then description.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_5a5500c5",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-06T17:34:17Z",
+      "side": 1,
+      "message": "indent.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
