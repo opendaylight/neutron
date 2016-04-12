@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "1a494da4_30314ea3",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2016-04-12T13:38:13Z",
+      "side": 1,
+      "message": "Would things like the local_ip and provider_mappings be a good fit here? netvirt uses the local_ip to know what the vtep tunnel ip dst addresses are. netvirt uses the provider_mappings to know what interface to use for the br-ex external traffic and for what interface to use for vlan networks.",
+      "revId": "d4db983dd85d62cf7d58375979320bcae1db46a0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_6bb92de9",
         "filename": "model/src/main/yang/neutron-hostconfig.yang",
         "patchSetId": 1
