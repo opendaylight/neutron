@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "1a494da4_b0227eff",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-12T14:29:02Z",
+      "side": 1,
+      "message": "Those parameters will be coded in config as json dictionary.\nThis follows how neutron agents does.\n\nexample should\u0027ve been added in description?",
+      "parentUuid": "1a494da4_30314ea3",
+      "revId": "d4db983dd85d62cf7d58375979320bcae1db46a0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_6bb92de9",
         "filename": "model/src/main/yang/neutron-hostconfig.yang",
         "patchSetId": 1
