@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a494da4_b35a8381",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "add blank line after subject line.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_935f8772",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "Please add not only link, but also explanation in the body of commit message.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_f301ab3a",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "ext isn\u0027t used.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_5365ff43",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "tab. please expand to spaces.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_b3e8c37d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "typo: \u0027_\u0027 -\u003e \u0027-\u0027",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_53f33f73",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "dhcp-mark-rules is missing",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_d3fe2f38",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "policy id isn\u0027t necessary because rules are child of policy.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_93edc78e",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "indent.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_53c17fe3",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "How did you determine this type?",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_73ee3b8d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "association port -\u003e policy-id and network-\u003epolicy-id is necessary.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_b3b60389",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:07:22Z",
+      "side": 1,
+      "message": "rule-types is missing.",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
