@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a494da4_33779304",
+        "filename": "features/production/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T06:11:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this line be removed?",
+      "revId": "e46e800aae6d8c8faa3e2b2e2bf137409430b9ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_137417fc",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T06:11:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this line be removed?",
+      "revId": "e46e800aae6d8c8faa3e2b2e2bf137409430b9ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
