@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a494da4_d3ac6f38",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:13:13Z",
+      "side": 1,
+      "message": "inconsiste naming. hostconfig vs host-config",
+      "revId": "74add4ed4fe1ba3c94a6739516fa8347cf9c3065",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_f376cbd7",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:13:13Z",
+      "side": 1,
+      "message": "Boron?",
+      "revId": "74add4ed4fe1ba3c94a6739516fa8347cf9c3065",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_d373cfe5",
+        "filename": "model/src/main/yang/neutron-hostconfig.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-04-14T07:13:13Z",
+      "side": 1,
+      "message": "inconsistent naming. hostconfig vs host-config",
+      "revId": "74add4ed4fe1ba3c94a6739516fa8347cf9c3065",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
