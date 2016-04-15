@@ -118,7 +118,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
         T item = toMd(neutronObject);
         InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        tx.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
+        tx.merge(LogicalDatastoreType.CONFIGURATION, iid, item,true);
         CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         future.get();   // Check if it's successfuly committed, otherwise exception will be thrown.
     }
