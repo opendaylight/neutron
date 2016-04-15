@@ -174,7 +174,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
             WriteTransaction transaction = chain.newWriteOnlyTransaction();
             T item = toMd(neutronObject);
             InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-            transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
+            transaction.merge(LogicalDatastoreType.CONFIGURATION, iid, item, true);
             CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
             try {
                 future.get();
