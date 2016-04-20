@@ -18,6 +18,9 @@ import java.net.URL;
 import org.junit.Assert;
 
 public class NeutronNetworkTests {
+
+    private static final int TIMEOUT = 180;
+
     String base;
 
     public NeutronNetworkTests(String base) {
@@ -28,7 +31,7 @@ public class NeutronNetworkTests {
         String url_s = base + "/networks";
         try {
             int i = 0;
-            while (i < 60) {
+            while (i < TIMEOUT) {
                 URL url = new URL(url_s);
                 HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
                 if (httpConn.getResponseCode() != 200) {

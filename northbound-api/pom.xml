@@ -51,7 +51,6 @@
       <artifactId>org.osgi.core</artifactId>
     </dependency>
   </dependencies>
-
   <build>
     <plugins>
       <plugin>
@@ -61,18 +60,18 @@
         <configuration>
           <instructions>
             <Import-Package>
-              org.eclipse.jetty.servlets,
-              org.eclipse.persistence.jaxb.rs,
               com.sun.jersey.spi.container.servlet,
+              org.eclipse.jetty.servlets,
+              org.opendaylight.aaa.shiro.filters,
+              org.opendaylight.aaa.shiro.realm,
+              org.opendaylight.aaa.shiro.web.env,
+              org.apache.shiro.web.env,
+              !org.codehaus.enunciate.jaxrs,
               javax.validation,
-              javax.ws.rs,
               javax.ws.rs.ext,
-              javax.ws.rs.core,
-              javax.xml.bind.annotation,
               javax.xml.bind,
-              org.slf4j,
-              org.osgi.framework,
-              !org.codehaus.enunciate.jaxrs,*</Import-Package>
+              *
+            </Import-Package>
             <Web-ContextPath>/controller/nb/v2/neutron</Web-ContextPath>
           </instructions>
           <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
