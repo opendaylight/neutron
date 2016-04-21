@@ -3,7 +3,7 @@
 <features name="odl-neutron-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.2.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
-   <repository>mvn:org.opendaylight.aaa/features-aaa/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.aaa/features-aaa-shiro/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.yangtools/features-yangtools/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.controller/features-mdsal/{{VERSION}}/xml/features</repository>
@@ -14,7 +14,7 @@
     <feature version='${project.version}'>odl-neutron-transcriber</feature>
   </feature>
   <feature name='odl-neutron-northbound-api' version='${project.version}' description="OpenDaylight :: Neutron :: Northbound">
-    <feature version='${aaa.version}'>odl-aaa-authn</feature>
+    <feature version='${aaa.version}'>odl-aaa-shiro</feature>
     <feature>war</feature>
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <bundle>mvn:org.opendaylight.neutron/northbound-api/{{VERSION}}</bundle>
