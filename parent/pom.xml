@@ -71,7 +71,6 @@
         <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <configuration>
-            <configLocation>${checkstyle.location}/java_rules.xml</configLocation>
             <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
             <consoleOutput>true</consoleOutput>
           </configuration>
