@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa57193c_847440d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-05-04T18:06:40Z",
+      "side": 1,
+      "message": "can you please improve commit message for better understanding ? \ncan you re format it. ideal one would be having a \n\n heading of what it does no more than 50 characters\n\n  brief introduction\n\n  references (if any). \n\n\nan example commit http://paste.openstack.org/show/496124/\n\nand paragraph in your commit should depends how much info you need to provide to make it clear for people reviewing patches",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "221ed0a7ad3004571b679a3b3743c45970cb4140",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
