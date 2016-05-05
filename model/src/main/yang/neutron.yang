@@ -26,7 +26,7 @@ module neutron {
     import neutron-fwaas { prefix "fwaas"; }
     import neutron-bgpvpns { prefix "bgpvpns"; }
     import neutron-hostconfig { prefix "hostconfig"; }
-
+    import neutron-qos { prefix "qos" ; }
     organization "OpenDaylight Neutron Group";
 
     contact "Ed Warnicke <eaw@cisco.com>";
@@ -60,5 +60,8 @@ module neutron {
         uses l2gateways:l2gateways-attributes;
         uses l2gateways:l2gateway-connections-attributes;
         uses hostconfig:hostconfig-attributes;
+        uses qos:policy-attributes;
+        uses qos:bandwidth-limit-attributes;
+        uses qos:dscp-marking-attributes;
     }
 }
