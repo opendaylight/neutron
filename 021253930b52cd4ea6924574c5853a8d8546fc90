@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa57193c_aeb67a3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "Keep the subject line single line. Don\u0027t wrap around.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_0e832657",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "Please add meaningful message body  in addition to those links.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_ee87d25f",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "Please follow the indentation customs of other yang files.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_6e93c2a3",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "Boron",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_8e961693",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "There is no point to split out those augmentation from neutron-qos.yang.\nPlease consolidate those into neutron-qos.yang.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_2e826a4f",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "Please follow the indentation way by other yang files.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_4ef4fef1",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "neutron northbound doesn\u0027t maintain this kind of backpointer.\nplease drop this.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_8edd7673",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "why int16?",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_2ef9cae9",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_6edaa279",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "why int16?",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_cee76e3f",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-06T21:59:07Z",
+      "side": 1,
+      "message": "why int16?",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
