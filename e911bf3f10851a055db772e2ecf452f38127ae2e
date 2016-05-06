@@ -155,6 +155,24 @@
     },
     {
       "key": {
+        "uuid": "1a494da4_b611ccae",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-06T17:02:58Z",
+      "side": 1,
+      "message": "Hi Isaku,\nit is mentioned in the below link. specified.\n\nhttps://specs.openstack.org/openstack/neutron-specs/specs/liberty/qos-api-extension.html",
+      "parentUuid": "1a494da4_53c17fe3",
+      "revId": "e911bf3f10851a055db772e2ecf452f38127ae2e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a494da4_73ee3b8d",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 4
