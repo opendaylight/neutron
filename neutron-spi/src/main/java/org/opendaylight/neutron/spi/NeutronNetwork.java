@@ -89,16 +89,6 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
         }
     }
 
-    @Deprecated
-    public String getNetworkUUID() {
-        return getID();
-    }
-
-    @Deprecated
-    public void setNetworkUUID(String uuid) {
-        setID(uuid);
-    }
-
     public String getNetworkName() {
         return networkName;
     }

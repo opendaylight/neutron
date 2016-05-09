@@ -13,7 +13,6 @@ module neutron-networks {
 
     prefix neutron-networks;
 
-    import ietf-yang-types { prefix "yang"; }
     import neutron-attrs { prefix "attrs"; }
 
     organization "OpenDaylight Neutron Group";
