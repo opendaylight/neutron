@@ -26,6 +26,8 @@ module neutron {
     import neutron-fwaas { prefix "fwaas"; }
     import neutron-bgpvpns { prefix "bgpvpns"; }
     import neutron-hostconfig { prefix "hostconfig"; }
+    import neutron-sfc-flow-classifier { prefix "neutron-sfcflowclassifier"; }
+    import neutron-sfc { prefix "neutron-sfc"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -60,5 +62,7 @@ module neutron {
         uses l2gateways:l2gateways-attributes;
         uses l2gateways:l2gateway-connections-attributes;
         uses hostconfig:hostconfig-attributes;
+        uses neutron-sfcflowclassifier:sfc-flow-classifiers-attributes;
+        uses neutron-sfc:sfc-attributes;
     }
 }
