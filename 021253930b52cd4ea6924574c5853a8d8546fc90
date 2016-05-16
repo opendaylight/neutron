@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_fa882c24",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-16T21:00:19Z",
+      "side": 1,
+      "message": "This creates the cyclic error if we augment the same in as neutron.yang. hence added in the file called neutron-ext.yang",
+      "parentUuid": "fa57193c_8e961693",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_2e826a4f",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 9
@@ -121,6 +139,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_6e48e22d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-16T21:00:19Z",
+      "side": 1,
+      "message": "Does this mean this long field Isaku? Should i keep the field shorter?",
+      "parentUuid": "fa57193c_4ef4fef1",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_8edd7673",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 9
@@ -132,6 +168,24 @@
       "writtenOn": "2016-05-06T21:59:07Z",
       "side": 1,
       "message": "why int16?",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_7a41bc38",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-16T21:00:19Z",
+      "side": 1,
+      "message": "This should be uint8 as per the discussion",
+      "parentUuid": "fa57193c_8edd7673",
       "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -172,6 +226,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_9a48105d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-16T21:00:19Z",
+      "side": 1,
+      "message": "This is uint32 as per the Openstack specification",
+      "parentUuid": "fa57193c_6edaa279",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_cee76e3f",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 9
@@ -183,6 +255,24 @@
       "writtenOn": "2016-05-06T21:59:07Z",
       "side": 1,
       "message": "why int16?",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_fab66cdb",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-16T21:00:19Z",
+      "side": 1,
+      "message": "This is uint32 as per the Openstack API specification",
+      "parentUuid": "fa57193c_cee76e3f",
       "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
