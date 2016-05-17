@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa57193c_3059075b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T22:12:26Z",
+      "side": 1,
+      "message": "Please add your s-o-b.",
+      "revId": "d176d4835c89e76736ebef02a1719f9bf18214b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_50359bf5",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSubnetInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T22:12:26Z",
+      "side": 1,
+      "message": "Please use constants introduced at line 69 and 70.",
+      "revId": "d176d4835c89e76736ebef02a1719f9bf18214b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_f025cfc2",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSubnetInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T22:12:26Z",
+      "side": 1,
+      "message": "subnet.getCidr().getValue() doesn\u0027t work?",
+      "revId": "d176d4835c89e76736ebef02a1719f9bf18214b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
