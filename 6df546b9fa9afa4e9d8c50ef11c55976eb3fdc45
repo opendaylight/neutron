@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "fa57193c_6d19e887",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "Please wrap around at 72char",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_5003db0c",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "Unfortunately, now sfc support only \"tcp\", \"udp\", \"icmp\".\nSo sinple protocol-base doesn\u0027t work here because protocol-base simply accepts other protocol names.",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_b00a371f",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "Although this doesn\u0027t harm, do we need this restriction?",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_d00ecb31",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "typo: L7, not L3",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_65baa26f",
         "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
         "patchSetId": 1
@@ -19,6 +87,41 @@
         "endLine": 94,
         "endChar": 33
       },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_900d733a",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "My suggestion is to resemble the sfc implementation.\ni.e. keword and value\nflowclassifier_db.py\n\nclass L7Parameter(model_base.BASEV2):\n    \"\"\"Represents a L7 parameter.\"\"\"\n    __tablename__ \u003d \u0027sfc_flow_classifier_l7_parameters\u0027\n    keyword \u003d sa.Column(sa.String(255), primary_key\u003dTrue)\n    value \u003d sa.Column(sa.String(255))\n    classifier_id \u003d sa.Column(\n        sa.String(36),\n        sa.ForeignKey(\u0027sfc_flow_classifiers.id\u0027, ondelete\u003d\u0027CASCADE\u0027),\n        primary_key\u003dTrue)",
+      "parentUuid": "fa57193c_65baa26f",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_502abb7e",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "description (not capitalize) for consistency with other definitions.",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -48,6 +151,58 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_d03c0bc2",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "fa57193c_c5028e3d",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_f0414f3a",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "description(not capital)",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_d0aa4bd1",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "port pair grops is a list. Not set.\nSo we have to do something to keep the list.",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_65a3c24f",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 1
@@ -65,6 +220,24 @@
         "endLine": 65,
         "endChar": 33
       },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_b07d1771",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "I suggest keyword and value as sfc_db.py",
+      "parentUuid": "fa57193c_65a3c24f",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -134,6 +307,41 @@
         "endLine": 128,
         "endChar": 28
       },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_907293ab",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "+1. splitting those resources is consistent with other resources.",
+      "parentUuid": "fa57193c_05fda63a",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_4d1ce477",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:05:12Z",
+      "side": 1,
+      "message": "Given that common flow classifier is under discussion, please append sfc- in order to avoid future name clash.",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
