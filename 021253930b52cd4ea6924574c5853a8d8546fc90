@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_f0c4af93",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:08:28Z",
+      "side": 1,
+      "message": "Then, please add comment to mention it.",
+      "parentUuid": "fa57193c_fa882c24",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_2e826a4f",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 9
