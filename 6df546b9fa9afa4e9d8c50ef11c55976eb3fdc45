@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa57193c_65baa26f",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-17T06:11:29Z",
+      "side": 1,
+      "message": "suggestion: use match-parameter-key, similar to way we use for key-value parameters in ovsdb.yang",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_c5028e3d",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-17T06:11:29Z",
+      "side": 1,
+      "message": "any specific reason to use grouping instead of just using type string in each? A better way might be to declare sfc-base-attributes that in turn uses base-attributes and Description, then use this sfc-base-attributes in everything else. Will avoid need to use description in each one of them.",
+      "range": {
+        "startLine": 33,
+        "startChar": 14,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_65a3c24f",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-17T06:11:29Z",
+      "side": 1,
+      "message": "suggestion: rename to chain-parameter-key, similar to way w do for key-value parameters in ovsdb.yang",
+      "range": {
+        "startLine": 65,
+        "startChar": 18,
+        "endLine": 65,
+        "endChar": 33
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_856ed6ff",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-17T06:11:29Z",
+      "side": 1,
+      "message": "Does this refer to Neutron Port uuid? If yes would prefer it explicitly mentioned, like you do in flow-classifier for source and destination ports.",
+      "range": {
+        "startLine": 96,
+        "startChar": 26,
+        "endLine": 96,
+        "endChar": 65
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_85a09644",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-17T06:11:29Z",
+      "side": 1,
+      "message": "suggestion: same as above for chain-parameter",
+      "range": {
+        "startLine": 115,
+        "startChar": 18,
+        "endLine": 115,
+        "endChar": 44
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_05fda63a",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-17T06:11:29Z",
+      "side": 1,
+      "message": "why were each of these not separate attributes called out explicitly in neutron.yang? I believe the way API works each of these have different CRUD APIs, right? I don\u0027t think it makes any difference [correct me if wrong], but just wondering. I do prefer this approach though.",
+      "range": {
+        "startLine": 128,
+        "startChar": 5,
+        "endLine": 128,
+        "endChar": 28
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
