@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa57193c_30bf47fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:22:58Z",
+      "side": 1,
+      "message": "Please add subject line",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_b042370e",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:22:58Z",
+      "side": 1,
+      "message": "network is redundant.\nqos-extension would do.",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_90457319",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:22:58Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_f04b0f29",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:22:58Z",
+      "side": 1,
+      "message": "Hmm, there are descr and description in the existing yang models.\nWhich is major?",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_5062bbad",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:22:58Z",
+      "side": 1,
+      "message": "There is a restriction.\nPlease check VALID_DSCP_MARKS",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_306d8799",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-17T19:22:58Z",
+      "side": 1,
+      "message": "Why uint32?",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
