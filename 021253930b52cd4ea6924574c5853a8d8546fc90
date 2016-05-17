@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_d0f40bd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-05-17T19:37:03Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "fa57193c_aeb67a3b",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_0e832657",
         "filename": "/COMMIT_MSG",
         "patchSetId": 9
@@ -30,6 +48,47 @@
       "writtenOn": "2016-05-06T21:59:07Z",
       "side": 1,
       "message": "Please add meaningful message body  in addition to those links.",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_300467bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-05-17T19:37:03Z",
+      "side": 1,
+      "message": "as I said its good to have clear introduction.",
+      "parentUuid": "fa57193c_0e832657",
+      "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_10ffa3ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-05-17T19:37:03Z",
+      "side": 1,
+      "message": "I don\u0027t see any purpose of having this in commit mesage ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 64
+      },
       "revId": "021253930b52cd4ea6924574c5853a8d8546fc90",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
