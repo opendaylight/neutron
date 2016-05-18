@@ -86,6 +86,9 @@ public class NeutronL2gatewayInterface extends
                 if (device.getDeviceName() != null){
                     neutronL2gatewayDevice.setDeviceName(device.getDeviceName().toString());
                 }
+                if (device.getUuid() != null) {
+                    neutronL2gatewayDevice.setID(device.getUuid().getValue());
+                }
                 if(device.getInterfaces() != null){
                     for(final Interfaces deviceInterface:device.getInterfaces()){
                         final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface =
@@ -147,6 +150,7 @@ public class NeutronL2gatewayInterface extends
                     interfaces.add(interfacesBuilder.build());
                 }
                 deviceBuilder.setDeviceName(neutronL2gatewayDevice.getDeviceName());
+                deviceBuilder.setUuid(toUuid(neutronL2gatewayDevice.getID()));
                 deviceBuilder.setInterfaces(interfaces);
                 devices.add(deviceBuilder.build());
             }

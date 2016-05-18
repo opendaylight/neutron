@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class NeutronL2gatewayDevice implements Serializable {
+public class NeutronL2gatewayDevice extends Neutron_ID implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,9 @@ public class NeutronL2gatewayDevice implements Serializable {
     }
     @Override
     public String toString() {
-        return "NeutronL2gatewayDevice [neutronL2gwDeviceInterfaces="
+        return "NeutronL2gatewayDevice ["
+                + "id=" + uuid
+                + ", neutronL2gwDeviceInterfaces="
                 + neutronL2gatewayDeviceInterfaces + ", deviceName=" + deviceName
                 + "]";
     }
