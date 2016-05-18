@@ -14,7 +14,6 @@ module neutron-portsecurity {
 
     prefix neutron-portsecurity;
 
-    import ietf-yang-types { prefix "yang"; }
     import yang-ext { prefix "ext"; }
     import neutron { prefix "neutron"; }
 
