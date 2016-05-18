@@ -13,7 +13,6 @@ module neutron-binding {
 
     prefix neutron-binding;
 
-    import ietf-yang-types { prefix "yang"; }
     import yang-ext { prefix "ext"; }
     import neutron { prefix "neutron"; }
 
@@ -42,11 +41,18 @@ module neutron-binding {
                         about functions that the Networking API provides. To enable or
                         disable port filtering features such as security group and anti-MAC/IP
                         spoofing, specify port-filter: True or port-filter: False ";
-            leaf port-filter {
-                type boolean;
+            // work around: "key" as leaf name in list can't be used due to java code
+            // generation. getKey() method is reserved for to retrieve key of the list
+            // and get<Name>() is also generated as a getter. it results in name
+            // collision.
+            // please see BindingGeneratorImpl#typeBuildersToGenTypes() for details.
+            // This isn't easily fixed as it's deeply hard-coded.
+            key details-key;
+            leaf details-key {
+                type string;
             }
-            leaf ovs-hybrid-plug {
-                type boolean;
+            leaf value {
+                type string;
             }
         }
         leaf vif-type {
@@ -60,7 +66,7 @@ module neutron-binding {
         }
     }
 
-    augment "/neutron:neutron/neutron:ports/neutron:port"{
+    augment "/neutron:neutron/neutron:ports/neutron:port" {
         description "This module augments the ports container in
                 the neutron-ports module with binding information.";
         ext:augment-identifier "port-binding-extension";
