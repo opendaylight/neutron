@@ -86,9 +86,6 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (ipsecPolicy.getTenantId() != null) {
             answer.setTenantID(ipsecPolicy.getTenantId());
         }
-        if (ipsecPolicy.getDescr() != null) {
-            answer.setDescription(ipsecPolicy.getDescr());
-        }
         if (ipsecPolicy.getAuthAlgorithm() != null) {
             answer.setAuthAlgorithm(ipsecPolicy.getAuthAlgorithm());
         }
@@ -124,9 +121,6 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         }
         if (ipsecPolicy.getTenantID() != null) {
             ipsecPolicyBuilder.setTenantId(toUuid(ipsecPolicy.getTenantID()));
-        }
-        if (ipsecPolicy.getDescription() != null) {
-            ipsecPolicyBuilder.setDescr(ipsecPolicy.getDescription());
         }
         if (ipsecPolicy.getAuthAlgorithm() != null) {
             ipsecPolicyBuilder.setAuthAlgorithm(ipsecPolicy.getAuthAlgorithm());

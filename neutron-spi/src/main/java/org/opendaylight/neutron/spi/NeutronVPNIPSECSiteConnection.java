@@ -29,9 +29,6 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
     @XmlElement (name = "name")
     String name;
 
-    @XmlElement (name = "description")
-    String description;
-
     @XmlElement (name = "peer_address")
     String peerAddress;
 
@@ -83,14 +80,6 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getPeerAddress() {
@@ -227,9 +216,6 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
             if (s.equals("name")) {
                 ans.setName(this.getName());
             }
-            if (s.equals("description")) {
-                ans.setDescription(this.getDescription());
-            }
             if (s.equals("peer_address")) {
                 ans.setPeerAddress(this.getPeerAddress());
             }
@@ -273,7 +259,7 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
     @Override
     public String toString() {
         return "NeutronVPNIPSECSiteConnection{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
-                + name + '\'' + ", description=" + description + ", peerAddress=" + peerAddress + ", peerID='" + peerID
+                + name + '\'' + ", peerAddress=" + peerAddress + ", peerID='" + peerID
                 + '\'' + ", routeMode='" + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\''
                 + ", preSharedKey='" + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp="
                 + adminStateUp + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\''

@@ -144,7 +144,6 @@ public class NeutronVPNIKEPoliciesNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
             @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("description") String queryDescription,
             @QueryParam("auth_algorithm") String queryAuthAlgorithm,
             @QueryParam("encryption_algorithm") String queryEncryptionAlgorithm,
             @QueryParam("phase1_negotiation_mode") String queryPhase1NegotiationMode,
@@ -160,7 +159,6 @@ public class NeutronVPNIKEPoliciesNorthbound
             NeutronVPNIKEPolicy oSS = i.next();
             if ((queryID == null || queryID.equals(oSS.getID())) &&
                     (queryName == null || queryName.equals(oSS.getName())) &&
-                    (queryDescription == null || queryDescription.equals(oSS.getDescription())) &&
                     (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm())) &&
                     (queryEncryptionAlgorithm == null || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm())) &&
                     (queryPhase1NegotiationMode == null || queryPhase1NegotiationMode.equals(oSS.getPhase1NegotiationMode())) &&
