@@ -40,9 +40,6 @@ public class NeutronVPNIKEPolicyJAXBTest {
             Assert.assertEquals("NeutronVPNIKEPolicy JAXB Test 3: Testing name failed",
                   "ikepolicy1", testObject.getName());
 
-            Assert.assertEquals("NeutronVPNIKEPolicy JAXB Test 4: Testing description failed",
-                  "updated description", testObject.getDescription());
-
             Assert.assertEquals("NeutronVPNIKEPolicy JAXB Test 5: Testing auth algorithm failed",
                   "sha1", testObject.getAuthAlgorithm());
 

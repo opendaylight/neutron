@@ -42,9 +42,6 @@ public class NeutronVPNService extends NeutronObject implements Serializable, IN
     @XmlElement (name = "subnet_id")
     String subnetUUID;
 
-    @XmlElement (name = "description")
-    String description;
-
     public NeutronVPNService() {
     }
 
@@ -86,14 +83,6 @@ public class NeutronVPNService extends NeutronObject implements Serializable, IN
         this.subnetUUID = subnetUUID;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public NeutronVPNService extractFields(List<String> fields) {
         NeutronVPNService ans = new NeutronVPNService();
         Iterator<String> i = fields.iterator();
@@ -104,9 +93,6 @@ public class NeutronVPNService extends NeutronObject implements Serializable, IN
             }
             if (s.equals("admin_state_up")) {
                 ans.setAdminStateUp(this.getAdminStateUp());
-            }
-            if (s.equals("description")) {
-                ans.setDescription(this.getDescription());
             }
             if (s.equals("name")) {
                 ans.setName(this.getName());
