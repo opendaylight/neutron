@@ -29,9 +29,6 @@ public class NeutronVPNIKEPolicy extends NeutronObject implements Serializable, 
     @XmlElement (name = "name")
     String name;
 
-    @XmlElement (name = "description")
-    String description;
-
     @XmlElement (name = "auth_algorithm")
     String authAlgorithm;
 
@@ -59,14 +56,6 @@ public class NeutronVPNIKEPolicy extends NeutronObject implements Serializable, 
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getAuthAlgorithm() {
@@ -139,9 +128,6 @@ public class NeutronVPNIKEPolicy extends NeutronObject implements Serializable, 
             }
             if (s.equals("tenant_id")) {
                 ans.setTenantID(this.getTenantID());
-            }
-            if (s.equals("description")) {
-                ans.setDescription(this.getDescription());
             }
             if (s.equals("auth_algorithm")) {
                 ans.setAuthAlgorithm(this.getAuthAlgorithm());

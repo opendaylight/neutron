@@ -87,9 +87,6 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         if (ipsecSiteConnection.isAdminStateUp() != null) {
             answer.setAdminStateUp(ipsecSiteConnection.isAdminStateUp());
         }
-        if (ipsecSiteConnection.getDescr() != null) {
-            answer.setDescription(ipsecSiteConnection.getDescr());
-        }
         if (ipsecSiteConnection.getPeerAddress() != null) {
             answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
@@ -152,9 +149,6 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         ipsecSiteConnectionBuilder.setStatus(ipsecSiteConnection.getStatus());
         if (ipsecSiteConnection.getAdminStateUp() != null) {
             ipsecSiteConnectionBuilder.setAdminStateUp(ipsecSiteConnection.getAdminStateUp());
-        }
-        if (ipsecSiteConnection.getDescription() != null) {
-            ipsecSiteConnectionBuilder.setDescr(ipsecSiteConnection.getDescription());
         }
         if (ipsecSiteConnection.getPeerAddress() != null) {
             ipsecSiteConnectionBuilder.setPeerAddress(ipsecSiteConnection.getPeerAddress());
