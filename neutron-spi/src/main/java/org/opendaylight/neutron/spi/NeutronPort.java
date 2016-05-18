@@ -11,8 +11,11 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -21,7 +24,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronPort extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
@@ -72,7 +74,8 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
 
     //@XmlElement (name = "binding:vif_details")
     @XmlElement (namespace = "binding", name = "vif_details")
-    List<NeutronPort_VIFDetail> vifDetails;
+    @XmlJavaTypeAdapter(NeutronPort_VIFAdapter.class)
+    Map<String, String> vifDetails;
 
     @XmlElement (name = "extra_dhcp_opts")
     List<NeutronPort_ExtraDHCPOption> extraDHCPOptions;
@@ -177,11 +180,11 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
         this.extraDHCPOptions = extraDHCPOptions;
     }
 
-    public List<NeutronPort_VIFDetail> getVIFDetail() {
+    public Map<String, String> getVIFDetails() {
         return vifDetails;
     }
 
-    public void setVIFDetail(List<NeutronPort_VIFDetail> vifDetails) {
+    public void setVIFDetails(Map<String, String> vifDetails) {
         this.vifDetails = vifDetails;
     }
 
@@ -279,7 +282,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
                 ans.setBindingvifType(this.getBindingvifType());
             }
             if ("binding:vif_details".equals(field)) {
-                ans.setVIFDetail(new ArrayList<NeutronPort_VIFDetail>(this.getVIFDetail()));
+                ans.setVIFDetails(new HashMap<String, String>(this.getVIFDetails()));
             }
             if ("extra_dhcp_opts".equals(field)) {
                 ans.setExtraDHCPOptions(new ArrayList<NeutronPort_ExtraDHCPOption>(this.getExtraDHCPOptions()));
