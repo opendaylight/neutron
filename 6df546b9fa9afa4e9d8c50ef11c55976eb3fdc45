@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_46e161cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa57193c_6d19e887",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_5003db0c",
         "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_8613790c",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "Given that these inputs are going to come from SFC itself, so we won\u0027t be getting anything except the supported value. Also if we specific specific protocol type, then whenever SFC will support new protocol, we will have to modify the yang models for that. Another reason is that protocol-base is used throughout the other yang models as well. For these reason, i think we should use protocol-base.",
+      "parentUuid": "fa57193c_5003db0c",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_b00a371f",
         "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2016-05-17T19:05:12Z",
       "side": 1,
       "message": "Although this doesn\u0027t harm, do we need this restriction?",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_26042dbf",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "uint16 has the same range, so we don\u0027t need it, will remove it.",
+      "parentUuid": "fa57193c_b00a371f",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -111,6 +165,48 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_e6e7d510",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "I am actually not very comfortable with naming yang leafs based on the internal variables of implementation. As i mentioned above these are matching attribute so, i thought using \"match\" in the leaf name, will generate better readable code. But i don\u0027t really have a strong opinion about it, so if you think \"keyword\" and \"value\" is more intuitive from flow classification point of view, i will change it.",
+      "parentUuid": "fa57193c_900d733a",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_261b8d1c",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "i believe rest of the neutron modules, we don\u0027t really use -key as a suffix. These key value pairs are basically match attribute and it\u0027s value, so i thought it\u0027s good to have \"match\" in the name, because it will generate more readable code.",
+      "parentUuid": "fa57193c_65baa26f",
+      "range": {
+        "startLine": 94,
+        "startChar": 18,
+        "endLine": 94,
+        "endChar": 33
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_502abb7e",
         "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
         "patchSetId": 1
@@ -122,6 +218,24 @@
       "writtenOn": "2016-05-17T19:05:12Z",
       "side": 1,
       "message": "description (not capitalize) for consistency with other definitions.",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_c6e29100",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "\"Description\" is basically part of the flow classifier attribute, so if i use \"description\" it will conflict with the yang keywork \"description\" and code compilation will fail.",
+      "parentUuid": "fa57193c_502abb7e",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -169,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_e6951541",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "base attribute itself is grouping, so if i create another grouping and put it inside that, that will generate nested grouping, and you end up creating multiple builder object to just set the attributes. Having it separately, give us two benifit (1) less nested groupings (2) this description doesn\u0027t make sense to me and i am not sure we need it as a attribute from networking-sfc down to the driver, so in case we remove it in future, we don\u0027t have to modify the grouping, just remove it from the individual groupings and will require very less code changes.",
+      "parentUuid": "fa57193c_c5028e3d",
+      "range": {
+        "startLine": 33,
+        "startChar": 14,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_f0414f3a",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 1
@@ -186,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_c690d150",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "as i mentioned in comment on flow-classifier yang model, this is sfc attribute, so if i will use \"description\" it will conflict with the yang keyword \"description\".",
+      "parentUuid": "fa57193c_f0414f3a",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_d0aa4bd1",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 1
@@ -197,6 +353,24 @@
       "writtenOn": "2016-05-17T19:05:12Z",
       "side": 1,
       "message": "port pair grops is a list. Not set.\nSo we have to do something to keep the list.",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_869d395c",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "As per the SFC API (http://docs.openstack.org/developer/networking-sfc/api.html) its basically a list of UUIDs. Implementation also has the same https://github.com/openstack/networking-sfc/blob/master/networking_sfc/extensions/sfc.py#L207\nAlso the only operation that can be done on it is Create and Read as per the API. So there is no key-value pair here, so i think we don\u0027t need list here.",
+      "parentUuid": "fa57193c_d0aa4bd1",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -244,6 +418,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_e6a3559c",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "please refer to my comment on other yang file.",
+      "parentUuid": "fa57193c_b07d1771",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_856ed6ff",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 1
@@ -267,6 +459,30 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_86b419d2",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa57193c_856ed6ff",
+      "range": {
+        "startLine": 96,
+        "startChar": 26,
+        "endLine": 96,
+        "endChar": 65
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_85a09644",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 1
@@ -278,6 +494,30 @@
       "writtenOn": "2016-05-17T06:11:29Z",
       "side": 1,
       "message": "suggestion: same as above for chain-parameter",
+      "range": {
+        "startLine": 115,
+        "startChar": 18,
+        "endLine": 115,
+        "endChar": 44
+      },
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_e6ca354e",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "please refer to my other comment.",
+      "parentUuid": "fa57193c_85a09644",
       "range": {
         "startLine": 115,
         "startChar": 18,
@@ -331,6 +571,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_06c00929",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "It does not matter, it\u0027s just a better way to club together all the attribute of the services. I can create three separate grouping and put each of these container into it, but we don\u0027t get any benefit out of it, except more grouping. We used the same approached for lbaasv2 yang models as well. So i am okay both ways, so let me know if you think there is some benefit of going that way, given that we already use this approach in other models.",
+      "parentUuid": "fa57193c_907293ab",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_4d1ce477",
         "filename": "model/src/main/yang/neutron.yang",
         "patchSetId": 1
@@ -342,6 +600,24 @@
       "writtenOn": "2016-05-17T19:05:12Z",
       "side": 1,
       "message": "Given that common flow classifier is under discussion, please append sfc- in order to avoid future name clash.",
+      "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_66de2513",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-18T07:54:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa57193c_4d1ce477",
       "revId": "6df546b9fa9afa4e9d8c50ef11c55976eb3fdc45",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
