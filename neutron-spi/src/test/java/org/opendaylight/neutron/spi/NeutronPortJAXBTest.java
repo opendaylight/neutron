@@ -9,6 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,7 +25,7 @@ public class NeutronPortJAXBTest {
             + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , \"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ],"
-            + "\"binding:vif_details\": [{\"port_filter\": true , \"ovs_hybrid_plug\": true } ], "
+            + "\"binding:vif_details\": {\"port_filter\": \"true\" , \"ovs_hybrid_plug\": \"false\" }, "
             + "\"extra_dhcp_opts\": [\"\"], " + "\"security_groups\": [\"\"], " + "\"allowed_address_pairs\": [\"\"], "
             + "\"device_id\": \"257614cc-e178-4c92-9c61-3b28d40eca44\", " + "\"device_owner\": \"\", "
             + "\"binding:host_id\": \"\", " + "\"binding:vif_type\": \"unbound\", "
@@ -70,16 +71,16 @@ public class NeutronPortJAXBTest {
             Assert.assertEquals("NeutronPort JAXB Test 8: Testing allowed_address_pairs list length failed", 1,
                     allowedAddressPairs.size());
 
-            List<NeutronPort_VIFDetail> vifDetails = neutronObject.getVIFDetail();
+            Map<String, String> vifDetails = neutronObject.getVIFDetails();
 
-            Assert.assertEquals("NeutronPort JAXB Test 9.1: Testing vif_details list length failed", 1,
+            Assert.assertEquals("NeutronPort JAXB Test 9.1: Testing vif_details list length failed", 2,
                     vifDetails.size());
 
-            Assert.assertEquals("NeutronPort JAXB Test 9.2: Testing port_filter value failed", true,
-                    vifDetails.get(0).portFilter);
+            Assert.assertEquals("NeutronPort JAXB Test 9.2: Testing port_filter value failed", "true",
+                    vifDetails.get("port_filter"));
 
-            Assert.assertEquals("NeutronNetwork JAXB Test 9.3: Testing ovs_hybrid_plug value failed", true,
-                    vifDetails.get(0).ovsHybridPlug);
+            Assert.assertEquals("NeutronPort JAXB Test 9.3: Testing ovs_hybrid_plug value failed", "false",
+                    vifDetails.get("ovs_hybrid_plug"));
 
             Assert.assertEquals("NeutronPort JAXB Test 10: Testing name failed", "net1", neutronObject.getName());
 
