@@ -145,7 +145,6 @@ public class NeutronVPNIPSECPoliciesNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("name") String queryName,
-            @QueryParam("description") String queryDescription,
             @QueryParam("transform_protocol") String queryTransformProtocol,
             @QueryParam("encapsulation_mode") String queryEncapsulationMode,
             @QueryParam("auth_algorithm") String queryAuthAlgorithm,
@@ -161,7 +160,6 @@ public class NeutronVPNIPSECPoliciesNorthbound
             NeutronVPNIPSECPolicy oSS = i.next();
             if ((queryID == null || queryID.equals(oSS.getID())) &&
                     (queryName == null || queryName.equals(oSS.getName())) &&
-                    (queryDescription == null || queryDescription.equals(oSS.getDescription())) &&
                     (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm())) &&
                     (queryEncryptionAlgorithm == null || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm())) &&
                     (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy())) &&

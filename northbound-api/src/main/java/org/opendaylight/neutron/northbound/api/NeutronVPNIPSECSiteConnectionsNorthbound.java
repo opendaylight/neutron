@@ -143,7 +143,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
             @QueryParam("fields") List<String> fields,
             // filter fields
             @QueryParam("id") String queryID, @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("name") String queryName, @QueryParam("description") String queryDescription,
+            @QueryParam("name") String queryName,
             @QueryParam("peer_address") String queryPeerAddress, @QueryParam("peer_id") String queryPeerID,
             @QueryParam("route_mode") String queryRouteMode, @QueryParam("mtu") Integer queryMtu,
             @QueryParam("auth_mode") String queryAuthMode, @QueryParam("psk") String queryPsk,
@@ -163,7 +163,6 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
             if ((queryID == null || queryID.equals(oSS.getID()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
                     && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryDescription == null || queryDescription.equals(oSS.getDescription()))
                     && (queryPeerAddress == null || queryPeerAddress.equals(oSS.getPeerAddress()))
                     && (queryPeerID == null || queryPeerID.equals(oSS.getPeerID()))
                     && (queryRouteMode == null || queryRouteMode.equals(oSS.getRouteMode()))

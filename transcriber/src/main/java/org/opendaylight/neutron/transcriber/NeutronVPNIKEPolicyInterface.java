@@ -82,9 +82,6 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         if (ikePolicy.getTenantId() != null) {
             answer.setTenantID(ikePolicy.getTenantId());
         }
-        if (ikePolicy.getDescr() != null) {
-            answer.setDescription(ikePolicy.getDescr());
-        }
         if (ikePolicy.getAuthAlgorithm() != null) {
             answer.setAuthAlgorithm(ikePolicy.getAuthAlgorithm());
         }
@@ -121,9 +118,6 @@ ikePolicy.getLifetime();
         }
         if (ikePolicy.getTenantID() != null) {
             ikePolicyBuilder.setTenantId(toUuid(ikePolicy.getTenantID()));
-        }
-        if (ikePolicy.getDescription() != null) {
-            ikePolicyBuilder.setDescr(ikePolicy.getDescription());
         }
         if (ikePolicy.getAuthAlgorithm() != null) {
             ikePolicyBuilder.setAuthAlgorithm(ikePolicy.getAuthAlgorithm());

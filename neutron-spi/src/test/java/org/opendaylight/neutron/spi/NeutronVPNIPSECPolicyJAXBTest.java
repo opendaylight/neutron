@@ -41,9 +41,6 @@ public class NeutronVPNIPSECPolicyJAXBTest {
             Assert.assertEquals("NeutronVPNIPSECPolicy JAXB Test 3: Testing name failed",
                   "ipsecpolicy1", testObject.getName());
 
-            Assert.assertEquals("NeutronVPNIPSECPolicy JAXB Test 4: Testing description failed",
-                  "update description", testObject.getDescription());
-
             Assert.assertEquals("NeutronVPNIPSECPolicy JAXB Test 5: Testing transform protocol failed",
                   "esp", testObject.getTransformProtocol());
 

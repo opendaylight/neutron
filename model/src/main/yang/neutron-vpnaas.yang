@@ -14,7 +14,6 @@ module neutron-vpnaas {
     prefix neutron-vpnaas;
 
     import ietf-yang-types { prefix "yang"; }
-    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
     import neutron-attrs { prefix "attrs"; }
 
     organization "OpenDaylight Neutron Group";
@@ -29,10 +28,6 @@ module neutron-vpnaas {
     }
 
     grouping vpnservice-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the vpn service.";
-        }
         leaf router-id {
             description "Contains the Router ID for the vpn service.";
             type yang:uuid;
@@ -44,10 +39,6 @@ module neutron-vpnaas {
     }
 
     grouping ikepolicy-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the ike policy.";
-        }
         leaf auth-algorithm {
             type string;
             description "Authentication hash algorithm.";
@@ -82,10 +73,6 @@ module neutron-vpnaas {
     }
 
     grouping ipsecpolicy-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the ipsec policy.";
-        }
         leaf transform-protocol {
             type string;
             description "Transform protocol.";
@@ -120,10 +107,6 @@ module neutron-vpnaas {
     }
 
     grouping ipsecconnection-attributes {
-        leaf descr {
-            type string;
-            description "Detailed description of the ipsec policy.";
-        }
         leaf peer_address {
             type string;
             description "Peer gateway public IPv4/IPv6 address or FQDN";
