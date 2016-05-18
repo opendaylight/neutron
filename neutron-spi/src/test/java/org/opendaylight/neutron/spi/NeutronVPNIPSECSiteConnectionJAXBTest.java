@@ -52,9 +52,6 @@ public class NeutronVPNIPSECSiteConnectionJAXBTest {
             Assert.assertEquals("NeutronVPNIPSECSiteConnection JAXB Test 3: Testing name failed",
                   "myvpn", testObject.getName());
 
-            Assert.assertEquals("NeutronVPNIPSECSiteConnection JAXB Test 4: Testing description failed",
-                  "Updated description", testObject.getDescription());
-
             Assert.assertEquals("NeutronVPNIPSECSiteConnection JAXB Test 5: Testing peer address failed",
                   "172.24.4.226", testObject.getPeerAddress());
 

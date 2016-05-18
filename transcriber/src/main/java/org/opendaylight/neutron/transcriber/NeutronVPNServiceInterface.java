@@ -85,9 +85,6 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         if (vpnService.getStatus() != null) {
             answer.setStatus(vpnService.getStatus());
         }
-        if (vpnService.getDescr() != null) {
-            answer.setDescription(vpnService.getDescr());
-        }
         if (vpnService.getSubnetId() != null) {
             answer.setSubnetUUID(vpnService.getSubnetId().getValue());
         }
@@ -112,9 +109,6 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         }
         if (vpnService.getStatus() != null) {
             vpnServiceBuilder.setStatus(vpnService.getStatus());
-        }
-        if (vpnService.getDescription() != null) {
-            vpnServiceBuilder.setDescr(vpnService.getDescription());
         }
         if (vpnService.getSubnetUUID() != null) {
             vpnServiceBuilder.setSubnetId(toUuid(vpnService.getSubnetUUID()));

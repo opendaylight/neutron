@@ -50,9 +50,6 @@ public class NeutronVPNServiceJAXBTest {
 
             Assert.assertEquals("NeutronVPNService JAXB Test 7: Testing id failed",
                   "9faaf49f-dd89-4e39-a8c6-101839aa49bc", testObject.getID());
-
-            Assert.assertEquals("NeutronVPNService JAXB Test 8: Testing description failed",
-                  "Updated description", testObject.getDescription());
         }
         catch (Exception e) {
             Assert.fail("Tests failed");
