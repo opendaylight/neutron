@@ -46,6 +46,30 @@
       "revId": "57a1eb3192a44caab8c786cce359d980d843a73f",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_a4cb1252",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-05-19T07:22:15Z",
+      "side": 1,
+      "message": "Yes. I updated the bug with findings, we should change the key to \"subnet-id ip-address\"",
+      "parentUuid": "fa57193c_e916e1f0",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 16
+      },
+      "revId": "57a1eb3192a44caab8c786cce359d980d843a73f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
