@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_b4ee99b2",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-20T23:53:19Z",
+      "side": 1,
+      "message": "yup, but i think we need to add the range back.",
+      "parentUuid": "fa57193c_530e3a35",
+      "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_730b7e25",
         "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-19T23:54:37Z",
       "side": 1,
       "message": "As most of neutron yang model definition intentionally doesn\u0027t define Description, please drop this leaf.\n\nThere are some exceptions.\nLater I\u0027ll upload a patch to drop \u0027leaf description\u0027 to make neutron models consistent.",
+      "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_b445f9b4",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-20T23:53:19Z",
+      "side": 1,
+      "message": "Hi Isaku, i looked at the neutron APIs (network,subnet,ports) but i don\u0027t see description field in the APIs body. \"Description\" is something that neutron SFC api\u0027s are using, so that\u0027s why i included it. It\u0027s not very useful, so i can remove it as well, but then it\u0027s just that we will have to drop this description string in the networking-odl driver. is that okay with you?",
+      "parentUuid": "fa57193c_730b7e25",
       "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -98,6 +134,24 @@
       "writtenOn": "2016-05-19T23:54:37Z",
       "side": 1,
       "message": "ditto.",
+      "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_1414a59e",
+        "filename": "model/src/main/yang/neutron-sfc.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-20T23:53:19Z",
+      "side": 1,
+      "message": "please look at my comment on other yang file.",
+      "parentUuid": "fa57193c_132b2283",
       "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
