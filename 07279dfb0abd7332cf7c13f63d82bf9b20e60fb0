@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_f44e5195",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-21T03:47:31Z",
+      "side": 1,
+      "message": "Description is only for human usability.\nIt won\u0027t affect actual behavior.\n\nwe don\u0027t have to drop description by networking-odl because ODL neutron northbound(more precisely JAXB) ignores unknown fields during parsing REST request.",
+      "parentUuid": "fa57193c_b445f9b4",
+      "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_f31e6e62",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 2
