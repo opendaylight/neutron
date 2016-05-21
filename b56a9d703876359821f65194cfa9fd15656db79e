@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_e1e69cb3",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-21T01:01:19Z",
+      "side": 1,
+      "message": "\"Description\" sounds better!",
+      "parentUuid": "fa57193c_f04b0f29",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_b4a9797d",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 10
@@ -104,6 +122,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_c1e1d89b",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-21T01:01:19Z",
+      "side": 1,
+      "message": "The valid Dscp marks are [0, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 46, 48, 56]",
+      "parentUuid": "fa57193c_5062bbad",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_306d8799",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 10
@@ -115,6 +151,24 @@
       "writtenOn": "2016-05-17T19:22:58Z",
       "side": 1,
       "message": "Why uint32?",
+      "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_21f09466",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-05-21T01:01:19Z",
+      "side": 1,
+      "message": "After discussion we found that it shoudl be 64",
+      "parentUuid": "fa57193c_306d8799",
       "revId": "b56a9d703876359821f65194cfa9fd15656db79e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
