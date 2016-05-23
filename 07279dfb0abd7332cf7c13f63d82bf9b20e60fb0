@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_6a69b824",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-23T08:12:55Z",
+      "side": 1,
+      "message": "Agree, ODL don\u0027t need this, so i will drop it.",
+      "parentUuid": "fa57193c_f44e5195",
+      "revId": "07279dfb0abd7332cf7c13f63d82bf9b20e60fb0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_f31e6e62",
         "filename": "model/src/main/yang/neutron-sfc.yang",
         "patchSetId": 2
