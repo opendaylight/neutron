@@ -33,6 +33,24 @@
       "revId": "f6d8d56991c0a0aa4925ade0a5dd00defa08cfe7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_490dd83d",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-25T05:55:29Z",
+      "side": 1,
+      "message": "shell we use \"neturon-sfc-flow-classifier\" everywhere ( for file name/module/prefix), because that\u0027s more readable??",
+      "parentUuid": "fa57193c_69e1bc99",
+      "revId": "f6d8d56991c0a0aa4925ade0a5dd00defa08cfe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
