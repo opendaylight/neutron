@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa57193c_89e6d0b2",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-25T00:16:11Z",
+      "side": 1,
+      "message": "For consistency, can you please rename the filename to neutron-sfcflowclassifier.yang?",
+      "revId": "f6d8d56991c0a0aa4925ade0a5dd00defa08cfe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_69e1bc99",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-05-25T00:16:11Z",
+      "side": 1,
+      "message": "Can you please rename it to neutron-sfcflowclassifier?",
+      "revId": "f6d8d56991c0a0aa4925ade0a5dd00defa08cfe7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
