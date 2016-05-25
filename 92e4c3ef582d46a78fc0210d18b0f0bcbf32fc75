@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fa57193c_58680087",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-25T20:22:28Z",
+      "side": 1,
+      "message": "no, all the models uses the namespace of this format.",
+      "parentUuid": "fa57193c_58bac00a",
+      "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_f85914ff",
         "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2016-05-25T20:17:19Z",
       "side": 1,
       "message": "do we need grouping followed by container?",
+      "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa57193c_b8067ccc",
+        "filename": "model/src/main/yang/neutron-sfc-flow-classifier.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-05-25T20:22:28Z",
+      "side": 1,
+      "message": "yes, we use this grouping in main neutron.yang file.",
+      "parentUuid": "fa57193c_f85914ff",
       "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
