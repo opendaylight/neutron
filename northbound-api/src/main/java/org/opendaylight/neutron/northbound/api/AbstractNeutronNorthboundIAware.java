@@ -9,10 +9,7 @@
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
-import java.util.List;
 
-import org.codehaus.enunciate.jaxrs.ResponseCode;
-import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 
