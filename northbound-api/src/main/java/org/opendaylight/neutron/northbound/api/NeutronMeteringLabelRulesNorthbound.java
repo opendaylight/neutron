@@ -29,8 +29,6 @@ import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.codehaus.enunciate.jaxrs.TypeHint;
-
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleAware;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
