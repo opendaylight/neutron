@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c1566_ad08752e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5448
+      },
+      "writtenOn": "2016-05-31T09:36:12Z",
+      "side": 1,
+      "message": "Verified",
+      "range": {
+        "startLine": 55,
+        "startChar": 10,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "34e23f5f59c5096975519bb42fe9b9b954174ba9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_0d06c120",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/Activator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5448
+      },
+      "writtenOn": "2016-05-31T09:36:12Z",
+      "side": 1,
+      "message": "Verified",
+      "range": {
+        "startLine": 21,
+        "startChar": 10,
+        "endLine": 21,
+        "endChar": 17
+      },
+      "revId": "34e23f5f59c5096975519bb42fe9b9b954174ba9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
