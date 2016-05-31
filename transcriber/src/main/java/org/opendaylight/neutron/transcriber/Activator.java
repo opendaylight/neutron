@@ -18,7 +18,7 @@ import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
     private List<ServiceRegistration<?>> registrations = new ArrayList<ServiceRegistration<?>>();
-    private ProviderContext providerContext;
+    final private ProviderContext providerContext;
 
     public Activator(ProviderContext providerContext) {
         this.providerContext = providerContext;
