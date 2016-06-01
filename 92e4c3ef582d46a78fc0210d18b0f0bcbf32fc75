@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c1566_a2dd1f45",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronFloatingIPInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-01T01:58:18Z",
+      "side": 0,
+      "message": "If removing unused import, can you please scrub all the files with single independent patch?\nYou can find all the unused import by checking something like [WARN] ... xxx.java:12:8: Unused import - xxx. [UnusedImports]",
+      "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}

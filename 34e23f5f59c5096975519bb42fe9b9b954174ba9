@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "da5c1566_42d88353",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-01T01:58:18Z",
+      "side": 1,
+      "message": "Poor commit message.\nPlease add meaning subject line and message body.\n\nEspecially what kind of clean up is done in which source files.",
+      "revId": "34e23f5f59c5096975519bb42fe9b9b954174ba9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da5c1566_ad08752e",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
         "patchSetId": 1
