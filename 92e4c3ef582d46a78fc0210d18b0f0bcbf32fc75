@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "da5c1566_678f9124",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthboundIAware.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-02T08:36:27Z",
+      "side": 0,
+      "message": "Please don\u0027t remove blank line.",
+      "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_47940d37",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronMeteringLabelRulesNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-02T08:36:27Z",
+      "side": 0,
+      "message": "Please don\u0027t remove blank line.",
+      "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_a799a970",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronMeteringLabelsNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-02T08:36:27Z",
+      "side": 0,
+      "message": "Please don\u0027t remove blank line.",
+      "revId": "92e4c3ef582d46a78fc0210d18b0f0bcbf32fc75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da5c1566_a2dd1f45",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronFloatingIPInterface.java",
         "patchSetId": 1

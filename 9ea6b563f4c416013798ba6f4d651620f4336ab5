@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c1566_c7781d2e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-02T08:36:27Z",
+      "side": 1,
+      "message": "Please make subject line more meaningful.\ne.g.\nBug 3902 - remove unused import",
+      "revId": "9ea6b563f4c416013798ba6f4d651620f4336ab5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_2776393f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-02T08:36:27Z",
+      "side": 1,
+      "message": "Please add blank line after the subject line.",
+      "revId": "9ea6b563f4c416013798ba6f4d651620f4336ab5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_0773354e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-02T08:36:27Z",
+      "side": 1,
+      "message": "There is no need to list all the files in message body because diffstat tells it.",
+      "revId": "9ea6b563f4c416013798ba6f4d651620f4336ab5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
