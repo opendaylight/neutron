@@ -26,7 +26,7 @@ public class NeutronTranscriberImplModuleFactory extends org.opendaylight.yang.g
             DynamicMBeanWithInstance old, BundleContext bundleContext)
             throws Exception {
         // TODO Auto-generated method stub
-        Module neutronTranscriberModule =  super.createModule(instanceName, dependencyResolver, old, bundleContext);
+        final Module neutronTranscriberModule =  super.createModule(instanceName, dependencyResolver, old, bundleContext);
         setModuleBundleContext(bundleContext, neutronTranscriberModule);
         return neutronTranscriberModule;
     }
@@ -46,7 +46,7 @@ public class NeutronTranscriberImplModuleFactory extends org.opendaylight.yang.g
     public Module createModule(String instanceName,
             DependencyResolver dependencyResolver, BundleContext bundleContext) {
         // TODO Auto-generated method stub
-        Module neutronTranscriberModule = super.createModule(instanceName, dependencyResolver, bundleContext);
+        final Module neutronTranscriberModule = super.createModule(instanceName, dependencyResolver, bundleContext);
         setModuleBundleContext(bundleContext, neutronTranscriberModule);
         return neutronTranscriberModule;
     }

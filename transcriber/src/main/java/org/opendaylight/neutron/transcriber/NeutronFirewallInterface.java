@@ -88,7 +88,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
     }
 
     protected NeutronFirewall fromMd(Firewall firewall) {
-        NeutronFirewall answer = new NeutronFirewall();
+        final NeutronFirewall answer = new NeutronFirewall();
         if (firewall.getUuid() != null) {
             answer.setID(firewall.getUuid().getValue());
         }
@@ -116,7 +116,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     @Override
     protected Firewall toMd(NeutronFirewall firewall) {
-        FirewallBuilder firewallBuilder = new FirewallBuilder();
+        final FirewallBuilder firewallBuilder = new FirewallBuilder();
         if (firewall.getID() != null) {
             firewallBuilder.setUuid(toUuid(firewall.getID()));
         }
@@ -146,7 +146,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     @Override
     protected Firewall toMd(String uuid) {
-        FirewallBuilder firewallBuilder = new FirewallBuilder();
+        final FirewallBuilder firewallBuilder = new FirewallBuilder();
         firewallBuilder.setUuid(toUuid(uuid));
         return firewallBuilder.build();
     }
@@ -154,8 +154,8 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
-        ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
+        final NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
+        final ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
         if(neutronFirewallInterfaceRegistration != null) {
             registrations.add(neutronFirewallInterfaceRegistration);
         }

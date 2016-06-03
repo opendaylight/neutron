@@ -92,7 +92,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
     }
 
     protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {
-        NeutronFirewallPolicy answer = new NeutronFirewallPolicy();
+        final NeutronFirewallPolicy answer = new NeutronFirewallPolicy();
         if (policy.getUuid() != null) {
             answer.setID(policy.getUuid().getValue());
         }
@@ -112,8 +112,8 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
             answer.setFirewallPolicyIsAudited(policy.isAudited());
         }
         if (policy.getFirewallRules() != null) {
-            List<String> rules = new ArrayList<String>();
-            for (Uuid rule: policy.getFirewallRules()) {
+            final List<String> rules = new ArrayList<String>();
+            for (final Uuid rule: policy.getFirewallRules()) {
                 rules.add(rule.getValue());
             }
             answer.setFirewallPolicyRules(rules);
@@ -123,7 +123,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
 
     @Override
     protected FirewallPolicy toMd(NeutronFirewallPolicy policy) {
-        FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
+        final FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
         if (policy.getID() != null) {
             policyBuilder.setUuid(toUuid(policy.getID()));
         }
@@ -143,8 +143,8 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
             policyBuilder.setAudited(policy.getFirewallPolicyIsAudited());
         }
         if (policy.getFirewallPolicyRules() != null) {
-            List<Uuid> rules = new ArrayList<Uuid>();
-            for (String rule: policy.getFirewallPolicyRules()) {
+            final List<Uuid> rules = new ArrayList<Uuid>();
+            for (final String rule: policy.getFirewallPolicyRules()) {
                 rules.add(toUuid(rule));
             }
             policyBuilder.setFirewallRules(rules);
@@ -154,7 +154,7 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
 
     @Override
     protected FirewallPolicy toMd(String uuid) {
-        FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
+        final FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
         policyBuilder.setUuid(toUuid(uuid));
         return policyBuilder.build();
     }
@@ -162,8 +162,8 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronFirewallPolicyInterface neutronFirewallPolicyInterface = new NeutronFirewallPolicyInterface(providerContext);
-        ServiceRegistration<INeutronFirewallPolicyCRUD> neutronFirewallPolicyInterfaceRegistration = context.registerService(INeutronFirewallPolicyCRUD.class, neutronFirewallPolicyInterface, null);
+        final NeutronFirewallPolicyInterface neutronFirewallPolicyInterface = new NeutronFirewallPolicyInterface(providerContext);
+        final ServiceRegistration<INeutronFirewallPolicyCRUD> neutronFirewallPolicyInterfaceRegistration = context.registerService(INeutronFirewallPolicyCRUD.class, neutronFirewallPolicyInterface, null);
         if(neutronFirewallPolicyInterfaceRegistration != null) {
             registrations.add(neutronFirewallPolicyInterfaceRegistration);
         }

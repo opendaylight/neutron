@@ -71,7 +71,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
     }
 
     protected NeutronVPNService fromMd(Vpnservice vpnService) {
-        NeutronVPNService answer = new NeutronVPNService();
+        final NeutronVPNService answer = new NeutronVPNService();
         if (vpnService.getName() != null) {
             answer.setName(vpnService.getName());
         }
@@ -99,7 +99,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     protected Vpnservice toMd(NeutronVPNService vpnService) {
-        VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
+        final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
         if (vpnService.getName() != null) {
             vpnServiceBuilder.setName(vpnService.getName());
         }
@@ -142,7 +142,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     protected Vpnservice toMd(String uuid) {
-        VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
+        final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
         vpnServiceBuilder.setUuid(toUuid(uuid));
         return vpnServiceBuilder.build();
     }
@@ -150,8 +150,8 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface(providerContext);
-        ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
+        final NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface(providerContext);
+        final ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
         if(neutronVPNServiceInterfaceRegistration != null) {
             registrations.add(neutronVPNServiceInterfaceRegistration);
         }

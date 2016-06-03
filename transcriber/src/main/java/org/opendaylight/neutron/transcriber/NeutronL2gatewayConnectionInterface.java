@@ -57,7 +57,7 @@ implements INeutronL2gatewayConnectionCRUD {
 
     @Override
     protected NeutronL2gatewayConnection fromMd(L2gatewayConnection l2gatewayConnection){
-        NeutronL2gatewayConnection result = new NeutronL2gatewayConnection();
+        final NeutronL2gatewayConnection result = new NeutronL2gatewayConnection();
         if (l2gatewayConnection.getUuid() != null){
             result.setID(l2gatewayConnection.getUuid().getValue());
         }
@@ -84,7 +84,7 @@ implements INeutronL2gatewayConnectionCRUD {
 
     @Override
     protected L2gatewayConnection toMd(NeutronL2gatewayConnection neutronObject) {
-        L2gatewayConnectionBuilder l2gatewayConnectionBuilder =
+        final L2gatewayConnectionBuilder l2gatewayConnectionBuilder =
                 new L2gatewayConnectionBuilder();
         if (neutronObject.getID() != null){
             l2gatewayConnectionBuilder.setUuid(toUuid(neutronObject.getID()));
@@ -109,7 +109,7 @@ implements INeutronL2gatewayConnectionCRUD {
 
     @Override
     protected L2gatewayConnection toMd(String uuid) {
-        L2gatewayConnectionBuilder l2gatewayConnectionBuilder = new L2gatewayConnectionBuilder();
+        final L2gatewayConnectionBuilder l2gatewayConnectionBuilder = new L2gatewayConnectionBuilder();
         l2gatewayConnectionBuilder.setUuid(toUuid(uuid));
         return l2gatewayConnectionBuilder.build();
     }
@@ -117,9 +117,9 @@ implements INeutronL2gatewayConnectionCRUD {
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronL2gatewayConnectionInterface neutronL2gatewayConnectionInterface =
+        final NeutronL2gatewayConnectionInterface neutronL2gatewayConnectionInterface =
                 new NeutronL2gatewayConnectionInterface(providerContext);
-        ServiceRegistration<INeutronL2gatewayConnectionCRUD> neutronL2gatewayConInterfaceRegistration = context
+        final ServiceRegistration<INeutronL2gatewayConnectionCRUD> neutronL2gatewayConInterfaceRegistration = context
         .registerService(INeutronL2gatewayConnectionCRUD.class, neutronL2gatewayConnectionInterface, null);
         if (neutronL2gatewayConInterfaceRegistration != null) {
             registrations.add(neutronL2gatewayConInterfaceRegistration);

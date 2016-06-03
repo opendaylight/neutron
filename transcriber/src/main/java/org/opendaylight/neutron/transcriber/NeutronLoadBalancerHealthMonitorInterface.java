@@ -91,7 +91,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     protected Healthmonitor toMd(String uuid) {
-        HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
         healthmonitorBuilder.setUuid(toUuid(uuid));
         return healthmonitorBuilder.build();
     }
@@ -112,7 +112,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
 
     @Override
     protected Healthmonitor toMd(NeutronLoadBalancerHealthMonitor healthMonitor) {
-        HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
         healthmonitorBuilder.setAdminStateUp(healthMonitor.getLoadBalancerHealthMonitorAdminStateIsUp());
         if (healthMonitor.getLoadBalancerHealthMonitorDelay() != null) {
             healthmonitorBuilder.setDelay(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorDelay()));
@@ -127,8 +127,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             healthmonitorBuilder.setMaxRetries(Integer.valueOf(healthMonitor.getLoadBalancerHealthMonitorMaxRetries()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
-            List<Uuid> listUuid = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : healthMonitor.getLoadBalancerHealthMonitorPools()) {
+            final List<Uuid> listUuid = new ArrayList<Uuid>();
+            for (final Neutron_ID neutron_id : healthMonitor.getLoadBalancerHealthMonitorPools()) {
                 listUuid.add(toUuid(neutron_id.getID()));
             }
             healthmonitorBuilder.setPools(listUuid);
@@ -140,7 +140,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             healthmonitorBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
-            ImmutableBiMap<String, Class<? extends ProbeBase>> mapper =
+            final ImmutableBiMap<String, Class<? extends ProbeBase>> mapper =
                     PROBE_MAP.inverse();
             healthmonitorBuilder.setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
         }
@@ -156,7 +156,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     }
 
     protected NeutronLoadBalancerHealthMonitor fromMd(Healthmonitor healthMonitor) {
-        NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
+        final NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
         if (healthMonitor.isAdminStateUp() != null) {
              answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.isAdminStateUp());
         }
@@ -173,8 +173,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             answer.setLoadBalancerHealthMonitorMaxRetries(Integer.valueOf(healthMonitor.getMaxRetries()));
         }
         if (healthMonitor.getPools() != null) {
-            List<Neutron_ID> list = new ArrayList<Neutron_ID>();
-            for (Uuid id : healthMonitor.getPools()) {
+            final List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            for (final Uuid id : healthMonitor.getPools()) {
                 list.add(new Neutron_ID(id.getValue()));
             }
             answer.setLoadBalancerHealthMonitorPools(list);
@@ -202,8 +202,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronLoadBalancerHealthMonitorInterface neutronLoadBalancerHealthMonitorInterface = new NeutronLoadBalancerHealthMonitorInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerHealthMonitorCRUD> neutronLoadBalancerHealthMonitorInterfaceRegistration = context.registerService(INeutronLoadBalancerHealthMonitorCRUD.class, neutronLoadBalancerHealthMonitorInterface, null);
+        final NeutronLoadBalancerHealthMonitorInterface neutronLoadBalancerHealthMonitorInterface = new NeutronLoadBalancerHealthMonitorInterface(providerContext);
+        final ServiceRegistration<INeutronLoadBalancerHealthMonitorCRUD> neutronLoadBalancerHealthMonitorInterfaceRegistration = context.registerService(INeutronLoadBalancerHealthMonitorCRUD.class, neutronLoadBalancerHealthMonitorInterface, null);
         if(neutronLoadBalancerHealthMonitorInterfaceRegistration != null) {
             registrations.add(neutronLoadBalancerHealthMonitorInterfaceRegistration);
         }

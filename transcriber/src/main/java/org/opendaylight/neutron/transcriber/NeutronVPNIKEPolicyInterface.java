@@ -75,7 +75,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
     }
 
     protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {
-        NeutronVPNIKEPolicy answer = new NeutronVPNIKEPolicy();
+        final NeutronVPNIKEPolicy answer = new NeutronVPNIKEPolicy();
         if (ikePolicy.getName() != null) {
             answer.setName(ikePolicy.getName());
         }
@@ -101,7 +101,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
             answer.setIkeVersion(ikePolicy.getIkeVersion());
         }
         if (ikePolicy.getLifetime() != null) {
-            NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
+            final NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
 ikePolicy.getLifetime();
             vpnLifetime.setUnits(ikePolicy.getLifetime().getUnits());
             vpnLifetime.setValue(ikePolicy.getLifetime().getValue());
@@ -115,7 +115,7 @@ ikePolicy.getLifetime();
 
     @Override
     protected Ikepolicy toMd(NeutronVPNIKEPolicy ikePolicy) {
-        IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
+        final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
         if (ikePolicy.getName() != null) {
             ikePolicyBuilder.setName(ikePolicy.getName());
         }
@@ -141,8 +141,8 @@ ikePolicy.getLifetime();
             ikePolicyBuilder.setIkeVersion(ikePolicy.getIkeVersion());
         }
         if (ikePolicy.getLifetime() !=null) {
-            NeutronVPNLifetime vpnLifetime = ikePolicy.getLifetime();
-            LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
+            final NeutronVPNLifetime vpnLifetime = ikePolicy.getLifetime();
+            final LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
             lifetimeBuilder.setUnits(vpnLifetime.getUnits());
             lifetimeBuilder.setValue(vpnLifetime.getValue());
             ikePolicyBuilder.setLifetime(lifetimeBuilder.build());
@@ -170,7 +170,7 @@ ikePolicy.getLifetime();
 
     @Override
     protected Ikepolicy toMd(String uuid) {
-        IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
+        final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
         ikePolicyBuilder.setUuid(toUuid(uuid));
         return ikePolicyBuilder.build();
     }
@@ -178,8 +178,8 @@ ikePolicy.getLifetime();
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronVPNIKEPolicyInterface neutronVPNIKEPolicyInterface = new NeutronVPNIKEPolicyInterface(providerContext);
-        ServiceRegistration<INeutronVPNIKEPolicyCRUD> neutronVPNIKEPolicyInterfaceRegistration = context.registerService(INeutronVPNIKEPolicyCRUD.class, neutronVPNIKEPolicyInterface, null);
+        final NeutronVPNIKEPolicyInterface neutronVPNIKEPolicyInterface = new NeutronVPNIKEPolicyInterface(providerContext);
+        final ServiceRegistration<INeutronVPNIKEPolicyCRUD> neutronVPNIKEPolicyInterfaceRegistration = context.registerService(INeutronVPNIKEPolicyCRUD.class, neutronVPNIKEPolicyInterface, null);
         if(neutronVPNIKEPolicyInterfaceRegistration != null) {
             registrations.add(neutronVPNIKEPolicyInterfaceRegistration);
         }

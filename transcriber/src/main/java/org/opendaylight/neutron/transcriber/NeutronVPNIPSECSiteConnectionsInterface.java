@@ -76,7 +76,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
-        NeutronVPNIPSECSiteConnection answer = new NeutronVPNIPSECSiteConnection();
+        final NeutronVPNIPSECSiteConnection answer = new NeutronVPNIPSECSiteConnection();
         if (ipsecSiteConnection.getName() != null) {
             answer.setName(ipsecSiteConnection.getName());
         }
@@ -94,8 +94,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
-            List<String> peerCidrs = new ArrayList<String>();
-            for( String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
+            final List<String> peerCidrs = new ArrayList<String>();
+            for( final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
             answer.setPeerCidrs(peerCidrs);
@@ -128,7 +128,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             answer.setVpnServiceID(ipsecSiteConnection.getVpnserviceId().getValue());
         }
         if (ipsecSiteConnection.getDpd() != null) {
-            NeutronVPNDeadPeerDetection deadPeerDetection = new NeutronVPNDeadPeerDetection();
+            final NeutronVPNDeadPeerDetection deadPeerDetection = new NeutronVPNDeadPeerDetection();
             deadPeerDetection.setAction(ipsecSiteConnection.getDpd().getAction());
             deadPeerDetection.setInterval(ipsecSiteConnection.getDpd().getInterval());
             deadPeerDetection.setTimeout(ipsecSiteConnection.getDpd().getTimeout());
@@ -142,7 +142,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
 
     @Override
     protected Ipsecsiteconnection toMd(NeutronVPNIPSECSiteConnection ipsecSiteConnection) {
-        IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
+        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
         if (ipsecSiteConnection.getName() != null) {
             ipsecSiteConnectionBuilder.setName(ipsecSiteConnection.getName());
         }
@@ -160,8 +160,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             ipsecSiteConnectionBuilder.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
-            List<String> peerCidrs = new ArrayList<String>();
-            for( String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
+            final List<String> peerCidrs = new ArrayList<String>();
+            for( final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
             ipsecSiteConnectionBuilder.setPeerCidrs(peerCidrs);
@@ -194,8 +194,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
             ipsecSiteConnectionBuilder.setVpnserviceId(toUuid(ipsecSiteConnection.getVpnServiceID()));
         }
         if (ipsecSiteConnection.getDeadPeerDetection() != null) {
-            NeutronVPNDeadPeerDetection deadPeerDetection = ipsecSiteConnection.getDeadPeerDetection();
-            DpdBuilder dpdBuilder = new DpdBuilder();
+            final NeutronVPNDeadPeerDetection deadPeerDetection = ipsecSiteConnection.getDeadPeerDetection();
+            final DpdBuilder dpdBuilder = new DpdBuilder();
             dpdBuilder.setAction(deadPeerDetection.getAction());
             dpdBuilder.setInterval(deadPeerDetection.getInterval());
             dpdBuilder.setTimeout(deadPeerDetection.getTimeout());
@@ -224,7 +224,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
 
     @Override
     protected Ipsecsiteconnection toMd(String uuid) {
-        IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
+        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
         ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
         return ipsecSiteConnectionBuilder.build();
     }
@@ -232,8 +232,8 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronVPNIPSECSiteConnectionsInterface neutronVPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(providerContext);
-        ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
+        final NeutronVPNIPSECSiteConnectionsInterface neutronVPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(providerContext);
+        final ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
         if (neutronVPNIPSECSiteConnectionsInterfaceRegistration != null) {
             registrations.add(neutronVPNIPSECSiteConnectionsInterfaceRegistration);
         }

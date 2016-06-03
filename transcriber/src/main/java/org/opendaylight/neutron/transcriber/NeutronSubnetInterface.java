@@ -116,7 +116,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     }
 
     protected NeutronSubnet fromMd(Subnet subnet) {
-        NeutronSubnet result = new NeutronSubnet();
+        final NeutronSubnet result = new NeutronSubnet();
         result.setName(subnet.getName());
         result.setTenantID(subnet.getTenantId());
         result.setNetworkUUID(subnet.getNetworkId().getValue());
@@ -133,9 +133,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         }
         result.setEnableDHCP(subnet.isEnableDhcp());
         if (subnet.getAllocationPools() != null) {
-            List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-            for (AllocationPools allocationPool : subnet.getAllocationPools()) {
-                NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
+            final List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
+            for (final AllocationPools allocationPool : subnet.getAllocationPools()) {
+                final NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
                 pool.setPoolStart(allocationPool.getStart());
                 pool.setPoolEnd(allocationPool.getEnd());
                 allocationPools.add(pool);
@@ -143,16 +143,16 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             result.setAllocationPools(allocationPools);
         }
         if (subnet.getDnsNameservers() != null) {
-            List<String> dnsNameServers = new ArrayList<String>();
-            for (IpAddress dnsNameServer : subnet.getDnsNameservers()) {
+            final List<String> dnsNameServers = new ArrayList<String>();
+            for (final IpAddress dnsNameServer : subnet.getDnsNameservers()) {
                 dnsNameServers.add(String.valueOf(dnsNameServer.getValue()));
             }
             result.setDnsNameservers(dnsNameServers);
         }
         if(subnet.getHostRoutes() != null){
-            List<NeutronSubnet_HostRoute> hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
-            for(HostRoutes hostRoute : subnet.getHostRoutes()) {
-                NeutronSubnet_HostRoute nsHostRoute = new NeutronSubnet_HostRoute();
+            final List<NeutronSubnet_HostRoute> hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
+            for(final HostRoutes hostRoute : subnet.getHostRoutes()) {
+                final NeutronSubnet_HostRoute nsHostRoute = new NeutronSubnet_HostRoute();
                 nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
                 nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
                 hostRoutes.add(nsHostRoute);
@@ -163,27 +163,27 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
 // read through the ports and put the ones in this subnet into the internal
 // myPorts object.
 // @deprecated and will be removed in Boron
-        Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+        final Set<NeutronPort> allPorts = new HashSet<NeutronPort>();
+        final NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronPortCRUD(this);
-        INeutronPortCRUD portIf = interfaces.getPortInterface();
-        for (NeutronPort port : portIf.getAllPorts()) {
+        final INeutronPortCRUD portIf = interfaces.getPortInterface();
+        for (final NeutronPort port : portIf.getAllPorts()) {
             if (port.getFixedIPs() != null) {
-                for (Neutron_IPs ip : port.getFixedIPs()) {
+                for (final Neutron_IPs ip : port.getFixedIPs()) {
                     if (ip.getSubnetUUID().equals(result.getID())) {
                         allPorts.add(port);
                     }
                 }
             }
         }
-        List<NeutronPort> ports = new ArrayList<NeutronPort>();
+        final List<NeutronPort> ports = new ArrayList<NeutronPort>();
         ports.addAll(allPorts);
         result.setPorts(ports);
         return result;
     }
 
     protected Subnet toMd(NeutronSubnet subnet) {
-        SubnetBuilder subnetBuilder = new SubnetBuilder();
+        final SubnetBuilder subnetBuilder = new SubnetBuilder();
         if (subnet.getName() != null) {
             subnetBuilder.setName(subnet.getName());
         }
@@ -194,7 +194,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
         }
         if (subnet.getIpVersion() != null) {
-            ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper =
+            final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper =
                     IPV_MAP.inverse();
             subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet
                     .getIpVersion()));
@@ -203,45 +203,45 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             subnetBuilder.setCidr(subnet.getCidr());
         }
         if (subnet.getGatewayIP() != null) {
-            IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
+            final IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
                     .toCharArray());
             subnetBuilder.setGatewayIp(ipAddress);
         }
         if (subnet.getIpV6RaMode() != null) {
-            ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
+            final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
                     DHCPV6_MAP.inverse();
             subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
         }
         if (subnet.getIpV6AddressMode() != null) {
-            ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
+            final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
                     DHCPV6_MAP.inverse();
             subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
         }
         subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
         if (subnet.getAllocationPools() != null) {
-            List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
-            for (NeutronSubnetIPAllocationPool allocationPool : subnet
+            final List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
+            for (final NeutronSubnetIPAllocationPool allocationPool : subnet
                     .getAllocationPools()) {
-                AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
+                final AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
                 builder.setStart(allocationPool.getPoolStart());
                 builder.setEnd(allocationPool.getPoolEnd());
-                AllocationPools temp = builder.build();
+                final AllocationPools temp = builder.build();
                 allocationPools.add(temp);
             }
             subnetBuilder.setAllocationPools(allocationPools);
         }
         if (subnet.getDnsNameservers() != null) {
-            List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
-            for (String dnsNameServer : subnet.getDnsNameservers()) {
-                IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
+            final List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
+            for (final String dnsNameServer : subnet.getDnsNameservers()) {
+                final IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
                 dnsNameServers.add(ipAddress);
             }
             subnetBuilder.setDnsNameservers(dnsNameServers);
         }
         if(subnet.getHostRoutes() != null) {
-            List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
-            for(NeutronSubnet_HostRoute hostRoute: subnet.getHostRoutes()) {
-                HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
+            final List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
+            for(final NeutronSubnet_HostRoute hostRoute: subnet.getHostRoutes()) {
+                final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
                 hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
                 hrBuilder.setNexthop(new IpAddress(hostRoute.getNextHop().toCharArray()));
                 hostRoutes.add(hrBuilder.build());
@@ -270,7 +270,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
 
     @Override
     protected Subnet toMd(String uuid) {
-        SubnetBuilder subnetBuilder = new SubnetBuilder();
+        final SubnetBuilder subnetBuilder = new SubnetBuilder();
         subnetBuilder.setUuid(toUuid(uuid));
         return subnetBuilder.build();
     }
@@ -278,8 +278,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronSubnetInterface neutronSubnetInterface = new NeutronSubnetInterface(providerContext);
-        ServiceRegistration<INeutronSubnetCRUD> neutronSubnetInterfaceRegistration = context.registerService(INeutronSubnetCRUD.class, neutronSubnetInterface, null);
+        final NeutronSubnetInterface neutronSubnetInterface = new NeutronSubnetInterface(providerContext);
+        final ServiceRegistration<INeutronSubnetCRUD> neutronSubnetInterfaceRegistration = context.registerService(INeutronSubnetCRUD.class, neutronSubnetInterface, null);
         if(neutronSubnetInterfaceRegistration != null) {
             registrations.add(neutronSubnetInterfaceRegistration);
         }

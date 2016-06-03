@@ -65,7 +65,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta) {
-        NeutronFloatingIP target = getFloatingIP(uuid);
+        final NeutronFloatingIP target = getFloatingIP(uuid);
         if (target == null) {
             return false;
         }
@@ -76,14 +76,14 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
 
     @Override
     protected Floatingip toMd(String uuid) {
-        FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
+        final FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
         floatingipBuilder.setUuid(toUuid(uuid));
         return floatingipBuilder.build();
     }
 
     @Override
     protected Floatingip toMd(NeutronFloatingIP floatingIp) {
-        FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
+        final FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
         if (floatingIp.getFixedIPAddress() != null) {
             floatingipBuilder.setFixedIpAddress(new IpAddress(floatingIp.getFixedIPAddress().toCharArray()));
         }
@@ -115,7 +115,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     }
 
     protected NeutronFloatingIP fromMd(Floatingip fip) {
-        NeutronFloatingIP result = new NeutronFloatingIP();
+        final NeutronFloatingIP result = new NeutronFloatingIP();
         result.setID(fip.getUuid().getValue());
         if (fip.getFloatingNetworkId() != null) {
             result.setFloatingNetworkUUID(String.valueOf(fip.getFloatingNetworkId().getValue()));
@@ -156,8 +156,8 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronFloatingIPInterface neutronFloatingIPInterface = new NeutronFloatingIPInterface(providerContext);
-        ServiceRegistration<INeutronFloatingIPCRUD> neutronFloatingIPInterfaceRegistration = context.registerService(INeutronFloatingIPCRUD.class, neutronFloatingIPInterface, null);
+        final NeutronFloatingIPInterface neutronFloatingIPInterface = new NeutronFloatingIPInterface(providerContext);
+        final ServiceRegistration<INeutronFloatingIPCRUD> neutronFloatingIPInterfaceRegistration = context.registerService(INeutronFloatingIPCRUD.class, neutronFloatingIPInterface, null);
         if (neutronFloatingIPInterfaceRegistration != null) {
             registrations.add(neutronFloatingIPInterfaceRegistration);
         }

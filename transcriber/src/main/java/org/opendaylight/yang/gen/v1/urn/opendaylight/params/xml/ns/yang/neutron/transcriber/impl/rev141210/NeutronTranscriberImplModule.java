@@ -22,8 +22,8 @@ public class NeutronTranscriberImplModule extends org.opendaylight.yang.gen.v1.u
 
     @Override
     public java.lang.AutoCloseable createInstance() {
-        NeutronTranscriberProvider provider = new NeutronTranscriberProvider(bundleContext);
-        BindingAwareBroker localBroker = getBrokerDependency();
+        final NeutronTranscriberProvider provider = new NeutronTranscriberProvider(bundleContext);
+        final BindingAwareBroker localBroker = getBrokerDependency();
         localBroker.registerProvider(provider);
         return provider;
     }

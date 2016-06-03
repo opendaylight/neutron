@@ -52,7 +52,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private static final int RETRY_MAX = 2;
 
-    private DataBroker db;
+    private final DataBroker db;
 
     AbstractNeutronInterface(ProviderContext providerContext) {
         this.db = providerContext.getSALService(DataBroker.class);
@@ -76,7 +76,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     private <T extends DataObject> T readMd(InstanceIdentifier<T> path, ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
         T result = null;
-        CheckedFuture<Optional<T>, ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
+        final CheckedFuture<Optional<T>, ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
         if (future != null) {
             Optional<T> optional;
             try {
@@ -84,7 +84,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
                 if (optional.isPresent()) {
                     result = optional.get();
                 }
-            } catch (ReadFailedException e) {
+            } catch (final ReadFailedException e) {
                 LOGGER.warn("Failed to read {}", path, e);
             }
         }
@@ -104,7 +104,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     protected boolean addMd(S neutronObject) {
         try {
-            WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
+            final WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
             addMd(neutronObject, tx);
             return true;
         } catch (InterruptedException | ExecutionException e) {
@@ -116,10 +116,10 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     private void updateMd(S neutronObject, WriteTransaction tx) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
 
-        T item = toMd(neutronObject);
-        InstanceIdentifier<T> iid = createInstanceIdentifier(item);
+        final T item = toMd(neutronObject);
+        final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
-        CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
+        final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         future.get();   // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
@@ -127,7 +127,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         int retries = RETRY_MAX;
         while (retries-- >= 0) {
             try {
-                WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
+                final WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
                 updateMd(neutronObject, tx);
                 return true;
             } catch (InterruptedException | ExecutionException e) {
@@ -145,14 +145,14 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private void removeMd(T item, WriteTransaction tx) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
-        InstanceIdentifier<T> iid = createInstanceIdentifier(item);
+        final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
+        final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         future.get();  // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
     protected boolean removeMd(T item) {
-        ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+        final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
         try {
             removeMd(item, tx);
             return true;
@@ -167,11 +167,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         Uuid result;
         try {
             result = new Uuid(uuid);
-        } catch(IllegalArgumentException e) {
+        } catch(final IllegalArgumentException e) {
             // OK... someone didn't follow RFC 4122... lets try this the hard way
-            String dedashed = uuid.replace("-", "");
+            final String dedashed = uuid.replace("-", "");
             if(dedashed.length() == DEDASHED_UUID_LENGTH) {
-                String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1)
+                final String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1)
                         + "-"
                         + dedashed.substring(DEDASHED_UUID_DIV1, DEDASHED_UUID_DIV2)
                         + "-"
@@ -191,22 +191,22 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     // this method uses reflection to update an object from it's delta.
 
     protected boolean overwrite(Object target, Object delta) {
-        Method[] methods = target.getClass().getMethods();
+        final Method[] methods = target.getClass().getMethods();
 
-        for(Method toMethod: methods){
+        for(final Method toMethod: methods){
             if(toMethod.getDeclaringClass().equals(target.getClass())
                     && toMethod.getName().startsWith("set")){
 
-                String toName = toMethod.getName();
-                String fromName = toName.replace("set", "get");
+                final String toName = toMethod.getName();
+                final String fromName = toName.replace("set", "get");
 
                 try {
-                    Method fromMethod = delta.getClass().getMethod(fromName);
-                    Object value = fromMethod.invoke(delta, (Object[])null);
+                    final Method fromMethod = delta.getClass().getMethod(fromName);
+                    final Object value = fromMethod.invoke(delta, (Object[])null);
                     if(value != null){
                         toMethod.invoke(target, value);
                     }
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     LOGGER.error("Error in overwrite", e);
                     return false;
                 }
@@ -223,7 +223,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private boolean exists(String uuid, ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
-        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
+        final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         return dataObject != null;
     }
 
@@ -236,7 +236,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private S get(String uuid, ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
-        T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
+        final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         if (dataObject == null) {
             return null;
         }
@@ -254,15 +254,15 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private List<S> getAll(ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
-        Set<S> allNeutronObjects = new HashSet<S>();
-        U dataObjects = readMd(createInstanceIdentifier(), tx);
+        final Set<S> allNeutronObjects = new HashSet<S>();
+        final U dataObjects = readMd(createInstanceIdentifier(), tx);
         if (dataObjects != null) {
-            for (T dataObject: getDataObjectList(dataObjects)) {
+            for (final T dataObject: getDataObjectList(dataObjects)) {
                 allNeutronObjects.add(fromMd(dataObject));
             }
         }
         LOGGER.debug("Exiting _getAll, Found {} OpenStackFirewall", allNeutronObjects.size());
-        List<S> ans = new ArrayList<S>();
+        final List<S> ans = new ArrayList<S>();
         ans.addAll(allNeutronObjects);
         return ans;
     }
@@ -288,7 +288,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     public boolean add(S input) {
         int retries = RETRY_MAX;
         while (retries-- >= 0) {
-            ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+            final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
                 return add(input, tx);
             } catch (InterruptedException | ExecutionException e) {
@@ -318,7 +318,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     public boolean remove(String uuid) {
         int retries = RETRY_MAX;
         while (retries-- >= 0) {
-            ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+            final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
                 return remove(uuid, tx);
             } catch (InterruptedException | ExecutionException e) {
@@ -348,7 +348,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     public boolean update(String uuid, S delta) {
         int retries = RETRY_MAX;
         while (retries-- >= 0) {
-            ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
+            final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
                 return update(uuid, delta, tx);
             } catch (InterruptedException | ExecutionException e) {

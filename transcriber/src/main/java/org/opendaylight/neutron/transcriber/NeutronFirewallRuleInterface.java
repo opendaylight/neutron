@@ -87,7 +87,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
     }
 
     protected NeutronFirewallRule fromMd(FirewallRule rule) {
-        NeutronFirewallRule answer = new NeutronFirewallRule();
+        final NeutronFirewallRule answer = new NeutronFirewallRule();
         if (rule.getUuid() != null) {
             answer.setID(rule.getUuid().getValue());
         }
@@ -141,7 +141,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
 
     @Override
     protected FirewallRule toMd(NeutronFirewallRule rule) {
-        FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
+        final FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
         if (rule.getID() != null) {
             ruleBuilder.setUuid(toUuid(rule.getID()));
         }
@@ -173,11 +173,11 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
             ruleBuilder.setIpVersion(rule.getFirewallRuleIpVer().shortValue());
         }
         if (rule.getFirewallRuleSrcIpAddr() != null) {
-            IpAddress ipAddress = new IpAddress(rule.getFirewallRuleSrcIpAddr().toCharArray());
+            final IpAddress ipAddress = new IpAddress(rule.getFirewallRuleSrcIpAddr().toCharArray());
             ruleBuilder.setSourceIpAddr(ipAddress);
         }
         if (rule.getFirewallRuleDstIpAddr() != null) {
-            IpAddress ipAddress = new IpAddress(rule.getFirewallRuleDstIpAddr().toCharArray());
+            final IpAddress ipAddress = new IpAddress(rule.getFirewallRuleDstIpAddr().toCharArray());
             ruleBuilder.setDestinationIpAddr(ipAddress);
         }
         if (rule.getFirewallRuleSrcPort() != null) {
@@ -197,7 +197,7 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
 
     @Override
     protected FirewallRule toMd(String uuid) {
-        FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
+        final FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
         ruleBuilder.setUuid(toUuid(uuid));
         return ruleBuilder.build();
     }
@@ -205,8 +205,8 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronFirewallRuleInterface neutronFirewallRuleInterface = new NeutronFirewallRuleInterface(providerContext);
-        ServiceRegistration<INeutronFirewallRuleCRUD> neutronFirewallRuleInterfaceRegistration = context.registerService(INeutronFirewallRuleCRUD.class, neutronFirewallRuleInterface, null);
+        final NeutronFirewallRuleInterface neutronFirewallRuleInterface = new NeutronFirewallRuleInterface(providerContext);
+        final ServiceRegistration<INeutronFirewallRuleCRUD> neutronFirewallRuleInterfaceRegistration = context.registerService(INeutronFirewallRuleCRUD.class, neutronFirewallRuleInterface, null);
         if(neutronFirewallRuleInterfaceRegistration != null) {
             registrations.add(neutronFirewallRuleInterfaceRegistration);
         }

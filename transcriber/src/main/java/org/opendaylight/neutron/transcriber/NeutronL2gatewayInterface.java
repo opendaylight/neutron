@@ -63,8 +63,8 @@ public class NeutronL2gatewayInterface extends
 
     @Override
     protected NeutronL2gateway fromMd(L2gateway l2gateway){
-        NeutronL2gateway result = new NeutronL2gateway();
-        List<NeutronL2gatewayDevice> neutronL2gatewayDevices = new ArrayList<NeutronL2gatewayDevice>();
+        final NeutronL2gateway result = new NeutronL2gateway();
+        final List<NeutronL2gatewayDevice> neutronL2gatewayDevices = new ArrayList<NeutronL2gatewayDevice>();
 
         if (l2gateway.getUuid() != null){
             result.setID(l2gateway.getUuid().getValue());
@@ -79,25 +79,25 @@ public class NeutronL2gatewayInterface extends
             result.setTenantID(l2gateway.getTenantId());
         }
         if (l2gateway.getDevices() != null){
-            for (Devices device:l2gateway.getDevices()){
-                NeutronL2gatewayDevice neutronL2gatewayDevice = new NeutronL2gatewayDevice();
-                List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces =
+            for (final Devices device:l2gateway.getDevices()){
+                final NeutronL2gatewayDevice neutronL2gatewayDevice = new NeutronL2gatewayDevice();
+                final List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces =
                         new ArrayList<NeutronL2gatewayDeviceInterface>();
                 if (device.getDeviceName() != null){
                     neutronL2gatewayDevice.setDeviceName(device.getDeviceName().toString());
                 }
                 if(device.getInterfaces() != null){
-                    for(Interfaces deviceInterface:device.getInterfaces()){
-                        NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface =
+                    for(final Interfaces deviceInterface:device.getInterfaces()){
+                        final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface =
                                 new NeutronL2gatewayDeviceInterface();
                         String interfaceName = null;
-                        List<Integer> segmentationIds = new ArrayList<Integer>();
+                        final List<Integer> segmentationIds = new ArrayList<Integer>();
                         if (deviceInterface.getInterfaceName() != null){
                             interfaceName = deviceInterface
                                     .getInterfaceName().toString();
                         }
                         if (deviceInterface.getSegmentationIds() != null){
-                            for(Integer segmentId:deviceInterface.getSegmentationIds()){
+                            for(final Integer segmentId:deviceInterface.getSegmentationIds()){
                                 segmentationIds.add(segmentId);
                             }
                             neutronL2gatewayDeviceInterface.setSegmentationId(segmentationIds);
@@ -116,7 +116,7 @@ public class NeutronL2gatewayInterface extends
 
     @Override
     protected L2gateway toMd(NeutronL2gateway neutronObject) {
-        L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
+        final L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
         if (neutronObject.getL2gatewayName() != null){
             l2gatewayBuilder.setL2gatewayName(neutronObject.getL2gatewayName());
         }
@@ -128,17 +128,17 @@ public class NeutronL2gatewayInterface extends
         }
 
         if (neutronObject.getNeutronL2gatewayDevices() != null){
-            List<Devices> devices = new ArrayList<>();
-            for(NeutronL2gatewayDevice neutronL2gatewayDevice:neutronObject.getNeutronL2gatewayDevices()){
-                DevicesBuilder deviceBuilder = new DevicesBuilder();
-                List<Interfaces> interfaces = new ArrayList<Interfaces>();
-                for(NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface:neutronL2gatewayDevice
+            final List<Devices> devices = new ArrayList<>();
+            for(final NeutronL2gatewayDevice neutronL2gatewayDevice:neutronObject.getNeutronL2gatewayDevices()){
+                final DevicesBuilder deviceBuilder = new DevicesBuilder();
+                final List<Interfaces> interfaces = new ArrayList<Interfaces>();
+                for(final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface:neutronL2gatewayDevice
                         .getNeutronL2gatewayDeviceInterfaces()){
-                    InterfacesBuilder interfacesBuilder = new InterfacesBuilder();
-                    List<Integer> segmentIds = new ArrayList<Integer>();
+                    final InterfacesBuilder interfacesBuilder = new InterfacesBuilder();
+                    final List<Integer> segmentIds = new ArrayList<Integer>();
                     interfacesBuilder.setInterfaceName(neutronL2gatewayDeviceInterface.getInterfaceName());
                     if (neutronL2gatewayDeviceInterface.getSegmentationId() != null){
-                        for(Integer segmentationId:neutronL2gatewayDeviceInterface
+                        for(final Integer segmentationId:neutronL2gatewayDeviceInterface
                                 .getSegmentationId()){
                             segmentIds.add(segmentationId);
                         }
@@ -157,7 +157,7 @@ public class NeutronL2gatewayInterface extends
 
     @Override
     protected L2gateway toMd(String uuid) {
-        L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
+        final L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
         l2gatewayBuilder.setUuid(toUuid(uuid));
         return l2gatewayBuilder.build();
     }
@@ -165,8 +165,8 @@ public class NeutronL2gatewayInterface extends
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronL2gatewayInterface neutronL2gatewayInterface = new NeutronL2gatewayInterface(providerContext);
-        ServiceRegistration<INeutronL2gatewayCRUD> neutronL2gatewayInterfaceRegistration = context
+        final NeutronL2gatewayInterface neutronL2gatewayInterface = new NeutronL2gatewayInterface(providerContext);
+        final ServiceRegistration<INeutronL2gatewayCRUD> neutronL2gatewayInterfaceRegistration = context
                         .registerService(INeutronL2gatewayCRUD.class, neutronL2gatewayInterface, null);
         if (neutronL2gatewayInterfaceRegistration != null) {
             registrations.add(neutronL2gatewayInterfaceRegistration);
