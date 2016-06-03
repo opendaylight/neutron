@@ -52,7 +52,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private static final int RETRY_MAX = 2;
 
-    private DataBroker db;
+    final private DataBroker db;
 
     AbstractNeutronInterface(ProviderContext providerContext) {
         this.db = providerContext.getSALService(DataBroker.class);
