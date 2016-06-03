@@ -17,8 +17,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
-    private List<ServiceRegistration<?>> registrations = new ArrayList<ServiceRegistration<?>>();
-    private ProviderContext providerContext;
+    private final List<ServiceRegistration<?>> registrations = new ArrayList<ServiceRegistration<?>>();
+    private final ProviderContext providerContext;
 
     public Activator(ProviderContext providerContext) {
         this.providerContext = providerContext;
@@ -53,7 +53,7 @@ public class Activator implements BundleActivator {
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        for (ServiceRegistration registration : registrations) {
+        for (final ServiceRegistration registration : registrations) {
             if (registration != null) {
                 registration.unregister();
             }

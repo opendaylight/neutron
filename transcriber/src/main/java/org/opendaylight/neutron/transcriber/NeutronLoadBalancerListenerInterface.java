@@ -91,7 +91,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     protected Listener toMd(String uuid) {
-        ListenerBuilder listenerBuilder = new ListenerBuilder();
+        final ListenerBuilder listenerBuilder = new ListenerBuilder();
         listenerBuilder.setUuid(toUuid(uuid));
         return listenerBuilder.build();
     }
@@ -112,7 +112,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
 
     @Override
     protected Listener toMd(NeutronLoadBalancerListener listener) {
-        ListenerBuilder listenerBuilder = new ListenerBuilder();
+        final ListenerBuilder listenerBuilder = new ListenerBuilder();
         listenerBuilder.setAdminStateUp(listener.getLoadBalancerListenerAdminStateIsUp());
         if (listener.getNeutronLoadBalancerListenerConnectionLimit() != null) {
             listenerBuilder.setConnectionLimit(listener.getNeutronLoadBalancerListenerConnectionLimit());
@@ -124,8 +124,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             listenerBuilder.setDescr(listener.getLoadBalancerListenerDescription());
         }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
-            List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
-            for (Neutron_ID neutron_id : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
+            final List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
+            for (final Neutron_ID neutron_id : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
                 listLoadBalancers.add(toUuid(neutron_id.getID()));
             }
             listenerBuilder.setLoadbalancers(listLoadBalancers);
@@ -134,7 +134,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             listenerBuilder.setName(listener.getLoadBalancerListenerName());
         }
         if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
-            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
+            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
                 PROTOCOL_MAP.inverse();
             listenerBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
         }
@@ -153,7 +153,7 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     }
 
     protected NeutronLoadBalancerListener fromMd(Listener listener) {
-        NeutronLoadBalancerListener answer = new NeutronLoadBalancerListener();
+        final NeutronLoadBalancerListener answer = new NeutronLoadBalancerListener();
         if (listener.isAdminStateUp() != null) {
             answer.setLoadBalancerListenerAdminStateIsUp(listener.isAdminStateUp());
         }
@@ -167,8 +167,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             answer.setLoadBalancerListenerDescription(listener.getDescr());
         }
         if (listener.getLoadbalancers() != null) {
-            List<Neutron_ID> list = new ArrayList<Neutron_ID>();
-            for (Uuid id : listener.getLoadbalancers()) {
+            final List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            for (final Uuid id : listener.getLoadbalancers()) {
                 list.add(new Neutron_ID(id.getValue()));
             }
             answer.setNeutronLoadBalancerListenerLoadBalancerIDs(list);
@@ -194,8 +194,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
+        final NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
+        final ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
         if(neutronLoadBalancerListenerInterfaceRegistration != null) {
             registrations.add(neutronLoadBalancerListenerInterfaceRegistration);
         }

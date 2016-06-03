@@ -78,7 +78,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     }
 
     protected NeutronSecurityGroup fromMd(SecurityGroup group) {
-        NeutronSecurityGroup answer = new NeutronSecurityGroup();
+        final NeutronSecurityGroup answer = new NeutronSecurityGroup();
         if (group.getName() != null) {
             answer.setSecurityGroupName(group.getName());
         }
@@ -93,13 +93,13 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
         // https://bugs.opendaylight.org/show_bug.cgi?id=4550
         // Now SecurityGroup::securityGroupRule isn't updated.
         // always rebuid it from security group rules
-        NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
+        final NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces()
             .fetchINeutronSecurityRuleCRUD(this);
-        INeutronSecurityRuleCRUD srCrud = interfaces.getSecurityRuleInterface();
+        final INeutronSecurityRuleCRUD srCrud = interfaces.getSecurityRuleInterface();
 
-        List<NeutronSecurityRule> rules = new ArrayList<NeutronSecurityRule>();
-        String sgId = group.getUuid().getValue();
-        for (NeutronSecurityRule rule: srCrud.getAll()) {
+        final List<NeutronSecurityRule> rules = new ArrayList<NeutronSecurityRule>();
+        final String sgId = group.getUuid().getValue();
+        for (final NeutronSecurityRule rule: srCrud.getAll()) {
             if (rule.getSecurityRuleGroupID().equals(sgId)) {
                 rules.add(rule);
             }
@@ -114,7 +114,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     protected SecurityGroup toMd(NeutronSecurityGroup securityGroup) {
-        SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
+        final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
         if (securityGroup.getSecurityGroupName() != null) {
             securityGroupBuilder.setName(securityGroup.getSecurityGroupName());
         }
@@ -154,7 +154,7 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     protected SecurityGroup toMd(String uuid) {
-        SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
+        final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
         securityGroupBuilder.setUuid(toUuid(uuid));
         return securityGroupBuilder.build();
     }
@@ -162,8 +162,8 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronSecurityGroupInterface neutronSecurityGroupInterface = new NeutronSecurityGroupInterface(providerContext);
-        ServiceRegistration<INeutronSecurityGroupCRUD> neutronSecurityGroupInterfaceRegistration = context.registerService(INeutronSecurityGroupCRUD.class, neutronSecurityGroupInterface, null);
+        final NeutronSecurityGroupInterface neutronSecurityGroupInterface = new NeutronSecurityGroupInterface(providerContext);
+        final ServiceRegistration<INeutronSecurityGroupCRUD> neutronSecurityGroupInterfaceRegistration = context.registerService(INeutronSecurityGroupCRUD.class, neutronSecurityGroupInterface, null);
         if(neutronSecurityGroupInterfaceRegistration != null) {
             registrations.add(neutronSecurityGroupInterfaceRegistration);
         }

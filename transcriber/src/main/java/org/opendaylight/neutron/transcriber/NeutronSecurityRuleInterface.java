@@ -104,7 +104,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     }
 
     protected NeutronSecurityRule fromMd(SecurityRule rule) {
-        NeutronSecurityRule answer = new NeutronSecurityRule();
+        final NeutronSecurityRule answer = new NeutronSecurityRule();
         if (rule.getTenantId() != null) {
             answer.setTenantID(rule.getTenantId());
         }
@@ -140,13 +140,13 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     protected SecurityRule toMd(NeutronSecurityRule securityRule) {
-        SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
+        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
 
         if (securityRule.getTenantID() != null) {
             securityRuleBuilder.setTenantId(toUuid(securityRule.getTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {
-            ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =
+            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =
                     DIRECTION_MAP.inverse();
             securityRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(securityRule.getSecurityRuleDirection()));
         }
@@ -157,16 +157,16 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setRemoteGroupId(toUuid(securityRule.getSecurityRemoteGroupID()));
         }
         if (securityRule.getSecurityRuleRemoteIpPrefix() != null) {
-            IpPrefix ipPrefix = new IpPrefix(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
+            final IpPrefix ipPrefix = new IpPrefix(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
             securityRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
-            ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
+            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
                     PROTOCOL_MAP.inverse();
             securityRuleBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(securityRule.getSecurityRuleProtocol()));
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
-            ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
+            final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
                     ETHERTYPE_MAP.inverse();
             securityRuleBuilder.setEthertype((Class<? extends EthertypeBase>) mapper.get(securityRule.getSecurityRuleEthertype()));
         }
@@ -199,7 +199,7 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     protected SecurityRule toMd(String uuid) {
-        SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
+        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
         securityRuleBuilder.setId(toUuid(uuid));
         return securityRuleBuilder.build();
     }
@@ -207,8 +207,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronSecurityRuleInterface neutronSecurityRuleInterface = new NeutronSecurityRuleInterface(providerContext);
-        ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
+        final NeutronSecurityRuleInterface neutronSecurityRuleInterface = new NeutronSecurityRuleInterface(providerContext);
+        final ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
         if(neutronSecurityRuleInterfaceRegistration != null) {
             registrations.add(neutronSecurityRuleInterfaceRegistration);
         }

@@ -74,7 +74,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     protected Loadbalancer toMd(String uuid) {
-        LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
+        final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
         loadBalancerBuilder.setUuid(toUuid(uuid));
         return loadBalancerBuilder.build();
     }
@@ -94,7 +94,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     }
 
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
-        NeutronLoadBalancer answer = new NeutronLoadBalancer();
+        final NeutronLoadBalancer answer = new NeutronLoadBalancer();
         if (loadBalancer.isAdminStateUp() != null) {
             answer.setLoadBalancerAdminStateUp(loadBalancer.isAdminStateUp());
         }
@@ -124,7 +124,7 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
 
     @Override
     protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
-        LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
+        final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
         loadBalancerBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
         if (loadBalancer.getLoadBalancerDescription() != null) {
             loadBalancerBuilder.setDescr(loadBalancer.getLoadBalancerDescription());
@@ -155,8 +155,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronLoadBalancerInterface neutronLoadBalancerInterface = new NeutronLoadBalancerInterface(providerContext);
-        ServiceRegistration<INeutronLoadBalancerCRUD> neutronLoadBalancerInterfaceRegistration = context.registerService(INeutronLoadBalancerCRUD.class, neutronLoadBalancerInterface, null);
+        final NeutronLoadBalancerInterface neutronLoadBalancerInterface = new NeutronLoadBalancerInterface(providerContext);
+        final ServiceRegistration<INeutronLoadBalancerCRUD> neutronLoadBalancerInterfaceRegistration = context.registerService(INeutronLoadBalancerCRUD.class, neutronLoadBalancerInterface, null);
         if(neutronLoadBalancerInterfaceRegistration != null) {
             registrations.add(neutronLoadBalancerInterfaceRegistration);
         }

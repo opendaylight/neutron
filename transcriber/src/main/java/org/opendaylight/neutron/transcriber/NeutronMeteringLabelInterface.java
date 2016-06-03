@@ -88,7 +88,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
 
     @Override
     protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
-        MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+        final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
         if (meteringLabel.getMeteringLabelName()!=null) {
             meteringLabelBuilder.setName(meteringLabel.getMeteringLabelName());
         }
@@ -105,7 +105,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
     }
 
     protected NeutronMeteringLabel fromMd(MeteringLabel label) {
-        NeutronMeteringLabel answer = new NeutronMeteringLabel();
+        final NeutronMeteringLabel answer = new NeutronMeteringLabel();
         if (label.getName() != null) {
             answer.setMeteringLabelName(label.getName());
         }
@@ -124,7 +124,7 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
 
     @Override
     protected MeteringLabel toMd(String uuid) {
-        MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+        final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
         meteringLabelBuilder.setUuid(toUuid(uuid));
         return meteringLabelBuilder.build();
     }
@@ -132,8 +132,8 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronMeteringLabelInterface neutronMeteringLabelInterface = new NeutronMeteringLabelInterface(providerContext);
-        ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
+        final NeutronMeteringLabelInterface neutronMeteringLabelInterface = new NeutronMeteringLabelInterface(providerContext);
+        final ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
         if(neutronMeteringLabelInterfaceRegistration != null) {
             registrations.add(neutronMeteringLabelInterfaceRegistration);
         }

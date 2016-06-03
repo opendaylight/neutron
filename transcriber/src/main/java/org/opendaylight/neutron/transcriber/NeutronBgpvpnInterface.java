@@ -55,7 +55,7 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
 
     @Override
     protected NeutronBgpvpn fromMd(Bgpvpn bgpvpn) {
-        NeutronBgpvpn result = new NeutronBgpvpn();
+        final NeutronBgpvpn result = new NeutronBgpvpn();
         result.setAdminStateUp(bgpvpn.isAdminStateUp());
         result.setBgpvpnName(bgpvpn.getName());
         result.setAutoAggregate(bgpvpn.isAutoAggregate());
@@ -72,43 +72,43 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
             result.setTechnique(bgpvpn.getTechnique());
         }
         if (bgpvpn.getRouteTargets() != null) {
-            List<String> routeTargets = new ArrayList<String>();
-            for( String routeTarget : bgpvpn.getRouteTargets()) {
+            final List<String> routeTargets = new ArrayList<String>();
+            for( final String routeTarget : bgpvpn.getRouteTargets()) {
                 routeTargets.add(routeTarget);
             }
             result.setRouteTargets(routeTargets);
         }
         if (bgpvpn.getImportTargets() != null) {
-            List<String> importTargets = new ArrayList<String>();
-            for( String importTarget : bgpvpn.getImportTargets()) {
+            final List<String> importTargets = new ArrayList<String>();
+            for( final String importTarget : bgpvpn.getImportTargets()) {
                 importTargets.add(importTarget);
             }
             result.setImportTargets(importTargets);
         }
         if (bgpvpn.getExportTargets() != null) {
-            List<String> exportTargets = new ArrayList<String>();
-            for( String exportTarget : bgpvpn.getExportTargets()) {
+            final List<String> exportTargets = new ArrayList<String>();
+            for( final String exportTarget : bgpvpn.getExportTargets()) {
                 exportTargets.add(exportTarget);
             }
             result.setExportTargets(exportTargets);
         }
         if (bgpvpn.getRouteDistinguishers() != null) {
-            List<String> routeDistinguishers = new ArrayList<String>();
-            for( String routeDistinguisher : bgpvpn.getRouteDistinguishers()) {
+            final List<String> routeDistinguishers = new ArrayList<String>();
+            for( final String routeDistinguisher : bgpvpn.getRouteDistinguishers()) {
                 routeDistinguishers.add(routeDistinguisher);
             }
             result.setRouteDistinguishers(routeDistinguishers);
         }
         if (bgpvpn.getRouters() != null) {
-            List<String> routers = new ArrayList<String>();
-            for( Uuid router : bgpvpn.getRouters()) {
+            final List<String> routers = new ArrayList<String>();
+            for( final Uuid router : bgpvpn.getRouters()) {
                routers.add(router.getValue());
             }
             result.setRouters(routers);
         }
         if (bgpvpn.getNetworks() != null) {
-            List<String> networks = new ArrayList<String>();
-            for( Uuid network : bgpvpn.getNetworks()) {
+            final List<String> networks = new ArrayList<String>();
+            for( final Uuid network : bgpvpn.getNetworks()) {
                networks.add(network.getValue());
             }
             result.setNetworks(networks);
@@ -118,7 +118,7 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
 
     @Override
     protected Bgpvpn toMd(NeutronBgpvpn bgpvpn) {
-        BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
+        final BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
 
         bgpvpnBuilder.setAdminStateUp(bgpvpn.getAdminStateUp());
         if (bgpvpn.getBgpvpnName() != null) {
@@ -134,50 +134,50 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
             bgpvpnBuilder.setVnid(bgpvpn.getVnid());
         }
         if (bgpvpn.getType() != null) {
-            ImmutableBiMap<String, Class<? extends BgpvpnTypeBase>> mapper = BGPVPN_TYPE_MAP.inverse();
+            final ImmutableBiMap<String, Class<? extends BgpvpnTypeBase>> mapper = BGPVPN_TYPE_MAP.inverse();
             bgpvpnBuilder.setType(mapper.get(bgpvpn.getType()));
         }
         if (bgpvpn.getTechnique() != null) {
             bgpvpnBuilder.setTechnique(bgpvpn.getTechnique());
         }
         if (bgpvpn.getRouteTargets() != null) {
-            List<String> routeTargets = new ArrayList<String>();
-            for( String routeTarget : bgpvpn.getRouteTargets()) {
+            final List<String> routeTargets = new ArrayList<String>();
+            for( final String routeTarget : bgpvpn.getRouteTargets()) {
                 routeTargets.add(routeTarget);
             }
             bgpvpnBuilder.setRouteTargets(routeTargets);
         }
         if (bgpvpn.getImportTargets() != null) {
-            List<String> importTargets = new ArrayList<String>();
-            for( String importTarget : bgpvpn.getImportTargets()) {
+            final List<String> importTargets = new ArrayList<String>();
+            for( final String importTarget : bgpvpn.getImportTargets()) {
                 importTargets.add(importTarget);
             }
             bgpvpnBuilder.setImportTargets(importTargets);
         }
         if (bgpvpn.getExportTargets() != null) {
-            List<String> exportTargets = new ArrayList<String>();
-            for( String exportTarget : bgpvpn.getExportTargets()) {
+            final List<String> exportTargets = new ArrayList<String>();
+            for( final String exportTarget : bgpvpn.getExportTargets()) {
                 exportTargets.add(exportTarget);
             }
             bgpvpnBuilder.setExportTargets(exportTargets);
         }
         if (bgpvpn.getRouteDistinguishers() != null) {
-            List<String> routeDistinguishers = new ArrayList<String>();
-            for( String routeDistinguisher : bgpvpn.getRouteDistinguishers()) {
+            final List<String> routeDistinguishers = new ArrayList<String>();
+            for( final String routeDistinguisher : bgpvpn.getRouteDistinguishers()) {
                 routeDistinguishers.add(routeDistinguisher);
             }
             bgpvpnBuilder.setRouteDistinguishers(routeDistinguishers);
         }
         if (bgpvpn.getRouters() != null) {
-            List<Uuid> routers = new ArrayList<Uuid>();
-            for( String router : bgpvpn.getRouters()) {
+            final List<Uuid> routers = new ArrayList<Uuid>();
+            for( final String router : bgpvpn.getRouters()) {
                 routers.add(toUuid(router));
             }
             bgpvpnBuilder.setRouters(routers);
         }
         if (bgpvpn.getNetworks() != null) {
-            List<Uuid> networks = new ArrayList<Uuid>();
-            for( String network : bgpvpn.getNetworks()) {
+            final List<Uuid> networks = new ArrayList<Uuid>();
+            for( final String network : bgpvpn.getNetworks()) {
                 networks.add(toUuid(network));
             }
             bgpvpnBuilder.setNetworks(networks);
@@ -195,7 +195,7 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
 
     @Override
     protected Bgpvpn toMd(String uuid) {
-        BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
+        final BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
         bgpvpnBuilder.setUuid(toUuid(uuid));
         return bgpvpnBuilder.build();
     }
@@ -216,8 +216,8 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronBgpvpnInterface neutronNetworkInterface = new NeutronBgpvpnInterface(providerContext);
-        ServiceRegistration<INeutronBgpvpnCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronBgpvpnCRUD.class, neutronNetworkInterface, null);
+        final NeutronBgpvpnInterface neutronNetworkInterface = new NeutronBgpvpnInterface(providerContext);
+        final ServiceRegistration<INeutronBgpvpnCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronBgpvpnCRUD.class, neutronNetworkInterface, null);
         if(neutronNetworkInterfaceRegistration != null) {
             registrations.add(neutronNetworkInterfaceRegistration);
         }

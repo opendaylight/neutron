@@ -99,7 +99,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
     }
 
     protected NeutronNetwork fromMd(Network network) {
-        NeutronNetwork result = new NeutronNetwork();
+        final NeutronNetwork result = new NeutronNetwork();
         result.initDefaults();
         result.setAdminStateUp(network.isAdminStateUp());
         result.setNetworkName(network.getName());
@@ -108,17 +108,17 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
         result.setTenantID(network.getTenantId());
         result.setID(network.getUuid().getValue());
 
-        NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
+        final NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
         result.setRouterExternal(l3Extension.isExternal());
 
-        NetworkProviderExtension providerExtension = network.getAugmentation(NetworkProviderExtension.class);
+        final NetworkProviderExtension providerExtension = network.getAugmentation(NetworkProviderExtension.class);
         result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());
         result.setProviderSegmentationID(providerExtension.getSegmentationId());
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
-        List<NeutronNetwork_Segment> segments = new ArrayList<NeutronNetwork_Segment>();
+        final List<NeutronNetwork_Segment> segments = new ArrayList<NeutronNetwork_Segment>();
         if (providerExtension.getSegments() != null) {
-            for (Segments segment: providerExtension.getSegments()) {
-                NeutronNetwork_Segment neutronSegment = new NeutronNetwork_Segment();
+            for (final Segments segment: providerExtension.getSegments()) {
+                final NeutronNetwork_Segment neutronSegment = new NeutronNetwork_Segment();
                 neutronSegment.setProviderPhysicalNetwork(segment.getPhysicalNetwork());
                 neutronSegment.setProviderSegmentationID(segment.getSegmentationId());
                 neutronSegment.setProviderNetworkType(NETWORK_MAP.get(segment.getNetworkType()));
@@ -131,12 +131,12 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
 
     private void fillExtensions(NetworkBuilder networkBuilder,
                                 NeutronNetwork network) {
-        NetworkL3ExtensionBuilder l3ExtensionBuilder = new NetworkL3ExtensionBuilder();
+        final NetworkL3ExtensionBuilder l3ExtensionBuilder = new NetworkL3ExtensionBuilder();
         if (network.getRouterExternal() != null) {
             l3ExtensionBuilder.setExternal(network.getRouterExternal());
         }
 
-        NetworkProviderExtensionBuilder providerExtensionBuilder = new NetworkProviderExtensionBuilder();
+        final NetworkProviderExtensionBuilder providerExtensionBuilder = new NetworkProviderExtensionBuilder();
         if (network.getProviderPhysicalNetwork() != null) {
             providerExtensionBuilder.setPhysicalNetwork(network.getProviderPhysicalNetwork());
         }
@@ -144,16 +144,16 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
         if (network.getProviderNetworkType() != null) {
-            ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
+            final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
                 NETWORK_MAP.inverse();
             providerExtensionBuilder.setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
         }
         if (network.getSegments() != null) {
-            List<Segments> segments = new ArrayList<Segments>();
+            final List<Segments> segments = new ArrayList<Segments>();
             long count = 0;
-            for( NeutronNetwork_Segment segment : network.getSegments()) {
+            for( final NeutronNetwork_Segment segment : network.getSegments()) {
                 count++;
-                SegmentsBuilder segmentsBuilder = new SegmentsBuilder();
+                final SegmentsBuilder segmentsBuilder = new SegmentsBuilder();
                 if (segment.getProviderPhysicalNetwork() != null) {
                     segmentsBuilder.setPhysicalNetwork(segment.getProviderPhysicalNetwork());
                 }
@@ -161,7 +161,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
                     segmentsBuilder.setSegmentationId(segment.getProviderSegmentationID());
                 }
                 if (segment.getProviderNetworkType() != null) {
-                    ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
+                    final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
                         NETWORK_MAP.inverse();
                     segmentsBuilder.setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(segment.getProviderNetworkType()));
                 }
@@ -181,7 +181,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
     }
 
     protected Network toMd(NeutronNetwork network) {
-        NetworkBuilder networkBuilder = new NetworkBuilder();
+        final NetworkBuilder networkBuilder = new NetworkBuilder();
         fillExtensions(networkBuilder, network);
 
         networkBuilder.setAdminStateUp(network.getAdminStateUp());
@@ -206,7 +206,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
     }
 
     protected Network toMd(String uuid) {
-        NetworkBuilder networkBuilder = new NetworkBuilder();
+        final NetworkBuilder networkBuilder = new NetworkBuilder();
         networkBuilder.setUuid(toUuid(uuid));
         return networkBuilder.build();
     }
@@ -227,8 +227,8 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronNetworkInterface neutronNetworkInterface = new NeutronNetworkInterface(providerContext);
-        ServiceRegistration<INeutronNetworkCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronNetworkCRUD.class, neutronNetworkInterface, null);
+        final NeutronNetworkInterface neutronNetworkInterface = new NeutronNetworkInterface(providerContext);
+        final ServiceRegistration<INeutronNetworkCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronNetworkCRUD.class, neutronNetworkInterface, null);
         if(neutronNetworkInterfaceRegistration != null) {
             registrations.add(neutronNetworkInterfaceRegistration);
         }

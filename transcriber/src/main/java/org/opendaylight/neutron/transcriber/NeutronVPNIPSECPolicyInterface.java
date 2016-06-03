@@ -75,7 +75,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
     }
 
     protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {
-        NeutronVPNIPSECPolicy answer = new NeutronVPNIPSECPolicy();
+        final NeutronVPNIPSECPolicy answer = new NeutronVPNIPSECPolicy();
         if (ipsecPolicy.getName() != null) {
             answer.setName(ipsecPolicy.getName());
         }
@@ -101,7 +101,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
             answer.setPerfectForwardSecrecy(ipsecPolicy.getPfs());
         }
         if (ipsecPolicy.getLifetime() !=null) {
-            NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
+            final NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
             vpnLifetime.setUnits(ipsecPolicy.getLifetime().getUnits());
             vpnLifetime.setValue(ipsecPolicy.getLifetime().getValue());
             answer.setLifetime(vpnLifetime);
@@ -114,7 +114,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
     @Override
     protected Ipsecpolicy toMd(NeutronVPNIPSECPolicy ipsecPolicy) {
-        IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
+        final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
         if (ipsecPolicy.getName() != null) {
             ipsecPolicyBuilder.setName(ipsecPolicy.getName());
         }
@@ -140,8 +140,8 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
             ipsecPolicyBuilder.setPfs(ipsecPolicy.getPerfectForwardSecrecy());
         }
         if (ipsecPolicy.getLifetime() !=null) {
-            NeutronVPNLifetime vpnLifetime = ipsecPolicy.getLifetime();
-            LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
+            final NeutronVPNLifetime vpnLifetime = ipsecPolicy.getLifetime();
+            final LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
             lifetimeBuilder.setUnits(vpnLifetime.getUnits());
             lifetimeBuilder.setValue(vpnLifetime.getValue());
             ipsecPolicyBuilder.setLifetime(lifetimeBuilder.build());
@@ -170,7 +170,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
 
     @Override
     protected Ipsecpolicy toMd(String uuid) {
-        IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
+        final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
         ipsecPolicyBuilder.setUuid(toUuid(uuid));
         return ipsecPolicyBuilder.build();
     }
@@ -178,8 +178,8 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
     public static void registerNewInterface(BundleContext context,
                                             ProviderContext providerContext,
                                             List<ServiceRegistration<?>> registrations) {
-        NeutronVPNIPSECPolicyInterface neutronVPNIPSECPolicyInterface = new NeutronVPNIPSECPolicyInterface(providerContext);
-        ServiceRegistration<INeutronVPNIPSECPolicyCRUD> neutronVPNIPSECPolicyInterfaceRegistration = context.registerService(INeutronVPNIPSECPolicyCRUD.class, neutronVPNIPSECPolicyInterface, null);
+        final NeutronVPNIPSECPolicyInterface neutronVPNIPSECPolicyInterface = new NeutronVPNIPSECPolicyInterface(providerContext);
+        final ServiceRegistration<INeutronVPNIPSECPolicyCRUD> neutronVPNIPSECPolicyInterfaceRegistration = context.registerService(INeutronVPNIPSECPolicyCRUD.class, neutronVPNIPSECPolicyInterface, null);
         if(neutronVPNIPSECPolicyInterfaceRegistration != null) {
             registrations.add(neutronVPNIPSECPolicyInterfaceRegistration);
         }
