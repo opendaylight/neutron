@@ -53,6 +53,75 @@
     },
     {
       "key": {
+        "uuid": "da5c1566_5eafa5e3",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosBandwidthCRUD.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Suggestion : Update the comment to distinguish from INeutronQosDscpRuleCRUD",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 79
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_de74559e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosBandwidthCRUD.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Not compliant with Java naming convention",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 13
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_be79a195",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosBandwidthCRUD.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Not compliant with Java naming conventions.",
+      "range": {
+        "startLine": 94,
+        "startChar": 12,
+        "endLine": 94,
+        "endChar": 14
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_49031842",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosDscpRuleCRUD.java",
         "patchSetId": 11
@@ -64,6 +133,75 @@
       "writtenOn": "2016-05-25T00:23:27Z",
       "side": 1,
       "message": "fix this line",
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_be87e160",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosDscpRuleCRUD.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Suggestion : Update the comment to distinguish INeutronQosBandwidthCRUD",
+      "range": {
+        "startLine": 14,
+        "startChar": 3,
+        "endLine": 14,
+        "endChar": 79
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_9e901d97",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosDscpRuleCRUD.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Naming compliance",
+      "range": {
+        "startLine": 29,
+        "startChar": 12,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_3e93d1a4",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosDscpRuleCRUD.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Naming compliance",
+      "range": {
+        "startLine": 94,
+        "startChar": 12,
+        "endLine": 94,
+        "endChar": 13
+      },
       "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -98,6 +236,121 @@
       "writtenOn": "2016-05-25T00:23:27Z",
       "side": 1,
       "message": "strange camel case.",
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_3ecbd173",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidth.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Suggestion : setters/getters are old style of programming which makes the code more verbose. For simple types the fields can be accessed directly.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 104
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_ded3b536",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidth.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "This while loop wont terminate. Please change it to reflect the correct logic.",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 28
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_bed88154",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidth.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "These method names are not compliant with the naming conventions. Use proper camel case",
+      "range": {
+        "startLine": 52,
+        "startChar": 16,
+        "endLine": 52,
+        "endChar": 62
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_1edecd3f",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidth.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "Use StringBuilder instead of appending strings.",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_9ef13dd0",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidth.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-06-06T20:09:16Z",
+      "side": 1,
+      "message": "What does this overrided function do?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 5
+      },
       "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
