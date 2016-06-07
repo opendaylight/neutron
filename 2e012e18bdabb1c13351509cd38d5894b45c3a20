@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c1566_c9a01df7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-07T00:02:26Z",
+      "side": 1,
+      "message": "Bug 3902 : Local ...\n\nPlease remove \"Patch added for \"",
+      "revId": "2e012e18bdabb1c13351509cd38d5894b45c3a20",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_29a6f910",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-07T00:02:26Z",
+      "side": 1,
+      "message": "Please wrap at char 72.\n\nHow did you identify those variables and what range of files were checked?\ni.e.\n- entire .java files\n- under .java files under neutron/transcriber\n- randomly find those two variables\nor\n- something else?\n\nThis kind of cleanup should be done consistently, not as random fix.",
+      "revId": "2e012e18bdabb1c13351509cd38d5894b45c3a20",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_895f450e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-07T00:02:26Z",
+      "side": 1,
+      "message": "private final\nhttps://google.github.io/styleguide/javaguide.html#s4.8.7-modifiers",
+      "revId": "2e012e18bdabb1c13351509cd38d5894b45c3a20",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da5c1566_e99b61c7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/Activator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-07T00:02:26Z",
+      "side": 1,
+      "message": "private final",
+      "revId": "2e012e18bdabb1c13351509cd38d5894b45c3a20",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
