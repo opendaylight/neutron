@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5c1566_638484d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-09T02:03:32Z",
+      "side": 1,
+      "message": "Can you please be more concrete instead of \"correct\"?\ne.g. sprinkle final\n\nand can you please describe how you identified those local variables to be final?",
+      "revId": "c68ea3e89876b9ef0f6241da459d48d20395e070",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
