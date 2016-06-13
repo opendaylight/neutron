@@ -32,8 +32,9 @@ public class Neutron_IPs implements Serializable {
 
     public Neutron_IPs() { }
 
-    public Neutron_IPs(String uuid) {
-        subnetUUID = uuid;
+    public Neutron_IPs(String ip, String subnet) {
+        ipAddress = ip;
+        subnetUUID = subnet;
     }
 
     public String getIpAddress() {
