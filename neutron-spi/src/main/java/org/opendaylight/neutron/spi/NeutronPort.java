@@ -81,7 +81,11 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     @XmlElement (defaultValue = "true", name = "port_security_enabled")
     Boolean portSecurityEnabled;
 
-    public NeutronPort() {
+    //Qos Policy ID is nillable by default
+    @XmlElement (name = "qos_policy_id", nillable=true)
+    String qosPolicyUUID;
+
+	public NeutronPort() {
     }
 
     @Deprecated
@@ -230,6 +234,14 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
         portSecurityEnabled = newValue;
     }
 
+    public String getQosPolicyUUID() {
+        return qosPolicyUUID;
+    }
+
+    public void setQosPolicyUUID(String qosPolicyUUID) {
+        this.qosPolicyUUID = qosPolicyUUID;
+    }
+
     /**
      * This method copies selected fields from the object and returns them
      * as a new object, suitable for marshaling.
@@ -279,6 +291,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
             if ("port_security_enabled".equals(field)) {
                 ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
             }
+            if ("qos_policy_id".equals(field)) {
+                ans.setQosPolicyUUID(this.getQosPolicyUUID());
+            }
         }
         return ans;
     }
@@ -302,6 +317,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
                 + ", fixedIPs=" + fixedIPs + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID="
                 + tenantID + ", securityGroups=" + securityGroups
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType
-                + ", bindingvnicType=" + bindingvnicType + ", portSecurityEnabled=" + portSecurityEnabled +"]";
+                + ", bindingvnicType=" + bindingvnicType + ", portSecurityEnabled=" + portSecurityEnabled
+                + ", qos_policy_id=" + qosPolicyUUID + "]";
     }
 }
