@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+module neutron-extensions {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-extensions";
+
+    prefix neutron-extensions;
+
+    import ietf-yang-types { prefix "yang"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Isaku Yamahata <isaku.yamahata@gmail.com>";
+
+    description "This YANG module defines neutron extensions attributes that are used
+        by OpenDaylight Neutron YANG modules.
+        http://developer.openstack.org/api-ref-networking-v2-ext.html#neutron_extensions";
+
+    revision "2016-06-17" {
+        description
+                "OpenDaylight Boron release";
+    }
+
+    grouping extension-attributes {
+        leaf name {
+            config false;
+            type string;
+        }
+        leaf alias {
+            config false;
+            type string;
+        }
+        leaf updated {
+            config false;
+            type yang:date-and-time;
+        }
+    }
+
+    grouping extensions-attributes {
+        container extensions {
+            config false;
+            list extension {
+                key "alias";
+                uses extension-attributes;
+            }
+        }
+    }
+}

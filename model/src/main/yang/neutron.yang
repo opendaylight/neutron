@@ -14,6 +14,7 @@ module neutron {
 
     prefix neutron-L3;
 
+    import neutron-exteions { prefix "neutron-extensions"; }
     import neutron-networks { prefix "networks"; }
     import neutron-ports { prefix "ports"; }
     import neutron-subnets { prefix "subnets"; }
@@ -41,6 +42,7 @@ module neutron {
     }
 
     container neutron {
+        uses neutron-extensions:neutron-extensions;
         uses networks:networks-attributes;
         uses subnets:subnets-attributes;
         uses ports:ports-attributes;
