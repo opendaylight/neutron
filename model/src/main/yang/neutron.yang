@@ -12,7 +12,7 @@ module neutron {
 
     namespace "urn:opendaylight:neutron";
 
-    prefix neutron-L3;
+    prefix neutron;
 
     import neutron-networks { prefix "networks"; }
     import neutron-ports { prefix "ports"; }
