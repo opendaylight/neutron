@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba51214e_a934c9de",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-06-20T19:17:59Z",
+      "side": 1,
+      "message": "i guess this should be qos-policy-id",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_2958b931",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-06-20T19:17:59Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 83,
+        "startChar": 13,
+        "endLine": 83,
+        "endChar": 22
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_090fb531",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-06-20T19:17:59Z",
+      "side": 1,
+      "message": "http://paste.openstack.org/show/520660/\n\nthis should be qos_policy_id",
+      "range": {
+        "startLine": 28,
+        "startChar": 24,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_49108d4e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-06-20T19:17:59Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 64,
+        "startChar": 25,
+        "endLine": 64,
+        "endChar": 34
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_a91de968",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-06-20T19:17:59Z",
+      "side": 1,
+      "message": "same here as well qos_policy_id\nhttp://paste.openstack.org/show/520662/",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
