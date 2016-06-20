@@ -8,15 +8,6 @@
 
 package org.opendaylight.neutron.e2etest;
 
-import java.io.OutputStreamWriter;
-
-import java.lang.Thread;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.junit.Assert;
-
 public class NeutronSecurityGroupTests {
     String base;
 

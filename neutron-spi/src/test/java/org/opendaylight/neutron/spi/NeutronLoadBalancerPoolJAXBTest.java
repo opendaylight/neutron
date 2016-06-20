@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;

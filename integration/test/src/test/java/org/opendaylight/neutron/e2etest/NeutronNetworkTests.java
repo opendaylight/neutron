@@ -8,8 +8,6 @@
 
 package org.opendaylight.neutron.e2etest;
 
-import java.io.OutputStreamWriter;
-
 import java.lang.Thread;
 
 import java.net.HttpURLConnection;

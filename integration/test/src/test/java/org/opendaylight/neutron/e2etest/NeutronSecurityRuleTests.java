@@ -8,19 +8,6 @@
 
 package org.opendaylight.neutron.e2etest;
 
-import java.io.OutputStreamWriter;
-
-import java.lang.Thread;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import org.junit.Assert;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-
 public class NeutronSecurityRuleTests {
     String base;
 

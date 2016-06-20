@@ -8,8 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Test;
 
