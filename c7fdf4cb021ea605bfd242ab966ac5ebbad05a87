@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_8fad828b",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-21T23:42:40Z",
+      "side": 1,
+      "message": "What exactly is this link?",
+      "parentUuid": "ba51214e_090fb531",
+      "range": {
+        "startLine": 28,
+        "startChar": 24,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_49108d4e",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
         "patchSetId": 15
