@@ -111,7 +111,7 @@ public class NeutronVPNIPSECPoliciesNorthbound
             // pagination and sorting are TODO
             ) {
         INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronCRUD();
-        List<NeutronVPNIPSECPolicy> allNeutronVPNIPSECPolicies = policyInterface.getAllNeutronVPNIPSECPolicies();
+        List<NeutronVPNIPSECPolicy> allNeutronVPNIPSECPolicies = policyInterface.getAll();
         List<NeutronVPNIPSECPolicy> ans = new ArrayList<NeutronVPNIPSECPolicy>();
         Iterator<NeutronVPNIPSECPolicy> i = allNeutronVPNIPSECPolicies.iterator();
         while (i.hasNext()) {

@@ -45,45 +45,9 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
     }
 
     // IfNBMeteringLabelRuleCRUD methods
-
-    @Override
-    public boolean neutronMeteringLabelRuleExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronMeteringLabelRule getNeutronMeteringLabelRule(String uuid) {
-        return get(uuid);
-    }
-
     @Override
     protected List<MeteringRule> getDataObjectList(MeteringRules rules) {
         return rules.getMeteringRule();
-    }
-
-    @Override
-    public List<NeutronMeteringLabelRule> getAllNeutronMeteringLabelRules() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronMeteringLabelRule(NeutronMeteringLabelRule input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronMeteringLabelRule(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronMeteringLabelRule(String uuid, NeutronMeteringLabelRule delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronMeteringLabelRuleInUse(String netUUID) {
-        return !exists(netUUID);
     }
 
     @Override

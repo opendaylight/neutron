@@ -112,8 +112,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
     // pagination and sorting are TODO
     ) {
         INeutronVPNIPSECSiteConnectionsCRUD labelInterface = getNeutronCRUD();
-        List<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnection = labelInterface
-                .getAllNeutronVPNIPSECSiteConnections();
+        List<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnection = labelInterface.getAll();
         List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
         Iterator<NeutronVPNIPSECSiteConnection> i = allNeutronVPNIPSECSiteConnection.iterator();
         while (i.hasNext()) {

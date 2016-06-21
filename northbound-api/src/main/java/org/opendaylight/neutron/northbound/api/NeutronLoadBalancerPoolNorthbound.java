@@ -117,7 +117,7 @@ public class NeutronLoadBalancerPoolNorthbound
             // sorting not supported
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        List<NeutronLoadBalancerPool> allLoadBalancerPools = loadBalancerPoolInterface.getAllNeutronLoadBalancerPools();
+        List<NeutronLoadBalancerPool> allLoadBalancerPools = loadBalancerPoolInterface.getAll();
         List<NeutronLoadBalancerPool> ans = new ArrayList<NeutronLoadBalancerPool>();
         Iterator<NeutronLoadBalancerPool> i = allLoadBalancerPools.iterator();
         while (i.hasNext()) {
@@ -246,11 +246,11 @@ public class NeutronLoadBalancerPoolNorthbound
             // sorting not supported
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
+        if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
         List<NeutronLoadBalancerPoolMember> members =
-                    loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
+                    loadBalancerPoolInterface.get(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
         List<NeutronLoadBalancerPoolMember> ans = new ArrayList<NeutronLoadBalancerPoolMember>();
         Iterator<NeutronLoadBalancerPoolMember> i = members.iterator();
         while (i.hasNext()) {
@@ -298,11 +298,11 @@ public class NeutronLoadBalancerPoolNorthbound
             @QueryParam("fields") List<String> fields ) {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        if (!loadBalancerPoolInterface.neutronLoadBalancerPoolExists(loadBalancerPoolUUID)) {
+        if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
         List<NeutronLoadBalancerPoolMember> members =
-                    loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
+                    loadBalancerPoolInterface.get(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
         for (NeutronLoadBalancerPoolMember ans: members) {
             if (!ans.getID().equals(loadBalancerPoolMemberUUID)) {
                 continue;
@@ -334,7 +334,7 @@ public class NeutronLoadBalancerPoolNorthbound
             final NeutronLoadBalancerPoolMemberRequest input) {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
+        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.get(loadBalancerPoolUUID);
 
         if (input.isSingleton()) {
             NeutronLoadBalancerPoolMember singleton = input.getSingleton();
@@ -371,7 +371,7 @@ public class NeutronLoadBalancerPoolNorthbound
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID,
             final NeutronLoadBalancerPoolMemberRequest input) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID);
+        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.get(loadBalancerPoolUUID);
         NeutronLoadBalancerPoolMember singleton = input.getSingleton();
         singleton.setPoolID(loadBalancerPoolUUID);
 
@@ -402,7 +402,7 @@ public class NeutronLoadBalancerPoolNorthbound
         //Verify that the LB pool member exists
         NeutronLoadBalancerPoolMember singleton = null;
         List<NeutronLoadBalancerPoolMember> members =
-                loadBalancerPoolInterface.getNeutronLoadBalancerPool(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
+                loadBalancerPoolInterface.get(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
         for (NeutronLoadBalancerPoolMember member: members) {
             if (member.getID().equals(loadBalancerPoolMemberUUID)) {
                 singleton = member;

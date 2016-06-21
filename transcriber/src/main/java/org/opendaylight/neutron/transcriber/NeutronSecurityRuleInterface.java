@@ -54,43 +54,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
     }
 
     @Override
-    public boolean neutronSecurityRuleExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronSecurityRule getNeutronSecurityRule(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<SecurityRule> getDataObjectList(SecurityRules rules) {
         return rules.getSecurityRule();
-    }
-
-    @Override
-    public List<NeutronSecurityRule> getAllNeutronSecurityRules() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronSecurityRule(NeutronSecurityRule input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronSecurityRule(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronSecurityRule(String uuid, NeutronSecurityRule delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronSecurityRuleInUse(String securityRuleUUID) {
-        return !exists(securityRuleUUID);
     }
 
     protected NeutronSecurityRule fromMd(SecurityRule rule) {

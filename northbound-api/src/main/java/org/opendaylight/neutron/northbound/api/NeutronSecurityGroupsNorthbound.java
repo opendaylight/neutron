@@ -100,7 +100,7 @@ public class NeutronSecurityGroupsNorthbound
             @QueryParam ("page_reverse") String pageReverse
     ) {
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronCRUD();
-        List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAllNeutronSecurityGroups();
+        List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAll();
         List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
         Iterator<NeutronSecurityGroup> i = allSecurityGroups.iterator();
         while (i.hasNext()) {

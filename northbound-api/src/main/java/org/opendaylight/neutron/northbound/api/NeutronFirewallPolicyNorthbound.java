@@ -105,7 +105,7 @@ public class NeutronFirewallPolicyNorthbound
     ) {
         INeutronFirewallPolicyCRUD firewallPolicyInterface = getNeutronCRUD();
         List<NeutronFirewallPolicy> ans = new ArrayList<NeutronFirewallPolicy>();
-        for (NeutronFirewallPolicy nsg : firewallPolicyInterface.getAllNeutronFirewallPolicies()) {
+        for (NeutronFirewallPolicy nsg : firewallPolicyInterface.getAll()) {
             if ((queryFirewallPolicyUUID == null ||
                 queryFirewallPolicyUUID.equals(nsg.getID())) &&
                 (queryFirewallPolicyTenantID == null ||

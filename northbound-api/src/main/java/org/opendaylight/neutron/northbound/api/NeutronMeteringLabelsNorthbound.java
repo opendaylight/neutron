@@ -105,7 +105,7 @@ public class NeutronMeteringLabelsNorthbound
             // pagination and sorting are TODO
             ) {
         INeutronMeteringLabelCRUD labelInterface = getNeutronCRUD();
-        List<NeutronMeteringLabel> allNeutronMeteringLabel = labelInterface.getAllNeutronMeteringLabels();
+        List<NeutronMeteringLabel> allNeutronMeteringLabel = labelInterface.getAll();
         List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
         Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabel.iterator();
         while (i.hasNext()) {

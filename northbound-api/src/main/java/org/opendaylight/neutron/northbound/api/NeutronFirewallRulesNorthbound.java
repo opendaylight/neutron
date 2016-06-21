@@ -115,7 +115,7 @@ public class NeutronFirewallRulesNorthbound
     ) {
         INeutronFirewallRuleCRUD firewallRuleInterface = getNeutronCRUD();
         List<NeutronFirewallRule> ans = new ArrayList<NeutronFirewallRule>();
-        for (NeutronFirewallRule nsr : firewallRuleInterface.getAllNeutronFirewallRules()) {
+        for (NeutronFirewallRule nsr : firewallRuleInterface.getAll()) {
             if ((queryFirewallRuleUUID == null ||
                     queryFirewallRuleUUID.equals(nsr.getID())) &&
                     (queryFirewallRuleTenantID == null ||

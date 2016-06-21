@@ -142,7 +142,7 @@ public class NeutronRoutersNorthbound
         if (routerInterface == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
-        List<NeutronRouter> allRouters = routerInterface.getAllRouters();
+        List<NeutronRouter> allRouters = routerInterface.getAll();
         List<NeutronRouter> ans = new ArrayList<NeutronRouter>();
         Iterator<NeutronRouter> i = allRouters.iterator();
         while (i.hasNext()) {

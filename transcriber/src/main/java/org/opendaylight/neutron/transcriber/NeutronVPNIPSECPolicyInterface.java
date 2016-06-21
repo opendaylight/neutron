@@ -35,43 +35,8 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
     // IfNBVPNIPSECPolicyCRUD methods
 
     @Override
-    public boolean neutronVPNIPSECPolicyExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronVPNIPSECPolicy getNeutronVPNIPSECPolicy(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Ipsecpolicy> getDataObjectList(IpsecPolicies policies) {
         return policies.getIpsecpolicy();
-    }
-
-    @Override
-    public List<NeutronVPNIPSECPolicy> getAllNeutronVPNIPSECPolicies() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronVPNIPSECPolicy(NeutronVPNIPSECPolicy input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronVPNIPSECPolicy(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronVPNIPSECPolicy(String uuid, NeutronVPNIPSECPolicy delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronVPNIPSECPolicyInUse(String netUUID) {
-        return !exists(netUUID);
     }
 
     protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {

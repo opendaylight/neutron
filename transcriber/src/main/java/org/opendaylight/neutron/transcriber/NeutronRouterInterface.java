@@ -45,45 +45,9 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
 
 
     // IfNBRouterCRUD Interface methods
-
-    @Override
-    public boolean routerExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronRouter getRouter(String uuid) {
-        return get(uuid);
-    }
-
     @Override
     protected List<Router> getDataObjectList(Routers routers) {
         return routers.getRouter();
-    }
-
-    @Override
-    public List<NeutronRouter> getAllRouters() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addRouter(NeutronRouter input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeRouter(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateRouter(String uuid, NeutronRouter delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean routerInUse(String routerUUID) {
-        return !exists(routerUUID);
     }
 
     @Override

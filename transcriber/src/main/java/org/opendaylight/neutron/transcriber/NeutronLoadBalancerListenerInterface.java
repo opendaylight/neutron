@@ -49,45 +49,9 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     }
 
     @Override
-    public boolean neutronLoadBalancerListenerExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronLoadBalancerListener getNeutronLoadBalancerListener(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Listener> getDataObjectList(Listeners listeners) {
         return listeners.getListener();
     }
-
-    @Override
-    public List<NeutronLoadBalancerListener> getAllNeutronLoadBalancerListeners() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronLoadBalancerListener(NeutronLoadBalancerListener input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronLoadBalancerListener(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronLoadBalancerListener(String uuid, NeutronLoadBalancerListener delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronLoadBalancerListenerInUse(String loadBalancerListenerUUID) {
-        return !exists(loadBalancerListenerUUID);
-    }
-
 
     @Override
     protected Listener toMd(String uuid) {

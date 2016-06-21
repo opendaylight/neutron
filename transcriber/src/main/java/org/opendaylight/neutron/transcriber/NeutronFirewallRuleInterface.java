@@ -56,43 +56,8 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
     }
 
     @Override
-    public boolean neutronFirewallRuleExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronFirewallRule getNeutronFirewallRule(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<FirewallRule> getDataObjectList(FirewallRules rules) {
         return rules.getFirewallRule();
-    }
-
-    @Override
-    public List<NeutronFirewallRule> getAllNeutronFirewallRules() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronFirewallRule(NeutronFirewallRule input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronFirewallRule(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronFirewallRule(String uuid, NeutronFirewallRule delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronFirewallRuleInUse(String firewallRuleUUID) {
-        return !exists(firewallRuleUUID);
     }
 
     @Override

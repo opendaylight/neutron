@@ -35,43 +35,8 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
     // IfNBVPNIKEPolicyCRUD methods
 
     @Override
-    public boolean neutronVPNIKEPolicyExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronVPNIKEPolicy getNeutronVPNIKEPolicy(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Ikepolicy> getDataObjectList(IkePolicies policies) {
         return policies.getIkepolicy();
-    }
-
-    @Override
-    public List<NeutronVPNIKEPolicy> getAllNeutronVPNIKEPolicies() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronVPNIKEPolicy(NeutronVPNIKEPolicy input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronVPNIKEPolicy(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronVPNIKEPolicy(String uuid, NeutronVPNIKEPolicy delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronVPNIKEPolicyInUse(String netUUID) {
-        return !exists(netUUID);
     }
 
     protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {

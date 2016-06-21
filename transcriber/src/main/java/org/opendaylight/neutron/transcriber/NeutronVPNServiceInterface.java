@@ -31,42 +31,12 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
     }
 
     @Override
-    public boolean neutronVPNServiceExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronVPNService getVPNService(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Vpnservice> getDataObjectList(VpnServices services) {
         return services.getVpnservice();
     }
 
     @Override
-    public List<NeutronVPNService> getAllVPNService() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addVPNService(NeutronVPNService input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeVPNService(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateVPNService(String uuid, NeutronVPNService delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronVPNServiceInUse(String uuid) {
+    public boolean inUse(String uuid) {
         return !exists(uuid);
     }
 

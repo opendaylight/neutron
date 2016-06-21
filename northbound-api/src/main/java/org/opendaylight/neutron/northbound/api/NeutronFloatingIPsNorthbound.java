@@ -128,7 +128,7 @@ public class NeutronFloatingIPsNorthbound
             // sorting not supported
             ) {
         INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
-        List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAllFloatingIPs();
+        List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAll();
         List<NeutronFloatingIP> ans = new ArrayList<NeutronFloatingIP>();
         Iterator<NeutronFloatingIP> i = allFloatingIPs.iterator();
         while (i.hasNext()) {

@@ -164,7 +164,7 @@ public class NeutronMeteringLabelRulesNorthbound
             /*
              * add meteringLabelRule to the cache
              */
-            meteringLabelRuleInterface.addNeutronMeteringLabelRule(singleton);
+            meteringLabelRuleInterface.add(singleton);
         } else {
 
             /*
