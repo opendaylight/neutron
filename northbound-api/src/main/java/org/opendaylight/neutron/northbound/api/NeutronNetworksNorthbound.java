@@ -119,7 +119,7 @@ public class NeutronNetworksNorthbound
             // sorting not supported
             ) {
         INeutronNetworkCRUD networkInterface = getNeutronCRUD();
-        List<NeutronNetwork> allNetworks = networkInterface.getAllNetworks();
+        List<NeutronNetwork> allNetworks = networkInterface.getAll();
         List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
         Iterator<NeutronNetwork> i = allNetworks.iterator();
         while (i.hasNext()) {

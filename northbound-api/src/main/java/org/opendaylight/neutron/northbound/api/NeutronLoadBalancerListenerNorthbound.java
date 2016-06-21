@@ -107,7 +107,7 @@ public class NeutronLoadBalancerListenerNorthbound
             // sorting not supported
     ) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronCRUD();
-        List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAllNeutronLoadBalancerListeners();
+        List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAll();
         List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
         Iterator<NeutronLoadBalancerListener> i = allLoadBalancerListeners.iterator();
         while (i.hasNext()) {

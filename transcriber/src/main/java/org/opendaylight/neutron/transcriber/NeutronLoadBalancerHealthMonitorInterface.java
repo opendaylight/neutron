@@ -50,43 +50,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     }
 
     @Override
-    public boolean neutronLoadBalancerHealthMonitorExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronLoadBalancerHealthMonitor getNeutronLoadBalancerHealthMonitor(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Healthmonitor> getDataObjectList(Healthmonitors healthMonitors) {
         return healthMonitors.getHealthmonitor();
-    }
-
-    @Override
-    public List<NeutronLoadBalancerHealthMonitor> getAllNeutronLoadBalancerHealthMonitors() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronLoadBalancerHealthMonitor(NeutronLoadBalancerHealthMonitor input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronLoadBalancerHealthMonitor(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronLoadBalancerHealthMonitor(String uuid, NeutronLoadBalancerHealthMonitor delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronLoadBalancerHealthMonitorInUse(String loadBalancerHealthMonitorUUID) {
-        return !exists(loadBalancerHealthMonitorUUID);
     }
 
     @Override

@@ -33,43 +33,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     }
 
     @Override
-    public boolean neutronLoadBalancerExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronLoadBalancer getNeutronLoadBalancer(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Loadbalancer> getDataObjectList(Loadbalancers lbs) {
         return lbs.getLoadbalancer();
-    }
-
-    @Override
-    public List<NeutronLoadBalancer> getAllNeutronLoadBalancers() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronLoadBalancer(NeutronLoadBalancer input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronLoadBalancer(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronLoadBalancer(String uuid, NeutronLoadBalancer delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronLoadBalancerInUse(String loadBalancerUUID) {
-        return !exists(loadBalancerUUID);
     }
 
     @Override

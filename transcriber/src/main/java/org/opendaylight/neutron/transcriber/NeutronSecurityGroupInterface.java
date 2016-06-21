@@ -33,43 +33,8 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
     }
 
     @Override
-    public boolean neutronSecurityGroupExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronSecurityGroup getNeutronSecurityGroup(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<SecurityGroup> getDataObjectList(SecurityGroups groups) {
         return groups.getSecurityGroup();
-    }
-
-    @Override
-    public List<NeutronSecurityGroup> getAllNeutronSecurityGroups() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronSecurityGroup(NeutronSecurityGroup input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronSecurityGroup(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronSecurityGroup(String uuid, NeutronSecurityGroup delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronSecurityGroupInUse(String securityGroupUUID) {
-        return !exists(securityGroupUUID);
     }
 
     protected NeutronSecurityGroup fromMd(SecurityGroup group) {

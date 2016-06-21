@@ -128,7 +128,7 @@ public class NeutronSubnetsNorthbound
             // sorting not supported
             ) {
         INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
-        List<NeutronSubnet> allNetworks = subnetInterface.getAllSubnets();
+        List<NeutronSubnet> allNetworks = subnetInterface.getAll();
         List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
         Iterator<NeutronSubnet> i = allNetworks.iterator();
         while (i.hasNext()) {

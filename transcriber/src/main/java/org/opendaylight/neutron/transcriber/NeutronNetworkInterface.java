@@ -54,48 +54,9 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
     }
 
     // IfNBNetworkCRUD methods
-
-    @Override
-    public boolean networkExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronNetwork getNetwork(String uuid) {
-        return get(uuid);
-    }
-
     @Override
     protected List<Network> getDataObjectList(Networks networks) {
         return networks.getNetwork();
-    }
-
-    @Override
-    public List<NeutronNetwork> getAllNetworks() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNetwork(NeutronNetwork input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNetwork(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNetwork(String uuid, NeutronNetwork delta) {
-/* note: because what we get is *not* a delta but (at this point) the updated
- * object, this is much simpler - just replace the value and update the mdsal
- * with it */
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean networkInUse(String netUUID) {
-        return !exists(netUUID);
     }
 
     protected NeutronNetwork fromMd(Network network) {

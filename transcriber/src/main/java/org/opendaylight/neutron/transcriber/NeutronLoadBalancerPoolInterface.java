@@ -66,44 +66,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     }
 
     @Override
-    public boolean neutronLoadBalancerPoolExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronLoadBalancerPool getNeutronLoadBalancerPool(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Pool> getDataObjectList(Pools pools) {
         return pools.getPool();
-    }
-
-    @Override
-    public List<NeutronLoadBalancerPool> getAllNeutronLoadBalancerPools() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronLoadBalancerPool(NeutronLoadBalancerPool input) {
-        //TODO: add code to find INeutronLoadBalancerPoolAware services and call newtorkCreated on them
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronLoadBalancerPool(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateNeutronLoadBalancerPool(String uuid, NeutronLoadBalancerPool delta) {
-        return update(uuid, delta);
-    }
-
-    @Override
-    public boolean neutronLoadBalancerPoolInUse(String loadBalancerPoolUUID) {
-        return !exists(loadBalancerPoolUUID);
     }
 
     @Override

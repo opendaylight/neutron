@@ -111,7 +111,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
             // sorting not supported
     ) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronCRUD();
-        List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface.getAllNeutronLoadBalancerHealthMonitors();
+        List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface.getAll();
         List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
         Iterator<NeutronLoadBalancerHealthMonitor> i = allLoadBalancerHealthMonitors.iterator();
         while (i.hasNext()) {

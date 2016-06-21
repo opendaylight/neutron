@@ -107,7 +107,7 @@ public class NeutronSecurityRulesNorthbound
             @QueryParam ("page_reverse") String pageReverse
     ) {
         INeutronSecurityRuleCRUD securityRuleInterface = getNeutronCRUD();
-        List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAllNeutronSecurityRules();
+        List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAll();
         List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
         Iterator<NeutronSecurityRule> i = allSecurityRules.iterator();
         while (i.hasNext()) {

@@ -69,41 +69,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     // IfNBSubnetCRUD methods
 
     @Override
-    public boolean subnetExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronSubnet getSubnet(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Subnet> getDataObjectList(Subnets subnets) {
         return subnets.getSubnet();
-    }
-
-    @Override
-    public List<NeutronSubnet> getAllSubnets() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addSubnet(NeutronSubnet input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeSubnet(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateSubnet(String uuid, NeutronSubnet delta) {
-/* note: because what we get is *not* a delta but (at this point) the updated
- * object, this is much simpler - just replace the value and update the mdsal
- * with it */
-        return update(uuid, delta);
     }
 
     protected NeutronSubnet fromMd(Subnet subnet) {

@@ -137,7 +137,7 @@ public class NeutronPortsNorthbound
             // sorting not supported
             ) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
-        List<NeutronPort> allPorts = portInterface.getAllPorts();
+        List<NeutronPort> allPorts = portInterface.getAll();
         List<NeutronPort> ans = new ArrayList<NeutronPort>();
         Iterator<NeutronPort> i = allPorts.iterator();
         while (i.hasNext()) {

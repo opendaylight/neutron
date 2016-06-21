@@ -70,40 +70,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
     }
 
     // IfNBPortCRUD methods
-
-    @Override
-    public boolean portExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronPort getPort(String uuid) {
-        return get(uuid);
-    }
-
     @Override
     protected List<Port> getDataObjectList(Ports ports) {
         return ports.getPort();
-    }
-
-    @Override
-    public List<NeutronPort> getAllPorts() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addPort(NeutronPort input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removePort(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updatePort(String uuid, NeutronPort delta) {
-        return update(uuid, delta);
     }
 
     @Override
@@ -184,7 +153,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             final NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
             final INeutronSecurityGroupCRUD sgIf = interfaces.getSecurityGroupInterface();
             for (final Uuid sgUuid : port.getSecurityGroups()) {
-                allGroups.add(sgIf.getNeutronSecurityGroup(sgUuid.getValue()));
+                allGroups.add(sgIf.get(sgUuid.getValue()));
             }
             final List<NeutronSecurityGroup> groups = new ArrayList<NeutronSecurityGroup>();
             groups.addAll(allGroups);

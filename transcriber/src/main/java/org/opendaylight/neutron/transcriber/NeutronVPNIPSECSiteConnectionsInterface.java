@@ -34,44 +34,13 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
     }
 
     // INeutronVPNIPSECSiteConnectionsCRUD methods
-
-    @Override
-    public boolean neutronVPNIPSECSiteConnectionsExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronVPNIPSECSiteConnection getNeutronVPNIPSECSiteConnections(String uuid) {
-        return get(uuid);
-    }
-
     @Override
     protected List<Ipsecsiteconnection> getDataObjectList(IpsecSiteConnections connections) {
         return connections.getIpsecsiteconnection();
     }
 
     @Override
-    public List<NeutronVPNIPSECSiteConnection> getAllNeutronVPNIPSECSiteConnections() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addNeutronVPNIPSECSiteConnections(NeutronVPNIPSECSiteConnection input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeNeutronVPNIPSECSiteConnections(String policyID) {
-        return remove(policyID);
-    }
-
-    @Override
-    public boolean updateNeutronVPNIPSECSiteConnections(String policyID, NeutronVPNIPSECSiteConnection delta) {
-        return update(policyID, delta);
-    }
-
-    @Override
-    public boolean neutronVPNIPSECSiteConnectionsInUse(String policyID) {
+    public boolean inUse(String policyID) {
         return !exists(policyID);
     }
 

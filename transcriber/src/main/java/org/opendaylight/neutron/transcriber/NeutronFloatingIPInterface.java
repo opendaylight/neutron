@@ -34,44 +34,8 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     // IfNBFloatingIPCRUD interface methods
 
     @Override
-    public boolean floatingIPExists(String uuid) {
-        return exists(uuid);
-    }
-
-    @Override
-    public NeutronFloatingIP getFloatingIP(String uuid) {
-        return get(uuid);
-    }
-
-    @Override
     protected List<Floatingip> getDataObjectList(Floatingips fips) {
         return fips.getFloatingip();
-    }
-
-    @Override
-    public List<NeutronFloatingIP> getAllFloatingIPs() {
-        return getAll();
-    }
-
-    @Override
-    public boolean addFloatingIP(NeutronFloatingIP input) {
-        return add(input);
-    }
-
-    @Override
-    public boolean removeFloatingIP(String uuid) {
-        return remove(uuid);
-    }
-
-    @Override
-    public boolean updateFloatingIP(String uuid, NeutronFloatingIP delta) {
-        final NeutronFloatingIP target = getFloatingIP(uuid);
-        if (target == null) {
-            return false;
-        }
-        target.setPortUUID(delta.getPortUUID());
-        target.setFixedIPAddress(delta.getFixedIPAddress());
-        return updateMd(target);
     }
 
     @Override

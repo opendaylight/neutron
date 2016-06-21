@@ -114,7 +114,7 @@ public class NeutronVPNServicesNorthbound
     // sorting not supported
     ) {
         INeutronVPNServiceCRUD VPNServiceInterface = getNeutronCRUD();
-        List<NeutronVPNService> allVPNService = VPNServiceInterface.getAllVPNService();
+        List<NeutronVPNService> allVPNService = VPNServiceInterface.getAll();
         List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
         Iterator<NeutronVPNService> i = allVPNService.iterator();
         while (i.hasNext()) {

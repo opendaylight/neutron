@@ -14,5 +14,4 @@ package org.opendaylight.neutron.spi;
 
 public interface INeutronL2gatewayConnectionCRUD extends INeutronCRUD<NeutronL2gatewayConnection> {
     //Do nothing here.
-
 }
