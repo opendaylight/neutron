@@ -97,13 +97,11 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
             throw new ResourceNotFoundException(uuidNoExist());
         }
         T updated = neutronCRUD.get(uuid);
-        return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(neutronCRUD.get(uuid))).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
     }
 
     protected Response delete(String uuid) {
         final I neutronCRUD = getNeutronCRUD();
-
-        T singleton = neutronCRUD.get(uuid);
 
         /*
          * remove it and return 204 status
