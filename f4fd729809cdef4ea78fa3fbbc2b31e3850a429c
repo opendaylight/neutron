@@ -357,6 +357,30 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_49870662",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidth.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-21T23:42:40Z",
+      "side": 1,
+      "message": "This funcition will override to defaults!",
+      "parentUuid": "da5c1566_9ef13dd0",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "f4fd729809cdef4ea78fa3fbbc2b31e3850a429c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa57193c_69f89c49",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
         "patchSetId": 11
