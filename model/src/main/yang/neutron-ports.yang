@@ -14,8 +14,7 @@ module neutron-ports {
     prefix neutron-ports;
 
     import ietf-yang-types { prefix "yang"; }
-    // It requires rfc6991 (revision 2013-07-15), but odl don't have it, so this patch verify build will fail.
-    import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+    import ietf-inet-types { prefix "inet"; revision-date 2013-07-15; }
     import neutron-attrs { prefix "attrs"; }
     import neutron-constants { prefix "constants"; }
     import neutron-types { prefix "types"; }
