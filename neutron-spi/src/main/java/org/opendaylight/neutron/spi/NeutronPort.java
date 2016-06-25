@@ -74,7 +74,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
 
     //@XmlElement (name = "binding:vif_details")
     @XmlElement (namespace = "binding", name = "vif_details")
-    @XmlJavaTypeAdapter(NeutronPort_VIFAdapter.class)
+    @XmlJavaTypeAdapter(NeutronResourceMapPropertyAdapter.class)
     Map<String, String> vifDetails;
 
     @XmlElement (name = "extra_dhcp_opts")

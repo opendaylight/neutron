@@ -10,30 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.base.Preconditions;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
-import org.opendaylight.neutron.spi.INeutronCRUD;
-import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
-import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
-import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
-import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
-import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
-import org.opendaylight.neutron.spi.INeutronL2gatewayConnectionCRUD;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
-import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
-import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
-import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
-import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
-import org.opendaylight.neutron.spi.INeutronPortCRUD;
-import org.opendaylight.neutron.spi.INeutronRouterCRUD;
-import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
-import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
-import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
+import org.opendaylight.neutron.spi.*;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
@@ -75,6 +52,7 @@ public class NeutronTranscriberProvider
     private NeutronVPNIPSECPolicyInterface vPNIPSECPolicyInterface;
     private NeutronVPNIPSECSiteConnectionsInterface vPNIPSECSiteConnectionsInterface;
     private NeutronVPNServiceInterface vPNServiceInterface;
+    private NeutronSFCFlowClassifierInterface sfcFlowClassifierInterface;
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
@@ -159,6 +137,9 @@ public class NeutronTranscriberProvider
 
         vPNServiceInterface = new NeutronVPNServiceInterface(db);
         registerCRUDInterface(INeutronVPNServiceCRUD.class, vPNServiceInterface);
+
+        sfcFlowClassifierInterface = new NeutronSFCFlowClassifierInterface(db);
+        registerCRUDInterface(INeutronSFCFlowClassifierCRUD.class,sfcFlowClassifierInterface);
 
         // We don't need context any more
         this.context = null;
