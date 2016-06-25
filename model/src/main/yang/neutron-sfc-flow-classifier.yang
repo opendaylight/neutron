@@ -103,9 +103,9 @@
      }
 
      grouping sfc-flow-classifiers-attributes {
-         container flow-classifiers {
+         container sfc-flow-classifiers {
              description "Contains list of Service Function Chaining flow classifiers";
-             list flow-classifier {
+             list sfc-flow-classifier {
                  description "
                     Defines high level model of SFC Flow Classifier. This models is based on the flow classifier APIs
                     defined by OpenStack Neutron networking-sfc project.";

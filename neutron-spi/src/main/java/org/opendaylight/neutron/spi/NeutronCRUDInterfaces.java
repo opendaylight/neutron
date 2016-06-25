@@ -41,6 +41,7 @@ public class NeutronCRUDInterfaces {
     private INeutronBgpvpnCRUD bgpvpnInterface;
     private INeutronL2gatewayCRUD l2gatewayInterface;
     private INeutronL2gatewayConnectionCRUD l2gatewayConnectionInterface;
+    private INeutronSFCFlowClassifierCRUD sfcFlowClassifierInterface;
 
     public NeutronCRUDInterfaces() {
     }
@@ -139,6 +140,10 @@ public class NeutronCRUDInterfaces {
 
     public INeutronBgpvpnCRUD getBgpvpnInterface() {
         return bgpvpnInterface;
+    }
+
+    public INeutronSFCFlowClassifierCRUD getSFCFlowClassifierInterface() {
+        return sfcFlowClassifierInterface;
     }
 
     public NeutronCRUDInterfaces fetchINeutronNetworkCRUD(Object obj) {
@@ -253,6 +258,12 @@ public class NeutronCRUDInterfaces {
 
     public NeutronCRUDInterfaces fetchINeutronL2gatewayConnectionCRUD(Object obj) {
         l2gatewayConnectionInterface = (INeutronL2gatewayConnectionCRUD) getInstances(INeutronL2gatewayConnectionCRUD.class, obj);
+        return this;
+    }
+
+    public NeutronCRUDInterfaces fetchINeutronSFCFlowClassifierCRUD (Object obj) {
+        sfcFlowClassifierInterface =
+                (INeutronSFCFlowClassifierCRUD) getInstances(INeutronSFCFlowClassifierCRUD.class, obj);
         return this;
     }
 

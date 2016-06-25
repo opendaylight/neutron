@@ -22,9 +22,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
-public class NeutronPort_VIFAdapter extends XmlAdapter<Object, Map<String, String>> {
+public class NeutronResource_MapPropertyAdapter extends XmlAdapter<Object, Map<String, String>> {
     private static final Logger LOGGER = LoggerFactory
-        .getLogger(NeutronPort_VIFAdapter.class);
+        .getLogger(NeutronResource_MapPropertyAdapter.class);
 
     @Override
     public Map<String, String> unmarshal(Object domTree) {
