@@ -53,6 +53,7 @@ public class NeutronTranscriberProvider
     private NeutronVPNIPSECSiteConnectionsInterface vPNIPSECSiteConnectionsInterface;
     private NeutronVPNServiceInterface vPNServiceInterface;
     private NeutronSFCFlowClassifierInterface sfcFlowClassifierInterface;
+    private NeutronSFCPortPairInterface sfcPortPairInterface;
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
@@ -140,6 +141,9 @@ public class NeutronTranscriberProvider
 
         sfcFlowClassifierInterface = new NeutronSFCFlowClassifierInterface(db);
         registerCRUDInterface(INeutronSFCFlowClassifierCRUD.class,sfcFlowClassifierInterface);
+
+        sfcPortPairInterface = new NeutronSFCPortPairInterface(db);
+        registerCRUDInterface(INeutronSFCPortPairCRUD.class, sfcPortPairInterface);
 
         // We don't need context any more
         this.context = null;
