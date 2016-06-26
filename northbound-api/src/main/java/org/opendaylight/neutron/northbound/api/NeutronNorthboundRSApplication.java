@@ -55,6 +55,7 @@ public class NeutronNorthboundRSApplication extends Application {
         classes.add(NeutronL2gatewayConnectionNorthbound.class);
         classes.add(NeutronSFCFlowClassifiersNorthbound.class);
         classes.add(NeutronSFCPortPairsNorthbound.class);
+        classes.add(NeutronSFCPortPairGroupsNorthbound.class);
 
       classes.add(MOXyJsonProvider.class);
         return classes;
