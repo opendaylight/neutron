@@ -10,7 +10,12 @@
 		"4deeda6e-d087-3833-8349-cc7233f1ca88",
 		"96110c74-ae51-7bb3-e94c-d4c0044ccccc",
 		"8676edc8-697a-aef2-b203-2f840fa648b6",
-		"3d8a5b17-f6f6-c004-5686-5a38ffb3d064"
+		"3d8a5b17-f6f6-c004-5686-5a38ffb3d064",
+		"be3dce07-d900-7e45-6cf7-04f077d28989",
+		"535c75b8-b722-79ea-a7fb-ad79a6510b02",
+		"9a716ae1-b9b8-a1e7-8278-c655b5333909",
+		"7039b324-34c2-e024-1339-1314bbaa6b6d",
+		"842a23f9-bde0-d639-1b06-663e711ef19a"
 	],
 	"folders": [],
 	"timestamp": 1466797738971,
@@ -94,18 +99,12 @@
 			"id": "4deeda6e-d087-3833-8349-cc7233f1ca88",
 			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
 			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portpairs/",
-			"pathVariables": {},
 			"preRequestScript": "",
+			"pathVariables": {},
 			"method": "POST",
-			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
 			"data": [],
 			"dataMode": "raw",
-			"name": "Create Port Pair (non-MDSAL)",
-			"description": "This REST call create SFC Port Pairr using the handcrafted REST API (not through the RESTCONF yang based modles).",
-			"descriptionFormat": "html",
-			"time": 1466977029811,
 			"version": 2,
-			"responses": [],
 			"tests": "",
 			"currentHelper": "basicAuth",
 			"helperAttributes": {
@@ -114,7 +113,32 @@
 				"password": "admin",
 				"saveToRequest": true
 			},
-			"rawModeData": "{\n    \"portpair\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"fc1\", \n    \"ingress\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"egress\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"service_function_parameters\": [\n        {\n            \"correlation\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+			"time": 1466982369300,
+			"name": "Create Port Pair (non-MDSAL)",
+			"description": "This REST call create SFC Port Pairr using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"responses": [],
+			"rawModeData": "{\n    \"portpair\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"portpair\", \n    \"ingress\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"egress\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"service_function_parameters\": [\n        {\n            \"correlation\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+		},
+		{
+			"id": "535c75b8-b722-79ea-a7fb-ad79a6510b02",
+			"headers": "Authorization: Basic YWRtaW46YWRtaW4=\nContent-Type: application/json\nAccept: application/json\n",
+			"url": "http://localhost:8181/restconf/config/neutron:neutron/port-pair-groups/",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "params",
+			"name": "All PortPairGroups Data from MDSAL",
+			"description": "Fetch SFC Port Pair Groups data from the MD-SAL Data Store using the MD-SAL RESTCONF URL. This restconf call can be used to verify that the SFC Port Pair Groups created through handcrafted REST request is indeed present in the MD-SAL Data store.  ",
+			"descriptionFormat": "html",
+			"time": 1466981252619,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
 		},
 		{
 			"id": "5e12f74c-5edd-dfa7-56e5-4b3c426664c5",
@@ -134,6 +158,58 @@
 			"description": "Fetch SFC Flow Classifier data from the MD-SAL Data Store using the MD-SAL RESTCONF URL. This restconf call can be used to verify that the SFC flow classifier created through handcrafted REST request is indeed present in the MD-SAL Data store.  ",
 			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
 			"responses": []
+		},
+		{
+			"id": "7039b324-34c2-e024-1339-1314bbaa6b6d",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portpairgroups/",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "raw",
+			"name": "All Port Pair Group Data (non-MDSAL)",
+			"description": "This REST call fetch all SFC Port Pair Group data  using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"descriptionFormat": "html",
+			"time": 1466981329770,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "admin",
+				"password": "admin",
+				"saveToRequest": true
+			},
+			"rawModeData": "{\n    \"flowclassifier\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"fc1\", \n    \"ethertype\": \"IPv4\", \n    \"protocol\": \"UDP\", \n    \"source_port_range_min\": 100, \n    \"source_port_range_max\": 200, \n    \"destination_port_range_min\": 100, \n    \"destination_port_range_max\": 200, \n    \"source_ip_prefix\": \"10.0.0.0/24\", \n    \"destination_ip_prefix\": \"11.0.0.0/24\", \n    \"logical_source_port\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"l7_parameters\": [\n        {\n            \"key\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+		},
+		{
+			"id": "842a23f9-bde0-d639-1b06-663e711ef19a",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portpairgroups/444e5957-649f-477b-9e5b-f1f75b21c03c",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "DELETE",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Delete Specific Port Pair Group Data (non-MDSAL)",
+			"description": "This REST call delete specific SFC Port Pair Group data  using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"descriptionFormat": "html",
+			"time": 1466982457834,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "admin",
+				"password": "admin",
+				"saveToRequest": true
+			},
+			"rawModeData": "{\n    \"flowclassifier\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"fc1\", \n    \"ethertype\": \"IPv4\", \n    \"protocol\": \"UDP\", \n    \"source_port_range_min\": 100, \n    \"source_port_range_max\": 200, \n    \"destination_port_range_min\": 100, \n    \"destination_port_range_max\": 200, \n    \"source_ip_prefix\": \"10.0.0.0/24\", \n    \"destination_ip_prefix\": \"11.0.0.0/24\", \n    \"logical_source_port\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"l7_parameters\": [\n        {\n            \"key\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
 		},
 		{
 			"id": "8676edc8-697a-aef2-b203-2f840fa648b6",
@@ -175,6 +251,26 @@
 			"helperAttributes": {}
 		},
 		{
+			"id": "9a716ae1-b9b8-a1e7-8278-c655b5333909",
+			"headers": "Authorization: Basic YWRtaW46YWRtaW4=\nContent-Type: application/json\nAccept: application/json\n",
+			"url": "http://localhost:8181/restconf/config/neutron:neutron/port-pair-groups/port-pair-group/444e5957-649f-477b-9e5b-f1f75b21c03c",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "params",
+			"name": "Specific Port Pair Group Data from MDSAL",
+			"description": "Fetch specific SFC Port Pair Group data from the MD-SAL Data Store using the MD-SAL RESTCONF URL. This restconf call can be used to verify that the SFC Port Pair Group created through handcrafted REST request is indeed present in the MD-SAL Data store.",
+			"descriptionFormat": "html",
+			"time": 1466981299760,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
 			"id": "b3012570-d38b-432a-2eb6-4a7731450814",
 			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
 			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/flowclassifiers/",
@@ -199,6 +295,31 @@
 				"saveToRequest": true
 			},
 			"rawModeData": "{\n    \"flowclassifier\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"fc1\", \n    \"ethertype\": \"IPv4\", \n    \"protocol\": \"UDP\", \n    \"source_port_range_min\": 100, \n    \"source_port_range_max\": 200, \n    \"destination_port_range_min\": 100, \n    \"destination_port_range_max\": 200, \n    \"source_ip_prefix\": \"10.0.0.0/24\", \n    \"destination_ip_prefix\": \"11.0.0.0/24\", \n    \"logical_source_port\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"l7_parameters\": [\n        {\n            \"key\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+		},
+		{
+			"id": "be3dce07-d900-7e45-6cf7-04f077d28989",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portpairgroups/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "admin",
+				"password": "admin",
+				"saveToRequest": true
+			},
+			"time": 1466981979425,
+			"name": "Create Port Pair Group (non-MDSAL)",
+			"description": "This REST call create SFC Port Pair Group using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"responses": [],
+			"rawModeData": "{\n    \"portpairgroup\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"portpairgroup\", \n    \"service_function_parameters\": [\n        \"d11e9190-73d4-11e5-b392-2c27d72acb4c\"\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
 		}
 	]
 }
