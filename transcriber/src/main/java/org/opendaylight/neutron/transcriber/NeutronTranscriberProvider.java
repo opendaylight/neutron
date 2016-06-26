@@ -28,6 +28,7 @@ import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
+import org.opendaylight.neutron.spi.INeutronSFCPortPairCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
@@ -77,6 +78,7 @@ public class NeutronTranscriberProvider
     private NeutronVPNIPSECSiteConnectionsInterface vPNIPSECSiteConnectionsInterface;
     private NeutronVPNServiceInterface vPNServiceInterface;
     private NeutronSFCFlowClassifierInterface sfcFlowClassifierInterface;
+    private NeutronSFCPortPairInterface sfcPortPairInterface;
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
@@ -164,6 +166,9 @@ public class NeutronTranscriberProvider
 
         sfcFlowClassifierInterface = new NeutronSFCFlowClassifierInterface(db);
         registerCRUDInterface(INeutronSFCFlowClassifierCRUD.class,sfcFlowClassifierInterface);
+
+        sfcPortPairInterface = new NeutronSFCPortPairInterface(db);
+        registerCRUDInterface(INeutronSFCPortPairCRUD.class, sfcPortPairInterface);
 
         // We don't need context any more
         this.context = null;
