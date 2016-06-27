@@ -43,7 +43,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class NeutronTranscriberProvider
     implements AutoCloseable, NeutronTranscriber {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
@@ -79,6 +78,7 @@ public class NeutronTranscriberProvider
     private NeutronSFCFlowClassifierInterface sfcFlowClassifierInterface;
     private NeutronSFCPortPairInterface sfcPortPairInterface;
     private NeutronSFCPortPairGroupInterface sfcPortPairGroupInterface;
+    private NeutronSFCPortChainInterface sfcPortChainInterface;
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
@@ -172,6 +172,10 @@ public class NeutronTranscriberProvider
 
         sfcPortPairGroupInterface = new NeutronSFCPortPairGroupInterface(db);
         registerCRUDInterface(INeutronSFCPortPairGroupCRUD.class, sfcPortPairGroupInterface);
+
+        sfcPortChainInterface = new NeutronSFCPortChainInterface(db);
+        registerCRUDInterface(INeutronSFCPortChainCRUD.class, sfcPortChainInterface);
+
         // We don't need context any more
         this.context = null;
     }
