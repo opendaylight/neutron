@@ -52,6 +52,7 @@ public class Activator implements BundleActivator {
         NeutronSFCFlowClassifierInterface.registerNewInterface(context, providerContext, registrations);
         NeutronSFCPortPairInterface.registerNewInterface(context, providerContext, registrations);
         NeutronSFCPortPairGroupInterface.registerNewInterface(context, providerContext, registrations);
+        NeutronSFCPortChainInterface.registerNewInterface(context, providerContext, registrations);
     }
 
     @Override
