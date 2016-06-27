@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_ab5a214e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "Can you please use NeutronObject instead of Neutron_ID?",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2b4f3194",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "Is the adapter also required by flow classifier?\n\nThen, can you please rename it for general one?\nThe current name would confuse us.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2b361104",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "This seems common problem.\nSo can you please create a new independent patch to modify NeutronObject?",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_c612ec57",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifier.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "NeutronObject provide same implementation.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4b63851a",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "Good clean up, but unrelated modification.\nCan you please create independent patch to address this?",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_e647304a",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifierJAXBTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "in stead of catching all exceptions, can you please add throws Exception?\n\nAlthough the current test code consistently catching exceptions to avoid javac error, try/catch absorbs actual stack trace and makes debug harder. \nthe right way is to allow exceptions and expose real stack trace so that debug process will be easier.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4b18a584",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSFCFlowClassifiersNorthbound.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "Please eliminate this blank line for consistency.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2652c813",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "For consistency, lease order methods fromMd, then toMd.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_c6402c38",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "Although it\u0027s quite obscure when to check null or not and its reasoning,\nthe direction is add null check always to avoid null pointer exception.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_0b06ad20",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "For consistency, please move down toMd(SfcFlowClassifider)",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6b176952",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-27T19:54:30Z",
+      "side": 1,
+      "message": "Please move up this method for consistency.\nOther files defines this methods after constructor before createInstanceIdentifier.",
+      "revId": "cca488833e7e8fd0a0011f175935753620098470",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
