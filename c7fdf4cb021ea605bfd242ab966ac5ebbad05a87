@@ -368,6 +368,98 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_97f4a488",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2016-06-27T05:10:40Z",
+      "side": 1,
+      "message": "This should be BigInteger",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_372b18ed",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2016-06-27T05:10:40Z",
+      "side": 1,
+      "message": "Rename getQosBandWidthMaxKbpsValue",
+      "range": {
+        "startLine": 32,
+        "startChar": 11,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_f7f1a096",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2016-06-27T05:10:40Z",
+      "side": 1,
+      "message": "This should be BigInteger",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 10
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_d7ee1cb4",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2016-06-27T05:10:40Z",
+      "side": 1,
+      "message": "Rename to getQosBandWidthMaxKbpsValue",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_49108d4e",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
         "patchSetId": 15
@@ -424,6 +516,29 @@
         "startChar": 25,
         "endLine": 28,
         "endChar": 34
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_17f37474",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2016-06-27T05:10:40Z",
+      "side": 1,
+      "message": "This field is of type Short",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 10
       },
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
