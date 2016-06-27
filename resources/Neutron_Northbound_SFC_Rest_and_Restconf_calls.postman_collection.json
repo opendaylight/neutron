@@ -15,7 +15,12 @@
 		"535c75b8-b722-79ea-a7fb-ad79a6510b02",
 		"9a716ae1-b9b8-a1e7-8278-c655b5333909",
 		"7039b324-34c2-e024-1339-1314bbaa6b6d",
-		"842a23f9-bde0-d639-1b06-663e711ef19a"
+		"842a23f9-bde0-d639-1b06-663e711ef19a",
+		"67843460-9c88-2274-8c6d-b834a27ce90f",
+		"95ab58d5-525c-d2df-124d-abb747839445",
+		"01e744e0-4126-4c3e-8439-fc33cf0c1e18",
+		"f6faf4ec-86a9-e398-52a3-52050153c916",
+		"0cd5de7d-e72e-69af-2d29-735614f95b26"
 	],
 	"folders": [],
 	"timestamp": 1466797738971,
@@ -24,6 +29,52 @@
 	"public": false,
 	"published": false,
 	"requests": [
+		{
+			"id": "01e744e0-4126-4c3e-8439-fc33cf0c1e18",
+			"headers": "Authorization: Basic YWRtaW46YWRtaW4=\nContent-Type: application/json\nAccept: application/json\n",
+			"url": "http://localhost:8181/restconf/config/neutron:neutron/port-chains/port-chain/444e5957-649f-477b-9e5b-f1f75b21c03c",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "params",
+			"name": "Specific Port Chain Data from MDSAL",
+			"description": "Fetch specific SFC Port Chain data from the MD-SAL Data Store using the MD-SAL RESTCONF URL. This restconf call can be used to verify that the SFC Port Chain created through handcrafted REST request is indeed present in the MD-SAL Data store.",
+			"descriptionFormat": "html",
+			"time": 1466989350411,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "0cd5de7d-e72e-69af-2d29-735614f95b26",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portchains/444e5957-649f-477b-9e5b-f1f75b21c03c",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "DELETE",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "raw",
+			"name": "Delete Specific Port Chain Data (non-MDSAL)",
+			"description": "This REST call delete specific SFC Port Chain data  using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"descriptionFormat": "html",
+			"time": 1466989429349,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "admin",
+				"password": "admin",
+				"saveToRequest": true
+			},
+			"rawModeData": "{\n    \"flowclassifier\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"fc1\", \n    \"ethertype\": \"IPv4\", \n    \"protocol\": \"UDP\", \n    \"source_port_range_min\": 100, \n    \"source_port_range_max\": 200, \n    \"destination_port_range_min\": 100, \n    \"destination_port_range_max\": 200, \n    \"source_ip_prefix\": \"10.0.0.0/24\", \n    \"destination_ip_prefix\": \"11.0.0.0/24\", \n    \"logical_source_port\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"l7_parameters\": [\n        {\n            \"key\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+		},
 		{
 			"id": "1d511ed2-e420-e501-59b3-6107f2878387",
 			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
@@ -160,6 +211,28 @@
 			"responses": []
 		},
 		{
+			"id": "67843460-9c88-2274-8c6d-b834a27ce90f",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portchains/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": "{\"id\":\"basic\",\"username\":\"admin\",\"password\":\"admin\",\"saveToRequest\":true}",
+			"time": 1466989694590,
+			"name": "Create Port Chain (non-MDSAL)",
+			"description": "This REST call create SFC Port Chain using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"responses": [],
+			"descriptionFormat": "html",
+			"folder": null,
+			"rawModeData": "{\n    \"portchain\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"portchain\", \n    \"flow_classifiers\": [\n           \"4a334cd4-fe9c-4fae-af4b-321c5e2eb051\",\n           \"105a4b0a-73d6-11e5-b392-2c27d72acb4c\"\n       ],\n       \"port_pair_groups\": [\n           \"4512d643-24fc-4fae-af4b-321c5e2eb3d1\",\n           \"4a634d49-76dc-4fae-af4b-321c5e23d651\"\n       ],\n    \"chain_parameters\": [\n        {\n            \"correlation\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+		},
+		{
 			"id": "7039b324-34c2-e024-1339-1314bbaa6b6d",
 			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
 			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portpairgroups/",
@@ -229,6 +302,26 @@
 			"description": "Fetch specific SFC Port Pair data from the MD-SAL Data Store using the MD-SAL RESTCONF URL. This restconf call can be used to verify that the SFC Port Pair created through handcrafted REST request is indeed present in the MD-SAL Data store.",
 			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
 			"responses": []
+		},
+		{
+			"id": "95ab58d5-525c-d2df-124d-abb747839445",
+			"headers": "Authorization: Basic YWRtaW46YWRtaW4=\nContent-Type: application/json\nAccept: application/json\n",
+			"url": "http://localhost:8181/restconf/config/neutron:neutron/port-chains/",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "params",
+			"name": "All PortChains Data from MDSAL",
+			"description": "Fetch SFC Port Chains data from the MD-SAL Data Store using the MD-SAL RESTCONF URL. This restconf call can be used to verify that the SFC Port Chains created through handcrafted REST request is indeed present in the MD-SAL Data store.  ",
+			"descriptionFormat": "html",
+			"time": 1466989304254,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {}
 		},
 		{
 			"id": "96110c74-ae51-7bb3-e94c-d4c0044ccccc",
@@ -320,6 +413,32 @@
 			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
 			"responses": [],
 			"rawModeData": "{\n    \"portpairgroup\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"portpairgroup\", \n    \"service_function_parameters\": [\n        \"d11e9190-73d4-11e5-b392-2c27d72acb4c\"\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
+		},
+		{
+			"id": "f6faf4ec-86a9-e398-52a3-52050153c916",
+			"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Basic YWRtaW46YWRtaW4=\n",
+			"url": " http://localhost:8181/controller/nb/v2/neutron/sfc/portchains/",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "810e37ef-c291-5276-575c-d16b3f7ef595",
+			"data": [],
+			"dataMode": "raw",
+			"name": "All Port Chain Data (non-MDSAL)",
+			"description": "This REST call fetch all SFC Port Chain data  using the handcrafted REST API (not through the RESTCONF yang based modles).",
+			"descriptionFormat": "html",
+			"time": 1466989387969,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"id": "basic",
+				"username": "admin",
+				"password": "admin",
+				"saveToRequest": true
+			},
+			"rawModeData": "{\n    \"flowclassifier\":{\n    \"id\": \"444e5957-649f-477b-9e5b-f1f75b21c03c\",\n    \"name\": \"fc1\", \n    \"ethertype\": \"IPv4\", \n    \"protocol\": \"UDP\", \n    \"source_port_range_min\": 100, \n    \"source_port_range_max\": 200, \n    \"destination_port_range_min\": 100, \n    \"destination_port_range_max\": 200, \n    \"source_ip_prefix\": \"10.0.0.0/24\", \n    \"destination_ip_prefix\": \"11.0.0.0/24\", \n    \"logical_source_port\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", \n    \"l7_parameters\": [\n        {\n            \"key\":\"value\"\n        }\n     ],\n     \"tenant_id\":\"4969c491a3c74ee4af974e6d800c62de\"\n    }\n\n}"
 		}
 	]
 }
