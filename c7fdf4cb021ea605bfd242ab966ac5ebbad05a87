@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_ecbec5fe",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Sure Isaku. I will update the comments before submitting the next Patchset.",
+      "parentUuid": "ba51214e_8fdbc21a",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_2fa0b68f",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 15
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_cfc77a11",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_efb51ece",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_4fca4a50",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 15
@@ -81,6 +117,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "For it\u0027s own id, uuid is used consistently in neutron models.",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_afccc636",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_4fca4a50",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -110,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_0fd212d2",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_a934c9de",
+      "range": {
+        "startLine": 62,
+        "startChar": 13,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_2fc71647",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 15
@@ -127,6 +205,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_efd6bec4",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_2fc71647",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_2958b931",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 15
@@ -138,6 +234,30 @@
       "writtenOn": "2016-06-20T19:17:59Z",
       "side": 1,
       "message": "same here",
+      "range": {
+        "startLine": 83,
+        "startChar": 13,
+        "endLine": 83,
+        "endChar": 22
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_4fdb6aed",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_2958b931",
       "range": {
         "startLine": 83,
         "startChar": 13,
@@ -190,6 +310,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_2fd8b6ee",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_8fc46241",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_cfddba16",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 15
@@ -201,6 +339,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "inconsistent. bandwidth-limit vs bandwidthlimit",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_8fe582aa",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_cfddba16",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -270,6 +426,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_46889c22",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosBandWidthRuleCRUD.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Yes! This Interfaces is not necessary and it has been removed",
+      "parentUuid": "ba51214e_6fd8ee1d",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_cf049a80",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosDscpRuleCRUD.java",
         "patchSetId": 15
@@ -281,6 +455,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "Why do we need this?",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_8682b4fe",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosDscpRuleCRUD.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "There is no necessary for this and it has been removed.",
+      "parentUuid": "ba51214e_cf049a80",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -304,6 +496,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_2cea7d0f",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosPolicyCRUD.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Ok. Would it not help if we have QOS Specific Interfaces?",
+      "parentUuid": "ba51214e_af096697",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_ef035e71",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
         "patchSetId": 15
@@ -315,6 +525,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "Inconsistent naming.\nBandwidth or BandWidth?\ncompare yang model definitions.",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_46b6dcdd",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_ef035e71",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -414,6 +642,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_6687a010",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_97f4a488",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_f7f1a096",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
         "patchSetId": 15
@@ -437,6 +689,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_c67b0c28",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_f7f1a096",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 10
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_d7ee1cb4",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
         "patchSetId": 15
@@ -448,6 +724,30 @@
       "writtenOn": "2016-06-27T05:10:40Z",
       "side": 1,
       "message": "Rename to getQosBandWidthMaxKbpsValue",
+      "range": {
+        "startLine": 45,
+        "startChar": 18,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_26bbe8c5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandWidthRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_d7ee1cb4",
       "range": {
         "startLine": 45,
         "startChar": 18,
@@ -500,6 +800,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_2c839d57",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Hi Isaku, \nI have used only \"Dscp\" in naming the classes as \"DscpMarking\" would be verbose. But while defining the variables i have uses \"DscpMark\". Please let me know if it is ok. If it is not i can change accordingly.",
+      "parentUuid": "ba51214e_4ff88a7c",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_a91de968",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
         "patchSetId": 15
@@ -511,6 +829,30 @@
       "writtenOn": "2016-06-20T19:17:59Z",
       "side": 1,
       "message": "same here as well qos_policy_id\nhttp://paste.openstack.org/show/520662/",
+      "range": {
+        "startLine": 28,
+        "startChar": 25,
+        "endLine": 28,
+        "endChar": 34
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_6c7d956e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_a91de968",
       "range": {
         "startLine": 28,
         "startChar": 25,
@@ -546,6 +888,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_86b0f4de",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_17f37474",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 10
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_6fef4eb1",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
         "patchSetId": 15
@@ -557,6 +923,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "break the lines.",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_4c825150",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_6fef4eb1",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -580,6 +964,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_8c93c9a2",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_2ff55683",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_8ff2a298",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
         "patchSetId": 15
@@ -597,6 +999,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_ac968d92",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpRule.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_8ff2a298",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_ef3a3e35",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 15
@@ -608,6 +1028,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "What\u0027s the point to prefix qosPolicy?",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_4f540a54",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "I assume it would be easy to read if it is prefixed with \"qosPolicy\"",
+      "parentUuid": "ba51214e_ef3a3e35",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -637,6 +1075,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_e6a9f07c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba51214e_ca048880",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 10
+      },
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_cf2bfae9",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 15
@@ -654,6 +1116,24 @@
     },
     {
       "key": {
+        "uuid": "ba51214e_2f51d662",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done. Updated with the class!",
+      "parentUuid": "ba51214e_cf2bfae9",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba51214e_af304657",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 15
@@ -665,6 +1145,24 @@
       "writtenOn": "2016-06-22T00:01:19Z",
       "side": 1,
       "message": "Not String.",
+      "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba51214e_8f4e22c0",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-27T23:12:20Z",
+      "side": 1,
+      "message": "Done! update with the Class!",
+      "parentUuid": "ba51214e_af304657",
       "revId": "c7fdf4cb021ea605bfd242ab966ac5ebbad05a87",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
