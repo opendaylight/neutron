@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 
 @XmlRootElement
@@ -45,7 +46,7 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
         this.tenantID = tenantID;
     }
 
-    @Override
+    @Override @JsonIgnore
     public void setTenantID(Uuid tenantID) {
         this.tenantID = tenantID.getValue().replace("-", "");
     }
