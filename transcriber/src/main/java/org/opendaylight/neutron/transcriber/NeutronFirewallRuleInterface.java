@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallRule;
 
@@ -51,8 +51,8 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
             .put(IpVersionV6.class, Integer.valueOf(6))
             .build();
 
-    NeutronFirewallRuleInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronFirewallRuleInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -198,15 +198,5 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
         final FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
         ruleBuilder.setUuid(toUuid(uuid));
         return ruleBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronFirewallRuleInterface neutronFirewallRuleInterface = new NeutronFirewallRuleInterface(providerContext);
-        final ServiceRegistration<INeutronFirewallRuleCRUD> neutronFirewallRuleInterfaceRegistration = context.registerService(INeutronFirewallRuleCRUD.class, neutronFirewallRuleInterface, null);
-        if(neutronFirewallRuleInterfaceRegistration != null) {
-            registrations.add(neutronFirewallRuleInterfaceRegistration);
-        }
     }
 }

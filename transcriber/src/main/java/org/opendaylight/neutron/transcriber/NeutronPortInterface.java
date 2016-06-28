@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
@@ -65,8 +65,8 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             .put(IpVersionV6.class, Integer.valueOf(6))
             .build();
 
-    NeutronPortInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronPortInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBPortCRUD methods
@@ -284,15 +284,5 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         final PortBuilder portBuilder = new PortBuilder();
         portBuilder.setUuid(toUuid(uuid));
         return portBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronPortInterface neutronPortInterface = new NeutronPortInterface(providerContext);
-        final ServiceRegistration<INeutronPortCRUD> neutronPortInterfaceRegistration = context.registerService(INeutronPortCRUD.class, neutronPortInterface, null);
-        if(neutronPortInterfaceRegistration != null) {
-            registrations.add(neutronPortInterfaceRegistration);
-        }
     }
 }

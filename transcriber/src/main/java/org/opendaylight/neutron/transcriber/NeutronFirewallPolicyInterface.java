@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
 
@@ -32,8 +32,8 @@ import org.slf4j.LoggerFactory;
 public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, NeutronFirewallPolicy> implements INeutronFirewallPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
 
-    NeutronFirewallPolicyInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronFirewallPolicyInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -100,15 +100,5 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
         final FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
         policyBuilder.setUuid(toUuid(uuid));
         return policyBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronFirewallPolicyInterface neutronFirewallPolicyInterface = new NeutronFirewallPolicyInterface(providerContext);
-        final ServiceRegistration<INeutronFirewallPolicyCRUD> neutronFirewallPolicyInterfaceRegistration = context.registerService(INeutronFirewallPolicyCRUD.class, neutronFirewallPolicyInterface, null);
-        if(neutronFirewallPolicyInterfaceRegistration != null) {
-            registrations.add(neutronFirewallPolicyInterfaceRegistration);
-        }
     }
 }

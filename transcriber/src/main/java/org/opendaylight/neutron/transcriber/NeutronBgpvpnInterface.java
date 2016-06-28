@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
@@ -39,8 +39,8 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
             .put(BgpvpnTypeL3.class,"l3")
             .build();
 
-    NeutronBgpvpnInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronBgpvpnInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -211,15 +211,5 @@ public class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgp
     protected InstanceIdentifier<Bgpvpns> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Bgpvpns.class);
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronBgpvpnInterface neutronNetworkInterface = new NeutronBgpvpnInterface(providerContext);
-        final ServiceRegistration<INeutronBgpvpnCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronBgpvpnCRUD.class, neutronNetworkInterface, null);
-        if(neutronNetworkInterfaceRegistration != null) {
-            registrations.add(neutronNetworkInterfaceRegistration);
-        }
     }
 }

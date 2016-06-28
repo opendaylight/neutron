@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronL2gatewayConnectionCRUD;
 import org.opendaylight.neutron.spi.NeutronL2gatewayConnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.L2gatewayConnections;
@@ -29,8 +29,8 @@ implements INeutronL2gatewayConnectionCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayConnectionInterface.class);
 
-    NeutronL2gatewayConnectionInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronL2gatewayConnectionInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -113,17 +113,4 @@ implements INeutronL2gatewayConnectionCRUD {
         l2gatewayConnectionBuilder.setUuid(toUuid(uuid));
         return l2gatewayConnectionBuilder.build();
     }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronL2gatewayConnectionInterface neutronL2gatewayConnectionInterface =
-                new NeutronL2gatewayConnectionInterface(providerContext);
-        final ServiceRegistration<INeutronL2gatewayConnectionCRUD> neutronL2gatewayConInterfaceRegistration = context
-        .registerService(INeutronL2gatewayConnectionCRUD.class, neutronL2gatewayConnectionInterface, null);
-        if (neutronL2gatewayConInterfaceRegistration != null) {
-            registrations.add(neutronL2gatewayConInterfaceRegistration);
-        }
-    }
-
 }

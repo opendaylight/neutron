@@ -41,6 +41,5 @@
     <bundle>mvn:org.opendaylight.neutron/transcriber/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-    <configfile finalname="etc/opendaylight/karaf/neutron-transcriber-default-config.xml">mvn:org.opendaylight.neutron/transcriber/{{VERSION}}/xml/config</configfile>
   </feature>
 </features>

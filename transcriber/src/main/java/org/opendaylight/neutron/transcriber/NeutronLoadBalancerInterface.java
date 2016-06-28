@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
@@ -28,8 +28,8 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
 
 
-    NeutronLoadBalancerInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronLoadBalancerInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -109,15 +109,5 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
             LOGGER.warn("Attempting to write neutron load balancer without UUID");
         }
         return loadBalancerBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronLoadBalancerInterface neutronLoadBalancerInterface = new NeutronLoadBalancerInterface(providerContext);
-        final ServiceRegistration<INeutronLoadBalancerCRUD> neutronLoadBalancerInterfaceRegistration = context.registerService(INeutronLoadBalancerCRUD.class, neutronLoadBalancerInterface, null);
-        if(neutronLoadBalancerInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerInterfaceRegistration);
-        }
     }
 }

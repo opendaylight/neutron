@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.MeteringLabels;
@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, NeutronMeteringLabel> implements INeutronMeteringLabelCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
 
-    NeutronMeteringLabelInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronMeteringLabelInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBMeteringLabelCRUD methods
@@ -90,15 +90,5 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
         final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
         meteringLabelBuilder.setUuid(toUuid(uuid));
         return meteringLabelBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronMeteringLabelInterface neutronMeteringLabelInterface = new NeutronMeteringLabelInterface(providerContext);
-        final ServiceRegistration<INeutronMeteringLabelCRUD> neutronMeteringLabelInterfaceRegistration = context.registerService(INeutronMeteringLabelCRUD.class, neutronMeteringLabelInterface, null);
-        if(neutronMeteringLabelInterfaceRegistration != null) {
-            registrations.add(neutronMeteringLabelInterfaceRegistration);
-        }
     }
 }

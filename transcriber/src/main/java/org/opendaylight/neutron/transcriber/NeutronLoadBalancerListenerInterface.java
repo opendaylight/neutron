@@ -11,7 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 import org.opendaylight.neutron.spi.Neutron_ID;
@@ -44,8 +44,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
-    NeutronLoadBalancerListenerInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronLoadBalancerListenerInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -147,15 +147,5 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             answer.setID(listener.getUuid().getValue());
         }
         return answer;
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
-        final ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
-        if(neutronLoadBalancerListenerInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerListenerInterfaceRegistration);
-        }
     }
 }

@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.VpnServices;
@@ -26,8 +26,8 @@ import org.slf4j.LoggerFactory;
 public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice, VpnServices, NeutronVPNService> implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
 
-    NeutronVPNServiceInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronVPNServiceInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -109,15 +109,5 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
         vpnServiceBuilder.setUuid(toUuid(uuid));
         return vpnServiceBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronVPNServiceInterface neutronVPNServiceInterface = new NeutronVPNServiceInterface(providerContext);
-        final ServiceRegistration<INeutronVPNServiceCRUD> neutronVPNServiceInterfaceRegistration = context.registerService(INeutronVPNServiceCRUD.class, neutronVPNServiceInterface, null);
-        if(neutronVPNServiceInterfaceRegistration != null) {
-            registrations.add(neutronVPNServiceInterfaceRegistration);
-        }
     }
 }

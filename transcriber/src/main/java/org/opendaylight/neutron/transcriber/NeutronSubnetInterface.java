@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
@@ -62,8 +62,8 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             .put(Dhcpv6Stateless.class,"dhcpv6-stateless")
             .build();
 
-    NeutronSubnetInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronSubnetInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBSubnetCRUD methods
@@ -213,15 +213,5 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         final SubnetBuilder subnetBuilder = new SubnetBuilder();
         subnetBuilder.setUuid(toUuid(uuid));
         return subnetBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronSubnetInterface neutronSubnetInterface = new NeutronSubnetInterface(providerContext);
-        final ServiceRegistration<INeutronSubnetCRUD> neutronSubnetInterfaceRegistration = context.registerService(INeutronSubnetCRUD.class, neutronSubnetInterface, null);
-        if(neutronSubnetInterfaceRegistration != null) {
-            registrations.add(neutronSubnetInterfaceRegistration);
-        }
     }
 }
