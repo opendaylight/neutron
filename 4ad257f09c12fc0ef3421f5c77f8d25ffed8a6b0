@@ -22,6 +22,30 @@
       "revId": "4ad257f09c12fc0ef3421f5c77f8d25ffed8a6b0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_99b4cef3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTranscriberProvider.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-28T15:28:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_c373f9e5",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 92
+      },
+      "revId": "4ad257f09c12fc0ef3421f5c77f8d25ffed8a6b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
