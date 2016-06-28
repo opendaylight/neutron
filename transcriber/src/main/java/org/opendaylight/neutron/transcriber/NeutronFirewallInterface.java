@@ -8,7 +8,7 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 
@@ -18,9 +18,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.fir
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,8 +27,8 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
-    NeutronFirewallInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronFirewallInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -102,15 +99,5 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
         final FirewallBuilder firewallBuilder = new FirewallBuilder();
         firewallBuilder.setUuid(toUuid(uuid));
         return firewallBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronFirewallInterface neutronFirewallInterface = new NeutronFirewallInterface(providerContext);
-        final ServiceRegistration<INeutronFirewallCRUD> neutronFirewallInterfaceRegistration = context.registerService(INeutronFirewallCRUD.class, neutronFirewallInterface, null);
-        if(neutronFirewallInterfaceRegistration != null) {
-            registrations.add(neutronFirewallInterfaceRegistration);
-        }
     }
 }

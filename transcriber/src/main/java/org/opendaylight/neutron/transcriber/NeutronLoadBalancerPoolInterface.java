@@ -19,7 +19,7 @@ import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -41,8 +41,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.pool.attributes.SessionPersistenceBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,8 +59,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
-    NeutronLoadBalancerPoolInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronLoadBalancerPoolInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -180,16 +178,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             answer.setID(pool.getUuid().getValue());
         }
         return answer;
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronLoadBalancerPoolInterface neutronLoadBalancerPoolInterface = new NeutronLoadBalancerPoolInterface(providerContext);
-        final ServiceRegistration<INeutronLoadBalancerPoolCRUD> neutronLoadBalancerPoolInterfaceRegistration = context.registerService(INeutronLoadBalancerPoolCRUD.class, neutronLoadBalancerPoolInterface, null);
-        if(neutronLoadBalancerPoolInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerPoolInterfaceRegistration);
-        }
     }
 
     public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) {

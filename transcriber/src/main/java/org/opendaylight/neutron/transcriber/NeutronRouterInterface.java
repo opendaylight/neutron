@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.Neutron_IPs;
@@ -29,8 +29,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.router
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,8 +37,8 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
     // methods needed for creating caches
 
 
-    NeutronRouterInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronRouterInterface(DataBroker db) {
+        super(db);
     }
 
 
@@ -129,16 +127,6 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
         final RouterBuilder routerBuilder = new RouterBuilder();
         routerBuilder.setUuid(toUuid(uuid));
         return routerBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronRouterInterface neutronRouterInterface = new NeutronRouterInterface(providerContext);
-        final ServiceRegistration<INeutronRouterCRUD> neutronRouterInterfaceRegistration = context.registerService(INeutronRouterCRUD.class, neutronRouterInterface, null);
-        if(neutronRouterInterfaceRegistration != null) {
-            registrations.add(neutronRouterInterfaceRegistration);
-        }
     }
 
     public NeutronRouter fromMd(Router router) {

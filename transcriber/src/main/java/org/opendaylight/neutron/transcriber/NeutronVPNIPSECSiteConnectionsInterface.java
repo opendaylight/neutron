@@ -11,7 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNDeadPeerDetection;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
@@ -21,16 +21,14 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
-    NeutronVPNIPSECSiteConnectionsInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronVPNIPSECSiteConnectionsInterface(DataBroker db) {
+        super(db);
     }
 
     // INeutronVPNIPSECSiteConnectionsCRUD methods
@@ -190,15 +188,5 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
         ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
         return ipsecSiteConnectionBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronVPNIPSECSiteConnectionsInterface neutronVPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(providerContext);
-        final ServiceRegistration<INeutronVPNIPSECSiteConnectionsCRUD> neutronVPNIPSECSiteConnectionsInterfaceRegistration = context.registerService(INeutronVPNIPSECSiteConnectionsCRUD.class, neutronVPNIPSECSiteConnectionsInterface, null);
-        if (neutronVPNIPSECSiteConnectionsInterfaceRegistration != null) {
-            registrations.add(neutronVPNIPSECSiteConnectionsInterfaceRegistration);
-        }
     }
 }
