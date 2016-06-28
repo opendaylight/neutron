@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
@@ -40,8 +40,8 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             .build();
 
 
-    NeutronMeteringLabelRuleInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronMeteringLabelRuleInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBMeteringLabelRuleCRUD methods
@@ -115,15 +115,5 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
         final MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
         meteringRuleBuilder.setUuid(toUuid(uuid));
         return meteringRuleBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronMeteringLabelRuleInterface neutronMeteringLabelRuleInterface = new NeutronMeteringLabelRuleInterface(providerContext);
-        final ServiceRegistration<INeutronMeteringLabelRuleCRUD> neutronMeteringLabelRuleInterfaceRegistration = context.registerService(INeutronMeteringLabelRuleCRUD.class, neutronMeteringLabelRuleInterface, null);
-        if (neutronMeteringLabelRuleInterfaceRegistration != null) {
-            registrations.add(neutronMeteringLabelRuleInterfaceRegistration);
-        }
     }
 }

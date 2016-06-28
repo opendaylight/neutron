@@ -19,7 +19,7 @@ import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -61,8 +61,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
-    NeutronLoadBalancerPoolInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronLoadBalancerPoolInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -180,16 +180,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             answer.setID(pool.getUuid().getValue());
         }
         return answer;
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronLoadBalancerPoolInterface neutronLoadBalancerPoolInterface = new NeutronLoadBalancerPoolInterface(providerContext);
-        final ServiceRegistration<INeutronLoadBalancerPoolCRUD> neutronLoadBalancerPoolInterfaceRegistration = context.registerService(INeutronLoadBalancerPoolCRUD.class, neutronLoadBalancerPoolInterface, null);
-        if(neutronLoadBalancerPoolInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerPoolInterfaceRegistration);
-        }
     }
 
     public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) {
