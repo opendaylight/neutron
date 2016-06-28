@@ -13,7 +13,7 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronNetwork_Segment;
@@ -33,8 +33,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,8 +47,8 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
             .put(NetworkTypeVxlan.class,"vxlan")
             .build();
 
-    NeutronNetworkInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronNetworkInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBNetworkCRUD methods
@@ -183,15 +181,5 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
     protected InstanceIdentifier<Networks> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class)
                 .child(Networks.class);
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronNetworkInterface neutronNetworkInterface = new NeutronNetworkInterface(providerContext);
-        final ServiceRegistration<INeutronNetworkCRUD> neutronNetworkInterfaceRegistration = context.registerService(INeutronNetworkCRUD.class, neutronNetworkInterface, null);
-        if(neutronNetworkInterfaceRegistration != null) {
-            registrations.add(neutronNetworkInterfaceRegistration);
-        }
     }
 }

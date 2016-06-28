@@ -11,7 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 import org.opendaylight.neutron.spi.Neutron_ID;
@@ -26,8 +26,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,8 +43,8 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             .build();
 
 
-    NeutronLoadBalancerHealthMonitorInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronLoadBalancerHealthMonitorInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -162,15 +160,5 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
         return answer;
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronLoadBalancerHealthMonitorInterface neutronLoadBalancerHealthMonitorInterface = new NeutronLoadBalancerHealthMonitorInterface(providerContext);
-        final ServiceRegistration<INeutronLoadBalancerHealthMonitorCRUD> neutronLoadBalancerHealthMonitorInterfaceRegistration = context.registerService(INeutronLoadBalancerHealthMonitorCRUD.class, neutronLoadBalancerHealthMonitorInterface, null);
-        if(neutronLoadBalancerHealthMonitorInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerHealthMonitorInterfaceRegistration);
-        }
     }
 }

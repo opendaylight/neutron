@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
@@ -27,8 +27,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,8 +47,8 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             .put(EthertypeV6.class,"IPv6")
             .build();
 
-    NeutronSecurityRuleInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronSecurityRuleInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -164,15 +162,5 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
         final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
         securityRuleBuilder.setUuid(toUuid(uuid));
         return securityRuleBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronSecurityRuleInterface neutronSecurityRuleInterface = new NeutronSecurityRuleInterface(providerContext);
-        final ServiceRegistration<INeutronSecurityRuleCRUD> neutronSecurityRuleInterfaceRegistration = context.registerService(INeutronSecurityRuleCRUD.class, neutronSecurityRuleInterface, null);
-        if(neutronSecurityRuleInterfaceRegistration != null) {
-            registrations.add(neutronSecurityRuleInterfaceRegistration);
-        }
     }
 }

@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 import org.opendaylight.neutron.spi.NeutronVPNLifetime;
@@ -20,16 +20,14 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
 
-    NeutronVPNIPSECPolicyInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronVPNIPSECPolicyInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBVPNIPSECPolicyCRUD methods
@@ -132,15 +130,5 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
         ipsecPolicyBuilder.setUuid(toUuid(uuid));
         return ipsecPolicyBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronVPNIPSECPolicyInterface neutronVPNIPSECPolicyInterface = new NeutronVPNIPSECPolicyInterface(providerContext);
-        final ServiceRegistration<INeutronVPNIPSECPolicyCRUD> neutronVPNIPSECPolicyInterfaceRegistration = context.registerService(INeutronVPNIPSECPolicyCRUD.class, neutronVPNIPSECPolicyInterface, null);
-        if(neutronVPNIPSECPolicyInterfaceRegistration != null) {
-            registrations.add(neutronVPNIPSECPolicyInterfaceRegistration);
-        }
     }
 }

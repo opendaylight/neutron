@@ -11,7 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 import org.opendaylight.neutron.spi.Neutron_ID;
@@ -26,8 +26,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,8 +42,8 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
             .build();
 
-    NeutronLoadBalancerListenerInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronLoadBalancerListenerInterface(DataBroker db) {
+        super(db);
     }
 
     @Override
@@ -147,15 +145,5 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             answer.setID(listener.getUuid().getValue());
         }
         return answer;
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronLoadBalancerListenerInterface neutronLoadBalancerListenerInterface = new NeutronLoadBalancerListenerInterface(providerContext);
-        final ServiceRegistration<INeutronLoadBalancerListenerCRUD> neutronLoadBalancerListenerInterfaceRegistration = context.registerService(INeutronLoadBalancerListenerCRUD.class, neutronLoadBalancerListenerInterface, null);
-        if(neutronLoadBalancerListenerInterfaceRegistration != null) {
-            registrations.add(neutronLoadBalancerListenerInterfaceRegistration);
-        }
     }
 }
