@@ -25,7 +25,6 @@ import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yangtools.yang.binding.Augmentable;
 import org.opendaylight.yangtools.yang.binding.ChildOf;
@@ -54,8 +53,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
     private final DataBroker db;
 
-    AbstractNeutronInterface(ProviderContext providerContext) {
-        this.db = providerContext.getSALService(DataBroker.class);
+    AbstractNeutronInterface(DataBroker db) {
+        this.db = Preconditions.checkNotNull(db);
     }
 
     public DataBroker getDataBroker() {

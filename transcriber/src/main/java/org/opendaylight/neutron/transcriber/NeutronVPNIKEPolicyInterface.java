@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 
-import org.opendaylight.controller.sal.binding.api.BindingAwareBroker.ProviderContext;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 import org.opendaylight.neutron.spi.NeutronVPNLifetime;
@@ -20,16 +20,14 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ik
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, IkePolicies, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
-    NeutronVPNIKEPolicyInterface(ProviderContext providerContext) {
-        super(providerContext);
+    NeutronVPNIKEPolicyInterface(DataBroker db) {
+        super(db);
     }
 
     // IfNBVPNIKEPolicyCRUD methods
@@ -132,15 +130,5 @@ ikePolicy.getLifetime();
         final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
         ikePolicyBuilder.setUuid(toUuid(uuid));
         return ikePolicyBuilder.build();
-    }
-
-    public static void registerNewInterface(BundleContext context,
-                                            ProviderContext providerContext,
-                                            List<ServiceRegistration<?>> registrations) {
-        final NeutronVPNIKEPolicyInterface neutronVPNIKEPolicyInterface = new NeutronVPNIKEPolicyInterface(providerContext);
-        final ServiceRegistration<INeutronVPNIKEPolicyCRUD> neutronVPNIKEPolicyInterfaceRegistration = context.registerService(INeutronVPNIKEPolicyCRUD.class, neutronVPNIKEPolicyInterface, null);
-        if(neutronVPNIKEPolicyInterfaceRegistration != null) {
-            registrations.add(neutronVPNIKEPolicyInterfaceRegistration);
-        }
     }
 }
