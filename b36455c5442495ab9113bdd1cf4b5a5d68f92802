@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_8a73ceb0",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_7a3c3c94",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_ba46c421",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -47,6 +65,24 @@
       "writtenOn": "2016-04-06T17:34:17Z",
       "side": 1,
       "message": "space before \"{\" brace.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2a4ba25a",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_ba46c421",
       "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_0a485e5a",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_da41100d",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_fa47ac1b",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -81,6 +135,24 @@
       "writtenOn": "2016-04-06T17:34:17Z",
       "side": 1,
       "message": "Please be consistent. type, then description.",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6a747a9c",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Sure! I have fixed in the same in the latest patch",
+      "parentUuid": "3a4c51b2_fa47ac1b",
       "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -110,6 +182,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_4a79b692",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done!",
+      "parentUuid": "3a4c51b2_dae750e3",
+      "range": {
+        "startLine": 76,
+        "startChar": 34,
+        "endLine": 76,
+        "endChar": 35
+      },
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_5a5500c5",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -127,6 +223,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_aa6e92c7",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_5a5500c5",
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_ba036472",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -138,6 +252,30 @@
       "writtenOn": "2016-04-06T21:00:15Z",
       "side": 1,
       "message": "name contains whitespace",
+      "range": {
+        "startLine": 127,
+        "startChar": 38,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_ea67eae8",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_ba036472",
       "range": {
         "startLine": 127,
         "startChar": 38,
@@ -173,6 +311,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_2a6282d8",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_1af8987b",
+      "range": {
+        "startLine": 128,
+        "startChar": 43,
+        "endLine": 128,
+        "endChar": 44
+      },
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_faf4cc88",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -184,6 +346,30 @@
       "writtenOn": "2016-04-06T21:00:15Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 129,
+        "startChar": 42,
+        "endLine": 129,
+        "endChar": 43
+      },
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_0a5fbe0f",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_faf4cc88",
       "range": {
         "startLine": 129,
         "startChar": 42,
@@ -219,6 +405,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_6a9bdac9",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_5af2209b",
+      "range": {
+        "startLine": 133,
+        "startChar": 50,
+        "endLine": 133,
+        "endChar": 51
+      },
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_baec04c9",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -230,6 +440,30 @@
       "writtenOn": "2016-04-06T20:49:03Z",
       "side": 1,
       "message": "Please ensure the yang file is formatted properly.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 0
+      },
+      "revId": "b36455c5442495ab9113bdd1cf4b5a5d68f92802",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4aa096f4",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-06-29T07:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c51b2_baec04c9",
       "range": {
         "startLine": 1,
         "startChar": 0,
