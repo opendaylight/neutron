@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_ea01aa3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T07:48:29Z",
+      "side": 1,
+      "message": "https://wiki.openstack.org/wiki/GitCommitMessages",
+      "parentUuid": "9a561d44_cf6e7896",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_4f8d4831",
         "filename": "model/src/main/yang/neutron-qos-ext.yang",
         "patchSetId": 16
