@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_efd7f7bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:42:22Z",
+      "side": 1,
+      "message": "Please put appropreate subject line",
+      "revId": "20e57af7ea148b7d23b5bb065053f3f5a888c6f0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4fe543a7",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:42:22Z",
+      "side": 1,
+      "message": "Please break lines\nhttps://google.github.io/styleguide/javaguide.html#s4.8.5-annotations",
+      "revId": "20e57af7ea148b7d23b5bb065053f3f5a888c6f0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
