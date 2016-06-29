@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_92ddc017",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T18:43:17Z",
+      "side": 1,
+      "message": "subject line please",
+      "revId": "2624a8787656a35fe61d1abc76585eb0243be8b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_b2ec44c9",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCPortPair.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T18:43:17Z",
+      "side": 1,
+      "message": "NeutronObject instead of Neutron_ID",
+      "revId": "2624a8787656a35fe61d1abc76585eb0243be8b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_f2cd1c5f",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSFCPortPairJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T18:43:17Z",
+      "side": 1,
+      "message": "Please don\u0027t mask real exception.",
+      "revId": "2624a8787656a35fe61d1abc76585eb0243be8b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_52db281b",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSFCPortPairRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T18:43:17Z",
+      "side": 1,
+      "message": "no blank line.",
+      "revId": "2624a8787656a35fe61d1abc76585eb0243be8b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_32d8341d",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSFCPortPairRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T18:43:17Z",
+      "side": 1,
+      "message": "blank line between two methods.",
+      "revId": "2624a8787656a35fe61d1abc76585eb0243be8b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9204a07f",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronSFCPortPairsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T18:43:17Z",
+      "side": 1,
+      "message": "please avoid wildcard import.",
+      "revId": "2624a8787656a35fe61d1abc76585eb0243be8b0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
