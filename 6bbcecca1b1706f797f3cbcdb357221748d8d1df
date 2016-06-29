@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_8fee3b8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "Please add appropreate subject line\n\nhttps://wiki.openstack.org/wiki/GitCommitMessages",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6ff3e773",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronCRUDInterfaces.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "As blueprint wiring is introduced.\nPlease update.\n\ncf. https://git.opendaylight.org/gerrit/#/c/40911/",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4faa631a",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronResource_MapPropertyAdapter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "Please avoid \u0027_\u0027(underscore)\nNeutronPort_VIF was already there, so NeturonPort_VIF was used.\nBut for new name, please avoid \u0027_\u0027.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_cf3b13ea",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifier.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "Please put protocol before source port rage for consistency.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_af405f57",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronSFCFlowClassifierJAXBTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "Can you please remove this catch.\nbut add throws Exception to the method signature.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_8f18fb85",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "white space before \"{\"",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6f1da773",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "icmpv6 isn\u0027t supported.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_ef08972f",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "trace? too verbose?",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4f06e321",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_92ff8001",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_72046c15",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2f03af10",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T17:20:10Z",
+      "side": 1,
+      "message": "as blueprint is suported, this isn\u0027t needed.",
+      "revId": "6bbcecca1b1706f797f3cbcdb357221748d8d1df",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
