@@ -51,6 +51,363 @@
       "revId": "dc928902047206db0f3be6614097b382300e26e0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_8f8f5b23",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 16
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Please check yang models by pyang.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_afb5ffce",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 16
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Please check yang models by pyang.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2faa8f70",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 16
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Please update this to follow WIP patch\n\nhttps://review.openstack.org/#/c/319694/",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_cfb033e0",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 16
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Please don\u0027t put attributes in random order.\n\nuuid, then tenant-id",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_8fb63bdb",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Now rule is under policy, so qos-policy-id is redundant.\nSo please remove this.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6fbbe7c4",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2fc1ef2e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronQosPolicyCRUD.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Again, those are unnecessary.\n\nPlease address comments on old PS.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_8f047b7f",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "don\u0027t use wildcard import",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6f092795",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_cffe736b",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_af033f72",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_6fe2c7d6",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Indent\n\nPlease follow other files.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_cfe793e3",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_afecdfc8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Is bandwitdh too long?",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_0fd18bfb",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Indent",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_efcd375f",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Don\u0027t use wildcard import",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4fdb831b",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Too long line.\nPlease fix checkstyle warnings.",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_0ff86b7b",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyRequest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "Indent",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_eff41789",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyRequest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_4ff2639b",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyRequest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_2fef2fb2",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyRequest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-06-29T16:26:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "dc928902047206db0f3be6614097b382300e26e0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
