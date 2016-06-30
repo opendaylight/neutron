@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_f87b3b27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 65
+      },
+      "writtenOn": "2016-06-30T07:03:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_521de865",
+      "revId": "3f630a979dd18b2f23d554ac2d4a3e3f9707e2f7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_f2ca3c6d",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSFCPortChain.java",
         "patchSetId": 1
