@@ -28,6 +28,7 @@ import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
+import org.opendaylight.neutron.spi.INeutronSFCPortChainCRUD;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairCRUD;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
@@ -44,7 +45,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class NeutronTranscriberProvider
     implements AutoCloseable, NeutronTranscriber {
@@ -81,6 +81,7 @@ public class NeutronTranscriberProvider
     private NeutronSFCFlowClassifierInterface sfcFlowClassifierInterface;
     private NeutronSFCPortPairInterface sfcPortPairInterface;
     private NeutronSFCPortPairGroupInterface sfcPortPairGroupInterface;
+    private NeutronSFCPortChainInterface sfcPortChainInterface;
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
@@ -174,6 +175,10 @@ public class NeutronTranscriberProvider
 
         sfcPortPairGroupInterface = new NeutronSFCPortPairGroupInterface(db);
         registerCRUDInterface(INeutronSFCPortPairGroupCRUD.class, sfcPortPairGroupInterface);
+
+        sfcPortChainInterface = new NeutronSFCPortChainInterface(db);
+        registerCRUDInterface(INeutronSFCPortChainCRUD.class, sfcPortChainInterface);
+
         // We don't need context any more
         this.context = null;
     }
