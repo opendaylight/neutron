@@ -38,6 +38,7 @@ import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
+import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
@@ -82,6 +83,7 @@ public class NeutronTranscriberProvider
     private NeutronSFCPortPairInterface sfcPortPairInterface;
     private NeutronSFCPortPairGroupInterface sfcPortPairGroupInterface;
     private NeutronSFCPortChainInterface sfcPortChainInterface;
+    private NeutronQosPolicyInterface qosPolicyInterface;
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
@@ -178,6 +180,9 @@ public class NeutronTranscriberProvider
 
         sfcPortChainInterface = new NeutronSFCPortChainInterface(db);
         registerCRUDInterface(INeutronSFCPortChainCRUD.class, sfcPortChainInterface);
+
+        qosPolicyInterface = new NeutronQosPolicyInterface(db);
+        registerCRUDInterface(INeutronQosPolicyCRUD.class,qosPolicyInterface);
 
         // We don't need context any more
         this.context = null;
