@@ -14,4 +14,11 @@
     <argument ref="dataBroker"/>
   </bean>
 
+  <bean id="securityRuleLogger"
+        class="org.opendaylight.neutron.logger.NeutronLoggerSecurityRule"
+        init-method="init"
+        destroy-method="close">
+    <argument ref="dataBroker"/>
+  </bean>
+
 </blueprint>
