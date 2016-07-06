@@ -29,10 +29,10 @@ public class NeutronLogger implements AutoCloseable {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronLogger.class);
 
     private DataBroker db;
-    private ClusteredDataTreeChangeListener configurationDataTreeChangeListener;
-    private ListenerRegistration<? extends ClusteredDataTreeChangeListener> configurationRegisteredListener;
-    private ClusteredDataTreeChangeListener operationalDataTreeChangeListener;
-    private ListenerRegistration<? extends ClusteredDataTreeChangeListener> operationalRegisteredListener;
+    private ClusteredDataTreeChangeListener<Neutron> configurationDataTreeChangeListener;
+    private ListenerRegistration<? extends ClusteredDataTreeChangeListener<Neutron>> configurationRegisteredListener;
+    private ClusteredDataTreeChangeListener<Neutron> operationalDataTreeChangeListener;
+    private ListenerRegistration<? extends ClusteredDataTreeChangeListener<Neutron>> operationalRegisteredListener;
 
     public NeutronLogger(@Nonnull DataBroker db) {
         LOG.info("Creating NeutronLogger {}", db);
@@ -70,7 +70,7 @@ public class NeutronLogger implements AutoCloseable {
     private <T extends DataObject>
         void formatChanges(@Nonnull final StringBuilder messageBuilder,
                            @Nonnull final Collection<DataTreeModification<T>> changes) {
-        for (DataTreeModification modification : changes) {
+        for (DataTreeModification<T> modification : changes) {
             final DataTreeIdentifier<T> identifier = modification.getRootPath();
             final LogicalDatastoreType datastoreType = identifier.getDatastoreType();
             if (datastoreType == LogicalDatastoreType.OPERATIONAL) {

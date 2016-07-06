@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.opendaylight.neutron.spi.NeutronSubnet_HostRoute;
 import org.opendaylight.neutron.spi.NeutronSubnetIPAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpPrefix;
@@ -106,9 +106,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             result.setDnsNameservers(dnsNameServers);
         }
         if(subnet.getHostRoutes() != null){
-            final List<NeutronSubnet_HostRoute> hostRoutes = new ArrayList<NeutronSubnet_HostRoute>();
+            final List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
             for(final HostRoutes hostRoute : subnet.getHostRoutes()) {
-                final NeutronSubnet_HostRoute nsHostRoute = new NeutronSubnet_HostRoute();
+                final NeutronRoute nsHostRoute = new NeutronRoute();
                 nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
                 nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
                 hostRoutes.add(nsHostRoute);
@@ -178,7 +178,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         }
         if(subnet.getHostRoutes() != null) {
             final List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
-            for(final NeutronSubnet_HostRoute hostRoute: subnet.getHostRoutes()) {
+            for(final NeutronRoute hostRoute: subnet.getHostRoutes()) {
                 final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
                 hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
                 hrBuilder.setNexthop(new IpAddress(hostRoute.getNextHop().toCharArray()));
