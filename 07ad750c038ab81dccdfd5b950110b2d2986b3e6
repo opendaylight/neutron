@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_1427bcb7",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-06T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_47da3a79",
+      "range": {
+        "startLine": 30,
+        "startChar": 22,
+        "endLine": 30,
+        "endChar": 46
+      },
+      "revId": "07ad750c038ab81dccdfd5b950110b2d2986b3e6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_27f466f1",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
         "patchSetId": 17
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_5421349e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-06T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_27f466f1",
+      "range": {
+        "startLine": 34,
+        "startChar": 16,
+        "endLine": 34,
+        "endChar": 36
+      },
+      "revId": "07ad750c038ab81dccdfd5b950110b2d2986b3e6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_f42b2880",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-06T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_e7e9ce1b",
+      "range": {
+        "startLine": 34,
+        "startChar": 48,
+        "endLine": 34,
+        "endChar": 68
+      },
+      "revId": "07ad750c038ab81dccdfd5b950110b2d2986b3e6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_87e4523c",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
         "patchSetId": 17
@@ -82,6 +154,30 @@
       "writtenOn": "2016-07-01T21:42:02Z",
       "side": 1,
       "message": "Inconsistent naming with get function. getBandwidthMaxBurstKbps.",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 42,
+        "endChar": 36
+      },
+      "revId": "07ad750c038ab81dccdfd5b950110b2d2986b3e6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_342640b8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-06T22:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_87e4523c",
       "range": {
         "startLine": 42,
         "startChar": 16,
