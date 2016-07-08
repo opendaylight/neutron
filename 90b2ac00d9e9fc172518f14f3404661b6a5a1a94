@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_932c79ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "Those change from the previous patch shouldn\u0027t go commit message body.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_bf6fbfc4",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronQosPolicyTests.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "dscp marking test is missing.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_f3185586",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "Can you please address the comment on the before patch?\nCan you please add a comment why this extension is split from neutron-qos.yang?",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_d31d5175",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 18
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "Did you really check yang model with pyang?",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_730c4543",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "no blank line between imports.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_bf0a1f1f",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 18
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_5f03030d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 18
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "indent.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9f0d9b3a",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 18
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "indent, style.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_ff13f759",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "blank line between methods.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_3f1e0f64",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "This is provided by NeutronObject.\nWe don\u0027t need this.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9f247bb0",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "break this line.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_3f356fda",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "only one blank line.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9f72bbab",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "Although other files do so, please don\u0027t mask exceptions.\nJust add throw clause to method signature.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9f5bdb2d",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyNorthbound.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "list and show are missing.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_1f306be7",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyRequest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:22:41Z",
+      "side": 1,
+      "message": "why group?\nlooks like copy-and-paste bug.",
+      "revId": "90b2ac00d9e9fc172518f14f3404661b6a5a1a94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
