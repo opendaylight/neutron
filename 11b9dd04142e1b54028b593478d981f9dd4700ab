@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_bfa69f0e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-08T22:32:20Z",
+      "side": 1,
+      "message": "something wrong.",
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
