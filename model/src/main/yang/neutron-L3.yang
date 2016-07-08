@@ -123,7 +123,7 @@ module neutron-L3 {
                     }
                     list external-fixed-ips {
                         description "external fixed IPs for this router ";
-                        key subnet-id;
+                        key "subnet-id ip-address";
                         leaf subnet-id {
                             type yang:uuid;
                         }
