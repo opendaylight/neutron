@@ -67,6 +67,9 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
             singleton.initDefaults();
             neutronCRUD.add(singleton);
         } else {
+            if (input.getBulk() == null) {
+                throw new BadRequestException("Invalid requests");
+            }
             for (T test : input.getBulk()) {
                 test.initDefaults();
                 neutronCRUD.add(test);
