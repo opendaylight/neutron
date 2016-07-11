@@ -93,7 +93,6 @@
     <module>neutron-spi</module>
     <module>northbound-api</module>
     <module>transcriber</module>
-    <module>dummyprovider</module>
     <module>neutron-logger</module>
     <module>features/production</module>
     <module>features/test</module>
