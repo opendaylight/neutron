@@ -30,6 +30,7 @@ module neutron {
     import neutron-qos { prefix "qos"; }
     import neutron-sfc-flow-classifier { prefix "sfc-flow-classifier"; }
     import neutron-sfc { prefix "sfc"; }
+    import neutron-trunks { prefix "trunks"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -68,5 +69,6 @@ module neutron {
         uses qos:qos-attributes;
         uses sfc-flow-classifier:sfc-flow-classifiers-attributes;
         uses sfc:sfc-attributes;
+        uses trunks:trunk-attributes;
     }
 }
