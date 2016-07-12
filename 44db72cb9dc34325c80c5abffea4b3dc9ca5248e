@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_fe777039",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-07-12T11:47:04Z",
+      "side": 1,
+      "message": "nitpick: neutron-trunks would be better",
+      "revId": "44db72cb9dc34325c80c5abffea4b3dc9ca5248e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_1ecfc480",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-07-12T11:47:04Z",
+      "side": 1,
+      "message": "use neutron-attrs:base-attributes for these.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 9
+      },
+      "revId": "44db72cb9dc34325c80c5abffea4b3dc9ca5248e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9ea2b4ac",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-07-12T11:47:04Z",
+      "side": 1,
+      "message": "I\u0027d prefer sub-ports for consistent naming.",
+      "range": {
+        "startLine": 74,
+        "startChar": 13,
+        "endLine": 74,
+        "endChar": 21
+      },
+      "revId": "44db72cb9dc34325c80c5abffea4b3dc9ca5248e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_fec9307a",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-07-12T11:47:04Z",
+      "side": 1,
+      "message": "Add a description here",
+      "revId": "44db72cb9dc34325c80c5abffea4b3dc9ca5248e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_fe901050",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2016-07-12T11:47:04Z",
+      "side": 1,
+      "message": "change to trunks-attributes to be consistent with naming.",
+      "range": {
+        "startLine": 79,
+        "startChar": 13,
+        "endLine": 79,
+        "endChar": 27
+      },
+      "revId": "44db72cb9dc34325c80c5abffea4b3dc9ca5248e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
