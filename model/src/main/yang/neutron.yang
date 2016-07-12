@@ -28,6 +28,7 @@ module neutron {
     import neutron-hostconfig { prefix "hostconfig"; }
     import neutron-sfc-flow-classifier { prefix "neutron-sfc-flow-classifier"; }
     import neutron-sfc { prefix "neutron-sfc"; }
+    import neutron-trunk { prefix "neutron-trunk"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -64,5 +65,6 @@ module neutron {
         uses hostconfig:hostconfig-attributes;
         uses neutron-sfc-flow-classifier:sfc-flow-classifiers-attributes;
         uses neutron-sfc:sfc-attributes;
+        uses neutron-trunk:neutron-trunks;
     }
 }
