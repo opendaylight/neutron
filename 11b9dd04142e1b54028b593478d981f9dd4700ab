@@ -16,6 +16,184 @@
       "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_fab49336",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "Tabs/Whitespaces",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 8
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_1ae8670f",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "formatting extra whitespace.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 8
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_5a83ff55",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "LOGGER is never used.",
+      "range": {
+        "startLine": 35,
+        "startChar": 32,
+        "endLine": 35,
+        "endChar": 38
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_7a808346",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "formatting. Upto 100 characters per line allowed according to google java style.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 55
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_da96ef93",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 56,
+        "endChar": 42
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_ba917b9c",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 76,
+        "startChar": 94,
+        "endLine": 76,
+        "endChar": 107
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_3a860b66",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_3ad44b46",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTranscriberProvider.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-13T20:51:12Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 185,
+        "startChar": 57,
+        "endLine": 185,
+        "endChar": 58
+      },
+      "revId": "11b9dd04142e1b54028b593478d981f9dd4700ab",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
