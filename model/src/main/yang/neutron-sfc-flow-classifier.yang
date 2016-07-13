@@ -14,7 +14,7 @@
      prefix neutron-sfc-flow-classifier;
 
      import ietf-yang-types { prefix "yang"; }
-     import ietf-inet-types { prefix "inet"; revision-date 2010-09-24; }
+     import ietf-inet-types { prefix "inet"; revision-date 2013-07-15; }
      import neutron-attrs { prefix "attrs"; }
      import neutron-constants { prefix "constants"; }
 

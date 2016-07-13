@@ -19,8 +19,8 @@
 
   <properties>
     <aaa.version>0.3.0-SNAPSHOT</aaa.version>
-    <ietf-yang-types.version>2010.09.24.9-SNAPSHOT</ietf-yang-types.version>
-    <ietf-inet-types.version>2010.09.24.9-SNAPSHOT</ietf-inet-types.version>
+    <ietf-yang-types.version>2013.07.15.9-SNAPSHOT</ietf-yang-types.version>
+    <ietf-inet-types.version>1.1.0-SNAPSHOT</ietf-inet-types.version>
     <salGeneratorPath>src/main/yang-gen-sal</salGeneratorPath>
     <mdsal.model.version>0.9.0-SNAPSHOT</mdsal.model.version>
     <yangtools.version>1.0.0-SNAPSHOT</yangtools.version>
@@ -49,12 +49,12 @@
       </dependency>
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
-        <artifactId>ietf-inet-types</artifactId>
+        <artifactId>ietf-inet-types-2013-07-15</artifactId>
         <version>${ietf-inet-types.version}</version>
       </dependency>
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
-        <artifactId>ietf-yang-types</artifactId>
+        <artifactId>ietf-yang-types-20130715</artifactId>
         <version>${ietf-yang-types.version}</version>
       </dependency>
       <dependency>

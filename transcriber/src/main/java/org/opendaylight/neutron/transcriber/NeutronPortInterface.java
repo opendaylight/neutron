@@ -24,7 +24,7 @@ import org.opendaylight.neutron.spi.NeutronPort_AllowedAddressPairs;
 import org.opendaylight.neutron.spi.NeutronPort_ExtraDHCPOption;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.neutron.spi.Neutron_IPs;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev100924.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.MacAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetails;
