@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_9d710ce3",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-14T21:50:55Z",
+      "side": 1,
+      "message": "blank line",
+      "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_fd7768d2",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-14T21:50:55Z",
+      "side": 1,
+      "message": "blank line",
+      "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_bd6e90ff",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-14T21:50:55Z",
+      "side": 1,
+      "message": "nit: trunk for brevity.",
+      "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
