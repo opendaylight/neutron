@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,6 +18,30 @@ public class NeutronSecurityRuleJAXBTest {
         "\"id\": \"2bc0accf-312e-429a-956e-e4407625eb62\", " +
         "\"direction\": \"ingress\", " +
         "\"protocol\": \"tcp\", " +
+        "\"port_range_min\": 80, " +
+        "\"port_range_max\": 80, " +
+        "\"ethertype\": \"IPv4\", " +
+        "\"remote_ip_prefix\": \"0.0.0.0/0\", " +
+        "\"remote_group_id\": \"85cc3048-abc3-43cc-89b3-377341426ac5\", " +
+        "\"security_group_id\": \"a7734e61-b545-452d-a3cd-0189cbd9747a\", " +
+        "\"tenant_id\": \"e4f50856753b4dc6afee5fa6b9b6c550\" }";
+
+    private static final String NeutronSecurityRuleProtocolNumber_sourceJson="{" +
+        "\"id\": \"2bc0accf-312e-429a-956e-e4407625eb62\", " +
+        "\"direction\": \"ingress\", " +
+        "\"protocol\": 6, " +
+        "\"port_range_min\": 80, " +
+        "\"port_range_max\": 80, " +
+        "\"ethertype\": \"IPv4\", " +
+        "\"remote_ip_prefix\": \"0.0.0.0/0\", " +
+        "\"remote_group_id\": \"85cc3048-abc3-43cc-89b3-377341426ac5\", " +
+        "\"security_group_id\": \"a7734e61-b545-452d-a3cd-0189cbd9747a\", " +
+        "\"tenant_id\": \"e4f50856753b4dc6afee5fa6b9b6c550\" }";
+
+    private static final String NeutronSecurityRuleProtocolNumberString_sourceJson="{" +
+        "\"id\": \"2bc0accf-312e-429a-956e-e4407625eb62\", " +
+        "\"direction\": \"ingress\", " +
+        "\"protocol\": \"6\", " +
         "\"port_range_min\": 80, " +
         "\"port_range_max\": 80, " +
         "\"ethertype\": \"IPv4\", " +
@@ -62,5 +87,25 @@ public class NeutronSecurityRuleJAXBTest {
         } catch (Exception e) {
             Assert.fail("Tests failed");
         }
+    }
+
+    @Test
+    public void test_NeutronSecurityRuleProtocolNumber_JAXB() throws JAXBException {
+        NeutronSecurityRule dummyObject = new NeutronSecurityRule();
+        NeutronSecurityRule testObject =
+            (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+                                                                NeutronSecurityRuleProtocolNumber_sourceJson);
+        Assert.assertEquals("NeutronSecurityRuleProtocolNumber JAXB: Testing protocol failed",
+                            "6", testObject.getSecurityRuleProtocol());
+    }
+
+    @Test
+    public void test_NeutronSecurityRuleProtocolNumberString_JAXB() throws JAXBException {
+        NeutronSecurityRule dummyObject = new NeutronSecurityRule();
+        NeutronSecurityRule testObject =
+            (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+                                                                NeutronSecurityRuleProtocolNumberString_sourceJson);
+        Assert.assertEquals("NeutronSecurityRuleProtocolNumberString JAXB: Testing protocol failed",
+                            "6", testObject.getSecurityRuleProtocol());
     }
 }
