@@ -22,6 +22,30 @@
       "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_7f7228ae",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-15T23:17:55Z",
+      "side": 1,
+      "message": "Good point! I will wait for comments",
+      "parentUuid": "9a561d44_ff46384e",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
