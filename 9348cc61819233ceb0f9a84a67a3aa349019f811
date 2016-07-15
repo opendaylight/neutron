@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_df3a54cc",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyNorthbound.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-15T22:54:02Z",
+      "side": 1,
+      "message": "Space! Fixing in upcoming patch",
+      "revId": "9348cc61819233ceb0f9a84a67a3aa349019f811",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_bf35e0dc",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyNorthbound.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-15T22:54:02Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9348cc61819233ceb0f9a84a67a3aa349019f811",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_7f24e8ae",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyRequest.java",
+        "patchSetId": 19
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-15T22:54:02Z",
+      "side": 1,
+      "message": "Going to update in next patchset",
+      "range": {
+        "startLine": 51,
+        "startChar": 30,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "revId": "9348cc61819233ceb0f9a84a67a3aa349019f811",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
