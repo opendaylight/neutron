@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_ff46384e",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2016-07-15T23:14:07Z",
+      "side": 1,
+      "message": "instead of hard coding this, would\u0027nt it be possible to mock the NeutronQosPolicy object behavior and build json string from its attributes ?? I think mocking would make things easy.",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
