@@ -46,6 +46,24 @@
       "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_bf6320dc",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-16T00:01:09Z",
+      "side": 1,
+      "message": "I don\u0027t see how mocking helps to produce those strings.\nCan you please elaborate it?",
+      "parentUuid": "9a561d44_ff46384e",
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
