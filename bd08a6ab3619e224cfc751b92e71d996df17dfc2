@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a561d44_7f806846",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronQosPolicyTests.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2016-07-16T00:30:32Z",
+      "side": 1,
+      "message": "Needs to be removed",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 82
+      },
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_ff46384e",
         "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
         "patchSetId": 20
