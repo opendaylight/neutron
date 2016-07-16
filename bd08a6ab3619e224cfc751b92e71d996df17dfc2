@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "9a561d44_1fbfacfc",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronQosPolicyTests.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-16T01:58:19Z",
+      "side": 1,
+      "message": "align * column.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 2
+      },
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_ffb91816",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronQosPolicyTests.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-16T01:58:19Z",
+      "side": 1,
+      "message": "There is no point to use + here",
+      "range": {
+        "startLine": 34,
+        "startChar": 39,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_7f806846",
         "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronQosPolicyTests.java",
         "patchSetId": 20
@@ -19,6 +65,57 @@
         "endLine": 68,
         "endChar": 82
       },
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_9f429c0e",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 20
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-16T01:58:19Z",
+      "side": 1,
+      "message": "wrong indentation. should be 8 space.",
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_7f450816",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 20
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-16T01:58:19Z",
+      "side": 1,
+      "message": "wrong indent.",
+      "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_df4b7429",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 20
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-16T01:58:19Z",
+      "side": 1,
+      "message": "wrong indent.",
       "revId": "bd08a6ab3619e224cfc751b92e71d996df17dfc2",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
