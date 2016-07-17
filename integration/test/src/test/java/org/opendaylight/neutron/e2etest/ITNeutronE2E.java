@@ -121,7 +121,8 @@ public class ITNeutronE2E {
         NeutronBgpvpnTests.runTests(base);
         NeutronL2GatewayTests.runTests(base);
         NeutronL2GatewayConnectionTests.runTests(base);
-
+        NeutronQosPolicyTests.runTests(base);
+        
     // tests related to bugs
         Neutron_Bug3812_Tests.runTests(base);
         Tempest_PortsIpV6TestJSON.runTests(base);
