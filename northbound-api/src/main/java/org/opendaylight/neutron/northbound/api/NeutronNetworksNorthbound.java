@@ -112,6 +112,7 @@ public class NeutronNetworksNorthbound
             @QueryParam("provider_network_type") String queryProviderNetworkType,
             @QueryParam("provider_physical_network") String queryProviderPhysicalNetwork,
             @QueryParam("provider_segmentation_id") String queryProviderSegmentationID,
+            @QueryParam("qos_policy_id") String queryQosPolicyId,
             // linkTitle
             @QueryParam("limit") Integer limit,
             @QueryParam("marker") String marker,
@@ -143,7 +144,8 @@ public class NeutronNetworksNorthbound
                     (queryStatus == null || queryStatus.equals(oSN.getStatus())) &&
                     (bShared == null || bShared.booleanValue() == oSN.isShared()) &&
                     (bRouterExternal == null || bRouterExternal.booleanValue() == oSN.isRouterExternal()) &&
-                    (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))) {
+                    (queryTenantID == null || queryTenantID.equals(oSN.getTenantID())) &&
+                    (queryQosPolicyId == null || queryQosPolicyId.equals(oSN.getQosPolicyId()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSN,fields));
                 } else {

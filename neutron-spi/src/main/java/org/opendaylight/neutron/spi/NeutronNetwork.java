@@ -63,6 +63,9 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
     @XmlElement (name="mtu")
     Integer mtu;
 
+    @XmlElement (name = "qos_policy_id")
+    String qosPolicyId;
+
     /* This attribute lists the ports associated with an instance
      * which is needed for determining if that instance can be deleted
      */
@@ -179,6 +182,14 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
         mtu = input;
     }
 
+    public String getQosPolicyId() {
+        return qosPolicyId;
+    }
+
+    public void setQosPolicyId(String qosPolicyId) {
+        this.qosPolicyId = qosPolicyId;
+    }
+
     /**
      * This method copies selected fields from the object and returns them
      * as a new object, suitable for marshaling.
@@ -224,6 +235,10 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
             if (s.equals("network_type")) {
                 ans.setProviderNetworkType(this.getProviderNetworkType());
             }
+            if (s.equals("qos_policy_id")) {
+                ans.setQosPolicyId(this.getQosPolicyId());
+            }
+
         }
         return ans;
     }
@@ -234,6 +249,7 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
                 + adminStateUp + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
+                + ", qosPolicyId =" + qosPolicyId
                 + ", segments = " + segments + "]";
     }
 }
