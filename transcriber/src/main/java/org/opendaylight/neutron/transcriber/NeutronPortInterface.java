@@ -45,6 +45,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.por
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.ports.attributes.ports.PortBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150712.PortSecurityExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150712.PortSecurityExtensionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtension;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
@@ -107,6 +109,13 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         }
     }
 
+    private void qosExtension(Port port, NeutronPort result) {
+        final QosPortExtension qos = port.getAugmentation(QosPortExtension.class);
+        if(qos != null && qos.getQosPolicyId() != null) {
+            result.setQosPolicyId(qos.getQosPolicyId().getValue());
+        }
+    }
+
     protected NeutronPort fromMd(Port port) {
         final NeutronPort result = new NeutronPort();
         result.setAdminStateUp(port.isAdminStateUp());
@@ -164,6 +173,7 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         result.setID(port.getUuid().getValue());
         addExtensions(port, result);
         portSecurityExtension(port, result);
+        qosExtension(port, result);
         return result;
     }
 
@@ -273,6 +283,11 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
             portBuilder.setUuid(toUuid(neutronPort.getID()));
         } else {
             LOGGER.warn("Attempting to write neutron port without UUID");
+        }
+        if (neutronPort.getQosPolicyId() != null) {
+            final QosPortExtensionBuilder qosExtensionBuilder = new QosPortExtensionBuilder();
+            qosExtensionBuilder.setQosPolicyId(toUuid(neutronPort.getQosPolicyId()));
+            portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
         }
         return portBuilder.build();
     }

@@ -84,6 +84,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     @XmlElement (defaultValue = "true", name = "port_security_enabled")
     Boolean portSecurityEnabled;
 
+    @XmlElement (name = "qos_policy_id")
+    String qosPolicyId;
+
     public NeutronPort() {
     }
 
@@ -218,6 +221,14 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
         }
         return portSecurityEnabled;
     }
+    public String getQosPolicyId() {
+        return qosPolicyId;
+    }
+
+    public void setQosPolicyId(String qosPolicyId) {
+        this.qosPolicyId = qosPolicyId;
+    }
+
 
     public void setPortSecurityEnabled(Boolean newValue) {
         portSecurityEnabled = newValue;
@@ -290,6 +301,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
             if ("port_security_enabled".equals(field)) {
                 ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
             }
+            if ("qos_policy_id".equals(field)) {
+                ans.setQosPolicyId(this.getQosPolicyId());
+            }
         }
         return ans;
     }
@@ -317,6 +331,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
                 + ", bindingvifType=" + bindingvifType
                 + ", vifDetails=" + vifDetails
                 + ", extraDHCPOptions=" + extraDHCPOptions
-                + ", portSecurityEnabled=" + portSecurityEnabled +"]";
+                + ", portSecurityEnabled=" + portSecurityEnabled
+                + ", qosPolicyId=" + qosPolicyId +"]";
     }
 }

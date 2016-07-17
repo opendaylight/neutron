@@ -31,6 +31,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeVxlan;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtensionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtension;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
@@ -84,6 +86,10 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
                 segments.add(neutronSegment);
             }
         }
+        final QosNetworkExtension qos = network.getAugmentation(QosNetworkExtension.class);
+        if(qos != null && qos.getQosPolicyId() != null) {
+            result.setQosPolicyId(qos.getQosPolicyId().getValue());
+        }
         result.setSegments(segments);
         return result;
     }
@@ -132,7 +138,11 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
         if (network.getProviderSegmentationID() != null) {
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
-
+        if (network.getQosPolicyId() != null) {
+            final QosNetworkExtensionBuilder qosExtensionBuilder = new QosNetworkExtensionBuilder();
+            qosExtensionBuilder.setQosPolicyId(toUuid(network.getQosPolicyId()));
+            networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
+        }
         networkBuilder.addAugmentation(NetworkL3Extension.class,
                                        l3ExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkProviderExtension.class,
