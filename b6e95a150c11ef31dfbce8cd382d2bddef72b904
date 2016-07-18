@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_04847b5c",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-18T19:19:07Z",
+      "side": 1,
+      "message": "nit: trailing white space.",
+      "revId": "b6e95a150c11ef31dfbce8cd382d2bddef72b904",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_649297a0",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronNetworkQosJAXBTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-18T19:19:07Z",
+      "side": 1,
+      "message": "Can you please drop this try/catch. instead, add throw clause to method signature.\n\nActually this is the way how the existing code is written.\nBut it\u0027s a bad practice to swallow actual exception because it would make debug difficult.\n\nLong term, all the test should be fixed in such way.",
+      "revId": "b6e95a150c11ef31dfbce8cd382d2bddef72b904",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_c491e39a",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronPortQosJAXBTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-18T19:19:07Z",
+      "side": 1,
+      "message": "Please drop try/catch.",
+      "revId": "b6e95a150c11ef31dfbce8cd382d2bddef72b904",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_44f5d3ec",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-18T19:19:07Z",
+      "side": 1,
+      "message": "nit: single white space.",
+      "range": {
+        "startLine": 142,
+        "startChar": 44,
+        "endLine": 142,
+        "endChar": 46
+      },
+      "revId": "b6e95a150c11ef31dfbce8cd382d2bddef72b904",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_24f89fe4",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-18T19:19:07Z",
+      "side": 1,
+      "message": "nit: single whitespace.",
+      "range": {
+        "startLine": 288,
+        "startChar": 41,
+        "endLine": 288,
+        "endChar": 43
+      },
+      "revId": "b6e95a150c11ef31dfbce8cd382d2bddef72b904",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
