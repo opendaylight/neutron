@@ -25,6 +25,54 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_695a6851",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_443dd3dd",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_49ea0476",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Hi Isaku, \nActually it is a general comment. But since the name of identifier is specifically mentioned it will be indented as you have told.",
+      "parentUuid": "9a561d44_443dd3dd",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_24409f55",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 22
@@ -42,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_c9fd743c",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_24409f55",
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_8426cbcc",
         "filename": "model/src/main/yang/neutron.yang",
         "patchSetId": 22
@@ -53,6 +119,30 @@
       "writtenOn": "2016-07-19T00:24:14Z",
       "side": 1,
       "message": "unnecessary whitespace.",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_09c92c26",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_8426cbcc",
       "range": {
         "startLine": 29,
         "startChar": 37,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_89037c41",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_a42b0f93",
+      "range": {
+        "startLine": 56,
+        "startChar": 28,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_041abb7c",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
         "patchSetId": 22
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "9a561d44_69fee839",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_041abb7c",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 13
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_e41ce779",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyNorthbound.java",
         "patchSetId": 22
@@ -145,6 +283,30 @@
       "writtenOn": "2016-07-19T00:24:14Z",
       "side": 1,
       "message": "Please follows the style other files does.",
+      "range": {
+        "startLine": 89,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 18
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_496fa4fd",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyNorthbound.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-19T22:30:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_e41ce779",
       "range": {
         "startLine": 89,
         "startChar": 16,
