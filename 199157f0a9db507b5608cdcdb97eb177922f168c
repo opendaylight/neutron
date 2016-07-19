@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_30373050",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-19T23:51:44Z",
+      "side": 1,
+      "message": "comma and white space at the beginning, this should be removed",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 15
+      },
+      "revId": "199157f0a9db507b5608cdcdb97eb177922f168c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_103aec35",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronQosJAXBTest.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4233
+      },
+      "writtenOn": "2016-07-19T23:51:44Z",
+      "side": 1,
+      "message": "nitpick - Indent.",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 12
+      },
+      "revId": "199157f0a9db507b5608cdcdb97eb177922f168c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
