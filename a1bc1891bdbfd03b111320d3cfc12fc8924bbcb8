@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_443dd3dd",
+        "filename": "model/src/main/yang/neutron-qos-ext.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": "on which line this comment explain?\nIf it\u0027s line 40, this line should be indented same to line 40.",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_24409f55",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": "wrong indent.",
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_8426cbcc",
+        "filename": "model/src/main/yang/neutron.yang",
+        "patchSetId": 22
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": "unnecessary whitespace.",
+      "range": {
+        "startLine": 29,
+        "startChar": 37,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_c430c303",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": "maxKbps",
+      "range": {
+        "startLine": 34,
+        "startChar": 38,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_a42b0f93",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": "\u003d is missing.",
+      "range": {
+        "startLine": 56,
+        "startChar": 28,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_041abb7c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": ",(comma) is missing",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 57,
+        "endChar": 13
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_e41ce779",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronQosPolicyNorthbound.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-19T00:24:14Z",
+      "side": 1,
+      "message": "Please follows the style other files does.",
+      "range": {
+        "startLine": 89,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 18
+      },
+      "revId": "a1bc1891bdbfd03b111320d3cfc12fc8924bbcb8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
