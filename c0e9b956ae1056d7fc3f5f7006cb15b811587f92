@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_36ca836e",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 26
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-20T21:41:09Z",
+      "side": 1,
+      "message": "For boron, this is okay.\nPlease upload a patch to catch up neutron change as I requested before.",
+      "revId": "c0e9b956ae1056d7fc3f5f7006cb15b811587f92",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_f6b80be7",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 26
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-20T21:41:09Z",
+      "side": 1,
+      "message": "qos-rule_types\n(trailing \"s\")",
+      "range": {
+        "startLine": 99,
+        "startChar": 18,
+        "endLine": 99,
+        "endChar": 31
+      },
+      "revId": "c0e9b956ae1056d7fc3f5f7006cb15b811587f92",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_56cf377f",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 26
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-20T21:41:09Z",
+      "side": 1,
+      "message": "rule-types",
+      "range": {
+        "startLine": 100,
+        "startChar": 17,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "c0e9b956ae1056d7fc3f5f7006cb15b811587f92",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_b6a5f3b6",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthRule.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-20T21:41:09Z",
+      "side": 1,
+      "message": "\u0027 is missing.",
+      "range": {
+        "startLine": 74,
+        "startChar": 54,
+        "endLine": 74,
+        "endChar": 55
+      },
+      "revId": "c0e9b956ae1056d7fc3f5f7006cb15b811587f92",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_16adbf9c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosDscpMarkingRule.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-20T21:41:09Z",
+      "side": 1,
+      "message": "\u0027 is missing",
+      "range": {
+        "startLine": 58,
+        "startChar": 49,
+        "endLine": 58,
+        "endChar": 50
+      },
+      "revId": "c0e9b956ae1056d7fc3f5f7006cb15b811587f92",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_5696174d",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-20T21:41:09Z",
+      "side": 1,
+      "message": "\u0027 is missing.",
+      "range": {
+        "startLine": 108,
+        "startChar": 50,
+        "endLine": 108,
+        "endChar": 51
+      },
+      "revId": "c0e9b956ae1056d7fc3f5f7006cb15b811587f92",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
