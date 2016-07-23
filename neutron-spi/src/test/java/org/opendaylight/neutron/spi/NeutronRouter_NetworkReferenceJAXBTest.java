@@ -1,5 +1,5 @@
 /*
- * Copyright Tata Consultancy Services, 2015.  All rights reserved.
+ * Copyright (c) 2015 Tata Consultancy Services.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -18,7 +18,7 @@ public class NeutronRouter_NetworkReferenceJAXBTest {
     private static final String NeutronRouter_NetworkReference_sourceJson = "{" +
         "\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" ," +
         "\"enable_snat\": false , " +
-        "\"external_fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , \"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ]" + 
+        "\"external_fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , \"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ]" +
         "}";
 
     @Test

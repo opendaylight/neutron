@@ -1,5 +1,5 @@
 /*
- * Copyright Tata Consultancy Services, 2015.  All rights reserved.
+ * Copyright (c) 2015 Tata Consultancy Services.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -57,7 +57,7 @@ public class NeutronVPNIKEPolicyJAXBTest {
 
             Assert.assertEquals("NeutronVPNIKEPolicy JAXB Test 10.1: Testing lifetime units value failed",
                   "seconds", testObject.getLifetime().getUnits());
-            
+
             Assert.assertEquals("NeutronVPNIKEPolicy JAXB Test 10.2: Testing lifetime values failed",
                     new Integer(3600), testObject.getLifetime().getValue());
         } catch (Exception e) {
