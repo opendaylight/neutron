@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_f5b74bf3",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-25T22:29:19Z",
+      "side": 1,
+      "message": "unnecessary white space.",
+      "range": {
+        "startLine": 20,
+        "startChar": 67,
+        "endLine": 20,
+        "endChar": 68
+      },
+      "revId": "c22b22d0d15c23c4594b7327bea61b35f455b52a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_35cd4386",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronLoadBalancerTests.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-25T22:29:19Z",
+      "side": 1,
+      "message": "unrelated modifications.\nIf necessary, please split this chainge into another patch.",
+      "range": {
+        "startLine": 61,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "c22b22d0d15c23c4594b7327bea61b35f455b52a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
