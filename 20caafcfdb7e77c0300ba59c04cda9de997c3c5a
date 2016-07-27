@@ -22,6 +22,30 @@
       "revId": "20caafcfdb7e77c0300ba59c04cda9de997c3c5a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_f69c6711",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnTests.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-07-27T21:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a561d44_8e46b94d",
+      "range": {
+        "startLine": 86,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 14
+      },
+      "revId": "20caafcfdb7e77c0300ba59c04cda9de997c3c5a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
