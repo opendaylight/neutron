@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_bd8763b4",
+        "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-28T22:38:07Z",
+      "side": 1,
+      "message": "Since odl is unix centric, please use unix style.i.e. \\n only.",
+      "range": {
+        "startLine": 39,
+        "startChar": 77,
+        "endLine": 39,
+        "endChar": 81
+      },
+      "revId": "f46991f716ff9e3467fbcd140c14ddef5024586b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
