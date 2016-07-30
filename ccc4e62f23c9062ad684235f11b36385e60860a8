@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a561d44_0056e329",
+        "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-30T00:24:38Z",
+      "side": 1,
+      "message": "how about port number?",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 11,
+        "endChar": 41
+      },
+      "revId": "ccc4e62f23c9062ad684235f11b36385e60860a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a561d44_a05c574c",
+        "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-07-30T00:24:38Z",
+      "side": 1,
+      "message": "it\u0027s better to provide default value in \"variables\"",
+      "range": {
+        "startLine": 11,
+        "startChar": 21,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "ccc4e62f23c9062ad684235f11b36385e60860a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
