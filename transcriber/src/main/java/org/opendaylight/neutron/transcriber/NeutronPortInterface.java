@@ -17,8 +17,6 @@ import java.util.Set;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
-import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronPort_AllowedAddressPairs;
 import org.opendaylight.neutron.spi.NeutronPort_ExtraDHCPOption;
@@ -157,10 +155,10 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         result.setNetworkUUID(String.valueOf(port.getNetworkId().getValue()));
         if (port.getSecurityGroups() != null) {
             final Set<NeutronSecurityGroup> allGroups = new HashSet<NeutronSecurityGroup>();
-            final NeutronCRUDInterfaces interfaces = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
-            final INeutronSecurityGroupCRUD sgIf = interfaces.getSecurityGroupInterface();
             for (final Uuid sgUuid : port.getSecurityGroups()) {
-                allGroups.add(sgIf.get(sgUuid.getValue()));
+                final NeutronSecurityGroup sg = new NeutronSecurityGroup();
+                sg.setID(sgUuid.getValue());
+                allGroups.add(sg);
             }
             final List<NeutronSecurityGroup> groups = new ArrayList<NeutronSecurityGroup>();
             groups.addAll(allGroups);
