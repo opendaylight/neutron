@@ -19,7 +19,7 @@
 
   <properties>
     <aaa.version>0.4.0-SNAPSHOT</aaa.version>
-    <ietf-yang-types.version>2013.07.15.7-SNAPSHOT</ietf-yang-types.version>
+    <ietf-yang-types.version>2013.07.15.9-SNAPSHOT</ietf-yang-types.version>
     <ietf-inet-types.version>1.2.0-SNAPSHOT</ietf-inet-types.version>
     <salGeneratorPath>src/main/yang-gen-sal</salGeneratorPath>
     <mdsal.model.version>0.10.0-SNAPSHOT</mdsal.model.version>
