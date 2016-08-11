@@ -8,8 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
 import java.util.List;
-
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
@@ -22,15 +22,13 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV6;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.ProtocolMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.ImmutableBiMap;
 
 
 public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {

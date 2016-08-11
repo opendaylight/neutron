@@ -9,6 +9,8 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.base.Preconditions;
+import java.util.ArrayList;
+import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.INeutronCRUD;
@@ -26,6 +28,7 @@ import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
+import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
 import org.opendaylight.neutron.spi.INeutronSFCPortChainCRUD;
@@ -38,14 +41,10 @@ import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
-import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class NeutronTranscriberProvider
     implements AutoCloseable, NeutronTranscriber {

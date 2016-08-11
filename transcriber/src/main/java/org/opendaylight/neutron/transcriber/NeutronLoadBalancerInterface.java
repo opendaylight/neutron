@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
-
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;

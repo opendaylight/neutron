@@ -9,10 +9,8 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;

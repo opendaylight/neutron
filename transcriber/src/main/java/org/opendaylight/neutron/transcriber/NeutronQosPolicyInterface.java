@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronQosBandwidthRule;
@@ -24,8 +26,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.util.ArrayList;
-import java.util.List;
 
 public class NeutronQosPolicyInterface extends AbstractNeutronInterface <QosPolicy, QosPolicies, NeutronQosPolicy>
         implements INeutronQosPolicyCRUD {
