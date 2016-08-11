@@ -11,8 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
-
 public class NeutronVPNIPSECPolicyJAXBTest {
 
     private static final String NeutronVPNIPSECPolicy_SingleProvider_sourceJson = "{" +

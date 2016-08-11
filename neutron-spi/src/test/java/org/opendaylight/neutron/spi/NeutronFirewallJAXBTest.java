@@ -11,11 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.NeutronFirewall;
-import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
-import org.opendaylight.neutron.spi.NeutronFirewallRule;
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-
 public class NeutronFirewallJAXBTest {
 
     private static final String NeutronFirewall_sourceJson="{ \"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\", \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", \"name\": \"jaxb-test\", \"description\": \"Test of NeutronFirewall JAXB\", \"admin_state_up\": false, \"status\": \"DOWN\", \"shared\": true, \"firewall_policy_id\": \"83ca694a-eeff-48e5-b2d8-fe5198cf2e86\" }";

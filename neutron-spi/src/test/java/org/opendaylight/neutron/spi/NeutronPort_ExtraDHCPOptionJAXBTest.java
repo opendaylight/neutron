@@ -11,9 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-import org.opendaylight.neutron.spi.NeutronPort_ExtraDHCPOption;
-
 public class NeutronPort_ExtraDHCPOptionJAXBTest {
 
     private static final String NeutronPort_ExtraDHCPOption_sourceJson = "{" + "\"opt_value\": \"123.123.123.456\", "

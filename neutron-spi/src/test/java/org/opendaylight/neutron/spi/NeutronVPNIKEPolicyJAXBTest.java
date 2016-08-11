@@ -11,8 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
-
 public class NeutronVPNIKEPolicyJAXBTest {
     private static final String NeutronVPNIKEPolicy_sourceJson = "{" +
         "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\", " +

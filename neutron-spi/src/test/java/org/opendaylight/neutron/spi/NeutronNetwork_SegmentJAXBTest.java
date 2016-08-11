@@ -11,9 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-import org.opendaylight.neutron.spi.NeutronNetwork_Segment;
-
 public class NeutronNetwork_SegmentJAXBTest {
 
     private static final String NeutronNetwork_Segment_sourceJson = "{ "

@@ -9,13 +9,8 @@
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
-
-import org.codehaus.enunciate.jaxrs.ResponseCode;
-import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronFirewall;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -27,8 +22,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.List;
+import org.codehaus.enunciate.jaxrs.ResponseCode;
+import org.codehaus.enunciate.jaxrs.StatusCodes;
+import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.opendaylight.neutron.spi.NeutronFirewall;
 
 /**
  * Neutron Northbound REST APIs for Firewall.<br>

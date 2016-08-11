@@ -9,10 +9,9 @@
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
-
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Status Code 501 (Not Implemented Error)

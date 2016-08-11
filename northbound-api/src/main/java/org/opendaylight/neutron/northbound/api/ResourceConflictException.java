@@ -9,8 +9,8 @@
 package org.opendaylight.neutron.northbound.api;
 
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Status Code 409 (Conflict)

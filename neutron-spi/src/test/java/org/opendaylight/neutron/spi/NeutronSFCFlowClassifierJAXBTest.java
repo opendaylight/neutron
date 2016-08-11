@@ -7,11 +7,10 @@
  */
 package org.opendaylight.neutron.spi;
 
+import java.util.Map;
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBException;
-import java.util.Map;
 
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com) on 6/24/16.

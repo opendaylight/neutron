@@ -7,13 +7,10 @@
  */
 package org.opendaylight.neutron.northbound.api;
 
-import org.codehaus.enunciate.jaxrs.ResponseCode;
-import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.codehaus.enunciate.jaxrs.TypeHint;
-import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
-
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,10 +22,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import org.codehaus.enunciate.jaxrs.ResponseCode;
+import org.codehaus.enunciate.jaxrs.StatusCodes;
+import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
 
 /**
  * Neutron Northbound REST APIs for OpenStack SFC Flow Classifier.<br>
