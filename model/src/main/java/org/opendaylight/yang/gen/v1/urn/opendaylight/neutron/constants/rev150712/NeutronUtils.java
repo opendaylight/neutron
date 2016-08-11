@@ -10,16 +10,6 @@ package org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev15071
 
 import com.google.common.collect.ImmutableBiMap;
 
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.FwProtocolBase;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.FwProtocolIcmp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.FwProtocolTcp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.FwProtocolUdp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolIcmp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolIcmpV6;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolTcp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolUdp;
-
 
 public final class NeutronUtils {
     private NeutronUtils() {

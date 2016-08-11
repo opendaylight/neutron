@@ -8,8 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.util.List;
-
 /**
  * This interface defines the methods for CRUD of NB OpenStack Security Rule objects
  */

@@ -8,8 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.util.List;
-
 public interface INeutronVPNIKEPolicyCRUD
     extends INeutronCRUD<NeutronVPNIKEPolicy> {
     // Nothing Here.
