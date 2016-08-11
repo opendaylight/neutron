@@ -8,9 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
-import org.opendaylight.neutron.spi.INeutronObject;
-
 import java.util.List;
+import org.opendaylight.neutron.spi.INeutronObject;
 
 public interface INeutronRequest<T extends INeutronObject> {
     T getSingleton();

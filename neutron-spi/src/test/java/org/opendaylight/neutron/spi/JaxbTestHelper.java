@@ -9,16 +9,12 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.StringReader;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-
 import javax.xml.transform.stream.StreamSource;
-
 import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 

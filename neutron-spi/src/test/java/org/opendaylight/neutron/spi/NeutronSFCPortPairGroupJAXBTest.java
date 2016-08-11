@@ -7,10 +7,9 @@
  */
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBException;
 
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com)

@@ -8,13 +8,12 @@
 
 package org.opendaylight.neutron.northbound.api;
 
-import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
-
-import javax.ws.rs.core.Application;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import javax.ws.rs.core.Application;
+import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 
 
 /**

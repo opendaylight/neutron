@@ -11,9 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-import org.opendaylight.neutron.spi.NeutronFloatingIP;
-
 public class NeutronFloatingIPJAXBTest {
 
     private static final String NeutronFloatingIP_sourceJson="{" +

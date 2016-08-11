@@ -7,9 +7,9 @@
  */
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
-import javax.xml.bind.JAXBException;
 
 public class NeutronNetworkQosJAXBTest {
     private static final String NeutronNetworkQosEnabled_sourceJson="{ " +

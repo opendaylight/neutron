@@ -10,8 +10,6 @@ package org.opendaylight.neutron.spi;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-import org.opendaylight.neutron.spi.NeutronPort_AllowedAddressPairs;
 
 public class NeutronPort_AllowedAddressPairsJAXBTest {
 

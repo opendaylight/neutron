@@ -8,10 +8,9 @@
 
 package org.opendaylight.neutron.northbound.api;
 
-import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
-
-import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
+import javax.xml.bind.annotation.XmlElement;
+import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
 public class NeutronLoadBalancerPoolMemberRequest
     implements INeutronRequest<NeutronLoadBalancerPoolMember> {

@@ -11,8 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.NeutronVPNService;
-
 public class NeutronVPNServiceJAXBTest {
 
     private static final String NeutronVPNService_sourceJson = "{" +
