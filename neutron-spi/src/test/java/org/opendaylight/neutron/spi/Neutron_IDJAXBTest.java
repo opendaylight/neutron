@@ -11,9 +11,6 @@ package org.opendaylight.neutron.spi;
 import org.junit.Assert;
 import org.junit.Test;
 
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-import org.opendaylight.neutron.spi.Neutron_ID;
-
 public class Neutron_IDJAXBTest {
 
     private static final String Neutron_ID_sourceJson = "{ " +

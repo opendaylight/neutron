@@ -8,11 +8,11 @@
 
 package org.opendaylight.neutron.spi;
 
-import org.junit.Assert;
-import org.junit.Test;
-import javax.xml.bind.JAXBException;
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.JAXBException;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class NeutronPortQosJAXBTest {
 

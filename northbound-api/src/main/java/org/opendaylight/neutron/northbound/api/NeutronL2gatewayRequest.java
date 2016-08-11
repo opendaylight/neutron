@@ -9,9 +9,7 @@
 package org.opendaylight.neutron.northbound.api;
 
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
-
 import org.opendaylight.neutron.spi.NeutronL2gateway;
 
 public class NeutronL2gatewayRequest implements INeutronRequest<NeutronL2gateway> {

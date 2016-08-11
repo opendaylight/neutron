@@ -8,10 +8,8 @@
 
 package org.opendaylight.neutron.spi;
 
-import org.junit.Test;
 import org.junit.Assert;
-
-import org.opendaylight.neutron.spi.NeutronLoadBalancer;
+import org.junit.Test;
 
 public class NeutronLoadBalancerJAXBTest {
 

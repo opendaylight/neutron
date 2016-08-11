@@ -10,9 +10,9 @@ package org.opendaylight.neutron.spi;
 
 import java.math.BigInteger;
 import java.util.List;
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
-import javax.xml.bind.JAXBException;
 
 public class NeutronQosJAXBTest {
 

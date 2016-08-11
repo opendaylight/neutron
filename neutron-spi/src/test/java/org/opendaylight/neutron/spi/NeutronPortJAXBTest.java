@@ -10,12 +10,8 @@ package org.opendaylight.neutron.spi;
 
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
-
-import org.opendaylight.neutron.spi.JaxbTestHelper;
-import org.opendaylight.neutron.spi.NeutronPort;
 
 public class NeutronPortJAXBTest {
 
