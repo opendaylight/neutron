@@ -8,8 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.util.List;
-
 public interface INeutronVPNIPSECSiteConnectionsCRUD
     extends INeutronCRUD<NeutronVPNIPSECSiteConnection> {
     // Nothing Here.

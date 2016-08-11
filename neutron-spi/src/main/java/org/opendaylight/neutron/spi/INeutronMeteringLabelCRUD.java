@@ -8,8 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.util.List;
-
 public interface INeutronMeteringLabelCRUD
     extends INeutronCRUD<NeutronMeteringLabel> {
     // Nothing Here.
