@@ -10,14 +10,11 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
+import org.opendaylight.neutron.spi.NeutronL2gateway;
 import org.opendaylight.neutron.spi.NeutronL2gatewayDevice;
 import org.opendaylight.neutron.spi.NeutronL2gatewayDeviceInterface;
-import org.opendaylight.neutron.spi.NeutronL2gateway;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.attributes.Devices;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.attributes.DevicesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.attributes.devices.Interfaces;
@@ -27,6 +24,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NeutronL2gatewayInterface extends
     AbstractNeutronInterface<L2gateway, L2gateways, NeutronL2gateway>

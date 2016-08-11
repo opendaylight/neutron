@@ -8,6 +8,9 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
@@ -30,10 +33,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com) on 6/24/16.
