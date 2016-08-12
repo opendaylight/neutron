@@ -81,10 +81,7 @@ public class NeutronSFCPortPairGroup extends NeutronObject implements Serializab
 
     @Override
     public String toString() {
-        return "NeutronSFCPortPairGroup[" +
-                "tenantID='" + tenantID + '\'' +
-                ", name='" + name + '\'' +
-                ", portPairs=" + portPairs +
-                ']';
+        return "NeutronSFCPortPairGroup[" + "tenantID='" + tenantID + '\'' + ", name='" + name + '\'' + ", portPairs="
+                + portPairs + ']';
     }
 }

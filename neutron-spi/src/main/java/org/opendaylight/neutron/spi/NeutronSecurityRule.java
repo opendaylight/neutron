@@ -170,18 +170,13 @@ public class NeutronSecurityRule extends NeutronObject implements Serializable, 
 
     @Override
     public String toString() {
-        return "NeutronSecurityRule{" +
-            "securityRuleUUID='" + uuid + '\'' +
-            ", securityRuleDirection='" + securityRuleDirection + '\'' +
-            ", securityRuleProtocol='" + securityRuleProtocol + '\'' +
-            ", securityRulePortMin=" + securityRulePortMin +
-            ", securityRulePortMax=" + securityRulePortMax +
-            ", securityRuleEthertype='" + securityRuleEthertype + '\'' +
-            ", securityRuleRemoteIpPrefix='" + securityRuleRemoteIpPrefix + '\'' +
-            ", securityRemoteGroupID=" + securityRemoteGroupID +
-            ", securityRuleGroupID='" + securityRuleGroupID + '\'' +
-            ", securityRuleTenantID='" + tenantID + '\'' +
-            '}';
+        return "NeutronSecurityRule{" + "securityRuleUUID='" + uuid + '\'' + ", securityRuleDirection='"
+                + securityRuleDirection + '\'' + ", securityRuleProtocol='" + securityRuleProtocol + '\''
+                + ", securityRulePortMin=" + securityRulePortMin + ", securityRulePortMax=" + securityRulePortMax
+                + ", securityRuleEthertype='" + securityRuleEthertype + '\'' + ", securityRuleRemoteIpPrefix='"
+                + securityRuleRemoteIpPrefix + '\'' + ", securityRemoteGroupID=" + securityRemoteGroupID
+                + ", securityRuleGroupID='" + securityRuleGroupID + '\'' + ", securityRuleTenantID='" + tenantID + '\''
+                + '}';
     }
 
     @Override

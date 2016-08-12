@@ -37,19 +37,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronLoadBalancer extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String loadBalancerName;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String loadBalancerStatus;
 
-    @XmlElement (name = "admin_state_up")
+    @XmlElement(name = "admin_state_up")
     Boolean loadBalancerAdminStateUp;
 
-    @XmlElement (name = "vip_address")
+    @XmlElement(name = "vip_address")
     String loadBalancerVipAddress;
 
-    @XmlElement (name = "vip_subnet_id")
+    @XmlElement(name = "vip_subnet_id")
     String loadBalancerVipSubnetID;
 
     public String getLoadBalancerName() {
@@ -122,15 +122,11 @@ public class NeutronLoadBalancer extends NeutronObject implements Serializable, 
         return ans;
     }
 
-    @Override public String toString() {
-        return "NeutronLoadBalancer{" +
-                "loadBalancerID='" + uuid + '\'' +
-                ", loadBalancerTenantID='" + tenantID + '\'' +
-                ", loadBalancerName='" + loadBalancerName + '\'' +
-                ", loadBalancerStatus='" + loadBalancerStatus + '\'' +
-                ", loadBalancerAdminStateUp='" + loadBalancerAdminStateUp + '\'' +
-                ", loadBalancerVipAddress='" + loadBalancerVipAddress + '\'' +
-                ", loadBalancerVipSubnetID='" + loadBalancerVipSubnetID + '\'' +
-                '}';
+    @Override
+    public String toString() {
+        return "NeutronLoadBalancer{" + "loadBalancerID='" + uuid + '\'' + ", loadBalancerTenantID='" + tenantID + '\''
+                + ", loadBalancerName='" + loadBalancerName + '\'' + ", loadBalancerStatus='" + loadBalancerStatus
+                + '\'' + ", loadBalancerAdminStateUp='" + loadBalancerAdminStateUp + '\'' + ", loadBalancerVipAddress='"
+                + loadBalancerVipAddress + '\'' + ", loadBalancerVipSubnetID='" + loadBalancerVipSubnetID + '\'' + '}';
     }
 }

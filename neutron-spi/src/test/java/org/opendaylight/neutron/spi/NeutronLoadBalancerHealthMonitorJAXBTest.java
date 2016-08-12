@@ -18,8 +18,8 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
     private static final String NeutronLoadBalancerHealthMonitor_sourceJson = "{"
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", " + "\"type\": \"HTTP\", " + "\"delay\": 1, "
             + "\"timeout\": 1, " + "\"admin_state_up\": \"false\", " + "\"max_retries\": 5, "
-            + "\"http_method\": \"get\", " + "\"url_path\": \"/index.html\", "
-            + "\"expected_codes\": \"200,201,202\", " + "\"tenant_id\": \"00045a7b-796b-4f26-9cf9-9e82d248fda7\" }";
+            + "\"http_method\": \"get\", " + "\"url_path\": \"/index.html\", " + "\"expected_codes\": \"200,201,202\", "
+            + "\"tenant_id\": \"00045a7b-796b-4f26-9cf9-9e82d248fda7\" }";
 
     @Test
     public void test_NeutronLoadBalancerHealthMonitor_JAXB() {
@@ -48,8 +48,8 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
             Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 7: Testing  http_methods failed", "get",
                     testObject.getLoadBalancerHealthMonitorHttpMethod());
 
-            Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 8: Testing  url_path failed",
-                    "/index.html", testObject.getLoadBalancerHealthMonitorUrlPath());
+            Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 8: Testing  url_path failed", "/index.html",
+                    testObject.getLoadBalancerHealthMonitorUrlPath());
 
             Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 9: Testing  expected_codes failed",
                     "200,201,202", testObject.getLoadBalancerHealthMonitorExpectedCodes());
@@ -63,8 +63,8 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
             loadBalancerHealthMonitorPool.add(neutron_id);
             testObject.setLoadBalancerHealthMonitorPools(loadBalancerHealthMonitorPool);
             Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 11: Testing Pools failed",
-                    "2f245a7b-0000-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerHealthMonitorPools().get(0)
-                            .getID());
+                    "2f245a7b-0000-4f26-9cf9-9e82d248fda7",
+                    testObject.getLoadBalancerHealthMonitorPools().get(0).getID());
         } catch (Exception e) {
             Assert.assertFalse("Tests Failed", true);
         }

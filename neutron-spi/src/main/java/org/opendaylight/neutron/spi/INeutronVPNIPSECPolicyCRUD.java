@@ -8,8 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
-public interface INeutronVPNIPSECPolicyCRUD
-    extends INeutronCRUD<NeutronVPNIPSECPolicy> {
+public interface INeutronVPNIPSECPolicyCRUD extends INeutronCRUD<NeutronVPNIPSECPolicy> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

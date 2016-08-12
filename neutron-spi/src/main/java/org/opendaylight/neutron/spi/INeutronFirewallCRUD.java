@@ -12,8 +12,7 @@ package org.opendaylight.neutron.spi;
  * This interface defines the methods for CRUD of NB OpenStack Firewall objects
  */
 
-public interface INeutronFirewallCRUD
-    extends INeutronCRUD<NeutronFirewall> {
+public interface INeutronFirewallCRUD extends INeutronCRUD<NeutronFirewall> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

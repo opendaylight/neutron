@@ -7,6 +7,7 @@
  */
 
 package org.opendaylight.neutron.spi;
+
 /**
  * This interface defines the methods for CRUD of NB OpenStack L2gateway
  * Connection objects.

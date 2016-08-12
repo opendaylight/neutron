@@ -40,19 +40,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronLoadBalancerPool extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String loadBalancerPoolName;
 
-    @XmlElement (name = "protocol")
+    @XmlElement(name = "protocol")
     String loadBalancerPoolProtocol;
 
-    @XmlElement (name = "lb_algorithm")
+    @XmlElement(name = "lb_algorithm")
     String loadBalancerPoolLbAlgorithm;
 
-    @XmlElement (name = "healthmonitor_id")
+    @XmlElement(name = "healthmonitor_id")
     String neutronLoadBalancerPoolHealthMonitorID;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerPoolAdminStateIsUp;
 
     @XmlElement(name = "listeners")
@@ -65,7 +65,7 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
     List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers;
 
     public NeutronLoadBalancerPool() {
-        loadBalancerPoolMembers = new ArrayList<NeutronLoadBalancerPoolMember>();
+        loadBalancerPoolMembers = new ArrayList<>();
     }
 
     public String getLoadBalancerPoolName() {
@@ -112,7 +112,8 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
         return loadBalancerPoolSessionPersistence;
     }
 
-    public void setLoadBalancerSessionPersistence(NeutronLoadBalancer_SessionPersistence loadBalancerPoolSessionPersistence) {
+    public void setLoadBalancerSessionPersistence(
+            NeutronLoadBalancer_SessionPersistence loadBalancerPoolSessionPersistence) {
         this.loadBalancerPoolSessionPersistence = loadBalancerPoolSessionPersistence;
     }
 
@@ -128,9 +129,9 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
         /*
          * Update the pool_id of the member to that this.id
          */
-        List<NeutronLoadBalancerPoolMember> answer = new ArrayList<NeutronLoadBalancerPoolMember>();
+        List<NeutronLoadBalancerPoolMember> answer = new ArrayList<>();
         if (loadBalancerPoolMembers != null) {
-            for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers) {
+            for (NeutronLoadBalancerPoolMember member : loadBalancerPoolMembers) {
                 member.setPoolID(uuid);
                 answer.add(member);
             }
@@ -139,7 +140,7 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
     }
 
     public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String uuid) {
-        for (NeutronLoadBalancerPoolMember member: loadBalancerPoolMembers) {
+        for (NeutronLoadBalancerPoolMember member : loadBalancerPoolMembers) {
             if (uuid.equals(member.getID())) {
                 return member;
             }
@@ -161,7 +162,7 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
 
     public NeutronLoadBalancerPool extractFields(List<String> fields) {
         NeutronLoadBalancerPool ans = new NeutronLoadBalancerPool();
-        for (String s: fields) {
+        for (String s : fields) {
             if (s.equals("id")) {
                 ans.setID(this.getID());
             }
@@ -171,7 +172,7 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
             if (s.equals("name")) {
                 ans.setLoadBalancerPoolName(this.getLoadBalancerPoolName());
             }
-            if(s.equals("protocol")) {
+            if (s.equals("protocol")) {
                 ans.setLoadBalancerPoolProtocol(this.getLoadBalancerPoolProtocol());
             }
             if (s.equals("lb_algorithm")) {
@@ -192,16 +193,11 @@ public class NeutronLoadBalancerPool extends NeutronObject implements Serializab
 
     @Override
     public String toString() {
-        return "NeutronLoadBalancerPool{" +
-            "id='" + uuid + '\'' +
-            ", tenantID='" + tenantID + '\'' +
-            ", name='" + loadBalancerPoolName + '\'' +
-            ", protocol=" + loadBalancerPoolProtocol +'\''+
-            ", lbAlgorithm='" + loadBalancerPoolLbAlgorithm + '\'' +
-            ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID +
-            ", adminStateUp=" + loadBalancerPoolAdminStateIsUp +
-// todo: add loadBalancerPoolMembers as joined string
-            '}';
+        return "NeutronLoadBalancerPool{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
+                + loadBalancerPoolName + '\'' + ", protocol=" + loadBalancerPoolProtocol + '\'' + ", lbAlgorithm='"
+                + loadBalancerPoolLbAlgorithm + '\'' + ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID
+                + ", adminStateUp=" + loadBalancerPoolAdminStateIsUp + '}';
+     // todo: add loadBalancerPoolMembers as joined string
     }
 
 }

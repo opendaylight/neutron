@@ -24,43 +24,43 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
 
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String bgpvpnName;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String status;
 
-    @XmlElement (defaultValue = "l3", name = "type")
+    @XmlElement(defaultValue = "l3", name = "type")
     String type;
 
-    @XmlElement (name = "technique")
+    @XmlElement(name = "technique")
     String technique;
 
-    @XmlElement (name = "route_targets")
+    @XmlElement(name = "route_targets")
     List<String> routeTargets;
 
-    @XmlElement (name = "import_targets")
+    @XmlElement(name = "import_targets")
     List<String> importTargets;
 
-    @XmlElement (name = "export_targets")
+    @XmlElement(name = "export_targets")
     List<String> exportTargets;
 
-    @XmlElement (name = "route_distinguishers")
+    @XmlElement(name = "route_distinguishers")
     List<String> routeDistinguishers;
 
-    @XmlElement (name="vnid")
+    @XmlElement(name = "vnid")
     Long vnid;
 
-    @XmlElement (defaultValue="false", name="auto_aggregate")
+    @XmlElement(defaultValue = "false", name = "auto_aggregate")
     Boolean autoAggregate;
 
-    @XmlElement (name = "networks")
+    @XmlElement(name = "networks")
     List<String> networks;
 
-    @XmlElement (name = "routers")
+    @XmlElement(name = "routers")
     List<String> routers;
 
     /* This attribute lists the ports associated with an instance
@@ -97,7 +97,9 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
         return adminStateUp;
     }
 
-    public Boolean getAdminStateUp() { return adminStateUp; }
+    public Boolean getAdminStateUp() {
+        return adminStateUp;
+    }
 
     public void setAdminStateUp(boolean newValue) {
         adminStateUp = newValue;
@@ -136,7 +138,7 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
     }
 
     public void setRouteTargets(List<String> routeTargets) {
-        this.routeTargets= routeTargets;
+        this.routeTargets = routeTargets;
     }
 
     public void addRouteTarget(String uuid) {
@@ -203,7 +205,9 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
         vnid = input;
     }
 
-    public Boolean getAutoAggregate() { return autoAggregate; }
+    public Boolean getAutoAggregate() {
+        return autoAggregate;
+    }
 
     public void setAutoAggregate(boolean newValue) {
         autoAggregate = newValue;
@@ -307,13 +311,10 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
 
     @Override
     public String toString() {
-        return "NeutronBgpvpn [bgpvpnUUID=" + uuid + ", bgpvpnName=" + bgpvpnName + ", adminStateUp="
-                + adminStateUp + ", status=" + status + ", tenantID=" + tenantID + ", type=" + type
-                + ", technique=" + technique + ", routeTargets="
-                + routeTargets + ", importTargets=" + importTargets + ", exportTargets=" + exportTargets
-                + ", routeDistinguishers=" + routeDistinguishers + ", vnid = " + vnid
-                + ", autoAggregate = " + autoAggregate + ", networks = " + networks
-                + ", routers = " + routers + "]";
+        return "NeutronBgpvpn [bgpvpnUUID=" + uuid + ", bgpvpnName=" + bgpvpnName + ", adminStateUp=" + adminStateUp
+                + ", status=" + status + ", tenantID=" + tenantID + ", type=" + type + ", technique=" + technique
+                + ", routeTargets=" + routeTargets + ", importTargets=" + importTargets + ", exportTargets="
+                + exportTargets + ", routeDistinguishers=" + routeDistinguishers + ", vnid = " + vnid
+                + ", autoAggregate = " + autoAggregate + ", networks = " + networks + ", routers = " + routers + "]";
     }
 }
-

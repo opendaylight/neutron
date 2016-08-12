@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +19,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronPort extends NeutronObject implements Serializable, INeutronObject {
@@ -29,61 +27,61 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "network_id")
+    @XmlElement(name = "network_id")
     String networkUUID;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String name;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String status;
 
-    @XmlElement (name = "mac_address")
+    @XmlElement(name = "mac_address")
     String macAddress;
 
-    @XmlElement (name = "fixed_ips")
+    @XmlElement(name = "fixed_ips")
     List<Neutron_IPs> fixedIPs;
 
-    @XmlElement (name = "device_id")
+    @XmlElement(name = "device_id")
     String deviceID;
 
-    @XmlElement (name = "device_owner")
+    @XmlElement(name = "device_owner")
     String deviceOwner;
 
-    @XmlElement (name = "security_groups")
+    @XmlElement(name = "security_groups")
     List<NeutronSecurityGroup> securityGroups;
 
-    @XmlElement (name = "allowed_address_pairs")
+    @XmlElement(name = "allowed_address_pairs")
     List<NeutronPort_AllowedAddressPairs> allowedAddressPairs;
 
     //@XmlElement (name = "binding:host_id")
-    @XmlElement (namespace = "binding", name = "host_id")
+    @XmlElement(namespace = "binding", name = "host_id")
     String bindinghostID;
 
     //@XmlElement (name = "binding:vnic_type")
-    @XmlElement (namespace = "binding", name = "vnic_type")
+    @XmlElement(namespace = "binding", name = "vnic_type")
     String bindingvnicType;
 
     //@XmlElement (name = "binding:vif_type")
-    @XmlElement (namespace = "binding", name = "vif_type")
+    @XmlElement(namespace = "binding", name = "vif_type")
     String bindingvifType;
 
     //@XmlElement (name = "binding:vif_details")
-    @XmlElement (namespace = "binding", name = "vif_details")
+    @XmlElement(namespace = "binding", name = "vif_details")
     @XmlJavaTypeAdapter(NeutronResourceMapPropertyAdapter.class)
     Map<String, String> vifDetails;
 
-    @XmlElement (name = "extra_dhcp_opts")
+    @XmlElement(name = "extra_dhcp_opts")
     List<NeutronPort_ExtraDHCPOption> extraDHCPOptions;
 
     //Port security is enabled by default for backward compatibility.
-    @XmlElement (defaultValue = "true", name = "port_security_enabled")
+    @XmlElement(defaultValue = "true", name = "port_security_enabled")
     Boolean portSecurityEnabled;
 
-    @XmlElement (name = "qos_policy_id")
+    @XmlElement(name = "qos_policy_id")
     String qosPolicyId;
 
     public NeutronPort() {
@@ -112,7 +110,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
         return adminStateUp;
     }
 
-    public Boolean getAdminStateUp() { return adminStateUp; }
+    public Boolean getAdminStateUp() {
+        return adminStateUp;
+    }
 
     public void setAdminStateUp(Boolean newValue) {
         adminStateUp = newValue;
@@ -220,6 +220,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
         }
         return portSecurityEnabled;
     }
+
     public String getQosPolicyId() {
         return qosPolicyId;
     }
@@ -227,7 +228,6 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     public void setQosPolicyId(String qosPolicyId) {
         this.qosPolicyId = qosPolicyId;
     }
-
 
     public void setPortSecurityEnabled(Boolean newValue) {
         portSecurityEnabled = newValue;
@@ -245,7 +245,7 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
 
     public NeutronPort extractFields(List<String> fields) {
         NeutronPort ans = new NeutronPort();
-        for (String field: fields) {
+        for (String field : fields) {
             if ("id".equals(field)) {
                 ans.setID(this.getID());
             }
@@ -280,7 +280,8 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
                 ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
             }
             if ("allowed_address_pairs".equals(field)) {
-                ans.setAllowedAddressPairs(new ArrayList<NeutronPort_AllowedAddressPairs>(this.getAllowedAddressPairs()));
+                ans.setAllowedAddressPairs(
+                        new ArrayList<NeutronPort_AllowedAddressPairs>(this.getAllowedAddressPairs()));
             }
             if ("binding:host_id".equals(field)) {
                 ans.setBindinghostID(this.getBindinghostID());
@@ -321,16 +322,12 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
 
     @Override
     public String toString() {
-        return "NeutronPort [portUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name
-                + ", adminStateUp=" + adminStateUp + ", status=" + status + ", macAddress=" + macAddress
-                + ", fixedIPs=" + fixedIPs + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID="
-                + tenantID + ", securityGroups=" + securityGroups
-                + ", allowedAddressPairs" + allowedAddressPairs
-                + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType
-                + ", bindingvifType=" + bindingvifType
-                + ", vifDetails=" + vifDetails
-                + ", extraDHCPOptions=" + extraDHCPOptions
-                + ", portSecurityEnabled=" + portSecurityEnabled
-                + ", qosPolicyId=" + qosPolicyId +"]";
+        return "NeutronPort [portUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", adminStateUp="
+                + adminStateUp + ", status=" + status + ", macAddress=" + macAddress + ", fixedIPs=" + fixedIPs
+                + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
+                + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
+                + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
+                + bindingvifType + ", vifDetails=" + vifDetails + ", extraDHCPOptions=" + extraDHCPOptions
+                + ", portSecurityEnabled=" + portSecurityEnabled + ", qosPolicyId=" + qosPolicyId + "]";
     }
 }

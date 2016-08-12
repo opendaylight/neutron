@@ -38,7 +38,7 @@ public class JaxbTestHelper {
 
         Unmarshaller unmarshaller = jc.createUnmarshaller();
         unmarshaller.setProperty(UnmarshallerProperties.JSON_NAMESPACE_PREFIX_MAPPER, namespacePrefixMapper);
-        
+
         StringReader reader = new StringReader(json);
         StreamSource stream = new StreamSource(reader);
         return unmarshaller.unmarshal(stream, c).getValue();

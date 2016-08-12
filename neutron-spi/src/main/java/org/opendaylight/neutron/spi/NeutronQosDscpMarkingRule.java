@@ -52,10 +52,7 @@ public class NeutronQosDscpMarkingRule extends NeutronObject implements Serializ
 
     @Override
     public String toString() {
-        return "qosDscpRules{" +
-            "qosDscpRuleUUID='" + uuid + '\'' +
-            ", qosDscpRuleTenantID='" + tenantID + '\'' +
-            ", qosDscpRuleDscpMark='" + dscpMark + '\'' +
-            '}';
+        return "qosDscpRules{" + "qosDscpRuleUUID='" + uuid + '\'' + ", qosDscpRuleTenantID='" + tenantID + '\''
+                + ", qosDscpRuleDscpMark='" + dscpMark + '\'' + '}';
     }
 }

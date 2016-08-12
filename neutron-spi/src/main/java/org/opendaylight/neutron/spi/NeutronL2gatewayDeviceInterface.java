@@ -40,7 +40,7 @@ public class NeutronL2gatewayDeviceInterface implements Serializable {
 
     @Override
     public String toString() {
-        return "NeutronL2gatewayDeviceInterface [interfaceNames=" + interfaceName
-                + ", segmentationId=" + segmentationId + "]";
+        return "NeutronL2gatewayDeviceInterface [interfaceNames=" + interfaceName + ", segmentationId=" + segmentationId
+                + "]";
     }
 }

@@ -111,15 +111,10 @@ public class NeutronSFCPortPair extends NeutronObject implements Serializable, I
         return ans;
     }
 
-
     @Override
     public String toString() {
-        return "NeutronSFCPortPair[" +
-                "tenantID='" + tenantID + '\'' +
-                ", name='" + name + '\'' +
-                ", ingressPortUUID='" + ingressPortUUID + '\'' +
-                ", egressPortUUID='" + egressPortUUID + '\'' +
-                ", serviceFunctionParameters=" + serviceFunctionParameters +
-                ']';
+        return "NeutronSFCPortPair[" + "tenantID='" + tenantID + '\'' + ", name='" + name + '\'' + ", ingressPortUUID='"
+                + ingressPortUUID + '\'' + ", egressPortUUID='" + egressPortUUID + '\'' + ", serviceFunctionParameters="
+                + serviceFunctionParameters + ']';
     }
 }

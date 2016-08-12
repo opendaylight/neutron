@@ -95,14 +95,9 @@ public class NeutronL2gatewayConnection extends NeutronObject implements Seriali
 
     @Override
     public String toString() {
-        return "NeutronL2GatewayConnection [" +
-                "tenant_id = " + tenantID +
-                ", connection_id = " + uuid +
-                ", gateway_id = " + l2gatewayID +
-                ", network_id = " + networkID +
-                ", segmentation_id = " + segmentID +
-                ", port_id = " + portID +
-                "]";
+        return "NeutronL2GatewayConnection [" + "tenant_id = " + tenantID + ", connection_id = " + uuid
+                + ", gateway_id = " + l2gatewayID + ", network_id = " + networkID + ", segmentation_id = " + segmentID
+                + ", port_id = " + portID + "]";
     }
 
 }

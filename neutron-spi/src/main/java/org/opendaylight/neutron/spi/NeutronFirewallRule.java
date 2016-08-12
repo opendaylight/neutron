@@ -260,22 +260,15 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
 
     @Override
     public String toString() {
-        return "firewallPolicyRules{" +
-            "firewallRuleUUID='" + uuid + '\'' +
-            ", firewallRuleTenantID='" + tenantID + '\'' +
-            ", firewallRuleName='" + firewallRuleName + '\'' +
-            ", firewallRuleIsShared=" + firewallRuleIsShared +
-            ", firewallRulePolicyID=" + firewallRulePolicyID +
-            ", firewallRuleProtocol='" + firewallRuleProtocol + '\'' +
-            ", firewallRuleIpVer=" + firewallRuleIpVer +
-            ", firewallRuleSrcIpAddr='" + firewallRuleSrcIpAddr + '\'' +
-            ", firewallRuleDstIpAddr='" + firewallRuleDstIpAddr + '\'' +
-            ", firewallRuleSrcPort=" + firewallRuleSrcPortRangeMin + ':' + firewallRuleSrcPortRangeMax +
-            ", firewallRuleDstPort=" + firewallRuleDstPortRangeMin + ':' + firewallRuleDstPortRangeMax +
-            ", firewallRulePosition=" + firewallRulePosition +
-            ", firewallRuleAction='" + firewallRuleAction + '\'' +
-            ", firewallRuleIsEnabled=" + firewallRuleIsEnabled +
-            '}';
+        return "firewallPolicyRules{" + "firewallRuleUUID='" + uuid + '\'' + ", firewallRuleTenantID='" + tenantID
+                + '\'' + ", firewallRuleName='" + firewallRuleName + '\'' + ", firewallRuleIsShared="
+                + firewallRuleIsShared + ", firewallRulePolicyID=" + firewallRulePolicyID + ", firewallRuleProtocol='"
+                + firewallRuleProtocol + '\'' + ", firewallRuleIpVer=" + firewallRuleIpVer + ", firewallRuleSrcIpAddr='"
+                + firewallRuleSrcIpAddr + '\'' + ", firewallRuleDstIpAddr='" + firewallRuleDstIpAddr + '\''
+                + ", firewallRuleSrcPort=" + firewallRuleSrcPortRangeMin + ':' + firewallRuleSrcPortRangeMax
+                + ", firewallRuleDstPort=" + firewallRuleDstPortRangeMin + ':' + firewallRuleDstPortRangeMax
+                + ", firewallRulePosition=" + firewallRulePosition + ", firewallRuleAction='" + firewallRuleAction
+                + '\'' + ", firewallRuleIsEnabled=" + firewallRuleIsEnabled + '}';
     }
 
     @Override

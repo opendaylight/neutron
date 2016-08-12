@@ -13,9 +13,8 @@ import org.junit.Test;
 
 public class Neutron_IDJAXBTest {
 
-    private static final String Neutron_ID_sourceJson = "{ " +
-
-    "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
+    private static final String Neutron_ID_sourceJson =
+            "{ \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
     public void test_Neutron_ID_JAXB() {

@@ -29,8 +29,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 
 public class NeutronSubnet extends NeutronObject implements Serializable, INeutronObject {
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(NeutronCRUDInterfaces.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private static final long serialVersionUID = 1L;
     private static final int IPV4_VERSION = 4;
@@ -43,37 +42,37 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "network_id")
+    @XmlElement(name = "network_id")
     String networkUUID;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String name;
 
-    @XmlElement (defaultValue = "4", name = "ip_version")
+    @XmlElement(defaultValue = "4", name = "ip_version")
     Integer ipVersion;
 
-    @XmlElement (name = "cidr")
+    @XmlElement(name = "cidr")
     String cidr;
 
-    @XmlElement (name = "gateway_ip")
+    @XmlElement(name = "gateway_ip")
     String gatewayIP;
 
-    @XmlElement (name = "dns_nameservers")
+    @XmlElement(name = "dns_nameservers")
     List<String> dnsNameservers;
 
-    @XmlElement (name = "allocation_pools")
+    @XmlElement(name = "allocation_pools")
     List<NeutronSubnetIPAllocationPool> allocationPools;
 
-    @XmlElement (name = "host_routes")
+    @XmlElement(name = "host_routes")
     List<NeutronRoute> hostRoutes;
 
-    @XmlElement (defaultValue = "true", name = "enable_dhcp")
+    @XmlElement(defaultValue = "true", name = "enable_dhcp")
     Boolean enableDHCP;
 
-    @XmlElement (name = "ipv6_address_mode", nillable = true)
+    @XmlElement(name = "ipv6_address_mode", nillable = true)
     String ipV6AddressMode;
 
-    @XmlElement (name = "ipv6_ra_mode", nillable = true)
+    @XmlElement(name = "ipv6_ra_mode", nillable = true)
     String ipV6RaMode;
 
     public String getNetworkUUID() {
@@ -147,19 +146,29 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
         return enableDHCP;
     }
 
-    public Boolean getEnableDHCP() { return enableDHCP; }
-
-    public void setEnableDHCP(Boolean newValue) {
-            enableDHCP = newValue;
+    public Boolean getEnableDHCP() {
+        return enableDHCP;
     }
 
-    public String getIpV6AddressMode() { return ipV6AddressMode; }
+    public void setEnableDHCP(Boolean newValue) {
+        enableDHCP = newValue;
+    }
 
-    public void setIpV6AddressMode(String ipV6AddressMode) { this.ipV6AddressMode = ipV6AddressMode; }
+    public String getIpV6AddressMode() {
+        return ipV6AddressMode;
+    }
 
-    public String getIpV6RaMode() { return ipV6RaMode; }
+    public void setIpV6AddressMode(String ipV6AddressMode) {
+        this.ipV6AddressMode = ipV6AddressMode;
+    }
 
-    public void setIpV6RaMode(String ipV6RaMode) { this.ipV6RaMode = ipV6RaMode; }
+    public String getIpV6RaMode() {
+        return ipV6RaMode;
+    }
+
+    public void setIpV6RaMode(String ipV6RaMode) {
+        this.ipV6RaMode = ipV6RaMode;
+    }
 
     /**
      * This method copies selected fields from the object and returns them
@@ -260,14 +269,15 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
                 byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
                 int i;
                 for (i = length; i < IPV6_LENGTH; i++) {
-                    if (((((int) addrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) != 0) {
-                        return(false);
+                    if (((((int) addrBytes[i / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
+                            & (1 << (IPV6_BYTE_OFFSET - (i % IPV6_LENGTH_BYTES)))) != 0) {
+                        return (false);
                     }
                 }
-                return(true);
+                return (true);
             } catch (UnknownHostException e) {
                 LOGGER.warn("Failure in isValidCIDR()", e);
-                return(false);
+                return (false);
             }
         }
         return false;
@@ -315,9 +325,8 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
                         gatewayIP = info.getLowAddress();
                     }
                     if (allocationPools.size() < 1) {
-                        NeutronSubnetIPAllocationPool source =
-                            new NeutronSubnetIPAllocationPool(info.getLowAddress(),
-                                    info.getHighAddress());
+                        NeutronSubnetIPAllocationPool source = new NeutronSubnetIPAllocationPool(info.getLowAddress(),
+                                info.getHighAddress());
                         allocationPools = source.splitPool(gatewayIP);
                     }
                 } catch (IllegalArgumentException e) {
@@ -335,14 +344,14 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
                     BigInteger lowAddress_bi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
                     String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
                     BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
-                    String highAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
+                    String highAddress = NeutronSubnetIPAllocationPool
+                            .bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
                     if (gatewayIP == null || ("").equals(gatewayIP)) {
                         gatewayIP = lowAddress;
                     }
                     if (allocationPools.size() < 1) {
-                        NeutronSubnetIPAllocationPool source =
-                            new NeutronSubnetIPAllocationPool(lowAddress,
-                                    highAddress);
+                        NeutronSubnetIPAllocationPool source = new NeutronSubnetIPAllocationPool(lowAddress,
+                                highAddress);
                         allocationPools = source.splitPoolV6(gatewayIP);
                     }
                 } catch (Exception e) {
@@ -373,18 +382,19 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
             try {
                 int length = Integer.parseInt(parts[1]);
                 byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
-                byte[] ipBytes =  ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
+                byte[] ipBytes = ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
                 int i;
                 for (i = 0; i < length; i++) {
-                    if (((((int) cidrBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES)))) !=
-                        ((((int) ipBytes[i/IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET-(i%IPV6_LENGTH_BYTES))))) {
-                        return(false);
+                    if (((((int) cidrBytes[i / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET
+                            - (i % IPV6_LENGTH_BYTES)))) != ((((int) ipBytes[i / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
+                                    & (1 << (IPV6_BYTE_OFFSET - (i % IPV6_LENGTH_BYTES))))) {
+                        return (false);
                     }
                 }
-                return(true);
+                return (true);
             } catch (UnknownHostException e) {
                 LOGGER.warn("Failure in isValidIP()", e);
-                return(false);
+                return (false);
             }
         }
         return false;
@@ -401,29 +411,26 @@ public class NeutronSubnet extends NeutronObject implements Serializable, INeutr
             NeutronSubnetIPAllocationPool pool = i.next();
             if (ans == null) {
                 ans = pool.getPoolStart();
+            } else {
+                if (ipVersion == IPV4_VERSION && NeutronSubnetIPAllocationPool
+                        .convert(pool.getPoolStart()) < NeutronSubnetIPAllocationPool.convert(ans)) {
+                    ans = pool.getPoolStart();
+                }
+                if (ipVersion == IPV6_VERSION && NeutronSubnetIPAllocationPool.convertV6(pool.getPoolStart())
+                        .compareTo(NeutronSubnetIPAllocationPool.convertV6(ans)) < 0) {
+                    ans = pool.getPoolStart();
+                }
             }
-            else {
-                if (ipVersion == IPV4_VERSION &&
-                    NeutronSubnetIPAllocationPool.convert(pool.getPoolStart()) <
-                            NeutronSubnetIPAllocationPool.convert(ans)) {
-                    ans = pool.getPoolStart();
-                }
-                if (ipVersion == IPV6_VERSION &&
-                    NeutronSubnetIPAllocationPool.convertV6(pool.getPoolStart()).compareTo(NeutronSubnetIPAllocationPool.convertV6(ans)) < 0) {
-                    ans = pool.getPoolStart();
-                }
-           }
         }
         return ans;
     }
 
     @Override
     public String toString() {
-        return "NeutronSubnet [subnetUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name
-                + ", ipVersion=" + ipVersion + ", cidr=" + cidr + ", gatewayIP=" + gatewayIP + ", dnsNameservers="
-                + dnsNameservers + ", allocationPools=" + allocationPools + ", hostRoutes=" + hostRoutes
-                + ", enableDHCP=" + enableDHCP + ", tenantID=" + tenantID
-                + ", ipv6AddressMode=" + ipV6AddressMode
-                + ", ipv6RaMode=" + ipV6RaMode + "]";
+        return "NeutronSubnet [subnetUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", ipVersion="
+                + ipVersion + ", cidr=" + cidr + ", gatewayIP=" + gatewayIP + ", dnsNameservers=" + dnsNameservers
+                + ", allocationPools=" + allocationPools + ", hostRoutes=" + hostRoutes + ", enableDHCP=" + enableDHCP
+                + ", tenantID=" + tenantID + ", ipv6AddressMode=" + ipV6AddressMode + ", ipv6RaMode=" + ipV6RaMode
+                + "]";
     }
 }

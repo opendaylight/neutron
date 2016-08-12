@@ -19,13 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronPort_ExtraDHCPOption implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "opt_value")
+    @XmlElement(name = "opt_value")
     String value;
 
-    @XmlElement (name = "opt_name")
+    @XmlElement(name = "opt_name")
     String name;
 
-    @XmlElement (name = "ip_version", defaultValue = "4", required = false, nillable = true)
+    @XmlElement(name = "ip_version", defaultValue = "4", required = false, nillable = true)
     Integer ipVersion = 4;
 
     public NeutronPort_ExtraDHCPOption() {
@@ -37,15 +37,27 @@ public class NeutronPort_ExtraDHCPOption implements Serializable {
         this.ipVersion = ipVersion;
     }
 
-    public String getValue() { return(value); }
+    public String getValue() {
+        return (value);
+    }
 
-    public void setValue(String value) { this.value = value; }
+    public void setValue(String value) {
+        this.value = value;
+    }
 
-    public String getName() { return(name); }
+    public String getName() {
+        return (name);
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Integer getIpVersion() { return ipVersion; }
+    public Integer getIpVersion() {
+        return ipVersion;
+    }
 
-    public void setIpVersion(Integer ipVersion) { this.ipVersion = ipVersion; }
+    public void setIpVersion(Integer ipVersion) {
+        this.ipVersion = ipVersion;
+    }
 }

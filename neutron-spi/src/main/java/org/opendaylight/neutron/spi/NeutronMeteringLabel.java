@@ -21,10 +21,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronMeteringLabel extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String meteringLabelName;
 
-    @XmlElement (defaultValue = "false", name = "shared")
+    @XmlElement(defaultValue = "false", name = "shared")
     Boolean shared;
 
     /*
@@ -50,15 +50,13 @@ public class NeutronMeteringLabel extends NeutronObject implements Serializable,
     /*
      *  constructor
      */
-    public NeutronMeteringLabel() { }
+    public NeutronMeteringLabel() {
+    }
 
     @Override
     public String toString() {
-        return "NeutronMeteringLabel [id=" + uuid +
-            ", name=" + meteringLabelName +
-            ", tenant_id=" + tenantID +
-            ", shared=" + shared +
-            "]";
+        return "NeutronMeteringLabel [id=" + uuid + ", name=" + meteringLabelName + ", tenant_id=" + tenantID
+                + ", shared=" + shared + "]";
     }
 
     /**

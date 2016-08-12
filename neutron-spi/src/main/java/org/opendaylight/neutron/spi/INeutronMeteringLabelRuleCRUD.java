@@ -8,8 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
-public interface INeutronMeteringLabelRuleCRUD
-    extends INeutronCRUD<NeutronMeteringLabelRule> {
+public interface INeutronMeteringLabelRuleCRUD extends INeutronCRUD<NeutronMeteringLabelRule> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

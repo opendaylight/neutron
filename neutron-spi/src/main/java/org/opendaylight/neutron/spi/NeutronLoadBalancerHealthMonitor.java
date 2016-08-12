@@ -40,36 +40,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerHealthMonitor
-    extends NeutronObject
-    implements Serializable, INeutronObject {
+public class NeutronLoadBalancerHealthMonitor extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "type")
+    @XmlElement(name = "type")
     String loadBalancerHealthMonitorType;
 
-    @XmlElement (name = "delay")
+    @XmlElement(name = "delay")
     Integer loadBalancerHealthMonitorDelay;
 
-    @XmlElement (name = "timeout")
+    @XmlElement(name = "timeout")
     Integer loadBalancerHealthMonitorTimeout;
 
-    @XmlElement (name = "max_retries")
+    @XmlElement(name = "max_retries")
     Integer loadBalancerHealthMonitorMaxRetries;
 
-    @XmlElement (name = "http_method")
+    @XmlElement(name = "http_method")
     String loadBalancerHealthMonitorHttpMethod;
 
-    @XmlElement (name = "url_path")
+    @XmlElement(name = "url_path")
     String loadBalancerHealthMonitorUrlPath;
 
-    @XmlElement (name = "expected_codes")
+    @XmlElement(name = "expected_codes")
     String loadBalancerHealthMonitorExpectedCodes;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerHealthMonitorAdminStateIsUp;
 
-    @XmlElement (name = "pools")
+    @XmlElement(name = "pools")
     List<Neutron_ID> loadBalancerHealthMonitorPools;
 
     public String getLoadBalancerHealthMonitorType() {
@@ -170,7 +168,7 @@ public class NeutronLoadBalancerHealthMonitor
             if (s.equals("http_method")) {
                 ans.setLoadBalancerHealthMonitorHttpMethod(this.getLoadBalancerHealthMonitorHttpMethod());
             }
-            if(s.equals("url_path")) {
+            if (s.equals("url_path")) {
                 ans.setLoadBalancerHealthMonitorUrlPath(this.getLoadBalancerHealthMonitorUrlPath());
             }
             if (s.equals("expected_codes")) {
@@ -183,18 +181,17 @@ public class NeutronLoadBalancerHealthMonitor
         return ans;
     }
 
-    @Override public String toString() {
-        return "NeutronLoadBalancerHealthMonitor{" +
-                "loadBalancerHealthMonitorID='" + uuid + '\'' +
-                ", loadBalancerHealthMonitorTenantID='" + tenantID + '\'' +
-                ", loadBalancerHealthMonitorType='" + loadBalancerHealthMonitorType + '\'' +
-                ", loadBalancerHealthMonitorDelay=" + loadBalancerHealthMonitorDelay +
-                ", loadBalancerHealthMonitorTimeout=" + loadBalancerHealthMonitorTimeout +
-                ", loadBalancerHealthMonitorMaxRetries=" + loadBalancerHealthMonitorMaxRetries +
-                ", loadBalancerHealthMonitorHttpMethod='" + loadBalancerHealthMonitorHttpMethod + '\'' +
-                ", loadBalancerHealthMonitorUrlPath='" + loadBalancerHealthMonitorUrlPath + '\'' +
-                ", loadBalancerHealthMonitorExpectedCodes='" + loadBalancerHealthMonitorExpectedCodes + '\'' +
-                ", loadBalancerHealthMonitorAdminStateIsUp=" + loadBalancerHealthMonitorAdminStateIsUp +
-                '}';
+    @Override
+    public String toString() {
+        return "NeutronLoadBalancerHealthMonitor{" + "loadBalancerHealthMonitorID='" + uuid + '\''
+                + ", loadBalancerHealthMonitorTenantID='" + tenantID + '\'' + ", loadBalancerHealthMonitorType='"
+                + loadBalancerHealthMonitorType + '\'' + ", loadBalancerHealthMonitorDelay="
+                + loadBalancerHealthMonitorDelay + ", loadBalancerHealthMonitorTimeout="
+                + loadBalancerHealthMonitorTimeout + ", loadBalancerHealthMonitorMaxRetries="
+                + loadBalancerHealthMonitorMaxRetries + ", loadBalancerHealthMonitorHttpMethod='"
+                + loadBalancerHealthMonitorHttpMethod + '\'' + ", loadBalancerHealthMonitorUrlPath='"
+                + loadBalancerHealthMonitorUrlPath + '\'' + ", loadBalancerHealthMonitorExpectedCodes='"
+                + loadBalancerHealthMonitorExpectedCodes + '\'' + ", loadBalancerHealthMonitorAdminStateIsUp="
+                + loadBalancerHealthMonitorAdminStateIsUp + '}';
     }
 }

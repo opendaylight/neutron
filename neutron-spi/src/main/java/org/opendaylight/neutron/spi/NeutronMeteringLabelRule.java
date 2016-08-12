@@ -21,16 +21,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronMeteringLabelRule extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "direction")
+    @XmlElement(name = "direction")
     String meteringLabelRuleDirection;
 
-    @XmlElement (defaultValue = "false", name = "excluded")
+    @XmlElement(defaultValue = "false", name = "excluded")
     Boolean meteringLabelRuleExcluded;
 
-    @XmlElement (name = "remote_ip_prefix")
+    @XmlElement(name = "remote_ip_prefix")
     String meteringLabelRuleRemoteIPPrefix;
 
-    @XmlElement (name = "metering_label_id")
+    @XmlElement(name = "metering_label_id")
     String meteringLabelRuleLabelID;
 
     /*
@@ -72,16 +72,14 @@ public class NeutronMeteringLabelRule extends NeutronObject implements Serializa
     /*
      *  constructor
      */
-    public NeutronMeteringLabelRule() { }
+    public NeutronMeteringLabelRule() {
+    }
 
     @Override
     public String toString() {
-        return "NeutronMeteringLabelRule [id=" + uuid +
-            ", tenantID=" + tenantID +
-            ", direction=" + meteringLabelRuleDirection +
-            ", excluded=" + meteringLabelRuleExcluded +
-            ", remote_ip_prefix=" + meteringLabelRuleRemoteIPPrefix +
-            ", metering_label_id=" + meteringLabelRuleLabelID + "]";
+        return "NeutronMeteringLabelRule [id=" + uuid + ", tenantID=" + tenantID + ", direction="
+                + meteringLabelRuleDirection + ", excluded=" + meteringLabelRuleExcluded + ", remote_ip_prefix="
+                + meteringLabelRuleRemoteIPPrefix + ", metering_label_id=" + meteringLabelRuleLabelID + "]";
     }
 
     /**

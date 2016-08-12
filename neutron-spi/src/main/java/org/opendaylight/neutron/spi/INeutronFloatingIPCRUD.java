@@ -13,8 +13,7 @@ package org.opendaylight.neutron.spi;
  *
  */
 
-public interface INeutronFloatingIPCRUD
-    extends INeutronCRUD<NeutronFloatingIP> {
+public interface INeutronFloatingIPCRUD extends INeutronCRUD<NeutronFloatingIP> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

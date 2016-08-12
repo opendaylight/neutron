@@ -13,8 +13,7 @@ package org.opendaylight.neutron.spi;
  *
  */
 
-public interface INeutronFirewallRuleCRUD
-    extends INeutronCRUD<NeutronFirewallRule> {
+public interface INeutronFirewallRuleCRUD extends INeutronCRUD<NeutronFirewallRule> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

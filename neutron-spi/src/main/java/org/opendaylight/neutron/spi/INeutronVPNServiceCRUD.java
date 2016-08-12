@@ -13,8 +13,7 @@ package org.opendaylight.neutron.spi;
  *
  */
 
-public interface INeutronVPNServiceCRUD
-    extends INeutronCRUD<NeutronVPNService> {
+public interface INeutronVPNServiceCRUD extends INeutronCRUD<NeutronVPNService> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

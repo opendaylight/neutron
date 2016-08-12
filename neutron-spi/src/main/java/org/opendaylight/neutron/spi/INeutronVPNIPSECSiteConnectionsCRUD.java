@@ -8,8 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
-public interface INeutronVPNIPSECSiteConnectionsCRUD
-    extends INeutronCRUD<NeutronVPNIPSECSiteConnection> {
+public interface INeutronVPNIPSECSiteConnectionsCRUD extends INeutronCRUD<NeutronVPNIPSECSiteConnection> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

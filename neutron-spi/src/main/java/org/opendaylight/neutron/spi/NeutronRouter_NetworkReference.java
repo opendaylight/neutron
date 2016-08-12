@@ -62,9 +62,8 @@ public class NeutronRouter_NetworkReference implements Serializable {
 
     @Override
     public String toString() {
-        return "NeutronRouterNetworkReference [networkID=" + networkID +
-            " enableSNAT=" + enableSNAT +
-            " externalFixedIPs=" + externalFixedIPs + "]";
+        return "NeutronRouterNetworkReference [networkID=" + networkID + " enableSNAT=" + enableSNAT
+                + " externalFixedIPs=" + externalFixedIPs + "]";
     }
 
 }

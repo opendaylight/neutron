@@ -13,9 +13,8 @@ import org.junit.Test;
 
 public class NeutronLoadBalancer_SessionPersistenceJAXBTest {
 
-    private static final String NeutronLoadBalancer_SessionPersistence_sourceJson = "{ " +
-        "\"cookie_name\": \"NeutronLoadBalancer_SessionPersistence_Cookie\", " +
-        "\"type\": \"HTTP_COOKIE\" }";
+    private static final String NeutronLoadBalancer_SessionPersistence_sourceJson = "{ "
+            + "\"cookie_name\": \"NeutronLoadBalancer_SessionPersistence_Cookie\", " + "\"type\": \"HTTP_COOKIE\" }";
 
     @Test
     public void test_NeutronLoadBalancer_SessionPersistence_JAXB() {

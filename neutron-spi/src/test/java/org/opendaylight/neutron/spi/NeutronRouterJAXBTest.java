@@ -14,16 +14,12 @@ import org.junit.Test;
 
 public class NeutronRouterJAXBTest {
 
-    private static final String NeutronRouter_sourceJson = "{" +
-        "\"id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", " +
-        "\"name\": \"jaxb-test\", " +
-        "\"admin_state_up\": false , " +
-        "\"status\": \"ACTIVE\", " +
-        "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", " +
-        "\"external_gateway_info\": {\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" }, " +
-        "\"distributed\": false , " +
-        "\"gw_port_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17127\", " +
-        "\"routes\": [ { \"destination\":\"10.0.0.0/24\",\"nexthop\":\"1.1.1.1\" } ] }";
+    private static final String NeutronRouter_sourceJson = "{" + "\"id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", "
+            + "\"name\": \"jaxb-test\", " + "\"admin_state_up\": false , " + "\"status\": \"ACTIVE\", "
+            + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", "
+            + "\"external_gateway_info\": {\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" }, "
+            + "\"distributed\": false , " + "\"gw_port_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17127\", "
+            + "\"routes\": [ { \"destination\":\"10.0.0.0/24\",\"nexthop\":\"1.1.1.1\" } ] }";
 
     @Test
     public void test_NeutronRouter_JAXB() {
@@ -59,8 +55,8 @@ public class NeutronRouterJAXBTest {
 
             Assert.assertEquals("NeutronRouter JAXB Test 9.1: Testing routes failed", 1, routes.size());
 
-            Assert.assertEquals("NeutronRouter JAXB Test 9.2: Testing routes failed",
-                    "10.0.0.0/24", routes.get(0).getDestination());
+            Assert.assertEquals("NeutronRouter JAXB Test 9.2: Testing routes failed", "10.0.0.0/24",
+                    routes.get(0).getDestination());
 
         } catch (Exception e) {
             Assert.fail("Tests failed");

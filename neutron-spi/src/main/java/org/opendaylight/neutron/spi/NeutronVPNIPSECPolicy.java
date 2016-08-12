@@ -24,25 +24,25 @@ public class NeutronVPNIPSECPolicy extends NeutronObject implements Serializable
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String name;
 
-    @XmlElement (name = "transform_protocol")
+    @XmlElement(name = "transform_protocol")
     String transformProtocol;
 
-    @XmlElement (name = "encapsulation_mode")
+    @XmlElement(name = "encapsulation_mode")
     String encapsulationMode;
 
-    @XmlElement (name = "auth_algorithm")
+    @XmlElement(name = "auth_algorithm")
     String authAlgorithm;
 
-    @XmlElement (name = "encryption_algorithm")
+    @XmlElement(name = "encryption_algorithm")
     String encryptionAlgorithm;
 
-    @XmlElement (name = "pfs")
+    @XmlElement(name = "pfs")
     String perfectForwardSecrecy;
 
-    @XmlElement (name = "lifetime")
+    @XmlElement(name = "lifetime")
     NeutronVPNLifetime lifetime;
 
     public NeutronVPNIPSECPolicy() {

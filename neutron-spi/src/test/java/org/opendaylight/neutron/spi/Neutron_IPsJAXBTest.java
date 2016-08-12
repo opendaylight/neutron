@@ -13,9 +13,8 @@ import org.junit.Test;
 
 public class Neutron_IPsJAXBTest {
 
-    private static final String Neutron_IPs_sourceJson = "{ " +
-
-    "\"ip_address\": \"192.168.111.3\", " + "\"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" }";
+    private static final String Neutron_IPs_sourceJson =
+            "{ \"ip_address\": \"192.168.111.3\", " + "\"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" }";
 
     @Test
     public void test_Neutron_IPs_JAXB() {

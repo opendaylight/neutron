@@ -99,13 +99,8 @@ public class NeutronQosPolicy extends NeutronObject implements Serializable, INe
 
     @Override
     public String toString() {
-        return "NeutronQosPolicy{" +
-            "qosPolicyUUID='" + uuid + '\'' +
-            ", qosPolicyTenantID='" + tenantID + '\'' +
-            ", qosPolicyName='" + name + '\'' +
-            ", qosPolicyIsShared='" + shared + '\'' +
-            ", qosBwLimitRules='" + bwLimitRules + '\'' +
-            ", qosDscpRules='" + dscpRules + '\'' +
-            '}';
+        return "NeutronQosPolicy{" + "qosPolicyUUID='" + uuid + '\'' + ", qosPolicyTenantID='" + tenantID + '\''
+                + ", qosPolicyName='" + name + '\'' + ", qosPolicyIsShared='" + shared + '\'' + ", qosBwLimitRules='"
+                + bwLimitRules + '\'' + ", qosDscpRules='" + dscpRules + '\'' + '}';
     }
 }

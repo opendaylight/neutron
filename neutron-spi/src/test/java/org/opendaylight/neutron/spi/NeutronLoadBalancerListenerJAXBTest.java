@@ -26,13 +26,12 @@ public class NeutronLoadBalancerListenerJAXBTest {
     public void test_NeutronLoadBalancerListener_JAXB() {
         NeutronLoadBalancerListener dummyObject = new NeutronLoadBalancerListener();
         try {
-            NeutronLoadBalancerListener testObject = (NeutronLoadBalancerListener) JaxbTestHelper.jaxbUnmarshall(
-                    dummyObject, NeutronLoadBalancerListener_sourceJson);
+            NeutronLoadBalancerListener testObject = (NeutronLoadBalancerListener) JaxbTestHelper
+                    .jaxbUnmarshall(dummyObject, NeutronLoadBalancerListener_sourceJson);
             Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 1: Testing id failed",
                     "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
-            Assert.assertEquals(
-                    "NeutronLoadBalancerListener JAXB Test 2: Testing LoadBalancer defaulti pool ID failed",
+            Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 2: Testing LoadBalancer defaulti pool ID failed",
                     "00005a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getNeutronLoadBalancerListenerDefaultPoolID());
 
             Assert.assertEquals(
@@ -62,8 +61,8 @@ public class NeutronLoadBalancerListenerJAXBTest {
             neutronLoadBalancerListenerLoadBalancerIDs.add(neutron_id);
             testObject.setNeutronLoadBalancerListenerLoadBalancerIDs(neutronLoadBalancerListenerLoadBalancerIDs);
             Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 10: Testing LoadBalancerIDs failed",
-                    "2f245a7b-0000-4f26-9cf9-9e82d248fda7", testObject.getNeutronLoadBalancerListenerLoadBalancerIDs()
-                            .get(0).getID());
+                    "2f245a7b-0000-4f26-9cf9-9e82d248fda7",
+                    testObject.getNeutronLoadBalancerListenerLoadBalancerIDs().get(0).getID());
         } catch (Exception e) {
             Assert.assertFalse("Tests Failed", true);
         }

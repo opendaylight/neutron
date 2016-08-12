@@ -52,4 +52,3 @@ public class NeutronLoadBalancer_SessionPersistence implements Serializable {
         this.type = type;
     }
 }
-
