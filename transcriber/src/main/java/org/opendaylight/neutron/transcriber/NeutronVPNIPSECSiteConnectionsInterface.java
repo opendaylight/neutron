@@ -43,6 +43,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface
         return !exists(policyID);
     }
 
+    @Override
     protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
         final NeutronVPNIPSECSiteConnection answer = new NeutronVPNIPSECSiteConnection();
         if (ipsecSiteConnection.getName() != null) {
@@ -59,7 +60,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface
             answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
-            final List<String> peerCidrs = new ArrayList<String>();
+            final List<String> peerCidrs = new ArrayList<>();
             for (final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
@@ -72,7 +73,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface
             answer.setRouteMode(ipsecSiteConnection.getRouteMode());
         }
         if (ipsecSiteConnection.getMtu() != null) {
-            answer.setMtu((ipsecSiteConnection.getMtu()).intValue());
+            answer.setMtu(ipsecSiteConnection.getMtu().intValue());
         }
         if (ipsecSiteConnection.getAuthMode() != null) {
             answer.setAuthMode(ipsecSiteConnection.getAuthMode());
@@ -122,7 +123,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface
             ipsecSiteConnectionBuilder.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
-            final List<String> peerCidrs = new ArrayList<String>();
+            final List<String> peerCidrs = new ArrayList<>();
             for (final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
@@ -135,7 +136,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface
             ipsecSiteConnectionBuilder.setRouteMode(ipsecSiteConnection.getRouteMode());
         }
         if (ipsecSiteConnection.getMtu() != null) {
-            ipsecSiteConnectionBuilder.setMtu((ipsecSiteConnection.getMtu()).shortValue());
+            ipsecSiteConnectionBuilder.setMtu(ipsecSiteConnection.getMtu().shortValue());
         }
         if (ipsecSiteConnection.getAuthMode() != null) {
             ipsecSiteConnectionBuilder.setAuthMode(ipsecSiteConnection.getAuthMode());
@@ -172,6 +173,13 @@ public class NeutronVPNIPSECSiteConnectionsInterface
     }
 
     @Override
+    protected Ipsecsiteconnection toMd(String uuid) {
+        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
+        ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
+        return ipsecSiteConnectionBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<IpsecSiteConnections> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class);
     }
@@ -181,12 +189,5 @@ public class NeutronVPNIPSECSiteConnectionsInterface
             Ipsecsiteconnection ipsecSiteConnection) {
         return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class)
                 .child(Ipsecsiteconnection.class, ipsecSiteConnection.getKey());
-    }
-
-    @Override
-    protected Ipsecsiteconnection toMd(String uuid) {
-        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
-        ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
-        return ipsecSiteConnectionBuilder.build();
     }
 }

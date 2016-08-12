@@ -49,13 +49,6 @@ public class NeutronLoadBalancerHealthMonitorInterface
     }
 
     @Override
-    protected Healthmonitor toMd(String uuid) {
-        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
-        healthmonitorBuilder.setUuid(toUuid(uuid));
-        return healthmonitorBuilder.build();
-    }
-
-    @Override
     protected InstanceIdentifier<Healthmonitor> createInstanceIdentifier(Healthmonitor healthMonitor) {
         return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class).child(Healthmonitor.class,
                 healthMonitor.getKey());
@@ -64,6 +57,13 @@ public class NeutronLoadBalancerHealthMonitorInterface
     @Override
     protected InstanceIdentifier<Healthmonitors> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class);
+    }
+
+    @Override
+    protected Healthmonitor toMd(String uuid) {
+        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        healthmonitorBuilder.setUuid(toUuid(uuid));
+        return healthmonitorBuilder.build();
     }
 
     @Override
@@ -83,7 +83,7 @@ public class NeutronLoadBalancerHealthMonitorInterface
             healthmonitorBuilder.setMaxRetries(Integer.valueOf(healthMonitor.getLoadBalancerHealthMonitorMaxRetries()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
-            final List<Uuid> listUuid = new ArrayList<Uuid>();
+            final List<Uuid> listUuid = new ArrayList<>();
             for (final Neutron_ID neutron_id : healthMonitor.getLoadBalancerHealthMonitorPools()) {
                 listUuid.add(toUuid(neutron_id.getID()));
             }
@@ -98,7 +98,7 @@ public class NeutronLoadBalancerHealthMonitorInterface
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
             final ImmutableBiMap<String, Class<? extends ProbeBase>> mapper = PROBE_MAP.inverse();
             healthmonitorBuilder
-                    .setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
+                    .setType(mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
             healthmonitorBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
@@ -111,6 +111,7 @@ public class NeutronLoadBalancerHealthMonitorInterface
         return healthmonitorBuilder.build();
     }
 
+    @Override
     protected NeutronLoadBalancerHealthMonitor fromMd(Healthmonitor healthMonitor) {
         final NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
         if (healthMonitor.isAdminStateUp() != null) {
@@ -129,7 +130,7 @@ public class NeutronLoadBalancerHealthMonitorInterface
             answer.setLoadBalancerHealthMonitorMaxRetries(Integer.valueOf(healthMonitor.getMaxRetries()));
         }
         if (healthMonitor.getPools() != null) {
-            final List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            final List<Neutron_ID> list = new ArrayList<>();
             for (final Uuid id : healthMonitor.getPools()) {
                 list.add(new Neutron_ID(id.getValue()));
             }

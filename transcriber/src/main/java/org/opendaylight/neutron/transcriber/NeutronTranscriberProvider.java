@@ -73,10 +73,10 @@ public class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscr
     private NeutronSecurityGroupInterface securityGroupInterface;
     private NeutronSecurityRuleInterface securityRuleInterface;
     private NeutronSubnetInterface subnetInterface;
-    private NeutronVPNIKEPolicyInterface vPNIKEPolicyInterface;
-    private NeutronVPNIPSECPolicyInterface vPNIPSECPolicyInterface;
-    private NeutronVPNIPSECSiteConnectionsInterface vPNIPSECSiteConnectionsInterface;
-    private NeutronVPNServiceInterface vPNServiceInterface;
+    private NeutronVPNIKEPolicyInterface vpnIkePolicyInterface;
+    private NeutronVPNIPSECPolicyInterface vpnIpsecPolicyInterface;
+    private NeutronVPNIPSECSiteConnectionsInterface vpnIpsecSiteConnectionsInterface;
+    private NeutronVPNServiceInterface vpnServiceInterface;
     private NeutronSFCFlowClassifierInterface sfcFlowClassifierInterface;
     private NeutronSFCPortPairInterface sfcPortPairInterface;
     private NeutronSFCPortPairGroupInterface sfcPortPairGroupInterface;
@@ -156,17 +156,17 @@ public class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscr
         subnetInterface = new NeutronSubnetInterface(db);
         registerCRUDInterface(INeutronSubnetCRUD.class, subnetInterface);
 
-        vPNIKEPolicyInterface = new NeutronVPNIKEPolicyInterface(db);
-        registerCRUDInterface(INeutronVPNIKEPolicyCRUD.class, vPNIKEPolicyInterface);
+        vpnIkePolicyInterface = new NeutronVPNIKEPolicyInterface(db);
+        registerCRUDInterface(INeutronVPNIKEPolicyCRUD.class, vpnIkePolicyInterface);
 
-        vPNIPSECPolicyInterface = new NeutronVPNIPSECPolicyInterface(db);
-        registerCRUDInterface(INeutronVPNIPSECPolicyCRUD.class, vPNIPSECPolicyInterface);
+        vpnIpsecPolicyInterface = new NeutronVPNIPSECPolicyInterface(db);
+        registerCRUDInterface(INeutronVPNIPSECPolicyCRUD.class, vpnIpsecPolicyInterface);
 
-        vPNIPSECSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(db);
-        registerCRUDInterface(INeutronVPNIPSECSiteConnectionsCRUD.class, vPNIPSECSiteConnectionsInterface);
+        vpnIpsecSiteConnectionsInterface = new NeutronVPNIPSECSiteConnectionsInterface(db);
+        registerCRUDInterface(INeutronVPNIPSECSiteConnectionsCRUD.class, vpnIpsecSiteConnectionsInterface);
 
-        vPNServiceInterface = new NeutronVPNServiceInterface(db);
-        registerCRUDInterface(INeutronVPNServiceCRUD.class, vPNServiceInterface);
+        vpnServiceInterface = new NeutronVPNServiceInterface(db);
+        registerCRUDInterface(INeutronVPNServiceCRUD.class, vpnServiceInterface);
 
         sfcFlowClassifierInterface = new NeutronSFCFlowClassifierInterface(db);
         registerCRUDInterface(INeutronSFCFlowClassifierCRUD.class, sfcFlowClassifierInterface);

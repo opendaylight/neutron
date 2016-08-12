@@ -56,16 +56,6 @@ public class NeutronLoadBalancerListenerInterface
     }
 
     @Override
-    protected InstanceIdentifier<Listener> createInstanceIdentifier(Listener listener) {
-        return InstanceIdentifier.create(Neutron.class).child(Listeners.class).child(Listener.class, listener.getKey());
-    }
-
-    @Override
-    protected InstanceIdentifier<Listeners> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Listeners.class);
-    }
-
-    @Override
     protected Listener toMd(NeutronLoadBalancerListener listener) {
         final ListenerBuilder listenerBuilder = new ListenerBuilder();
         listenerBuilder.setAdminStateUp(listener.getLoadBalancerListenerAdminStateIsUp());
@@ -76,7 +66,7 @@ public class NeutronLoadBalancerListenerInterface
             listenerBuilder.setDefaultPoolId(toUuid(listener.getNeutronLoadBalancerListenerDefaultPoolID()));
         }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
-            final List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
+            final List<Uuid> listLoadBalancers = new ArrayList<>();
             for (final Neutron_ID neutron_id : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
                 listLoadBalancers.add(toUuid(neutron_id.getID()));
             }
@@ -88,7 +78,7 @@ public class NeutronLoadBalancerListenerInterface
         if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
             listenerBuilder.setProtocol(
-                    (Class<? extends ProtocolBase>) mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
+                    mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
         }
         if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
             listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
@@ -104,6 +94,17 @@ public class NeutronLoadBalancerListenerInterface
         return listenerBuilder.build();
     }
 
+    @Override
+    protected InstanceIdentifier<Listener> createInstanceIdentifier(Listener listener) {
+        return InstanceIdentifier.create(Neutron.class).child(Listeners.class).child(Listener.class, listener.getKey());
+    }
+
+    @Override
+    protected InstanceIdentifier<Listeners> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class).child(Listeners.class);
+    }
+
+    @Override
     protected NeutronLoadBalancerListener fromMd(Listener listener) {
         final NeutronLoadBalancerListener answer = new NeutronLoadBalancerListener();
         if (listener.isAdminStateUp() != null) {
@@ -116,7 +117,7 @@ public class NeutronLoadBalancerListenerInterface
             answer.setNeutronLoadBalancerListenerDefaultPoolID(listener.getDefaultPoolId().getValue());
         }
         if (listener.getLoadbalancers() != null) {
-            final List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            final List<Neutron_ID> list = new ArrayList<>();
             for (final Uuid id : listener.getLoadbalancers()) {
                 list.add(new Neutron_ID(id.getValue()));
             }

@@ -38,6 +38,7 @@ public class NeutronVPNIPSECPolicyInterface
         return policies.getIpsecpolicy();
     }
 
+    @Override
     protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {
         final NeutronVPNIPSECPolicy answer = new NeutronVPNIPSECPolicy();
         if (ipsecPolicy.getName() != null) {
@@ -113,6 +114,13 @@ public class NeutronVPNIPSECPolicyInterface
     }
 
     @Override
+    protected Ipsecpolicy toMd(String uuid) {
+        final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
+        ipsecPolicyBuilder.setUuid(toUuid(uuid));
+        return ipsecPolicyBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Ipsecpolicy> createInstanceIdentifier(Ipsecpolicy ipsecPolicy) {
         return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class).child(Ipsecpolicy.class,
                 ipsecPolicy.getKey());
@@ -121,12 +129,5 @@ public class NeutronVPNIPSECPolicyInterface
     @Override
     protected InstanceIdentifier<IpsecPolicies> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class);
-    }
-
-    @Override
-    protected Ipsecpolicy toMd(String uuid) {
-        final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
-        ipsecPolicyBuilder.setUuid(toUuid(uuid));
-        return ipsecPolicyBuilder.build();
     }
 }

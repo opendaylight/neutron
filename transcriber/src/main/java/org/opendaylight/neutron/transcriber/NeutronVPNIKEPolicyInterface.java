@@ -37,6 +37,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         return policies.getIkepolicy();
     }
 
+    @Override
     protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {
         final NeutronVPNIKEPolicy answer = new NeutronVPNIKEPolicy();
         if (ikePolicy.getName() != null) {
@@ -113,6 +114,13 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
     }
 
     @Override
+    protected Ikepolicy toMd(String uuid) {
+        final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
+        ikePolicyBuilder.setUuid(toUuid(uuid));
+        return ikePolicyBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Ikepolicy> createInstanceIdentifier(Ikepolicy ikePolicy) {
         return InstanceIdentifier.create(Neutron.class).child(IkePolicies.class).child(Ikepolicy.class,
                 ikePolicy.getKey());
@@ -121,12 +129,5 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
     @Override
     protected InstanceIdentifier<IkePolicies> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(IkePolicies.class);
-    }
-
-    @Override
-    protected Ikepolicy toMd(String uuid) {
-        final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
-        ikePolicyBuilder.setUuid(toUuid(uuid));
-        return ikePolicyBuilder.build();
     }
 }

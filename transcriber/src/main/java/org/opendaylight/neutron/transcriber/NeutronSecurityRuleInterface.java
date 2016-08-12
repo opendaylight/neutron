@@ -50,6 +50,7 @@ public class NeutronSecurityRuleInterface extends
         return rules.getSecurityRule();
     }
 
+    @Override
     protected NeutronSecurityRule fromMd(SecurityRule rule) {
         final NeutronSecurityRule answer = new NeutronSecurityRule();
         if (rule.getTenantId() != null) {
@@ -102,7 +103,7 @@ public class NeutronSecurityRuleInterface extends
         if (securityRule.getSecurityRuleDirection() != null) {
             final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
             securityRuleBuilder
-                    .setDirection((Class<? extends DirectionBase>) mapper.get(securityRule.getSecurityRuleDirection()));
+                    .setDirection(mapper.get(securityRule.getSecurityRuleDirection()));
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
@@ -122,7 +123,7 @@ public class NeutronSecurityRuleInterface extends
         if (securityRule.getSecurityRuleEthertype() != null) {
             final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = ETHERTYPE_MAP.inverse();
             securityRuleBuilder
-                    .setEthertype((Class<? extends EthertypeBase>) mapper.get(securityRule.getSecurityRuleEthertype()));
+                    .setEthertype(mapper.get(securityRule.getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
             securityRuleBuilder.setPortRangeMin(Integer.valueOf(securityRule.getSecurityRulePortMin()));
@@ -139,6 +140,13 @@ public class NeutronSecurityRuleInterface extends
     }
 
     @Override
+    protected SecurityRule toMd(String uuid) {
+        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
+        securityRuleBuilder.setUuid(toUuid(uuid));
+        return securityRuleBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<SecurityRule> createInstanceIdentifier(SecurityRule securityRule) {
         return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
                 securityRule.getKey());
@@ -147,12 +155,5 @@ public class NeutronSecurityRuleInterface extends
     @Override
     protected InstanceIdentifier<SecurityRules> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class);
-    }
-
-    @Override
-    protected SecurityRule toMd(String uuid) {
-        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
-        securityRuleBuilder.setUuid(toUuid(uuid));
-        return securityRuleBuilder.build();
     }
 }

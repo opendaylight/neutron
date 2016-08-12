@@ -42,43 +42,6 @@ public class NeutronLoadBalancerInterface extends
     }
 
     @Override
-    protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(Loadbalancer loadBalancer) {
-        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class).child(Loadbalancer.class,
-                loadBalancer.getKey());
-    }
-
-    @Override
-    protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class);
-    }
-
-    protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
-        final NeutronLoadBalancer answer = new NeutronLoadBalancer();
-        if (loadBalancer.isAdminStateUp() != null) {
-            answer.setLoadBalancerAdminStateUp(loadBalancer.isAdminStateUp());
-        }
-        if (loadBalancer.getName() != null) {
-            answer.setLoadBalancerName(loadBalancer.getName());
-        }
-        if (loadBalancer.getStatus() != null) {
-            answer.setLoadBalancerStatus(loadBalancer.getStatus());
-        }
-        if (loadBalancer.getTenantId() != null) {
-            answer.setTenantID(loadBalancer.getTenantId());
-        }
-        if (loadBalancer.getVipAddress() != null) {
-            answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
-        }
-        if (loadBalancer.getVipSubnetId() != null) {
-            answer.setLoadBalancerVipSubnetID(loadBalancer.getVipSubnetId().getValue());
-        }
-        if (loadBalancer.getUuid() != null) {
-            answer.setID(loadBalancer.getUuid().getValue());
-        }
-        return answer;
-    }
-
-    @Override
     protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
         final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
         loadBalancerBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
@@ -103,5 +66,43 @@ public class NeutronLoadBalancerInterface extends
             LOGGER.warn("Attempting to write neutron load balancer without UUID");
         }
         return loadBalancerBuilder.build();
+    }
+
+    @Override
+    protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(Loadbalancer loadBalancer) {
+        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class).child(Loadbalancer.class,
+                loadBalancer.getKey());
+    }
+
+    @Override
+    protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier() {
+        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class);
+    }
+
+    @Override
+    protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
+        final NeutronLoadBalancer answer = new NeutronLoadBalancer();
+        if (loadBalancer.isAdminStateUp() != null) {
+            answer.setLoadBalancerAdminStateUp(loadBalancer.isAdminStateUp());
+        }
+        if (loadBalancer.getName() != null) {
+            answer.setLoadBalancerName(loadBalancer.getName());
+        }
+        if (loadBalancer.getStatus() != null) {
+            answer.setLoadBalancerStatus(loadBalancer.getStatus());
+        }
+        if (loadBalancer.getTenantId() != null) {
+            answer.setTenantID(loadBalancer.getTenantId());
+        }
+        if (loadBalancer.getVipAddress() != null) {
+            answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
+        }
+        if (loadBalancer.getVipSubnetId() != null) {
+            answer.setLoadBalancerVipSubnetID(loadBalancer.getVipSubnetId().getValue());
+        }
+        if (loadBalancer.getUuid() != null) {
+            answer.setID(loadBalancer.getUuid().getValue());
+        }
+        return answer;
     }
 }

@@ -70,7 +70,7 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
         routerBuilder.setAdminStateUp(router.getAdminStateUp());
         routerBuilder.setDistributed(router.getDistributed());
         if (router.getRoutes() != null) {
-            final List<Routes> routes = new ArrayList<Routes>();
+            final List<Routes> routes = new ArrayList<>();
             for (final NeutronRoute route : router.getRoutes()) {
                 final RoutesBuilder routeBuilder = new RoutesBuilder();
                 routeBuilder.setDestination(new IpPrefix(route.getDestination().toCharArray()));
@@ -81,15 +81,14 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
         }
         if (router.getExternalGatewayInfo() != null) {
             ExternalGatewayInfo externalGatewayInfo = null;
-            final List<NeutronRouter_NetworkReference> neutronRouter_NetworkReferences = new ArrayList<
-                    NeutronRouter_NetworkReference>();
+            final List<NeutronRouter_NetworkReference> neutronRouter_NetworkReferences = new ArrayList<>();
             neutronRouter_NetworkReferences.add(router.getExternalGatewayInfo());
             for (final NeutronRouter_NetworkReference externalGatewayInfos : neutronRouter_NetworkReferences) {
                 final ExternalGatewayInfoBuilder builder = new ExternalGatewayInfoBuilder();
                 builder.setEnableSnat(externalGatewayInfos.getEnableSNAT());
                 builder.setExternalNetworkId(toUuid(externalGatewayInfos.getNetworkID()));
                 if (externalGatewayInfos.getExternalFixedIPs() != null) {
-                    final List<ExternalFixedIps> externalFixedIps = new ArrayList<ExternalFixedIps>();
+                    final List<ExternalFixedIps> externalFixedIps = new ArrayList<>();
                     for (final Neutron_IPs eIP : externalGatewayInfos.getExternalFixedIPs()) {
                         final ExternalFixedIpsBuilder eFixedIpBuilder = new ExternalFixedIpsBuilder();
                         eFixedIpBuilder.setIpAddress(new IpAddress(eIP.getIpAddress().toCharArray()));
@@ -111,6 +110,13 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
     }
 
     @Override
+    protected Router toMd(String uuid) {
+        final RouterBuilder routerBuilder = new RouterBuilder();
+        routerBuilder.setUuid(toUuid(uuid));
+        return routerBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Router> createInstanceIdentifier(Router router) {
         return InstanceIdentifier.create(Neutron.class).child(Routers.class).child(Router.class, router.getKey());
     }
@@ -121,12 +127,6 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
     }
 
     @Override
-    protected Router toMd(String uuid) {
-        final RouterBuilder routerBuilder = new RouterBuilder();
-        routerBuilder.setUuid(toUuid(uuid));
-        return routerBuilder.build();
-    }
-
     public NeutronRouter fromMd(Router router) {
         final NeutronRouter result = new NeutronRouter();
         result.setID(router.getUuid().getValue());
@@ -139,7 +139,7 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             result.setGatewayPortId(String.valueOf(router.getGatewayPortId().getValue()));
         }
         if (router.getRoutes() != null) {
-            final List<NeutronRoute> routes = new ArrayList<NeutronRoute>();
+            final List<NeutronRoute> routes = new ArrayList<>();
             for (final Routes route : router.getRoutes()) {
                 final NeutronRoute routerRoute = new NeutronRoute();
                 routerRoute.setDestination(String.valueOf(route.getDestination().getValue()));
@@ -154,7 +154,7 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             extGwInfo.setNetworkID(String.valueOf(router.getExternalGatewayInfo().getExternalNetworkId().getValue()));
             extGwInfo.setEnableSNAT(router.getExternalGatewayInfo().isEnableSnat());
             if (router.getExternalGatewayInfo().getExternalFixedIps() != null) {
-                final List<Neutron_IPs> fixedIPs = new ArrayList<Neutron_IPs>();
+                final List<Neutron_IPs> fixedIPs = new ArrayList<>();
                 for (final ExternalFixedIps mdFixedIP : router.getExternalGatewayInfo().getExternalFixedIps()) {
                     final Neutron_IPs fixedIP = new Neutron_IPs();
                     fixedIP.setSubnetUUID(String.valueOf(mdFixedIP.getSubnetId().getValue()));

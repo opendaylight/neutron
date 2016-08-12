@@ -38,6 +38,7 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
         return !exists(uuid);
     }
 
+    @Override
     protected NeutronVPNService fromMd(Vpnservice vpnService) {
         final NeutronVPNService answer = new NeutronVPNService();
         if (vpnService.getName() != null) {
@@ -90,6 +91,13 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
     }
 
     @Override
+    protected Vpnservice toMd(String uuid) {
+        final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
+        vpnServiceBuilder.setUuid(toUuid(uuid));
+        return vpnServiceBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Vpnservice> createInstanceIdentifier(Vpnservice vpnService) {
         return InstanceIdentifier.create(Neutron.class).child(VpnServices.class).child(Vpnservice.class,
                 vpnService.getKey());
@@ -98,12 +106,5 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
     @Override
     protected InstanceIdentifier<VpnServices> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(VpnServices.class);
-    }
-
-    @Override
-    protected Vpnservice toMd(String uuid) {
-        final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
-        vpnServiceBuilder.setUuid(toUuid(uuid));
-        return vpnServiceBuilder.build();
     }
 }

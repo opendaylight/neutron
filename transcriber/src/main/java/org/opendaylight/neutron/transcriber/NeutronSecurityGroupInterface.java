@@ -34,6 +34,7 @@ public class NeutronSecurityGroupInterface
         return groups.getSecurityGroup();
     }
 
+    @Override
     protected NeutronSecurityGroup fromMd(SecurityGroup group) {
         final NeutronSecurityGroup answer = new NeutronSecurityGroup();
         if (group.getName() != null) {
@@ -67,6 +68,13 @@ public class NeutronSecurityGroupInterface
     }
 
     @Override
+    protected SecurityGroup toMd(String uuid) {
+        final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
+        securityGroupBuilder.setUuid(toUuid(uuid));
+        return securityGroupBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<SecurityGroup> createInstanceIdentifier(SecurityGroup securityGroup) {
         return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class).child(SecurityGroup.class,
                 securityGroup.getKey());
@@ -75,12 +83,5 @@ public class NeutronSecurityGroupInterface
     @Override
     protected InstanceIdentifier<SecurityGroups> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class);
-    }
-
-    @Override
-    protected SecurityGroup toMd(String uuid) {
-        final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
-        securityGroupBuilder.setUuid(toUuid(uuid));
-        return securityGroupBuilder.build();
     }
 }

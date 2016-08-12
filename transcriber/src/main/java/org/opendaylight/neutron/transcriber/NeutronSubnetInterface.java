@@ -67,6 +67,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         return subnets.getSubnet();
     }
 
+    @Override
     protected NeutronSubnet fromMd(Subnet subnet) {
         final NeutronSubnet result = new NeutronSubnet();
         result.setName(subnet.getName());
@@ -85,7 +86,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         }
         result.setEnableDHCP(subnet.isEnableDhcp());
         if (subnet.getAllocationPools() != null) {
-            final List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
+            final List<NeutronSubnetIPAllocationPool> allocationPools = new ArrayList<>();
             for (final AllocationPools allocationPool : subnet.getAllocationPools()) {
                 final NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
                 pool.setPoolStart(String.valueOf(allocationPool.getStart().getValue()));
@@ -95,14 +96,14 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             result.setAllocationPools(allocationPools);
         }
         if (subnet.getDnsNameservers() != null) {
-            final List<String> dnsNameServers = new ArrayList<String>();
+            final List<String> dnsNameServers = new ArrayList<>();
             for (final IpAddress dnsNameServer : subnet.getDnsNameservers()) {
                 dnsNameServers.add(String.valueOf(dnsNameServer.getValue()));
             }
             result.setDnsNameservers(dnsNameServers);
         }
         if (subnet.getHostRoutes() != null) {
-            final List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
+            final List<NeutronRoute> hostRoutes = new ArrayList<>();
             for (final HostRoutes hostRoute : subnet.getHostRoutes()) {
                 final NeutronRoute nsHostRoute = new NeutronRoute();
                 nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
@@ -115,6 +116,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         return result;
     }
 
+    @Override
     protected Subnet toMd(NeutronSubnet subnet) {
         final SubnetBuilder subnetBuilder = new SubnetBuilder();
         if (subnet.getName() != null) {
@@ -128,7 +130,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         }
         if (subnet.getIpVersion() != null) {
             final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
-            subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet.getIpVersion()));
+            subnetBuilder.setIpVersion(mapper.get(subnet.getIpVersion()));
         }
         if (subnet.getCidr() != null) {
             final IpPrefix ipPrefix = IpPrefixBuilder.getDefaultInstance(subnet.getCidr());
@@ -140,15 +142,15 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
         }
         if (subnet.getIpV6RaMode() != null) {
             final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper = DHCPV6_MAP.inverse();
-            subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
+            subnetBuilder.setIpv6RaMode(mapper.get(subnet.getIpV6RaMode()));
         }
         if (subnet.getIpV6AddressMode() != null) {
             final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper = DHCPV6_MAP.inverse();
-            subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
+            subnetBuilder.setIpv6AddressMode(mapper.get(subnet.getIpV6AddressMode()));
         }
         subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
         if (subnet.getAllocationPools() != null) {
-            final List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
+            final List<AllocationPools> allocationPools = new ArrayList<>();
             for (final NeutronSubnetIPAllocationPool allocationPool : subnet.getAllocationPools()) {
                 final AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
                 builder.setStart(new IpAddress(allocationPool.getPoolStart().toCharArray()));
@@ -159,7 +161,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             subnetBuilder.setAllocationPools(allocationPools);
         }
         if (subnet.getDnsNameservers() != null) {
-            final List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
+            final List<IpAddress> dnsNameServers = new ArrayList<>();
             for (final String dnsNameServer : subnet.getDnsNameservers()) {
                 final IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
                 dnsNameServers.add(ipAddress);
@@ -167,7 +169,7 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             subnetBuilder.setDnsNameservers(dnsNameServers);
         }
         if (subnet.getHostRoutes() != null) {
-            final List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
+            final List<HostRoutes> hostRoutes = new ArrayList<>();
             for (final NeutronRoute hostRoute : subnet.getHostRoutes()) {
                 final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
                 hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
@@ -185,6 +187,13 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     }
 
     @Override
+    protected Subnet toMd(String uuid) {
+        final SubnetBuilder subnetBuilder = new SubnetBuilder();
+        subnetBuilder.setUuid(toUuid(uuid));
+        return subnetBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
         return InstanceIdentifier.create(Neutron.class).child(Subnets.class).child(Subnet.class, subnet.getKey());
     }
@@ -192,12 +201,5 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     @Override
     protected InstanceIdentifier<Subnets> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(Subnets.class);
-    }
-
-    @Override
-    protected Subnet toMd(String uuid) {
-        final SubnetBuilder subnetBuilder = new SubnetBuilder();
-        subnetBuilder.setUuid(toUuid(uuid));
-        return subnetBuilder.build();
     }
 }
