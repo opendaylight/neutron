@@ -39,37 +39,34 @@ public class NeutronLogger implements AutoCloseable {
         this.db = Preconditions.checkNotNull(db, "null db");
     }
 
-    private <T extends DataObject>
-        void formatModification(@Nonnull final StringBuilder messageBuilder,
-                                @Nonnull final DataObjectModification<T> objectModification) {
+    private <T extends DataObject> void formatModification(@Nonnull final StringBuilder messageBuilder,
+            @Nonnull final DataObjectModification<T> objectModification) {
         final String typeName = objectModification.getDataType().getSimpleName();
 
         switch (objectModification.getModificationType()) {
-            case SUBTREE_MODIFIED:
-                for (final DataObjectModification<? extends DataObject> child :
-                             objectModification.getModifiedChildren()) {
-                    formatModification(messageBuilder, child);
-                }
-                break;
-            case WRITE:
-                messageBuilder.append("\n");
-                messageBuilder.append("WRITE: type: ").append(typeName).append("\n");
-                final T dataAfter = objectModification.getDataAfter();
-                messageBuilder.append(dataAfter.toString());
-                break;
-            case DELETE:
-                messageBuilder.append("\n");
-                messageBuilder.append("DELETE: ").append(typeName);
-                break;
-            default:
-                LOG.warn("unknown modification type: {}", typeName);
-                break;
+        case SUBTREE_MODIFIED:
+            for (final DataObjectModification<? extends DataObject> child : objectModification.getModifiedChildren()) {
+                formatModification(messageBuilder, child);
+            }
+            break;
+        case WRITE:
+            messageBuilder.append("\n");
+            messageBuilder.append("WRITE: type: ").append(typeName).append("\n");
+            final T dataAfter = objectModification.getDataAfter();
+            messageBuilder.append(dataAfter.toString());
+            break;
+        case DELETE:
+            messageBuilder.append("\n");
+            messageBuilder.append("DELETE: ").append(typeName);
+            break;
+        default:
+            LOG.warn("unknown modification type: {}", typeName);
+            break;
         }
     }
 
-    private <T extends DataObject>
-        void formatChanges(@Nonnull final StringBuilder messageBuilder,
-                           @Nonnull final Collection<DataTreeModification<T>> changes) {
+    private <T extends DataObject> void formatChanges(@Nonnull final StringBuilder messageBuilder,
+            @Nonnull final Collection<DataTreeModification<T>> changes) {
         for (DataTreeModification<T> modification : changes) {
             final DataTreeIdentifier<T> identifier = modification.getRootPath();
             final LogicalDatastoreType datastoreType = identifier.getDatastoreType();
@@ -103,8 +100,8 @@ public class NeutronLogger implements AutoCloseable {
         LOG.info("Register listener for Neutron model data changes");
         InstanceIdentifier<Neutron> instanceId = Preconditions.checkNotNull(InstanceIdentifier.create(Neutron.class));
 
-        DataTreeIdentifier<Neutron> configurationDataTreeId =
-            new DataTreeIdentifier<>(LogicalDatastoreType.CONFIGURATION, instanceId);
+        DataTreeIdentifier<Neutron> configurationDataTreeId = new DataTreeIdentifier<>(
+                LogicalDatastoreType.CONFIGURATION, instanceId);
         configurationDataTreeChangeListener = new ClusteredDataTreeChangeListener<Neutron>() {
             @Override
             public void onDataTreeChanged(Collection<DataTreeModification<Neutron>> changes) {
@@ -112,10 +109,10 @@ public class NeutronLogger implements AutoCloseable {
             }
         };
         configurationRegisteredListener = db.registerDataTreeChangeListener(configurationDataTreeId,
-                                                                            configurationDataTreeChangeListener);
+                configurationDataTreeChangeListener);
 
-        DataTreeIdentifier<Neutron> operationalDataTreeId =
-            new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL, instanceId);
+        DataTreeIdentifier<
+                Neutron> operationalDataTreeId = new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL, instanceId);
         operationalDataTreeChangeListener = new ClusteredDataTreeChangeListener<Neutron>() {
             @Override
             public void onDataTreeChanged(Collection<DataTreeModification<Neutron>> changes) {
@@ -123,7 +120,7 @@ public class NeutronLogger implements AutoCloseable {
             }
         };
         operationalRegisteredListener = db.registerDataTreeChangeListener(operationalDataTreeId,
-                                                                          operationalDataTreeChangeListener);
+                operationalDataTreeChangeListener);
     }
 
     @Override
