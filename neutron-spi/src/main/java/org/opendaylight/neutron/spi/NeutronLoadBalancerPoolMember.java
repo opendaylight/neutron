@@ -20,28 +20,26 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerPoolMember
-    extends NeutronObject
-    implements Serializable, INeutronObject {
+public class NeutronLoadBalancerPoolMember extends NeutronObject implements Serializable, INeutronObject {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * TODO: Plumb into LBaaS Pool. Members are nested underneath Pool CRUD.
      */
-    @XmlElement (name = "address")
+    @XmlElement(name = "address")
     String poolMemberAddress;
 
-    @XmlElement (name = "protocol_port")
+    @XmlElement(name = "protocol_port")
     Integer poolMemberProtoPort;
 
-    @XmlElement (name = "admin_state_up")
+    @XmlElement(name = "admin_state_up")
     Boolean poolMemberAdminStateIsUp;
 
-    @XmlElement (name = "weight")
+    @XmlElement(name = "weight")
     Integer poolMemberWeight;
 
-    @XmlElement (name = "subnet_id")
+    @XmlElement(name = "subnet_id")
     String poolMemberSubnetID;
 
     String poolID;
@@ -115,31 +113,28 @@ public class NeutronLoadBalancerPoolMember
             if (s.equals("address")) {
                 ans.setPoolMemberAddress(this.getPoolMemberAddress());
             }
-            if(s.equals("protocol_port")) {
+            if (s.equals("protocol_port")) {
                 ans.setPoolMemberProtoPort(this.getPoolMemberProtoPort());
             }
             if (s.equals("admin_state_up")) {
                 ans.setPoolMemberAdminStateIsUp(poolMemberAdminStateIsUp);
             }
-            if(s.equals("weight")) {
+            if (s.equals("weight")) {
                 ans.setPoolMemberWeight(this.getPoolMemberWeight());
             }
-            if(s.equals("subnet_id")) {
+            if (s.equals("subnet_id")) {
                 ans.setPoolMemberSubnetID(this.getPoolMemberSubnetID());
             }
         }
         return ans;
     }
-    @Override public String toString() {
-        return "NeutronLoadBalancerPoolMember{" +
-                "poolMemberID='" + uuid + '\'' +
-                ", poolID='" + poolID + '\'' +
-                ", poolMemberTenantID='" + tenantID + '\'' +
-                ", poolMemberAddress='" + poolMemberAddress + '\'' +
-                ", poolMemberProtoPort=" + poolMemberProtoPort +
-                ", poolMemberAdminStateIsUp=" + poolMemberAdminStateIsUp +
-                ", poolMemberWeight=" + poolMemberWeight +
-                ", poolMemberSubnetID='" + poolMemberSubnetID + '\'' +
-                '}';
+
+    @Override
+    public String toString() {
+        return "NeutronLoadBalancerPoolMember{" + "poolMemberID='" + uuid + '\'' + ", poolID='" + poolID + '\''
+                + ", poolMemberTenantID='" + tenantID + '\'' + ", poolMemberAddress='" + poolMemberAddress + '\''
+                + ", poolMemberProtoPort=" + poolMemberProtoPort + ", poolMemberAdminStateIsUp="
+                + poolMemberAdminStateIsUp + ", poolMemberWeight=" + poolMemberWeight + ", poolMemberSubnetID='"
+                + poolMemberSubnetID + '\'' + '}';
     }
 }

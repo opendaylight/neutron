@@ -13,8 +13,7 @@ package org.opendaylight.neutron.spi;
  *
  */
 
-public interface INeutronLoadBalancerListenerCRUD
-    extends INeutronCRUD<NeutronLoadBalancerListener> {
+public interface INeutronLoadBalancerListenerCRUD extends INeutronCRUD<NeutronLoadBalancerListener> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

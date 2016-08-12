@@ -13,8 +13,7 @@ package org.opendaylight.neutron.spi;
  *
  */
 
-public interface INeutronSubnetCRUD
-    extends INeutronCRUD<NeutronSubnet> {
+public interface INeutronSubnetCRUD extends INeutronCRUD<NeutronSubnet> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

@@ -22,8 +22,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 public class NeutronResourceMapPropertyAdapter extends XmlAdapter<Object, Map<String, String>> {
-    private static final Logger LOGGER = LoggerFactory
-        .getLogger(NeutronResourceMapPropertyAdapter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronResourceMapPropertyAdapter.class);
 
     @Override
     public Map<String, String> unmarshal(Object domTree) {

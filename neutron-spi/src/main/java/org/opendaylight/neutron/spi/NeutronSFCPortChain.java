@@ -112,12 +112,8 @@ public class NeutronSFCPortChain extends NeutronObject implements Serializable, 
 
     @Override
     public String toString() {
-        return "NeutronSFCPortChain[" +
-                "tenantID='" + tenantID + '\'' +
-                ", name='" + name + '\'' +
-                ", portPairGroupsUUID=" + portPairGroupsUUID +
-                ", flowClassifiersUUID='" + flowClassifiersUUID + '\'' +
-                ", chainParameters=" + chainParameters +
-                ']';
+        return "NeutronSFCPortChain[" + "tenantID='" + tenantID + '\'' + ", name='" + name + '\''
+                + ", portPairGroupsUUID=" + portPairGroupsUUID + ", flowClassifiersUUID='" + flowClassifiersUUID + '\''
+                + ", chainParameters=" + chainParameters + ']';
     }
 }

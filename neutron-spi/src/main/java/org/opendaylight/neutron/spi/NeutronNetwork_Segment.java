@@ -24,15 +24,15 @@ public class NeutronNetwork_Segment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //    @XmlElement (defaultValue="flat", name="provider:network_type")
-    @XmlElement (defaultValue="flat", namespace="provider", name="network_type")
+    @XmlElement(defaultValue = "flat", namespace = "provider", name = "network_type")
     String providerNetworkType;
 
     //    @XmlElement (name="provider:physical_network")
-    @XmlElement (namespace="provider", name="physical_network")
+    @XmlElement(namespace = "provider", name = "physical_network")
     String providerPhysicalNetwork;
 
     //    @XmlElement (name="provider:segmentation_id")
-    @XmlElement (namespace="provider", name="segmentation_id")
+    @XmlElement(namespace = "provider", name = "segmentation_id")
     String providerSegmentationID;
 
     public NeutronNetwork_Segment() {
@@ -64,10 +64,8 @@ public class NeutronNetwork_Segment implements Serializable {
 
     @Override
     public String toString() {
-        return "NeutronNetwork_Segment [ " +
-               ", providerNetworkType=" + providerNetworkType +
-               ", providerPhysicalNetwork=" + providerPhysicalNetwork +
-               ", providerSegmentationID=" + providerSegmentationID + "]";
+        return "NeutronNetwork_Segment [ " + ", providerNetworkType=" + providerNetworkType
+                + ", providerPhysicalNetwork=" + providerPhysicalNetwork + ", providerSegmentationID="
+                + providerSegmentationID + "]";
     }
 }
-

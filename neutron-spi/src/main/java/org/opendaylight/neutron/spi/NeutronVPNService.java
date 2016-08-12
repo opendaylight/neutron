@@ -24,19 +24,19 @@ public class NeutronVPNService extends NeutronObject implements Serializable, IN
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "router_id")
+    @XmlElement(name = "router_id")
     String routerUUID;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String status;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String name;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name = "subnet_id")
+    @XmlElement(name = "subnet_id")
     String subnetUUID;
 
     public NeutronVPNService() {
@@ -66,7 +66,9 @@ public class NeutronVPNService extends NeutronObject implements Serializable, IN
         this.name = name;
     }
 
-    public Boolean getAdminStateUp() { return adminStateUp; }
+    public Boolean getAdminStateUp() {
+        return adminStateUp;
+    }
 
     public void setAdminStateUp(boolean newValue) {
         adminStateUp = newValue;

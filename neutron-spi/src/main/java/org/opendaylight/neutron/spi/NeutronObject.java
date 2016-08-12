@@ -22,7 +22,7 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 public class NeutronObject extends Neutron_ID implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "tenant_id")
+    @XmlElement(name = "tenant_id")
     String tenantID;
 
     public NeutronObject() {

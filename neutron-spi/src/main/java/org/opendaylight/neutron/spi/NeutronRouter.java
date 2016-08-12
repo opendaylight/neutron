@@ -24,25 +24,25 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String name;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String status;
 
-    @XmlElement (name = "external_gateway_info", nillable = true)
+    @XmlElement(name = "external_gateway_info", nillable = true)
     NeutronRouter_NetworkReference externalGatewayInfo;
 
-    @XmlElement (name = "distributed")
+    @XmlElement(name = "distributed")
     Boolean distributed;
 
-    @XmlElement (name = "gw_port_id", nillable = true)
+    @XmlElement(name = "gw_port_id", nillable = true)
     String gatewayPortId;
 
-    @XmlElement (name = "routes")
+    @XmlElement(name = "routes")
     List<NeutronRoute> routes;
 
     public NeutronRouter() {
@@ -63,7 +63,9 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
         return adminStateUp;
     }
 
-    public Boolean getAdminStateUp() { return adminStateUp; }
+    public Boolean getAdminStateUp() {
+        return adminStateUp;
+    }
 
     public void setAdminStateUp(Boolean newValue) {
         adminStateUp = newValue;
@@ -147,7 +149,7 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
             if (s.equals("gw_port_id")) {
                 ans.setGatewayPortId(this.getGatewayPortId());
             }
-            if (s.equals("routes")){
+            if (s.equals("routes")) {
                 ans.setRoutes(this.getRoutes());
             }
         }
@@ -161,17 +163,9 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
 
     @Override
     public String toString() {
-        return "NeutronRouter [" +
-            "id=" + uuid +
-            ", name=" + name +
-            ", adminStateUp=" + adminStateUp +
-            ", status=" + status +
-            ", tenantID=" + tenantID +
-            ", external_gateway_info=" + externalGatewayInfo +
-            ", distributed=" + distributed +
-            ", gw_port_id=" + gatewayPortId +
-            ", routes=" + routes +
-            "]";
+        return "NeutronRouter [" + "id=" + uuid + ", name=" + name + ", adminStateUp=" + adminStateUp + ", status="
+                + status + ", tenantID=" + tenantID + ", external_gateway_info=" + externalGatewayInfo
+                + ", distributed=" + distributed + ", gw_port_id=" + gatewayPortId + ", routes=" + routes + "]";
     }
 
 }

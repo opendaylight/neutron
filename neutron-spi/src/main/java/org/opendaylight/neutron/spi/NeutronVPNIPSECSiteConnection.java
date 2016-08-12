@@ -24,49 +24,49 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String name;
 
-    @XmlElement (name = "peer_address")
+    @XmlElement(name = "peer_address")
     String peerAddress;
 
-    @XmlElement (name = "peer_id")
+    @XmlElement(name = "peer_id")
     String peerID;
 
-    @XmlElement (name = "peer_cidrs")
+    @XmlElement(name = "peer_cidrs")
     List<String> peerCidrs;
 
-    @XmlElement (name = "route_mode")
+    @XmlElement(name = "route_mode")
     String routeMode;
 
-    @XmlElement (name = "mtu")
+    @XmlElement(name = "mtu")
     Integer mtu;
 
-    @XmlElement (name = "auth_mode")
+    @XmlElement(name = "auth_mode")
     String authMode;
 
-    @XmlElement (name = "psk")
+    @XmlElement(name = "psk")
     String preSharedKey;
 
-    @XmlElement (name = "initiator")
+    @XmlElement(name = "initiator")
     String initiator;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String status;
 
-    @XmlElement (name = "ikepolicy_id")
+    @XmlElement(name = "ikepolicy_id")
     String ikePolicyID;
 
-    @XmlElement (name = "ipsecpolicy_id")
+    @XmlElement(name = "ipsecpolicy_id")
     String ipsecPolicyID;
 
-    @XmlElement (name = "vpnservice_id")
+    @XmlElement(name = "vpnservice_id")
     String vpnServiceID;
 
-    @XmlElement (name = "dpd")
+    @XmlElement(name = "dpd")
     NeutronVPNDeadPeerDetection deadPeerDetection;
 
     public NeutronVPNIPSECSiteConnection() {
@@ -144,7 +144,9 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
         this.initiator = initiator;
     }
 
-    public Boolean getAdminStateUp() { return adminStateUp; }
+    public Boolean getAdminStateUp() {
+        return adminStateUp;
+    }
 
     public void setAdminStateUp(boolean newValue) {
         adminStateUp = newValue;
@@ -257,10 +259,10 @@ public class NeutronVPNIPSECSiteConnection extends NeutronObject implements Seri
     @Override
     public String toString() {
         return "NeutronVPNIPSECSiteConnection{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
-                + name + '\'' + ", peerAddress=" + peerAddress + ", peerID='" + peerID
-                + '\'' + ", routeMode='" + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\''
-                + ", preSharedKey='" + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp="
-                + adminStateUp + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\''
-                + ", ipsecPolicyID='" + ipsecPolicyID + '\'' + ", vpnServiceID='" + vpnServiceID + '\'' + '}';
+                + name + '\'' + ", peerAddress=" + peerAddress + ", peerID='" + peerID + '\'' + ", routeMode='"
+                + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\'' + ", preSharedKey='"
+                + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp=" + adminStateUp
+                + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\'' + ", ipsecPolicyID='"
+                + ipsecPolicyID + '\'' + ", vpnServiceID='" + vpnServiceID + '\'' + '}';
     }
 }

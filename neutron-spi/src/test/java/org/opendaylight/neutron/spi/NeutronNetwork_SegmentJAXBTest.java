@@ -13,10 +13,8 @@ import org.junit.Test;
 
 public class NeutronNetwork_SegmentJAXBTest {
 
-    private static final String NeutronNetwork_Segment_sourceJson = "{ "
-            + "\"provider:network_type\": \"vlan\", "
-            + "\"provider:physical_network\": \"physnet1\", "
-            + "\"provider:segmentation_id\": \"1001\" }";
+    private static final String NeutronNetwork_Segment_sourceJson = "{ " + "\"provider:network_type\": \"vlan\", "
+            + "\"provider:physical_network\": \"physnet1\", " + "\"provider:segmentation_id\": \"1001\" }";
 
     @Test
     public void test_NeutronNetwork_Segment_JAXB() {

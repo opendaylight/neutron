@@ -16,12 +16,11 @@ import org.junit.Test;
 
 public class NeutronPortQosJAXBTest {
 
-    private static final String NeutronPortQosEnabled_sourceJson = "{ "
-            + "\"status\": \"ACTIVE\", "
-            + "\"name\": \"net1\", "
-            + "\"admin_state_up\": true, "
+    private static final String NeutronPortQosEnabled_sourceJson = "{ " + "\"status\": \"ACTIVE\", "
+            + "\"name\": \"net1\", " + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
-            + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , \"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ],"
+            + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
+            + "\"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ],"
             + "\"binding:vif_details\": {\"port_filter\": \"true\" , \"ovs_hybrid_plug\": \"false\" }, "
             + "\"extra_dhcp_opts\": [\"\"], " + "\"security_groups\": [\"\"], " + "\"allowed_address_pairs\": [\"\"], "
             + "\"device_id\": \"257614cc-e178-4c92-9c61-3b28d40eca44\", " + "\"device_owner\": \"\", "
@@ -35,12 +34,13 @@ public class NeutronPortQosJAXBTest {
     public void test_PortQosEnabled_JAXB() throws JAXBException {
         NeutronPort testObject = new NeutronPort();
 
-        NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject, NeutronPortQosEnabled_sourceJson);
+        NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject,
+                NeutronPortQosEnabled_sourceJson);
         Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());
 
-        Assert.assertEquals("NeutronPort JAXB Test 2: Testing tenant_id failed",
-                "9bacb3c5d39d41a79512987f338cf177", neutronObject.getTenantID());
+        Assert.assertEquals("NeutronPort JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
+                neutronObject.getTenantID());
 
         Assert.assertEquals("NeutronPort JAXB Test 3: Testing network_id failed",
                 "e9330b1f-a2ef-4160-a991-169e56ab17f5", neutronObject.getNetworkUUID());
@@ -70,8 +70,7 @@ public class NeutronPortQosJAXBTest {
                 allowedAddressPairs.size());
 
         Map<String, String> vifDetails = neutronObject.getVIFDetails();
-        Assert.assertEquals("NeutronPort JAXB Test 9.1: Testing vif_details list length failed", 2,
-                vifDetails.size());
+        Assert.assertEquals("NeutronPort JAXB Test 9.1: Testing vif_details list length failed", 2, vifDetails.size());
 
         Assert.assertEquals("NeutronPort JAXB Test 9.2: Testing port_filter value failed", "true",
                 vifDetails.get("port_filter"));
@@ -102,7 +101,7 @@ public class NeutronPortQosJAXBTest {
         Assert.assertEquals("NeutronPort JAXB Test 17: Testing binding:host_id failed", "",
                 neutronObject.getBindinghostID());
 
-        Assert.assertEquals("NeutronPort JAXB Test 18: Testing qos_policy_id failed", "d6220bbb-35f3-48ab-8eae-69c60aef3546",
-                neutronObject.getQosPolicyId());
+        Assert.assertEquals("NeutronPort JAXB Test 18: Testing qos_policy_id failed",
+                "d6220bbb-35f3-48ab-8eae-69c60aef3546", neutronObject.getQosPolicyId());
     }
 }

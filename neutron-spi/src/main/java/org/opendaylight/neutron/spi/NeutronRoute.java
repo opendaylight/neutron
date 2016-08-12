@@ -31,7 +31,8 @@ public class NeutronRoute implements Serializable {
     /**
      *  HostRoute constructor
      */
-    public NeutronRoute() { }
+    public NeutronRoute() {
+    }
 
     public String getDestination() {
         return destination;
@@ -51,9 +52,7 @@ public class NeutronRoute implements Serializable {
 
     @Override
     public String toString() {
-        return "NeutronRoute [" +
-            "destination=" + destination +
-            ", nextHop=" + nextHop + "]";
+        return "NeutronRoute [" + "destination=" + destination + ", nextHop=" + nextHop + "]";
     }
 
 }

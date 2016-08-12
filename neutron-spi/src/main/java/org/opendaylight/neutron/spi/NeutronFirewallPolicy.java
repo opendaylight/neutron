@@ -37,13 +37,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronFirewallPolicy extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String firewallPolicyName;
 
-    @XmlElement (defaultValue = "false", name = "shared")
+    @XmlElement(defaultValue = "false", name = "shared")
     Boolean firewallPolicyIsShared;
 
-    @XmlElement (defaultValue = "false", name = "audited")
+    @XmlElement(defaultValue = "false", name = "audited")
     Boolean firewallPolicyIsAudited;
 
     public Boolean getFirewallPolicyIsAudited() {
@@ -96,12 +96,8 @@ public class NeutronFirewallPolicy extends NeutronObject implements Serializable
 
     @Override
     public String toString() {
-        return "NeutronFirewallPolicy{" +
-            "firewallPolicyUUID='" + uuid + '\'' +
-            ", firewallPolicyTenantID='" + tenantID + '\'' +
-            ", firewallPolicyName='" + firewallPolicyName + '\'' +
-            ", firewallPolicyIsShared=" + firewallPolicyIsShared +
-            ", firewallPolicyIsAudited='" + firewallPolicyIsAudited + '\'' +
-            '}';
+        return "NeutronFirewallPolicy{" + "firewallPolicyUUID='" + uuid + '\'' + ", firewallPolicyTenantID='" + tenantID
+                + '\'' + ", firewallPolicyName='" + firewallPolicyName + '\'' + ", firewallPolicyIsShared="
+                + firewallPolicyIsShared + ", firewallPolicyIsAudited='" + firewallPolicyIsAudited + '\'' + '}';
     }
 }

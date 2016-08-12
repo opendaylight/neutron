@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "l2gateway")
-public class NeutronL2gateway extends NeutronObject implements Serializable, INeutronObject{
+public class NeutronL2gateway extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "name")
@@ -66,12 +66,8 @@ public class NeutronL2gateway extends NeutronObject implements Serializable, INe
 
     @Override
     public String toString() {
-        return "NeutronL2Gateway [" +
-                "id = " + uuid +
-                ", name = " + l2gatewayName +
-                ", tenant_id = " + tenantID +
-                ", devices = " + neutronL2gatewayDevices +
-                "]";
+        return "NeutronL2Gateway [" + "id = " + uuid + ", name = " + l2gatewayName + ", tenant_id = " + tenantID
+                + ", devices = " + neutronL2gatewayDevices + "]";
     }
 
 }

@@ -47,18 +47,18 @@ public class NeutronSecurityGroup extends NeutronObject implements Serializable,
     }
 
     public NeutronSecurityGroup extractFields(List<String> fields) {
-        NeutronSecurityGroup ans = new NeutronSecurityGroup ();
-        Iterator<String> i = fields.iterator ();
-        while (i.hasNext ()) {
-            String s = i.next ();
-            if (s.equals ("id")) {
-                ans.setID (this.getID ());
+        NeutronSecurityGroup ans = new NeutronSecurityGroup();
+        Iterator<String> i = fields.iterator();
+        while (i.hasNext()) {
+            String s = i.next();
+            if (s.equals("id")) {
+                ans.setID(this.getID());
             }
-            if (s.equals ("name")) {
-                ans.setSecurityGroupName (this.getSecurityGroupName ());
+            if (s.equals("name")) {
+                ans.setSecurityGroupName(this.getSecurityGroupName());
             }
-            if (s.equals ("tenant_id")) {
-                ans.setTenantID (this.getTenantID ());
+            if (s.equals("tenant_id")) {
+                ans.setTenantID(this.getTenantID());
             }
         }
         return ans;
@@ -66,11 +66,8 @@ public class NeutronSecurityGroup extends NeutronObject implements Serializable,
 
     @Override
     public String toString() {
-        return "NeutronSecurityGroup{" +
-                "securityGroupUUID='" + uuid + '\'' +
-                ", securityGroupName='" + securityGroupName + '\'' +
-                ", securityGroupTenantID='" + tenantID + '\'' +
-                "]";
+        return "NeutronSecurityGroup{" + "securityGroupUUID='" + uuid + '\'' + ", securityGroupName='"
+                + securityGroupName + '\'' + ", securityGroupTenantID='" + tenantID + '\'' + "]";
     }
 
     @Override

@@ -25,44 +25,44 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
 
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String networkName;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement (defaultValue = "false", name = "shared")
+    @XmlElement(defaultValue = "false", name = "shared")
     Boolean shared;
 
     //    @XmlElement (defaultValue = "false", name = "router:external")
-    @XmlElement (defaultValue="false", namespace="router", name="external")
+    @XmlElement(defaultValue = "false", namespace = "router", name = "external")
     Boolean routerExternal;
 
     //    @XmlElement (defaultValue = "flat", name = "provider:network_type")
-    @XmlElement (namespace="provider", name="network_type")
+    @XmlElement(namespace = "provider", name = "network_type")
     String providerNetworkType;
 
     //    @XmlElement (name = "provider:physical_network")
-    @XmlElement (namespace="provider", name="physical_network")
+    @XmlElement(namespace = "provider", name = "physical_network")
     String providerPhysicalNetwork;
 
     //    @XmlElement (name = "provider:segmentation_id")
-    @XmlElement (namespace="provider", name="segmentation_id")
+    @XmlElement(namespace = "provider", name = "segmentation_id")
     String providerSegmentationID;
 
-    @XmlElement (name = "status")
+    @XmlElement(name = "status")
     String status;
 
-    @XmlElement (name="segments")
+    @XmlElement(name = "segments")
     List<NeutronNetwork_Segment> segments;
 
-    @XmlElement (name="vlan_transparent")
+    @XmlElement(name = "vlan_transparent")
     Boolean vlanTransparent;
 
-    @XmlElement (name="mtu")
+    @XmlElement(name = "mtu")
     Integer mtu;
 
-    @XmlElement (name = "qos_policy_id")
+    @XmlElement(name = "qos_policy_id")
     String qosPolicyId;
 
     /* This attribute lists the ports associated with an instance
@@ -103,23 +103,33 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
         return adminStateUp;
     }
 
-    public Boolean getAdminStateUp() { return adminStateUp; }
+    public Boolean getAdminStateUp() {
+        return adminStateUp;
+    }
 
     public void setAdminStateUp(boolean newValue) {
         adminStateUp = newValue;
     }
 
-    public boolean isShared() { return shared; }
+    public boolean isShared() {
+        return shared;
+    }
 
-    public Boolean getShared() { return shared; }
+    public Boolean getShared() {
+        return shared;
+    }
 
     public void setShared(boolean newValue) {
         shared = newValue;
     }
 
-    public boolean isRouterExternal() { return routerExternal; }
+    public boolean isRouterExternal() {
+        return routerExternal;
+    }
 
-    public Boolean getRouterExternal() { return routerExternal; }
+    public Boolean getRouterExternal() {
+        return routerExternal;
+    }
 
     public void setRouterExternal(boolean newValue) {
         routerExternal = newValue;
@@ -244,12 +254,10 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
 
     @Override
     public String toString() {
-        return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + networkName + ", adminStateUp="
-                + adminStateUp + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
+        return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + networkName + ", adminStateUp=" + adminStateUp
+                + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
-                + ", qosPolicyId =" + qosPolicyId
-                + ", segments = " + segments + "]";
+                + ", qosPolicyId =" + qosPolicyId + ", segments = " + segments + "]";
     }
 }
-

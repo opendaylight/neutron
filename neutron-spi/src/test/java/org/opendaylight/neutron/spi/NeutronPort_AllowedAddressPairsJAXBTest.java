@@ -14,8 +14,7 @@ import org.junit.Test;
 public class NeutronPort_AllowedAddressPairsJAXBTest {
 
     private static final String NeutronPort_AllowedAddressPairs_sourceJson = "{ "
-            + "\"ip_address\": \"192.168.199.1\", "
-            + "\"mac_address\": \"fa:16:3e:c9:cb:f0\" }";
+            + "\"ip_address\": \"192.168.199.1\", " + "\"mac_address\": \"fa:16:3e:c9:cb:f0\" }";
 
     @Test
     public void test_NeutronPort_AllowedAddressPairs_JAXB() {

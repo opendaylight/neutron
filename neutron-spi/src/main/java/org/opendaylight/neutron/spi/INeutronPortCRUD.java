@@ -13,8 +13,7 @@ package org.opendaylight.neutron.spi;
  *
  */
 
-public interface INeutronPortCRUD
-    extends INeutronCRUD<NeutronPort> {
+public interface INeutronPortCRUD extends INeutronCRUD<NeutronPort> {
     // Nothing Here.
     // This class is defined to use reflection.
 }

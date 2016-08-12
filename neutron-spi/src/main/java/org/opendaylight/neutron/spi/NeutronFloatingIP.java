@@ -25,22 +25,22 @@ public class NeutronFloatingIP extends NeutronObject implements Serializable, IN
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "floating_network_id")
+    @XmlElement(name = "floating_network_id")
     String floatingNetworkUUID;
 
-    @XmlElement (name = "port_id")
+    @XmlElement(name = "port_id")
     String portUUID;
 
-    @XmlElement (name = "fixed_ip_address")
+    @XmlElement(name = "fixed_ip_address")
     String fixedIPAddress;
 
-    @XmlElement (name = "floating_ip_address")
+    @XmlElement(name = "floating_ip_address")
     String floatingIPAddress;
 
-    @XmlElement (name="router_id")
+    @XmlElement(name = "router_id")
     String routerUUID;
 
-    @XmlElement (name="status")
+    @XmlElement(name = "status")
     String status;
 
     public NeutronFloatingIP() {
@@ -139,15 +139,9 @@ public class NeutronFloatingIP extends NeutronObject implements Serializable, IN
 
     @Override
     public String toString() {
-        return "NeutronFloatingIP{" +
-            "fipUUID='" + uuid + '\'' +
-            ", fipFloatingNetworkId='" + floatingNetworkUUID + '\'' +
-            ", fipPortUUID='" + portUUID + '\'' +
-            ", fipFixedIPAddress='" + fixedIPAddress + '\'' +
-            ", fipFloatingIPAddress=" + floatingIPAddress +
-            ", fipTenantId='" + tenantID + '\'' +
-            ", fipRouterId='" + routerUUID + '\'' +
-            ", fipStatus='" + status + '\'' +
-            '}';
+        return "NeutronFloatingIP{" + "fipUUID='" + uuid + '\'' + ", fipFloatingNetworkId='" + floatingNetworkUUID
+                + '\'' + ", fipPortUUID='" + portUUID + '\'' + ", fipFixedIPAddress='" + fixedIPAddress + '\''
+                + ", fipFloatingIPAddress=" + floatingIPAddress + ", fipTenantId='" + tenantID + '\''
+                + ", fipRouterId='" + routerUUID + '\'' + ", fipStatus='" + status + '\'' + '}';
     }
 }

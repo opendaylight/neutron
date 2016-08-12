@@ -12,10 +12,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronRouter_InterfaceJAXBTest {
-    private static final String NeutronRouter_Interface_sourceJson = "{" +
-        "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", " +
-        "\"port_id\": \"65c0ee9f-d634-4522-8954-51021b570b0d\", " +
-        "\"id\": \"7370da7f-234e-3f7a-ed12-e384131d886d\" }";
+    private static final String NeutronRouter_Interface_sourceJson = "{"
+            + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
+            + "\"port_id\": \"65c0ee9f-d634-4522-8954-51021b570b0d\", "
+            + "\"id\": \"7370da7f-234e-3f7a-ed12-e384131d886d\" }";
 
     @Test
     public void test_NeutronRouter_Interface_JAXB() {

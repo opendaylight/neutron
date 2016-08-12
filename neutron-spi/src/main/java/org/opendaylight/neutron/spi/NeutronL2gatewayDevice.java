@@ -35,15 +35,13 @@ public class NeutronL2gatewayDevice extends Neutron_ID implements Serializable {
     }
 
     public void setNeutronL2gatewayDeviceInterfaces(
-                    List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces) {
+            List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces) {
         this.neutronL2gatewayDeviceInterfaces = neutronL2gatewayDeviceInterfaces;
     }
+
     @Override
     public String toString() {
-        return "NeutronL2gatewayDevice ["
-                + "id=" + uuid
-                + ", neutronL2gwDeviceInterfaces="
-                + neutronL2gatewayDeviceInterfaces + ", deviceName=" + deviceName
-                + "]";
+        return "NeutronL2gatewayDevice [" + "id=" + uuid + ", neutronL2gwDeviceInterfaces="
+                + neutronL2gatewayDeviceInterfaces + ", deviceName=" + deviceName + "]";
     }
 }

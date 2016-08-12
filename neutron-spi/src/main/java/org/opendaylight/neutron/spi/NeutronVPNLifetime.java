@@ -22,10 +22,10 @@ public class NeutronVPNLifetime implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "units")
+    @XmlElement(name = "units")
     String units;
 
-    @XmlElement (name = "value")
+    @XmlElement(name = "value")
     Integer value;
 
     public NeutronVPNLifetime() {

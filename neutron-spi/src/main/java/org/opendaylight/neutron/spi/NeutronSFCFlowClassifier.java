@@ -221,19 +221,12 @@ public class NeutronSFCFlowClassifier extends NeutronObject implements Serializa
 
     @Override
     public String toString() {
-        return "NeutronSFCFlowClassifier[" +
-                "name='" + name + '\'' +
-                ", ethertype='" + ethertype + '\'' +
-                ", protocol='" + protocol + '\'' +
-                ", sourcePortRangeMin=" + sourcePortRangeMin +
-                ", sourcePortRangeMax=" + sourcePortRangeMax +
-                ", destinationPortRangeMin=" + destinationPortRangeMin +
-                ", destinationPortRangeMax=" + destinationPortRangeMax +
-                ", sourceIpPrefix='" + sourceIpPrefix + '\'' +
-                ", destinationIpPrefix='" + destinationIpPrefix + '\'' +
-                ", logicalSourcePortUUID='" + logicalSourcePortUUID + '\'' +
-                ", logicalDestinationPortUUID='" + logicalDestinationPortUUID + '\'' +
-                ", l7Parameters=" + l7Parameters +
-                ']';
+        return "NeutronSFCFlowClassifier[" + "name='" + name + '\'' + ", ethertype='" + ethertype + '\''
+                + ", protocol='" + protocol + '\'' + ", sourcePortRangeMin=" + sourcePortRangeMin
+                + ", sourcePortRangeMax=" + sourcePortRangeMax + ", destinationPortRangeMin=" + destinationPortRangeMin
+                + ", destinationPortRangeMax=" + destinationPortRangeMax + ", sourceIpPrefix='" + sourceIpPrefix + '\''
+                + ", destinationIpPrefix='" + destinationIpPrefix + '\'' + ", logicalSourcePortUUID='"
+                + logicalSourcePortUUID + '\'' + ", logicalDestinationPortUUID='" + logicalDestinationPortUUID + '\''
+                + ", l7Parameters=" + l7Parameters + ']';
     }
 }

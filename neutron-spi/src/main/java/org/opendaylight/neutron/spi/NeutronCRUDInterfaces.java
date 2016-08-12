@@ -15,8 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class NeutronCRUDInterfaces {
-    private static final Logger LOGGER = LoggerFactory
-            .getLogger(NeutronCRUDInterfaces.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private INeutronNetworkCRUD networkInterface;
     private INeutronSubnetCRUD subnetInterface;
@@ -232,7 +231,8 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronLoadBalancerHealthMonitorCRUD(Object obj) {
-        lbhmInterface = (INeutronLoadBalancerHealthMonitorCRUD) getInstances(INeutronLoadBalancerHealthMonitorCRUD.class, obj);
+        lbhmInterface = (INeutronLoadBalancerHealthMonitorCRUD) getInstances(
+                INeutronLoadBalancerHealthMonitorCRUD.class, obj);
         return this;
     }
 
@@ -262,7 +262,8 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronVPNIPSECSiteConnectionsCRUD(Object obj) {
-        ipsecScInterface = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(INeutronVPNIPSECSiteConnectionsCRUD.class, obj);
+        ipsecScInterface = (INeutronVPNIPSECSiteConnectionsCRUD) getInstances(INeutronVPNIPSECSiteConnectionsCRUD.class,
+                obj);
         return this;
     }
 
@@ -277,31 +278,30 @@ public class NeutronCRUDInterfaces {
     }
 
     public NeutronCRUDInterfaces fetchINeutronL2gatewayConnectionCRUD(Object obj) {
-        l2gatewayConnectionInterface = (INeutronL2gatewayConnectionCRUD) getInstances(INeutronL2gatewayConnectionCRUD.class, obj);
+        l2gatewayConnectionInterface = (INeutronL2gatewayConnectionCRUD) getInstances(
+                INeutronL2gatewayConnectionCRUD.class, obj);
         return this;
     }
 
-    public NeutronCRUDInterfaces fetchINeutronSFCFlowClassifierCRUD (Object obj) {
-        sfcFlowClassifierInterface =
-                (INeutronSFCFlowClassifierCRUD) getInstances(INeutronSFCFlowClassifierCRUD.class, obj);
+    public NeutronCRUDInterfaces fetchINeutronSFCFlowClassifierCRUD(Object obj) {
+        sfcFlowClassifierInterface = (INeutronSFCFlowClassifierCRUD) getInstances(INeutronSFCFlowClassifierCRUD.class,
+                obj);
         return this;
     }
 
-    public NeutronCRUDInterfaces fetchINeutronSFCPortPairCRUD (Object obj) {
-        sfcPortPairInterface =
-                (INeutronSFCPortPairCRUD) getInstances(INeutronSFCPortPairCRUD.class, obj);
+    public NeutronCRUDInterfaces fetchINeutronSFCPortPairCRUD(Object obj) {
+        sfcPortPairInterface = (INeutronSFCPortPairCRUD) getInstances(INeutronSFCPortPairCRUD.class, obj);
         return this;
     }
 
-    public NeutronCRUDInterfaces fetchINeutronSFCPortPairGroupCRUD (Object obj) {
-        sfcPortPairGroupInterface =
-                (INeutronSFCPortPairGroupCRUD) getInstances(INeutronSFCPortPairGroupCRUD.class, obj);
+    public NeutronCRUDInterfaces fetchINeutronSFCPortPairGroupCRUD(Object obj) {
+        sfcPortPairGroupInterface = (INeutronSFCPortPairGroupCRUD) getInstances(INeutronSFCPortPairGroupCRUD.class,
+                obj);
         return this;
     }
 
-    public NeutronCRUDInterfaces fetchINeutronSFCPortChainCRUD (Object obj) {
-        sfcPortChainInterface =
-                (INeutronSFCPortChainCRUD) getInstances(INeutronSFCPortChainCRUD.class, obj);
+    public NeutronCRUDInterfaces fetchINeutronSFCPortChainCRUD(Object obj) {
+        sfcPortChainInterface = (INeutronSFCPortChainCRUD) getInstances(INeutronSFCPortChainCRUD.class, obj);
         return this;
     }
 

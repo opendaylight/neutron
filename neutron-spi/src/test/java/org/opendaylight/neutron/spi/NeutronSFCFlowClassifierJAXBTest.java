@@ -17,44 +17,33 @@ import org.junit.Test;
  */
 public class NeutronSFCFlowClassifierJAXBTest {
 
-    private static final String NeutronSFCFlowClassifier_sourceJson = "{ "
-            + "\"name\": \"flowclassifier1\", "
-            + "\"ethertype\": \"IPv4\", "
-            + "\"protocol\": \"UDP\", "
-            + "\"source_port_range_min\": 100, "
-            + "\"source_port_range_max\": 200, "
-            + "\"destination_port_range_min\": 100, "
-            + "\"destination_port_range_max\": 200, "
-            + "\"source_ip_prefix\": \"10.0.0.0/24\", "
+    private static final String NeutronSFCFlowClassifier_sourceJson = "{ " + "\"name\": \"flowclassifier1\", "
+            + "\"ethertype\": \"IPv4\", " + "\"protocol\": \"UDP\", " + "\"source_port_range_min\": 100, "
+            + "\"source_port_range_max\": 200, " + "\"destination_port_range_min\": 100, "
+            + "\"destination_port_range_max\": 200, " + "\"source_ip_prefix\": \"10.0.0.0/24\", "
             + "\"destination_ip_prefix\": \"11.0.0.0/24\", "
             + "\"logical_source_port\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
-            + "\"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
-            + "\"l7_parameters\": [ "
-            + "{ "
-            + "\"Key\": \"value\" "
-            + "} "
-            + "], "
-            + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
+            + "\"logical_destination_port\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", " + "\"l7_parameters\": [ "
+            + "{ " + "\"Key\": \"value\" " + "} " + "], " + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
     public void test_NeutronSFCFlowClassifier_JAXB() throws JAXBException {
         NeutronSFCFlowClassifier testObject = new NeutronSFCFlowClassifier();
-        NeutronSFCFlowClassifier neutronObject
-                = (NeutronSFCFlowClassifier) JaxbTestHelper.jaxbUnmarshall(testObject
-                , NeutronSFCFlowClassifier_sourceJson);
+        NeutronSFCFlowClassifier neutronObject = (NeutronSFCFlowClassifier) JaxbTestHelper.jaxbUnmarshall(testObject,
+                NeutronSFCFlowClassifier_sourceJson);
 
-        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 1: Testing id failed"
-                , "4e8e5957-649f-477b-9e5b-f1f75b21c03c",neutronObject.getID());
+        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 1: Testing id failed",
+                "4e8e5957-649f-477b-9e5b-f1f75b21c03c", neutronObject.getID());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 2: Testing tenant_id failed",
                 "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
 
-        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 3: Testing ethertype failed",
-                "IPv4", neutronObject.getEthertype());
+        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 3: Testing ethertype failed", "IPv4",
+                neutronObject.getEthertype());
 
-        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 4: Testing protocol failed",
-                "UDP", neutronObject.getProtocol());
+        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 4: Testing protocol failed", "UDP",
+                neutronObject.getProtocol());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 5: Testing source_port_range_min failed",
                 new Integer(100), neutronObject.getSourcePortRangeMin());
@@ -68,8 +57,8 @@ public class NeutronSFCFlowClassifierJAXBTest {
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 8: Testing destination_port_range_max failed",
                 new Integer(200), neutronObject.getDestinationPortRangeMax());
 
-        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 9: Testing source_ip_prefix failed",
-                "10.0.0.0/24", neutronObject.getSourceIpPrefix());
+        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 9: Testing source_ip_prefix failed", "10.0.0.0/24",
+                neutronObject.getSourceIpPrefix());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 10: Testing destination_ip_prefix failed",
                 "11.0.0.0/24", neutronObject.getDestinationIpPrefix());

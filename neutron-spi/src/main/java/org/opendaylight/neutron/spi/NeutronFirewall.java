@@ -38,16 +38,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class NeutronFirewall extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String firewallName;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean firewallAdminStateIsUp;
 
-    @XmlElement (defaultValue = "false", name = "shared")
+    @XmlElement(defaultValue = "false", name = "shared")
     Boolean firewallIsShared;
 
-    @XmlElement (name = "firewall_policy_id")
+    @XmlElement(name = "firewall_policy_id")
     String neutronFirewallPolicyID;
 
     public String getFirewallName() {
@@ -111,13 +111,8 @@ public class NeutronFirewall extends NeutronObject implements Serializable, INeu
 
     @Override
     public String toString() {
-        return "NeutronFirewall{" +
-            "firewallUUID='" + uuid + '\'' +
-            ", firewallTenantID='" + tenantID + '\'' +
-            ", firewallName='" + firewallName + '\'' +
-            ", firewallAdminStateIsUp=" + firewallAdminStateIsUp +
-            ", firewallIsShared=" + firewallIsShared +
-            ", firewallRulePolicyID=" + neutronFirewallPolicyID +
-            '}';
+        return "NeutronFirewall{" + "firewallUUID='" + uuid + '\'' + ", firewallTenantID='" + tenantID + '\''
+                + ", firewallName='" + firewallName + '\'' + ", firewallAdminStateIsUp=" + firewallAdminStateIsUp
+                + ", firewallIsShared=" + firewallIsShared + ", firewallRulePolicyID=" + neutronFirewallPolicyID + '}';
     }
 }

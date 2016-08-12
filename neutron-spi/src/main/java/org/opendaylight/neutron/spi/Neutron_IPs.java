@@ -14,7 +14,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Neutron_IPs implements Serializable {
@@ -29,7 +28,8 @@ public class Neutron_IPs implements Serializable {
     @XmlElement(name = "subnet_id")
     String subnetUUID;
 
-    public Neutron_IPs() { }
+    public Neutron_IPs() {
+    }
 
     public Neutron_IPs(String uuid) {
         subnetUUID = uuid;
@@ -53,8 +53,6 @@ public class Neutron_IPs implements Serializable {
 
     @Override
     public String toString() {
-        return "Neutron_IPs{" +
-               "ipAddress='" + ipAddress + '\'' +
-               ", subnetUUID='" + subnetUUID + '\'' + "}";
+        return "Neutron_IPs{" + "ipAddress='" + ipAddress + '\'' + ", subnetUUID='" + subnetUUID + '\'' + "}";
     }
 }

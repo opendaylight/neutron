@@ -20,24 +20,22 @@ public class NeutronSubnetTest {
         NeutronSubnet objectUT = new NeutronSubnet();
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/24");
-        Assert.assertTrue("isValidCIDR Test 1: Testing valid CIDR (10.18.0.0/24) failed",
-              objectUT.isValidCIDR());
+        Assert.assertTrue("isValidCIDR Test 1: Testing valid CIDR (10.18.0.0/24) failed", objectUT.isValidCIDR());
 
         objectUT.setCidr("10.18.0.0/16");
-        Assert.assertTrue("isValidCIDR Test 2: Testing valid CIDR (10.18.0.0/16) failed",
-              objectUT.isValidCIDR());
+        Assert.assertTrue("isValidCIDR Test 2: Testing valid CIDR (10.18.0.0/16) failed", objectUT.isValidCIDR());
 
         objectUT.setCidr("10.18.0.0/8");
         Assert.assertFalse("isValidCIDR Negative Test 1: Testing invalid CIDR (10.18.0.0/8) failed",
-              objectUT.isValidCIDR());
+                objectUT.isValidCIDR());
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015:0:0:0:0:0:0:0/24");
         Assert.assertTrue("isValidCIDR Test 1: Testing valid V6 CIDR (2015:0:0:0:0:0:0:0/24) failed",
-              objectUT.isValidCIDR());
+                objectUT.isValidCIDR());
         objectUT.setCidr("2015:0:0:0:0:0:0:1/24");
         Assert.assertFalse("isValidCIDR Negative Test 1: Testing invalid CIDR (2015:0:0:0:0:0:0:1) failed",
-              objectUT.isValidCIDR());
+                objectUT.isValidCIDR());
     }
 
     @Test
@@ -55,15 +53,15 @@ public class NeutronSubnetTest {
 
         objectUT.setGatewayIP("10.18.0.1");
         Assert.assertFalse("gatewayIP_Pool_overlap Test 1: test with address below allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+                objectUT.gatewayIP_Pool_overlap());
 
         objectUT.setGatewayIP("10.18.0.4");
         Assert.assertTrue("gatewayIP_Pool_overlap Test 2: test with address in allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+                objectUT.gatewayIP_Pool_overlap());
 
         objectUT.setGatewayIP("10.18.0.7");
         Assert.assertFalse("gatewayIP_Pool_overlap Test 3: test with address above allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+                objectUT.gatewayIP_Pool_overlap());
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
@@ -77,15 +75,15 @@ public class NeutronSubnetTest {
 
         objectUT.setGatewayIP("2015::1");
         Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 1: test with address below allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+                objectUT.gatewayIP_Pool_overlap());
 
         objectUT.setGatewayIP("2015::4");
         Assert.assertTrue("gatewayIP_Pool_overlap v6 Test 2: test with address in allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+                objectUT.gatewayIP_Pool_overlap());
 
         objectUT.setGatewayIP("2015::7");
         Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 3: test with address above allocation pool failed",
-              objectUT.gatewayIP_Pool_overlap());
+                objectUT.gatewayIP_Pool_overlap());
     }
 
     @Test
@@ -95,19 +93,19 @@ public class NeutronSubnetTest {
         objectUT.setCidr("10.18.0.0/24");
 
         Assert.assertFalse("isValidIP Negative Test 1: test of IP address outside of CIDR block failed",
-              objectUT.isValidIP("10.18.1.1"));
+                objectUT.isValidIP("10.18.1.1"));
 
         Assert.assertTrue("isValidIP Test 1: test of IP address within CIDR block failed",
-              objectUT.isValidIP("10.18.0.1"));
+                objectUT.isValidIP("10.18.0.1"));
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
 
         Assert.assertFalse("isValidIP v6 Negative Test 1: test of IP address outside of CIDR block failed",
-              objectUT.isValidIP("2015:0:0:1:0:0:0:1"));
+                objectUT.isValidIP("2015:0:0:1:0:0:0:1"));
 
         Assert.assertTrue("isValidIP v6 Test 1: test of IP address within CIDR block failed",
-              objectUT.isValidIP("2015:0:0:0:1:0:0:1"));
+                objectUT.isValidIP("2015:0:0:0:1:0:0:1"));
     }
 
     @Test
@@ -126,8 +124,7 @@ public class NeutronSubnetTest {
         allocationPool.setPoolEnd("10.18.0.15");
         objectUT.setAllocationPools(aPools);
 
-        Assert.assertEquals("getLowAddr Test 1: test of returned address",
-              "10.18.0.2", objectUT.getLowAddr());
+        Assert.assertEquals("getLowAddr Test 1: test of returned address", "10.18.0.2", objectUT.getLowAddr());
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/24");
@@ -142,7 +139,6 @@ public class NeutronSubnetTest {
         allocationPool.setPoolEnd("2015::15");
         objectUT.setAllocationPools(aPools);
 
-        Assert.assertEquals("getLowAddr v6 Test 1: test of returned address",
-              "2015::2", objectUT.getLowAddr());
+        Assert.assertEquals("getLowAddr v6 Test 1: test of returned address", "2015::2", objectUT.getLowAddr());
     }
 }

@@ -22,10 +22,10 @@ public class NeutronRouter_Interface extends NeutronObject implements Serializab
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "subnet_id")
+    @XmlElement(name = "subnet_id")
     String subnetUUID;
 
-    @XmlElement (name = "port_id")
+    @XmlElement(name = "port_id")
     String portUUID;
 
     public NeutronRouter_Interface() {
@@ -54,10 +54,7 @@ public class NeutronRouter_Interface extends NeutronObject implements Serializab
 
     @Override
     public String toString() {
-        return "NeutronRouterInterface [" +
-            "subnetUUID=" + subnetUUID +
-            ", portUUID=" + portUUID +
-            ", id=" + uuid +
-            ", tenantID=" + tenantID + "]";
+        return "NeutronRouterInterface [" + "subnetUUID=" + subnetUUID + ", portUUID=" + portUUID + ", id=" + uuid
+                + ", tenantID=" + tenantID + "]";
     }
 }

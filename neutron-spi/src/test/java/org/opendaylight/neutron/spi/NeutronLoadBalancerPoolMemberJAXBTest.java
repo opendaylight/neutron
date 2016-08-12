@@ -23,8 +23,8 @@ public class NeutronLoadBalancerPoolMemberJAXBTest {
     public void test_NeutronLoadBalancerPoolMember_JAXB() {
         NeutronLoadBalancerPoolMember dummyObject = new NeutronLoadBalancerPoolMember();
         try {
-            NeutronLoadBalancerPoolMember testObject = (NeutronLoadBalancerPoolMember) JaxbTestHelper.jaxbUnmarshall(
-                    dummyObject, NeutronLoadBalancerPoolMember_sourceJson);
+            NeutronLoadBalancerPoolMember testObject = (NeutronLoadBalancerPoolMember) JaxbTestHelper
+                    .jaxbUnmarshall(dummyObject, NeutronLoadBalancerPoolMember_sourceJson);
             Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 1: Testing id failed",
                     "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 

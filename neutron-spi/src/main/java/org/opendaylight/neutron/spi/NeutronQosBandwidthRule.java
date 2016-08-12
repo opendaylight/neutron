@@ -67,11 +67,8 @@ public class NeutronQosBandwidthRule extends NeutronObject implements Serializab
 
     @Override
     public String toString() {
-        return "qosBandwidthRules{" +
-            "qosBandwidthRuleUUID='" + uuid + '\'' +
-            ", qosBandwidthRuleTenantID='" + tenantID + '\'' +
-            ", qosBandwidthMaxValue='" + maxKbps + '\'' +
-            ", qosBandwidthMaxBurst='" + maxBurstKbps + '\'' +
-            '}';
+        return "qosBandwidthRules{" + "qosBandwidthRuleUUID='" + uuid + '\'' + ", qosBandwidthRuleTenantID='" + tenantID
+                + '\'' + ", qosBandwidthMaxValue='" + maxKbps + '\'' + ", qosBandwidthMaxBurst='" + maxBurstKbps + '\''
+                + '}';
     }
 }

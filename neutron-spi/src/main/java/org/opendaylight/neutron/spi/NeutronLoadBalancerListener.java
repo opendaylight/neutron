@@ -39,30 +39,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerListener
-    extends NeutronObject
-    implements Serializable, INeutronObject {
+public class NeutronLoadBalancerListener extends NeutronObject implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement (name = "default_pool_id")
+    @XmlElement(name = "default_pool_id")
     String neutronLoadBalancerListenerDefaultPoolID;
 
-    @XmlElement (name = "connection_limit")
+    @XmlElement(name = "connection_limit")
     Integer neutronLoadBalancerListenerConnectionLimit;
 
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     String loadBalancerListenerName;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
+    @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerListenerAdminStateIsUp;
 
-    @XmlElement (name = "protocol")
+    @XmlElement(name = "protocol")
     String neutronLoadBalancerListenerProtocol;
 
-    @XmlElement (name = "protocol_port")
+    @XmlElement(name = "protocol_port")
     String neutronLoadBalancerListenerProtocolPort;
 
-    @XmlElement (name = "load_balancers")
+    @XmlElement(name = "load_balancers")
     List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs;
 
     public String getLoadBalancerListenerName() {
@@ -117,7 +115,8 @@ public class NeutronLoadBalancerListener
         return neutronLoadBalancerListenerLoadBalancerIDs;
     }
 
-    public void setNeutronLoadBalancerListenerLoadBalancerIDs(List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs) {
+    public void setNeutronLoadBalancerListenerLoadBalancerIDs(
+            List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs) {
         this.neutronLoadBalancerListenerLoadBalancerIDs = neutronLoadBalancerListenerLoadBalancerIDs;
     }
 
@@ -129,7 +128,7 @@ public class NeutronLoadBalancerListener
             if (s.equals("id")) {
                 ans.setID(this.getID());
             }
-            if(s.equals("default_pool_id")) {
+            if (s.equals("default_pool_id")) {
                 ans.setNeutronLoadBalancerListenerDefaultPoolID(this.getNeutronLoadBalancerListenerDefaultPoolID());
             }
             if (s.equals("tenant_id")) {
@@ -151,16 +150,15 @@ public class NeutronLoadBalancerListener
         return ans;
     }
 
-    @Override public String toString() {
-        return "NeutronLoadBalancerListener{" +
-                "loadBalancerListenerID='" + uuid + '\'' +
-                ", neutronLoadBalancerListenerDefaultPoolID='" + neutronLoadBalancerListenerDefaultPoolID + '\'' +
-                ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\'' +
-                ", loadBalancerListenerTenantID='" + tenantID + '\'' +
-                ", loadBalancerListenerName='" + loadBalancerListenerName + '\'' +
-                ", loadBalancerListenerAdminStateIsUp=" + loadBalancerListenerAdminStateIsUp +
-                ", neutronLoadBalancerListenerProtocol='" + neutronLoadBalancerListenerProtocol + '\'' +
-                ", neutronLoadBalancerListenerProtocolPort='" + neutronLoadBalancerListenerProtocolPort + '\'' +
-                '}';
+    @Override
+    public String toString() {
+        return "NeutronLoadBalancerListener{" + "loadBalancerListenerID='" + uuid + '\''
+                + ", neutronLoadBalancerListenerDefaultPoolID='" + neutronLoadBalancerListenerDefaultPoolID + '\''
+                + ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\''
+                + ", loadBalancerListenerTenantID='" + tenantID + '\'' + ", loadBalancerListenerName='"
+                + loadBalancerListenerName + '\'' + ", loadBalancerListenerAdminStateIsUp="
+                + loadBalancerListenerAdminStateIsUp + ", neutronLoadBalancerListenerProtocol='"
+                + neutronLoadBalancerListenerProtocol + '\'' + ", neutronLoadBalancerListenerProtocolPort='"
+                + neutronLoadBalancerListenerProtocolPort + '\'' + '}';
     }
 }

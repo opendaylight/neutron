@@ -22,13 +22,13 @@ public class NeutronVPNDeadPeerDetection implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement (name = "action")
+    @XmlElement(name = "action")
     String action;
 
-    @XmlElement (name = "interval")
+    @XmlElement(name = "interval")
     Integer interval;
 
-    @XmlElement (name = "timeout")
+    @XmlElement(name = "timeout")
     Integer timeout;
 
     public NeutronVPNDeadPeerDetection() {
