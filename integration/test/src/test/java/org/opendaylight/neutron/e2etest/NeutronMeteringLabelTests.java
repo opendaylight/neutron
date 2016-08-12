@@ -23,23 +23,21 @@ public class NeutronMeteringLabelTests {
     //TODO handle SB check
     public void singleton_meteringLabel_create_test() {
         String url = base + "/metering/metering-labels";
-        String content = "{ \"metering_label\": { " +
-            "\"tenant_id\": \"45345b0ee1ea477fac0f541b2cb79cd4\", " +
-            "\"description\": \"description of label1\", " +
-            "\"name\": \"label1\", " +
-            "\"id\": \"bc91b832-8465-40a7-a5d8-ba87de442266\" } }";
+        String content = "{ \"metering_label\": { " + "\"tenant_id\": \"45345b0ee1ea477fac0f541b2cb79cd4\", "
+                + "\"description\": \"description of label1\", " + "\"name\": \"label1\", "
+                + "\"id\": \"bc91b832-8465-40a7-a5d8-ba87de442266\" } }";
         ITNeutronE2E.test_create(url, content, "Singleton Metering Label Post Failed NB");
     }
 
     public void meteringLabel_element_get_test() {
         String url = base + "/metering/metering-labels/bc91b832-8465-40a7-a5d8-ba87de442266";
-        ITNeutronE2E.test_fetch(url, true ,"Metering Label Element Get Failed");
+        ITNeutronE2E.test_fetch(url, true, "Metering Label Element Get Failed");
     }
 
     public void meteringLabel_element_get_with_query_test() {
-        String url = base + "/metering/metering-labels/bc91b832-8465-40a7-a5d8-ba87de442266" +
-            "?fields=id&fields=tenant_id&fields=name&fields=description";
-        ITNeutronE2E.test_fetch(url, true ,"Metering Label Element Get Failed");
+        String url = base + "/metering/metering-labels/bc91b832-8465-40a7-a5d8-ba87de442266"
+                + "?fields=id&fields=tenant_id&fields=name&fields=description";
+        ITNeutronE2E.test_fetch(url, true, "Metering Label Element Get Failed");
     }
 
     public void meteringLabel_delete_test() {
@@ -49,7 +47,7 @@ public class NeutronMeteringLabelTests {
 
     public void meteringLabel_element_negative_get_test() {
         String url = base + "/metering/metering-labels/bc91b832-8465-40a7-a5d8-ba87de442266";
-        ITNeutronE2E.test_fetch(url, false ,"Metering Label Element Negative Get Failed");
+        ITNeutronE2E.test_fetch(url, false, "Metering Label Element Negative Get Failed");
     }
 
     public static void runTests(String base) {

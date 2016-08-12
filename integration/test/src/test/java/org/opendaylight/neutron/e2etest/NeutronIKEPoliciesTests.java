@@ -22,17 +22,12 @@ public class NeutronIKEPoliciesTests {
 
     public String singleton_ikePolicy_create_test() {
         String url = base + "/vpn/ikepolicies";
-        String content = " { \"ikepolicy\": { \"name\": \"ikepolicy1\"," +
-            "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\"," +
-            "\"auth_algorithm\": \"sha1\"," +
-            "\"encryption_algorithm\": \"aes-128\"," +
-            "\"pfs\": \"group5\"," +
-            "\"phase1_negotiation_mode\": \"main\"," +
-            "\"lifetime\": { \"units\": \"seconds\"," +
-            "\"value\": 7200}," +
-            "\"ike_version\": \"v1\"," +
-            "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\"," +
-            "\"description\": \"\" } }";
+        String content = " { \"ikepolicy\": { \"name\": \"ikepolicy1\","
+                + "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\"," + "\"auth_algorithm\": \"sha1\","
+                + "\"encryption_algorithm\": \"aes-128\"," + "\"pfs\": \"group5\","
+                + "\"phase1_negotiation_mode\": \"main\"," + "\"lifetime\": { \"units\": \"seconds\","
+                + "\"value\": 7200}," + "\"ike_version\": \"v1\"," + "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\","
+                + "\"description\": \"\" } }";
         ITNeutronE2E.test_create(url, content, "IKE Policy POST failed");
         return content;
     }
@@ -44,16 +39,12 @@ public class NeutronIKEPoliciesTests {
 
     public void ikePolicy_update_test() {
         String url = base + "/vpn/ikepolicies/5522aff7-1b3c-48dd-9c3c-b50f016b73db";
-        String content = " { \"ikepolicy\": { \"name\": \"ikepolicy1\"," +
-            "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\"," +
-            "\"auth_algorithm\": \"sha1\"," +
-            "\"encryption_algorithm\": \"aes-256\"," +
-            "\"pfs\": \"group5\"," +
-            "\"phase1_negotiation_mode\": \"main\"," +
-            "\"lifetime\": { \"units\": \"seconds\", \"value\": 3600 }," +
-            "\"ike_version\": \"v1\"," +
-            "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\"," +
-            "\"description\": \"\" } }";
+        String content = " { \"ikepolicy\": { \"name\": \"ikepolicy1\","
+                + "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\"," + "\"auth_algorithm\": \"sha1\","
+                + "\"encryption_algorithm\": \"aes-256\"," + "\"pfs\": \"group5\","
+                + "\"phase1_negotiation_mode\": \"main\","
+                + "\"lifetime\": { \"units\": \"seconds\", \"value\": 3600 }," + "\"ike_version\": \"v1\","
+                + "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\"," + "\"description\": \"\" } }";
         ITNeutronE2E.test_modify(url, content, "IKE Policy PUT failed");
     }
 
@@ -63,10 +54,10 @@ public class NeutronIKEPoliciesTests {
     }
 
     public void ikePolicy_element_get_with_query_test() {
-        String url = base + "/vpn/ikepolicies/5522aff7-1b3c-48dd-9c3c-b50f016b73db" +
-            "?fields=id&fields=tenant_id&fields=name&fields=description&fields=pfs" +
-            "&fields=auth_algorithm&fields=phase1_negotiation_mode" +
-            "&fields=ike_version&fields=encryption_algorithm";
+        String url = base + "/vpn/ikepolicies/5522aff7-1b3c-48dd-9c3c-b50f016b73db"
+                + "?fields=id&fields=tenant_id&fields=name&fields=description&fields=pfs"
+                + "&fields=auth_algorithm&fields=phase1_negotiation_mode"
+                + "&fields=ike_version&fields=encryption_algorithm";
         ITNeutronE2E.test_fetch(url, true, "IKE Policy Element GET With Query failed");
     }
 
@@ -92,4 +83,3 @@ public class NeutronIKEPoliciesTests {
         ike_policy_tester.ikePolicy_element_negative_get_test();
     }
 }
-
