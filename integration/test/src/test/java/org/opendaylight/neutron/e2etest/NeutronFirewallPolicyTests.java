@@ -22,12 +22,10 @@ public class NeutronFirewallPolicyTests {
 
     public String singleton_fw_policy_create_test() {
         String url = base + "/fw/firewall_policies";
-        String content = " { \"firewall_policy\": { \"audited\": false," +
-            "\"description\": \"\", \"firewall_rules\": [" +
-                "\"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\" ]," +
-            "\"id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\"," +
-            "\"name\": \"test-policy\", \"shared\": false," +
-            "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
+        String content = " { \"firewall_policy\": { \"audited\": false,"
+                + "\"description\": \"\", \"firewall_rules\": [" + "\"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\" ],"
+                + "\"id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\"," + "\"name\": \"test-policy\", \"shared\": false,"
+                + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_create(url, content, "Firewall Policy Singleton Post Failed");
         return content;
     }
@@ -39,13 +37,11 @@ public class NeutronFirewallPolicyTests {
 
     public void fw_policy_modify_test() {
         String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c";
-        String content = " { \"firewall_policy\": { \"audited\": false," +
-            "\"description\": \"\", \"firewall_rules\": [" +
-                "\"a08ef905-0ff6-4784-8374-175fffe7dade\"," +
-                "\"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\" ]," +
-            "\"id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\"," +
-            "\"name\": \"test-policy\", \"shared\": false," +
-            "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
+        String content = " { \"firewall_policy\": { \"audited\": false,"
+                + "\"description\": \"\", \"firewall_rules\": [" + "\"a08ef905-0ff6-4784-8374-175fffe7dade\","
+                + "\"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\" ]," + "\"id\": \"c69933c1-b472-44f9-8226-30dc4ffd454c\","
+                + "\"name\": \"test-policy\", \"shared\": false,"
+                + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
         ITNeutronE2E.test_modify(url, content, "Firewall Policy Singleton Post Failed");
     }
 
@@ -55,11 +51,11 @@ public class NeutronFirewallPolicyTests {
     }
 
     public void fw_policy_element_get_with_query_test() {
-        String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c" +
-            "?fields=tenant_id&field=id&fields=name&fields=description" +
-            "&fields=shared&fields=firewall_rules&fields=audited" +
-            "&fields=limit&fields=marker&fields=page_reverse";
-                ;
+        String url = base + "/fw/firewall_policies/c69933c1-b472-44f9-8226-30dc4ffd454c"
+                + "?fields=tenant_id&field=id&fields=name&fields=description"
+                + "&fields=shared&fields=firewall_rules&fields=audited"
+                + "&fields=limit&fields=marker&fields=page_reverse";
+        ;
         ITNeutronE2E.test_fetch(url, true, "Firewall Policy Element Get with Query Failed");
     }
 

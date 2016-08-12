@@ -55,37 +55,29 @@ public class ITNeutronE2E {
     @Configuration
     public Option[] config() {
         return new Option[] {
-            // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
-            // FIXME: need to *NOT* hardcode the version here - it breaks on
-            // version bumps
-            karafDistributionConfiguration()
-                .frameworkUrl(
-                    maven()
-                        .groupId("org.opendaylight.neutron")
-                        .artifactId("neutron-karaf")
-                        .type("zip")
-                        .versionAsInProject())
-                .karafVersion("3.0.3")
-                .name("Neutron")
-                .unpackDirectory(new File("target/pax"))
-                .useDeployFolder(false),
-       // It is really nice if the container sticks around after the test so you can check the contents
-       // of the data directory when things go wrong.
-            vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"),
-            keepRuntimeFolder(),
-       // Don't bother with local console output as it just ends up cluttering the logs
-            configureConsole().ignoreLocalConsole(),
-       // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
-            logLevel(LogLevel.INFO),
-       // provision the needed features for this test
-       //    features("mvn:org.opendaylight.neutron/features-test/0.5.0-SNAPSHOT/xml/features",
-       //        "features-neutron-test"),
-       // Remember that the test executes in another process.  If you want to debug it, you need
-       // to tell Pax Exam to launch that process with debugging enabled.  Launching the test class itself with
-       // debugging enabled (for example in Eclipse) will not get you the desired results.
-            when(Boolean.getBoolean(KARAF_DEBUG_PROP))
-                    .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)),
-       };
+                // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
+                // FIXME: need to *NOT* hardcode the version here - it breaks on
+                // version bumps
+                karafDistributionConfiguration()
+                        .frameworkUrl(maven().groupId("org.opendaylight.neutron").artifactId("neutron-karaf")
+                                .type("zip").versionAsInProject())
+                        .karafVersion("3.0.3").name("Neutron").unpackDirectory(new File("target/pax"))
+                        .useDeployFolder(false),
+                // It is really nice if the container sticks around after the test so you can check the contents
+                // of the data directory when things go wrong.
+                vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"), keepRuntimeFolder(),
+                // Don't bother with local console output as it just ends up cluttering the logs
+                configureConsole().ignoreLocalConsole(),
+                // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
+                logLevel(LogLevel.INFO),
+                // provision the needed features for this test
+                //    features("mvn:org.opendaylight.neutron/features-test/0.5.0-SNAPSHOT/xml/features",
+                //        "features-neutron-test"),
+                // Remember that the test executes in another process.  If you want to debug it, you need
+                // to tell Pax Exam to launch that process with debugging enabled.  Launching the test class itself with
+                // debugging enabled (for example in Eclipse) will not get you the desired results.
+                when(Boolean.getBoolean(KARAF_DEBUG_PROP))
+                        .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)), };
     }
 
     final String base = "http://127.0.0.1:8080/controller/nb/v2/neutron";
@@ -118,7 +110,7 @@ public class ITNeutronE2E {
         NeutronL2GatewayConnectionTests.runTests(base);
         NeutronQosPolicyTests.runTests(base);
 
-    // tests related to bugs
+        // tests related to bugs
         Neutron_Bug3812_Tests.runTests(base);
         Tempest_PortsIpV6TestJSON.runTests(base);
         Neutron_Bug4027_Tests.runTests(base);
@@ -129,7 +121,7 @@ public class ITNeutronE2E {
         httpConn.setRequestMethod("GET");
         httpConn.setRequestProperty("Content-Type", "application/json");
         httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-        return(httpConn);
+        return (httpConn);
     }
 
     static HttpURLConnection HttpURLConnectionFactoryDelete(URL url) throws Exception {
@@ -137,7 +129,7 @@ public class ITNeutronE2E {
         httpConn.setRequestMethod("DELETE");
         httpConn.setRequestProperty("Content-Type", "application/json");
         httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
-        return(httpConn);
+        return (httpConn);
     }
 
     static HttpURLConnection HttpURLConnectionFactoryPost(URL url, String content) throws Exception {
@@ -146,11 +138,10 @@ public class ITNeutronE2E {
         httpConn.setRequestProperty("Content-Type", "application/json");
         httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
         httpConn.setDoOutput(true);
-        OutputStreamWriter out = new OutputStreamWriter(
-            httpConn.getOutputStream());
+        OutputStreamWriter out = new OutputStreamWriter(httpConn.getOutputStream());
         out.write(content);
         out.close();
-        return(httpConn);
+        return (httpConn);
     }
 
     static HttpURLConnection HttpURLConnectionFactoryPut(URL url, String content) throws Exception {
@@ -159,11 +150,10 @@ public class ITNeutronE2E {
         httpConn.setRequestProperty("Content-Type", "application/json");
         httpConn.setRequestProperty("Authorization", "Basic YWRtaW46YWRtaW4=");
         httpConn.setDoOutput(true);
-        OutputStreamWriter out = new OutputStreamWriter(
-            httpConn.getOutputStream());
+        OutputStreamWriter out = new OutputStreamWriter(httpConn.getOutputStream());
         out.write(content);
         out.close();
-        return(httpConn);
+        return (httpConn);
     }
 
     static void test_create(String url_s, String content, String context) {
@@ -276,14 +266,14 @@ public class ITNeutronE2E {
         JsonObject jsonObjectInput = gson.fromJson(content, JsonObject.class);
         Set<Map.Entry<String, JsonElement>> entrySet = jsonObjectInput.entrySet();
         JsonObject jsonObjectOutput = entrySet.iterator().next().getValue().getAsJsonObject();
-        for (Map.Entry<String, JsonElement> element: jsonObjectOutput.entrySet()) {
+        for (Map.Entry<String, JsonElement> element : jsonObjectOutput.entrySet()) {
             String key = element.getKey();
             JsonElement jsonElementValue = element.getValue();
             // Query only values that are non null Primitives - Integer,Strings,character and boolean
             if (jsonElementValue.isJsonPrimitive() && (!jsonElementValue.isJsonNull())) {
                 String valueStr = jsonElementValue.getAsString();
                 valueStr = valueStr.replaceAll("\\s+", "+");
-                String queryUrl =  url_s + "?" + key + "=" + valueStr;
+                String queryUrl = url_s + "?" + key + "=" + valueStr;
                 String context = collectionName + " " + key + "=" + jsonElementValue.toString() + " Get Failed";
                 test_fetch_collection_response(queryUrl, collectionName, context);
             }

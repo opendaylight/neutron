@@ -23,26 +23,16 @@ public class NeutronPortTests {
     //TODO handle SB check
     public String singleton_port_create_test() {
         String url = base + "/ports";
-        String content = "{ \"port\": { \"status\": \"DOWN\","+
-            "\"binding:host_id\": \"\","+
-            "\"name\": \"private-port\","+
-            "\"allowed_address_pairs\": [],"+
-            "\"admin_state_up\": true,"+
-            "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\","+
-            "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\","+
-            "\"binding:vif_details\": {},"+
-            "\"binding:vnic_type\": \"normal\","+
-            "\"binding:vif_type\": \"unbound\","+
-            "\"device_owner\": \"\","+
-            "\"mac_address\": \"fa:16:3e:c9:cb:f0\","+
-            "\"binding:profile\": {},"+
-            "\"fixed_ips\": [ {"+
-                "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","+
-                "\"ip_address\": \"10.0.0.2\" } ],"+
-            "\"id\": \"65c0ee9f-d634-4522-8954-51021b570b0d\","+
-            "\"security_groups\": [] ,"+
-            "\"device_id\": \"\" } }";
-        ITNeutronE2E.test_create(url, content,"Singleton Port Post Failed NB");
+        String content = "{ \"port\": { \"status\": \"DOWN\"," + "\"binding:host_id\": \"\","
+                + "\"name\": \"private-port\"," + "\"allowed_address_pairs\": []," + "\"admin_state_up\": true,"
+                + "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\","
+                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\"," + "\"binding:vif_details\": {},"
+                + "\"binding:vnic_type\": \"normal\"," + "\"binding:vif_type\": \"unbound\","
+                + "\"device_owner\": \"\"," + "\"mac_address\": \"fa:16:3e:c9:cb:f0\"," + "\"binding:profile\": {},"
+                + "\"fixed_ips\": [ {" + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
+                + "\"ip_address\": \"10.0.0.2\" } ]," + "\"id\": \"65c0ee9f-d634-4522-8954-51021b570b0d\","
+                + "\"security_groups\": [] ," + "\"device_id\": \"\" } }";
+        ITNeutronE2E.test_create(url, content, "Singleton Port Post Failed NB");
         return content;
     }
 
@@ -54,69 +44,64 @@ public class NeutronPortTests {
     //TODO handle SB check
     public void router_interface_port_create_test() {
         String url = base + "/ports";
-        String content = "{\"ports\": [ {\"status\": \"DOWN\", \"binding:host_id\": \"\", \"allowed_address_pairs\": [], \"device_owner\": \"network:router_gateway\", \"binding:profile\": {}, \"fixed_ips\": [{\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", \"ip_address\": \"10.0.0.1\"}], \"id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51e\", \"security_groups\": [], \"device_id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\", \"name\": \"\", \"admin_state_up\": true, \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", \"binding:vif_details\": {}, \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\", \"mac_address\": \"fa:16:3e:dc:1d:8d\"}, "
-            + " {\"status\": \"DOWN\", \"binding:host_id\": \"\", \"allowed_address_pairs\": [], \"device_owner\": \"network:router_gateway\", \"binding:profile\": {}, \"fixed_ips\": [{\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", \"ip_address\": \"10.0.0.2\"}], \"id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51f\", \"security_groups\": [], \"device_id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2f\", \"name\": \"\", \"admin_state_up\": true, \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", \"binding:vif_details\": {}, \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\", \"mac_address\": \"fa:16:3e:dc:1d:8e\"} ] }";
+        String content = "{\"ports\": [ {\"status\": \"DOWN\", \"binding:host_id\": \"\", "
+                + "\"allowed_address_pairs\": [], \"device_owner\": \"network:router_gateway\", "
+                + "\"binding:profile\": {}, \"fixed_ips\": "
+                + "[{\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
+                + "\"ip_address\": \"10.0.0.1\"}], \"id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51e\", "
+                + "\"security_groups\": [], \"device_id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\", "
+                + "\"name\": \"\", \"admin_state_up\": true, "
+                + "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
+                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", \"binding:vif_details\": {},"
+                + " \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\", "
+                + "\"mac_address\": \"fa:16:3e:dc:1d:8d\"}, "
+                + " {\"status\": \"DOWN\", \"binding:host_id\": \"\", "
+                + "\"allowed_address_pairs\": [], \"device_owner\": \"network:router_gateway\", "
+                + "\"binding:profile\": {}, \"fixed_ips\": [{\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
+                + "\"ip_address\": \"10.0.0.2\"}], \"id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51f\", "
+                + "\"security_groups\": [], \"device_id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2f\", "
+                + "\"name\": \"\", \"admin_state_up\": true, "
+                + "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
+                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
+                + "\"binding:vif_details\": {}, \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\","
+                + " \"mac_address\": \"fa:16:3e:dc:1d:8e\"} ] }";
         ITNeutronE2E.test_create(url, content, "Router Interface Port Post Failed NB");
     }
 
     public void bulk_port_create_test() {
         String url = base + "/ports";
-        String content = "{ \"ports\": [ { "
-            + " \"status\": \"DOWN\", "
-            + " \"name\": \"sample_port_1\", "
-            + " \"allowed_address_pairs\": [], "
-            + " \"admin_state_up\": false, "
-            + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
-            + " \"tenant_id\": \"d6700c0c9ffa4f1cb322cd4a1f3906fa\", "
-            + " \"device_owner\": \"\", "
-            + " \"mac_address\": \"fa:16:3e:48:b8:9f\", "
-            + " \"fixed_ips\": [ { "
-            + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
-            + " \"ip_address\": \"10.0.0.5\" } ], "
-            + " \"id\": \"94225baa-9d3f-4b93-bf12-b41e7ce49cdb\", "
-            + " \"security_groups\": [], "
-            + " \"device_id\": \"\" }, { "
-            + " \"status\": \"DOWN\", "
-            + " \"name\": \"sample_port_2\", "
-            + " \"allowed_address_pairs\": [], "
-            + " \"admin_state_up\": false, "
-            + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
-            + " \"tenant_id\": \"d6700c0c9ffa4f1cb322cd4a1f3906fa\", "
-            + " \"device_owner\": \"\", "
-            + " \"mac_address\": \"fa:16:3e:f4:73:df\", "
-            + " \"fixed_ips\": [ { "
-            + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
-            + " \"ip_address\": \"10.0.0.6\" } ], "
-            + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", "
-            + " \"security_groups\": [], "
-            + " \"device_id\": \"\" } ] } ";
+        String content = "{ \"ports\": [ { " + " \"status\": \"DOWN\", " + " \"name\": \"sample_port_1\", "
+                + " \"allowed_address_pairs\": [], " + " \"admin_state_up\": false, "
+                + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
+                + " \"tenant_id\": \"d6700c0c9ffa4f1cb322cd4a1f3906fa\", " + " \"device_owner\": \"\", "
+                + " \"mac_address\": \"fa:16:3e:48:b8:9f\", " + " \"fixed_ips\": [ { "
+                + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\"," + " \"ip_address\": \"10.0.0.5\" } ], "
+                + " \"id\": \"94225baa-9d3f-4b93-bf12-b41e7ce49cdb\", " + " \"security_groups\": [], "
+                + " \"device_id\": \"\" }, { " + " \"status\": \"DOWN\", " + " \"name\": \"sample_port_2\", "
+                + " \"allowed_address_pairs\": [], " + " \"admin_state_up\": false, "
+                + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
+                + " \"tenant_id\": \"d6700c0c9ffa4f1cb322cd4a1f3906fa\", " + " \"device_owner\": \"\", "
+                + " \"mac_address\": \"fa:16:3e:f4:73:df\", " + " \"fixed_ips\": [ { "
+                + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\"," + " \"ip_address\": \"10.0.0.6\" } ], "
+                + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", " + " \"security_groups\": [], "
+                + " \"device_id\": \"\" } ] } ";
         ITNeutronE2E.test_create(url, content, "Bulk Port Post Failed");
     }
 
     public void port_update_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        String content = " { \"port\": { "
-        + " \"status\": \"DOWN\", "
-        + " \"binding:host_id\": \"00000000-1111-2222-3333-444444444444\", "
-        + " \"allowed_address_pairs\": [], "
-        + " \"extra_dhcp_opts\": [], "
-        + " \"device_owner\": \"compute:nova\", "
-        + " \"binding:profile\": {}, "
-        + " \"fixed_ips\": [ { "
-        + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
-        + " \"ip_address\": \"10.0.0.7\" } ], "
-        + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", "
-        + " \"security_groups\": [], "
-        + " \"device_id\": \"\", "
-        + " \"name\": \"test-for-port-update\", "
-        + " \"admin_state_up\": true, "
-        + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
-        + " \"tenant_id\": \"522eda8d23124b25bf03fe44f1986b74\", "
-        + " \"binding:vif_details\": {}, "
-        + " \"binding:vnic_type\": \"normal\", "
-        + " \"binding:vif_type\": \"binding_failed\", "
-        + " \"mac_address\": \"fa:16:3e:11:11:5e\" } } ";
-        ITNeutronE2E.test_modify(url, content,"Port Put Failed");
+        String content = " { \"port\": { " + " \"status\": \"DOWN\", "
+                + " \"binding:host_id\": \"00000000-1111-2222-3333-444444444444\", "
+                + " \"allowed_address_pairs\": [], " + " \"extra_dhcp_opts\": [], "
+                + " \"device_owner\": \"compute:nova\", " + " \"binding:profile\": {}, " + " \"fixed_ips\": [ { "
+                + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\"," + " \"ip_address\": \"10.0.0.7\" } ], "
+                + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", " + " \"security_groups\": [], "
+                + " \"device_id\": \"\", " + " \"name\": \"test-for-port-update\", " + " \"admin_state_up\": true, "
+                + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
+                + " \"tenant_id\": \"522eda8d23124b25bf03fe44f1986b74\", " + " \"binding:vif_details\": {}, "
+                + " \"binding:vnic_type\": \"normal\", " + " \"binding:vif_type\": \"binding_failed\", "
+                + " \"mac_address\": \"fa:16:3e:11:11:5e\" } } ";
+        ITNeutronE2E.test_modify(url, content, "Port Put Failed");
     }
 
     public void port_element_get_test() {
@@ -125,10 +110,10 @@ public class NeutronPortTests {
     }
 
     public void port_element_get_with_query_test() {
-        String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b" +
-            "?fields=id&fields=network_id&fields=name&fields=admin_state_up" +
-            "&fields=status&fields=mac_address&fields=device_id&fields=tenant_id" +
-            "&fields=device_owner&fields=limit&fields=marker&fields=page_reverse";
+        String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b"
+                + "?fields=id&fields=network_id&fields=name&fields=admin_state_up"
+                + "&fields=status&fields=mac_address&fields=device_id&fields=tenant_id"
+                + "&fields=device_owner&fields=limit&fields=marker&fields=page_reverse";
         ITNeutronE2E.test_fetch(url, true, "Port Element Get With Query Failed");
     }
 

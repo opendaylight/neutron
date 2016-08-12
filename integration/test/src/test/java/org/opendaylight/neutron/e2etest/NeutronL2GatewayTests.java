@@ -22,13 +22,11 @@ public class NeutronL2GatewayTests {
 
     public String singleton_l2gateway_create_test() {
         String url = base + "/l2-gateways";
-        String content = "{ \"l2_gateway\": { \"name\": \"gateway1\"," +
-            "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\"," +
-            "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\"," +
-            "\"devices\": [{ \"device_name\": \"device1\"," +
-                            "\"id\": \"0a24b09a-88a1-4f2c-94e9-92515972a704\"," +
-                            "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100] }] }]" +
-            "} }";
+        String content = "{ \"l2_gateway\": { \"name\": \"gateway1\","
+                + "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\","
+                + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\","
+                + "\"devices\": [{ \"device_name\": \"device1\"," + "\"id\": \"0a24b09a-88a1-4f2c-94e9-92515972a704\","
+                + "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100] }] }]" + "} }";
         ITNeutronE2E.test_create(url, content, "L2 Gateway Singleton Post Failed");
         return content;
     }
@@ -40,13 +38,11 @@ public class NeutronL2GatewayTests {
 
     public void l2gateway_modify_test() {
         String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        String content = "{ \"l2_gateway\": { \"name\": \"gateway1\"," +
-            "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\"," +
-            "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\"," +
-            "\"devices\": [{ \"device_name\": \"device1\"," +
-                            "\"id\": \"0a24b09a-88a1-4f2c-94e9-92515972a704\"," +
-                            "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100, 50] }] }]" +
-            "} }";
+        String content = "{ \"l2_gateway\": { \"name\": \"gateway1\","
+                + "\"id\": \"3b0ef8f4-82c7-44d4-a4fb-6177f9a21977\","
+                + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\","
+                + "\"devices\": [{ \"device_name\": \"device1\"," + "\"id\": \"0a24b09a-88a1-4f2c-94e9-92515972a704\","
+                + "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100, 50] }] }]" + "} }";
         ITNeutronE2E.test_modify(url, content, "L2 Gateway  Singleton Put Failed");
     }
 
@@ -56,9 +52,8 @@ public class NeutronL2GatewayTests {
     }
 
     public void l2gateway_element_get_with_query_test() {
-        String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977" +
-                "?fields=tenant_id&fields=id&fields=name" +
-                "&fields=devices";
+        String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977"
+                + "?fields=tenant_id&fields=id&fields=name" + "&fields=devices";
         ITNeutronE2E.test_fetch(url, true, "L2 Gateway Element Get With Query Failed");
     }
 
