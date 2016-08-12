@@ -36,8 +36,8 @@ public class NeutronSFCPortPairGroupInterface
 
     @Override
     protected InstanceIdentifier<PortPairGroup> createInstanceIdentifier(PortPairGroup portPairGroup) {
-        return InstanceIdentifier.create(Neutron.class).child(PortPairGroups.class)
-                .child(PortPairGroup.class, portPairGroup.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(PortPairGroups.class).child(PortPairGroup.class,
+                portPairGroup.getKey());
     }
 
     @Override
@@ -54,9 +54,9 @@ public class NeutronSFCPortPairGroupInterface
         result.setUuid(new Uuid(neutronPortPairGroup.getID()));
         result.setName(neutronPortPairGroup.getName());
         result.setTenantId(toUuid(neutronPortPairGroup.getTenantID()));
-        if (neutronPortPairGroup.getPortPairs() != null ) {
+        if (neutronPortPairGroup.getPortPairs() != null) {
             List<Uuid> portPairs = new ArrayList<>();
-            for(String ppUuid : neutronPortPairGroup.getPortPairs()) {
+            for (String ppUuid : neutronPortPairGroup.getPortPairs()) {
                 portPairs.add(new Uuid(ppUuid));
             }
             result.setPortPairs(portPairs);
@@ -81,7 +81,7 @@ public class NeutronSFCPortPairGroupInterface
         result.setTenantID(mdPortPairGroup.getTenantId());
         if (mdPortPairGroup.getPortPairs() != null) {
             List<String> portPairsUUID = new ArrayList<>();
-            for(Uuid uuid : mdPortPairGroup.getPortPairs()) {
+            for (Uuid uuid : mdPortPairGroup.getPortPairs()) {
                 portPairsUUID.add(uuid.getValue());
             }
             result.setPortPairs(portPairsUUID);

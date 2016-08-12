@@ -25,16 +25,14 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<MeteringRule, MeteringRules, NeutronMeteringLabelRule>
+public class NeutronMeteringLabelRuleInterface
+        extends AbstractNeutronInterface<MeteringRule, MeteringRules, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
-            = new ImmutableBiMap.Builder<Class<? extends DirectionBase>,String>()
-            .put(DirectionEgress.class,"egress")
-            .put(DirectionIngress.class,"ingress")
-            .build();
-
+    private static final ImmutableBiMap<Class<? extends DirectionBase>,
+            String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
+                    .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();
 
     NeutronMeteringLabelRuleInterface(DataBroker db) {
         super(db);
@@ -48,15 +46,13 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
 
     @Override
     protected InstanceIdentifier<MeteringRule> createInstanceIdentifier(MeteringRule item) {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(MeteringRules.class)
-            .child(MeteringRule.class, item.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(MeteringRules.class).child(MeteringRule.class,
+                item.getKey());
     }
 
     @Override
     protected InstanceIdentifier<MeteringRules> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(MeteringRules.class);
+        return InstanceIdentifier.create(Neutron.class).child(MeteringRules.class);
     }
 
     @Override
@@ -72,12 +68,13 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleLabelID()));
         }
         if (meteringLabelRule.getMeteringLabelRuleDirection() != null) {
-            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =
-                    DIRECTION_MAP.inverse();
-            meteringRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
+            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
+            meteringRuleBuilder.setDirection(
+                    (Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
         if (meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
-            final IpPrefix ipPrefix = new IpPrefix(meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
+            final IpPrefix ipPrefix = new IpPrefix(
+                    meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
             meteringRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
@@ -96,8 +93,7 @@ public class NeutronMeteringLabelRuleInterface extends AbstractNeutronInterface<
             answer.setMeteringLabelRuleLabelID(rule.getMeteringLabelId().getValue());
         }
         if (rule.getDirection() != null) {
-            answer.setMeteringLabelRuleDirection(
-                DIRECTION_MAP.get(rule.getDirection()));
+            answer.setMeteringLabelRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
         }
         if (rule.getRemoteIpPrefix() != null) {
             answer.setMeteringLabelRuleRemoteIPPrefix(new String(rule.getRemoteIpPrefix().getValue()));

@@ -43,18 +43,14 @@ public class NeutronSFCFlowClassifierInterface
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCFlowClassifierInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
-            = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
-            .put(EthertypeV4.class,"IPv4")
-            .put(EthertypeV6.class,"IPv6")
-            .build();
+    private static final ImmutableBiMap<Class<? extends EthertypeBase>,
+            String> ETHERTYPE_MAP = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>, String>()
+                    .put(EthertypeV4.class, "IPv4").put(EthertypeV6.class, "IPv6").build();
 
-    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolTcp.class,"TCP")
-            .put(ProtocolUdp.class,"UDP")
-            .put(ProtocolIcmp.class,"ICMP")
-            .build();
+    private static final ImmutableBiMap<Class<? extends ProtocolBase>,
+            String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
+                    .put(ProtocolTcp.class, "TCP").put(ProtocolUdp.class, "UDP").put(ProtocolIcmp.class, "ICMP")
+                    .build();
 
     NeutronSFCFlowClassifierInterface(DataBroker db) {
         super(db);
@@ -67,8 +63,8 @@ public class NeutronSFCFlowClassifierInterface
 
     @Override
     protected InstanceIdentifier<SfcFlowClassifier> createInstanceIdentifier(SfcFlowClassifier classifier) {
-        return InstanceIdentifier.create(Neutron.class).child(SfcFlowClassifiers.class)
-                .child(SfcFlowClassifier.class, classifier.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(SfcFlowClassifiers.class).child(SfcFlowClassifier.class,
+                classifier.getKey());
     }
 
     @Override
@@ -82,53 +78,51 @@ public class NeutronSFCFlowClassifierInterface
         LOGGER.trace("toMd: REST SFC Flow Classifier data : {}", neutronClassifier);
 
         SfcFlowClassifierBuilder result = new SfcFlowClassifierBuilder();
-        if(neutronClassifier.getID() != null) {
+        if (neutronClassifier.getID() != null) {
             result.setUuid(new Uuid(neutronClassifier.getID()));
         }
-        if(neutronClassifier.getName() != null) {
+        if (neutronClassifier.getName() != null) {
             result.setName(neutronClassifier.getName());
         }
-        if(neutronClassifier.getTenantID() != null) {
+        if (neutronClassifier.getTenantID() != null) {
             result.setTenantId(toUuid(neutronClassifier.getTenantID()));
         }
-        if(neutronClassifier.getEthertype() != null) {
-            final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
-                    ETHERTYPE_MAP.inverse();
+        if (neutronClassifier.getEthertype() != null) {
+            final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = ETHERTYPE_MAP.inverse();
 
             result.setEthertype(mapper.get(neutronClassifier.getEthertype()));
         }
-        if(neutronClassifier.getProtocol() != null) {
-            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
-                    PROTOCOL_MAP.inverse();
+        if (neutronClassifier.getProtocol() != null) {
+            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
             result.setProtocol(mapper.get(neutronClassifier.getProtocol()));
         }
-        if(neutronClassifier.getSourcePortRangeMin() != null) {
+        if (neutronClassifier.getSourcePortRangeMin() != null) {
             result.setSourcePortRangeMin(neutronClassifier.getSourcePortRangeMin());
         }
-        if(neutronClassifier.getSourcePortRangeMax() != null) {
+        if (neutronClassifier.getSourcePortRangeMax() != null) {
             result.setSourcePortRangeMax(neutronClassifier.getSourcePortRangeMax());
         }
-        if(neutronClassifier.getDestinationPortRangeMin() != null) {
+        if (neutronClassifier.getDestinationPortRangeMin() != null) {
             result.setDestinationPortRangeMin(neutronClassifier.getDestinationPortRangeMin());
         }
-        if(neutronClassifier.getDestinationPortRangeMax() != null) {
+        if (neutronClassifier.getDestinationPortRangeMax() != null) {
             result.setDestinationPortRangeMax(neutronClassifier.getDestinationPortRangeMax());
         }
-        if(neutronClassifier.getSourceIpPrefix() != null) {
+        if (neutronClassifier.getSourceIpPrefix() != null) {
             result.setSourceIpPrefix(new IpPrefix(neutronClassifier.getSourceIpPrefix().toCharArray()));
         }
-        if(neutronClassifier.getDestinationIpPrefix() != null) {
+        if (neutronClassifier.getDestinationIpPrefix() != null) {
             result.setDestinationIpPrefix(new IpPrefix(neutronClassifier.getDestinationIpPrefix().toCharArray()));
         }
-        if(neutronClassifier.getLogicalSourcePortUUID() !=null ) {
+        if (neutronClassifier.getLogicalSourcePortUUID() != null) {
             result.setLogicalSourcePort(new Uuid(neutronClassifier.getLogicalSourcePortUUID()));
         }
-        if(neutronClassifier.getLogicalDestinationPortUUID() != null) {
+        if (neutronClassifier.getLogicalDestinationPortUUID() != null) {
             result.setLogicalDestinationPort(new Uuid(neutronClassifier.getLogicalDestinationPortUUID()));
         }
-        if(neutronClassifier.getL7Parameters()!= null) {
+        if (neutronClassifier.getL7Parameters() != null) {
             List<L7Parameter> l7Params = new ArrayList<>();
-            for(String paramKey : neutronClassifier.getL7Parameters().keySet()) {
+            for (String paramKey : neutronClassifier.getL7Parameters().keySet()) {
                 L7ParameterBuilder param = new L7ParameterBuilder();
                 param.setKey(new L7ParameterKey(paramKey));
                 param.setMatchParameter(paramKey);
@@ -155,40 +149,40 @@ public class NeutronSFCFlowClassifierInterface
         result.setID(mdClassifier.getUuid().getValue());
         result.setName(mdClassifier.getName());
         result.setTenantID(mdClassifier.getTenantId());
-        if(mdClassifier.getEthertype() != null) {
+        if (mdClassifier.getEthertype() != null) {
             result.setEthertype(ETHERTYPE_MAP.get(mdClassifier.getEthertype()));
         }
-        if(mdClassifier.getProtocol() != null) {
+        if (mdClassifier.getProtocol() != null) {
             result.setProtocol(PROTOCOL_MAP.get(mdClassifier.getProtocol()));
         }
-        if(mdClassifier.getSourcePortRangeMin() != null) {
+        if (mdClassifier.getSourcePortRangeMin() != null) {
             result.setSourcePortRangeMin(mdClassifier.getSourcePortRangeMin());
         }
-        if(mdClassifier.getSourcePortRangeMax() != null) {
+        if (mdClassifier.getSourcePortRangeMax() != null) {
             result.setSourcePortRangeMax(mdClassifier.getSourcePortRangeMax());
         }
-        if(mdClassifier.getDestinationPortRangeMin() != null) {
+        if (mdClassifier.getDestinationPortRangeMin() != null) {
             result.setDestinationPortRangeMin(mdClassifier.getDestinationPortRangeMin());
         }
-        if(mdClassifier.getDestinationPortRangeMax() != null) {
+        if (mdClassifier.getDestinationPortRangeMax() != null) {
             result.setDestinationPortRangeMax(mdClassifier.getDestinationPortRangeMax());
         }
-        if(mdClassifier.getSourceIpPrefix() != null) {
+        if (mdClassifier.getSourceIpPrefix() != null) {
             result.setSourceIpPrefix(String.valueOf(mdClassifier.getSourceIpPrefix().getValue()));
         }
-        if(mdClassifier.getDestinationIpPrefix() != null) {
+        if (mdClassifier.getDestinationIpPrefix() != null) {
             result.setDestinationIpPrefix(String.valueOf(mdClassifier.getDestinationIpPrefix()));
         }
-        if(mdClassifier.getLogicalSourcePort() !=null ) {
+        if (mdClassifier.getLogicalSourcePort() != null) {
             result.setLogicalSourcePortUUID(mdClassifier.getLogicalSourcePort().getValue());
         }
-        if(mdClassifier.getLogicalDestinationPort() != null) {
+        if (mdClassifier.getLogicalDestinationPort() != null) {
             result.setLogicalDestinationPortUUID(mdClassifier.getLogicalDestinationPort().getValue());
         }
-        if(mdClassifier.getL7Parameter()!= null) {
+        if (mdClassifier.getL7Parameter() != null) {
             HashMap<String, String> l7Param = new HashMap<>();
-            for(L7Parameter param : mdClassifier.getL7Parameter()) {
-                l7Param.put(param.getMatchParameter(),param.getMatchParameterValue());
+            for (L7Parameter param : mdClassifier.getL7Parameter()) {
+                l7Param.put(param.getMatchParameter(), param.getMatchParameterValue());
             }
             result.setL7Parameters(l7Param);
         }

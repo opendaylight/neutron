@@ -30,20 +30,17 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<FirewallRule, FirewallRules, NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
+public class NeutronFirewallRuleInterface extends
+        AbstractNeutronInterface<FirewallRule, FirewallRules, NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends ActionBase>, String> ACTION_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ActionBase>, String>()
-            .put(ActionAllow.class, "allow")
-            .put(ActionDeny.class, "deny")
-            .build();
+    private static final ImmutableBiMap<Class<? extends ActionBase>,
+            String> ACTION_MAP = new ImmutableBiMap.Builder<Class<? extends ActionBase>, String>()
+                    .put(ActionAllow.class, "allow").put(ActionDeny.class, "deny").build();
 
-    private static final ImmutableBiMap<Class<? extends IpVersionBase>, Integer> IP_VERSION_MAP
-            = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
-            .put(IpVersionV4.class, Integer.valueOf(4))
-            .put(IpVersionV6.class, Integer.valueOf(6))
-            .build();
+    private static final ImmutableBiMap<Class<? extends IpVersionBase>,
+            Integer> IP_VERSION_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
+                    .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
 
     NeutronFirewallRuleInterface(DataBroker db) {
         super(db);
@@ -56,15 +53,13 @@ public class NeutronFirewallRuleInterface extends AbstractNeutronInterface<Firew
 
     @Override
     protected InstanceIdentifier<FirewallRule> createInstanceIdentifier(FirewallRule item) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(FirewallRules.class)
-                .child(FirewallRule.class, item.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(FirewallRules.class).child(FirewallRule.class,
+                item.getKey());
     }
 
     @Override
     protected InstanceIdentifier<FirewallRules> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(FirewallRules.class);
+        return InstanceIdentifier.create(Neutron.class).child(FirewallRules.class);
     }
 
     protected NeutronFirewallRule fromMd(FirewallRule rule) {

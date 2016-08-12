@@ -22,7 +22,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, IkePolicies, NeutronVPNIKEPolicy> implements INeutronVPNIKEPolicyCRUD {
+public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, IkePolicies, NeutronVPNIKEPolicy>
+        implements INeutronVPNIKEPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIKEPolicyInterface(DataBroker db) {
@@ -61,7 +62,7 @@ public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepo
         }
         if (ikePolicy.getLifetime() != null) {
             final NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
-ikePolicy.getLifetime();
+            ikePolicy.getLifetime();
             vpnLifetime.setUnits(ikePolicy.getLifetime().getUnits());
             vpnLifetime.setValue(ikePolicy.getLifetime().getValue());
             answer.setLifetime(vpnLifetime);
@@ -96,7 +97,7 @@ ikePolicy.getLifetime();
         if (ikePolicy.getIkeVersion() != null) {
             ikePolicyBuilder.setIkeVersion(ikePolicy.getIkeVersion());
         }
-        if (ikePolicy.getLifetime() !=null) {
+        if (ikePolicy.getLifetime() != null) {
             final NeutronVPNLifetime vpnLifetime = ikePolicy.getLifetime();
             final LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
             lifetimeBuilder.setUnits(vpnLifetime.getUnits());
@@ -113,15 +114,13 @@ ikePolicy.getLifetime();
 
     @Override
     protected InstanceIdentifier<Ikepolicy> createInstanceIdentifier(Ikepolicy ikePolicy) {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(IkePolicies.class)
-                 .child(Ikepolicy.class, ikePolicy.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(IkePolicies.class).child(Ikepolicy.class,
+                ikePolicy.getKey());
     }
 
     @Override
     protected InstanceIdentifier<IkePolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(IkePolicies.class);
+        return InstanceIdentifier.create(Neutron.class).child(IkePolicies.class);
     }
 
     @Override

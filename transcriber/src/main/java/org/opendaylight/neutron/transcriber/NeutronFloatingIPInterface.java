@@ -21,7 +21,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, Floatingips, NeutronFloatingIP> implements INeutronFloatingIPCRUD {
+public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatingip, Floatingips, NeutronFloatingIP>
+        implements INeutronFloatingIPCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     NeutronFloatingIPInterface(DataBroker db) {
@@ -48,7 +49,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (floatingIp.getFixedIPAddress() != null) {
             floatingipBuilder.setFixedIpAddress(new IpAddress(floatingIp.getFixedIPAddress().toCharArray()));
         }
-        if(floatingIp.getFloatingIPAddress() != null) {
+        if (floatingIp.getFloatingIPAddress() != null) {
             floatingipBuilder.setFloatingIpAddress(new IpAddress(floatingIp.getFloatingIPAddress().toCharArray()));
         }
         if (floatingIp.getFloatingNetworkUUID() != null) {
@@ -68,8 +69,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         }
         if (floatingIp.getID() != null) {
             floatingipBuilder.setUuid(toUuid(floatingIp.getID()));
-        }
-        else {
+        } else {
             LOGGER.warn("Attempting to write neutron floating IP without UUID");
         }
         return floatingipBuilder.build();
@@ -84,7 +84,7 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
         if (fip.getPortId() != null) {
             result.setPortUUID(String.valueOf(fip.getPortId().getValue()));
         }
-        if (fip.getFixedIpAddress() != null ) {
+        if (fip.getFixedIpAddress() != null) {
             result.setFixedIPAddress(String.valueOf(fip.getFixedIpAddress().getValue()));
         }
         if (fip.getFloatingIpAddress() != null) {
@@ -101,16 +101,12 @@ public class NeutronFloatingIPInterface extends AbstractNeutronInterface<Floatin
     }
 
     @Override
-    protected InstanceIdentifier<Floatingip> createInstanceIdentifier(
-            Floatingip item) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Floatingips.class)
-                .child(Floatingip.class,item.getKey());
+    protected InstanceIdentifier<Floatingip> createInstanceIdentifier(Floatingip item) {
+        return InstanceIdentifier.create(Neutron.class).child(Floatingips.class).child(Floatingip.class, item.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Floatingips> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Floatingips.class);
+        return InstanceIdentifier.create(Neutron.class).child(Floatingips.class);
     }
 }

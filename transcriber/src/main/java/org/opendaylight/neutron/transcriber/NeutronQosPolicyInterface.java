@@ -27,7 +27,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronQosPolicyInterface extends AbstractNeutronInterface <QosPolicy, QosPolicies, NeutronQosPolicy>
+public class NeutronQosPolicyInterface extends AbstractNeutronInterface<QosPolicy, QosPolicies, NeutronQosPolicy>
         implements INeutronQosPolicyCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicyInterface.class);
@@ -70,8 +70,7 @@ public class NeutronQosPolicyInterface extends AbstractNeutronInterface <QosPoli
         }
         if (qosPolicy.getBwLimitRules() != null) {
             final List<BandwidthLimitRules> listBandwith = new ArrayList<>();
-            final BandwidthLimitRulesBuilder bandwidthLimitRulesBuilder =
-                    new BandwidthLimitRulesBuilder();
+            final BandwidthLimitRulesBuilder bandwidthLimitRulesBuilder = new BandwidthLimitRulesBuilder();
             for (final NeutronQosBandwidthRule bandWidthRule : qosPolicy.getBwLimitRules()) {
                 bandwidthLimitRulesBuilder.setUuid(toUuid(bandWidthRule.getID()));
                 bandwidthLimitRulesBuilder.setTenantId(toUuid(bandWidthRule.getTenantID()));

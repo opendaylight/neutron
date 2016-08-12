@@ -20,7 +20,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice, VpnServices, NeutronVPNService> implements INeutronVPNServiceCRUD {
+public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnservice, VpnServices, NeutronVPNService>
+        implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
 
     NeutronVPNServiceInterface(DataBroker db) {
@@ -90,15 +91,13 @@ public class NeutronVPNServiceInterface extends AbstractNeutronInterface<Vpnserv
 
     @Override
     protected InstanceIdentifier<Vpnservice> createInstanceIdentifier(Vpnservice vpnService) {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(VpnServices.class)
-                 .child(Vpnservice.class, vpnService.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(VpnServices.class).child(Vpnservice.class,
+                vpnService.getKey());
     }
 
     @Override
     protected InstanceIdentifier<VpnServices> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(VpnServices.class);
+        return InstanceIdentifier.create(Neutron.class).child(VpnServices.class);
     }
 
     @Override

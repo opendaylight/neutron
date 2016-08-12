@@ -20,9 +20,9 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronL2gatewayConnectionInterface extends
-AbstractNeutronInterface<L2gatewayConnection, L2gatewayConnections, NeutronL2gatewayConnection>
-implements INeutronL2gatewayConnectionCRUD {
+public class NeutronL2gatewayConnectionInterface
+        extends AbstractNeutronInterface<L2gatewayConnection, L2gatewayConnections, NeutronL2gatewayConnection>
+        implements INeutronL2gatewayConnectionCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayConnectionInterface.class);
 
@@ -41,39 +41,39 @@ implements INeutronL2gatewayConnectionCRUD {
     }
 
     @Override
-    protected InstanceIdentifier<L2gatewayConnection>
-    createInstanceIdentifier(L2gatewayConnection l2gatewayConnection) {
+    protected InstanceIdentifier<L2gatewayConnection> createInstanceIdentifier(
+            L2gatewayConnection l2gatewayConnection) {
         return InstanceIdentifier.create(Neutron.class).child(L2gatewayConnections.class)
-                .child(L2gatewayConnection.class,l2gatewayConnection.getKey());
+                .child(L2gatewayConnection.class, l2gatewayConnection.getKey());
     }
 
     @Override
-    protected InstanceIdentifier<L2gatewayConnections> createInstanceIdentifier(){
+    protected InstanceIdentifier<L2gatewayConnections> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(L2gatewayConnections.class);
     }
 
     @Override
-    protected NeutronL2gatewayConnection fromMd(L2gatewayConnection l2gatewayConnection){
+    protected NeutronL2gatewayConnection fromMd(L2gatewayConnection l2gatewayConnection) {
         final NeutronL2gatewayConnection result = new NeutronL2gatewayConnection();
-        if (l2gatewayConnection.getUuid() != null){
+        if (l2gatewayConnection.getUuid() != null) {
             result.setID(l2gatewayConnection.getUuid().getValue());
         }
-        if (l2gatewayConnection.getKey().getUuid() != null){
+        if (l2gatewayConnection.getKey().getUuid() != null) {
             result.setID(l2gatewayConnection.getKey().getUuid().getValue());
         }
-        if (l2gatewayConnection.getL2gatewayId().getValue() != null){
+        if (l2gatewayConnection.getL2gatewayId().getValue() != null) {
             result.setL2gatewayID(String.valueOf(l2gatewayConnection.getL2gatewayId().getValue()));
         }
-        if (l2gatewayConnection.getTenantId() != null){
+        if (l2gatewayConnection.getTenantId() != null) {
             result.setTenantID(l2gatewayConnection.getTenantId());
         }
-        if (l2gatewayConnection.getNetworkId().getValue() != null){
+        if (l2gatewayConnection.getNetworkId().getValue() != null) {
             result.setNetworkID(String.valueOf(l2gatewayConnection.getNetworkId().getValue()));
         }
-        if (l2gatewayConnection.getSegmentId() != null){
+        if (l2gatewayConnection.getSegmentId() != null) {
             result.setSegmentID(Integer.valueOf(l2gatewayConnection.getSegmentId()));
         }
-        if (l2gatewayConnection.getPortId() != null){
+        if (l2gatewayConnection.getPortId() != null) {
             result.setPortID(String.valueOf(l2gatewayConnection.getPortId().getValue()));
         }
         return result;
@@ -81,24 +81,23 @@ implements INeutronL2gatewayConnectionCRUD {
 
     @Override
     protected L2gatewayConnection toMd(NeutronL2gatewayConnection neutronObject) {
-        final L2gatewayConnectionBuilder l2gatewayConnectionBuilder =
-                new L2gatewayConnectionBuilder();
-        if (neutronObject.getID() != null){
+        final L2gatewayConnectionBuilder l2gatewayConnectionBuilder = new L2gatewayConnectionBuilder();
+        if (neutronObject.getID() != null) {
             l2gatewayConnectionBuilder.setUuid(toUuid(neutronObject.getID()));
         }
-        if (neutronObject.getL2gatewayID() != null){
+        if (neutronObject.getL2gatewayID() != null) {
             l2gatewayConnectionBuilder.setL2gatewayId(toUuid(neutronObject.getL2gatewayID()));
         }
-        if (neutronObject.getNetworkID() != null){
+        if (neutronObject.getNetworkID() != null) {
             l2gatewayConnectionBuilder.setNetworkId(toUuid(neutronObject.getNetworkID()));
         }
-        if (neutronObject.getSegmentID() != null){
+        if (neutronObject.getSegmentID() != null) {
             l2gatewayConnectionBuilder.setSegmentId((neutronObject.getSegmentID()));
         }
-        if (neutronObject.getTenantID() != null){
+        if (neutronObject.getTenantID() != null) {
             l2gatewayConnectionBuilder.setTenantId(toUuid(neutronObject.getTenantID()));
         }
-        if (neutronObject.getPortID() != null){
+        if (neutronObject.getPortID() != null) {
             l2gatewayConnectionBuilder.setPortId(toUuid(neutronObject.getPortID()));
         }
         return l2gatewayConnectionBuilder.build();

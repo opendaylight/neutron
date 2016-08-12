@@ -30,20 +30,16 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
+public class NeutronSecurityRuleInterface extends
+        AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends DirectionBase>,String> DIRECTION_MAP
-            = new ImmutableBiMap.Builder<Class<? extends DirectionBase>,String>()
-            .put(DirectionEgress.class,"egress")
-            .put(DirectionIngress.class,"ingress")
-            .build();
-    private static final ImmutableBiMap<Class<? extends EthertypeBase>,String> ETHERTYPE_MAP
-            = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>,String>()
-            .put(EthertypeV4.class,"IPv4")
-            .put(EthertypeV6.class,"IPv6")
-            .build();
+    private static final ImmutableBiMap<Class<? extends DirectionBase>,
+            String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
+                    .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();
+    private static final ImmutableBiMap<Class<? extends EthertypeBase>,
+            String> ETHERTYPE_MAP = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>, String>()
+                    .put(EthertypeV4.class, "IPv4").put(EthertypeV6.class, "IPv6").build();
 
     NeutronSecurityRuleInterface(DataBroker db) {
         super(db);
@@ -104,9 +100,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setTenantId(toUuid(securityRule.getTenantID()));
         }
         if (securityRule.getSecurityRuleDirection() != null) {
-            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper =
-                    DIRECTION_MAP.inverse();
-            securityRuleBuilder.setDirection((Class<? extends DirectionBase>) mapper.get(securityRule.getSecurityRuleDirection()));
+            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
+            securityRuleBuilder
+                    .setDirection((Class<? extends DirectionBase>) mapper.get(securityRule.getSecurityRuleDirection()));
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
@@ -124,9 +120,9 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
             securityRuleBuilder.setProtocol(protocol);
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
-            final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper =
-                    ETHERTYPE_MAP.inverse();
-            securityRuleBuilder.setEthertype((Class<? extends EthertypeBase>) mapper.get(securityRule.getSecurityRuleEthertype()));
+            final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = ETHERTYPE_MAP.inverse();
+            securityRuleBuilder
+                    .setEthertype((Class<? extends EthertypeBase>) mapper.get(securityRule.getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
             securityRuleBuilder.setPortRangeMin(Integer.valueOf(securityRule.getSecurityRulePortMin()));
@@ -144,15 +140,13 @@ public class NeutronSecurityRuleInterface extends AbstractNeutronInterface<Secur
 
     @Override
     protected InstanceIdentifier<SecurityRule> createInstanceIdentifier(SecurityRule securityRule) {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(SecurityRules.class).child(SecurityRule.class,
-                                              securityRule.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
+                securityRule.getKey());
     }
 
     @Override
     protected InstanceIdentifier<SecurityRules> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(SecurityRules.class);
+        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class);
     }
 
     @Override

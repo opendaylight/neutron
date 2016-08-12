@@ -20,10 +20,10 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, NeutronSecurityGroup> implements INeutronSecurityGroupCRUD {
+public class NeutronSecurityGroupInterface
+        extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, NeutronSecurityGroup>
+        implements INeutronSecurityGroupCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
-
 
     NeutronSecurityGroupInterface(DataBroker db) {
         super(db);
@@ -68,15 +68,13 @@ public class NeutronSecurityGroupInterface extends AbstractNeutronInterface<Secu
 
     @Override
     protected InstanceIdentifier<SecurityGroup> createInstanceIdentifier(SecurityGroup securityGroup) {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(SecurityGroups.class).child(SecurityGroup.class,
-                                               securityGroup.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class).child(SecurityGroup.class,
+                securityGroup.getKey());
     }
 
     @Override
     protected InstanceIdentifier<SecurityGroups> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(SecurityGroups.class);
+        return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class);
     }
 
     @Override
