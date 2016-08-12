@@ -18,10 +18,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class NeutronPageLink {
 
-    @XmlElement(name="ref")
+    @XmlElement(name = "ref")
     String ref;
 
-    @XmlElement (name="href")
+    @XmlElement(name = "href")
     String href;
 
     public String getRef() {

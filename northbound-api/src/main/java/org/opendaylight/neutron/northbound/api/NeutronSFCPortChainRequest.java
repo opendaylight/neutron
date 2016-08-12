@@ -21,10 +21,10 @@ public class NeutronSFCPortChainRequest implements INeutronRequest<NeutronSFCPor
     // See OpenStack Networking SFC (networking-sfc) Port Chain API v1.0 Reference
     // for description of annotated attributes
 
-    @XmlElement(name="portchain")
+    @XmlElement(name = "portchain")
     NeutronSFCPortChain singletonPortChain;
 
-    @XmlElement(name="portchains")
+    @XmlElement(name = "portchains")
     List<NeutronSFCPortChain> bulkRequest;
 
     NeutronSFCPortChainRequest() {

@@ -48,8 +48,7 @@ import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 
 @Path("/sfc/portchains")
 public class NeutronSFCPortChainsNorthbound
-        extends AbstractNeutronNorthbound<NeutronSFCPortChain,
-        NeutronSFCPortChainRequest, INeutronSFCPortChainCRUD> {
+        extends AbstractNeutronNorthbound<NeutronSFCPortChain, NeutronSFCPortChainRequest, INeutronSFCPortChainCRUD> {
 
     private static final String RESOURCE_NAME = "Sfc Port Chain";
 
@@ -82,8 +81,7 @@ public class NeutronSFCPortChainsNorthbound
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -99,11 +97,11 @@ public class NeutronSFCPortChainsNorthbound
         Iterator<NeutronSFCPortChain> i = allSFCPortChain.iterator();
         while (i.hasNext()) {
             NeutronSFCPortChain oSFCPC = i.next();
-            if ((queryID == null || queryID.equals(oSFCPC.getID())) &&
-                    (queryName == null || queryName.equals(oSFCPC.getName())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSFCPC.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSFCPC.getID()))
+                    && (queryName == null || queryName.equals(oSFCPC.getName()))
+                    && (queryTenantID == null || queryTenantID.equals(oSFCPC.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSFCPC,fields));
+                    ans.add(extractFields(oSFCPC, fields));
                 } else {
                     ans.add(oSFCPC);
                 }
@@ -120,14 +118,12 @@ public class NeutronSFCPortChainsNorthbound
     @Path("{portChainUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showSFCPortChain(
-            @PathParam("portChainUUID") String sfcPortChainUUID,
+    public Response showSFCPortChain(@PathParam("portChainUUID") String sfcPortChainUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
         return show(sfcPortChainUUID, fields);
@@ -138,8 +134,7 @@ public class NeutronSFCPortChainsNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSFCPortChain(final NeutronSFCPortChainRequest input) {
         return create(input);
@@ -164,12 +159,11 @@ public class NeutronSFCPortChainsNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateSFCPortChain(
-            @PathParam("portChainUUID") String sfcPortChainUUID, final NeutronSFCPortChainRequest input) {
+    public Response updateSFCPortChain(@PathParam("portChainUUID") String sfcPortChainUUID,
+            final NeutronSFCPortChainRequest input) {
         return update(sfcPortChainUUID, input);
     }
 
@@ -177,12 +171,10 @@ public class NeutronSFCPortChainsNorthbound
      * Deletes the SFC Port Chain */
     @Path("{portChainUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteSFCPortChain(
-            @PathParam("portChainUUID") String sfcPortChainUUID) {
+    public Response deleteSFCPortChain(@PathParam("portChainUUID") String sfcPortChainUUID) {
         return delete(sfcPortChainUUID);
     }
 }

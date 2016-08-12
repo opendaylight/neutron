@@ -47,7 +47,7 @@ import org.opendaylight.neutron.spi.NeutronFirewall;
  */
 @Path("/fw/firewalls")
 public class NeutronFirewallNorthbound
-    extends AbstractNeutronNorthbound<NeutronFirewall, NeutronFirewallRequest, INeutronFirewallCRUD> {
+        extends AbstractNeutronNorthbound<NeutronFirewall, NeutronFirewallRequest, INeutronFirewallCRUD> {
 
     private static final String RESOURCE_NAME = "Firewall";
 
@@ -79,8 +79,7 @@ public class NeutronFirewallNorthbound
      * Returns a list of all Firewalls */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -99,33 +98,27 @@ public class NeutronFirewallNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronFirewallCRUD firewallInterface = getNeutronCRUD();
-        List<NeutronFirewall> ans = new ArrayList<NeutronFirewall>();
+        List<NeutronFirewall> ans = new ArrayList<>();
         for (NeutronFirewall nsg : firewallInterface.getAll()) {
-            if ((queryFirewallUUID == null ||
-                queryFirewallUUID.equals(nsg.getID())) &&
-                (queryFirewallTenantID == null ||
-                    queryFirewallTenantID.equals(nsg.getTenantID())) &&
-                (queryFirewallName == null ||
-                    queryFirewallName.equals(nsg.getFirewallName())) &&
-                (queryFirewallAdminStateIsUp == null ||
-                    queryFirewallAdminStateIsUp.equals(nsg.getFirewallAdminStateIsUp())) &&
-                (queryFirewallIsShared == null ||
-                    queryFirewallIsShared.equals(nsg.getFirewallIsShared())) &&
-                (queryFirewallPolicyID == null ||
-                    queryFirewallPolicyID.equals(nsg.getFirewallPolicyID()))) {
+            if ((queryFirewallUUID == null || queryFirewallUUID.equals(nsg.getID()))
+                    && (queryFirewallTenantID == null || queryFirewallTenantID.equals(nsg.getTenantID()))
+                    && (queryFirewallName == null || queryFirewallName.equals(nsg.getFirewallName()))
+                    && (queryFirewallAdminStateIsUp == null
+                            || queryFirewallAdminStateIsUp.equals(nsg.getFirewallAdminStateIsUp()))
+                    && (queryFirewallIsShared == null || queryFirewallIsShared.equals(nsg.getFirewallIsShared()))
+                    && (queryFirewallPolicyID == null || queryFirewallPolicyID.equals(nsg.getFirewallPolicyID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg,fields));
+                    ans.add(extractFields(nsg, fields));
                 } else {
                     ans.add(nsg);
                 }
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronFirewallRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFirewallRequest(ans)).build();
     }
 
     /**
@@ -134,15 +127,14 @@ public class NeutronFirewallNorthbound
     @Path("{firewallUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showFirewall(@PathParam("firewallUUID") String firewallUUID,
-                                      // return fields
-                                      @QueryParam("fields") List<String> fields) {
+            // return fields
+            @QueryParam("fields") List<String> fields) {
         return show(firewallUUID, fields);
     }
 
@@ -152,8 +144,7 @@ public class NeutronFirewallNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFirewalls(final NeutronFirewallRequest input) {
         return create(input);
@@ -166,12 +157,10 @@ public class NeutronFirewallNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateFirewall(
-            @PathParam("firewallUUID") String firewallUUID, final NeutronFirewallRequest input) {
+    public Response updateFirewall(@PathParam("firewallUUID") String firewallUUID, final NeutronFirewallRequest input) {
         return update(firewallUUID, input);
     }
 
@@ -180,12 +169,10 @@ public class NeutronFirewallNorthbound
 
     @Path("{firewallUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteFirewall(
-            @PathParam("firewallUUID") String firewallUUID) {
+    public Response deleteFirewall(@PathParam("firewallUUID") String firewallUUID) {
         return delete(firewallUUID);
     }
 }

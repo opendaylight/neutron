@@ -31,7 +31,6 @@ public class ResourceConflictException extends WebApplicationException {
     private static final long serialVersionUID = 1L;
 
     public ResourceConflictException(String string) {
-        super(Response.status(Response.Status.CONFLICT).entity(string).type(
-                MediaType.TEXT_PLAIN).build());
+        super(Response.status(Response.Status.CONFLICT).entity(string).type(MediaType.TEXT_PLAIN).build());
     }
 }

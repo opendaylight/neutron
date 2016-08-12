@@ -48,7 +48,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancer;
  */
 @Path("/lbaas/loadbalancers")
 public class NeutronLoadBalancerNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancer, NeutronLoadBalancerRequest, INeutronLoadBalancerCRUD> {
+        extends AbstractNeutronNorthbound<NeutronLoadBalancer, NeutronLoadBalancerRequest, INeutronLoadBalancerCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancer";
 
@@ -80,8 +80,7 @@ public class NeutronLoadBalancerNorthbound
      * Returns a list of all LoadBalancer */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -100,33 +99,29 @@ public class NeutronLoadBalancerNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronLoadBalancerCRUD loadBalancerInterface = getNeutronCRUD();
         List<NeutronLoadBalancer> allLoadBalancers = loadBalancerInterface.getAll();
-        List<NeutronLoadBalancer> ans = new ArrayList<NeutronLoadBalancer>();
+        List<NeutronLoadBalancer> ans = new ArrayList<>();
         Iterator<NeutronLoadBalancer> i = allLoadBalancers.iterator();
         while (i.hasNext()) {
             NeutronLoadBalancer nsg = i.next();
-            if ((queryLoadBalancerID == null ||
-                    queryLoadBalancerID.equals(nsg.getID())) &&
-                    (queryLoadBalancerTenantID == null ||
-                            queryLoadBalancerTenantID.equals(nsg.getTenantID())) &&
-                    (queryLoadBalancerName == null ||
-                            queryLoadBalancerName.equals(nsg.getLoadBalancerName())) &&
-                    (queryLoadBalancerVipAddress == null ||
-                            queryLoadBalancerVipAddress.equals(nsg.getLoadBalancerVipAddress())) &&
-                    (queryLoadBalancerVipSubnet == null ||
-                            queryLoadBalancerVipSubnet.equals(nsg.getLoadBalancerVipSubnetID()))) {
+            if ((queryLoadBalancerID == null || queryLoadBalancerID.equals(nsg.getID()))
+                    && (queryLoadBalancerTenantID == null || queryLoadBalancerTenantID.equals(nsg.getTenantID()))
+                    && (queryLoadBalancerName == null || queryLoadBalancerName.equals(nsg.getLoadBalancerName()))
+                    && (queryLoadBalancerVipAddress == null
+                            || queryLoadBalancerVipAddress.equals(nsg.getLoadBalancerVipAddress()))
+                    && (queryLoadBalancerVipSubnet == null
+                            || queryLoadBalancerVipSubnet.equals(nsg.getLoadBalancerVipSubnetID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg,fields));
+                    ans.add(extractFields(nsg, fields));
                 } else {
                     ans.add(nsg);
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronLoadBalancerRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerRequest(ans)).build();
     }
 
     /**
@@ -136,8 +131,7 @@ public class NeutronLoadBalancerNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
 
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
@@ -155,8 +149,7 @@ public class NeutronLoadBalancerNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
 
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancers(final NeutronLoadBalancerRequest input) {
         return create(input);
@@ -170,12 +163,11 @@ public class NeutronLoadBalancerNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
 
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateLoadBalancer(
-            @PathParam("loadBalancerID") String loadBalancerID, final NeutronLoadBalancerRequest input) {
+    public Response updateLoadBalancer(@PathParam("loadBalancerID") String loadBalancerID,
+            final NeutronLoadBalancerRequest input) {
         return update(loadBalancerID, input);
     }
 
@@ -184,12 +176,10 @@ public class NeutronLoadBalancerNorthbound
 
     @Path("{loadBalancerID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteLoadBalancer(
-            @PathParam("loadBalancerID") String loadBalancerID) {
+    public Response deleteLoadBalancer(@PathParam("loadBalancerID") String loadBalancerID) {
         return delete(loadBalancerID);
     }
 }

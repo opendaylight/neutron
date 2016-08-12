@@ -15,21 +15,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 
-
 @XmlRootElement
-@XmlAccessorType (XmlAccessType.NONE)
+@XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSecurityGroupRequest
-    implements INeutronRequest<NeutronSecurityGroup> {
+public class NeutronSecurityGroupRequest implements INeutronRequest<NeutronSecurityGroup> {
     /**
     * See OpenStack Network API v2.0 Reference for a
     * description of annotated attributes and operations
     */
 
-    @XmlElement (name = "security_group")
+    @XmlElement(name = "security_group")
     NeutronSecurityGroup singletonSecurityGroup;
 
-    @XmlElement (name = "security_groups")
+    @XmlElement(name = "security_groups")
     List<NeutronSecurityGroup> bulkRequest;
 
     NeutronSecurityGroupRequest() {

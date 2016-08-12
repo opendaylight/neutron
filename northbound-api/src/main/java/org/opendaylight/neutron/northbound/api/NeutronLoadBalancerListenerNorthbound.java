@@ -47,8 +47,8 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
  *
  */
 @Path("/lbaas/listeners")
-public class NeutronLoadBalancerListenerNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancerListener, NeutronLoadBalancerListenerRequest, INeutronLoadBalancerListenerCRUD> {
+public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthbound<NeutronLoadBalancerListener,
+        NeutronLoadBalancerListenerRequest, INeutronLoadBalancerListenerCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancerListener";
 
@@ -80,8 +80,7 @@ public class NeutronLoadBalancerListenerNorthbound
      * Returns a list of all LoadBalancerListener */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -101,37 +100,35 @@ public class NeutronLoadBalancerListenerNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronCRUD();
         List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAll();
-        List<NeutronLoadBalancerListener> ans = new ArrayList<NeutronLoadBalancerListener>();
+        List<NeutronLoadBalancerListener> ans = new ArrayList<>();
         Iterator<NeutronLoadBalancerListener> i = allLoadBalancerListeners.iterator();
         while (i.hasNext()) {
             NeutronLoadBalancerListener nsg = i.next();
-            if ((queryLoadBalancerListenerID == null ||
-                    queryLoadBalancerListenerID.equals(nsg.getID())) &&
-                    (queryLoadBalancerListenerDefaultPoolID == null ||
-                            queryLoadBalancerListenerDefaultPoolID.equals(nsg.getNeutronLoadBalancerListenerDefaultPoolID())) &&
-                    (queryLoadBalancerListenerTenantID == null ||
-                            queryLoadBalancerListenerTenantID.equals(nsg.getTenantID())) &&
-                    (queryLoadBalancerListenerName == null ||
-                            queryLoadBalancerListenerName.equals(nsg.getLoadBalancerListenerName())) &&
-                    (queryLoadBalancerListenerProtocol == null ||
-                            queryLoadBalancerListenerProtocol.equals(nsg.getNeutronLoadBalancerListenerProtocol())) &&
-                    (queryLoadBalancerListenerProtocolPort == null ||
-                            queryLoadBalancerListenerProtocolPort.equals(nsg.getNeutronLoadBalancerListenerProtocolPort())) &&
-                    (queryLoadBalancerListenerAdminIsUp == null ||
-                            queryLoadBalancerListenerAdminIsUp.equals(nsg.getLoadBalancerListenerAdminStateIsUp()))) {
+            if ((queryLoadBalancerListenerID == null || queryLoadBalancerListenerID.equals(nsg.getID()))
+                    && (queryLoadBalancerListenerDefaultPoolID == null || queryLoadBalancerListenerDefaultPoolID
+                            .equals(nsg.getNeutronLoadBalancerListenerDefaultPoolID()))
+                    && (queryLoadBalancerListenerTenantID == null
+                            || queryLoadBalancerListenerTenantID.equals(nsg.getTenantID()))
+                    && (queryLoadBalancerListenerName == null
+                            || queryLoadBalancerListenerName.equals(nsg.getLoadBalancerListenerName()))
+                    && (queryLoadBalancerListenerProtocol == null
+                            || queryLoadBalancerListenerProtocol.equals(nsg.getNeutronLoadBalancerListenerProtocol()))
+                    && (queryLoadBalancerListenerProtocolPort == null || queryLoadBalancerListenerProtocolPort
+                            .equals(nsg.getNeutronLoadBalancerListenerProtocolPort()))
+                    && (queryLoadBalancerListenerAdminIsUp == null || queryLoadBalancerListenerAdminIsUp
+                            .equals(nsg.getLoadBalancerListenerAdminStateIsUp()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg,fields));
+                    ans.add(extractFields(nsg, fields));
                 } else {
                     ans.add(nsg);
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronLoadBalancerListenerRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerListenerRequest(ans)).build();
     }
 
     /**
@@ -140,8 +137,7 @@ public class NeutronLoadBalancerListenerNorthbound
     @Path("{loadBalancerListenerID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
@@ -158,8 +154,7 @@ public class NeutronLoadBalancerListenerNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerListeners(final NeutronLoadBalancerListenerRequest input) {
         return create(input);
@@ -172,12 +167,11 @@ public class NeutronLoadBalancerListenerNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateLoadBalancerListener(
-            @PathParam("loadBalancerListenerID") String loadBalancerListenerID, final NeutronLoadBalancerListenerRequest input) {
+    public Response updateLoadBalancerListener(@PathParam("loadBalancerListenerID") String loadBalancerListenerID,
+            final NeutronLoadBalancerListenerRequest input) {
         return update(loadBalancerListenerID, input);
     }
 
@@ -186,12 +180,10 @@ public class NeutronLoadBalancerListenerNorthbound
 
     @Path("{loadBalancerListenerID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteLoadBalancerListener(
-            @PathParam("loadBalancerListenerID") String loadBalancerListenerID) {
+    public Response deleteLoadBalancerListener(@PathParam("loadBalancerListenerID") String loadBalancerListenerID) {
         return delete(loadBalancerListenerID);
     }
 }

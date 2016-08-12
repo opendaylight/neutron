@@ -68,25 +68,25 @@ public final class PaginatedRequestFactory {
      */
     @SuppressWarnings("unchecked")
     public static <T extends INeutronObject> INeutronRequest<T> createRequest(Integer limit, String marker,
-                                                                           Boolean pageReverse,
-                                                                           UriInfo uriInfo,
-                                                                           List<T> collection,
-                                                                           Class<T> clazz) {
+            Boolean pageReverse, UriInfo uriInfo, List<T> collection, Class<T> clazz) {
         PaginationResults<T> results = paginate(limit, marker, pageReverse, uriInfo, collection);
 
-        if (clazz.equals(NeutronNetwork.class)){
-            return (INeutronRequest<T>) new NeutronNetworkRequest((List<NeutronNetwork>) results.collection, results.links);
+        if (clazz.equals(NeutronNetwork.class)) {
+            return (INeutronRequest<T>) new NeutronNetworkRequest((List<NeutronNetwork>) results.collection,
+                    results.links);
         }
-        if (clazz.equals(NeutronSubnet.class)){
-            return (INeutronRequest<T>) new NeutronSubnetRequest((List<NeutronSubnet>) results.collection, results.links);
+        if (clazz.equals(NeutronSubnet.class)) {
+            return (INeutronRequest<T>) new NeutronSubnetRequest((List<NeutronSubnet>) results.collection,
+                    results.links);
         }
-        if (clazz.equals(NeutronPort.class)){
+        if (clazz.equals(NeutronPort.class)) {
             return (INeutronRequest<T>) new NeutronPortRequest((List<NeutronPort>) results.collection, results.links);
         }
         return null;
     }
 
-    private static <T extends INeutronObject> PaginationResults<T> paginate(Integer limit, String marker, Boolean pageReverse, UriInfo uriInfo, List<T> collection) {
+    private static <T extends INeutronObject> PaginationResults<T> paginate(Integer limit, String marker,
+            Boolean pageReverse, UriInfo uriInfo, List<T> collection) {
         List<NeutronPageLink> links = new ArrayList<>();
         final int startPos;
         String startMarker;
@@ -105,16 +105,14 @@ public final class PaginatedRequestFactory {
 
             if (!pageReverse) {
                 startPos = offset + 1;
-            }
-            else {
+            } else {
                 startPos = offset - limit;
             }
-        }
-        else {
+        } else {
             startPos = 0;
         }
 
-        if (startPos == 0){
+        if (startPos == 0) {
             firstPage = true;
         }
 
@@ -123,22 +121,20 @@ public final class PaginatedRequestFactory {
             startMarker = lCollection.get(0).getID();
             endMarker = lCollection.get(lCollection.size() - 1).getID();
             lastPage = true;
-        }
-        else if (startPos < 0) {
+        } else if (startPos < 0) {
             if (startPos + limit > 0) {
                 lCollection = lCollection.subList(0, startPos + limit);
                 startMarker = lCollection.get(0).getID();
                 endMarker = lCollection.get(lCollection.size() - 1).getID();
                 firstPage = true;
+            } else {
+                throw new BadRequestException(
+                        "Requested page is out of bounds. Please check the supplied limit and marker");
             }
-            else {
-                throw new BadRequestException("Requested page is out of bounds. Please check the supplied limit and marker");
-            }
-        }
-        else {
+        } else {
             lCollection = lCollection.subList(startPos, startPos + limit);
             startMarker = lCollection.get(0).getID();
-            endMarker = lCollection.get(limit-1).getID();
+            endMarker = lCollection.get(limit - 1).getID();
         }
 
         if (!lastPage) {
@@ -151,7 +147,8 @@ public final class PaginatedRequestFactory {
         if (!firstPage) {
             NeutronPageLink previous = new NeutronPageLink();
             previous.setRef("previous");
-            previous.setHref(uriInfo.getAbsolutePath().toString() + "?limit=" + limit.toString() + "&marker=" + startMarker + "&page_reverse=True");
+            previous.setHref(uriInfo.getAbsolutePath().toString() + "?limit=" + limit.toString() + "&marker="
+                    + startMarker + "&page_reverse=True");
             links.add(previous);
         }
 

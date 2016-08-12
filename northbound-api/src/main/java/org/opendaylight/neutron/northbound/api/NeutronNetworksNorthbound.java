@@ -53,7 +53,7 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 
 @Path("/networks")
 public class NeutronNetworksNorthbound
-    extends AbstractNeutronNorthbound<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD> {
+        extends AbstractNeutronNorthbound<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD> {
 
     @Context
     UriInfo uriInfo;
@@ -90,11 +90,10 @@ public class NeutronNetworksNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listNetworks(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -114,11 +113,11 @@ public class NeutronNetworksNorthbound
             @QueryParam("limit") Integer limit,
             @QueryParam("marker") String marker,
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
-            // sorting not supported
-            ) {
+    // sorting not supported
+    ) {
         INeutronNetworkCRUD networkInterface = getNeutronCRUD();
         List<NeutronNetwork> allNetworks = networkInterface.getAll();
-        List<NeutronNetwork> ans = new ArrayList<NeutronNetwork>();
+        List<NeutronNetwork> ans = new ArrayList<>();
         Iterator<NeutronNetwork> i = allNetworks.iterator();
         while (i.hasNext()) {
             NeutronNetwork oSN = i.next();
@@ -135,16 +134,16 @@ public class NeutronNetworksNorthbound
             if (queryRouterExternal != null) {
                 bRouterExternal = Boolean.valueOf(queryRouterExternal);
             }
-            if ((queryID == null || queryID.equals(oSN.getID())) &&
-                    (queryName == null || queryName.equals(oSN.getNetworkName())) &&
-                    (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp()) &&
-                    (queryStatus == null || queryStatus.equals(oSN.getStatus())) &&
-                    (bShared == null || bShared.booleanValue() == oSN.isShared()) &&
-                    (bRouterExternal == null || bRouterExternal.booleanValue() == oSN.isRouterExternal()) &&
-                    (queryTenantID == null || queryTenantID.equals(oSN.getTenantID())) &&
-                    (queryQosPolicyId == null || queryQosPolicyId.equals(oSN.getQosPolicyId()))) {
+            if ((queryID == null || queryID.equals(oSN.getID()))
+                    && (queryName == null || queryName.equals(oSN.getNetworkName()))
+                    && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
+                    && (queryStatus == null || queryStatus.equals(oSN.getStatus()))
+                    && (bShared == null || bShared.booleanValue() == oSN.isShared())
+                    && (bRouterExternal == null || bRouterExternal.booleanValue() == oSN.isRouterExternal())
+                    && (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))
+                    && (queryQosPolicyId == null || queryQosPolicyId.equals(oSN.getQosPolicyId()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSN,fields));
+                    ans.add(extractFields(oSN, fields));
                 } else {
                     ans.add(oSN);
                 }
@@ -153,12 +152,12 @@ public class NeutronNetworksNorthbound
 
         if (limit != null && ans.size() > 1) {
             // Return a paginated request
-            NeutronNetworkRequest request = (NeutronNetworkRequest) PaginatedRequestFactory.createRequest(limit,
-                    marker, pageReverse, uriInfo, ans, NeutronNetwork.class);
+            NeutronNetworkRequest request = (NeutronNetworkRequest) PaginatedRequestFactory.createRequest(limit, marker,
+                    pageReverse, uriInfo, ans, NeutronNetwork.class);
             return Response.status(HttpURLConnection.HTTP_OK).entity(request).build();
         }
 
-    return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronNetworkRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronNetworkRequest(ans)).build();
 
     }
 
@@ -169,17 +168,14 @@ public class NeutronNetworksNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showNetwork(
-            @PathParam("netUUID") String netUUID,
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response showNetwork(@PathParam("netUUID") String netUUID,
             // return fields
-            @QueryParam("fields") List<String> fields
-            ) {
+            @QueryParam("fields") List<String> fields) {
         return show(netUUID, fields);
     }
 
@@ -189,9 +185,8 @@ public class NeutronNetworksNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronNetwork.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createNetworks(final NeutronNetworkRequest input) {
         return create(input);
     }
@@ -216,13 +211,10 @@ public class NeutronNetworksNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateNetwork(
-            @PathParam("netUUID") String netUUID, final NeutronNetworkRequest input
-            ) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response updateNetwork(@PathParam("netUUID") String netUUID, final NeutronNetworkRequest input) {
         return update(netUUID, input);
     }
 
@@ -231,12 +223,10 @@ public class NeutronNetworksNorthbound
 
     @Path("{netUUID}")
     @DELETE
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteNetwork(
-            @PathParam("netUUID") String netUUID) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response deleteNetwork(@PathParam("netUUID") String netUUID) {
         return delete(netUUID);
     }
 }

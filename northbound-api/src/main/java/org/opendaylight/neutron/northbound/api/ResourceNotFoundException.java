@@ -31,7 +31,6 @@ public class ResourceNotFoundException extends WebApplicationException {
     private static final long serialVersionUID = 1L;
 
     public ResourceNotFoundException(String string) {
-        super(Response.status(Response.Status.NOT_FOUND).entity(string).type(
-                MediaType.TEXT_PLAIN).build());
+        super(Response.status(Response.Status.NOT_FOUND).entity(string).type(MediaType.TEXT_PLAIN).build());
     }
 }

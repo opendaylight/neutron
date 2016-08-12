@@ -15,19 +15,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronMeteringLabelRuleRequest
-    implements INeutronRequest<NeutronMeteringLabelRule> {
+public class NeutronMeteringLabelRuleRequest implements INeutronRequest<NeutronMeteringLabelRule> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="metering_label_rule")
+    @XmlElement(name = "metering_label_rule")
     NeutronMeteringLabelRule singletonMeteringLabelRule;
 
-    @XmlElement(name="metering_label_rules")
+    @XmlElement(name = "metering_label_rules")
     List<NeutronMeteringLabelRule> bulkMeteringLabelRules;
 
     NeutronMeteringLabelRuleRequest() {

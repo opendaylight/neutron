@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronPort;
 
 @Path("/ports")
 public class NeutronPortsNorthbound
-    extends AbstractNeutronNorthbound<NeutronPort, NeutronPortRequest, INeutronPortCRUD> {
+        extends AbstractNeutronNorthbound<NeutronPort, NeutronPortRequest, INeutronPortCRUD> {
 
     private static final String RESOURCE_NAME = "Port";
 
@@ -72,17 +72,17 @@ public class NeutronPortsNorthbound
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         if (needNetworks) {
-            answer = answer.fetchINeutronNetworkCRUD( this);
+            answer = answer.fetchINeutronNetworkCRUD(this);
             if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException("Network CRUD Interface "
-                        + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
         }
         if (needSubnets) {
-            answer = answer.fetchINeutronSubnetCRUD( this);
+            answer = answer.fetchINeutronSubnetCRUD(this);
             if (answer.getSubnetInterface() == null) {
-                throw new ServiceUnavailableException("Subnet CRUD Interface "
-                        + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Subnet CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
         }
         return answer;
@@ -107,11 +107,10 @@ public class NeutronPortsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listPorts(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -131,27 +130,28 @@ public class NeutronPortsNorthbound
             @QueryParam("limit") Integer limit,
             @QueryParam("marker") String marker,
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
-            // sorting not supported
-            ) {
+    // sorting not supported
+    ) {
         INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
         List<NeutronPort> allPorts = portInterface.getAll();
-        List<NeutronPort> ans = new ArrayList<NeutronPort>();
+        List<NeutronPort> ans = new ArrayList<>();
         Iterator<NeutronPort> i = allPorts.iterator();
         while (i.hasNext()) {
             NeutronPort oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID())) &&
-                    (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkUUID())) &&
-                    (queryName == null || queryName.equals(oSS.getName())) &&
-                    (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp())) &&
-                    (queryStatus == null || queryStatus.equals(oSS.getStatus())) &&
-                    (queryMACAddress == null || queryMACAddress.equals(oSS.getMacAddress())) &&
-                    (queryDeviceID == null || queryDeviceID.equals(oSS.getDeviceID())) &&
-                    (queryDeviceOwner == null || queryDeviceOwner.equals(oSS.getDeviceOwner())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID())) &&
-                    (queryPortSecurityEnabled == null || queryPortSecurityEnabled.equals(oSS.getPortSecurityEnabled())) &&
-                    (queryQosPolicyId == null || queryQosPolicyId.equals(oSS.getQosPolicyId()))) {
+            if ((queryID == null || queryID.equals(oSS.getID()))
+                    && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkUUID()))
+                    && (queryName == null || queryName.equals(oSS.getName()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
+                    && (queryMACAddress == null || queryMACAddress.equals(oSS.getMacAddress()))
+                    && (queryDeviceID == null || queryDeviceID.equals(oSS.getDeviceID()))
+                    && (queryDeviceOwner == null || queryDeviceOwner.equals(oSS.getDeviceOwner()))
+                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
+                    && (queryPortSecurityEnabled == null
+                            || queryPortSecurityEnabled.equals(oSS.getPortSecurityEnabled()))
+                    && (queryQosPolicyId == null || queryQosPolicyId.equals(oSS.getQosPolicyId()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS,fields));
+                    ans.add(extractFields(oSS, fields));
                 } else {
                     ans.add(oSS);
                 }
@@ -160,13 +160,12 @@ public class NeutronPortsNorthbound
 
         if (limit != null && ans.size() > 1) {
             // Return a paginated request
-            NeutronPortRequest request = (NeutronPortRequest) PaginatedRequestFactory.createRequest(limit,
-                    marker, pageReverse, uriInfo, ans, NeutronPort.class);
+            NeutronPortRequest request = (NeutronPortRequest) PaginatedRequestFactory.createRequest(limit, marker,
+                    pageReverse, uriInfo, ans, NeutronPort.class);
             return Response.status(HttpURLConnection.HTTP_OK).entity(request).build();
         }
 
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronPortRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronPortRequest(ans)).build();
     }
 
     /**
@@ -176,16 +175,14 @@ public class NeutronPortsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showPort(
-            @PathParam("portUUID") String portUUID,
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response showPort(@PathParam("portUUID") String portUUID,
             // return fields
-            @QueryParam("fields") List<String> fields ) {
+            @QueryParam("fields") List<String> fields) {
         return show(portUUID, fields);
     }
 
@@ -196,9 +193,8 @@ public class NeutronPortsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
         getNeutronInterfaces(true, true); // Ensure that services for networks and subnets are loaded
         return create(input);
@@ -236,14 +232,10 @@ public class NeutronPortsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updatePort(
-            @PathParam("portUUID") String portUUID,
-            NeutronPortRequest input
-            ) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response updatePort(@PathParam("portUUID") String portUUID, NeutronPortRequest input) {
         //        TODO: Support change of security groups
         // update the port and return the modified object
         return update(portUUID, input);
@@ -254,12 +246,10 @@ public class NeutronPortsNorthbound
 
     @Path("{portUUID}")
     @DELETE
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deletePort(
-            @PathParam("portUUID") String portUUID) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response deletePort(@PathParam("portUUID") String portUUID) {
         return delete(portUUID);
     }
 }

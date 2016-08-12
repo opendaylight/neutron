@@ -30,7 +30,7 @@ public class UnimplementedException extends WebApplicationException {
      *
      */
     public UnimplementedException(String string) {
-        super(Response.status(HttpURLConnection.HTTP_NOT_IMPLEMENTED).entity(
-                string).type(MediaType.TEXT_PLAIN).build());
+        super(Response.status(HttpURLConnection.HTTP_NOT_IMPLEMENTED).entity(string).type(MediaType.TEXT_PLAIN)
+                .build());
     }
 }

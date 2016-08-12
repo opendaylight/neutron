@@ -47,7 +47,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallRule;
 
 @Path("fw/firewall_rules")
 public class NeutronFirewallRulesNorthbound
-    extends AbstractNeutronNorthbound<NeutronFirewallRule, NeutronFirewallRuleRequest, INeutronFirewallRuleCRUD> {
+        extends AbstractNeutronNorthbound<NeutronFirewallRule, NeutronFirewallRuleRequest, INeutronFirewallRuleCRUD> {
     private static final String RESOURCE_NAME = "Firewall Rule";
 
     @Override
@@ -78,9 +78,8 @@ public class NeutronFirewallRulesNorthbound
      * Returns a list of all Firewall Rules
      */
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -108,43 +107,38 @@ public class NeutronFirewallRulesNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronFirewallRuleCRUD firewallRuleInterface = getNeutronCRUD();
-        List<NeutronFirewallRule> ans = new ArrayList<NeutronFirewallRule>();
+        List<NeutronFirewallRule> ans = new ArrayList<>();
         for (NeutronFirewallRule nsr : firewallRuleInterface.getAll()) {
-            if ((queryFirewallRuleUUID == null ||
-                    queryFirewallRuleUUID.equals(nsr.getID())) &&
-                    (queryFirewallRuleTenantID == null ||
-                            queryFirewallRuleTenantID.equals(nsr.getTenantID())) &&
-                    (queryFirewallRuleName == null ||
-                            queryFirewallRuleName.equals(nsr.getFirewallRuleName())) &&
-                    (queryFirewallRuleIsShared == null ||
-                            queryFirewallRuleIsShared.equals(nsr.getFirewallRuleIsShared())) &&
-                    (queryFirewallRulePolicyID == null ||
-                            queryFirewallRulePolicyID.equals(nsr.getFirewallRulePolicyID())) &&
-                    (queryFirewallRuleProtocol == null ||
-                            queryFirewallRuleProtocol.equals(nsr.getFirewallRuleProtocol())) &&
-                    (queryFirewallRuleIpVer == null ||
-                            queryFirewallRuleIpVer.equals(nsr.getFirewallRuleIpVer())) &&
-                    (queryFirewallRuleSrcIpAddr == null ||
-                            queryFirewallRuleSrcIpAddr.equals(nsr.getFirewallRuleSrcIpAddr())) &&
-                    (queryFirewallRuleDstIpAddr == null ||
-                            queryFirewallRuleDstIpAddr.equals(nsr.getFirewallRuleDstIpAddr())) &&
-                    (queryFirewallRuleSrcPortRangeMin == null ||
-                            queryFirewallRuleSrcPortRangeMin.equals(nsr.getFirewallRuleSrcPortRangeMin())) &&
-                    (queryFirewallRuleSrcPortRangeMax == null ||
-                            queryFirewallRuleSrcPortRangeMax.equals(nsr.getFirewallRuleSrcPortRangeMax())) &&
-                    (queryFirewallRuleDstPortRangeMin == null ||
-                            queryFirewallRuleDstPortRangeMin.equals(nsr.getFirewallRuleDstPortRangeMin())) &&
-                    (queryFirewallRuleDstPortRangeMax == null ||
-                            queryFirewallRuleDstPortRangeMax.equals(nsr.getFirewallRuleDstPortRangeMax())) &&
-                    (queryFirewallRulePosition == null ||
-                            queryFirewallRulePosition.equals(nsr.getFirewallRulePosition())) &&
-                    (queryFirewallRuleAction == null ||
-                            queryFirewallRuleAction.equals(nsr.getFirewallRuleAction())) &&
-                    (queryFirewallRuleIsEnabled == null ||
-                            queryFirewallRuleIsEnabled.equals(nsr.getFirewallRuleIsEnabled()))) {
+            if ((queryFirewallRuleUUID == null || queryFirewallRuleUUID.equals(nsr.getID()))
+                    && (queryFirewallRuleTenantID == null || queryFirewallRuleTenantID.equals(nsr.getTenantID()))
+                    && (queryFirewallRuleName == null || queryFirewallRuleName.equals(nsr.getFirewallRuleName()))
+                    && (queryFirewallRuleIsShared == null
+                            || queryFirewallRuleIsShared.equals(nsr.getFirewallRuleIsShared()))
+                    && (queryFirewallRulePolicyID == null
+                            || queryFirewallRulePolicyID.equals(nsr.getFirewallRulePolicyID()))
+                    && (queryFirewallRuleProtocol == null
+                            || queryFirewallRuleProtocol.equals(nsr.getFirewallRuleProtocol()))
+                    && (queryFirewallRuleIpVer == null || queryFirewallRuleIpVer.equals(nsr.getFirewallRuleIpVer()))
+                    && (queryFirewallRuleSrcIpAddr == null
+                            || queryFirewallRuleSrcIpAddr.equals(nsr.getFirewallRuleSrcIpAddr()))
+                    && (queryFirewallRuleDstIpAddr == null
+                            || queryFirewallRuleDstIpAddr.equals(nsr.getFirewallRuleDstIpAddr()))
+                    && (queryFirewallRuleSrcPortRangeMin == null
+                            || queryFirewallRuleSrcPortRangeMin.equals(nsr.getFirewallRuleSrcPortRangeMin()))
+                    && (queryFirewallRuleSrcPortRangeMax == null
+                            || queryFirewallRuleSrcPortRangeMax.equals(nsr.getFirewallRuleSrcPortRangeMax()))
+                    && (queryFirewallRuleDstPortRangeMin == null
+                            || queryFirewallRuleDstPortRangeMin.equals(nsr.getFirewallRuleDstPortRangeMin()))
+                    && (queryFirewallRuleDstPortRangeMax == null
+                            || queryFirewallRuleDstPortRangeMax.equals(nsr.getFirewallRuleDstPortRangeMax()))
+                    && (queryFirewallRulePosition == null
+                            || queryFirewallRulePosition.equals(nsr.getFirewallRulePosition()))
+                    && (queryFirewallRuleAction == null || queryFirewallRuleAction.equals(nsr.getFirewallRuleAction()))
+                    && (queryFirewallRuleIsEnabled == null
+                            || queryFirewallRuleIsEnabled.equals(nsr.getFirewallRuleIsEnabled()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsr, fields));
                 } else {
@@ -153,8 +147,7 @@ public class NeutronFirewallRulesNorthbound
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronFirewallRuleRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFirewallRuleRequest(ans)).build();
     }
 
     /**
@@ -163,9 +156,8 @@ public class NeutronFirewallRulesNorthbound
 
     @Path("{firewallRuleUUID}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
@@ -181,10 +173,9 @@ public class NeutronFirewallRulesNorthbound
      */
 
     @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFirewallRules(final NeutronFirewallRuleRequest input) {
         return create(input);
@@ -195,14 +186,13 @@ public class NeutronFirewallRulesNorthbound
      */
     @Path("{firewallRuleUUID}")
     @PUT
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateFirewallRule(
-            @PathParam("firewallRuleUUID") String firewallRuleUUID, final NeutronFirewallRuleRequest input) {
+    public Response updateFirewallRule(@PathParam("firewallRuleUUID") String firewallRuleUUID,
+            final NeutronFirewallRuleRequest input) {
         return update(firewallRuleUUID, input);
     }
 
@@ -212,12 +202,10 @@ public class NeutronFirewallRulesNorthbound
 
     @Path("{firewallRuleUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteFirewallRule(
-            @PathParam("firewallRuleUUID") String firewallRuleUUID) {
+    public Response deleteFirewallRule(@PathParam("firewallRuleUUID") String firewallRuleUUID) {
         return delete(firewallRuleUUID);
     }
 }

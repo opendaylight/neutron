@@ -22,10 +22,10 @@ public class NeutronSFCFlowClassifierRequest implements INeutronRequest<NeutronS
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="flowclassifier")
+    @XmlElement(name = "flowclassifier")
     NeutronSFCFlowClassifier singletonSFCFlowClassifier;
 
-    @XmlElement(name="flowclassifiers")
+    @XmlElement(name = "flowclassifiers")
     List<NeutronSFCFlowClassifier> bulkRequest;
 
     NeutronSFCFlowClassifierRequest() {

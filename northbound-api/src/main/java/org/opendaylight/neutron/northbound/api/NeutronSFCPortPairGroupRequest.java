@@ -21,10 +21,10 @@ public class NeutronSFCPortPairGroupRequest implements INeutronRequest<NeutronSF
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0 Reference
     // for description of annotated attributes
 
-    @XmlElement(name="portpairgroup")
+    @XmlElement(name = "portpairgroup")
     NeutronSFCPortPairGroup singletonPortPairGroup;
 
-    @XmlElement(name="portpairgroups")
+    @XmlElement(name = "portpairgroups")
     List<NeutronSFCPortPairGroup> bulkRequest;
 
     NeutronSFCPortPairGroupRequest() {

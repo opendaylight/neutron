@@ -48,7 +48,8 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
  */
 @Path("/lbaas/healthmonitors")
 public class NeutronLoadBalancerHealthMonitorNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancerHealthMonitor, NeutronLoadBalancerHealthMonitorRequest, INeutronLoadBalancerHealthMonitorCRUD> {
+        extends AbstractNeutronNorthbound<NeutronLoadBalancerHealthMonitor, NeutronLoadBalancerHealthMonitorRequest,
+                INeutronLoadBalancerHealthMonitorCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancerHealthMonitor";
 
@@ -80,8 +81,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
      * Returns a list of all LoadBalancerHealthMonitor */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -105,52 +105,45 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronLoadBalancerHealthMonitorCRUD loadBalancerHealthMonitorInterface = getNeutronCRUD();
-        List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface.getAll();
-        List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<NeutronLoadBalancerHealthMonitor>();
+        List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface
+                .getAll();
+        List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<>();
         Iterator<NeutronLoadBalancerHealthMonitor> i = allLoadBalancerHealthMonitors.iterator();
         while (i.hasNext()) {
             NeutronLoadBalancerHealthMonitor nsg = i.next();
-            if ((queryLoadBalancerHealthMonitorID == null ||
-                    queryLoadBalancerHealthMonitorID.equals(nsg.getID())) &&
-                    (queryLoadBalancerHealthMonitorTenantID == null ||
-                            queryLoadBalancerHealthMonitorTenantID.equals
-                                    (nsg.getTenantID())) &&
-                    (queryLoadBalancerHealthMonitorType == null ||
-                            queryLoadBalancerHealthMonitorType.equals
-                                    (nsg.getLoadBalancerHealthMonitorType())) &&
-                    (queryLoadBalancerHealthMonitorDelay == null ||
-                            queryLoadBalancerHealthMonitorDelay.equals
-                                    (nsg.getLoadBalancerHealthMonitorDelay())) &&
-                    (queryLoadBalancerHealthMonitorTimeout == null ||
-                            queryLoadBalancerHealthMonitorTimeout.equals
-                                    (nsg.getLoadBalancerHealthMonitorTimeout())) &&
-                    (queryLoadBalancerHealthMonitorMaxRetries == null ||
-                            queryLoadBalancerHealthMonitorMaxRetries.equals
-                                    (nsg.getLoadBalancerHealthMonitorMaxRetries())) &&
-                    (queryLoadBalancerHealthMonitorHttpMethod == null ||
-                            queryLoadBalancerHealthMonitorHttpMethod.equals
-                                    (nsg.getLoadBalancerHealthMonitorHttpMethod())) &&
-                    (queryLoadBalancerHealthMonitorUrlPath == null ||
-                            queryLoadBalancerHealthMonitorUrlPath.equals
-                                    (nsg.getLoadBalancerHealthMonitorUrlPath())) &&
-                    (queryLoadBalancerHealthMonitorExpectedCodes == null ||
-                            queryLoadBalancerHealthMonitorExpectedCodes.equals
-                                    (nsg.getLoadBalancerHealthMonitorExpectedCodes())) &&
-                    (queryLoadBalancerHealthMonitorIsAdminStateUp == null ||
-                            queryLoadBalancerHealthMonitorIsAdminStateUp.equals
-                                    (nsg.getLoadBalancerHealthMonitorAdminStateIsUp()))) {
+            if ((queryLoadBalancerHealthMonitorID == null || queryLoadBalancerHealthMonitorID.equals(nsg.getID()))
+                    && (queryLoadBalancerHealthMonitorTenantID == null
+                            || queryLoadBalancerHealthMonitorTenantID.equals(nsg.getTenantID()))
+                    && (queryLoadBalancerHealthMonitorType == null
+                            || queryLoadBalancerHealthMonitorType.equals(nsg.getLoadBalancerHealthMonitorType()))
+                    && (queryLoadBalancerHealthMonitorDelay == null
+                            || queryLoadBalancerHealthMonitorDelay.equals(nsg.getLoadBalancerHealthMonitorDelay()))
+                    && (queryLoadBalancerHealthMonitorTimeout == null
+                            || queryLoadBalancerHealthMonitorTimeout.equals(nsg.getLoadBalancerHealthMonitorTimeout()))
+                    && (queryLoadBalancerHealthMonitorMaxRetries == null || queryLoadBalancerHealthMonitorMaxRetries
+                            .equals(nsg.getLoadBalancerHealthMonitorMaxRetries()))
+                    && (queryLoadBalancerHealthMonitorHttpMethod == null || queryLoadBalancerHealthMonitorHttpMethod
+                            .equals(nsg.getLoadBalancerHealthMonitorHttpMethod()))
+                    && (queryLoadBalancerHealthMonitorUrlPath == null
+                            || queryLoadBalancerHealthMonitorUrlPath.equals(nsg.getLoadBalancerHealthMonitorUrlPath()))
+                    && (queryLoadBalancerHealthMonitorExpectedCodes == null
+                            || queryLoadBalancerHealthMonitorExpectedCodes
+                                    .equals(nsg.getLoadBalancerHealthMonitorExpectedCodes()))
+                    && (queryLoadBalancerHealthMonitorIsAdminStateUp == null
+                            || queryLoadBalancerHealthMonitorIsAdminStateUp
+                                    .equals(nsg.getLoadBalancerHealthMonitorAdminStateIsUp()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg,fields));
+                    ans.add(extractFields(nsg, fields));
                 } else {
                     ans.add(nsg);
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronLoadBalancerHealthMonitorRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerHealthMonitorRequest(ans))
+                .build();
     }
 
     /**
@@ -159,13 +152,13 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
     @Path("{loadBalancerHealthMonitorID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showLoadBalancerHealthMonitor(@PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
+    public Response showLoadBalancerHealthMonitor(
+            @PathParam("loadBalancerHealthMonitorID") String loadBalancerHealthMonitorID,
             // return fields
             @QueryParam("fields") List<String> fields) {
         return show(loadBalancerHealthMonitorID, fields);
@@ -177,8 +170,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerHealthMonitors(final NeutronLoadBalancerHealthMonitorRequest input) {
         return create(input);
@@ -191,8 +183,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateLoadBalancerHealthMonitor(
@@ -201,14 +192,12 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
         return update(loadBalancerHealthMonitorID, input);
     }
 
-
     /**
      * Deletes a LoadBalancerHealthMonitor
      * */
     @Path("{loadBalancerHealthMonitorID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerHealthMonitor(

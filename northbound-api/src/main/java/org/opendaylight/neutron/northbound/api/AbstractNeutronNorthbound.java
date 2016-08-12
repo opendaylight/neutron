@@ -16,9 +16,9 @@ import org.opendaylight.neutron.spi.INeutronObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractNeutronNorthbound<T extends INeutronObject, NeutronRequest extends INeutronRequest<T>, I extends INeutronCRUD<T>> {
-    private static final Logger LOGGER = LoggerFactory
-        .getLogger(AbstractNeutronNorthbound.class);
+public abstract class AbstractNeutronNorthbound<T extends INeutronObject, NeutronRequest extends INeutronRequest<T>,
+        I extends INeutronCRUD<T>> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
     protected static final int HTTP_OK_BOTTOM = 200;
     protected static final int HTTP_OK_TOP = 299;
@@ -35,13 +35,16 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
     }
 
     protected abstract String getResourceName();
+
     protected abstract T extractFields(T o, List<String> fields);
+
     protected abstract NeutronRequest newNeutronRequest(T o);
+
     protected abstract I getNeutronCRUD();
 
     protected Response show(String uuid,
-                            // return fields
-                            List<String> fields) {
+            // return fields
+            List<String> fields) {
         I neutronCRUD = getNeutronCRUD();
         T ans = neutronCRUD.get(uuid);
         if (ans == null) {
@@ -49,8 +52,8 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
         }
 
         if (fields.size() > 0) {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    newNeutronRequest(extractFields(ans, fields))).build();
+            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(extractFields(ans, fields)))
+                    .build();
         } else {
             return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();
         }
@@ -111,10 +114,8 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
         try {
             exist = neutronCRUD.remove(uuid);
         } catch (Exception e) {
-            LOGGER.debug("exception during remove {} {} {}",
-                         resourceName, uuid, e);
-            throw new InternalServerErrorException("Could not delete " +
-                                                   resourceName);
+            LOGGER.debug("exception during remove {} {} {}", resourceName, uuid, e);
+            throw new InternalServerErrorException("Could not delete " + resourceName);
         }
         if (!exist) {
             throw new ResourceNotFoundException(uuidNoExist());

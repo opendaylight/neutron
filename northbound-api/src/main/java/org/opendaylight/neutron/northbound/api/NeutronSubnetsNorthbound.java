@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 
 @Path("/subnets")
 public class NeutronSubnetsNorthbound
-    extends AbstractNeutronNorthbound<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD> {
+        extends AbstractNeutronNorthbound<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD> {
     private static final String RESOURCE_NAME = "Subnet";
 
     @Override
@@ -73,8 +73,8 @@ public class NeutronSubnetsNorthbound
         if (needNetwork) {
             answer = answer.fetchINeutronNetworkCRUD(this);
             if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
         }
         return answer;
@@ -98,8 +98,7 @@ public class NeutronSubnetsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackSubnets.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -121,26 +120,26 @@ public class NeutronSubnetsNorthbound
             @QueryParam("limit") Integer limit,
             @QueryParam("marker") String marker,
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
-            // sorting not supported
-            ) {
+    // sorting not supported
+    ) {
         INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
         List<NeutronSubnet> allNetworks = subnetInterface.getAll();
-        List<NeutronSubnet> ans = new ArrayList<NeutronSubnet>();
+        List<NeutronSubnet> ans = new ArrayList<>();
         Iterator<NeutronSubnet> i = allNetworks.iterator();
         while (i.hasNext()) {
             NeutronSubnet oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID())) &&
-                    (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkUUID())) &&
-                    (queryName == null || queryName.equals(oSS.getName())) &&
-                    (queryIPVersion == null || queryIPVersion.equals(oSS.getIpVersion())) &&
-                    (queryCIDR == null || queryCIDR.equals(oSS.getCidr())) &&
-                    (queryGatewayIP == null || queryGatewayIP.equals(oSS.getGatewayIP())) &&
-                    (queryEnableDHCP == null || queryEnableDHCP.equals(oSS.getEnableDHCP())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID())) &&
-                    (queryIpV6AddressMode == null || queryIpV6AddressMode.equals(oSS.getIpV6AddressMode())) &&
-                    (queryIpV6RaMode == null || queryIpV6RaMode.equals(oSS.getIpV6RaMode()))){
+            if ((queryID == null || queryID.equals(oSS.getID()))
+                    && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkUUID()))
+                    && (queryName == null || queryName.equals(oSS.getName()))
+                    && (queryIPVersion == null || queryIPVersion.equals(oSS.getIpVersion()))
+                    && (queryCIDR == null || queryCIDR.equals(oSS.getCidr()))
+                    && (queryGatewayIP == null || queryGatewayIP.equals(oSS.getGatewayIP()))
+                    && (queryEnableDHCP == null || queryEnableDHCP.equals(oSS.getEnableDHCP()))
+                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
+                    && (queryIpV6AddressMode == null || queryIpV6AddressMode.equals(oSS.getIpV6AddressMode()))
+                    && (queryIpV6RaMode == null || queryIpV6RaMode.equals(oSS.getIpV6RaMode()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS,fields));
+                    ans.add(extractFields(oSS, fields));
                 } else {
                     ans.add(oSS);
                 }
@@ -149,13 +148,12 @@ public class NeutronSubnetsNorthbound
 
         if (limit != null && ans.size() > 1) {
             // Return a paginated request
-            NeutronSubnetRequest request = (NeutronSubnetRequest) PaginatedRequestFactory.createRequest(limit,
-                    marker, pageReverse, uriInfo, ans, NeutronSubnet.class);
+            NeutronSubnetRequest request = (NeutronSubnetRequest) PaginatedRequestFactory.createRequest(limit, marker,
+                    pageReverse, uriInfo, ans, NeutronSubnet.class);
             return Response.status(HttpURLConnection.HTTP_OK).entity(request).build();
         }
 
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronSubnetRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSubnetRequest(ans)).build();
     }
 
     /**
@@ -165,14 +163,12 @@ public class NeutronSubnetsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackSubnets.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showSubnet(
-            @PathParam("subnetUUID") String subnetUUID,
+    public Response showSubnet(@PathParam("subnetUUID") String subnetUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
         return show(subnetUUID, fields);
@@ -185,8 +181,7 @@ public class NeutronSubnetsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackSubnets.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSubnets(final NeutronSubnetRequest input) {
         getNeutronInterfaces(true); // Ensure that network service is loaded
@@ -216,13 +211,10 @@ public class NeutronSubnetsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackSubnets.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateSubnet(
-            @PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input
-            ) {
+    public Response updateSubnet(@PathParam("subnetUUID") String subnetUUID, final NeutronSubnetRequest input) {
         return update(subnetUUID, input);
     }
 
@@ -231,12 +223,10 @@ public class NeutronSubnetsNorthbound
 
     @Path("{subnetUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteSubnet(
-            @PathParam("subnetUUID") String subnetUUID) {
+    public Response deleteSubnet(@PathParam("subnetUUID") String subnetUUID) {
         return delete(subnetUUID);
     }
 }

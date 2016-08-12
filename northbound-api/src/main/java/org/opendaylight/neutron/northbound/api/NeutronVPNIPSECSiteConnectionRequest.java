@@ -19,10 +19,10 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronVPNIPSECSiteConnectionRequest implements INeutronRequest<NeutronVPNIPSECSiteConnection> {
 
-    @XmlElement(name="ipsec_site_connection")
+    @XmlElement(name = "ipsec_site_connection")
     NeutronVPNIPSECSiteConnection singletonVPNIPSECSiteConnection;
 
-    @XmlElement(name="ipsec_site_connections")
+    @XmlElement(name = "ipsec_site_connections")
     List<NeutronVPNIPSECSiteConnection> bulkVPNIPSECSiteConnections;
 
     NeutronVPNIPSECSiteConnectionRequest() {
@@ -30,7 +30,7 @@ public class NeutronVPNIPSECSiteConnectionRequest implements INeutronRequest<Neu
 
     NeutronVPNIPSECSiteConnectionRequest(NeutronVPNIPSECSiteConnection connection) {
         singletonVPNIPSECSiteConnection = connection;
-       bulkVPNIPSECSiteConnections = null;
+        bulkVPNIPSECSiteConnections = null;
     }
 
     NeutronVPNIPSECSiteConnectionRequest(List<NeutronVPNIPSECSiteConnection> connections) {

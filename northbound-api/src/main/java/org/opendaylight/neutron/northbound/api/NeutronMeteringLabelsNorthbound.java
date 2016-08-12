@@ -49,8 +49,8 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
  */
 
 @Path("/metering/metering-labels")
-public class NeutronMeteringLabelsNorthbound
-    extends AbstractNeutronNorthbound<NeutronMeteringLabel, NeutronMeteringLabelRequest, INeutronMeteringLabelCRUD> {
+public class NeutronMeteringLabelsNorthbound extends
+        AbstractNeutronNorthbound<NeutronMeteringLabel, NeutronMeteringLabelRequest, INeutronMeteringLabelCRUD> {
     private static final String RESOURCE_NAME = "Metering Label";
 
     @Override
@@ -86,8 +86,7 @@ public class NeutronMeteringLabelsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -98,27 +97,26 @@ public class NeutronMeteringLabelsNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
             @QueryParam("tenant_id") String queryTenantID
-            // pagination and sorting are TODO
-            ) {
+    // pagination and sorting are TODO
+    ) {
         INeutronMeteringLabelCRUD labelInterface = getNeutronCRUD();
         List<NeutronMeteringLabel> allNeutronMeteringLabel = labelInterface.getAll();
-        List<NeutronMeteringLabel> ans = new ArrayList<NeutronMeteringLabel>();
+        List<NeutronMeteringLabel> ans = new ArrayList<>();
         Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabel.iterator();
         while (i.hasNext()) {
             NeutronMeteringLabel oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID())) &&
-                    (queryName == null || queryName.equals(oSS.getMeteringLabelName())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSS.getID()))
+                    && (queryName == null || queryName.equals(oSS.getMeteringLabelName()))
+                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS,fields));
+                    ans.add(extractFields(oSS, fields));
                 } else {
                     ans.add(oSS);
                 }
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronMeteringLabelRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronMeteringLabelRequest(ans)).build();
     }
 
     /**
@@ -127,15 +125,13 @@ public class NeutronMeteringLabelsNorthbound
     @Path("{labelUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showMeteringLabel(
-            @PathParam("labelUUID") String labelUUID,
+    public Response showMeteringLabel(@PathParam("labelUUID") String labelUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
         return show(labelUUID, fields);
@@ -147,8 +143,7 @@ public class NeutronMeteringLabelsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(NeutronNetwork.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabel(final NeutronMeteringLabelRequest input) {
         return create(input);
@@ -159,12 +154,10 @@ public class NeutronMeteringLabelsNorthbound
 
     @Path("{labelUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteMeteringLabel(
-            @PathParam("labelUUID") String labelUUID) {
+    public Response deleteMeteringLabel(@PathParam("labelUUID") String labelUUID) {
         return delete(labelUUID);
     }
 }

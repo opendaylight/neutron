@@ -53,7 +53,7 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 
 @Path("/bgpvpns")
 public class NeutronBgpvpnsNorthbound
-    extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
+        extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
 
     @Context
     UriInfo uriInfo;
@@ -90,11 +90,10 @@ public class NeutronBgpvpnsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackBgpvpns.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listBgpvpns(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -110,11 +109,11 @@ public class NeutronBgpvpnsNorthbound
             @QueryParam("limit") Integer limit,
             @QueryParam("marker") String marker,
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
-            // sorting not supported
-            ) {
+    // sorting not supported
+    ) {
         INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
         List<NeutronBgpvpn> allBgpvpns = bgpvpnInterface.getAll();
-        List<NeutronBgpvpn> ans = new ArrayList<NeutronBgpvpn>();
+        List<NeutronBgpvpn> ans = new ArrayList<>();
         Iterator<NeutronBgpvpn> i = allBgpvpns.iterator();
         while (i.hasNext()) {
             NeutronBgpvpn oSN = i.next();
@@ -127,14 +126,14 @@ public class NeutronBgpvpnsNorthbound
             if (queryAutoAggregate != null) {
                 bAutoAggregate = Boolean.valueOf(queryAutoAggregate);
             }
-            if ((queryID == null || queryID.equals(oSN.getID())) &&
-                    (queryName == null || queryName.equals(oSN.getBgpvpnName())) &&
-                    (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp()) &&
-                    (queryStatus == null || queryStatus.equals(oSN.getStatus())) &&
-                    (bAutoAggregate == null || bAutoAggregate.booleanValue() == oSN.isAutoAggregate()) &&
-                    (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSN.getID()))
+                    && (queryName == null || queryName.equals(oSN.getBgpvpnName()))
+                    && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
+                    && (queryStatus == null || queryStatus.equals(oSN.getStatus()))
+                    && (bAutoAggregate == null || bAutoAggregate.booleanValue() == oSN.isAutoAggregate())
+                    && (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSN,fields));
+                    ans.add(extractFields(oSN, fields));
                 } else {
                     ans.add(oSN);
                 }
@@ -143,12 +142,12 @@ public class NeutronBgpvpnsNorthbound
 
         if (limit != null && ans.size() > 1) {
             // Return a paginated request
-            NeutronBgpvpnRequest request = (NeutronBgpvpnRequest) PaginatedRequestFactory.createRequest(limit,
-                    marker, pageReverse, uriInfo, ans, NeutronBgpvpn.class);
+            NeutronBgpvpnRequest request = (NeutronBgpvpnRequest) PaginatedRequestFactory.createRequest(limit, marker,
+                    pageReverse, uriInfo, ans, NeutronBgpvpn.class);
             return Response.status(HttpURLConnection.HTTP_OK).entity(request).build();
         }
 
-    return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronBgpvpnRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronBgpvpnRequest(ans)).build();
 
     }
 
@@ -159,17 +158,14 @@ public class NeutronBgpvpnsNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackBgpvpns.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showBgpvpn(
-            @PathParam("bgpvpnUUID") String bgpvpnUUID,
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response showBgpvpn(@PathParam("bgpvpnUUID") String bgpvpnUUID,
             // return fields
-            @QueryParam("fields") List<String> fields
-            ) {
+            @QueryParam("fields") List<String> fields) {
         return show(bgpvpnUUID, fields);
     }
 
@@ -179,9 +175,8 @@ public class NeutronBgpvpnsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronBgpvpn.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createBgpvpns(final NeutronBgpvpnRequest input) {
         return create(input);
     }
@@ -189,8 +184,7 @@ public class NeutronBgpvpnsNorthbound
     /**
      * Updates a Bgpvpn */
     @Override
-    protected void updateDelta(String uuid,
-                               NeutronBgpvpn delta, NeutronBgpvpn original) {
+    protected void updateDelta(String uuid, NeutronBgpvpn delta, NeutronBgpvpn original) {
         //Fill in defaults if they're missing in update
         delta.initDefaults();
         delta.setID(uuid);
@@ -202,13 +196,10 @@ public class NeutronBgpvpnsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackBgpvpns.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateBgpvpn(
-            @PathParam("bgpvpnUUID") String bgpvpnUUID, final NeutronBgpvpnRequest input
-            ) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response updateBgpvpn(@PathParam("bgpvpnUUID") String bgpvpnUUID, final NeutronBgpvpnRequest input) {
         return update(bgpvpnUUID, input);
     }
 
@@ -217,12 +208,10 @@ public class NeutronBgpvpnsNorthbound
 
     @Path("{bgpvpnUUID}")
     @DELETE
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteBgpvpn(
-            @PathParam("bgpvpnUUID") String bgpvpnUUID) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response deleteBgpvpn(@PathParam("bgpvpnUUID") String bgpvpnUUID) {
         return delete(bgpvpnUUID);
     }
 }

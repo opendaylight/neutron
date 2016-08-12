@@ -32,7 +32,6 @@ public class InternalServerErrorException extends WebApplicationException {
      *
      */
     public InternalServerErrorException(String string) {
-        super(Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(
-                string).type(MediaType.TEXT_PLAIN).build());
+        super(Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(string).type(MediaType.TEXT_PLAIN).build());
     }
 }

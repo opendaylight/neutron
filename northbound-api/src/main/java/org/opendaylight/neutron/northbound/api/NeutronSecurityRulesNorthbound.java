@@ -46,9 +46,9 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 
-@Path ("/security-group-rules")
+@Path("/security-group-rules")
 public class NeutronSecurityRulesNorthbound
-    extends AbstractNeutronNorthbound<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD> {
+        extends AbstractNeutronNorthbound<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD> {
     private static final String RESOURCE_NAME = "Security Rule";
 
     @Override
@@ -79,56 +79,52 @@ public class NeutronSecurityRulesNorthbound
      * Returns a list of all Security Rules
      */
     @GET
-    @Produces ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listRules(
             // return fields
-            @QueryParam ("fields") List<String> fields,
+            @QueryParam("fields") List<String> fields,
             // OpenStack security rule attributes
-            @QueryParam ("id") String querySecurityRuleUUID,
-            @QueryParam ("direction") String querySecurityRuleDirection,
-            @QueryParam ("protocol") String querySecurityRuleProtocol,
-            @QueryParam ("port_range_min") Integer querySecurityRulePortMin,
-            @QueryParam ("port_range_max") Integer querySecurityRulePortMax,
-            @QueryParam ("ethertype") String querySecurityRuleEthertype,
-            @QueryParam ("remote_ip_prefix") String querySecurityRuleIpPrefix,
-            @QueryParam ("remote_group_id") String querySecurityRemoteGroupID,
-            @QueryParam ("security_group_id") String querySecurityRuleGroupID,
-            @QueryParam ("tenant_id") String querySecurityRuleTenantID,
-            @QueryParam ("limit") String limit,
-            @QueryParam ("marker") String marker,
-            @QueryParam ("page_reverse") String pageReverse
-    ) {
+            @QueryParam("id") String querySecurityRuleUUID,
+            @QueryParam("direction") String querySecurityRuleDirection,
+            @QueryParam("protocol") String querySecurityRuleProtocol,
+            @QueryParam("port_range_min") Integer querySecurityRulePortMin,
+            @QueryParam("port_range_max") Integer querySecurityRulePortMax,
+            @QueryParam("ethertype") String querySecurityRuleEthertype,
+            @QueryParam("remote_ip_prefix") String querySecurityRuleIpPrefix,
+            @QueryParam("remote_group_id") String querySecurityRemoteGroupID,
+            @QueryParam("security_group_id") String querySecurityRuleGroupID,
+            @QueryParam("tenant_id") String querySecurityRuleTenantID,
+            @QueryParam("limit") String limit,
+            @QueryParam("marker") String marker,
+            @QueryParam("page_reverse") String pageReverse) {
         INeutronSecurityRuleCRUD securityRuleInterface = getNeutronCRUD();
         List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAll();
-        List<NeutronSecurityRule> ans = new ArrayList<NeutronSecurityRule>();
+        List<NeutronSecurityRule> ans = new ArrayList<>();
         Iterator<NeutronSecurityRule> i = allSecurityRules.iterator();
         while (i.hasNext()) {
             NeutronSecurityRule nsr = i.next();
-            if ((querySecurityRuleUUID == null ||
-                    querySecurityRuleUUID.equals(nsr.getID())) &&
-                    (querySecurityRuleDirection == null ||
-                            querySecurityRuleDirection.equals(nsr.getSecurityRuleDirection())) &&
-                    (querySecurityRuleProtocol == null ||
-                            querySecurityRuleProtocol.equals(nsr.getSecurityRuleProtocol())) &&
-                    (querySecurityRulePortMin == null ||
-                            querySecurityRulePortMin.equals(nsr.getSecurityRulePortMin())) &&
-                    (querySecurityRulePortMax == null ||
-                            querySecurityRulePortMax.equals(nsr.getSecurityRulePortMax())) &&
-                    (querySecurityRuleEthertype == null ||
-                            querySecurityRuleEthertype.equals(nsr.getSecurityRuleEthertype())) &&
-                    (querySecurityRuleIpPrefix == null ||
-                            querySecurityRuleIpPrefix.equals(nsr.getSecurityRuleRemoteIpPrefix())) &&
-                    (querySecurityRuleGroupID == null ||
-                            querySecurityRuleGroupID.equals(nsr.getSecurityRuleGroupID())) &&
-                    (querySecurityRemoteGroupID == null ||
-                            querySecurityRemoteGroupID.equals(nsr.getSecurityRemoteGroupID())) &&
-                    (querySecurityRuleTenantID == null ||
-                            querySecurityRuleTenantID.equals(nsr.getTenantID()))) {
+            if ((querySecurityRuleUUID == null || querySecurityRuleUUID.equals(nsr.getID()))
+                    && (querySecurityRuleDirection == null
+                            || querySecurityRuleDirection.equals(nsr.getSecurityRuleDirection()))
+                    && (querySecurityRuleProtocol == null
+                            || querySecurityRuleProtocol.equals(nsr.getSecurityRuleProtocol()))
+                    && (querySecurityRulePortMin == null
+                            || querySecurityRulePortMin.equals(nsr.getSecurityRulePortMin()))
+                    && (querySecurityRulePortMax == null
+                            || querySecurityRulePortMax.equals(nsr.getSecurityRulePortMax()))
+                    && (querySecurityRuleEthertype == null
+                            || querySecurityRuleEthertype.equals(nsr.getSecurityRuleEthertype()))
+                    && (querySecurityRuleIpPrefix == null
+                            || querySecurityRuleIpPrefix.equals(nsr.getSecurityRuleRemoteIpPrefix()))
+                    && (querySecurityRuleGroupID == null
+                            || querySecurityRuleGroupID.equals(nsr.getSecurityRuleGroupID()))
+                    && (querySecurityRemoteGroupID == null
+                            || querySecurityRemoteGroupID.equals(nsr.getSecurityRemoteGroupID()))
+                    && (querySecurityRuleTenantID == null || querySecurityRuleTenantID.equals(nsr.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsr, fields));
                 } else {
@@ -136,26 +132,24 @@ public class NeutronSecurityRulesNorthbound
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronSecurityRuleRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityRuleRequest(ans)).build();
     }
 
     /**
      * Returns a specific Security Rule
      */
 
-    @Path ("{securityRuleUUID}")
+    @Path("{securityRuleUUID}")
     @GET
-    @Produces ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showSecurityRule(@PathParam ("securityRuleUUID") String securityRuleUUID,
-                                     // return fields
-                                     @QueryParam ("fields") List<String> fields) {
+    public Response showSecurityRule(@PathParam("securityRuleUUID") String securityRuleUUID,
+            // return fields
+            @QueryParam("fields") List<String> fields) {
         return show(securityRuleUUID, fields);
     }
 
@@ -164,10 +158,9 @@ public class NeutronSecurityRulesNorthbound
      */
 
     @POST
-    @Produces ({MediaType.APPLICATION_JSON})
-    @Consumes ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityRules(final NeutronSecurityRuleRequest input) {
         return create(input);
@@ -177,16 +170,15 @@ public class NeutronSecurityRulesNorthbound
      * Updates a Security Rule
      */
 
-    @Path ("{securityRuleUUID}")
+    @Path("{securityRuleUUID}")
     @PUT
-    @Produces ({MediaType.APPLICATION_JSON})
-    @Consumes ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateSecurityRule(
-            @PathParam ("securityRuleUUID") String securityRuleUUID, final NeutronSecurityRuleRequest input) {
+    public Response updateSecurityRule(@PathParam("securityRuleUUID") String securityRuleUUID,
+            final NeutronSecurityRuleRequest input) {
         return update(securityRuleUUID, input);
     }
 
@@ -194,14 +186,12 @@ public class NeutronSecurityRulesNorthbound
      * Deletes a Security Rule
      */
 
-    @Path ("{securityRuleUUID}")
+    @Path("{securityRuleUUID}")
     @DELETE
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteSecurityRule(
-            @PathParam ("securityRuleUUID") String securityRuleUUID) {
+    public Response deleteSecurityRule(@PathParam("securityRuleUUID") String securityRuleUUID) {
         return delete(securityRuleUUID);
     }
 }

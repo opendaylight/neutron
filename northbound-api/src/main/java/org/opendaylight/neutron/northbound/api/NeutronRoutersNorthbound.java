@@ -30,7 +30,6 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
-
 /**
  * Neutron Northbound REST APIs.<br>
  * This class provides REST APIs for managing neutron routers
@@ -51,7 +50,7 @@ import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
 @Path("/routers")
 public class NeutronRoutersNorthbound
-    extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD> {
+        extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD> {
     static final String ROUTER_INTERFACE_STR = "network:router_interface";
     static final String ROUTER_GATEWAY_STR = "network:router_gateway";
     private static final String RESOURCE_NAME = "Router";
@@ -74,8 +73,8 @@ public class NeutronRoutersNorthbound
         if (flag) {
             answer = answer.fetchINeutronNetworkCRUD(this);
             if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException("Network CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
         }
         return answer;
@@ -93,12 +92,11 @@ public class NeutronRoutersNorthbound
         }
         answer = answer.fetchINeutronPortCRUD(this).fetchINeutronSubnetCRUD(this);
         if (answer.getPortInterface() == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException("Port CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         if (answer.getSubnetInterface() == null) {
-            throw new ServiceUnavailableException("Subnet CRUD Interface "
-                    + RestMessages.SERVICEUNAVAILABLE.toString());
+            throw new ServiceUnavailableException(
+                    "Subnet CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
         }
         return answer;
     }
@@ -114,8 +112,7 @@ public class NeutronRoutersNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouters.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -133,33 +130,33 @@ public class NeutronRoutersNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
-            ) {
+    // sorting not supported
+    ) {
         INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
         if (routerInterface == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         List<NeutronRouter> allRouters = routerInterface.getAll();
-        List<NeutronRouter> ans = new ArrayList<NeutronRouter>();
+        List<NeutronRouter> ans = new ArrayList<>();
         Iterator<NeutronRouter> i = allRouters.iterator();
         while (i.hasNext()) {
             NeutronRouter oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID())) &&
-                    (queryName == null || queryName.equals(oSS.getName())) &&
-                    (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp())) &&
-                    (queryStatus == null || queryStatus.equals(oSS.getStatus())) &&
-                    (queryExternalGatewayInfo == null || queryExternalGatewayInfo.equals(oSS.getExternalGatewayInfo())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSS.getID()))
+                    && (queryName == null || queryName.equals(oSS.getName()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
+                    && (queryExternalGatewayInfo == null
+                            || queryExternalGatewayInfo.equals(oSS.getExternalGatewayInfo()))
+                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS,fields));
+                    ans.add(extractFields(oSS, fields));
                 } else {
                     ans.add(oSS);
                 }
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronRouterRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronRouterRequest(ans)).build();
     }
 
     /**
@@ -169,15 +166,13 @@ public class NeutronRoutersNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouters.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showRouter(
-            @PathParam("routerUUID") String routerUUID,
+    public Response showRouter(@PathParam("routerUUID") String routerUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
         return show(routerUUID, fields);
@@ -190,8 +185,7 @@ public class NeutronRoutersNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouters.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createRouters(final NeutronRouterRequest input) {
         getNeutronInterfaces(true); // ensure that network service is loaded
@@ -212,14 +206,10 @@ public class NeutronRoutersNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouters.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateRouter(
-            @PathParam("routerUUID") String routerUUID,
-            NeutronRouterRequest input
-            ) {
+    public Response updateRouter(@PathParam("routerUUID") String routerUUID, NeutronRouterRequest input) {
         getNeutronInterfaces(true); // ensure that network service is loaded
         return update(routerUUID, input);
     }
@@ -229,12 +219,10 @@ public class NeutronRoutersNorthbound
 
     @Path("{routerUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteRouter(
-            @PathParam("routerUUID") String routerUUID) {
+    public Response deleteRouter(@PathParam("routerUUID") String routerUUID) {
         return delete(routerUUID);
     }
 
@@ -246,12 +234,8 @@ public class NeutronRoutersNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouterInterfaces.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
-    public Response addRouterInterface(
-            @PathParam("routerUUID") String routerUUID,
-            NeutronRouter_Interface input
-            ) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
+    public Response addRouterInterface(@PathParam("routerUUID") String routerUUID, NeutronRouter_Interface input) {
         // Do nothing. Keep this interface for compatibility
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
@@ -261,12 +245,8 @@ public class NeutronRoutersNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouterInterfaces.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
-    public Response removeRouterInterface(
-            @PathParam("routerUUID") String routerUUID,
-            NeutronRouter_Interface input
-            ) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
+    public Response removeRouterInterface(@PathParam("routerUUID") String routerUUID, NeutronRouter_Interface input) {
         // Do nothing. Keep this interface for compatibility
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }

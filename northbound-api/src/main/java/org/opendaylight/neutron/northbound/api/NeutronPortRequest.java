@@ -21,13 +21,13 @@ public class NeutronPortRequest implements INeutronRequest<NeutronPort> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="port")
+    @XmlElement(name = "port")
     NeutronPort singletonPort;
 
-    @XmlElement(name="ports")
+    @XmlElement(name = "ports")
     List<NeutronPort> bulkRequest;
 
-    @XmlElement(name="ports_links")
+    @XmlElement(name = "ports_links")
     List<NeutronPageLink> links;
 
     NeutronPortRequest() {

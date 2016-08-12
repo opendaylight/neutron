@@ -19,10 +19,10 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronVPNIKEPolicyRequest implements INeutronRequest<NeutronVPNIKEPolicy> {
 
-    @XmlElement(name="ikepolicy")
+    @XmlElement(name = "ikepolicy")
     NeutronVPNIKEPolicy singletonIKEPolicy;
 
-    @XmlElement(name="ikepolicies")
+    @XmlElement(name = "ikepolicies")
     List<NeutronVPNIKEPolicy> bulkIKEPolicies;
 
     NeutronVPNIKEPolicyRequest() {
