@@ -22,7 +22,9 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, NeutronVPNIPSECPolicy> implements INeutronVPNIPSECPolicyCRUD {
+public class NeutronVPNIPSECPolicyInterface
+        extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, NeutronVPNIPSECPolicy>
+        implements INeutronVPNIPSECPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
 
     NeutronVPNIPSECPolicyInterface(DataBroker db) {
@@ -59,7 +61,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (ipsecPolicy.getPfs() != null) {
             answer.setPerfectForwardSecrecy(ipsecPolicy.getPfs());
         }
-        if (ipsecPolicy.getLifetime() !=null) {
+        if (ipsecPolicy.getLifetime() != null) {
             final NeutronVPNLifetime vpnLifetime = new NeutronVPNLifetime();
             vpnLifetime.setUnits(ipsecPolicy.getLifetime().getUnits());
             vpnLifetime.setValue(ipsecPolicy.getLifetime().getValue());
@@ -95,7 +97,7 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         if (ipsecPolicy.getPerfectForwardSecrecy() != null) {
             ipsecPolicyBuilder.setPfs(ipsecPolicy.getPerfectForwardSecrecy());
         }
-        if (ipsecPolicy.getLifetime() !=null) {
+        if (ipsecPolicy.getLifetime() != null) {
             final NeutronVPNLifetime vpnLifetime = ipsecPolicy.getLifetime();
             final LifetimeBuilder lifetimeBuilder = new LifetimeBuilder();
             lifetimeBuilder.setUnits(vpnLifetime.getUnits());
@@ -110,18 +112,15 @@ public class NeutronVPNIPSECPolicyInterface extends AbstractNeutronInterface<Ips
         return ipsecPolicyBuilder.build();
     }
 
-
     @Override
     protected InstanceIdentifier<Ipsecpolicy> createInstanceIdentifier(Ipsecpolicy ipsecPolicy) {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(IpsecPolicies.class)
-                 .child(Ipsecpolicy.class, ipsecPolicy.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class).child(Ipsecpolicy.class,
+                ipsecPolicy.getKey());
     }
 
     @Override
     protected InstanceIdentifier<IpsecPolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(IpsecPolicies.class);
+        return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class);
     }
 
     @Override

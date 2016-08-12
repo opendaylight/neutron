@@ -29,16 +29,15 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterface<Listener, Listeners, NeutronLoadBalancerListener> implements INeutronLoadBalancerListenerCRUD {
+public class NeutronLoadBalancerListenerInterface
+        extends AbstractNeutronInterface<Listener, Listeners, NeutronLoadBalancerListener>
+        implements INeutronLoadBalancerListenerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolHttp.class,"HTTP")
-            .put(ProtocolHttps.class,"HTTPS")
-            .put(ProtocolTcp.class,"TCP")
-            .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
-            .build();
+    private static final ImmutableBiMap<Class<? extends ProtocolBase>,
+            String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
+                    .put(ProtocolHttp.class, "HTTP").put(ProtocolHttps.class, "HTTPS").put(ProtocolTcp.class, "TCP")
+                    .put(ProtocolTerminatedHttps.class, "TERMINATED_HTTPS").build();
 
     NeutronLoadBalancerListenerInterface(DataBroker db) {
         super(db);
@@ -57,17 +56,13 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
     }
 
     @Override
-    protected InstanceIdentifier<Listener> createInstanceIdentifier(
-            Listener listener) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Listeners.class)
-                .child(Listener.class, listener.getKey());
+    protected InstanceIdentifier<Listener> createInstanceIdentifier(Listener listener) {
+        return InstanceIdentifier.create(Neutron.class).child(Listeners.class).child(Listener.class, listener.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Listeners> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Listeners.class);
+        return InstanceIdentifier.create(Neutron.class).child(Listeners.class);
     }
 
     @Override
@@ -91,9 +86,9 @@ public class NeutronLoadBalancerListenerInterface extends AbstractNeutronInterfa
             listenerBuilder.setName(listener.getLoadBalancerListenerName());
         }
         if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
-            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
-                PROTOCOL_MAP.inverse();
-            listenerBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
+            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
+            listenerBuilder.setProtocol(
+                    (Class<? extends ProtocolBase>) mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
         }
         if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
             listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));

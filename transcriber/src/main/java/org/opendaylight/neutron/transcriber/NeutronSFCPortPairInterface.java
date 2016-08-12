@@ -28,8 +28,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com)
  */
-public class NeutronSFCPortPairInterface
-        extends AbstractNeutronInterface<PortPair, PortPairs, NeutronSFCPortPair>
+public class NeutronSFCPortPairInterface extends AbstractNeutronInterface<PortPair, PortPairs, NeutronSFCPortPair>
         implements INeutronSFCPortPairCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairInterface.class);
@@ -40,8 +39,7 @@ public class NeutronSFCPortPairInterface
 
     @Override
     protected InstanceIdentifier<PortPair> createInstanceIdentifier(PortPair portPair) {
-        return InstanceIdentifier.create(Neutron.class).child(PortPairs.class)
-                .child(PortPair.class, portPair.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(PortPairs.class).child(PortPair.class, portPair.getKey());
     }
 
     @Override
@@ -58,15 +56,15 @@ public class NeutronSFCPortPairInterface
         result.setUuid(new Uuid(neutronPortPair.getID()));
         result.setName(neutronPortPair.getName());
         result.setTenantId(toUuid(neutronPortPair.getTenantID()));
-        if (neutronPortPair.getIngressPortUUID() != null ) {
+        if (neutronPortPair.getIngressPortUUID() != null) {
             result.setIngress(new Uuid(neutronPortPair.getIngressPortUUID()));
         }
         if (neutronPortPair.getEgressPortUUID() != null) {
             result.setEgress(new Uuid(neutronPortPair.getEgressPortUUID()));
         }
-        if (neutronPortPair.getServiceFunctionParameters()!= null) {
+        if (neutronPortPair.getServiceFunctionParameters() != null) {
             List<ServiceFunctionParameters> serviceFunctionParams = new ArrayList<>();
-            for(String paramKey : neutronPortPair.getServiceFunctionParameters().keySet()) {
+            for (String paramKey : neutronPortPair.getServiceFunctionParameters().keySet()) {
                 ServiceFunctionParametersBuilder param = new ServiceFunctionParametersBuilder();
                 param.setKey(new ServiceFunctionParametersKey(paramKey));
                 param.setServiceFunctionParameter(paramKey);
@@ -93,16 +91,16 @@ public class NeutronSFCPortPairInterface
         result.setID(mdPortPair.getUuid().getValue());
         result.setName(mdPortPair.getName());
         result.setTenantID(mdPortPair.getTenantId());
-        if (mdPortPair.getIngress() !=null) {
+        if (mdPortPair.getIngress() != null) {
             result.setIngressPortUUID(mdPortPair.getIngress().getValue());
         }
         if (mdPortPair.getEgress() != null) {
             result.setEgressPortUUID(mdPortPair.getEgress().getValue());
         }
-        if (mdPortPair.getServiceFunctionParameters()!= null) {
+        if (mdPortPair.getServiceFunctionParameters() != null) {
             HashMap<String, String> serviceFunctionParam = new HashMap<>();
-            for(ServiceFunctionParameters param : mdPortPair.getServiceFunctionParameters()) {
-                serviceFunctionParam.put(param.getServiceFunctionParameter(),param.getServiceFunctionParameterValue());
+            for (ServiceFunctionParameters param : mdPortPair.getServiceFunctionParameters()) {
+                serviceFunctionParam.put(param.getServiceFunctionParameter(), param.getServiceFunctionParameterValue());
             }
             result.setServiceFunctionParameters(serviceFunctionParam);
         }

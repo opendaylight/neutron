@@ -36,16 +36,14 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, Networks, NeutronNetwork> implements INeutronNetworkCRUD {
+public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, Networks, NeutronNetwork>
+        implements INeutronNetworkCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends NetworkTypeBase>,String> NETWORK_MAP
-            = new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>,String>()
-            .put(NetworkTypeFlat.class,"flat")
-            .put(NetworkTypeGre.class,"gre")
-            .put(NetworkTypeVlan.class,"vlan")
-            .put(NetworkTypeVxlan.class,"vxlan")
-            .build();
+    private static final ImmutableBiMap<Class<? extends NetworkTypeBase>,
+            String> NETWORK_MAP = new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>, String>()
+                    .put(NetworkTypeFlat.class, "flat").put(NetworkTypeGre.class, "gre")
+                    .put(NetworkTypeVlan.class, "vlan").put(NetworkTypeVxlan.class, "vxlan").build();
 
     NeutronNetworkInterface(DataBroker db) {
         super(db);
@@ -76,7 +74,7 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
         final List<NeutronNetwork_Segment> segments = new ArrayList<NeutronNetwork_Segment>();
         if (providerExtension.getSegments() != null) {
-            for (final Segments segment: providerExtension.getSegments()) {
+            for (final Segments segment : providerExtension.getSegments()) {
                 final NeutronNetwork_Segment neutronSegment = new NeutronNetwork_Segment();
                 neutronSegment.setProviderPhysicalNetwork(segment.getPhysicalNetwork());
                 neutronSegment.setProviderSegmentationID(segment.getSegmentationId());
@@ -85,15 +83,14 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
             }
         }
         final QosNetworkExtension qos = network.getAugmentation(QosNetworkExtension.class);
-        if(qos != null && qos.getQosPolicyId() != null) {
+        if (qos != null && qos.getQosPolicyId() != null) {
             result.setQosPolicyId(qos.getQosPolicyId().getValue());
         }
         result.setSegments(segments);
         return result;
     }
 
-    private void fillExtensions(NetworkBuilder networkBuilder,
-                                NeutronNetwork network) {
+    private void fillExtensions(NetworkBuilder networkBuilder, NeutronNetwork network) {
         final NetworkL3ExtensionBuilder l3ExtensionBuilder = new NetworkL3ExtensionBuilder();
         if (network.getRouterExternal() != null) {
             l3ExtensionBuilder.setExternal(network.getRouterExternal());
@@ -107,14 +104,14 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
         if (network.getProviderNetworkType() != null) {
-            final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
-                NETWORK_MAP.inverse();
-            providerExtensionBuilder.setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
+            final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_MAP.inverse();
+            providerExtensionBuilder
+                    .setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
         }
         if (network.getSegments() != null) {
             final List<Segments> segments = new ArrayList<Segments>();
             long count = 0;
-            for( final NeutronNetwork_Segment segment : network.getSegments()) {
+            for (final NeutronNetwork_Segment segment : network.getSegments()) {
                 count++;
                 final SegmentsBuilder segmentsBuilder = new SegmentsBuilder();
                 if (segment.getProviderPhysicalNetwork() != null) {
@@ -124,9 +121,9 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
                     segmentsBuilder.setSegmentationId(segment.getProviderSegmentationID());
                 }
                 if (segment.getProviderNetworkType() != null) {
-                    final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper =
-                        NETWORK_MAP.inverse();
-                    segmentsBuilder.setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(segment.getProviderNetworkType()));
+                    final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_MAP.inverse();
+                    segmentsBuilder.setNetworkType(
+                            (Class<? extends NetworkTypeBase>) mapper.get(segment.getProviderNetworkType()));
                 }
                 segmentsBuilder.setSegmentationIndex(Long.valueOf(count));
                 segments.add(segmentsBuilder.build());
@@ -141,10 +138,8 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
             qosExtensionBuilder.setQosPolicyId(toUuid(network.getQosPolicyId()));
             networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
         }
-        networkBuilder.addAugmentation(NetworkL3Extension.class,
-                                       l3ExtensionBuilder.build());
-        networkBuilder.addAugmentation(NetworkProviderExtension.class,
-                                       providerExtensionBuilder.build());
+        networkBuilder.addAugmentation(NetworkL3Extension.class, l3ExtensionBuilder.build());
+        networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
     }
 
     protected Network toMd(NeutronNetwork network) {
@@ -180,14 +175,11 @@ public class NeutronNetworkInterface extends AbstractNeutronInterface<Network, N
 
     @Override
     protected InstanceIdentifier<Network> createInstanceIdentifier(Network network) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Networks.class)
-                .child(Network.class,network.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Networks.class).child(Network.class, network.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Networks> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Networks.class);
+        return InstanceIdentifier.create(Neutron.class).child(Networks.class);
     }
 }

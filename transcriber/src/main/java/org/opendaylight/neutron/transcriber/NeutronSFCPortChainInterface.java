@@ -28,8 +28,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com)
  */
-public class NeutronSFCPortChainInterface
-        extends AbstractNeutronInterface<PortChain, PortChains, NeutronSFCPortChain>
+public class NeutronSFCPortChainInterface extends AbstractNeutronInterface<PortChain, PortChains, NeutronSFCPortChain>
         implements INeutronSFCPortChainCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);
@@ -45,8 +44,8 @@ public class NeutronSFCPortChainInterface
 
     @Override
     protected InstanceIdentifier<PortChain> createInstanceIdentifier(PortChain portChain) {
-        return InstanceIdentifier.create(Neutron.class).child(PortChains.class)
-                .child(PortChain.class, portChain.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(PortChains.class).child(PortChain.class,
+                portChain.getKey());
     }
 
     @Override
@@ -65,21 +64,21 @@ public class NeutronSFCPortChainInterface
         result.setTenantId(toUuid(neutronPortChain.getTenantID()));
         if (neutronPortChain.getPortPairGroupsUUID() != null) {
             List<Uuid> portPairGroups = new ArrayList<>();
-            for(String uuid : neutronPortChain.getPortPairGroupsUUID()) {
+            for (String uuid : neutronPortChain.getPortPairGroupsUUID()) {
                 portPairGroups.add(new Uuid(uuid));
             }
             result.setPortPairGroups(portPairGroups);
         }
         if (neutronPortChain.getFlowClassifiersUUID() != null) {
-            List<Uuid> flowClassifiers= new ArrayList<>();
-            for(String uuid : neutronPortChain.getFlowClassifiersUUID()) {
+            List<Uuid> flowClassifiers = new ArrayList<>();
+            for (String uuid : neutronPortChain.getFlowClassifiersUUID()) {
                 flowClassifiers.add(new Uuid(uuid));
             }
             result.setFlowClassifiers(flowClassifiers);
         }
-        if (neutronPortChain.getChainParameters()!= null) {
+        if (neutronPortChain.getChainParameters() != null) {
             List<ChainParameters> chainParams = new ArrayList<>();
-            for(String paramKey : neutronPortChain.getChainParameters().keySet()) {
+            for (String paramKey : neutronPortChain.getChainParameters().keySet()) {
                 ChainParametersBuilder param = new ChainParametersBuilder();
                 param.setKey(new ChainParametersKey(paramKey));
                 param.setChainParameter(paramKey);
@@ -106,24 +105,24 @@ public class NeutronSFCPortChainInterface
         result.setID(mdPortChain.getUuid().getValue());
         result.setName(mdPortChain.getName());
         result.setTenantID(mdPortChain.getTenantId());
-        if (mdPortChain.getPortPairGroups() !=null) {
+        if (mdPortChain.getPortPairGroups() != null) {
             List<String> portPairGroups = new ArrayList<>();
-            for(Uuid uuid : mdPortChain.getPortPairGroups()) {
+            for (Uuid uuid : mdPortChain.getPortPairGroups()) {
                 portPairGroups.add(uuid.getValue());
             }
             result.setPortPairGroupsUUID(portPairGroups);
         }
-        if (mdPortChain.getFlowClassifiers() !=null) {
+        if (mdPortChain.getFlowClassifiers() != null) {
             List<String> flowClassifiers = new ArrayList<>();
-            for(Uuid uuid : mdPortChain.getFlowClassifiers()) {
+            for (Uuid uuid : mdPortChain.getFlowClassifiers()) {
                 flowClassifiers.add(uuid.getValue());
             }
             result.setFlowClassifiersUUID(flowClassifiers);
         }
-        if (mdPortChain.getChainParameters()!= null) {
+        if (mdPortChain.getChainParameters() != null) {
             HashMap<String, String> chainParams = new HashMap<>();
-            for(ChainParameters param : mdPortChain.getChainParameters()) {
-                chainParams.put(param.getChainParameter(),param.getChainParameterValue());
+            for (ChainParameters param : mdPortChain.getChainParameters()) {
+                chainParams.put(param.getChainParameter(), param.getChainParameterValue());
             }
             result.setChainParameters(chainParams);
         }

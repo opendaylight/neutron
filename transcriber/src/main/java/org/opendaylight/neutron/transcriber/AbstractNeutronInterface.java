@@ -36,7 +36,9 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractNeutronInterface<T extends DataObject, U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject> implements AutoCloseable, INeutronCRUD<S> {
+public abstract class AbstractNeutronInterface<T extends DataObject,
+        U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject>
+        implements AutoCloseable, INeutronCRUD<S> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
@@ -71,7 +73,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     private <T extends DataObject> T readMd(InstanceIdentifier<T> path, ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
         T result = null;
-        final CheckedFuture<Optional<T>, ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
+        final CheckedFuture<Optional<T>,
+                ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
         if (future != null) {
             Optional<T> optional;
             try {
@@ -113,9 +116,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
 
         final T item = toMd(neutronObject);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        tx.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
+        tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
-        future.get();   // Check if it's successfuly committed, otherwise exception will be thrown.
+        future.get(); // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
     protected boolean updateMd(S neutronObject) {
@@ -143,7 +146,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
-        future.get();  // Check if it's successfuly committed, otherwise exception will be thrown.
+        future.get(); // Check if it's successfuly committed, otherwise exception will be thrown.
     }
 
     protected boolean removeMd(T item) {
@@ -162,18 +165,14 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         Uuid result;
         try {
             result = new Uuid(uuid);
-        } catch(final IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             // OK... someone didn't follow RFC 4122... lets try this the hard way
             final String dedashed = uuid.replace("-", "");
-            if(dedashed.length() == DEDASHED_UUID_LENGTH) {
-                final String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1)
-                        + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV1, DEDASHED_UUID_DIV2)
-                        + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV2, DEDASHED_UUID_DIV3)
-                        + "-"
-                        + dedashed.substring(DEDASHED_UUID_DIV3, DEDASHED_UUID_DIV4)
-                        + "-"
+            if (dedashed.length() == DEDASHED_UUID_LENGTH) {
+                final String redashed = dedashed.substring(DEDASHED_UUID_START, DEDASHED_UUID_DIV1) + "-"
+                        + dedashed.substring(DEDASHED_UUID_DIV1, DEDASHED_UUID_DIV2) + "-"
+                        + dedashed.substring(DEDASHED_UUID_DIV2, DEDASHED_UUID_DIV3) + "-"
+                        + dedashed.substring(DEDASHED_UUID_DIV3, DEDASHED_UUID_DIV4) + "-"
                         + dedashed.substring(DEDASHED_UUID_DIV4, DEDASHED_UUID_LENGTH);
                 result = new Uuid(redashed);
             } else {
@@ -188,17 +187,16 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
     protected boolean overwrite(Object target, Object delta) {
         final Method[] methods = target.getClass().getMethods();
 
-        for(final Method toMethod: methods){
-            if(toMethod.getDeclaringClass().equals(target.getClass())
-                    && toMethod.getName().startsWith("set")){
+        for (final Method toMethod : methods) {
+            if (toMethod.getDeclaringClass().equals(target.getClass()) && toMethod.getName().startsWith("set")) {
 
                 final String toName = toMethod.getName();
                 final String fromName = toName.replace("set", "get");
 
                 try {
                     final Method fromMethod = delta.getClass().getMethod(fromName);
-                    final Object value = fromMethod.invoke(delta, (Object[])null);
-                    if(value != null){
+                    final Object value = fromMethod.invoke(delta, (Object[]) null);
+                    if (value != null) {
                         toMethod.invoke(target, value);
                     }
                 } catch (final Exception e) {
@@ -252,7 +250,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
         final Set<S> allNeutronObjects = new HashSet<S>();
         final U dataObjects = readMd(createInstanceIdentifier(), tx);
         if (dataObjects != null) {
-            for (final T dataObject: getDataObjectList(dataObjects)) {
+            for (final T dataObject : getDataObjectList(dataObjects)) {
                 allNeutronObjects.add(fromMd(dataObject));
             }
         }
@@ -327,9 +325,10 @@ public abstract class AbstractNeutronInterface<T extends DataObject, U extends C
             break;
         }
         return false;
-     }
+    }
 
-    private boolean update(String uuid, S delta, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+    private boolean update(String uuid, S delta, ReadWriteTransaction tx)
+            throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
         if (!exists(uuid, tx)) {
             tx.cancel();

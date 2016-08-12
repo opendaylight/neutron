@@ -46,8 +46,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronTranscriberProvider
-    implements AutoCloseable, NeutronTranscriber {
+public class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscriber {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
 
     private BundleContext context;
@@ -90,13 +89,12 @@ public class NeutronTranscriberProvider
         this.db = Preconditions.checkNotNull(db);
     }
 
-    private <S extends INeutronCRUD<?>, T extends AutoCloseable /* & S */>
-    void registerCRUDInterface(java.lang.Class<S> clazz, T crudInterface) {
+    private <S extends INeutronCRUD<?>,
+            T extends AutoCloseable /* & S */> void registerCRUDInterface(java.lang.Class<S> clazz, T crudInterface) {
         neutronInterfaces.add(crudInterface);
         @SuppressWarnings("unchecked")
-        S sCrudInterface = (S)crudInterface;
-        final ServiceRegistration<S> crudInterfaceRegistration =
-                context.registerService(clazz, sCrudInterface, null);
+        S sCrudInterface = (S) crudInterface;
+        final ServiceRegistration<S> crudInterfaceRegistration = context.registerService(clazz, sCrudInterface, null);
         registrations.add(crudInterfaceRegistration);
     }
 
@@ -171,7 +169,7 @@ public class NeutronTranscriberProvider
         registerCRUDInterface(INeutronVPNServiceCRUD.class, vPNServiceInterface);
 
         sfcFlowClassifierInterface = new NeutronSFCFlowClassifierInterface(db);
-        registerCRUDInterface(INeutronSFCFlowClassifierCRUD.class,sfcFlowClassifierInterface);
+        registerCRUDInterface(INeutronSFCFlowClassifierCRUD.class, sfcFlowClassifierInterface);
 
         sfcPortPairInterface = new NeutronSFCPortPairInterface(db);
         registerCRUDInterface(INeutronSFCPortPairCRUD.class, sfcPortPairInterface);

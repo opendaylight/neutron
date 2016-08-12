@@ -23,7 +23,9 @@ import org.slf4j.LoggerFactory;
 /**
  */
 
-public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, NeutronFirewallPolicy> implements INeutronFirewallPolicyCRUD {
+public class NeutronFirewallPolicyInterface
+        extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, NeutronFirewallPolicy>
+        implements INeutronFirewallPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
 
     NeutronFirewallPolicyInterface(DataBroker db) {
@@ -37,15 +39,13 @@ public class NeutronFirewallPolicyInterface extends AbstractNeutronInterface<Fir
 
     @Override
     protected InstanceIdentifier<FirewallPolicy> createInstanceIdentifier(FirewallPolicy item) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(FirewallPolicies.class)
-                .child(FirewallPolicy.class, item.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(FirewallPolicies.class).child(FirewallPolicy.class,
+                item.getKey());
     }
 
     @Override
     protected InstanceIdentifier<FirewallPolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(FirewallPolicies.class);
+        return InstanceIdentifier.create(Neutron.class).child(FirewallPolicies.class);
     }
 
     protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {

@@ -51,15 +51,14 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort> implements INeutronPortCRUD {
+public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort>
+        implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
 
     // TODO: consolidate this map with NeutronSubnetInterface.IPV_MAP
-    private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
-            = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
-            .put(IpVersionV4.class, Integer.valueOf(4))
-            .put(IpVersionV6.class, Integer.valueOf(6))
-            .build();
+    private static final ImmutableBiMap<Class<? extends IpVersionBase>,
+            Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
+                    .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
 
     NeutronPortInterface(DataBroker db) {
         super(db);
@@ -73,15 +72,12 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
 
     @Override
     protected InstanceIdentifier<Port> createInstanceIdentifier(Port port) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Ports.class)
-                .child(Port.class, port.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Ports.class).child(Port.class, port.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Ports> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Ports.class);
+        return InstanceIdentifier.create(Neutron.class).child(Ports.class);
     }
 
     protected void addExtensions(Port port, NeutronPort result) {
@@ -100,14 +96,14 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
 
     private void portSecurityExtension(Port port, NeutronPort result) {
         final PortSecurityExtension portSecurity = port.getAugmentation(PortSecurityExtension.class);
-        if(portSecurity != null && portSecurity.isPortSecurityEnabled() != null) {
+        if (portSecurity != null && portSecurity.isPortSecurityEnabled() != null) {
             result.setPortSecurityEnabled(portSecurity.isPortSecurityEnabled());
         }
     }
 
     private void qosExtension(Port port, NeutronPort result) {
         final QosPortExtension qos = port.getAugmentation(QosPortExtension.class);
-        if(qos != null && qos.getQosPolicyId() != null) {
+        if (qos != null && qos.getQosPolicyId() != null) {
             result.setQosPolicyId(qos.getQosPolicyId().getValue());
         }
     }
@@ -207,17 +203,17 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
         }
 
         final PortBuilder portBuilder = new PortBuilder();
-        portBuilder.addAugmentation(PortBindingExtension.class,
-                                    bindingBuilder.build());
+        portBuilder.addAugmentation(PortBindingExtension.class, bindingBuilder.build());
         portBuilder.addAugmentation(PortSecurityExtension.class, portSecurityBuilder.build());
         portBuilder.setAdminStateUp(neutronPort.isAdminStateUp());
-        if(neutronPort.getAllowedAddressPairs() != null) {
+        if (neutronPort.getAllowedAddressPairs() != null) {
             final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
             for (final NeutronPort_AllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
-                    final AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
-                    allowedAddressPairsBuilder.setIpAddress(new IpPrefixOrAddress(allowedAddressPairs.getIpAddress().toCharArray()));
-                    allowedAddressPairsBuilder.setMacAddress(new MacAddress(allowedAddressPairs.getMacAddress()));
-                    listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
+                final AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
+                allowedAddressPairsBuilder
+                        .setIpAddress(new IpPrefixOrAddress(allowedAddressPairs.getIpAddress().toCharArray()));
+                allowedAddressPairsBuilder.setMacAddress(new MacAddress(allowedAddressPairs.getMacAddress()));
+                listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
             }
             portBuilder.setAllowedAddressPairs(listAllowedAddressPairs);
         }
@@ -236,9 +232,9 @@ public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, 
                 extraDHCPOptsBuilder.setOptValue(extraDHCPOption.getValue());
                 Integer ipVersion = extraDHCPOption.getIpVersion();
                 if (ipVersion == null) {
-                    ipVersion = 4;      // default as v4 for neutron api evolves
+                    ipVersion = 4; // default as v4 for neutron api evolves
                 }
-                extraDHCPOptsBuilder.setIpVersion((Class<? extends IpVersionBase>)mapper.get(ipVersion));
+                extraDHCPOptsBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(ipVersion));
                 listExtraDHCPOptions.add(extraDHCPOptsBuilder.build());
             }
             portBuilder.setExtraDhcpOpts(listExtraDHCPOptions);

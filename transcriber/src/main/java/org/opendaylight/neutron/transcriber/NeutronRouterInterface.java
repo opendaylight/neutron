@@ -32,15 +32,14 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, NeutronRouter> implements INeutronRouterCRUD {
+public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, NeutronRouter>
+        implements INeutronRouterCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     // methods needed for creating caches
-
 
     NeutronRouterInterface(DataBroker db) {
         super(db);
     }
-
 
     // IfNBRouterCRUD Interface methods
     @Override
@@ -82,7 +81,8 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
         }
         if (router.getExternalGatewayInfo() != null) {
             ExternalGatewayInfo externalGatewayInfo = null;
-            final List<NeutronRouter_NetworkReference> neutronRouter_NetworkReferences = new ArrayList<NeutronRouter_NetworkReference>();
+            final List<NeutronRouter_NetworkReference> neutronRouter_NetworkReferences = new ArrayList<
+                    NeutronRouter_NetworkReference>();
             neutronRouter_NetworkReferences.add(router.getExternalGatewayInfo());
             for (final NeutronRouter_NetworkReference externalGatewayInfos : neutronRouter_NetworkReferences) {
                 final ExternalGatewayInfoBuilder builder = new ExternalGatewayInfoBuilder();
@@ -112,9 +112,7 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
 
     @Override
     protected InstanceIdentifier<Router> createInstanceIdentifier(Router router) {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(Routers.class)
-                 .child(Router.class, router.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Routers.class).child(Router.class, router.getKey());
     }
 
     @Override
@@ -158,10 +156,10 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
             if (router.getExternalGatewayInfo().getExternalFixedIps() != null) {
                 final List<Neutron_IPs> fixedIPs = new ArrayList<Neutron_IPs>();
                 for (final ExternalFixedIps mdFixedIP : router.getExternalGatewayInfo().getExternalFixedIps()) {
-                     final Neutron_IPs fixedIP = new Neutron_IPs();
-                     fixedIP.setSubnetUUID(String.valueOf(mdFixedIP.getSubnetId().getValue()));
-                     fixedIP.setIpAddress(String.valueOf(mdFixedIP.getIpAddress().getValue()));
-                     fixedIPs.add(fixedIP);
+                    final Neutron_IPs fixedIP = new Neutron_IPs();
+                    fixedIP.setSubnetUUID(String.valueOf(mdFixedIP.getSubnetId().getValue()));
+                    fixedIP.setIpAddress(String.valueOf(mdFixedIP.getIpAddress().getValue()));
+                    fixedIPs.add(fixedIP);
                 }
                 extGwInfo.setExternalFixedIPs(fixedIPs);
             }

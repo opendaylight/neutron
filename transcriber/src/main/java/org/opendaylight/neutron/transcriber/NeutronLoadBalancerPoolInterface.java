@@ -46,16 +46,14 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pool, Pools, NeutronLoadBalancerPool> implements INeutronLoadBalancerPoolCRUD {
+public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pool, Pools, NeutronLoadBalancerPool>
+        implements INeutronLoadBalancerPoolCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolHttp.class,"HTTP")
-            .put(ProtocolHttps.class,"HTTPS")
-            .put(ProtocolTcp.class,"TCP")
-            .put(ProtocolTerminatedHttps.class,"TERMINATED_HTTPS")
-            .build();
+    private static final ImmutableBiMap<Class<? extends ProtocolBase>,
+            String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
+                    .put(ProtocolHttp.class, "HTTP").put(ProtocolHttps.class, "HTTPS").put(ProtocolTcp.class, "TCP")
+                    .put(ProtocolTerminatedHttps.class, "TERMINATED_HTTPS").build();
 
     NeutronLoadBalancerPoolInterface(DataBroker db) {
         super(db);
@@ -75,15 +73,12 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
 
     @Override
     protected InstanceIdentifier<Pool> createInstanceIdentifier(Pool pool) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Pools.class)
-                .child(Pool.class, pool.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Pools> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Pools.class);
+        return InstanceIdentifier.create(Neutron.class).child(Pools.class);
     }
 
     @Override
@@ -109,12 +104,12 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             poolBuilder.setName(pool.getLoadBalancerPoolName());
         }
         if (pool.getLoadBalancerPoolProtocol() != null) {
-            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper =
-                PROTOCOL_MAP.inverse();
+            final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
             poolBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(pool.getLoadBalancerPoolProtocol()));
         }
         if (pool.getLoadBalancerPoolSessionPersistence() != null) {
-            final NeutronLoadBalancer_SessionPersistence sessionPersistence = pool.getLoadBalancerPoolSessionPersistence();
+            final NeutronLoadBalancer_SessionPersistence sessionPersistence = pool
+                    .getLoadBalancerPoolSessionPersistence();
             final SessionPersistenceBuilder sessionPersistenceBuilder = new SessionPersistenceBuilder();
             sessionPersistenceBuilder.setCookieName(sessionPersistence.getCookieName());
             sessionPersistenceBuilder.setType(sessionPersistence.getType());
@@ -151,7 +146,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         }
         if (pool.getMembers() != null) {
             final List<NeutronLoadBalancerPoolMember> members = new ArrayList<NeutronLoadBalancerPoolMember>();
-            for (final Member member: pool.getMembers().getMember()) {
+            for (final Member member : pool.getMembers().getMember()) {
                 members.add(fromMemberMd(member));
             }
             answer.setLoadBalancerPoolMembers(members);
@@ -179,20 +174,15 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     }
 
     public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) {
-        final Member member = readMemberMd(
-                createMemberInstanceIdentifier(toMd(poolUuid),
-                                               toMemberMd(uuid)));
+        final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
             return false;
         }
         return true;
     }
 
-    public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(
-            String poolUuid, String uuid) {
-        final Member member = readMemberMd(
-                createMemberInstanceIdentifier(toMd(poolUuid),
-                                               toMemberMd(uuid)));
+    public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String poolUuid, String uuid) {
+        final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
             return null;
         }
@@ -200,10 +190,11 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     }
 
     public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid) {
-        final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<NeutronLoadBalancerPoolMember>();
+        final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<
+                NeutronLoadBalancerPoolMember>();
         final Members members = readMd(createMembersInstanceIdentifier(toMd(poolUuid)));
         if (members != null) {
-            for (final Member member: members.getMember()) {
+            for (final Member member : members.getMember()) {
                 allLoadBalancerPoolMembers.add(fromMemberMd(member));
             }
         }
@@ -229,8 +220,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         return removeMemberMd(toMd(poolUuid), toMemberMd(uuid));
     }
 
-    public boolean updateNeutronLoadBalancerPoolMember(String poolUuid,
-            String uuid, NeutronLoadBalancerPoolMember delta) {
+    public boolean updateNeutronLoadBalancerPoolMember(String poolUuid, String uuid,
+            NeutronLoadBalancerPoolMember delta) {
         if (!neutronLoadBalancerPoolMemberExists(poolUuid, uuid)) {
             return false;
         }
@@ -238,26 +229,18 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         return true;
     }
 
-    public boolean neutronLoadBalancerPoolMemberInUse(String poolUuid,
-            String loadBalancerPoolMemberID) {
-        return !neutronLoadBalancerPoolMemberExists(poolUuid,
-                                                    loadBalancerPoolMemberID);
+    public boolean neutronLoadBalancerPoolMemberInUse(String poolUuid, String loadBalancerPoolMemberID) {
+        return !neutronLoadBalancerPoolMemberExists(poolUuid, loadBalancerPoolMemberID);
     }
 
-    protected InstanceIdentifier<Member> createMemberInstanceIdentifier(Pool pool,
-            Member item) {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(Pools.class)
-            .child(Pool.class, pool.getKey())
-            .child(Members.class)
-            .child(Member.class, item.getKey());
+    protected InstanceIdentifier<Member> createMemberInstanceIdentifier(Pool pool, Member item) {
+        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey())
+                .child(Members.class).child(Member.class, item.getKey());
     }
 
     protected InstanceIdentifier<Members> createMembersInstanceIdentifier(Pool pool) {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(Pools.class)
-            .child(Pool.class, pool.getKey())
-            .child(Members.class);
+        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey())
+                .child(Members.class);
     }
 
     static NeutronLoadBalancerPoolMember fromMemberMd(Member member) {
@@ -318,10 +301,12 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         return memberBuilder.build();
     }
 
-    protected <T extends org.opendaylight.yangtools.yang.binding.DataObject> T readMemberMd(InstanceIdentifier<T> path) {
+    protected <
+            T extends org.opendaylight.yangtools.yang.binding.DataObject> T readMemberMd(InstanceIdentifier<T> path) {
         T result = null;
         final ReadOnlyTransaction transaction = getDataBroker().newReadOnlyTransaction();
-        final CheckedFuture<Optional<T>, ReadFailedException> future = transaction.read(LogicalDatastoreType.CONFIGURATION, path);
+        final CheckedFuture<Optional<T>,
+                ReadFailedException> future = transaction.read(LogicalDatastoreType.CONFIGURATION, path);
         if (future != null) {
             Optional<T> optional;
             try {
@@ -346,12 +331,12 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final Member item = toMemberMd(neutronObject);
         final InstanceIdentifier<Member> iid = createMemberInstanceIdentifier(pool, item);
-        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item,true);
+        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
         final CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ",e);
+            LOGGER.warn("Transation failed ", e);
             return false;
         }
         return true;
@@ -365,7 +350,7 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ",e);
+            LOGGER.warn("Transation failed ", e);
             return false;
         }
         return true;

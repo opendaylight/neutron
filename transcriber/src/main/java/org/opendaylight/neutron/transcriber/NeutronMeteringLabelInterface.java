@@ -20,7 +20,9 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, NeutronMeteringLabel> implements INeutronMeteringLabelCRUD {
+public class NeutronMeteringLabelInterface
+        extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, NeutronMeteringLabel>
+        implements INeutronMeteringLabelCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
 
     NeutronMeteringLabelInterface(DataBroker db) {
@@ -34,17 +36,14 @@ public class NeutronMeteringLabelInterface extends AbstractNeutronInterface<Mete
     }
 
     @Override
-    protected InstanceIdentifier<MeteringLabel> createInstanceIdentifier(
-            MeteringLabel item) {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(MeteringLabels.class)
-            .child(MeteringLabel.class,item.getKey());
+    protected InstanceIdentifier<MeteringLabel> createInstanceIdentifier(MeteringLabel item) {
+        return InstanceIdentifier.create(Neutron.class).child(MeteringLabels.class).child(MeteringLabel.class,
+                item.getKey());
     }
 
     @Override
     protected InstanceIdentifier<MeteringLabels> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-            .child(MeteringLabels.class);
+        return InstanceIdentifier.create(Neutron.class).child(MeteringLabels.class);
     }
 
     @Override

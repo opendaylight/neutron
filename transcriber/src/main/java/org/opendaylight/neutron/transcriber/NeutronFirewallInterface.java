@@ -20,7 +20,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall, Firewalls, NeutronFirewall> implements INeutronFirewallCRUD {
+public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall, Firewalls, NeutronFirewall>
+        implements INeutronFirewallCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
@@ -35,15 +36,12 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
 
     @Override
     protected InstanceIdentifier<Firewall> createInstanceIdentifier(Firewall item) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Firewalls.class)
-                .child(Firewall.class, item.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Firewalls.class).child(Firewall.class, item.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Firewalls> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Firewalls.class);
+        return InstanceIdentifier.create(Neutron.class).child(Firewalls.class);
     }
 
     protected NeutronFirewall fromMd(Firewall firewall) {
@@ -62,7 +60,7 @@ public class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall,
             answer.setFirewallIsShared(firewall.isShared());
         }
         if (firewall.getFirewallPolicyId() != null) {
-             answer.setFirewallPolicyID(firewall.getFirewallPolicyId().getValue());
+            answer.setFirewallPolicyID(firewall.getFirewallPolicyId().getValue());
         }
         return answer;
     }

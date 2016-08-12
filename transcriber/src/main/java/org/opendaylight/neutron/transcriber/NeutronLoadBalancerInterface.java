@@ -21,9 +21,9 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadbalancer, Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
+public class NeutronLoadBalancerInterface extends
+        AbstractNeutronInterface<Loadbalancer, Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
-
 
     NeutronLoadBalancerInterface(DataBroker db) {
         super(db);
@@ -42,17 +42,14 @@ public class NeutronLoadBalancerInterface extends AbstractNeutronInterface<Loadb
     }
 
     @Override
-    protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(
-            Loadbalancer loadBalancer) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Loadbalancers.class)
-                .child(Loadbalancer.class, loadBalancer.getKey());
+    protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(Loadbalancer loadBalancer) {
+        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class).child(Loadbalancer.class,
+                loadBalancer.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Loadbalancers.class);
+        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class);
     }
 
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {

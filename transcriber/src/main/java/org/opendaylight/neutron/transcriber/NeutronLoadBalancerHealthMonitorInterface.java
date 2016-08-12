@@ -29,17 +29,15 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, NeutronLoadBalancerHealthMonitor> implements INeutronLoadBalancerHealthMonitorCRUD {
+public class NeutronLoadBalancerHealthMonitorInterface
+        extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, NeutronLoadBalancerHealthMonitor>
+        implements INeutronLoadBalancerHealthMonitorCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends ProbeBase>,String> PROBE_MAP
-            = new ImmutableBiMap.Builder<Class<? extends ProbeBase>,String>()
-            .put(ProbeHttp.class,"HTTP")
-            .put(ProbeHttps.class,"HTTPS")
-            .put(ProbePing.class,"PING")
-            .put(ProbeTcp.class,"TCP")
-            .build();
-
+    private static final ImmutableBiMap<Class<? extends ProbeBase>,
+            String> PROBE_MAP = new ImmutableBiMap.Builder<Class<? extends ProbeBase>, String>()
+                    .put(ProbeHttp.class, "HTTP").put(ProbeHttps.class, "HTTPS").put(ProbePing.class, "PING")
+                    .put(ProbeTcp.class, "TCP").build();
 
     NeutronLoadBalancerHealthMonitorInterface(DataBroker db) {
         super(db);
@@ -58,17 +56,14 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     }
 
     @Override
-    protected InstanceIdentifier<Healthmonitor> createInstanceIdentifier(
-            Healthmonitor healthMonitor) {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Healthmonitors.class )
-                .child(Healthmonitor.class, healthMonitor.getKey());
+    protected InstanceIdentifier<Healthmonitor> createInstanceIdentifier(Healthmonitor healthMonitor) {
+        return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class).child(Healthmonitor.class,
+                healthMonitor.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Healthmonitors> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Healthmonitors.class);
+        return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class);
     }
 
     @Override
@@ -101,9 +96,9 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
             healthmonitorBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
-            final ImmutableBiMap<String, Class<? extends ProbeBase>> mapper =
-                    PROBE_MAP.inverse();
-            healthmonitorBuilder.setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
+            final ImmutableBiMap<String, Class<? extends ProbeBase>> mapper = PROBE_MAP.inverse();
+            healthmonitorBuilder
+                    .setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
             healthmonitorBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
@@ -119,7 +114,7 @@ public class NeutronLoadBalancerHealthMonitorInterface extends AbstractNeutronIn
     protected NeutronLoadBalancerHealthMonitor fromMd(Healthmonitor healthMonitor) {
         final NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
         if (healthMonitor.isAdminStateUp() != null) {
-             answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.isAdminStateUp());
+            answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.isAdminStateUp());
         }
         if (healthMonitor.getDelay() != null) {
             answer.setLoadBalancerHealthMonitorDelay(healthMonitor.getDelay().intValue());

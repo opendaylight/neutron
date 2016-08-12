@@ -39,25 +39,22 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet> implements INeutronSubnetCRUD {
+public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet>
+        implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
 
     private static final int IPV4_VERSION = 4;
     private static final int IPV6_VERSION = 6;
 
-    private static final ImmutableBiMap<Class<? extends IpVersionBase>,Integer> IPV_MAP
-            = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>,Integer>()
-            .put(IpVersionV4.class,Integer.valueOf(IPV4_VERSION))
-            .put(IpVersionV6.class,Integer.valueOf(IPV6_VERSION))
-            .build();
+    private static final ImmutableBiMap<Class<? extends IpVersionBase>,
+            Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
+                    .put(IpVersionV4.class, Integer.valueOf(IPV4_VERSION))
+                    .put(IpVersionV6.class, Integer.valueOf(IPV6_VERSION)).build();
 
-    private static final ImmutableBiMap<Class<? extends Dhcpv6Base>,String> DHCPV6_MAP
-            = new ImmutableBiMap.Builder<Class<? extends Dhcpv6Base>,String>()
-            .put(Dhcpv6Off.class,"off")
-            .put(Dhcpv6Stateful.class,"dhcpv6-stateful")
-            .put(Dhcpv6Slaac.class,"slaac")
-            .put(Dhcpv6Stateless.class,"dhcpv6-stateless")
-            .build();
+    private static final ImmutableBiMap<Class<? extends Dhcpv6Base>,
+            String> DHCPV6_MAP = new ImmutableBiMap.Builder<Class<? extends Dhcpv6Base>, String>()
+                    .put(Dhcpv6Off.class, "off").put(Dhcpv6Stateful.class, "dhcpv6-stateful")
+                    .put(Dhcpv6Slaac.class, "slaac").put(Dhcpv6Stateless.class, "dhcpv6-stateless").build();
 
     NeutronSubnetInterface(DataBroker db) {
         super(db);
@@ -104,9 +101,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             }
             result.setDnsNameservers(dnsNameServers);
         }
-        if(subnet.getHostRoutes() != null){
+        if (subnet.getHostRoutes() != null) {
             final List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
-            for(final HostRoutes hostRoute : subnet.getHostRoutes()) {
+            for (final HostRoutes hostRoute : subnet.getHostRoutes()) {
                 final NeutronRoute nsHostRoute = new NeutronRoute();
                 nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
                 nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
@@ -130,35 +127,29 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
         }
         if (subnet.getIpVersion() != null) {
-            final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper =
-                    IPV_MAP.inverse();
-            subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet
-                    .getIpVersion()));
+            final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
+            subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet.getIpVersion()));
         }
         if (subnet.getCidr() != null) {
             final IpPrefix ipPrefix = IpPrefixBuilder.getDefaultInstance(subnet.getCidr());
             subnetBuilder.setCidr(ipPrefix);
         }
         if (subnet.getGatewayIP() != null) {
-            final IpAddress ipAddress = new IpAddress(subnet.getGatewayIP()
-                    .toCharArray());
+            final IpAddress ipAddress = new IpAddress(subnet.getGatewayIP().toCharArray());
             subnetBuilder.setGatewayIp(ipAddress);
         }
         if (subnet.getIpV6RaMode() != null) {
-            final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
-                    DHCPV6_MAP.inverse();
+            final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper = DHCPV6_MAP.inverse();
             subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
         }
         if (subnet.getIpV6AddressMode() != null) {
-            final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper =
-                    DHCPV6_MAP.inverse();
+            final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper = DHCPV6_MAP.inverse();
             subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
         }
         subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
         if (subnet.getAllocationPools() != null) {
             final List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
-            for (final NeutronSubnetIPAllocationPool allocationPool : subnet
-                    .getAllocationPools()) {
+            for (final NeutronSubnetIPAllocationPool allocationPool : subnet.getAllocationPools()) {
                 final AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
                 builder.setStart(new IpAddress(allocationPool.getPoolStart().toCharArray()));
                 builder.setEnd(new IpAddress(allocationPool.getPoolEnd().toCharArray()));
@@ -175,9 +166,9 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
             }
             subnetBuilder.setDnsNameservers(dnsNameServers);
         }
-        if(subnet.getHostRoutes() != null) {
+        if (subnet.getHostRoutes() != null) {
             final List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
-            for(final NeutronRoute hostRoute: subnet.getHostRoutes()) {
+            for (final NeutronRoute hostRoute : subnet.getHostRoutes()) {
                 final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
                 hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
                 hrBuilder.setNexthop(new IpAddress(hostRoute.getNextHop().toCharArray()));
@@ -195,14 +186,12 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
 
     @Override
     protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
-        return InstanceIdentifier.create(Neutron.class).child(Subnets.class)
-                .child(Subnet.class, subnet.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Subnets.class).child(Subnet.class, subnet.getKey());
     }
 
     @Override
     protected InstanceIdentifier<Subnets> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                .child(Subnets.class);
+        return InstanceIdentifier.create(Neutron.class).child(Subnets.class);
     }
 
     @Override

@@ -23,7 +23,9 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection> implements INeutronVPNIPSECSiteConnectionsCRUD {
+public class NeutronVPNIPSECSiteConnectionsInterface
+        extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection>
+        implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIPSECSiteConnectionsInterface(DataBroker db) {
@@ -58,7 +60,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
             final List<String> peerCidrs = new ArrayList<String>();
-            for( final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
+            for (final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
             answer.setPeerCidrs(peerCidrs);
@@ -121,7 +123,7 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
             final List<String> peerCidrs = new ArrayList<String>();
-            for( final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
+            for (final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
             ipsecSiteConnectionBuilder.setPeerCidrs(peerCidrs);
@@ -171,15 +173,14 @@ public class NeutronVPNIPSECSiteConnectionsInterface extends AbstractNeutronInte
 
     @Override
     protected InstanceIdentifier<IpsecSiteConnections> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(IpsecSiteConnections.class);
+        return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class);
     }
 
     @Override
-    protected InstanceIdentifier<Ipsecsiteconnection> createInstanceIdentifier(Ipsecsiteconnection ipsecSiteConnection) {
-        return InstanceIdentifier.create(Neutron.class)
-                 .child(IpsecSiteConnections.class)
-                 .child(Ipsecsiteconnection.class, ipsecSiteConnection.getKey());
+    protected InstanceIdentifier<Ipsecsiteconnection> createInstanceIdentifier(
+            Ipsecsiteconnection ipsecSiteConnection) {
+        return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class)
+                .child(Ipsecsiteconnection.class, ipsecSiteConnection.getKey());
     }
 
     @Override
