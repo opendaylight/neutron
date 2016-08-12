@@ -69,6 +69,10 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
         return o.extractFields(fields);
     }
 
+    protected NeutronLoadBalancerPoolMember extractFields(NeutronLoadBalancerPoolMember o, List<String> fields) {
+        return o.extractFields(fields);
+    }
+
     @Override
     protected NeutronLoadBalancerPoolRequest newNeutronRequest(NeutronLoadBalancerPool o) {
         return new NeutronLoadBalancerPoolRequest(o);
@@ -195,10 +199,6 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerPool(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID) {
         return delete(loadBalancerPoolUUID);
-    }
-
-    protected NeutronLoadBalancerPoolMember extractFields(NeutronLoadBalancerPoolMember o, List<String> fields) {
-        return o.extractFields(fields);
     }
 
     /**

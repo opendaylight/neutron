@@ -23,7 +23,7 @@ public enum RestMessages {
 
     private String message;
 
-    private RestMessages(String msg) {
+    RestMessages(String msg) {
         message = msg;
     }
 

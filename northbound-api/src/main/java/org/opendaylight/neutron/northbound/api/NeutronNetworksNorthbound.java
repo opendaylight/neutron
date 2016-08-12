@@ -120,7 +120,6 @@ public class NeutronNetworksNorthbound
         List<NeutronNetwork> ans = new ArrayList<>();
         Iterator<NeutronNetwork> i = allNetworks.iterator();
         while (i.hasNext()) {
-            NeutronNetwork oSN = i.next();
             //match filters: TODO provider extension
             Boolean bAdminStateUp = null;
             Boolean bShared = null;
@@ -134,6 +133,7 @@ public class NeutronNetworksNorthbound
             if (queryRouterExternal != null) {
                 bRouterExternal = Boolean.valueOf(queryRouterExternal);
             }
+            NeutronNetwork oSN = i.next();
             if ((queryID == null || queryID.equals(oSN.getID()))
                     && (queryName == null || queryName.equals(oSN.getNetworkName()))
                     && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
