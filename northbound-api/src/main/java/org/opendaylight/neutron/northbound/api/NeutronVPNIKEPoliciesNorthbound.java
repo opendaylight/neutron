@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 
 @Path("/vpn/ikepolicies")
 public class NeutronVPNIKEPoliciesNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD> {
+        extends AbstractNeutronNorthbound<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD> {
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     @Override
@@ -87,8 +87,7 @@ public class NeutronVPNIKEPoliciesNorthbound
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -104,32 +103,33 @@ public class NeutronVPNIKEPoliciesNorthbound
             @QueryParam("phase1_negotiation_mode") String queryPhase1NegotiationMode,
             @QueryParam("pfs") String queryPFS,
             @QueryParam("ike_version") String queryIKEVersion
-            // pagination and sorting are TODO
-            ) {
+    // pagination and sorting are TODO
+    ) {
         INeutronVPNIKEPolicyCRUD labelInterface = getNeutronCRUD();
         List<NeutronVPNIKEPolicy> allNeutronVPNIKEPolicy = labelInterface.getAll();
-        List<NeutronVPNIKEPolicy> ans = new ArrayList<NeutronVPNIKEPolicy>();
+        List<NeutronVPNIKEPolicy> ans = new ArrayList<>();
         Iterator<NeutronVPNIKEPolicy> i = allNeutronVPNIKEPolicy.iterator();
         while (i.hasNext()) {
             NeutronVPNIKEPolicy oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID())) &&
-                    (queryName == null || queryName.equals(oSS.getName())) &&
-                    (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm())) &&
-                    (queryEncryptionAlgorithm == null || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm())) &&
-                    (queryPhase1NegotiationMode == null || queryPhase1NegotiationMode.equals(oSS.getPhase1NegotiationMode())) &&
-                    (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy())) &&
-                    (queryIKEVersion == null || queryIKEVersion.equals(oSS.getIkeVersion())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSS.getID()))
+                    && (queryName == null || queryName.equals(oSS.getName()))
+                    && (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm()))
+                    && (queryEncryptionAlgorithm == null
+                            || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm()))
+                    && (queryPhase1NegotiationMode == null
+                            || queryPhase1NegotiationMode.equals(oSS.getPhase1NegotiationMode()))
+                    && (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy()))
+                    && (queryIKEVersion == null || queryIKEVersion.equals(oSS.getIkeVersion()))
+                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS,fields));
+                    ans.add(extractFields(oSS, fields));
                 } else {
                     ans.add(oSS);
                 }
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronVPNIKEPolicyRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVPNIKEPolicyRequest(ans)).build();
     }
 
     /**
@@ -138,18 +138,15 @@ public class NeutronVPNIKEPoliciesNorthbound
     @Path("{policyID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showVPNIKEPolicy(
-            @PathParam("policyID") String policyUUID,
+    public Response showVPNIKEPolicy(@PathParam("policyID") String policyUUID,
             // return fields
-            @QueryParam("fields") List<String> fields
-            ) {
+            @QueryParam("fields") List<String> fields) {
         return show(policyUUID, fields);
     }
 
@@ -159,8 +156,7 @@ public class NeutronVPNIKEPoliciesNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVPNIKEPolicy.class)
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createVPNIKEPolicy(final NeutronVPNIKEPolicyRequest input) {
         return create(input);
@@ -172,13 +168,11 @@ public class NeutronVPNIKEPoliciesNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateVPNIKEPolicy(
-            @PathParam("policyID") String policyUUID, final NeutronVPNIKEPolicyRequest input
-            ) {
+    public Response updateVPNIKEPolicy(@PathParam("policyID") String policyUUID,
+            final NeutronVPNIKEPolicyRequest input) {
         return update(policyUUID, input);
     }
 
@@ -187,12 +181,10 @@ public class NeutronVPNIKEPoliciesNorthbound
 
     @Path("{policyID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteVPNIKEPolicy(
-            @PathParam("policyID") String policyUUID) {
+    public Response deleteVPNIKEPolicy(@PathParam("policyID") String policyUUID) {
         return delete(policyUUID);
     }
 }

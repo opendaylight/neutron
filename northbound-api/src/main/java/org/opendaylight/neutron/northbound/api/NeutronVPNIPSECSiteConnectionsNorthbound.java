@@ -51,8 +51,8 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
  */
 
 @Path("/vpn/ipsecsiteconnections")
-public class NeutronVPNIPSECSiteConnectionsNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNIPSECSiteConnection, NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD> {
+public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNorthbound<NeutronVPNIPSECSiteConnection,
+        NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD> {
 
     private static final String RESOURCE_NAME = "VPNIPSECSiteConnections";
 
@@ -97,20 +97,26 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
             // return fields
             @QueryParam("fields") List<String> fields,
             // filter fields
-            @QueryParam("id") String queryID, @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("id") String queryID,
+            @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("name") String queryName,
-            @QueryParam("peer_address") String queryPeerAddress, @QueryParam("peer_id") String queryPeerID,
-            @QueryParam("route_mode") String queryRouteMode, @QueryParam("mtu") Integer queryMtu,
-            @QueryParam("auth_mode") String queryAuthMode, @QueryParam("psk") String queryPsk,
-            @QueryParam("initiator") String queryInitiator, @QueryParam("admin_state_up") Boolean queryAdminStateUp,
-            @QueryParam("status") String queryStatus, @QueryParam("ikepolicy_id") String queryIkePolicyID,
+            @QueryParam("peer_address") String queryPeerAddress,
+            @QueryParam("peer_id") String queryPeerID,
+            @QueryParam("route_mode") String queryRouteMode,
+            @QueryParam("mtu") Integer queryMtu,
+            @QueryParam("auth_mode") String queryAuthMode,
+            @QueryParam("psk") String queryPsk,
+            @QueryParam("initiator") String queryInitiator,
+            @QueryParam("admin_state_up") Boolean queryAdminStateUp,
+            @QueryParam("status") String queryStatus,
+            @QueryParam("ikepolicy_id") String queryIkePolicyID,
             @QueryParam("ipsecpolicy_id") String queryIpSecPolicyID,
             @QueryParam("vpnservice_id") String queryVpnServiceID
     // pagination and sorting are TODO
     ) {
         INeutronVPNIPSECSiteConnectionsCRUD labelInterface = getNeutronCRUD();
         List<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnection = labelInterface.getAll();
-        List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<NeutronVPNIPSECSiteConnection>();
+        List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<>();
         Iterator<NeutronVPNIPSECSiteConnection> i = allNeutronVPNIPSECSiteConnection.iterator();
         while (i.hasNext()) {
             NeutronVPNIPSECSiteConnection oSS = i.next();
@@ -155,7 +161,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showVPNIPSECSiteConnection(@PathParam("connectionID") String connectionID,
-    // return fields
+            // return fields
             @QueryParam("fields") List<String> fields) {
         return show(connectionID, fields);
     }

@@ -47,8 +47,7 @@ import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
  */
 
 @Path("/sfc/portpairgroups")
-public class NeutronSFCPortPairGroupsNorthbound
-        extends AbstractNeutronNorthbound<NeutronSFCPortPairGroup,
+public class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthbound<NeutronSFCPortPairGroup,
         NeutronSFCPortPairGroupRequest, INeutronSFCPortPairGroupCRUD> {
 
     private static final String RESOURCE_NAME = "Sfc Port Pair Group";
@@ -82,8 +81,7 @@ public class NeutronSFCPortPairGroupsNorthbound
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -93,18 +91,18 @@ public class NeutronSFCPortPairGroupsNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
             @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("port_pairs") List<String> queryPortPairsUUID ) {
+            @QueryParam("port_pairs") List<String> queryPortPairsUUID) {
         INeutronSFCPortPairGroupCRUD sfcPortPairGroupInterface = getNeutronCRUD();
         List<NeutronSFCPortPairGroup> allSFCPortPairGroup = sfcPortPairGroupInterface.getAll();
         List<NeutronSFCPortPairGroup> ans = new ArrayList<>();
         Iterator<NeutronSFCPortPairGroup> i = allSFCPortPairGroup.iterator();
         while (i.hasNext()) {
             NeutronSFCPortPairGroup oSFCPPG = i.next();
-            if ((queryID == null || queryID.equals(oSFCPPG.getID())) &&
-                    (queryName == null || queryName.equals(oSFCPPG.getName())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSFCPPG.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSFCPPG.getID()))
+                    && (queryName == null || queryName.equals(oSFCPPG.getName()))
+                    && (queryTenantID == null || queryTenantID.equals(oSFCPPG.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSFCPPG,fields));
+                    ans.add(extractFields(oSFCPPG, fields));
                 } else {
                     ans.add(oSFCPPG);
                 }
@@ -121,16 +119,14 @@ public class NeutronSFCPortPairGroupsNorthbound
     @Path("{portPairGroupUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showSFCPortPairGroup(
-            @PathParam("portPairGroupUUID") String sfcPortPairGroupUUID,
+    public Response showSFCPortPairGroup(@PathParam("portPairGroupUUID") String sfcPortPairGroupUUID,
             // return fields
-            @QueryParam("fields") List<String> fields ){
+            @QueryParam("fields") List<String> fields) {
         return show(sfcPortPairGroupUUID, fields);
     }
 
@@ -139,8 +135,7 @@ public class NeutronSFCPortPairGroupsNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSFCPortPairGroup(final NeutronSFCPortPairGroupRequest input) {
         return create(input);
@@ -165,12 +160,11 @@ public class NeutronSFCPortPairGroupsNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateSFCPortPairGroup(
-            @PathParam("portPairGroupUUID") String sfcPortPairGroupUUID, final NeutronSFCPortPairGroupRequest input ) {
+    public Response updateSFCPortPairGroup(@PathParam("portPairGroupUUID") String sfcPortPairGroupUUID,
+            final NeutronSFCPortPairGroupRequest input) {
         return update(sfcPortPairGroupUUID, input);
     }
 
@@ -179,12 +173,10 @@ public class NeutronSFCPortPairGroupsNorthbound
 
     @Path("{portPairGroupUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteSFCPortPairGroup(
-            @PathParam("portPairGroupUUID") String sfcPortPairGroupUUID) {
+    public Response deleteSFCPortPairGroup(@PathParam("portPairGroupUUID") String sfcPortPairGroupUUID) {
         return delete(sfcPortPairGroupUUID);
     }
 }

@@ -15,21 +15,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronFirewallRequest
-    implements INeutronRequest<NeutronFirewall> {
+public class NeutronFirewallRequest implements INeutronRequest<NeutronFirewall> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
      */
 
-    @XmlElement(name="firewall")
+    @XmlElement(name = "firewall")
     NeutronFirewall singletonFirewall;
 
-    @XmlElement(name="firewalls")
+    @XmlElement(name = "firewalls")
     List<NeutronFirewall> bulkRequest;
 
     NeutronFirewallRequest() {

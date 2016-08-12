@@ -21,12 +21,11 @@ public class NeutronBgpvpnRequest implements INeutronRequest<NeutronBgpvpn> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="bgpvpn")
+    @XmlElement(name = "bgpvpn")
     NeutronBgpvpn singletonBgpvpn;
 
-    @XmlElement(name="bgpvpns")
+    @XmlElement(name = "bgpvpns")
     List<NeutronBgpvpn> bulkRequest;
-
 
     NeutronBgpvpnRequest() {
     }

@@ -15,21 +15,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
 
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronLoadBalancerRequest
-    implements INeutronRequest<NeutronLoadBalancer> {
+public class NeutronLoadBalancerRequest implements INeutronRequest<NeutronLoadBalancer> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
      */
 
-    @XmlElement(name="loadbalancer")
+    @XmlElement(name = "loadbalancer")
     NeutronLoadBalancer singletonLoadBalancer;
 
-    @XmlElement(name="loadbalancers")
+    @XmlElement(name = "loadbalancers")
     List<NeutronLoadBalancer> bulkRequest;
 
     NeutronLoadBalancerRequest() {

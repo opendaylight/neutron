@@ -15,19 +15,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.opendaylight.neutron.spi.NeutronRouter;
 
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronRouterRequest
-    implements INeutronRequest<NeutronRouter> {
+public class NeutronRouterRequest implements INeutronRequest<NeutronRouter> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="router")
+    @XmlElement(name = "router")
     NeutronRouter singletonRouter;
 
-    @XmlElement(name="routers")
+    @XmlElement(name = "routers")
     List<NeutronRouter> bulkRequest;
 
     NeutronRouterRequest() {

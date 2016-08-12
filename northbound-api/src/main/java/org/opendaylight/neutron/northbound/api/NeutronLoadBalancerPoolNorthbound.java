@@ -54,8 +54,8 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
  */
 
 @Path("/lbaas/pools")
-public class NeutronLoadBalancerPoolNorthbound
-    extends AbstractNeutronNorthbound<NeutronLoadBalancerPool, NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD> {
+public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound<NeutronLoadBalancerPool,
+        NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancerPool";
 
@@ -76,8 +76,7 @@ public class NeutronLoadBalancerPoolNorthbound
 
     @Override
     protected INeutronLoadBalancerPoolCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().
-            fetchINeutronLoadBalancerPoolCRUD(this);
+        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerPoolCRUD(this);
         if (answer.getLoadBalancerPoolInterface() == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
@@ -89,8 +88,7 @@ public class NeutronLoadBalancerPoolNorthbound
      * */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -111,37 +109,35 @@ public class NeutronLoadBalancerPoolNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
         List<NeutronLoadBalancerPool> allLoadBalancerPools = loadBalancerPoolInterface.getAll();
-        List<NeutronLoadBalancerPool> ans = new ArrayList<NeutronLoadBalancerPool>();
+        List<NeutronLoadBalancerPool> ans = new ArrayList<>();
         Iterator<NeutronLoadBalancerPool> i = allLoadBalancerPools.iterator();
         while (i.hasNext()) {
             NeutronLoadBalancerPool nsg = i.next();
-            if ((queryLoadBalancerPoolID == null ||
-                    queryLoadBalancerPoolID.equals(nsg.getID())) &&
-                    (queryLoadBalancerPoolTenantID == null ||
-                            queryLoadBalancerPoolTenantID.equals(nsg.getTenantID())) &&
-                    (queryLoadBalancerPoolName == null ||
-                            queryLoadBalancerPoolName.equals(nsg.getLoadBalancerPoolName())) &&
-                    (queryLoadBalancerPoolLbAlgorithm == null ||
-                            queryLoadBalancerPoolLbAlgorithm.equals(nsg.getLoadBalancerPoolLbAlgorithm())) &&
-                    (queryLoadBalancerPoolHealthMonitorID == null ||
-                            queryLoadBalancerPoolHealthMonitorID.equals(nsg.getNeutronLoadBalancerPoolHealthMonitorID())) &&
-                    (queryLoadBalancerIsAdminStateUp == null ||
-                            queryLoadBalancerIsAdminStateUp.equals(nsg.getLoadBalancerPoolAdminIsStateIsUp())) &&
-                    (queryLoadBalancerPoolMembers.size() == 0 ||
-                            queryLoadBalancerPoolMembers.equals(nsg.getLoadBalancerPoolMembers()))) {
+            if ((queryLoadBalancerPoolID == null || queryLoadBalancerPoolID.equals(nsg.getID()))
+                    && (queryLoadBalancerPoolTenantID == null
+                            || queryLoadBalancerPoolTenantID.equals(nsg.getTenantID()))
+                    && (queryLoadBalancerPoolName == null
+                            || queryLoadBalancerPoolName.equals(nsg.getLoadBalancerPoolName()))
+                    && (queryLoadBalancerPoolLbAlgorithm == null
+                            || queryLoadBalancerPoolLbAlgorithm.equals(nsg.getLoadBalancerPoolLbAlgorithm()))
+                    && (queryLoadBalancerPoolHealthMonitorID == null || queryLoadBalancerPoolHealthMonitorID
+                            .equals(nsg.getNeutronLoadBalancerPoolHealthMonitorID()))
+                    && (queryLoadBalancerIsAdminStateUp == null
+                            || queryLoadBalancerIsAdminStateUp.equals(nsg.getLoadBalancerPoolAdminIsStateIsUp()))
+                    && (queryLoadBalancerPoolMembers.size() == 0
+                            || queryLoadBalancerPoolMembers.equals(nsg.getLoadBalancerPoolMembers()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg,fields));
+                    ans.add(extractFields(nsg, fields));
                 } else {
                     ans.add(nsg);
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronLoadBalancerPoolRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerPoolRequest(ans)).build();
     }
 
     /**
@@ -150,8 +146,7 @@ public class NeutronLoadBalancerPoolNorthbound
     @Path("{loadBalancerPoolID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
@@ -168,8 +163,7 @@ public class NeutronLoadBalancerPoolNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createLoadBalancerPools(final NeutronLoadBalancerPoolRequest input) {
         return create(input);
@@ -182,12 +176,11 @@ public class NeutronLoadBalancerPoolNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateLoadBalancerPool(
-            @PathParam("loadBalancerPoolID") String loadBalancerPoolID, final NeutronLoadBalancerPoolRequest input) {
+    public Response updateLoadBalancerPool(@PathParam("loadBalancerPoolID") String loadBalancerPoolID,
+            final NeutronLoadBalancerPoolRequest input) {
         return update(loadBalancerPoolID, input);
     }
 
@@ -197,12 +190,10 @@ public class NeutronLoadBalancerPoolNorthbound
 
     @Path("{loadBalancerPoolUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteLoadBalancerPool(
-            @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID) {
+    public Response deleteLoadBalancerPool(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID) {
         return delete(loadBalancerPoolUUID);
     }
 
@@ -215,9 +206,8 @@ public class NeutronLoadBalancerPoolNorthbound
      */
     @Path("{loadBalancerPoolUUID}/members")
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listMembers(
@@ -240,31 +230,30 @@ public class NeutronLoadBalancerPoolNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
+    // sorting not supported
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
         if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
-        List<NeutronLoadBalancerPoolMember> members =
-                    loadBalancerPoolInterface.get(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
-        List<NeutronLoadBalancerPoolMember> ans = new ArrayList<NeutronLoadBalancerPoolMember>();
+        List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
+                .getLoadBalancerPoolMembers();
+        List<NeutronLoadBalancerPoolMember> ans = new ArrayList<>();
         Iterator<NeutronLoadBalancerPoolMember> i = members.iterator();
         while (i.hasNext()) {
             NeutronLoadBalancerPoolMember nsg = i.next();
-            if ((queryLoadBalancerPoolMemberID == null ||
-                queryLoadBalancerPoolMemberID.equals(nsg.getID())) &&
-                loadBalancerPoolUUID.equals(nsg.getPoolID()) &&
-                (queryLoadBalancerPoolMemberTenantID == null ||
-                        queryLoadBalancerPoolMemberTenantID.equals(nsg.getTenantID())) &&
-                (queryLoadBalancerPoolMemberAddress == null ||
-                        queryLoadBalancerPoolMemberAddress.equals(nsg.getPoolMemberAddress())) &&
-                (queryLoadBalancerPoolMemberAdminStateUp == null ||
-                        queryLoadBalancerPoolMemberAdminStateUp.equals(nsg.getPoolMemberAdminStateIsUp())) &&
-                (queryLoadBalancerPoolMemberWeight == null ||
-                        queryLoadBalancerPoolMemberWeight.equals(nsg.getPoolMemberWeight())) &&
-                (queryLoadBalancerPoolMemberSubnetID == null ||
-                        queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID()))) {
+            if ((queryLoadBalancerPoolMemberID == null || queryLoadBalancerPoolMemberID.equals(nsg.getID()))
+                    && loadBalancerPoolUUID.equals(nsg.getPoolID())
+                    && (queryLoadBalancerPoolMemberTenantID == null
+                            || queryLoadBalancerPoolMemberTenantID.equals(nsg.getTenantID()))
+                    && (queryLoadBalancerPoolMemberAddress == null
+                            || queryLoadBalancerPoolMemberAddress.equals(nsg.getPoolMemberAddress()))
+                    && (queryLoadBalancerPoolMemberAdminStateUp == null
+                            || queryLoadBalancerPoolMemberAdminStateUp.equals(nsg.getPoolMemberAdminStateIsUp()))
+                    && (queryLoadBalancerPoolMemberWeight == null
+                            || queryLoadBalancerPoolMemberWeight.equals(nsg.getPoolMemberWeight()))
+                    && (queryLoadBalancerPoolMemberSubnetID == null
+                            || queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsg, fields));
                 } else {
@@ -272,8 +261,7 @@ public class NeutronLoadBalancerPoolNorthbound
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronLoadBalancerPoolMemberRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerPoolMemberRequest(ans)).build();
     }
 
     /**
@@ -283,34 +271,32 @@ public class NeutronLoadBalancerPoolNorthbound
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackLoadBalancerPoolMembers.class)
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showLoadBalancerPoolMember(
-            @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response showLoadBalancerPoolMember(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID,
             // return fields
-            @QueryParam("fields") List<String> fields ) {
+            @QueryParam("fields") List<String> fields) {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
         if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
-        List<NeutronLoadBalancerPoolMember> members =
-                    loadBalancerPoolInterface.get(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
-        for (NeutronLoadBalancerPoolMember ans: members) {
+        List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
+                .getLoadBalancerPoolMembers();
+        for (NeutronLoadBalancerPoolMember ans : members) {
             if (!ans.getID().equals(loadBalancerPoolMemberUUID)) {
                 continue;
             }
 
             if (fields.size() > 0) {
-                return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronLoadBalancerPoolMemberRequest(extractFields(ans, fields))).build();
+                return Response.status(HttpURLConnection.HTTP_OK)
+                        .entity(new NeutronLoadBalancerPoolMemberRequest(extractFields(ans, fields))).build();
             } else {
-                return Response.status(HttpURLConnection.HTTP_OK).entity(
-                    new NeutronLoadBalancerPoolMemberRequest(ans)).build();
+                return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerPoolMemberRequest(ans))
+                        .build();
             }
         }
         throw new ResourceNotFoundException(uuidNoExist());
@@ -321,13 +307,11 @@ public class NeutronLoadBalancerPoolNorthbound
      */
     @Path("{loadBalancerPoolUUID}/members")
     @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response createLoadBalancerPoolMember(
-            @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
+    public Response createLoadBalancerPoolMember(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
             final NeutronLoadBalancerPoolMemberRequest input) {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
@@ -360,11 +344,9 @@ public class NeutronLoadBalancerPoolNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found") })
-    public Response updateLoadBalancerPoolMember(
-            @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
+    public Response updateLoadBalancerPoolMember(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID,
             final NeutronLoadBalancerPoolMemberRequest input) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
@@ -375,9 +357,11 @@ public class NeutronLoadBalancerPoolNorthbound
         if (singletonPool == null) {
             throw new ResourceNotFoundException("Pool doesn't Exist");
         }
-        NeutronLoadBalancerPoolMember original = singletonPool.getNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID);
+        NeutronLoadBalancerPoolMember original = singletonPool
+                .getNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID);
 
-        loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID, singleton);
+        loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID,
+                singleton);
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 
@@ -387,20 +371,18 @@ public class NeutronLoadBalancerPoolNorthbound
 
     @Path("{loadBalancerPoolUUID}/members/{loadBalancerPoolMemberUUID}")
     @DELETE
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteLoadBalancerPoolMember(
-            @PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response deleteLoadBalancerPoolMember(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
 
         //Verify that the LB pool member exists
         NeutronLoadBalancerPoolMember singleton = null;
-        List<NeutronLoadBalancerPoolMember> members =
-                loadBalancerPoolInterface.get(loadBalancerPoolUUID).getLoadBalancerPoolMembers();
-        for (NeutronLoadBalancerPoolMember member: members) {
+        List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
+                .getLoadBalancerPoolMembers();
+        for (NeutronLoadBalancerPoolMember member : members) {
             if (member.getID().equals(loadBalancerPoolMemberUUID)) {
                 singleton = member;
                 break;

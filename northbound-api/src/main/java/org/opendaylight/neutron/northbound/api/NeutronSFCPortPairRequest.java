@@ -17,14 +17,14 @@ import org.opendaylight.neutron.spi.NeutronSFCPortPair;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 
-public class NeutronSFCPortPairRequest  implements INeutronRequest<NeutronSFCPortPair> {
+public class NeutronSFCPortPairRequest implements INeutronRequest<NeutronSFCPortPair> {
     // See OpenStack Networking SFC (networking-sfc) Port Pair API v1.0 Reference
     // for description of annotated attributes
 
-    @XmlElement(name="portpair")
+    @XmlElement(name = "portpair")
     NeutronSFCPortPair singletonPortPair;
 
-    @XmlElement(name="portpairs")
+    @XmlElement(name = "portpairs")
     List<NeutronSFCPortPair> bulkRequest;
 
     NeutronSFCPortPairRequest() {

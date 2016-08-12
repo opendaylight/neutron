@@ -49,9 +49,9 @@ import org.slf4j.LoggerFactory;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 
-@Path ("/l2gateway-connections")
-public class NeutronL2gatewayConnectionNorthbound
-    extends AbstractNeutronNorthbound<NeutronL2gatewayConnection, NeutronL2gatewayConnectionRequest, INeutronL2gatewayConnectionCRUD> {
+@Path("/l2gateway-connections")
+public class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbound<NeutronL2gatewayConnection,
+        NeutronL2gatewayConnectionRequest, INeutronL2gatewayConnectionCRUD> {
 
     static final Logger logger = LoggerFactory.getLogger(NeutronL2gatewayConnectionNorthbound.class);
 
@@ -67,8 +67,7 @@ public class NeutronL2gatewayConnectionNorthbound
     }
 
     @Override
-    protected NeutronL2gatewayConnection extractFields(NeutronL2gatewayConnection o,
-                                                     List<String> fields) {
+    protected NeutronL2gatewayConnection extractFields(NeutronL2gatewayConnection o, List<String> fields) {
         return o.extractFields(fields);
     }
 
@@ -92,10 +91,9 @@ public class NeutronL2gatewayConnectionNorthbound
      * @return status
      */
     @POST
-    @Produces ({MediaType.APPLICATION_JSON})
-    @Consumes ({MediaType.APPLICATION_JSON})
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_BAD_REQUEST, condition = "Bad Request"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
@@ -115,48 +113,36 @@ public class NeutronL2gatewayConnectionNorthbound
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_OK,
-                condition = "Operation successful"),
-                @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED,
-                condition = "Unauthorized"),
-                @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED,
-                condition = "Not Implemented"),
-                @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE,
-                condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response listL2gatewayConnections(
-                                // return fields
-                                @QueryParam("fields") List<String> fields,
-                                @QueryParam("tenant_id") String queryTenantID,
-                                @QueryParam("connection_id") String queryConnectionID,
-                                @QueryParam("l2gateway_id") String queryL2gatewayID,
-                                @QueryParam("network_id") String queryNetworkID,
-                                @QueryParam("segment_id") String querySegmentID,
-                                @QueryParam("port_id") String queryPortID,
-                                @QueryParam ("limit") String limit,
-                                @QueryParam ("marker") String marker,
-                                @QueryParam ("page_reverse") String pageReverse
-                                // sorting not supported
+            // return fields
+            @QueryParam("fields") List<String> fields,
+            @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("connection_id") String queryConnectionID,
+            @QueryParam("l2gateway_id") String queryL2gatewayID,
+            @QueryParam("network_id") String queryNetworkID,
+            @QueryParam("segment_id") String querySegmentID,
+            @QueryParam("port_id") String queryPortID,
+            @QueryParam("limit") String limit,
+            @QueryParam("marker") String marker,
+            @QueryParam("page_reverse") String pageReverse
+    // sorting not supported
     ) {
         INeutronL2gatewayConnectionCRUD l2gatewayConnectionInterface = getNeutronCRUD();
         List<NeutronL2gatewayConnection> allL2gatewayConnections = l2gatewayConnectionInterface.getAll();
-        List<NeutronL2gatewayConnection> ans = new ArrayList<NeutronL2gatewayConnection>();
-        Iterator<NeutronL2gatewayConnection> i = allL2gatewayConnections
-            .iterator();
+        List<NeutronL2gatewayConnection> ans = new ArrayList<>();
+        Iterator<NeutronL2gatewayConnection> i = allL2gatewayConnections.iterator();
         while (i.hasNext()) {
             NeutronL2gatewayConnection oSS = i.next();
-            if ((queryTenantID == null || queryTenantID.equals(oSS
-                .getTenantID()))
-                    && (queryConnectionID == null || queryConnectionID
-                        .equals(oSS.getID()))
-                    && (queryL2gatewayID == null || queryL2gatewayID.equals(oSS
-                        .getL2gatewayID()))
-                    && (queryNetworkID == null || queryNetworkID.equals(oSS
-                        .getNetworkID()))
-                    && (querySegmentID == null || querySegmentID.equals(oSS
-                        .getSegmentID()))
-                    && (queryPortID == null || queryPortID.equals(oSS
-                        .getPortID()))) {
+            if ((queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
+                    && (queryConnectionID == null || queryConnectionID.equals(oSS.getID()))
+                    && (queryL2gatewayID == null || queryL2gatewayID.equals(oSS.getL2gatewayID()))
+                    && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkID()))
+                    && (querySegmentID == null || querySegmentID.equals(oSS.getSegmentID()))
+                    && (queryPortID == null || queryPortID.equals(oSS.getPortID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(oSS, fields));
                 } else {
@@ -165,8 +151,7 @@ public class NeutronL2gatewayConnectionNorthbound
             }
         }
         // TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK)
-            .entity(new NeutronL2gatewayConnectionRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronL2gatewayConnectionRequest(ans)).build();
     }
 
     /**
@@ -175,23 +160,17 @@ public class NeutronL2gatewayConnectionNorthbound
      * @param fields attributes used for querying
      * @return status
      */
-    @Path ("{l2gatewayConnectionID}")
+    @Path("{l2gatewayConnectionID}")
     @GET
-    @Produces ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-        @ResponseCode (code = HttpURLConnection.HTTP_OK,
-                condition = "Operation successful"),
-                @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED,
-                condition = "Unauthorized"),
-                @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND,
-                condition = "Not Found"),
-                @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED,
-                condition = "Not Implemented"),
-                @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE,
-                condition = "No providers available") })
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showL2gatewayID(@PathParam("l2gatewayConnectionID") String l2gatewayConnectionID,
-                                      // return fields
-                                      @QueryParam("fields") List<String> fields) {
+            // return fields
+            @QueryParam("fields") List<String> fields) {
         return show(l2gatewayConnectionID, fields);
     }
 
@@ -202,15 +181,10 @@ public class NeutronL2gatewayConnectionNorthbound
      */
     @Path("{l2gatewayConnectionID}")
     @DELETE
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT,
-                condition = "No Content"),
-        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND,
-                condition = "Not Found"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE,
-        condition = "No providers available") })
-    public Response deleteL2gatewayConnection(
-            @PathParam("l2gatewayConnectionID") String l2gatewayConnectionID) {
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    public Response deleteL2gatewayConnection(@PathParam("l2gatewayConnectionID") String l2gatewayConnectionID) {
         return delete(l2gatewayConnectionID);
     }
 

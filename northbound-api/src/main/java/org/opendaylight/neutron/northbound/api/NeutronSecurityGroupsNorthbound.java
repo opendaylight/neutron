@@ -45,9 +45,9 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  * More info :
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
-@Path ("/security-groups")
-public class NeutronSecurityGroupsNorthbound
-    extends AbstractNeutronNorthbound<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD> {
+@Path("/security-groups")
+public class NeutronSecurityGroupsNorthbound extends
+        AbstractNeutronNorthbound<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD> {
     private static final String RESOURCE_NAME = "Security Group";
 
     @Override
@@ -78,36 +78,31 @@ public class NeutronSecurityGroupsNorthbound
      * Returns a list of all Security Groups
      */
     @GET
-    @Produces ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 
     public Response listGroups(
             // return fields
-            @QueryParam ("fields") List<String> fields,
+            @QueryParam("fields") List<String> fields,
             // OpenStack security group attributes
-            @QueryParam ("id") String querySecurityGroupUUID,
-            @QueryParam ("name") String querySecurityGroupName,
-            @QueryParam ("tenant_id") String querySecurityTenantID,
-            @QueryParam ("limit") String limit,
-            @QueryParam ("marker") String marker,
-            @QueryParam ("page_reverse") String pageReverse
-    ) {
+            @QueryParam("id") String querySecurityGroupUUID,
+            @QueryParam("name") String querySecurityGroupName,
+            @QueryParam("tenant_id") String querySecurityTenantID,
+            @QueryParam("limit") String limit,
+            @QueryParam("marker") String marker,
+            @QueryParam("page_reverse") String pageReverse) {
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronCRUD();
         List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAll();
-        List<NeutronSecurityGroup> ans = new ArrayList<NeutronSecurityGroup>();
+        List<NeutronSecurityGroup> ans = new ArrayList<>();
         Iterator<NeutronSecurityGroup> i = allSecurityGroups.iterator();
         while (i.hasNext()) {
             NeutronSecurityGroup nsg = i.next();
-            if ((querySecurityGroupUUID == null ||
-                    querySecurityGroupUUID.equals(nsg.getID())) &&
-                    (querySecurityGroupName == null ||
-                            querySecurityGroupName.equals(nsg.getSecurityGroupName())) &&
-                    (querySecurityTenantID == null ||
-                            querySecurityTenantID.equals(nsg.getTenantID()))) {
+            if ((querySecurityGroupUUID == null || querySecurityGroupUUID.equals(nsg.getID()))
+                    && (querySecurityGroupName == null || querySecurityGroupName.equals(nsg.getSecurityGroupName()))
+                    && (querySecurityTenantID == null || querySecurityTenantID.equals(nsg.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(extractFields(nsg, fields));
                 } else {
@@ -115,26 +110,24 @@ public class NeutronSecurityGroupsNorthbound
                 }
             }
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronSecurityGroupRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronSecurityGroupRequest(ans)).build();
     }
 
     /**
      * Returns a specific Security Group
      */
 
-    @Path ("{securityGroupUUID}")
+    @Path("{securityGroupUUID}")
     @GET
-    @Produces ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode (code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode (code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showSecurityGroup(@PathParam ("securityGroupUUID") String securityGroupUUID,
-                                      // return fields
-                                      @QueryParam ("fields") List<String> fields) {
+    public Response showSecurityGroup(@PathParam("securityGroupUUID") String securityGroupUUID,
+            // return fields
+            @QueryParam("fields") List<String> fields) {
         return show(securityGroupUUID, fields);
     }
 
@@ -143,10 +136,9 @@ public class NeutronSecurityGroupsNorthbound
      */
 
     @POST
-    @Produces ({MediaType.APPLICATION_JSON})
-    @Consumes ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSecurityGroups(final NeutronSecurityGroupRequest input) {
         return create(input);
@@ -156,16 +148,15 @@ public class NeutronSecurityGroupsNorthbound
      * Updates a Security Group
      */
 
-    @Path ("{securityGroupUUID}")
+    @Path("{securityGroupUUID}")
     @PUT
-    @Produces ({MediaType.APPLICATION_JSON})
-    @Consumes ({MediaType.APPLICATION_JSON})
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @Produces({ MediaType.APPLICATION_JSON })
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateSecurityGroup(
-            @PathParam ("securityGroupUUID") String securityGroupUUID, final NeutronSecurityGroupRequest input) {
+    public Response updateSecurityGroup(@PathParam("securityGroupUUID") String securityGroupUUID,
+            final NeutronSecurityGroupRequest input) {
         return update(securityGroupUUID, input);
     }
 
@@ -173,14 +164,12 @@ public class NeutronSecurityGroupsNorthbound
      * Deletes a Security Group
      */
 
-    @Path ("{securityGroupUUID}")
+    @Path("{securityGroupUUID}")
     @DELETE
-    @StatusCodes ({
-            @ResponseCode (code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteSecurityGroup(
-            @PathParam ("securityGroupUUID") String securityGroupUUID) {
+    public Response deleteSecurityGroup(@PathParam("securityGroupUUID") String securityGroupUUID) {
         return delete(securityGroupUUID);
     }
 }

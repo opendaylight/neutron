@@ -49,7 +49,7 @@ import org.opendaylight.neutron.spi.NeutronFloatingIP;
 
 @Path("/floatingips")
 public class NeutronFloatingIPsNorthbound
-    extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD> {
+        extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIPCRUD> {
     private static final String RESOURCE_NAME = "Floating IP";
 
     @Override
@@ -75,16 +75,16 @@ public class NeutronFloatingIPsNorthbound
         if (flag) {
             answer = answer.fetchINeutronNetworkCRUD(this).fetchINeutronSubnetCRUD(this).fetchINeutronPortCRUD(this);
             if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException("Network CRUD Interface "
-                        + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
             if (answer.getSubnetInterface() == null) {
-                throw new ServiceUnavailableException("Subnet CRUD Interface "
-                        + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Subnet CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
             if (answer.getPortInterface() == null) {
-                throw new ServiceUnavailableException("Port CRUD Interface "
-                        + RestMessages.SERVICEUNAVAILABLE.toString());
+                throw new ServiceUnavailableException(
+                        "Port CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
             }
         }
         return answer;
@@ -101,8 +101,7 @@ public class NeutronFloatingIPsNorthbound
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -122,33 +121,32 @@ public class NeutronFloatingIPsNorthbound
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
-            // sorting not supported
-            ) {
+    // sorting not supported
+    ) {
         INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
         List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAll();
-        List<NeutronFloatingIP> ans = new ArrayList<NeutronFloatingIP>();
+        List<NeutronFloatingIP> ans = new ArrayList<>();
         Iterator<NeutronFloatingIP> i = allFloatingIPs.iterator();
         while (i.hasNext()) {
             NeutronFloatingIP oSS = i.next();
             //match filters: TODO provider extension and router extension
-            if ((queryID == null || queryID.equals(oSS.getID())) &&
-                    (queryFloatingNetworkId == null || queryFloatingNetworkId.equals(oSS.getFloatingNetworkUUID())) &&
-                    (queryPortId == null || queryPortId.equals(oSS.getPortUUID())) &&
-                    (queryFixedIPAddress == null || queryFixedIPAddress.equals(oSS.getFixedIPAddress())) &&
-                    (queryFloatingIPAddress == null || queryFloatingIPAddress.equals(oSS.getFloatingIPAddress())) &&
-                    (queryStatus == null || queryStatus.equals(oSS.getStatus())) &&
-                    (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSS.getID()))
+                    && (queryFloatingNetworkId == null || queryFloatingNetworkId.equals(oSS.getFloatingNetworkUUID()))
+                    && (queryPortId == null || queryPortId.equals(oSS.getPortUUID()))
+                    && (queryFixedIPAddress == null || queryFixedIPAddress.equals(oSS.getFixedIPAddress()))
+                    && (queryFloatingIPAddress == null || queryFloatingIPAddress.equals(oSS.getFloatingIPAddress()))
+                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
+                    && (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS,fields));
+                    ans.add(extractFields(oSS, fields));
                 } else {
                     ans.add(oSS);
                 }
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(
-                new NeutronFloatingIPRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFloatingIPRequest(ans)).build();
     }
 
     /**
@@ -157,16 +155,14 @@ public class NeutronFloatingIPsNorthbound
     @Path("{floatingipUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showFloatingIP(
-            @PathParam("floatingipUUID") String floatingipUUID,
+    public Response showFloatingIP(@PathParam("floatingipUUID") String floatingipUUID,
             // return fields
-            @QueryParam("fields") List<String> fields ) {
+            @QueryParam("fields") List<String> fields) {
         return show(floatingipUUID, fields);
     }
 
@@ -176,9 +172,8 @@ public class NeutronFloatingIPsNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
         return create(input);
     }
@@ -190,14 +185,11 @@ public class NeutronFloatingIPsNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateFloatingIP(
-            @PathParam("floatingipUUID") String floatingipUUID,
-            NeutronFloatingIPRequest input
-            ) {
+    public Response updateFloatingIP(@PathParam("floatingipUUID") String floatingipUUID,
+            NeutronFloatingIPRequest input) {
         return update(floatingipUUID, input);
     }
 
@@ -206,12 +198,10 @@ public class NeutronFloatingIPsNorthbound
 
     @Path("{floatingipUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteFloatingIP(
-            @PathParam("floatingipUUID") String floatingipUUID) {
+    public Response deleteFloatingIP(@PathParam("floatingipUUID") String floatingipUUID) {
         return delete(floatingipUUID);
     }
 }

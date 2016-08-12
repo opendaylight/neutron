@@ -52,7 +52,7 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
 
 @Path("/vpn/vpnservices")
 public class NeutronVPNServicesNorthbound
-    extends AbstractNeutronNorthbound<NeutronVPNService, NeutronVPNServiceRequest, INeutronVPNServiceCRUD> {
+        extends AbstractNeutronNorthbound<NeutronVPNService, NeutronVPNServiceRequest, INeutronVPNServiceCRUD> {
 
     private static final String RESOURCE_NAME = "VPNService";
 
@@ -112,7 +112,7 @@ public class NeutronVPNServicesNorthbound
     ) {
         INeutronVPNServiceCRUD VPNServiceInterface = getNeutronCRUD();
         List<NeutronVPNService> allVPNService = VPNServiceInterface.getAll();
-        List<NeutronVPNService> ans = new ArrayList<NeutronVPNService>();
+        List<NeutronVPNService> ans = new ArrayList<>();
         Iterator<NeutronVPNService> i = allVPNService.iterator();
         while (i.hasNext()) {
             NeutronVPNService oSS = i.next();
@@ -147,7 +147,7 @@ public class NeutronVPNServicesNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response showVPNService(@PathParam("serviceID") String serviceID,
-    // return fields
+            // return fields
             @QueryParam("fields") List<String> fields) {
         return show(serviceID, fields);
     }

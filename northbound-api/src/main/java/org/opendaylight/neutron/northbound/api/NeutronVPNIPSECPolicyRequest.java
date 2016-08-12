@@ -19,10 +19,10 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronVPNIPSECPolicyRequest implements INeutronRequest<NeutronVPNIPSECPolicy> {
 
-    @XmlElement(name="ipsecpolicy")
+    @XmlElement(name = "ipsecpolicy")
     NeutronVPNIPSECPolicy singletonVPNIPSECPolicy;
 
-    @XmlElement(name="ipsecpolicies")
+    @XmlElement(name = "ipsecpolicies")
     List<NeutronVPNIPSECPolicy> bulkVPNIPSECPolicies;
 
     NeutronVPNIPSECPolicyRequest() {
@@ -30,7 +30,7 @@ public class NeutronVPNIPSECPolicyRequest implements INeutronRequest<NeutronVPNI
 
     NeutronVPNIPSECPolicyRequest(NeutronVPNIPSECPolicy policy) {
         singletonVPNIPSECPolicy = policy;
-       bulkVPNIPSECPolicies = null;
+        bulkVPNIPSECPolicies = null;
     }
 
     NeutronVPNIPSECPolicyRequest(List<NeutronVPNIPSECPolicy> policies) {

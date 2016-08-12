@@ -47,9 +47,8 @@ import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
  */
 
 @Path("/sfc/flowclassifiers")
-public class NeutronSFCFlowClassifiersNorthbound
-        extends AbstractNeutronNorthbound<NeutronSFCFlowClassifier,
-        NeutronSFCFlowClassifierRequest,INeutronSFCFlowClassifierCRUD>{
+public class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbound<NeutronSFCFlowClassifier,
+        NeutronSFCFlowClassifierRequest, INeutronSFCFlowClassifierCRUD> {
     private static final String RESOURCE_NAME = "Sfc Flow Classifier";
 
     @Override
@@ -81,8 +80,7 @@ public class NeutronSFCFlowClassifiersNorthbound
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
@@ -102,31 +100,33 @@ public class NeutronSFCFlowClassifiersNorthbound
             @QueryParam("source_ip_prefix") String querySourceIpPrefix,
             @QueryParam("destination_ip_prefix") String queryDestinationIpPrefix,
             @QueryParam("logical_source_port") String queryLogicalSourcePort,
-            @QueryParam("logical_destination_port") String queryLogicalDestinationPort
-    ) {
+            @QueryParam("logical_destination_port") String queryLogicalDestinationPort) {
         INeutronSFCFlowClassifierCRUD sfcFlowClassifierInterface = getNeutronCRUD();
         List<NeutronSFCFlowClassifier> allSFCFlowClassifier = sfcFlowClassifierInterface.getAll();
         List<NeutronSFCFlowClassifier> ans = new ArrayList<>();
         Iterator<NeutronSFCFlowClassifier> i = allSFCFlowClassifier.iterator();
         while (i.hasNext()) {
             NeutronSFCFlowClassifier oSFC = i.next();
-            if ((queryID == null || queryID.equals(oSFC.getID())) &&
-                    (queryName == null || queryName.equals(oSFC.getName())) &&
-                    (queryEthertype == null || queryEthertype.equals(oSFC.getEthertype())) &&
-                    (queryProtocol == null || queryProtocol.equals(oSFC.getProtocol())) &&
-                    (querySourcePortRangeMin == null || querySourcePortRangeMin.equals(oSFC.getSourcePortRangeMin())) &&
-                    (querySourcePortRangeMax == null || querySourcePortRangeMax.equals(oSFC.getSourcePortRangeMax())) &&
-                    (queryDestinationPortRangeMin == null
-                            || queryDestinationPortRangeMin.equals(oSFC.getDestinationPortRangeMin())) &&
-                    (queryDestinationPortRangeMax == null
-                            || queryDestinationPortRangeMax.equals(oSFC.getDestinationPortRangeMax())) &&
-                    (querySourceIpPrefix == null || querySourceIpPrefix.equals(oSFC.getSourceIpPrefix())) &&
-                    (queryDestinationIpPrefix == null || queryDestinationIpPrefix.equals(oSFC.getDestinationIpPrefix())) &&
-                    (queryLogicalSourcePort == null || queryLogicalSourcePort.equals(oSFC.getLogicalSourcePortUUID())) &&
-                    (queryLogicalDestinationPort == null || queryLogicalDestinationPort.equals(oSFC.getLogicalDestinationPortUUID())) &&
-                    (queryTenantID == null || queryTenantID.equals(oSFC.getTenantID()))) {
+            if ((queryID == null || queryID.equals(oSFC.getID()))
+                    && (queryName == null || queryName.equals(oSFC.getName()))
+                    && (queryEthertype == null || queryEthertype.equals(oSFC.getEthertype()))
+                    && (queryProtocol == null || queryProtocol.equals(oSFC.getProtocol()))
+                    && (querySourcePortRangeMin == null || querySourcePortRangeMin.equals(oSFC.getSourcePortRangeMin()))
+                    && (querySourcePortRangeMax == null || querySourcePortRangeMax.equals(oSFC.getSourcePortRangeMax()))
+                    && (queryDestinationPortRangeMin == null
+                            || queryDestinationPortRangeMin.equals(oSFC.getDestinationPortRangeMin()))
+                    && (queryDestinationPortRangeMax == null
+                            || queryDestinationPortRangeMax.equals(oSFC.getDestinationPortRangeMax()))
+                    && (querySourceIpPrefix == null || querySourceIpPrefix.equals(oSFC.getSourceIpPrefix()))
+                    && (queryDestinationIpPrefix == null
+                            || queryDestinationIpPrefix.equals(oSFC.getDestinationIpPrefix()))
+                    && (queryLogicalSourcePort == null
+                            || queryLogicalSourcePort.equals(oSFC.getLogicalSourcePortUUID()))
+                    && (queryLogicalDestinationPort == null
+                            || queryLogicalDestinationPort.equals(oSFC.getLogicalDestinationPortUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(oSFC.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSFC,fields));
+                    ans.add(extractFields(oSFC, fields));
                 } else {
                     ans.add(oSFC);
                 }
@@ -143,17 +143,14 @@ public class NeutronSFCFlowClassifiersNorthbound
     @Path("{flowClassifierUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showSFCFlowClassifier(
-            @PathParam("flowClassifierUUID") String sfcFlowClassifierUUID,
+    public Response showSFCFlowClassifier(@PathParam("flowClassifierUUID") String sfcFlowClassifierUUID,
             // return fields
-            @QueryParam("fields") List<String> fields
-    ) {
+            @QueryParam("fields") List<String> fields) {
         return show(sfcFlowClassifierUUID, fields);
     }
 
@@ -162,8 +159,7 @@ public class NeutronSFCFlowClassifiersNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSFCFlowClassifier(final NeutronSFCFlowClassifierRequest input) {
         return create(input);
@@ -188,13 +184,11 @@ public class NeutronSFCFlowClassifiersNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateSFCFlowClassifier(
-            @PathParam("flowClassifierUUID") String sfcFlowClassifierUUID, final NeutronSFCFlowClassifierRequest input
-    ) {
+    public Response updateSFCFlowClassifier(@PathParam("flowClassifierUUID") String sfcFlowClassifierUUID,
+            final NeutronSFCFlowClassifierRequest input) {
         return update(sfcFlowClassifierUUID, input);
     }
 
@@ -202,12 +196,10 @@ public class NeutronSFCFlowClassifiersNorthbound
      * Deletes the SFC Flow Classifier */
     @Path("{flowClassifierUUID}")
     @DELETE
-    @StatusCodes({
-            @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteSFCFlowClassifier(
-            @PathParam("flowClassifierUUID") String sfcFlowClassifierUUID) {
+    public Response deleteSFCFlowClassifier(@PathParam("flowClassifierUUID") String sfcFlowClassifierUUID) {
         return delete(sfcFlowClassifierUUID);
     }
 }

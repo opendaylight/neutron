@@ -21,13 +21,13 @@ public class NeutronNetworkRequest implements INeutronRequest<NeutronNetwork> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
-    @XmlElement(name="network")
+    @XmlElement(name = "network")
     NeutronNetwork singletonNetwork;
 
-    @XmlElement(name="networks")
+    @XmlElement(name = "networks")
     List<NeutronNetwork> bulkRequest;
 
-    @XmlElement(name="networks_links")
+    @XmlElement(name = "networks_links")
     List<NeutronPageLink> links;
 
     NeutronNetworkRequest() {

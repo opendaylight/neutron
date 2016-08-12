@@ -19,10 +19,10 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronVPNServiceRequest implements INeutronRequest<NeutronVPNService> {
 
-    @XmlElement(name="vpnservice")
+    @XmlElement(name = "vpnservice")
     NeutronVPNService singletonVPNService;
 
-    @XmlElement(name="vpnservices")
+    @XmlElement(name = "vpnservices")
     List<NeutronVPNService> bulkVPNServices;
 
     NeutronVPNServiceRequest() {

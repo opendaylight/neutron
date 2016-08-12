@@ -15,7 +15,6 @@ import java.util.Set;
 import javax.ws.rs.core.Application;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 
-
 /**
  * This class is an instance of javax.ws.rs.core.Application and is used to return the classes
  * that will be instantiated for JAXRS processing. This is necessary
@@ -28,7 +27,7 @@ public class NeutronNorthboundRSApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<Class<?>>();
-// northbound URIs
+        // northbound URIs
         classes.add(NeutronNetworksNorthbound.class);
         classes.add(NeutronSubnetsNorthbound.class);
         classes.add(NeutronPortsNorthbound.class);

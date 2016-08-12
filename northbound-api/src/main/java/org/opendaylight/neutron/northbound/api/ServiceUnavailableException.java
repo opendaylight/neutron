@@ -33,7 +33,6 @@ public class ServiceUnavailableException extends WebApplicationException {
      *
      */
     public ServiceUnavailableException(String string) {
-        super(Response.status(Response.Status.SERVICE_UNAVAILABLE).entity(
-                string).type(MediaType.TEXT_PLAIN).build());
+        super(Response.status(Response.Status.SERVICE_UNAVAILABLE).entity(string).type(MediaType.TEXT_PLAIN).build());
     }
 }

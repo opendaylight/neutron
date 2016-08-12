@@ -13,6 +13,8 @@ import org.opendaylight.neutron.spi.INeutronObject;
 
 public interface INeutronRequest<T extends INeutronObject> {
     T getSingleton();
+
     boolean isSingleton();
+
     List<T> getBulk();
 }
