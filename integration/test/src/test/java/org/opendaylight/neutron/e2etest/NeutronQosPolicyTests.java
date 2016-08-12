@@ -22,9 +22,9 @@ public class NeutronQosPolicyTests {
 
     public String singleton_qos_policy_create_test() {
         String url = base + "/qos/policies";
-        String content = "{\"policy\": {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\"," +
-            "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", " +
-            "\"shared\": false }}";
+        String content = "{\"policy\": {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
+                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", "
+                + "\"shared\": false }}";
         ITNeutronE2E.test_create(url, content, "Qos Policy Singleton POST Failed");
         return content;
     }
@@ -36,15 +36,14 @@ public class NeutronQosPolicyTests {
 
     public void qos_policy_modify_test() {
         String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546";
-        String content = "{\"policy\": {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\"," +
-            "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", " +
-            "\"shared\": false," +
-            "\"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\"," +
-            "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\"max_kbps\": 25," +
-            "\"max_burst_kbps\": 100 } ] ," +
-            "\"dscp_marking_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\"," +
-            "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " +
-            "\"dscp_mark\": 8 } ] }}";
+        String content = "{\"policy\": {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
+                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", "
+                + "\"shared\": false,"
+                + "\"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
+                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\"max_kbps\": 25,"
+                + "\"max_burst_kbps\": 100 } ] ,"
+                + "\"dscp_marking_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
+                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " + "\"dscp_mark\": 8 } ] }}";
         ITNeutronE2E.test_modify(url, content, "Qos Policy Singleton Put failed");
     }
 
@@ -54,10 +53,9 @@ public class NeutronQosPolicyTests {
     }
 
     public void qos_policy_element_get_with_query_test() {
-        String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546" +
-            "?fields=tenant_id&fields=id&fields=name&fields=description" +
-            "&fields=shared&fields=limits" +
-            "&fields=marker&fields=page_reverse";
+        String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546"
+                + "?fields=tenant_id&fields=id&fields=name&fields=description" + "&fields=shared&fields=limits"
+                + "&fields=marker&fields=page_reverse";
         ITNeutronE2E.test_fetch(url, true, "Qos Firewall Element Get with Query Failed");
     }
 
