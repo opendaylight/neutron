@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_75a3744f",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-08-15T20:51:30Z",
+      "side": 1,
+      "message": "Can you please remove parens around httpCon?\nThis isn\u0027t common java practice and it\u0027s inconsistent with other neutron northbound code.",
+      "range": {
+        "startLine": 124,
+        "startChar": 15,
+        "endLine": 124,
+        "endChar": 16
+      },
+      "revId": "3e07d2acd43cefc53b974642972304e989c0b331",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
