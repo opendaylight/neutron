@@ -172,6 +172,13 @@ public class NeutronVPNIPSECSiteConnectionsInterface
     }
 
     @Override
+    protected Ipsecsiteconnection toMd(String uuid) {
+        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
+        ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
+        return ipsecSiteConnectionBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<IpsecSiteConnections> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class);
     }
@@ -181,12 +188,5 @@ public class NeutronVPNIPSECSiteConnectionsInterface
             Ipsecsiteconnection ipsecSiteConnection) {
         return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class)
                 .child(Ipsecsiteconnection.class, ipsecSiteConnection.getKey());
-    }
-
-    @Override
-    protected Ipsecsiteconnection toMd(String uuid) {
-        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
-        ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
-        return ipsecSiteConnectionBuilder.build();
     }
 }

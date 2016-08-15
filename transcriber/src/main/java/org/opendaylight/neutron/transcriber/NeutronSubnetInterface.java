@@ -185,6 +185,13 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     }
 
     @Override
+    protected Subnet toMd(String uuid) {
+        final SubnetBuilder subnetBuilder = new SubnetBuilder();
+        subnetBuilder.setUuid(toUuid(uuid));
+        return subnetBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
         return InstanceIdentifier.create(Neutron.class).child(Subnets.class).child(Subnet.class, subnet.getKey());
     }
@@ -192,12 +199,5 @@ public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Sub
     @Override
     protected InstanceIdentifier<Subnets> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(Subnets.class);
-    }
-
-    @Override
-    protected Subnet toMd(String uuid) {
-        final SubnetBuilder subnetBuilder = new SubnetBuilder();
-        subnetBuilder.setUuid(toUuid(uuid));
-        return subnetBuilder.build();
     }
 }

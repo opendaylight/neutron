@@ -65,13 +65,6 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
     }
 
     @Override
-    protected Pool toMd(String uuid) {
-        final PoolBuilder poolBuilder = new PoolBuilder();
-        poolBuilder.setUuid(toUuid(uuid));
-        return poolBuilder.build();
-    }
-
-    @Override
     protected InstanceIdentifier<Pool> createInstanceIdentifier(Pool pool) {
         return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey());
     }
@@ -126,6 +119,13 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
         return poolBuilder.build();
     }
 
+    @Override
+    protected Pool toMd(String uuid) {
+        final PoolBuilder poolBuilder = new PoolBuilder();
+        poolBuilder.setUuid(toUuid(uuid));
+        return poolBuilder.build();
+    }
+
     protected NeutronLoadBalancerPool fromMd(Pool pool) {
         final NeutronLoadBalancerPool answer = new NeutronLoadBalancerPool();
         if (pool.isAdminStateUp() != null) {
@@ -158,7 +158,8 @@ public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<P
             answer.setLoadBalancerPoolProtocol(PROTOCOL_MAP.get(pool.getProtocol()));
         }
         if (pool.getSessionPersistence() != null) {
-            final NeutronLoadBalancer_SessionPersistence sessionPersistence = new NeutronLoadBalancer_SessionPersistence();
+            final NeutronLoadBalancer_SessionPersistence sessionPersistence =
+                    new NeutronLoadBalancer_SessionPersistence();
             sessionPersistence.setCookieName(pool.getSessionPersistence().getCookieName());
             sessionPersistence.setType(pool.getSessionPersistence().getType());
 

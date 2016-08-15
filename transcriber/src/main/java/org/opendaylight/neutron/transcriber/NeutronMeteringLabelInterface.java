@@ -64,6 +64,13 @@ public class NeutronMeteringLabelInterface
         return meteringLabelBuilder.build();
     }
 
+    @Override
+    protected MeteringLabel toMd(String uuid) {
+        final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
+        meteringLabelBuilder.setUuid(toUuid(uuid));
+        return meteringLabelBuilder.build();
+    }
+
     protected NeutronMeteringLabel fromMd(MeteringLabel label) {
         final NeutronMeteringLabel answer = new NeutronMeteringLabel();
         if (label.getName() != null) {
@@ -79,12 +86,5 @@ public class NeutronMeteringLabelInterface
             answer.setID(label.getUuid().getValue());
         }
         return answer;
-    }
-
-    @Override
-    protected MeteringLabel toMd(String uuid) {
-        final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-        meteringLabelBuilder.setUuid(toUuid(uuid));
-        return meteringLabelBuilder.build();
     }
 }

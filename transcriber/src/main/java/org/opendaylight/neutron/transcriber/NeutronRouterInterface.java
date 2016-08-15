@@ -111,6 +111,13 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
     }
 
     @Override
+    protected Router toMd(String uuid) {
+        final RouterBuilder routerBuilder = new RouterBuilder();
+        routerBuilder.setUuid(toUuid(uuid));
+        return routerBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<Router> createInstanceIdentifier(Router router) {
         return InstanceIdentifier.create(Neutron.class).child(Routers.class).child(Router.class, router.getKey());
     }
@@ -118,13 +125,6 @@ public class NeutronRouterInterface extends AbstractNeutronInterface<Router, Rou
     @Override
     protected InstanceIdentifier<Routers> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(Routers.class);
-    }
-
-    @Override
-    protected Router toMd(String uuid) {
-        final RouterBuilder routerBuilder = new RouterBuilder();
-        routerBuilder.setUuid(toUuid(uuid));
-        return routerBuilder.build();
     }
 
     public NeutronRouter fromMd(Router router) {

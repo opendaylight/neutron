@@ -49,13 +49,6 @@ public class NeutronLoadBalancerListenerInterface
     }
 
     @Override
-    protected Listener toMd(String uuid) {
-        final ListenerBuilder listenerBuilder = new ListenerBuilder();
-        listenerBuilder.setUuid(toUuid(uuid));
-        return listenerBuilder.build();
-    }
-
-    @Override
     protected InstanceIdentifier<Listener> createInstanceIdentifier(Listener listener) {
         return InstanceIdentifier.create(Neutron.class).child(Listeners.class).child(Listener.class, listener.getKey());
     }
@@ -101,6 +94,13 @@ public class NeutronLoadBalancerListenerInterface
         } else {
             LOGGER.warn("Attempting to write neutron load balancer listener without UUID");
         }
+        return listenerBuilder.build();
+    }
+
+    @Override
+    protected Listener toMd(String uuid) {
+        final ListenerBuilder listenerBuilder = new ListenerBuilder();
+        listenerBuilder.setUuid(toUuid(uuid));
         return listenerBuilder.build();
     }
 

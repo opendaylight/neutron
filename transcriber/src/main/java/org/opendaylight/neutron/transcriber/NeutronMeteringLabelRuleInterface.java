@@ -81,6 +81,13 @@ public class NeutronMeteringLabelRuleInterface
         return meteringRuleBuilder.build();
     }
 
+    @Override
+    protected MeteringRule toMd(String uuid) {
+        final MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
+        meteringRuleBuilder.setUuid(toUuid(uuid));
+        return meteringRuleBuilder.build();
+    }
+
     protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
         final NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
         if (rule.getUuid() != null) {
@@ -100,12 +107,5 @@ public class NeutronMeteringLabelRuleInterface
         }
         answer.setMeteringLabelRuleExcluded(rule.isExcluded());
         return answer;
-    }
-
-    @Override
-    protected MeteringRule toMd(String uuid) {
-        final MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        meteringRuleBuilder.setUuid(toUuid(uuid));
-        return meteringRuleBuilder.build();
     }
 }

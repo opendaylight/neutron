@@ -49,13 +49,6 @@ public class NeutronLoadBalancerHealthMonitorInterface
     }
 
     @Override
-    protected Healthmonitor toMd(String uuid) {
-        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
-        healthmonitorBuilder.setUuid(toUuid(uuid));
-        return healthmonitorBuilder.build();
-    }
-
-    @Override
     protected InstanceIdentifier<Healthmonitor> createInstanceIdentifier(Healthmonitor healthMonitor) {
         return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class).child(Healthmonitor.class,
                 healthMonitor.getKey());
@@ -108,6 +101,13 @@ public class NeutronLoadBalancerHealthMonitorInterface
         } else {
             LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
+        return healthmonitorBuilder.build();
+    }
+
+    @Override
+    protected Healthmonitor toMd(String uuid) {
+        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        healthmonitorBuilder.setUuid(toUuid(uuid));
         return healthmonitorBuilder.build();
     }
 

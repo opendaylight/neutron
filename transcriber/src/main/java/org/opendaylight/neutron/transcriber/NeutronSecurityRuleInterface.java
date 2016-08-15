@@ -139,6 +139,13 @@ public class NeutronSecurityRuleInterface extends
     }
 
     @Override
+    protected SecurityRule toMd(String uuid) {
+        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
+        securityRuleBuilder.setUuid(toUuid(uuid));
+        return securityRuleBuilder.build();
+    }
+
+    @Override
     protected InstanceIdentifier<SecurityRule> createInstanceIdentifier(SecurityRule securityRule) {
         return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
                 securityRule.getKey());
@@ -147,12 +154,5 @@ public class NeutronSecurityRuleInterface extends
     @Override
     protected InstanceIdentifier<SecurityRules> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class);
-    }
-
-    @Override
-    protected SecurityRule toMd(String uuid) {
-        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
-        securityRuleBuilder.setUuid(toUuid(uuid));
-        return securityRuleBuilder.build();
     }
 }

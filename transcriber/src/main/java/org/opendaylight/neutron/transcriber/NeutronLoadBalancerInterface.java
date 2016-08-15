@@ -35,13 +35,6 @@ public class NeutronLoadBalancerInterface extends
     }
 
     @Override
-    protected Loadbalancer toMd(String uuid) {
-        final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
-        loadBalancerBuilder.setUuid(toUuid(uuid));
-        return loadBalancerBuilder.build();
-    }
-
-    @Override
     protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(Loadbalancer loadBalancer) {
         return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class).child(Loadbalancer.class,
                 loadBalancer.getKey());
@@ -102,6 +95,13 @@ public class NeutronLoadBalancerInterface extends
         } else {
             LOGGER.warn("Attempting to write neutron load balancer without UUID");
         }
+        return loadBalancerBuilder.build();
+    }
+
+    @Override
+    protected Loadbalancer toMd(String uuid) {
+        final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
+        loadBalancerBuilder.setUuid(toUuid(uuid));
         return loadBalancerBuilder.build();
     }
 }

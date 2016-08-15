@@ -86,7 +86,8 @@ public class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2gatewa
                 }
                 if (device.getInterfaces() != null) {
                     for (final Interfaces deviceInterface : device.getInterfaces()) {
-                        final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface = new NeutronL2gatewayDeviceInterface();
+                        final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface =
+                                new NeutronL2gatewayDeviceInterface();
                         String interfaceName = null;
                         final List<Integer> segmentationIds = new ArrayList<Integer>();
                         if (deviceInterface.getInterfaceName() != null) {
