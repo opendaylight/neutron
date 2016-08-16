@@ -73,6 +73,9 @@
           <configuration>
             <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
             <consoleOutput>true</consoleOutput>
+            <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+            <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+            <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
           </configuration>
           <executions>
             <execution>

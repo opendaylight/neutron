@@ -47,6 +47,24 @@
   <build>
     <pluginManagement>
       <plugins>
+         <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <configuration>
+            <suppressionsLocation>../../parent/checkstyle-suppressions.xml</suppressionsLocation>
+            <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+            <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
+            <consoleOutput>true</consoleOutput>
+             <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+              <phase>process-sources</phase>
+            </execution>
+          </executions>
+        </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
