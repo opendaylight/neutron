@@ -28,10 +28,8 @@ public class NeutronNetworkTests {
             int i = 0;
             while (i < TIMEOUT) {
                 URL url = new URL(url_s);
-                HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
+                HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
                 if (httpConn.getResponseCode() != 200) {
-                    System.out.println("trial " + Integer.toString(i) + ": failed with: "
-                            + Integer.toString(httpConn.getResponseCode()));
                     Thread.sleep(1000);
                     i += 1;
                 } else {

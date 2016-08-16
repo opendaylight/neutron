@@ -116,7 +116,7 @@ public class ITNeutronE2E {
         Neutron_Bug4027_Tests.runTests(base);
     }
 
-    static HttpURLConnection HttpURLConnectionFactoryGet(URL url) throws Exception {
+    static HttpURLConnection httpURLConnectionFactoryGet(URL url) throws Exception {
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setRequestMethod("GET");
         httpConn.setRequestProperty("Content-Type", "application/json");
@@ -124,7 +124,7 @@ public class ITNeutronE2E {
         return httpConn;
     }
 
-    static HttpURLConnection HttpURLConnectionFactoryDelete(URL url) throws Exception {
+    static HttpURLConnection httpURLConnectionFactoryDelete(URL url) throws Exception {
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setRequestMethod("DELETE");
         httpConn.setRequestProperty("Content-Type", "application/json");
@@ -132,7 +132,7 @@ public class ITNeutronE2E {
         return httpConn;
     }
 
-    static HttpURLConnection HttpURLConnectionFactoryPost(URL url, String content) throws Exception {
+    static HttpURLConnection httpURLConnectionFactoryPost(URL url, String content) throws Exception {
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setRequestMethod("POST");
         httpConn.setRequestProperty("Content-Type", "application/json");
@@ -144,7 +144,7 @@ public class ITNeutronE2E {
         return httpConn;
     }
 
-    static HttpURLConnection HttpURLConnectionFactoryPut(URL url, String content) throws Exception {
+    static HttpURLConnection httpURLConnectionFactoryPut(URL url, String content) throws Exception {
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setRequestMethod("PUT");
         httpConn.setRequestProperty("Content-Type", "application/json");
@@ -159,10 +159,9 @@ public class ITNeutronE2E {
     static void test_create(String url_s, String content, String context) {
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = HttpURLConnectionFactoryPost(url, content);
+            HttpURLConnection httpConn = httpURLConnectionFactoryPost(url, content);
             Assert.assertEquals(context, 201, httpConn.getResponseCode());
         } catch (Exception e) {
-            e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
@@ -170,10 +169,9 @@ public class ITNeutronE2E {
     static void test_modify(String url_s, String content, String context) {
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = HttpURLConnectionFactoryPut(url, content);
+            HttpURLConnection httpConn = httpURLConnectionFactoryPut(url, content);
             Assert.assertEquals(context, 200, httpConn.getResponseCode());
         } catch (Exception e) {
-            e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
@@ -181,10 +179,9 @@ public class ITNeutronE2E {
     static void test_fetch(String url_s, int responseCode, String context) {
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
+            HttpURLConnection httpConn = httpURLConnectionFactoryGet(url);
             Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (Exception e) {
-            e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
@@ -201,10 +198,9 @@ public class ITNeutronE2E {
     static void test_delete(String url_s, int responseCode, String context) {
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = HttpURLConnectionFactoryDelete(url);
+            HttpURLConnection httpConn = httpURLConnectionFactoryDelete(url);
             Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (Exception e) {
-            e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
@@ -217,12 +213,12 @@ public class ITNeutronE2E {
         test_delete(url_s, 404, context);
     }
 
-    static private String fetchResponse(String url_s, String context) {
+    private static String fetchResponse(String url_s, String context) {
         StringBuffer response = new StringBuffer();
 
         try {
             URL url = new URL(url_s);
-            HttpURLConnection httpConn = HttpURLConnectionFactoryGet(url);
+            HttpURLConnection httpConn = httpURLConnectionFactoryGet(url);
             Assert.assertEquals(context, 200, httpConn.getResponseCode());
             BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
             String inputLine;
@@ -231,7 +227,6 @@ public class ITNeutronE2E {
             }
             in.close();
         } catch (Exception e) {
-            e.printStackTrace(); // temporary, remove me
             Assert.assertFalse("E2E Tests Failed", true);
 
         }

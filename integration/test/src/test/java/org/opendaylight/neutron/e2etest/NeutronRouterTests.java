@@ -95,7 +95,6 @@ public class NeutronRouterTests {
         String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2f"
                 + "?fields=id&fields=admin_state_up&fields=name&fields=status"
                 + "&fields=tenant_id&fields=external_gateway_info" + "&fields=limit&fields=marker&fields=page_reverse";
-        ;
         ITNeutronE2E.test_fetch(url, true, "Router Element Get With Query Test");
     }
 
