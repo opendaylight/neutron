@@ -11,12 +11,16 @@ package org.opendaylight.neutron.e2etest;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.junit.Assert;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NeutronNetworkTests {
 
     private static final int TIMEOUT = 180;
 
     String base;
+  
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkTests.class);
 
     public NeutronNetworkTests(String base) {
         this.base = base;
@@ -28,9 +32,9 @@ public class NeutronNetworkTests {
             int i = 0;
             while (i < TIMEOUT) {
                 URL url = new URL(url_s);
-                HttpURLConnection httpConn = ITNeutronE2E.HttpURLConnectionFactoryGet(url);
+                HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
                 if (httpConn.getResponseCode() != 200) {
-                    System.out.println("trial " + Integer.toString(i) + ": failed with: "
+                    LOGGER.info("trial " + Integer.toString(i) + ": failed with: "
                             + Integer.toString(httpConn.getResponseCode()));
                     Thread.sleep(1000);
                     i += 1;
