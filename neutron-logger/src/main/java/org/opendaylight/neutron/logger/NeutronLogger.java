@@ -44,24 +44,25 @@ public class NeutronLogger implements AutoCloseable {
         final String typeName = objectModification.getDataType().getSimpleName();
 
         switch (objectModification.getModificationType()) {
-        case SUBTREE_MODIFIED:
-            for (final DataObjectModification<? extends DataObject> child : objectModification.getModifiedChildren()) {
-                formatModification(messageBuilder, child);
-            }
-            break;
-        case WRITE:
-            messageBuilder.append("\n");
-            messageBuilder.append("WRITE: type: ").append(typeName).append("\n");
-            final T dataAfter = objectModification.getDataAfter();
-            messageBuilder.append(dataAfter.toString());
-            break;
-        case DELETE:
-            messageBuilder.append("\n");
-            messageBuilder.append("DELETE: ").append(typeName);
-            break;
-        default:
-            LOG.warn("unknown modification type: {}", typeName);
-            break;
+            case SUBTREE_MODIFIED:
+                for (final DataObjectModification<? extends DataObject> child :
+                        objectModification.getModifiedChildren()) {
+                    formatModification(messageBuilder, child);
+                }
+                break;
+            case WRITE:
+                messageBuilder.append("\n");
+                messageBuilder.append("WRITE: type: ").append(typeName).append("\n");
+                final T dataAfter = objectModification.getDataAfter();
+                messageBuilder.append(dataAfter.toString());
+                break;
+            case DELETE:
+                messageBuilder.append("\n");
+                messageBuilder.append("DELETE: ").append(typeName);
+                break;
+            default:
+                LOG.warn("unknown modification type: {}", typeName);
+                break;
         }
     }
 
