@@ -55,7 +55,6 @@ public class NeutronFirewallPolicyTests {
                 + "?fields=tenant_id&field=id&fields=name&fields=description"
                 + "&fields=shared&fields=firewall_rules&fields=audited"
                 + "&fields=limit&fields=marker&fields=page_reverse";
-        ;
         ITNeutronE2E.test_fetch(url, true, "Firewall Policy Element Get with Query Failed");
     }
 

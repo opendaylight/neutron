@@ -58,7 +58,6 @@ public class NeutronLBPoolMembersTests {
                 + "?fields=id&fields=tenant_id&fields=address&fields=protocol_port"
                 + "&fields=weight&fields=subnet_id&fields=admin_state_up"
                 + "&fields=limit&fields=marker&fields=page_reverse";
-        ;
         ITNeutronE2E.test_fetch(url, true, "LB Pool Member Element Get With Query Failed");
     }
 
