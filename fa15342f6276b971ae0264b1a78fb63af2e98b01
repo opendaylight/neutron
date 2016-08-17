@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_6cc8c622",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-08-17T02:54:35Z",
+      "side": 0,
+      "message": "What kind of checkstyle error?\nCan we keep this line until fixing catch all exception?\nWithout stack trace, debugging integration would be extremely difficult.",
+      "range": {
+        "startLine": 165,
+        "startChar": 12,
+        "endLine": 165,
+        "endChar": 56
+      },
+      "revId": "fa15342f6276b971ae0264b1a78fb63af2e98b01",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a6b29fe_8cd562bb",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-08-17T02:54:35Z",
+      "side": 0,
+      "message": "Can we convert this into logging instead of removing System.out?",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 76
+      },
+      "revId": "fa15342f6276b971ae0264b1a78fb63af2e98b01",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
