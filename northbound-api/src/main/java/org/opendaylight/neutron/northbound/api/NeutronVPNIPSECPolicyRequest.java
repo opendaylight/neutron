@@ -18,38 +18,20 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronVPNIPSECPolicyRequest implements INeutronRequest<NeutronVPNIPSECPolicy> {
-
     @XmlElement(name = "ipsecpolicy")
-    NeutronVPNIPSECPolicy singletonVPNIPSECPolicy;
+    NeutronVPNIPSECPolicy singleton;
 
     @XmlElement(name = "ipsecpolicies")
-    List<NeutronVPNIPSECPolicy> bulkVPNIPSECPolicies;
+    List<NeutronVPNIPSECPolicy> bulkRequest;
 
     NeutronVPNIPSECPolicyRequest() {
     }
 
     NeutronVPNIPSECPolicyRequest(NeutronVPNIPSECPolicy policy) {
-        singletonVPNIPSECPolicy = policy;
-        bulkVPNIPSECPolicies = null;
+        singleton = policy;
     }
 
     NeutronVPNIPSECPolicyRequest(List<NeutronVPNIPSECPolicy> policies) {
-        singletonVPNIPSECPolicy = null;
-        bulkVPNIPSECPolicies = policies;
-    }
-
-    @Override
-    public NeutronVPNIPSECPolicy getSingleton() {
-        return singletonVPNIPSECPolicy;
-    }
-
-    @Override
-    public List<NeutronVPNIPSECPolicy> getBulk() {
-        return bulkVPNIPSECPolicies;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonVPNIPSECPolicy != null);
+        bulkRequest = policies;
     }
 }

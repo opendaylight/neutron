@@ -20,7 +20,7 @@ import org.opendaylight.neutron.spi.NeutronL2gatewayConnection;
 
 public class NeutronL2gatewayConnectionRequest implements INeutronRequest<NeutronL2gatewayConnection> {
     @XmlElement(name = "l2gateway_connection")
-    NeutronL2gatewayConnection singletonL2gatewayConnection;
+    NeutronL2gatewayConnection singleton;
 
     @XmlElement(name = "l2gateway_connections")
     List<NeutronL2gatewayConnection> bulkRequest;
@@ -29,27 +29,10 @@ public class NeutronL2gatewayConnectionRequest implements INeutronRequest<Neutro
     }
 
     NeutronL2gatewayConnectionRequest(NeutronL2gatewayConnection l2gatewayConnection) {
-        this.singletonL2gatewayConnection = l2gatewayConnection;
+        this.singleton = l2gatewayConnection;
     }
 
     NeutronL2gatewayConnectionRequest(List<NeutronL2gatewayConnection> bulk) {
         bulkRequest = bulk;
-        singletonL2gatewayConnection = null;
     }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonL2gatewayConnection != null);
-    }
-
-    @Override
-    public NeutronL2gatewayConnection getSingleton() {
-        return singletonL2gatewayConnection;
-    }
-
-    @Override
-    public List<NeutronL2gatewayConnection> getBulk() {
-        return bulkRequest;
-    }
-
 }

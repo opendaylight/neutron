@@ -17,7 +17,6 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronSecurityRuleRequest implements INeutronRequest<NeutronSecurityRule> {
     /**
      * See OpenStack Network API v2.0 Reference for a
@@ -25,7 +24,7 @@ public class NeutronSecurityRuleRequest implements INeutronRequest<NeutronSecuri
      */
 
     @XmlElement(name = "security_group_rule")
-    NeutronSecurityRule singletonSecurityRule;
+    NeutronSecurityRule singleton;
 
     @XmlElement(name = "security_group_rules")
     List<NeutronSecurityRule> bulkRequest;
@@ -35,26 +34,9 @@ public class NeutronSecurityRuleRequest implements INeutronRequest<NeutronSecuri
 
     NeutronSecurityRuleRequest(List<NeutronSecurityRule> bulk) {
         bulkRequest = bulk;
-        singletonSecurityRule = null;
     }
 
     NeutronSecurityRuleRequest(NeutronSecurityRule rule) {
-        singletonSecurityRule = rule;
+        singleton = rule;
     }
-
-    @Override
-    public NeutronSecurityRule getSingleton() {
-        return singletonSecurityRule;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonSecurityRule != null);
-    }
-
-    @Override
-    public List<NeutronSecurityRule> getBulk() {
-        return bulkRequest;
-    }
-
 }

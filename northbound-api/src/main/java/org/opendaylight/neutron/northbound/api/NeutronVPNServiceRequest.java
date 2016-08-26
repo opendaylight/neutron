@@ -18,38 +18,20 @@ import org.opendaylight.neutron.spi.NeutronVPNService;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronVPNServiceRequest implements INeutronRequest<NeutronVPNService> {
-
     @XmlElement(name = "vpnservice")
-    NeutronVPNService singletonVPNService;
+    NeutronVPNService singleton;
 
     @XmlElement(name = "vpnservices")
-    List<NeutronVPNService> bulkVPNServices;
+    List<NeutronVPNService> bulkRequest;
 
     NeutronVPNServiceRequest() {
     }
 
     NeutronVPNServiceRequest(NeutronVPNService service) {
-        singletonVPNService = service;
-        bulkVPNServices = null;
+        singleton = service;
     }
 
     NeutronVPNServiceRequest(List<NeutronVPNService> services) {
-        singletonVPNService = null;
-        bulkVPNServices = services;
-    }
-
-    @Override
-    public NeutronVPNService getSingleton() {
-        return singletonVPNService;
-    }
-
-    @Override
-    public List<NeutronVPNService> getBulk() {
-        return bulkVPNServices;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonVPNService != null);
+        bulkRequest = services;
     }
 }

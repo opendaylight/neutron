@@ -17,7 +17,6 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronLoadBalancerListenerRequest implements INeutronRequest<NeutronLoadBalancerListener> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
@@ -25,7 +24,7 @@ public class NeutronLoadBalancerListenerRequest implements INeutronRequest<Neutr
      */
 
     @XmlElement(name = "listener")
-    NeutronLoadBalancerListener singletonLoadBalancerListener;
+    NeutronLoadBalancerListener singleton;
 
     @XmlElement(name = "listeners")
     List<NeutronLoadBalancerListener> bulkRequest;
@@ -35,25 +34,9 @@ public class NeutronLoadBalancerListenerRequest implements INeutronRequest<Neutr
 
     NeutronLoadBalancerListenerRequest(List<NeutronLoadBalancerListener> bulk) {
         bulkRequest = bulk;
-        singletonLoadBalancerListener = null;
     }
 
     NeutronLoadBalancerListenerRequest(NeutronLoadBalancerListener group) {
-        singletonLoadBalancerListener = group;
-    }
-
-    @Override
-    public List<NeutronLoadBalancerListener> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronLoadBalancerListener getSingleton() {
-        return singletonLoadBalancerListener;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonLoadBalancerListener != null);
+        singleton = group;
     }
 }

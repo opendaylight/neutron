@@ -17,43 +17,24 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronMeteringLabelRuleRequest implements INeutronRequest<NeutronMeteringLabelRule> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     @XmlElement(name = "metering_label_rule")
-    NeutronMeteringLabelRule singletonMeteringLabelRule;
+    NeutronMeteringLabelRule singleton;
 
     @XmlElement(name = "metering_label_rules")
-    List<NeutronMeteringLabelRule> bulkMeteringLabelRules;
+    List<NeutronMeteringLabelRule> buldRequest;
 
     NeutronMeteringLabelRuleRequest() {
     }
 
     NeutronMeteringLabelRuleRequest(NeutronMeteringLabelRule rule) {
-        singletonMeteringLabelRule = rule;
-        bulkMeteringLabelRules = null;
+        singleton = rule;
     }
 
     NeutronMeteringLabelRuleRequest(List<NeutronMeteringLabelRule> bulk) {
-        bulkMeteringLabelRules = bulk;
-        singletonMeteringLabelRule = null;
+        buldRequest = bulk;
     }
-
-    @Override
-    public NeutronMeteringLabelRule getSingleton() {
-        return singletonMeteringLabelRule;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonMeteringLabelRule != null);
-    }
-
-    @Override
-    public List<NeutronMeteringLabelRule> getBulk() {
-        return bulkMeteringLabelRules;
-    }
-
 }

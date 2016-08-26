@@ -18,9 +18,8 @@ import org.opendaylight.neutron.spi.NeutronQosPolicy;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronQosPolicyRequest implements INeutronRequest<NeutronQosPolicy> {
-
     @XmlElement(name = "policy")
-    NeutronQosPolicy singletonQosPolicy;
+    NeutronQosPolicy singleton;
 
     @XmlElement(name = "policies")
     List<NeutronQosPolicy> bulkRequest;
@@ -30,25 +29,9 @@ public class NeutronQosPolicyRequest implements INeutronRequest<NeutronQosPolicy
 
     NeutronQosPolicyRequest(List<NeutronQosPolicy> bulk) {
         bulkRequest = bulk;
-        singletonQosPolicy = null;
     }
 
     NeutronQosPolicyRequest(NeutronQosPolicy qos) {
-        singletonQosPolicy = qos;
-    }
-
-    @Override
-    public List<NeutronQosPolicy> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronQosPolicy getSingleton() {
-        return singletonQosPolicy;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonQosPolicy != null);
+        singleton = qos;
     }
 }

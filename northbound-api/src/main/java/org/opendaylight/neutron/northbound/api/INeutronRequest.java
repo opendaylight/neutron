@@ -8,13 +8,39 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import org.opendaylight.neutron.spi.INeutronObject;
 
+
 public interface INeutronRequest<T extends INeutronObject> {
-    T getSingleton();
+    default T getSingleton() {
+        Class aClass = getClass();
+        try {
+            Field field = aClass.getField("singleton");
+            return (T) field.get(this);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            return null;
+        }
+    }
 
-    boolean isSingleton();
+    default boolean isSingleton() {
+        Class aClass = getClass();
+        try {
+            Field field = aClass.getField("singleton");
+            return field.get(this) != null;
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            return false;
+        }
+    }
 
-    List<T> getBulk();
+    default List<T> getBulk() {
+        Class aClass = getClass();
+        try {
+            Field field = aClass.getField("bulkRequest");
+            return (List<T>) field.get(this);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            return null;
+        }
+    }
 }

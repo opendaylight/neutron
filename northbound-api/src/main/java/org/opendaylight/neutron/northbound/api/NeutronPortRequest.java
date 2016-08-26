@@ -22,7 +22,7 @@ public class NeutronPortRequest implements INeutronRequest<NeutronPort> {
     // annotated attributes
 
     @XmlElement(name = "port")
-    NeutronPort singletonPort;
+    NeutronPort singleton;
 
     @XmlElement(name = "ports")
     List<NeutronPort> bulkRequest;
@@ -36,30 +36,13 @@ public class NeutronPortRequest implements INeutronRequest<NeutronPort> {
     public NeutronPortRequest(List<NeutronPort> bulkRequest, List<NeutronPageLink> links) {
         this.bulkRequest = bulkRequest;
         this.links = links;
-        this.singletonPort = null;
     }
 
     NeutronPortRequest(List<NeutronPort> bulk) {
         bulkRequest = bulk;
-        singletonPort = null;
     }
 
     NeutronPortRequest(NeutronPort port) {
-        singletonPort = port;
-    }
-
-    @Override
-    public NeutronPort getSingleton() {
-        return singletonPort;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonPort != null);
-    }
-
-    @Override
-    public List<NeutronPort> getBulk() {
-        return bulkRequest;
+        singleton = port;
     }
 }

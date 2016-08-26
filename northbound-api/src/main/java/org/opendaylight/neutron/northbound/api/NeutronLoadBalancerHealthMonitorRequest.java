@@ -17,7 +17,6 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronLoadBalancerHealthMonitorRequest implements INeutronRequest<NeutronLoadBalancerHealthMonitor> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
@@ -25,7 +24,7 @@ public class NeutronLoadBalancerHealthMonitorRequest implements INeutronRequest<
      */
 
     @XmlElement(name = "healthmonitor")
-    NeutronLoadBalancerHealthMonitor singletonLoadBalancerHealthMonitor;
+    NeutronLoadBalancerHealthMonitor singleton;
 
     @XmlElement(name = "healthmonitors")
     List<NeutronLoadBalancerHealthMonitor> bulkRequest;
@@ -35,25 +34,9 @@ public class NeutronLoadBalancerHealthMonitorRequest implements INeutronRequest<
 
     NeutronLoadBalancerHealthMonitorRequest(List<NeutronLoadBalancerHealthMonitor> bulk) {
         bulkRequest = bulk;
-        singletonLoadBalancerHealthMonitor = null;
     }
 
     NeutronLoadBalancerHealthMonitorRequest(NeutronLoadBalancerHealthMonitor group) {
-        singletonLoadBalancerHealthMonitor = group;
-    }
-
-    @Override
-    public List<NeutronLoadBalancerHealthMonitor> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronLoadBalancerHealthMonitor getSingleton() {
-        return singletonLoadBalancerHealthMonitor;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonLoadBalancerHealthMonitor != null);
+        singleton = group;
     }
 }

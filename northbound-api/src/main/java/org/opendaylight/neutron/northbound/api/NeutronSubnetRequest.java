@@ -22,7 +22,7 @@ public class NeutronSubnetRequest implements INeutronRequest<NeutronSubnet> {
     // annotated attributes
 
     @XmlElement(name = "subnet")
-    NeutronSubnet singletonSubnet;
+    NeutronSubnet singleton;
 
     @XmlElement(name = "subnets")
     List<NeutronSubnet> bulkRequest;
@@ -36,33 +36,13 @@ public class NeutronSubnetRequest implements INeutronRequest<NeutronSubnet> {
     public NeutronSubnetRequest(List<NeutronSubnet> bulkRequest, List<NeutronPageLink> links) {
         this.bulkRequest = bulkRequest;
         this.links = links;
-        this.singletonSubnet = null;
     }
 
     NeutronSubnetRequest(List<NeutronSubnet> bulk) {
         bulkRequest = bulk;
-        singletonSubnet = null;
-        links = null;
     }
 
     NeutronSubnetRequest(NeutronSubnet subnet) {
-        singletonSubnet = subnet;
-        bulkRequest = null;
-        links = null;
-    }
-
-    @Override
-    public NeutronSubnet getSingleton() {
-        return singletonSubnet;
-    }
-
-    @Override
-    public List<NeutronSubnet> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonSubnet != null);
+        singleton = subnet;
     }
 }

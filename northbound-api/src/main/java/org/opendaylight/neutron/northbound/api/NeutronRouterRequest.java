@@ -17,13 +17,12 @@ import org.opendaylight.neutron.spi.NeutronRouter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronRouterRequest implements INeutronRequest<NeutronRouter> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     @XmlElement(name = "router")
-    NeutronRouter singletonRouter;
+    NeutronRouter singleton;
 
     @XmlElement(name = "routers")
     List<NeutronRouter> bulkRequest;
@@ -33,25 +32,9 @@ public class NeutronRouterRequest implements INeutronRequest<NeutronRouter> {
 
     NeutronRouterRequest(List<NeutronRouter> bulk) {
         bulkRequest = bulk;
-        singletonRouter = null;
     }
 
     NeutronRouterRequest(NeutronRouter router) {
-        singletonRouter = router;
-    }
-
-    @Override
-    public List<NeutronRouter> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronRouter getSingleton() {
-        return singletonRouter;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonRouter != null);
+        singleton = router;
     }
 }

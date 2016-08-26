@@ -22,7 +22,7 @@ public class NeutronFloatingIPRequest implements INeutronRequest<NeutronFloating
     // annotated attributes
 
     @XmlElement(name = "floatingip")
-    NeutronFloatingIP singletonFloatingIP;
+    NeutronFloatingIP singleton;
 
     @XmlElement(name = "floatingips")
     List<NeutronFloatingIP> bulkRequest;
@@ -32,26 +32,9 @@ public class NeutronFloatingIPRequest implements INeutronRequest<NeutronFloating
 
     NeutronFloatingIPRequest(List<NeutronFloatingIP> bulk) {
         bulkRequest = bulk;
-        singletonFloatingIP = null;
     }
 
     NeutronFloatingIPRequest(NeutronFloatingIP singleton) {
-        bulkRequest = null;
-        singletonFloatingIP = singleton;
-    }
-
-    @Override
-    public List<NeutronFloatingIP> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronFloatingIP getSingleton() {
-        return singletonFloatingIP;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonFloatingIP != null);
+        this.singleton = singleton;
     }
 }

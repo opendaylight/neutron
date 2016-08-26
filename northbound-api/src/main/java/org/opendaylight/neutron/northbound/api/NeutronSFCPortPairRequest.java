@@ -16,13 +16,12 @@ import org.opendaylight.neutron.spi.NeutronSFCPortPair;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
 public class NeutronSFCPortPairRequest implements INeutronRequest<NeutronSFCPortPair> {
     // See OpenStack Networking SFC (networking-sfc) Port Pair API v1.0 Reference
     // for description of annotated attributes
 
     @XmlElement(name = "portpair")
-    NeutronSFCPortPair singletonPortPair;
+    NeutronSFCPortPair singleton;
 
     @XmlElement(name = "portpairs")
     List<NeutronSFCPortPair> bulkRequest;
@@ -32,25 +31,9 @@ public class NeutronSFCPortPairRequest implements INeutronRequest<NeutronSFCPort
 
     NeutronSFCPortPairRequest(List<NeutronSFCPortPair> bulkRequest) {
         this.bulkRequest = bulkRequest;
-        this.singletonPortPair = null;
     }
 
     NeutronSFCPortPairRequest(NeutronSFCPortPair sfcPortPair) {
-        this.singletonPortPair = sfcPortPair;
-    }
-
-    @Override
-    public NeutronSFCPortPair getSingleton() {
-        return this.singletonPortPair;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return singletonPortPair != null;
-    }
-
-    @Override
-    public List<NeutronSFCPortPair> getBulk() {
-        return this.bulkRequest;
+        this.singleton = sfcPortPair;
     }
 }
