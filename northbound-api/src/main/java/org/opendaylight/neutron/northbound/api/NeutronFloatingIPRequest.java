@@ -17,12 +17,12 @@ import org.opendaylight.neutron.spi.NeutronFloatingIP;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronFloatingIPRequest implements INeutronRequest<NeutronFloatingIP> {
+public final class NeutronFloatingIPRequest implements INeutronRequest<NeutronFloatingIP> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     @XmlElement(name = "floatingip")
-    NeutronFloatingIP singletonFloatingIP;
+    NeutronFloatingIP singleton;
 
     @XmlElement(name = "floatingips")
     List<NeutronFloatingIP> bulkRequest;
@@ -32,26 +32,9 @@ public class NeutronFloatingIPRequest implements INeutronRequest<NeutronFloating
 
     NeutronFloatingIPRequest(List<NeutronFloatingIP> bulk) {
         bulkRequest = bulk;
-        singletonFloatingIP = null;
     }
 
     NeutronFloatingIPRequest(NeutronFloatingIP singleton) {
-        bulkRequest = null;
-        singletonFloatingIP = singleton;
-    }
-
-    @Override
-    public List<NeutronFloatingIP> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronFloatingIP getSingleton() {
-        return singletonFloatingIP;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonFloatingIP != null);
+        this.singleton = singleton;
     }
 }

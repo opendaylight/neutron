@@ -17,15 +17,14 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronSecurityGroupRequest implements INeutronRequest<NeutronSecurityGroup> {
+public final class NeutronSecurityGroupRequest implements INeutronRequest<NeutronSecurityGroup> {
     /**
     * See OpenStack Network API v2.0 Reference for a
     * description of annotated attributes and operations
     */
 
     @XmlElement(name = "security_group")
-    NeutronSecurityGroup singletonSecurityGroup;
+    NeutronSecurityGroup singleton;
 
     @XmlElement(name = "security_groups")
     List<NeutronSecurityGroup> bulkRequest;
@@ -35,25 +34,9 @@ public class NeutronSecurityGroupRequest implements INeutronRequest<NeutronSecur
 
     NeutronSecurityGroupRequest(List<NeutronSecurityGroup> bulk) {
         bulkRequest = bulk;
-        singletonSecurityGroup = null;
     }
 
     NeutronSecurityGroupRequest(NeutronSecurityGroup group) {
-        singletonSecurityGroup = group;
-    }
-
-    @Override
-    public List<NeutronSecurityGroup> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronSecurityGroup getSingleton() {
-        return singletonSecurityGroup;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonSecurityGroup != null);
+        singleton = group;
     }
 }

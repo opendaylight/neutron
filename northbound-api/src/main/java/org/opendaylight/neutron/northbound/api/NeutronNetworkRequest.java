@@ -17,12 +17,12 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronNetworkRequest implements INeutronRequest<NeutronNetwork> {
+public final class NeutronNetworkRequest implements INeutronRequest<NeutronNetwork> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     @XmlElement(name = "network")
-    NeutronNetwork singletonNetwork;
+    NeutronNetwork singleton;
 
     @XmlElement(name = "networks")
     List<NeutronNetwork> bulkRequest;
@@ -36,30 +36,13 @@ public class NeutronNetworkRequest implements INeutronRequest<NeutronNetwork> {
     NeutronNetworkRequest(List<NeutronNetwork> bulkRequest, List<NeutronPageLink> links) {
         this.bulkRequest = bulkRequest;
         this.links = links;
-        this.singletonNetwork = null;
     }
 
     NeutronNetworkRequest(List<NeutronNetwork> bulk) {
         bulkRequest = bulk;
-        singletonNetwork = null;
     }
 
     NeutronNetworkRequest(NeutronNetwork net) {
-        singletonNetwork = net;
-    }
-
-    @Override
-    public NeutronNetwork getSingleton() {
-        return singletonNetwork;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonNetwork != null);
-    }
-
-    @Override
-    public List<NeutronNetwork> getBulk() {
-        return bulkRequest;
+        singleton = net;
     }
 }

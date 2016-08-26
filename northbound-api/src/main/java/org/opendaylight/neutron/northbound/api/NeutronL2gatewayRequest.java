@@ -12,10 +12,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
 
-public class NeutronL2gatewayRequest implements INeutronRequest<NeutronL2gateway> {
-
+public final class NeutronL2gatewayRequest implements INeutronRequest<NeutronL2gateway> {
     @XmlElement(name = "l2_gateway")
-    NeutronL2gateway singletonL2gateway;
+    NeutronL2gateway singleton;
 
     @XmlElement(name = "l2_gateways")
     List<NeutronL2gateway> bulkRequest;
@@ -24,27 +23,10 @@ public class NeutronL2gatewayRequest implements INeutronRequest<NeutronL2gateway
     }
 
     NeutronL2gatewayRequest(NeutronL2gateway l2gateway) {
-        this.singletonL2gateway = l2gateway;
+        this.singleton = l2gateway;
     }
 
     NeutronL2gatewayRequest(List<NeutronL2gateway> bulk) {
         bulkRequest = bulk;
-        singletonL2gateway = null;
     }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonL2gateway != null);
-    }
-
-    @Override
-    public NeutronL2gateway getSingleton() {
-        return singletonL2gateway;
-    }
-
-    @Override
-    public List<NeutronL2gateway> getBulk() {
-        return bulkRequest;
-    }
-
 }

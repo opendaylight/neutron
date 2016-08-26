@@ -17,39 +17,21 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNIKEPolicyRequest implements INeutronRequest<NeutronVPNIKEPolicy> {
-
+public final class NeutronVPNIKEPolicyRequest implements INeutronRequest<NeutronVPNIKEPolicy> {
     @XmlElement(name = "ikepolicy")
-    NeutronVPNIKEPolicy singletonIKEPolicy;
+    NeutronVPNIKEPolicy singleton;
 
     @XmlElement(name = "ikepolicies")
-    List<NeutronVPNIKEPolicy> bulkIKEPolicies;
+    List<NeutronVPNIKEPolicy> bulkRequest;
 
     NeutronVPNIKEPolicyRequest() {
     }
 
     NeutronVPNIKEPolicyRequest(NeutronVPNIKEPolicy policy) {
-        singletonIKEPolicy = policy;
-        bulkIKEPolicies = null;
+        singleton = policy;
     }
 
     NeutronVPNIKEPolicyRequest(List<NeutronVPNIKEPolicy> policies) {
-        singletonIKEPolicy = null;
-        bulkIKEPolicies = policies;
-    }
-
-    @Override
-    public NeutronVPNIKEPolicy getSingleton() {
-        return singletonIKEPolicy;
-    }
-
-    @Override
-    public List<NeutronVPNIKEPolicy> getBulk() {
-        return bulkIKEPolicies;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonIKEPolicy != null);
+        bulkRequest = policies;
     }
 }

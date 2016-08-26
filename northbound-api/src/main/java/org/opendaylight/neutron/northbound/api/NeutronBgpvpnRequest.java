@@ -17,12 +17,12 @@ import org.opendaylight.neutron.spi.NeutronBgpvpn;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronBgpvpnRequest implements INeutronRequest<NeutronBgpvpn> {
+public final class NeutronBgpvpnRequest implements INeutronRequest<NeutronBgpvpn> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     @XmlElement(name = "bgpvpn")
-    NeutronBgpvpn singletonBgpvpn;
+    NeutronBgpvpn singleton;
 
     @XmlElement(name = "bgpvpns")
     List<NeutronBgpvpn> bulkRequest;
@@ -31,26 +31,10 @@ public class NeutronBgpvpnRequest implements INeutronRequest<NeutronBgpvpn> {
     }
 
     NeutronBgpvpnRequest(NeutronBgpvpn bgpvpn) {
-        singletonBgpvpn = bgpvpn;
+        singleton = bgpvpn;
     }
 
     NeutronBgpvpnRequest(List<NeutronBgpvpn> bulk) {
         bulkRequest = bulk;
-        singletonBgpvpn = null;
-    }
-
-    @Override
-    public NeutronBgpvpn getSingleton() {
-        return singletonBgpvpn;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonBgpvpn != null);
-    }
-
-    @Override
-    public List<NeutronBgpvpn> getBulk() {
-        return bulkRequest;
     }
 }

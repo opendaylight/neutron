@@ -17,8 +17,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronFirewallPolicyRequest implements INeutronRequest<NeutronFirewallPolicy> {
+public final class NeutronFirewallPolicyRequest implements INeutronRequest<NeutronFirewallPolicy> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
@@ -26,7 +25,7 @@ public class NeutronFirewallPolicyRequest implements INeutronRequest<NeutronFire
      */
 
     @XmlElement(name = "firewall_policy")
-    NeutronFirewallPolicy singletonFirewallPolicy;
+    NeutronFirewallPolicy singleton;
 
     @XmlElement(name = "firewall_policies")
     List<NeutronFirewallPolicy> bulkRequest;
@@ -36,25 +35,9 @@ public class NeutronFirewallPolicyRequest implements INeutronRequest<NeutronFire
 
     NeutronFirewallPolicyRequest(List<NeutronFirewallPolicy> bulk) {
         bulkRequest = bulk;
-        singletonFirewallPolicy = null;
     }
 
     NeutronFirewallPolicyRequest(NeutronFirewallPolicy group) {
-        singletonFirewallPolicy = group;
-    }
-
-    @Override
-    public List<NeutronFirewallPolicy> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronFirewallPolicy getSingleton() {
-        return singletonFirewallPolicy;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonFirewallPolicy != null);
+        singleton = group;
     }
 }

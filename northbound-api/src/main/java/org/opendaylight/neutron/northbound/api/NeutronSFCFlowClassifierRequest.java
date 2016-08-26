@@ -16,14 +16,12 @@ import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronSFCFlowClassifierRequest implements INeutronRequest<NeutronSFCFlowClassifier> {
-
+public final class NeutronSFCFlowClassifierRequest implements INeutronRequest<NeutronSFCFlowClassifier> {
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of
     // annotated attributes
 
     @XmlElement(name = "flowclassifier")
-    NeutronSFCFlowClassifier singletonSFCFlowClassifier;
+    NeutronSFCFlowClassifier singleton;
 
     @XmlElement(name = "flowclassifiers")
     List<NeutronSFCFlowClassifier> bulkRequest;
@@ -33,25 +31,9 @@ public class NeutronSFCFlowClassifierRequest implements INeutronRequest<NeutronS
 
     NeutronSFCFlowClassifierRequest(List<NeutronSFCFlowClassifier> bulkRequest) {
         this.bulkRequest = bulkRequest;
-        this.singletonSFCFlowClassifier = null;
     }
 
     NeutronSFCFlowClassifierRequest(NeutronSFCFlowClassifier sfcFlowClassifier) {
-        this.singletonSFCFlowClassifier = sfcFlowClassifier;
-    }
-
-    @Override
-    public NeutronSFCFlowClassifier getSingleton() {
-        return this.singletonSFCFlowClassifier;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return singletonSFCFlowClassifier != null;
-    }
-
-    @Override
-    public List<NeutronSFCFlowClassifier> getBulk() {
-        return this.bulkRequest;
+        this.singleton = sfcFlowClassifier;
     }
 }

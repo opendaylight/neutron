@@ -17,15 +17,14 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronLoadBalancerPoolRequest implements INeutronRequest<NeutronLoadBalancerPool> {
+public final class NeutronLoadBalancerPoolRequest implements INeutronRequest<NeutronLoadBalancerPool> {
     /**
      * See OpenStack Network API v2.0 Reference for description of
      * http://docs.openstack.org/api/openstack-network/2.0/content/
      */
 
     @XmlElement(name = "pool")
-    NeutronLoadBalancerPool singletonLoadBalancerPool;
+    NeutronLoadBalancerPool singleton;
 
     @XmlElement(name = "pools")
     List<NeutronLoadBalancerPool> bulkRequest;
@@ -35,25 +34,9 @@ public class NeutronLoadBalancerPoolRequest implements INeutronRequest<NeutronLo
 
     NeutronLoadBalancerPoolRequest(List<NeutronLoadBalancerPool> bulk) {
         bulkRequest = bulk;
-        singletonLoadBalancerPool = null;
     }
 
     NeutronLoadBalancerPoolRequest(NeutronLoadBalancerPool group) {
-        singletonLoadBalancerPool = group;
-    }
-
-    @Override
-    public List<NeutronLoadBalancerPool> getBulk() {
-        return bulkRequest;
-    }
-
-    @Override
-    public NeutronLoadBalancerPool getSingleton() {
-        return singletonLoadBalancerPool;
-    }
-
-    @Override
-    public boolean isSingleton() {
-        return (singletonLoadBalancerPool != null);
+        singleton = group;
     }
 }
