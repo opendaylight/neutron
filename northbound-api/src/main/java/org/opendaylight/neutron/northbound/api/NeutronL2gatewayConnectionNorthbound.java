@@ -67,11 +67,6 @@ public class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbo
     }
 
     @Override
-    protected NeutronL2gatewayConnection extractFields(NeutronL2gatewayConnection o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronL2gatewayConnectionRequest newNeutronRequest(NeutronL2gatewayConnection o) {
         return new NeutronL2gatewayConnectionRequest(o);
     }
@@ -144,7 +139,7 @@ public class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbo
                     && (querySegmentID == null || querySegmentID.equals(oSS.getSegmentID()))
                     && (queryPortID == null || queryPortID.equals(oSS.getPortID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

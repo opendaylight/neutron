@@ -61,11 +61,6 @@ public class NeutronVPNServicesNorthbound
         return RESOURCE_NAME;
     }
 
-    @Override
-    protected NeutronVPNService extractFields(NeutronVPNService o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
     @Context
     UriInfo uriInfo;
 
@@ -124,7 +119,7 @@ public class NeutronVPNServicesNorthbound
                     && (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

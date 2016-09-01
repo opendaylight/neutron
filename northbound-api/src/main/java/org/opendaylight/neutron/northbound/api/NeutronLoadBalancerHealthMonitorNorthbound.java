@@ -59,11 +59,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     @Override
-    protected NeutronLoadBalancerHealthMonitor extractFields(NeutronLoadBalancerHealthMonitor o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronLoadBalancerHealthMonitorRequest newNeutronRequest(NeutronLoadBalancerHealthMonitor o) {
         return new NeutronLoadBalancerHealthMonitorRequest(o);
     }
@@ -136,7 +131,7 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
                             || queryLoadBalancerHealthMonitorIsAdminStateUp
                                     .equals(nsg.getLoadBalancerHealthMonitorAdminStateIsUp()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }

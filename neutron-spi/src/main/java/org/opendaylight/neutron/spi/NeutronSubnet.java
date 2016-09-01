@@ -27,8 +27,8 @@ import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronSubnet extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronSubnet extends NeutronObject<NeutronSubnet>
+        implements Serializable, INeutronObject<NeutronSubnet> {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private static final long serialVersionUID = 1L;

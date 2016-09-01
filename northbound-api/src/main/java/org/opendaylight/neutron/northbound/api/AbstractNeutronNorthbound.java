@@ -16,7 +16,7 @@ import org.opendaylight.neutron.spi.INeutronObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractNeutronNorthbound<T extends INeutronObject, NeutronRequest extends INeutronRequest<T>,
+public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, NeutronRequest extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
@@ -36,8 +36,6 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
 
     protected abstract String getResourceName();
 
-    protected abstract T extractFields(T o, List<String> fields);
-
     protected abstract NeutronRequest newNeutronRequest(T o);
 
     protected abstract I getNeutronCRUD();
@@ -52,7 +50,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject, Neutro
         }
 
         if (fields.size() > 0) {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(extractFields(ans, fields)))
+            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans.extractFields(fields)))
                     .build();
         } else {
             return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();

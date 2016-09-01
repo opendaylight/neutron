@@ -11,6 +11,7 @@ package org.opendaylight.neutron.spi;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -19,7 +20,8 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronObject extends Neutron_ID implements Serializable, INeutronObject {
+public abstract class NeutronObject<T extends NeutronObject> extends Neutron_ID
+        implements Serializable, INeutronObject<T> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "tenant_id")
@@ -58,4 +60,7 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
     @Override
     public void initDefaults() {
     }
+
+    @Override
+    public abstract T extractFields(List<String> fields);
 }

@@ -18,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNService extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronVPNService extends NeutronObject<NeutronVPNService>
+        implements Serializable, INeutronObject<NeutronVPNService> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of

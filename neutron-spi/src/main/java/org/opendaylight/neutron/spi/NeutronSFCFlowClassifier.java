@@ -20,8 +20,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronSFCFlowClassifier extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronSFCFlowClassifier extends NeutronObject<NeutronSFCFlowClassifier>
+        implements Serializable, INeutronObject<NeutronSFCFlowClassifier> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of

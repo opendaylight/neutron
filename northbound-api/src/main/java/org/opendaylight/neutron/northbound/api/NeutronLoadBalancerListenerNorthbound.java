@@ -58,11 +58,6 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
     }
 
     @Override
-    protected NeutronLoadBalancerListener extractFields(NeutronLoadBalancerListener o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronLoadBalancerListenerRequest newNeutronRequest(NeutronLoadBalancerListener o) {
         return new NeutronLoadBalancerListenerRequest(o);
     }
@@ -122,7 +117,7 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
                     && (queryLoadBalancerListenerAdminIsUp == null || queryLoadBalancerListenerAdminIsUp
                             .equals(nsg.getLoadBalancerListenerAdminStateIsUp()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }

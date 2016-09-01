@@ -62,11 +62,6 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
     }
 
     @Override
-    protected NeutronVPNIPSECSiteConnection extractFields(NeutronVPNIPSECSiteConnection o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronVPNIPSECSiteConnectionRequest newNeutronRequest(NeutronVPNIPSECSiteConnection o) {
         return new NeutronVPNIPSECSiteConnectionRequest(o);
     }
@@ -136,7 +131,7 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
                     && (queryIpSecPolicyID == null || queryIpSecPolicyID.equals(oSS.getIpsecPolicyID()))
                     && (queryVpnServiceID == null || queryVpnServiceID.equals(oSS.getVpnServiceID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

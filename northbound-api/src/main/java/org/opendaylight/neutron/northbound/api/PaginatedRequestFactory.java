@@ -28,7 +28,7 @@ public final class PaginatedRequestFactory {
         }
     };
 
-    public static class PaginationResults<T extends INeutronObject> {
+    public static class PaginationResults<T extends INeutronObject<T>> {
         List<T> collection;
         List<NeutronPageLink> links;
 
@@ -38,7 +38,8 @@ public final class PaginatedRequestFactory {
         }
     }
 
-    private static final class MarkerObject extends NeutronObject implements INeutronObject {
+    private static final class MarkerObject extends NeutronObject<MarkerObject>
+            implements INeutronObject<MarkerObject> {
         private final String id;
 
         MarkerObject(String id) {
@@ -55,6 +56,11 @@ public final class PaginatedRequestFactory {
         public void setID(String id) {
             throw new UnsupportedOperationException("Marker has constant ID");
         }
+
+        @Override
+        public MarkerObject extractFields(List<String> fields) {
+            return null;
+        }
     }
 
     private PaginatedRequestFactory() {
@@ -67,7 +73,7 @@ public final class PaginatedRequestFactory {
      * FIXME: the only caller performs a cast back, so this is not actually necessary.
      */
     @SuppressWarnings("unchecked")
-    public static <T extends INeutronObject> INeutronRequest<T> createRequest(Integer limit, String marker,
+    public static <T extends INeutronObject<T>> INeutronRequest<T> createRequest(Integer limit, String marker,
             Boolean pageReverse, UriInfo uriInfo, List<T> collection, Class<T> clazz) {
         PaginationResults<T> results = paginate(limit, marker, pageReverse, uriInfo, collection);
 
@@ -85,7 +91,7 @@ public final class PaginatedRequestFactory {
         return null;
     }
 
-    private static <T extends INeutronObject> PaginationResults<T> paginate(Integer limit, String marker,
+    private static <T extends INeutronObject<T>> PaginationResults<T> paginate(Integer limit, String marker,
             Boolean pageReverse, UriInfo uriInfo, List<T> collection) {
         List<NeutronPageLink> links = new ArrayList<>();
         final int startPos;

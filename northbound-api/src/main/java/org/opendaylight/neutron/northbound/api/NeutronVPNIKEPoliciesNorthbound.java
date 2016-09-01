@@ -61,11 +61,6 @@ public class NeutronVPNIKEPoliciesNorthbound
     }
 
     @Override
-    protected NeutronVPNIKEPolicy extractFields(NeutronVPNIKEPolicy o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected INeutronVPNIKEPolicyCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIKEPolicyCRUD(this);
         if (answer.getVPNIKEPolicyInterface() == null) {
@@ -122,7 +117,7 @@ public class NeutronVPNIKEPoliciesNorthbound
                     && (queryIKEVersion == null || queryIKEVersion.equals(oSS.getIkeVersion()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

@@ -37,7 +37,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class AbstractNeutronInterface<T extends DataObject,
-        U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject>
+        U extends ChildOf<? extends DataObject> & Augmentable<U>, S extends INeutronObject<S>>
         implements AutoCloseable, INeutronCRUD<S> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;

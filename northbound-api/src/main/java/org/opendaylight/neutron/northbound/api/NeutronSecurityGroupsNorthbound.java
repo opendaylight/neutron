@@ -56,11 +56,6 @@ public class NeutronSecurityGroupsNorthbound extends
     }
 
     @Override
-    protected NeutronSecurityGroup extractFields(NeutronSecurityGroup o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronSecurityGroupRequest newNeutronRequest(NeutronSecurityGroup o) {
         return new NeutronSecurityGroupRequest(o);
     }
@@ -104,7 +99,7 @@ public class NeutronSecurityGroupsNorthbound extends
                     && (querySecurityGroupName == null || querySecurityGroupName.equals(nsg.getSecurityGroupName()))
                     && (querySecurityTenantID == null || querySecurityTenantID.equals(nsg.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }

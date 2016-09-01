@@ -58,11 +58,6 @@ public class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthboun
     }
 
     @Override
-    protected NeutronSFCPortPairGroup extractFields(NeutronSFCPortPairGroup o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronSFCPortPairGroupRequest newNeutronRequest(NeutronSFCPortPairGroup o) {
         return new NeutronSFCPortPairGroupRequest(o);
     }
@@ -102,7 +97,7 @@ public class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthboun
                     && (queryName == null || queryName.equals(oSFCPPG.getName()))
                     && (queryTenantID == null || queryTenantID.equals(oSFCPPG.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSFCPPG, fields));
+                    ans.add(oSFCPPG.extractFields(fields));
                 } else {
                     ans.add(oSFCPPG);
                 }

@@ -58,11 +58,6 @@ public class NeutronFloatingIPsNorthbound
     }
 
     @Override
-    protected NeutronFloatingIP extractFields(NeutronFloatingIP o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronFloatingIPRequest newNeutronRequest(NeutronFloatingIP o) {
         return new NeutronFloatingIPRequest(o);
     }
@@ -139,7 +134,7 @@ public class NeutronFloatingIPsNorthbound
                     && (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

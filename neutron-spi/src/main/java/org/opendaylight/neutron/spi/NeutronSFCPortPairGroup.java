@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronSFCPortPairGroup extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronSFCPortPairGroup extends NeutronObject<NeutronSFCPortPairGroup>
+        implements Serializable, INeutronObject<NeutronSFCPortPairGroup> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0

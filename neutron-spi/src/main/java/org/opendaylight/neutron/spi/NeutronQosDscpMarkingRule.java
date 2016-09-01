@@ -18,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronQosDscpMarkingRule extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronQosDscpMarkingRule extends NeutronObject<NeutronQosDscpMarkingRule>
+        implements Serializable, INeutronObject<NeutronQosDscpMarkingRule> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "dscp_mark")

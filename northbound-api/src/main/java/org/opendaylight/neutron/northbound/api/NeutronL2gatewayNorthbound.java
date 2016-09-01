@@ -65,11 +65,6 @@ public class NeutronL2gatewayNorthbound
     }
 
     @Override
-    protected NeutronL2gateway extractFields(NeutronL2gateway o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronL2gatewayRequest newNeutronRequest(NeutronL2gateway o) {
         return new NeutronL2gatewayRequest(o);
     }
@@ -140,7 +135,7 @@ public class NeutronL2gatewayNorthbound
                     && (queryNeutronL2gatewayDevice == null
                             || queryNeutronL2gatewayDevice.equals(l2gateway.getNeutronL2gatewayDevices()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(l2gateway, fields));
+                    ans.add(l2gateway.extractFields(fields));
                 } else {
                     ans.add(l2gateway);
                 }

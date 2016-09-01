@@ -8,12 +8,14 @@
 
 package org.opendaylight.neutron.spi;
 
+import java.util.List;
+
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 
 /**
  * This class contains behaviour common to Neutron configuration objects
  */
-public interface INeutronObject {
+public interface INeutronObject<T extends INeutronObject> {
 
     String getID();
 
@@ -26,4 +28,6 @@ public interface INeutronObject {
     void setTenantID(Uuid tenantID);
 
     void initDefaults();
+
+    T extractFields(List<String> fields);
 }
