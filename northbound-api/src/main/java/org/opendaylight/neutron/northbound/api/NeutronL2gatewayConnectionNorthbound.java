@@ -59,7 +59,6 @@ public class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbo
     UriInfo uriInfo;
 
     private static final String RESOURCE_NAME = "L2gatewayConnection";
-    private static final String INTERFACE_NAME = "L2gatewayConnection CRUD Interface";
 
     @Override
     protected String getResourceName() {

@@ -315,7 +315,6 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
             final NeutronLoadBalancerPoolMemberRequest input) {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.get(loadBalancerPoolUUID);
 
         if (input.isSingleton()) {
             NeutronLoadBalancerPoolMember singleton = input.getSingleton();
@@ -357,9 +356,6 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
         if (singletonPool == null) {
             throw new ResourceNotFoundException("Pool doesn't Exist");
         }
-        NeutronLoadBalancerPoolMember original = singletonPool
-                .getNeutronLoadBalancerPoolMember(loadBalancerPoolMemberUUID);
-
         loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID,
                 singleton);
         return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();

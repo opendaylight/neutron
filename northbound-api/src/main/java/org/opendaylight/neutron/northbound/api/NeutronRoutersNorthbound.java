@@ -85,22 +85,6 @@ public class NeutronRoutersNorthbound
         return getNeutronInterfaces(false).getRouterInterface();
     }
 
-    private NeutronCRUDInterfaces getAttachInterfaces() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronRouterCRUD(this);
-        if (answer.getRouterInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        answer = answer.fetchINeutronPortCRUD(this).fetchINeutronSubnetCRUD(this);
-        if (answer.getPortInterface() == null) {
-            throw new ServiceUnavailableException("Port CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        if (answer.getSubnetInterface() == null) {
-            throw new ServiceUnavailableException(
-                    "Subnet CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-        }
-        return answer;
-    }
-
     @Override
     protected NeutronRouterRequest newNeutronRequest(NeutronRouter o) {
         return new NeutronRouterRequest(o);
