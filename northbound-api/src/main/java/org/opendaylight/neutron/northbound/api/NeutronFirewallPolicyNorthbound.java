@@ -57,11 +57,6 @@ public class NeutronFirewallPolicyNorthbound extends
     }
 
     @Override
-    protected NeutronFirewallPolicyRequest newNeutronRequest(NeutronFirewallPolicy o) {
-        return new NeutronFirewallPolicyRequest(o);
-    }
-
-    @Override
     protected INeutronFirewallPolicyCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFirewallPolicyCRUD(this);
         if (answer.getFirewallPolicyInterface() == null) {

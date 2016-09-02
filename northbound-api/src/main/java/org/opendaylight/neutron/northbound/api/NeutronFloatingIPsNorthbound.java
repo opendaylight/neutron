@@ -57,11 +57,6 @@ public class NeutronFloatingIPsNorthbound
         return RESOURCE_NAME;
     }
 
-    @Override
-    protected NeutronFloatingIPRequest newNeutronRequest(NeutronFloatingIP o) {
-        return new NeutronFloatingIPRequest(o);
-    }
-
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFloatingIPCRUD(this);
         if (answer.getFloatingIPInterface() == null) {

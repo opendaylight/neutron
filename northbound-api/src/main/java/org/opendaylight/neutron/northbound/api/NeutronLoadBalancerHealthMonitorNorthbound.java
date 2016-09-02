@@ -59,11 +59,6 @@ public class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     @Override
-    protected NeutronLoadBalancerHealthMonitorRequest newNeutronRequest(NeutronLoadBalancerHealthMonitor o) {
-        return new NeutronLoadBalancerHealthMonitorRequest(o);
-    }
-
-    @Override
     protected INeutronLoadBalancerHealthMonitorCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerHealthMonitorCRUD(this);
         if (answer.getLoadBalancerHealthMonitorInterface() == null) {

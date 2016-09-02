@@ -65,11 +65,6 @@ public class NeutronVPNServicesNorthbound
     UriInfo uriInfo;
 
     @Override
-    protected NeutronVPNServiceRequest newNeutronRequest(NeutronVPNService o) {
-        return new NeutronVPNServiceRequest(o);
-    }
-
-    @Override
     protected INeutronVPNServiceCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNServiceCRUD(this);
         if (answer.getVPNServiceInterface() == null) {

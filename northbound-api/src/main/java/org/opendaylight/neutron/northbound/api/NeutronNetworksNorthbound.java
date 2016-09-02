@@ -66,11 +66,6 @@ public class NeutronNetworksNorthbound
     }
 
     @Override
-    protected NeutronNetworkRequest newNeutronRequest(NeutronNetwork o) {
-        return new NeutronNetworkRequest(o);
-    }
-
-    @Override
     protected INeutronNetworkCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronNetworkCRUD(this);
         if (answer.getNetworkInterface() == null) {

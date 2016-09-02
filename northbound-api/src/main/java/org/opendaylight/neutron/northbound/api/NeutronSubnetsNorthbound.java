@@ -80,11 +80,6 @@ public class NeutronSubnetsNorthbound
         return getNeutronInterfaces(false).getSubnetInterface();
     }
 
-    @Override
-    protected NeutronSubnetRequest newNeutronRequest(NeutronSubnet o) {
-        return new NeutronSubnetRequest(o);
-    }
-
     @Context
     UriInfo uriInfo;
 

@@ -69,11 +69,6 @@ public class NeutronVPNIKEPoliciesNorthbound
         return answer.getVPNIKEPolicyInterface();
     }
 
-    @Override
-    protected NeutronVPNIKEPolicyRequest newNeutronRequest(NeutronVPNIKEPolicy o) {
-        return new NeutronVPNIKEPolicyRequest(o);
-    }
-
     @Context
     UriInfo uriInfo;
 

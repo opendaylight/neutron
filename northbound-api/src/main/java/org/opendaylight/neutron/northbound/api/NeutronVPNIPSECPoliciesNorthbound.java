@@ -70,11 +70,6 @@ public class NeutronVPNIPSECPoliciesNorthbound extends
         return answer.getVPNIPSECPolicyInterface();
     }
 
-    @Override
-    protected NeutronVPNIPSECPolicyRequest newNeutronRequest(NeutronVPNIPSECPolicy o) {
-        return new NeutronVPNIPSECPolicyRequest(o);
-    }
-
     @Context
     UriInfo uriInfo;
 

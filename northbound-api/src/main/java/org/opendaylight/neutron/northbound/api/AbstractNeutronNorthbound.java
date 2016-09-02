@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
 import java.util.List;
 import javax.ws.rs.core.Response;
@@ -36,7 +39,20 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
 
     protected abstract String getResourceName();
 
-    protected abstract NeutronRequest newNeutronRequest(T o);
+    private NeutronRequest newNeutronRequest(T o) {
+        // return new NeutronRequest(o);
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        Class<T> argumentClass = (Class) parameterizedType.getActualTypeArguments()[0];
+        Class<NeutronRequest> cls = (Class) parameterizedType.getActualTypeArguments()[1];
+        try {
+            Constructor<NeutronRequest> ctor = cls.getDeclaredConstructor(argumentClass);
+            return ctor.newInstance(o);
+        } catch (NoSuchMethodException | InstantiationException
+                 | IllegalAccessException | InvocationTargetException e) {
+            // This case shouldn't happen
+            throw new RuntimeException(e);
+        }
+    }
 
     protected abstract I getNeutronCRUD();
 

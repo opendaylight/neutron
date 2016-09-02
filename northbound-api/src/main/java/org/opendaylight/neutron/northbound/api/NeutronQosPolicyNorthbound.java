@@ -40,11 +40,6 @@ public class NeutronQosPolicyNorthbound
     }
 
     @Override
-    protected NeutronQosPolicyRequest newNeutronRequest(NeutronQosPolicy o) {
-        return new NeutronQosPolicyRequest(o);
-    }
-
-    @Override
     protected INeutronQosPolicyCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronQosPolicyCRUD(this);
         if (answer.getQosPolicyInterface() == null) {

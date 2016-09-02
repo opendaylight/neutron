@@ -62,11 +62,6 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
     }
 
     @Override
-    protected NeutronVPNIPSECSiteConnectionRequest newNeutronRequest(NeutronVPNIPSECSiteConnection o) {
-        return new NeutronVPNIPSECSiteConnectionRequest(o);
-    }
-
-    @Override
     protected INeutronVPNIPSECSiteConnectionsCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIPSECSiteConnectionsCRUD(this);
         if (answer.getVPNIPSECSiteConnectionsInterface() == null) {

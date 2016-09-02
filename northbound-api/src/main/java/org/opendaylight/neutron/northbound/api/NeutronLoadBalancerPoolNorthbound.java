@@ -65,11 +65,6 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
     }
 
     @Override
-    protected NeutronLoadBalancerPoolRequest newNeutronRequest(NeutronLoadBalancerPool o) {
-        return new NeutronLoadBalancerPoolRequest(o);
-    }
-
-    @Override
     protected INeutronLoadBalancerPoolCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerPoolCRUD(this);
         if (answer.getLoadBalancerPoolInterface() == null) {

@@ -66,11 +66,6 @@ public class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbo
     }
 
     @Override
-    protected NeutronL2gatewayConnectionRequest newNeutronRequest(NeutronL2gatewayConnection o) {
-        return new NeutronL2gatewayConnectionRequest(o);
-    }
-
-    @Override
     protected INeutronL2gatewayConnectionCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayConnectionCRUD(this);
         if (answer.getL2gatewayConnectionInterface() == null) {

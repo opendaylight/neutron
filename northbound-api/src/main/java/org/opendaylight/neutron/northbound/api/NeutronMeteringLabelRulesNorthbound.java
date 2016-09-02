@@ -67,11 +67,6 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
         return answer.getMeteringLabelRuleInterface();
     }
 
-    @Override
-    protected NeutronMeteringLabelRuleRequest newNeutronRequest(NeutronMeteringLabelRule o) {
-        return new NeutronMeteringLabelRuleRequest(o);
-    }
-
     @Context
     UriInfo uriInfo;
 
