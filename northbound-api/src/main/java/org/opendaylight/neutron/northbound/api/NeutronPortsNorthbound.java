@@ -88,11 +88,6 @@ public class NeutronPortsNorthbound
         return getNeutronInterfaces(false, false).getPortInterface();
     }
 
-    @Override
-    protected NeutronPortRequest newNeutronRequest(NeutronPort o) {
-        return new NeutronPortRequest(o);
-    }
-
     @Context
     UriInfo uriInfo;
 

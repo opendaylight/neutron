@@ -58,11 +58,6 @@ public class NeutronLoadBalancerListenerNorthbound extends AbstractNeutronNorthb
     }
 
     @Override
-    protected NeutronLoadBalancerListenerRequest newNeutronRequest(NeutronLoadBalancerListener o) {
-        return new NeutronLoadBalancerListenerRequest(o);
-    }
-
-    @Override
     protected INeutronLoadBalancerListenerCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerListenerCRUD(this);
         if (answer.getLoadBalancerListenerInterface() == null) {

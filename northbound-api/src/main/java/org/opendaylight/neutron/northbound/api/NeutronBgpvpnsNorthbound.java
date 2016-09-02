@@ -66,11 +66,6 @@ public class NeutronBgpvpnsNorthbound
     }
 
     @Override
-    protected NeutronBgpvpnRequest newNeutronRequest(NeutronBgpvpn o) {
-        return new NeutronBgpvpnRequest(o);
-    }
-
-    @Override
     protected INeutronBgpvpnCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronBgpvpnCRUD(this);
         if (answer.getBgpvpnInterface() == null) {

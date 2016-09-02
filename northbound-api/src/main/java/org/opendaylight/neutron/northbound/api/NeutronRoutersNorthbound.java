@@ -80,11 +80,6 @@ public class NeutronRoutersNorthbound
         return getNeutronInterfaces(false).getRouterInterface();
     }
 
-    @Override
-    protected NeutronRouterRequest newNeutronRequest(NeutronRouter o) {
-        return new NeutronRouterRequest(o);
-    }
-
     /**
      * Returns a list of all Routers */
 

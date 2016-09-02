@@ -57,11 +57,6 @@ public class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbou
     }
 
     @Override
-    protected NeutronSFCFlowClassifierRequest newNeutronRequest(NeutronSFCFlowClassifier o) {
-        return new NeutronSFCFlowClassifierRequest(o);
-    }
-
-    @Override
     protected INeutronSFCFlowClassifierCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSFCFlowClassifierCRUD(this);
         if (answer.getSFCFlowClassifierInterface() == null) {

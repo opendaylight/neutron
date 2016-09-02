@@ -57,11 +57,6 @@ public class NeutronSecurityRulesNorthbound
     }
 
     @Override
-    protected NeutronSecurityRuleRequest newNeutronRequest(NeutronSecurityRule o) {
-        return new NeutronSecurityRuleRequest(o);
-    }
-
-    @Override
     protected INeutronSecurityRuleCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityRuleCRUD(this);
         if (answer.getSecurityRuleInterface() == null) {

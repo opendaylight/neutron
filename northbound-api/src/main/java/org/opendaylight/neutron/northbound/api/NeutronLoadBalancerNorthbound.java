@@ -58,11 +58,6 @@ public class NeutronLoadBalancerNorthbound
     }
 
     @Override
-    protected NeutronLoadBalancerRequest newNeutronRequest(NeutronLoadBalancer o) {
-        return new NeutronLoadBalancerRequest(o);
-    }
-
-    @Override
     protected INeutronLoadBalancerCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronLoadBalancerCRUD(this);
         if (answer.getLoadBalancerInterface() == null) {

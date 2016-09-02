@@ -56,11 +56,6 @@ public class NeutronSecurityGroupsNorthbound extends
     }
 
     @Override
-    protected NeutronSecurityGroupRequest newNeutronRequest(NeutronSecurityGroup o) {
-        return new NeutronSecurityGroupRequest(o);
-    }
-
-    @Override
     protected INeutronSecurityGroupCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
         if (answer.getSecurityGroupInterface() == null) {

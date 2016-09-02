@@ -58,11 +58,6 @@ public class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthboun
     }
 
     @Override
-    protected NeutronSFCPortPairGroupRequest newNeutronRequest(NeutronSFCPortPairGroup o) {
-        return new NeutronSFCPortPairGroupRequest(o);
-    }
-
-    @Override
     protected INeutronSFCPortPairGroupCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSFCPortPairGroupCRUD(this);
         if (answer.getSFCPortPairGroupInterface() == null) {

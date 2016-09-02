@@ -65,11 +65,6 @@ public class NeutronL2gatewayNorthbound
     }
 
     @Override
-    protected NeutronL2gatewayRequest newNeutronRequest(NeutronL2gateway o) {
-        return new NeutronL2gatewayRequest(o);
-    }
-
-    @Override
     protected INeutronL2gatewayCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayCRUD(this);
         if (answer.getL2gatewayInterface() == null) {
