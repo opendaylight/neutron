@@ -40,11 +40,6 @@ public class NeutronQosPolicyNorthbound
     }
 
     @Override
-    protected NeutronQosPolicy extractFields(NeutronQosPolicy o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronQosPolicyRequest newNeutronRequest(NeutronQosPolicy o) {
         return new NeutronQosPolicyRequest(o);
     }
@@ -87,7 +82,7 @@ public class NeutronQosPolicyNorthbound
                     && (queryQosPolicyName == null || queryQosPolicyName.equals(nsg.getQosPolicyName()))
                     && (queryQosPolicyIsShared == null || queryQosPolicyIsShared.equals(nsg.getPolicyIsShared()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }

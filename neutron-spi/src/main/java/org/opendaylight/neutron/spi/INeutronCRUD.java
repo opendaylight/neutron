@@ -15,7 +15,7 @@ import java.util.List;
  *
  */
 
-public interface INeutronCRUD<T extends INeutronObject> {
+public interface INeutronCRUD<T extends INeutronObject<T>> {
     /**
      * Applications call this interface method to determine if a particular
      * Neutron object exists

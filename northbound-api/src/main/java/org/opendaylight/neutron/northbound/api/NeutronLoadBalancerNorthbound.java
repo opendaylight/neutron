@@ -58,11 +58,6 @@ public class NeutronLoadBalancerNorthbound
     }
 
     @Override
-    protected NeutronLoadBalancer extractFields(NeutronLoadBalancer o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronLoadBalancerRequest newNeutronRequest(NeutronLoadBalancer o) {
         return new NeutronLoadBalancerRequest(o);
     }
@@ -115,7 +110,7 @@ public class NeutronLoadBalancerNorthbound
                     && (queryLoadBalancerVipSubnet == null
                             || queryLoadBalancerVipSubnet.equals(nsg.getLoadBalancerVipSubnetID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }

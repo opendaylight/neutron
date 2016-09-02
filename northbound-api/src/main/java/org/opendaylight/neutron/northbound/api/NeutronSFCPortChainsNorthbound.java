@@ -58,11 +58,6 @@ public class NeutronSFCPortChainsNorthbound
     }
 
     @Override
-    protected NeutronSFCPortChain extractFields(NeutronSFCPortChain o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronSFCPortChainRequest newNeutronRequest(NeutronSFCPortChain o) {
         return new NeutronSFCPortChainRequest(o);
     }
@@ -101,7 +96,7 @@ public class NeutronSFCPortChainsNorthbound
                     && (queryName == null || queryName.equals(oSFCPC.getName()))
                     && (queryTenantID == null || queryTenantID.equals(oSFCPC.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSFCPC, fields));
+                    ans.add(oSFCPC.extractFields(fields));
                 } else {
                     ans.add(oSFCPC);
                 }

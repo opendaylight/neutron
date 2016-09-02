@@ -66,11 +66,6 @@ public class NeutronBgpvpnsNorthbound
     }
 
     @Override
-    protected NeutronBgpvpn extractFields(NeutronBgpvpn o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronBgpvpnRequest newNeutronRequest(NeutronBgpvpn o) {
         return new NeutronBgpvpnRequest(o);
     }
@@ -133,7 +128,7 @@ public class NeutronBgpvpnsNorthbound
                     && (bAutoAggregate == null || bAutoAggregate.booleanValue() == oSN.isAutoAggregate())
                     && (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSN, fields));
+                    ans.add(oSN.extractFields(fields));
                 } else {
                     ans.add(oSN);
                 }

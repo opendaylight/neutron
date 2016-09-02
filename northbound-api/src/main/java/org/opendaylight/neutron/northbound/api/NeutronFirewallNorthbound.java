@@ -57,11 +57,6 @@ public class NeutronFirewallNorthbound
     }
 
     @Override
-    protected NeutronFirewall extractFields(NeutronFirewall o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronFirewallRequest newNeutronRequest(NeutronFirewall o) {
         return new NeutronFirewallRequest(o);
     }
@@ -111,7 +106,7 @@ public class NeutronFirewallNorthbound
                     && (queryFirewallIsShared == null || queryFirewallIsShared.equals(nsg.getFirewallIsShared()))
                     && (queryFirewallPolicyID == null || queryFirewallPolicyID.equals(nsg.getFirewallPolicyID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }

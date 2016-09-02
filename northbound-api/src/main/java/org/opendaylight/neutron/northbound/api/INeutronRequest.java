@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import org.opendaylight.neutron.spi.INeutronObject;
 
-public interface INeutronRequest<T extends INeutronObject> {
+public interface INeutronRequest<T extends INeutronObject<T>> {
     default T getSingleton() {
         Class aClass = getClass();
         try {

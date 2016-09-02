@@ -60,11 +60,6 @@ public class NeutronRoutersNorthbound
         return RESOURCE_NAME;
     }
 
-    @Override
-    protected NeutronRouter extractFields(NeutronRouter o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronRouterCRUD(this);
         if (answer.getRouterInterface() == null) {
@@ -133,7 +128,7 @@ public class NeutronRoutersNorthbound
                             || queryExternalGatewayInfo.equals(oSS.getExternalGatewayInfo()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

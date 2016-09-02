@@ -57,11 +57,6 @@ public class NeutronSecurityRulesNorthbound
     }
 
     @Override
-    protected NeutronSecurityRule extractFields(NeutronSecurityRule o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronSecurityRuleRequest newNeutronRequest(NeutronSecurityRule o) {
         return new NeutronSecurityRuleRequest(o);
     }
@@ -126,7 +121,7 @@ public class NeutronSecurityRulesNorthbound
                             || querySecurityRemoteGroupID.equals(nsr.getSecurityRemoteGroupID()))
                     && (querySecurityRuleTenantID == null || querySecurityRuleTenantID.equals(nsr.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsr, fields));
+                    ans.add(nsr.extractFields(fields));
                 } else {
                     ans.add(nsr);
                 }

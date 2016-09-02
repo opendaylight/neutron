@@ -59,11 +59,6 @@ public class NeutronMeteringLabelsNorthbound extends
     }
 
     @Override
-    protected NeutronMeteringLabel extractFields(NeutronMeteringLabel o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected INeutronMeteringLabelCRUD getNeutronCRUD() {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronMeteringLabelCRUD(this);
         if (answer.getMeteringLabelInterface() == null) {
@@ -109,7 +104,7 @@ public class NeutronMeteringLabelsNorthbound extends
                     && (queryName == null || queryName.equals(oSS.getMeteringLabelName()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

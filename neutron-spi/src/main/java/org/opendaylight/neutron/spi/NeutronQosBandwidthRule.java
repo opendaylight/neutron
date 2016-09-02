@@ -19,7 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronQosBandwidthRule extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandwidthRule>
+        implements Serializable, INeutronObject<NeutronQosBandwidthRule> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "max_kbps")

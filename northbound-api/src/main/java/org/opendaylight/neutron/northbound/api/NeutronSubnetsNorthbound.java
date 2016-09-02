@@ -60,11 +60,6 @@ public class NeutronSubnetsNorthbound
         return RESOURCE_NAME;
     }
 
-    @Override
-    protected NeutronSubnet extractFields(NeutronSubnet o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetwork) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSubnetCRUD(this);
         if (answer.getSubnetInterface() == null) {
@@ -139,7 +134,7 @@ public class NeutronSubnetsNorthbound
                     && (queryIpV6AddressMode == null || queryIpV6AddressMode.equals(oSS.getIpV6AddressMode()))
                     && (queryIpV6RaMode == null || queryIpV6RaMode.equals(oSS.getIpV6RaMode()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

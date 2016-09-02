@@ -61,11 +61,6 @@ public class NeutronPortsNorthbound
         return RESOURCE_NAME;
     }
 
-    @Override
-    protected NeutronPort extractFields(NeutronPort o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
     private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetworks, boolean needSubnets) {
         NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronPortCRUD(this);
         if (answer.getPortInterface() == null) {
@@ -151,7 +146,7 @@ public class NeutronPortsNorthbound
                             || queryPortSecurityEnabled.equals(oSS.getPortSecurityEnabled()))
                     && (queryQosPolicyId == null || queryQosPolicyId.equals(oSS.getQosPolicyId()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSS, fields));
+                    ans.add(oSS.extractFields(fields));
                 } else {
                     ans.add(oSS);
                 }

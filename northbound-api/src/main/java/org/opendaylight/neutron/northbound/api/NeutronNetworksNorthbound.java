@@ -66,11 +66,6 @@ public class NeutronNetworksNorthbound
     }
 
     @Override
-    protected NeutronNetwork extractFields(NeutronNetwork o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronNetworkRequest newNeutronRequest(NeutronNetwork o) {
         return new NeutronNetworkRequest(o);
     }
@@ -143,7 +138,7 @@ public class NeutronNetworksNorthbound
                     && (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))
                     && (queryQosPolicyId == null || queryQosPolicyId.equals(oSN.getQosPolicyId()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSN, fields));
+                    ans.add(oSN.extractFields(fields));
                 } else {
                     ans.add(oSN);
                 }

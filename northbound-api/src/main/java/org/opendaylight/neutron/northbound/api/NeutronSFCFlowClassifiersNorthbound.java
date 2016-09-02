@@ -57,11 +57,6 @@ public class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbou
     }
 
     @Override
-    protected NeutronSFCFlowClassifier extractFields(NeutronSFCFlowClassifier o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronSFCFlowClassifierRequest newNeutronRequest(NeutronSFCFlowClassifier o) {
         return new NeutronSFCFlowClassifierRequest(o);
     }
@@ -126,7 +121,7 @@ public class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbou
                             || queryLogicalDestinationPort.equals(oSFC.getLogicalDestinationPortUUID()))
                     && (queryTenantID == null || queryTenantID.equals(oSFC.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(oSFC, fields));
+                    ans.add(oSFC.extractFields(fields));
                 } else {
                     ans.add(oSFC);
                 }

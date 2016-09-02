@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronLoadBalancerPoolMember extends NeutronObject implements Serializable, INeutronObject {
+public class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLoadBalancerPoolMember>
+        implements Serializable, INeutronObject<NeutronLoadBalancerPoolMember> {
 
     private static final long serialVersionUID = 1L;
 

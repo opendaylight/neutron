@@ -65,15 +65,6 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
     }
 
     @Override
-    protected NeutronLoadBalancerPool extractFields(NeutronLoadBalancerPool o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    protected NeutronLoadBalancerPoolMember extractFields(NeutronLoadBalancerPoolMember o, List<String> fields) {
-        return o.extractFields(fields);
-    }
-
-    @Override
     protected NeutronLoadBalancerPoolRequest newNeutronRequest(NeutronLoadBalancerPool o) {
         return new NeutronLoadBalancerPoolRequest(o);
     }
@@ -135,7 +126,7 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
                     && (queryLoadBalancerPoolMembers.size() == 0
                             || queryLoadBalancerPoolMembers.equals(nsg.getLoadBalancerPoolMembers()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }
@@ -255,7 +246,7 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
                     && (queryLoadBalancerPoolMemberSubnetID == null
                             || queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID()))) {
                 if (fields.size() > 0) {
-                    ans.add(extractFields(nsg, fields));
+                    ans.add(nsg.extractFields(fields));
                 } else {
                     ans.add(nsg);
                 }
@@ -293,7 +284,7 @@ public class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound
 
             if (fields.size() > 0) {
                 return Response.status(HttpURLConnection.HTTP_OK)
-                        .entity(new NeutronLoadBalancerPoolMemberRequest(extractFields(ans, fields))).build();
+                        .entity(new NeutronLoadBalancerPoolMemberRequest(ans.extractFields(fields))).build();
             } else {
                 return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerPoolMemberRequest(ans))
                         .build();
