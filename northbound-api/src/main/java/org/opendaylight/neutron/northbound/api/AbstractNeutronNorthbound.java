@@ -16,6 +16,7 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
+import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +59,16 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
         }
     }
 
-    protected abstract I getNeutronCRUD();
+    protected I getNeutronCRUD() {
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        // cls = I.class
+        Class<I> cls = (Class<I>) parameterizedType.getActualTypeArguments()[2];
+        I neutronCrud = NeutronCRUDInterfaces.fetchINeutronCRUD(cls, (Object) this);
+        if (neutronCrud == null) {
+            throw new ServiceUnavailableException(serviceUnavailable());
+        }
+        return neutronCrud;
+    }
 
     protected Response show(String uuid,
             // return fields

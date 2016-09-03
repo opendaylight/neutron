@@ -27,7 +27,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 
 /**
@@ -56,15 +55,6 @@ public class NeutronMeteringLabelsNorthbound extends
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    @Override
-    protected INeutronMeteringLabelCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronMeteringLabelCRUD(this);
-        if (answer.getMeteringLabelInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getMeteringLabelInterface();
     }
 
     @Context

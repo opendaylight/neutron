@@ -29,7 +29,6 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
 
 /**
@@ -59,15 +58,6 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    @Override
-    protected INeutronVPNIPSECSiteConnectionsCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNIPSECSiteConnectionsCRUD(this);
-        if (answer.getVPNIPSECSiteConnectionsInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getVPNIPSECSiteConnectionsInterface();
     }
 
     @Context

@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 
 /**
@@ -53,15 +52,6 @@ public class NeutronSecurityGroupsNorthbound extends
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    @Override
-    protected INeutronSecurityGroupCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSecurityGroupCRUD(this);
-        if (answer.getSecurityGroupInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getSecurityGroupInterface();
     }
 
     /**

@@ -29,7 +29,6 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronVPNService;
 
 /**
@@ -63,15 +62,6 @@ public class NeutronVPNServicesNorthbound
 
     @Context
     UriInfo uriInfo;
-
-    @Override
-    protected INeutronVPNServiceCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronVPNServiceCRUD(this);
-        if (answer.getVPNServiceInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getVPNServiceInterface();
-    }
 
     /**
      * Returns a list of all VPN Services

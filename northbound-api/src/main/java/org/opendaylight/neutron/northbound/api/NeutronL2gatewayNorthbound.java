@@ -27,7 +27,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,15 +61,6 @@ public class NeutronL2gatewayNorthbound
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    @Override
-    protected INeutronL2gatewayCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayCRUD(this);
-        if (answer.getL2gatewayInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getL2gatewayInterface();
     }
 
     /**
@@ -118,7 +108,7 @@ public class NeutronL2gatewayNorthbound
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
-        INeutronL2gatewayCRUD l2gatewayInterface = getNeutronInterfaces().getL2gatewayInterface();
+        INeutronL2gatewayCRUD l2gatewayInterface = getNeutronCRUD();
         List<NeutronL2gateway> allL2gateways = l2gatewayInterface.getAll();
         List<NeutronL2gateway> ans = new ArrayList<>();
         Iterator<NeutronL2gateway> i = allL2gateways.iterator();
@@ -190,13 +180,5 @@ public class NeutronL2gatewayNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateL2gateway(@PathParam("l2gatewayID") String l2gatewayID, NeutronL2gatewayRequest input) {
         return update(l2gatewayID, input);
-    }
-
-    private NeutronCRUDInterfaces getNeutronInterfaces() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronL2gatewayCRUD(this);
-        if (answer.getL2gatewayInterface() == null) {
-            throw new ServiceUnavailableException("Service is unavailable");
-        }
-        return answer;
     }
 }

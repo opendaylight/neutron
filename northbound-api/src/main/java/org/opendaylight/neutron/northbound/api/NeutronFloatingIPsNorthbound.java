@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronFloatingIP;
 
 /**
@@ -57,35 +56,6 @@ public class NeutronFloatingIPsNorthbound
         return RESOURCE_NAME;
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronFloatingIPCRUD(this);
-        if (answer.getFloatingIPInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        if (flag) {
-            answer = answer.fetchINeutronNetworkCRUD(this).fetchINeutronSubnetCRUD(this).fetchINeutronPortCRUD(this);
-            if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-            if (answer.getSubnetInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Subnet CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-            if (answer.getPortInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Port CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-        }
-        return answer;
-    }
-
-    @Override
-    protected INeutronFloatingIPCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = getNeutronInterfaces(false);
-        return answer.getFloatingIPInterface();
-    }
-
     /**
      * Returns a list of all FloatingIPs */
 
@@ -113,7 +83,7 @@ public class NeutronFloatingIPsNorthbound
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
-        INeutronFloatingIPCRUD floatingIPInterface = getNeutronInterfaces(false).getFloatingIPInterface();
+        INeutronFloatingIPCRUD floatingIPInterface = getNeutronCRUD();
         List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAll();
         List<NeutronFloatingIP> ans = new ArrayList<>();
         Iterator<NeutronFloatingIP> i = allFloatingIPs.iterator();

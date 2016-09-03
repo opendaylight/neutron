@@ -31,7 +31,6 @@ import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 
 /**
  * Neutron Northbound REST APIs for Bgpvpn.<br>
@@ -63,15 +62,6 @@ public class NeutronBgpvpnsNorthbound
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    @Override
-    protected INeutronBgpvpnCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronBgpvpnCRUD(this);
-        if (answer.getBgpvpnInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getBgpvpnInterface();
     }
 
     /**

@@ -25,7 +25,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
 
 /**
@@ -55,15 +54,6 @@ public class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthboun
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    @Override
-    protected INeutronSFCPortPairGroupCRUD getNeutronCRUD() {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSFCPortPairGroupCRUD(this);
-        if (answer.getSFCPortPairGroupInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return answer.getSFCPortPairGroupInterface();
     }
 
     /**
