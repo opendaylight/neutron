@@ -46,7 +46,7 @@ import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
  */
 
 @Path("/sfc/flowclassifiers")
-public class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbound<NeutronSFCFlowClassifier,
+public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbound<NeutronSFCFlowClassifier,
         NeutronSFCFlowClassifierRequest, INeutronSFCFlowClassifierCRUD> {
     private static final String RESOURCE_NAME = "Sfc Flow Classifier";
 

@@ -51,7 +51,7 @@ import org.opendaylight.neutron.spi.NeutronBgpvpn;
  */
 
 @Path("/bgpvpns")
-public class NeutronBgpvpnsNorthbound
+public final class NeutronBgpvpnsNorthbound
         extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
 
     @Context

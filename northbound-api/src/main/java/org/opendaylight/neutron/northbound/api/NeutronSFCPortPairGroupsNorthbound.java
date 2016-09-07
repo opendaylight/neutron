@@ -46,7 +46,7 @@ import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
  */
 
 @Path("/sfc/portpairgroups")
-public class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthbound<NeutronSFCPortPairGroup,
+public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthbound<NeutronSFCPortPairGroup,
         NeutronSFCPortPairGroupRequest, INeutronSFCPortPairGroupCRUD> {
 
     private static final String RESOURCE_NAME = "Sfc Port Pair Group";

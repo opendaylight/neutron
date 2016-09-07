@@ -21,10 +21,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
@@ -50,7 +48,7 @@ import org.opendaylight.neutron.spi.NeutronVPNIKEPolicy;
  */
 
 @Path("/vpn/ikepolicies")
-public class NeutronVPNIKEPoliciesNorthbound
+public final class NeutronVPNIKEPoliciesNorthbound
         extends AbstractNeutronNorthbound<NeutronVPNIKEPolicy, NeutronVPNIKEPolicyRequest, INeutronVPNIKEPolicyCRUD> {
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
@@ -58,9 +56,6 @@ public class NeutronVPNIKEPoliciesNorthbound
     protected String getResourceName() {
         return RESOURCE_NAME;
     }
-
-    @Context
-    UriInfo uriInfo;
 
     /**
      * Returns a list of all VPN IKE Policies */

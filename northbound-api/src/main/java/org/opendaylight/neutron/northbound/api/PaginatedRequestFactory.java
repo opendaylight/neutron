@@ -59,7 +59,7 @@ public final class PaginatedRequestFactory {
 
         @Override
         public MarkerObject extractFields(List<String> fields) {
-            return null;
+            throw new UnsupportedOperationException("extractFields shouldn't be called for MarkerObject");
         }
     }
 

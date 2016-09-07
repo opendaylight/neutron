@@ -20,10 +20,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
@@ -48,7 +46,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
  */
 
 @Path("/metering/metering-label-rules")
-public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbound<NeutronMeteringLabelRule,
+public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbound<NeutronMeteringLabelRule,
         NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD> {
     private static final String RESOURCE_NAME = "Metering Label Rule";
 
@@ -56,9 +54,6 @@ public class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbou
     protected String getResourceName() {
         return RESOURCE_NAME;
     }
-
-    @Context
-    UriInfo uriInfo;
 
     /**
      * Returns a list of all metering label rules */

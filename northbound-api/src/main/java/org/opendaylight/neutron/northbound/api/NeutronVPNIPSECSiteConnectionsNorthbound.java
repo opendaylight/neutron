@@ -21,10 +21,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
@@ -50,7 +48,8 @@ import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
  */
 
 @Path("/vpn/ipsecsiteconnections")
-public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNorthbound<NeutronVPNIPSECSiteConnection,
+public final class NeutronVPNIPSECSiteConnectionsNorthbound
+        extends AbstractNeutronNorthbound<NeutronVPNIPSECSiteConnection,
         NeutronVPNIPSECSiteConnectionRequest, INeutronVPNIPSECSiteConnectionsCRUD> {
 
     private static final String RESOURCE_NAME = "VPNIPSECSiteConnections";
@@ -59,9 +58,6 @@ public class NeutronVPNIPSECSiteConnectionsNorthbound extends AbstractNeutronNor
     protected String getResourceName() {
         return RESOURCE_NAME;
     }
-
-    @Context
-    UriInfo uriInfo;
 
     /**
      * Returns a list of all VPN IPSEC SiteConnections

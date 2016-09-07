@@ -49,7 +49,7 @@ import org.opendaylight.neutron.spi.NeutronRouter_Interface;
  */
 
 @Path("/routers")
-public class NeutronRoutersNorthbound
+public final class NeutronRoutersNorthbound
         extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD> {
     static final String ROUTER_INTERFACE_STR = "network:router_interface";
     static final String ROUTER_GATEWAY_STR = "network:router_gateway";
