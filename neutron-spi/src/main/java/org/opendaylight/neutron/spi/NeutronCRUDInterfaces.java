@@ -14,7 +14,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronCRUDInterfaces {
+public final class NeutronCRUDInterfaces {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private INeutronNetworkCRUD networkInterface;

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronLoadBalancer extends NeutronObject<NeutronLoadBalancer>
+public final class NeutronLoadBalancer extends NeutronObject<NeutronLoadBalancer>
         implements Serializable, INeutronObject<NeutronLoadBalancer> {
     private static final long serialVersionUID = 1L;
 

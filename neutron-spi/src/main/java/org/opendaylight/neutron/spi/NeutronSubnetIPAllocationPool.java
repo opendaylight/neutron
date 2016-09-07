@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSubnetIPAllocationPool implements Serializable {
+public final class NeutronSubnetIPAllocationPool implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetIPAllocationPool.class);
 
     private static final long serialVersionUID = 1L;

@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNIPSECPolicy extends NeutronObject<NeutronVPNIPSECPolicy>
+public final class NeutronVPNIPSECPolicy extends NeutronObject<NeutronVPNIPSECPolicy>
         implements Serializable, INeutronObject<NeutronVPNIPSECPolicy> {
     private static final long serialVersionUID = 1L;
 

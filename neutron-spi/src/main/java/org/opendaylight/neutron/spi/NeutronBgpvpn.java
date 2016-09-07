@@ -18,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "bgpvpn")
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronBgpvpn extends NeutronObject<NeutronBgpvpn> implements Serializable, INeutronObject<NeutronBgpvpn> {
+public final class NeutronBgpvpn extends NeutronObject<NeutronBgpvpn>
+        implements Serializable, INeutronObject<NeutronBgpvpn> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronMeteringLabel extends NeutronObject<NeutronMeteringLabel>
+public final class NeutronMeteringLabel extends NeutronObject<NeutronMeteringLabel>
         implements Serializable, INeutronObject<NeutronMeteringLabel> {
     private static final long serialVersionUID = 1L;
 

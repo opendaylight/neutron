@@ -21,7 +21,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
-public class NeutronResourceMapPropertyAdapter extends XmlAdapter<Object, Map<String, String>> {
+public final class NeutronResourceMapPropertyAdapter extends XmlAdapter<Object, Map<String, String>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronResourceMapPropertyAdapter.class);
 
     @Override

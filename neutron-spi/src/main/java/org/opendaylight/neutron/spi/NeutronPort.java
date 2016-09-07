@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronPort extends NeutronObject<NeutronPort> implements Serializable, INeutronObject<NeutronPort> {
+public final class NeutronPort extends NeutronObject<NeutronPort> implements Serializable, INeutronObject<NeutronPort> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of

@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule>
+public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule>
         implements Serializable, INeutronObject<NeutronSecurityRule> {
     private static final long serialVersionUID = 1L;
 

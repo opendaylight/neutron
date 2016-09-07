@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronRouter_Interface extends NeutronObject<NeutronRouter_Interface>
+public final class NeutronRouter_Interface extends NeutronObject<NeutronRouter_Interface>
         implements Serializable, INeutronObject<NeutronRouter_Interface> {
     private static final long serialVersionUID = 1L;
 

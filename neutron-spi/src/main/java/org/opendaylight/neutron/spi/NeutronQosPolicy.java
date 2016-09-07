@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronQosPolicy extends NeutronObject<NeutronQosPolicy>
+public final class NeutronQosPolicy extends NeutronObject<NeutronQosPolicy>
         implements Serializable, INeutronObject<NeutronQosPolicy> {
     private static final long serialVersionUID = 1L;
 

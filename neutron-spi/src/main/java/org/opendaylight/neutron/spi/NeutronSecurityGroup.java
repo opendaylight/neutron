@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSecurityGroup extends NeutronObject<NeutronSecurityGroup>
+public final class NeutronSecurityGroup extends NeutronObject<NeutronSecurityGroup>
         implements Serializable, INeutronObject<NeutronSecurityGroup> {
     private static final long serialVersionUID = 1L;
 
