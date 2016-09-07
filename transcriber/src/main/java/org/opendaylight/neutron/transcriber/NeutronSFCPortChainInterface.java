@@ -28,7 +28,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com)
  */
-public class NeutronSFCPortChainInterface extends AbstractNeutronInterface<PortChain, PortChains, NeutronSFCPortChain>
+public final class NeutronSFCPortChainInterface
+        extends AbstractNeutronInterface<PortChain, PortChains, NeutronSFCPortChain>
         implements INeutronSFCPortChainCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);

@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com) on 6/24/16.
  */
-public class NeutronSFCFlowClassifierInterface
+public final class NeutronSFCFlowClassifierInterface
         extends AbstractNeutronInterface<SfcFlowClassifier, SfcFlowClassifiers, NeutronSFCFlowClassifier>
         implements INeutronSFCFlowClassifierCRUD {
 

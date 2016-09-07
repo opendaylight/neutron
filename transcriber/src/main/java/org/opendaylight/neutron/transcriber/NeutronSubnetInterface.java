@@ -39,7 +39,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet>
+public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet>
         implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
 

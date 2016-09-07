@@ -22,7 +22,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIKEPolicyInterface extends AbstractNeutronInterface<Ikepolicy, IkePolicies, NeutronVPNIKEPolicy>
+public final class NeutronVPNIKEPolicyInterface
+        extends AbstractNeutronInterface<Ikepolicy, IkePolicies, NeutronVPNIKEPolicy>
         implements INeutronVPNIKEPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 

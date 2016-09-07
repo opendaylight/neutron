@@ -46,7 +46,7 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscriber {
+public final class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscriber {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
 
     private BundleContext context;

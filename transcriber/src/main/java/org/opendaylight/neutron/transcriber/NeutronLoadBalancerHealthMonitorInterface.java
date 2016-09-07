@@ -29,7 +29,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerHealthMonitorInterface
+public final class NeutronLoadBalancerHealthMonitorInterface
         extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, NeutronLoadBalancerHealthMonitor>
         implements INeutronLoadBalancerHealthMonitorCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);

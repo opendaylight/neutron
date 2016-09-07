@@ -30,7 +30,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronFirewallRuleInterface extends
+public final class NeutronFirewallRuleInterface extends
         AbstractNeutronInterface<FirewallRule, FirewallRules, NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
 

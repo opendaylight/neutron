@@ -30,7 +30,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronSecurityRuleInterface extends
+public final class NeutronSecurityRuleInterface extends
         AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 

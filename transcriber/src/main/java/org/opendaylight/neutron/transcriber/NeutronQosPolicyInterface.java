@@ -27,7 +27,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronQosPolicyInterface extends AbstractNeutronInterface<QosPolicy, QosPolicies, NeutronQosPolicy>
+public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<QosPolicy, QosPolicies, NeutronQosPolicy>
         implements INeutronQosPolicyCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicyInterface.class);

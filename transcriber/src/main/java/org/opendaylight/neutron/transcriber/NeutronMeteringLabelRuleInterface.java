@@ -25,7 +25,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronMeteringLabelRuleInterface
+public final class NeutronMeteringLabelRuleInterface
         extends AbstractNeutronInterface<MeteringRule, MeteringRules, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);

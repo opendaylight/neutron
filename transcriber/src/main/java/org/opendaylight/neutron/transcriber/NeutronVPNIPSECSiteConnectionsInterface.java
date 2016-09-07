@@ -23,7 +23,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronVPNIPSECSiteConnectionsInterface
+public final class NeutronVPNIPSECSiteConnectionsInterface
         extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection>
         implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
