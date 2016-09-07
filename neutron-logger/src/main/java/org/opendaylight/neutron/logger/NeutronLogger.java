@@ -25,7 +25,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLogger implements AutoCloseable {
+public final class NeutronLogger implements AutoCloseable {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronLogger.class);
 
     private DataBroker db;
