@@ -20,7 +20,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronSecurityGroupInterface
+public final class NeutronSecurityGroupInterface
         extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, NeutronSecurityGroup>
         implements INeutronSecurityGroupCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);

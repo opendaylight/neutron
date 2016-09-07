@@ -27,7 +27,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2gateway, L2gateways, NeutronL2gateway>
+public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2gateway, L2gateways, NeutronL2gateway>
         implements INeutronL2gatewayCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayInterface.class);
 

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com)
  */
-public class NeutronSFCPortPairGroupInterface
+public final class NeutronSFCPortPairGroupInterface
         extends AbstractNeutronInterface<PortPairGroup, PortPairGroups, NeutronSFCPortPairGroup>
         implements INeutronSFCPortPairGroupCRUD {
 

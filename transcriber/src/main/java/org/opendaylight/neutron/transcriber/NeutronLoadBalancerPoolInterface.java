@@ -46,7 +46,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronLoadBalancerPoolInterface extends AbstractNeutronInterface<Pool, Pools, NeutronLoadBalancerPool>
+public final class NeutronLoadBalancerPoolInterface
+        extends AbstractNeutronInterface<Pool, Pools, NeutronLoadBalancerPool>
         implements INeutronLoadBalancerPoolCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
 

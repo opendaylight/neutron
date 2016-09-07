@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 /**
  */
 
-public class NeutronFirewallPolicyInterface
+public final class NeutronFirewallPolicyInterface
         extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, NeutronFirewallPolicy>
         implements INeutronFirewallPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);

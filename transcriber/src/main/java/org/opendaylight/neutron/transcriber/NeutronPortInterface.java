@@ -51,7 +51,7 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort>
+public final class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, NeutronPort>
         implements INeutronPortCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
 
