@@ -28,7 +28,7 @@ import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronQosPolicy;
 
 @Path("/qos/policies")
-public class NeutronQosPolicyNorthbound
+public final class NeutronQosPolicyNorthbound
         extends AbstractNeutronNorthbound<NeutronQosPolicy, NeutronQosPolicyRequest, INeutronQosPolicyCRUD> {
 
     private static final String RESOURCE_NAME = "Qos Policy";

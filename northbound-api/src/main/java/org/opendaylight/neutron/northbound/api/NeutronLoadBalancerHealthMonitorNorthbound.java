@@ -46,7 +46,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
  *
  */
 @Path("/lbaas/healthmonitors")
-public class NeutronLoadBalancerHealthMonitorNorthbound
+public final class NeutronLoadBalancerHealthMonitorNorthbound
         extends AbstractNeutronNorthbound<NeutronLoadBalancerHealthMonitor, NeutronLoadBalancerHealthMonitorRequest,
                 INeutronLoadBalancerHealthMonitorCRUD> {
 

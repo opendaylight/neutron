@@ -20,10 +20,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
@@ -49,12 +47,9 @@ import org.slf4j.LoggerFactory;
  */
 
 @Path("/l2-gateways")
-public class NeutronL2gatewayNorthbound
+public final class NeutronL2gatewayNorthbound
         extends AbstractNeutronNorthbound<NeutronL2gateway, NeutronL2gatewayRequest, INeutronL2gatewayCRUD> {
     static final Logger logger = LoggerFactory.getLogger(NeutronL2gatewayNorthbound.class);
-
-    @Context
-    UriInfo uriInfo;
 
     private static final String RESOURCE_NAME = "L2gateway";
 

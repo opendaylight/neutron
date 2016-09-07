@@ -21,7 +21,7 @@ import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
  * because package scanning in jersey doesn't yet work in OSGi environment.
  *
  */
-public class NeutronNorthboundRSApplication extends Application {
+public final class NeutronNorthboundRSApplication extends Application {
     private static final int HASHMAP_SIZE = 3;
 
     @Override

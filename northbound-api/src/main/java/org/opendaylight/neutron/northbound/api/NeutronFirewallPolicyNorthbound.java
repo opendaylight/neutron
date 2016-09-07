@@ -45,7 +45,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
  *
  */
 @Path("/fw/firewall_policies")
-public class NeutronFirewallPolicyNorthbound extends
+public final class NeutronFirewallPolicyNorthbound extends
         AbstractNeutronNorthbound<NeutronFirewallPolicy, NeutronFirewallPolicyRequest, INeutronFirewallPolicyCRUD> {
 
     private static final String RESOURCE_NAME = "Firewall Policy";

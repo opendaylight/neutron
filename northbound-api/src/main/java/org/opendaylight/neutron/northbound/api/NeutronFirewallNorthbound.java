@@ -45,7 +45,7 @@ import org.opendaylight.neutron.spi.NeutronFirewall;
  *
  */
 @Path("/fw/firewalls")
-public class NeutronFirewallNorthbound
+public final class NeutronFirewallNorthbound
         extends AbstractNeutronNorthbound<NeutronFirewall, NeutronFirewallRequest, INeutronFirewallCRUD> {
 
     private static final String RESOURCE_NAME = "Firewall";

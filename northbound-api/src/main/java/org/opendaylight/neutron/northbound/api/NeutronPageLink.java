@@ -15,8 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronPageLink {
+public final class NeutronPageLink {
 
     @XmlElement(name = "ref")
     String ref;

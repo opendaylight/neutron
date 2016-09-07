@@ -51,7 +51,7 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
  */
 
 @Path("/subnets")
-public class NeutronSubnetsNorthbound
+public final class NeutronSubnetsNorthbound
         extends AbstractNeutronNorthbound<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD> {
     private static final String RESOURCE_NAME = "Subnet";
 

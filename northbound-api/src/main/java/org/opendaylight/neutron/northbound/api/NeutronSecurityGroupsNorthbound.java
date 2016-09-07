@@ -45,7 +45,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
  * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
 @Path("/security-groups")
-public class NeutronSecurityGroupsNorthbound extends
+public final class NeutronSecurityGroupsNorthbound extends
         AbstractNeutronNorthbound<NeutronSecurityGroup, NeutronSecurityGroupRequest, INeutronSecurityGroupCRUD> {
     private static final String RESOURCE_NAME = "Security Group";
 
