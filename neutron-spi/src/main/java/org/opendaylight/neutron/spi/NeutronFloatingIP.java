@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronFloatingIP
+public final class NeutronFloatingIP
         extends NeutronObject<NeutronFloatingIP> implements Serializable, INeutronObject<NeutronFloatingIP> {
     private static final long serialVersionUID = 1L;
 

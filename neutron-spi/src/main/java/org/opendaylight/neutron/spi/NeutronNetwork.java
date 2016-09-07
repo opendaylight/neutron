@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronNetwork extends NeutronObject<NeutronNetwork>
+public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
         implements Serializable, INeutronObject<NeutronNetwork> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronFirewallPolicy extends NeutronObject<NeutronFirewallPolicy>
+public final class NeutronFirewallPolicy extends NeutronObject<NeutronFirewallPolicy>
         implements Serializable, INeutronObject<NeutronFirewallPolicy> {
     private static final long serialVersionUID = 1L;
 

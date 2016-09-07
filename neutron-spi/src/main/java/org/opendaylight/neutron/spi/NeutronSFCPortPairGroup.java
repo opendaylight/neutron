@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSFCPortPairGroup extends NeutronObject<NeutronSFCPortPairGroup>
+public final class NeutronSFCPortPairGroup extends NeutronObject<NeutronSFCPortPairGroup>
         implements Serializable, INeutronObject<NeutronSFCPortPairGroup> {
     private static final long serialVersionUID = 1L;
 

@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBalancerPool>
+public final class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBalancerPool>
         implements Serializable, INeutronObject<NeutronLoadBalancerPool> {
     private static final long serialVersionUID = 1L;
 

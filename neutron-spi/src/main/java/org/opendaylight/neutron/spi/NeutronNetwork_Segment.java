@@ -16,8 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
-
-public class NeutronNetwork_Segment implements Serializable {
+public final class NeutronNetwork_Segment implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

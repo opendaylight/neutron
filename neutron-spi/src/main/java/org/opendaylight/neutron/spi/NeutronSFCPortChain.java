@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSFCPortChain extends NeutronObject<NeutronSFCPortChain>
+public final class NeutronSFCPortChain extends NeutronObject<NeutronSFCPortChain>
         implements Serializable, INeutronObject<NeutronSFCPortChain> {
 
     private static final long serialVersionUID = 1L;

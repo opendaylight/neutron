@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronVPNService extends NeutronObject<NeutronVPNService>
+public final class NeutronVPNService extends NeutronObject<NeutronVPNService>
         implements Serializable, INeutronObject<NeutronVPNService> {
     private static final long serialVersionUID = 1L;
 

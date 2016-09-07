@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class NeutronSFCFlowClassifier extends NeutronObject<NeutronSFCFlowClassifier>
+public final class NeutronSFCFlowClassifier extends NeutronObject<NeutronSFCFlowClassifier>
         implements Serializable, INeutronObject<NeutronSFCFlowClassifier> {
     private static final long serialVersionUID = 1L;
 
