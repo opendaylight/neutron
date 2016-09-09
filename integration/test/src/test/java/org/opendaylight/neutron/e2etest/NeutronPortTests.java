@@ -8,6 +8,10 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import org.junit.Assert;
+
 public class NeutronPortTests {
     String base;
 
@@ -92,7 +96,8 @@ public class NeutronPortTests {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
         String content = " { \"port\": { " + " \"status\": \"DOWN\", "
                 + " \"binding:host_id\": \"00000000-1111-2222-3333-444444444444\", "
-                + " \"allowed_address_pairs\": [], " + " \"extra_dhcp_opts\": [], "
+                + " \"allowed_address_pairs\": [ { " + " \"mac_address\": \"fa:16:3e:11:11:5e\", "
+                + " \"ip_address\": \"192.168.1.200/32\" } ], " + " \"extra_dhcp_opts\": [], "
                 + " \"device_owner\": \"compute:nova\", " + " \"binding:profile\": {}, " + " \"fixed_ips\": [ { "
                 + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\"," + " \"ip_address\": \"10.0.0.7\" } ], "
                 + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", " + " \"security_groups\": [], "
@@ -117,6 +122,18 @@ public class NeutronPortTests {
         ITNeutronE2E.test_fetch(url, true, "Port Element Get With Query Failed");
     }
 
+    public void port_element_get_with_query_content_validation_test() {
+        String element = "allowed_address_pairs";
+        String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b"
+                + "?fields=" + element;
+        String expectedContent = "[{\"mac_address\":\"fa:16:3e:11:11:5e\",\"ip_address\":\"192.168.1.200/32\"}]";
+        String context = "Port details do not match.";
+        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = jsonObjectOutput.getAsJsonObject("port");
+        JsonElement jsonElementValue = jsonObjectOutput.get(element);
+        Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
+    }
+
     public void port_delete_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
         ITNeutronE2E.test_delete(url, "Port Element Delete Failed");
@@ -135,6 +152,7 @@ public class NeutronPortTests {
         port_tester.bulk_port_create_test();
         port_tester.port_update_test();
         port_tester.port_element_get_test();
+        port_tester.port_element_get_with_query_content_validation_test();
         port_tester.port_element_get_with_query_test();
         port_tester.port_collection_get_test();
         port_tester.port_delete_test();

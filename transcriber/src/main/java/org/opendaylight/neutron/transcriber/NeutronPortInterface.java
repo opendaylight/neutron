@@ -115,7 +115,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             final List<NeutronPort_AllowedAddressPairs> pairs = new ArrayList<NeutronPort_AllowedAddressPairs>();
             for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
                 final NeutronPort_AllowedAddressPairs pair = new NeutronPort_AllowedAddressPairs();
-                pair.setIpAddress(mdPair.getIpAddress().getValue().toString());
+                pair.setIpAddress(String.valueOf(mdPair.getIpAddress().getValue()));
                 pair.setMacAddress(mdPair.getMacAddress().getValue());
                 pairs.add(pair);
             }
