@@ -29,7 +29,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronPort;
 
 /**
@@ -59,33 +58,6 @@ public final class NeutronPortsNorthbound
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetworks, boolean needSubnets) {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronPortCRUD(this);
-        if (answer.getPortInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        if (needNetworks) {
-            answer = answer.fetchINeutronNetworkCRUD(this);
-            if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-        }
-        if (needSubnets) {
-            answer = answer.fetchINeutronSubnetCRUD(this);
-            if (answer.getSubnetInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Subnet CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-        }
-        return answer;
-    }
-
-    @Override
-    protected INeutronPortCRUD getNeutronCRUD() {
-        return getNeutronInterfaces(false, false).getPortInterface();
     }
 
     @Context
@@ -122,7 +94,7 @@ public final class NeutronPortsNorthbound
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
     // sorting not supported
     ) {
-        INeutronPortCRUD portInterface = getNeutronInterfaces(false, false).getPortInterface();
+        INeutronPortCRUD portInterface = getNeutronCRUD();
         List<NeutronPort> allPorts = portInterface.getAll();
         List<NeutronPort> ans = new ArrayList<>();
         Iterator<NeutronPort> i = allPorts.iterator();
@@ -186,7 +158,6 @@ public final class NeutronPortsNorthbound
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createPorts(final NeutronPortRequest input) {
-        getNeutronInterfaces(true, true); // Ensure that services for networks and subnets are loaded
         return create(input);
     }
 

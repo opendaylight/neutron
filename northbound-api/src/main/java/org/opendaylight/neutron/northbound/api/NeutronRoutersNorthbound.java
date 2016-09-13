@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
@@ -60,26 +59,6 @@ public final class NeutronRoutersNorthbound
         return RESOURCE_NAME;
     }
 
-    private NeutronCRUDInterfaces getNeutronInterfaces(boolean flag) {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronRouterCRUD(this);
-        if (answer.getRouterInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        if (flag) {
-            answer = answer.fetchINeutronNetworkCRUD(this);
-            if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-        }
-        return answer;
-    }
-
-    @Override
-    protected INeutronRouterCRUD getNeutronCRUD() {
-        return getNeutronInterfaces(false).getRouterInterface();
-    }
-
     /**
      * Returns a list of all Routers */
 
@@ -106,7 +85,7 @@ public final class NeutronRoutersNorthbound
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
-        INeutronRouterCRUD routerInterface = getNeutronInterfaces(false).getRouterInterface();
+        INeutronRouterCRUD routerInterface = getNeutronCRUD();
         if (routerInterface == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
@@ -162,7 +141,6 @@ public final class NeutronRoutersNorthbound
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createRouters(final NeutronRouterRequest input) {
-        getNeutronInterfaces(true); // ensure that network service is loaded
         return create(input);
     }
 
@@ -184,7 +162,6 @@ public final class NeutronRoutersNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response updateRouter(@PathParam("routerUUID") String routerUUID, NeutronRouterRequest input) {
-        getNeutronInterfaces(true); // ensure that network service is loaded
         return update(routerUUID, input);
     }
 

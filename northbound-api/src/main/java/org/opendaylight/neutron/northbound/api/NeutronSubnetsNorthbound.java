@@ -29,7 +29,6 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 
 /**
@@ -58,26 +57,6 @@ public final class NeutronSubnetsNorthbound
     @Override
     protected String getResourceName() {
         return RESOURCE_NAME;
-    }
-
-    private NeutronCRUDInterfaces getNeutronInterfaces(boolean needNetwork) {
-        NeutronCRUDInterfaces answer = new NeutronCRUDInterfaces().fetchINeutronSubnetCRUD(this);
-        if (answer.getSubnetInterface() == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        if (needNetwork) {
-            answer = answer.fetchINeutronNetworkCRUD(this);
-            if (answer.getNetworkInterface() == null) {
-                throw new ServiceUnavailableException(
-                        "Network CRUD Interface " + RestMessages.SERVICEUNAVAILABLE.toString());
-            }
-        }
-        return answer;
-    }
-
-    @Override
-    protected INeutronSubnetCRUD getNeutronCRUD() {
-        return getNeutronInterfaces(false).getSubnetInterface();
     }
 
     @Context
@@ -112,7 +91,7 @@ public final class NeutronSubnetsNorthbound
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
     // sorting not supported
     ) {
-        INeutronSubnetCRUD subnetInterface = getNeutronInterfaces(false).getSubnetInterface();
+        INeutronSubnetCRUD subnetInterface = getNeutronCRUD();
         List<NeutronSubnet> allNetworks = subnetInterface.getAll();
         List<NeutronSubnet> ans = new ArrayList<>();
         Iterator<NeutronSubnet> i = allNetworks.iterator();
@@ -174,7 +153,6 @@ public final class NeutronSubnetsNorthbound
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createSubnets(final NeutronSubnetRequest input) {
-        getNeutronInterfaces(true); // Ensure that network service is loaded
         return create(input);
     }
 
