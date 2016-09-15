@@ -17,48 +17,7 @@ import org.slf4j.LoggerFactory;
 public final class NeutronCRUDInterfaces {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
-    private INeutronNetworkCRUD networkInterface;
-    private INeutronSubnetCRUD subnetInterface;
-    private INeutronPortCRUD portInterface;
-    private INeutronRouterCRUD routerInterface;
-
     public NeutronCRUDInterfaces() {
-    }
-
-    public INeutronNetworkCRUD getNetworkInterface() {
-        return networkInterface;
-    }
-
-    public INeutronSubnetCRUD getSubnetInterface() {
-        return subnetInterface;
-    }
-
-    public INeutronPortCRUD getPortInterface() {
-        return portInterface;
-    }
-
-    public INeutronRouterCRUD getRouterInterface() {
-        return routerInterface;
-    }
-
-    public NeutronCRUDInterfaces fetchINeutronNetworkCRUD(Object obj) {
-        networkInterface = (INeutronNetworkCRUD) getInstances(INeutronNetworkCRUD.class, obj);
-        return this;
-    }
-
-    public NeutronCRUDInterfaces fetchINeutronSubnetCRUD(Object obj) {
-        subnetInterface = (INeutronSubnetCRUD) getInstances(INeutronSubnetCRUD.class, obj);
-        return this;
-    }
-
-    public NeutronCRUDInterfaces fetchINeutronPortCRUD(Object obj) {
-        portInterface = (INeutronPortCRUD) getInstances(INeutronPortCRUD.class, obj);
-        return this;
-    }
-
-    public NeutronCRUDInterfaces fetchINeutronRouterCRUD(Object obj) {
-        routerInterface = (INeutronRouterCRUD) getInstances(INeutronRouterCRUD.class, obj);
-        return this;
     }
 
     public static <T extends INeutronObject<T>, I extends INeutronCRUD<T>> I fetchINeutronCRUD(
