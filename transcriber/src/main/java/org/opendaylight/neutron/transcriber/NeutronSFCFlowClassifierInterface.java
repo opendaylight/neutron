@@ -178,7 +178,7 @@ public class NeutronSFCFlowClassifierInterface
             result.setSourceIpPrefix(String.valueOf(mdClassifier.getSourceIpPrefix().getValue()));
         }
         if(mdClassifier.getDestinationIpPrefix() != null) {
-            result.setDestinationIpPrefix(String.valueOf(mdClassifier.getDestinationIpPrefix()));
+            result.setDestinationIpPrefix(String.valueOf(mdClassifier.getDestinationIpPrefix().getValue()));
         }
         if(mdClassifier.getLogicalSourcePort() !=null ) {
             result.setLogicalSourcePortUUID(mdClassifier.getLogicalSourcePort().getValue());
