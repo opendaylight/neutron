@@ -22,6 +22,30 @@
       "revId": "b7066c0be50ec0456831f4f844a1f10ab53d0b0f",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a6b29fe_f51d3610",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSFCFlowClassifierTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2016-09-21T23:52:42Z",
+      "side": 1,
+      "message": "Fixed!",
+      "parentUuid": "7a6b29fe_124e083b",
+      "range": {
+        "startLine": 54,
+        "startChar": 37,
+        "endLine": 54,
+        "endChar": 42
+      },
+      "revId": "b7066c0be50ec0456831f4f844a1f10ab53d0b0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
