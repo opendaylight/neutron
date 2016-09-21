@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_124e083b",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronSFCFlowClassifierTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-09-21T17:10:07Z",
+      "side": 1,
+      "message": "this ins\u0027t necessary.\nuse test_fetch(String, String)",
+      "range": {
+        "startLine": 54,
+        "startChar": 37,
+        "endLine": 54,
+        "endChar": 42
+      },
+      "revId": "b7066c0be50ec0456831f4f844a1f10ab53d0b0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
