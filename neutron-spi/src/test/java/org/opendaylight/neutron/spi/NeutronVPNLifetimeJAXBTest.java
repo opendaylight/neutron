@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,18 +18,15 @@ public class NeutronVPNLifetimeJAXBTest {
             + "\"value\": 3600 }";
 
     @Test
-    public void test_NeutronVPNLifetime_JAXB() {
+    public void test_NeutronVPNLifetime_JAXB() throws JAXBException {
         NeutronVPNLifetime dummyObject = new NeutronVPNLifetime();
-        try {
-            NeutronVPNLifetime testObject = (NeutronVPNLifetime) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                    NeutronVPNLifetimeTest_sourceJson);
-            Assert.assertEquals("NeutronVPNLifetime JAXB Test 1: Testing units failed", "seconds",
-                    testObject.getUnits());
 
-            Assert.assertEquals("NeutronVPNLifetime JAXB Test 2: Testing value failed", new Integer(3600),
-                    testObject.getValue());
-        } catch (Exception e) {
-            Assert.fail("Tests failed");
-        }
+        NeutronVPNLifetime testObject = (NeutronVPNLifetime) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+                NeutronVPNLifetimeTest_sourceJson);
+        Assert.assertEquals("NeutronVPNLifetime JAXB Test 1: Testing units failed", "seconds",
+                testObject.getUnits());
+
+        Assert.assertEquals("NeutronVPNLifetime JAXB Test 2: Testing value failed", new Integer(3600),
+                testObject.getValue());
     }
 }

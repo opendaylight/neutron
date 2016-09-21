@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,20 +18,15 @@ public class NeutronPort_AllowedAddressPairsJAXBTest {
             + "\"ip_address\": \"192.168.199.1\", " + "\"mac_address\": \"fa:16:3e:c9:cb:f0\" }";
 
     @Test
-    public void test_NeutronPort_AllowedAddressPairs_JAXB() {
+    public void test_NeutronPort_AllowedAddressPairs_JAXB()  throws JAXBException {
         NeutronPort_AllowedAddressPairs portObject = new NeutronPort_AllowedAddressPairs();
-        try {
-            NeutronPort_AllowedAddressPairs testObject = (NeutronPort_AllowedAddressPairs) JaxbTestHelper
-                    .jaxbUnmarshall(portObject, NeutronPort_AllowedAddressPairs_sourceJson);
-            Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 1: Testing ip_address failed",
-                    "192.168.199.1", testObject.getIpAddress());
 
-            Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 10: Testing mac_address failed",
-                    "fa:16:3e:c9:cb:f0", testObject.getMacAddress());
+        NeutronPort_AllowedAddressPairs testObject = (NeutronPort_AllowedAddressPairs) JaxbTestHelper
+                .jaxbUnmarshall(portObject, NeutronPort_AllowedAddressPairs_sourceJson);
+        Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 1: Testing ip_address failed",
+                "192.168.199.1", testObject.getIpAddress());
 
-        } catch (Exception e) {
-            Assert.assertFalse("Tests Failed", true);
-        }
+        Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 10: Testing mac_address failed",
+                "fa:16:3e:c9:cb:f0", testObject.getMacAddress());
     }
-
 }

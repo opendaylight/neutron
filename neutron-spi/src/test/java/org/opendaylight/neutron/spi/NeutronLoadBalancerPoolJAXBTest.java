@@ -9,6 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,51 +24,47 @@ public class NeutronLoadBalancerPoolJAXBTest {
             + "\"tenant_id\": \"1a3e005cf9ce40308c900bcb08e5320c\" " + "} ";
 
     @Test
-    public void test_NeutronLoadBalancerPool_JAXB() {
+    public void test_NeutronLoadBalancerPool_JAXB()  throws JAXBException {
         NeutronLoadBalancerPool dummyObject = new NeutronLoadBalancerPool();
-        try {
-            NeutronLoadBalancerPool testObject = (NeutronLoadBalancerPool) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                    NeutronLoadBalancerPool_sourceJson);
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 1: Testing id failed",
-                    "12ff63af-4127-4074-a251-bcb2ecc53ebe", testObject.getID());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 2: Testing name failed", "pool1",
-                    testObject.getLoadBalancerPoolName());
+        NeutronLoadBalancerPool testObject = (NeutronLoadBalancerPool) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+                NeutronLoadBalancerPool_sourceJson);
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 1: Testing id failed",
+                "12ff63af-4127-4074-a251-bcb2ecc53ebe", testObject.getID());
 
-            Assert.assertTrue("NeutronLoadBalancerPool JAXB Test 3: Testing admin_state_up failed",
-                    testObject.getLoadBalancerPoolAdminIsStateIsUp());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 2: Testing name failed", "pool1",
+                testObject.getLoadBalancerPoolName());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 5: Testing LbAlgorithm failed", "ROUND_ROBIN",
-                    testObject.getLoadBalancerPoolLbAlgorithm());
+        Assert.assertTrue("NeutronLoadBalancerPool JAXB Test 3: Testing admin_state_up failed",
+                testObject.getLoadBalancerPoolAdminIsStateIsUp());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 6: Testing Protocol failed", "HTTP",
-                    testObject.getLoadBalancerPoolProtocol());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 5: Testing LbAlgorithm failed", "ROUND_ROBIN",
+                testObject.getLoadBalancerPoolLbAlgorithm());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 7: Testing Tenant_id failed",
-                    "1a3e005cf9ce40308c900bcb08e5320c", testObject.getTenantID());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 6: Testing Protocol failed", "HTTP",
+                testObject.getLoadBalancerPoolProtocol());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 8: Testing HealthMonitorID failed",
-                    "00066a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getNeutronLoadBalancerPoolHealthMonitorID());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 7: Testing Tenant_id failed",
+                "1a3e005cf9ce40308c900bcb08e5320c", testObject.getTenantID());
 
-            List<Neutron_ID> testListeners = testObject.getLoadBalancerPoolListeners();
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.1: Testing Listeners failed", 1,
-                    testListeners.size());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 8: Testing HealthMonitorID failed",
+                "00066a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getNeutronLoadBalancerPoolHealthMonitorID());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.2: Testing Listeners failed",
-                    "39de4d56-d663-46e5-85a1-5b9d5fa17829", testObject.getLoadBalancerPoolListeners().get(0).getID());
+        List<Neutron_ID> testListeners = testObject.getLoadBalancerPoolListeners();
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.1: Testing Listeners failed", 1,
+                testListeners.size());
 
-            List<NeutronLoadBalancerPoolMember> testMembers = testObject.getLoadBalancerPoolMembers();
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 10.1: Testing Listeners failed", 0,
-                    testMembers.size());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.2: Testing Listeners failed",
+                "39de4d56-d663-46e5-85a1-5b9d5fa17829", testObject.getLoadBalancerPoolListeners().get(0).getID());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 11: Testing session_persistence cookie_name failed",
-                    "my_cookie", testObject.getLoadBalancerPoolSessionPersistence().getCookieName());
+        List<NeutronLoadBalancerPoolMember> testMembers = testObject.getLoadBalancerPoolMembers();
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 10.1: Testing Listeners failed", 0,
+                testMembers.size());
 
-            Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 12: Testing session_persistence type failed",
-                    "APP_COOKIE", testObject.getLoadBalancerPoolSessionPersistence().getType());
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 11: Testing session_persistence cookie_name failed",
+                "my_cookie", testObject.getLoadBalancerPoolSessionPersistence().getCookieName());
 
-        } catch (Exception e) {
-            Assert.fail("Tests failed");
-        }
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 12: Testing session_persistence type failed",
+                "APP_COOKIE", testObject.getLoadBalancerPoolSessionPersistence().getType());
     }
 }

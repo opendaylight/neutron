@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,17 +18,12 @@ public class Neutron_IDJAXBTest {
             "{ \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
-    public void test_Neutron_ID_JAXB() {
+    public void test_Neutron_ID_JAXB() throws JAXBException {
         Neutron_ID neutronObject = new Neutron_ID();
-        try {
-            Neutron_ID testObject = (Neutron_ID) JaxbTestHelper.jaxbUnmarshall(neutronObject, Neutron_ID_sourceJson);
+        Neutron_ID testObject = (Neutron_ID) JaxbTestHelper.jaxbUnmarshall(neutronObject, Neutron_ID_sourceJson);
 
-            Assert.assertEquals("Neutron_ID JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
+        Assert.assertEquals("Neutron_ID JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                     testObject.getID());
-
-        } catch (Exception e) {
-            Assert.fail("Test failed");
-        }
     }
 
 }

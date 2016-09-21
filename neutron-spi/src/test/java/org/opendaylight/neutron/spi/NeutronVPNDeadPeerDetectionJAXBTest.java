@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,21 +18,18 @@ public class NeutronVPNDeadPeerDetectionJAXBTest {
             + "\"interval\": 30, " + "\"timeout\": 120 }";
 
     @Test
-    public void test_NeutronVPNDeadPeerDetection_JAXB() {
+    public void test_NeutronVPNDeadPeerDetection_JAXB() throws JAXBException {
         NeutronVPNDeadPeerDetection dummyObject = new NeutronVPNDeadPeerDetection();
-        try {
-            NeutronVPNDeadPeerDetection testObject = (NeutronVPNDeadPeerDetection) JaxbTestHelper
-                    .jaxbUnmarshall(dummyObject, NeutronVPNDeadPeerDetection_sourceJson);
-            Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 1: Testing action failed", "hold",
-                    testObject.getAction());
 
-            Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 2: Testing interval failed", new Integer(30),
-                    testObject.getInterval());
+        NeutronVPNDeadPeerDetection testObject = (NeutronVPNDeadPeerDetection) JaxbTestHelper
+                .jaxbUnmarshall(dummyObject, NeutronVPNDeadPeerDetection_sourceJson);
+        Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 1: Testing action failed", "hold",
+                testObject.getAction());
 
-            Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 3: Testing timeout failed", new Integer(120),
-                    testObject.getTimeout());
-        } catch (Exception e) {
-            Assert.fail("Tests failed");
-        }
+        Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 2: Testing interval failed", new Integer(30),
+                testObject.getInterval());
+
+        Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 3: Testing timeout failed", new Integer(120),
+                testObject.getTimeout());
     }
 }

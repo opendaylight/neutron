@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,34 +21,32 @@ public class NeutronLoadBalancerPoolMemberJAXBTest {
             + "\"tenant_id\": \"00045a7b-796b-4f26-9cf9-9e82d248fda7\" }";
 
     @Test
-    public void test_NeutronLoadBalancerPoolMember_JAXB() {
+    public void test_NeutronLoadBalancerPoolMember_JAXB()  throws JAXBException {
         NeutronLoadBalancerPoolMember dummyObject = new NeutronLoadBalancerPoolMember();
-        try {
-            NeutronLoadBalancerPoolMember testObject = (NeutronLoadBalancerPoolMember) JaxbTestHelper
-                    .jaxbUnmarshall(dummyObject, NeutronLoadBalancerPoolMember_sourceJson);
-            Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 1: Testing id failed",
-                    "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
-            Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 2: Testing  address failed", "10.0.0.8",
-                    testObject.getPoolMemberAddress());
+        NeutronLoadBalancerPoolMember testObject = (NeutronLoadBalancerPoolMember) JaxbTestHelper
+                .jaxbUnmarshall(dummyObject, NeutronLoadBalancerPoolMember_sourceJson);
+        Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 1: Testing id failed",
+                "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
-            Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 3: Testing  protocol_port failed", 80,
-                    (long) testObject.getPoolMemberProtoPort());
+        Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 2: Testing  address failed", "10.0.0.8",
+                testObject.getPoolMemberAddress());
 
-            Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 4: Testing  weight failed", 1,
-                    (long) testObject.getPoolMemberWeight());
+        Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 3: Testing  protocol_port failed", 80,
+                (long) testObject.getPoolMemberProtoPort());
 
-            Assert.assertFalse("NeutronLoadBalancerPoolMember JAXB Test 5: Testing  admin_state_up failed",
-                    testObject.getPoolMemberAdminStateIsUp());
+        Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 4: Testing  weight failed", 1,
+                (long) testObject.getPoolMemberWeight());
 
-            Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 6: Testing  subnet_id  failed",
-                    "10045a7b-0000-4f26-9cf9-9e82d248fda7", testObject.getPoolMemberSubnetID());
+        Assert.assertFalse("NeutronLoadBalancerPoolMember JAXB Test 5: Testing  admin_state_up failed",
+                testObject.getPoolMemberAdminStateIsUp());
 
-            Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 7: Testing  tenant_id  failed",
-                    "00045a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getTenantID());
-        } catch (Exception e) {
-            Assert.fail("Test failed");
-        }
+        Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 6: Testing  subnet_id  failed",
+                "10045a7b-0000-4f26-9cf9-9e82d248fda7", testObject.getPoolMemberSubnetID());
+
+        Assert.assertEquals("NeutronLoadBalancerPoolMember JAXB Test 7: Testing  tenant_id  failed",
+                "00045a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getTenantID());
+
     }
 
 }

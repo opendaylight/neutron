@@ -10,6 +10,7 @@ package org.opendaylight.neutron.spi;
 
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -28,80 +29,75 @@ public class NeutronPortJAXBTest {
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
-    public void test_NeutronPort_JAXB() {
+    public void test_NeutronPort_JAXB() throws JAXBException {
         NeutronPort testObject = new NeutronPort();
-        try {
-            NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject, NeutronPort_sourceJson);
-            Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
-                    neutronObject.getID());
 
-            Assert.assertEquals("NeutronPort JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
-                    neutronObject.getTenantID());
+        NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject, NeutronPort_sourceJson);
+        Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
+                neutronObject.getID());
 
-            Assert.assertEquals("NeutronPort JAXB Test 3: Testing network_id failed",
-                    "e9330b1f-a2ef-4160-a991-169e56ab17f5", neutronObject.getNetworkUUID());
+        Assert.assertEquals("NeutronPort JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
+                neutronObject.getTenantID());
 
-            Assert.assertEquals("NeutronPort JAXB Test 4: Testing status failed", "ACTIVE", neutronObject.getStatus());
+        Assert.assertEquals("NeutronPort JAXB Test 3: Testing network_id failed",
+                "e9330b1f-a2ef-4160-a991-169e56ab17f5", neutronObject.getNetworkUUID());
 
-            List<Neutron_IPs> fixedIPs = neutronObject.getFixedIPs();
-            Assert.assertEquals(" NeutronPort JAXB Test 5.1: Testing fixed_ips list length failed", 1, fixedIPs.size());
+        Assert.assertEquals("NeutronPort JAXB Test 4: Testing status failed", "ACTIVE", neutronObject.getStatus());
 
-            Assert.assertEquals(" NeutronPort JAXB Test 5.2: Testing ip_address value failed", "192.168.111.3",
-                    fixedIPs.get(0).ipAddress);
+        List<Neutron_IPs> fixedIPs = neutronObject.getFixedIPs();
+        Assert.assertEquals(" NeutronPort JAXB Test 5.1: Testing fixed_ips list length failed", 1, fixedIPs.size());
 
-            Assert.assertEquals(" NeutronPort JAXB Test 5.3: Testing subnet_id value failed",
-                    "22b44fc2-4ffb-4de4-b0f9-69d58b37ae27", fixedIPs.get(0).subnetUUID);
+        Assert.assertEquals(" NeutronPort JAXB Test 5.2: Testing ip_address value failed", "192.168.111.3",
+                fixedIPs.get(0).ipAddress);
 
-            List<NeutronPort_ExtraDHCPOption> extraDHCPOptions = neutronObject.getExtraDHCPOptions();
+        Assert.assertEquals(" NeutronPort JAXB Test 5.3: Testing subnet_id value failed",
+                "22b44fc2-4ffb-4de4-b0f9-69d58b37ae27", fixedIPs.get(0).subnetUUID);
 
-            Assert.assertEquals("NeutronPort JAXB Test 6: Testing extra_dhcp_opts list length failed", 1,
-                    extraDHCPOptions.size());
+        List<NeutronPort_ExtraDHCPOption> extraDHCPOptions = neutronObject.getExtraDHCPOptions();
 
-            List<NeutronSecurityGroup> securityGroups = neutronObject.getSecurityGroups();
-            Assert.assertEquals("NeutronPort JAXB Test 7: Testing security_groups list length failed", 1,
-                    securityGroups.size());
+        Assert.assertEquals("NeutronPort JAXB Test 6: Testing extra_dhcp_opts list length failed", 1,
+                extraDHCPOptions.size());
 
-            List<NeutronPort_AllowedAddressPairs> allowedAddressPairs = neutronObject.getAllowedAddressPairs();
-            Assert.assertEquals("NeutronPort JAXB Test 8: Testing allowed_address_pairs list length failed", 1,
-                    allowedAddressPairs.size());
+        List<NeutronSecurityGroup> securityGroups = neutronObject.getSecurityGroups();
+        Assert.assertEquals("NeutronPort JAXB Test 7: Testing security_groups list length failed", 1,
+                securityGroups.size());
 
-            Map<String, String> vifDetails = neutronObject.getVIFDetails();
+        List<NeutronPort_AllowedAddressPairs> allowedAddressPairs = neutronObject.getAllowedAddressPairs();
+        Assert.assertEquals("NeutronPort JAXB Test 8: Testing allowed_address_pairs list length failed", 1,
+                allowedAddressPairs.size());
 
-            Assert.assertEquals("NeutronPort JAXB Test 9.1: Testing vif_details list length failed", 2,
-                    vifDetails.size());
+        Map<String, String> vifDetails = neutronObject.getVIFDetails();
 
-            Assert.assertEquals("NeutronPort JAXB Test 9.2: Testing port_filter value failed", "true",
-                    vifDetails.get("port_filter"));
+        Assert.assertEquals("NeutronPort JAXB Test 9.1: Testing vif_details list length failed", 2,
+                vifDetails.size());
 
-            Assert.assertEquals("NeutronPort JAXB Test 9.3: Testing ovs_hybrid_plug value failed", "false",
-                    vifDetails.get("ovs_hybrid_plug"));
+        Assert.assertEquals("NeutronPort JAXB Test 9.2: Testing port_filter value failed", "true",
+                vifDetails.get("port_filter"));
 
-            Assert.assertEquals("NeutronPort JAXB Test 10: Testing name failed", "net1", neutronObject.getName());
+        Assert.assertEquals("NeutronPort JAXB Test 9.3: Testing ovs_hybrid_plug value failed", "false",
+                vifDetails.get("ovs_hybrid_plug"));
 
-            Assert.assertEquals("NeutronPort JAXB Test 11: Testing admin_state_up failed", true,
-                    neutronObject.getAdminStateUp());
+        Assert.assertEquals("NeutronPort JAXB Test 10: Testing name failed", "net1", neutronObject.getName());
 
-            Assert.assertEquals("NeutronPort JAXB Test 12: Testing binding:vif_type failed", "unbound",
-                    neutronObject.getBindingvifType());
+        Assert.assertEquals("NeutronPort JAXB Test 11: Testing admin_state_up failed", true,
+                neutronObject.getAdminStateUp());
 
-            Assert.assertEquals("NeutronPort JAXB Test 13: Testing binding:vnic_type failed", "normal",
-                    neutronObject.getBindingvnicType());
+        Assert.assertEquals("NeutronPort JAXB Test 12: Testing binding:vif_type failed", "unbound",
+                neutronObject.getBindingvifType());
 
-            Assert.assertEquals("NeutronPort JAXB Test 14: Testing mac_address failed", "fa:16:3e:c9:cb:f0",
-                    neutronObject.getMacAddress());
+        Assert.assertEquals("NeutronPort JAXB Test 13: Testing binding:vnic_type failed", "normal",
+                neutronObject.getBindingvnicType());
 
-            Assert.assertEquals("NeutronPort JAXB Test 15: Testing device_id failed",
-                    "257614cc-e178-4c92-9c61-3b28d40eca44", neutronObject.getDeviceID());
+        Assert.assertEquals("NeutronPort JAXB Test 14: Testing mac_address failed", "fa:16:3e:c9:cb:f0",
+                neutronObject.getMacAddress());
 
-            Assert.assertEquals("NeutronPort JAXB Test 16: Testing device_owner failed", "",
-                    neutronObject.getDeviceOwner());
+        Assert.assertEquals("NeutronPort JAXB Test 15: Testing device_id failed",
+                "257614cc-e178-4c92-9c61-3b28d40eca44", neutronObject.getDeviceID());
 
-            Assert.assertEquals("NeutronPort JAXB Test 17: Testing binding:host_id failed", "",
-                    neutronObject.getBindinghostID());
+        Assert.assertEquals("NeutronPort JAXB Test 16: Testing device_owner failed", "",
+                neutronObject.getDeviceOwner());
 
-        } catch (Exception e) {
-            Assert.assertFalse("Tests Failed", true);
-        }
+        Assert.assertEquals("NeutronPort JAXB Test 17: Testing binding:host_id failed", "",
+                neutronObject.getBindinghostID());
     }
-
 }

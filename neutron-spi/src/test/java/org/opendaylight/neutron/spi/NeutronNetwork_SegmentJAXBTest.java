@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,24 +18,19 @@ public class NeutronNetwork_SegmentJAXBTest {
             + "\"provider:physical_network\": \"physnet1\", " + "\"provider:segmentation_id\": \"1001\" }";
 
     @Test
-    public void test_NeutronNetwork_Segment_JAXB() {
+    public void test_NeutronNetwork_Segment_JAXB()  throws JAXBException {
         NeutronNetwork_Segment segmentObject = new NeutronNetwork_Segment();
-        try {
-            NeutronNetwork_Segment testObject = (NeutronNetwork_Segment) JaxbTestHelper.jaxbUnmarshall(segmentObject,
-                    NeutronNetwork_Segment_sourceJson);
 
-            Assert.assertEquals("NeutronNetwork_Segment JAXB Test 1: Testing provider:network_type failed", "vlan",
-                    testObject.getProviderNetworkType());
+        NeutronNetwork_Segment testObject = (NeutronNetwork_Segment) JaxbTestHelper.jaxbUnmarshall(segmentObject,
+                NeutronNetwork_Segment_sourceJson);
 
-            Assert.assertEquals("NeutronNetwork_Segment JAXB Test 2: Testing provider:physical_network failed",
-                    "physnet1", testObject.getProviderPhysicalNetwork());
+        Assert.assertEquals("NeutronNetwork_Segment JAXB Test 1: Testing provider:network_type failed", "vlan",
+                testObject.getProviderNetworkType());
 
-            Assert.assertEquals("NeutronNetwork_Segment JAXB Test 3: Testing provider:segmentation_id failed", "1001",
-                    testObject.getProviderSegmentationID());
+        Assert.assertEquals("NeutronNetwork_Segment JAXB Test 2: Testing provider:physical_network failed",
+                "physnet1", testObject.getProviderPhysicalNetwork());
 
-        } catch (Exception e) {
-            Assert.fail("Test failed");
-        }
+        Assert.assertEquals("NeutronNetwork_Segment JAXB Test 3: Testing provider:segmentation_id failed", "1001",
+                testObject.getProviderSegmentationID());
     }
-
 }

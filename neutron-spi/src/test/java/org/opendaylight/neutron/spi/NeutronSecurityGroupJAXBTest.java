@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -24,21 +25,18 @@ public class NeutronSecurityGroupJAXBTest {
             + "\"tenant_id\": \"e4f50856753b4dc6afee5fa6b9b6c550\" } ]" + "}";
 
     @Test
-    public void test_NeutronSecurityGroup_JAXB() {
+    public void test_NeutronSecurityGroup_JAXB() throws JAXBException {
         NeutronSecurityGroup dummyObject = new NeutronSecurityGroup();
-        try {
-            NeutronSecurityGroup testObject = (NeutronSecurityGroup) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                    NeutronSecurityGroup_sourceJson);
-            Assert.assertEquals("NeutronSecurityGroup JAXB Test 1: Testing id failed",
-                    "2076db17-a522-4506-91de-c6dd8e837028", testObject.getID());
 
-            Assert.assertEquals("NeutronSecurityGroup JAXB Test 2: Testing direction failed", "new-webservers",
-                    testObject.getSecurityGroupName());
+        NeutronSecurityGroup testObject = (NeutronSecurityGroup) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+                NeutronSecurityGroup_sourceJson);
+        Assert.assertEquals("NeutronSecurityGroup JAXB Test 1: Testing id failed",
+                "2076db17-a522-4506-91de-c6dd8e837028", testObject.getID());
 
-            Assert.assertEquals("NeutronSecurityGroup JAXB Test 4: Testing port range min failed",
-                    "b4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());
-        } catch (Exception e) {
-            Assert.fail("Tests failed");
-        }
+        Assert.assertEquals("NeutronSecurityGroup JAXB Test 2: Testing direction failed", "new-webservers",
+                testObject.getSecurityGroupName());
+
+        Assert.assertEquals("NeutronSecurityGroup JAXB Test 4: Testing port range min failed",
+                "b4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());
     }
 }

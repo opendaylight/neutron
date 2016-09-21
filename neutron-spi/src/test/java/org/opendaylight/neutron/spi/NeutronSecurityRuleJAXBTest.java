@@ -39,43 +39,40 @@ public class NeutronSecurityRuleJAXBTest {
             + "\"tenant_id\": \"e4f50856753b4dc6afee5fa6b9b6c550\" }";
 
     @Test
-    public void test_NeutronSecurityRule_JAXB() {
+    public void test_NeutronSecurityRule_JAXB() throws JAXBException {
         NeutronSecurityRule dummyObject = new NeutronSecurityRule();
-        try {
-            NeutronSecurityRule testObject = (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                    NeutronSecurityRule_sourceJson);
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 1: Testing id failed",
-                    "2bc0accf-312e-429a-956e-e4407625eb62", testObject.getID());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 2: Testing direction failed", "ingress",
-                    testObject.getSecurityRuleDirection());
+        NeutronSecurityRule testObject = (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+                NeutronSecurityRule_sourceJson);
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 1: Testing id failed",
+                "2bc0accf-312e-429a-956e-e4407625eb62", testObject.getID());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 3: Testing protocol failed", "tcp",
-                    testObject.getSecurityRuleProtocol());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 2: Testing direction failed", "ingress",
+                testObject.getSecurityRuleDirection());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 4: Testing port range min failed", new Integer(80),
-                    testObject.getSecurityRulePortMin());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 3: Testing protocol failed", "tcp",
+                testObject.getSecurityRuleProtocol());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 5: Testing port range max failed", new Integer(80),
-                    testObject.getSecurityRulePortMax());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 4: Testing port range min failed", new Integer(80),
+                testObject.getSecurityRulePortMin());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 6: Testing ethertype failed", "IPv4",
-                    testObject.getSecurityRuleEthertype());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 5: Testing port range max failed", new Integer(80),
+                testObject.getSecurityRulePortMax());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 7: Testing remote ip prefix failed", "0.0.0.0/0",
-                    testObject.getSecurityRuleRemoteIpPrefix());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 6: Testing ethertype failed", "IPv4",
+                testObject.getSecurityRuleEthertype());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 8: Testing remote group id failed",
-                    "85cc3048-abc3-43cc-89b3-377341426ac5", testObject.getSecurityRemoteGroupID());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 7: Testing remote ip prefix failed", "0.0.0.0/0",
+                testObject.getSecurityRuleRemoteIpPrefix());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 9: Testing security group id failed",
-                    "a7734e61-b545-452d-a3cd-0189cbd9747a", testObject.getSecurityRuleGroupID());
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 8: Testing remote group id failed",
+                "85cc3048-abc3-43cc-89b3-377341426ac5", testObject.getSecurityRemoteGroupID());
 
-            Assert.assertEquals("NeutronSecurityRule JAXB Test 10: Testing tenant id failed",
-                    "e4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());
-        } catch (Exception e) {
-            Assert.fail("Tests failed");
-        }
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 9: Testing security group id failed",
+                "a7734e61-b545-452d-a3cd-0189cbd9747a", testObject.getSecurityRuleGroupID());
+
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 10: Testing tenant id failed",
+                "e4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());
     }
 
     @Test

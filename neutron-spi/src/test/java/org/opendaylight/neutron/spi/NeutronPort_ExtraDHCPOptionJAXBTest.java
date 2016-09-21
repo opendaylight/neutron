@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,16 +24,12 @@ public class NeutronPort_ExtraDHCPOptionJAXBTest {
             + "\"ip_version\": 6" + "}";
 
     @Test
-    public void test_NeutronPort_ExtraDHCPOption_JAXB() {
+    public void test_NeutronPort_ExtraDHCPOption_JAXB() throws JAXBException {
         NeutronPort_ExtraDHCPOption portObject = new NeutronPort_ExtraDHCPOption();
         NeutronPort_ExtraDHCPOption testObject;
-        try {
-            testObject = (NeutronPort_ExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
-                    NeutronPort_ExtraDHCPOption_sourceJson);
-        } catch (Exception e) {
-            Assert.assertFalse("Tests Failed", true);
-            return;
-        }
+
+        testObject = (NeutronPort_ExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
+                NeutronPort_ExtraDHCPOption_sourceJson);
 
         Assert.assertEquals("NeutronPort_ExtraDHCPOption JAXB Test 1: Testing opt_value failed", "123.123.123.456",
                 testObject.getValue());
@@ -43,16 +40,12 @@ public class NeutronPort_ExtraDHCPOptionJAXBTest {
     }
 
     @Test
-    public void test_NeutronPort_ExtraDHCPOption_IPv4_JAXB() {
+    public void test_NeutronPort_ExtraDHCPOption_IPv4_JAXB() throws JAXBException {
         NeutronPort_ExtraDHCPOption portObject = new NeutronPort_ExtraDHCPOption();
         NeutronPort_ExtraDHCPOption testObject;
-        try {
-            testObject = (NeutronPort_ExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
-                    NeutronPort_ExtraDHCPOption_IPv4_sourceJson);
-        } catch (Exception e) {
-            Assert.assertFalse("Tests Failed", true);
-            return;
-        }
+
+        testObject = (NeutronPort_ExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
+                NeutronPort_ExtraDHCPOption_IPv4_sourceJson);
 
         Assert.assertEquals("NeutronPort_ExtraDHCPOption_IPv4 JAXB Test 1: Testing opt_value failed", "123.123.123.456",
                 testObject.getValue());
@@ -63,16 +56,12 @@ public class NeutronPort_ExtraDHCPOptionJAXBTest {
     }
 
     @Test
-    public void test_NeutronPort_ExtraDHCPOption_IPv6_JAXB() {
+    public void test_NeutronPort_ExtraDHCPOption_IPv6_JAXB() throws JAXBException {
         NeutronPort_ExtraDHCPOption portObject = new NeutronPort_ExtraDHCPOption();
         NeutronPort_ExtraDHCPOption testObject;
-        try {
-            testObject = (NeutronPort_ExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
-                    NeutronPort_ExtraDHCPOption_IPv6_sourceJson);
-        } catch (Exception e) {
-            Assert.assertFalse("Tests Failed", true);
-            return;
-        }
+
+        testObject = (NeutronPort_ExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
+                NeutronPort_ExtraDHCPOption_IPv6_sourceJson);
 
         Assert.assertEquals("NeutronPort_ExtraDHCPOption_IPv6 JAXB Test 1: Testing opt_value failed",
                 "::ffff:123.123.123.456", testObject.getValue());
