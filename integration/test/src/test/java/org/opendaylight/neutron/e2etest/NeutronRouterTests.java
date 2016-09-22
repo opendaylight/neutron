@@ -56,36 +56,6 @@ public class NeutronRouterTests {
         ITNeutronE2E.test_modify(url, content, "Singleton Router Put Failed NB");
     }
 
-    //TODO handle SB check
-    public void router_add_interface_test() {
-        String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2e/add_router_interface";
-        String content = "{ " + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
-                + "\"port_id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51e\", "
-                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
-                + "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\"}";
-        ITNeutronE2E.test_modify(url, content, "Add Interface to Router Put Failed NB");
-    }
-
-    //TODO handle SB check
-    public void router_add_interface() {
-        String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2f/add_router_interface";
-        String content = "{ " + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
-                + "\"port_id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51f\", "
-                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
-                + "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2f\"}";
-        ITNeutronE2E.test_modify(url, content, "Router Prep Interface Add Failed");
-    }
-
-    //TODO handle SB check
-    public void router_remove_interface_test() {
-        String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2f/remove_router_interface";
-        String content = "{ " + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
-                + "\"port_id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51f\", "
-                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
-                + "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2f\"}";
-        ITNeutronE2E.test_modify(url, content, "Remove Interface to Router Put Failed NB");
-    }
-
     public void router_element_get_test() {
         String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2f";
         ITNeutronE2E.test_fetch(url, true, "Router Element Get Test");
@@ -112,14 +82,11 @@ public class NeutronRouterTests {
         NeutronRouterTests router_tester = new NeutronRouterTests(base);
         String createJsonString = router_tester.singleton_router_create_test();
         router_tester.singleton_router_get_with_one_query_item_test(createJsonString);
-        router_tester.router_add_interface_test();
         router_tester.update_router_test();
         router_tester.create_router(); // needed for following tests
-        router_tester.router_add_interface();
         router_tester.router_element_get_test();
         router_tester.router_element_get_with_query_test();
         router_tester.router_collection_get_test();
-        router_tester.router_remove_interface_test();
         router_tester.router_delete_test();
         router_tester.router_element_negative_get_test();
     }

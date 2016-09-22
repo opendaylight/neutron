@@ -27,7 +27,6 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.NeutronRouter;
-import org.opendaylight.neutron.spi.NeutronRouter_Interface;
 
 /**
  * Neutron Northbound REST APIs.<br>
@@ -175,30 +174,5 @@ public final class NeutronRoutersNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteRouter(@PathParam("routerUUID") String routerUUID) {
         return delete(routerUUID);
-    }
-
-    /**
-     * Adds an interface to a router */
-
-    @Path("{routerUUID}/add_router_interface")
-    @PUT
-    @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_JSON })
-    //@TypeHint(OpenStackRouterInterfaces.class)
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
-    public Response addRouterInterface(@PathParam("routerUUID") String routerUUID, NeutronRouter_Interface input) {
-        // Do nothing. Keep this interface for compatibility
-        return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
-    }
-
-    @Path("{routerUUID}/remove_router_interface")
-    @PUT
-    @Produces({ MediaType.APPLICATION_JSON })
-    @Consumes({ MediaType.APPLICATION_JSON })
-    //@TypeHint(OpenStackRouterInterfaces.class)
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful") })
-    public Response removeRouterInterface(@PathParam("routerUUID") String routerUUID, NeutronRouter_Interface input) {
-        // Do nothing. Keep this interface for compatibility
-        return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 }
