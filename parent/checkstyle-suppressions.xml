@@ -32,11 +32,5 @@
   <suppress checks="TypeName"
             files="."
              />
-  <suppress checks="IllegalCatch"
-            files="."
-             />
-  <suppress checks="RegexpSinglelineJava"
-            files="."
-             />
 </suppressions>
 

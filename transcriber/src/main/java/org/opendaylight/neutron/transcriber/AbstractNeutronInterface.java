@@ -317,32 +317,6 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         return result;
     }
 
-    // this method uses reflection to update an object from it's delta.
-
-    protected boolean overwrite(Object target, Object delta) {
-        final Method[] methods = target.getClass().getMethods();
-
-        for (final Method toMethod : methods) {
-            if (toMethod.getDeclaringClass().equals(target.getClass()) && toMethod.getName().startsWith("set")) {
-
-                final String toName = toMethod.getName();
-                final String fromName = toName.replace("set", "get");
-
-                try {
-                    final Method fromMethod = delta.getClass().getMethod(fromName);
-                    final Object value = fromMethod.invoke(delta, (Object[]) null);
-                    if (value != null) {
-                        toMethod.invoke(target, value);
-                    }
-                } catch (final Exception e) {
-                    LOGGER.error("Error in overwrite", e);
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     @Override
     public void close() throws Exception {
         // TODO Auto-generated method stub
