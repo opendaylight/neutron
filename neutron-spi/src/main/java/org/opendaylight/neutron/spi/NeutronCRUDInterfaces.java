@@ -17,7 +17,8 @@ import org.slf4j.LoggerFactory;
 public final class NeutronCRUDInterfaces {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
-    public NeutronCRUDInterfaces() {
+    private NeutronCRUDInterfaces() {
+        throw new UnsupportedOperationException("NeutronCRUDInterfaces class shouldn't be instantiated");
     }
 
     public static <T extends INeutronObject<T>, I extends INeutronCRUD<T>> I fetchINeutronCRUD(
