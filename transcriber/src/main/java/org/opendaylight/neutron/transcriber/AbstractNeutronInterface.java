@@ -334,7 +334,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
                     if (value != null) {
                         toMethod.invoke(target, value);
                     }
-                } catch (final Exception e) {
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                     LOGGER.error("Error in overwrite", e);
                     return false;
                 }

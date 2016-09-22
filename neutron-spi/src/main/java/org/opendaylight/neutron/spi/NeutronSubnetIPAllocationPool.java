@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -136,7 +137,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
         }
         try {
             return new BigInteger(((Inet6Address) InetAddress.getByName(inputString)).getAddress());
-        } catch (Exception e) {
+        } catch (UnknownHostException e) {
             LOGGER.error("convertV6 error", e);
             return BigInteger.ZERO;
         }
@@ -172,7 +173,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
     static String bigIntegerToIP(BigInteger b) {
         try {
             return Inet6Address.getByAddress(b.toByteArray()).getHostAddress();
-        } catch (Exception e) {
+        } catch (UnknownHostException e) {
             LOGGER.error("bigIntegerToIP", e);
             return "ERROR";
         }

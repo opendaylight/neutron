@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.junit.Assert;
@@ -26,27 +27,23 @@ public class NeutronNetworkTests {
         this.base = base;
     }
 
-    public void network_collection_get_test_with_wait() {
+    public void network_collection_get_test_with_wait() throws IOException, InterruptedException {
         String url_s = base + "/networks";
-        try {
-            int i = 0;
-            while (i < TIMEOUT) {
-                URL url = new URL(url_s);
-                HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
-                if (httpConn.getResponseCode() != 200) {
-                    LOGGER.info("trial " + Integer.toString(i) + ": failed with: "
-                            + Integer.toString(httpConn.getResponseCode()));
-                    Thread.sleep(1000);
-                    i += 1;
-                } else {
-                    Assert.assertEquals("Network Collection GET failed", 200, httpConn.getResponseCode());
-                    return;
-                }
+        int i = 0;
+        while (i < TIMEOUT) {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
+            if (httpConn.getResponseCode() != 200) {
+                LOGGER.info("trial " + Integer.toString(i) + ": failed with: "
+                        + Integer.toString(httpConn.getResponseCode()));
+                Thread.sleep(1000);
+                i += 1;
+            } else {
+                Assert.assertEquals("Network Collection GET failed", 200, httpConn.getResponseCode());
+                return;
             }
-            Assert.assertFalse("Network Collection GET with wait failed", true);
-        } catch (Exception e) {
-            Assert.assertFalse("E2E Tests Failed", true);
         }
+        Assert.assertFalse("Network Collection GET with wait failed", true);
     }
 
     //TODO handle SB check
@@ -137,7 +134,7 @@ public class NeutronNetworkTests {
         ITNeutronE2E.test_delete(url, "Network Element Delete Failed");
     }
 
-    public static void runTests(String base) {
+    public static void runTests(String base) throws IOException, InterruptedException {
         NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
         network_tester.network_collection_get_test_with_wait();
         String createJsonString = network_tester.singleton_network_create_test();

@@ -317,24 +317,20 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 if (parts.length != 2) {
                     return;
                 }
-                try {
-                    int length = Integer.parseInt(parts[1]);
-                    BigInteger lowAddress_bi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
-                    String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
-                    BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
-                    String highAddress = NeutronSubnetIPAllocationPool
-                            .bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
-                    if (gatewayIP == null || ("").equals(gatewayIP)) {
-                        gatewayIP = lowAddress;
-                    }
-                    if (allocationPools.size() < 1) {
-                        NeutronSubnetIPAllocationPool source = new NeutronSubnetIPAllocationPool(lowAddress,
-                                highAddress);
-                        allocationPools = source.splitPoolV6(gatewayIP);
-                    }
-                } catch (Exception e) {
-                    LOGGER.warn("Failure in initDefault()", e);
-                    return;
+
+                int length = Integer.parseInt(parts[1]);
+                BigInteger lowAddress_bi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
+                String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
+                BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
+                String highAddress = NeutronSubnetIPAllocationPool
+                        .bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
+                if (gatewayIP == null || ("").equals(gatewayIP)) {
+                    gatewayIP = lowAddress;
+                }
+                if (allocationPools.size() < 1) {
+                    NeutronSubnetIPAllocationPool source = new NeutronSubnetIPAllocationPool(lowAddress,
+                            highAddress);
+                    allocationPools = source.splitPoolV6(gatewayIP);
                 }
             }
         }
