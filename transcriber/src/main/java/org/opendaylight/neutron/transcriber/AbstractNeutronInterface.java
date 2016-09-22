@@ -11,6 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.CheckedFuture;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -199,7 +200,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject,
                     if (value != null) {
                         toMethod.invoke(target, value);
                     }
-                } catch (final Exception e) {
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                     LOGGER.error("Error in overwrite", e);
                     return false;
                 }

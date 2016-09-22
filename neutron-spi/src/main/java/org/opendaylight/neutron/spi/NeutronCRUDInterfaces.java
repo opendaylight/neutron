@@ -10,6 +10,7 @@ package org.opendaylight.neutron.spi;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,7 @@ public final class NeutronCRUDInterfaces {
             if (services != null) {
                 return bCtx.getService(services[0]);
             }
-        } catch (Exception e) {
+        } catch (InvalidSyntaxException e) {
             LOGGER.error("Error in getInstances", e);
         }
         return null;

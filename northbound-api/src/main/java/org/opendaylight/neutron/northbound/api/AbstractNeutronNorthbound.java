@@ -138,13 +138,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
          * remove it and return 204 status
          */
         boolean exist = false;
-        try {
-            exist = neutronCRUD.remove(uuid);
-        } catch (Exception e) {
-            final String resourceName = getResourceName();
-            LOGGER.debug("exception during remove {} {} {}", resourceName, uuid, e);
-            throw new InternalServerErrorException("Could not delete " + resourceName);
-        }
+        exist = neutronCRUD.remove(uuid);
         if (!exist) {
             throw new ResourceNotFoundException(uuidNoExist());
         }

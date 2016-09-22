@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.junit.Assert;
@@ -44,7 +45,7 @@ public class NeutronNetworkTests {
                 }
             }
             Assert.assertFalse("Network Collection GET with wait failed", true);
-        } catch (Exception e) {
+        } catch (IOException | InterruptedException e) {
             Assert.assertFalse("E2E Tests Failed", true);
         }
     }
