@@ -98,8 +98,6 @@ public final class NeutronRoutersNorthbound
                     && (queryName == null || queryName.equals(oSS.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
                     && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
-                    && (queryExternalGatewayInfo == null
-                            || queryExternalGatewayInfo.equals(oSS.getExternalGatewayInfo()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(oSS.extractFields(fields));
