@@ -115,7 +115,7 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
                     && (queryConnectionID == null || queryConnectionID.equals(oSS.getID()))
                     && (queryL2gatewayID == null || queryL2gatewayID.equals(oSS.getL2gatewayID()))
                     && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkID()))
-                    && (querySegmentID == null || querySegmentID.equals(oSS.getSegmentID()))
+                    && (querySegmentID == null || (Integer.valueOf(querySegmentID).equals(oSS.getSegmentID())))
                     && (queryPortID == null || queryPortID.equals(oSS.getPortID()))) {
                 if (fields.size() > 0) {
                     ans.add(oSS.extractFields(fields));

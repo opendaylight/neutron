@@ -111,9 +111,7 @@ public final class NeutronL2gatewayNorthbound
             NeutronL2gateway l2gateway = i.next();
             if ((queryID == null || queryID.equals(l2gateway.getID()))
                     && (queryName == null || queryName.equals(l2gateway.getL2gatewayName()))
-                    && (queryTenantID == null || queryTenantID.equals(l2gateway.getTenantID()))
-                    && (queryNeutronL2gatewayDevice == null
-                            || queryNeutronL2gatewayDevice.equals(l2gateway.getNeutronL2gatewayDevices()))) {
+                    && (queryTenantID == null || queryTenantID.equals(l2gateway.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(l2gateway.extractFields(fields));
                 } else {
