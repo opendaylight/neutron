@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -131,12 +130,8 @@ public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule
 
     public NeutronSecurityRule extractFields(List<String> fields) {
         NeutronSecurityRule ans = new NeutronSecurityRule();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("direction")) {
                 ans.setSecurityRuleDirection(this.getSecurityRuleDirection());
             }
@@ -160,9 +155,6 @@ public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule
             }
             if (s.equals("security_group_id")) {
                 ans.setSecurityRuleGroupID(this.getSecurityRuleGroupID());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
             }
         }
         return ans;

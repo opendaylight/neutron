@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -68,12 +67,8 @@ public final class NeutronL2gatewayConnection extends NeutronObject<NeutronL2gat
 
     public NeutronL2gatewayConnection extractFields(List<String> fields) {
         NeutronL2gatewayConnection ans = new NeutronL2gatewayConnection();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("connection_id")) {
                 ans.setID(this.getID());
             }

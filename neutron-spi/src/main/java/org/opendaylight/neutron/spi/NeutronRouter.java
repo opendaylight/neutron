@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -122,12 +121,8 @@ public final class NeutronRouter extends NeutronObject<NeutronRouter>
      */
     public NeutronRouter extractFields(List<String> fields) {
         NeutronRouter ans = new NeutronRouter();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("name")) {
                 ans.setName(this.getName());
             }
@@ -136,9 +131,6 @@ public final class NeutronRouter extends NeutronObject<NeutronRouter>
             }
             if (s.equals("status")) {
                 ans.setStatus(this.getStatus());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("external_gateway_info")) {
                 ans.setExternalGatewayInfo(this.getExternalGatewayInfo());

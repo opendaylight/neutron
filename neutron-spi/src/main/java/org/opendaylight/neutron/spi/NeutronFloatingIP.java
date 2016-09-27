@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -106,12 +105,8 @@ public final class NeutronFloatingIP
 
     public NeutronFloatingIP extractFields(List<String> fields) {
         NeutronFloatingIP ans = new NeutronFloatingIP();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("floating_network_id")) {
                 ans.setFloatingNetworkUUID(this.getFloatingNetworkUUID());
             }
@@ -123,9 +118,6 @@ public final class NeutronFloatingIP
             }
             if (s.equals("floating_ip_address")) {
                 ans.setFloatingIPAddress(this.getFloatingIPAddress());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("router_id")) {
                 ans.setRouterUUID(this.getRouterUUID());

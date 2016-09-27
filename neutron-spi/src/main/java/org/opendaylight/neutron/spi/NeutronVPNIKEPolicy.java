@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -116,17 +115,10 @@ public final class NeutronVPNIKEPolicy extends NeutronObject<NeutronVPNIKEPolicy
      */
     public NeutronVPNIKEPolicy extractFields(List<String> fields) {
         NeutronVPNIKEPolicy ans = new NeutronVPNIKEPolicy();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("name")) {
                 ans.setName(this.getName());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("auth_algorithm")) {
                 ans.setAuthAlgorithm(this.getAuthAlgorithm());

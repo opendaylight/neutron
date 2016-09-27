@@ -163,12 +163,7 @@ public final class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBala
     public NeutronLoadBalancerPool extractFields(List<String> fields) {
         NeutronLoadBalancerPool ans = new NeutronLoadBalancerPool();
         for (String s : fields) {
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
-            }
+            extractField(s, ans);
             if (s.equals("name")) {
                 ans.setLoadBalancerPoolName(this.getLoadBalancerPoolName());
             }

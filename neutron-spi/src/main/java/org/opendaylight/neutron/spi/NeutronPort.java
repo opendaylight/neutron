@@ -246,12 +246,7 @@ public final class NeutronPort extends NeutronObject<NeutronPort> implements Ser
     public NeutronPort extractFields(List<String> fields) {
         NeutronPort ans = new NeutronPort();
         for (String field : fields) {
-            if ("id".equals(field)) {
-                ans.setID(this.getID());
-            }
-            if ("tenant_id".equals(field)) {
-                ans.setTenantID(this.getTenantID());
-            }
+            extractField(field, ans);
             if ("network_id".equals(field)) {
                 ans.setNetworkUUID(this.getNetworkUUID());
             }

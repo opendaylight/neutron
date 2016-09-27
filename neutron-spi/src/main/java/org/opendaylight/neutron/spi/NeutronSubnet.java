@@ -182,12 +182,8 @@ public final class NeutronSubnet extends NeutronObject<NeutronSubnet>
 
     public NeutronSubnet extractFields(List<String> fields) {
         NeutronSubnet ans = new NeutronSubnet();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("network_id")) {
                 ans.setNetworkUUID(this.getNetworkUUID());
             }
@@ -220,9 +216,6 @@ public final class NeutronSubnet extends NeutronObject<NeutronSubnet>
             }
             if (s.equals("enable_dhcp")) {
                 ans.setEnableDHCP(this.getEnableDHCP());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
             }
             if (s.equals("ipv6_address_mode")) {
                 ans.setIpV6AddressMode(this.getIpV6AddressMode());

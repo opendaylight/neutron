@@ -9,7 +9,6 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -86,15 +85,8 @@ public final class NeutronSFCPortPair extends NeutronObject<NeutronSFCPortPair>
 
     public NeutronSFCPortPair extractFields(List<String> fields) {
         NeutronSFCPortPair ans = new NeutronSFCPortPair();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("name")) {
                 ans.setName(this.getName());
             }

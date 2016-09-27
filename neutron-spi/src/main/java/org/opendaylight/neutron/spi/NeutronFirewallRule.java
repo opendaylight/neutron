@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -205,15 +204,8 @@ public final class NeutronFirewallRule extends NeutronObject<NeutronFirewallRule
 
     public NeutronFirewallRule extractFields(List<String> fields) {
         NeutronFirewallRule ans = new NeutronFirewallRule();
-        Iterator<String> i = fields.iterator();
-        while (i.hasNext()) {
-            String s = i.next();
-            if (s.equals("id")) {
-                ans.setID(this.getID());
-            }
-            if (s.equals("tenant_id")) {
-                ans.setTenantID(this.getTenantID());
-            }
+        for (String s : fields) {
+            extractField(s, ans);
             if (s.equals("name")) {
                 ans.setFirewallRuleName(this.getFirewallRuleName());
             }
