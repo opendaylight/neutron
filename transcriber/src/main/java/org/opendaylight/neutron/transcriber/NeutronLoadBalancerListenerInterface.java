@@ -40,7 +40,7 @@ public final class NeutronLoadBalancerListenerInterface
                     .put(ProtocolTerminatedHttps.class, "TERMINATED_HTTPS").build();
 
     NeutronLoadBalancerListenerInterface(DataBroker db) {
-        super(db);
+        super(ListenerBuilder.class, db);
     }
 
     @Override
@@ -61,6 +61,7 @@ public final class NeutronLoadBalancerListenerInterface
     @Override
     protected Listener toMd(NeutronLoadBalancerListener listener) {
         final ListenerBuilder listenerBuilder = new ListenerBuilder();
+        toMdBaseAttributes(listener, listenerBuilder);
         listenerBuilder.setAdminStateUp(listener.getLoadBalancerListenerAdminStateIsUp());
         if (listener.getNeutronLoadBalancerListenerConnectionLimit() != null) {
             listenerBuilder.setConnectionLimit(listener.getNeutronLoadBalancerListenerConnectionLimit());
@@ -75,9 +76,6 @@ public final class NeutronLoadBalancerListenerInterface
             }
             listenerBuilder.setLoadbalancers(listLoadBalancers);
         }
-        if (listener.getName() != null) {
-            listenerBuilder.setName(listener.getName());
-        }
         if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
             listenerBuilder.setProtocol(
@@ -86,26 +84,13 @@ public final class NeutronLoadBalancerListenerInterface
         if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
             listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
         }
-        if (listener.getTenantID() != null) {
-            listenerBuilder.setTenantId(toUuid(listener.getTenantID()));
-        }
-        if (listener.getID() != null) {
-            listenerBuilder.setUuid(toUuid(listener.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron load balancer listener without UUID");
-        }
         return listenerBuilder.build();
     }
 
     @Override
-    protected Listener toMd(String uuid) {
-        final ListenerBuilder listenerBuilder = new ListenerBuilder();
-        listenerBuilder.setUuid(toUuid(uuid));
-        return listenerBuilder.build();
-    }
-
     protected NeutronLoadBalancerListener fromMd(Listener listener) {
         final NeutronLoadBalancerListener answer = new NeutronLoadBalancerListener();
+        fromMdBaseAttributes(listener, answer);
         if (listener.isAdminStateUp() != null) {
             answer.setLoadBalancerListenerAdminStateIsUp(listener.isAdminStateUp());
         }
@@ -122,20 +107,11 @@ public final class NeutronLoadBalancerListenerInterface
             }
             answer.setNeutronLoadBalancerListenerLoadBalancerIDs(list);
         }
-        if (listener.getName() != null) {
-            answer.setName(listener.getName());
-        }
         if (listener.getProtocol() != null) {
             answer.setNeutronLoadBalancerListenerProtocol(PROTOCOL_MAP.get(listener.getProtocol()));
         }
         if (listener.getProtocolPort() != null) {
             answer.setNeutronLoadBalancerListenerProtocolPort(String.valueOf(listener.getProtocolPort()));
-        }
-        if (listener.getTenantId() != null) {
-            answer.setTenantID(listener.getTenantId());
-        }
-        if (listener.getUuid() != null) {
-            answer.setID(listener.getUuid().getValue());
         }
         return answer;
     }

@@ -11,7 +11,9 @@ package org.opendaylight.neutron.transcriber;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.util.concurrent.CheckedFuture;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -26,9 +28,14 @@ import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import org.opendaylight.neutron.spi.INeutronAdminAttributes;
+import org.opendaylight.neutron.spi.INeutronBaseAttributes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.AdminAttributes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.BaseAttributes;
+import org.opendaylight.yangtools.concepts.Builder;
 import org.opendaylight.yangtools.yang.binding.Augmentable;
 import org.opendaylight.yangtools.yang.binding.ChildOf;
 import org.opendaylight.yangtools.yang.binding.DataObject;
@@ -51,8 +58,40 @@ public abstract class AbstractNeutronInterface<T extends DataObject,
 
     private final DataBroker db;
 
-    AbstractNeutronInterface(DataBroker db) {
+    // Unfortunately odl yangtools doesn't model yang model "uses" as
+    // class/interface hierarchy. So we need to resort to use reflection
+    // to call setter method.
+    private final Class<? extends Builder<T>> builderClass;
+    private final Method setUuid;
+    private final Method setTenantId;
+    private final Method setName;
+    private final Method setAdminStateUp;
+    private final Method setStatus;
+
+    AbstractNeutronInterface(Class<? extends Builder<T>> builderClass, DataBroker db) {
         this.db = Preconditions.checkNotNull(db);
+        this.builderClass = builderClass;
+
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        Class<S> iNeutronClass = (Class<S>) parameterizedType.getActualTypeArguments()[2];
+        try {
+            setUuid = builderClass.getDeclaredMethod("setUuid", Uuid.class);
+            setTenantId = builderClass.getDeclaredMethod("setTenantId", Uuid.class);
+            if (INeutronBaseAttributes.class.isAssignableFrom(iNeutronClass)) {
+                setName = builderClass.getDeclaredMethod("setName", String.class);
+            } else {
+                setName = null;
+            }
+            if (INeutronAdminAttributes.class.isAssignableFrom(iNeutronClass)) {
+                setAdminStateUp = builderClass.getDeclaredMethod("setAdminStateUp", Boolean.class);
+                setStatus = builderClass.getDeclaredMethod("setStatus", String.class);
+            } else {
+                setAdminStateUp = null;
+                setStatus = null;
+            }
+        } catch (NoSuchMethodException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     public DataBroker getDataBroker() {
@@ -64,9 +103,91 @@ public abstract class AbstractNeutronInterface<T extends DataObject,
 
     protected abstract InstanceIdentifier<U> createInstanceIdentifier();
 
+    protected <S1 extends INeutronBaseAttributes<S1>, M extends BaseAttributes, B extends Builder<M>>
+        void toMdIds(INeutronObject<S1> neutronObject, B builder) {
+        try {
+            if (neutronObject.getID() != null) {
+                setUuid.invoke(builder, toUuid(neutronObject.getID()));
+            } else {
+                LOGGER.warn("Attempting to write neutron object {} without UUID", builderClass.getSimpleName());
+            }
+            if (neutronObject.getTenantID() != null && !neutronObject.getTenantID().isEmpty()) {
+                setTenantId.invoke(builder, toUuid(neutronObject.getTenantID()));
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    protected <S1 extends INeutronBaseAttributes<S1>>
+        void fromMdIds(BaseAttributes baseAttributes, INeutronObject<S1> answer) {
+        if (baseAttributes.getUuid() != null) {
+            answer.setID(baseAttributes.getUuid().getValue());
+        }
+        if (baseAttributes.getTenantId() != null) {
+            answer.setTenantID(baseAttributes.getTenantId());
+        }
+    }
+
+    protected <S1 extends INeutronBaseAttributes<S1>, M extends BaseAttributes, B extends Builder<M>>
+        void toMdBaseAttributes(S1 neutronObject, B builder) {
+        toMdIds(neutronObject, builder);
+        try {
+            if (neutronObject.getName() != null) {
+                setName.invoke(builder, neutronObject.getName());
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    protected <S1 extends INeutronBaseAttributes<S1>>
+        void fromMdBaseAttributes(BaseAttributes baseAttributes, S1 answer) {
+        fromMdIds(baseAttributes, answer);
+        if (baseAttributes.getName() != null) {
+            answer.setName(baseAttributes.getName());
+        }
+    }
+
+    protected <S1 extends INeutronAdminAttributes<S1>, M extends BaseAttributes & AdminAttributes, B extends Builder<M>>
+        void toMdAdminAttributes(S1 neutronObject, B builder) {
+        toMdBaseAttributes(neutronObject, builder);
+        try {
+            if (neutronObject.getAdminStateUp() != null) {
+                setAdminStateUp.invoke(builder, neutronObject.getAdminStateUp());
+            }
+            if (neutronObject.getStatus() != null) {
+                setStatus.invoke(builder, neutronObject.getStatus());
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    protected <M extends BaseAttributes & AdminAttributes, S1 extends INeutronAdminAttributes<S1>>
+        void fromMdAdminAttributes(M attr, S1 answer) {
+        fromMdBaseAttributes(attr, answer);
+        if (attr.isAdminStateUp() != null) {
+            answer.setAdminStateUp(attr.isAdminStateUp());
+        }
+        if (attr.getStatus() != null) {
+            answer.setStatus(attr.getStatus());
+        }
+    }
+
     protected abstract T toMd(S neutronObject);
 
-    protected abstract T toMd(String uuid);
+    protected T toMd(String uuid) {
+        Builder<T> builder;
+        try {
+            builder = builderClass.newInstance();
+            setUuid.invoke(builder, toUuid(uuid));
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            // should not happen.
+            throw new IllegalArgumentException(e);
+        }
+        return builder.build();
+    }
 
     protected abstract S fromMd(T dataObject);
 

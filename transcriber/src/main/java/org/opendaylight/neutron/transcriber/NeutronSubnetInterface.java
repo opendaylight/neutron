@@ -57,7 +57,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
                     .put(Dhcpv6Slaac.class, "slaac").put(Dhcpv6Stateless.class, "dhcpv6-stateless").build();
 
     NeutronSubnetInterface(DataBroker db) {
-        super(db);
+        super(SubnetBuilder.class, db);
     }
 
     // IfNBSubnetCRUD methods
@@ -69,8 +69,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
 
     protected NeutronSubnet fromMd(Subnet subnet) {
         final NeutronSubnet result = new NeutronSubnet();
-        result.setName(subnet.getName());
-        result.setTenantID(subnet.getTenantId());
+        fromMdBaseAttributes(subnet, result);
         result.setNetworkUUID(subnet.getNetworkId().getValue());
         result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
         result.setCidr(String.valueOf(subnet.getCidr().getValue()));
@@ -111,18 +110,12 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             }
             result.setHostRoutes(hostRoutes);
         }
-        result.setID(subnet.getUuid().getValue());
         return result;
     }
 
     protected Subnet toMd(NeutronSubnet subnet) {
         final SubnetBuilder subnetBuilder = new SubnetBuilder();
-        if (subnet.getName() != null) {
-            subnetBuilder.setName(subnet.getName());
-        }
-        if (subnet.getTenantID() != null) {
-            subnetBuilder.setTenantId(toUuid(subnet.getTenantID()));
-        }
+        toMdBaseAttributes(subnet, subnetBuilder);
         if (subnet.getNetworkUUID() != null) {
             subnetBuilder.setNetworkId(toUuid(subnet.getNetworkUUID()));
         }
@@ -176,18 +169,6 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             }
             subnetBuilder.setHostRoutes(hostRoutes);
         }
-        if (subnet.getID() != null) {
-            subnetBuilder.setUuid(toUuid(subnet.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron subnet without UUID");
-        }
-        return subnetBuilder.build();
-    }
-
-    @Override
-    protected Subnet toMd(String uuid) {
-        final SubnetBuilder subnetBuilder = new SubnetBuilder();
-        subnetBuilder.setUuid(toUuid(uuid));
         return subnetBuilder.build();
     }
 

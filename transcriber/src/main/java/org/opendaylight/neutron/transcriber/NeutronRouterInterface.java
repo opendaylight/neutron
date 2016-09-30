@@ -38,7 +38,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
     // methods needed for creating caches
 
     NeutronRouterInterface(DataBroker db) {
-        super(db);
+        super(RouterBuilder.class, db);
     }
 
     // IfNBRouterCRUD Interface methods
@@ -51,23 +51,10 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
     protected Router toMd(NeutronRouter router) {
 
         final RouterBuilder routerBuilder = new RouterBuilder();
-
-        if (router.getID() != null) {
-            routerBuilder.setUuid(toUuid(router.getID()));
-        }
-        if (router.getName() != null) {
-            routerBuilder.setName(router.getName());
-        }
-        if (router.getTenantID() != null && !router.getTenantID().isEmpty()) {
-            routerBuilder.setTenantId(toUuid(router.getTenantID()));
-        }
-        if (router.getStatus() != null) {
-            routerBuilder.setStatus(router.getStatus());
-        }
+        toMdAdminAttributes(router, routerBuilder);
         if (router.getGatewayPortId() != null && !router.getGatewayPortId().isEmpty()) {
             routerBuilder.setGatewayPortId(toUuid(router.getGatewayPortId()));
         }
-        routerBuilder.setAdminStateUp(router.getAdminStateUp());
         routerBuilder.setDistributed(router.getDistributed());
         if (router.getRoutes() != null) {
             final List<Routes> routes = new ArrayList<Routes>();
@@ -102,18 +89,6 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             }
             routerBuilder.setExternalGatewayInfo(externalGatewayInfo);
         }
-        if (router.getID() != null) {
-            routerBuilder.setUuid(toUuid(router.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron router without UUID");
-        }
-        return routerBuilder.build();
-    }
-
-    @Override
-    protected Router toMd(String uuid) {
-        final RouterBuilder routerBuilder = new RouterBuilder();
-        routerBuilder.setUuid(toUuid(uuid));
         return routerBuilder.build();
     }
 
@@ -129,11 +104,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
 
     public NeutronRouter fromMd(Router router) {
         final NeutronRouter result = new NeutronRouter();
-        result.setID(router.getUuid().getValue());
-        result.setName(router.getName());
-        result.setTenantID(router.getTenantId());
-        result.setAdminStateUp(router.isAdminStateUp());
-        result.setStatus(router.getStatus());
+        fromMdAdminAttributes(router, result);
         result.setDistributed(router.isDistributed());
         if (router.getGatewayPortId() != null) {
             result.setGatewayPortId(String.valueOf(router.getGatewayPortId().getValue()));
