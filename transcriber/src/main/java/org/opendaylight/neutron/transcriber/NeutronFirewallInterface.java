@@ -39,11 +39,6 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
         return InstanceIdentifier.create(Neutron.class).child(Firewalls.class).child(Firewall.class, item.getKey());
     }
 
-    @Override
-    protected InstanceIdentifier<Firewalls> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Firewalls.class);
-    }
-
     protected NeutronFirewall fromMd(Firewall firewall) {
         final NeutronFirewall answer = new NeutronFirewall();
         fromMdBaseAttributes(firewall, answer);

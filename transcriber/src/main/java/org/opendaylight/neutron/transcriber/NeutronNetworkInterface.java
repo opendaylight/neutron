@@ -153,9 +153,4 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
     protected InstanceIdentifier<Network> createInstanceIdentifier(Network network) {
         return InstanceIdentifier.create(Neutron.class).child(Networks.class).child(Network.class, network.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<Networks> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Networks.class);
-    }
 }

@@ -55,11 +55,6 @@ public final class NeutronLoadBalancerHealthMonitorInterface
     }
 
     @Override
-    protected InstanceIdentifier<Healthmonitors> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class);
-    }
-
-    @Override
     protected Healthmonitor toMd(NeutronLoadBalancerHealthMonitor healthMonitor) {
         final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
         healthmonitorBuilder.setAdminStateUp(healthMonitor.getLoadBalancerHealthMonitorAdminStateIsUp());

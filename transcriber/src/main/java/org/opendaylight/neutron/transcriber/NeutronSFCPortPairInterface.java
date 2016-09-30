@@ -43,11 +43,6 @@ public final class NeutronSFCPortPairInterface extends AbstractNeutronInterface<
     }
 
     @Override
-    protected InstanceIdentifier<PortPairs> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(PortPairs.class);
-    }
-
-    @Override
     protected PortPair toMd(NeutronSFCPortPair neutronPortPair) {
 
         LOGGER.trace("toMd: REST SFC Port Pair data : {}", neutronPortPair);

@@ -176,9 +176,4 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
     protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
         return InstanceIdentifier.create(Neutron.class).child(Subnets.class).child(Subnet.class, subnet.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<Subnets> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Subnets.class);
-    }
 }
