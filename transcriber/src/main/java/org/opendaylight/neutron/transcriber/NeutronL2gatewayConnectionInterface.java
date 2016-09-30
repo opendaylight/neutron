@@ -48,11 +48,6 @@ public final class NeutronL2gatewayConnectionInterface
     }
 
     @Override
-    protected InstanceIdentifier<L2gatewayConnections> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(L2gatewayConnections.class);
-    }
-
-    @Override
     protected NeutronL2gatewayConnection fromMd(L2gatewayConnection l2gatewayConnection) {
         final NeutronL2gatewayConnection result = new NeutronL2gatewayConnection();
         if (l2gatewayConnection.getUuid() != null) {

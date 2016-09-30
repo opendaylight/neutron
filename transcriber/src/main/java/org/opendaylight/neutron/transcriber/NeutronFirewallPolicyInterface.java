@@ -43,11 +43,6 @@ public final class NeutronFirewallPolicyInterface
                 item.getKey());
     }
 
-    @Override
-    protected InstanceIdentifier<FirewallPolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(FirewallPolicies.class);
-    }
-
     protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {
         final NeutronFirewallPolicy answer = new NeutronFirewallPolicy();
         fromMdBaseAttributes(policy, answer);

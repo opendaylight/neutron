@@ -100,9 +100,4 @@ public final class NeutronVPNIKEPolicyInterface
         return InstanceIdentifier.create(Neutron.class).child(IkePolicies.class).child(Ikepolicy.class,
                 ikePolicy.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<IkePolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(IkePolicies.class);
-    }
 }

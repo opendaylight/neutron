@@ -75,11 +75,6 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         return InstanceIdentifier.create(Neutron.class).child(Ports.class).child(Port.class, port.getKey());
     }
 
-    @Override
-    protected InstanceIdentifier<Ports> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Ports.class);
-    }
-
     protected void addExtensions(Port port, NeutronPort result) {
         final PortBindingExtension binding = port.getAugmentation(PortBindingExtension.class);
         result.setBindinghostID(binding.getHostId());

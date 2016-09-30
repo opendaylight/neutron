@@ -42,11 +42,6 @@ public final class NeutronMeteringLabelInterface
     }
 
     @Override
-    protected InstanceIdentifier<MeteringLabels> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(MeteringLabels.class);
-    }
-
-    @Override
     protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
         final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
         toMdBaseAttributes(meteringLabel, meteringLabelBuilder);

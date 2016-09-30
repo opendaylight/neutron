@@ -143,9 +143,4 @@ public final class NeutronSecurityRuleInterface extends
         return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
                 securityRule.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<SecurityRules> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class);
-    }
 }

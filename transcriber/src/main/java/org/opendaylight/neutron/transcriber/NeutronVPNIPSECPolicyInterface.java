@@ -99,9 +99,4 @@ public final class NeutronVPNIPSECPolicyInterface
         return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class).child(Ipsecpolicy.class,
                 ipsecPolicy.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<IpsecPolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class);
-    }
 }

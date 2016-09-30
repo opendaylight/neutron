@@ -71,11 +71,6 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    protected InstanceIdentifier<Pools> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Pools.class);
-    }
-
-    @Override
     protected Pool toMd(NeutronLoadBalancerPool pool) {
         final PoolBuilder poolBuilder = new PoolBuilder();
         poolBuilder.setAdminStateUp(pool.getLoadBalancerPoolAdminIsStateIsUp());
