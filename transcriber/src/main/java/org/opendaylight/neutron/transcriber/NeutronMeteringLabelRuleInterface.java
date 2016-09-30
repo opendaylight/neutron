@@ -35,7 +35,7 @@ public final class NeutronMeteringLabelRuleInterface
                     .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();
 
     NeutronMeteringLabelRuleInterface(DataBroker db) {
-        super(db);
+        super(MeteringRuleBuilder.class, db);
     }
 
     // IfNBMeteringLabelRuleCRUD methods
@@ -78,13 +78,6 @@ public final class NeutronMeteringLabelRuleInterface
             meteringRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
-        return meteringRuleBuilder.build();
-    }
-
-    @Override
-    protected MeteringRule toMd(String uuid) {
-        final MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        meteringRuleBuilder.setUuid(toUuid(uuid));
         return meteringRuleBuilder.build();
     }
 

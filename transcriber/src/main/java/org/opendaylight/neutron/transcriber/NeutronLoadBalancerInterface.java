@@ -26,7 +26,7 @@ public final class NeutronLoadBalancerInterface extends
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
 
     NeutronLoadBalancerInterface(DataBroker db) {
-        super(db);
+        super(LoadbalancerBuilder.class, db);
     }
 
     @Override
@@ -47,26 +47,12 @@ public final class NeutronLoadBalancerInterface extends
 
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
         final NeutronLoadBalancer answer = new NeutronLoadBalancer();
-        if (loadBalancer.isAdminStateUp() != null) {
-            answer.setAdminStateUp(loadBalancer.isAdminStateUp());
-        }
-        if (loadBalancer.getName() != null) {
-            answer.setName(loadBalancer.getName());
-        }
-        if (loadBalancer.getStatus() != null) {
-            answer.setStatus(loadBalancer.getStatus());
-        }
-        if (loadBalancer.getTenantId() != null) {
-            answer.setTenantID(loadBalancer.getTenantId());
-        }
+        fromMdAdminAttributes(loadBalancer, answer);
         if (loadBalancer.getVipAddress() != null) {
             answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
         }
         if (loadBalancer.getVipSubnetId() != null) {
             answer.setLoadBalancerVipSubnetID(loadBalancer.getVipSubnetId().getValue());
-        }
-        if (loadBalancer.getUuid() != null) {
-            answer.setID(loadBalancer.getUuid().getValue());
         }
         return answer;
     }
@@ -74,34 +60,13 @@ public final class NeutronLoadBalancerInterface extends
     @Override
     protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
         final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
-        loadBalancerBuilder.setAdminStateUp(loadBalancer.getAdminStateUp());
-        if (loadBalancer.getName() != null) {
-            loadBalancerBuilder.setName(loadBalancer.getName());
-        }
-        if (loadBalancer.getStatus() != null) {
-            loadBalancerBuilder.setStatus(loadBalancer.getStatus());
-        }
-        if (loadBalancer.getTenantID() != null) {
-            loadBalancerBuilder.setTenantId(toUuid(loadBalancer.getTenantID()));
-        }
+        toMdAdminAttributes(loadBalancer, loadBalancerBuilder);
         if (loadBalancer.getLoadBalancerVipAddress() != null) {
             loadBalancerBuilder.setVipAddress(new IpAddress(loadBalancer.getLoadBalancerVipAddress().toCharArray()));
         }
         if (loadBalancer.getLoadBalancerVipSubnetID() != null) {
             loadBalancerBuilder.setVipSubnetId(toUuid(loadBalancer.getLoadBalancerVipSubnetID()));
         }
-        if (loadBalancer.getID() != null) {
-            loadBalancerBuilder.setUuid(toUuid(loadBalancer.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron load balancer without UUID");
-        }
-        return loadBalancerBuilder.build();
-    }
-
-    @Override
-    protected Loadbalancer toMd(String uuid) {
-        final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
-        loadBalancerBuilder.setUuid(toUuid(uuid));
         return loadBalancerBuilder.build();
     }
 }

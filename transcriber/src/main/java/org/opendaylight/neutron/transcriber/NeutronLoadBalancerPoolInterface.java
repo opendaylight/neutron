@@ -57,7 +57,7 @@ public final class NeutronLoadBalancerPoolInterface
                     .put(ProtocolTerminatedHttps.class, "TERMINATED_HTTPS").build();
 
     NeutronLoadBalancerPoolInterface(DataBroker db) {
-        super(db);
+        super(PoolBuilder.class, db);
     }
 
     @Override
@@ -117,13 +117,6 @@ public final class NeutronLoadBalancerPoolInterface
         } else {
             LOGGER.warn("Attempting to write neutron load balancer pool without UUID");
         }
-        return poolBuilder.build();
-    }
-
-    @Override
-    protected Pool toMd(String uuid) {
-        final PoolBuilder poolBuilder = new PoolBuilder();
-        poolBuilder.setUuid(toUuid(uuid));
         return poolBuilder.build();
     }
 

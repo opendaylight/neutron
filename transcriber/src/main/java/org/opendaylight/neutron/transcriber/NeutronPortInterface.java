@@ -61,7 +61,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
                     .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
 
     NeutronPortInterface(DataBroker db) {
-        super(db);
+        super(PortBuilder.class, db);
     }
 
     // IfNBPortCRUD methods
@@ -110,7 +110,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
 
     protected NeutronPort fromMd(Port port) {
         final NeutronPort result = new NeutronPort();
-        result.setAdminStateUp(port.isAdminStateUp());
+        fromMdAdminAttributes(port, result);
         if (port.getAllowedAddressPairs() != null) {
             final List<NeutronPort_AllowedAddressPairs> pairs = new ArrayList<NeutronPort_AllowedAddressPairs>();
             for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
@@ -145,7 +145,6 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             result.setFixedIPs(ips);
         }
         result.setMacAddress(port.getMacAddress().getValue());
-        result.setName(port.getName());
         result.setNetworkUUID(String.valueOf(port.getNetworkId().getValue()));
         if (port.getSecurityGroups() != null) {
             final Set<NeutronSecurityGroup> allGroups = new HashSet<NeutronSecurityGroup>();
@@ -158,11 +157,6 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             groups.addAll(allGroups);
             result.setSecurityGroups(groups);
         }
-        result.setStatus(port.getStatus());
-        if (port.getTenantId() != null) {
-            result.setTenantID(port.getTenantId());
-        }
-        result.setID(port.getUuid().getValue());
         addExtensions(port, result);
         portSecurityExtension(port, result);
         qosExtension(port, result);
@@ -203,9 +197,9 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
 
         final PortBuilder portBuilder = new PortBuilder();
+        toMdAdminAttributes(neutronPort, portBuilder);
         portBuilder.addAugmentation(PortBindingExtension.class, bindingBuilder.build());
         portBuilder.addAugmentation(PortSecurityExtension.class, portSecurityBuilder.build());
-        portBuilder.setAdminStateUp(neutronPort.isAdminStateUp());
         if (neutronPort.getAllowedAddressPairs() != null) {
             final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
             for (final NeutronPort_AllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
@@ -252,9 +246,6 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         if (neutronPort.getMacAddress() != null) {
             portBuilder.setMacAddress(new MacAddress(neutronPort.getMacAddress()));
         }
-        if (neutronPort.getName() != null) {
-            portBuilder.setName(neutronPort.getName());
-        }
         if (neutronPort.getNetworkUUID() != null) {
             portBuilder.setNetworkId(toUuid(neutronPort.getNetworkUUID()));
         }
@@ -265,29 +256,11 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             }
             portBuilder.setSecurityGroups(listSecurityGroups);
         }
-        if (neutronPort.getStatus() != null) {
-            portBuilder.setStatus(neutronPort.getStatus());
-        }
-        if (neutronPort.getTenantID() != null) {
-            portBuilder.setTenantId(toUuid(neutronPort.getTenantID()));
-        }
-        if (neutronPort.getID() != null) {
-            portBuilder.setUuid(toUuid(neutronPort.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron port without UUID");
-        }
         if (neutronPort.getQosPolicyId() != null) {
             final QosPortExtensionBuilder qosExtensionBuilder = new QosPortExtensionBuilder();
             qosExtensionBuilder.setQosPolicyId(toUuid(neutronPort.getQosPolicyId()));
             portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
         }
-        return portBuilder.build();
-    }
-
-    @Override
-    protected Port toMd(String uuid) {
-        final PortBuilder portBuilder = new PortBuilder();
-        portBuilder.setUuid(toUuid(uuid));
         return portBuilder.build();
     }
 }

@@ -40,7 +40,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
                     .put(ProbeTcp.class, "TCP").build();
 
     NeutronLoadBalancerHealthMonitorInterface(DataBroker db) {
-        super(db);
+        super(HealthmonitorBuilder.class, db);
     }
 
     @Override
@@ -101,13 +101,6 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         } else {
             LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
-        return healthmonitorBuilder.build();
-    }
-
-    @Override
-    protected Healthmonitor toMd(String uuid) {
-        final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
-        healthmonitorBuilder.setUuid(toUuid(uuid));
         return healthmonitorBuilder.build();
     }
 

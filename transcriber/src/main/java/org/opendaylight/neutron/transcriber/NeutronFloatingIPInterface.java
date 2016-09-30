@@ -27,7 +27,7 @@ public final class NeutronFloatingIPInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     NeutronFloatingIPInterface(DataBroker db) {
-        super(db);
+        super(FloatingipBuilder.class, db);
     }
 
     // IfNBFloatingIPCRUD interface methods
@@ -35,13 +35,6 @@ public final class NeutronFloatingIPInterface
     @Override
     protected List<Floatingip> getDataObjectList(Floatingips fips) {
         return fips.getFloatingip();
-    }
-
-    @Override
-    protected Floatingip toMd(String uuid) {
-        final FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
-        floatingipBuilder.setUuid(toUuid(uuid));
-        return floatingipBuilder.build();
     }
 
     @Override
