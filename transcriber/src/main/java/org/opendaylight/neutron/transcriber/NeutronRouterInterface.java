@@ -97,11 +97,6 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         return InstanceIdentifier.create(Neutron.class).child(Routers.class).child(Router.class, router.getKey());
     }
 
-    @Override
-    protected InstanceIdentifier<Routers> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Routers.class);
-    }
-
     public NeutronRouter fromMd(Router router) {
         final NeutronRouter result = new NeutronRouter();
         fromMdAdminAttributes(router, result);

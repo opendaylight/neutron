@@ -52,9 +52,4 @@ public final class NeutronSecurityGroupInterface
         return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class).child(SecurityGroup.class,
                 securityGroup.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<SecurityGroups> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class);
-    }
 }

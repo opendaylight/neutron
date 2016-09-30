@@ -54,11 +54,6 @@ public final class NeutronLoadBalancerListenerInterface
     }
 
     @Override
-    protected InstanceIdentifier<Listeners> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Listeners.class);
-    }
-
-    @Override
     protected Listener toMd(NeutronLoadBalancerListener listener) {
         final ListenerBuilder listenerBuilder = new ListenerBuilder();
         toMdBaseAttributes(listener, listenerBuilder);

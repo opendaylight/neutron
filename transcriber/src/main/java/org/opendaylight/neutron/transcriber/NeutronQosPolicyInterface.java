@@ -47,11 +47,6 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
     }
 
     @Override
-    protected InstanceIdentifier<QosPolicies> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(QosPolicies.class);
-    }
-
-    @Override
     protected QosPolicy toMd(NeutronQosPolicy qosPolicy) {
         final QosPolicyBuilder qosPolicyBuilder = new QosPolicyBuilder();
         toMdBaseAttributes(qosPolicy, qosPolicyBuilder);
