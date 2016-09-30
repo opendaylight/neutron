@@ -43,7 +43,7 @@ public final class NeutronFirewallRuleInterface extends
                     .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
 
     NeutronFirewallRuleInterface(DataBroker db) {
-        super(db);
+        super(FirewallRuleBuilder.class, db);
     }
 
     @Override
@@ -64,15 +64,7 @@ public final class NeutronFirewallRuleInterface extends
 
     protected NeutronFirewallRule fromMd(FirewallRule rule) {
         final NeutronFirewallRule answer = new NeutronFirewallRule();
-        if (rule.getUuid() != null) {
-            answer.setID(rule.getUuid().getValue());
-        }
-        if (rule.getName() != null) {
-            answer.setName(rule.getName());
-        }
-        if (rule.getTenantId() != null) {
-            answer.setTenantID(rule.getTenantId());
-        }
+        fromMdBaseAttributes(rule, answer);
         if (rule.isShared() != null) {
             answer.setFirewallRuleIsShared(rule.isShared());
         }
@@ -125,15 +117,7 @@ public final class NeutronFirewallRuleInterface extends
     @Override
     protected FirewallRule toMd(NeutronFirewallRule rule) {
         final FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
-        if (rule.getID() != null) {
-            ruleBuilder.setUuid(toUuid(rule.getID()));
-        }
-        if (rule.getName() != null) {
-            ruleBuilder.setName(rule.getName());
-        }
-        if (rule.getTenantID() != null) {
-            ruleBuilder.setTenantId(toUuid(rule.getTenantID()));
-        }
+        toMdBaseAttributes(rule, ruleBuilder);
         if (rule.getFirewallRuleIsShared() != null) {
             ruleBuilder.setShared(rule.getFirewallRuleIsShared());
         }
@@ -179,13 +163,6 @@ public final class NeutronFirewallRuleInterface extends
             final ImmutableBiMap<String, Class<? extends ActionBase>> mapper = ACTION_MAP.inverse();
             ruleBuilder.setAction(mapper.get(rule.getFirewallRuleAction()));
         }
-        return ruleBuilder.build();
-    }
-
-    @Override
-    protected FirewallRule toMd(String uuid) {
-        final FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
-        ruleBuilder.setUuid(toUuid(uuid));
         return ruleBuilder.build();
     }
 }

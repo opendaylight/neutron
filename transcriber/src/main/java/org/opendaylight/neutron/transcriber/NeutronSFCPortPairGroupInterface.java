@@ -31,7 +31,7 @@ public final class NeutronSFCPortPairGroupInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairGroupInterface.class);
 
     NeutronSFCPortPairGroupInterface(DataBroker db) {
-        super(db);
+        super(PortPairGroupBuilder.class, db);
     }
 
     @Override
@@ -51,9 +51,7 @@ public final class NeutronSFCPortPairGroupInterface
         LOGGER.trace("toMd: REST SFC Port Pair Group data : {}", neutronPortPairGroup);
 
         PortPairGroupBuilder result = new PortPairGroupBuilder();
-        result.setUuid(new Uuid(neutronPortPairGroup.getID()));
-        result.setName(neutronPortPairGroup.getName());
-        result.setTenantId(toUuid(neutronPortPairGroup.getTenantID()));
+        toMdBaseAttributes(neutronPortPairGroup, result);
         if (neutronPortPairGroup.getPortPairs() != null) {
             List<Uuid> portPairs = new ArrayList<>();
             for (String ppUuid : neutronPortPairGroup.getPortPairs()) {
@@ -66,19 +64,10 @@ public final class NeutronSFCPortPairGroupInterface
     }
 
     @Override
-    protected PortPairGroup toMd(String uuid) {
-        final PortPairGroupBuilder portPairGroupBuilder = new PortPairGroupBuilder();
-        portPairGroupBuilder.setUuid(toUuid(uuid));
-        return portPairGroupBuilder.build();
-    }
-
-    @Override
     protected NeutronSFCPortPairGroup fromMd(PortPairGroup mdPortPairGroup) {
         LOGGER.trace("fromMd: Yang SFC Port Pair Group data : {}", mdPortPairGroup);
         NeutronSFCPortPairGroup result = new NeutronSFCPortPairGroup();
-        result.setID(mdPortPairGroup.getUuid().getValue());
-        result.setName(mdPortPairGroup.getName());
-        result.setTenantID(mdPortPairGroup.getTenantId());
+        fromMdBaseAttributes(mdPortPairGroup, result);
         if (mdPortPairGroup.getPortPairs() != null) {
             List<String> portPairsUUID = new ArrayList<>();
             for (Uuid uuid : mdPortPairGroup.getPortPairs()) {

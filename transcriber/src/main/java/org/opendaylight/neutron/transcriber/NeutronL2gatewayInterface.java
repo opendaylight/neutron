@@ -32,7 +32,7 @@ public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayInterface.class);
 
     NeutronL2gatewayInterface(DataBroker db) {
-        super(db);
+        super(L2gatewayBuilder.class, db);
     }
 
     @Override
@@ -149,13 +149,6 @@ public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2
             }
             l2gatewayBuilder.setDevices(devices);
         }
-        return l2gatewayBuilder.build();
-    }
-
-    @Override
-    protected L2gateway toMd(String uuid) {
-        final L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
-        l2gatewayBuilder.setUuid(toUuid(uuid));
         return l2gatewayBuilder.build();
     }
 }

@@ -27,7 +27,7 @@ public final class NeutronL2gatewayConnectionInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayConnectionInterface.class);
 
     NeutronL2gatewayConnectionInterface(DataBroker db) {
-        super(db);
+        super(L2gatewayConnectionBuilder.class, db);
     }
 
     @Override
@@ -100,13 +100,6 @@ public final class NeutronL2gatewayConnectionInterface
         if (neutronObject.getPortID() != null) {
             l2gatewayConnectionBuilder.setPortId(toUuid(neutronObject.getPortID()));
         }
-        return l2gatewayConnectionBuilder.build();
-    }
-
-    @Override
-    protected L2gatewayConnection toMd(String uuid) {
-        final L2gatewayConnectionBuilder l2gatewayConnectionBuilder = new L2gatewayConnectionBuilder();
-        l2gatewayConnectionBuilder.setUuid(toUuid(uuid));
         return l2gatewayConnectionBuilder.build();
     }
 }

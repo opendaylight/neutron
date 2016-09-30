@@ -26,7 +26,7 @@ public final class NeutronMeteringLabelInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
 
     NeutronMeteringLabelInterface(DataBroker db) {
-        super(db);
+        super(MeteringLabelBuilder.class, db);
     }
 
     // IfNBMeteringLabelCRUD methods
@@ -49,41 +49,19 @@ public final class NeutronMeteringLabelInterface
     @Override
     protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
         final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-        if (meteringLabel.getName() != null) {
-            meteringLabelBuilder.setName(meteringLabel.getName());
-        }
+        toMdBaseAttributes(meteringLabel, meteringLabelBuilder);
         if (meteringLabel.getMeteringLabelShared() != null) {
             meteringLabelBuilder.setShared(meteringLabel.getMeteringLabelShared());
-        }
-        if (meteringLabel.getTenantID() != null) {
-            meteringLabelBuilder.setTenantId(toUuid(meteringLabel.getTenantID()));
-        }
-        if (meteringLabel.getID() != null) {
-            meteringLabelBuilder.setUuid(toUuid(meteringLabel.getID()));
         }
         return meteringLabelBuilder.build();
     }
 
     @Override
-    protected MeteringLabel toMd(String uuid) {
-        final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-        meteringLabelBuilder.setUuid(toUuid(uuid));
-        return meteringLabelBuilder.build();
-    }
-
     protected NeutronMeteringLabel fromMd(MeteringLabel label) {
         final NeutronMeteringLabel answer = new NeutronMeteringLabel();
-        if (label.getName() != null) {
-            answer.setName(label.getName());
-        }
+        fromMdBaseAttributes(label, answer);
         if (label.isShared() != null) {
             answer.setMeteringLabelShared(label.isShared());
-        }
-        if (label.getTenantId() != null) {
-            answer.setTenantID(label.getTenantId());
-        }
-        if (label.getUuid() != null) {
-            answer.setID(label.getUuid().getValue());
         }
         return answer;
     }

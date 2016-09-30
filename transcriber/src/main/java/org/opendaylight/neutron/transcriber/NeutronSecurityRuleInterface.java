@@ -42,7 +42,7 @@ public final class NeutronSecurityRuleInterface extends
                     .put(EthertypeV4.class, "IPv4").put(EthertypeV6.class, "IPv6").build();
 
     NeutronSecurityRuleInterface(DataBroker db) {
-        super(db);
+        super(SecurityRuleBuilder.class, db);
     }
 
     @Override
@@ -135,13 +135,6 @@ public final class NeutronSecurityRuleInterface extends
         } else {
             LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }
-        return securityRuleBuilder.build();
-    }
-
-    @Override
-    protected SecurityRule toMd(String uuid) {
-        final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
-        securityRuleBuilder.setUuid(toUuid(uuid));
         return securityRuleBuilder.build();
     }
 
