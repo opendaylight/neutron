@@ -68,11 +68,6 @@ public final class NeutronSFCFlowClassifierInterface
     }
 
     @Override
-    protected InstanceIdentifier<SfcFlowClassifiers> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(SfcFlowClassifiers.class);
-    }
-
-    @Override
     protected SfcFlowClassifier toMd(NeutronSFCFlowClassifier neutronClassifier) {
 
         LOGGER.trace("toMd: REST SFC Flow Classifier data : {}", neutronClassifier);

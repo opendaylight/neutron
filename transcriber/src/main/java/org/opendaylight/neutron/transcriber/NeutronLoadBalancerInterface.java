@@ -40,11 +40,6 @@ public final class NeutronLoadBalancerInterface extends
                 loadBalancer.getKey());
     }
 
-    @Override
-    protected InstanceIdentifier<Loadbalancers> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class);
-    }
-
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
         final NeutronLoadBalancer answer = new NeutronLoadBalancer();
         fromMdAdminAttributes(loadBalancer, answer);

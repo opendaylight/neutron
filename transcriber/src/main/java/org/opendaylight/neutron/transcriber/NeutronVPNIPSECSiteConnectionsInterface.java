@@ -146,11 +146,6 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
     }
 
     @Override
-    protected InstanceIdentifier<IpsecSiteConnections> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class);
-    }
-
-    @Override
     protected InstanceIdentifier<Ipsecsiteconnection> createInstanceIdentifier(
             Ipsecsiteconnection ipsecSiteConnection) {
         return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class)

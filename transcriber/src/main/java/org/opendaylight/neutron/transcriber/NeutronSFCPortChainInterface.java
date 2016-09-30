@@ -50,11 +50,6 @@ public final class NeutronSFCPortChainInterface
     }
 
     @Override
-    protected InstanceIdentifier<PortChains> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(PortChains.class);
-    }
-
-    @Override
     protected PortChain toMd(NeutronSFCPortChain neutronPortChain) {
 
         LOGGER.trace("toMd: REST SFC Port Chain data : {}", neutronPortChain);
