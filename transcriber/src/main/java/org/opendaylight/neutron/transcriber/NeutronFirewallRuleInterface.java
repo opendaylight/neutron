@@ -57,11 +57,6 @@ public final class NeutronFirewallRuleInterface extends
                 item.getKey());
     }
 
-    @Override
-    protected InstanceIdentifier<FirewallRules> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(FirewallRules.class);
-    }
-
     protected NeutronFirewallRule fromMd(FirewallRule rule) {
         final NeutronFirewallRule answer = new NeutronFirewallRule();
         fromMdBaseAttributes(rule, answer);

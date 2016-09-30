@@ -41,11 +41,6 @@ public final class NeutronSFCPortPairGroupInterface
     }
 
     @Override
-    protected InstanceIdentifier<PortPairGroups> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(PortPairGroups.class);
-    }
-
-    @Override
     protected PortPairGroup toMd(NeutronSFCPortPairGroup neutronPortPairGroup) {
 
         LOGGER.trace("toMd: REST SFC Port Pair Group data : {}", neutronPortPairGroup);

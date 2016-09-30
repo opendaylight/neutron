@@ -174,9 +174,4 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
     protected InstanceIdentifier<Bgpvpn> createInstanceIdentifier(Bgpvpn bgpvpn) {
         return InstanceIdentifier.create(Neutron.class).child(Bgpvpns.class).child(Bgpvpn.class, bgpvpn.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<Bgpvpns> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Bgpvpns.class);
-    }
 }

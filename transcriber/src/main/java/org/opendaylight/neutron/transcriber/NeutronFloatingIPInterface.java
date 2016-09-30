@@ -98,9 +98,4 @@ public final class NeutronFloatingIPInterface
     protected InstanceIdentifier<Floatingip> createInstanceIdentifier(Floatingip item) {
         return InstanceIdentifier.create(Neutron.class).child(Floatingips.class).child(Floatingip.class, item.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<Floatingips> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(Floatingips.class);
-    }
 }
