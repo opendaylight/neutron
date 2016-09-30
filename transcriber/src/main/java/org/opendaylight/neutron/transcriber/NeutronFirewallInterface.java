@@ -50,7 +50,7 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
             answer.setID(firewall.getUuid().getValue());
         }
         if (firewall.getName() != null) {
-            answer.setFirewallName(firewall.getName());
+            answer.setName(firewall.getName());
         }
         if (firewall.getTenantId() != null) {
             answer.setTenantID(firewall.getTenantId());
@@ -71,8 +71,8 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
         if (firewall.getID() != null) {
             firewallBuilder.setUuid(toUuid(firewall.getID()));
         }
-        if (firewall.getFirewallName() != null) {
-            firewallBuilder.setName(firewall.getFirewallName());
+        if (firewall.getName() != null) {
+            firewallBuilder.setName(firewall.getName());
         }
         if (firewall.getTenantID() != null) {
             firewallBuilder.setTenantId(toUuid(firewall.getTenantID()));

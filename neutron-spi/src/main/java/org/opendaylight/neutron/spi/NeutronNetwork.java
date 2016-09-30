@@ -17,18 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
-        implements Serializable, INeutronObject<NeutronNetwork> {
+public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork> implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String networkName;
-
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
 
     @XmlElement(defaultValue = "false", name = "shared")
     Boolean shared;
@@ -48,9 +41,6 @@ public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
     //    @XmlElement (name = "provider:segmentation_id")
     @XmlElement(namespace = "provider", name = "segmentation_id")
     String providerSegmentationID;
-
-    @XmlElement(name = "status")
-    String status;
 
     @XmlElement(name = "segments")
     List<NeutronNetwork_Segment> segments;
@@ -90,24 +80,8 @@ public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
         }
     }
 
-    public String getNetworkName() {
-        return networkName;
-    }
-
-    public void setNetworkName(String networkName) {
-        this.networkName = networkName;
-    }
-
     public boolean isAdminStateUp() {
         return adminStateUp;
-    }
-
-    public Boolean getAdminStateUp() {
-        return adminStateUp;
-    }
-
-    public void setAdminStateUp(boolean newValue) {
-        adminStateUp = newValue;
     }
 
     public boolean isShared() {
@@ -158,14 +132,6 @@ public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
         this.providerSegmentationID = providerSegmentationID;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public void setSegments(List<NeutronNetwork_Segment> segments) {
         this.segments = segments;
     }
@@ -212,15 +178,6 @@ public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
         NeutronNetwork ans = new NeutronNetwork();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setNetworkName(this.getNetworkName());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setAdminStateUp(adminStateUp);
-            }
-            if (s.equals("status")) {
-                ans.setStatus(this.getStatus());
-            }
             if (s.equals("shared")) {
                 ans.setShared(shared);
             }
@@ -246,7 +203,7 @@ public final class NeutronNetwork extends NeutronObject<NeutronNetwork>
 
     @Override
     public String toString() {
-        return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + networkName + ", adminStateUp=" + adminStateUp
+        return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + name + ", adminStateUp=" + adminStateUp
                 + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
                 + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status

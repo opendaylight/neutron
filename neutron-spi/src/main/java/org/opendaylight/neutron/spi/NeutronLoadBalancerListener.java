@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronLoadBalancerListener extends NeutronObject<NeutronLoadBalancerListener>
-        implements Serializable, INeutronObject<NeutronLoadBalancerListener> {
+public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<NeutronLoadBalancerListener>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "default_pool_id")
@@ -46,9 +46,6 @@ public final class NeutronLoadBalancerListener extends NeutronObject<NeutronLoad
 
     @XmlElement(name = "connection_limit")
     Integer neutronLoadBalancerListenerConnectionLimit;
-
-    @XmlElement(name = "name")
-    String loadBalancerListenerName;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerListenerAdminStateIsUp;
@@ -61,14 +58,6 @@ public final class NeutronLoadBalancerListener extends NeutronObject<NeutronLoad
 
     @XmlElement(name = "load_balancers")
     List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs;
-
-    public String getLoadBalancerListenerName() {
-        return loadBalancerListenerName;
-    }
-
-    public void setLoadBalancerListenerName(String loadBalancerListenerName) {
-        this.loadBalancerListenerName = loadBalancerListenerName;
-    }
 
     public Boolean getLoadBalancerListenerAdminStateIsUp() {
         return loadBalancerListenerAdminStateIsUp;
@@ -126,9 +115,6 @@ public final class NeutronLoadBalancerListener extends NeutronObject<NeutronLoad
             if (s.equals("default_pool_id")) {
                 ans.setNeutronLoadBalancerListenerDefaultPoolID(this.getNeutronLoadBalancerListenerDefaultPoolID());
             }
-            if (s.equals("name")) {
-                ans.setLoadBalancerListenerName(this.getLoadBalancerListenerName());
-            }
             if (s.equals("protocol")) {
                 ans.setNeutronLoadBalancerListenerProtocol(this.getNeutronLoadBalancerListenerProtocol());
             }
@@ -148,7 +134,7 @@ public final class NeutronLoadBalancerListener extends NeutronObject<NeutronLoad
                 + ", neutronLoadBalancerListenerDefaultPoolID='" + neutronLoadBalancerListenerDefaultPoolID + '\''
                 + ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\''
                 + ", loadBalancerListenerTenantID='" + tenantID + '\'' + ", loadBalancerListenerName='"
-                + loadBalancerListenerName + '\'' + ", loadBalancerListenerAdminStateIsUp="
+                + name + '\'' + ", loadBalancerListenerAdminStateIsUp="
                 + loadBalancerListenerAdminStateIsUp + ", neutronLoadBalancerListenerProtocol='"
                 + neutronLoadBalancerListenerProtocol + '\'' + ", neutronLoadBalancerListenerProtocolPort='"
                 + neutronLoadBalancerListenerProtocolPort + '\'' + '}';

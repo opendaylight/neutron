@@ -64,7 +64,7 @@ public final class NeutronQosPolicyNorthbound
         for (NeutronQosPolicy nsg : qosPolicyInterface.getAll()) {
             if ((queryQosPolicyUUID == null || queryQosPolicyUUID.equals(nsg.getID()))
                     && (queryQosPolicyTenantID == null || queryQosPolicyTenantID.equals(nsg.getTenantID()))
-                    && (queryQosPolicyName == null || queryQosPolicyName.equals(nsg.getQosPolicyName()))
+                    && (queryQosPolicyName == null || queryQosPolicyName.equals(nsg.getName()))
                     && (queryQosPolicyIsShared == null || queryQosPolicyIsShared.equals(nsg.getPolicyIsShared()))) {
                 if (fields.size() > 0) {
                     ans.add(nsg.extractFields(fields));

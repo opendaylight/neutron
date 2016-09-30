@@ -94,7 +94,7 @@ public final class NeutronFirewallRulesNorthbound
         for (NeutronFirewallRule nsr : firewallRuleInterface.getAll()) {
             if ((queryFirewallRuleUUID == null || queryFirewallRuleUUID.equals(nsr.getID()))
                     && (queryFirewallRuleTenantID == null || queryFirewallRuleTenantID.equals(nsr.getTenantID()))
-                    && (queryFirewallRuleName == null || queryFirewallRuleName.equals(nsr.getFirewallRuleName()))
+                    && (queryFirewallRuleName == null || queryFirewallRuleName.equals(nsr.getName()))
                     && (queryFirewallRuleIsShared == null
                             || queryFirewallRuleIsShared.equals(nsr.getFirewallRuleIsShared()))
                     && (queryFirewallRulePolicyID == null

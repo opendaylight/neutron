@@ -59,7 +59,7 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
         final NeutronNetwork result = new NeutronNetwork();
         result.initDefaults();
         result.setAdminStateUp(network.isAdminStateUp());
-        result.setNetworkName(network.getName());
+        result.setName(network.getName());
         result.setShared(network.isShared());
         result.setStatus(network.getStatus());
         result.setTenantID(network.getTenantId());
@@ -147,8 +147,8 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
         fillExtensions(networkBuilder, network);
 
         networkBuilder.setAdminStateUp(network.getAdminStateUp());
-        if (network.getNetworkName() != null) {
-            networkBuilder.setName(network.getNetworkName());
+        if (network.getName() != null) {
+            networkBuilder.setName(network.getName());
         }
         if (network.getShared() != null) {
             networkBuilder.setShared(network.getShared());

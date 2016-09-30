@@ -40,7 +40,7 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 4: Testing status failed", "ACTIVE", testObject.getStatus());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing name failed", "net1", testObject.getNetworkName());
+        Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing name failed", "net1", testObject.getName());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 7: Testing admin state up failed", true,
                 testObject.getAdminStateUp());
@@ -81,7 +81,7 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing status failed", "ACTIVE", testObject.getStatus());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 5: Testing name failed", "net1", testObject.getNetworkName());
+        Assert.assertEquals("NeutronNetwork JAXB Test 5: Testing name failed", "net1", testObject.getName());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing admin state up failed", true,
                 testObject.getAdminStateUp());
@@ -134,7 +134,7 @@ public class NeutronNetworkJAXBTest {
         Assert.assertNull("NeutronNetwork JAXB Test 2: Testing tenant_id failed", testObject.getTenantID());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing name failed",
-                "HA network tenant c15340eb65804b20af2dd0fd3beddc8c", testObject.getNetworkName());
+                "HA network tenant c15340eb65804b20af2dd0fd3beddc8c", testObject.getName());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 4: Testing admin state up failed", true,
                 testObject.getAdminStateUp());

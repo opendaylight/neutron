@@ -84,7 +84,7 @@ public final class NeutronFirewallPolicyNorthbound extends
         for (NeutronFirewallPolicy nsg : firewallPolicyInterface.getAll()) {
             if ((queryFirewallPolicyUUID == null || queryFirewallPolicyUUID.equals(nsg.getID()))
                     && (queryFirewallPolicyTenantID == null || queryFirewallPolicyTenantID.equals(nsg.getTenantID()))
-                    && (queryFirewallPolicyName == null || queryFirewallPolicyName.equals(nsg.getFirewallPolicyName()))
+                    && (queryFirewallPolicyName == null || queryFirewallPolicyName.equals(nsg.getName()))
                     && (querySecurityPolicyIsShared == null
                             || querySecurityPolicyIsShared.equals(nsg.getFirewallPolicyIsShared()))
                     && (querySecurityPolicyIsAudited == null

@@ -29,7 +29,7 @@ public class NeutronMeteringLabelJAXBTest {
                 "4e8e5957-649f-477b-9e5b-f1f75b21c03c", testObject.getID());
 
         Assert.assertEquals("NeutronMeteringLabel JAXB Test 2: Testing name failed", "net1",
-                testObject.getMeteringLabelName());
+                testObject.getName());
 
         Assert.assertEquals("NeutronMeteringLabel JAXB Test 4: Testing tenant_id failed",
                 "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());

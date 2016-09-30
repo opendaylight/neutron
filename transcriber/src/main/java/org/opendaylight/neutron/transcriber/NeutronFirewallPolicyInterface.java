@@ -54,7 +54,7 @@ public final class NeutronFirewallPolicyInterface
             answer.setID(policy.getUuid().getValue());
         }
         if (policy.getName() != null) {
-            answer.setFirewallPolicyName(policy.getName());
+            answer.setName(policy.getName());
         }
         if (policy.getTenantId() != null) {
             answer.setTenantID(policy.getTenantId());
@@ -74,8 +74,8 @@ public final class NeutronFirewallPolicyInterface
         if (policy.getID() != null) {
             policyBuilder.setUuid(toUuid(policy.getID()));
         }
-        if (policy.getFirewallPolicyName() != null) {
-            policyBuilder.setName(policy.getFirewallPolicyName());
+        if (policy.getName() != null) {
+            policyBuilder.setName(policy.getName());
         }
         if (policy.getTenantID() != null) {
             policyBuilder.setTenantId(toUuid(policy.getTenantID()));

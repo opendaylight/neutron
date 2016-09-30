@@ -85,7 +85,7 @@ public final class NeutronFirewallNorthbound
         for (NeutronFirewall nsg : firewallInterface.getAll()) {
             if ((queryFirewallUUID == null || queryFirewallUUID.equals(nsg.getID()))
                     && (queryFirewallTenantID == null || queryFirewallTenantID.equals(nsg.getTenantID()))
-                    && (queryFirewallName == null || queryFirewallName.equals(nsg.getFirewallName()))
+                    && (queryFirewallName == null || queryFirewallName.equals(nsg.getName()))
                     && (queryFirewallAdminStateIsUp == null
                             || queryFirewallAdminStateIsUp.equals(nsg.getFirewallAdminStateIsUp()))
                     && (queryFirewallIsShared == null || queryFirewallIsShared.equals(nsg.getFirewallIsShared()))

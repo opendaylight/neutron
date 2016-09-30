@@ -52,7 +52,7 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
     protected NeutronBgpvpn fromMd(Bgpvpn bgpvpn) {
         final NeutronBgpvpn result = new NeutronBgpvpn();
         result.setAdminStateUp(bgpvpn.isAdminStateUp());
-        result.setBgpvpnName(bgpvpn.getName());
+        result.setName(bgpvpn.getName());
         result.setAutoAggregate(bgpvpn.isAutoAggregate());
         result.setStatus(bgpvpn.getStatus());
         result.setTenantID(bgpvpn.getTenantId());
@@ -116,8 +116,8 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
         final BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
 
         bgpvpnBuilder.setAdminStateUp(bgpvpn.getAdminStateUp());
-        if (bgpvpn.getBgpvpnName() != null) {
-            bgpvpnBuilder.setName(bgpvpn.getBgpvpnName());
+        if (bgpvpn.getName() != null) {
+            bgpvpnBuilder.setName(bgpvpn.getName());
         }
         if (bgpvpn.getAutoAggregate() != null) {
             bgpvpnBuilder.setAutoAggregate(bgpvpn.getAutoAggregate());

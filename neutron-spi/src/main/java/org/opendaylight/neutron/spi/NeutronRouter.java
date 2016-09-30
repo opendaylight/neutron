@@ -17,21 +17,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronRouter extends NeutronObject<NeutronRouter>
-        implements Serializable, INeutronObject<NeutronRouter> {
+public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-    @XmlElement(name = "name")
-    String name;
-
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
-    @XmlElement(name = "status")
-    String status;
-
     @XmlElement(name = "external_gateway_info", nillable = true)
     NeutronRouter_NetworkReference externalGatewayInfo;
 
@@ -47,35 +38,11 @@ public final class NeutronRouter extends NeutronObject<NeutronRouter>
     public NeutronRouter() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean isAdminStateUp() {
         if (adminStateUp == null) {
             return true;
         }
         return adminStateUp;
-    }
-
-    public Boolean getAdminStateUp() {
-        return adminStateUp;
-    }
-
-    public void setAdminStateUp(Boolean newValue) {
-        adminStateUp = newValue;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public NeutronRouter_NetworkReference getExternalGatewayInfo() {
@@ -123,15 +90,6 @@ public final class NeutronRouter extends NeutronObject<NeutronRouter>
         NeutronRouter ans = new NeutronRouter();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setAdminStateUp(this.getAdminStateUp());
-            }
-            if (s.equals("status")) {
-                ans.setStatus(this.getStatus());
-            }
             if (s.equals("external_gateway_info")) {
                 ans.setExternalGatewayInfo(this.getExternalGatewayInfo());
             }
