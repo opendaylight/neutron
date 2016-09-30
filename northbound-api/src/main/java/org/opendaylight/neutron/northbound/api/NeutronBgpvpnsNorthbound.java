@@ -107,7 +107,7 @@ public final class NeutronBgpvpnsNorthbound
                 bAutoAggregate = Boolean.valueOf(queryAutoAggregate);
             }
             if ((queryID == null || queryID.equals(oSN.getID()))
-                    && (queryName == null || queryName.equals(oSN.getBgpvpnName()))
+                    && (queryName == null || queryName.equals(oSN.getName()))
                     && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
                     && (queryStatus == null || queryStatus.equals(oSN.getStatus()))
                     && (bAutoAggregate == null || bAutoAggregate.booleanValue() == oSN.isAutoAggregate())

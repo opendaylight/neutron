@@ -19,16 +19,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSFCPortPair extends NeutronObject<NeutronSFCPortPair>
-        implements Serializable, INeutronObject<NeutronSFCPortPair> {
+public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPortPair> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair API v1.0 Reference
     // for description of annotated attributes
-    @XmlElement(name = "name")
-    String name;
-
     @XmlElement(name = "ingress")
     String ingressPortUUID;
 
@@ -40,14 +36,6 @@ public final class NeutronSFCPortPair extends NeutronObject<NeutronSFCPortPair>
     Map<String, String> serviceFunctionParameters;
 
     public NeutronSFCPortPair() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getIngressPortUUID() {
@@ -87,9 +75,6 @@ public final class NeutronSFCPortPair extends NeutronObject<NeutronSFCPortPair>
         NeutronSFCPortPair ans = new NeutronSFCPortPair();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("ingress")) {
                 ans.setIngressPortUUID(this.getIngressPortUUID());
             }

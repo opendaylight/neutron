@@ -17,21 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "bgpvpn")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronBgpvpn extends NeutronObject<NeutronBgpvpn>
-        implements Serializable, INeutronObject<NeutronBgpvpn> {
+public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String bgpvpnName;
-
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
-    @XmlElement(name = "status")
-    String status;
 
     @XmlElement(defaultValue = "l3", name = "type")
     String type;
@@ -85,32 +75,8 @@ public final class NeutronBgpvpn extends NeutronObject<NeutronBgpvpn>
         }
     }
 
-    public String getBgpvpnName() {
-        return bgpvpnName;
-    }
-
-    public void setBgpvpnName(String bgpvpnName) {
-        this.bgpvpnName = bgpvpnName;
-    }
-
     public boolean isAdminStateUp() {
         return adminStateUp;
-    }
-
-    public Boolean getAdminStateUp() {
-        return adminStateUp;
-    }
-
-    public void setAdminStateUp(boolean newValue) {
-        adminStateUp = newValue;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public boolean isAutoAggregate() {
@@ -259,15 +225,6 @@ public final class NeutronBgpvpn extends NeutronObject<NeutronBgpvpn>
         NeutronBgpvpn ans = new NeutronBgpvpn();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setBgpvpnName(this.getBgpvpnName());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setAdminStateUp(adminStateUp);
-            }
-            if (s.equals("status")) {
-                ans.setStatus(this.getStatus());
-            }
             if (s.equals("type")) {
                 ans.setType(this.getType());
             }
@@ -304,7 +261,7 @@ public final class NeutronBgpvpn extends NeutronObject<NeutronBgpvpn>
 
     @Override
     public String toString() {
-        return "NeutronBgpvpn [bgpvpnUUID=" + uuid + ", bgpvpnName=" + bgpvpnName + ", adminStateUp=" + adminStateUp
+        return "NeutronBgpvpn [bgpvpnUUID=" + uuid + ", bgpvpnName=" + name + ", adminStateUp=" + adminStateUp
                 + ", status=" + status + ", tenantID=" + tenantID + ", type=" + type + ", technique=" + technique
                 + ", routeTargets=" + routeTargets + ", importTargets=" + importTargets + ", exportTargets="
                 + exportTargets + ", routeDistinguishers=" + routeDistinguishers + ", vnid = " + vnid

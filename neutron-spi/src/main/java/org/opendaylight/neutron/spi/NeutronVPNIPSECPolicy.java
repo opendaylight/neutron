@@ -17,15 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronVPNIPSECPolicy extends NeutronObject<NeutronVPNIPSECPolicy>
-        implements Serializable, INeutronObject<NeutronVPNIPSECPolicy> {
+public final class NeutronVPNIPSECPolicy extends NeutronBaseAttributes<NeutronVPNIPSECPolicy> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement(name = "name")
-    String name;
 
     @XmlElement(name = "transform_protocol")
     String transformProtocol;
@@ -46,14 +42,6 @@ public final class NeutronVPNIPSECPolicy extends NeutronObject<NeutronVPNIPSECPo
     NeutronVPNLifetime lifetime;
 
     public NeutronVPNIPSECPolicy() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getTransformProtocol() {
@@ -117,9 +105,6 @@ public final class NeutronVPNIPSECPolicy extends NeutronObject<NeutronVPNIPSECPo
         NeutronVPNIPSECPolicy ans = new NeutronVPNIPSECPolicy();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("transform_protocol")) {
                 ans.setTransformProtocol(this.getTransformProtocol());
             }

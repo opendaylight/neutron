@@ -31,13 +31,13 @@ public class NeutronLoadBalancerJAXBTest {
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.uuid);
 
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed",
-                "NeutronLoadBalancer", testObject.getLoadBalancerName());
+                "NeutronLoadBalancer", testObject.getName());
 
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 4: Testing status failed", "ACTIVE",
-                testObject.getLoadBalancerStatus());
+                testObject.getStatus());
 
         Assert.assertFalse("NeutronLoadBalancer JAXB Test 5: Testing Admin state up failed",
-                testObject.getLoadBalancerAdminStateUp());
+                testObject.getAdminStateUp());
 
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 6: Testing LoadBalancer VipAddress failed", "10.0.0.3",
                 testObject.getLoadBalancerVipAddress());

@@ -89,7 +89,7 @@ public final class NeutronLoadBalancerNorthbound
             NeutronLoadBalancer nsg = i.next();
             if ((queryLoadBalancerID == null || queryLoadBalancerID.equals(nsg.getID()))
                     && (queryLoadBalancerTenantID == null || queryLoadBalancerTenantID.equals(nsg.getTenantID()))
-                    && (queryLoadBalancerName == null || queryLoadBalancerName.equals(nsg.getLoadBalancerName()))
+                    && (queryLoadBalancerName == null || queryLoadBalancerName.equals(nsg.getName()))
                     && (queryLoadBalancerVipAddress == null
                             || queryLoadBalancerVipAddress.equals(nsg.getLoadBalancerVipAddress()))
                     && (queryLoadBalancerVipSubnet == null

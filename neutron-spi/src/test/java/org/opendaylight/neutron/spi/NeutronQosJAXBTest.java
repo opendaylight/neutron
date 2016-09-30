@@ -37,7 +37,7 @@ public class NeutronQosJAXBTest {
                 "aa902936679e4ea29bfe1158e3450a13", neutronObject.getTenantID());
 
         Assert.assertEquals("NeutronQosPolicy JAXB Test 3 : Testing Name failed", "jaxb-test",
-                neutronObject.getQosPolicyName());
+                neutronObject.getName());
 
         Assert.assertFalse("NeutronQosPolicy JaxB Test 4 : Testing Shared failed", neutronObject.getPolicyIsShared());
 

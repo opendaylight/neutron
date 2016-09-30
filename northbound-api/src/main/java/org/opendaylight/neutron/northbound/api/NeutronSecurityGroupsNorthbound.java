@@ -81,7 +81,7 @@ public final class NeutronSecurityGroupsNorthbound extends
         while (i.hasNext()) {
             NeutronSecurityGroup nsg = i.next();
             if ((querySecurityGroupUUID == null || querySecurityGroupUUID.equals(nsg.getID()))
-                    && (querySecurityGroupName == null || querySecurityGroupName.equals(nsg.getSecurityGroupName()))
+                    && (querySecurityGroupName == null || querySecurityGroupName.equals(nsg.getName()))
                     && (querySecurityTenantID == null || querySecurityTenantID.equals(nsg.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(nsg.extractFields(fields));
