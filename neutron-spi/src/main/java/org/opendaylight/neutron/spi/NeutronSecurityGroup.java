@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -27,31 +26,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSecurityGroup extends NeutronObject<NeutronSecurityGroup>
-        implements Serializable, INeutronObject<NeutronSecurityGroup> {
+public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSecurityGroup> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "name")
-    String securityGroupName;
-
     public NeutronSecurityGroup() {
-    }
-
-    public String getSecurityGroupName() {
-        return securityGroupName;
-    }
-
-    public void setSecurityGroupName(String securityGroupName) {
-        this.securityGroupName = securityGroupName;
     }
 
     public NeutronSecurityGroup extractFields(List<String> fields) {
         NeutronSecurityGroup ans = new NeutronSecurityGroup();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setSecurityGroupName(this.getSecurityGroupName());
-            }
         }
         return ans;
     }
@@ -59,7 +43,7 @@ public final class NeutronSecurityGroup extends NeutronObject<NeutronSecurityGro
     @Override
     public String toString() {
         return "NeutronSecurityGroup{" + "securityGroupUUID='" + uuid + '\'' + ", securityGroupName='"
-                + securityGroupName + '\'' + ", securityGroupTenantID='" + tenantID + '\'' + "]";
+                + name + '\'' + ", securityGroupTenantID='" + tenantID + '\'' + "]";
     }
 
     @Override

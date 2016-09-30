@@ -32,7 +32,7 @@ public class NeutronFirewallJAXBTest {
                 "aa902936679e4ea29bfe1158e3450a13", testObject.getTenantID());
 
         Assert.assertEquals("NeutronFirewall JAXB Test 3: Testing name failed", "jaxb-test",
-                testObject.getFirewallName());
+                testObject.getName());
 
         Assert.assertFalse("NeutronFirewall JAXB Test 5: Testing admin_state_up failed",
                 testObject.getFirewallAdminStateIsUp());
@@ -62,7 +62,7 @@ public class NeutronFirewallJAXBTest {
                 "aa902936679e4ea29bfe1158e3450a13", testObject.getTenantID());
 
         Assert.assertEquals("NeutronFirewallPolicy JAXB Test 3: Testing name failed", "jaxb-test",
-                testObject.getFirewallPolicyName());
+                testObject.getName());
 
         Assert.assertTrue("NeutronFirewallPolicy JAXB Test 5: Testing shared failed",
                 testObject.getFirewallPolicyIsShared());
@@ -92,7 +92,7 @@ public class NeutronFirewallJAXBTest {
                 "45977fa2dbd7482098dd68d0d8970117", testObject.getTenantID());
 
         Assert.assertEquals("NeutronFirewallRule JAXB Test 3: Testing name failed", "ALLOW_HTTP",
-                testObject.getFirewallRuleName());
+                testObject.getName());
 
         Assert.assertEquals("NeutronFirewallRule JAXB Test 5: Testing firewaulPolicyRuleID failed",
                 "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", testObject.getFirewallRulePolicyID());

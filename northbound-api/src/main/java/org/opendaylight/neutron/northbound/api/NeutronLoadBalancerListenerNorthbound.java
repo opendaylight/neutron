@@ -94,7 +94,7 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
                     && (queryLoadBalancerListenerTenantID == null
                             || queryLoadBalancerListenerTenantID.equals(nsg.getTenantID()))
                     && (queryLoadBalancerListenerName == null
-                            || queryLoadBalancerListenerName.equals(nsg.getLoadBalancerListenerName()))
+                            || queryLoadBalancerListenerName.equals(nsg.getName()))
                     && (queryLoadBalancerListenerProtocol == null
                             || queryLoadBalancerListenerProtocol.equals(nsg.getNeutronLoadBalancerListenerProtocol()))
                     && (queryLoadBalancerListenerProtocolPort == null || queryLoadBalancerListenerProtocolPort

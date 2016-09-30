@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronPort extends NeutronObject<NeutronPort> implements Serializable, INeutronObject<NeutronPort> {
+public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -29,15 +29,6 @@ public final class NeutronPort extends NeutronObject<NeutronPort> implements Ser
 
     @XmlElement(name = "network_id")
     String networkUUID;
-
-    @XmlElement(name = "name")
-    String name;
-
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
-    @XmlElement(name = "status")
-    String status;
 
     @XmlElement(name = "mac_address")
     String macAddress;
@@ -95,35 +86,11 @@ public final class NeutronPort extends NeutronObject<NeutronPort> implements Ser
         this.networkUUID = networkUUID;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public boolean isAdminStateUp() {
         if (adminStateUp == null) {
             return true;
         }
         return adminStateUp;
-    }
-
-    public Boolean getAdminStateUp() {
-        return adminStateUp;
-    }
-
-    public void setAdminStateUp(Boolean newValue) {
-        adminStateUp = newValue;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public String getMacAddress() {
@@ -249,15 +216,6 @@ public final class NeutronPort extends NeutronObject<NeutronPort> implements Ser
             extractField(field, ans);
             if ("network_id".equals(field)) {
                 ans.setNetworkUUID(this.getNetworkUUID());
-            }
-            if ("name".equals(field)) {
-                ans.setName(this.getName());
-            }
-            if ("admin_state_up".equals(field)) {
-                ans.setAdminStateUp(this.getAdminStateUp());
-            }
-            if ("status".equals(field)) {
-                ans.setStatus(this.getStatus());
             }
             if ("mac_address".equals(field)) {
                 ans.setMacAddress(this.getMacAddress());

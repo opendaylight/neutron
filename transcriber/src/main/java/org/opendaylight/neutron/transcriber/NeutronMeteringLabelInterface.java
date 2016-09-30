@@ -49,8 +49,8 @@ public final class NeutronMeteringLabelInterface
     @Override
     protected MeteringLabel toMd(NeutronMeteringLabel meteringLabel) {
         final MeteringLabelBuilder meteringLabelBuilder = new MeteringLabelBuilder();
-        if (meteringLabel.getMeteringLabelName() != null) {
-            meteringLabelBuilder.setName(meteringLabel.getMeteringLabelName());
+        if (meteringLabel.getName() != null) {
+            meteringLabelBuilder.setName(meteringLabel.getName());
         }
         if (meteringLabel.getMeteringLabelShared() != null) {
             meteringLabelBuilder.setShared(meteringLabel.getMeteringLabelShared());
@@ -74,7 +74,7 @@ public final class NeutronMeteringLabelInterface
     protected NeutronMeteringLabel fromMd(MeteringLabel label) {
         final NeutronMeteringLabel answer = new NeutronMeteringLabel();
         if (label.getName() != null) {
-            answer.setMeteringLabelName(label.getName());
+            answer.setName(label.getName());
         }
         if (label.isShared() != null) {
             answer.setMeteringLabelShared(label.isShared());

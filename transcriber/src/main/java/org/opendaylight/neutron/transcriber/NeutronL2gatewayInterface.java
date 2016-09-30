@@ -68,7 +68,7 @@ public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2
             result.setID(l2gateway.getUuid().getValue());
         }
         if (l2gateway.getL2gatewayName() != null) {
-            result.setL2gatewayName(String.valueOf(l2gateway.getL2gatewayName()));
+            result.setName(String.valueOf(l2gateway.getL2gatewayName()));
         }
         if (l2gateway.getTenantId() != null) {
             result.setTenantID(l2gateway.getTenantId());
@@ -114,8 +114,8 @@ public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2
     @Override
     protected L2gateway toMd(NeutronL2gateway neutronObject) {
         final L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
-        if (neutronObject.getL2gatewayName() != null) {
-            l2gatewayBuilder.setL2gatewayName(neutronObject.getL2gatewayName());
+        if (neutronObject.getName() != null) {
+            l2gatewayBuilder.setL2gatewayName(neutronObject.getName());
         }
         if (neutronObject.getID() != null) {
             l2gatewayBuilder.setUuid(toUuid(neutronObject.getID()));

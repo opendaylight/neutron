@@ -17,8 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronVPNService extends NeutronObject<NeutronVPNService>
-        implements Serializable, INeutronObject<NeutronVPNService> {
+public final class NeutronVPNService extends NeutronAdminAttributes<NeutronVPNService> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -26,15 +25,6 @@ public final class NeutronVPNService extends NeutronObject<NeutronVPNService>
 
     @XmlElement(name = "router_id")
     String routerUUID;
-
-    @XmlElement(name = "status")
-    String status;
-
-    @XmlElement(name = "name")
-    String name;
-
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
 
     @XmlElement(name = "subnet_id")
     String subnetUUID;
@@ -50,30 +40,6 @@ public final class NeutronVPNService extends NeutronObject<NeutronVPNService>
         this.routerUUID = routerUUID;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Boolean getAdminStateUp() {
-        return adminStateUp;
-    }
-
-    public void setAdminStateUp(boolean newValue) {
-        adminStateUp = newValue;
-    }
-
     public String getSubnetUUID() {
         return subnetUUID;
     }
@@ -86,17 +52,8 @@ public final class NeutronVPNService extends NeutronObject<NeutronVPNService>
         NeutronVPNService ans = new NeutronVPNService();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("admin_state_up")) {
-                ans.setAdminStateUp(this.getAdminStateUp());
-            }
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("router_id")) {
                 ans.setRouterUUID(this.getRouterUUID());
-            }
-            if (s.equals("status")) {
-                ans.setStatus(this.getStatus());
             }
             if (s.equals("subnet_id")) {
                 ans.setSubnetUUID(this.getSubnetUUID());

@@ -15,23 +15,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "l2gateway")
-public final class NeutronL2gateway extends NeutronObject<NeutronL2gateway>
-        implements Serializable, INeutronObject<NeutronL2gateway> {
+public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gateway>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String l2gatewayName;
 
     @XmlElement(name = "devices")
     List<NeutronL2gatewayDevice> neutronL2gatewayDevices;
-
-    public String getL2gatewayName() {
-        return l2gatewayName;
-    }
-
-    public void setL2gatewayName(String l2gatewayName) {
-        this.l2gatewayName = l2gatewayName;
-    }
 
     public List<NeutronL2gatewayDevice> getNeutronL2gatewayDevices() {
         return neutronL2gatewayDevices;
@@ -45,9 +34,6 @@ public final class NeutronL2gateway extends NeutronObject<NeutronL2gateway>
         NeutronL2gateway ans = new NeutronL2gateway();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setL2gatewayName(this.getL2gatewayName());
-            }
             if (s.equals("devices")) {
                 List<NeutronL2gatewayDevice> devices = new ArrayList<NeutronL2gatewayDevice>();
                 devices.addAll(this.getNeutronL2gatewayDevices());
@@ -59,7 +45,7 @@ public final class NeutronL2gateway extends NeutronObject<NeutronL2gateway>
 
     @Override
     public String toString() {
-        return "NeutronL2Gateway [" + "id = " + uuid + ", name = " + l2gatewayName + ", tenant_id = " + tenantID
+        return "NeutronL2Gateway [" + "id = " + uuid + ", name = " + name + ", tenant_id = " + tenantID
                 + ", devices = " + neutronL2gatewayDevices + "]";
     }
 

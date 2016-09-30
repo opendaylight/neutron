@@ -33,7 +33,7 @@ public class NeutronLoadBalancerPoolJAXBTest {
                 "12ff63af-4127-4074-a251-bcb2ecc53ebe", testObject.getID());
 
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 2: Testing name failed", "pool1",
-                testObject.getLoadBalancerPoolName());
+                testObject.getName());
 
         Assert.assertTrue("NeutronLoadBalancerPool JAXB Test 3: Testing admin_state_up failed",
                 testObject.getLoadBalancerPoolAdminIsStateIsUp());

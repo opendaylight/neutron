@@ -115,7 +115,7 @@ public final class NeutronNetworksNorthbound
             }
             NeutronNetwork oSN = i.next();
             if ((queryID == null || queryID.equals(oSN.getID()))
-                    && (queryName == null || queryName.equals(oSN.getNetworkName()))
+                    && (queryName == null || queryName.equals(oSN.getName()))
                     && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
                     && (queryStatus == null || queryStatus.equals(oSN.getStatus()))
                     && (bShared == null || bShared.booleanValue() == oSN.isShared())

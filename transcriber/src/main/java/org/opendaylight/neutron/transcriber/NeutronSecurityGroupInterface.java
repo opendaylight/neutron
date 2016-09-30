@@ -37,7 +37,7 @@ public final class NeutronSecurityGroupInterface
     protected NeutronSecurityGroup fromMd(SecurityGroup group) {
         final NeutronSecurityGroup answer = new NeutronSecurityGroup();
         if (group.getName() != null) {
-            answer.setSecurityGroupName(group.getName());
+            answer.setName(group.getName());
         }
         if (group.getTenantId() != null) {
             answer.setTenantID(group.getTenantId());
@@ -51,8 +51,8 @@ public final class NeutronSecurityGroupInterface
     @Override
     protected SecurityGroup toMd(NeutronSecurityGroup securityGroup) {
         final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
-        if (securityGroup.getSecurityGroupName() != null) {
-            securityGroupBuilder.setName(securityGroup.getSecurityGroupName());
+        if (securityGroup.getName() != null) {
+            securityGroupBuilder.setName(securityGroup.getName());
         }
         if (securityGroup.getTenantID() != null) {
             securityGroupBuilder.setTenantId(toUuid(securityGroup.getTenantID()));

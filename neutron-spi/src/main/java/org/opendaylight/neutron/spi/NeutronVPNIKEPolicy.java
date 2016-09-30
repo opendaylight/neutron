@@ -17,15 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronVPNIKEPolicy extends NeutronObject<NeutronVPNIKEPolicy>
-        implements Serializable, INeutronObject<NeutronVPNIKEPolicy> {
+public final class NeutronVPNIKEPolicy extends NeutronBaseAttributes<NeutronVPNIKEPolicy> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement(name = "name")
-    String name;
 
     @XmlElement(name = "auth_algorithm")
     String authAlgorithm;
@@ -46,14 +42,6 @@ public final class NeutronVPNIKEPolicy extends NeutronObject<NeutronVPNIKEPolicy
     NeutronVPNLifetime lifetime;
 
     public NeutronVPNIKEPolicy() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getAuthAlgorithm() {
@@ -117,9 +105,6 @@ public final class NeutronVPNIKEPolicy extends NeutronObject<NeutronVPNIKEPolicy
         NeutronVPNIKEPolicy ans = new NeutronVPNIKEPolicy();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("auth_algorithm")) {
                 ans.setAuthAlgorithm(this.getAuthAlgorithm());
             }

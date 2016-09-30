@@ -17,15 +17,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronVPNIPSECSiteConnection extends NeutronObject<NeutronVPNIPSECSiteConnection>
-        implements Serializable, INeutronObject<NeutronVPNIPSECSiteConnection> {
+public final class NeutronVPNIPSECSiteConnection extends NeutronAdminAttributes<NeutronVPNIPSECSiteConnection>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
-
-    @XmlElement(name = "name")
-    String name;
 
     @XmlElement(name = "peer_address")
     String peerAddress;
@@ -51,12 +48,6 @@ public final class NeutronVPNIPSECSiteConnection extends NeutronObject<NeutronVP
     @XmlElement(name = "initiator")
     String initiator;
 
-    @XmlElement(defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
-    @XmlElement(name = "status")
-    String status;
-
     @XmlElement(name = "ikepolicy_id")
     String ikePolicyID;
 
@@ -70,14 +61,6 @@ public final class NeutronVPNIPSECSiteConnection extends NeutronObject<NeutronVP
     NeutronVPNDeadPeerDetection deadPeerDetection;
 
     public NeutronVPNIPSECSiteConnection() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPeerAddress() {
@@ -144,22 +127,6 @@ public final class NeutronVPNIPSECSiteConnection extends NeutronObject<NeutronVP
         this.initiator = initiator;
     }
 
-    public Boolean getAdminStateUp() {
-        return adminStateUp;
-    }
-
-    public void setAdminStateUp(boolean newValue) {
-        adminStateUp = newValue;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getIkePolicyID() {
         return ikePolicyID;
     }
@@ -206,9 +173,6 @@ public final class NeutronVPNIPSECSiteConnection extends NeutronObject<NeutronVP
         NeutronVPNIPSECSiteConnection ans = new NeutronVPNIPSECSiteConnection();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("peer_address")) {
                 ans.setPeerAddress(this.getPeerAddress());
             }
@@ -229,12 +193,6 @@ public final class NeutronVPNIPSECSiteConnection extends NeutronObject<NeutronVP
             }
             if (s.equals("initiator")) {
                 ans.setInitiator(this.getInitiator());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setAdminStateUp(this.getAdminStateUp());
-            }
-            if (s.equals("status")) {
-                ans.setStatus(this.getStatus());
             }
             if (s.equals("ikepolicy_id")) {
                 ans.setIkePolicyID(this.getIkePolicyID());

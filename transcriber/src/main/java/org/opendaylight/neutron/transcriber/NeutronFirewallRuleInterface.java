@@ -68,7 +68,7 @@ public final class NeutronFirewallRuleInterface extends
             answer.setID(rule.getUuid().getValue());
         }
         if (rule.getName() != null) {
-            answer.setFirewallRuleName(rule.getName());
+            answer.setName(rule.getName());
         }
         if (rule.getTenantId() != null) {
             answer.setTenantID(rule.getTenantId());
@@ -128,8 +128,8 @@ public final class NeutronFirewallRuleInterface extends
         if (rule.getID() != null) {
             ruleBuilder.setUuid(toUuid(rule.getID()));
         }
-        if (rule.getFirewallRuleName() != null) {
-            ruleBuilder.setName(rule.getFirewallRuleName());
+        if (rule.getName() != null) {
+            ruleBuilder.setName(rule.getName());
         }
         if (rule.getTenantID() != null) {
             ruleBuilder.setTenantId(toUuid(rule.getTenantID()));

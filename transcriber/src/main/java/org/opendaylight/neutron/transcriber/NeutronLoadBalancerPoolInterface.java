@@ -94,8 +94,8 @@ public final class NeutronLoadBalancerPoolInterface
         }
         // because members are another container, we don't want to copy
         // it over, so just skip it here
-        if (pool.getLoadBalancerPoolName() != null) {
-            poolBuilder.setName(pool.getLoadBalancerPoolName());
+        if (pool.getName() != null) {
+            poolBuilder.setName(pool.getName());
         }
         if (pool.getLoadBalancerPoolProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
@@ -153,7 +153,7 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolMembers(members);
         }
         if (pool.getName() != null) {
-            answer.setLoadBalancerPoolName(pool.getName());
+            answer.setName(pool.getName());
         }
         if (pool.getProtocol() != null) {
             answer.setLoadBalancerPoolProtocol(PROTOCOL_MAP.get(pool.getProtocol()));

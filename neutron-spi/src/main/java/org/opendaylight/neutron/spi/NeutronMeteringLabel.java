@@ -17,12 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronMeteringLabel extends NeutronObject<NeutronMeteringLabel>
-        implements Serializable, INeutronObject<NeutronMeteringLabel> {
+public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMeteringLabel> implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String meteringLabelName;
 
     @XmlElement(defaultValue = "false", name = "shared")
     Boolean shared;
@@ -30,14 +26,6 @@ public final class NeutronMeteringLabel extends NeutronObject<NeutronMeteringLab
     /*
      * getters and setters
      */
-
-    public String getMeteringLabelName() {
-        return meteringLabelName;
-    }
-
-    public void setMeteringLabelName(String name) {
-        this.meteringLabelName = name;
-    }
 
     public Boolean getMeteringLabelShared() {
         return shared;
@@ -55,7 +43,7 @@ public final class NeutronMeteringLabel extends NeutronObject<NeutronMeteringLab
 
     @Override
     public String toString() {
-        return "NeutronMeteringLabel [id=" + uuid + ", name=" + meteringLabelName + ", tenant_id=" + tenantID
+        return "NeutronMeteringLabel [id=" + uuid + ", name=" + name + ", tenant_id=" + tenantID
                 + ", shared=" + shared + "]";
     }
 
@@ -72,9 +60,6 @@ public final class NeutronMeteringLabel extends NeutronObject<NeutronMeteringLab
         NeutronMeteringLabel ans = new NeutronMeteringLabel();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setMeteringLabelName(this.getMeteringLabelName());
-            }
             if (s.equals("shared")) {
                 ans.setMeteringLabelShared(this.getMeteringLabelShared());
             }

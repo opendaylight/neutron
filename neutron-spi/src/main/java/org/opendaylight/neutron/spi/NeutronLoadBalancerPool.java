@@ -36,12 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBalancerPool>
-        implements Serializable, INeutronObject<NeutronLoadBalancerPool> {
+public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<NeutronLoadBalancerPool>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String loadBalancerPoolName;
 
     @XmlElement(name = "protocol")
     String loadBalancerPoolProtocol;
@@ -66,14 +63,6 @@ public final class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBala
 
     public NeutronLoadBalancerPool() {
         loadBalancerPoolMembers = new ArrayList<>();
-    }
-
-    public String getLoadBalancerPoolName() {
-        return loadBalancerPoolName;
-    }
-
-    public void setLoadBalancerPoolName(String loadBalancerPoolName) {
-        this.loadBalancerPoolName = loadBalancerPoolName;
     }
 
     public String getLoadBalancerPoolProtocol() {
@@ -164,9 +153,6 @@ public final class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBala
         NeutronLoadBalancerPool ans = new NeutronLoadBalancerPool();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setLoadBalancerPoolName(this.getLoadBalancerPoolName());
-            }
             if (s.equals("protocol")) {
                 ans.setLoadBalancerPoolProtocol(this.getLoadBalancerPoolProtocol());
             }
@@ -189,7 +175,7 @@ public final class NeutronLoadBalancerPool extends NeutronObject<NeutronLoadBala
     @Override
     public String toString() {
         return "NeutronLoadBalancerPool{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
-                + loadBalancerPoolName + '\'' + ", protocol=" + loadBalancerPoolProtocol + '\'' + ", lbAlgorithm='"
+                + name + '\'' + ", protocol=" + loadBalancerPoolProtocol + '\'' + ", lbAlgorithm='"
                 + loadBalancerPoolLbAlgorithm + '\'' + ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID
                 + ", adminStateUp=" + loadBalancerPoolAdminStateIsUp + '}';
      // todo: add loadBalancerPoolMembers as joined string

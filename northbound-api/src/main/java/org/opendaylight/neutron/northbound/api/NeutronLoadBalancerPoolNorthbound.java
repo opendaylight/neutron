@@ -101,7 +101,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
                     && (queryLoadBalancerPoolTenantID == null
                             || queryLoadBalancerPoolTenantID.equals(nsg.getTenantID()))
                     && (queryLoadBalancerPoolName == null
-                            || queryLoadBalancerPoolName.equals(nsg.getLoadBalancerPoolName()))
+                            || queryLoadBalancerPoolName.equals(nsg.getName()))
                     && (queryLoadBalancerPoolLbAlgorithm == null
                             || queryLoadBalancerPoolLbAlgorithm.equals(nsg.getLoadBalancerPoolLbAlgorithm()))
                     && (queryLoadBalancerPoolHealthMonitorID == null || queryLoadBalancerPoolHealthMonitorID

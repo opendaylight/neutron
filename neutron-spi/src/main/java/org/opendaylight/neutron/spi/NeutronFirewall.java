@@ -33,12 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronFirewall extends NeutronObject<NeutronFirewall>
-        implements Serializable, INeutronObject<NeutronFirewall> {
+public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall> implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String firewallName;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean firewallAdminStateIsUp;
@@ -48,14 +44,6 @@ public final class NeutronFirewall extends NeutronObject<NeutronFirewall>
 
     @XmlElement(name = "firewall_policy_id")
     String neutronFirewallPolicyID;
-
-    public String getFirewallName() {
-        return firewallName;
-    }
-
-    public void setFirewallName(String firewallName) {
-        this.firewallName = firewallName;
-    }
 
     public Boolean getFirewallAdminStateIsUp() {
         return firewallAdminStateIsUp;
@@ -85,9 +73,6 @@ public final class NeutronFirewall extends NeutronObject<NeutronFirewall>
         NeutronFirewall ans = new NeutronFirewall();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setFirewallName(this.getFirewallName());
-            }
             if (s.equals("admin_state_up")) {
                 ans.setFirewallAdminStateIsUp(firewallAdminStateIsUp);
             }
@@ -104,7 +89,7 @@ public final class NeutronFirewall extends NeutronObject<NeutronFirewall>
     @Override
     public String toString() {
         return "NeutronFirewall{" + "firewallUUID='" + uuid + '\'' + ", firewallTenantID='" + tenantID + '\''
-                + ", firewallName='" + firewallName + '\'' + ", firewallAdminStateIsUp=" + firewallAdminStateIsUp
+                + ", firewallName='" + name + '\'' + ", firewallAdminStateIsUp=" + firewallAdminStateIsUp
                 + ", firewallIsShared=" + firewallIsShared + ", firewallRulePolicyID=" + neutronFirewallPolicyID + '}';
     }
 }

@@ -62,8 +62,8 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
         if (qosPolicy.getTenantID() != null) {
             qosPolicyBuilder.setTenantId(toUuid(qosPolicy.getTenantID()));
         }
-        if (qosPolicy.getQosPolicyName() != null) {
-            qosPolicyBuilder.setName(qosPolicy.getQosPolicyName());
+        if (qosPolicy.getName() != null) {
+            qosPolicyBuilder.setName(qosPolicy.getName());
         }
         if (qosPolicy.getPolicyIsShared() != null) {
             qosPolicyBuilder.setShared(qosPolicy.getPolicyIsShared());
@@ -111,7 +111,7 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
             result.setTenantID(qosPolicy.getTenantId());
         }
         if (qosPolicy.getName() != null) {
-            result.setQosPolicyName(qosPolicy.getName());
+            result.setName(qosPolicy.getName());
         }
         if (qosPolicy.isShared() != null) {
             result.setPolicyIsShared(qosPolicy.isShared());

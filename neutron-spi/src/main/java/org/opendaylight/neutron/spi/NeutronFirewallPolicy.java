@@ -32,12 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronFirewallPolicy extends NeutronObject<NeutronFirewallPolicy>
-        implements Serializable, INeutronObject<NeutronFirewallPolicy> {
+public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFirewallPolicy> implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String firewallPolicyName;
 
     @XmlElement(defaultValue = "false", name = "shared")
     Boolean firewallPolicyIsShared;
@@ -61,21 +57,10 @@ public final class NeutronFirewallPolicy extends NeutronObject<NeutronFirewallPo
         this.firewallPolicyIsShared = firewallPolicyIsShared;
     }
 
-    public String getFirewallPolicyName() {
-        return firewallPolicyName;
-    }
-
-    public void setFirewallPolicyName(String firewallPolicyName) {
-        this.firewallPolicyName = firewallPolicyName;
-    }
-
     public NeutronFirewallPolicy extractFields(List<String> fields) {
         NeutronFirewallPolicy ans = new NeutronFirewallPolicy();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setFirewallPolicyName(this.getFirewallPolicyName());
-            }
             if (s.equals("shared")) {
                 ans.setFirewallPolicyIsShared(firewallPolicyIsShared);
             }
@@ -89,7 +74,7 @@ public final class NeutronFirewallPolicy extends NeutronObject<NeutronFirewallPo
     @Override
     public String toString() {
         return "NeutronFirewallPolicy{" + "firewallPolicyUUID='" + uuid + '\'' + ", firewallPolicyTenantID='" + tenantID
-                + '\'' + ", firewallPolicyName='" + firewallPolicyName + '\'' + ", firewallPolicyIsShared="
+                + '\'' + ", firewallPolicyName='" + name + '\'' + ", firewallPolicyIsShared="
                 + firewallPolicyIsShared + ", firewallPolicyIsAudited='" + firewallPolicyIsAudited + '\'' + '}';
     }
 }
