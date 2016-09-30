@@ -69,10 +69,4 @@ public final class NeutronVPNServiceInterface
         return InstanceIdentifier.create(Neutron.class).child(VpnServices.class).child(Vpnservice.class,
                 vpnService.getKey());
     }
-
-    @Override
-    protected InstanceIdentifier<VpnServices> createInstanceIdentifier() {
-        return InstanceIdentifier.create(Neutron.class).child(VpnServices.class);
-    }
-
 }
