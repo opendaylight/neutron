@@ -18,12 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronQosPolicy extends NeutronObject<NeutronQosPolicy>
-        implements Serializable, INeutronObject<NeutronQosPolicy> {
+public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPolicy> implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String name;
 
     @XmlElement(defaultValue = "false", name = "shared")
     Boolean shared;
@@ -33,14 +29,6 @@ public final class NeutronQosPolicy extends NeutronObject<NeutronQosPolicy>
 
     @XmlElement(name = "dscp_marking_rules")
     List<NeutronQosDscpMarkingRule> dscpRules;
-
-    public String getQosPolicyName() {
-        return name;
-    }
-
-    public void setQosPolicyName(String qosPolicyName) {
-        this.name = qosPolicyName;
-    }
 
     public Boolean getPolicyIsShared() {
         return shared;
@@ -70,9 +58,6 @@ public final class NeutronQosPolicy extends NeutronObject<NeutronQosPolicy>
         NeutronQosPolicy ans = new NeutronQosPolicy();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setQosPolicyName(this.getQosPolicyName());
-            }
             if (s.equals("shared")) {
                 ans.setPolicyIsShared(this.getPolicyIsShared());
             }

@@ -34,7 +34,7 @@ public class NeutronSecurityGroupJAXBTest {
                 "2076db17-a522-4506-91de-c6dd8e837028", testObject.getID());
 
         Assert.assertEquals("NeutronSecurityGroup JAXB Test 2: Testing direction failed", "new-webservers",
-                testObject.getSecurityGroupName());
+                testObject.getName());
 
         Assert.assertEquals("NeutronSecurityGroup JAXB Test 4: Testing port range min failed",
                 "b4f50856753b4dc6afee5fa6b9b6c550", testObject.getTenantID());

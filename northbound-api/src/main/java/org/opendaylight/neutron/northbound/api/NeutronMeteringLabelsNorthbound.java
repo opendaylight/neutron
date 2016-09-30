@@ -81,7 +81,7 @@ public final class NeutronMeteringLabelsNorthbound extends
         while (i.hasNext()) {
             NeutronMeteringLabel oSS = i.next();
             if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryName == null || queryName.equals(oSS.getMeteringLabelName()))
+                    && (queryName == null || queryName.equals(oSS.getName()))
                     && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(oSS.extractFields(fields));

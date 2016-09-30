@@ -48,13 +48,13 @@ public final class NeutronLoadBalancerInterface extends
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
         final NeutronLoadBalancer answer = new NeutronLoadBalancer();
         if (loadBalancer.isAdminStateUp() != null) {
-            answer.setLoadBalancerAdminStateUp(loadBalancer.isAdminStateUp());
+            answer.setAdminStateUp(loadBalancer.isAdminStateUp());
         }
         if (loadBalancer.getName() != null) {
-            answer.setLoadBalancerName(loadBalancer.getName());
+            answer.setName(loadBalancer.getName());
         }
         if (loadBalancer.getStatus() != null) {
-            answer.setLoadBalancerStatus(loadBalancer.getStatus());
+            answer.setStatus(loadBalancer.getStatus());
         }
         if (loadBalancer.getTenantId() != null) {
             answer.setTenantID(loadBalancer.getTenantId());
@@ -74,12 +74,12 @@ public final class NeutronLoadBalancerInterface extends
     @Override
     protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
         final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
-        loadBalancerBuilder.setAdminStateUp(loadBalancer.getLoadBalancerAdminStateUp());
-        if (loadBalancer.getLoadBalancerName() != null) {
-            loadBalancerBuilder.setName(loadBalancer.getLoadBalancerName());
+        loadBalancerBuilder.setAdminStateUp(loadBalancer.getAdminStateUp());
+        if (loadBalancer.getName() != null) {
+            loadBalancerBuilder.setName(loadBalancer.getName());
         }
-        if (loadBalancer.getLoadBalancerStatus() != null) {
-            loadBalancerBuilder.setStatus(loadBalancer.getLoadBalancerStatus());
+        if (loadBalancer.getStatus() != null) {
+            loadBalancerBuilder.setStatus(loadBalancer.getStatus());
         }
         if (loadBalancer.getTenantID() != null) {
             loadBalancerBuilder.setTenantId(toUuid(loadBalancer.getTenantID()));

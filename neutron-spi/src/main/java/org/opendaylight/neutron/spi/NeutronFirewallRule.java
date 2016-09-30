@@ -44,12 +44,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronFirewallRule extends NeutronObject<NeutronFirewallRule>
-        implements Serializable, INeutronObject<NeutronFirewallRule> {
+public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFirewallRule> implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String firewallRuleName;
 
     @XmlElement(defaultValue = "false", name = "shared")
     Boolean firewallRuleIsShared;
@@ -194,21 +190,10 @@ public final class NeutronFirewallRule extends NeutronObject<NeutronFirewallRule
         this.firewallRuleIsShared = firewallRuleIsShared;
     }
 
-    public String getFirewallRuleName() {
-        return firewallRuleName;
-    }
-
-    public void setFirewallRuleName(String firewallRuleName) {
-        this.firewallRuleName = firewallRuleName;
-    }
-
     public NeutronFirewallRule extractFields(List<String> fields) {
         NeutronFirewallRule ans = new NeutronFirewallRule();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setFirewallRuleName(this.getFirewallRuleName());
-            }
             if (s.equals("shared")) {
                 ans.setFirewallRuleIsShared(firewallRuleIsShared);
             }
@@ -253,7 +238,7 @@ public final class NeutronFirewallRule extends NeutronObject<NeutronFirewallRule
     @Override
     public String toString() {
         return "firewallPolicyRules{" + "firewallRuleUUID='" + uuid + '\'' + ", firewallRuleTenantID='" + tenantID
-                + '\'' + ", firewallRuleName='" + firewallRuleName + '\'' + ", firewallRuleIsShared="
+                + '\'' + ", firewallRuleName='" + name + '\'' + ", firewallRuleIsShared="
                 + firewallRuleIsShared + ", firewallRulePolicyID=" + firewallRulePolicyID + ", firewallRuleProtocol='"
                 + firewallRuleProtocol + '\'' + ", firewallRuleIpVer=" + firewallRuleIpVer + ", firewallRuleSrcIpAddr='"
                 + firewallRuleSrcIpAddr + '\'' + ", firewallRuleDstIpAddr='" + firewallRuleDstIpAddr + '\''

@@ -38,7 +38,7 @@ public class NeutronNetworkQosJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 4: Testing status failed", "ACTIVE", testObject.getStatus());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing name failed", "net1", testObject.getNetworkName());
+        Assert.assertEquals("NeutronNetwork JAXB Test 6: Testing name failed", "net1", testObject.getName());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 7: Testing admin state up failed", true,
                 testObject.getAdminStateUp());

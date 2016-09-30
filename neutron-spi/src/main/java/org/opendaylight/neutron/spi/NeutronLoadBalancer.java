@@ -32,48 +32,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronLoadBalancer extends NeutronObject<NeutronLoadBalancer>
-        implements Serializable, INeutronObject<NeutronLoadBalancer> {
+public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoadBalancer> implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @XmlElement(name = "name")
-    String loadBalancerName;
-
-    @XmlElement(name = "status")
-    String loadBalancerStatus;
-
-    @XmlElement(name = "admin_state_up")
-    Boolean loadBalancerAdminStateUp;
 
     @XmlElement(name = "vip_address")
     String loadBalancerVipAddress;
 
     @XmlElement(name = "vip_subnet_id")
     String loadBalancerVipSubnetID;
-
-    public String getLoadBalancerName() {
-        return loadBalancerName;
-    }
-
-    public void setLoadBalancerName(String loadBalancerName) {
-        this.loadBalancerName = loadBalancerName;
-    }
-
-    public String getLoadBalancerStatus() {
-        return loadBalancerStatus;
-    }
-
-    public void setLoadBalancerStatus(String loadBalancerStatus) {
-        this.loadBalancerStatus = loadBalancerStatus;
-    }
-
-    public Boolean getLoadBalancerAdminStateUp() {
-        return loadBalancerAdminStateUp;
-    }
-
-    public void setLoadBalancerAdminStateUp(Boolean loadBalancerAdminStateUp) {
-        this.loadBalancerAdminStateUp = loadBalancerAdminStateUp;
-    }
 
     public String getLoadBalancerVipAddress() {
         return loadBalancerVipAddress;
@@ -95,20 +61,11 @@ public final class NeutronLoadBalancer extends NeutronObject<NeutronLoadBalancer
         NeutronLoadBalancer ans = new NeutronLoadBalancer();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setLoadBalancerName(this.getLoadBalancerName());
-            }
             if (s.equals("vip_address")) {
                 ans.setLoadBalancerVipAddress(this.getLoadBalancerVipAddress());
             }
             if (s.equals("vip_subnet_id")) {
                 ans.setLoadBalancerVipSubnetID(this.getLoadBalancerVipSubnetID());
-            }
-            if (s.equals("status")) {
-                ans.setLoadBalancerStatus(this.getLoadBalancerStatus());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setLoadBalancerAdminStateUp(this.getLoadBalancerAdminStateUp());
             }
         }
         return ans;
@@ -117,8 +74,8 @@ public final class NeutronLoadBalancer extends NeutronObject<NeutronLoadBalancer
     @Override
     public String toString() {
         return "NeutronLoadBalancer{" + "loadBalancerID='" + uuid + '\'' + ", loadBalancerTenantID='" + tenantID + '\''
-                + ", loadBalancerName='" + loadBalancerName + '\'' + ", loadBalancerStatus='" + loadBalancerStatus
-                + '\'' + ", loadBalancerAdminStateUp='" + loadBalancerAdminStateUp + '\'' + ", loadBalancerVipAddress='"
+                + ", loadBalancerName='" + name + '\'' + ", loadBalancerStatus='" + status
+                + '\'' + ", loadBalancerAdminStateUp='" + adminStateUp + '\'' + ", loadBalancerVipAddress='"
                 + loadBalancerVipAddress + '\'' + ", loadBalancerVipSubnetID='" + loadBalancerVipSubnetID + '\'' + '}';
     }
 }

@@ -27,8 +27,7 @@ import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSubnet extends NeutronObject<NeutronSubnet>
-        implements Serializable, INeutronObject<NeutronSubnet> {
+public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> implements Serializable {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private static final long serialVersionUID = 1L;
@@ -44,9 +43,6 @@ public final class NeutronSubnet extends NeutronObject<NeutronSubnet>
 
     @XmlElement(name = "network_id")
     String networkUUID;
-
-    @XmlElement(name = "name")
-    String name;
 
     @XmlElement(defaultValue = "4", name = "ip_version")
     Integer ipVersion;
@@ -81,14 +77,6 @@ public final class NeutronSubnet extends NeutronObject<NeutronSubnet>
 
     public void setNetworkUUID(String networkUUID) {
         this.networkUUID = networkUUID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Integer getIpVersion() {
@@ -186,9 +174,6 @@ public final class NeutronSubnet extends NeutronObject<NeutronSubnet>
             extractField(s, ans);
             if (s.equals("network_id")) {
                 ans.setNetworkUUID(this.getNetworkUUID());
-            }
-            if (s.equals("name")) {
-                ans.setName(this.getName());
             }
             if (s.equals("ip_version")) {
                 ans.setIpVersion(this.getIpVersion());

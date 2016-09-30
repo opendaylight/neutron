@@ -75,8 +75,8 @@ public final class NeutronLoadBalancerListenerInterface
             }
             listenerBuilder.setLoadbalancers(listLoadBalancers);
         }
-        if (listener.getLoadBalancerListenerName() != null) {
-            listenerBuilder.setName(listener.getLoadBalancerListenerName());
+        if (listener.getName() != null) {
+            listenerBuilder.setName(listener.getName());
         }
         if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
@@ -123,7 +123,7 @@ public final class NeutronLoadBalancerListenerInterface
             answer.setNeutronLoadBalancerListenerLoadBalancerIDs(list);
         }
         if (listener.getName() != null) {
-            answer.setLoadBalancerListenerName(listener.getName());
+            answer.setName(listener.getName());
         }
         if (listener.getProtocol() != null) {
             answer.setNeutronLoadBalancerListenerProtocol(PROTOCOL_MAP.get(listener.getProtocol()));

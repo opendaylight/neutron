@@ -19,15 +19,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSFCFlowClassifier extends NeutronObject<NeutronSFCFlowClassifier>
-        implements Serializable, INeutronObject<NeutronSFCFlowClassifier> {
+public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<NeutronSFCFlowClassifier>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of
     // annotated attributes
-    @XmlElement(name = "name")
-    String name;
-
     @XmlElement(defaultValue = "IPv4", name = "ethertype")
     String ethertype;
 
@@ -63,14 +60,6 @@ public final class NeutronSFCFlowClassifier extends NeutronObject<NeutronSFCFlow
     Map<String, String> l7Parameters;
 
     public NeutronSFCFlowClassifier() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEthertype() {
@@ -174,9 +163,6 @@ public final class NeutronSFCFlowClassifier extends NeutronObject<NeutronSFCFlow
         NeutronSFCFlowClassifier ans = new NeutronSFCFlowClassifier();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("ethertype")) {
                 ans.setEthertype(this.getEthertype());
             }

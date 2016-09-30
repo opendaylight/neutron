@@ -16,28 +16,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSFCPortPairGroup extends NeutronObject<NeutronSFCPortPairGroup>
-        implements Serializable, INeutronObject<NeutronSFCPortPairGroup> {
+public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<NeutronSFCPortPairGroup>
+        implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0
     // Reference for description of annotated attributes
 
-    @XmlElement(name = "name")
-    String name;
-
     @XmlElement(name = "port_pairs")
     List<String> portPairs;
 
     public NeutronSFCPortPairGroup() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<String> getPortPairs() {
@@ -61,9 +50,6 @@ public final class NeutronSFCPortPairGroup extends NeutronObject<NeutronSFCPortP
         NeutronSFCPortPairGroup ans = new NeutronSFCPortPairGroup();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("name")) {
-                ans.setName(this.getName());
-            }
             if (s.equals("port_pairs")) {
                 ans.setPortPairs(this.getPortPairs());
             }
