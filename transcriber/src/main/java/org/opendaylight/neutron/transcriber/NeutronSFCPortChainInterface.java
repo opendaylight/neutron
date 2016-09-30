@@ -35,7 +35,7 @@ public final class NeutronSFCPortChainInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);
 
     NeutronSFCPortChainInterface(DataBroker db) {
-        super(db);
+        super(PortChainBuilder.class, db);
     }
 
     @Override
@@ -60,9 +60,7 @@ public final class NeutronSFCPortChainInterface
         LOGGER.trace("toMd: REST SFC Port Chain data : {}", neutronPortChain);
 
         PortChainBuilder result = new PortChainBuilder();
-        result.setUuid(new Uuid(neutronPortChain.getID()));
-        result.setName(neutronPortChain.getName());
-        result.setTenantId(toUuid(neutronPortChain.getTenantID()));
+        toMdBaseAttributes(neutronPortChain, result);
         if (neutronPortChain.getPortPairGroupsUUID() != null) {
             List<Uuid> portPairGroups = new ArrayList<>();
             for (String uuid : neutronPortChain.getPortPairGroupsUUID()) {
@@ -93,19 +91,10 @@ public final class NeutronSFCPortChainInterface
     }
 
     @Override
-    protected PortChain toMd(String uuid) {
-        final PortChainBuilder portChainBuilder = new PortChainBuilder();
-        portChainBuilder.setUuid(toUuid(uuid));
-        return portChainBuilder.build();
-    }
-
-    @Override
     protected NeutronSFCPortChain fromMd(PortChain mdPortChain) {
         LOGGER.trace("fromMd: Yang SFC Port Chain data : {}", mdPortChain);
         NeutronSFCPortChain result = new NeutronSFCPortChain();
-        result.setID(mdPortChain.getUuid().getValue());
-        result.setName(mdPortChain.getName());
-        result.setTenantID(mdPortChain.getTenantId());
+        fromMdBaseAttributes(mdPortChain, result);
         if (mdPortChain.getPortPairGroups() != null) {
             List<String> portPairGroups = new ArrayList<>();
             for (Uuid uuid : mdPortChain.getPortPairGroups()) {

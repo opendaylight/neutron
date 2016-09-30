@@ -28,7 +28,7 @@ public final class NeutronVPNIKEPolicyInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIKEPolicyInterface(DataBroker db) {
-        super(db);
+        super(IkepolicyBuilder.class, db);
     }
 
     // IfNBVPNIKEPolicyCRUD methods
@@ -40,12 +40,7 @@ public final class NeutronVPNIKEPolicyInterface
 
     protected NeutronVPNIKEPolicy fromMd(Ikepolicy ikePolicy) {
         final NeutronVPNIKEPolicy answer = new NeutronVPNIKEPolicy();
-        if (ikePolicy.getName() != null) {
-            answer.setName(ikePolicy.getName());
-        }
-        if (ikePolicy.getTenantId() != null) {
-            answer.setTenantID(ikePolicy.getTenantId());
-        }
+        fromMdBaseAttributes(ikePolicy, answer);
         if (ikePolicy.getAuthAlgorithm() != null) {
             answer.setAuthAlgorithm(ikePolicy.getAuthAlgorithm());
         }
@@ -68,21 +63,13 @@ public final class NeutronVPNIKEPolicyInterface
             vpnLifetime.setValue(ikePolicy.getLifetime().getValue());
             answer.setLifetime(vpnLifetime);
         }
-        if (ikePolicy.getUuid() != null) {
-            answer.setID(ikePolicy.getUuid().getValue());
-        }
         return answer;
     }
 
     @Override
     protected Ikepolicy toMd(NeutronVPNIKEPolicy ikePolicy) {
         final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
-        if (ikePolicy.getName() != null) {
-            ikePolicyBuilder.setName(ikePolicy.getName());
-        }
-        if (ikePolicy.getTenantID() != null) {
-            ikePolicyBuilder.setTenantId(toUuid(ikePolicy.getTenantID()));
-        }
+        toMdBaseAttributes(ikePolicy, ikePolicyBuilder);
         if (ikePolicy.getAuthAlgorithm() != null) {
             ikePolicyBuilder.setAuthAlgorithm(ikePolicy.getAuthAlgorithm());
         }
@@ -105,18 +92,6 @@ public final class NeutronVPNIKEPolicyInterface
             lifetimeBuilder.setValue(vpnLifetime.getValue());
             ikePolicyBuilder.setLifetime(lifetimeBuilder.build());
         }
-        if (ikePolicy.getID() != null) {
-            ikePolicyBuilder.setUuid(toUuid(ikePolicy.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron vpnIKEPolicy without UUID");
-        }
-        return ikePolicyBuilder.build();
-    }
-
-    @Override
-    protected Ikepolicy toMd(String uuid) {
-        final IkepolicyBuilder ikePolicyBuilder = new IkepolicyBuilder();
-        ikePolicyBuilder.setUuid(toUuid(uuid));
         return ikePolicyBuilder.build();
     }
 

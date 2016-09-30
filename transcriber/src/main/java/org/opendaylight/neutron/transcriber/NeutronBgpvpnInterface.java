@@ -35,7 +35,7 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
                     .put(BgpvpnTypeL2.class, "l2").put(BgpvpnTypeL3.class, "l3").build();
 
     NeutronBgpvpnInterface(DataBroker db) {
-        super(db);
+        super(BgpvpnBuilder.class, db);
     }
 
     @Override
@@ -51,12 +51,8 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
     @Override
     protected NeutronBgpvpn fromMd(Bgpvpn bgpvpn) {
         final NeutronBgpvpn result = new NeutronBgpvpn();
-        result.setAdminStateUp(bgpvpn.isAdminStateUp());
-        result.setName(bgpvpn.getName());
+        fromMdAdminAttributes(bgpvpn, result);
         result.setAutoAggregate(bgpvpn.isAutoAggregate());
-        result.setStatus(bgpvpn.getStatus());
-        result.setTenantID(bgpvpn.getTenantId());
-        result.setID(bgpvpn.getUuid().getValue());
         if (bgpvpn.getVnid() != null) {
             result.setVnid(bgpvpn.getVnid());
         }
@@ -115,15 +111,9 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
     protected Bgpvpn toMd(NeutronBgpvpn bgpvpn) {
         final BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
 
-        bgpvpnBuilder.setAdminStateUp(bgpvpn.getAdminStateUp());
-        if (bgpvpn.getName() != null) {
-            bgpvpnBuilder.setName(bgpvpn.getName());
-        }
+        toMdAdminAttributes(bgpvpn, bgpvpnBuilder);
         if (bgpvpn.getAutoAggregate() != null) {
             bgpvpnBuilder.setAutoAggregate(bgpvpn.getAutoAggregate());
-        }
-        if (bgpvpn.getStatus() != null) {
-            bgpvpnBuilder.setStatus(bgpvpn.getStatus());
         }
         if (bgpvpn.getVnid() != null) {
             bgpvpnBuilder.setVnid(bgpvpn.getVnid());
@@ -177,21 +167,6 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
             }
             bgpvpnBuilder.setNetworks(networks);
         }
-        if (bgpvpn.getTenantID() != null) {
-            bgpvpnBuilder.setTenantId(toUuid(bgpvpn.getTenantID()));
-        }
-        if (bgpvpn.getID() != null) {
-            bgpvpnBuilder.setUuid(toUuid(bgpvpn.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron bgpvpn without UUID");
-        }
-        return bgpvpnBuilder.build();
-    }
-
-    @Override
-    protected Bgpvpn toMd(String uuid) {
-        final BgpvpnBuilder bgpvpnBuilder = new BgpvpnBuilder();
-        bgpvpnBuilder.setUuid(toUuid(uuid));
         return bgpvpnBuilder.build();
     }
 

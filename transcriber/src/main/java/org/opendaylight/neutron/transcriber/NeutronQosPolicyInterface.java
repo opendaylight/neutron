@@ -33,7 +33,7 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicyInterface.class);
 
     NeutronQosPolicyInterface(DataBroker db) {
-        super(db);
+        super(QosPolicyBuilder.class, db);
     }
 
     @Override
@@ -54,17 +54,7 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
     @Override
     protected QosPolicy toMd(NeutronQosPolicy qosPolicy) {
         final QosPolicyBuilder qosPolicyBuilder = new QosPolicyBuilder();
-        if (qosPolicy.getID() != null) {
-            qosPolicyBuilder.setUuid(toUuid(qosPolicy.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron Qos Policy without UUID");
-        }
-        if (qosPolicy.getTenantID() != null) {
-            qosPolicyBuilder.setTenantId(toUuid(qosPolicy.getTenantID()));
-        }
-        if (qosPolicy.getName() != null) {
-            qosPolicyBuilder.setName(qosPolicy.getName());
-        }
+        toMdBaseAttributes(qosPolicy, qosPolicyBuilder);
         if (qosPolicy.getPolicyIsShared() != null) {
             qosPolicyBuilder.setShared(qosPolicy.getPolicyIsShared());
         }
@@ -95,24 +85,9 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
     }
 
     @Override
-    protected QosPolicy toMd(String uuid) {
-        final QosPolicyBuilder policyBuilder = new QosPolicyBuilder();
-        policyBuilder.setUuid(toUuid(uuid));
-        return policyBuilder.build();
-    }
-
-    @Override
     protected NeutronQosPolicy fromMd(QosPolicy qosPolicy) {
         final NeutronQosPolicy result = new NeutronQosPolicy();
-        if (qosPolicy.getUuid() != null) {
-            result.setID(qosPolicy.getUuid().getValue());
-        }
-        if (qosPolicy.getTenantId() != null) {
-            result.setTenantID(qosPolicy.getTenantId());
-        }
-        if (qosPolicy.getName() != null) {
-            result.setName(qosPolicy.getName());
-        }
+        fromMdBaseAttributes(qosPolicy, result);
         if (qosPolicy.isShared() != null) {
             result.setPolicyIsShared(qosPolicy.isShared());
         }

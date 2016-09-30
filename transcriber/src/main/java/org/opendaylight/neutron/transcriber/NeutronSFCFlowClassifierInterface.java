@@ -53,7 +53,7 @@ public final class NeutronSFCFlowClassifierInterface
                     .build();
 
     NeutronSFCFlowClassifierInterface(DataBroker db) {
-        super(db);
+        super(SfcFlowClassifierBuilder.class, db);
     }
 
     @Override
@@ -78,15 +78,7 @@ public final class NeutronSFCFlowClassifierInterface
         LOGGER.trace("toMd: REST SFC Flow Classifier data : {}", neutronClassifier);
 
         SfcFlowClassifierBuilder result = new SfcFlowClassifierBuilder();
-        if (neutronClassifier.getID() != null) {
-            result.setUuid(new Uuid(neutronClassifier.getID()));
-        }
-        if (neutronClassifier.getName() != null) {
-            result.setName(neutronClassifier.getName());
-        }
-        if (neutronClassifier.getTenantID() != null) {
-            result.setTenantId(toUuid(neutronClassifier.getTenantID()));
-        }
+        toMdBaseAttributes(neutronClassifier, result);
         if (neutronClassifier.getEthertype() != null) {
             final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = ETHERTYPE_MAP.inverse();
 
@@ -136,19 +128,10 @@ public final class NeutronSFCFlowClassifierInterface
     }
 
     @Override
-    protected SfcFlowClassifier toMd(String uuid) {
-        final SfcFlowClassifierBuilder sfcFlowClassifierBuilder = new SfcFlowClassifierBuilder();
-        sfcFlowClassifierBuilder.setUuid(toUuid(uuid));
-        return sfcFlowClassifierBuilder.build();
-    }
-
-    @Override
     protected NeutronSFCFlowClassifier fromMd(SfcFlowClassifier mdClassifier) {
         LOGGER.trace("fromMd: Yang SFC flow classifier data : {}", mdClassifier);
         NeutronSFCFlowClassifier result = new NeutronSFCFlowClassifier();
-        result.setID(mdClassifier.getUuid().getValue());
-        result.setName(mdClassifier.getName());
-        result.setTenantID(mdClassifier.getTenantId());
+        fromMdBaseAttributes(mdClassifier, result);
         if (mdClassifier.getEthertype() != null) {
             result.setEthertype(ETHERTYPE_MAP.get(mdClassifier.getEthertype()));
         }

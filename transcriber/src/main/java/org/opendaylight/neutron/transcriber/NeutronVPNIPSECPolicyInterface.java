@@ -28,7 +28,7 @@ public final class NeutronVPNIPSECPolicyInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
 
     NeutronVPNIPSECPolicyInterface(DataBroker db) {
-        super(db);
+        super(IpsecpolicyBuilder.class, db);
     }
 
     // IfNBVPNIPSECPolicyCRUD methods
@@ -40,12 +40,7 @@ public final class NeutronVPNIPSECPolicyInterface
 
     protected NeutronVPNIPSECPolicy fromMd(Ipsecpolicy ipsecPolicy) {
         final NeutronVPNIPSECPolicy answer = new NeutronVPNIPSECPolicy();
-        if (ipsecPolicy.getName() != null) {
-            answer.setName(ipsecPolicy.getName());
-        }
-        if (ipsecPolicy.getTenantId() != null) {
-            answer.setTenantID(ipsecPolicy.getTenantId());
-        }
+        fromMdBaseAttributes(ipsecPolicy, answer);
         if (ipsecPolicy.getAuthAlgorithm() != null) {
             answer.setAuthAlgorithm(ipsecPolicy.getAuthAlgorithm());
         }
@@ -67,21 +62,13 @@ public final class NeutronVPNIPSECPolicyInterface
             vpnLifetime.setValue(ipsecPolicy.getLifetime().getValue());
             answer.setLifetime(vpnLifetime);
         }
-        if (ipsecPolicy.getUuid() != null) {
-            answer.setID(ipsecPolicy.getUuid().getValue());
-        }
         return answer;
     }
 
     @Override
     protected Ipsecpolicy toMd(NeutronVPNIPSECPolicy ipsecPolicy) {
         final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
-        if (ipsecPolicy.getName() != null) {
-            ipsecPolicyBuilder.setName(ipsecPolicy.getName());
-        }
-        if (ipsecPolicy.getTenantID() != null) {
-            ipsecPolicyBuilder.setTenantId(toUuid(ipsecPolicy.getTenantID()));
-        }
+        toMdBaseAttributes(ipsecPolicy, ipsecPolicyBuilder);
         if (ipsecPolicy.getAuthAlgorithm() != null) {
             ipsecPolicyBuilder.setAuthAlgorithm(ipsecPolicy.getAuthAlgorithm());
         }
@@ -104,18 +91,6 @@ public final class NeutronVPNIPSECPolicyInterface
             lifetimeBuilder.setValue(vpnLifetime.getValue());
             ipsecPolicyBuilder.setLifetime(lifetimeBuilder.build());
         }
-        if (ipsecPolicy.getID() != null) {
-            ipsecPolicyBuilder.setUuid(toUuid(ipsecPolicy.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron vpnIPSECPolicy without UUID");
-        }
-        return ipsecPolicyBuilder.build();
-    }
-
-    @Override
-    protected Ipsecpolicy toMd(String uuid) {
-        final IpsecpolicyBuilder ipsecPolicyBuilder = new IpsecpolicyBuilder();
-        ipsecPolicyBuilder.setUuid(toUuid(uuid));
         return ipsecPolicyBuilder.build();
     }
 

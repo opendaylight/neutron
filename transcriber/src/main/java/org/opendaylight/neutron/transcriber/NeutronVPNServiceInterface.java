@@ -26,7 +26,7 @@ public final class NeutronVPNServiceInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
 
     NeutronVPNServiceInterface(DataBroker db) {
-        super(db);
+        super(VpnserviceBuilder.class, db);
     }
 
     @Override
@@ -41,24 +41,12 @@ public final class NeutronVPNServiceInterface
 
     protected NeutronVPNService fromMd(Vpnservice vpnService) {
         final NeutronVPNService answer = new NeutronVPNService();
-        if (vpnService.getName() != null) {
-            answer.setName(vpnService.getName());
-        }
-        if (vpnService.getTenantId() != null) {
-            answer.setTenantID(vpnService.getTenantId());
-        }
-        if (vpnService.getStatus() != null) {
-            answer.setStatus(vpnService.getStatus());
-        }
+        fromMdAdminAttributes(vpnService, answer);
         if (vpnService.getSubnetId() != null) {
             answer.setSubnetUUID(vpnService.getSubnetId().getValue());
         }
         if (vpnService.getRouterId() != null) {
             answer.setRouterUUID(vpnService.getRouterId().getValue());
-        }
-        answer.setAdminStateUp(vpnService.isAdminStateUp());
-        if (vpnService.getUuid() != null) {
-            answer.setID(vpnService.getUuid().getValue());
         }
         return answer;
     }
@@ -66,34 +54,13 @@ public final class NeutronVPNServiceInterface
     @Override
     protected Vpnservice toMd(NeutronVPNService vpnService) {
         final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
-        if (vpnService.getName() != null) {
-            vpnServiceBuilder.setName(vpnService.getName());
-        }
-        if (vpnService.getTenantID() != null) {
-            vpnServiceBuilder.setTenantId(toUuid(vpnService.getTenantID()));
-        }
-        if (vpnService.getStatus() != null) {
-            vpnServiceBuilder.setStatus(vpnService.getStatus());
-        }
+        toMdAdminAttributes(vpnService, vpnServiceBuilder);
         if (vpnService.getSubnetUUID() != null) {
             vpnServiceBuilder.setSubnetId(toUuid(vpnService.getSubnetUUID()));
         }
         if (vpnService.getRouterUUID() != null) {
             vpnServiceBuilder.setRouterId(toUuid(vpnService.getRouterUUID()));
         }
-        vpnServiceBuilder.setAdminStateUp(vpnService.getAdminStateUp());
-        if (vpnService.getID() != null) {
-            vpnServiceBuilder.setUuid(toUuid(vpnService.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron vpnService without UUID");
-        }
-        return vpnServiceBuilder.build();
-    }
-
-    @Override
-    protected Vpnservice toMd(String uuid) {
-        final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
-        vpnServiceBuilder.setUuid(toUuid(uuid));
         return vpnServiceBuilder.build();
     }
 
