@@ -46,7 +46,7 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
                     .put(NetworkTypeVlan.class, "vlan").put(NetworkTypeVxlan.class, "vxlan").build();
 
     NeutronNetworkInterface(DataBroker db) {
-        super(db);
+        super(NetworkBuilder.class, db);
     }
 
     // IfNBNetworkCRUD methods
@@ -58,12 +58,8 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
     protected NeutronNetwork fromMd(Network network) {
         final NeutronNetwork result = new NeutronNetwork();
         result.initDefaults();
-        result.setAdminStateUp(network.isAdminStateUp());
-        result.setNetworkName(network.getName());
+        fromMdAdminAttributes(network, result);
         result.setShared(network.isShared());
-        result.setStatus(network.getStatus());
-        result.setTenantID(network.getTenantId());
-        result.setID(network.getUuid().getValue());
 
         final NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
         result.setRouterExternal(l3Extension.isExternal());
@@ -144,32 +140,12 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
 
     protected Network toMd(NeutronNetwork network) {
         final NetworkBuilder networkBuilder = new NetworkBuilder();
+        toMdAdminAttributes(network, networkBuilder);
         fillExtensions(networkBuilder, network);
 
-        networkBuilder.setAdminStateUp(network.getAdminStateUp());
-        if (network.getNetworkName() != null) {
-            networkBuilder.setName(network.getNetworkName());
-        }
         if (network.getShared() != null) {
             networkBuilder.setShared(network.getShared());
         }
-        if (network.getStatus() != null) {
-            networkBuilder.setStatus(network.getStatus());
-        }
-        if (network.getTenantID() != null) {
-            networkBuilder.setTenantId(toUuid(network.getTenantID()));
-        }
-        if (network.getID() != null) {
-            networkBuilder.setUuid(toUuid(network.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron network without UUID");
-        }
-        return networkBuilder.build();
-    }
-
-    protected Network toMd(String uuid) {
-        final NetworkBuilder networkBuilder = new NetworkBuilder();
-        networkBuilder.setUuid(toUuid(uuid));
         return networkBuilder.build();
     }
 

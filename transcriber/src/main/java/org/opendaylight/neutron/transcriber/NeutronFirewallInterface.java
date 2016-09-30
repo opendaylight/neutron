@@ -26,7 +26,7 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
     NeutronFirewallInterface(DataBroker db) {
-        super(db);
+        super(FirewallBuilder.class, db);
     }
 
     @Override
@@ -46,15 +46,7 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
 
     protected NeutronFirewall fromMd(Firewall firewall) {
         final NeutronFirewall answer = new NeutronFirewall();
-        if (firewall.getUuid() != null) {
-            answer.setID(firewall.getUuid().getValue());
-        }
-        if (firewall.getName() != null) {
-            answer.setFirewallName(firewall.getName());
-        }
-        if (firewall.getTenantId() != null) {
-            answer.setTenantID(firewall.getTenantId());
-        }
+        fromMdBaseAttributes(firewall, answer);
         answer.setFirewallAdminStateIsUp(firewall.isAdminStateUp());
         if (firewall.isShared() != null) {
             answer.setFirewallIsShared(firewall.isShared());
@@ -68,15 +60,7 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
     @Override
     protected Firewall toMd(NeutronFirewall firewall) {
         final FirewallBuilder firewallBuilder = new FirewallBuilder();
-        if (firewall.getID() != null) {
-            firewallBuilder.setUuid(toUuid(firewall.getID()));
-        }
-        if (firewall.getFirewallName() != null) {
-            firewallBuilder.setName(firewall.getFirewallName());
-        }
-        if (firewall.getTenantID() != null) {
-            firewallBuilder.setTenantId(toUuid(firewall.getTenantID()));
-        }
+        toMdBaseAttributes(firewall, firewallBuilder);
         if (firewall.getFirewallAdminStateIsUp() != null) {
             firewallBuilder.setAdminStateUp(firewall.getFirewallAdminStateIsUp());
         }
@@ -86,13 +70,6 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
         if (firewall.getFirewallPolicyID() != null) {
             firewallBuilder.setFirewallPolicyId(toUuid(firewall.getFirewallPolicyID()));
         }
-        return firewallBuilder.build();
-    }
-
-    @Override
-    protected Firewall toMd(String uuid) {
-        final FirewallBuilder firewallBuilder = new FirewallBuilder();
-        firewallBuilder.setUuid(toUuid(uuid));
         return firewallBuilder.build();
     }
 }

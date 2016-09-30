@@ -38,7 +38,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
     // methods needed for creating caches
 
     NeutronRouterInterface(DataBroker db) {
-        super(db);
+        super(RouterBuilder.class, db);
     }
 
     // IfNBRouterCRUD Interface methods
@@ -107,13 +107,6 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         } else {
             LOGGER.warn("Attempting to write neutron router without UUID");
         }
-        return routerBuilder.build();
-    }
-
-    @Override
-    protected Router toMd(String uuid) {
-        final RouterBuilder routerBuilder = new RouterBuilder();
-        routerBuilder.setUuid(toUuid(uuid));
         return routerBuilder.build();
     }
 

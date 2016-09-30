@@ -26,7 +26,7 @@ public final class NeutronSecurityGroupInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
 
     NeutronSecurityGroupInterface(DataBroker db) {
-        super(db);
+        super(SecurityGroupBuilder.class, db);
     }
 
     @Override
@@ -36,40 +36,14 @@ public final class NeutronSecurityGroupInterface
 
     protected NeutronSecurityGroup fromMd(SecurityGroup group) {
         final NeutronSecurityGroup answer = new NeutronSecurityGroup();
-        if (group.getName() != null) {
-            answer.setSecurityGroupName(group.getName());
-        }
-        if (group.getTenantId() != null) {
-            answer.setTenantID(group.getTenantId());
-        }
-        if (group.getUuid() != null) {
-            answer.setID(group.getUuid().getValue());
-        }
+        fromMdBaseAttributes(group, answer);
         return answer;
     }
 
     @Override
     protected SecurityGroup toMd(NeutronSecurityGroup securityGroup) {
         final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
-        if (securityGroup.getSecurityGroupName() != null) {
-            securityGroupBuilder.setName(securityGroup.getSecurityGroupName());
-        }
-        if (securityGroup.getTenantID() != null) {
-            securityGroupBuilder.setTenantId(toUuid(securityGroup.getTenantID()));
-        }
-        if (securityGroup.getID() != null) {
-            securityGroupBuilder.setUuid(toUuid(securityGroup.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron securityGroup without UUID");
-        }
-
-        return securityGroupBuilder.build();
-    }
-
-    @Override
-    protected SecurityGroup toMd(String uuid) {
-        final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
-        securityGroupBuilder.setUuid(toUuid(uuid));
+        toMdBaseAttributes(securityGroup, securityGroupBuilder);
         return securityGroupBuilder.build();
     }
 

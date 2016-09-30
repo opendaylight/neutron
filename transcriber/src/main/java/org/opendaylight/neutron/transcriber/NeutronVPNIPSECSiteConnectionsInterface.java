@@ -29,7 +29,7 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
     NeutronVPNIPSECSiteConnectionsInterface(DataBroker db) {
-        super(db);
+        super(IpsecsiteconnectionBuilder.class, db);
     }
 
     // INeutronVPNIPSECSiteConnectionsCRUD methods
@@ -45,16 +45,7 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
 
     protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
         final NeutronVPNIPSECSiteConnection answer = new NeutronVPNIPSECSiteConnection();
-        if (ipsecSiteConnection.getName() != null) {
-            answer.setName(ipsecSiteConnection.getName());
-        }
-        if (ipsecSiteConnection.getTenantId() != null) {
-            answer.setTenantID(ipsecSiteConnection.getTenantId());
-        }
-        answer.setStatus(ipsecSiteConnection.getStatus());
-        if (ipsecSiteConnection.isAdminStateUp() != null) {
-            answer.setAdminStateUp(ipsecSiteConnection.isAdminStateUp());
-        }
+        fromMdAdminAttributes(ipsecSiteConnection, answer);
         if (ipsecSiteConnection.getPeerAddress() != null) {
             answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
@@ -99,25 +90,13 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
             deadPeerDetection.setTimeout(ipsecSiteConnection.getDpd().getTimeout());
             answer.setDeadPeerDetection(deadPeerDetection);
         }
-        if (ipsecSiteConnection.getUuid() != null) {
-            answer.setID(ipsecSiteConnection.getUuid().getValue());
-        }
         return answer;
     }
 
     @Override
     protected Ipsecsiteconnection toMd(NeutronVPNIPSECSiteConnection ipsecSiteConnection) {
         final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
-        if (ipsecSiteConnection.getName() != null) {
-            ipsecSiteConnectionBuilder.setName(ipsecSiteConnection.getName());
-        }
-        if (ipsecSiteConnection.getTenantID() != null) {
-            ipsecSiteConnectionBuilder.setTenantId(toUuid(ipsecSiteConnection.getTenantID()));
-        }
-        ipsecSiteConnectionBuilder.setStatus(ipsecSiteConnection.getStatus());
-        if (ipsecSiteConnection.getAdminStateUp() != null) {
-            ipsecSiteConnectionBuilder.setAdminStateUp(ipsecSiteConnection.getAdminStateUp());
-        }
+        toMdAdminAttributes(ipsecSiteConnection, ipsecSiteConnectionBuilder);
         if (ipsecSiteConnection.getPeerAddress() != null) {
             ipsecSiteConnectionBuilder.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
@@ -163,18 +142,6 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
             dpdBuilder.setTimeout(deadPeerDetection.getTimeout());
             ipsecSiteConnectionBuilder.setDpd(dpdBuilder.build());
         }
-        if (ipsecSiteConnection.getID() != null) {
-            ipsecSiteConnectionBuilder.setUuid(toUuid(ipsecSiteConnection.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron vpnIPSECSiteConnection without UUID");
-        }
-        return ipsecSiteConnectionBuilder.build();
-    }
-
-    @Override
-    protected Ipsecsiteconnection toMd(String uuid) {
-        final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
-        ipsecSiteConnectionBuilder.setUuid(toUuid(uuid));
         return ipsecSiteConnectionBuilder.build();
     }
 

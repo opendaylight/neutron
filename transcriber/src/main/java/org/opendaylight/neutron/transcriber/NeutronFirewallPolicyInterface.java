@@ -29,7 +29,7 @@ public final class NeutronFirewallPolicyInterface
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
 
     NeutronFirewallPolicyInterface(DataBroker db) {
-        super(db);
+        super(FirewallPolicyBuilder.class, db);
     }
 
     @Override
@@ -50,15 +50,7 @@ public final class NeutronFirewallPolicyInterface
 
     protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {
         final NeutronFirewallPolicy answer = new NeutronFirewallPolicy();
-        if (policy.getUuid() != null) {
-            answer.setID(policy.getUuid().getValue());
-        }
-        if (policy.getName() != null) {
-            answer.setFirewallPolicyName(policy.getName());
-        }
-        if (policy.getTenantId() != null) {
-            answer.setTenantID(policy.getTenantId());
-        }
+        fromMdBaseAttributes(policy, answer);
         if (policy.isShared() != null) {
             answer.setFirewallPolicyIsShared(policy.isShared());
         }
@@ -71,28 +63,13 @@ public final class NeutronFirewallPolicyInterface
     @Override
     protected FirewallPolicy toMd(NeutronFirewallPolicy policy) {
         final FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
-        if (policy.getID() != null) {
-            policyBuilder.setUuid(toUuid(policy.getID()));
-        }
-        if (policy.getFirewallPolicyName() != null) {
-            policyBuilder.setName(policy.getFirewallPolicyName());
-        }
-        if (policy.getTenantID() != null) {
-            policyBuilder.setTenantId(toUuid(policy.getTenantID()));
-        }
+        toMdBaseAttributes(policy, policyBuilder);
         if (policy.getFirewallPolicyIsShared() != null) {
             policyBuilder.setShared(policy.getFirewallPolicyIsShared());
         }
         if (policy.getFirewallPolicyIsAudited() != null) {
             policyBuilder.setAudited(policy.getFirewallPolicyIsAudited());
         }
-        return policyBuilder.build();
-    }
-
-    @Override
-    protected FirewallPolicy toMd(String uuid) {
-        final FirewallPolicyBuilder policyBuilder = new FirewallPolicyBuilder();
-        policyBuilder.setUuid(toUuid(uuid));
         return policyBuilder.build();
     }
 }
