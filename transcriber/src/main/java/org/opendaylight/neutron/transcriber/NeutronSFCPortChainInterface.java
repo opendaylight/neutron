@@ -14,14 +14,13 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSFCPortChainCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.chain.attributes.ChainParameters;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.chain.attributes.ChainParametersBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.chain.attributes.ChainParametersKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.PortChains;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.chains.PortChain;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.chains.PortChainBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.chains.PortChainKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * Created by Anil Vishnoi (avishnoi@Brocade.com)
  */
 public final class NeutronSFCPortChainInterface
-        extends AbstractNeutronInterface<PortChain, PortChains, NeutronSFCPortChain>
+        extends AbstractNeutronInterface<PortChain, PortChains, PortChainKey, NeutronSFCPortChain>
         implements INeutronSFCPortChainCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);
@@ -41,12 +40,6 @@ public final class NeutronSFCPortChainInterface
     @Override
     protected List<PortChain> getDataObjectList(PortChains dataObjects) {
         return dataObjects.getPortChain();
-    }
-
-    @Override
-    protected InstanceIdentifier<PortChain> createInstanceIdentifier(PortChain portChain) {
-        return InstanceIdentifier.create(Neutron.class).child(PortChains.class).child(PortChain.class,
-                portChain.getKey());
     }
 
     @Override

@@ -40,12 +40,14 @@ import org.opendaylight.yangtools.concepts.Builder;
 import org.opendaylight.yangtools.yang.binding.Augmentable;
 import org.opendaylight.yangtools.yang.binding.ChildOf;
 import org.opendaylight.yangtools.yang.binding.DataObject;
+import org.opendaylight.yangtools.yang.binding.Identifiable;
+import org.opendaylight.yangtools.yang.binding.Identifier;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractNeutronInterface<T extends DataObject & ChildOf<? super U>,
-        U extends ChildOf<? super Neutron> & Augmentable<U>, S extends INeutronObject<S>>
+public abstract class AbstractNeutronInterface<T extends DataObject & Identifiable<K> & ChildOf<? super U>,
+        U extends ChildOf<? super Neutron> & Augmentable<U>, K extends Identifier<T>, S extends INeutronObject<S>>
         implements AutoCloseable, INeutronCRUD<S> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
@@ -60,6 +62,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & ChildOf<? 
     private final DataBroker db;
 
     private final Class<U> mdContainerClass;
+    private final Class<T> mdListClass;
 
     // Unfortunately odl yangtools doesn't model yang model "uses" as
     // class/interface hierarchy. So we need to resort to use reflection
@@ -76,8 +79,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject & ChildOf<? 
         this.builderClass = builderClass;
 
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        mdListClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
         mdContainerClass = (Class<U>) parameterizedType.getActualTypeArguments()[1];
-        Class<S> iNeutronClass = (Class<S>) parameterizedType.getActualTypeArguments()[2];
+        Class<S> iNeutronClass = (Class<S>) parameterizedType.getActualTypeArguments()[3];
         try {
             setUuid = builderClass.getDeclaredMethod("setUuid", Uuid.class);
             setTenantId = builderClass.getDeclaredMethod("setTenantId", Uuid.class);
@@ -103,12 +107,13 @@ public abstract class AbstractNeutronInterface<T extends DataObject & ChildOf<? 
         return db;
     }
 
-    protected abstract InstanceIdentifier<T> createInstanceIdentifier(T item);
+    private InstanceIdentifier<T> createInstanceIdentifier(T item) {
+        return InstanceIdentifier.create(Neutron.class).child(mdContainerClass).child(mdListClass, item.getKey());
+    }
 
     private InstanceIdentifier<U> createInstanceIdentifier() {
         return InstanceIdentifier.create(Neutron.class).child(mdContainerClass);
     }
-
 
     protected <S1 extends INeutronBaseAttributes<S1>, M extends BaseAttributes, B extends Builder<M>>
         void toMdIds(INeutronObject<S1> neutronObject, B builder) {

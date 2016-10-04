@@ -15,8 +15,7 @@ import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.FirewallPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 
 public final class NeutronFirewallPolicyInterface
-        extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, NeutronFirewallPolicy>
+        extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, FirewallPolicyKey, NeutronFirewallPolicy>
         implements INeutronFirewallPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicyInterface.class);
 
@@ -35,12 +34,6 @@ public final class NeutronFirewallPolicyInterface
     @Override
     protected List<FirewallPolicy> getDataObjectList(FirewallPolicies policies) {
         return policies.getFirewallPolicy();
-    }
-
-    @Override
-    protected InstanceIdentifier<FirewallPolicy> createInstanceIdentifier(FirewallPolicy item) {
-        return InstanceIdentifier.create(Neutron.class).child(FirewallPolicies.class).child(FirewallPolicy.class,
-                item.getKey());
     }
 
     protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {
