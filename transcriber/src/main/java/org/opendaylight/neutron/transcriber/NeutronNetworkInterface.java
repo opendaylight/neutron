@@ -25,18 +25,18 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.networks.attributes.Networks;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.networks.attributes.networks.Network;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.networks.attributes.networks.NetworkBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.networks.attributes.networks.NetworkKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.neutron.networks.network.Segments;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.neutron.networks.network.SegmentsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtensionBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronNetworkInterface extends AbstractNeutronInterface<Network, Networks, NeutronNetwork>
+public final class NeutronNetworkInterface
+        extends AbstractNeutronInterface<Network, Networks, NetworkKey, NeutronNetwork>
         implements INeutronNetworkCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
 
@@ -147,10 +147,5 @@ public final class NeutronNetworkInterface extends AbstractNeutronInterface<Netw
             networkBuilder.setShared(network.getShared());
         }
         return networkBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Network> createInstanceIdentifier(Network network) {
-        return InstanceIdentifier.create(Neutron.class).child(Networks.class).child(Network.class, network.getKey());
     }
 }

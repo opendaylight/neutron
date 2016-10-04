@@ -21,12 +21,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.B
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.Bgpvpns;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.Bgpvpn;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, NeutronBgpvpn>
+public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, BgpvpnKey, NeutronBgpvpn>
         implements INeutronBgpvpnCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpnInterface.class);
 
@@ -168,10 +167,5 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
             bgpvpnBuilder.setNetworks(networks);
         }
         return bgpvpnBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Bgpvpn> createInstanceIdentifier(Bgpvpn bgpvpn) {
-        return InstanceIdentifier.create(Neutron.class).child(Bgpvpns.class).child(Bgpvpn.class, bgpvpn.getKey());
     }
 }

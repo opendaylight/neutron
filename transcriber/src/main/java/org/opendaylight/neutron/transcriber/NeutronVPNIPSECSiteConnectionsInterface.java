@@ -14,17 +14,17 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNDeadPeerDetection;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECSiteConnection;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnection.attributes.DpdBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.IpsecSiteConnections;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.Ipsecsiteconnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronVPNIPSECSiteConnectionsInterface
-        extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, NeutronVPNIPSECSiteConnection>
+        extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, IpsecsiteconnectionKey,
+                                         NeutronVPNIPSECSiteConnection>
         implements INeutronVPNIPSECSiteConnectionsCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIKEPolicyInterface.class);
 
@@ -143,12 +143,5 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
             ipsecSiteConnectionBuilder.setDpd(dpdBuilder.build());
         }
         return ipsecSiteConnectionBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Ipsecsiteconnection> createInstanceIdentifier(
-            Ipsecsiteconnection ipsecSiteConnection) {
-        return InstanceIdentifier.create(Neutron.class).child(IpsecSiteConnections.class)
-                .child(Ipsecsiteconnection.class, ipsecSiteConnection.getKey());
     }
 }
