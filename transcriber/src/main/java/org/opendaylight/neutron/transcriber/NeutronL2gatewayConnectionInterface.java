@@ -36,11 +36,6 @@ public final class NeutronL2gatewayConnectionInterface
     }
 
     @Override
-    public boolean inUse(String l2gatewayConnectionID) {
-        return !exists(l2gatewayConnectionID);
-    }
-
-    @Override
     protected NeutronL2gatewayConnection fromMd(L2gatewayConnection l2gatewayConnection) {
         final NeutronL2gatewayConnection result = new NeutronL2gatewayConnection();
         if (l2gatewayConnection.getUuid() != null) {

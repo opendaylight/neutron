@@ -43,11 +43,6 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
     }
 
     @Override
-    public boolean inUse(String uuid) {
-        return !exists(uuid);
-    }
-
-    @Override
     protected NeutronBgpvpn fromMd(Bgpvpn bgpvpn) {
         final NeutronBgpvpn result = new NeutronBgpvpn();
         fromMdAdminAttributes(bgpvpn, result);

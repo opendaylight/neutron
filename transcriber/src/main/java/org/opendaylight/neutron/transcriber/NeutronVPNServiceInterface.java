@@ -33,11 +33,6 @@ public final class NeutronVPNServiceInterface
         return services.getVpnservice();
     }
 
-    @Override
-    public boolean inUse(String uuid) {
-        return !exists(uuid);
-    }
-
     protected NeutronVPNService fromMd(Vpnservice vpnService) {
         final NeutronVPNService answer = new NeutronVPNService();
         fromMdAdminAttributes(vpnService, answer);
