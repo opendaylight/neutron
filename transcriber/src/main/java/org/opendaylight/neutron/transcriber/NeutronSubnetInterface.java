@@ -27,7 +27,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV6;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.AllocationPools;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.AllocationPoolsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnet.attributes.HostRoutes;
@@ -35,11 +34,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.s
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.Subnets;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, NeutronSubnet>
+public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, SubnetKey, NeutronSubnet>
         implements INeutronSubnetCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
 
@@ -170,10 +169,5 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             subnetBuilder.setHostRoutes(hostRoutes);
         }
         return subnetBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Subnet> createInstanceIdentifier(Subnet subnet) {
-        return InstanceIdentifier.create(Neutron.class).child(Subnets.class).child(Subnet.class, subnet.getKey());
     }
 }

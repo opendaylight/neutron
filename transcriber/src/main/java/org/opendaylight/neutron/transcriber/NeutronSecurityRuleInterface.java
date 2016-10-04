@@ -21,17 +21,17 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV6;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.ProtocolMapper;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronSecurityRuleInterface extends
-        AbstractNeutronInterface<SecurityRule, SecurityRules, NeutronSecurityRule> implements INeutronSecurityRuleCRUD {
+        AbstractNeutronInterface<SecurityRule, SecurityRules, SecurityRuleKey, NeutronSecurityRule>
+        implements INeutronSecurityRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 
     private static final ImmutableBiMap<Class<? extends DirectionBase>,
@@ -136,11 +136,5 @@ public final class NeutronSecurityRuleInterface extends
             LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }
         return securityRuleBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<SecurityRule> createInstanceIdentifier(SecurityRule securityRule) {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityRules.class).child(SecurityRule.class,
-                securityRule.getKey());
     }
 }

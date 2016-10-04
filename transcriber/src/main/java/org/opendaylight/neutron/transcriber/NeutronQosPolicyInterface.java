@@ -18,16 +18,16 @@ import org.opendaylight.neutron.spi.NeutronQosPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.QosPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.BandwidthLimitRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.BandwidthLimitRulesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRulesBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<QosPolicy, QosPolicies, NeutronQosPolicy>
+public final class NeutronQosPolicyInterface
+        extends AbstractNeutronInterface<QosPolicy, QosPolicies, QosPolicyKey,NeutronQosPolicy>
         implements INeutronQosPolicyCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicyInterface.class);
@@ -39,11 +39,6 @@ public final class NeutronQosPolicyInterface extends AbstractNeutronInterface<Qo
     @Override
     protected List<QosPolicy> getDataObjectList(QosPolicies qosPolicies) {
         return qosPolicies.getQosPolicy();
-    }
-
-    @Override
-    protected InstanceIdentifier<QosPolicy> createInstanceIdentifier(QosPolicy port) {
-        return InstanceIdentifier.create(Neutron.class).child(QosPolicies.class).child(QosPolicy.class, port.getKey());
     }
 
     @Override
