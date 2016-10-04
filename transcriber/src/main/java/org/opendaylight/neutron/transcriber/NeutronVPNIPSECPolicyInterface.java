@@ -13,17 +13,16 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNIPSECPolicy;
 import org.opendaylight.neutron.spi.NeutronVPNLifetime;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.IpsecPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.Ipsecpolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicy.attributes.LifetimeBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronVPNIPSECPolicyInterface
-        extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, NeutronVPNIPSECPolicy>
+        extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, IpsecpolicyKey, NeutronVPNIPSECPolicy>
         implements INeutronVPNIPSECPolicyCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNIPSECPolicyInterface.class);
 
@@ -92,11 +91,5 @@ public final class NeutronVPNIPSECPolicyInterface
             ipsecPolicyBuilder.setLifetime(lifetimeBuilder.build());
         }
         return ipsecPolicyBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Ipsecpolicy> createInstanceIdentifier(Ipsecpolicy ipsecPolicy) {
-        return InstanceIdentifier.create(Neutron.class).child(IpsecPolicies.class).child(Ipsecpolicy.class,
-                ipsecPolicy.getKey());
     }
 }

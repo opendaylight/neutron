@@ -23,16 +23,15 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.l3.att
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.Routers;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.Router;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.RouterBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.RouterKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.ExternalGatewayInfo;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.ExternalGatewayInfoBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIpsBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, NeutronRouter>
+public final class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, RouterKey, NeutronRouter>
         implements INeutronRouterCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     // methods needed for creating caches
@@ -108,11 +107,6 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             LOGGER.warn("Attempting to write neutron router without UUID");
         }
         return routerBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Router> createInstanceIdentifier(Router router) {
-        return InstanceIdentifier.create(Neutron.class).child(Routers.class).child(Router.class, router.getKey());
     }
 
     public NeutronRouter fromMd(Router router) {

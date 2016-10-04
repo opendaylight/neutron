@@ -15,12 +15,12 @@ import org.opendaylight.neutron.spi.NeutronFirewall;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.Firewalls;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.Firewall;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.FirewallBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.FirewallKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronFirewallInterface extends AbstractNeutronInterface<Firewall, Firewalls, NeutronFirewall>
+public final class NeutronFirewallInterface
+        extends AbstractNeutronInterface<Firewall, Firewalls, FirewallKey, NeutronFirewall>
         implements INeutronFirewallCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
@@ -32,11 +32,6 @@ public final class NeutronFirewallInterface extends AbstractNeutronInterface<Fir
     @Override
     protected List<Firewall> getDataObjectList(Firewalls firewalls) {
         return firewalls.getFirewall();
-    }
-
-    @Override
-    protected InstanceIdentifier<Firewall> createInstanceIdentifier(Firewall item) {
-        return InstanceIdentifier.create(Neutron.class).child(Firewalls.class).child(Firewall.class, item.getKey());
     }
 
     protected NeutronFirewall fromMd(Firewall firewall) {

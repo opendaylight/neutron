@@ -24,13 +24,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.Listeners;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.Listener;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronLoadBalancerListenerInterface
-        extends AbstractNeutronInterface<Listener, Listeners, NeutronLoadBalancerListener>
+        extends AbstractNeutronInterface<Listener, Listeners, ListenerKey, NeutronLoadBalancerListener>
         implements INeutronLoadBalancerListenerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
 
@@ -46,11 +45,6 @@ public final class NeutronLoadBalancerListenerInterface
     @Override
     protected List<Listener> getDataObjectList(Listeners listeners) {
         return listeners.getListener();
-    }
-
-    @Override
-    protected InstanceIdentifier<Listener> createInstanceIdentifier(Listener listener) {
-        return InstanceIdentifier.create(Neutron.class).child(Listeners.class).child(Listener.class, listener.getKey());
     }
 
     @Override

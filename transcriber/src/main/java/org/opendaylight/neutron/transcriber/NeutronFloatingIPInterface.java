@@ -16,13 +16,12 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.Floatingips;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.Floatingip;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronFloatingIPInterface
-        extends AbstractNeutronInterface<Floatingip, Floatingips, NeutronFloatingIP>
+        extends AbstractNeutronInterface<Floatingip, Floatingips, FloatingipKey, NeutronFloatingIP>
         implements INeutronFloatingIPCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
@@ -92,10 +91,5 @@ public final class NeutronFloatingIPInterface
         }
         result.setStatus(fip.getStatus());
         return result;
-    }
-
-    @Override
-    protected InstanceIdentifier<Floatingip> createInstanceIdentifier(Floatingip item) {
-        return InstanceIdentifier.create(Neutron.class).child(Floatingips.class).child(Floatingip.class, item.getKey());
     }
 }

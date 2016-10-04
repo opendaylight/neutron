@@ -20,13 +20,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.MeteringRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRuleBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRuleKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronMeteringLabelRuleInterface
-        extends AbstractNeutronInterface<MeteringRule, MeteringRules, NeutronMeteringLabelRule>
+        extends AbstractNeutronInterface<MeteringRule, MeteringRules, MeteringRuleKey, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
 
@@ -42,12 +41,6 @@ public final class NeutronMeteringLabelRuleInterface
     @Override
     protected List<MeteringRule> getDataObjectList(MeteringRules rules) {
         return rules.getMeteringRule();
-    }
-
-    @Override
-    protected InstanceIdentifier<MeteringRule> createInstanceIdentifier(MeteringRule item) {
-        return InstanceIdentifier.create(Neutron.class).child(MeteringRules.class).child(MeteringRule.class,
-                item.getKey());
     }
 
     @Override

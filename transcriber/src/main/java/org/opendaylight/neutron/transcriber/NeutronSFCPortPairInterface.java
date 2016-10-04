@@ -14,32 +14,27 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortPair;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.pair.attributes.ServiceFunctionParameters;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.pair.attributes.ServiceFunctionParametersBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.pair.attributes.ServiceFunctionParametersKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.PortPairs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPair;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPairBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPairKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com)
  */
-public final class NeutronSFCPortPairInterface extends AbstractNeutronInterface<PortPair, PortPairs, NeutronSFCPortPair>
+public final class NeutronSFCPortPairInterface
+        extends AbstractNeutronInterface<PortPair, PortPairs, PortPairKey, NeutronSFCPortPair>
         implements INeutronSFCPortPairCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairInterface.class);
 
     NeutronSFCPortPairInterface(DataBroker db) {
         super(PortPairBuilder.class, db);
-    }
-
-    @Override
-    protected InstanceIdentifier<PortPair> createInstanceIdentifier(PortPair portPair) {
-        return InstanceIdentifier.create(Neutron.class).child(PortPairs.class).child(PortPair.class, portPair.getKey());
     }
 
     @Override
