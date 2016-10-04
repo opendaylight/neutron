@@ -490,9 +490,4 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         }
         return false;
     }
-
-    @Override
-    public boolean inUse(String uuid) {
-        return false;
-    }
 }

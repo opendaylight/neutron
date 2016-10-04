@@ -80,16 +80,4 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      */
 
     boolean update(String uuid, T delta);
-
-    /**
-     * Applications call this interface method to determine if a Neutron object
-     * is use
-     *
-     * @param uuid
-     *            identifier of the neutron object
-     *
-     * @return boolean on whether the neutron is in use or not
-     */
-
-    boolean inUse(String uuid);
 }

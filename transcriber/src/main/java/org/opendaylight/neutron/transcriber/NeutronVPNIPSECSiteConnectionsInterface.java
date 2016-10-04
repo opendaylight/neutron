@@ -38,11 +38,6 @@ public final class NeutronVPNIPSECSiteConnectionsInterface
         return connections.getIpsecsiteconnection();
     }
 
-    @Override
-    public boolean inUse(String policyID) {
-        return !exists(policyID);
-    }
-
     protected NeutronVPNIPSECSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
         final NeutronVPNIPSECSiteConnection answer = new NeutronVPNIPSECSiteConnection();
         fromMdAdminAttributes(ipsecSiteConnection, answer);
