@@ -24,13 +24,13 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.Healthmonitors;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.Healthmonitor;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronLoadBalancerHealthMonitorInterface
-        extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, NeutronLoadBalancerHealthMonitor>
+        extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, HealthmonitorKey,
+                                         NeutronLoadBalancerHealthMonitor>
         implements INeutronLoadBalancerHealthMonitorCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
 
@@ -46,12 +46,6 @@ public final class NeutronLoadBalancerHealthMonitorInterface
     @Override
     protected List<Healthmonitor> getDataObjectList(Healthmonitors healthMonitors) {
         return healthMonitors.getHealthmonitor();
-    }
-
-    @Override
-    protected InstanceIdentifier<Healthmonitor> createInstanceIdentifier(Healthmonitor healthMonitor) {
-        return InstanceIdentifier.create(Neutron.class).child(Healthmonitors.class).child(Healthmonitor.class,
-                healthMonitor.getKey());
     }
 
     @Override

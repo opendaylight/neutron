@@ -37,6 +37,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.Pools;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.Pool;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.PoolBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.PoolKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.pool.Members;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.pool.members.Member;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.pool.members.MemberBuilder;
@@ -47,7 +48,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronLoadBalancerPoolInterface
-        extends AbstractNeutronInterface<Pool, Pools, NeutronLoadBalancerPool>
+        extends AbstractNeutronInterface<Pool, Pools, PoolKey, NeutronLoadBalancerPool>
         implements INeutronLoadBalancerPoolCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
 
@@ -63,11 +64,6 @@ public final class NeutronLoadBalancerPoolInterface
     @Override
     protected List<Pool> getDataObjectList(Pools pools) {
         return pools.getPool();
-    }
-
-    @Override
-    protected InstanceIdentifier<Pool> createInstanceIdentifier(Pool pool) {
-        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey());
     }
 
     @Override

@@ -22,12 +22,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.L2gateways;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gateway;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2gateway, L2gateways, NeutronL2gateway>
+public final class NeutronL2gatewayInterface
+        extends AbstractNeutronInterface<L2gateway, L2gateways, L2gatewayKey, NeutronL2gateway>
         implements INeutronL2gatewayCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayInterface.class);
 
@@ -43,12 +43,6 @@ public final class NeutronL2gatewayInterface extends AbstractNeutronInterface<L2
     @Override
     public boolean inUse(String l2gatewayID) {
         return !exists(l2gatewayID);
-    }
-
-    @Override
-    protected InstanceIdentifier<L2gateway> createInstanceIdentifier(L2gateway l2gateway) {
-        return InstanceIdentifier.create(Neutron.class).child(L2gateways.class).child(L2gateway.class,
-                l2gateway.getKey());
     }
 
     @Override
