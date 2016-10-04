@@ -45,9 +45,9 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
 
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         // argumentClass = T.class
-        Class<T> argumentClass = (Class) parameterizedType.getActualTypeArguments()[0];
+        Class<T> argumentClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
         // cls = NeturonRequest.class
-        Class<NeutronRequest> cls = (Class) parameterizedType.getActualTypeArguments()[1];
+        Class<NeutronRequest> cls = (Class<NeutronRequest>) parameterizedType.getActualTypeArguments()[1];
         try {
             // ctor = NeutronRequest constructor
             Constructor<NeutronRequest> ctor = cls.getDeclaredConstructor(argumentClass);
