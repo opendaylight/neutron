@@ -16,13 +16,13 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.Loadbalancers;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.Loadbalancer;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronLoadBalancerInterface extends
-        AbstractNeutronInterface<Loadbalancer, Loadbalancers, NeutronLoadBalancer> implements INeutronLoadBalancerCRUD {
+public final class NeutronLoadBalancerInterface
+        extends AbstractNeutronInterface<Loadbalancer, Loadbalancers, LoadbalancerKey, NeutronLoadBalancer>
+        implements INeutronLoadBalancerCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
 
     NeutronLoadBalancerInterface(DataBroker db) {
@@ -32,12 +32,6 @@ public final class NeutronLoadBalancerInterface extends
     @Override
     protected List<Loadbalancer> getDataObjectList(Loadbalancers lbs) {
         return lbs.getLoadbalancer();
-    }
-
-    @Override
-    protected InstanceIdentifier<Loadbalancer> createInstanceIdentifier(Loadbalancer loadBalancer) {
-        return InstanceIdentifier.create(Neutron.class).child(Loadbalancers.class).child(Loadbalancer.class,
-                loadBalancer.getKey());
     }
 
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {

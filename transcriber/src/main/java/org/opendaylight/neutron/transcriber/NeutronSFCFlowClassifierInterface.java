@@ -23,14 +23,13 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolIcmp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolTcp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolUdp;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.flow.classifier.match.attributes.L7Parameter;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.flow.classifier.match.attributes.L7ParameterBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.flow.classifier.match.attributes.L7ParameterKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.SfcFlowClassifiers;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifier;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +37,8 @@ import org.slf4j.LoggerFactory;
  * Created by Anil Vishnoi (avishnoi@Brocade.com) on 6/24/16.
  */
 public final class NeutronSFCFlowClassifierInterface
-        extends AbstractNeutronInterface<SfcFlowClassifier, SfcFlowClassifiers, NeutronSFCFlowClassifier>
+        extends AbstractNeutronInterface<SfcFlowClassifier, SfcFlowClassifiers, SfcFlowClassifierKey,
+                                         NeutronSFCFlowClassifier>
         implements INeutronSFCFlowClassifierCRUD {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCFlowClassifierInterface.class);
@@ -59,12 +59,6 @@ public final class NeutronSFCFlowClassifierInterface
     @Override
     protected List<SfcFlowClassifier> getDataObjectList(SfcFlowClassifiers dataObjects) {
         return dataObjects.getSfcFlowClassifier();
-    }
-
-    @Override
-    protected InstanceIdentifier<SfcFlowClassifier> createInstanceIdentifier(SfcFlowClassifier classifier) {
-        return InstanceIdentifier.create(Neutron.class).child(SfcFlowClassifiers.class).child(SfcFlowClassifier.class,
-                classifier.getKey());
     }
 
     @Override

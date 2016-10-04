@@ -12,16 +12,15 @@ import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVPNService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.VpnServices;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.vpn.services.Vpnservice;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.vpn.services.VpnserviceBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.vpn.services.VpnserviceKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronVPNServiceInterface
-        extends AbstractNeutronInterface<Vpnservice, VpnServices, NeutronVPNService>
+        extends AbstractNeutronInterface<Vpnservice, VpnServices, VpnserviceKey, NeutronVPNService>
         implements INeutronVPNServiceCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVPNServiceInterface.class);
 
@@ -62,11 +61,5 @@ public final class NeutronVPNServiceInterface
             vpnServiceBuilder.setRouterId(toUuid(vpnService.getRouterUUID()));
         }
         return vpnServiceBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<Vpnservice> createInstanceIdentifier(Vpnservice vpnService) {
-        return InstanceIdentifier.create(Neutron.class).child(VpnServices.class).child(Vpnservice.class,
-                vpnService.getKey());
     }
 }

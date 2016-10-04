@@ -15,13 +15,12 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.MeteringLabels;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.metering.labels.MeteringLabel;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.metering.labels.MeteringLabelBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.metering.labels.MeteringLabelKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronMeteringLabelInterface
-        extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, NeutronMeteringLabel>
+        extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, MeteringLabelKey, NeutronMeteringLabel>
         implements INeutronMeteringLabelCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
 
@@ -33,12 +32,6 @@ public final class NeutronMeteringLabelInterface
     @Override
     protected List<MeteringLabel> getDataObjectList(MeteringLabels labels) {
         return labels.getMeteringLabel();
-    }
-
-    @Override
-    protected InstanceIdentifier<MeteringLabel> createInstanceIdentifier(MeteringLabel item) {
-        return InstanceIdentifier.create(Neutron.class).child(MeteringLabels.class).child(MeteringLabel.class,
-                item.getKey());
     }
 
     @Override

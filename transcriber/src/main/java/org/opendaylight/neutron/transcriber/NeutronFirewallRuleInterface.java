@@ -24,14 +24,14 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.Fir
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.FirewallRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronFirewallRuleInterface extends
-        AbstractNeutronInterface<FirewallRule, FirewallRules, NeutronFirewallRule> implements INeutronFirewallRuleCRUD {
+public final class NeutronFirewallRuleInterface
+        extends AbstractNeutronInterface<FirewallRule, FirewallRules, FirewallRuleKey, NeutronFirewallRule>
+        implements INeutronFirewallRuleCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ActionBase>,
@@ -49,12 +49,6 @@ public final class NeutronFirewallRuleInterface extends
     @Override
     protected List<FirewallRule> getDataObjectList(FirewallRules rules) {
         return rules.getFirewallRule();
-    }
-
-    @Override
-    protected InstanceIdentifier<FirewallRule> createInstanceIdentifier(FirewallRule item) {
-        return InstanceIdentifier.create(Neutron.class).child(FirewallRules.class).child(FirewallRule.class,
-                item.getKey());
     }
 
     protected NeutronFirewallRule fromMd(FirewallRule rule) {

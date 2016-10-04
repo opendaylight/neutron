@@ -12,16 +12,15 @@ import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.SecurityGroups;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroup;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroupBuilder;
-import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroupKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronSecurityGroupInterface
-        extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, NeutronSecurityGroup>
+        extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, SecurityGroupKey, NeutronSecurityGroup>
         implements INeutronSecurityGroupCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
 
@@ -45,11 +44,5 @@ public final class NeutronSecurityGroupInterface
         final SecurityGroupBuilder securityGroupBuilder = new SecurityGroupBuilder();
         toMdBaseAttributes(securityGroup, securityGroupBuilder);
         return securityGroupBuilder.build();
-    }
-
-    @Override
-    protected InstanceIdentifier<SecurityGroup> createInstanceIdentifier(SecurityGroup securityGroup) {
-        return InstanceIdentifier.create(Neutron.class).child(SecurityGroups.class).child(SecurityGroup.class,
-                securityGroup.getKey());
     }
 }
