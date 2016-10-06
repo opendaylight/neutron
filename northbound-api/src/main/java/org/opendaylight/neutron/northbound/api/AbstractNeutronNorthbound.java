@@ -55,7 +55,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
         } catch (NoSuchMethodException | InstantiationException
                  | IllegalAccessException | InvocationTargetException e) {
             // This case shouldn't happen
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 
