@@ -52,9 +52,9 @@ public class NeutronSFCFlowClassifierInterface
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,String> PROTOCOL_MAP
             = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>,String>()
-            .put(ProtocolTcp.class,"TCP")
-            .put(ProtocolUdp.class,"UDP")
-            .put(ProtocolIcmp.class,"ICMP")
+            .put(ProtocolTcp.class,"tcp")
+            .put(ProtocolUdp.class,"udp")
+            .put(ProtocolIcmp.class,"icmp")
             .build();
 
     NeutronSFCFlowClassifierInterface(DataBroker db) {
