@@ -36,6 +36,7 @@
     <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/{{VERSION}}</bundle>
   </feature>
   <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
+    <feature version='${project.version}'>odl-neutron-northbound-api</feature>
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature>war</feature>
     <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
