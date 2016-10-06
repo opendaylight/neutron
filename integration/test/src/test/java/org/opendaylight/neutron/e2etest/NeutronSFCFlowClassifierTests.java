@@ -24,7 +24,7 @@ public class NeutronSFCFlowClassifierTests {
         String url = base + "/sfc/flowclassifiers";
         String content = "{ \"flowclassifier\" : { \"name\": \"flowclassifier1\", "
             + "\"ethertype\": \"IPv4\", "
-            + "\"protocol\": \"UDP\", "
+            + "\"protocol\": \"udp\", "
             + "\"source_port_range_min\": 100, "
             + "\"source_port_range_max\": 200, "
             + "\"destination_port_range_min\": 100, "
@@ -67,7 +67,7 @@ public class NeutronSFCFlowClassifierTests {
         String url = base + "/sfc/flowclassifiers/4e8e5957-649f-477b-9e5b-f1f75b21c03c";
         String content = "{ \"flowclassifier\" : { \"name\": \"flowclassifier1\", "
             + "\"ethertype\": \"IPv4\", "
-            + "\"protocol\": \"UDP\", "
+            + "\"protocol\": \"udp\", "
             + "\"source_port_range_min\": 100, "
             + "\"source_port_range_max\": 200, "
             + "\"destination_port_range_min\": 100, "

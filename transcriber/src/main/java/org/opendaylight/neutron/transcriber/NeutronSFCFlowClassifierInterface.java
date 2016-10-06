@@ -49,7 +49,7 @@ public final class NeutronSFCFlowClassifierInterface
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,
             String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
-                    .put(ProtocolTcp.class, "TCP").put(ProtocolUdp.class, "UDP").put(ProtocolIcmp.class, "ICMP")
+                    .put(ProtocolTcp.class, "tcp").put(ProtocolUdp.class, "udp").put(ProtocolIcmp.class, "icmp")
                     .build();
 
     NeutronSFCFlowClassifierInterface(DataBroker db) {
@@ -75,7 +75,7 @@ public final class NeutronSFCFlowClassifierInterface
         }
         if (neutronClassifier.getProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
-            result.setProtocol(mapper.get(neutronClassifier.getProtocol()));
+            result.setProtocol(mapper.get(neutronClassifier.getProtocol().toLowerCase()));
         }
         if (neutronClassifier.getSourcePortRangeMin() != null) {
             result.setSourcePortRangeMin(neutronClassifier.getSourcePortRangeMin());
