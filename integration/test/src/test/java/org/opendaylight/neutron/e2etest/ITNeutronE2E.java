@@ -172,6 +172,16 @@ public class ITNeutronE2E {
         }
     }
 
+    static void test_create(String url_s, int responseCode, String content, String context) {
+        try {
+            URL url = new URL(url_s);
+            HttpURLConnection httpConn = httpURLConnectionFactoryPost(url, content);
+            Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
     static void test_modify(String url_s, String content, String context) {
         try {
             URL url = new URL(url_s);

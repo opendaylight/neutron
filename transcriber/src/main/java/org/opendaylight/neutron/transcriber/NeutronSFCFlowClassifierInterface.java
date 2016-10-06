@@ -11,7 +11,9 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
@@ -49,7 +51,7 @@ public final class NeutronSFCFlowClassifierInterface
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,
             String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
-                    .put(ProtocolTcp.class, "TCP").put(ProtocolUdp.class, "UDP").put(ProtocolIcmp.class, "ICMP")
+                    .put(ProtocolTcp.class, "tcp").put(ProtocolUdp.class, "udp").put(ProtocolIcmp.class, "icmp")
                     .build();
 
     NeutronSFCFlowClassifierInterface(DataBroker db) {
@@ -75,7 +77,12 @@ public final class NeutronSFCFlowClassifierInterface
         }
         if (neutronClassifier.getProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
-            result.setProtocol(mapper.get(neutronClassifier.getProtocol()));
+            Class<? extends ProtocolBase> protocol = mapper.get(neutronClassifier.getProtocol());
+            if (protocol != null) {
+                result.setProtocol(protocol);
+            } else {
+                throw new BadRequestException("Protocol {" + neutronClassifier.getProtocol() + "} is not supported");
+            }
         }
         if (neutronClassifier.getSourcePortRangeMin() != null) {
             result.setSourcePortRangeMin(neutronClassifier.getSourcePortRangeMin());
