@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_679aedc6",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3675
+      },
+      "writtenOn": "2016-10-06T02:44:05Z",
+      "side": 1,
+      "message": "I think using equalsIgnoreCase function where the matching is done is more bulletproof to potential regression",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 43
+      },
+      "revId": "34e12ffc33b5e096e7ae4a1ea5260ad238c68356",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
