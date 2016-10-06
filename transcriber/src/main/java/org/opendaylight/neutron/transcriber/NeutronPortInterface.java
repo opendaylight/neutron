@@ -215,7 +215,8 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
                 extraDHCPOptsBuilder.setOptValue(extraDHCPOption.getValue());
                 Integer ipVersion = extraDHCPOption.getIpVersion();
                 if (ipVersion == null) {
-                    ipVersion = 4; // default as v4 for neutron api evolves
+                    // default as v4 for neutron api evolves
+                    ipVersion = 4;
                 }
                 extraDHCPOptsBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(ipVersion));
                 listExtraDHCPOptions.add(extraDHCPOptsBuilder.build());

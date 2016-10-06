@@ -251,7 +251,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
-        future.get(); // Check if it's successfuly committed, otherwise exception will be thrown.
+        // Check if it's successfuly committed, otherwise exception will be thrown.
+        future.get();
     }
 
     protected boolean updateMd(S neutronObject) {
@@ -279,7 +280,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
-        future.get(); // Check if it's successfuly committed, otherwise exception will be thrown.
+        // Check if it's successfuly committed, otherwise exception will be thrown.
+        future.get();
     }
 
     protected boolean removeMd(T item) {
