@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_e10b7f7b",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-10-10T21:10:27Z",
+      "side": 1,
+      "message": "RuntimeException is too coarse.\nUncheckedIOException is better.",
+      "range": {
+        "startLine": 170,
+        "startChar": 22,
+        "endLine": 170,
+        "endChar": 38
+      },
+      "revId": "6f7c55f7696df91b03b8419f098a13f727cc0658",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a6b29fe_611f6fb8",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-10-10T21:10:27Z",
+      "side": 1,
+      "message": "I\u0027ve found that this overwrite method is not used any more.\nSo let\u0027s remove this method entirely.",
+      "range": {
+        "startLine": 322,
+        "startChar": 22,
+        "endLine": 322,
+        "endChar": 31
+      },
+      "revId": "6f7c55f7696df91b03b8419f098a13f727cc0658",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
