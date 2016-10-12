@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_955f6575",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-10-12T00:52:01Z",
+      "side": 1,
+      "message": "Can you please shorten git subject line into one line?\naround 50chars.",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 8,
+        "endChar": 41
+      },
+      "revId": "3d85f52ee646825a66133ec2b4480dc11e1eb38c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a6b29fe_d5827dc7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCFlowClassifierInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-10-12T00:52:01Z",
+      "side": 1,
+      "message": "Is this necessary?\nFor consistency with other api(security group, fwaas, lbaas), neuron northbound only accepts protocol names normalized by openstack neutron. in this case, only lower case is accepted.",
+      "range": {
+        "startLine": 78,
+        "startChar": 73,
+        "endLine": 78,
+        "endChar": 87
+      },
+      "revId": "3d85f52ee646825a66133ec2b4480dc11e1eb38c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
