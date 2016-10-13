@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6b29fe_0f81794a",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-10-13T17:44:46Z",
+      "side": 1,
+      "message": "Please don\u0027t catch Exception.\nhttps://git.opendaylight.org/gerrit/#/c/46101/\n\ncatch only IOException and rethrow as UncheckedIOException.",
+      "range": {
+        "startLine": 179,
+        "startChar": 9,
+        "endLine": 181,
+        "endChar": 9
+      },
+      "revId": "327a4f84a42779a8eb156af2eeaf18c00a0caacd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
