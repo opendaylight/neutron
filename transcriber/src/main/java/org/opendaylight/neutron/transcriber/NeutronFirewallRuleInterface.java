@@ -11,6 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
@@ -118,8 +119,13 @@ public final class NeutronFirewallRuleInterface
         }
         if (rule.getFirewallRuleProtocol() != null) {
             final String protocolString = rule.getFirewallRuleProtocol();
-            final Protocol protocol = new Protocol(protocolString.toCharArray());
-            ruleBuilder.setProtocol(protocol);
+            try {
+                final Protocol protocol = new Protocol(protocolString.toCharArray());
+                ruleBuilder.setProtocol(protocol);
+            } catch (NumberFormatException e) {
+                throw new BadRequestException("Protocol {" + rule.getFirewallRuleProtocol()
+                        + "} is not supported");
+            }
         }
         if (rule.getFirewallRuleIpVer() != null) {
             final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IP_VERSION_MAP.inverse();
