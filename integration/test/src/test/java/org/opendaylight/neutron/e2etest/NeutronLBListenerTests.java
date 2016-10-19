@@ -72,6 +72,18 @@ public class NeutronLBListenerTests {
         ITNeutronE2E.test_delete(url, "LB Listener Element Delete Failed");
     }
 
+    public String test_bug6398_lb_listener_create_test() {
+        String url = base + "/lbaas/listeners";
+        String content = "{ \"listener\": { " + "\"admin_state_up\": true, " + "\"connection_limit\": 100, "
+                + "\"default_pool_id\": null, " + "\"description\": \"listener one\", "
+                + "\"id\": \"39de4d56-d663-46e5-85a1-5b9d5fa17829\", " + "\"loadbalancers\": [ { "
+                + "\"id\": \"a36c20d0-18e9-42ce-88fd-82a35977ee8c\" } ], " + "\"name\": \"listener1\", "
+                + "\"protocol\": \"http\", " + "\"protocol_port\": 80, "
+                + "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
+        ITNeutronE2E.test_create(url, 400, content, "LB Listener Post Bug 6398 regressed");
+        return content;
+    }
+
     public static void runTests(String base) {
         NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
         String createJsonString = listener_tester.singleton_lb_listener_create_test();
@@ -82,5 +94,6 @@ public class NeutronLBListenerTests {
         listener_tester.listener_collection_get_test();
         listener_tester.listener_delete_test();
         listener_tester.listener_element_negative_get_test();
+        listener_tester.test_bug6398_lb_listener_create_test();
     }
 }

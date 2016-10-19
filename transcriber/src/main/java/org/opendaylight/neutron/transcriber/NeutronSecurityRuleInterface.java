@@ -11,6 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
@@ -116,8 +117,13 @@ public final class NeutronSecurityRuleInterface extends
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
             final String protocolString = securityRule.getSecurityRuleProtocol();
-            final Protocol protocol = new Protocol(protocolString.toCharArray());
-            securityRuleBuilder.setProtocol(protocol);
+            try {
+                final Protocol protocol = new Protocol(protocolString.toCharArray());
+                securityRuleBuilder.setProtocol(protocol);
+            } catch (NumberFormatException e) {
+                throw new BadRequestException("Protocol {" + securityRule.getSecurityRuleProtocol()
+                        + "} is not supported");
+            }
         }
         if (securityRule.getSecurityRuleEthertype() != null) {
             final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = ETHERTYPE_MAP.inverse();

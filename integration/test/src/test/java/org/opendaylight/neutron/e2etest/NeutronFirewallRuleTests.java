@@ -76,6 +76,19 @@ public class NeutronFirewallRuleTests {
         ITNeutronE2E.test_fetch(url, false, "Firewall Rule Element Negative Get Failed");
     }
 
+    public String test_bug6398_fw_rule_create_test() {
+        String url = base + "/fw/firewall_rules";
+        String content = "{ \"firewall_rule\": { \"action\": \"allow\"," + "\"destination_ip_address\": null,"
+                + "\"destination_port_min\": \"80\", \"destination_port_max\": \"80\"," + "\"enabled\": true,"
+                + "\"firewall_policy_id\": null," + "\"id\": \"8722e0e0-9cc9-4490-9660-8c9a5732fbb0\","
+                + "\"ip_version\": 4, \"name\": \"ALLOW_HTTP\"," + "\"position\": null, \"protocol\": \"TCP\","
+                + "\"shared\": false, \"source_ip_address\": null,"
+                + "\"source_port_min\": null, \"source_port_max\": null,"
+                + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
+        ITNeutronE2E.test_create(url, 400, content, "Firewall Rule Singleton Post Bug 6398 regressed");
+        return content;
+    }
+
     public static void runTests(String base) {
         NeutronFirewallRuleTests fw_rule_tester = new NeutronFirewallRuleTests(base);
         String createJsonString = fw_rule_tester.singleton_fw_rule_create_test();
@@ -86,5 +99,6 @@ public class NeutronFirewallRuleTests {
         fw_rule_tester.fw_rule_modify_test();
         fw_rule_tester.fw_rule_delete_test();
         fw_rule_tester.fw_rule_element_negative_get_test();
+        fw_rule_tester.test_bug6398_fw_rule_create_test();
     }
 }

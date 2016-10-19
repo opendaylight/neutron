@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 import org.opendaylight.neutron.spi.Neutron_ID;
@@ -67,8 +68,13 @@ public final class NeutronLoadBalancerListenerInterface
         }
         if (listener.getNeutronLoadBalancerListenerProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
-            listenerBuilder.setProtocol(
-                    (Class<? extends ProtocolBase>) mapper.get(listener.getNeutronLoadBalancerListenerProtocol()));
+            Class<? extends ProtocolBase> protocol = mapper.get(listener.getNeutronLoadBalancerListenerProtocol());
+            if (protocol != null) {
+                listenerBuilder.setProtocol(protocol);
+            } else {
+                throw new BadRequestException("Protocol {" + listener.getNeutronLoadBalancerListenerProtocol()
+                        + "} is not supported");
+            }
         }
         if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
             listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
