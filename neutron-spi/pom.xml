@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>project-neutron-parent</artifactId>
-    <version>0.6.4-SNAPSHOT</version>
+    <version>0.6.4-Beryllium-SR4</version>
     <relativePath>../parent</relativePath>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>neutron-spi</artifactId>
-  <version>0.6.4-SNAPSHOT</version>
+  <version>0.6.4-Beryllium-SR4</version>
   <packaging>bundle</packaging>
   <properties>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
@@ -20,7 +20,7 @@
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
         <artifactId>mdsal-model-artifacts</artifactId>
-        <version>0.8.4-SNAPSHOT</version>
+        <version>0.8.4-Beryllium-SR4</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

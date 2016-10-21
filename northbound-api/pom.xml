@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>project-neutron-parent</artifactId>
-    <version>0.6.4-SNAPSHOT</version>
+    <version>0.6.4-Beryllium-SR4</version>
     <relativePath>../parent</relativePath>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>northbound-api</artifactId>
-  <version>0.6.4-SNAPSHOT</version>
+  <version>0.6.4-Beryllium-SR4</version>
   <packaging>bundle</packaging>
   <properties>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
