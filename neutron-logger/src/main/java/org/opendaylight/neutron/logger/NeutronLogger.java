@@ -59,7 +59,9 @@ public class NeutronLogger implements AutoCloseable {
                 break;
             case DELETE:
                 messageBuilder.append("\n");
-                messageBuilder.append("DELETE: ").append(typeName);
+                messageBuilder.append("DELETE: type: ").append(typeName).append("\n");
+                final T dataBefore = objectModification.getDataBefore();
+                messageBuilder.append(dataBefore.toString());
                 break;
             default:
                 LOG.warn("unknown modification type: {}", typeName);
