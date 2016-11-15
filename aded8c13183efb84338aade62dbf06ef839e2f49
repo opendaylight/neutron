@@ -45,6 +45,52 @@
       "revId": "aded8c13183efb84338aade62dbf06ef839e2f49",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a65312a_d159c6ff",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronLoadBalancerListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-11-15T10:29:16Z",
+      "side": 1,
+      "message": "Please update this too.",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 19
+      },
+      "revId": "aded8c13183efb84338aade62dbf06ef839e2f49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a65312a_915f4ee5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronLoadBalancerListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-11-15T10:29:16Z",
+      "side": 1,
+      "message": "loadbalancer ids isn\u0027t printed out.",
+      "range": {
+        "startLine": 132,
+        "startChar": 18,
+        "endLine": 132,
+        "endChar": 26
+      },
+      "revId": "aded8c13183efb84338aade62dbf06ef839e2f49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
