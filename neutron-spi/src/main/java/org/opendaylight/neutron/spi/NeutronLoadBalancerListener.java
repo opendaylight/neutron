@@ -56,7 +56,7 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
     @XmlElement(name = "protocol_port")
     String neutronLoadBalancerListenerProtocolPort;
 
-    @XmlElement(name = "load_balancers")
+    @XmlElement(name = "loadbalancers")
     List<Neutron_ID> neutronLoadBalancerListenerLoadBalancerIDs;
 
     public Boolean getLoadBalancerListenerAdminStateIsUp() {
