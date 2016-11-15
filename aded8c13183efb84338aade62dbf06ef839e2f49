@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a65312a_d142660f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-11-15T10:26:39Z",
+      "side": 1,
+      "message": "Please don\u0027t wrap subject line and keep it short. ideally \u003c\u003d 50 chars.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 14
+      },
+      "revId": "aded8c13183efb84338aade62dbf06ef839e2f49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a65312a_b1452a19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-11-15T10:26:39Z",
+      "side": 1,
+      "message": "Please don\u0027t repeat subject line. but write more concrete stuff. not only what, but also why.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 61
+      },
+      "revId": "aded8c13183efb84338aade62dbf06ef839e2f49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
