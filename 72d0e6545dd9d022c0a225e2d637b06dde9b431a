@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a65312a_03363c03",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronLoadBalancerListener.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-11-23T19:13:13Z",
+      "side": 1,
+      "message": "nitpick: indent",
+      "range": {
+        "startLine": 31,
+        "startChar": 22,
+        "endLine": 31,
+        "endChar": 23
+      },
+      "revId": "72d0e6545dd9d022c0a225e2d637b06dde9b431a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
