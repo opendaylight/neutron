@@ -97,7 +97,7 @@ module neutron-lbaasv2 {
         }
         leaf healthmonitor-id {
             type yang:uuid;
-            description "List of healthmonitors associated with this pool.";
+            description "The healthmonitor associated with this pool.";
         }
         leaf-list listeners {
             type yang:uuid;
