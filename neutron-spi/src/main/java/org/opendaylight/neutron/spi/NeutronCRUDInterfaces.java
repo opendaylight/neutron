@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
+import java.util.Collection;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.InvalidSyntaxException;
@@ -23,18 +24,12 @@ public final class NeutronCRUDInterfaces {
     }
 
     public static <T extends INeutronObject<T>, I extends INeutronCRUD<T>> I fetchINeutronCRUD(
-        Class<I> cls, Object obj) {
-        return (I) getInstances(cls, obj);
-    }
-
-    public static Object getInstances(Class<?> clazz, Object bundle) {
+        Class<I> clazz, Object bundle) {
         try {
             BundleContext bundleCtx = FrameworkUtil.getBundle(bundle.getClass()).getBundleContext();
-
-            ServiceReference<?>[] services = null;
-            services = bundleCtx.getServiceReferences(clazz.getName(), null);
-            if (services != null) {
-                return bundleCtx.getService(services[0]);
+            Collection<ServiceReference<I>> services = bundleCtx.getServiceReferences(clazz, null);
+            for (ServiceReference<I> service : services) {
+                return bundleCtx.getService(service);
             }
         } catch (InvalidSyntaxException e) {
             LOGGER.error("Error in getInstances", e);
