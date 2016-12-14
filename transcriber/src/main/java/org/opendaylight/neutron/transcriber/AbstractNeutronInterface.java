@@ -14,6 +14,7 @@ import com.google.common.util.concurrent.CheckedFuture;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -49,6 +50,13 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractNeutronInterface<T extends DataObject & Identifiable<K> & ChildOf<? super U>,
         U extends ChildOf<? super Neutron> & Augmentable<U>, K extends Identifier<T>, S extends INeutronObject<S>>
         implements AutoCloseable, INeutronCRUD<S> {
+    // T extends DataObject & Identifiable<K> & ChildOf<? super U> as 0th type argument
+    private static final int MD_LIST_CLASS_TYPE_INDEX = 0;
+    // U extends ChildOf<? super Neutron> & Augmentable<U> as 1st type argument
+    private static final int MD_CONTAINER_CLASS_TYPE_INDEX = 1;
+    // S extends INeutronObject<S> as 3rd type argument
+    private static final int NEUTRON_OBJECT_TYPE_INDEX = 3;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
@@ -79,9 +87,15 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         this.builderClass = builderClass;
 
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
-        mdListClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
-        mdContainerClass = (Class<U>) parameterizedType.getActualTypeArguments()[1];
-        Class<S> iNeutronClass = (Class<S>) parameterizedType.getActualTypeArguments()[3];
+        Type[] types = parameterizedType.getActualTypeArguments();
+        @SuppressWarnings("unchecked")
+        Class<T> localMdListClass = (Class<T>) types[MD_LIST_CLASS_TYPE_INDEX];
+        mdListClass = localMdListClass;
+        @SuppressWarnings("unchecked")
+        Class<U> localMdContainerClass = (Class<U>) types[MD_CONTAINER_CLASS_TYPE_INDEX];
+        mdContainerClass = localMdContainerClass;
+        @SuppressWarnings("unchecked")
+        Class<S> iNeutronClass = (Class<S>) types[NEUTRON_OBJECT_TYPE_INDEX];
         try {
             setUuid = builderClass.getDeclaredMethod("setUuid", Uuid.class);
             setTenantId = builderClass.getDeclaredMethod("setTenantId", Uuid.class);

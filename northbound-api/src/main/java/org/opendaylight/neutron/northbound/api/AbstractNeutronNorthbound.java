@@ -22,6 +22,13 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, NeutronRequest extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
+    // T extends INeutronObject<T> as 0th type argument
+    private static final int NEUTRON_ARGUMENT_TYPE_INDEX = 0;
+    // NeutronRequest extends INeutronRequest<T> as 1sr type argument
+    private static final int NEUTRON_REQUEST_TYPE_INDEX = 1;
+    // I extends INeutronCRUD<T> as 2nd type argument
+    private static final int NEUTRON_CRUD_TYPE_INDEX = 2;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
     protected static final int HTTP_OK_BOTTOM = 200;
@@ -40,14 +47,20 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
 
     protected abstract String getResourceName();
 
+    private <K> Class<K> getActualTypeArgument(final int typeIndex) {
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        @SuppressWarnings("unchecked")
+        Class<K> cls = (Class<K>) parameterizedType.getActualTypeArguments()[typeIndex];
+        return cls;
+    }
+
     private NeutronRequest newNeutronRequest(T o) {
         // return new NeutronRequest(o);
 
-        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         // argumentClass = T.class
-        Class<T> argumentClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
+        Class<T> argumentClass = getActualTypeArgument(NEUTRON_ARGUMENT_TYPE_INDEX);
         // cls = NeturonRequest.class
-        Class<NeutronRequest> cls = (Class<NeutronRequest>) parameterizedType.getActualTypeArguments()[1];
+        Class<NeutronRequest> cls = getActualTypeArgument(NEUTRON_REQUEST_TYPE_INDEX);
         try {
             // ctor = NeutronRequest constructor
             Constructor<NeutronRequest> ctor = cls.getDeclaredConstructor(argumentClass);
@@ -62,7 +75,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
     protected I getNeutronCRUD() {
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         // cls = I.class
-        Class<I> cls = (Class<I>) parameterizedType.getActualTypeArguments()[2];
+        Class<I> cls = getActualTypeArgument(NEUTRON_CRUD_TYPE_INDEX);
         I neutronCrud = NeutronCRUDInterfaces.fetchINeutronCRUD(cls, (Object) this);
         if (neutronCrud == null) {
             throw new ServiceUnavailableException(serviceUnavailable());

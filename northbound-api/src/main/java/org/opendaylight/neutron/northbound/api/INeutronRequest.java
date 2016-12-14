@@ -18,7 +18,9 @@ public interface INeutronRequest<T extends INeutronObject<T>> {
         Class aClass = getClass();
         try {
             Field field = aClass.getDeclaredField("singleton");
-            return (T) field.get(this);
+            @SuppressWarnings("unchecked")
+            T value = (T) field.get(this);
+            return value;
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new IllegalArgumentException(e);
         }
@@ -40,7 +42,9 @@ public interface INeutronRequest<T extends INeutronObject<T>> {
         Class aClass = getClass();
         try {
             Field field = aClass.getDeclaredField("bulkRequest");
-            return (List<T>) field.get(this);
+            @SuppressWarnings("unchecked")
+            List<T> value = (List<T>) field.get(this);
+            return value;
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new IllegalArgumentException(e);
         }
