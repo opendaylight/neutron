@@ -8,23 +8,23 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>odlparent</artifactId>
-    <version>1.7.2-SNAPSHOT</version>
+    <version>1.7.2-Boron-SR2</version>
     <relativePath/>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>project-neutron-parent</artifactId>
-  <version>0.7.2-SNAPSHOT</version>
+  <version>0.7.2-Boron-SR2</version>
   <packaging>pom</packaging>
 
   <properties>
-    <aaa.version>0.3.2-SNAPSHOT</aaa.version>
-    <ietf-yang-types.version>2013.07.15.9.2-SNAPSHOT</ietf-yang-types.version>
-    <ietf-inet-types.version>1.1.2-SNAPSHOT</ietf-inet-types.version>
+    <aaa.version>0.3.2-Boron-SR2</aaa.version>
+    <ietf-yang-types.version>2013.07.15.9.2-Boron-SR2</ietf-yang-types.version>
+    <ietf-inet-types.version>1.1.2-Boron-SR2</ietf-inet-types.version>
     <salGeneratorPath>src/main/yang-gen-sal</salGeneratorPath>
-    <mdsal.model.version>0.9.2-SNAPSHOT</mdsal.model.version>
-    <yangtools.version>1.0.2-SNAPSHOT</yangtools.version>
-    <yang-ext.version>2013.09.07.9.2-SNAPSHOT</yang-ext.version>
+    <mdsal.model.version>0.9.2-Boron-SR2</mdsal.model.version>
+    <yangtools.version>1.0.2-Boron-SR2</yangtools.version>
+    <yang-ext.version>2013.09.07.9.2-Boron-SR2</yang-ext.version>
     <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.jacoco.itReportPath>../target/jacoco-it.exec</sonar.jacoco.itReportPath>
     <checkstyle.location>${project.build.resources[0].directory}</checkstyle.location>
