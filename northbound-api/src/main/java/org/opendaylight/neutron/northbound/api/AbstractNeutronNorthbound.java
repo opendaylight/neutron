@@ -20,7 +20,7 @@ import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, NeutronRequest extends INeutronRequest<T>,
+public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
@@ -40,18 +40,18 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
 
     protected abstract String getResourceName();
 
-    private NeutronRequest newNeutronRequest(T o) {
-        // return new NeutronRequest(o);
+    private R newNeutronRequest(T neutronObject) {
+        // return new R(neutronObject);
 
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         // argumentClass = T.class
         Class<T> argumentClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
         // cls = NeturonRequest.class
-        Class<NeutronRequest> cls = (Class<NeutronRequest>) parameterizedType.getActualTypeArguments()[1];
+        Class<R> cls = (Class<R>) parameterizedType.getActualTypeArguments()[1];
         try {
-            // ctor = NeutronRequest constructor
-            Constructor<NeutronRequest> ctor = cls.getDeclaredConstructor(argumentClass);
-            return ctor.newInstance(o);
+            // ctor = R constructor
+            Constructor<R> ctor = cls.getDeclaredConstructor(argumentClass);
+            return ctor.newInstance(neutronObject);
         } catch (NoSuchMethodException | InstantiationException
                  | IllegalAccessException | InvocationTargetException e) {
             // This case shouldn't happen
@@ -87,7 +87,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
         }
     }
 
-    protected Response create(final NeutronRequest input) {
+    protected Response create(final R input) {
         I neutronCRUD = getNeutronCRUD();
         if (input.isSingleton()) {
             T singleton = input.getSingleton();
@@ -109,7 +109,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, Neu
     protected void updateDelta(String uuid, T delta, T original) {
     }
 
-    protected Response update(String uuid, final NeutronRequest input) {
+    protected Response update(String uuid, final R input) {
         I neutronCRUD = getNeutronCRUD();
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");

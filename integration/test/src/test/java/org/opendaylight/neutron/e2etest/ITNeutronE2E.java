@@ -162,9 +162,9 @@ public class ITNeutronE2E {
         return httpConn;
     }
 
-    static void test_create(String url_s, String content, String context) {
+    static void test_create(String urlStr, String content, String context) {
         try {
-            URL url = new URL(url_s);
+            URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryPost(url, content);
             Assert.assertEquals(context, 201, httpConn.getResponseCode());
         } catch (IOException e) {
@@ -172,9 +172,9 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_create(String url_s, int responseCode, String content, String context) {
+    static void test_create(String urlStr, int responseCode, String content, String context) {
         try {
-            URL url = new URL(url_s);
+            URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryPost(url, content);
             Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (IOException e) {
@@ -182,9 +182,9 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_modify(String url_s, String content, String context) {
+    static void test_modify(String urlStr, String content, String context) {
         try {
-            URL url = new URL(url_s);
+            URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryPut(url, content);
             Assert.assertEquals(context, 200, httpConn.getResponseCode());
         } catch (IOException e) {
@@ -192,9 +192,9 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_fetch(String url_s, int responseCode, String context) {
+    static void test_fetch(String urlStr, int responseCode, String context) {
         try {
-            URL url = new URL(url_s);
+            URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryGet(url);
             Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (IOException e) {
@@ -202,18 +202,18 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_fetch(String url_s, String context) {
-        test_fetch(url_s, 200, context);
+    static void test_fetch(String urlStr, String context) {
+        test_fetch(urlStr, 200, context);
     }
 
-    static void test_fetch(String url_s, boolean positiveTest, String context) {
+    static void test_fetch(String urlStr, boolean positiveTest, String context) {
         int responseCode = positiveTest ? 200 : 404;
-        test_fetch(url_s, responseCode, context);
+        test_fetch(urlStr, responseCode, context);
     }
 
-    static void test_delete(String url_s, int responseCode, String context) {
+    static void test_delete(String urlStr, int responseCode, String context) {
         try {
-            URL url = new URL(url_s);
+            URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryDelete(url);
             Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (IOException e) {
@@ -221,19 +221,19 @@ public class ITNeutronE2E {
         }
     }
 
-    static void test_delete(String url_s, String context) {
-        test_delete(url_s, 204, context);
+    static void test_delete(String urlStr, String context) {
+        test_delete(urlStr, 204, context);
     }
 
-    static void test_delete_404(String url_s, String context) {
-        test_delete(url_s, 404, context);
+    static void test_delete_404(String urlStr, String context) {
+        test_delete(urlStr, 404, context);
     }
 
-    private static String fetchResponse(String url_s, String context) {
+    private static String fetchResponse(String urlStr, String context) {
         StringBuffer response = new StringBuffer();
 
         try {
-            URL url = new URL(url_s);
+            URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryGet(url);
             Assert.assertEquals(context, 200, httpConn.getResponseCode());
             BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
@@ -248,14 +248,14 @@ public class ITNeutronE2E {
         return response.toString();
     }
 
-    static JsonObject test_fetch_gson(String url_s, String context) {
-        String response = fetchResponse(url_s, context);
+    static JsonObject test_fetch_gson(String urlStr, String context) {
+        String response = fetchResponse(urlStr, context);
         Gson gson = new Gson();
         return gson.fromJson(response, JsonObject.class);
     }
 
-    static void test_fetch_collection_response(String url_s, String collectionName, String context) {
-        String response = fetchResponse(url_s, context);
+    static void test_fetch_collection_response(String urlStr, String collectionName, String context) {
+        String response = fetchResponse(urlStr, context);
 
         //Collection is returned in an array. Format - {"collectionName": [{...}, {....}]}
         Gson gson = new Gson();
@@ -271,7 +271,7 @@ public class ITNeutronE2E {
     }
 
     // Helper function - content is json used during create. Format - {"Name": {...}}
-    static void test_fetch_with_one_query_item(String url_s, String content, String collectionName) {
+    static void test_fetch_with_one_query_item(String urlStr, String content, String collectionName) {
         Gson gson = new Gson();
         JsonObject jsonObjectInput = gson.fromJson(content, JsonObject.class);
         Set<Map.Entry<String, JsonElement>> entrySet = jsonObjectInput.entrySet();
@@ -283,7 +283,7 @@ public class ITNeutronE2E {
             if (jsonElementValue.isJsonPrimitive() && (!jsonElementValue.isJsonNull())) {
                 String valueStr = jsonElementValue.getAsString();
                 valueStr = valueStr.replaceAll("\\s+", "+");
-                String queryUrl = url_s + "?" + key + "=" + valueStr;
+                String queryUrl = urlStr + "?" + key + "=" + valueStr;
                 String context = collectionName + " " + key + "=" + jsonElementValue.toString() + " Get Failed";
                 test_fetch_collection_response(queryUrl, collectionName, context);
             }

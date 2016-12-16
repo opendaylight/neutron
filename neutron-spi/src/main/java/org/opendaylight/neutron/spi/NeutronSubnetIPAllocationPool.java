@@ -170,9 +170,9 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
      *            high-endian representation of the IPv4 address as a long
      * @return IPv4 address in dotted decimal format
      */
-    static String bigIntegerToIP(BigInteger b) {
+    static String bigIntegerToIP(BigInteger ipv4BigInteger) {
         try {
-            return Inet6Address.getByAddress(b.toByteArray()).getHostAddress();
+            return Inet6Address.getByAddress(ipv4BigInteger.toByteArray()).getHostAddress();
         } catch (UnknownHostException e) {
             LOGGER.error("bigIntegerToIP", e);
             return "ERROR";
@@ -182,17 +182,17 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
     /*
      * helper routine used by longToIP
      */
-    public static String join(String[] r, String separator) {
-        if (r.length == 0) {
+    public static String join(String[] strings, String separator) {
+        if (strings.length == 0) {
             return "";
         }
         StringBuilder sb = new StringBuilder();
         int i;
-        for (i = 0; i < r.length - 1; i++) {
-            sb.append(r[i]);
+        for (i = 0; i < strings.length - 1; i++) {
+            sb.append(strings[i]);
             sb.append(separator);
         }
-        return sb.toString() + r[i];
+        return sb.toString() + strings[i];
     }
 
     /*
