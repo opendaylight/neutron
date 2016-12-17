@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 /**
  * Status Code 500 (Internal Server Error)
  *
+ * <p>
  * The server encountered an unexpected condition which prevented
  * it from fulfilling the request.
  *

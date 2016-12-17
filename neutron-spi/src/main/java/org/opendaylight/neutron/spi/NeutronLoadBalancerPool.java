@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * v2.0 Reference for description of  the fields:
  * Implemented fields are as follows:
  *
+ * <p>
  * id                 uuid-str
  * tenant_id          uuid-str
  * name               String

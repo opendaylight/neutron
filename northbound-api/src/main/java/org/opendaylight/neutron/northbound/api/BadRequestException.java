@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 /**
  * Status Code 400 (Bad Request)
  *
+ * <p>
  * The request could not be understood by the server due to malformed syntax.
  * The client SHOULD NOT repeat the request without modifications.
  */
