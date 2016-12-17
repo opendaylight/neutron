@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
-public final class NeutronL2gatewayDevice extends Neutron_ID implements Serializable {
+public final class NeutronL2gatewayDevice extends NeutronID implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

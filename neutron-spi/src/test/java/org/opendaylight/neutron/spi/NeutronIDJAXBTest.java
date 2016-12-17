@@ -12,17 +12,17 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Neutron_IDJAXBTest {
+public class NeutronIDJAXBTest {
 
     private static final String NEUTRON_ID_SOURCE_JSON =
             "{ \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
-    public void test_Neutron_ID_JAXB() throws JAXBException {
-        Neutron_ID neutronObject = new Neutron_ID();
-        Neutron_ID testObject = (Neutron_ID) JaxbTestHelper.jaxbUnmarshall(neutronObject, NEUTRON_ID_SOURCE_JSON);
+    public void test_NeutronID_JAXB() throws JAXBException {
+        NeutronID neutronObject = new NeutronID();
+        NeutronID testObject = (NeutronID) JaxbTestHelper.jaxbUnmarshall(neutronObject, NEUTRON_ID_SOURCE_JSON);
 
-        Assert.assertEquals("Neutron_ID JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
+        Assert.assertEquals("NeutronID JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                     testObject.getID());
     }
 

@@ -14,8 +14,8 @@ import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
+import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
-import org.opendaylight.neutron.spi.Neutron_ID;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolHttp;
@@ -61,7 +61,7 @@ public final class NeutronLoadBalancerListenerInterface
         }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
             final List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
-            for (final Neutron_ID neutronId : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
+            for (final NeutronID neutronId : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
                 listLoadBalancers.add(toUuid(neutronId.getID()));
             }
             listenerBuilder.setLoadbalancers(listLoadBalancers);
@@ -96,9 +96,9 @@ public final class NeutronLoadBalancerListenerInterface
             answer.setNeutronLoadBalancerListenerDefaultPoolID(listener.getDefaultPoolId().getValue());
         }
         if (listener.getLoadbalancers() != null) {
-            final List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            final List<NeutronID> list = new ArrayList<NeutronID>();
             for (final Uuid id : listener.getLoadbalancers()) {
-                list.add(new Neutron_ID(id.getValue()));
+                list.add(new NeutronID(id.getValue()));
             }
             answer.setNeutronLoadBalancerListenerLoadBalancerIDs(list);
         }

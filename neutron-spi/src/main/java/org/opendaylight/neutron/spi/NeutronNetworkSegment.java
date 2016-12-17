@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronNetwork_Segment implements Serializable {
+public final class NeutronNetworkSegment implements Serializable {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -34,7 +34,7 @@ public final class NeutronNetwork_Segment implements Serializable {
     @XmlElement(namespace = "provider", name = "segmentation_id")
     String providerSegmentationID;
 
-    public NeutronNetwork_Segment() {
+    public NeutronNetworkSegment() {
     }
 
     public String getProviderNetworkType() {
@@ -63,7 +63,7 @@ public final class NeutronNetwork_Segment implements Serializable {
 
     @Override
     public String toString() {
-        return "NeutronNetwork_Segment [ " + ", providerNetworkType=" + providerNetworkType
+        return "NeutronNetworkSegment [ " + ", providerNetworkType=" + providerNetworkType
                 + ", providerPhysicalNetwork=" + providerPhysicalNetwork + ", providerSegmentationID="
                 + providerSegmentationID + "]";
     }

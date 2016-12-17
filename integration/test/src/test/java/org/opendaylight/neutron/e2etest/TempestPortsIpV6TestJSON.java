@@ -8,10 +8,10 @@
 
 package org.opendaylight.neutron.e2etest;
 
-public class Tempest_PortsIpV6TestJSON {
+public class TempestPortsIpV6TestJSON {
     String base;
 
-    public Tempest_PortsIpV6TestJSON(String base) {
+    public TempestPortsIpV6TestJSON(String base) {
         this.base = base;
     }
 
@@ -85,7 +85,7 @@ public class Tempest_PortsIpV6TestJSON {
     }
 
     public static void runTests(String base) {
-        Tempest_PortsIpV6TestJSON tpv6runner = new Tempest_PortsIpV6TestJSON(base);
+        TempestPortsIpV6TestJSON tpv6runner = new TempestPortsIpV6TestJSON(base);
         tpv6runner.test_create_port_in_allowed_allocation_pools();
     }
 }

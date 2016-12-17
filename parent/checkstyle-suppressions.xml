@@ -9,8 +9,5 @@
   <suppress checks="AbbreviationAsWordInName"
             files="."
              />
-  <suppress checks="TypeName"
-            files="."
-             />
 </suppressions>
 

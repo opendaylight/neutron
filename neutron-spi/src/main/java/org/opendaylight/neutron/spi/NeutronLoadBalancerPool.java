@@ -54,10 +54,10 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
     Boolean loadBalancerPoolAdminStateIsUp;
 
     @XmlElement(name = "listeners")
-    List<Neutron_ID> loadBalancerPoolListeners;
+    List<NeutronID> loadBalancerPoolListeners;
 
     @XmlElement(name = "session_persistence")
-    NeutronLoadBalancer_SessionPersistence loadBalancerPoolSessionPersistence;
+    NeutronLoadBalancerSessionPersistence loadBalancerPoolSessionPersistence;
 
     @XmlElement(name = "members")
     List<NeutronLoadBalancerPoolMember> loadBalancerPoolMembers;
@@ -98,20 +98,20 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
         this.loadBalancerPoolAdminStateIsUp = loadBalancerPoolAdminStateIsUp;
     }
 
-    public NeutronLoadBalancer_SessionPersistence getLoadBalancerPoolSessionPersistence() {
+    public NeutronLoadBalancerSessionPersistence getLoadBalancerPoolSessionPersistence() {
         return loadBalancerPoolSessionPersistence;
     }
 
     public void setLoadBalancerSessionPersistence(
-            NeutronLoadBalancer_SessionPersistence loadBalancerPoolSessionPersistence) {
+            NeutronLoadBalancerSessionPersistence loadBalancerPoolSessionPersistence) {
         this.loadBalancerPoolSessionPersistence = loadBalancerPoolSessionPersistence;
     }
 
-    public List<Neutron_ID> getLoadBalancerPoolListeners() {
+    public List<NeutronID> getLoadBalancerPoolListeners() {
         return loadBalancerPoolListeners;
     }
 
-    public void setLoadBalancerPoolListeners(List<Neutron_ID> loadBalancerPoolListeners) {
+    public void setLoadBalancerPoolListeners(List<NeutronID> loadBalancerPoolListeners) {
         this.loadBalancerPoolListeners = loadBalancerPoolListeners;
     }
 
