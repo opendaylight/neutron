@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronNetwork_SegmentJAXBTest {
 
-    private static final String NeutronNetwork_Segment_sourceJson = "{ " + "\"provider:network_type\": \"vlan\", "
+    private static final String NEUTRON_NETWORK_SEGMENT_SOURCE_JSON = "{ " + "\"provider:network_type\": \"vlan\", "
             + "\"provider:physical_network\": \"physnet1\", " + "\"provider:segmentation_id\": \"1001\" }";
 
     @Test
@@ -22,7 +22,7 @@ public class NeutronNetwork_SegmentJAXBTest {
         NeutronNetwork_Segment segmentObject = new NeutronNetwork_Segment();
 
         NeutronNetwork_Segment testObject = (NeutronNetwork_Segment) JaxbTestHelper.jaxbUnmarshall(segmentObject,
-                NeutronNetwork_Segment_sourceJson);
+                NEUTRON_NETWORK_SEGMENT_SOURCE_JSON);
 
         Assert.assertEquals("NeutronNetwork_Segment JAXB Test 1: Testing provider:network_type failed", "vlan",
                 testObject.getProviderNetworkType());

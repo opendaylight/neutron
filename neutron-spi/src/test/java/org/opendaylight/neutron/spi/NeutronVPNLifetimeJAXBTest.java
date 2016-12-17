@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronVPNLifetimeJAXBTest {
 
-    private static final String NeutronVPNLifetimeTest_sourceJson = "{" + "\"units\": \"seconds\", "
+    private static final String NEUTRON_VPN_LIFETIME_TEST_SOURCE_JSON = "{" + "\"units\": \"seconds\", "
             + "\"value\": 3600 }";
 
     @Test
@@ -22,7 +22,7 @@ public class NeutronVPNLifetimeJAXBTest {
         NeutronVPNLifetime dummyObject = new NeutronVPNLifetime();
 
         NeutronVPNLifetime testObject = (NeutronVPNLifetime) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronVPNLifetimeTest_sourceJson);
+                NEUTRON_VPN_LIFETIME_TEST_SOURCE_JSON);
         Assert.assertEquals("NeutronVPNLifetime JAXB Test 1: Testing units failed", "seconds",
                 testObject.getUnits());
 

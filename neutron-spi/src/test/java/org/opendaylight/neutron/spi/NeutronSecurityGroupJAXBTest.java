@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronSecurityGroupJAXBTest {
-    private static final String NeutronSecurityGroup_sourceJson = "{"
+    private static final String NEUTRON_SECURITY_GROUP_SOURCE_JSON = "{"
             + "\"id\": \"2076db17-a522-4506-91de-c6dd8e837028\", " + "\"name\": \"new-webservers\", "
             + "\"description\": \"security group for webservers\", "
             + "\"tenant_id\": \"b4f50856753b4dc6afee5fa6b9b6c550\", "
@@ -29,7 +29,7 @@ public class NeutronSecurityGroupJAXBTest {
         NeutronSecurityGroup dummyObject = new NeutronSecurityGroup();
 
         NeutronSecurityGroup testObject = (NeutronSecurityGroup) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronSecurityGroup_sourceJson);
+                NEUTRON_SECURITY_GROUP_SOURCE_JSON);
         Assert.assertEquals("NeutronSecurityGroup JAXB Test 1: Testing id failed",
                 "2076db17-a522-4506-91de-c6dd8e837028", testObject.getID());
 

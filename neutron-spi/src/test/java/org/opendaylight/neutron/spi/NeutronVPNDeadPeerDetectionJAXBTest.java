@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronVPNDeadPeerDetectionJAXBTest {
 
-    private static final String NeutronVPNDeadPeerDetection_sourceJson = "{" + "\"action\": \"hold\", "
+    private static final String NEUTRON_VPN_DEAD_PEER_DETECTION_SOURCE_JSON = "{" + "\"action\": \"hold\", "
             + "\"interval\": 30, " + "\"timeout\": 120 }";
 
     @Test
@@ -22,7 +22,7 @@ public class NeutronVPNDeadPeerDetectionJAXBTest {
         NeutronVPNDeadPeerDetection dummyObject = new NeutronVPNDeadPeerDetection();
 
         NeutronVPNDeadPeerDetection testObject = (NeutronVPNDeadPeerDetection) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NeutronVPNDeadPeerDetection_sourceJson);
+                .jaxbUnmarshall(dummyObject, NEUTRON_VPN_DEAD_PEER_DETECTION_SOURCE_JSON);
         Assert.assertEquals("NeutronVPNDeadPeerDetection JAXB Test 1: Testing action failed", "hold",
                 testObject.getAction());
 

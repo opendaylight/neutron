@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class NeutronRouter_NetworkReferenceJAXBTest {
 
-    private static final String NeutronRouter_NetworkReference_sourceJson = "{"
+    private static final String NEUTRON_ROUTER_NETWORK_REFERENCE_SOURCE_JSON = "{"
             + "\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" ," + "\"enable_snat\": false , "
             + "\"external_fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
             + "\"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ]"
@@ -26,7 +26,7 @@ public class NeutronRouter_NetworkReferenceJAXBTest {
         NeutronRouter_NetworkReference dummyObject = new NeutronRouter_NetworkReference();
 
         NeutronRouter_NetworkReference testObject = (NeutronRouter_NetworkReference) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NeutronRouter_NetworkReference_sourceJson);
+                .jaxbUnmarshall(dummyObject, NEUTRON_ROUTER_NETWORK_REFERENCE_SOURCE_JSON);
 
         List<Neutron_IPs> externalFixedIPs = testObject.getExternalFixedIPs();
 

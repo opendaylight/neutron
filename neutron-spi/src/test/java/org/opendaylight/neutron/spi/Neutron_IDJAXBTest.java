@@ -14,13 +14,13 @@ import org.junit.Test;
 
 public class Neutron_IDJAXBTest {
 
-    private static final String Neutron_ID_sourceJson =
+    private static final String NEUTRON_ID_SOURCE_JSON =
             "{ \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
     public void test_Neutron_ID_JAXB() throws JAXBException {
         Neutron_ID neutronObject = new Neutron_ID();
-        Neutron_ID testObject = (Neutron_ID) JaxbTestHelper.jaxbUnmarshall(neutronObject, Neutron_ID_sourceJson);
+        Neutron_ID testObject = (Neutron_ID) JaxbTestHelper.jaxbUnmarshall(neutronObject, NEUTRON_ID_SOURCE_JSON);
 
         Assert.assertEquals("Neutron_ID JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                     testObject.getID());

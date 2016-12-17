@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronNetworkQosJAXBTest {
-    private static final String NeutronNetworkQosEnabled_sourceJson = "{ " + "\"status\": \"ACTIVE\", "
+    private static final String NEUTRON_NETWORK_QOS_ENABLED_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
             + "\"subnets\": [ \"3b80198d-4f7b-4f77-9ef5-774d54e17126\" ], " + "\"name\": \"net1\", "
             + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"router:external\": false, " + "\"provider:segmentation_id\": \"2\", "
@@ -26,7 +26,7 @@ public class NeutronNetworkQosJAXBTest {
         NeutronNetwork dummyObject = new NeutronNetwork();
 
         NeutronNetwork testObject = (NeutronNetwork) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronNetworkQosEnabled_sourceJson);
+                NEUTRON_NETWORK_QOS_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());
 

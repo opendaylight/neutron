@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronLoadBalancerJAXBTest {
 
-    private static final String NeutronLoadBalancer_sourceJson = "{"
+    private static final String NEUTRON_LOAD_BALANCER_SOURCE_JSON = "{"
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", " + "\"name\": \"NeutronLoadBalancer\", "
             + "\"description\": \"NeutronLoadBalancer_Description\", " + "\"status\": \"ACTIVE\", "
             + "\"admin_state_up\": \"false\", " + "\"vip_address\": \"10.0.0.3\", "
@@ -26,7 +26,7 @@ public class NeutronLoadBalancerJAXBTest {
         NeutronLoadBalancer dummyObject = new NeutronLoadBalancer();
 
         NeutronLoadBalancer testObject = (NeutronLoadBalancer) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronLoadBalancer_sourceJson);
+                NEUTRON_LOAD_BALANCER_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.uuid);
 

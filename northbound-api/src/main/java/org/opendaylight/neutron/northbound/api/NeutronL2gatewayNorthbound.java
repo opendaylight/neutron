@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 @Path("/l2-gateways")
 public final class NeutronL2gatewayNorthbound
         extends AbstractNeutronNorthbound<NeutronL2gateway, NeutronL2gatewayRequest, INeutronL2gatewayCRUD> {
-    static final Logger logger = LoggerFactory.getLogger(NeutronL2gatewayNorthbound.class);
+    static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayNorthbound.class);
 
     private static final String RESOURCE_NAME = "L2gateway";
 
@@ -75,7 +75,7 @@ public final class NeutronL2gatewayNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 
     public Response createL2gateway(final NeutronL2gatewayRequest input) {
-        logger.debug("CreateL2gateway     NeutronL2gatewayRequest");
+        LOGGER.debug("CreateL2gateway     NeutronL2gatewayRequest");
         return create(input);
     }
 
