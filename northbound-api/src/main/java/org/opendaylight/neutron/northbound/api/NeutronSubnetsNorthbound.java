@@ -80,7 +80,7 @@ public final class NeutronSubnetsNorthbound
             @QueryParam("name") String queryName,
             @QueryParam("ip_version") Integer queryIPVersion,
             @QueryParam("cidr") String queryCIDR,
-            @QueryParam("gateway_ip") String queryGatewayIP,
+            @QueryParam("gateway_ip") String queryGatewayIp,
             @QueryParam("enable_dhcp") Boolean queryEnableDHCP,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("ipv6_address_mode") String queryIpV6AddressMode,
@@ -100,7 +100,7 @@ public final class NeutronSubnetsNorthbound
                     && (queryName == null || queryName.equals(subnet.getName()))
                     && (queryIPVersion == null || queryIPVersion.equals(subnet.getIpVersion()))
                     && (queryCIDR == null || queryCIDR.equals(subnet.getCidr()))
-                    && (queryGatewayIP == null || queryGatewayIP.equals(subnet.getGatewayIP()))
+                    && (queryGatewayIp == null || queryGatewayIp.equals(subnet.getGatewayIp()))
                     && (queryEnableDHCP == null || queryEnableDHCP.equals(subnet.getEnableDHCP()))
                     && (queryTenantID == null || queryTenantID.equals(subnet.getTenantID()))
                     && (queryIpV6AddressMode == null || queryIpV6AddressMode.equals(subnet.getIpV6AddressMode()))

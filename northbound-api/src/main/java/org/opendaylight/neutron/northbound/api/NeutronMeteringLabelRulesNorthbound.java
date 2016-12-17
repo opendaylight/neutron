@@ -71,7 +71,7 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
             // filter fields
             @QueryParam("id") String queryID,
             @QueryParam("direction") String queryDirection,
-            @QueryParam("remote_ip_prefix") String queryRemoteIPPrefix,
+            @QueryParam("remote_ip_prefix") String queryRemoteIpPrefix,
             @QueryParam("metering_label_id") String queryLabelID
     // pagination and sorting are TODO
     ) {
@@ -81,8 +81,8 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
         for (NeutronMeteringLabelRule rule : allNeutronMeteringLabelRule) {
             if ((queryID == null || queryID.equals(rule.getID()))
                     && (queryDirection == null || queryDirection.equals(rule.getMeteringLabelRuleDirection()))
-                    && (queryRemoteIPPrefix == null
-                            || queryRemoteIPPrefix.equals(rule.getMeteringLabelRuleRemoteIPPrefix()))
+                    && (queryRemoteIpPrefix == null
+                            || queryRemoteIpPrefix.equals(rule.getMeteringLabelRuleRemoteIpPrefix()))
                     && (queryLabelID == null || queryLabelID.equals(rule.getMeteringLabelRuleLabelID()))) {
                 if (fields.size() > 0) {
                     ans.add(rule.extractFields(fields));

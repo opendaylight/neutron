@@ -56,7 +56,7 @@ public class NeutronSubnetJAXBTest {
                             dnsNameservers, testObject.getDnsNameservers());
 
         Assert.assertEquals("NeutronSubnet JAXB Test 7: Testing gateway_ip failed",
-                            "2003::1", testObject.getGatewayIP());
+                            "2003::1", testObject.getGatewayIp());
         Assert.assertEquals("NeutronSubnet JAXB Test 8: Testing ipv6_ra_mode failed",
                             null, testObject.getIpV6RaMode());
         Assert.assertEquals("NeutronSubnet JAXB Test 9: Testing ip_version failed",

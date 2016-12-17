@@ -30,7 +30,7 @@ public final class NeutronRouterNetworkReference implements Serializable {
     Boolean enableSNAT;
 
     @XmlElement(name = "external_fixed_ips")
-    List<NeutronIPs> externalFixedIPs;
+    List<NeutronIps> externalFixedIps;
 
     public NeutronRouterNetworkReference() {
     }
@@ -51,18 +51,18 @@ public final class NeutronRouterNetworkReference implements Serializable {
         this.enableSNAT = enableSNAT;
     }
 
-    public List<NeutronIPs> getExternalFixedIPs() {
-        return externalFixedIPs;
+    public List<NeutronIps> getExternalFixedIps() {
+        return externalFixedIps;
     }
 
-    public void setExternalFixedIPs(List<NeutronIPs> externalFixedIPs) {
-        this.externalFixedIPs = externalFixedIPs;
+    public void setExternalFixedIps(List<NeutronIps> externalFixedIps) {
+        this.externalFixedIps = externalFixedIps;
     }
 
     @Override
     public String toString() {
         return "NeutronRouterNetworkReference [networkID=" + networkID + " enableSNAT=" + enableSNAT
-                + " externalFixedIPs=" + externalFixedIPs + "]";
+                + " externalFixedIps=" + externalFixedIps + "]";
     }
 
 }

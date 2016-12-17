@@ -28,7 +28,7 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
     Boolean meteringLabelRuleExcluded;
 
     @XmlElement(name = "remote_ip_prefix")
-    String meteringLabelRuleRemoteIPPrefix;
+    String meteringLabelRuleRemoteIpPrefix;
 
     @XmlElement(name = "metering_label_id")
     String meteringLabelRuleLabelID;
@@ -53,12 +53,12 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
         this.meteringLabelRuleExcluded = excluded;
     }
 
-    public String getMeteringLabelRuleRemoteIPPrefix() {
-        return meteringLabelRuleRemoteIPPrefix;
+    public String getMeteringLabelRuleRemoteIpPrefix() {
+        return meteringLabelRuleRemoteIpPrefix;
     }
 
-    public void setMeteringLabelRuleRemoteIPPrefix(String prefix) {
-        this.meteringLabelRuleRemoteIPPrefix = prefix;
+    public void setMeteringLabelRuleRemoteIpPrefix(String prefix) {
+        this.meteringLabelRuleRemoteIpPrefix = prefix;
     }
 
     public String getMeteringLabelRuleLabelID() {
@@ -79,7 +79,7 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
     public String toString() {
         return "NeutronMeteringLabelRule [id=" + uuid + ", tenantID=" + tenantID + ", direction="
                 + meteringLabelRuleDirection + ", excluded=" + meteringLabelRuleExcluded + ", remote_ip_prefix="
-                + meteringLabelRuleRemoteIPPrefix + ", metering_label_id=" + meteringLabelRuleLabelID + "]";
+                + meteringLabelRuleRemoteIpPrefix + ", metering_label_id=" + meteringLabelRuleLabelID + "]";
     }
 
     /**
@@ -102,7 +102,7 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
                 ans.setMeteringLabelRuleExcluded(this.getMeteringLabelRuleExcluded());
             }
             if (s.equals("remote_ip_prefix")) {
-                ans.setMeteringLabelRuleRemoteIPPrefix(this.getMeteringLabelRuleRemoteIPPrefix());
+                ans.setMeteringLabelRuleRemoteIpPrefix(this.getMeteringLabelRuleRemoteIpPrefix());
             }
             if (s.equals("metering_label_id")) {
                 ans.setMeteringLabelRuleLabelID(this.getMeteringLabelRuleLabelID());

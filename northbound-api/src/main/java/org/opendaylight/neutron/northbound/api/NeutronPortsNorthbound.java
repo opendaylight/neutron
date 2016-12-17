@@ -180,8 +180,8 @@ public final class NeutronPortsNorthbound
         if (delta.getMacAddress() == null) {
             delta.setMacAddress(original.getMacAddress());
         }
-        if (delta.getFixedIPs() == null) {
-            delta.setFixedIPs(original.getFixedIPs());
+        if (delta.getFixedIps() == null) {
+            delta.setFixedIps(original.getFixedIps());
         }
     }
 

@@ -50,13 +50,13 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
     String cidr;
 
     @XmlElement(name = "gateway_ip")
-    String gatewayIP;
+    String gatewayIp;
 
     @XmlElement(name = "dns_nameservers")
     List<String> dnsNameservers;
 
     @XmlElement(name = "allocation_pools")
-    List<NeutronSubnetIPAllocationPool> allocationPools;
+    List<NeutronSubnetIpAllocationPool> allocationPools;
 
     @XmlElement(name = "host_routes")
     List<NeutronRoute> hostRoutes;
@@ -94,12 +94,12 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
         this.cidr = cidr;
     }
 
-    public String getGatewayIP() {
-        return gatewayIP;
+    public String getGatewayIp() {
+        return gatewayIp;
     }
 
-    public void setGatewayIP(String gatewayIP) {
-        this.gatewayIP = gatewayIP;
+    public void setGatewayIp(String gatewayIp) {
+        this.gatewayIp = gatewayIp;
     }
 
     public List<String> getDnsNameservers() {
@@ -110,11 +110,11 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
         this.dnsNameservers = dnsNameservers;
     }
 
-    public List<NeutronSubnetIPAllocationPool> getAllocationPools() {
+    public List<NeutronSubnetIpAllocationPool> getAllocationPools() {
         return allocationPools;
     }
 
-    public void setAllocationPools(List<NeutronSubnetIPAllocationPool> allocationPools) {
+    public void setAllocationPools(List<NeutronSubnetIpAllocationPool> allocationPools) {
         this.allocationPools = allocationPools;
     }
 
@@ -181,7 +181,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 ans.setCidr(this.getCidr());
             }
             if (s.equals("gateway_ip")) {
-                ans.setGatewayIP(this.getGatewayIP());
+                ans.setGatewayIp(this.getGatewayIp());
             }
             if (s.equals("dns_nameservers")) {
                 List<String> nsList = new ArrayList<String>();
@@ -189,7 +189,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 ans.setDnsNameservers(nsList);
             }
             if (s.equals("allocation_pools")) {
-                List<NeutronSubnetIPAllocationPool> pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+                List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
                 pools.addAll(this.getAllocationPools());
                 ans.setAllocationPools(pools);
             }
@@ -263,12 +263,12 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
      * allocation pools (an error condition when creating a new subnet
      * or assigning a gateway IP)
      */
-    public boolean gatewayIP_Pool_overlap() {
-        for (NeutronSubnetIPAllocationPool pool : allocationPools) {
-            if (ipVersion == IPV4_VERSION && pool.contains(gatewayIP)) {
+    public boolean gatewayIp_Pool_overlap() {
+        for (NeutronSubnetIpAllocationPool pool : allocationPools) {
+            if (ipVersion == IPV4_VERSION && pool.contains(gatewayIp)) {
                 return true;
             }
-            if (ipVersion == IPV6_VERSION && pool.containsV6(gatewayIP)) {
+            if (ipVersion == IPV6_VERSION && pool.containsV6(gatewayIp)) {
                 return true;
             }
         }
@@ -290,18 +290,18 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
             hostRoutes = new ArrayList<NeutronRoute>();
         }
         if (allocationPools == null) {
-            allocationPools = new ArrayList<NeutronSubnetIPAllocationPool>();
+            allocationPools = new ArrayList<NeutronSubnetIpAllocationPool>();
             if (ipVersion == IPV4_VERSION) {
                 try {
                     SubnetUtils util = new SubnetUtils(cidr);
                     SubnetInfo info = util.getInfo();
-                    if (gatewayIP == null || ("").equals(gatewayIP)) {
-                        gatewayIP = info.getLowAddress();
+                    if (gatewayIp == null || ("").equals(gatewayIp)) {
+                        gatewayIp = info.getLowAddress();
                     }
                     if (allocationPools.size() < 1) {
-                        NeutronSubnetIPAllocationPool source = new NeutronSubnetIPAllocationPool(info.getLowAddress(),
+                        NeutronSubnetIpAllocationPool source = new NeutronSubnetIpAllocationPool(info.getLowAddress(),
                                 info.getHighAddress());
-                        allocationPools = source.splitPool(gatewayIP);
+                        allocationPools = source.splitPool(gatewayIp);
                     }
                 } catch (IllegalArgumentException e) {
                     LOGGER.warn("Failure in initDefault()", e);
@@ -315,18 +315,18 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 }
 
                 int length = Integer.parseInt(parts[1]);
-                BigInteger lowAddressBi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
-                String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddressBi.add(BigInteger.ONE));
+                BigInteger lowAddressBi = NeutronSubnetIpAllocationPool.convertV6(parts[0]);
+                String lowAddress = NeutronSubnetIpAllocationPool.bigIntegerToIp(lowAddressBi.add(BigInteger.ONE));
                 BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
-                String highAddress = NeutronSubnetIPAllocationPool
-                        .bigIntegerToIP(lowAddressBi.add(mask).subtract(BigInteger.ONE));
-                if (gatewayIP == null || ("").equals(gatewayIP)) {
-                    gatewayIP = lowAddress;
+                String highAddress = NeutronSubnetIpAllocationPool
+                        .bigIntegerToIp(lowAddressBi.add(mask).subtract(BigInteger.ONE));
+                if (gatewayIp == null || ("").equals(gatewayIp)) {
+                    gatewayIp = lowAddress;
                 }
                 if (allocationPools.size() < 1) {
-                    NeutronSubnetIPAllocationPool source = new NeutronSubnetIPAllocationPool(lowAddress,
+                    NeutronSubnetIpAllocationPool source = new NeutronSubnetIpAllocationPool(lowAddress,
                             highAddress);
-                    allocationPools = source.splitPoolV6(gatewayIP);
+                    allocationPools = source.splitPoolV6(gatewayIp);
                 }
             }
         }
@@ -335,14 +335,14 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
     /* this method tests to see if the supplied IPv4 address
      * is valid for this subnet or not
      */
-    public boolean isValidIP(String ipAddress) {
+    public boolean isValidIp(String ipAddress) {
         if (ipVersion == IPV4_VERSION) {
             try {
                 SubnetUtils util = new SubnetUtils(cidr);
                 SubnetInfo info = util.getInfo();
                 return info.isInRange(ipAddress);
             } catch (IllegalArgumentException e) {
-                LOGGER.warn("Failure in isValidIP()", e);
+                LOGGER.warn("Failure in isValidIp()", e);
                 return false;
             }
         }
@@ -363,7 +363,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 }
                 return (true);
             } catch (UnknownHostException e) {
-                LOGGER.warn("Failure in isValidIP()", e);
+                LOGGER.warn("Failure in isValidIp()", e);
                 return (false);
             }
         }
@@ -376,16 +376,16 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
      */
     public String getLowAddr() {
         String ans = null;
-        for (NeutronSubnetIPAllocationPool pool : allocationPools) {
+        for (NeutronSubnetIpAllocationPool pool : allocationPools) {
             if (ans == null) {
                 ans = pool.getPoolStart();
             } else {
-                if (ipVersion == IPV4_VERSION && NeutronSubnetIPAllocationPool
-                        .convert(pool.getPoolStart()) < NeutronSubnetIPAllocationPool.convert(ans)) {
+                if (ipVersion == IPV4_VERSION && NeutronSubnetIpAllocationPool
+                        .convert(pool.getPoolStart()) < NeutronSubnetIpAllocationPool.convert(ans)) {
                     ans = pool.getPoolStart();
                 }
-                if (ipVersion == IPV6_VERSION && NeutronSubnetIPAllocationPool.convertV6(pool.getPoolStart())
-                        .compareTo(NeutronSubnetIPAllocationPool.convertV6(ans)) < 0) {
+                if (ipVersion == IPV6_VERSION && NeutronSubnetIpAllocationPool.convertV6(pool.getPoolStart())
+                        .compareTo(NeutronSubnetIpAllocationPool.convertV6(ans)) < 0) {
                     ans = pool.getPoolStart();
                 }
             }
@@ -396,7 +396,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
     @Override
     public String toString() {
         return "NeutronSubnet [subnetUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", ipVersion="
-                + ipVersion + ", cidr=" + cidr + ", gatewayIP=" + gatewayIP + ", dnsNameservers=" + dnsNameservers
+                + ipVersion + ", cidr=" + cidr + ", gatewayIp=" + gatewayIp + ", dnsNameservers=" + dnsNameservers
                 + ", allocationPools=" + allocationPools + ", hostRoutes=" + hostRoutes + ", enableDHCP=" + enableDHCP
                 + ", tenantID=" + tenantID + ", ipv6AddressMode=" + ipV6AddressMode + ", ipv6RaMode=" + ipV6RaMode
                 + "]";

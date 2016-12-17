@@ -92,14 +92,14 @@ public class NeutronPortSecurityJAXBTest {
 
         Assert.assertEquals("NeutronPort JAXB Test 4: Testing status failed", "ACTIVE", neutronObject.getStatus());
 
-        List<NeutronIPs> fixedIPs = neutronObject.getFixedIPs();
-        Assert.assertEquals(" NeutronPort JAXB Test 5.1: Testing fixed_ips list length failed", 1, fixedIPs.size());
+        List<NeutronIps> fixedIps = neutronObject.getFixedIps();
+        Assert.assertEquals(" NeutronPort JAXB Test 5.1: Testing fixed_ips list length failed", 1, fixedIps.size());
 
         Assert.assertEquals(" NeutronPort JAXB Test 5.2: Testing ip_address value failed", "192.168.111.3",
-                fixedIPs.get(0).ipAddress);
+                fixedIps.get(0).ipAddress);
 
         Assert.assertEquals(" NeutronPort JAXB Test 5.3: Testing subnet_id value failed",
-                "22b44fc2-4ffb-4de4-b0f9-69d58b37ae27", fixedIPs.get(0).subnetUUID);
+                "22b44fc2-4ffb-4de4-b0f9-69d58b37ae27", fixedIps.get(0).subnetUUID);
 
         List<NeutronPortExtraDHCPOption> extraDHCPOptions = neutronObject.getExtraDHCPOptions();
 

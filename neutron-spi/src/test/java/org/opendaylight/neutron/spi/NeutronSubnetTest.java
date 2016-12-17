@@ -39,73 +39,73 @@ public class NeutronSubnetTest {
     }
 
     @Test
-    public void gatewayIP_PoolOverlapTest() {
+    public void gatewayIp_PoolOverlapTest() {
         NeutronSubnet objectUT = new NeutronSubnet();
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/16");
 
-        NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
+        NeutronSubnetIpAllocationPool allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIPAllocationPool> pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
         pools.add(allocationPool);
         objectUT.setAllocationPools(pools);
 
-        objectUT.setGatewayIP("10.18.0.1");
-        Assert.assertFalse("gatewayIP_Pool_overlap Test 1: test with address below allocation pool failed",
-                objectUT.gatewayIP_Pool_overlap());
+        objectUT.setGatewayIp("10.18.0.1");
+        Assert.assertFalse("gatewayIp_Pool_overlap Test 1: test with address below allocation pool failed",
+                objectUT.gatewayIp_Pool_overlap());
 
-        objectUT.setGatewayIP("10.18.0.4");
-        Assert.assertTrue("gatewayIP_Pool_overlap Test 2: test with address in allocation pool failed",
-                objectUT.gatewayIP_Pool_overlap());
+        objectUT.setGatewayIp("10.18.0.4");
+        Assert.assertTrue("gatewayIp_Pool_overlap Test 2: test with address in allocation pool failed",
+                objectUT.gatewayIp_Pool_overlap());
 
-        objectUT.setGatewayIP("10.18.0.7");
-        Assert.assertFalse("gatewayIP_Pool_overlap Test 3: test with address above allocation pool failed",
-                objectUT.gatewayIP_Pool_overlap());
+        objectUT.setGatewayIp("10.18.0.7");
+        Assert.assertFalse("gatewayIp_Pool_overlap Test 3: test with address above allocation pool failed",
+                objectUT.gatewayIp_Pool_overlap());
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
 
-        allocationPool = new NeutronSubnetIPAllocationPool();
+        allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        pools = new ArrayList<NeutronSubnetIpAllocationPool>();
         pools.add(allocationPool);
         objectUT.setAllocationPools(pools);
 
-        objectUT.setGatewayIP("2015::1");
-        Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 1: test with address below allocation pool failed",
-                objectUT.gatewayIP_Pool_overlap());
+        objectUT.setGatewayIp("2015::1");
+        Assert.assertFalse("gatewayIp_Pool_overlap v6 Test 1: test with address below allocation pool failed",
+                objectUT.gatewayIp_Pool_overlap());
 
-        objectUT.setGatewayIP("2015::4");
-        Assert.assertTrue("gatewayIP_Pool_overlap v6 Test 2: test with address in allocation pool failed",
-                objectUT.gatewayIP_Pool_overlap());
+        objectUT.setGatewayIp("2015::4");
+        Assert.assertTrue("gatewayIp_Pool_overlap v6 Test 2: test with address in allocation pool failed",
+                objectUT.gatewayIp_Pool_overlap());
 
-        objectUT.setGatewayIP("2015::7");
-        Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 3: test with address above allocation pool failed",
-                objectUT.gatewayIP_Pool_overlap());
+        objectUT.setGatewayIp("2015::7");
+        Assert.assertFalse("gatewayIp_Pool_overlap v6 Test 3: test with address above allocation pool failed",
+                objectUT.gatewayIp_Pool_overlap());
     }
 
     @Test
-    public void isValidIPTest() {
+    public void isValidIpTest() {
         NeutronSubnet objectUT = new NeutronSubnet();
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/24");
 
-        Assert.assertFalse("isValidIP Negative Test 1: test of IP address outside of CIDR block failed",
-                objectUT.isValidIP("10.18.1.1"));
+        Assert.assertFalse("isValidIp Negative Test 1: test of IP address outside of CIDR block failed",
+                objectUT.isValidIp("10.18.1.1"));
 
-        Assert.assertTrue("isValidIP Test 1: test of IP address within CIDR block failed",
-                objectUT.isValidIP("10.18.0.1"));
+        Assert.assertTrue("isValidIp Test 1: test of IP address within CIDR block failed",
+                objectUT.isValidIp("10.18.0.1"));
 
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/64");
 
-        Assert.assertFalse("isValidIP v6 Negative Test 1: test of IP address outside of CIDR block failed",
-                objectUT.isValidIP("2015:0:0:1:0:0:0:1"));
+        Assert.assertFalse("isValidIp v6 Negative Test 1: test of IP address outside of CIDR block failed",
+                objectUT.isValidIp("2015:0:0:1:0:0:0:1"));
 
-        Assert.assertTrue("isValidIP v6 Test 1: test of IP address within CIDR block failed",
-                objectUT.isValidIP("2015:0:0:0:1:0:0:1"));
+        Assert.assertTrue("isValidIp v6 Test 1: test of IP address within CIDR block failed",
+                objectUT.isValidIp("2015:0:0:0:1:0:0:1"));
     }
 
     @Test
@@ -114,12 +114,12 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(4);
         objectUT.setCidr("10.18.0.0/24");
 
-        NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
+        NeutronSubnetIpAllocationPool allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIPAllocationPool> pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
         pools.add(allocationPool);
-        allocationPool = new NeutronSubnetIPAllocationPool();
+        allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("10.18.0.10");
         allocationPool.setPoolEnd("10.18.0.15");
         objectUT.setAllocationPools(pools);
@@ -129,12 +129,12 @@ public class NeutronSubnetTest {
         objectUT.setIpVersion(6);
         objectUT.setCidr("2015::0/24");
 
-        allocationPool = new NeutronSubnetIPAllocationPool();
+        allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        pools = new ArrayList<NeutronSubnetIpAllocationPool>();
         pools.add(allocationPool);
-        allocationPool = new NeutronSubnetIPAllocationPool();
+        allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("2015::10");
         allocationPool.setPoolEnd("2015::15");
         objectUT.setAllocationPools(pools);

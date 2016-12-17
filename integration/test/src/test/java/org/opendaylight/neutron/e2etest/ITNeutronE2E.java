@@ -90,7 +90,7 @@ public class ITNeutronE2E {
         NeutronSubnetTests.runTests(base);
         NeutronPortTests.runTests(base);
         NeutronRouterTests.runTests(base);
-        NeutronFloatingIPTests.runTests(base);
+        NeutronFloatingIpTests.runTests(base);
         NeutronSecurityGroupTests.runTests(base);
         NeutronSecurityRuleTests.runTests(base);
         NeutronFirewallTests.runTests(base);
@@ -103,9 +103,9 @@ public class ITNeutronE2E {
         NeutronLBHealthMonitorTests.runTests(base);
         NeutronMeteringLabelTests.runTests(base);
         NeutronMeteringRuleTests.runTests(base);
-        NeutronVPNServicesTests.runTests(base);
-        NeutronIPSECPoliciesTests.runTests(base);
-        NeutronIPSECSiteConnectionTests.runTests(base);
+        NeutronVpnServicesTests.runTests(base);
+        NeutronIpSecPoliciesTests.runTests(base);
+        NeutronIpSecSiteConnectionTests.runTests(base);
         NeutronIKEPoliciesTests.runTests(base);
         NeutronBgpvpnTests.runTests(base);
         NeutronL2GatewayTests.runTests(base);

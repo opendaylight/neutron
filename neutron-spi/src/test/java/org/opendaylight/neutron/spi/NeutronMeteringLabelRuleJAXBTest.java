@@ -29,7 +29,7 @@ public class NeutronMeteringLabelRuleJAXBTest {
                 "e131d186-b02d-4c0b-83d5-0c0725c4f812", testObject.getMeteringLabelRuleLabelID());
 
         Assert.assertEquals("NeutronMeteringLabelRule JAXB Test 2: Testing remote_ip_prefix failed", "10.0.0.0/24",
-                testObject.getMeteringLabelRuleRemoteIPPrefix());
+                testObject.getMeteringLabelRuleRemoteIpPrefix());
 
         Assert.assertEquals("NeutronMeteringLabelRule JAXB Test 3: Testing direction failed", "ingress",
                 testObject.getMeteringLabelRuleDirection());

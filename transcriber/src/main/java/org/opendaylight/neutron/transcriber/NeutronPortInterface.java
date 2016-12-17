@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
-import org.opendaylight.neutron.spi.NeutronIPs;
+import org.opendaylight.neutron.spi.NeutronIps;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronPortAllowedAddressPairs;
 import org.opendaylight.neutron.spi.NeutronPortExtraDHCPOption;
@@ -124,14 +124,14 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             result.setExtraDHCPOptions(options);
         }
         if (port.getFixedIps() != null) {
-            final List<NeutronIPs> ips = new ArrayList<NeutronIPs>();
-            for (final FixedIps mdIP : port.getFixedIps()) {
-                final NeutronIPs ip = new NeutronIPs();
-                ip.setIpAddress(String.valueOf(mdIP.getIpAddress().getValue()));
-                ip.setSubnetUUID(mdIP.getSubnetId().getValue());
+            final List<NeutronIps> ips = new ArrayList<NeutronIps>();
+            for (final FixedIps mdIp : port.getFixedIps()) {
+                final NeutronIps ip = new NeutronIps();
+                ip.setIpAddress(String.valueOf(mdIp.getIpAddress().getValue()));
+                ip.setSubnetUUID(mdIp.getSubnetId().getValue());
                 ips.add(ip);
             }
-            result.setFixedIPs(ips);
+            result.setFixedIps(ips);
         }
         result.setMacAddress(port.getMacAddress().getValue());
         result.setNetworkUUID(String.valueOf(port.getNetworkId().getValue()));
@@ -223,15 +223,15 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             }
             portBuilder.setExtraDhcpOpts(listExtraDHCPOptions);
         }
-        if (neutronPort.getFixedIPs() != null) {
-            final List<FixedIps> listNeutronIPs = new ArrayList<FixedIps>();
-            for (final NeutronIPs neutronIPs : neutronPort.getFixedIPs()) {
+        if (neutronPort.getFixedIps() != null) {
+            final List<FixedIps> listNeutronIps = new ArrayList<FixedIps>();
+            for (final NeutronIps neutronIPs : neutronPort.getFixedIps()) {
                 final FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
                 fixedIpsBuilder.setIpAddress(new IpAddress(neutronIPs.getIpAddress().toCharArray()));
                 fixedIpsBuilder.setSubnetId(toUuid(neutronIPs.getSubnetUUID()));
-                listNeutronIPs.add(fixedIpsBuilder.build());
+                listNeutronIps.add(fixedIpsBuilder.build());
             }
-            portBuilder.setFixedIps(listNeutronIPs);
+            portBuilder.setFixedIps(listNeutronIps);
         }
         if (neutronPort.getMacAddress() != null) {
             portBuilder.setMacAddress(new MacAddress(neutronPort.getMacAddress()));

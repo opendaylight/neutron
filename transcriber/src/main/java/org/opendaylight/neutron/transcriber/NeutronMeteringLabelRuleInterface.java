@@ -60,9 +60,9 @@ public final class NeutronMeteringLabelRuleInterface
             meteringRuleBuilder.setDirection(
                     (Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
-        if (meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix() != null) {
+        if (meteringLabelRule.getMeteringLabelRuleRemoteIpPrefix() != null) {
             final IpPrefix ipPrefix = new IpPrefix(
-                    meteringLabelRule.getMeteringLabelRuleRemoteIPPrefix().toCharArray());
+                    meteringLabelRule.getMeteringLabelRuleRemoteIpPrefix().toCharArray());
             meteringRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
@@ -84,7 +84,7 @@ public final class NeutronMeteringLabelRuleInterface
             answer.setMeteringLabelRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
         }
         if (rule.getRemoteIpPrefix() != null) {
-            answer.setMeteringLabelRuleRemoteIPPrefix(new String(rule.getRemoteIpPrefix().getValue()));
+            answer.setMeteringLabelRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
         }
         answer.setMeteringLabelRuleExcluded(rule.isExcluded());
         return answer;

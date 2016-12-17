@@ -28,7 +28,7 @@ public class NeutronRouterNetworkReferenceJAXBTest {
         NeutronRouterNetworkReference testObject = (NeutronRouterNetworkReference) JaxbTestHelper
                 .jaxbUnmarshall(dummyObject, NEUTRON_ROUTER_NETWORK_REFERENCE_SOURCE_JSON);
 
-        List<NeutronIPs> externalFixedIPs = testObject.getExternalFixedIPs();
+        List<NeutronIps> externalFixedIps = testObject.getExternalFixedIps();
 
         Assert.assertEquals("NeutronRouterNetworkReference JAXB Test 1: Testing network_id failed",
                 "e9330b1f-a2ef-4160-a991-169e56ab17f6", testObject.getNetworkID());
@@ -37,13 +37,13 @@ public class NeutronRouterNetworkReferenceJAXBTest {
                 testObject.getEnableSNAT());
 
         Assert.assertEquals(
-                "NeutronRouterNetworkReference JAXB Test 3.1: Testing externalFixedIPs list length failed", 1,
-                externalFixedIPs.size());
+                "NeutronRouterNetworkReference JAXB Test 3.1: Testing externalFixedIps list length failed", 1,
+                externalFixedIps.size());
 
         Assert.assertEquals("NeutronRouterNetworkReference JAXB Test 3.2: Testing ip_address value failed",
-                "192.168.111.3", externalFixedIPs.get(0).ipAddress);
+                "192.168.111.3", externalFixedIps.get(0).ipAddress);
 
         Assert.assertEquals("NeutronRouterNetworkReference JAXB Test 3.3: Testing subnet_id value failed",
-                "22b44fc2-4ffb-4de4-b0f9-69d58b37ae27", externalFixedIPs.get(0).subnetUUID);
+                "22b44fc2-4ffb-4de4-b0f9-69d58b37ae27", externalFixedIps.get(0).subnetUUID);
     }
 }

@@ -34,7 +34,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     String macAddress;
 
     @XmlElement(name = "fixed_ips")
-    List<NeutronIPs> fixedIPs;
+    List<NeutronIps> fixedIps;
 
     @XmlElement(name = "device_id")
     String deviceID;
@@ -101,12 +101,12 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         this.macAddress = macAddress;
     }
 
-    public List<NeutronIPs> getFixedIPs() {
-        return fixedIPs;
+    public List<NeutronIps> getFixedIps() {
+        return fixedIps;
     }
 
-    public void setFixedIPs(List<NeutronIPs> fixedIPs) {
-        this.fixedIPs = fixedIPs;
+    public void setFixedIps(List<NeutronIps> fixedIps) {
+        this.fixedIps = fixedIps;
     }
 
     public String getDeviceID() {
@@ -221,7 +221,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 ans.setMacAddress(this.getMacAddress());
             }
             if ("fixed_ips".equals(field)) {
-                ans.setFixedIPs(new ArrayList<NeutronIPs>(this.getFixedIPs()));
+                ans.setFixedIps(new ArrayList<NeutronIps>(this.getFixedIps()));
             }
             if ("device_id".equals(field)) {
                 ans.setDeviceID(this.getDeviceID());
@@ -268,15 +268,15 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         if (status == null) {
             status = "ACTIVE";
         }
-        if (fixedIPs == null) {
-            fixedIPs = new ArrayList<NeutronIPs>();
+        if (fixedIps == null) {
+            fixedIps = new ArrayList<NeutronIps>();
         }
     }
 
     @Override
     public String toString() {
         return "NeutronPort [portUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", adminStateUp="
-                + adminStateUp + ", status=" + status + ", macAddress=" + macAddress + ", fixedIPs=" + fixedIPs
+                + adminStateUp + ", status=" + status + ", macAddress=" + macAddress + ", fixedIps=" + fixedIps
                 + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
                 + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
