@@ -20,14 +20,14 @@ public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gatew
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "devices")
-    List<NeutronL2gatewayDevice> neutronL2gatewayDevices;
+    List<NeutronL2gatewayDevice> l2gatewayDevices;
 
     public List<NeutronL2gatewayDevice> getNeutronL2gatewayDevices() {
-        return neutronL2gatewayDevices;
+        return l2gatewayDevices;
     }
 
-    public void setNeutronL2gatewayDevices(List<NeutronL2gatewayDevice> neutronL2gatewayDevices) {
-        this.neutronL2gatewayDevices = neutronL2gatewayDevices;
+    public void setNeutronL2gatewayDevices(List<NeutronL2gatewayDevice> l2gatewayDevices) {
+        this.l2gatewayDevices = l2gatewayDevices;
     }
 
     public NeutronL2gateway extractFields(List<String> fields) {
@@ -46,7 +46,7 @@ public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gatew
     @Override
     public String toString() {
         return "NeutronL2Gateway [" + "id = " + uuid + ", name = " + name + ", tenant_id = " + tenantID
-                + ", devices = " + neutronL2gatewayDevices + "]";
+                + ", devices = " + l2gatewayDevices + "]";
     }
 
 }
