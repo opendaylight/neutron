@@ -29,7 +29,7 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
 
     /**
      * Applications call this interface method to return if a particular
-     * Neutron object exists
+     * Neutron object exists.
      *
      * @param uuid
      *            UUID of the Neutron object
