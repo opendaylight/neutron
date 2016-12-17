@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronMeteringLabelJAXBTest {
 
-    private static final String NeutronMeteringLabel_sourceJson = "{ "
+    private static final String NEUTRON_METERING_LABEL_SOURCE_JSON = "{ "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", " + "\"name\": \"net1\", "
             + "\"description\": \"Provides allowed address pairs\", "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\"}";
@@ -24,7 +24,7 @@ public class NeutronMeteringLabelJAXBTest {
         NeutronMeteringLabel meteringObject = new NeutronMeteringLabel();
 
         NeutronMeteringLabel testObject = (NeutronMeteringLabel) JaxbTestHelper.jaxbUnmarshall(meteringObject,
-                NeutronMeteringLabel_sourceJson);
+                NEUTRON_METERING_LABEL_SOURCE_JSON);
         Assert.assertEquals("NeutronMeteringLabel JAXB Test 1: Testing id failed",
                 "4e8e5957-649f-477b-9e5b-f1f75b21c03c", testObject.getID());
 

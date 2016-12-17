@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronPort_AllowedAddressPairsJAXBTest {
 
-    private static final String NeutronPort_AllowedAddressPairs_sourceJson = "{ "
+    private static final String NEUTRON_PORT_ALLOWED_ADDRESS_PAIRS_SOURCE_JSON = "{ "
             + "\"ip_address\": \"192.168.199.1\", " + "\"mac_address\": \"fa:16:3e:c9:cb:f0\" }";
 
     @Test
@@ -22,7 +22,7 @@ public class NeutronPort_AllowedAddressPairsJAXBTest {
         NeutronPort_AllowedAddressPairs portObject = new NeutronPort_AllowedAddressPairs();
 
         NeutronPort_AllowedAddressPairs testObject = (NeutronPort_AllowedAddressPairs) JaxbTestHelper
-                .jaxbUnmarshall(portObject, NeutronPort_AllowedAddressPairs_sourceJson);
+                .jaxbUnmarshall(portObject, NEUTRON_PORT_ALLOWED_ADDRESS_PAIRS_SOURCE_JSON);
         Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 1: Testing ip_address failed",
                 "192.168.199.1", testObject.getIpAddress());
 

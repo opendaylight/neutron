@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class NeutronPortJAXBTest {
 
-    private static final String NeutronPort_sourceJson = "{ " + "\"status\": \"ACTIVE\", " + "\"name\": \"net1\", "
+    private static final String NEUTRON_PORT_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", " + "\"name\": \"net1\", "
             + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
             + "\"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" } ],"
@@ -32,7 +32,7 @@ public class NeutronPortJAXBTest {
     public void test_NeutronPort_JAXB() throws JAXBException {
         NeutronPort testObject = new NeutronPort();
 
-        NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject, NeutronPort_sourceJson);
+        NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject, NEUTRON_PORT_SOURCE_JSON);
         Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());
 

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronLoadBalancer_SessionPersistenceJAXBTest {
 
-    private static final String NeutronLoadBalancer_SessionPersistence_sourceJson = "{ "
+    private static final String NEUTRON_LOAD_BALANCER_SESSION_PERSISTENCE_SOURCE_JSON = "{ "
             + "\"cookie_name\": \"NeutronLoadBalancer_SessionPersistence_Cookie\", " + "\"type\": \"HTTP_COOKIE\" }";
 
     @Test
@@ -22,7 +22,7 @@ public class NeutronLoadBalancer_SessionPersistenceJAXBTest {
         NeutronLoadBalancer_SessionPersistence dummyObject = new NeutronLoadBalancer_SessionPersistence();
 
         NeutronLoadBalancer_SessionPersistence testObject = (NeutronLoadBalancer_SessionPersistence) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NeutronLoadBalancer_SessionPersistence_sourceJson);
+                .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_SESSION_PERSISTENCE_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
                 "NeutronLoadBalancer_SessionPersistence_Cookie", testObject.getCookieName());
 

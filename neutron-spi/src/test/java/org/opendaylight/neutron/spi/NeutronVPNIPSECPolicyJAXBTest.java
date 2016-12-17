@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronVPNIPSECPolicyJAXBTest {
 
-    private static final String NeutronVPNIPSECPolicy_SingleProvider_sourceJson = "{"
+    private static final String NEUTRON_VPN_IPSEC_POLICY_SINGLE_PROVIDER_SOURCE_JSON = "{"
             + "\"id\": \"5291b189-fd84-46e5-84bd-78f40c05d69c\", "
             + "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\", " + "\"name\": \"ipsecpolicy1\", "
             + "\"description\": \"update description\", " + "\"transform_protocol\": \"esp\", "
@@ -27,7 +27,7 @@ public class NeutronVPNIPSECPolicyJAXBTest {
         NeutronVPNIPSECPolicy dummyObject = new NeutronVPNIPSECPolicy();
 
         NeutronVPNIPSECPolicy testObject = (NeutronVPNIPSECPolicy) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronVPNIPSECPolicy_SingleProvider_sourceJson);
+                NEUTRON_VPN_IPSEC_POLICY_SINGLE_PROVIDER_SOURCE_JSON);
         Assert.assertEquals("NeutronVPNIPSECPolicy JAXB Test 1: Testing id failed",
                 "5291b189-fd84-46e5-84bd-78f40c05d69c", testObject.getID());
 

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronLoadBalancerListenerJAXBTest {
 
-    private static final String NeutronLoadBalancerListener_sourceJson = "{"
+    private static final String NEUTRON_LOAD_BALANCER_LISTENER_SOURCE_JSON = "{"
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", "
             + "\"default_pool_id\": \"00005a7b-796b-4f26-9cf9-9e82d248fda7\", "
             + "\"connection_limit\": 5, "
@@ -34,7 +34,7 @@ public class NeutronLoadBalancerListenerJAXBTest {
         NeutronLoadBalancerListener dummyObject = new NeutronLoadBalancerListener();
 
         NeutronLoadBalancerListener testObject = (NeutronLoadBalancerListener) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NeutronLoadBalancerListener_sourceJson);
+                .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_LISTENER_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 

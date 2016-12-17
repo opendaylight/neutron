@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class NeutronSFCPortPairJAXBTest {
 
-    private static final String NeutronSFCPortPair_sourceJson = "{ " + "\"name\": \"portpair1\", "
+    private static final String NEUTRON_SFC_PORT_PAIR_SOURCE_JSON = "{ " + "\"name\": \"portpair1\", "
             + "\"ingress\": \"5e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
             + "\"egress\": \"6e8e5957-649f-477b-9e5b-f1f75b21c03c\", " + "\"service_function_parameters\": [ " + "{ "
             + "\"correlation\": \"value\" " + "} " + "], " + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
@@ -27,7 +27,7 @@ public class NeutronSFCPortPairJAXBTest {
     public void test_NeutronSFCPortPair_JAXB() throws JAXBException {
         NeutronSFCPortPair testObject = new NeutronSFCPortPair();
         NeutronSFCPortPair neutronObject = (NeutronSFCPortPair) JaxbTestHelper.jaxbUnmarshall(testObject,
-                NeutronSFCPortPair_sourceJson);
+                NEUTRON_SFC_PORT_PAIR_SOURCE_JSON);
 
         Assert.assertEquals("NeutronSFCPortPair JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());

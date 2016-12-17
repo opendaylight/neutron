@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class NeutronRouterJAXBTest {
 
-    private static final String NeutronRouter_sourceJson = "{" + "\"id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", "
+    private static final String NEUTRON_ROUTER_SOURCE_JSON = "{" + "\"id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", "
             + "\"name\": \"jaxb-test\", " + "\"admin_state_up\": false , " + "\"status\": \"ACTIVE\", "
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", "
             + "\"external_gateway_info\": {\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" }, "
@@ -27,7 +27,7 @@ public class NeutronRouterJAXBTest {
         NeutronRouter dummyObject = new NeutronRouter();
 
         NeutronRouter testObject = (NeutronRouter) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronRouter_sourceJson);
+                NEUTRON_ROUTER_SOURCE_JSON);
 
         NeutronRouter_NetworkReference externalGatewayInfo = testObject.getExternalGatewayInfo();
         List<NeutronRoute> routes = testObject.getRoutes();

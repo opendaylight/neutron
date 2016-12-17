@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronFirewallJAXBTest {
 
-    private static final String NeutronFirewall_sourceJson = "{ \"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\", "
+    private static final String NEUTRON_FIREWALL_SOURCE_JSON = "{ \"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\", "
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", \"name\": \"jaxb-test\", "
             + "\"description\": \"Test of NeutronFirewall JAXB\", \"admin_state_up\": false, \"status\": \"DOWN\", "
             + "\"shared\": true, \"firewall_policy_id\": \"83ca694a-eeff-48e5-b2d8-fe5198cf2e86\" }";
@@ -24,7 +24,7 @@ public class NeutronFirewallJAXBTest {
         NeutronFirewall dummyObject = new NeutronFirewall();
 
         NeutronFirewall testObject = (NeutronFirewall) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronFirewall_sourceJson);
+                NEUTRON_FIREWALL_SOURCE_JSON);
         Assert.assertEquals("NeutronFirewall JAXB Test 1: Testing id failed",
                 "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getID());
 
@@ -43,7 +43,7 @@ public class NeutronFirewallJAXBTest {
                 "83ca694a-eeff-48e5-b2d8-fe5198cf2e86", testObject.getFirewallPolicyID());
     }
 
-    private static final String NeutronFirewallPolicy_sourceJson =
+    private static final String NEUTRON_FIREWALL_POLICY_SOURCE_JSON =
             "{ \"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\", "
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", \"name\": \"jaxb-test\", "
             + "\"description\": \"Test of NeutronFirewallPolicy JAXB\", \"shared\": true, \"audited\": true, "
@@ -54,7 +54,7 @@ public class NeutronFirewallJAXBTest {
         NeutronFirewallPolicy dummyObject = new NeutronFirewallPolicy();
 
         NeutronFirewallPolicy testObject = (NeutronFirewallPolicy) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronFirewallPolicy_sourceJson);
+                NEUTRON_FIREWALL_POLICY_SOURCE_JSON);
         Assert.assertEquals("NeutronFirewallPolicy JAXB Test 1: Testing id failed",
                 "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getID());
 
@@ -71,7 +71,7 @@ public class NeutronFirewallJAXBTest {
                 testObject.getFirewallPolicyIsAudited());
     }
 
-    private static final String NeutronFirewallRule_sourceJson = "{ \"action\": \"allow\", "
+    private static final String NEUTRON_FIREWALL_RULE_SOURCE_JSON = "{ \"action\": \"allow\", "
             + "\"description\": \"Test of NeutronFirewallRule JAXB\", \"destination_ip_address\": \"10.10.10.10\", "
             + "\"destination_port_range_min\": \"80\", \"destination_port_range_max\": \"81\", \"enabled\": true, "
             + "\"firewall_policy_id\": \"83ca694a-eeff-48e5-b2d8-fe5198cf2e86\", "
@@ -80,11 +80,11 @@ public class NeutronFirewallJAXBTest {
             + "\"source_port\": null, \"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" }";
 
     @Test
-    public void test_NeutronFirewallRule_JAXB() throws JAXBException {
+    public void test_NEUTRON_FIREWALL_RULE_JAXB() throws JAXBException {
         NeutronFirewallRule dummyObject = new NeutronFirewallRule();
 
         NeutronFirewallRule testObject = (NeutronFirewallRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronFirewallRule_sourceJson);
+                NEUTRON_FIREWALL_RULE_SOURCE_JSON);
         Assert.assertEquals("NeutronFirewallRule JAXB Test 1: Testing id failed",
                 "8722e0e0-9cc9-4490-9660-8c9a5732fbb0", testObject.getID());
 
