@@ -50,8 +50,6 @@
          <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <configuration>
-            <suppressionsLocation>../../parent/checkstyle-suppressions.xml</suppressionsLocation>
-            <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
             <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
             <consoleOutput>true</consoleOutput>
              <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
