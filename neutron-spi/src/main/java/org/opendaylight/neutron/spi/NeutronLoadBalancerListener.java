@@ -44,22 +44,22 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "default_pool_id")
-    String neutronLoadBalancerListenerDefaultPoolID;
+    String loadBalancerListenerDefaultPoolID;
 
     @XmlElement(name = "connection_limit")
-    Integer neutronLoadBalancerListenerConnectionLimit;
+    Integer loadBalancerListenerConnectionLimit;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerListenerAdminStateIsUp;
 
     @XmlElement(name = "protocol")
-    String neutronLoadBalancerListenerProtocol;
+    String loadBalancerListenerProtocol;
 
     @XmlElement(name = "protocol_port")
-    String neutronLoadBalancerListenerProtocolPort;
+    String loadBalancerListenerProtocolPort;
 
     @XmlElement(name = "loadbalancers")
-    List<NeutronID> neutronLoadBalancerListenerLoadBalancerIDs;
+    List<NeutronID> loadBalancerListenerLoadBalancerIDs;
 
     public Boolean getLoadBalancerListenerAdminStateIsUp() {
         return loadBalancerListenerAdminStateIsUp;
@@ -70,44 +70,44 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
     }
 
     public String getNeutronLoadBalancerListenerProtocol() {
-        return neutronLoadBalancerListenerProtocol;
+        return loadBalancerListenerProtocol;
     }
 
-    public void setNeutronLoadBalancerListenerProtocol(String neutronLoadBalancerListenerProtocol) {
-        this.neutronLoadBalancerListenerProtocol = neutronLoadBalancerListenerProtocol;
+    public void setNeutronLoadBalancerListenerProtocol(String loadBalancerListenerProtocol) {
+        this.loadBalancerListenerProtocol = loadBalancerListenerProtocol;
     }
 
     public String getNeutronLoadBalancerListenerProtocolPort() {
-        return neutronLoadBalancerListenerProtocolPort;
+        return loadBalancerListenerProtocolPort;
     }
 
-    public void setNeutronLoadBalancerListenerProtocolPort(String neutronLoadBalancerListenerProtocolPort) {
-        this.neutronLoadBalancerListenerProtocolPort = neutronLoadBalancerListenerProtocolPort;
+    public void setNeutronLoadBalancerListenerProtocolPort(String loadBalancerListenerProtocolPort) {
+        this.loadBalancerListenerProtocolPort = loadBalancerListenerProtocolPort;
     }
 
     public String getNeutronLoadBalancerListenerDefaultPoolID() {
-        return neutronLoadBalancerListenerDefaultPoolID;
+        return loadBalancerListenerDefaultPoolID;
     }
 
-    public void setNeutronLoadBalancerListenerDefaultPoolID(String neutronLoadBalancerListenerDefaultPoolID) {
-        this.neutronLoadBalancerListenerDefaultPoolID = neutronLoadBalancerListenerDefaultPoolID;
+    public void setNeutronLoadBalancerListenerDefaultPoolID(String loadBalancerListenerDefaultPoolID) {
+        this.loadBalancerListenerDefaultPoolID = loadBalancerListenerDefaultPoolID;
     }
 
     public Integer getNeutronLoadBalancerListenerConnectionLimit() {
-        return neutronLoadBalancerListenerConnectionLimit;
+        return loadBalancerListenerConnectionLimit;
     }
 
-    public void setNeutronLoadBalancerListenerConnectionLimit(Integer neutronLoadBalancerListenerConnectionLimit) {
-        this.neutronLoadBalancerListenerConnectionLimit = neutronLoadBalancerListenerConnectionLimit;
+    public void setNeutronLoadBalancerListenerConnectionLimit(Integer loadBalancerListenerConnectionLimit) {
+        this.loadBalancerListenerConnectionLimit = loadBalancerListenerConnectionLimit;
     }
 
     public List<NeutronID> getNeutronLoadBalancerListenerLoadBalancerIDs() {
-        return neutronLoadBalancerListenerLoadBalancerIDs;
+        return loadBalancerListenerLoadBalancerIDs;
     }
 
     public void setNeutronLoadBalancerListenerLoadBalancerIDs(
-            List<NeutronID> neutronLoadBalancerListenerLoadBalancerIDs) {
-        this.neutronLoadBalancerListenerLoadBalancerIDs = neutronLoadBalancerListenerLoadBalancerIDs;
+            List<NeutronID> loadBalancerListenerLoadBalancerIDs) {
+        this.loadBalancerListenerLoadBalancerIDs = loadBalancerListenerLoadBalancerIDs;
     }
 
     public NeutronLoadBalancerListener extractFields(List<String> fields) {
@@ -133,14 +133,14 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
     @Override
     public String toString() {
         return "NeutronLoadBalancerListener{" + "loadBalancerListenerID='" + uuid + '\''
-                + ", neutronLoadBalancerListenerDefaultPoolID='" + neutronLoadBalancerListenerDefaultPoolID + '\''
-                + ", neutronLoadBalancerListenerConnectionLimit='" + neutronLoadBalancerListenerConnectionLimit + '\''
+                + ", loadBalancerListenerDefaultPoolID='" + loadBalancerListenerDefaultPoolID + '\''
+                + ", loadBalancerListenerConnectionLimit='" + loadBalancerListenerConnectionLimit + '\''
                 + ", loadBalancerListenerTenantID='" + tenantID + '\''
                 + ", loadBalancerListenerName='" + name + '\''
                 + ", loadBalancerListenerAdminStateIsUp=" + loadBalancerListenerAdminStateIsUp + '\''
-                + ", neutronLoadBalancerListenerProtocol='" + neutronLoadBalancerListenerProtocol + '\''
-                + ", neutronLoadBalancerListenerProtocolPort='" + neutronLoadBalancerListenerProtocolPort + '\''
-                + ", neutronLoadBalancerListenerLoadBalancerIDs='" + neutronLoadBalancerListenerLoadBalancerIDs + '\''
+                + ", loadBalancerListenerProtocol='" + loadBalancerListenerProtocol + '\''
+                + ", loadBalancerListenerProtocolPort='" + loadBalancerListenerProtocolPort + '\''
+                + ", loadBalancerListenerLoadBalancerIDs='" + loadBalancerListenerLoadBalancerIDs + '\''
                 + '}';
     }
 }
