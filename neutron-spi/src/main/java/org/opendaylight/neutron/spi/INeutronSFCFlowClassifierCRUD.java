@@ -8,7 +8,7 @@
 package org.opendaylight.neutron.spi;
 
 /**
- * This interface defines the methods for CRUD of NB SFC Flow Classifier objects
+ * This interface defines the methods for CRUD of NB SFC Flow Classifier objects.
  *
  */
 public interface INeutronSFCFlowClassifierCRUD extends INeutronCRUD<NeutronSFCFlowClassifier> {

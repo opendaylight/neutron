@@ -55,7 +55,7 @@ public final class NeutronFirewallRulesNorthbound
     }
 
     /**
-     * Returns a list of all Firewall Rules
+     * Returns a list of all Firewall Rules.
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -131,7 +131,7 @@ public final class NeutronFirewallRulesNorthbound
     }
 
     /**
-     * Returns a specific Firewall Rule
+     * Returns a specific Firewall Rule.
      */
 
     @Path("{firewallRuleUUID}")
@@ -149,7 +149,7 @@ public final class NeutronFirewallRulesNorthbound
     }
 
     /**
-     * Creates new Firewall Rule
+     * Creates new Firewall Rule.
      */
 
     @POST
@@ -162,7 +162,7 @@ public final class NeutronFirewallRulesNorthbound
     }
 
     /**
-     * Updates a Firewall Rule
+     * Updates a Firewall Rule.
      */
     @Path("{firewallRuleUUID}")
     @PUT
@@ -177,7 +177,7 @@ public final class NeutronFirewallRulesNorthbound
     }
 
     /**
-     * Deletes a Firewall Rule
+     * Deletes a Firewall Rule.
      */
 
     @Path("{firewallRuleUUID}")

@@ -56,7 +56,7 @@ public final class NeutronSecurityRulesNorthbound
     }
 
     /**
-     * Returns a list of all Security Rules
+     * Returns a list of all Security Rules.
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -114,7 +114,7 @@ public final class NeutronSecurityRulesNorthbound
     }
 
     /**
-     * Returns a specific Security Rule
+     * Returns a specific Security Rule.
      */
 
     @Path("{securityRuleUUID}")
@@ -132,7 +132,7 @@ public final class NeutronSecurityRulesNorthbound
     }
 
     /**
-     * Creates new Security Rule
+     * Creates new Security Rule.
      */
 
     @POST
@@ -145,7 +145,7 @@ public final class NeutronSecurityRulesNorthbound
     }
 
     /**
-     * Updates a Security Rule
+     * Updates a Security Rule.
      */
 
     @Path("{securityRuleUUID}")
@@ -161,7 +161,7 @@ public final class NeutronSecurityRulesNorthbound
     }
 
     /**
-     * Deletes a Security Rule
+     * Deletes a Security Rule.
      */
 
     @Path("{securityRuleUUID}")

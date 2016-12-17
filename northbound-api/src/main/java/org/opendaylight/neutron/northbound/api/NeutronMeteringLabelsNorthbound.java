@@ -55,7 +55,8 @@ public final class NeutronMeteringLabelsNorthbound extends
     }
 
     /**
-     * Returns a list of all metering labels */
+     * Returns a list of all metering labels.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -92,7 +93,8 @@ public final class NeutronMeteringLabelsNorthbound extends
     }
 
     /**
-     * Returns a specific metering label */
+     * Returns a specific metering label.
+     */
 
     @Path("{labelUUID}")
     @GET
@@ -110,7 +112,8 @@ public final class NeutronMeteringLabelsNorthbound extends
     }
 
     /**
-     * Creates new metering label */
+     * Creates new metering label.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -122,7 +125,8 @@ public final class NeutronMeteringLabelsNorthbound extends
     }
 
     /**
-     * Deletes a Metering Label */
+     * Deletes a Metering Label.
+     */
 
     @Path("{labelUUID}")
     @DELETE

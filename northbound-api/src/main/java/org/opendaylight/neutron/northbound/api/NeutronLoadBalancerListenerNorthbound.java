@@ -56,7 +56,8 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
     }
 
     /**
-     * Returns a list of all LoadBalancerListener */
+     * Returns a list of all LoadBalancerListener.
+     */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -109,7 +110,8 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
     }
 
     /**
-     * Returns a specific LoadBalancerListener */
+     * Returns a specific LoadBalancerListener.
+     */
 
     @Path("{loadBalancerListenerID}")
     @GET
@@ -126,7 +128,8 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
     }
 
     /**
-     * Creates new LoadBalancerListener */
+     * Creates new LoadBalancerListener.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -138,7 +141,7 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
     }
 
     /**
-     * Updates a LoadBalancerListener Policy
+     * Updates a LoadBalancerListener Policy.
      */
     @Path("{loadBalancerListenerID}")
     @PUT
@@ -153,7 +156,8 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
     }
 
     /**
-     * Deletes a LoadBalancerListener */
+     * Deletes a LoadBalancerListener.
+     */
 
     @Path("{loadBalancerListenerID}")
     @DELETE

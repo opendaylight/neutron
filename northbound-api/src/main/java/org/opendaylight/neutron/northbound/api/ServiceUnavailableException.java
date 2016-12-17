@@ -27,7 +27,7 @@ public class ServiceUnavailableException extends WebApplicationException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for the SERVICE_UNAVAILABLE custom handler
+     * Constructor for the SERVICE_UNAVAILABLE custom handler.
      *
      * @param string Error message to specify further the
      *            SERVICE_UNAVAILABLE response

@@ -58,7 +58,8 @@ public final class NeutronVPNIPSECPoliciesNorthbound extends
     }
 
     /**
-     * Returns a list of all VPN IPSEC Policies */
+     * Returns a list of all VPN IPSEC Policies.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -105,7 +106,8 @@ public final class NeutronVPNIPSECPoliciesNorthbound extends
     }
 
     /**
-     * Returns a specific VPN IPSEC Policy */
+     * Returns a specific VPN IPSEC Policy.
+     */
 
     @Path("{policyID}")
     @GET
@@ -123,7 +125,8 @@ public final class NeutronVPNIPSECPoliciesNorthbound extends
     }
 
     /**
-     * Creates new VPN IPSEC Policy */
+     * Creates new VPN IPSEC Policy.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -135,7 +138,8 @@ public final class NeutronVPNIPSECPoliciesNorthbound extends
     }
 
     /**
-     * Updates a VPN IPSEC Policy */
+     * Updates a VPN IPSEC Policy.
+     */
     @Path("{policyID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -149,7 +153,8 @@ public final class NeutronVPNIPSECPoliciesNorthbound extends
     }
 
     /**
-     * Deletes a VPN IPSEC Policy */
+     * Deletes a VPN IPSEC Policy.
+     */
 
     @Path("{policyID}")
     @DELETE

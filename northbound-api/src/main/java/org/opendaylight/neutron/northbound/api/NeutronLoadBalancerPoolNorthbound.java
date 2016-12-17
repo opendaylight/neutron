@@ -63,7 +63,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Returns a list of all LoadBalancerPool
+     * Returns a list of all LoadBalancerPool.
      * */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -118,7 +118,8 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Returns a specific LoadBalancerPool */
+     * Returns a specific LoadBalancerPool.
+     */
 
     @Path("{loadBalancerPoolID}")
     @GET
@@ -135,7 +136,8 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Creates new LoadBalancerPool */
+     * Creates new LoadBalancerPool.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -147,7 +149,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Updates a LoadBalancerPool Policy
+     * Updates a LoadBalancerPool Policy.
      */
     @Path("{loadBalancerPoolID}")
     @PUT
@@ -162,7 +164,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Deletes a LoadBalancerPool
+     * Deletes a LoadBalancerPool.
      */
 
     @Path("{loadBalancerPoolUUID}")
@@ -175,7 +177,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Returns a list of all LoadBalancerPoolMembers in specified pool
+     * Returns a list of all LoadBalancerPoolMembers in specified pool.
      */
     @Path("{loadBalancerPoolUUID}/members")
     @GET
@@ -236,7 +238,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Returns a specific LoadBalancerPoolMember
+     * Returns a specific LoadBalancerPoolMember.
      */
     @Path("{loadBalancerPoolUUID}/members/{loadBalancerPoolMemberUUID}")
     @GET
@@ -274,7 +276,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Adds a Member to an LBaaS Pool member
+     * Adds a Member to an LBaaS Pool member.
      */
     @Path("{loadBalancerPoolUUID}/members")
     @POST
@@ -307,7 +309,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Updates a LB member pool
+     * Updates a LB member pool.
      */
 
     @Path("{loadBalancerPoolUUID}/members/{loadBalancerPoolMemberUUID}")
@@ -333,7 +335,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     }
 
     /**
-     * Deletes a LoadBalancerPoolMember
+     * Deletes a LoadBalancerPoolMember.
      */
 
     @Path("{loadBalancerPoolUUID}/members/{loadBalancerPoolMemberUUID}")

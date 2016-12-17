@@ -56,7 +56,8 @@ public final class NeutronLoadBalancerNorthbound
     }
 
     /**
-     * Returns a list of all LoadBalancer */
+     * Returns a list of all LoadBalancer.
+     */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -102,7 +103,8 @@ public final class NeutronLoadBalancerNorthbound
     }
 
     /**
-     * Returns a specific LoadBalancer */
+     * Returns a specific LoadBalancer.
+     */
 
     @Path("{loadBalancerID}")
     @GET
@@ -120,7 +122,8 @@ public final class NeutronLoadBalancerNorthbound
     }
 
     /**
-     * Creates new LoadBalancer */
+     * Creates new LoadBalancer.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -133,7 +136,7 @@ public final class NeutronLoadBalancerNorthbound
     }
 
     /**
-     * Updates a LoadBalancer Policy
+     * Updates a LoadBalancer Policy.
      */
     @Path("{loadBalancerID}")
     @PUT
@@ -149,7 +152,8 @@ public final class NeutronLoadBalancerNorthbound
     }
 
     /**
-     * Deletes a LoadBalancer */
+     * Deletes a LoadBalancer.
+     */
 
     @Path("{loadBalancerID}")
     @DELETE

@@ -59,7 +59,8 @@ public final class NeutronRoutersNorthbound
     }
 
     /**
-     * Returns a list of all Routers */
+     * Returns a list of all Routers.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -108,7 +109,8 @@ public final class NeutronRoutersNorthbound
     }
 
     /**
-     * Returns a specific Router */
+     * Returns a specific Router.
+     */
 
     @Path("{routerUUID}")
     @GET
@@ -127,7 +129,8 @@ public final class NeutronRoutersNorthbound
     }
 
     /**
-     * Creates new Routers */
+     * Creates new Routers.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -146,7 +149,8 @@ public final class NeutronRoutersNorthbound
     }
 
     /**
-     * Updates a Router */
+     * Updates a Router.
+     */
 
     @Path("{routerUUID}")
     @PUT
@@ -161,7 +165,8 @@ public final class NeutronRoutersNorthbound
     }
 
     /**
-     * Deletes a Router */
+     * Deletes a Router.
+     */
 
     @Path("{routerUUID}")
     @DELETE
@@ -173,7 +178,8 @@ public final class NeutronRoutersNorthbound
     }
 
     /**
-     * Adds an interface to a router */
+     * Adds an interface to a router.
+     */
 
     @Path("{routerUUID}/add_router_interface")
     @PUT

@@ -9,7 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 /**
- * This interface defines the methods for CRUD of NB OpenStack Security Rule objects
+ * This interface defines the methods for CRUD of NB OpenStack Security Rule objects.
  */
 
 public interface INeutronSecurityRuleCRUD extends INeutronCRUD<NeutronSecurityRule> {
