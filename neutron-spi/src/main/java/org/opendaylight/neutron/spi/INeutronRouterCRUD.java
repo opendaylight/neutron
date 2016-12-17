@@ -9,7 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 /**
- * This interface defines the methods for CRUD of NB Router objects
+ * This interface defines the methods for CRUD of NB Router objects.
  *
  */
 

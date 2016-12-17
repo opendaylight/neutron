@@ -58,7 +58,7 @@ public final class NeutronL2gatewayNorthbound
     }
 
     /**
-     * Creates L2gateway
+     * Creates L2gateway.
      * @param input l2gateway attributes
      * @return success or error code
      */
@@ -80,7 +80,7 @@ public final class NeutronL2gatewayNorthbound
     }
 
     /**
-     * Returns a list of all L2gateways
+     * Returns a list of all L2gateways.
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -141,7 +141,7 @@ public final class NeutronL2gatewayNorthbound
     }
 
     /**
-     * Deletes a L2gateway
+     * Deletes a L2gateway.
      * @param l2gatewayID l2gateway uuid which should be deleted
      * @return success or error code
      * */
@@ -156,7 +156,7 @@ public final class NeutronL2gatewayNorthbound
     }
 
     /**
-     * Updates a L2gateway
+     * Updates a L2gateway.
      * @param l2gatewayID gateway ID that needs to be modified
      * @param input gateway attributes
      * @return status

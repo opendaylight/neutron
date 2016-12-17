@@ -55,7 +55,7 @@ public final class NeutronSecurityGroupsNorthbound extends
     }
 
     /**
-     * Returns a list of all Security Groups
+     * Returns a list of all Security Groups.
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -92,7 +92,7 @@ public final class NeutronSecurityGroupsNorthbound extends
     }
 
     /**
-     * Returns a specific Security Group
+     * Returns a specific Security Group.
      */
 
     @Path("{securityGroupUUID}")
@@ -110,7 +110,7 @@ public final class NeutronSecurityGroupsNorthbound extends
     }
 
     /**
-     * Creates new Security Group
+     * Creates new Security Group.
      */
 
     @POST
@@ -123,7 +123,7 @@ public final class NeutronSecurityGroupsNorthbound extends
     }
 
     /**
-     * Updates a Security Group
+     * Updates a Security Group.
      */
 
     @Path("{securityGroupUUID}")
@@ -139,7 +139,7 @@ public final class NeutronSecurityGroupsNorthbound extends
     }
 
     /**
-     * Deletes a Security Group
+     * Deletes a Security Group.
      */
 
     @Path("{securityGroupUUID}")

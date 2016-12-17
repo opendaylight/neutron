@@ -11,14 +11,14 @@ package org.opendaylight.neutron.spi;
 import java.util.List;
 
 /**
- * This interface defines the methods for CRUD of NB neutron objects
+ * This interface defines the methods for CRUD of NB neutron objects.
  *
  */
 
 public interface INeutronCRUD<T extends INeutronObject<T>> {
     /**
      * Applications call this interface method to determine if a particular
-     * Neutron object exists
+     * Neutron object exists.
      *
      * @param uuid
      *            UUID of the Neutron object
@@ -40,7 +40,7 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
     T get(String uuid);
 
     /**
-     * Applications call this interface method to return all Neutron objects
+     * Applications call this interface method to return all Neutron objects.
      *
      * @return List of OpenStackNeutrons objects
      */
@@ -49,7 +49,7 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
 
     /**
      * Applications call this interface method to add a Neutron object to the
-     * concurrent map
+     * concurrent map.
      *
      * @param input
      *            OpenStackNeutron object
@@ -60,7 +60,7 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
 
     /**
      * Applications call this interface method to remove a Neutron object to the
-     * concurrent map
+     * concurrent map.
      *
      * @param uuid
      *            identifier for the neutron object
@@ -70,7 +70,7 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
     boolean remove(String uuid);
 
     /**
-     * Applications call this interface method to edit a Neutron object
+     * Applications call this interface method to edit a Neutron object.
      *
      * @param uuid
      *            identifier of the neutron object

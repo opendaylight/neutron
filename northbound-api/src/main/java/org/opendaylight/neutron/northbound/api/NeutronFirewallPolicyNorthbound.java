@@ -56,7 +56,8 @@ public final class NeutronFirewallPolicyNorthbound extends
     }
 
     /**
-     * Returns a list of all Firewall Policies */
+     * Returns a list of all Firewall Policies.
+     */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -101,7 +102,8 @@ public final class NeutronFirewallPolicyNorthbound extends
     }
 
     /**
-     * Returns a specific Firewall Policy */
+     * Returns a specific Firewall Policy.
+     */
 
     @Path("{firewallPolicyUUID}")
     @GET
@@ -118,7 +120,7 @@ public final class NeutronFirewallPolicyNorthbound extends
     }
 
     /**
-     * Creates new Firewall Policy
+     * Creates new Firewall Policy.
      * */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -130,7 +132,7 @@ public final class NeutronFirewallPolicyNorthbound extends
     }
 
     /**
-     * Updates a Firewall Policy
+     * Updates a Firewall Policy.
      */
     @Path("{firewallPolicyUUID}")
     @PUT
@@ -146,7 +148,8 @@ public final class NeutronFirewallPolicyNorthbound extends
     }
 
     /**
-     * Deletes a Firewall Policy */
+     * Deletes a Firewall Policy.
+     */
 
     @Path("{firewallPolicyUUID}")
     @DELETE

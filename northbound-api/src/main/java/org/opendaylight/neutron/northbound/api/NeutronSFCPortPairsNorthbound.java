@@ -56,7 +56,8 @@ public final class NeutronSFCPortPairsNorthbound
     }
 
     /**
-     * Returns a list of all SFC Port Pairs*/
+     * Returns a list of all SFC Port Pairs.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -94,7 +95,8 @@ public final class NeutronSFCPortPairsNorthbound
     }
 
     /**
-     * Returns a specific SFC Port Pair */
+     * Returns a specific SFC Port Pair.
+     */
 
     @Path("{portPairUUID}")
     @GET
@@ -111,7 +113,8 @@ public final class NeutronSFCPortPairsNorthbound
     }
 
     /**
-     * Creates new SFC Port Pair*/
+     * Creates new SFC Port Pair.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -135,7 +138,8 @@ public final class NeutronSFCPortPairsNorthbound
     }
 
     /**
-     * Updates an existing SFC Port Pair */
+     * Updates an existing SFC Port Pair.
+     */
     @Path("{portPairUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -149,7 +153,8 @@ public final class NeutronSFCPortPairsNorthbound
     }
 
     /**
-     * Deletes the SFC Port Pair */
+     * Deletes the SFC Port Pair.
+     */
 
     @Path("{portPairUUID}")
     @DELETE

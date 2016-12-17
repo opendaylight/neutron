@@ -24,7 +24,7 @@ public class UnimplementedException extends WebApplicationException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for the NOT_IMPLEMENTED custom handler
+     * Constructor for the NOT_IMPLEMENTED custom handler.
      *
      * @param string Error message to specify further the
      *            SERVICE_UNAVAILABLE response

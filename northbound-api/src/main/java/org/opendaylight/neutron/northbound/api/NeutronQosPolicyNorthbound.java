@@ -39,7 +39,7 @@ public final class NeutronQosPolicyNorthbound
     }
 
     /**
-     * Returns a list of all Qos Policies
+     * Returns a list of all Qos Policies.
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -77,7 +77,7 @@ public final class NeutronQosPolicyNorthbound
     }
 
     /**
-     * Returns a specific Qos Policy
+     * Returns a specific Qos Policy.
      */
     @Path("{qosPolicyUUID}")
     @GET
@@ -93,7 +93,7 @@ public final class NeutronQosPolicyNorthbound
     }
 
     /**
-     * Creates new Qos Policy
+     * Creates new Qos Policy.
      */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -105,7 +105,7 @@ public final class NeutronQosPolicyNorthbound
     }
 
     /**
-     * Updates a Qos Policy
+     * Updates a Qos Policy.
      */
     @Path("{qosPolicyUUID}")
     @PUT
@@ -120,7 +120,7 @@ public final class NeutronQosPolicyNorthbound
     }
 
     /**
-     * Deletes a Qos Policy
+     * Deletes a Qos Policy.
      */
     @Path("{qosPolicyUUID}")
     @DELETE

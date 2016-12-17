@@ -19,8 +19,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.pol
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- */
 
 public final class NeutronFirewallPolicyInterface
         extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, FirewallPolicyKey, NeutronFirewallPolicy>

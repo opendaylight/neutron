@@ -59,7 +59,7 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
     }
 
     /**
-     * Creates L2gateway Connection
+     * Creates L2gateway Connection.
      * @param  input contains connection details
      * @return status
      */
@@ -146,7 +146,7 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
     }
 
     /**
-     * Deletes a L2gateway Connection
+     * Deletes a L2gateway Connection.
      * @param  l2gatewayConnectionID  connection ID to delete
      * @return status
      */

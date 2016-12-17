@@ -9,7 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 /**
- * This interface defines the methods for CRUD of NB OpenStack Firewall Policy objects
+ * This interface defines the methods for CRUD of NB OpenStack Firewall Policy objects.
  *
  */
 

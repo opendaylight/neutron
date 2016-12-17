@@ -13,7 +13,7 @@ import java.util.List;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 
 /**
- * This class contains behaviour common to Neutron configuration objects
+ * This class contains behaviour common to Neutron configuration objects.
  */
 public interface INeutronObject<T extends INeutronObject> {
 

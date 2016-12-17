@@ -63,7 +63,8 @@ public final class NeutronPortsNorthbound
     UriInfo uriInfo;
 
     /**
-     * Returns a list of all Ports */
+     * Returns a list of all Ports.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -128,7 +129,8 @@ public final class NeutronPortsNorthbound
     }
 
     /**
-     * Returns a specific Port */
+     * Returns a specific Port.
+     */
 
     @Path("{portUUID}")
     @GET
@@ -146,7 +148,8 @@ public final class NeutronPortsNorthbound
     }
 
     /**
-     * Creates new Ports */
+     * Creates new Ports.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -183,7 +186,8 @@ public final class NeutronPortsNorthbound
     }
 
     /**
-     * Updates a Port */
+     * Updates a Port.
+     */
 
     @Path("{portUUID}")
     @PUT
@@ -200,7 +204,8 @@ public final class NeutronPortsNorthbound
     }
 
     /**
-     * Deletes a Port */
+     * Deletes a Port.
+     */
 
     @Path("{portUUID}")
     @DELETE

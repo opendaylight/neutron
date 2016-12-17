@@ -57,7 +57,8 @@ public final class NeutronVPNIKEPoliciesNorthbound
     }
 
     /**
-     * Returns a list of all VPN IKE Policies */
+     * Returns a list of all VPN IKE Policies.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -105,7 +106,8 @@ public final class NeutronVPNIKEPoliciesNorthbound
     }
 
     /**
-     * Returns a specific VPN IKE Policy */
+     * Returns a specific VPN IKE Policy.
+     */
 
     @Path("{policyID}")
     @GET
@@ -123,7 +125,8 @@ public final class NeutronVPNIKEPoliciesNorthbound
     }
 
     /**
-     * Creates new VPN IKE Policy */
+     * Creates new VPN IKE Policy.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -135,7 +138,8 @@ public final class NeutronVPNIKEPoliciesNorthbound
     }
 
     /**
-     * Updates a VPN IKE Policy */
+     * Updates a VPN IKE Policy.
+     */
     @Path("{policyID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -149,7 +153,8 @@ public final class NeutronVPNIKEPoliciesNorthbound
     }
 
     /**
-     * Deletes a VPN IKE Policy */
+     * Deletes a VPN IKE Policy.
+     */
 
     @Path("{policyID}")
     @DELETE
