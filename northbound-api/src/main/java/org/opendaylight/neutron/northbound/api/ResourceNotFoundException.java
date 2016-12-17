@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 /**
  * Status Code 404 (Not Found)
  *
+ * <p>
  * The server has not found anything matching the Request-URI.
  * No indication is given of whether the condition is temporary or permanent.
  * The 410 (Gone) status code SHOULD be used if the server knows,

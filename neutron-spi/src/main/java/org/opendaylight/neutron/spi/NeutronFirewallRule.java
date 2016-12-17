@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * v2.0 Reference for description of  the fields.
  * The implemented fields are as follows:
  *
+ * <p>
  * tenant_id               uuid-str
  * name                    String
  * admin_state_up          Bool

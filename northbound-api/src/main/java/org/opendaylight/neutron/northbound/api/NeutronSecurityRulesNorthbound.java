@@ -30,6 +30,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 /**
  * Neutron Northbound REST APIs for Security Rule.<br>
  * This class provides REST APIs for managing neutron Security Rule
+ *
  * <p>
  * <br>
  * <br>

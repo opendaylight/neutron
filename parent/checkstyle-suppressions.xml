@@ -12,9 +12,6 @@
   <suppress checks="SummaryJavadoc"
             files="."
              />
-  <suppress checks="JavadocParagraph"
-            files="."
-             />
   <suppress checks="JavadocTagContinuationIndentation"
             files="."
              />
