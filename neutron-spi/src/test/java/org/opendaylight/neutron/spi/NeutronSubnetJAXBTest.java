@@ -14,7 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronSubnetJAXBTest {
-    private static final String NeutronSubnetEnabled_sourceJson = "{"
+    private static final String NEUTRON_SUBNET_ENABLED_SOURCE_JSON = "{"
         + "\"service_types\": [], "
         + "\"description\": \"\", "
         + "\"enable_dhcp\": true, "
@@ -41,7 +41,7 @@ public class NeutronSubnetJAXBTest {
         NeutronSubnet dummyObject = new NeutronSubnet();
 
         NeutronSubnet testObject = (NeutronSubnet) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronSubnetEnabled_sourceJson);
+                NEUTRON_SUBNET_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronSubnet JAXB Test 1: Testing id failed",
                             "dd4320eb-a56b-412b-ae83-fc5ac2a5e6f6", testObject.getID());
         Assert.assertEquals("NeutronSubnet JAXB Test 2: Testing tenant_id failed",

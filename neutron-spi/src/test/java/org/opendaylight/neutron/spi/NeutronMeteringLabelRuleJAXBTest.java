@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronMeteringLabelRuleJAXBTest {
 
-    private static final String NeutronMeteringLabelRule_sourceJson = "{ "
+    private static final String NEUTRON_METERING_LABEL_RULE_SOURCE_JSON = "{ "
             + "\"metering_label_id\": \"e131d186-b02d-4c0b-83d5-0c0725c4f812\", "
             + "\"remote_ip_prefix\": \"10.0.0.0/24\", " + "\"direction\": \"ingress\", " + "\"excluded\": false , "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
@@ -24,7 +24,7 @@ public class NeutronMeteringLabelRuleJAXBTest {
         NeutronMeteringLabelRule meteringObject = new NeutronMeteringLabelRule();
 
         NeutronMeteringLabelRule testObject = (NeutronMeteringLabelRule) JaxbTestHelper
-                .jaxbUnmarshall(meteringObject, NeutronMeteringLabelRule_sourceJson);
+                .jaxbUnmarshall(meteringObject, NEUTRON_METERING_LABEL_RULE_SOURCE_JSON);
         Assert.assertEquals("NeutronMeteringLabelRule JAXB Test 1: Testing metering_label_id failed",
                 "e131d186-b02d-4c0b-83d5-0c0725c4f812", testObject.getMeteringLabelRuleLabelID());
 

@@ -16,7 +16,8 @@ import org.junit.Test;
 
 public class NeutronQosJAXBTest {
 
-    private static final String NeutronQosPolicy_sourceJson = "{" + "\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
+    private static final String NEUTRON_QOS_POLICY_SOURCE_JSON = "{"
+            + "\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", "
             + " \"shared\": false," + "\"rule_type\": \"rule\", "
             + "\"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\", "
@@ -29,7 +30,7 @@ public class NeutronQosJAXBTest {
     public void test_NeutronQosPolicy_JAXB() throws JAXBException {
         NeutronQosPolicy testObject = new NeutronQosPolicy();
         NeutronQosPolicy neutronObject = (NeutronQosPolicy) JaxbTestHelper.jaxbUnmarshall(testObject,
-                NeutronQosPolicy_sourceJson);
+                NEUTRON_QOS_POLICY_SOURCE_JSON);
         Assert.assertEquals("NeutronQosPolicy JAXB Test 1: Testing id failed", "d6220bbb-35f3-48ab-8eae-69c60aef3546",
                 neutronObject.getID());
 

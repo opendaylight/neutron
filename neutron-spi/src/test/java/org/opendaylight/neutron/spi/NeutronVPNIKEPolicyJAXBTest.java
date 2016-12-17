@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronVPNIKEPolicyJAXBTest {
-    private static final String NeutronVPNIKEPolicy_sourceJson = "{"
+    private static final String NEUTRON_VPN_IKE_POLICY_SOURCE_JSON = "{"
             + "\"id\": \"5522aff7-1b3c-48dd-9c3c-b50f016b73db\", "
             + "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\", " + "\"name\": \"ikepolicy1\", "
             + "\"description\": \"updated description\", " + "\"auth_algorithm\": \"sha1\", "
@@ -26,7 +26,7 @@ public class NeutronVPNIKEPolicyJAXBTest {
         NeutronVPNIKEPolicy dummyObject = new NeutronVPNIKEPolicy();
 
         NeutronVPNIKEPolicy testObject = (NeutronVPNIKEPolicy) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronVPNIKEPolicy_sourceJson);
+                NEUTRON_VPN_IKE_POLICY_SOURCE_JSON);
         Assert.assertEquals("NeutronVPNIKEPolicy JAXB Test 1: Testing id failed",
                 "5522aff7-1b3c-48dd-9c3c-b50f016b73db", testObject.getID());
 

@@ -17,7 +17,7 @@ import org.junit.Test;
 public class NeutronPortSecurityJAXBTest {
 
     // JSON with PortSecurityEnabled set true
-    private static final String portSecurityEnabled_sourceJson = "{ " + "\"status\": \"ACTIVE\", "
+    private static final String PORT_SECURITY_ENABLED_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
             + "\"name\": \"net1\", " + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
@@ -31,7 +31,7 @@ public class NeutronPortSecurityJAXBTest {
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", " + "\"port_security_enabled\": true }";
 
     // JSON with PortSecurityEnabled set false
-    private static final String portSecurityDisabled_sourceJson = "{ " + "\"status\": \"ACTIVE\", "
+    private static final String PORT_SECURITY_DISABLED_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
             + "\"name\": \"net1\", " + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
@@ -45,7 +45,7 @@ public class NeutronPortSecurityJAXBTest {
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", " + "\"port_security_enabled\": false }";
 
     // JSON with PortSecurityEnabled not set for compatibility test
-    private static final String portSecurityDefault_sourceJson = "{ " + "\"status\": \"ACTIVE\", "
+    private static final String PORT_SECURITY_DEFAULT_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
             + "\"name\": \"net1\", " + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
@@ -60,12 +60,12 @@ public class NeutronPortSecurityJAXBTest {
 
     @Test
     public void test_NeutronPortSecurityEnabled_JAXB() throws JAXBException {
-        test_PortSecurityEnabled_JAXB(portSecurityEnabled_sourceJson, true);
+        test_PortSecurityEnabled_JAXB(PORT_SECURITY_ENABLED_SOURCE_JSON, true);
     }
 
     @Test
     public void test_NeutronPortSecurityDisabled_JAXB() throws JAXBException {
-        test_PortSecurityEnabled_JAXB(portSecurityDisabled_sourceJson, false);
+        test_PortSecurityEnabled_JAXB(PORT_SECURITY_DISABLED_SOURCE_JSON, false);
     }
 
     /*
@@ -74,7 +74,7 @@ public class NeutronPortSecurityJAXBTest {
      */
     @Test
     public void test_NeutronPortSecurityDefault_JAXB() throws JAXBException {
-        test_PortSecurityEnabled_JAXB(portSecurityDefault_sourceJson, true);
+        test_PortSecurityEnabled_JAXB(PORT_SECURITY_DEFAULT_SOURCE_JSON, true);
     }
 
     private void test_PortSecurityEnabled_JAXB(String sourceJson, Boolean portSecurityEnabled) throws JAXBException {

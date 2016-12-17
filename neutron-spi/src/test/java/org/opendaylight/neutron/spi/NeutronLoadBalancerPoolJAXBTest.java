@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class NeutronLoadBalancerPoolJAXBTest {
 
-    private static final String NeutronLoadBalancerPool_sourceJson = "{ " + "\"admin_state_up\": true, "
+    private static final String NEUTRON_LOAD_BALANCER_POOL_SOURCE_JSON = "{ " + "\"admin_state_up\": true, "
             + "\"description\": \"simple pool\", " + "\"healthmonitor_id\": \"00066a7b-796b-4f26-9cf9-9e82d248fda7\", "
             + "\"id\": \"12ff63af-4127-4074-a251-bcb2ecc53ebe\", " + "\"lb_algorithm\": \"ROUND_ROBIN\", "
             + "\"listeners\": [ " + "{ " + "\"id\": \"39de4d56-d663-46e5-85a1-5b9d5fa17829\" " + "} " + "], "
@@ -28,7 +28,7 @@ public class NeutronLoadBalancerPoolJAXBTest {
         NeutronLoadBalancerPool dummyObject = new NeutronLoadBalancerPool();
 
         NeutronLoadBalancerPool testObject = (NeutronLoadBalancerPool) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronLoadBalancerPool_sourceJson);
+                NEUTRON_LOAD_BALANCER_POOL_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 1: Testing id failed",
                 "12ff63af-4127-4074-a251-bcb2ecc53ebe", testObject.getID());
 

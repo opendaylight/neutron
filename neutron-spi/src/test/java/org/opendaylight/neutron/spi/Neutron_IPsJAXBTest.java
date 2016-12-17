@@ -14,13 +14,13 @@ import org.junit.Test;
 
 public class Neutron_IPsJAXBTest {
 
-    private static final String Neutron_IPs_sourceJson =
+    private static final String NEUTRON_IPS_SOURCE_JSON =
             "{ \"ip_address\": \"192.168.111.3\", " + "\"subnet_id\": \"22b44fc2-4ffb-4de4-b0f9-69d58b37ae27\" }";
 
     @Test
     public void test_Neutron_IPs_JAXB() throws JAXBException {
         Neutron_IPs neutronObject = new Neutron_IPs();
-        Neutron_IPs testObject = (Neutron_IPs) JaxbTestHelper.jaxbUnmarshall(neutronObject, Neutron_IPs_sourceJson);
+        Neutron_IPs testObject = (Neutron_IPs) JaxbTestHelper.jaxbUnmarshall(neutronObject, NEUTRON_IPS_SOURCE_JSON);
 
         Assert.assertEquals("Neutron_IPs JAXB Test 1: Testing ip_address failed", "192.168.111.3",
                     testObject.getIpAddress());

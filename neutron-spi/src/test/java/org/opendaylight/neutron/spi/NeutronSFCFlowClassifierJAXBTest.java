@@ -17,7 +17,7 @@ import org.junit.Test;
  */
 public class NeutronSFCFlowClassifierJAXBTest {
 
-    private static final String NeutronSFCFlowClassifier_sourceJson = "{ " + "\"name\": \"flowclassifier1\", "
+    private static final String NEUTRON_SFC_FLOW_CLASSIFIER_SOURCE_JSON = "{ " + "\"name\": \"flowclassifier1\", "
             + "\"ethertype\": \"IPv4\", " + "\"protocol\": \"UDP\", " + "\"source_port_range_min\": 100, "
             + "\"source_port_range_max\": 200, " + "\"destination_port_range_min\": 100, "
             + "\"destination_port_range_max\": 200, " + "\"source_ip_prefix\": \"10.0.0.0/24\", "
@@ -31,7 +31,7 @@ public class NeutronSFCFlowClassifierJAXBTest {
     public void test_NeutronSFCFlowClassifier_JAXB() throws JAXBException {
         NeutronSFCFlowClassifier testObject = new NeutronSFCFlowClassifier();
         NeutronSFCFlowClassifier neutronObject = (NeutronSFCFlowClassifier) JaxbTestHelper.jaxbUnmarshall(testObject,
-                NeutronSFCFlowClassifier_sourceJson);
+                NEUTRON_SFC_FLOW_CLASSIFIER_SOURCE_JSON);
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 1: Testing id failed",
                 "4e8e5957-649f-477b-9e5b-f1f75b21c03c", neutronObject.getID());

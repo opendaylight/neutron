@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronVPNServiceJAXBTest {
 
-    private static final String NeutronVPNService_sourceJson = "{"
+    private static final String NEUTRON_VPN_SERVICE_SOURCE_JSON = "{"
             + "\"router_id\": \"ec8619be-0ba8-4955-8835-3b49ddb76f89\", " + "\"status\": \"PENDING_CREATE\", "
             + "\"name\": \"myservice\", " + "\"admin_state_up\": true, "
             + "\"subnet_id\": \"f4fb4528-ed93-467c-a57b-11c7ea9f963e\", "
@@ -26,7 +26,7 @@ public class NeutronVPNServiceJAXBTest {
         NeutronVPNService dummyObject = new NeutronVPNService();
 
         NeutronVPNService testObject = (NeutronVPNService) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronVPNService_sourceJson);
+                NEUTRON_VPN_SERVICE_SOURCE_JSON);
         Assert.assertEquals("NeutronVPNService JAXB Test 1: Testing router id failed",
                 "ec8619be-0ba8-4955-8835-3b49ddb76f89", testObject.getRouterUUID());
 

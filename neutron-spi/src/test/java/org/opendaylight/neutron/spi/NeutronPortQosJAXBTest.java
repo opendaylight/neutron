@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class NeutronPortQosJAXBTest {
 
-    private static final String NeutronPortQosEnabled_sourceJson = "{ " + "\"status\": \"ACTIVE\", "
+    private static final String NEUTRON_PORT_QOS_ENABLED_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
             + "\"name\": \"net1\", " + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
@@ -35,7 +35,7 @@ public class NeutronPortQosJAXBTest {
         NeutronPort testObject = new NeutronPort();
 
         NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject,
-                NeutronPortQosEnabled_sourceJson);
+                NEUTRON_PORT_QOS_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());
 

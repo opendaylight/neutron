@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class NeutronLoadBalancerHealthMonitorJAXBTest {
 
-    private static final String NeutronLoadBalancerHealthMonitor_sourceJson = "{"
+    private static final String NEUTRON_LOAD_BALANCER_HEALTH_MONITOR_SOURCE_JSON = "{"
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", " + "\"type\": \"HTTP\", " + "\"delay\": 1, "
             + "\"timeout\": 1, " + "\"admin_state_up\": \"false\", " + "\"max_retries\": 5, "
             + "\"http_method\": \"get\", " + "\"url_path\": \"/index.html\", " + "\"expected_codes\": \"200,201,202\", "
@@ -27,7 +27,7 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
         NeutronLoadBalancerHealthMonitor dummyObject = new NeutronLoadBalancerHealthMonitor();
 
         NeutronLoadBalancerHealthMonitor testObject = (NeutronLoadBalancerHealthMonitor) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NeutronLoadBalancerHealthMonitor_sourceJson);
+                .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_HEALTH_MONITOR_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 

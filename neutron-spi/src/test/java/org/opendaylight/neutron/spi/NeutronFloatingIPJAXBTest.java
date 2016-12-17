@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class NeutronFloatingIPJAXBTest {
 
-    private static final String NeutronFloatingIP_sourceJson = "{" + "\"fixed_ip_address\": \"10.0.0.3\", "
+    private static final String NEUTRON_FLOATING_IP_SOURCE_JSON = "{" + "\"fixed_ip_address\": \"10.0.0.3\", "
             + "\"floating_ip_address\": \"172.24.4.228\", "
             + "\"floating_network_id\": \"376da547-b977-4cfe-9cba-275c80debf57\", "
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", "
@@ -27,7 +27,7 @@ public class NeutronFloatingIPJAXBTest {
         NeutronFloatingIP dummyObject = new NeutronFloatingIP();
 
         NeutronFloatingIP testObject = (NeutronFloatingIP) JaxbTestHelper.jaxbUnmarshall(dummyObject,
-                NeutronFloatingIP_sourceJson);
+                NEUTRON_FLOATING_IP_SOURCE_JSON);
         Assert.assertEquals("NeutronFloatingIP JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 

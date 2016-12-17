@@ -15,7 +15,7 @@ import org.junit.Test;
 
 public class NeutronVPNIPSECSiteConnectionJAXBTest {
 
-    private static final String NeutronVPNIPSECSiteConnection_sourceJson = "{"
+    private static final String NEUTRON_VPN_IPSEC_SITE_CONNECTION_SOURCE_JSON = "{"
             + "\"id\": \"cbc152a0-7e93-4f98-9f04-b085a4bf2511\", "
             + "\"tenant_id\": \"ccb81365fe36411a9011e90491fe1330\", " + "\"name\": \"myvpn\", "
             + "\"description\": \"Updated description\", " + "\"peer_address\": \"172.24.4.226\", "
@@ -32,7 +32,7 @@ public class NeutronVPNIPSECSiteConnectionJAXBTest {
         NeutronVPNIPSECSiteConnection dummyObject = new NeutronVPNIPSECSiteConnection();
 
         NeutronVPNIPSECSiteConnection testObject = (NeutronVPNIPSECSiteConnection) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NeutronVPNIPSECSiteConnection_sourceJson);
+                .jaxbUnmarshall(dummyObject, NEUTRON_VPN_IPSEC_SITE_CONNECTION_SOURCE_JSON);
         Assert.assertEquals("NeutronVPNIPSECSiteConnection JAXB Test 1: Testing id failed",
                 "cbc152a0-7e93-4f98-9f04-b085a4bf2511", testObject.getID());
 
