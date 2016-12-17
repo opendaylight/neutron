@@ -80,7 +80,7 @@ public class NeutronFirewallJAXBTest {
             + "\"source_port\": null, \"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" }";
 
     @Test
-    public void test_NEUTRON_FIREWALL_RULE_JAXB() throws JAXBException {
+    public void test_NeutronFirewallRule_JAXB() throws JAXBException {
         NeutronFirewallRule dummyObject = new NeutronFirewallRule();
 
         NeutronFirewallRule testObject = (NeutronFirewallRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
