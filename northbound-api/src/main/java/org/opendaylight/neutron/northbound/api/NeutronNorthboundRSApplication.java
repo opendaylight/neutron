@@ -44,10 +44,10 @@ public final class NeutronNorthboundRSApplication extends Application {
         classes.add(NeutronLoadBalancerHealthMonitorNorthbound.class);
         classes.add(NeutronMeteringLabelsNorthbound.class);
         classes.add(NeutronMeteringLabelRulesNorthbound.class);
-        classes.add(NeutronVPNServicesNorthbound.class);
-        classes.add(NeutronVPNIKEPoliciesNorthbound.class);
-        classes.add(NeutronVPNIPSECPoliciesNorthbound.class);
-        classes.add(NeutronVPNIPSECSiteConnectionsNorthbound.class);
+        classes.add(NeutronVpnServicesNorthbound.class);
+        classes.add(NeutronVpnIkePoliciesNorthbound.class);
+        classes.add(NeutronVpnIPSecPoliciesNorthbound.class);
+        classes.add(NeutronVpnIPSecSiteConnectionsNorthbound.class);
         classes.add(NeutronBgpvpnsNorthbound.class);
         classes.add(NeutronL2gatewayNorthbound.class);
         classes.add(NeutronL2gatewayConnectionNorthbound.class);

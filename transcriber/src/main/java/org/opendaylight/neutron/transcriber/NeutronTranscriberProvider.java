@@ -17,7 +17,7 @@ import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
-import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
+import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
 import org.opendaylight.neutron.spi.INeutronL2gatewayConnectionCRUD;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
@@ -37,10 +37,10 @@ import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNIKEPolicyCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNIPSECPolicyCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNIPSECSiteConnectionsCRUD;
-import org.opendaylight.neutron.spi.INeutronVPNServiceCRUD;
+import org.opendaylight.neutron.spi.INeutronVpnIPSecPolicyCRUD;
+import org.opendaylight.neutron.spi.INeutronVpnIPSecSiteConnectionsCRUD;
+import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
+import org.opendaylight.neutron.spi.INeutronVpnServiceCRUD;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
@@ -75,7 +75,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
         registerCRUDInterface(INeutronFirewallCRUD.class, new NeutronFirewallInterface(db));
         registerCRUDInterface(INeutronFirewallPolicyCRUD.class, new NeutronFirewallPolicyInterface(db));
         registerCRUDInterface(INeutronFirewallRuleCRUD.class, new NeutronFirewallRuleInterface(db));
-        registerCRUDInterface(INeutronFloatingIPCRUD.class, new NeutronFloatingIPInterface(db));
+        registerCRUDInterface(INeutronFloatingIpCRUD.class, new NeutronFloatingIPInterface(db));
         registerCRUDInterface(INeutronL2gatewayConnectionCRUD.class, new NeutronL2gatewayConnectionInterface(db));
         registerCRUDInterface(INeutronL2gatewayCRUD.class, new NeutronL2gatewayInterface(db));
         registerCRUDInterface(INeutronLoadBalancerHealthMonitorCRUD.class,
@@ -96,11 +96,11 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
         registerCRUDInterface(INeutronSecurityGroupCRUD.class, new NeutronSecurityGroupInterface(db));
         registerCRUDInterface(INeutronSecurityRuleCRUD.class, new NeutronSecurityRuleInterface(db));
         registerCRUDInterface(INeutronSubnetCRUD.class, new NeutronSubnetInterface(db));
-        registerCRUDInterface(INeutronVPNIKEPolicyCRUD.class, new NeutronVPNIKEPolicyInterface(db));
-        registerCRUDInterface(INeutronVPNIPSECPolicyCRUD.class, new NeutronVPNIPSECPolicyInterface(db));
-        registerCRUDInterface(INeutronVPNIPSECSiteConnectionsCRUD.class,
-                              new NeutronVPNIPSECSiteConnectionsInterface(db));
-        registerCRUDInterface(INeutronVPNServiceCRUD.class, new NeutronVPNServiceInterface(db));
+        registerCRUDInterface(INeutronVpnIkePolicyCRUD.class, new NeutronVpnIkePolicyInterface(db));
+        registerCRUDInterface(INeutronVpnIPSecPolicyCRUD.class, new NeutronVpnIPSecPolicyInterface(db));
+        registerCRUDInterface(INeutronVpnIPSecSiteConnectionsCRUD.class,
+                              new NeutronVpnIPSecSiteConnectionsInterface(db));
+        registerCRUDInterface(INeutronVpnServiceCRUD.class, new NeutronVpnServiceInterface(db));
 
         // We don't need context any more
         this.context = null;

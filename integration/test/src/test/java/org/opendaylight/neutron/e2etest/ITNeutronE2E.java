@@ -103,9 +103,9 @@ public class ITNeutronE2E {
         NeutronLBHealthMonitorTests.runTests(base);
         NeutronMeteringLabelTests.runTests(base);
         NeutronMeteringRuleTests.runTests(base);
-        NeutronVPNServicesTests.runTests(base);
-        NeutronIPSECPoliciesTests.runTests(base);
-        NeutronIPSECSiteConnectionTests.runTests(base);
+        NeutronVpnServicesTests.runTests(base);
+        NeutronIPSecPoliciesTests.runTests(base);
+        NeutronIPSecSiteConnectionTests.runTests(base);
         NeutronIKEPoliciesTests.runTests(base);
         NeutronBgpvpnTests.runTests(base);
         NeutronL2GatewayTests.runTests(base);

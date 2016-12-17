@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
+ * Copyright (c) 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -24,12 +24,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
-import org.opendaylight.neutron.spi.NeutronFloatingIP;
+import org.codehaus.enunciate.jaxrs.TypeHint;
+import org.opendaylight.neutron.spi.INeutronVpnServiceCRUD;
+import org.opendaylight.neutron.spi.NeutronVpnService;
 
 /**
- * Neutron Northbound REST APIs.<br>
- * This class provides REST APIs for managing Neutron Floating IPs
+ * Neutron Northbound REST APIs for VPN Service.<br>
+ * This class provides REST APIs for managing neutron VPN Services
  *
  * <br>
  * <br>
@@ -45,10 +46,11 @@ import org.opendaylight.neutron.spi.NeutronFloatingIP;
  *
  */
 
-@Path("/floatingips")
-public final class NeutronFloatingIPsNorthbound
-        extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIpCRUD> {
-    private static final String RESOURCE_NAME = "Floating IP";
+@Path("/vpn/vpnservices")
+public final class NeutronVpnServicesNorthbound
+        extends AbstractNeutronNorthbound<NeutronVpnService, NeutronVpnServiceRequest, INeutronVpnServiceCRUD> {
+
+    private static final String RESOURCE_NAME = "VpnService";
 
     @Override
     protected String getResourceName() {
@@ -56,7 +58,7 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Returns a list of all FloatingIPs.
+     * Returns a list of all VPN Services.
      */
 
     @GET
@@ -65,55 +67,50 @@ public final class NeutronFloatingIPsNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response listFloatingIPs(
+    public Response listVPNServices(
             // return fields
             @QueryParam("fields") List<String> fields,
-            // note: openstack isn't clear about filtering on lists, so we aren't handling them
+            // OpenStack VPNService attributes
             @QueryParam("id") String queryID,
-            @QueryParam("floating_network_id") String queryFloatingNetworkId,
-            @QueryParam("port_id") String queryPortId,
-            @QueryParam("fixed_ip_address") String queryFixedIPAddress,
-            @QueryParam("floating_ip_address") String queryFloatingIPAddress,
             @QueryParam("tenant_id") String queryTenantID,
+            @QueryParam("name") String queryName,
+            @QueryParam("admin_state_up") Boolean queryAdminStateUp,
             @QueryParam("router_id") String queryRouterID,
             @QueryParam("status") String queryStatus,
+            @QueryParam("subnet_id") String querySubnetID,
             // pagination
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
-        INeutronFloatingIpCRUD floatingIPInterface = getNeutronCRUD();
-        List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAll();
-        List<NeutronFloatingIP> ans = new ArrayList<>();
-        for (NeutronFloatingIP floatingIp : allFloatingIPs) {
-            //match filters: TODO provider extension and router extension
-            if ((queryID == null || queryID.equals(floatingIp.getID()))
-                    && (queryFloatingNetworkId == null
-                        || queryFloatingNetworkId.equals(floatingIp.getFloatingNetworkUUID()))
-                    && (queryPortId == null || queryPortId.equals(floatingIp.getPortUUID()))
-                    && (queryFixedIPAddress == null || queryFixedIPAddress.equals(floatingIp.getFixedIPAddress()))
-                    && (queryFloatingIPAddress == null
-                        || queryFloatingIPAddress.equals(floatingIp.getFloatingIPAddress()))
-                    && (queryStatus == null || queryStatus.equals(floatingIp.getStatus()))
-                    && (queryRouterID == null || queryRouterID.equals(floatingIp.getRouterUUID()))
-                    && (queryTenantID == null || queryTenantID.equals(floatingIp.getTenantID()))) {
+        INeutronVpnServiceCRUD vpnServiceInterface = getNeutronCRUD();
+        List<NeutronVpnService> allVPNService = vpnServiceInterface.getAll();
+        List<NeutronVpnService> ans = new ArrayList<>();
+        for (NeutronVpnService vpnService : allVPNService) {
+            if ((queryID == null || queryID.equals(vpnService.getID()))
+                    && (queryName == null || queryName.equals(vpnService.getName()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(vpnService.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(vpnService.getStatus()))
+                    && (querySubnetID == null || querySubnetID.equals(vpnService.getSubnetUUID()))
+                    && (queryRouterID == null || queryRouterID.equals(vpnService.getRouterUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(vpnService.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(floatingIp.extractFields(fields));
+                    ans.add(vpnService.extractFields(fields));
                 } else {
-                    ans.add(floatingIp);
+                    ans.add(vpnService);
                 }
             }
         }
-        //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFloatingIPRequest(ans)).build();
+
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVpnServiceRequest(ans)).build();
     }
 
     /**
-     * Returns a specific FloatingIP.
+     * Returns a specific VPN Service.
      */
 
-    @Path("{floatingipUUID}")
+    @Path("{serviceID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -121,51 +118,49 @@ public final class NeutronFloatingIPsNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showFloatingIP(@PathParam("floatingipUUID") String floatingipUUID,
+    public Response showVPNService(@PathParam("serviceID") String serviceID,
             // return fields
             @QueryParam("fields") List<String> fields) {
-        return show(floatingipUUID, fields);
+        return show(serviceID, fields);
     }
 
     /**
-     * Creates new FloatingIPs.
+     * Creates new VPN Service.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
+    @TypeHint(NeutronVpnService.class)
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
+    public Response createVPNService(final NeutronVpnServiceRequest input) {
         return create(input);
     }
 
     /**
-     * Updates a FloatingIP.
+     * Updates a VPN Service.
      */
-
-    @Path("{floatingipUUID}")
+    @Path("{serviceID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateFloatingIP(@PathParam("floatingipUUID") String floatingipUUID,
-            NeutronFloatingIPRequest input) {
-        return update(floatingipUUID, input);
+    public Response updateVPNService(@PathParam("serviceID") String serviceID, final NeutronVpnServiceRequest input) {
+        return update(serviceID, input);
     }
 
     /**
-     * Deletes a FloatingIP.
+     * Deletes a VPN Service.
      */
 
-    @Path("{floatingipUUID}")
+    @Path("{serviceID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteFloatingIP(@PathParam("floatingipUUID") String floatingipUUID) {
-        return delete(floatingipUUID);
+    public Response deleteVPNService(@PathParam("serviceID") String serviceID) {
+        return delete(serviceID);
     }
 }

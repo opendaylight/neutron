@@ -10,7 +10,7 @@ package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.neutron.spi.INeutronFloatingIPCRUD;
+import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.NeutronFloatingIP;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.Floatingips;
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 public final class NeutronFloatingIPInterface
         extends AbstractNeutronInterface<Floatingip, Floatingips, FloatingipKey, NeutronFloatingIP>
-        implements INeutronFloatingIPCRUD {
+        implements INeutronFloatingIpCRUD {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIPInterface.class);
 
     NeutronFloatingIPInterface(DataBroker db) {
