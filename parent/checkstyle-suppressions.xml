@@ -6,8 +6,5 @@
 
 <suppressions>
   <suppress files="[/\\]target[/\\]" checks=".*"/>
-  <suppress checks="AbbreviationAsWordInName"
-            files="."
-             />
 </suppressions>
 

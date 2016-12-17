@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
+ * Copyright (c) 2015 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -24,12 +24,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
-import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
-import org.opendaylight.neutron.spi.NeutronFloatingIP;
+import org.codehaus.enunciate.jaxrs.TypeHint;
+import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
+import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
 
 /**
- * Neutron Northbound REST APIs.<br>
- * This class provides REST APIs for managing Neutron Floating IPs
+ * Neutron Northbound REST APIs for VPN IKE Policy.<br>
+ * This class provides REST APIs for managing neutron VPN IKE Policies
  *
  * <br>
  * <br>
@@ -45,10 +46,10 @@ import org.opendaylight.neutron.spi.NeutronFloatingIP;
  *
  */
 
-@Path("/floatingips")
-public final class NeutronFloatingIPsNorthbound
-        extends AbstractNeutronNorthbound<NeutronFloatingIP, NeutronFloatingIPRequest, INeutronFloatingIpCRUD> {
-    private static final String RESOURCE_NAME = "Floating IP";
+@Path("/vpn/ikepolicies")
+public final class NeutronVpnIkePoliciesNorthbound
+        extends AbstractNeutronNorthbound<NeutronVpnIkePolicy, NeutronVpnIkePolicyRequest, INeutronVpnIkePolicyCRUD> {
+    private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     @Override
     protected String getResourceName() {
@@ -56,7 +57,7 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Returns a list of all FloatingIPs.
+     * Returns a list of all VPN IKE Policies.
      */
 
     @GET
@@ -65,107 +66,102 @@ public final class NeutronFloatingIPsNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response listFloatingIPs(
+    public Response listVpnIkePolicies(
             // return fields
             @QueryParam("fields") List<String> fields,
-            // note: openstack isn't clear about filtering on lists, so we aren't handling them
+            // filter fields
             @QueryParam("id") String queryID,
-            @QueryParam("floating_network_id") String queryFloatingNetworkId,
-            @QueryParam("port_id") String queryPortId,
-            @QueryParam("fixed_ip_address") String queryFixedIPAddress,
-            @QueryParam("floating_ip_address") String queryFloatingIPAddress,
+            @QueryParam("name") String queryName,
             @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("router_id") String queryRouterID,
-            @QueryParam("status") String queryStatus,
-            // pagination
-            @QueryParam("limit") String limit,
-            @QueryParam("marker") String marker,
-            @QueryParam("page_reverse") String pageReverse
-    // sorting not supported
+            @QueryParam("auth_algorithm") String queryAuthAlgorithm,
+            @QueryParam("encryption_algorithm") String queryEncryptionAlgorithm,
+            @QueryParam("phase1_negotiation_mode") String queryPhase1NegotiationMode,
+            @QueryParam("pfs") String queryPFS,
+            @QueryParam("ike_version") String queryIKEVersion
+    // pagination and sorting are TODO
     ) {
-        INeutronFloatingIpCRUD floatingIPInterface = getNeutronCRUD();
-        List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAll();
-        List<NeutronFloatingIP> ans = new ArrayList<>();
-        for (NeutronFloatingIP floatingIp : allFloatingIPs) {
-            //match filters: TODO provider extension and router extension
-            if ((queryID == null || queryID.equals(floatingIp.getID()))
-                    && (queryFloatingNetworkId == null
-                        || queryFloatingNetworkId.equals(floatingIp.getFloatingNetworkUUID()))
-                    && (queryPortId == null || queryPortId.equals(floatingIp.getPortUUID()))
-                    && (queryFixedIPAddress == null || queryFixedIPAddress.equals(floatingIp.getFixedIPAddress()))
-                    && (queryFloatingIPAddress == null
-                        || queryFloatingIPAddress.equals(floatingIp.getFloatingIPAddress()))
-                    && (queryStatus == null || queryStatus.equals(floatingIp.getStatus()))
-                    && (queryRouterID == null || queryRouterID.equals(floatingIp.getRouterUUID()))
-                    && (queryTenantID == null || queryTenantID.equals(floatingIp.getTenantID()))) {
+        INeutronVpnIkePolicyCRUD labelInterface = getNeutronCRUD();
+        List<NeutronVpnIkePolicy> allNeutronVpnIkePolicy = labelInterface.getAll();
+        List<NeutronVpnIkePolicy> ans = new ArrayList<>();
+        for (NeutronVpnIkePolicy policy : allNeutronVpnIkePolicy) {
+            if ((queryID == null || queryID.equals(policy.getID()))
+                    && (queryName == null || queryName.equals(policy.getName()))
+                    && (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(policy.getAuthAlgorithm()))
+                    && (queryEncryptionAlgorithm == null
+                            || queryEncryptionAlgorithm.equals(policy.getEncryptionAlgorithm()))
+                    && (queryPhase1NegotiationMode == null
+                            || queryPhase1NegotiationMode.equals(policy.getPhase1NegotiationMode()))
+                    && (queryPFS == null || queryPFS.equals(policy.getPerfectForwardSecrecy()))
+                    && (queryIKEVersion == null || queryIKEVersion.equals(policy.getIkeVersion()))
+                    && (queryTenantID == null || queryTenantID.equals(policy.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(floatingIp.extractFields(fields));
+                    ans.add(policy.extractFields(fields));
                 } else {
-                    ans.add(floatingIp);
+                    ans.add(policy);
                 }
             }
         }
         //TODO: apply pagination to results
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronFloatingIPRequest(ans)).build();
+        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronVpnIkePolicyRequest(ans)).build();
     }
 
     /**
-     * Returns a specific FloatingIP.
+     * Returns a specific VPN IKE Policy.
      */
 
-    @Path("{floatingipUUID}")
+    @Path("{policyID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response showFloatingIP(@PathParam("floatingipUUID") String floatingipUUID,
-            // return fields
-            @QueryParam("fields") List<String> fields) {
-        return show(floatingipUUID, fields);
+    public Response showVpnIkePolicy(@PathParam("policyID") String policyUUID,
+                                     // return fields
+                                     @QueryParam("fields") List<String> fields) {
+        return show(policyUUID, fields);
     }
 
     /**
-     * Creates new FloatingIPs.
+     * Creates new VPN IKE Policy.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
+    @TypeHint(NeutronVpnIkePolicy.class)
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response createFloatingIPs(final NeutronFloatingIPRequest input) {
+    public Response createVpnIkePolicy(final NeutronVpnIkePolicyRequest input) {
         return create(input);
     }
 
     /**
-     * Updates a FloatingIP.
+     * Updates a VPN IKE Policy.
      */
-
-    @Path("{floatingipUUID}")
+    @Path("{policyID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response updateFloatingIP(@PathParam("floatingipUUID") String floatingipUUID,
-            NeutronFloatingIPRequest input) {
-        return update(floatingipUUID, input);
+    public Response updateVpnIkePolicy(@PathParam("policyID") String policyUUID,
+                                       final NeutronVpnIkePolicyRequest input) {
+        return update(policyUUID, input);
     }
 
     /**
-     * Deletes a FloatingIP.
+     * Deletes a VPN IKE Policy.
      */
 
-    @Path("{floatingipUUID}")
+    @Path("{policyID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-    public Response deleteFloatingIP(@PathParam("floatingipUUID") String floatingipUUID) {
-        return delete(floatingipUUID);
+    public Response deleteVpnIkePolicy(@PathParam("policyID") String policyUUID) {
+        return delete(policyUUID);
     }
 }
