@@ -43,7 +43,7 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
     String providerSegmentationID;
 
     @XmlElement(name = "segments")
-    List<NeutronNetwork_Segment> segments;
+    List<NeutronNetworkSegment> segments;
 
     @XmlElement(name = "vlan_transparent")
     Boolean vlanTransparent;
@@ -132,11 +132,11 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
         this.providerSegmentationID = providerSegmentationID;
     }
 
-    public void setSegments(List<NeutronNetwork_Segment> segments) {
+    public void setSegments(List<NeutronNetworkSegment> segments) {
         this.segments = segments;
     }
 
-    public List<NeutronNetwork_Segment> getSegments() {
+    public List<NeutronNetworkSegment> getSegments() {
         return segments;
     }
 

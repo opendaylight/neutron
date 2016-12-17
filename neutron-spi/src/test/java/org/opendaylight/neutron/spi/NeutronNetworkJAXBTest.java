@@ -91,7 +91,7 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 8: Testing shared failed", false, testObject.getShared());
 
-        List<NeutronNetwork_Segment> segments = testObject.getSegments();
+        List<NeutronNetworkSegment> segments = testObject.getSegments();
         Assert.assertEquals("NeutronNetwork JAXB Test 9.1: Testing segments list length failed", 2,
                 segments.size());
 

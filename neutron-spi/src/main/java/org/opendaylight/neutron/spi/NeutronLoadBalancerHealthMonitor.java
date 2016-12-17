@@ -67,7 +67,7 @@ public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<Neutro
     Boolean loadBalancerHealthMonitorAdminStateIsUp;
 
     @XmlElement(name = "pools")
-    List<Neutron_ID> loadBalancerHealthMonitorPools;
+    List<NeutronID> loadBalancerHealthMonitorPools;
 
     public String getLoadBalancerHealthMonitorType() {
         return loadBalancerHealthMonitorType;
@@ -133,11 +133,11 @@ public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<Neutro
         this.loadBalancerHealthMonitorAdminStateIsUp = loadBalancerHealthMonitorAdminStateIsUp;
     }
 
-    public List<Neutron_ID> getLoadBalancerHealthMonitorPools() {
+    public List<NeutronID> getLoadBalancerHealthMonitorPools() {
         return loadBalancerHealthMonitorPools;
     }
 
-    public void setLoadBalancerHealthMonitorPools(List<Neutron_ID> loadBalancerHealthMonitorPools) {
+    public void setLoadBalancerHealthMonitorPools(List<NeutronID> loadBalancerHealthMonitorPools) {
         this.loadBalancerHealthMonitorPools = loadBalancerHealthMonitorPools;
     }
 

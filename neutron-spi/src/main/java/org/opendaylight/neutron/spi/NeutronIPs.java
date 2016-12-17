@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class Neutron_IPs implements Serializable {
+public final class NeutronIPs implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -28,10 +28,10 @@ public final class Neutron_IPs implements Serializable {
     @XmlElement(name = "subnet_id")
     String subnetUUID;
 
-    public Neutron_IPs() {
+    public NeutronIPs() {
     }
 
-    public Neutron_IPs(String uuid) {
+    public NeutronIPs(String uuid) {
         subnetUUID = uuid;
     }
 
@@ -53,6 +53,6 @@ public final class Neutron_IPs implements Serializable {
 
     @Override
     public String toString() {
-        return "Neutron_IPs{" + "ipAddress='" + ipAddress + '\'' + ", subnetUUID='" + subnetUUID + '\'' + "}";
+        return "NeutronIPs{" + "ipAddress='" + ipAddress + '\'' + ", subnetUUID='" + subnetUUID + '\'' + "}";
     }
 }

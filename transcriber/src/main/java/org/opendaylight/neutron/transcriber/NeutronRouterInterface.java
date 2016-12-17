@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
+import org.opendaylight.neutron.spi.NeutronIPs;
 import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.NeutronRouter;
-import org.opendaylight.neutron.spi.NeutronRouter_NetworkReference;
-import org.opendaylight.neutron.spi.Neutron_IPs;
+import org.opendaylight.neutron.spi.NeutronRouterNetworkReference;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.l3.attributes.Routes;
@@ -67,16 +67,16 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         }
         if (router.getExternalGatewayInfo() != null) {
             ExternalGatewayInfo externalGatewayInfo = null;
-            final List<NeutronRouter_NetworkReference> neutronRouter_NetworkReferences = new ArrayList<
-                    NeutronRouter_NetworkReference>();
-            neutronRouter_NetworkReferences.add(router.getExternalGatewayInfo());
-            for (final NeutronRouter_NetworkReference externalGatewayInfos : neutronRouter_NetworkReferences) {
+            final List<NeutronRouterNetworkReference> neutronRouterNetworkReferences = new ArrayList<
+                    NeutronRouterNetworkReference>();
+            neutronRouterNetworkReferences.add(router.getExternalGatewayInfo());
+            for (final NeutronRouterNetworkReference externalGatewayInfos : neutronRouterNetworkReferences) {
                 final ExternalGatewayInfoBuilder builder = new ExternalGatewayInfoBuilder();
                 builder.setEnableSnat(externalGatewayInfos.getEnableSNAT());
                 builder.setExternalNetworkId(toUuid(externalGatewayInfos.getNetworkID()));
                 if (externalGatewayInfos.getExternalFixedIPs() != null) {
                     final List<ExternalFixedIps> externalFixedIps = new ArrayList<ExternalFixedIps>();
-                    for (final Neutron_IPs externalIp : externalGatewayInfos.getExternalFixedIPs()) {
+                    for (final NeutronIPs externalIp : externalGatewayInfos.getExternalFixedIPs()) {
                         final ExternalFixedIpsBuilder eFixedIpBuilder = new ExternalFixedIpsBuilder();
                         eFixedIpBuilder.setIpAddress(new IpAddress(externalIp.getIpAddress().toCharArray()));
                         eFixedIpBuilder.setSubnetId(toUuid(externalIp.getSubnetUUID()));
@@ -110,13 +110,13 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         }
 
         if (router.getExternalGatewayInfo() != null) {
-            final NeutronRouter_NetworkReference extGwInfo = new NeutronRouter_NetworkReference();
+            final NeutronRouterNetworkReference extGwInfo = new NeutronRouterNetworkReference();
             extGwInfo.setNetworkID(String.valueOf(router.getExternalGatewayInfo().getExternalNetworkId().getValue()));
             extGwInfo.setEnableSNAT(router.getExternalGatewayInfo().isEnableSnat());
             if (router.getExternalGatewayInfo().getExternalFixedIps() != null) {
-                final List<Neutron_IPs> fixedIPs = new ArrayList<Neutron_IPs>();
+                final List<NeutronIPs> fixedIPs = new ArrayList<NeutronIPs>();
                 for (final ExternalFixedIps mdFixedIP : router.getExternalGatewayInfo().getExternalFixedIps()) {
-                    final Neutron_IPs fixedIP = new Neutron_IPs();
+                    final NeutronIPs fixedIP = new NeutronIPs();
                     fixedIP.setSubnetUUID(String.valueOf(mdFixedIP.getSubnetId().getValue()));
                     fixedIP.setIpAddress(String.valueOf(mdFixedIP.getIpAddress().getValue()));
                     fixedIPs.add(fixedIP);

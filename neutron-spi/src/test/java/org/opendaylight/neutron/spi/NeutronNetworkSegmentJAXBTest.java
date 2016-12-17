@@ -12,25 +12,25 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class NeutronNetwork_SegmentJAXBTest {
+public class NeutronNetworkSegmentJAXBTest {
 
     private static final String NEUTRON_NETWORK_SEGMENT_SOURCE_JSON = "{ " + "\"provider:network_type\": \"vlan\", "
             + "\"provider:physical_network\": \"physnet1\", " + "\"provider:segmentation_id\": \"1001\" }";
 
     @Test
-    public void test_NeutronNetwork_Segment_JAXB()  throws JAXBException {
-        NeutronNetwork_Segment segmentObject = new NeutronNetwork_Segment();
+    public void test_NeutronNetworkSegment_JAXB()  throws JAXBException {
+        NeutronNetworkSegment segmentObject = new NeutronNetworkSegment();
 
-        NeutronNetwork_Segment testObject = (NeutronNetwork_Segment) JaxbTestHelper.jaxbUnmarshall(segmentObject,
+        NeutronNetworkSegment testObject = (NeutronNetworkSegment) JaxbTestHelper.jaxbUnmarshall(segmentObject,
                 NEUTRON_NETWORK_SEGMENT_SOURCE_JSON);
 
-        Assert.assertEquals("NeutronNetwork_Segment JAXB Test 1: Testing provider:network_type failed", "vlan",
+        Assert.assertEquals("NeutronNetworkSegment JAXB Test 1: Testing provider:network_type failed", "vlan",
                 testObject.getProviderNetworkType());
 
-        Assert.assertEquals("NeutronNetwork_Segment JAXB Test 2: Testing provider:physical_network failed",
+        Assert.assertEquals("NeutronNetworkSegment JAXB Test 2: Testing provider:physical_network failed",
                 "physnet1", testObject.getProviderPhysicalNetwork());
 
-        Assert.assertEquals("NeutronNetwork_Segment JAXB Test 3: Testing provider:segmentation_id failed", "1001",
+        Assert.assertEquals("NeutronNetworkSegment JAXB Test 3: Testing provider:segmentation_id failed", "1001",
                 testObject.getProviderSegmentationID());
     }
 }

@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronLoadBalancer_SessionPersistence implements Serializable {
+public final class NeutronLoadBalancerSessionPersistence implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -28,10 +28,10 @@ public final class NeutronLoadBalancer_SessionPersistence implements Serializabl
     @XmlElement(name = "type")
     String type;
 
-    public NeutronLoadBalancer_SessionPersistence() {
+    public NeutronLoadBalancerSessionPersistence() {
     }
 
-    public NeutronLoadBalancer_SessionPersistence(String cookieName, String type) {
+    public NeutronLoadBalancerSessionPersistence(String cookieName, String type) {
         this.cookieName = cookieName;
         this.type = type;
     }

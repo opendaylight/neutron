@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronRouter_Interface extends NeutronObject<NeutronRouter_Interface>
-        implements Serializable, INeutronObject<NeutronRouter_Interface> {
+public final class NeutronRouterInterface extends NeutronObject<NeutronRouterInterface>
+        implements Serializable, INeutronObject<NeutronRouterInterface> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -30,10 +30,10 @@ public final class NeutronRouter_Interface extends NeutronObject<NeutronRouter_I
     @XmlElement(name = "port_id")
     String portUUID;
 
-    public NeutronRouter_Interface() {
+    public NeutronRouterInterface() {
     }
 
-    public NeutronRouter_Interface(String subnetUUID, String portUUID) {
+    public NeutronRouterInterface(String subnetUUID, String portUUID) {
         this.subnetUUID = subnetUUID;
         this.portUUID = portUUID;
     }
@@ -55,8 +55,8 @@ public final class NeutronRouter_Interface extends NeutronObject<NeutronRouter_I
     }
 
     @Override
-    public NeutronRouter_Interface extractFields(List<String> fields) {
-        NeutronRouter_Interface ans = new NeutronRouter_Interface();
+    public NeutronRouterInterface extractFields(List<String> fields) {
+        NeutronRouterInterface ans = new NeutronRouterInterface();
         for (String s : fields) {
             extractField(s, ans);
             if (s.equals("subnet_id")) {

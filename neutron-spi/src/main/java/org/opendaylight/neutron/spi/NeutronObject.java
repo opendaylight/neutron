@@ -20,7 +20,7 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class NeutronObject<T extends NeutronObject> extends Neutron_ID
+public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
         implements Serializable, INeutronObject<T> {
     private static final long serialVersionUID = 1L;
 
