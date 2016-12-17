@@ -43,7 +43,7 @@ public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<Neutron
      *
      * @param fields List of attributes to be extracted
      * @return an OpenStack Neutron SFC Port Pair Group object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronSFCPortPairGroup extractFields(List<String> fields) {

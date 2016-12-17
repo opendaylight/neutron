@@ -29,7 +29,7 @@ public class InternalServerErrorException extends WebApplicationException {
      * Constructor for the INTERNAL_SERVER_ERROR custom handler
      *
      * @param string Error message to specify further the
-     * INTERNAL_SERVER_ERROR response
+     *            INTERNAL_SERVER_ERROR response
      *
      */
     public InternalServerErrorException(String string) {

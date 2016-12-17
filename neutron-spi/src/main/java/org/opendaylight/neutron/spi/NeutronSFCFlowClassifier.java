@@ -156,7 +156,7 @@ public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<Neutro
      *
      * @param fields List of attributes to be extracted
      * @return an OpenStack NeutronSFCFlowClassifier object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronSFCFlowClassifier extractFields(List<String> fields) {

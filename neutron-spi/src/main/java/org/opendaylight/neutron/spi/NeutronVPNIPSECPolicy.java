@@ -99,7 +99,7 @@ public final class NeutronVPNIPSECPolicy extends NeutronBaseAttributes<NeutronVP
      * @param fields
      *            List of attributes to be extracted
      * @return a NeutronVPNIPSECPolicy object with only the selected fields
-     * populated
+     *             populated
      */
     public NeutronVPNIPSECPolicy extractFields(List<String> fields) {
         NeutronVPNIPSECPolicy ans = new NeutronVPNIPSECPolicy();

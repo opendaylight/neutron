@@ -54,7 +54,7 @@ public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMet
      * @param fields
      *            List of attributes to be extracted
      * @return a NeutronMeteringLabel object with only the selected fields
-     * populated
+     *             populated
      */
     public NeutronMeteringLabel extractFields(List<String> fields) {
         NeutronMeteringLabel ans = new NeutronMeteringLabel();

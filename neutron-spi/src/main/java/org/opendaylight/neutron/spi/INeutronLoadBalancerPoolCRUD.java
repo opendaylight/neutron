@@ -101,7 +101,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
      * @param uuid
      *            identifier of the NeutronLoadBalancerPoolMember object
      * @return boolean on whether the macAddress is already associated with a
-     * port or not
+     *             port or not
      */
 
     boolean neutronLoadBalancerPoolMemberInUse(String poolUuid, String uuid);

@@ -100,7 +100,7 @@ public final class NeutronFloatingIP
      * @param fields
      *            List of attributes to be extracted
      * @return an OpenStackFloatingIPs object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronFloatingIP extractFields(List<String> fields) {
