@@ -69,7 +69,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
 
     /**
      * This method determines if this allocation pool contains the
-     * input IPv4 address
+     * input IPv4 address.
      *
      * @param inputString
      *            IPv4 address in dotted decimal format
@@ -107,7 +107,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
 
     /**
      * This method determines if this allocation pool contains the
-     * input IPv4 address
+     * input IPv4 address.
      *
      * @param inputString
      *            IPv4 address in dotted decimal format
@@ -145,7 +145,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
 
     /**
      * This static method converts the supplied high-ending long back
-     * into a dotted decimal representation of an IPv4 address
+     * into a dotted decimal representation of an IPv4 address.
      *
      * @param l
      *            high-endian representation of the IPv4 address as a long
@@ -164,7 +164,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
 
     /**
      * This static method converts the supplied high-ending long back
-     * into a dotted decimal representation of an IPv4 address
+     * into a dotted decimal representation of an IPv4 address.
      *
      * @param l
      *            high-endian representation of the IPv4 address as a long

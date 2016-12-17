@@ -26,7 +26,7 @@ public class InternalServerErrorException extends WebApplicationException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Constructor for the INTERNAL_SERVER_ERROR custom handler
+     * Constructor for the INTERNAL_SERVER_ERROR custom handler.
      *
      * @param string Error message to specify further the
      *            INTERNAL_SERVER_ERROR response

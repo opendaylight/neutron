@@ -55,7 +55,8 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Returns a list of all SFC Flow Classifiers */
+     * Returns a list of all SFC Flow Classifiers.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -117,7 +118,8 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Returns a specific SFC Flow Classifier */
+     * Returns a specific SFC Flow Classifier.
+     */
 
     @Path("{flowClassifierUUID}")
     @GET
@@ -134,7 +136,8 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Creates new SFC Flow Classifier */
+     * Creates new SFC Flow Classifier.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -158,7 +161,8 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Updates an existing SFC Flow Classifier */
+     * Updates an existing SFC Flow Classifier.
+     */
     @Path("{flowClassifierUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -172,7 +176,8 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Deletes the SFC Flow Classifier */
+     * Deletes the SFC Flow Classifier.
+     */
     @Path("{flowClassifierUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

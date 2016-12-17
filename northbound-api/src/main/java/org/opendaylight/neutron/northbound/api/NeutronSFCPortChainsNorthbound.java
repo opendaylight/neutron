@@ -56,7 +56,8 @@ public final class NeutronSFCPortChainsNorthbound
     }
 
     /**
-     * Returns a list of all SFC Port Chains*/
+     * Returns a list of all SFC Port Chains.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -90,7 +91,8 @@ public final class NeutronSFCPortChainsNorthbound
     }
 
     /**
-     * Returns a specific SFC Port Chain */
+     * Returns a specific SFC Port Chain.
+     */
 
     @Path("{portChainUUID}")
     @GET
@@ -107,7 +109,8 @@ public final class NeutronSFCPortChainsNorthbound
     }
 
     /**
-     * Creates new SFC Port Chain*/
+     * Creates new SFC Port Chain.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -131,7 +134,8 @@ public final class NeutronSFCPortChainsNorthbound
     }
 
     /**
-     * Updates an existing SFC Port Chain */
+     * Updates an existing SFC Port Chain.
+     */
     @Path("{portChainUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -145,7 +149,8 @@ public final class NeutronSFCPortChainsNorthbound
     }
 
     /**
-     * Deletes the SFC Port Chain */
+     * Deletes the SFC Port Chain.
+     */
     @Path("{portChainUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

@@ -57,7 +57,8 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     /**
-     * Returns a list of all LoadBalancerHealthMonitor */
+     * Returns a list of all LoadBalancerHealthMonitor.
+     */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -124,7 +125,8 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     /**
-     * Returns a specific LoadBalancerHealthMonitor */
+     * Returns a specific LoadBalancerHealthMonitor.
+     */
 
     @Path("{loadBalancerHealthMonitorID}")
     @GET
@@ -142,7 +144,8 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     /**
-     * Creates new LoadBalancerHealthMonitor */
+     * Creates new LoadBalancerHealthMonitor.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -154,7 +157,7 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     /**
-     * Updates a LoadBalancerHealthMonitor Policy
+     * Updates a LoadBalancerHealthMonitor Policy.
      */
     @Path("{loadBalancerHealthMonitorID}")
     @PUT
@@ -170,7 +173,7 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     }
 
     /**
-     * Deletes a LoadBalancerHealthMonitor
+     * Deletes a LoadBalancerHealthMonitor.
      * */
     @Path("{loadBalancerHealthMonitorID}")
     @DELETE

@@ -64,7 +64,8 @@ public final class NeutronNetworksNorthbound
     }
 
     /**
-     * Returns a list of all Networks */
+     * Returns a list of all Networks.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -139,7 +140,8 @@ public final class NeutronNetworksNorthbound
     }
 
     /**
-     * Returns a specific Network */
+     * Returns a specific Network.
+     */
 
     @Path("{netUUID}")
     @GET
@@ -157,7 +159,8 @@ public final class NeutronNetworksNorthbound
     }
 
     /**
-     * Creates new Networks */
+     * Creates new Networks.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -182,7 +185,8 @@ public final class NeutronNetworksNorthbound
     }
 
     /**
-     * Updates a Network */
+     * Updates a Network.
+     */
     @Path("{netUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -196,7 +200,8 @@ public final class NeutronNetworksNorthbound
     }
 
     /**
-     * Deletes a Network */
+     * Deletes a Network.
+     */
 
     @Path("{netUUID}")
     @DELETE

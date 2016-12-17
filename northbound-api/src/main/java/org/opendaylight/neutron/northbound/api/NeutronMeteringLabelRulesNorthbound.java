@@ -55,7 +55,8 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Returns a list of all metering label rules */
+     * Returns a list of all metering label rules.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -95,7 +96,8 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Returns a specific metering label rule */
+     * Returns a specific metering label rule.
+     */
 
     @Path("{ruleUUID}")
     @GET
@@ -113,7 +115,8 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Creates new metering label rule */
+     * Creates new metering label rule.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -140,7 +143,8 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     }
 
     /**
-     * Deletes a Metering Label rule */
+     * Deletes a Metering Label rule.
+     */
 
     @Path("{ruleUUID}")
     @DELETE

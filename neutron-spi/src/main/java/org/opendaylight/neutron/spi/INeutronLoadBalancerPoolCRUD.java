@@ -11,14 +11,14 @@ package org.opendaylight.neutron.spi;
 import java.util.List;
 
 /**
- * This interface defines the methods for CRUD of NB OpenStack LoadBalancerPool objects
+ * This interface defines the methods for CRUD of NB OpenStack LoadBalancerPool objects.
  *
  */
 
 public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBalancerPool> {
     /**
      * Applications call this interface method to determine if a particular
-     *NeutronLoadBalancerPoolMember object exists
+     * NeutronLoadBalancerPoolMember object exists.
      *
      * @param poolUuid
      *            UUID of the NeutronLoadBalancerPool object
@@ -44,7 +44,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
     NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String poolUuid, String uuid);
 
     /**
-     * Applications call this interface method to return all NeutronLoadBalancerPoolMember objects
+     * Applications call this interface method to return all NeutronLoadBalancerPoolMember objects.
      *
      * @param poolUuid
      *            UUID of the NeutronLoadBalancerPool object
@@ -55,7 +55,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
 
     /**
      * Applications call this interface method to add a NeutronLoadBalancerPoolMember object to the
-     * concurrent map
+     * concurrent map.
      *
      * @param poolUuid
      *            UUID of the NeutronLoadBalancerPool object
@@ -68,7 +68,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
 
     /**
      * Applications call this interface method to remove a Neutron NeutronLoadBalancerPoolMember object to the
-     * concurrent map
+     * concurrent map.
      *
      * @param poolUuid
      *            UUID of the NeutronLoadBalancerPool object
@@ -80,7 +80,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
     boolean removeNeutronLoadBalancerPoolMember(String poolUuid, String uuid);
 
     /**
-     * Applications call this interface method to edit a NeutronLoadBalancerPoolMember object
+     * Applications call this interface method to edit a NeutronLoadBalancerPoolMember object.
      *
      * @param poolUuid
      *            identifier of the NeutronLoadBalancerPool object
@@ -94,7 +94,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
     boolean updateNeutronLoadBalancerPoolMember(String poolUuid, String uuid, NeutronLoadBalancerPoolMember delta);
 
     /**
-     * Applications call this interface method to see if a MAC address is in use
+     * Applications call this interface method to see if a MAC address is in use.
      *
      * @param poolUuid
      *            identifier of the NeutronLoadBalancerPool object

@@ -29,7 +29,7 @@ public final class NeutronRoute implements Serializable {
     String nextHop;
 
     /**
-     *  HostRoute constructor
+     *  HostRoute constructor.
      */
     public NeutronRoute() {
     }

@@ -62,7 +62,8 @@ public final class NeutronSubnetsNorthbound
     UriInfo uriInfo;
 
     /**
-     * Returns a list of all Subnets */
+     * Returns a list of all Subnets.
+     */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackSubnets.class)
@@ -123,7 +124,8 @@ public final class NeutronSubnetsNorthbound
     }
 
     /**
-     * Returns a specific Subnet */
+     * Returns a specific Subnet.
+     */
 
     @Path("{subnetUUID}")
     @GET
@@ -141,7 +143,8 @@ public final class NeutronSubnetsNorthbound
     }
 
     /**
-     * Creates new Subnets */
+     * Creates new Subnets.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -169,7 +172,8 @@ public final class NeutronSubnetsNorthbound
     }
 
     /**
-     * Updates a Subnet */
+     * Updates a Subnet.
+     */
 
     @Path("{subnetUUID}")
     @PUT
@@ -184,7 +188,8 @@ public final class NeutronSubnetsNorthbound
     }
 
     /**
-     * Deletes a Subnet */
+     * Deletes a Subnet.
+     */
 
     @Path("{subnetUUID}")
     @DELETE

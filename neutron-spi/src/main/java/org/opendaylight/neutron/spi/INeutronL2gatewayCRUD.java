@@ -9,7 +9,7 @@
 package org.opendaylight.neutron.spi;
 
 /**
- * This interface defines the methods for CRUD of NB OpenStack L2gateway objects
+ * This interface defines the methods for CRUD of NB OpenStack L2gateway objects.
  */
 public interface INeutronL2gatewayCRUD extends INeutronCRUD<NeutronL2gateway> {
     //Do nothing here.

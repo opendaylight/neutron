@@ -58,7 +58,7 @@ public final class NeutronVPNServicesNorthbound
     }
 
     /**
-     * Returns a list of all VPN Services
+     * Returns a list of all VPN Services.
      */
 
     @GET
@@ -107,7 +107,7 @@ public final class NeutronVPNServicesNorthbound
     }
 
     /**
-     * Returns a specific VPN Service
+     * Returns a specific VPN Service.
      */
 
     @Path("{serviceID}")
@@ -125,7 +125,7 @@ public final class NeutronVPNServicesNorthbound
     }
 
     /**
-     * Creates new VPN Service
+     * Creates new VPN Service.
      */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -138,7 +138,7 @@ public final class NeutronVPNServicesNorthbound
     }
 
     /**
-     * Updates a VPN Service
+     * Updates a VPN Service.
      */
     @Path("{serviceID}")
     @PUT
@@ -152,7 +152,7 @@ public final class NeutronVPNServicesNorthbound
     }
 
     /**
-     * Deletes a VPN Service
+     * Deletes a VPN Service.
      */
 
     @Path("{serviceID}")

@@ -9,9 +9,6 @@
   <suppress checks="JavadocStyleCheck"
             files="."
              />
-  <suppress checks="SummaryJavadoc"
-            files="."
-             />
   <suppress checks="AbbreviationAsWordInName"
             files="."
              />

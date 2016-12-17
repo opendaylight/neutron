@@ -56,7 +56,8 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     }
 
     /**
-     * Returns a list of all SFC Port Pair Groups*/
+     * Returns a list of all SFC Port Pair Groups.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -91,7 +92,8 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     }
 
     /**
-     * Returns a specific SFC Port Pair Group*/
+     * Returns a specific SFC Port Pair Group.
+     */
 
     @Path("{portPairGroupUUID}")
     @GET
@@ -108,7 +110,8 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     }
 
     /**
-     * Creates new SFC Port Pair Group*/
+     * Creates new SFC Port Pair Group.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -132,7 +135,8 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     }
 
     /**
-     * Updates an existing SFC Port Pair Group*/
+     * Updates an existing SFC Port Pair Group.
+     */
     @Path("{portPairGroupUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -146,7 +150,8 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     }
 
     /**
-     * Deletes the SFC Port Pair Group*/
+     * Deletes the SFC Port Pair Group.
+     */
 
     @Path("{portPairGroupUUID}")
     @DELETE

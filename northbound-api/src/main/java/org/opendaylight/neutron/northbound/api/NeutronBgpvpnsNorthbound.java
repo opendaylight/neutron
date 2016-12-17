@@ -64,7 +64,8 @@ public final class NeutronBgpvpnsNorthbound
     }
 
     /**
-     * Returns a list of all Bgpvpns */
+     * Returns a list of all Bgpvpns.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -129,7 +130,8 @@ public final class NeutronBgpvpnsNorthbound
     }
 
     /**
-     * Returns a specific Bgpvpn */
+     * Returns a specific Bgpvpn.
+     */
 
     @Path("{bgpvpnUUID}")
     @GET
@@ -147,7 +149,8 @@ public final class NeutronBgpvpnsNorthbound
     }
 
     /**
-     * Creates new Bgpvpns */
+     * Creates new Bgpvpns.
+     */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -159,7 +162,8 @@ public final class NeutronBgpvpnsNorthbound
     }
 
     /**
-     * Updates a Bgpvpn */
+     * Updates a Bgpvpn.
+     */
     @Override
     protected void updateDelta(String uuid, NeutronBgpvpn delta, NeutronBgpvpn original) {
         //Fill in defaults if they're missing in update
@@ -181,7 +185,8 @@ public final class NeutronBgpvpnsNorthbound
     }
 
     /**
-     * Deletes a Bgpvpn */
+     * Deletes a Bgpvpn.
+     */
 
     @Path("{bgpvpnUUID}")
     @DELETE

@@ -56,7 +56,8 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Returns a list of all FloatingIPs */
+     * Returns a list of all FloatingIPs.
+     */
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -109,7 +110,8 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Returns a specific FloatingIP */
+     * Returns a specific FloatingIP.
+     */
 
     @Path("{floatingipUUID}")
     @GET
@@ -126,7 +128,8 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Creates new FloatingIPs */
+     * Creates new FloatingIPs.
+     */
 
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -138,7 +141,8 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Updates a FloatingIP */
+     * Updates a FloatingIP.
+     */
 
     @Path("{floatingipUUID}")
     @PUT
@@ -153,7 +157,8 @@ public final class NeutronFloatingIPsNorthbound
     }
 
     /**
-     * Deletes a FloatingIP */
+     * Deletes a FloatingIP.
+     */
 
     @Path("{floatingipUUID}")
     @DELETE

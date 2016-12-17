@@ -59,7 +59,7 @@ public final class NeutronVPNIPSECSiteConnectionsNorthbound
     }
 
     /**
-     * Returns a list of all VPN IPSEC SiteConnections
+     * Returns a list of all VPN IPSEC SiteConnections.
      */
 
     @GET
@@ -121,7 +121,7 @@ public final class NeutronVPNIPSECSiteConnectionsNorthbound
     }
 
     /**
-     * Returns a specific VPN IPSEC SiteConnection
+     * Returns a specific VPN IPSEC SiteConnection.
      */
 
     @Path("{connectionID}")
@@ -140,7 +140,7 @@ public final class NeutronVPNIPSECSiteConnectionsNorthbound
     }
 
     /**
-     * Creates new VPN IPSEC SiteConnection
+     * Creates new VPN IPSEC SiteConnection.
      */
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
@@ -153,7 +153,7 @@ public final class NeutronVPNIPSECSiteConnectionsNorthbound
     }
 
     /**
-     * Updates a VPN IPSEC SiteConnection
+     * Updates a VPN IPSEC SiteConnection.
      */
     @Path("{connectionID}")
     @PUT
@@ -168,7 +168,7 @@ public final class NeutronVPNIPSECSiteConnectionsNorthbound
     }
 
     /**
-     * Deletes a VPN IPSEC SiteConnection
+     * Deletes a VPN IPSEC SiteConnection.
      */
 
     @Path("{connectionID}")
