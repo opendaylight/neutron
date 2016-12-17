@@ -67,14 +67,14 @@ public class NeutronSFCPortPairGroupTests {
     }
 
     public static void runTests(String base) {
-        NeutronSFCPortPairGroupTests sfc_portpairgroup_tester = new NeutronSFCPortPairGroupTests(base);
-        String createJsonString = sfc_portpairgroup_tester.singleton_sfc_portpairgroup_create_test();
-        sfc_portpairgroup_tester.singleton_sfc_portpairgroup_get_with_query_item(createJsonString);
-        sfc_portpairgroup_tester.sfc_portpairgroup_element_get_test();
-        sfc_portpairgroup_tester.sfc_portpairgroup_collection_get_test();
-        sfc_portpairgroup_tester.sfc_portpairgroup_element_get_with_query_test();
-        sfc_portpairgroup_tester.sfc_portpairgroup_modify_test();
-        sfc_portpairgroup_tester.sfc_portpairgroup_delete_test();
-        sfc_portpairgroup_tester.sfc_portpairgroup_element_negative_get_test();
+        NeutronSFCPortPairGroupTests sfcPortpairgroupTester = new NeutronSFCPortPairGroupTests(base);
+        String createJsonString = sfcPortpairgroupTester.singleton_sfc_portpairgroup_create_test();
+        sfcPortpairgroupTester.singleton_sfc_portpairgroup_get_with_query_item(createJsonString);
+        sfcPortpairgroupTester.sfc_portpairgroup_element_get_test();
+        sfcPortpairgroupTester.sfc_portpairgroup_collection_get_test();
+        sfcPortpairgroupTester.sfc_portpairgroup_element_get_with_query_test();
+        sfcPortpairgroupTester.sfc_portpairgroup_modify_test();
+        sfcPortpairgroupTester.sfc_portpairgroup_delete_test();
+        sfcPortpairgroupTester.sfc_portpairgroup_element_negative_get_test();
     }
 }

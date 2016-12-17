@@ -28,16 +28,14 @@ public class NeutronNetworkTests {
     }
 
     public void network_collection_get_test_with_wait() throws IOException, InterruptedException {
-        String url_s = base + "/networks";
-        int i = 0;
-        while (i < TIMEOUT) {
-            URL url = new URL(url_s);
+        String urlS = base + "/networks";
+        for (int retry = 0; retry < TIMEOUT; retry++) {
+            URL url = new URL(urlS);
             HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
             if (httpConn.getResponseCode() != 200) {
-                LOGGER.info("trial " + Integer.toString(i) + ": failed with: "
+                LOGGER.info("trial " + Integer.toString(retry) + ": failed with: "
                         + Integer.toString(httpConn.getResponseCode()));
                 Thread.sleep(1000);
-                i += 1;
             } else {
                 Assert.assertEquals("Network Collection GET failed", 200, httpConn.getResponseCode());
                 return;
@@ -106,8 +104,8 @@ public class NeutronNetworkTests {
     }
 
     public void network_collection_get_test() {
-        String url_s = base + "/networks";
-        ITNeutronE2E.test_fetch(url_s, true, "Network collection Get Failed");
+        String urlS = base + "/networks";
+        ITNeutronE2E.test_fetch(urlS, true, "Network collection Get Failed");
     }
 
     public void network_element_get_test() {
@@ -135,17 +133,17 @@ public class NeutronNetworkTests {
     }
 
     public static void runTests(String base) throws IOException, InterruptedException {
-        NeutronNetworkTests network_tester = new NeutronNetworkTests(base);
-        network_tester.network_collection_get_test_with_wait();
-        String createJsonString = network_tester.singleton_network_create_test();
-        network_tester.singleton_network_get_with_one_query_item_test(createJsonString);
-        network_tester.external_network_create_test(); //needed for router test
-        network_tester.bulk_network_create_test();
-        network_tester.network_update_test();
-        network_tester.network_collection_get_test();
-        network_tester.network_element_get_test();
-        network_tester.network_element_get_test_with_query();
-        network_tester.network_delete_test();
-        network_tester.network_element_negative_get_test();
+        NeutronNetworkTests networkTester = new NeutronNetworkTests(base);
+        networkTester.network_collection_get_test_with_wait();
+        String createJsonString = networkTester.singleton_network_create_test();
+        networkTester.singleton_network_get_with_one_query_item_test(createJsonString);
+        networkTester.external_network_create_test(); //needed for router test
+        networkTester.bulk_network_create_test();
+        networkTester.network_update_test();
+        networkTester.network_collection_get_test();
+        networkTester.network_element_get_test();
+        networkTester.network_element_get_test_with_query();
+        networkTester.network_delete_test();
+        networkTester.network_element_negative_get_test();
     }
 }

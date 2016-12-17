@@ -69,14 +69,14 @@ public class NeutronFirewallPolicyTests {
     }
 
     public static void runTests(String base) {
-        NeutronFirewallPolicyTests fw_policy_tester = new NeutronFirewallPolicyTests(base);
-        String createJsonString = fw_policy_tester.singleton_fw_policy_create_test();
-        fw_policy_tester.singleton_fw_policy_get_with_one_query_item_test(createJsonString);
-        fw_policy_tester.fw_policy_element_get_test();
-        fw_policy_tester.fw_policy_element_get_with_query_test();
-        fw_policy_tester.fw_policy_collection_get_test();
-        fw_policy_tester.fw_policy_modify_test();
-        fw_policy_tester.fw_policy_delete_test();
-        fw_policy_tester.fw_policy_element_negative_get_test();
+        NeutronFirewallPolicyTests fwPolicyTester = new NeutronFirewallPolicyTests(base);
+        String createJsonString = fwPolicyTester.singleton_fw_policy_create_test();
+        fwPolicyTester.singleton_fw_policy_get_with_one_query_item_test(createJsonString);
+        fwPolicyTester.fw_policy_element_get_test();
+        fwPolicyTester.fw_policy_element_get_with_query_test();
+        fwPolicyTester.fw_policy_collection_get_test();
+        fwPolicyTester.fw_policy_modify_test();
+        fwPolicyTester.fw_policy_delete_test();
+        fwPolicyTester.fw_policy_element_negative_get_test();
     }
 }

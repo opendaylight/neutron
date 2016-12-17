@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -84,22 +83,20 @@ public final class NeutronVPNIPSECPoliciesNorthbound extends
         INeutronVPNIPSECPolicyCRUD policyInterface = getNeutronCRUD();
         List<NeutronVPNIPSECPolicy> allNeutronVPNIPSECPolicies = policyInterface.getAll();
         List<NeutronVPNIPSECPolicy> ans = new ArrayList<>();
-        Iterator<NeutronVPNIPSECPolicy> i = allNeutronVPNIPSECPolicies.iterator();
-        while (i.hasNext()) {
-            NeutronVPNIPSECPolicy oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm()))
+        for (NeutronVPNIPSECPolicy policy : allNeutronVPNIPSECPolicies) {
+            if ((queryID == null || queryID.equals(policy.getID()))
+                    && (queryName == null || queryName.equals(policy.getName()))
+                    && (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(policy.getAuthAlgorithm()))
                     && (queryEncryptionAlgorithm == null
-                            || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm()))
-                    && (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy()))
-                    && (queryTransformProtocol == null || queryTransformProtocol.equals(oSS.getTransformProtocol()))
-                    && (queryEncapsulationMode == null || queryEncapsulationMode.equals(oSS.getEncapsulationMode()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+                            || queryEncryptionAlgorithm.equals(policy.getEncryptionAlgorithm()))
+                    && (queryPFS == null || queryPFS.equals(policy.getPerfectForwardSecrecy()))
+                    && (queryTransformProtocol == null || queryTransformProtocol.equals(policy.getTransformProtocol()))
+                    && (queryEncapsulationMode == null || queryEncapsulationMode.equals(policy.getEncapsulationMode()))
+                    && (queryTenantID == null || queryTenantID.equals(policy.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(policy.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(policy);
                 }
             }
         }

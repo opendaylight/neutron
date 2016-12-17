@@ -90,15 +90,15 @@ public class NeutronFirewallRuleTests {
     }
 
     public static void runTests(String base) {
-        NeutronFirewallRuleTests fw_rule_tester = new NeutronFirewallRuleTests(base);
-        String createJsonString = fw_rule_tester.singleton_fw_rule_create_test();
-        fw_rule_tester.singleton_fw_rule_get_with_one_query_item_test(createJsonString);
-        fw_rule_tester.fw_rule_element_get_test();
-        fw_rule_tester.fw_rule_element_get_with_query_test();
-        fw_rule_tester.fw_rule_collection_get_test();
-        fw_rule_tester.fw_rule_modify_test();
-        fw_rule_tester.fw_rule_delete_test();
-        fw_rule_tester.fw_rule_element_negative_get_test();
-        fw_rule_tester.test_bug6398_fw_rule_create_test();
+        NeutronFirewallRuleTests fwRuleTester = new NeutronFirewallRuleTests(base);
+        String createJsonString = fwRuleTester.singleton_fw_rule_create_test();
+        fwRuleTester.singleton_fw_rule_get_with_one_query_item_test(createJsonString);
+        fwRuleTester.fw_rule_element_get_test();
+        fwRuleTester.fw_rule_element_get_with_query_test();
+        fwRuleTester.fw_rule_collection_get_test();
+        fwRuleTester.fw_rule_modify_test();
+        fwRuleTester.fw_rule_delete_test();
+        fwRuleTester.fw_rule_element_negative_get_test();
+        fwRuleTester.test_bug6398_fw_rule_create_test();
     }
 }

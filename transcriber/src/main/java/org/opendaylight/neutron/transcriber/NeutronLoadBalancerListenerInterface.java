@@ -61,8 +61,8 @@ public final class NeutronLoadBalancerListenerInterface
         }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
             final List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
-            for (final Neutron_ID neutron_id : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
-                listLoadBalancers.add(toUuid(neutron_id.getID()));
+            for (final Neutron_ID neutronId : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
+                listLoadBalancers.add(toUuid(neutronId.getID()));
             }
             listenerBuilder.setLoadbalancers(listLoadBalancers);
         }

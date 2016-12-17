@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -91,9 +90,7 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
         List<NeutronLoadBalancerHealthMonitor> allLoadBalancerHealthMonitors = loadBalancerHealthMonitorInterface
                 .getAll();
         List<NeutronLoadBalancerHealthMonitor> ans = new ArrayList<>();
-        Iterator<NeutronLoadBalancerHealthMonitor> i = allLoadBalancerHealthMonitors.iterator();
-        while (i.hasNext()) {
-            NeutronLoadBalancerHealthMonitor nsg = i.next();
+        for (NeutronLoadBalancerHealthMonitor nsg : allLoadBalancerHealthMonitors) {
             if ((queryLoadBalancerHealthMonitorID == null || queryLoadBalancerHealthMonitorID.equals(nsg.getID()))
                     && (queryLoadBalancerHealthMonitorTenantID == null
                             || queryLoadBalancerHealthMonitorTenantID.equals(nsg.getTenantID()))

@@ -64,8 +64,9 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
             T extends AutoCloseable /* & S */> void registerCRUDInterface(java.lang.Class<S> clazz, T crudInterface) {
         neutronInterfaces.add(crudInterface);
         @SuppressWarnings("unchecked")
-        S sCrudInterface = (S) crudInterface;
-        final ServiceRegistration<S> crudInterfaceRegistration = context.registerService(clazz, sCrudInterface, null);
+        S castCrudInterface = (S) crudInterface;
+        final ServiceRegistration<S> crudInterfaceRegistration =
+                context.registerService(clazz, castCrudInterface, null);
         registrations.add(crudInterfaceRegistration);
     }
 

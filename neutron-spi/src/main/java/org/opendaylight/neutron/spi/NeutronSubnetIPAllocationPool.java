@@ -187,12 +187,12 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
             return "";
         }
         StringBuilder sb = new StringBuilder();
-        int i;
-        for (i = 0; i < strings.length - 1; i++) {
-            sb.append(strings[i]);
+        int index;
+        for (index = 0; index < strings.length - 1; index++) {
+            sb.append(strings[index]);
             sb.append(separator);
         }
-        return sb.toString() + strings[i];
+        return sb.toString() + strings[index];
     }
 
     /*
@@ -209,43 +209,43 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
      */
     public List<NeutronSubnetIPAllocationPool> splitPool(String ipAddress) {
         List<NeutronSubnetIPAllocationPool> ans = new ArrayList<>();
-        long gIP = NeutronSubnetIPAllocationPool.convert(ipAddress);
-        long sIP = NeutronSubnetIPAllocationPool.convert(poolStart);
-        long eIP = NeutronSubnetIPAllocationPool.convert(poolEnd);
-        long i;
-        NeutronSubnetIPAllocationPool p = new NeutronSubnetIPAllocationPool();
+        long givenIp = NeutronSubnetIPAllocationPool.convert(ipAddress);
+        long startIp = NeutronSubnetIPAllocationPool.convert(poolStart);
+        long endIp = NeutronSubnetIPAllocationPool.convert(poolEnd);
+        long ipaddr;
+        NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
         boolean poolStarted = false;
-        for (i = sIP; i <= eIP; i++) {
-            if (i == sIP) {
-                if (i != gIP) {
-                    p.setPoolStart(poolStart);
+        for (ipaddr = startIp; ipaddr <= endIp; ipaddr++) {
+            if (ipaddr == startIp) {
+                if (ipaddr != givenIp) {
+                    pool.setPoolStart(poolStart);
                     poolStarted = true;
                 } else {
                     //FIX for bug 533
-                    p.setPoolStart(NeutronSubnetIPAllocationPool.longToIP(i + 1));
+                    pool.setPoolStart(NeutronSubnetIPAllocationPool.longToIP(ipaddr + 1));
                 }
             }
-            if (i == eIP) {
-                if (i != gIP) {
-                    p.setPoolEnd(poolEnd);
+            if (ipaddr == endIp) {
+                if (ipaddr != givenIp) {
+                    pool.setPoolEnd(poolEnd);
                 } else {
-                    p.setPoolEnd(NeutronSubnetIPAllocationPool.longToIP(i - 1));
+                    pool.setPoolEnd(NeutronSubnetIPAllocationPool.longToIP(ipaddr - 1));
                 }
-                ans.add(p);
+                ans.add(pool);
             }
-            if (i != sIP && i != eIP) {
-                if (i != gIP) {
+            if (ipaddr != startIp && ipaddr != endIp) {
+                if (ipaddr != givenIp) {
                     if (!poolStarted) {
-                        p.setPoolStart(NeutronSubnetIPAllocationPool.longToIP(i));
+                        pool.setPoolStart(NeutronSubnetIPAllocationPool.longToIP(ipaddr));
                         poolStarted = true;
                     }
                 } else {
-                    p.setPoolEnd(NeutronSubnetIPAllocationPool.longToIP(i - 1));
+                    pool.setPoolEnd(NeutronSubnetIPAllocationPool.longToIP(ipaddr - 1));
                     poolStarted = false;
-                    ans.add(p);
-                    p = new NeutronSubnetIPAllocationPool();
+                    ans.add(pool);
+                    pool = new NeutronSubnetIPAllocationPool();
                     // Fix for 2120
-                    p.setPoolStart(NeutronSubnetIPAllocationPool.longToIP(i + 1));
+                    pool.setPoolStart(NeutronSubnetIPAllocationPool.longToIP(ipaddr + 1));
                     poolStarted = true;
                 }
             }
@@ -273,30 +273,30 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
      */
     public List<NeutronSubnetIPAllocationPool> splitPoolV6(String ipAddress) {
         List<NeutronSubnetIPAllocationPool> ans = new ArrayList<>();
-        BigInteger gIP = NeutronSubnetIPAllocationPool.convertV6(ipAddress);
-        BigInteger sIP = NeutronSubnetIPAllocationPool.convertV6(poolStart);
-        BigInteger eIP = NeutronSubnetIPAllocationPool.convertV6(poolEnd);
-        if (gIP.compareTo(sIP) == 0 && gIP.compareTo(eIP) < 0) {
-            NeutronSubnetIPAllocationPool p = new NeutronSubnetIPAllocationPool();
-            p.setPoolStart(NeutronSubnetIPAllocationPool.bigIntegerToIP(sIP.add(BigInteger.ONE)));
-            p.setPoolEnd(poolEnd);
-            ans.add(p);
+        BigInteger givenIp = NeutronSubnetIPAllocationPool.convertV6(ipAddress);
+        BigInteger startIp = NeutronSubnetIPAllocationPool.convertV6(poolStart);
+        BigInteger endIp = NeutronSubnetIPAllocationPool.convertV6(poolEnd);
+        if (givenIp.compareTo(startIp) == 0 && givenIp.compareTo(endIp) < 0) {
+            NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
+            pool.setPoolStart(NeutronSubnetIPAllocationPool.bigIntegerToIP(startIp.add(BigInteger.ONE)));
+            pool.setPoolEnd(poolEnd);
+            ans.add(pool);
             return ans;
         }
-        if (gIP.compareTo(eIP) == 0 && gIP.compareTo(sIP) > 0) {
-            NeutronSubnetIPAllocationPool p = new NeutronSubnetIPAllocationPool();
-            p.setPoolStart(poolStart);
-            p.setPoolEnd(NeutronSubnetIPAllocationPool.bigIntegerToIP(eIP.subtract(BigInteger.ONE)));
-            ans.add(p);
+        if (givenIp.compareTo(endIp) == 0 && givenIp.compareTo(startIp) > 0) {
+            NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
+            pool.setPoolStart(poolStart);
+            pool.setPoolEnd(NeutronSubnetIPAllocationPool.bigIntegerToIP(endIp.subtract(BigInteger.ONE)));
+            ans.add(pool);
             return ans;
         }
-        if (gIP.compareTo(eIP) < 0 && gIP.compareTo(sIP) > 0) {
-            NeutronSubnetIPAllocationPool p = new NeutronSubnetIPAllocationPool();
-            p.setPoolStart(poolStart);
-            p.setPoolEnd(NeutronSubnetIPAllocationPool.bigIntegerToIP(gIP.subtract(BigInteger.ONE)));
-            ans.add(p);
+        if (givenIp.compareTo(endIp) < 0 && givenIp.compareTo(startIp) > 0) {
+            NeutronSubnetIPAllocationPool pool = new NeutronSubnetIPAllocationPool();
+            pool.setPoolStart(poolStart);
+            pool.setPoolEnd(NeutronSubnetIPAllocationPool.bigIntegerToIP(givenIp.subtract(BigInteger.ONE)));
+            ans.add(pool);
             NeutronSubnetIPAllocationPool p2 = new NeutronSubnetIPAllocationPool();
-            p2.setPoolStart(NeutronSubnetIPAllocationPool.bigIntegerToIP(gIP.add(BigInteger.ONE)));
+            p2.setPoolStart(NeutronSubnetIPAllocationPool.bigIntegerToIP(givenIp.add(BigInteger.ONE)));
             p2.setPoolEnd(poolEnd);
             ans.add(p2);
             return ans;

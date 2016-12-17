@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -94,28 +93,26 @@ public final class NeutronBgpvpnsNorthbound
         INeutronBgpvpnCRUD bgpvpnInterface = getNeutronCRUD();
         List<NeutronBgpvpn> allBgpvpns = bgpvpnInterface.getAll();
         List<NeutronBgpvpn> ans = new ArrayList<>();
-        Iterator<NeutronBgpvpn> i = allBgpvpns.iterator();
-        while (i.hasNext()) {
-            NeutronBgpvpn oSN = i.next();
+        for (NeutronBgpvpn bgpvpn : allBgpvpns) {
             //match filters: TODO provider extension
-            Boolean bAdminStateUp = null;
-            Boolean bAutoAggregate = null;
+            Boolean adminStateUp = null;
+            Boolean autoAggregate = null;
             if (queryAdminStateUp != null) {
-                bAdminStateUp = Boolean.valueOf(queryAdminStateUp);
+                adminStateUp = Boolean.valueOf(queryAdminStateUp);
             }
             if (queryAutoAggregate != null) {
-                bAutoAggregate = Boolean.valueOf(queryAutoAggregate);
+                autoAggregate = Boolean.valueOf(queryAutoAggregate);
             }
-            if ((queryID == null || queryID.equals(oSN.getID()))
-                    && (queryName == null || queryName.equals(oSN.getName()))
-                    && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(oSN.getStatus()))
-                    && (bAutoAggregate == null || bAutoAggregate.booleanValue() == oSN.isAutoAggregate())
-                    && (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))) {
+            if ((queryID == null || queryID.equals(bgpvpn.getID()))
+                    && (queryName == null || queryName.equals(bgpvpn.getName()))
+                    && (adminStateUp == null || adminStateUp.booleanValue() == bgpvpn.isAdminStateUp())
+                    && (queryStatus == null || queryStatus.equals(bgpvpn.getStatus()))
+                    && (autoAggregate == null || autoAggregate.booleanValue() == bgpvpn.isAutoAggregate())
+                    && (queryTenantID == null || queryTenantID.equals(bgpvpn.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSN.extractFields(fields));
+                    ans.add(bgpvpn.extractFields(fields));
                 } else {
-                    ans.add(oSN);
+                    ans.add(bgpvpn);
                 }
             }
         }

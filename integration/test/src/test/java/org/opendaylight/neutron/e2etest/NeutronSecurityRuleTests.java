@@ -138,19 +138,19 @@ public class NeutronSecurityRuleTests {
     }
 
     public static void runTests(String base) {
-        NeutronSecurityRuleTests securityRule_tester = new NeutronSecurityRuleTests(base);
-        String createJsonString = securityRule_tester.singleton_sr_create_test();
-        securityRule_tester.singleton_sr_get_with_one_query_item_test(createJsonString);
-        securityRule_tester.multiple_sr_create_test();
-        securityRule_tester.singleton_sr_modify_test();
-        securityRule_tester.sr_element_get_test();
-        securityRule_tester.sr_element_get_with_query_test();
-        securityRule_tester.securityRule_collection_get_test();
-        securityRule_tester.sr_delete_test();
-        securityRule_tester.sr_element_negative_get_test();
-        securityRule_tester.bug5478_rule_delete_negative_test();
-        securityRule_tester.bug4043_ipv4_test();
-        securityRule_tester.bug4043_ipv6_test();
-        securityRule_tester.bug6398_sr_create_test();
+        NeutronSecurityRuleTests securityRuleTester = new NeutronSecurityRuleTests(base);
+        String createJsonString = securityRuleTester.singleton_sr_create_test();
+        securityRuleTester.singleton_sr_get_with_one_query_item_test(createJsonString);
+        securityRuleTester.multiple_sr_create_test();
+        securityRuleTester.singleton_sr_modify_test();
+        securityRuleTester.sr_element_get_test();
+        securityRuleTester.sr_element_get_with_query_test();
+        securityRuleTester.securityRule_collection_get_test();
+        securityRuleTester.sr_delete_test();
+        securityRuleTester.sr_element_negative_get_test();
+        securityRuleTester.bug5478_rule_delete_negative_test();
+        securityRuleTester.bug4043_ipv4_test();
+        securityRuleTester.bug4043_ipv6_test();
+        securityRuleTester.bug6398_sr_create_test();
     }
 }

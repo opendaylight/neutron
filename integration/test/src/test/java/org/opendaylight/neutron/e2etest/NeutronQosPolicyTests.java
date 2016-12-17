@@ -70,14 +70,14 @@ public class NeutronQosPolicyTests {
     }
 
     public static void runTests(String base) {
-        NeutronQosPolicyTests qos_policy_tester = new NeutronQosPolicyTests(base);
-        String createJsonString = qos_policy_tester.singleton_qos_policy_create_test();
-        qos_policy_tester.singleton_qos_policy_get_with_query_item_test(createJsonString);
-        qos_policy_tester.qos_policy_element_get_test();
-        qos_policy_tester.qos_policy_element_get_with_query_test();
-        qos_policy_tester.qos_policy_collection_get_test();
-        qos_policy_tester.qos_policy_modify_test();
-        qos_policy_tester.qos_policy_delete_test();
-        qos_policy_tester.qos_policy_element_negative_get_test();
+        NeutronQosPolicyTests qosPolicyTester = new NeutronQosPolicyTests(base);
+        String createJsonString = qosPolicyTester.singleton_qos_policy_create_test();
+        qosPolicyTester.singleton_qos_policy_get_with_query_item_test(createJsonString);
+        qosPolicyTester.qos_policy_element_get_test();
+        qosPolicyTester.qos_policy_element_get_with_query_test();
+        qosPolicyTester.qos_policy_collection_get_test();
+        qosPolicyTester.qos_policy_modify_test();
+        qosPolicyTester.qos_policy_delete_test();
+        qosPolicyTester.qos_policy_element_negative_get_test();
     }
 }

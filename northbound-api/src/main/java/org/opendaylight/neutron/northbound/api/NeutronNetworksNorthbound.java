@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -98,34 +97,32 @@ public final class NeutronNetworksNorthbound
         INeutronNetworkCRUD networkInterface = getNeutronCRUD();
         List<NeutronNetwork> allNetworks = networkInterface.getAll();
         List<NeutronNetwork> ans = new ArrayList<>();
-        Iterator<NeutronNetwork> i = allNetworks.iterator();
-        while (i.hasNext()) {
+        for (NeutronNetwork network : allNetworks) {
             //match filters: TODO provider extension
-            Boolean bAdminStateUp = null;
-            Boolean bShared = null;
-            Boolean bRouterExternal = null;
+            Boolean adminStateUp = null;
+            Boolean shared = null;
+            Boolean routerExternal = null;
             if (queryAdminStateUp != null) {
-                bAdminStateUp = Boolean.valueOf(queryAdminStateUp);
+                adminStateUp = Boolean.valueOf(queryAdminStateUp);
             }
             if (queryShared != null) {
-                bShared = Boolean.valueOf(queryShared);
+                shared = Boolean.valueOf(queryShared);
             }
             if (queryRouterExternal != null) {
-                bRouterExternal = Boolean.valueOf(queryRouterExternal);
+                routerExternal = Boolean.valueOf(queryRouterExternal);
             }
-            NeutronNetwork oSN = i.next();
-            if ((queryID == null || queryID.equals(oSN.getID()))
-                    && (queryName == null || queryName.equals(oSN.getName()))
-                    && (bAdminStateUp == null || bAdminStateUp.booleanValue() == oSN.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(oSN.getStatus()))
-                    && (bShared == null || bShared.booleanValue() == oSN.isShared())
-                    && (bRouterExternal == null || bRouterExternal.booleanValue() == oSN.isRouterExternal())
-                    && (queryTenantID == null || queryTenantID.equals(oSN.getTenantID()))
-                    && (queryQosPolicyId == null || queryQosPolicyId.equals(oSN.getQosPolicyId()))) {
+            if ((queryID == null || queryID.equals(network.getID()))
+                    && (queryName == null || queryName.equals(network.getName()))
+                    && (adminStateUp == null || adminStateUp.booleanValue() == network.isAdminStateUp())
+                    && (queryStatus == null || queryStatus.equals(network.getStatus()))
+                    && (shared == null || shared.booleanValue() == network.isShared())
+                    && (routerExternal == null || routerExternal.booleanValue() == network.isRouterExternal())
+                    && (queryTenantID == null || queryTenantID.equals(network.getTenantID()))
+                    && (queryQosPolicyId == null || queryQosPolicyId.equals(network.getQosPolicyId()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSN.extractFields(fields));
+                    ans.add(network.extractFields(fields));
                 } else {
-                    ans.add(oSN);
+                    ans.add(network);
                 }
             }
         }

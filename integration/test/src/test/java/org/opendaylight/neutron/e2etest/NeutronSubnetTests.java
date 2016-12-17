@@ -112,16 +112,16 @@ public class NeutronSubnetTests {
     }
 
     public static void runTests(String base) {
-        NeutronSubnetTests subnet_tester = new NeutronSubnetTests(base);
-        String createJsonString = subnet_tester.singleton_subnet_create_test();
-        subnet_tester.singleton_subnet_get_with_one_query_item_test(createJsonString);
-        subnet_tester.external_subnet_create_test(); //needed for router test
-        subnet_tester.bulk_subnet_create_test();
-        subnet_tester.subnet_update_test();
-        subnet_tester.subnet_element_get_test();
-        subnet_tester.subnet_element_get_with_query_test();
-        subnet_tester.subnet_collection_get_test();
-        subnet_tester.subnet_delete_test();
-        subnet_tester.subnet_element_negative_get_test();
+        NeutronSubnetTests subnetTester = new NeutronSubnetTests(base);
+        String createJsonString = subnetTester.singleton_subnet_create_test();
+        subnetTester.singleton_subnet_get_with_one_query_item_test(createJsonString);
+        subnetTester.external_subnet_create_test(); //needed for router test
+        subnetTester.bulk_subnet_create_test();
+        subnetTester.subnet_update_test();
+        subnetTester.subnet_element_get_test();
+        subnetTester.subnet_element_get_with_query_test();
+        subnetTester.subnet_collection_get_test();
+        subnetTester.subnet_delete_test();
+        subnetTester.subnet_element_negative_get_test();
     }
 }

@@ -68,14 +68,14 @@ public class NeutronL2GatewayTests {
     }
 
     public static void runTests(String base) {
-        NeutronL2GatewayTests l2gateway_tester = new NeutronL2GatewayTests(base);
-        String createJsonString = l2gateway_tester.singleton_l2gateway_create_test();
-        l2gateway_tester.singleton_l2gateway_get_with_one_query_item_test(createJsonString);
-        l2gateway_tester.l2gateway_element_get_test();
-        l2gateway_tester.l2gateway_element_get_with_query_test();
-        l2gateway_tester.l2gateway_collection_get_test();
-        l2gateway_tester.l2gateway_modify_test();
-        l2gateway_tester.l2gateway_delete_test();
-        l2gateway_tester.l2gateway_element_negative_get_test();
+        NeutronL2GatewayTests l2gatewayTester = new NeutronL2GatewayTests(base);
+        String createJsonString = l2gatewayTester.singleton_l2gateway_create_test();
+        l2gatewayTester.singleton_l2gateway_get_with_one_query_item_test(createJsonString);
+        l2gatewayTester.l2gateway_element_get_test();
+        l2gatewayTester.l2gateway_element_get_with_query_test();
+        l2gatewayTester.l2gateway_collection_get_test();
+        l2gatewayTester.l2gateway_modify_test();
+        l2gatewayTester.l2gateway_delete_test();
+        l2gatewayTester.l2gateway_element_negative_get_test();
     }
 }

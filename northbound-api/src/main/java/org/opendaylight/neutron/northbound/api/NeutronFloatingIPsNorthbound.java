@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -86,22 +85,22 @@ public final class NeutronFloatingIPsNorthbound
         INeutronFloatingIPCRUD floatingIPInterface = getNeutronCRUD();
         List<NeutronFloatingIP> allFloatingIPs = floatingIPInterface.getAll();
         List<NeutronFloatingIP> ans = new ArrayList<>();
-        Iterator<NeutronFloatingIP> i = allFloatingIPs.iterator();
-        while (i.hasNext()) {
-            NeutronFloatingIP oSS = i.next();
+        for (NeutronFloatingIP floatingIp : allFloatingIPs) {
             //match filters: TODO provider extension and router extension
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryFloatingNetworkId == null || queryFloatingNetworkId.equals(oSS.getFloatingNetworkUUID()))
-                    && (queryPortId == null || queryPortId.equals(oSS.getPortUUID()))
-                    && (queryFixedIPAddress == null || queryFixedIPAddress.equals(oSS.getFixedIPAddress()))
-                    && (queryFloatingIPAddress == null || queryFloatingIPAddress.equals(oSS.getFloatingIPAddress()))
-                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
-                    && (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+            if ((queryID == null || queryID.equals(floatingIp.getID()))
+                    && (queryFloatingNetworkId == null
+                        || queryFloatingNetworkId.equals(floatingIp.getFloatingNetworkUUID()))
+                    && (queryPortId == null || queryPortId.equals(floatingIp.getPortUUID()))
+                    && (queryFixedIPAddress == null || queryFixedIPAddress.equals(floatingIp.getFixedIPAddress()))
+                    && (queryFloatingIPAddress == null
+                        || queryFloatingIPAddress.equals(floatingIp.getFloatingIPAddress()))
+                    && (queryStatus == null || queryStatus.equals(floatingIp.getStatus()))
+                    && (queryRouterID == null || queryRouterID.equals(floatingIp.getRouterUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(floatingIp.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(floatingIp.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(floatingIp);
                 }
             }
         }

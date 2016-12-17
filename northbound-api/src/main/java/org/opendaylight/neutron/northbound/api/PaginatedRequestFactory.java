@@ -99,12 +99,11 @@ public final class PaginatedRequestFactory {
         String endMarker;
         Boolean firstPage = false;
         Boolean lastPage = false;
-        List<T> lCollection = collection;
 
-        Collections.sort(lCollection, NEUTRON_OBJECT_COMPARATOR);
+        Collections.sort(collection, NEUTRON_OBJECT_COMPARATOR);
 
         if (marker != null) {
-            int offset = Collections.binarySearch(lCollection, new MarkerObject(marker), NEUTRON_OBJECT_COMPARATOR);
+            int offset = Collections.binarySearch(collection, new MarkerObject(marker), NEUTRON_OBJECT_COMPARATOR);
             if (offset < 0) {
                 throw new ResourceNotFoundException("UUID for marker: " + marker + " could not be found");
             }
@@ -122,25 +121,25 @@ public final class PaginatedRequestFactory {
             firstPage = true;
         }
 
-        if (startPos + limit >= lCollection.size()) {
-            lCollection = lCollection.subList(startPos, lCollection.size());
-            startMarker = lCollection.get(0).getID();
-            endMarker = lCollection.get(lCollection.size() - 1).getID();
+        if (startPos + limit >= collection.size()) {
+            collection = collection.subList(startPos, collection.size());
+            startMarker = collection.get(0).getID();
+            endMarker = collection.get(collection.size() - 1).getID();
             lastPage = true;
         } else if (startPos < 0) {
             if (startPos + limit > 0) {
-                lCollection = lCollection.subList(0, startPos + limit);
-                startMarker = lCollection.get(0).getID();
-                endMarker = lCollection.get(lCollection.size() - 1).getID();
+                collection = collection.subList(0, startPos + limit);
+                startMarker = collection.get(0).getID();
+                endMarker = collection.get(collection.size() - 1).getID();
                 firstPage = true;
             } else {
                 throw new BadRequestException(
                         "Requested page is out of bounds. Please check the supplied limit and marker");
             }
         } else {
-            lCollection = lCollection.subList(startPos, startPos + limit);
-            startMarker = lCollection.get(0).getID();
-            endMarker = lCollection.get(limit - 1).getID();
+            collection = collection.subList(startPos, startPos + limit);
+            startMarker = collection.get(0).getID();
+            endMarker = collection.get(limit - 1).getID();
         }
 
         if (!lastPage) {
@@ -158,6 +157,6 @@ public final class PaginatedRequestFactory {
             links.add(previous);
         }
 
-        return new PaginationResults<T>(lCollection, links);
+        return new PaginationResults<T>(collection, links);
     }
 }

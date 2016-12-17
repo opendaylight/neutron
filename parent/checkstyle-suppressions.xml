@@ -21,9 +21,6 @@
   <suppress checks="AbbreviationAsWordInName"
             files="."
              />
-  <suppress checks="LocalVariableName"
-            files="."
-             />
   <suppress checks="ConstantName"
             files="."
              />

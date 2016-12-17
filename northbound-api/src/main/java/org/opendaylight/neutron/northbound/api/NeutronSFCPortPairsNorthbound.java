@@ -9,7 +9,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -76,18 +75,16 @@ public final class NeutronSFCPortPairsNorthbound
         INeutronSFCPortPairCRUD sfcPortPairInterface = getNeutronCRUD();
         List<NeutronSFCPortPair> allSFCPortPair = sfcPortPairInterface.getAll();
         List<NeutronSFCPortPair> ans = new ArrayList<>();
-        Iterator<NeutronSFCPortPair> i = allSFCPortPair.iterator();
-        while (i.hasNext()) {
-            NeutronSFCPortPair oSFCPP = i.next();
-            if ((queryID == null || queryID.equals(oSFCPP.getID()))
-                    && (queryName == null || queryName.equals(oSFCPP.getName()))
-                    && (queryIngressPort == null || queryIngressPort.equals(oSFCPP.getIngressPortUUID()))
-                    && (queryEgressPort == null || queryEgressPort.equals(oSFCPP.getEgressPortUUID()))
-                    && (queryTenantID == null || queryTenantID.equals(oSFCPP.getTenantID()))) {
+        for (NeutronSFCPortPair sfcPortPair : allSFCPortPair) {
+            if ((queryID == null || queryID.equals(sfcPortPair.getID()))
+                    && (queryName == null || queryName.equals(sfcPortPair.getName()))
+                    && (queryIngressPort == null || queryIngressPort.equals(sfcPortPair.getIngressPortUUID()))
+                    && (queryEgressPort == null || queryEgressPort.equals(sfcPortPair.getEgressPortUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(sfcPortPair.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSFCPP.extractFields(fields));
+                    ans.add(sfcPortPair.extractFields(fields));
                 } else {
-                    ans.add(oSFCPP);
+                    ans.add(sfcPortPair);
                 }
             }
         }

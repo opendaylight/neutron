@@ -78,8 +78,8 @@ public final class NeutronLoadBalancerPoolInterface
         }
         if (pool.getLoadBalancerPoolListeners() != null) {
             final List<Uuid> listListener = new ArrayList<Uuid>();
-            for (final Neutron_ID neutron_id : pool.getLoadBalancerPoolListeners()) {
-                listListener.add(toUuid(neutron_id.getID()));
+            for (final Neutron_ID neutronId : pool.getLoadBalancerPoolListeners()) {
+                listListener.add(toUuid(neutronId.getID()));
             }
             poolBuilder.setListeners(listListener);
         }

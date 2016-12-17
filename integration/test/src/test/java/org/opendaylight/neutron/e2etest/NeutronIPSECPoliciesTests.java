@@ -72,14 +72,14 @@ public class NeutronIPSECPoliciesTests {
     }
 
     public static void runTests(String base) {
-        NeutronIPSECPoliciesTests ipsec_policy_tester = new NeutronIPSECPoliciesTests(base);
-        String createJsonString = ipsec_policy_tester.singleton_ipsecPolicy_create_test();
-        ipsec_policy_tester.singleton_ipsecPolicy_get_with_one_query_item_test(createJsonString);
-        ipsec_policy_tester.ipsecPolicy_update_test();
-        ipsec_policy_tester.ipsecPolicy_element_get_test();
-        ipsec_policy_tester.ipsecPolicy_element_get_with_query_test();
-        ipsec_policy_tester.ipsecPolicy_collection_get_test();
-        ipsec_policy_tester.ipsecPolicy_delete_test();
-        ipsec_policy_tester.ipsecPolicy_element_negative_get_test();
+        NeutronIPSECPoliciesTests ipsecPolicyTester = new NeutronIPSECPoliciesTests(base);
+        String createJsonString = ipsecPolicyTester.singleton_ipsecPolicy_create_test();
+        ipsecPolicyTester.singleton_ipsecPolicy_get_with_one_query_item_test(createJsonString);
+        ipsecPolicyTester.ipsecPolicy_update_test();
+        ipsecPolicyTester.ipsecPolicy_element_get_test();
+        ipsecPolicyTester.ipsecPolicy_element_get_with_query_test();
+        ipsecPolicyTester.ipsecPolicy_collection_get_test();
+        ipsecPolicyTester.ipsecPolicy_delete_test();
+        ipsecPolicyTester.ipsecPolicy_element_negative_get_test();
     }
 }

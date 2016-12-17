@@ -14,7 +14,6 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -190,14 +189,14 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 ans.setDnsNameservers(nsList);
             }
             if (s.equals("allocation_pools")) {
-                List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-                aPools.addAll(this.getAllocationPools());
-                ans.setAllocationPools(aPools);
+                List<NeutronSubnetIPAllocationPool> pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+                pools.addAll(this.getAllocationPools());
+                ans.setAllocationPools(pools);
             }
             if (s.equals("host_routes")) {
-                List<NeutronRoute> hRoutes = new ArrayList<NeutronRoute>();
-                hRoutes.addAll(this.getHostRoutes());
-                ans.setHostRoutes(hRoutes);
+                List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
+                hostRoutes.addAll(this.getHostRoutes());
+                ans.setHostRoutes(hostRoutes);
             }
             if (s.equals("enable_dhcp")) {
                 ans.setEnableDHCP(this.getEnableDHCP());
@@ -245,10 +244,9 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 //TODO?: limit check on length
                 // convert to byte array
                 byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
-                int i;
-                for (i = length; i < IPV6_LENGTH; i++) {
-                    if (((((int) addrBytes[i / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
-                            & (1 << (IPV6_BYTE_OFFSET - (i % IPV6_LENGTH_BYTES)))) != 0) {
+                for (int index = length; index < IPV6_LENGTH; index++) {
+                    if (((((int) addrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
+                            & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES)))) != 0) {
                         return (false);
                     }
                 }
@@ -266,9 +264,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
      * or assigning a gateway IP)
      */
     public boolean gatewayIP_Pool_overlap() {
-        Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
-        while (i.hasNext()) {
-            NeutronSubnetIPAllocationPool pool = i.next();
+        for (NeutronSubnetIPAllocationPool pool : allocationPools) {
             if (ipVersion == IPV4_VERSION && pool.contains(gatewayIP)) {
                 return true;
             }
@@ -319,11 +315,11 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 }
 
                 int length = Integer.parseInt(parts[1]);
-                BigInteger lowAddress_bi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
-                String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddress_bi.add(BigInteger.ONE));
+                BigInteger lowAddressBi = NeutronSubnetIPAllocationPool.convertV6(parts[0]);
+                String lowAddress = NeutronSubnetIPAllocationPool.bigIntegerToIP(lowAddressBi.add(BigInteger.ONE));
                 BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
                 String highAddress = NeutronSubnetIPAllocationPool
-                        .bigIntegerToIP(lowAddress_bi.add(mask).subtract(BigInteger.ONE));
+                        .bigIntegerToIP(lowAddressBi.add(mask).subtract(BigInteger.ONE));
                 if (gatewayIP == null || ("").equals(gatewayIP)) {
                     gatewayIP = lowAddress;
                 }
@@ -357,11 +353,11 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 int length = Integer.parseInt(parts[1]);
                 byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
                 byte[] ipBytes = ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
-                int i;
-                for (i = 0; i < length; i++) {
-                    if (((((int) cidrBytes[i / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET
-                            - (i % IPV6_LENGTH_BYTES)))) != ((((int) ipBytes[i / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
-                                    & (1 << (IPV6_BYTE_OFFSET - (i % IPV6_LENGTH_BYTES))))) {
+                for (int index = 0; index < length; index++) {
+                    if (((((int) cidrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET
+                            - (index % IPV6_LENGTH_BYTES)))) != (
+                                (((int) ipBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
+                                & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES))))) {
                         return (false);
                     }
                 }
@@ -380,9 +376,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
      */
     public String getLowAddr() {
         String ans = null;
-        Iterator<NeutronSubnetIPAllocationPool> i = allocationPools.iterator();
-        while (i.hasNext()) {
-            NeutronSubnetIPAllocationPool pool = i.next();
+        for (NeutronSubnetIPAllocationPool pool : allocationPools) {
             if (ans == null) {
                 ans = pool.getPoolStart();
             } else {

@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -77,9 +76,7 @@ public final class NeutronSecurityGroupsNorthbound extends
         INeutronSecurityGroupCRUD securityGroupInterface = getNeutronCRUD();
         List<NeutronSecurityGroup> allSecurityGroups = securityGroupInterface.getAll();
         List<NeutronSecurityGroup> ans = new ArrayList<>();
-        Iterator<NeutronSecurityGroup> i = allSecurityGroups.iterator();
-        while (i.hasNext()) {
-            NeutronSecurityGroup nsg = i.next();
+        for (NeutronSecurityGroup nsg : allSecurityGroups) {
             if ((querySecurityGroupUUID == null || querySecurityGroupUUID.equals(nsg.getID()))
                     && (querySecurityGroupName == null || querySecurityGroupName.equals(nsg.getName()))
                     && (querySecurityTenantID == null || querySecurityTenantID.equals(nsg.getTenantID()))) {

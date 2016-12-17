@@ -93,14 +93,14 @@ public class NeutronSFCPortChainTests {
     }
 
     public static void runTests(String base) {
-        NeutronSFCPortChainTests sfc_portchain_tester = new NeutronSFCPortChainTests(base);
-        String createJsonString = sfc_portchain_tester.singleton_sfc_portchain_create_test();
-        sfc_portchain_tester.singleton_sfc_portchain_get_with_query_item(createJsonString);
-        sfc_portchain_tester.sfc_portchain_element_get_test();
-        sfc_portchain_tester.sfc_portchain_element_get_test_with_query_test();
-        sfc_portchain_tester.sfc_portchain_collection_get_test();
-        sfc_portchain_tester.sfc_portchain_modify_test();
-        sfc_portchain_tester.sfc_portchain_delete_test();
-        sfc_portchain_tester.sfc_portchain_element_negative_get_test();
+        NeutronSFCPortChainTests sfcPortchainTester = new NeutronSFCPortChainTests(base);
+        String createJsonString = sfcPortchainTester.singleton_sfc_portchain_create_test();
+        sfcPortchainTester.singleton_sfc_portchain_get_with_query_item(createJsonString);
+        sfcPortchainTester.sfc_portchain_element_get_test();
+        sfcPortchainTester.sfc_portchain_element_get_test_with_query_test();
+        sfcPortchainTester.sfc_portchain_collection_get_test();
+        sfcPortchainTester.sfc_portchain_modify_test();
+        sfcPortchainTester.sfc_portchain_delete_test();
+        sfcPortchainTester.sfc_portchain_element_negative_get_test();
     }
 }

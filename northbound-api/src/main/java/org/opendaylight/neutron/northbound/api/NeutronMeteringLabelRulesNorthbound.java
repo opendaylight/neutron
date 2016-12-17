@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -78,18 +77,16 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
         INeutronMeteringLabelRuleCRUD ruleInterface = getNeutronCRUD();
         List<NeutronMeteringLabelRule> allNeutronMeteringLabelRule = ruleInterface.getAll();
         List<NeutronMeteringLabelRule> ans = new ArrayList<>();
-        Iterator<NeutronMeteringLabelRule> i = allNeutronMeteringLabelRule.iterator();
-        while (i.hasNext()) {
-            NeutronMeteringLabelRule oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryDirection == null || queryDirection.equals(oSS.getMeteringLabelRuleDirection()))
+        for (NeutronMeteringLabelRule rule : allNeutronMeteringLabelRule) {
+            if ((queryID == null || queryID.equals(rule.getID()))
+                    && (queryDirection == null || queryDirection.equals(rule.getMeteringLabelRuleDirection()))
                     && (queryRemoteIPPrefix == null
-                            || queryRemoteIPPrefix.equals(oSS.getMeteringLabelRuleRemoteIPPrefix()))
-                    && (queryLabelID == null || queryLabelID.equals(oSS.getMeteringLabelRuleLabelID()))) {
+                            || queryRemoteIPPrefix.equals(rule.getMeteringLabelRuleRemoteIPPrefix()))
+                    && (queryLabelID == null || queryLabelID.equals(rule.getMeteringLabelRuleLabelID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(rule.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(rule);
                 }
             }
         }

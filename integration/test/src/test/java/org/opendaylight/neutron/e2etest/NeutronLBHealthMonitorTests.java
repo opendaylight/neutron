@@ -72,14 +72,14 @@ public class NeutronLBHealthMonitorTests {
     }
 
     public static void runTests(String base) {
-        NeutronLBHealthMonitorTests healthMonitor_tester = new NeutronLBHealthMonitorTests(base);
-        String createJsonString = healthMonitor_tester.singleton_lb_healthMonitor_create_test();
-        healthMonitor_tester.singleton_lb_healthMonitor_with_one_query_item_test(createJsonString);
-        healthMonitor_tester.healthMonitor_update_test();
-        healthMonitor_tester.healthMonitor_element_get_test();
-        healthMonitor_tester.healthMonitor_element_get_with_query_test();
-        healthMonitor_tester.healthMonitor_collection_get_test();
-        healthMonitor_tester.healthMonitor_delete_test();
-        healthMonitor_tester.healthMonitor_element_negative_get_test();
+        NeutronLBHealthMonitorTests healthMonitorTester = new NeutronLBHealthMonitorTests(base);
+        String createJsonString = healthMonitorTester.singleton_lb_healthMonitor_create_test();
+        healthMonitorTester.singleton_lb_healthMonitor_with_one_query_item_test(createJsonString);
+        healthMonitorTester.healthMonitor_update_test();
+        healthMonitorTester.healthMonitor_element_get_test();
+        healthMonitorTester.healthMonitor_element_get_with_query_test();
+        healthMonitorTester.healthMonitor_collection_get_test();
+        healthMonitorTester.healthMonitor_delete_test();
+        healthMonitorTester.healthMonitor_element_negative_get_test();
     }
 }

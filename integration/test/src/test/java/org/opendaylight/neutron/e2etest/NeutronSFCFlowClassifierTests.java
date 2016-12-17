@@ -120,15 +120,15 @@ public class NeutronSFCFlowClassifierTests {
     }
 
     public static void runTests(String base) {
-        NeutronSFCFlowClassifierTests sfc_flowclassifier_tester = new NeutronSFCFlowClassifierTests(base);
-        String createJsonString = sfc_flowclassifier_tester.singleton_sfc_flowclassifier_create_test();
-        sfc_flowclassifier_tester.singleton_sfc_flowclassifier_get_with_query_item(createJsonString);
-        sfc_flowclassifier_tester.sfc_flowclassifier_element_get_test();
-        sfc_flowclassifier_tester.sfc_flowclassifier_get_test_with_query_test();
-        sfc_flowclassifier_tester.sfc_flowclassifier_collection_get_test();
-        sfc_flowclassifier_tester.sfc_flowclassifier_modify_test();
-        sfc_flowclassifier_tester.sfc_flowclassifier_delete_test();
-        sfc_flowclassifier_tester.sfc_flowclassifier_element_negative_get_test();
-        sfc_flowclassifier_tester.test_bug_6865();
+        NeutronSFCFlowClassifierTests sfcFlowclassifierTester = new NeutronSFCFlowClassifierTests(base);
+        String createJsonString = sfcFlowclassifierTester.singleton_sfc_flowclassifier_create_test();
+        sfcFlowclassifierTester.singleton_sfc_flowclassifier_get_with_query_item(createJsonString);
+        sfcFlowclassifierTester.sfc_flowclassifier_element_get_test();
+        sfcFlowclassifierTester.sfc_flowclassifier_get_test_with_query_test();
+        sfcFlowclassifierTester.sfc_flowclassifier_collection_get_test();
+        sfcFlowclassifierTester.sfc_flowclassifier_modify_test();
+        sfcFlowclassifierTester.sfc_flowclassifier_delete_test();
+        sfcFlowclassifierTester.sfc_flowclassifier_element_negative_get_test();
+        sfcFlowclassifierTester.test_bug_6865();
     }
 }

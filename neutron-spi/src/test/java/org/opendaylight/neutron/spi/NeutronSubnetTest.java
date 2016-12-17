@@ -47,9 +47,9 @@ public class NeutronSubnetTest {
         NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-        aPools.add(allocationPool);
-        objectUT.setAllocationPools(aPools);
+        List<NeutronSubnetIPAllocationPool> pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        pools.add(allocationPool);
+        objectUT.setAllocationPools(pools);
 
         objectUT.setGatewayIP("10.18.0.1");
         Assert.assertFalse("gatewayIP_Pool_overlap Test 1: test with address below allocation pool failed",
@@ -69,9 +69,9 @@ public class NeutronSubnetTest {
         allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-        aPools.add(allocationPool);
-        objectUT.setAllocationPools(aPools);
+        pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        pools.add(allocationPool);
+        objectUT.setAllocationPools(pools);
 
         objectUT.setGatewayIP("2015::1");
         Assert.assertFalse("gatewayIP_Pool_overlap v6 Test 1: test with address below allocation pool failed",
@@ -117,12 +117,12 @@ public class NeutronSubnetTest {
         NeutronSubnetIPAllocationPool allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIPAllocationPool> aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-        aPools.add(allocationPool);
+        List<NeutronSubnetIPAllocationPool> pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        pools.add(allocationPool);
         allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("10.18.0.10");
         allocationPool.setPoolEnd("10.18.0.15");
-        objectUT.setAllocationPools(aPools);
+        objectUT.setAllocationPools(pools);
 
         Assert.assertEquals("getLowAddr Test 1: test of returned address", "10.18.0.2", objectUT.getLowAddr());
 
@@ -132,12 +132,12 @@ public class NeutronSubnetTest {
         allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        aPools = new ArrayList<NeutronSubnetIPAllocationPool>();
-        aPools.add(allocationPool);
+        pools = new ArrayList<NeutronSubnetIPAllocationPool>();
+        pools.add(allocationPool);
         allocationPool = new NeutronSubnetIPAllocationPool();
         allocationPool.setPoolStart("2015::10");
         allocationPool.setPoolEnd("2015::15");
-        objectUT.setAllocationPools(aPools);
+        objectUT.setAllocationPools(pools);
 
         Assert.assertEquals("getLowAddr v6 Test 1: test of returned address", "2015::2", objectUT.getLowAddr());
     }

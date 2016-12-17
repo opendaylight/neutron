@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -108,19 +107,17 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
         INeutronL2gatewayConnectionCRUD l2gatewayConnectionInterface = getNeutronCRUD();
         List<NeutronL2gatewayConnection> allL2gatewayConnections = l2gatewayConnectionInterface.getAll();
         List<NeutronL2gatewayConnection> ans = new ArrayList<>();
-        Iterator<NeutronL2gatewayConnection> i = allL2gatewayConnections.iterator();
-        while (i.hasNext()) {
-            NeutronL2gatewayConnection oSS = i.next();
-            if ((queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
-                    && (queryConnectionID == null || queryConnectionID.equals(oSS.getID()))
-                    && (queryL2gatewayID == null || queryL2gatewayID.equals(oSS.getL2gatewayID()))
-                    && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkID()))
-                    && (querySegmentID == null || (Integer.valueOf(querySegmentID).equals(oSS.getSegmentID())))
-                    && (queryPortID == null || queryPortID.equals(oSS.getPortID()))) {
+        for (NeutronL2gatewayConnection connection : allL2gatewayConnections) {
+            if ((queryTenantID == null || queryTenantID.equals(connection.getTenantID()))
+                    && (queryConnectionID == null || queryConnectionID.equals(connection.getID()))
+                    && (queryL2gatewayID == null || queryL2gatewayID.equals(connection.getL2gatewayID()))
+                    && (queryNetworkID == null || queryNetworkID.equals(connection.getNetworkID()))
+                    && (querySegmentID == null || (Integer.valueOf(querySegmentID).equals(connection.getSegmentID())))
+                    && (queryPortID == null || queryPortID.equals(connection.getPortID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(connection.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(connection);
                 }
             }
         }
