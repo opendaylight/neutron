@@ -71,14 +71,14 @@ public class NeutronLoadBalancerTests {
     }
 
     public static void runTests(String base) {
-        NeutronLoadBalancerTests loadBalancer_tester = new NeutronLoadBalancerTests(base);
-        String createJsonString = loadBalancer_tester.singleton_loadbalancer_create_test();
-        loadBalancer_tester.singleton_loadbalancer_get_with_one_query_item_test(createJsonString);
-        loadBalancer_tester.loadBalancer_update_test();
-        loadBalancer_tester.loadBalancer_element_get_test();
-        loadBalancer_tester.loadBalancer_element_get_with_query_test();
-        loadBalancer_tester.loadBalancer_collection_get_test();
-        loadBalancer_tester.loadBalancer_delete_test();
-        loadBalancer_tester.loadBalancer_element_negative_get_test();
+        NeutronLoadBalancerTests loadBalancerTester = new NeutronLoadBalancerTests(base);
+        String createJsonString = loadBalancerTester.singleton_loadbalancer_create_test();
+        loadBalancerTester.singleton_loadbalancer_get_with_one_query_item_test(createJsonString);
+        loadBalancerTester.loadBalancer_update_test();
+        loadBalancerTester.loadBalancer_element_get_test();
+        loadBalancerTester.loadBalancer_element_get_with_query_test();
+        loadBalancerTester.loadBalancer_collection_get_test();
+        loadBalancerTester.loadBalancer_delete_test();
+        loadBalancerTester.loadBalancer_element_negative_get_test();
     }
 }

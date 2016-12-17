@@ -81,15 +81,15 @@ public class NeutronFirewallTests {
     }
 
     public static void runTests(String base) {
-        NeutronFirewallTests fw_tester = new NeutronFirewallTests(base);
-        String createJsonString = fw_tester.singleton_fw_create_test();
-        fw_tester.singleton_fw_get_with_one_query_item_test(createJsonString);
-        fw_tester.fw_element_get_test();
-        fw_tester.fw_element_get_with_query_test();
-        fw_tester.fw_collection_get_test();
-        fw_tester.fw_modify_test();
-        fw_tester.fw_delete_test();
-        fw_tester.fw_element_negative_get_test();
-        fw_tester.fw_collection_bug4944_test();
+        NeutronFirewallTests fwTester = new NeutronFirewallTests(base);
+        String createJsonString = fwTester.singleton_fw_create_test();
+        fwTester.singleton_fw_get_with_one_query_item_test(createJsonString);
+        fwTester.fw_element_get_test();
+        fwTester.fw_element_get_with_query_test();
+        fwTester.fw_collection_get_test();
+        fwTester.fw_modify_test();
+        fwTester.fw_delete_test();
+        fwTester.fw_element_negative_get_test();
+        fwTester.fw_collection_bug4944_test();
     }
 }

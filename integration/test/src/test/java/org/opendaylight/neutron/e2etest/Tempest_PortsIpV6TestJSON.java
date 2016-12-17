@@ -17,27 +17,27 @@ public class Tempest_PortsIpV6TestJSON {
 
     public void test_create_port_in_allowed_allocation_pools() {
         // create network
-        String url_n = base + "/networks";
-        String content_n = " {\"network\": {\"status\": \"ACTIVE\", \"subnets\": [], \"name\":"
+        String urlN = base + "/networks";
+        String contentN = " {\"network\": {\"status\": \"ACTIVE\", \"subnets\": [], \"name\":"
                 + " \"test-network--1850822235\", \"router:external\": false, "
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"admin_state_up\": true,"
                 + " \"mtu\": 0, \"shared\": false, \"port_security_enabled\": true, "
                 + "\"id\": \"114ddf69-8ccd-46bb-92fb-bc3e921318d4\"}}";
-        ITNeutronE2E.test_create(url_n, content_n, "test_create_port_in_allowed_allocation_pools Network Post Failed");
+        ITNeutronE2E.test_create(urlN, contentN, "test_create_port_in_allowed_allocation_pools Network Post Failed");
 
         // create subnet
-        String url_s = base + "/subnets";
-        String content_s1 = "{\"subnet\": {\"name\": \"\", \"enable_dhcp\": true, "
+        String urlS = base + "/subnets";
+        String contentS1 = "{\"subnet\": {\"name\": \"\", \"enable_dhcp\": true, "
                 + "\"network_id\": \"114ddf69-8ccd-46bb-92fb-bc3e921318d4\", "
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"dns_nameservers\": [], "
                 + "\"gateway_ip\": \"2003::1\", \"ipv6_ra_mode\": null, "
                 + "\"allocation_pools\": [{\"start\": \"2003::4\", \"end\": \"2003::6\"}], \"host_routes\": [], "
                 + "\"ip_version\": 6, \"ipv6_address_mode\": null, \"cidr\": \"2003::/64\", "
                 + "\"id\": \"77c68c25-72a6-415b-a6f0-886fe26f1b02\", \"subnetpool_id\": null}}";
-        ITNeutronE2E.test_create(url_s, content_s1, "test_create_port_in_allowed_allocation_pools Subnet Post Failed");
+        ITNeutronE2E.test_create(urlS, contentS1, "test_create_port_in_allowed_allocation_pools Subnet Post Failed");
 
-        String url_p = base + "/ports";
-        String content_p1 = "{ \"port\": {\"status\": \"ACTIVE\", \"binding:host_id\": \"odl-devstack\","
+        String urlP = base + "/ports";
+        String contentP1 = "{ \"port\": {\"status\": \"ACTIVE\", \"binding:host_id\": \"odl-devstack\","
                 + " \"allowed_address_pairs\": [], \"extra_dhcp_opts\": [], \"device_owner\": \"network:dhcp\","
                 + " \"port_security_enabled\": false, \"binding:profile\": {}, \"fixed_ips\": "
                 + "[{\"subnet_id\": \"77c68c25-72a6-415b-a6f0-886fe26f1b02\", \"ip_address\": \"2003::5\"}], "
@@ -47,9 +47,9 @@ public class Tempest_PortsIpV6TestJSON {
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"binding:vif_details\": "
                 + "{\"port_filter\": \"true\"}, \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"ovs\", "
                 + "\"mac_address\": \"fa:16:3e:09:db:75\"}}";
-        ITNeutronE2E.test_create(url_p, content_p1, "test_create_port_in_allowed_allocation_pools Port Post Failed");
+        ITNeutronE2E.test_create(urlP, contentP1, "test_create_port_in_allowed_allocation_pools Port Post Failed");
 
-        String content_p2 = "{\"port\": {\"binding:host_id\": \"\", \"allowed_address_pairs\": [], "
+        String contentP2 = "{\"port\": {\"binding:host_id\": \"\", \"allowed_address_pairs\": [], "
                 + "\"device_owner\": \"\", \"port_security_enabled\": true, \"binding:profile\": {}, "
                 + "\"fixed_ips\": [{\"subnet_id\": \"77c68c25-72a6-415b-a6f0-886fe26f1b02\", "
                 + "\"ip_address\": \"2003::4\"}], \"id\": \"856c48ea-fd3a-4ee2-b0c6-bf86f8813888\", "
@@ -80,7 +80,7 @@ public class Tempest_PortsIpV6TestJSON {
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"binding:vif_details\": {}, "
                 + "\"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\","
                 + " \"mac_address\": \"FA:16:3E:66:B1:38\"}}";
-        ITNeutronE2E.test_create(url_p, content_p2, "test_create_port_in_allowed_allocation_pools Port Post 2 Failed");
+        ITNeutronE2E.test_create(urlP, contentP2, "test_create_port_in_allowed_allocation_pools Port Post 2 Failed");
 
     }
 

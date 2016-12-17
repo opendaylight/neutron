@@ -72,14 +72,14 @@ public class NeutronIKEPoliciesTests {
     }
 
     public static void runTests(String base) {
-        NeutronIKEPoliciesTests ike_policy_tester = new NeutronIKEPoliciesTests(base);
-        String createJsonString = ike_policy_tester.singleton_ikePolicy_create_test();
-        ike_policy_tester.singleton_ikePolicy_get_with_one_query_item_test(createJsonString);
-        ike_policy_tester.ikePolicy_update_test();
-        ike_policy_tester.ikePolicy_element_get_test();
-        ike_policy_tester.ikePolicy_element_get_with_query_test();
-        ike_policy_tester.ikePolicy_collection_get_test();
-        ike_policy_tester.ikePolicy_delete_test();
-        ike_policy_tester.ikePolicy_element_negative_get_test();
+        NeutronIKEPoliciesTests ikePolicyTester = new NeutronIKEPoliciesTests(base);
+        String createJsonString = ikePolicyTester.singleton_ikePolicy_create_test();
+        ikePolicyTester.singleton_ikePolicy_get_with_one_query_item_test(createJsonString);
+        ikePolicyTester.ikePolicy_update_test();
+        ikePolicyTester.ikePolicy_element_get_test();
+        ikePolicyTester.ikePolicy_element_get_with_query_test();
+        ikePolicyTester.ikePolicy_collection_get_test();
+        ikePolicyTester.ikePolicy_delete_test();
+        ikePolicyTester.ikePolicy_element_negative_get_test();
     }
 }

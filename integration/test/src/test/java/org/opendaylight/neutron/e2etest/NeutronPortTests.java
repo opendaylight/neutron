@@ -145,17 +145,17 @@ public class NeutronPortTests {
     }
 
     public static void runTests(String base) {
-        NeutronPortTests port_tester = new NeutronPortTests(base);
-        String createJsonString = port_tester.singleton_port_create_test();
-        port_tester.singleton_port_get_with_one_query_item_test(createJsonString);
-        port_tester.router_interface_port_create_test(); //needed for router test
-        port_tester.bulk_port_create_test();
-        port_tester.port_update_test();
-        port_tester.port_element_get_test();
-        port_tester.port_element_get_with_query_content_validation_test();
-        port_tester.port_element_get_with_query_test();
-        port_tester.port_collection_get_test();
-        port_tester.port_delete_test();
-        port_tester.port_element_negative_get_test();
+        NeutronPortTests portTester = new NeutronPortTests(base);
+        String createJsonString = portTester.singleton_port_create_test();
+        portTester.singleton_port_get_with_one_query_item_test(createJsonString);
+        portTester.router_interface_port_create_test(); //needed for router test
+        portTester.bulk_port_create_test();
+        portTester.port_update_test();
+        portTester.port_element_get_test();
+        portTester.port_element_get_with_query_content_validation_test();
+        portTester.port_element_get_with_query_test();
+        portTester.port_collection_get_test();
+        portTester.port_delete_test();
+        portTester.port_element_negative_get_test();
     }
 }

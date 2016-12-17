@@ -9,7 +9,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -74,16 +73,14 @@ public final class NeutronSFCPortChainsNorthbound
         INeutronSFCPortChainCRUD sfcPortChainInterface = getNeutronCRUD();
         List<NeutronSFCPortChain> allSFCPortChain = sfcPortChainInterface.getAll();
         List<NeutronSFCPortChain> ans = new ArrayList<>();
-        Iterator<NeutronSFCPortChain> i = allSFCPortChain.iterator();
-        while (i.hasNext()) {
-            NeutronSFCPortChain oSFCPC = i.next();
-            if ((queryID == null || queryID.equals(oSFCPC.getID()))
-                    && (queryName == null || queryName.equals(oSFCPC.getName()))
-                    && (queryTenantID == null || queryTenantID.equals(oSFCPC.getTenantID()))) {
+        for (NeutronSFCPortChain sfcPortChain : allSFCPortChain) {
+            if ((queryID == null || queryID.equals(sfcPortChain.getID()))
+                    && (queryName == null || queryName.equals(sfcPortChain.getName()))
+                    && (queryTenantID == null || queryTenantID.equals(sfcPortChain.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSFCPC.extractFields(fields));
+                    ans.add(sfcPortChain.extractFields(fields));
                 } else {
-                    ans.add(oSFCPC);
+                    ans.add(sfcPortChain);
                 }
             }
         }

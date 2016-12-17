@@ -91,14 +91,14 @@ public class NeutronSecurityGroupTests {
     }
 
     public static void runTests(String base) {
-        NeutronSecurityGroupTests securityGroup_tester = new NeutronSecurityGroupTests(base);
-        String createJsonString = securityGroup_tester.singleton_sg_create_test();
-        securityGroup_tester.singleton_sg_get_with_one_query_item_test(createJsonString);
-        securityGroup_tester.sg_update_test();
-        securityGroup_tester.sg_element_get_test();
-        securityGroup_tester.sg_element_get_with_query_test();
-        securityGroup_tester.securityGroup_collection_get_test();
-        securityGroup_tester.sg_delete_test();
-        securityGroup_tester.sg_element_negative_get_test();
+        NeutronSecurityGroupTests securityGroupTester = new NeutronSecurityGroupTests(base);
+        String createJsonString = securityGroupTester.singleton_sg_create_test();
+        securityGroupTester.singleton_sg_get_with_one_query_item_test(createJsonString);
+        securityGroupTester.sg_update_test();
+        securityGroupTester.sg_element_get_test();
+        securityGroupTester.sg_element_get_with_query_test();
+        securityGroupTester.securityGroup_collection_get_test();
+        securityGroupTester.sg_delete_test();
+        securityGroupTester.sg_element_negative_get_test();
     }
 }

@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -92,25 +91,23 @@ public final class NeutronSubnetsNorthbound
     // sorting not supported
     ) {
         INeutronSubnetCRUD subnetInterface = getNeutronCRUD();
-        List<NeutronSubnet> allNetworks = subnetInterface.getAll();
+        List<NeutronSubnet> allSubnets = subnetInterface.getAll();
         List<NeutronSubnet> ans = new ArrayList<>();
-        Iterator<NeutronSubnet> i = allNetworks.iterator();
-        while (i.hasNext()) {
-            NeutronSubnet oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkUUID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryIPVersion == null || queryIPVersion.equals(oSS.getIpVersion()))
-                    && (queryCIDR == null || queryCIDR.equals(oSS.getCidr()))
-                    && (queryGatewayIP == null || queryGatewayIP.equals(oSS.getGatewayIP()))
-                    && (queryEnableDHCP == null || queryEnableDHCP.equals(oSS.getEnableDHCP()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
-                    && (queryIpV6AddressMode == null || queryIpV6AddressMode.equals(oSS.getIpV6AddressMode()))
-                    && (queryIpV6RaMode == null || queryIpV6RaMode.equals(oSS.getIpV6RaMode()))) {
+        for (NeutronSubnet subnet : allSubnets) {
+            if ((queryID == null || queryID.equals(subnet.getID()))
+                    && (queryNetworkID == null || queryNetworkID.equals(subnet.getNetworkUUID()))
+                    && (queryName == null || queryName.equals(subnet.getName()))
+                    && (queryIPVersion == null || queryIPVersion.equals(subnet.getIpVersion()))
+                    && (queryCIDR == null || queryCIDR.equals(subnet.getCidr()))
+                    && (queryGatewayIP == null || queryGatewayIP.equals(subnet.getGatewayIP()))
+                    && (queryEnableDHCP == null || queryEnableDHCP.equals(subnet.getEnableDHCP()))
+                    && (queryTenantID == null || queryTenantID.equals(subnet.getTenantID()))
+                    && (queryIpV6AddressMode == null || queryIpV6AddressMode.equals(subnet.getIpV6AddressMode()))
+                    && (queryIpV6RaMode == null || queryIpV6RaMode.equals(subnet.getIpV6RaMode()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(subnet.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(subnet);
                 }
             }
         }

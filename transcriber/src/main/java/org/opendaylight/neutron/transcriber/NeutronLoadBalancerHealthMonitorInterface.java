@@ -66,8 +66,8 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             final List<Uuid> listUuid = new ArrayList<Uuid>();
-            for (final Neutron_ID neutron_id : healthMonitor.getLoadBalancerHealthMonitorPools()) {
-                listUuid.add(toUuid(neutron_id.getID()));
+            for (final Neutron_ID neutronId : healthMonitor.getLoadBalancerHealthMonitorPools()) {
+                listUuid.add(toUuid(neutronId.getID()));
             }
             healthmonitorBuilder.setPools(listUuid);
         }

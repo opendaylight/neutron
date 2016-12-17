@@ -85,15 +85,15 @@ public class NeutronLBListenerTests {
     }
 
     public static void runTests(String base) {
-        NeutronLBListenerTests listener_tester = new NeutronLBListenerTests(base);
-        String createJsonString = listener_tester.singleton_lb_listener_create_test();
-        listener_tester.singleton_lb_listener_get_with_one_query_item_test(createJsonString);
-        listener_tester.listener_update_test();
-        listener_tester.listener_element_get_test();
-        listener_tester.listener_element_get_with_query_test();
-        listener_tester.listener_collection_get_test();
-        listener_tester.listener_delete_test();
-        listener_tester.listener_element_negative_get_test();
-        listener_tester.test_bug6398_lb_listener_create_test();
+        NeutronLBListenerTests listenerTester = new NeutronLBListenerTests(base);
+        String createJsonString = listenerTester.singleton_lb_listener_create_test();
+        listenerTester.singleton_lb_listener_get_with_one_query_item_test(createJsonString);
+        listenerTester.listener_update_test();
+        listenerTester.listener_element_get_test();
+        listenerTester.listener_element_get_with_query_test();
+        listenerTester.listener_collection_get_test();
+        listenerTester.listener_delete_test();
+        listenerTester.listener_element_negative_get_test();
+        listenerTester.test_bug6398_lb_listener_create_test();
     }
 }

@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -94,9 +93,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
         List<NeutronLoadBalancerPool> allLoadBalancerPools = loadBalancerPoolInterface.getAll();
         List<NeutronLoadBalancerPool> ans = new ArrayList<>();
-        Iterator<NeutronLoadBalancerPool> i = allLoadBalancerPools.iterator();
-        while (i.hasNext()) {
-            NeutronLoadBalancerPool nsg = i.next();
+        for (NeutronLoadBalancerPool nsg : allLoadBalancerPools) {
             if ((queryLoadBalancerPoolID == null || queryLoadBalancerPoolID.equals(nsg.getID()))
                     && (queryLoadBalancerPoolTenantID == null
                             || queryLoadBalancerPoolTenantID.equals(nsg.getTenantID()))
@@ -215,9 +212,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
         List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
                 .getLoadBalancerPoolMembers();
         List<NeutronLoadBalancerPoolMember> ans = new ArrayList<>();
-        Iterator<NeutronLoadBalancerPoolMember> i = members.iterator();
-        while (i.hasNext()) {
-            NeutronLoadBalancerPoolMember nsg = i.next();
+        for (NeutronLoadBalancerPoolMember nsg : members) {
             if ((queryLoadBalancerPoolMemberID == null || queryLoadBalancerPoolMemberID.equals(nsg.getID()))
                     && loadBalancerPoolUUID.equals(nsg.getPoolID())
                     && (queryLoadBalancerPoolMemberTenantID == null

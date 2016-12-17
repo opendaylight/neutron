@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -97,25 +96,23 @@ public final class NeutronPortsNorthbound
         INeutronPortCRUD portInterface = getNeutronCRUD();
         List<NeutronPort> allPorts = portInterface.getAll();
         List<NeutronPort> ans = new ArrayList<>();
-        Iterator<NeutronPort> i = allPorts.iterator();
-        while (i.hasNext()) {
-            NeutronPort oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryNetworkID == null || queryNetworkID.equals(oSS.getNetworkUUID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
-                    && (queryMACAddress == null || queryMACAddress.equals(oSS.getMacAddress()))
-                    && (queryDeviceID == null || queryDeviceID.equals(oSS.getDeviceID()))
-                    && (queryDeviceOwner == null || queryDeviceOwner.equals(oSS.getDeviceOwner()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
+        for (NeutronPort port: allPorts) {
+            if ((queryID == null || queryID.equals(port.getID()))
+                    && (queryNetworkID == null || queryNetworkID.equals(port.getNetworkUUID()))
+                    && (queryName == null || queryName.equals(port.getName()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(port.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(port.getStatus()))
+                    && (queryMACAddress == null || queryMACAddress.equals(port.getMacAddress()))
+                    && (queryDeviceID == null || queryDeviceID.equals(port.getDeviceID()))
+                    && (queryDeviceOwner == null || queryDeviceOwner.equals(port.getDeviceOwner()))
+                    && (queryTenantID == null || queryTenantID.equals(port.getTenantID()))
                     && (queryPortSecurityEnabled == null
-                            || queryPortSecurityEnabled.equals(oSS.getPortSecurityEnabled()))
-                    && (queryQosPolicyId == null || queryQosPolicyId.equals(oSS.getQosPolicyId()))) {
+                            || queryPortSecurityEnabled.equals(port.getPortSecurityEnabled()))
+                    && (queryQosPolicyId == null || queryQosPolicyId.equals(port.getQosPolicyId()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(port.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(port);
                 }
             }
         }

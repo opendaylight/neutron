@@ -70,14 +70,14 @@ public class NeutronVPNServicesTests {
     }
 
     public static void runTests(String base) {
-        NeutronVPNServicesTests vpnService_tester = new NeutronVPNServicesTests(base);
-        String createJsonString = vpnService_tester.singleton_vpnservice_create_test();
-        vpnService_tester.singleton_vpnservice_get_with_one_query_item_test(createJsonString);
-        vpnService_tester.vpnservice_update_test();
-        vpnService_tester.vpnservice_element_get_test();
-        vpnService_tester.vpnservice_element_get_with_query_test();
-        vpnService_tester.vpnService_collection_get_test();
-        vpnService_tester.vpnservice_delete_test();
-        vpnService_tester.vpnservice_element_negative_get_test();
+        NeutronVPNServicesTests vpnServiceTester = new NeutronVPNServicesTests(base);
+        String createJsonString = vpnServiceTester.singleton_vpnservice_create_test();
+        vpnServiceTester.singleton_vpnservice_get_with_one_query_item_test(createJsonString);
+        vpnServiceTester.vpnservice_update_test();
+        vpnServiceTester.vpnservice_element_get_test();
+        vpnServiceTester.vpnservice_element_get_with_query_test();
+        vpnServiceTester.vpnService_collection_get_test();
+        vpnServiceTester.vpnservice_delete_test();
+        vpnServiceTester.vpnservice_element_negative_get_test();
     }
 }

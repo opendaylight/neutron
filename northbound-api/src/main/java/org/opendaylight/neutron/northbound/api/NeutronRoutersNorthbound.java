@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -91,18 +90,16 @@ public final class NeutronRoutersNorthbound
         }
         List<NeutronRouter> allRouters = routerInterface.getAll();
         List<NeutronRouter> ans = new ArrayList<>();
-        Iterator<NeutronRouter> i = allRouters.iterator();
-        while (i.hasNext()) {
-            NeutronRouter oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+        for (NeutronRouter router : allRouters) {
+            if ((queryID == null || queryID.equals(router.getID()))
+                    && (queryName == null || queryName.equals(router.getName()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(router.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(router.getStatus()))
+                    && (queryTenantID == null || queryTenantID.equals(router.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(router.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(router);
                 }
             }
         }

@@ -22,9 +22,9 @@ public class JaxbTestHelper {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static Object jaxbUnmarshall(Object schemaObject, String json) throws JAXBException {
-        Class c = schemaObject.getClass();
+        Class cls = schemaObject.getClass();
         Class[] types = new Class[1];
-        types[0] = c;
+        types[0] = cls;
         Map<String, String> namespacePrefixMapper = new HashMap<String, String>(3);
         namespacePrefixMapper.put("router", "router");
         namespacePrefixMapper.put("provider", "provider");
@@ -41,6 +41,6 @@ public class JaxbTestHelper {
 
         StringReader reader = new StringReader(json);
         StreamSource stream = new StreamSource(reader);
-        return unmarshaller.unmarshal(stream, c).getValue();
+        return unmarshaller.unmarshal(stream, cls).getValue();
     }
 }

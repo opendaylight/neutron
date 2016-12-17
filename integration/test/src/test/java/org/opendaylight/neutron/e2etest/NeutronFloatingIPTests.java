@@ -79,14 +79,14 @@ public class NeutronFloatingIPTests {
     }
 
     public static void runTests(String base) {
-        NeutronFloatingIPTests floatingIP_tester = new NeutronFloatingIPTests(base);
-        String createJsonString = floatingIP_tester.singleton_floatingIP_create_test();
-        floatingIP_tester.singleton_floatingIP_get_with_one_query_item_test(createJsonString);
-        floatingIP_tester.update_floatingIP_test();
-        floatingIP_tester.floatingIP_element_get_test();
-        floatingIP_tester.floatingIP_element_get_with_query_test();
-        floatingIP_tester.floatingIP_collection_get_test();
-        floatingIP_tester.floatingIP_delete_test();
-        floatingIP_tester.floatingIP_element_negative_get_test();
+        NeutronFloatingIPTests floatingIPTester = new NeutronFloatingIPTests(base);
+        String createJsonString = floatingIPTester.singleton_floatingIP_create_test();
+        floatingIPTester.singleton_floatingIP_get_with_one_query_item_test(createJsonString);
+        floatingIPTester.update_floatingIP_test();
+        floatingIPTester.floatingIP_element_get_test();
+        floatingIPTester.floatingIP_element_get_with_query_test();
+        floatingIPTester.floatingIP_collection_get_test();
+        floatingIPTester.floatingIP_delete_test();
+        floatingIPTester.floatingIP_element_negative_get_test();
     }
 }

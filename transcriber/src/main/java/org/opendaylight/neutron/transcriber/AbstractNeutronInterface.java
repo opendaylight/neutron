@@ -81,16 +81,16 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         mdListClass = (Class<T>) parameterizedType.getActualTypeArguments()[0];
         mdContainerClass = (Class<U>) parameterizedType.getActualTypeArguments()[1];
-        Class<S> iNeutronClass = (Class<S>) parameterizedType.getActualTypeArguments()[3];
+        Class<S> neutronObjectClass = (Class<S>) parameterizedType.getActualTypeArguments()[3];
         try {
             setUuid = builderClass.getDeclaredMethod("setUuid", Uuid.class);
             setTenantId = builderClass.getDeclaredMethod("setTenantId", Uuid.class);
-            if (INeutronBaseAttributes.class.isAssignableFrom(iNeutronClass)) {
+            if (INeutronBaseAttributes.class.isAssignableFrom(neutronObjectClass)) {
                 setName = builderClass.getDeclaredMethod("setName", String.class);
             } else {
                 setName = null;
             }
-            if (INeutronAdminAttributes.class.isAssignableFrom(iNeutronClass)) {
+            if (INeutronAdminAttributes.class.isAssignableFrom(neutronObjectClass)) {
                 setAdminStateUp = builderClass.getDeclaredMethod("setAdminStateUp", Boolean.class);
                 setStatus = builderClass.getDeclaredMethod("setStatus", String.class);
             } else {

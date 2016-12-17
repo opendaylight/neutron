@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -84,9 +83,7 @@ public final class NeutronSecurityRulesNorthbound
         INeutronSecurityRuleCRUD securityRuleInterface = getNeutronCRUD();
         List<NeutronSecurityRule> allSecurityRules = securityRuleInterface.getAll();
         List<NeutronSecurityRule> ans = new ArrayList<>();
-        Iterator<NeutronSecurityRule> i = allSecurityRules.iterator();
-        while (i.hasNext()) {
-            NeutronSecurityRule nsr = i.next();
+        for (NeutronSecurityRule nsr : allSecurityRules) {
             if ((querySecurityRuleUUID == null || querySecurityRuleUUID.equals(nsr.getID()))
                     && (querySecurityRuleDirection == null
                             || querySecurityRuleDirection.equals(nsr.getSecurityRuleDirection()))

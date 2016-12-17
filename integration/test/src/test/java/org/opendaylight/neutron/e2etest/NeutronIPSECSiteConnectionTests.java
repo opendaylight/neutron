@@ -81,14 +81,14 @@ public class NeutronIPSECSiteConnectionTests {
     }
 
     public static void runTests(String base) {
-        NeutronIPSECSiteConnectionTests ipsec_siteConnection_tester = new NeutronIPSECSiteConnectionTests(base);
-        String createJsonString = ipsec_siteConnection_tester.singleton_ipsecSiteConnection_create_test();
-        ipsec_siteConnection_tester.singleton_ipsecSiteConnection_get_with_one_query_item_test(createJsonString);
-        ipsec_siteConnection_tester.ipsecSiteConnection_update_test();
-        ipsec_siteConnection_tester.ipsecSiteConnection_element_get_test();
-        ipsec_siteConnection_tester.ipsecSiteConnection_element_get_with_query_test();
-        ipsec_siteConnection_tester.ipsecSiteConnection_collection_get_test();
-        ipsec_siteConnection_tester.ipsecSiteConnection_delete_test();
-        ipsec_siteConnection_tester.ipsecSiteConnection_element_negative_get_test();
+        NeutronIPSECSiteConnectionTests ipsecSiteConnectionTester = new NeutronIPSECSiteConnectionTests(base);
+        String createJsonString = ipsecSiteConnectionTester.singleton_ipsecSiteConnection_create_test();
+        ipsecSiteConnectionTester.singleton_ipsecSiteConnection_get_with_one_query_item_test(createJsonString);
+        ipsecSiteConnectionTester.ipsecSiteConnection_update_test();
+        ipsecSiteConnectionTester.ipsecSiteConnection_element_get_test();
+        ipsecSiteConnectionTester.ipsecSiteConnection_element_get_with_query_test();
+        ipsecSiteConnectionTester.ipsecSiteConnection_collection_get_test();
+        ipsecSiteConnectionTester.ipsecSiteConnection_delete_test();
+        ipsecSiteConnectionTester.ipsecSiteConnection_element_negative_get_test();
     }
 }

@@ -51,12 +51,12 @@ public class NeutronMeteringLabelTests {
     }
 
     public static void runTests(String base) {
-        NeutronMeteringLabelTests meteringLabel_tester = new NeutronMeteringLabelTests(base);
-        meteringLabel_tester.singleton_meteringLabel_create_test();
-        meteringLabel_tester.meteringLabel_element_get_test();
-        meteringLabel_tester.meteringLabel_element_get_with_query_test();
-        meteringLabel_tester.meteringLabel_collection_get_test();
-        meteringLabel_tester.meteringLabel_delete_test();
-        meteringLabel_tester.meteringLabel_element_negative_get_test();
+        NeutronMeteringLabelTests meteringLabelTester = new NeutronMeteringLabelTests(base);
+        meteringLabelTester.singleton_meteringLabel_create_test();
+        meteringLabelTester.meteringLabel_element_get_test();
+        meteringLabelTester.meteringLabel_element_get_with_query_test();
+        meteringLabelTester.meteringLabel_collection_get_test();
+        meteringLabelTester.meteringLabel_delete_test();
+        meteringLabelTester.meteringLabel_element_negative_get_test();
     }
 }

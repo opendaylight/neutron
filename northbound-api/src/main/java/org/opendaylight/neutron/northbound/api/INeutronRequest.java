@@ -15,9 +15,9 @@ import org.opendaylight.neutron.spi.INeutronObject;
 public interface INeutronRequest<T extends INeutronObject<T>> {
     default T getSingleton() {
         // return this.sinleton;
-        Class aClass = getClass();
+        Class cls = getClass();
         try {
-            Field field = aClass.getDeclaredField("singleton");
+            Field field = cls.getDeclaredField("singleton");
             return (T) field.get(this);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new IllegalArgumentException(e);
@@ -26,9 +26,9 @@ public interface INeutronRequest<T extends INeutronObject<T>> {
 
     default boolean isSingleton() {
         // return this.sinleton != null;
-        Class aClass = getClass();
+        Class cls = getClass();
         try {
-            Field field = aClass.getDeclaredField("singleton");
+            Field field = cls.getDeclaredField("singleton");
             return field.get(this) != null;
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new IllegalArgumentException(e);
@@ -37,9 +37,9 @@ public interface INeutronRequest<T extends INeutronObject<T>> {
 
     default List<T> getBulk() {
         // return this.bulkRequest;
-        Class aClass = getClass();
+        Class cls = getClass();
         try {
-            Field field = aClass.getDeclaredField("bulkRequest");
+            Field field = cls.getDeclaredField("bulkRequest");
             return (List<T>) field.get(this);
         } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new IllegalArgumentException(e);

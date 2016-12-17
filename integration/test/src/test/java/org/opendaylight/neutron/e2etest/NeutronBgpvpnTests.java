@@ -84,15 +84,15 @@ public class NeutronBgpvpnTests {
     }
 
     public static void runTests(String base) {
-        NeutronBgpvpnTests bgpvpn_tester = new NeutronBgpvpnTests(base);
-        bgpvpn_tester.bgpvpn_collection_get_test();
-        String createJsonString = bgpvpn_tester.singleton_bgpvpn_create_test();
-        bgpvpn_tester.singleton_bgpvpn_get_with_one_query_item_test(createJsonString);
-        bgpvpn_tester.bulk_bgpvpn_create_test();
-        bgpvpn_tester.bgpvpn_update_test();
-        bgpvpn_tester.bgpvpn_element_get_test();
-        bgpvpn_tester.bgpvpn_element_get_test_with_added_query();
-        bgpvpn_tester.bgpvpn_delete_test();
-        bgpvpn_tester.bgpvpn_element_negative_get_test();
+        NeutronBgpvpnTests bgpvpnTester = new NeutronBgpvpnTests(base);
+        bgpvpnTester.bgpvpn_collection_get_test();
+        String createJsonString = bgpvpnTester.singleton_bgpvpn_create_test();
+        bgpvpnTester.singleton_bgpvpn_get_with_one_query_item_test(createJsonString);
+        bgpvpnTester.bulk_bgpvpn_create_test();
+        bgpvpnTester.bgpvpn_update_test();
+        bgpvpnTester.bgpvpn_element_get_test();
+        bgpvpnTester.bgpvpn_element_get_test_with_added_query();
+        bgpvpnTester.bgpvpn_delete_test();
+        bgpvpnTester.bgpvpn_element_negative_get_test();
     }
 }

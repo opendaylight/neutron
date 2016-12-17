@@ -74,16 +74,16 @@ public class NeutronLBPoolTests {
     }
 
     public static void runTests(String base) {
-        NeutronLBPoolTests pool_tester = new NeutronLBPoolTests(base);
-        String createJsonString = pool_tester.singleton_lb_pool_create_test();
-        pool_tester.singleton_lb_pool_get_with_one_query_item_test(createJsonString);
-        pool_tester.pool_update_test();
-        pool_tester.pool_element_get_test();
-        pool_tester.pool_element_get_with_query_test();
-        pool_tester.pool_collection_get_test();
-        pool_tester.pool_delete_test();
-        pool_tester.pool_element_negative_get_test();
+        NeutronLBPoolTests poolTester = new NeutronLBPoolTests(base);
+        String createJsonString = poolTester.singleton_lb_pool_create_test();
+        poolTester.singleton_lb_pool_get_with_one_query_item_test(createJsonString);
+        poolTester.pool_update_test();
+        poolTester.pool_element_get_test();
+        poolTester.pool_element_get_with_query_test();
+        poolTester.pool_collection_get_test();
+        poolTester.pool_delete_test();
+        poolTester.pool_element_negative_get_test();
         // needed for pool member testing
-        pool_tester.singleton_lb_pool_create_test();
+        poolTester.singleton_lb_pool_create_test();
     }
 }

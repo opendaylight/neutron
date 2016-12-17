@@ -79,16 +79,16 @@ public class NeutronL2GatewayConnectionTests {
     }
 
     public static void runTests(String base) {
-        NeutronL2GatewayConnectionTests l2gateway_connection_tester = new NeutronL2GatewayConnectionTests(base);
-        String createJsonString = l2gateway_connection_tester.singleton_l2gateway_connection_create_test();
-        l2gateway_connection_tester.singleton_l2gateway_connection_get_with_one_query_test(createJsonString);
-        l2gateway_connection_tester.l2gateway_connection_element_get_test();
-        l2gateway_connection_tester.l2gateway_connection_element_get_with_query_test();
-        l2gateway_connection_tester.l2gateway_connection_collection_get_test();
-        l2gateway_connection_tester.l2gateway_connection_delete_test();
-        l2gateway_connection_tester.l2gateway_connection_element_negative_get_test();
-        l2gateway_connection_tester.l2gateway_connection_create_without_port_test();
-        l2gateway_connection_tester.l2gateway_connection_element_get_without_port_test();
-        l2gateway_connection_tester.l2gateway_connection_delete_without_port_test();
+        NeutronL2GatewayConnectionTests l2gatewayConnectionTester = new NeutronL2GatewayConnectionTests(base);
+        String createJsonString = l2gatewayConnectionTester.singleton_l2gateway_connection_create_test();
+        l2gatewayConnectionTester.singleton_l2gateway_connection_get_with_one_query_test(createJsonString);
+        l2gatewayConnectionTester.l2gateway_connection_element_get_test();
+        l2gatewayConnectionTester.l2gateway_connection_element_get_with_query_test();
+        l2gatewayConnectionTester.l2gateway_connection_collection_get_test();
+        l2gatewayConnectionTester.l2gateway_connection_delete_test();
+        l2gatewayConnectionTester.l2gateway_connection_element_negative_get_test();
+        l2gatewayConnectionTester.l2gateway_connection_create_without_port_test();
+        l2gatewayConnectionTester.l2gateway_connection_element_get_without_port_test();
+        l2gatewayConnectionTester.l2gateway_connection_delete_without_port_test();
     }
 }

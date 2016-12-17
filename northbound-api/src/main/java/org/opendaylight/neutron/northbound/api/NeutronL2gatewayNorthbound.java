@@ -9,7 +9,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -106,9 +105,7 @@ public final class NeutronL2gatewayNorthbound
         INeutronL2gatewayCRUD l2gatewayInterface = getNeutronCRUD();
         List<NeutronL2gateway> allL2gateways = l2gatewayInterface.getAll();
         List<NeutronL2gateway> ans = new ArrayList<>();
-        Iterator<NeutronL2gateway> i = allL2gateways.iterator();
-        while (i.hasNext()) {
-            NeutronL2gateway l2gateway = i.next();
+        for (NeutronL2gateway l2gateway : allL2gateways) {
             if ((queryID == null || queryID.equals(l2gateway.getID()))
                     && (queryName == null || queryName.equals(l2gateway.getName()))
                     && (queryTenantID == null || queryTenantID.equals(l2gateway.getTenantID()))) {

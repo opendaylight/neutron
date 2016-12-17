@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -85,23 +84,21 @@ public final class NeutronVPNServicesNorthbound
             @QueryParam("page_reverse") String pageReverse
     // sorting not supported
     ) {
-        INeutronVPNServiceCRUD VPNServiceInterface = getNeutronCRUD();
-        List<NeutronVPNService> allVPNService = VPNServiceInterface.getAll();
+        INeutronVPNServiceCRUD vpnServiceInterface = getNeutronCRUD();
+        List<NeutronVPNService> allVPNService = vpnServiceInterface.getAll();
         List<NeutronVPNService> ans = new ArrayList<>();
-        Iterator<NeutronVPNService> i = allVPNService.iterator();
-        while (i.hasNext()) {
-            NeutronVPNService oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
-                    && (querySubnetID == null || querySubnetID.equals(oSS.getSubnetUUID()))
-                    && (queryRouterID == null || queryRouterID.equals(oSS.getRouterUUID()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+        for (NeutronVPNService vpnService : allVPNService) {
+            if ((queryID == null || queryID.equals(vpnService.getID()))
+                    && (queryName == null || queryName.equals(vpnService.getName()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(vpnService.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(vpnService.getStatus()))
+                    && (querySubnetID == null || querySubnetID.equals(vpnService.getSubnetUUID()))
+                    && (queryRouterID == null || queryRouterID.equals(vpnService.getRouterUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(vpnService.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(vpnService.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(vpnService);
                 }
             }
         }

@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -83,23 +82,21 @@ public final class NeutronVPNIKEPoliciesNorthbound
         INeutronVPNIKEPolicyCRUD labelInterface = getNeutronCRUD();
         List<NeutronVPNIKEPolicy> allNeutronVPNIKEPolicy = labelInterface.getAll();
         List<NeutronVPNIKEPolicy> ans = new ArrayList<>();
-        Iterator<NeutronVPNIKEPolicy> i = allNeutronVPNIKEPolicy.iterator();
-        while (i.hasNext()) {
-            NeutronVPNIKEPolicy oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(oSS.getAuthAlgorithm()))
+        for (NeutronVPNIKEPolicy policy : allNeutronVPNIKEPolicy) {
+            if ((queryID == null || queryID.equals(policy.getID()))
+                    && (queryName == null || queryName.equals(policy.getName()))
+                    && (queryAuthAlgorithm == null || queryAuthAlgorithm.equals(policy.getAuthAlgorithm()))
                     && (queryEncryptionAlgorithm == null
-                            || queryEncryptionAlgorithm.equals(oSS.getEncryptionAlgorithm()))
+                            || queryEncryptionAlgorithm.equals(policy.getEncryptionAlgorithm()))
                     && (queryPhase1NegotiationMode == null
-                            || queryPhase1NegotiationMode.equals(oSS.getPhase1NegotiationMode()))
-                    && (queryPFS == null || queryPFS.equals(oSS.getPerfectForwardSecrecy()))
-                    && (queryIKEVersion == null || queryIKEVersion.equals(oSS.getIkeVersion()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+                            || queryPhase1NegotiationMode.equals(policy.getPhase1NegotiationMode()))
+                    && (queryPFS == null || queryPFS.equals(policy.getPerfectForwardSecrecy()))
+                    && (queryIKEVersion == null || queryIKEVersion.equals(policy.getIkeVersion()))
+                    && (queryTenantID == null || queryTenantID.equals(policy.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(policy.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(policy);
                 }
             }
         }

@@ -61,12 +61,12 @@ public class NeutronMeteringRuleTests {
     }
 
     public static void runTests(String base) {
-        NeutronMeteringRuleTests meteringRule_tester = new NeutronMeteringRuleTests(base);
-        meteringRule_tester.singleton_meteringRule_create_test();
-        meteringRule_tester.meteringRule_element_get_test();
-        meteringRule_tester.meteringRule_element_get_with_query_test();
-        meteringRule_tester.meteringRule_collection_get_test();
-        meteringRule_tester.meteringRule_delete_test();
-        meteringRule_tester.meteringRule_element_negative_get_test();
+        NeutronMeteringRuleTests meteringRuleTester = new NeutronMeteringRuleTests(base);
+        meteringRuleTester.singleton_meteringRule_create_test();
+        meteringRuleTester.meteringRule_element_get_test();
+        meteringRuleTester.meteringRule_element_get_with_query_test();
+        meteringRuleTester.meteringRule_collection_get_test();
+        meteringRuleTester.meteringRule_delete_test();
+        meteringRuleTester.meteringRule_element_negative_get_test();
     }
 }

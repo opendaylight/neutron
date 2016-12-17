@@ -225,10 +225,10 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (neutronPort.getFixedIPs() != null) {
             final List<FixedIps> listNeutronIPs = new ArrayList<FixedIps>();
-            for (final Neutron_IPs neutron_IPs : neutronPort.getFixedIPs()) {
+            for (final Neutron_IPs neutronIPs : neutronPort.getFixedIPs()) {
                 final FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
-                fixedIpsBuilder.setIpAddress(new IpAddress(neutron_IPs.getIpAddress().toCharArray()));
-                fixedIpsBuilder.setSubnetId(toUuid(neutron_IPs.getSubnetUUID()));
+                fixedIpsBuilder.setIpAddress(new IpAddress(neutronIPs.getIpAddress().toCharArray()));
+                fixedIpsBuilder.setSubnetId(toUuid(neutronIPs.getSubnetUUID()));
                 listNeutronIPs.add(fixedIpsBuilder.build());
             }
             portBuilder.setFixedIps(listNeutronIPs);

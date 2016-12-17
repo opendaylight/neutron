@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -93,28 +92,26 @@ public final class NeutronVPNIPSECSiteConnectionsNorthbound
         INeutronVPNIPSECSiteConnectionsCRUD labelInterface = getNeutronCRUD();
         List<NeutronVPNIPSECSiteConnection> allNeutronVPNIPSECSiteConnection = labelInterface.getAll();
         List<NeutronVPNIPSECSiteConnection> ans = new ArrayList<>();
-        Iterator<NeutronVPNIPSECSiteConnection> i = allNeutronVPNIPSECSiteConnection.iterator();
-        while (i.hasNext()) {
-            NeutronVPNIPSECSiteConnection oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryPeerAddress == null || queryPeerAddress.equals(oSS.getPeerAddress()))
-                    && (queryPeerID == null || queryPeerID.equals(oSS.getPeerID()))
-                    && (queryRouteMode == null || queryRouteMode.equals(oSS.getRouteMode()))
-                    && (queryMtu == null || queryMtu.equals(oSS.getMtu()))
-                    && (queryAuthMode == null || queryAuthMode.equals(oSS.getAuthMode()))
-                    && (queryPsk == null || queryPsk.equals(oSS.getPreSharedKey()))
-                    && (queryInitiator == null || queryInitiator.equals(oSS.getInitiator()))
-                    && (queryAdminStateUp == null || queryAdminStateUp.equals(oSS.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(oSS.getStatus()))
-                    && (queryIkePolicyID == null || queryIkePolicyID.equals(oSS.getIkePolicyID()))
-                    && (queryIpSecPolicyID == null || queryIpSecPolicyID.equals(oSS.getIpsecPolicyID()))
-                    && (queryVpnServiceID == null || queryVpnServiceID.equals(oSS.getVpnServiceID()))) {
+        for (NeutronVPNIPSECSiteConnection siteConnection : allNeutronVPNIPSECSiteConnection) {
+            if ((queryID == null || queryID.equals(siteConnection.getID()))
+                    && (queryTenantID == null || queryTenantID.equals(siteConnection.getTenantID()))
+                    && (queryName == null || queryName.equals(siteConnection.getName()))
+                    && (queryPeerAddress == null || queryPeerAddress.equals(siteConnection.getPeerAddress()))
+                    && (queryPeerID == null || queryPeerID.equals(siteConnection.getPeerID()))
+                    && (queryRouteMode == null || queryRouteMode.equals(siteConnection.getRouteMode()))
+                    && (queryMtu == null || queryMtu.equals(siteConnection.getMtu()))
+                    && (queryAuthMode == null || queryAuthMode.equals(siteConnection.getAuthMode()))
+                    && (queryPsk == null || queryPsk.equals(siteConnection.getPreSharedKey()))
+                    && (queryInitiator == null || queryInitiator.equals(siteConnection.getInitiator()))
+                    && (queryAdminStateUp == null || queryAdminStateUp.equals(siteConnection.getAdminStateUp()))
+                    && (queryStatus == null || queryStatus.equals(siteConnection.getStatus()))
+                    && (queryIkePolicyID == null || queryIkePolicyID.equals(siteConnection.getIkePolicyID()))
+                    && (queryIpSecPolicyID == null || queryIpSecPolicyID.equals(siteConnection.getIpsecPolicyID()))
+                    && (queryVpnServiceID == null || queryVpnServiceID.equals(siteConnection.getVpnServiceID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(siteConnection.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(siteConnection);
                 }
             }
         }

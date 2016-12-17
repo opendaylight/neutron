@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -77,16 +76,14 @@ public final class NeutronMeteringLabelsNorthbound extends
         INeutronMeteringLabelCRUD labelInterface = getNeutronCRUD();
         List<NeutronMeteringLabel> allNeutronMeteringLabel = labelInterface.getAll();
         List<NeutronMeteringLabel> ans = new ArrayList<>();
-        Iterator<NeutronMeteringLabel> i = allNeutronMeteringLabel.iterator();
-        while (i.hasNext()) {
-            NeutronMeteringLabel oSS = i.next();
-            if ((queryID == null || queryID.equals(oSS.getID()))
-                    && (queryName == null || queryName.equals(oSS.getName()))
-                    && (queryTenantID == null || queryTenantID.equals(oSS.getTenantID()))) {
+        for (NeutronMeteringLabel label : allNeutronMeteringLabel) {
+            if ((queryID == null || queryID.equals(label.getID()))
+                    && (queryName == null || queryName.equals(label.getName()))
+                    && (queryTenantID == null || queryTenantID.equals(label.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSS.extractFields(fields));
+                    ans.add(label.extractFields(fields));
                 } else {
-                    ans.add(oSS);
+                    ans.add(label);
                 }
             }
         }

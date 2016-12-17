@@ -76,10 +76,10 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
                 builder.setExternalNetworkId(toUuid(externalGatewayInfos.getNetworkID()));
                 if (externalGatewayInfos.getExternalFixedIPs() != null) {
                     final List<ExternalFixedIps> externalFixedIps = new ArrayList<ExternalFixedIps>();
-                    for (final Neutron_IPs eIP : externalGatewayInfos.getExternalFixedIPs()) {
+                    for (final Neutron_IPs externalIp : externalGatewayInfos.getExternalFixedIPs()) {
                         final ExternalFixedIpsBuilder eFixedIpBuilder = new ExternalFixedIpsBuilder();
-                        eFixedIpBuilder.setIpAddress(new IpAddress(eIP.getIpAddress().toCharArray()));
-                        eFixedIpBuilder.setSubnetId(toUuid(eIP.getSubnetUUID()));
+                        eFixedIpBuilder.setIpAddress(new IpAddress(externalIp.getIpAddress().toCharArray()));
+                        eFixedIpBuilder.setSubnetId(toUuid(externalIp.getSubnetUUID()));
                         externalFixedIps.add(eFixedIpBuilder.build());
                     }
                     builder.setExternalFixedIps(externalFixedIps);

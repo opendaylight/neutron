@@ -109,18 +109,18 @@ public class NeutronRouterTests {
     }
 
     public static void runTests(String base) {
-        NeutronRouterTests router_tester = new NeutronRouterTests(base);
-        String createJsonString = router_tester.singleton_router_create_test();
-        router_tester.singleton_router_get_with_one_query_item_test(createJsonString);
-        router_tester.router_add_interface_test();
-        router_tester.update_router_test();
-        router_tester.create_router(); // needed for following tests
-        router_tester.router_add_interface();
-        router_tester.router_element_get_test();
-        router_tester.router_element_get_with_query_test();
-        router_tester.router_collection_get_test();
-        router_tester.router_remove_interface_test();
-        router_tester.router_delete_test();
-        router_tester.router_element_negative_get_test();
+        NeutronRouterTests routerTester = new NeutronRouterTests(base);
+        String createJsonString = routerTester.singleton_router_create_test();
+        routerTester.singleton_router_get_with_one_query_item_test(createJsonString);
+        routerTester.router_add_interface_test();
+        routerTester.update_router_test();
+        routerTester.create_router(); // needed for following tests
+        routerTester.router_add_interface();
+        routerTester.router_element_get_test();
+        routerTester.router_element_get_with_query_test();
+        routerTester.router_collection_get_test();
+        routerTester.router_remove_interface_test();
+        routerTester.router_delete_test();
+        routerTester.router_element_negative_get_test();
     }
 }

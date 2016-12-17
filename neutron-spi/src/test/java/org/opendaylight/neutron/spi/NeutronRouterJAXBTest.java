@@ -29,7 +29,7 @@ public class NeutronRouterJAXBTest {
         NeutronRouter testObject = (NeutronRouter) JaxbTestHelper.jaxbUnmarshall(dummyObject,
                 NeutronRouter_sourceJson);
 
-        NeutronRouter_NetworkReference external_gateway_info = testObject.getExternalGatewayInfo();
+        NeutronRouter_NetworkReference externalGatewayInfo = testObject.getExternalGatewayInfo();
         List<NeutronRoute> routes = testObject.getRoutes();
 
         Assert.assertEquals("NeutronRouter JAXB Test 1: Testing router_uuid failed",
@@ -45,8 +45,8 @@ public class NeutronRouterJAXBTest {
         Assert.assertEquals("NeutronFloatingIP JAXB Test 5: Testing tenant_id failed",
                 "aa902936679e4ea29bfe1158e3450a13", testObject.getTenantID());
 
-        Assert.assertEquals("NeutronRouter JAXB Test 6: Testing external_gateway_info failed",
-                "e9330b1f-a2ef-4160-a991-169e56ab17f6", external_gateway_info.getNetworkID());
+        Assert.assertEquals("NeutronRouter JAXB Test 6: Testing externalGatewayInfo failed",
+                "e9330b1f-a2ef-4160-a991-169e56ab17f6", externalGatewayInfo.getNetworkID());
 
         Assert.assertEquals("NeutronRouter JAXB Test 7: Testing distributed failed", false,
                 testObject.getDistributed());

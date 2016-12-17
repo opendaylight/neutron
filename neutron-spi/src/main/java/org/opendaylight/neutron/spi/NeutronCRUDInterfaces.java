@@ -29,12 +29,12 @@ public final class NeutronCRUDInterfaces {
 
     public static Object getInstances(Class<?> clazz, Object bundle) {
         try {
-            BundleContext bCtx = FrameworkUtil.getBundle(bundle.getClass()).getBundleContext();
+            BundleContext bundleCtx = FrameworkUtil.getBundle(bundle.getClass()).getBundleContext();
 
             ServiceReference<?>[] services = null;
-            services = bCtx.getServiceReferences(clazz.getName(), null);
+            services = bundleCtx.getServiceReferences(clazz.getName(), null);
             if (services != null) {
-                return bCtx.getService(services[0]);
+                return bundleCtx.getService(services[0]);
             }
         } catch (InvalidSyntaxException e) {
             LOGGER.error("Error in getInstances", e);

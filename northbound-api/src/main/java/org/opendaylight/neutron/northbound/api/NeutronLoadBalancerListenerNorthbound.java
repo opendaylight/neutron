@@ -10,7 +10,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -85,9 +84,7 @@ public final class NeutronLoadBalancerListenerNorthbound extends AbstractNeutron
         INeutronLoadBalancerListenerCRUD loadBalancerListenerInterface = getNeutronCRUD();
         List<NeutronLoadBalancerListener> allLoadBalancerListeners = loadBalancerListenerInterface.getAll();
         List<NeutronLoadBalancerListener> ans = new ArrayList<>();
-        Iterator<NeutronLoadBalancerListener> i = allLoadBalancerListeners.iterator();
-        while (i.hasNext()) {
-            NeutronLoadBalancerListener nsg = i.next();
+        for (NeutronLoadBalancerListener nsg : allLoadBalancerListeners) {
             if ((queryLoadBalancerListenerID == null || queryLoadBalancerListenerID.equals(nsg.getID()))
                     && (queryLoadBalancerListenerDefaultPoolID == null || queryLoadBalancerListenerDefaultPoolID
                             .equals(nsg.getNeutronLoadBalancerListenerDefaultPoolID()))

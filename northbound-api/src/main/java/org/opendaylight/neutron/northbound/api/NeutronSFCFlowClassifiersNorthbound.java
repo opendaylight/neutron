@@ -9,7 +9,6 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -84,31 +83,31 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
         INeutronSFCFlowClassifierCRUD sfcFlowClassifierInterface = getNeutronCRUD();
         List<NeutronSFCFlowClassifier> allSFCFlowClassifier = sfcFlowClassifierInterface.getAll();
         List<NeutronSFCFlowClassifier> ans = new ArrayList<>();
-        Iterator<NeutronSFCFlowClassifier> i = allSFCFlowClassifier.iterator();
-        while (i.hasNext()) {
-            NeutronSFCFlowClassifier oSFC = i.next();
-            if ((queryID == null || queryID.equals(oSFC.getID()))
-                    && (queryName == null || queryName.equals(oSFC.getName()))
-                    && (queryEthertype == null || queryEthertype.equals(oSFC.getEthertype()))
-                    && (queryProtocol == null || queryProtocol.equals(oSFC.getProtocol()))
-                    && (querySourcePortRangeMin == null || querySourcePortRangeMin.equals(oSFC.getSourcePortRangeMin()))
-                    && (querySourcePortRangeMax == null || querySourcePortRangeMax.equals(oSFC.getSourcePortRangeMax()))
+        for (NeutronSFCFlowClassifier classifier : allSFCFlowClassifier) {
+            if ((queryID == null || queryID.equals(classifier.getID()))
+                    && (queryName == null || queryName.equals(classifier.getName()))
+                    && (queryEthertype == null || queryEthertype.equals(classifier.getEthertype()))
+                    && (queryProtocol == null || queryProtocol.equals(classifier.getProtocol()))
+                    && (querySourcePortRangeMin == null
+                        || querySourcePortRangeMin.equals(classifier.getSourcePortRangeMin()))
+                    && (querySourcePortRangeMax == null
+                        || querySourcePortRangeMax.equals(classifier.getSourcePortRangeMax()))
                     && (queryDestinationPortRangeMin == null
-                            || queryDestinationPortRangeMin.equals(oSFC.getDestinationPortRangeMin()))
+                            || queryDestinationPortRangeMin.equals(classifier.getDestinationPortRangeMin()))
                     && (queryDestinationPortRangeMax == null
-                            || queryDestinationPortRangeMax.equals(oSFC.getDestinationPortRangeMax()))
-                    && (querySourceIpPrefix == null || querySourceIpPrefix.equals(oSFC.getSourceIpPrefix()))
+                            || queryDestinationPortRangeMax.equals(classifier.getDestinationPortRangeMax()))
+                    && (querySourceIpPrefix == null || querySourceIpPrefix.equals(classifier.getSourceIpPrefix()))
                     && (queryDestinationIpPrefix == null
-                            || queryDestinationIpPrefix.equals(oSFC.getDestinationIpPrefix()))
+                            || queryDestinationIpPrefix.equals(classifier.getDestinationIpPrefix()))
                     && (queryLogicalSourcePort == null
-                            || queryLogicalSourcePort.equals(oSFC.getLogicalSourcePortUUID()))
+                            || queryLogicalSourcePort.equals(classifier.getLogicalSourcePortUUID()))
                     && (queryLogicalDestinationPort == null
-                            || queryLogicalDestinationPort.equals(oSFC.getLogicalDestinationPortUUID()))
-                    && (queryTenantID == null || queryTenantID.equals(oSFC.getTenantID()))) {
+                            || queryLogicalDestinationPort.equals(classifier.getLogicalDestinationPortUUID()))
+                    && (queryTenantID == null || queryTenantID.equals(classifier.getTenantID()))) {
                 if (fields.size() > 0) {
-                    ans.add(oSFC.extractFields(fields));
+                    ans.add(classifier.extractFields(fields));
                 } else {
-                    ans.add(oSFC);
+                    ans.add(classifier);
                 }
             }
         }
