@@ -13,7 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by Anil Vishnoi (avishnoi@Brocade.com)
+ * Created by Anil Vishnoi (avishnoi@Brocade.com).
  */
 public class NeutronSFCPortChainJAXBTest {
 

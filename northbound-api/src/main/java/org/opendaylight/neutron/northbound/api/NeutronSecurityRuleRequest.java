@@ -20,7 +20,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 public final class NeutronSecurityRuleRequest implements INeutronRequest<NeutronSecurityRule> {
     /**
      * See OpenStack Network API v2.0 Reference for a
-     * description of annotated attributes and operations
+     * description of annotated attributes and operations.
      */
 
     @XmlElement(name = "security_group_rule")

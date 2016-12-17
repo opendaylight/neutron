@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by Anil Vishnoi (avishnoi@Brocade.com)
+ * Created by Anil Vishnoi (avishnoi@Brocade.com).
  */
 public class NeutronSFCPortPairGroupJAXBTest {
     private static final String NEUTRON_SFC_PORT_PAIR_GROUP_SOURCE_JSON = "{ " + "\"name\": \"portpair1\", "

@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerPoolRequest implements INeutronRequest<NeutronLoadBalancerPool> {
     /**
-     * See OpenStack Network API v2.0 Reference for description of
+     * See OpenStack Network API v2.0 Reference for description of the following link.
      * http://docs.openstack.org/api/openstack-network/2.0/content/
      */
 

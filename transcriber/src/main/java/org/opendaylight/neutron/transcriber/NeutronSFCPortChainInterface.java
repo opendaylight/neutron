@@ -25,7 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by Anil Vishnoi (avishnoi@Brocade.com)
+ * Created by Anil Vishnoi (avishnoi@Brocade.com).
  */
 public final class NeutronSFCPortChainInterface
         extends AbstractNeutronInterface<PortChain, PortChains, PortChainKey, NeutronSFCPortChain>
