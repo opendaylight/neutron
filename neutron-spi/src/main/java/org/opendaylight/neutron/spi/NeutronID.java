@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class Neutron_ID implements Serializable {
+public class NeutronID implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String UUID_PATTERN_REGEX =
             "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
@@ -36,10 +36,10 @@ public class Neutron_ID implements Serializable {
                 "Supplied value \"%s\" does not match uuid pattern \"%s\"", uuid, UUID_PATTERN_REGEX);
     }
 
-    public Neutron_ID() {
+    public NeutronID() {
     }
 
-    public Neutron_ID(String uuid) {
+    public NeutronID(String uuid) {
         checkUuidPattern(uuid);
         this.uuid = uuid;
     }
@@ -55,6 +55,6 @@ public class Neutron_ID implements Serializable {
 
     @Override
     public String toString() {
-        return "Neutron_ID{" + "id='" + uuid + '\'' + "}";
+        return "NeutronID{" + "id='" + uuid + '\'' + "}";
     }
 }

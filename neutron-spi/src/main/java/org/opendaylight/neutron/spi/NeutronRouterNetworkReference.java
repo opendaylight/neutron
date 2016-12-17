@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronRouter_NetworkReference implements Serializable {
+public final class NeutronRouterNetworkReference implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -30,9 +30,9 @@ public final class NeutronRouter_NetworkReference implements Serializable {
     Boolean enableSNAT;
 
     @XmlElement(name = "external_fixed_ips")
-    List<Neutron_IPs> externalFixedIPs;
+    List<NeutronIPs> externalFixedIPs;
 
-    public NeutronRouter_NetworkReference() {
+    public NeutronRouterNetworkReference() {
     }
 
     public String getNetworkID() {
@@ -51,11 +51,11 @@ public final class NeutronRouter_NetworkReference implements Serializable {
         this.enableSNAT = enableSNAT;
     }
 
-    public List<Neutron_IPs> getExternalFixedIPs() {
+    public List<NeutronIPs> getExternalFixedIPs() {
         return externalFixedIPs;
     }
 
-    public void setExternalFixedIPs(List<Neutron_IPs> externalFixedIPs) {
+    public void setExternalFixedIPs(List<NeutronIPs> externalFixedIPs) {
         this.externalFixedIPs = externalFixedIPs;
     }
 

@@ -34,7 +34,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     String macAddress;
 
     @XmlElement(name = "fixed_ips")
-    List<Neutron_IPs> fixedIPs;
+    List<NeutronIPs> fixedIPs;
 
     @XmlElement(name = "device_id")
     String deviceID;
@@ -46,7 +46,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     List<NeutronSecurityGroup> securityGroups;
 
     @XmlElement(name = "allowed_address_pairs")
-    List<NeutronPort_AllowedAddressPairs> allowedAddressPairs;
+    List<NeutronPortAllowedAddressPairs> allowedAddressPairs;
 
     //@XmlElement (name = "binding:host_id")
     @XmlElement(namespace = "binding", name = "host_id")
@@ -66,7 +66,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     Map<String, String> vifDetails;
 
     @XmlElement(name = "extra_dhcp_opts")
-    List<NeutronPort_ExtraDHCPOption> extraDHCPOptions;
+    List<NeutronPortExtraDHCPOption> extraDHCPOptions;
 
     //Port security is enabled by default for backward compatibility.
     @XmlElement(defaultValue = "true", name = "port_security_enabled")
@@ -101,11 +101,11 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         this.macAddress = macAddress;
     }
 
-    public List<Neutron_IPs> getFixedIPs() {
+    public List<NeutronIPs> getFixedIPs() {
         return fixedIPs;
     }
 
-    public void setFixedIPs(List<Neutron_IPs> fixedIPs) {
+    public void setFixedIPs(List<NeutronIPs> fixedIPs) {
         this.fixedIPs = fixedIPs;
     }
 
@@ -133,19 +133,19 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         this.securityGroups = securityGroups;
     }
 
-    public List<NeutronPort_AllowedAddressPairs> getAllowedAddressPairs() {
+    public List<NeutronPortAllowedAddressPairs> getAllowedAddressPairs() {
         return allowedAddressPairs;
     }
 
-    public void setAllowedAddressPairs(List<NeutronPort_AllowedAddressPairs> allowedAddressPairs) {
+    public void setAllowedAddressPairs(List<NeutronPortAllowedAddressPairs> allowedAddressPairs) {
         this.allowedAddressPairs = allowedAddressPairs;
     }
 
-    public List<NeutronPort_ExtraDHCPOption> getExtraDHCPOptions() {
+    public List<NeutronPortExtraDHCPOption> getExtraDHCPOptions() {
         return extraDHCPOptions;
     }
 
-    public void setExtraDHCPOptions(List<NeutronPort_ExtraDHCPOption> extraDHCPOptions) {
+    public void setExtraDHCPOptions(List<NeutronPortExtraDHCPOption> extraDHCPOptions) {
         this.extraDHCPOptions = extraDHCPOptions;
     }
 
@@ -221,7 +221,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 ans.setMacAddress(this.getMacAddress());
             }
             if ("fixed_ips".equals(field)) {
-                ans.setFixedIPs(new ArrayList<Neutron_IPs>(this.getFixedIPs()));
+                ans.setFixedIPs(new ArrayList<NeutronIPs>(this.getFixedIPs()));
             }
             if ("device_id".equals(field)) {
                 ans.setDeviceID(this.getDeviceID());
@@ -234,7 +234,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
             }
             if ("allowed_address_pairs".equals(field)) {
                 ans.setAllowedAddressPairs(
-                        new ArrayList<NeutronPort_AllowedAddressPairs>(this.getAllowedAddressPairs()));
+                        new ArrayList<NeutronPortAllowedAddressPairs>(this.getAllowedAddressPairs()));
             }
             if ("binding:host_id".equals(field)) {
                 ans.setBindinghostID(this.getBindinghostID());
@@ -249,7 +249,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 ans.setVIFDetails(new HashMap<String, String>(this.getVIFDetails()));
             }
             if ("extra_dhcp_opts".equals(field)) {
-                ans.setExtraDHCPOptions(new ArrayList<NeutronPort_ExtraDHCPOption>(this.getExtraDHCPOptions()));
+                ans.setExtraDHCPOptions(new ArrayList<NeutronPortExtraDHCPOption>(this.getExtraDHCPOptions()));
             }
             if ("port_security_enabled".equals(field)) {
                 ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
@@ -269,7 +269,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
             status = "ACTIVE";
         }
         if (fixedIPs == null) {
-            fixedIPs = new ArrayList<Neutron_IPs>();
+            fixedIPs = new ArrayList<NeutronIPs>();
         }
     }
 

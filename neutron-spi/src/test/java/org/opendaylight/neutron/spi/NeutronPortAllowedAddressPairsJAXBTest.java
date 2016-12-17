@@ -12,16 +12,16 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class NeutronPort_AllowedAddressPairsJAXBTest {
+public class NeutronPortAllowedAddressPairsJAXBTest {
 
     private static final String NEUTRON_PORT_ALLOWED_ADDRESS_PAIRS_SOURCE_JSON = "{ "
             + "\"ip_address\": \"192.168.199.1\", " + "\"mac_address\": \"fa:16:3e:c9:cb:f0\" }";
 
     @Test
-    public void test_NeutronPort_AllowedAddressPairs_JAXB()  throws JAXBException {
-        NeutronPort_AllowedAddressPairs portObject = new NeutronPort_AllowedAddressPairs();
+    public void test_NeutronPortAllowedAddressPairs_JAXB()  throws JAXBException {
+        NeutronPortAllowedAddressPairs portObject = new NeutronPortAllowedAddressPairs();
 
-        NeutronPort_AllowedAddressPairs testObject = (NeutronPort_AllowedAddressPairs) JaxbTestHelper
+        NeutronPortAllowedAddressPairs testObject = (NeutronPortAllowedAddressPairs) JaxbTestHelper
                 .jaxbUnmarshall(portObject, NEUTRON_PORT_ALLOWED_ADDRESS_PAIRS_SOURCE_JSON);
         Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 1: Testing ip_address failed",
                 "192.168.199.1", testObject.getIpAddress());

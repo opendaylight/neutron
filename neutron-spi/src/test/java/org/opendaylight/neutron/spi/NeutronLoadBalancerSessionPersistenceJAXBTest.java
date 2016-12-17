@@ -12,19 +12,19 @@ import javax.xml.bind.JAXBException;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class NeutronLoadBalancer_SessionPersistenceJAXBTest {
+public class NeutronLoadBalancerSessionPersistenceJAXBTest {
 
     private static final String NEUTRON_LOAD_BALANCER_SESSION_PERSISTENCE_SOURCE_JSON = "{ "
-            + "\"cookie_name\": \"NeutronLoadBalancer_SessionPersistence_Cookie\", " + "\"type\": \"HTTP_COOKIE\" }";
+            + "\"cookie_name\": \"NeutronLoadBalancerSessionPersistence_Cookie\", " + "\"type\": \"HTTP_COOKIE\" }";
 
     @Test
-    public void test_NeutronLoadBalancer_SessionPersistence_JAXB() throws JAXBException {
-        NeutronLoadBalancer_SessionPersistence dummyObject = new NeutronLoadBalancer_SessionPersistence();
+    public void test_NeutronLoadBalancerSessionPersistence_JAXB() throws JAXBException {
+        NeutronLoadBalancerSessionPersistence dummyObject = new NeutronLoadBalancerSessionPersistence();
 
-        NeutronLoadBalancer_SessionPersistence testObject = (NeutronLoadBalancer_SessionPersistence) JaxbTestHelper
+        NeutronLoadBalancerSessionPersistence testObject = (NeutronLoadBalancerSessionPersistence) JaxbTestHelper
                 .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_SESSION_PERSISTENCE_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
-                "NeutronLoadBalancer_SessionPersistence_Cookie", testObject.getCookieName());
+                "NeutronLoadBalancerSessionPersistence_Cookie", testObject.getCookieName());
 
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed", "HTTP_COOKIE",
                 testObject.getType());

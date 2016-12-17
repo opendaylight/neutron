@@ -17,11 +17,11 @@ import java.util.Map;
 import java.util.Set;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
+import org.opendaylight.neutron.spi.NeutronIPs;
 import org.opendaylight.neutron.spi.NeutronPort;
-import org.opendaylight.neutron.spi.NeutronPort_AllowedAddressPairs;
-import org.opendaylight.neutron.spi.NeutronPort_ExtraDHCPOption;
+import org.opendaylight.neutron.spi.NeutronPortAllowedAddressPairs;
+import org.opendaylight.neutron.spi.NeutronPortExtraDHCPOption;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.opendaylight.neutron.spi.Neutron_IPs;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.MacAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
@@ -101,9 +101,9 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         final NeutronPort result = new NeutronPort();
         fromMdAdminAttributes(port, result);
         if (port.getAllowedAddressPairs() != null) {
-            final List<NeutronPort_AllowedAddressPairs> pairs = new ArrayList<NeutronPort_AllowedAddressPairs>();
+            final List<NeutronPortAllowedAddressPairs> pairs = new ArrayList<NeutronPortAllowedAddressPairs>();
             for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
-                final NeutronPort_AllowedAddressPairs pair = new NeutronPort_AllowedAddressPairs();
+                final NeutronPortAllowedAddressPairs pair = new NeutronPortAllowedAddressPairs();
                 pair.setIpAddress(String.valueOf(mdPair.getIpAddress().getValue()));
                 pair.setMacAddress(mdPair.getMacAddress().getValue());
                 pairs.add(pair);
@@ -113,9 +113,9 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         result.setDeviceID(port.getDeviceId());
         result.setDeviceOwner(port.getDeviceOwner());
         if (port.getExtraDhcpOpts() != null) {
-            final List<NeutronPort_ExtraDHCPOption> options = new ArrayList<NeutronPort_ExtraDHCPOption>();
+            final List<NeutronPortExtraDHCPOption> options = new ArrayList<NeutronPortExtraDHCPOption>();
             for (final ExtraDhcpOpts opt : port.getExtraDhcpOpts()) {
-                final NeutronPort_ExtraDHCPOption arg = new NeutronPort_ExtraDHCPOption();
+                final NeutronPortExtraDHCPOption arg = new NeutronPortExtraDHCPOption();
                 arg.setName(opt.getOptName());
                 arg.setValue(opt.getOptValue());
                 arg.setIpVersion(IPV_MAP.get(opt.getIpVersion()));
@@ -124,9 +124,9 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             result.setExtraDHCPOptions(options);
         }
         if (port.getFixedIps() != null) {
-            final List<Neutron_IPs> ips = new ArrayList<Neutron_IPs>();
+            final List<NeutronIPs> ips = new ArrayList<NeutronIPs>();
             for (final FixedIps mdIP : port.getFixedIps()) {
-                final Neutron_IPs ip = new Neutron_IPs();
+                final NeutronIPs ip = new NeutronIPs();
                 ip.setIpAddress(String.valueOf(mdIP.getIpAddress().getValue()));
                 ip.setSubnetUUID(mdIP.getSubnetId().getValue());
                 ips.add(ip);
@@ -191,7 +191,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         portBuilder.addAugmentation(PortSecurityExtension.class, portSecurityBuilder.build());
         if (neutronPort.getAllowedAddressPairs() != null) {
             final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
-            for (final NeutronPort_AllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
+            for (final NeutronPortAllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
                 final AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
                 allowedAddressPairsBuilder
                         .setIpAddress(new IpPrefixOrAddress(allowedAddressPairs.getIpAddress().toCharArray()));
@@ -209,7 +209,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         if (neutronPort.getExtraDHCPOptions() != null) {
             final List<ExtraDhcpOpts> listExtraDHCPOptions = new ArrayList<ExtraDhcpOpts>();
             final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
-            for (final NeutronPort_ExtraDHCPOption extraDHCPOption : neutronPort.getExtraDHCPOptions()) {
+            for (final NeutronPortExtraDHCPOption extraDHCPOption : neutronPort.getExtraDHCPOptions()) {
                 final ExtraDhcpOptsBuilder extraDHCPOptsBuilder = new ExtraDhcpOptsBuilder();
                 extraDHCPOptsBuilder.setOptName(extraDHCPOption.getName());
                 extraDHCPOptsBuilder.setOptValue(extraDHCPOption.getValue());
@@ -225,7 +225,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (neutronPort.getFixedIPs() != null) {
             final List<FixedIps> listNeutronIPs = new ArrayList<FixedIps>();
-            for (final Neutron_IPs neutronIPs : neutronPort.getFixedIPs()) {
+            for (final NeutronIPs neutronIPs : neutronPort.getFixedIPs()) {
                 final FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
                 fixedIpsBuilder.setIpAddress(new IpAddress(neutronIPs.getIpAddress().toCharArray()));
                 fixedIpsBuilder.setSubnetId(toUuid(neutronIPs.getSubnetUUID()));

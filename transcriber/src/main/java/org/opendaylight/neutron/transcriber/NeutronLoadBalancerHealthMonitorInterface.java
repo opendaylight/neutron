@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
+import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
-import org.opendaylight.neutron.spi.Neutron_ID;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProbeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProbeHttp;
@@ -66,7 +66,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             final List<Uuid> listUuid = new ArrayList<Uuid>();
-            for (final Neutron_ID neutronId : healthMonitor.getLoadBalancerHealthMonitorPools()) {
+            for (final NeutronID neutronId : healthMonitor.getLoadBalancerHealthMonitorPools()) {
                 listUuid.add(toUuid(neutronId.getID()));
             }
             healthmonitorBuilder.setPools(listUuid);
@@ -111,9 +111,9 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             answer.setLoadBalancerHealthMonitorMaxRetries(Integer.valueOf(healthMonitor.getMaxRetries()));
         }
         if (healthMonitor.getPools() != null) {
-            final List<Neutron_ID> list = new ArrayList<Neutron_ID>();
+            final List<NeutronID> list = new ArrayList<NeutronID>();
             for (final Uuid id : healthMonitor.getPools()) {
-                list.add(new Neutron_ID(id.getValue()));
+                list.add(new NeutronID(id.getValue()));
             }
             answer.setLoadBalancerHealthMonitorPools(list);
         }

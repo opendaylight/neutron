@@ -23,10 +23,10 @@ import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
+import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
-import org.opendaylight.neutron.spi.NeutronLoadBalancer_SessionPersistence;
-import org.opendaylight.neutron.spi.Neutron_ID;
+import org.opendaylight.neutron.spi.NeutronLoadBalancerSessionPersistence;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
@@ -78,7 +78,7 @@ public final class NeutronLoadBalancerPoolInterface
         }
         if (pool.getLoadBalancerPoolListeners() != null) {
             final List<Uuid> listListener = new ArrayList<Uuid>();
-            for (final Neutron_ID neutronId : pool.getLoadBalancerPoolListeners()) {
+            for (final NeutronID neutronId : pool.getLoadBalancerPoolListeners()) {
                 listListener.add(toUuid(neutronId.getID()));
             }
             poolBuilder.setListeners(listListener);
@@ -93,7 +93,7 @@ public final class NeutronLoadBalancerPoolInterface
             poolBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(pool.getLoadBalancerPoolProtocol()));
         }
         if (pool.getLoadBalancerPoolSessionPersistence() != null) {
-            final NeutronLoadBalancer_SessionPersistence sessionPersistence = pool
+            final NeutronLoadBalancerSessionPersistence sessionPersistence = pool
                     .getLoadBalancerPoolSessionPersistence();
             final SessionPersistenceBuilder sessionPersistenceBuilder = new SessionPersistenceBuilder();
             sessionPersistenceBuilder.setCookieName(sessionPersistence.getCookieName());
@@ -123,9 +123,9 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolLbAlgorithm(pool.getLbAlgorithm());
         }
         if (pool.getListeners() != null) {
-            final List<Neutron_ID> ids = new ArrayList<Neutron_ID>();
+            final List<NeutronID> ids = new ArrayList<NeutronID>();
             for (final Uuid id : pool.getListeners()) {
-                ids.add(new Neutron_ID(id.getValue()));
+                ids.add(new NeutronID(id.getValue()));
             }
             answer.setLoadBalancerPoolListeners(ids);
         }
@@ -143,8 +143,8 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolProtocol(PROTOCOL_MAP.get(pool.getProtocol()));
         }
         if (pool.getSessionPersistence() != null) {
-            final NeutronLoadBalancer_SessionPersistence sessionPersistence =
-                    new NeutronLoadBalancer_SessionPersistence();
+            final NeutronLoadBalancerSessionPersistence sessionPersistence =
+                    new NeutronLoadBalancerSessionPersistence();
             sessionPersistence.setCookieName(pool.getSessionPersistence().getCookieName());
             sessionPersistence.setType(pool.getSessionPersistence().getType());
 

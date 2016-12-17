@@ -24,7 +24,7 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
     @XmlElement(name = "external_gateway_info", nillable = true)
-    NeutronRouter_NetworkReference externalGatewayInfo;
+    NeutronRouterNetworkReference externalGatewayInfo;
 
     @XmlElement(name = "distributed")
     Boolean distributed;
@@ -45,11 +45,11 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
         return adminStateUp;
     }
 
-    public NeutronRouter_NetworkReference getExternalGatewayInfo() {
+    public NeutronRouterNetworkReference getExternalGatewayInfo() {
         return externalGatewayInfo;
     }
 
-    public void setExternalGatewayInfo(NeutronRouter_NetworkReference externalGatewayInfo) {
+    public void setExternalGatewayInfo(NeutronRouterNetworkReference externalGatewayInfo) {
         this.externalGatewayInfo = externalGatewayInfo;
     }
 

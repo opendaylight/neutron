@@ -117,9 +117,9 @@ public class ITNeutronE2E {
         NeutronSFCFlowClassifierTests.runTests(base);
 
         // tests related to bugs
-        Neutron_Bug3812_Tests.runTests(base);
-        Tempest_PortsIpV6TestJSON.runTests(base);
-        Neutron_Bug4027_Tests.runTests(base);
+        NeutronBug3812Tests.runTests(base);
+        TempestPortsIpV6TestJSON.runTests(base);
+        NeutronBug4027Tests.runTests(base);
     }
 
     static HttpURLConnection httpURLConnectionFactoryGet(URL url) throws IOException {

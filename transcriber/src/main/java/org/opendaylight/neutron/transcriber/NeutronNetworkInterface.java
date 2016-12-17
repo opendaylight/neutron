@@ -14,7 +14,7 @@ import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
-import org.opendaylight.neutron.spi.NeutronNetwork_Segment;
+import org.opendaylight.neutron.spi.NeutronNetworkSegment;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev150712.NetworkL3Extension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev150712.NetworkL3ExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeBase;
@@ -68,10 +68,10 @@ public final class NeutronNetworkInterface
         result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());
         result.setProviderSegmentationID(providerExtension.getSegmentationId());
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
-        final List<NeutronNetwork_Segment> segments = new ArrayList<NeutronNetwork_Segment>();
+        final List<NeutronNetworkSegment> segments = new ArrayList<NeutronNetworkSegment>();
         if (providerExtension.getSegments() != null) {
             for (final Segments segment : providerExtension.getSegments()) {
-                final NeutronNetwork_Segment neutronSegment = new NeutronNetwork_Segment();
+                final NeutronNetworkSegment neutronSegment = new NeutronNetworkSegment();
                 neutronSegment.setProviderPhysicalNetwork(segment.getPhysicalNetwork());
                 neutronSegment.setProviderSegmentationID(segment.getSegmentationId());
                 neutronSegment.setProviderNetworkType(NETWORK_MAP.get(segment.getNetworkType()));
@@ -107,7 +107,7 @@ public final class NeutronNetworkInterface
         if (network.getSegments() != null) {
             final List<Segments> segments = new ArrayList<Segments>();
             long count = 0;
-            for (final NeutronNetwork_Segment segment : network.getSegments()) {
+            for (final NeutronNetworkSegment segment : network.getSegments()) {
                 count++;
                 final SegmentsBuilder segmentsBuilder = new SegmentsBuilder();
                 if (segment.getProviderPhysicalNetwork() != null) {

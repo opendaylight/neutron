@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronPort_ExtraDHCPOption implements Serializable {
+public final class NeutronPortExtraDHCPOption implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "opt_value")
@@ -28,10 +28,10 @@ public final class NeutronPort_ExtraDHCPOption implements Serializable {
     @XmlElement(name = "ip_version", defaultValue = "4", required = false, nillable = true)
     Integer ipVersion = 4;
 
-    public NeutronPort_ExtraDHCPOption() {
+    public NeutronPortExtraDHCPOption() {
     }
 
-    public NeutronPort_ExtraDHCPOption(String value, String name, Integer ipVersion) {
+    public NeutronPortExtraDHCPOption(String value, String name, Integer ipVersion) {
         this.value = value;
         this.name = name;
         this.ipVersion = ipVersion;

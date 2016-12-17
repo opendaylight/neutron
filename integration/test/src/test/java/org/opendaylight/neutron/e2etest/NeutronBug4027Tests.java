@@ -8,10 +8,10 @@
 
 package org.opendaylight.neutron.e2etest;
 
-public class Neutron_Bug4027_Tests {
+public class NeutronBug4027Tests {
     String base;
 
-    public Neutron_Bug4027_Tests(String base) {
+    public NeutronBug4027Tests(String base) {
         this.base = base;
     }
 
@@ -40,7 +40,7 @@ public class Neutron_Bug4027_Tests {
     }
 
     public static void runTests(String base) {
-        Neutron_Bug4027_Tests bugTest = new Neutron_Bug4027_Tests(base);
+        NeutronBug4027Tests bugTest = new NeutronBug4027Tests(base);
         bugTest.check_bug4027();
     }
 }
