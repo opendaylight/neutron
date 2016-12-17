@@ -17,7 +17,7 @@ public final class NeutronL2gatewayDevice extends NeutronID implements Serializa
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "interfaces")
-    List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces;
+    List<NeutronL2gatewayDeviceInterface> l2gatewayDeviceInterfaces;
 
     @XmlElement(name = "device_name")
     String deviceName;
@@ -31,17 +31,17 @@ public final class NeutronL2gatewayDevice extends NeutronID implements Serializa
     }
 
     public List<NeutronL2gatewayDeviceInterface> getNeutronL2gatewayDeviceInterfaces() {
-        return neutronL2gatewayDeviceInterfaces;
+        return l2gatewayDeviceInterfaces;
     }
 
     public void setNeutronL2gatewayDeviceInterfaces(
-            List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces) {
-        this.neutronL2gatewayDeviceInterfaces = neutronL2gatewayDeviceInterfaces;
+            List<NeutronL2gatewayDeviceInterface> l2gatewayDeviceInterfaces) {
+        this.l2gatewayDeviceInterfaces = l2gatewayDeviceInterfaces;
     }
 
     @Override
     public String toString() {
         return "NeutronL2gatewayDevice [" + "id=" + uuid + ", neutronL2gwDeviceInterfaces="
-                + neutronL2gatewayDeviceInterfaces + ", deviceName=" + deviceName + "]";
+                + l2gatewayDeviceInterfaces + ", deviceName=" + deviceName + "]";
     }
 }
