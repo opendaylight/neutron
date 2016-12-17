@@ -6,9 +6,6 @@
 
 <suppressions>
   <suppress files="[/\\]target[/\\]" checks=".*"/>
-  <suppress checks="JavadocStyleCheck"
-            files="."
-             />
   <suppress checks="AbbreviationAsWordInName"
             files="."
              />

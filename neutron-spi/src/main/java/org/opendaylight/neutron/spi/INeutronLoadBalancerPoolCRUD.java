@@ -31,7 +31,7 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
 
     /**
      * Applications call this interface method to return if a particular
-     * NeutronLoadBalancerPoolMember object exists
+     * NeutronLoadBalancerPoolMember object exists.
      *
      * @param poolUuid
      *            UUID of the NeutronLoadBalancerPool object

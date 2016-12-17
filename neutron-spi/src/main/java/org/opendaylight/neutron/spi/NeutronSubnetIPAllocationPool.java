@@ -85,7 +85,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
 
     /**
      * This static method converts the supplied IPv4 address to a long
-     * integer for comparison
+     * integer for comparison.
      *
      * @param inputString
      *            IPv4 address in dotted decimal format
@@ -123,7 +123,7 @@ public final class NeutronSubnetIPAllocationPool implements Serializable {
 
     /**
      * This static method converts the supplied IPv4 address to a long
-     * integer for comparison
+     * integer for comparison.
      *
      * @param inputString
      *            IPv6 address in dotted decimal format
