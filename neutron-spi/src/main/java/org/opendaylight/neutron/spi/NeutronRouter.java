@@ -84,7 +84,7 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
      * @param fields
      *            List of attributes to be extracted
      * @return an OpenStackRouters object with only the selected fields
-     * populated
+     *             populated
      */
     public NeutronRouter extractFields(List<String> fields) {
         NeutronRouter ans = new NeutronRouter();

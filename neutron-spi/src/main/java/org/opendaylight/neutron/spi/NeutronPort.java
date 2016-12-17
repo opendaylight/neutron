@@ -207,7 +207,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
      * @param fields
      *            List of attributes to be extracted
      * @return an OpenStackPorts object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronPort extractFields(List<String> fields) {

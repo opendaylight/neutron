@@ -30,7 +30,7 @@ public class ServiceUnavailableException extends WebApplicationException {
      * Constructor for the SERVICE_UNAVAILABLE custom handler
      *
      * @param string Error message to specify further the
-     * SERVICE_UNAVAILABLE response
+     *            SERVICE_UNAVAILABLE response
      *
      */
     public ServiceUnavailableException(String string) {

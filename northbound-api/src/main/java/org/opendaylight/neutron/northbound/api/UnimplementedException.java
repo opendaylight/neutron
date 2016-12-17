@@ -27,7 +27,7 @@ public class UnimplementedException extends WebApplicationException {
      * Constructor for the NOT_IMPLEMENTED custom handler
      *
      * @param string Error message to specify further the
-     * SERVICE_UNAVAILABLE response
+     *            SERVICE_UNAVAILABLE response
      *
      */
     public UnimplementedException(String string) {

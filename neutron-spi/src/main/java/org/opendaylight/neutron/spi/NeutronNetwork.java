@@ -171,7 +171,7 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
      * @param fields
      *            List of attributes to be extracted
      * @return an OpenStackNetworks object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronNetwork extractFields(List<String> fields) {

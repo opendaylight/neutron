@@ -68,7 +68,7 @@ public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCP
      *
      * @param fields List of attributes to be extracted
      * @return an OpenStack Neutron SFC Port Chain object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronSFCPortChain extractFields(List<String> fields) {
