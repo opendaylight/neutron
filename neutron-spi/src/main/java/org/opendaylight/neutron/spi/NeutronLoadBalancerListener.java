@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * v2.0 Reference for description of  the fields:
  * Implemented fields are as follows:
  *
+ * <p>
  * id                 uuid-str
  * default_pool_id    String
  * tenant_id          uuid-str
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * admin_state_up     Boolean
  * status             String
  *
+ * <p>
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
  */
 

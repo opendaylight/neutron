@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * See OpenStack Network API v2.0 Reference for description of
  * annotated attributes. The current fields are as follows:
+ *
  * <p>
  * id                uuid (String) UUID for the security group rule.
  * direction         String Direction the VM traffic  (ingress/egress).

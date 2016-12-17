@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 /**
  * Status Code 409 (Conflict)
  *
+ * <p>
  * The request could not be completed due to a conflict with the
  * current state of the resource. This code is only allowed in
  * situations where it is expected that the user might be able to
