@@ -218,7 +218,7 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> i
      * @param fields
      *            List of attributes to be extracted
      * @return an OpenStackNetworks object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronBgpvpn extractFields(List<String> fields) {

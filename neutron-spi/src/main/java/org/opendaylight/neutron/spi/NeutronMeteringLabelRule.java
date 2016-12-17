@@ -89,7 +89,7 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
      * @param fields
      *            List of attributes to be extracted
      * @return a NeutronMeteringLabelRule object with only the selected fields
-     * populated
+     *             populated
      */
     public NeutronMeteringLabelRule extractFields(List<String> fields) {
         NeutronMeteringLabelRule ans = new NeutronMeteringLabelRule();

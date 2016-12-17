@@ -164,7 +164,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
      * @param fields
      *            List of attributes to be extracted
      * @return an OpenStackSubnets object with only the selected fields
-     * populated
+     *             populated
      */
 
     public NeutronSubnet extractFields(List<String> fields) {

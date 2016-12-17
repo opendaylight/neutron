@@ -99,7 +99,7 @@ public final class NeutronVPNIKEPolicy extends NeutronBaseAttributes<NeutronVPNI
      * @param fields
      *            List of attributes to be extracted
      * @return a NeutronVPNIKEPolicy object with only the selected fields
-     * populated
+     *             populated
      */
     public NeutronVPNIKEPolicy extractFields(List<String> fields) {
         NeutronVPNIKEPolicy ans = new NeutronVPNIKEPolicy();
