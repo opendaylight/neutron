@@ -22,6 +22,30 @@
       "revId": "81f0328600674cc1590e58946735c6384547efe8",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_bff83b4a",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/Neutron_Bug3812_Tests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2016-12-21T20:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_8ad544bb",
+      "range": {
+        "startLine": 21,
+        "startChar": 15,
+        "endLine": 21,
+        "endChar": 23
+      },
+      "revId": "81f0328600674cc1590e58946735c6384547efe8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
