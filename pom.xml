@@ -99,6 +99,8 @@
     <module>karaf</module>
     <module>integration/test</module>
     <module>model</module>
+    <module>neutron-utils</module>
+    <module>neutron-hostconfig-ovs</module>
   </modules>
   <build>
     <plugins>
