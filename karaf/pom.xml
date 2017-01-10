@@ -35,7 +35,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
 
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>features-neutron-test</artifactId>
+      <artifactId>features4-neutron-test</artifactId>
       <version>${project.version}</version>
       <classifier>features</classifier>
       <type>xml</type>
