@@ -91,14 +91,6 @@ public final class NeutronLogger implements AutoCloseable {
         LOG.info(messageBuilder.toString());
     }
 
-    private void configurationDataTreeChanged(@Nonnull Collection<DataTreeModification<Neutron>> changes) {
-        logChanges("Configuration DataTreeChanged ", changes);
-    }
-
-    private void operationalDataTreeChanged(@Nonnull Collection<DataTreeModification<Neutron>> changes) {
-        logChanges("Operational DataTreeChanged ", changes);
-    }
-
     public void init() {
         LOG.info("Register listener for Neutron model data changes");
         InstanceIdentifier<Neutron> instanceId = Preconditions.checkNotNull(InstanceIdentifier.create(Neutron.class));
@@ -108,7 +100,7 @@ public final class NeutronLogger implements AutoCloseable {
         configurationDataTreeChangeListener = new ClusteredDataTreeChangeListener<Neutron>() {
             @Override
             public void onDataTreeChanged(Collection<DataTreeModification<Neutron>> changes) {
-                configurationDataTreeChanged(changes);
+                logChanges("Configuration DataTreeChanged ", changes);
             }
         };
         configurationRegisteredListener = db.registerDataTreeChangeListener(configurationDataTreeId,
@@ -119,7 +111,7 @@ public final class NeutronLogger implements AutoCloseable {
         operationalDataTreeChangeListener = new ClusteredDataTreeChangeListener<Neutron>() {
             @Override
             public void onDataTreeChanged(Collection<DataTreeModification<Neutron>> changes) {
-                operationalDataTreeChanged(changes);
+                logChanges("Operational DataTreeChanged ", changes);
             }
         };
         operationalRegisteredListener = db.registerDataTreeChangeListener(operationalDataTreeId,
