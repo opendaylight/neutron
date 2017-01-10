@@ -41,7 +41,7 @@ public final class NeutronL2gatewayDevice extends NeutronID implements Serializa
 
     @Override
     public String toString() {
-        return "NeutronL2gatewayDevice [" + "id=" + uuid + ", neutronL2gwDeviceInterfaces="
+        return "NeutronL2gatewayDevice [" + "id=" + uuid + ", l2gwDeviceInterfaces="
                 + l2gatewayDeviceInterfaces + ", deviceName=" + deviceName + "]";
     }
 }

@@ -70,8 +70,8 @@ public final class NeutronLoadBalancerPoolInterface
     protected Pool toMd(NeutronLoadBalancerPool pool) {
         final PoolBuilder poolBuilder = new PoolBuilder();
         poolBuilder.setAdminStateUp(pool.getLoadBalancerPoolAdminIsStateIsUp());
-        if (pool.getNeutronLoadBalancerPoolHealthMonitorID() != null) {
-            poolBuilder.setHealthmonitorId(toUuid(pool.getNeutronLoadBalancerPoolHealthMonitorID()));
+        if (pool.getLoadBalancerPoolHealthMonitorID() != null) {
+            poolBuilder.setHealthmonitorId(toUuid(pool.getLoadBalancerPoolHealthMonitorID()));
         }
         if (pool.getLoadBalancerPoolLbAlgorithm() != null) {
             poolBuilder.setLbAlgorithm(pool.getLoadBalancerPoolLbAlgorithm());
@@ -117,7 +117,7 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolAdminStateIsUp(pool.isAdminStateUp());
         }
         if (pool.getHealthmonitorId() != null) {
-            answer.setNeutronLoadBalancerPoolHealthMonitorID(pool.getHealthmonitorId().getValue());
+            answer.setLoadBalancerPoolHealthMonitorID(pool.getHealthmonitorId().getValue());
         }
         if (pool.getLbAlgorithm() != null) {
             answer.setLoadBalancerPoolLbAlgorithm(pool.getLbAlgorithm());

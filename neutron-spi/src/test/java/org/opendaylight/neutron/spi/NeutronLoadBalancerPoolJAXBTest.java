@@ -48,7 +48,7 @@ public class NeutronLoadBalancerPoolJAXBTest {
                 "1a3e005cf9ce40308c900bcb08e5320c", testObject.getTenantID());
 
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 8: Testing HealthMonitorID failed",
-                "00066a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getNeutronLoadBalancerPoolHealthMonitorID());
+                "00066a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerPoolHealthMonitorID());
 
         List<NeutronID> testListeners = testObject.getLoadBalancerPoolListeners();
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.1: Testing Listeners failed", 1,
