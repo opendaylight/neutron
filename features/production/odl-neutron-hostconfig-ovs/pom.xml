@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.opendaylight.odlparent</groupId>
+        <artifactId>single-feature-parent</artifactId>
+        <version>1.8.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>org.opendaylight.neutron</groupId>
+    <artifactId>odl-neutron-hostconfig-ovs</artifactId>
+    <version>0.8.0-SNAPSHOT</version>
+    <packaging>feature</packaging>
+    <name>OpenDaylight :: Neutron :: Hostconfig :: OVS</name>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.opendaylight.controller</groupId>
+                <artifactId>mdsal-artifacts</artifactId>
+                <version>1.5.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opendaylight.ovsdb</groupId>
+                <artifactId>odl-ovsdb-southbound-api</artifactId>
+                <version>1.4.0-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.opendaylight.controller</groupId>
+            <artifactId>odl-mdsal-broker</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.ovsdb</groupId>
+            <artifactId>odl-ovsdb-southbound-api</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.ovsdb</groupId>
+            <artifactId>utils.mdsal-utils</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.ovsdb</groupId>
+            <artifactId>utils.southbound-utils</artifactId>
+            <version>1.4.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>neutron-hostconfig-utils</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>neutron-hostconfig-ovs</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
