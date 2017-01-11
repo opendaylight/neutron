@@ -48,7 +48,7 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
     String loadBalancerPoolLbAlgorithm;
 
     @XmlElement(name = "healthmonitor_id")
-    String neutronLoadBalancerPoolHealthMonitorID;
+    String loadBalancerPoolHealthMonitorID;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean loadBalancerPoolAdminStateIsUp;
@@ -82,12 +82,12 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
         this.loadBalancerPoolLbAlgorithm = loadBalancerPoolLbAlgorithm;
     }
 
-    public String getNeutronLoadBalancerPoolHealthMonitorID() {
-        return neutronLoadBalancerPoolHealthMonitorID;
+    public String getLoadBalancerPoolHealthMonitorID() {
+        return loadBalancerPoolHealthMonitorID;
     }
 
-    public void setNeutronLoadBalancerPoolHealthMonitorID(String neutronLoadBalancerPoolHealthMonitorID) {
-        this.neutronLoadBalancerPoolHealthMonitorID = neutronLoadBalancerPoolHealthMonitorID;
+    public void setLoadBalancerPoolHealthMonitorID(String loadBalancerPoolHealthMonitorID) {
+        this.loadBalancerPoolHealthMonitorID = loadBalancerPoolHealthMonitorID;
     }
 
     public Boolean getLoadBalancerPoolAdminIsStateIsUp() {
@@ -161,7 +161,7 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
                 ans.setLoadBalancerPoolLbAlgorithm(this.getLoadBalancerPoolLbAlgorithm());
             }
             if (s.equals("healthmonitor_id")) {
-                ans.setNeutronLoadBalancerPoolHealthMonitorID(this.getNeutronLoadBalancerPoolHealthMonitorID());
+                ans.setLoadBalancerPoolHealthMonitorID(this.getLoadBalancerPoolHealthMonitorID());
             }
             if (s.equals("admin_state_up")) {
                 ans.setLoadBalancerPoolAdminStateIsUp(loadBalancerPoolAdminStateIsUp);
@@ -177,7 +177,7 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
     public String toString() {
         return "NeutronLoadBalancerPool{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
                 + name + '\'' + ", protocol=" + loadBalancerPoolProtocol + '\'' + ", lbAlgorithm='"
-                + loadBalancerPoolLbAlgorithm + '\'' + ", healthmonitorID=" + neutronLoadBalancerPoolHealthMonitorID
+                + loadBalancerPoolLbAlgorithm + '\'' + ", healthmonitorID=" + loadBalancerPoolHealthMonitorID
                 + ", adminStateUp=" + loadBalancerPoolAdminStateIsUp + '}';
      // todo: add loadBalancerPoolMembers as joined string
     }

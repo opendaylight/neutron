@@ -44,7 +44,7 @@ public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall
     Boolean firewallIsShared;
 
     @XmlElement(name = "firewall_policy_id")
-    String neutronFirewallPolicyID;
+    String firewallPolicyID;
 
     public Boolean getFirewallAdminStateIsUp() {
         return firewallAdminStateIsUp;
@@ -63,11 +63,11 @@ public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall
     }
 
     public String getFirewallPolicyID() {
-        return neutronFirewallPolicyID;
+        return firewallPolicyID;
     }
 
     public void setFirewallPolicyID(String firewallPolicy) {
-        this.neutronFirewallPolicyID = firewallPolicy;
+        this.firewallPolicyID = firewallPolicy;
     }
 
     public NeutronFirewall extractFields(List<String> fields) {
@@ -91,6 +91,6 @@ public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall
     public String toString() {
         return "NeutronFirewall{" + "firewallUUID='" + uuid + '\'' + ", firewallTenantID='" + tenantID + '\''
                 + ", firewallName='" + name + '\'' + ", firewallAdminStateIsUp=" + firewallAdminStateIsUp
-                + ", firewallIsShared=" + firewallIsShared + ", firewallRulePolicyID=" + neutronFirewallPolicyID + '}';
+                + ", firewallIsShared=" + firewallIsShared + ", firewallRulePolicyID=" + firewallPolicyID + '}';
     }
 }
