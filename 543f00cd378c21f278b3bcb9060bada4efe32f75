@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_a400e734",
+        "filename": "features/production/odl-neutron-service/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 491
+      },
+      "writtenOn": "2017-01-13T20:27:49Z",
+      "side": 1,
+      "message": "This is probably not necessary here.",
+      "revId": "543f00cd378c21f278b3bcb9060bada4efe32f75",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
