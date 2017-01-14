@@ -115,6 +115,7 @@ public class ITNeutronE2E {
         NeutronSFCPortPairGroupTests.runTests(base);
         NeutronSFCPortChainTests.runTests(base);
         NeutronSFCFlowClassifierTests.runTests(base);
+        NeutronTrunkTests.runTests(base);
 
         // tests related to bugs
         NeutronBug3812Tests.runTests(base);
@@ -261,11 +262,11 @@ public class ITNeutronE2E {
         Gson gson = new Gson();
         JsonObject jsonObjectOutput = gson.fromJson(response, JsonObject.class);
         Set<Map.Entry<String, JsonElement>> entrySet = jsonObjectOutput.entrySet();
-        Assert.assertTrue("E2E Tests Failed - Json Error", (entrySet.size() > 0));
+        Assert.assertTrue("E2E Tests Failed - Json Error", entrySet.size() > 0);
         JsonElement jsonElementValue = entrySet.iterator().next().getValue();
         String key = entrySet.iterator().next().getKey();
         Assert.assertEquals(context, collectionName, key);
-        Assert.assertTrue("E2E Tests Failed - Collection not Array", (jsonElementValue.isJsonArray()));
+        Assert.assertTrue("E2E Tests Failed - Collection not Array", jsonElementValue.isJsonArray());
         JsonArray jsonArray = jsonElementValue.getAsJsonArray();
         Assert.assertNotEquals(context, jsonArray.size(), 0);
     }
@@ -280,7 +281,7 @@ public class ITNeutronE2E {
             String key = element.getKey();
             JsonElement jsonElementValue = element.getValue();
             // Query only values that are non null Primitives - Integer,Strings,character and boolean
-            if (jsonElementValue.isJsonPrimitive() && (!jsonElementValue.isJsonNull())) {
+            if (jsonElementValue.isJsonPrimitive() && !jsonElementValue.isJsonNull()) {
                 String valueStr = jsonElementValue.getAsString();
                 valueStr = valueStr.replaceAll("\\s+", "+");
                 String queryUrl = urlStr + "?" + key + "=" + valueStr;
