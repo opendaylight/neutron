@@ -37,6 +37,7 @@ import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.INeutronTrunkCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecSiteConnectionsCRUD;
@@ -50,7 +51,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
 
     private BundleContext context;
-    private DataBroker db;
+    private final DataBroker db;
     private final List<ServiceRegistration<? extends INeutronCRUD<?>>> registrations = new ArrayList<>();
     private final List<AutoCloseable> neutronInterfaces = new ArrayList<>();
 
@@ -96,6 +97,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
         registerCRUDInterface(INeutronSecurityGroupCRUD.class, new NeutronSecurityGroupInterface(db));
         registerCRUDInterface(INeutronSecurityRuleCRUD.class, new NeutronSecurityRuleInterface(db));
         registerCRUDInterface(INeutronSubnetCRUD.class, new NeutronSubnetInterface(db));
+        registerCRUDInterface(INeutronTrunkCRUD.class, new NeutronTrunkInterface(db));
         registerCRUDInterface(INeutronVpnIkePolicyCRUD.class, new NeutronVpnIkePolicyInterface(db));
         registerCRUDInterface(INeutronVpnIpSecPolicyCRUD.class, new NeutronVpnIpSecPolicyInterface(db));
         registerCRUDInterface(INeutronVpnIpSecSiteConnectionsCRUD.class,
