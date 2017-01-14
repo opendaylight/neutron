@@ -26,7 +26,7 @@ public final class NeutronNorthboundRSApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        Set<Class<?>> classes = new HashSet<Class<?>>();
+        Set<Class<?>> classes = new HashSet<>();
         // northbound URIs
         classes.add(NeutronNetworksNorthbound.class);
         classes.add(NeutronSubnetsNorthbound.class);
@@ -56,6 +56,7 @@ public final class NeutronNorthboundRSApplication extends Application {
         classes.add(NeutronSFCPortPairGroupsNorthbound.class);
         classes.add(NeutronSFCPortChainsNorthbound.class);
         classes.add(NeutronQosPolicyNorthbound.class);
+        classes.add(NeutronTrunksNorthbound.class);
 
         classes.add(MOXyJsonProvider.class);
         return classes;
@@ -71,7 +72,7 @@ public final class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setMarshalEmptyCollections(true);
         moxyJsonProvider.setValueWrapper("$");
 
-        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(HASHMAP_SIZE);
+        Map<String, String> namespacePrefixMapper = new HashMap<>(HASHMAP_SIZE);
         // FIXME: fill in next two with XSD
         namespacePrefixMapper.put("router", "router");
         namespacePrefixMapper.put("provider", "provider");
@@ -79,7 +80,7 @@ public final class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setNamespacePrefixMapper(namespacePrefixMapper);
         moxyJsonProvider.setNamespaceSeparator(':');
 
-        Set<Object> set = new HashSet<Object>(1);
+        Set<Object> set = new HashSet<>(1);
         set.add(moxyJsonProvider);
         return set;
     }
