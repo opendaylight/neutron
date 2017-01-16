@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a622d24_3c018706",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-16T14:52:59Z",
+      "side": 1,
+      "message": "sub-port-attributes",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a561d44_9d710ce3",
         "filename": "model/src/main/yang/neutron-trunk.yang",
         "patchSetId": 4
@@ -13,6 +36,46 @@
       "writtenOn": "2016-07-14T21:50:55Z",
       "side": 1,
       "message": "blank line",
+      "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_5c044317",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-16T14:52:59Z",
+      "side": 1,
+      "message": "need admin-attributes also: uses attrs:admin-attributes",
+      "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_7f06511e",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-16T14:52:59Z",
+      "side": 1,
+      "message": "sub-port-attributes",
+      "range": {
+        "startLine": 66,
+        "startChar": 17,
+        "endLine": 66,
+        "endChar": 25
+      },
       "revId": "3c00f982d79ce4d8091d48748cd22111238847b5",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
