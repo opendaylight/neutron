@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_d8933659",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-17T21:51:38Z",
+      "side": 1,
+      "message": "2017? or 2016 and 2017?",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "246e4ce83970ff5fbf2319111473ceaef2ec3e59",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_782dc2fd",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-17T21:51:38Z",
+      "side": 1,
+      "message": "Is this used?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 44
+      },
+      "revId": "246e4ce83970ff5fbf2319111473ceaef2ec3e59",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_18edaeb7",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-17T21:51:38Z",
+      "side": 1,
+      "message": "Ariel, are you okay with this?",
+      "range": {
+        "startLine": 21,
+        "startChar": 13,
+        "endLine": 21,
+        "endChar": 50
+      },
+      "revId": "246e4ce83970ff5fbf2319111473ceaef2ec3e59",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_580ba68d",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-17T21:51:38Z",
+      "side": 1,
+      "message": "segmentation-type and segmentation-id is mandatory.",
+      "range": {
+        "startLine": 46,
+        "startChar": 11,
+        "endLine": 46,
+        "endChar": 28
+      },
+      "revId": "246e4ce83970ff5fbf2319111473ceaef2ec3e59",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_18bf6eab",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-17T21:51:38Z",
+      "side": 1,
+      "message": "This should be trunk, not trunk-port in order to align neutron terminology.",
+      "range": {
+        "startLine": 55,
+        "startChar": 13,
+        "endLine": 55,
+        "endChar": 24
+      },
+      "revId": "246e4ce83970ff5fbf2319111473ceaef2ec3e59",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_f8f9d280",
+        "filename": "model/src/main/yang/neutron-trunk.yang",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-17T21:51:38Z",
+      "side": 1,
+      "message": "unique \"segmentation-type segmentation-id\"",
+      "range": {
+        "startLine": 66,
+        "startChar": 23,
+        "endLine": 66,
+        "endChar": 24
+      },
+      "revId": "246e4ce83970ff5fbf2319111473ceaef2ec3e59",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
