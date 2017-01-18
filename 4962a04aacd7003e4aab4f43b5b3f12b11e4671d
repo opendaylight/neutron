@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_2eddbf42",
+        "filename": "model/src/main/yang/neutron-trunks.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-18T21:34:32Z",
+      "side": 1,
+      "message": "Oops! I caught it but forgot to cleanup. will do.",
+      "parentUuid": "1a622d24_0ecd63b7",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 44
+      },
+      "revId": "4962a04aacd7003e4aab4f43b5b3f12b11e4671d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_4ec2bb85",
         "filename": "model/src/main/yang/neutron-trunks.yang",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-18T21:11:01Z",
       "side": 1,
       "message": "nitpick: only one blank line.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 0
+      },
+      "revId": "4962a04aacd7003e4aab4f43b5b3f12b11e4671d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_0ee0c3f8",
+        "filename": "model/src/main/yang/neutron-trunks.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-18T21:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_4ec2bb85",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_0eb723f6",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTrunk.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-18T21:34:32Z",
+      "side": 1,
+      "message": "Not used anywhere, will remove this.",
+      "parentUuid": "1a622d24_8e4fb333",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 5
+      },
+      "revId": "4962a04aacd7003e4aab4f43b5b3f12b11e4671d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_6efcd7b8",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronNorthboundRSApplication.java",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2017-01-18T21:11:01Z",
       "side": 1,
       "message": "Nice clean up. \nCan you please split out this cleanup into another patch?",
+      "range": {
+        "startLine": 29,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 48
+      },
+      "revId": "4962a04aacd7003e4aab4f43b5b3f12b11e4671d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_6ed17722",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronNorthboundRSApplication.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-18T21:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_6efcd7b8",
       "range": {
         "startLine": 29,
         "startChar": 1,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_aec70f63",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTrunkInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-18T21:34:32Z",
+      "side": 1,
+      "message": "Will move it to a common constants in a follow up patch.",
+      "parentUuid": "1a622d24_8efdf3b3",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 93
+      },
+      "revId": "4962a04aacd7003e4aab4f43b5b3f12b11e4671d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_ee2f473d",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTrunkInterface.java",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2017-01-18T21:11:01Z",
       "side": 1,
       "message": "integer or long?",
+      "range": {
+        "startLine": 63,
+        "startChar": 75,
+        "endLine": 63,
+        "endChar": 85
+      },
+      "revId": "4962a04aacd7003e4aab4f43b5b3f12b11e4671d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_cea7ebbb",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTrunkInterface.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-01-18T21:34:32Z",
+      "side": 1,
+      "message": "Currently String. NetworkProvider had defined as String in spi, though I too think Integer or Long works better. What do you suggest? Long would be perfect as that is used in generated SubPorts class.",
+      "parentUuid": "1a622d24_ee2f473d",
       "range": {
         "startLine": 63,
         "startChar": 75,
