@@ -9,8 +9,12 @@
 package org.opendaylight.neutron.utils.hostconfig;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
-import org.opendaylight.ovsdb.utils.mdsal.utils.MdsalUtils;
+import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.Hostconfigs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.hostconfigs.Hostconfig;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.hostconfigs.HostconfigBuilder;
@@ -22,7 +26,6 @@ import org.slf4j.LoggerFactory;
 public class NeutronHostconfigUtils {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronHostconfigUtils.class);
     private final DataBroker dataBroker;
-    private final MdsalUtils mdsalUtils;
 
     public enum Action {
         ADD,
@@ -32,29 +35,33 @@ public class NeutronHostconfigUtils {
 
     public NeutronHostconfigUtils(final DataBroker dataBroker) {
         this.dataBroker = dataBroker;
-        this.mdsalUtils = new MdsalUtils(dataBroker);
     }
 
     public void updateMdsal(Hostconfig hostConfig, Action action) {
-        boolean result;
         InstanceIdentifier<Hostconfig> hostConfigId;
         if (hostConfig == null) {
             return;
         }
-        switch (action) {
-            case ADD:
-            case UPDATE:
-                hostConfigId = createInstanceIdentifier(hostConfig);
-                result = mdsalUtils.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig);
-                LOG.trace("Add Node: result: {}", result);
-                break;
-            case DELETE:
-                hostConfigId = createInstanceIdentifier(hostConfig);
-                result = mdsalUtils.delete(LogicalDatastoreType.OPERATIONAL, hostConfigId);
-                LOG.trace("Delete Node: result: {}", result);
-                break;
-            default:
-                break;
+        try {
+            switch (action) {
+                case ADD:
+                case UPDATE:
+                    final WriteTransaction writeTx = dataBroker.newWriteOnlyTransaction();
+                    hostConfigId = createInstanceIdentifier(hostConfig);
+                    writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig, true);
+                    writeTx.submit().get();
+                    break;
+                case DELETE:
+                    final WriteTransaction delTx = dataBroker.newWriteOnlyTransaction();
+                    hostConfigId = createInstanceIdentifier(hostConfig);
+                    delTx.delete(LogicalDatastoreType.OPERATIONAL, hostConfigId);
+                    delTx.submit().get();
+                    break;
+                default:
+                    break;
+            }
+        } catch (Exception e) {
+            LOG.warn("Transaction commit failed to DS.", e);
         }
     }
 

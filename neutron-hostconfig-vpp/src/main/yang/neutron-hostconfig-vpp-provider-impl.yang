@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) 2014 Cisco Systems, Inc. and others.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-hostconfig-vpp-provider-impl {
+    yang-version 1;
+    namespace "urn:opendaylight:params:xml:ns:yang:controller:config:neutron-hostconfig-vpp-provider:impl";
+    prefix "neutron-hostconfig-vpp-provider-impl";
+
+    import config { prefix config; revision-date 2013-04-05; }
+    import opendaylight-md-sal-binding { prefix mdsal; revision-date 2013-10-28; }
+    import ietf-yang-types { prefix "yang"; revision-date 2013-07-15; }
+    import opendaylight-sal-binding-broker-impl { prefix sal-broker; revision-date 2013-10-28;}
+
+    description
+        "This module contains the base YANG definitions for
+          neutron-hostconfig-vpp-provider impl implementation.";
+
+    revision "2016-04-25" {
+        description
+            "Initial revision.";
+    }
+
+    identity neutron-hostconfig-vpp-provider-impl {
+        base "config:module-type";
+
+        config:java-name-prefix NeutronHostconfigVppProvider;
+    }
+
+    // Augments the 'configuration' choice node under modules/module.
+    augment "/config:modules/config:module/config:configuration" {
+        case neutron-hostconfig-vpp-provider-impl {
+            when "/config:modules/config:module/config:type = 'neutron-hostconfig-vpp-provider-impl'";
+        }
+    }
+}
