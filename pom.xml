@@ -101,6 +101,7 @@
     <module>model</module>
     <module>neutron-utils</module>
     <module>neutron-hostconfig-ovs</module>
+    <module>neutron-hostconfig-vpp</module>
   </modules>
   <build>
     <plugins>

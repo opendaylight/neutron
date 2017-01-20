@@ -9,14 +9,23 @@
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
-  <artifactId>neutron-utils</artifactId>
+  <artifactId>neutron-hostconfig-vpp</artifactId>
   <version>0.8.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>bundle</packaging>
   <properties>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
+    <netconf.version>1.2.0-SNAPSHOT</netconf.version>
+    <controller.version>0.6.0-SNAPSHOT</controller.version>
   </properties>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.opendaylight.netconf</groupId>
+        <artifactId>netconf-artifacts</artifactId>
+        <version>${netconf.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
         <artifactId>mdsal-model-artifacts</artifactId>
@@ -38,6 +47,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.neutron</groupId>
+      <artifactId>neutron-utils.hostconfig</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
     </dependency>
@@ -48,7 +62,11 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>config-api</artifactId>
-      <version>0.6.0-SNAPSHOT</version>
+      <version>${controller.version}</version>
+    </dependency>
+	<dependency>
+      <groupId>org.opendaylight.netconf</groupId>
+      <artifactId>sal-netconf-connector</artifactId>
     </dependency>
   </dependencies>
   <build>
@@ -60,9 +78,6 @@
         <configuration>
           <instructions>
             <Import-Package>*</Import-Package>
-            <Export-Package>
-              org.opendaylight.neutron.*
-            </Export-Package>
           </instructions>
           <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
         </configuration>
@@ -86,9 +101,6 @@
     <tag>HEAD</tag>
     <url>https://wiki.opendaylight.org/view/NeutronNorthBound:Main</url>
   </scm>
-  <modules>
-    <module>hostconfig</module>
-  </modules>
   <distributionManagement>
     <!-- Site deployment -->
     <site>
