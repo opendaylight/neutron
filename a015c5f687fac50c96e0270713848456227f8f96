@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a622d24_a8425aab",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/controller/config/yang/config/neutron_hostconfig_vpp_provider/impl/NeutronHostconfigVppProviderInstance.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5661
+      },
+      "writtenOn": "2017-01-21T20:08:12Z",
+      "side": 1,
+      "message": "These two config parameters needed to be passed to NeutronHostconfigVppListener too",
+      "range": {
+        "startLine": 16,
+        "startChar": 77,
+        "endLine": 16,
+        "endChar": 113
+      },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_8894be8b",
         "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/HostconfigUtil.java",
         "patchSetId": 1
@@ -42,6 +65,23 @@
         "endLine": 2,
         "endChar": 21
       },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_883dde2d",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 5661
+      },
+      "writtenOn": "2017-01-21T20:08:12Z",
+      "side": 1,
+      "message": "You need to take socket related config arguments here rt?",
       "revId": "a015c5f687fac50c96e0270713848456227f8f96",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
