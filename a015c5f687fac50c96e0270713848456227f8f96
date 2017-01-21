@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_8894be8b",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/HostconfigUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_68a5e202",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_c85cf61b",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/SocketInfo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "nitpick: 2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_289f6ab6",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/SocketInfo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "final?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 32
+      },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_08a26efc",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/SocketInfo.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "static?",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 44
+      },
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_487106a7",
+        "filename": "neutron-hostconfig-vpp/src/main/yang/neutron-hostconfig-vpp-provider-impl.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "Since neutron northbound adopted blueprint, is this still needed?",
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_e84a9253",
+        "filename": "neutron-utils/hostconfig/src/main/java/org/opendaylight/neutron/utils/hostconfig/NeutronHostconfigUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-01-21T02:29:28Z",
+      "side": 1,
+      "message": "nice cleanup.",
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
