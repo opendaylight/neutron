@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_09f98fc8",
+        "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3547
+      },
+      "writtenOn": "2017-01-25T13:49:30Z",
+      "side": 1,
+      "message": "Right, I put todo there, forgot about it.",
+      "parentUuid": "1a622d24_883dde2d",
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_c85cf61b",
         "filename": "neutron-hostconfig-vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/SocketInfo.java",
         "patchSetId": 1
@@ -168,6 +186,24 @@
       "writtenOn": "2017-01-21T02:29:28Z",
       "side": 1,
       "message": "Since neutron northbound adopted blueprint, is this still needed?",
+      "revId": "a015c5f687fac50c96e0270713848456227f8f96",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_c90f87e0",
+        "filename": "neutron-hostconfig-vpp/src/main/yang/neutron-hostconfig-vpp-provider-impl.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3547
+      },
+      "writtenOn": "2017-01-25T13:49:30Z",
+      "side": 1,
+      "message": "no, it\u0027s not needed anymore, thanks",
+      "parentUuid": "1a622d24_487106a7",
       "revId": "a015c5f687fac50c96e0270713848456227f8f96",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
