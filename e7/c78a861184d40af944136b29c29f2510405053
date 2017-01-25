@@ -1,0 +1,8 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+2: Isaku Yamahata <isaku.yamahata@gmail.com>
+Code-Review+1: Ariel Waizel <ariel.waizel@hpe.com>
+Submitted-by: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-at: Wed, 25 Jan 2017 04:03:22 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/50615
+Project: neutron
+Branch: refs/heads/master
