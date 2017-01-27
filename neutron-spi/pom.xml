@@ -95,7 +95,6 @@
           <instructions>
             <Import-Package>*</Import-Package>
           </instructions>
-          <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
         </configuration>
       </plugin>
       <plugin>

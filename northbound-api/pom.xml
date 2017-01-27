@@ -69,7 +69,6 @@
             </Import-Package>
             <Web-ContextPath>/controller/nb/v2/neutron</Web-ContextPath>
           </instructions>
-          <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
         </configuration>
       </plugin>
       <plugin>
