@@ -71,7 +71,6 @@ and is available at http://www.eclipse.org/legal/epl-v10.html
             <Bundle-Name>${project.groupId}.${project.artifactId}</Bundle-Name>
             <Import-Package>*</Import-Package>
           </instructions>
-          <manifestLocation>${project.basedir}/src/main/resources/META-INF</manifestLocation>
         </configuration>
       </plugin>
       <plugin>
