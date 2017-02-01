@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_bc69878d",
+        "filename": "features/production/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-01T01:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_9f2a807c",
+      "range": {
+        "startLine": 143,
+        "startChar": 15,
+        "endLine": 143,
+        "endChar": 29
+      },
+      "revId": "4093d481c9d8e32a5573691cb75a19a970290b14",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_cd052815",
         "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-21T02:12:38Z",
       "side": 1,
       "message": "Is this used? duplicated to init().",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "4093d481c9d8e32a5573691cb75a19a970290b14",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_fc0aefd0",
+        "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-01T01:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_cd052815",
       "range": {
         "startLine": 60,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_5c105b01",
+        "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-01T01:02:34Z",
+      "side": 1,
+      "message": "Removed executorService. Not needed.",
+      "parentUuid": "1a622d24_a8441a4a",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "4093d481c9d8e32a5573691cb75a19a970290b14",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_0d3560f7",
         "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2017-01-21T02:12:38Z",
       "side": 1,
       "message": "nitpick: space after comma.",
+      "range": {
+        "startLine": 101,
+        "startChar": 37,
+        "endLine": 101,
+        "endChar": 38
+      },
+      "revId": "4093d481c9d8e32a5573691cb75a19a970290b14",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_3c1597f1",
+        "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-01T01:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_0d3560f7",
       "range": {
         "startLine": 101,
         "startChar": 37,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_7cf6ffd8",
+        "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-01T01:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_4d3bd8ea",
+      "range": {
+        "startLine": 111,
+        "startChar": 16,
+        "endLine": 111,
+        "endChar": 45
+      },
+      "revId": "4093d481c9d8e32a5573691cb75a19a970290b14",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_2803ea0e",
         "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2017-01-21T02:12:38Z",
       "side": 1,
       "message": "nitpick: space after comma.",
+      "range": {
+        "startLine": 126,
+        "startChar": 29,
+        "endLine": 126,
+        "endChar": 30
+      },
+      "revId": "4093d481c9d8e32a5573691cb75a19a970290b14",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_dc03abb6",
+        "filename": "neutron-hostconfig-ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-01T01:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a622d24_2803ea0e",
       "range": {
         "startLine": 126,
         "startChar": 29,
