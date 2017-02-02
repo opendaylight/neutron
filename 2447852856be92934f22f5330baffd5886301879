@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "fafc7978_51acbca0",
+        "filename": "neutron-hostconfig/ovs/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 773
+      },
+      "writtenOn": "2017-02-02T03:22:34Z",
+      "side": 1,
+      "message": "shouldn\u0027t need any of this either. by default it should pull in all the imports required.",
+      "revId": "2447852856be92934f22f5330baffd5886301879",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_9113c45b",
         "filename": "neutron-hostconfig/ovs/pom.xml",
         "patchSetId": 2
