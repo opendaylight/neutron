@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_caa62010",
+        "filename": "neutron-hostconfig/ovs/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-06T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_51acbca0",
+      "revId": "2447852856be92934f22f5330baffd5886301879",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_9113c45b",
         "filename": "neutron-hostconfig/ovs/pom.xml",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2017-02-02T00:09:26Z",
       "side": 1,
       "message": "This causes troubles.\nCan you please remove this?\nrefer to https://git.opendaylight\n\nsame to other pom.xml",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 93
+      },
+      "revId": "2447852856be92934f22f5330baffd5886301879",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_aaa91ce1",
+        "filename": "neutron-hostconfig/ovs/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-06T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_9113c45b",
       "range": {
         "startLine": 79,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_0ab02842",
+        "filename": "neutron-hostconfig/utils/src/main/java/org/opendaylight/neutron/hostconfig/utils/NeutronHostconfigUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-06T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_7110e04e",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "2447852856be92934f22f5330baffd5886301879",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_b11a486c",
         "filename": "neutron-hostconfig/utils/src/main/java/org/opendaylight/neutron/hostconfig/utils/NeutronHostconfigUtils.java",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2017-02-02T00:09:26Z",
       "side": 1,
       "message": "Can you please integrate tomaz\u0027s improvement?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 5
+      },
+      "revId": "2447852856be92934f22f5330baffd5886301879",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_eaaa04d1",
+        "filename": "neutron-hostconfig/utils/src/main/java/org/opendaylight/neutron/hostconfig/utils/NeutronHostconfigUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-06T23:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_b11a486c",
       "range": {
         "startLine": 38,
         "startChar": 0,
