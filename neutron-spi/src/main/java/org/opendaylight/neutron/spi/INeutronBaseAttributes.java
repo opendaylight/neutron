@@ -16,4 +16,8 @@ public interface INeutronBaseAttributes<T extends INeutronBaseAttributes> extend
     String getName();
 
     void setName(String name);
+
+    Long getRevisionNumber();
+
+    void setRevisionNumber(Long revisionNumber);
 }

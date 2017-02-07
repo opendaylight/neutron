@@ -27,6 +27,10 @@ public interface INeutronObject<T extends INeutronObject> {
 
     void setTenantID(Uuid tenantID);
 
+    String getProjectID();
+
+    void setProjectID(String projectID);
+
     void initDefaults();
 
     T extractFields(List<String> fields);

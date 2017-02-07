@@ -24,6 +24,9 @@ public abstract class NeutronBaseAttributes<T extends NeutronBaseAttributes> ext
     @XmlElement(name = "name")
     String name;
 
+    @XmlElement(name = "revision_number")
+    Long revisionNumber;
+
     public NeutronBaseAttributes() {
         super();
     }
@@ -39,10 +42,23 @@ public abstract class NeutronBaseAttributes<T extends NeutronBaseAttributes> ext
     }
 
     @Override
+    public Long getRevisionNumber() {
+        return revisionNumber;
+    }
+
+    @Override
+    public void setRevisionNumber(Long revisionNumber) {
+        this.revisionNumber = revisionNumber;
+    }
+
+    @Override
     protected void extractField(String field, T ans) {
         super.extractField(field, ans);
         if (field.equals("name")) {
             ans.setName(this.getName());
+        }
+        if (field.equals("revision_number")) {
+            ans.setRevisionNumber(this.getRevisionNumber());
         }
     }
 }

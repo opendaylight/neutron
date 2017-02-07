@@ -27,6 +27,9 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
     @XmlElement(name = "tenant_id")
     String tenantID;
 
+    @XmlElement(name = "project_id")
+    String projectID;
+
     public NeutronObject() {
         super();
     }
@@ -58,6 +61,16 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
     }
 
     @Override
+    public void setProjectID(String projectID) {
+        this.projectID = projectID;
+    }
+
+    @Override
+    public String getProjectID() {
+        return this.projectID;
+    }
+
+    @Override
     public void initDefaults() {
     }
 
@@ -70,6 +83,9 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
         }
         if (field.equals("tenant_id")) {
             ans.setTenantID(this.getTenantID());
+        }
+        if (field.equals("project_id")) {
+            ans.setProjectID(this.getProjectID());
         }
     }
 }
