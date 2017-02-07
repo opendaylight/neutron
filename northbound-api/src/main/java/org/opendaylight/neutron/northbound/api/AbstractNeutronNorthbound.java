@@ -10,10 +10,15 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 import java.net.HttpURLConnection;
 import java.util.List;
 import javax.ws.rs.core.Response;
+
+import org.opendaylight.neutron.spi.INeutronBaseAttributes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
@@ -121,6 +126,25 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     protected void updateDelta(String uuid, T delta, T original) {
     }
 
+    private Long getRevisionNumber(T input) {
+        Long revNumber = 0L;
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        Type[] types = parameterizedType.getActualTypeArguments();
+        Class<T> neutronObjectClass = (Class<T>) types[NEUTRON_ARGUMENT_TYPE_INDEX];
+        try {
+            if (INeutronBaseAttributes.class.isAssignableFrom(neutronObjectClass)) {
+                final Method getRevisionNumberOrg = neutronObjectClass.getMethod("getRevisionNumber");
+                Object obj = getRevisionNumberOrg.invoke(input);
+                if (obj != null) {
+                    revNumber = (Long) obj;
+                }
+            }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new IllegalArgumentException(e);
+        }
+        return revNumber;
+    }
+
     protected Response update(String uuid, final R input) {
         I neutronCRUD = getNeutronCRUD();
         if (!input.isSingleton()) {
@@ -132,7 +156,11 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             throw new ResourceNotFoundException(uuidNoExist());
         }
         updateDelta(uuid, delta, original);
-
+        Long revNumberOrg = getRevisionNumber(original);
+        Long revNumberInput = getRevisionNumber(delta);
+        if (revNumberOrg > revNumberInput) {
+            return Response.status(HttpURLConnection.HTTP_OK).build();
+        }
         /*
          * update the object and return it
          */

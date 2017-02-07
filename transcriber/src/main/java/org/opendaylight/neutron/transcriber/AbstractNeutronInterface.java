@@ -81,6 +81,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
     private final Method setName;
     private final Method setAdminStateUp;
     private final Method setStatus;
+    private final Method setRevisionNumber;
 
     AbstractNeutronInterface(Class<? extends Builder<T>> builderClass, DataBroker db) {
         this.db = Preconditions.checkNotNull(db);
@@ -101,9 +102,12 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             setTenantId = builderClass.getDeclaredMethod("setTenantId", Uuid.class);
             if (INeutronBaseAttributes.class.isAssignableFrom(neutronObjectClass)) {
                 setName = builderClass.getDeclaredMethod("setName", String.class);
+                setRevisionNumber = builderClass.getDeclaredMethod("setRevisionNumber", Long.class);
             } else {
                 setName = null;
+                setRevisionNumber = null;
             }
+
             if (INeutronAdminAttributes.class.isAssignableFrom(neutronObjectClass)) {
                 setAdminStateUp = builderClass.getDeclaredMethod("setAdminStateUp", Boolean.class);
                 setStatus = builderClass.getDeclaredMethod("setStatus", String.class);
@@ -162,6 +166,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             if (neutronObject.getName() != null) {
                 setName.invoke(builder, neutronObject.getName());
             }
+            if (neutronObject.getRevisionNumber() != null) {
+                setRevisionNumber.invoke(builder, neutronObject.getRevisionNumber());
+            }
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new IllegalArgumentException(e);
         }
@@ -172,6 +179,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         fromMdIds(baseAttributes, answer);
         if (baseAttributes.getName() != null) {
             answer.setName(baseAttributes.getName());
+        }
+        if (baseAttributes.getRevisionNumber() != null) {
+            answer.setRevisionNumber(baseAttributes.getRevisionNumber());
         }
     }
 

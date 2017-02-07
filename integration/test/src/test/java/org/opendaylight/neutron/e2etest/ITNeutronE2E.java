@@ -116,7 +116,7 @@ public class ITNeutronE2E {
         NeutronSFCPortChainTests.runTests(base);
         NeutronSFCFlowClassifierTests.runTests(base);
         NeutronTrunkTests.runTests(base);
-
+        NeutronRevisionNumberTests.runTests(base);
         // tests related to bugs
         NeutronBug3812Tests.runTests(base);
         TempestPortsIpV6TestJSON.runTests(base);
