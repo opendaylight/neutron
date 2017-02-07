@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_8509a9df",
+        "filename": "neutron-hostconfig/ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-07T07:44:59Z",
+      "side": 1,
+      "message": "This is only set by constructor, but isn\u0027t referenced by any other place.\nThis can be removed.",
+      "range": {
+        "startLine": 44,
+        "startChar": 28,
+        "endLine": 44,
+        "endChar": 40
+      },
+      "revId": "1a7e87e1f14bc072cdfa36e23449db5f3b1a2bcd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_25fa7dbd",
+        "filename": "neutron-hostconfig/ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-07T07:44:59Z",
+      "side": 1,
+      "message": "Although this case shouldn\u0027t happen, but please log something.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "1a7e87e1f14bc072cdfa36e23449db5f3b1a2bcd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_c513b10b",
+        "filename": "neutron-hostconfig/ovs/src/main/java/org/opendaylight/neutron/hostconfig/ovs/NeutronHostconfigOvsListener.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-07T07:44:59Z",
+      "side": 1,
+      "message": "This isn\u0027t necessary as nested class isn\u0027t used.",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 45
+      },
+      "revId": "1a7e87e1f14bc072cdfa36e23449db5f3b1a2bcd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_e55995ff",
+        "filename": "neutron-hostconfig/utils/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-07T07:44:59Z",
+      "side": 1,
+      "message": "this isn\u0027t used any more.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 17
+      },
+      "revId": "1a7e87e1f14bc072cdfa36e23449db5f3b1a2bcd",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
