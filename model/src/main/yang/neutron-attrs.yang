@@ -41,7 +41,22 @@ module neutron-attrs {
 
         leaf tenant-id {
             type yang:uuid;
-            description "The UUID of the tenant that will own the object.";
+            description "The UUID of the tenant that will own the object. This
+                         field will be deprecated and replaced by project-id";
+        }
+
+        leaf project-id {
+            type string {
+                length "0..255";
+            }
+            description "The id of the project.";
+        }
+
+        leaf revision-number {
+            type int64;
+            description "The revision number of the resource. Used as monotonic
+                         counter that is updated whenever an object is updated
+                         on neutron server";
         }
     }
 
@@ -56,4 +71,5 @@ module neutron-attrs {
             description "The object status.";
         }
     }
+
 }
