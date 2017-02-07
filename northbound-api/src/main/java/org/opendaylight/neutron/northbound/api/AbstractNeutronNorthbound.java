@@ -11,9 +11,11 @@ package org.opendaylight.neutron.northbound.api;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
+
 import java.net.HttpURLConnection;
 import java.util.List;
 import javax.ws.rs.core.Response;
+
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
@@ -121,6 +123,21 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     protected void updateDelta(String uuid, T delta, T original) {
     }
 
+    private Boolean checkRevisionNumber(T original, T delta) {
+        // If new update is null ignore the original revision number
+        if (delta.getRevisionNumber() == null) {
+            return Boolean.FALSE;
+        }
+        // If what is stored is null no need for comparison
+        if (original.getRevisionNumber() == null) {
+            return Boolean.FALSE;
+        }
+        if (original.getRevisionNumber() > delta.getRevisionNumber()) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
     protected Response update(String uuid, final R input) {
         I neutronCRUD = getNeutronCRUD();
         if (!input.isSingleton()) {
@@ -131,8 +148,10 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         if (original == null) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
+        if (checkRevisionNumber(original, delta)) {
+            return Response.status(HttpURLConnection.HTTP_OK).build();
+        }
         updateDelta(uuid, delta, original);
-
         /*
          * update the object and return it
          */
