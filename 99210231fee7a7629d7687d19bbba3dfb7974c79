@@ -22,6 +22,29 @@
       "revId": "99210231fee7a7629d7687d19bbba3dfb7974c79",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_bec4bb92",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-08T05:51:40Z",
+      "side": 1,
+      "message": "Hmm, given the usage of revision number, unsigned is appropreate. But in sql definition it\u0027s signed as sql data type doesn\u0027t define unsigned integer.\nAlthough the difference won\u0027t matter in practice, let\u0027s make it match with sql schema definition",
+      "range": {
+        "startLine": 56,
+        "startChar": 17,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "99210231fee7a7629d7687d19bbba3dfb7974c79",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
