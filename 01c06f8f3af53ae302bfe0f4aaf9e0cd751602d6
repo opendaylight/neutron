@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_cd7c6fb8",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-02-09T03:54:06Z",
+      "side": 1,
+      "message": "Should mark this as deprecated. It will allow dependent projects to catch usage and change in Carbon. We\u0027ll be in position to remove it in Nitrogen itself, else will have to deprecate in Nitrogen and remove in Oxygen.",
+      "range": {
+        "startLine": 42,
+        "startChar": 13,
+        "endLine": 42,
+        "endChar": 22
+      },
+      "revId": "01c06f8f3af53ae302bfe0f4aaf9e0cd751602d6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_8d7267e1",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-02-09T03:54:06Z",
+      "side": 1,
+      "message": "why string and not uuid?",
+      "range": {
+        "startLine": 49,
+        "startChar": 17,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "01c06f8f3af53ae302bfe0f4aaf9e0cd751602d6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_ed817390",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-02-09T03:54:06Z",
+      "side": 1,
+      "message": "What is range and type for this on openstack side? Do we need to specify min..0?",
+      "range": {
+        "startLine": 56,
+        "startChar": 17,
+        "endLine": 56,
+        "endChar": 22
+      },
+      "revId": "01c06f8f3af53ae302bfe0f4aaf9e0cd751602d6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
