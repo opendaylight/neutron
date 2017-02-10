@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_e9cb1d1c",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-10T23:52:34Z",
+      "side": 1,
+      "message": "Neutron REST API definition is free format string. Not uuid format.\nNeutorn accepts non uuid string for the deployment without keystone.",
+      "parentUuid": "fafc7978_8d7267e1",
+      "range": {
+        "startLine": 49,
+        "startChar": 17,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "01c06f8f3af53ae302bfe0f4aaf9e0cd751602d6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_ed817390",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 3
@@ -59,6 +83,30 @@
       "writtenOn": "2017-02-09T03:54:06Z",
       "side": 1,
       "message": "What is range and type for this on openstack side? Do we need to specify min..0?",
+      "range": {
+        "startLine": 56,
+        "startChar": 17,
+        "endLine": 56,
+        "endChar": 22
+      },
+      "revId": "01c06f8f3af53ae302bfe0f4aaf9e0cd751602d6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_29d6c5c5",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-10T23:52:34Z",
+      "side": 1,
+      "message": "It\u0027s BigInteger.(signed integer)\nIts range depends on RDBMS backend. Usually 64bit.",
+      "parentUuid": "fafc7978_ed817390",
       "range": {
         "startLine": 56,
         "startChar": 17,
