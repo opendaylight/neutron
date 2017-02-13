@@ -1,0 +1,19 @@
+# INITIAL VPP HOSTCONFIG CONFIGURATION
+#
+# Uncomment lines on the bottom of this file to change
+# default values of neutron-hostconfig-vpp bundle config.
+# The file should be placed to karaf_root_dir/etc
+# vhostuser-mode can be set to client or server
+#   server - VPP owns the connection creates a socket
+#            file on hosting machine
+#   client - VPP accepts the connection and looks for
+#            a socket file on hosting machine
+#
+# socket-dir - directory where socket files should be
+#              created or searched
+# socket-prefix - name prefix of created socket files,
+#                 e.g. socket_<port-uuid>
+#
+#vhostuser-mode=server
+#socket-dir=/tmp/
+#socket-prefix = socket_
