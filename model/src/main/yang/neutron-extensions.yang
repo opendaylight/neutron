@@ -35,6 +35,10 @@ module neutron-extensions {
             type string;
             description "The alias for the extension";
         }
+        leaf configuration {
+            type string;
+            description "The configuration of this extension";
+        }
     }
 
     grouping extensions-attributes {
