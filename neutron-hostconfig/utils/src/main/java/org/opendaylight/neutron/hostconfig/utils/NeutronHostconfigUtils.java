@@ -8,6 +8,10 @@
 
 package org.opendaylight.neutron.hostconfig.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
@@ -46,11 +50,13 @@ public class NeutronHostconfigUtils {
                     hostConfigId = createInstanceIdentifier(hostConfig);
                     writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig, true);
                     writeTx.submit().get();
+                    LOG.trace("Hostconfig updated for node {}", hostConfig.getHostId());
                     break;
                 case DELETE:
                     final WriteTransaction delTx = dataBroker.newWriteOnlyTransaction();
                     hostConfigId = createInstanceIdentifier(hostConfig);
                     delTx.delete(LogicalDatastoreType.OPERATIONAL, hostConfigId);
+                    LOG.trace("Hostconfig deleted for node {}", hostConfig.getHostId());
                     delTx.submit().get();
                     break;
                 default:
@@ -72,5 +78,18 @@ public class NeutronHostconfigUtils {
     private InstanceIdentifier<Hostconfig> createInstanceIdentifier(Hostconfig hostconfig) {
         return InstanceIdentifier.create(Neutron.class).child(Hostconfigs.class)
                 .child(Hostconfig.class, hostconfig.getKey());
+    }
+
+    /**
+     * @param revision in format "yyyy-MM-dd"
+     * @return Date instance
+     */
+    public static Date parseDate(final String revision) {
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return formatter.parse(revision);
+        } catch (final ParseException e) {
+            throw new IllegalArgumentException("Date not valid", e);
+        }
     }
 }
