@@ -9,6 +9,7 @@
    <repository>mvn:org.opendaylight.controller/features-mdsal/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.ovsdb/southbound-features/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.netconf/features-restconf/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.netconf/features-netconf-connector/{{VERSION}}/xml/features</repository>
    <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
     <feature version='${project.version}'>odl-neutron-spi</feature>
     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
@@ -59,6 +60,14 @@
     <bundle>mvn:org.opendaylight.ovsdb/utils.southbound-utils/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-ovs/{{VERSION}}</bundle>
+    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+  </feature>
+  <feature name='odl-neutron-hostconfig-vpp' version='${project.version}' description="OpenDaylight :: Neutron :: HostconfigVpp">
+    <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
+    <feature version="${netconf.version}">odl-netconf-clustered-topology</feature>
+    <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
+    <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
   </feature>
 </features>

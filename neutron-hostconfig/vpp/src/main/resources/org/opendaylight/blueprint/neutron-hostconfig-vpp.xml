@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:odl="http://opendaylight.org/xmlns/blueprint/v1.0.0"
+    xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+    odl:use-default-for-reference-types="true">
+
+  <reference id="dataBroker"
+      interface="org.opendaylight.controller.md.sal.binding.api.DataBroker"
+      odl:type="default" />
+
+  <cm:property-placeholder persistent-id="org.opendaylight.neutron.hostconfig.vpp" update-strategy="none">
+    <cm:default-properties>
+      <cm:property name="vhostuser-mode" value="server"/>
+      <cm:property name="socket-dir" value="/tmp/"/>
+      <cm:property name="socket-prefix" value="socket_"/>
+    </cm:default-properties>
+  </cm:property-placeholder>
+
+  <bean id="neutronHostconfigVpp"
+     class="org.opendaylight.neutron.hostconfig.vpp.NeutronHostconfigVppListener"
+     init-method="init"
+     destroy-method="close">
+    <argument ref="dataBroker"/>
+    <argument value="${socket-dir}"/>
+    <argument value="${socket-prefix}"/>
+    <argument value="${vhostuser-mode}"/>
+  </bean>
+
+</blueprint>
