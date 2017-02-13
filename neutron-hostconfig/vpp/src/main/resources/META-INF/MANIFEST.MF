@@ -1,0 +1,43 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1485351922598
+Build-Jdk: 1.8.0_112
+Built-By: tcechval
+Bundle-Description: OpenDaylight is leading the transformation to Open S
+ oftware Defined Networking (SDN). For more information, please see http
+ s://www.opendaylight.org
+Bundle-DocURL: https://www.opendaylight.org
+Bundle-License: https://www.eclipse.org/legal/epl-v10.html
+Bundle-ManifestVersion: 2
+Bundle-Name: neutron-hostconfig-vpp
+Bundle-SymbolicName: org.opendaylight.neutron.hostconfig-vpp
+Bundle-Vendor: OpenDaylight
+Bundle-Version: 0.8.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.opendaylight.neutron.hostconfig.vpp;version="0.8.0";
+ uses:="javax.annotation,org.opendaylight.controller.md.sal.binding.api,
+ org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topolog
+ y.rev131021,org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.net
+ work.topology.rev131021.network.topology.topology"
+Import-Package: com.google.common.base;version="[18.0,19)",com.google.co
+ mmon.collect;version="[18.0,19)",com.google.gson;version="[2.7,3)",java
+ x.annotation,org.opendaylight.controller.md.sal.binding.api;version="[1
+ .5,2)",org.opendaylight.controller.md.sal.common.api.data;version="[1.5
+ ,2)",org.opendaylight.neutron.hostconfig.vpp;version="[0.8,1)",org.open
+ daylight.neutron.utils.hostconfig;version="[0.8,1)",org.opendaylight.ya
+ ng.gen.v1.urn.opendaylight.netconf.node.topology.rev150114;version="[1.
+ 5,2)",org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topolo
+ gy.rev150114.netconf.node.connection.status;version="[1.5,2)",org.opend
+ aylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.ne
+ tconf.node.connection.status.available.capabilities;version="[1.5,2)",o
+ rg.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev1507
+ 12.hostconfig.attributes.hostconfigs;version="[0.8,1)",org.opendaylight
+ .yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.rev131021;vers
+ ion="[2013.10,2014)",org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns
+ .yang.network.topology.rev131021.network.topology;version="[2013.10,201
+ 4)",org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.top
+ ology.rev131021.network.topology.topology;version="[2013.10,2014)",org.
+ opendaylight.yangtools.concepts;version="[1.1,2)",org.opendaylight.yang
+ tools.yang.binding;version="[0.10,1)",org.slf4j;version="[1.7,2)"
+Originally-Created-By: Apache Maven Bundle Plugin
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-3.0.0.201509101326
