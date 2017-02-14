@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_436e7d97",
+        "filename": "features/production/src/main/features/features.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-14T01:13:31Z",
+      "side": 1,
+      "message": "vpp",
+      "range": {
+        "startLine": 65,
+        "startChar": 124,
+        "endLine": 65,
+        "endChar": 127
+      },
+      "revId": "92ea6c787410081334ba8a30dd19073cd4992d7f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_a36da99a",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/init/NeutronHostconfigVppInitializer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-14T01:13:31Z",
+      "side": 1,
+      "message": "Can we consolidate this into NeutronHostconfigVppListener?\nOr did you split this intentionally? e.g. test.",
+      "range": {
+        "startLine": 19,
+        "startChar": 13,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "92ea6c787410081334ba8a30dd19073cd4992d7f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
