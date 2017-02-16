@@ -26,7 +26,7 @@ public class NeutronTrunkTests {
 
     public String singleton_trunk_create_test() {
         String url = base + "/trunks";
-        String content = "{\"trunk\":{\"status\":\"DOWN\",\"name\":\"trunk0\",\"admin_state_up\":true, "
+        String content = "{\"trunk\":{\"name\":\"trunk0\",\"admin_state_up\":true, "
                 + "\"tenant_id\":\"cc3641789c8a4304abaa841c64f638d9\", "
                 + "\"port_id\":\"60aac28d-1d3a-48d9-99bc-dd4bd62e50f2\", "
                 + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
@@ -78,7 +78,7 @@ public class NeutronTrunkTests {
 
     public void bulk_trunk_create_test() {
         String url = base + "/trunks";
-        String content = "{\"trunks\":[{\"status\":\"DOWN\",\"name\":\"trunk1\",\"admin_state_up\":true, "
+        String content = "{\"trunks\":[{\"name\":\"trunk1\",\"admin_state_up\":true, "
                 + "\"tenant_id\":\"cc3641789c8a4304abaa841c64f638d9\", "
                 + "\"port_id\":\"87927a7a-86ec-4062-946f-40222ec583ca\", "
                 + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
@@ -86,7 +86,7 @@ public class NeutronTrunkTests {
                 + "{\"segmentation_type\":\"vlan\",\"port_id\":\"e12f8356-ff66-4948-979f-9dedb63ee299\", "
                 + "\"segmentation_id\":102}],\"id\":\"bc587c4c-de31-42b1-89c3-809add88c9b3\", "
                 + "\"description\":\"test trunk1\"},"
-                + "{\"status\":\"ACTIVE\",\"name\":\"trunk2\",\"admin_state_up\":true, "
+                + "{\"name\":\"trunk2\",\"admin_state_up\":true, "
                 + "\"tenant_id\":\"cc3641789c8a4304abaa841c64f638d9\","
                 + "\"port_id\":\"f5624c68-eda2-42c1-92a1-53094707dc36\", "
                 + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
@@ -99,7 +99,7 @@ public class NeutronTrunkTests {
 
     public void trunk_update_test() {
         String url = base + "/trunks/c935240e-4aa6-496a-841c-d113c54499b9";
-        String content = "{\"trunk\":{\"status\":\"DOWN\",\"name\":\"trunk0\",\"admin_state_up\":true, "
+        String content = "{\"trunk\":{\"name\":\"trunk0\",\"admin_state_up\":true, "
                 + "\"port_id\":\"60aac28d-1d3a-48d9-99bc-dd4bd62e50f2\", "
                 + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
                 + "\"port_id\":\"dca33436-2a7c-415b-aa35-14769e7834e3\",\"segmentation_id\":101}], "
@@ -120,7 +120,7 @@ public class NeutronTrunkTests {
     public void trunk_element_get_test_with_added_query() {
         String url = base + "/trunks/c935240e-4aa6-496a-841c-d113c54499b9"
                 + "?fields=id&fields=tenant_id&fields=name&fields=port_id"
-                + "&fields=status&fields=admin_state_up&fields=sub_ports";
+                + "&fields=admin_state_up&fields=sub_ports";
         ITNeutronE2E.test_fetch(url, true, "Trunk Element Get with query Failed");
     }
 
