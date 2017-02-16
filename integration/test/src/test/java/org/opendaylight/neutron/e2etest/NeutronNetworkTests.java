@@ -47,7 +47,7 @@ public class NeutronNetworkTests {
     //TODO handle SB check
     public String singleton_network_create_test() {
         String url = base + "/networks";
-        String content = "{ \"network\": {" + " \"status\": \"ACTIVE\", \"subnets\": [], "
+        String content = "{ \"network\": {\"subnets\": [], "
                 + " \"name\": \"net1\", \"admin_state_up\": true, "
                 + " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + " \"router:external\": false, \"segments\": [ " + " { \"provider:segmentation_id\": 2, "
@@ -68,7 +68,7 @@ public class NeutronNetworkTests {
     //TODO handle SB check
     public void external_network_create_test() {
         String url = base + "/networks";
-        String content = "{ \"network\": {" + " \"status\": \"ACTIVE\", \"subnets\": [], "
+        String content = "{ \"network\": {\"subnets\": [], "
                 + " \"name\": \"external1\", \"admin_state_up\": true, "
                 + " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + " \"router:external\": true, \"shared\": false, "
@@ -79,12 +79,12 @@ public class NeutronNetworkTests {
     //TODO handle SB check
     public void bulk_network_create_test() {
         String url = base + "/networks";
-        String content = "{ \"networks\": [ { " + "\"status\": \"ACTIVE\", \"subnets\": [], "
+        String content = "{ \"networks\": [ {  \"subnets\": [], "
                 + "\"name\": \"sample_network3\", " + "\"provider:physical_network\": null, "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
                 + "\"provider:network_type\": \"local\", " + "\"shared\": false, "
                 + "\"id\": \"bc1a76cb-8767-4c3a-bb95-018b822f2130\", " + "\"provider:segmentation_id\": null }, { "
-                + "\"status\": \"ACTIVE\", " + "\"subnets\": [], " + "\"name\": \"sample_network4\", "
+                + "\"subnets\": [], " + "\"name\": \"sample_network4\", "
                 + "\"provider:physical_network\": null, " + "\"admin_state_up\": true, "
                 + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", " + "\"provider:network_type\": \"local\", "
                 + "\"shared\": false, " + "\"id\": \"af374017-c9ae-4a1d-b799-ab73111476e2\", "
@@ -95,7 +95,7 @@ public class NeutronNetworkTests {
     //TODO handle SB check
     public void network_update_test() {
         String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
-        String content = " { \"network\": { " + "\"status\": \"ACTIVE\", " + "\"subnets\": [], "
+        String content = " { \"network\": { " + "\"subnets\": [], "
                 + "\"name\": \"sample_network_5_updated\", " + "\"provider:physical_network\": null, "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
                 + "\"provider:network_type\": \"local\", " + "\"router:external\": false, " + "\"shared\": false, "

@@ -34,9 +34,6 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> imp
     @Override
     public void initDefaults() {
         adminStateUp = true;
-        if (status == null) {
-            status = "DOWN";
-        }
         if (subPorts == null) {
             subPorts = new ArrayList<>();
         }

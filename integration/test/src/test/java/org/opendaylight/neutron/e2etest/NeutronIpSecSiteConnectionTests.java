@@ -43,7 +43,7 @@ public class NeutronIpSecSiteConnectionTests {
 
     public void ipsecSiteConnection_update_test() {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc";
-        String content = " { \"ipsec_site_connection\": {" + "\"status\": \"DOWN\"," + "\"psk\": \"secret\","
+        String content = " { \"ipsec_site_connection\": {" + "\"psk\": \"secret\","
                 + "\"initiator\": \"bi-directional\"," + "\"name\": \"vpnconnection1\"," + "\"admin_state_up\": true,"
                 + "\"tenant_id\": \"26de9cd6cae94c8cb9f79d660d628e1f\"," + "\"description\": \"\","
                 + "\"auth_mode\": \"psk\"," + "\"peer_cidrs\": [ \"10.2.0.0/24\" ]," + "\"mtu\": 2000,"

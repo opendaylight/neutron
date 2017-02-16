@@ -23,7 +23,7 @@ public class NeutronRouterTests {
     //TODO handle SB check
     public String singleton_router_create_test() {
         String url = base + "/routers";
-        String content = "{ \"router\": { " + "\"status\": \"ACTIVE\", " + "\"external_gateway_info\": { "
+        String content = "{ \"router\": {" + "\"external_gateway_info\": { "
                 + "\"network_id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" }, " + "\"name\": \"another_router\", "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\" } } ";
@@ -39,7 +39,7 @@ public class NeutronRouterTests {
     //TODO handle SB check
     public void create_router() {
         String url = base + "/routers";
-        String content = "{ \"router\": { " + "\"status\": \"ACTIVE\", " + "\"external_gateway_info\": { "
+        String content = "{ \"router\": {" + "\"external_gateway_info\": { "
                 + "\"network_id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" }, " + "\"name\": \"another_router\", "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2f\" } } ";
@@ -49,7 +49,7 @@ public class NeutronRouterTests {
     //TODO handle SB check
     public void update_router_test() {
         String url = base + "/routers/8604a0de-7f6b-409a-a47c-a1cc7bc77b2e";
-        String content = "{ \"router\": { " + "\"status\": \"ACTIVE\", " + "\"external_gateway_info\": { "
+        String content = "{ \"router\": { " + "\"external_gateway_info\": { "
                 + "\"network_id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" }, " + "\"name\": \"new_name\", "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + "\"id\": \"8604a0de-7f6b-409a-a47c-a1cc7bc77b2e\" } } ";
