@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_2a3b3ad2",
+        "filename": "neutron-hostconfig/vpp/pom.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-16T21:37:30Z",
+      "side": 1,
+      "message": "Add checkstyle plugin here. And fix checkstyle violations in the patch.\nhttps://git.opendaylight.org/gerrit/#/c/51982/1/neutron-hostconfig/ovs/pom.xml",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 12
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_af4bbc85",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-16T21:37:30Z",
+      "side": 1,
+      "message": "executorService is not needed",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 23
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_4f7df0b0",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-02-16T21:37:30Z",
+      "side": 1,
+      "message": "Update log message",
+      "range": {
+        "startLine": 107,
+        "startChar": 7,
+        "endLine": 107,
+        "endChar": 103
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
