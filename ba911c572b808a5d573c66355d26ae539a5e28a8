@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_2ac5fa8d",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-16T23:57:09Z",
+      "side": 1,
+      "message": "please add \"status deprecated;\" to declare deprecation.",
+      "revId": "ba911c572b808a5d573c66355d26ae539a5e28a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_caceeeb3",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-16T23:57:09Z",
+      "side": 1,
+      "message": "unnecessary code churn.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 1
+      },
+      "revId": "ba911c572b808a5d573c66355d26ae539a5e28a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
