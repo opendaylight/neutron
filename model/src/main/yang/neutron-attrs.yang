@@ -68,6 +68,7 @@ module neutron-attrs {
         }
         leaf status {
             type string;
+            config false;
             description "The object status.";
         }
     }
