@@ -265,9 +265,6 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     public void initDefaults() {
         adminStateUp = true;
         portSecurityEnabled = true;
-        if (status == null) {
-            status = "ACTIVE";
-        }
         if (fixedIps == null) {
             fixedIps = new ArrayList<NeutronIps>();
         }

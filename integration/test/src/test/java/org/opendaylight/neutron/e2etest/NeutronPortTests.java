@@ -27,7 +27,7 @@ public class NeutronPortTests {
     //TODO handle SB check
     public String singleton_port_create_test() {
         String url = base + "/ports";
-        String content = "{ \"port\": { \"status\": \"DOWN\"," + "\"binding:host_id\": \"\","
+        String content = "{ \"port\": { " + "\"binding:host_id\": \"\","
                 + "\"name\": \"private-port\"," + "\"allowed_address_pairs\": []," + "\"admin_state_up\": true,"
                 + "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\","
                 + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\"," + "\"binding:vif_details\": {},"
@@ -48,7 +48,7 @@ public class NeutronPortTests {
     //TODO handle SB check
     public void router_interface_port_create_test() {
         String url = base + "/ports";
-        String content = "{\"ports\": [ {\"status\": \"DOWN\", \"binding:host_id\": \"\", "
+        String content = "{\"ports\": [ { \"binding:host_id\": \"\", "
                 + "\"allowed_address_pairs\": [], \"device_owner\": \"network:router_gateway\", "
                 + "\"binding:profile\": {}, \"fixed_ips\": "
                 + "[{\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
@@ -59,7 +59,7 @@ public class NeutronPortTests {
                 + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", \"binding:vif_details\": {},"
                 + " \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\", "
                 + "\"mac_address\": \"fa:16:3e:dc:1d:8d\"}, "
-                + " {\"status\": \"DOWN\", \"binding:host_id\": \"\", "
+                + " {\"binding:host_id\": \"\", "
                 + "\"allowed_address_pairs\": [], \"device_owner\": \"network:router_gateway\", "
                 + "\"binding:profile\": {}, \"fixed_ips\": [{\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
                 + "\"ip_address\": \"10.0.0.2\"}], \"id\": \"d8a4cc85-ad78-46ac-b5a1-8e04f16fa51f\", "
@@ -74,14 +74,14 @@ public class NeutronPortTests {
 
     public void bulk_port_create_test() {
         String url = base + "/ports";
-        String content = "{ \"ports\": [ { " + " \"status\": \"DOWN\", " + " \"name\": \"sample_port_1\", "
+        String content = "{ \"ports\": [ { " + " \"name\": \"sample_port_1\", "
                 + " \"allowed_address_pairs\": [], " + " \"admin_state_up\": false, "
                 + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
                 + " \"tenant_id\": \"d6700c0c9ffa4f1cb322cd4a1f3906fa\", " + " \"device_owner\": \"\", "
                 + " \"mac_address\": \"fa:16:3e:48:b8:9f\", " + " \"fixed_ips\": [ { "
                 + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\"," + " \"ip_address\": \"10.0.0.5\" } ], "
                 + " \"id\": \"94225baa-9d3f-4b93-bf12-b41e7ce49cdb\", " + " \"security_groups\": [], "
-                + " \"device_id\": \"\" }, { " + " \"status\": \"DOWN\", " + " \"name\": \"sample_port_2\", "
+                + " \"device_id\": \"\" }, { " +  " \"name\": \"sample_port_2\", "
                 + " \"allowed_address_pairs\": [], " + " \"admin_state_up\": false, "
                 + " \"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\", "
                 + " \"tenant_id\": \"d6700c0c9ffa4f1cb322cd4a1f3906fa\", " + " \"device_owner\": \"\", "
@@ -94,7 +94,7 @@ public class NeutronPortTests {
 
     public void port_update_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        String content = " { \"port\": { " + " \"status\": \"DOWN\", "
+        String content = " { \"port\": { "
                 + " \"binding:host_id\": \"00000000-1111-2222-3333-444444444444\", "
                 + " \"allowed_address_pairs\": [ { " + " \"mac_address\": \"fa:16:3e:11:11:5e\", "
                 + " \"ip_address\": \"192.168.1.200/32\" } ], " + " \"extra_dhcp_opts\": [], "
@@ -117,7 +117,7 @@ public class NeutronPortTests {
     public void port_element_get_with_query_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b"
                 + "?fields=id&fields=network_id&fields=name&fields=admin_state_up"
-                + "&fields=status&fields=mac_address&fields=device_id&fields=tenant_id"
+                + "&fields=mac_address&fields=device_id&fields=tenant_id"
                 + "&fields=device_owner&fields=limit&fields=marker&fields=page_reverse";
         ITNeutronE2E.test_fetch(url, true, "Port Element Get With Query Failed");
     }

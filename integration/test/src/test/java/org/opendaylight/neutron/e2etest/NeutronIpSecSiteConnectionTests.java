@@ -22,7 +22,7 @@ public class NeutronIpSecSiteConnectionTests {
 
     public String singleton_ipsecSiteConnection_create_test() {
         String url = base + "/vpn/ipsecsiteconnections";
-        String content = " { \"ipsec_site_connection\": {" + "\"status\": \"PENDING_CREATE\"," + "\"psk\": \"secret\","
+        String content = " { \"ipsec_site_connection\": {" + "\"psk\": \"secret\","
                 + "\"initiator\": \"bi-directional\"," + "\"name\": \"vpnconnection1\"," + "\"admin_state_up\": true,"
                 + "\"tenant_id\": \"b6887d0b45b54a249b2ce3dee01caa47\"," + "\"description\": \"\","
                 + "\"auth_mode\": \"psk\"," + "\"peer_cidrs\": [ \"10.2.0.0/24\" ]," + "\"mtu\": 1500,"
@@ -43,7 +43,7 @@ public class NeutronIpSecSiteConnectionTests {
 
     public void ipsecSiteConnection_update_test() {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc";
-        String content = " { \"ipsec_site_connection\": {" + "\"status\": \"DOWN\"," + "\"psk\": \"secret\","
+        String content = " { \"ipsec_site_connection\": {" + "\"psk\": \"secret\","
                 + "\"initiator\": \"bi-directional\"," + "\"name\": \"vpnconnection1\"," + "\"admin_state_up\": true,"
                 + "\"tenant_id\": \"26de9cd6cae94c8cb9f79d660d628e1f\"," + "\"description\": \"\","
                 + "\"auth_mode\": \"psk\"," + "\"peer_cidrs\": [ \"10.2.0.0/24\" ]," + "\"mtu\": 2000,"
@@ -65,7 +65,7 @@ public class NeutronIpSecSiteConnectionTests {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc"
                 + "?fields=id&fields=tenant_id&fields=name&fields=description&fields=peer_address"
                 + "&fields=peer_id&fields=route_mode&fields=auth_mode&fields=initiator"
-                + "&fields=mtu&fields=psk&fields=admin_state_up&fields=status&fields=ikepolicy_id"
+                + "&fields=mtu&fields=psk&fields=admin_state_up&fields=ikepolicy_id"
                 + "&fields=ipsecpolicy_id&fields=vpnservice_id";
         ITNeutronE2E.test_fetch(url, true, "IPSEC Site Connection Element GET With Query failed");
     }

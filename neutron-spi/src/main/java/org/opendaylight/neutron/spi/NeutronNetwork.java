@@ -63,9 +63,6 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
 
     @Override
     public void initDefaults() {
-        if (status == null) {
-            status = "ACTIVE";
-        }
         if (adminStateUp == null) {
             adminStateUp = true;
         }
