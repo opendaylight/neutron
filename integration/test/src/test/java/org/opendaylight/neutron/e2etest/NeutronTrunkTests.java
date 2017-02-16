@@ -49,7 +49,7 @@ public class NeutronTrunkTests {
                 + "{\"segmentation_type\":\"vlan\",\"port_id\":\"e12f8356-ff66-4948-979f-9dedb63ee299\", "
                 + "\"segmentation_id\":102}],\"id\":\"bc587c4c-de31-42b1-89c3-809add88c9b3\", "
                 + "\"description\":\"test trunk1\"},"
-                + "{\"status\":\"ACTIVE\",\"name\":\"trunk2\",\"admin_state_up\":true, "
+                + "{\"name\":\"trunk2\",\"admin_state_up\":true, "
                 + "\"tenant_id\":\"cc3641789c8a4304abaa841c64f638d9\","
                 + "\"port_id\":\"f5624c68-eda2-42c1-92a1-53094707dc36\", "
                 + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
