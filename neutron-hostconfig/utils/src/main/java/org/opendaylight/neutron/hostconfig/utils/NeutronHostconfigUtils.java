@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.hostconfig.utils;
 
+import java.util.concurrent.ExecutionException;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
@@ -56,7 +57,7 @@ public class NeutronHostconfigUtils {
                 default:
                     break;
             }
-        } catch (Exception e) {
+        } catch (InterruptedException | ExecutionException e) {
             LOG.warn("Hostconfig transaction commit failed to DS.", e);
         }
     }
