@@ -93,6 +93,7 @@ module neutron-L3 {
         }
         leaf status {
             type string;
+            config false;
             description "The network status.";
         }
     }

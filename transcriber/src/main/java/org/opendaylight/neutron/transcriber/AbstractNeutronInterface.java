@@ -81,7 +81,6 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
     private final Method setProjectId;
     private final Method setName;
     private final Method setAdminStateUp;
-    private final Method setStatus;
     private final Method setRevisionNumber;
 
     AbstractNeutronInterface(Class<? extends Builder<T>> builderClass, DataBroker db) {
@@ -113,10 +112,8 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
 
             if (INeutronAdminAttributes.class.isAssignableFrom(neutronObjectClass)) {
                 setAdminStateUp = builderClass.getDeclaredMethod("setAdminStateUp", Boolean.class);
-                setStatus = builderClass.getDeclaredMethod("setStatus", String.class);
             } else {
                 setAdminStateUp = null;
-                setStatus = null;
             }
         } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException(e);
@@ -201,9 +198,6 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             if (neutronObject.getAdminStateUp() != null) {
                 setAdminStateUp.invoke(builder, neutronObject.getAdminStateUp());
             }
-            if (neutronObject.getStatus() != null) {
-                setStatus.invoke(builder, neutronObject.getStatus());
-            }
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new IllegalArgumentException(e);
         }
@@ -214,9 +208,6 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         fromMdBaseAttributes(attr, answer);
         if (attr.isAdminStateUp() != null) {
             answer.setAdminStateUp(attr.isAdminStateUp());
-        }
-        if (attr.getStatus() != null) {
-            answer.setStatus(attr.getStatus());
         }
     }
 
