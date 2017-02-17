@@ -25,6 +25,98 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_8a0986df",
+        "filename": "neutron-hostconfig/vpp/pom.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "maven-bundle-plugin too.\nThen the plugin automatically creates MANIFEST.MF",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 12
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_4aff9eaa",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "nitpick: trailing white space.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 4
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_a583db54",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "Is this QName for yang module?\nQName.create().toString()?",
+      "range": {
+        "startLine": 52,
+        "startChar": 50,
+        "endLine": 52,
+        "endChar": 118
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_ca138e0b",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "Can you please log something.\nNormally this line isn\u0027t reached, though.\ntoo paranoic?",
+      "range": {
+        "startLine": 84,
+        "startChar": 24,
+        "endLine": 85,
+        "endChar": 20
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_af4bbc85",
         "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
         "patchSetId": 6
@@ -64,6 +156,98 @@
         "startChar": 7,
         "endLine": 107,
         "endChar": 103
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_6a0422c0",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "This method is only used by line 132. So can you please open code there?",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 5
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_ea101203",
+        "filename": "neutron-hostconfig/vpp/src/main/resources/META-INF/MANIFEST.MF",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "org.apache.felix:maven-bundle-plugin can be used to automatically produce MANIFEST.MF.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_c5f7fff3",
+        "filename": "neutron-hostconfig/vpp/src/main/resources/org/opendaylight/blueprint/neutron-hostconfig-vpp.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "Just from curiosity.\nIs this correct? something like /var/run/vpp?",
+      "range": {
+        "startLine": 15,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_853b379b",
+        "filename": "neutron-hostconfig/vpp/src/test/java/org/opendaylight/neutron/hostconfig/vpp/HostconfigsDataBrokerTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-02-17T07:36:12Z",
+      "side": 1,
+      "message": "why for?\ncopy-and-paste?",
+      "range": {
+        "startLine": 26,
+        "startChar": 35,
+        "endLine": 26,
+        "endChar": 76
       },
       "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
