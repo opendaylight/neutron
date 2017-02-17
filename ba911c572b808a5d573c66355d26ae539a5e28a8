@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_2a405aa4",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-02-17T03:29:42Z",
+      "side": 1,
+      "message": "update in description not needed. just \"status deprecated;\" is enough.",
+      "range": {
+        "startLine": 44,
+        "startChar": 73,
+        "endLine": 45,
+        "endChar": 76
+      },
+      "revId": "ba911c572b808a5d573c66355d26ae539a5e28a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_caceeeb3",
         "filename": "model/src/main/yang/neutron-attrs.yang",
         "patchSetId": 4
