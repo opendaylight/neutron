@@ -45,6 +45,7 @@ module neutron {
 
     container neutron {
         uses extensions:extensions-attributes;
+        uses extensions:service-provider-features-attributes;
         uses networks:networks-attributes;
         uses subnets:subnets-attributes;
         uses ports:ports-attributes;
