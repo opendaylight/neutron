@@ -8,6 +8,10 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import org.junit.Assert;
+
 public class NeutronTrunkTests {
     String base;
 
@@ -30,6 +34,20 @@ public class NeutronTrunkTests {
                 + "{\"segmentation_type\":\"vlan\",\"port_id\":\"be28febe-bdff-45cc-8a2d-872d54e62527\", "
                 + "\"segmentation_id\":102}],\"id\":\"c935240e-4aa6-496a-841c-d113c54499b9\", "
                 + "\"description\":\"test trunk0\"} }";
+        ITNeutronE2E.test_create(url, content, "Singleton Trunk Post Failed NB");
+        return content;
+    }
+
+    public String singleton_default_trunk_create_test() {
+        String url = base + "/trunks";
+        String content = "{\"trunk\":{\"name\":\"trunkdefault\", "
+                + "\"tenant_id\":\"cc3641789c8a4304abaa841c64f638d9\", "
+                + "\"port_id\":\"60aac28d-1d3a-48d9-99bc-dd4bd62e50f2\", "
+                + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
+                + "\"port_id\":\"dca33436-2a7c-415b-aa35-14769e7834e3\",\"segmentation_id\":101}, "
+                + "{\"segmentation_type\":\"vlan\",\"port_id\":\"be28febe-bdff-45cc-8a2d-872d54e62527\", "
+                + "\"segmentation_id\":102}],\"id\":\"d935240e-4aa6-d96a-d41c-d113c54499b9\", "
+                + "\"description\":\"test trunkdefault\"} }";
         ITNeutronE2E.test_create(url, content, "Singleton Trunk Post Failed NB");
         return content;
     }
@@ -87,6 +105,27 @@ public class NeutronTrunkTests {
         ITNeutronE2E.test_fetch(url, true, "Trunk Element Get with query Failed");
     }
 
+    public void default_trunk_content_validation_test() {
+        //Validates NeutronTrunk default parmeters are set.
+        //Default parameters: status,admin_state_up
+        String element = "status";
+        String url = base + "/trunks/d935240e-4aa6-d96a-d41c-d113c54499b9?fields=" + element;
+        String expectedContent = "\"DOWN\"";
+        String context = "Trunk details do not match.";
+        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = jsonObjectOutput.getAsJsonObject("trunk");
+        JsonElement jsonElementValue = jsonObjectOutput.get(element);
+        Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
+        element = "admin_state_up";
+        url = base + "/trunks/d935240e-4aa6-d96a-d41c-d113c54499b9?fields=" + element;
+        boolean expectedState = true;
+        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = jsonObjectOutput.getAsJsonObject("trunk");
+        jsonElementValue = jsonObjectOutput.get(element);
+        Assert.assertEquals(context, expectedState, jsonElementValue.getAsBoolean());
+    }
+
+
     public void trunk_element_negative_get_test() {
         String url = base + "/trunks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
         ITNeutronE2E.test_fetch(url, false, "Trunk Element Negative Get Failed");
@@ -102,6 +141,8 @@ public class NeutronTrunkTests {
         trunkTester.trunk_collection_get_test();
         String createJsonString = trunkTester.singleton_trunk_create_test();
         trunkTester.singleton_trunk_get_with_one_query_item_test(createJsonString);
+        trunkTester.singleton_default_trunk_create_test();
+        trunkTester.default_trunk_content_validation_test();
         trunkTester.bulk_trunk_create_test();
         trunkTester.trunk_update_test();
         trunkTester.trunk_bulk_get_test();
