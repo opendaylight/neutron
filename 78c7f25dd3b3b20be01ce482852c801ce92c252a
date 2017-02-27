@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_a76bbcef",
+        "filename": "neutron-hostconfig/vpp/src/test/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListenerTest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3547
+      },
+      "writtenOn": "2017-02-27T09:44:40Z",
+      "side": 1,
+      "message": "I made it rather simpler for now due to bugs mentioned in my other comment.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 5
+      },
+      "revId": "78c7f25dd3b3b20be01ce482852c801ce92c252a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
