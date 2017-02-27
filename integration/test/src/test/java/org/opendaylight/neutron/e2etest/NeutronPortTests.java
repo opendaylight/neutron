@@ -51,6 +51,22 @@ public class NeutronPortTests {
         ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ports");
     }
 
+    public String singleton_default_port_create_test() {
+        String url = base + "/ports";
+        String content = "{ \"port\": { \"binding:host_id\": \"\","
+                + "\"name\": \"default-port\"," + "\"allowed_address_pairs\": [],"
+                + "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\","
+                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\"," + "\"binding:vif_details\": {},"
+                + "\"binding:vnic_type\": \"normal\"," + "\"binding:vif_type\": \"unbound\","
+                + "\"device_owner\": \"\"," + "\"mac_address\": \"fa:16:3e:c9:cb:f0\"," + "\"binding:profile\": {},"
+                + "\"fixed_ips\": [ {" + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
+                + "\"ip_address\": \"10.0.0.2\" } ]," + "\"id\": \"d5c0ee9f-d634-d522-d954-d1021b570b0d\","
+                + "\"security_groups\": [] ," + "\"device_id\": \"\" } }";
+        ITNeutronE2E.test_create(url, content, "Singleton Default Port Post Failed NB");
+        return content;
+    }
+
+
     //TODO handle SB check
     public void router_interface_port_create_test() {
         String url = base + "/ports";
@@ -146,6 +162,7 @@ public class NeutronPortTests {
         NeutronPortTests port_tester = new NeutronPortTests(base);
         String createJsonString = port_tester.singleton_port_create_test();
         port_tester.singleton_port_get_with_one_query_item_test(createJsonString);
+        port_tester.singleton_default_port_create_test();
         port_tester.router_interface_port_create_test(); //needed for router test
         port_tester.bulk_port_create_test();
         port_tester.port_update_test();

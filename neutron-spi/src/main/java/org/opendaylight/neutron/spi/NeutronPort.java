@@ -310,10 +310,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
 
     @Override
     public void initDefaults() {
-        adminStateUp = true;
-        portSecurityEnabled = true;
-        if (status == null) {
-            status = "ACTIVE";
+        super.initDefaults();
+        if (portSecurityEnabled == null) {
+            portSecurityEnabled = true;
         }
         if (fixedIPs == null) {
             fixedIPs = new ArrayList<Neutron_IPs>();

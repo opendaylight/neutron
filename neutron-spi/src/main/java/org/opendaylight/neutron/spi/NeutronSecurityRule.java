@@ -183,9 +183,4 @@ public class NeutronSecurityRule extends NeutronObject implements Serializable, 
             ", securityRuleTenantID='" + tenantID + '\'' +
             '}';
     }
-
-    @Override
-    public void initDefaults() {
-        //TODO verify no defaults values are nessecary required.
-    }
 }

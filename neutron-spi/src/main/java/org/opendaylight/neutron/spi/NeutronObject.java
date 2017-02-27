@@ -23,6 +23,8 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 @XmlAccessorType(XmlAccessType.NONE)
 public class NeutronObject extends Neutron_ID implements Serializable, INeutronObject {
     private static final long serialVersionUID = 1L;
+    String status;
+    Boolean adminStateUp;
 
     @XmlElement (name = "tenant_id")
     String tenantID;
@@ -59,5 +61,11 @@ public class NeutronObject extends Neutron_ID implements Serializable, INeutronO
 
     @Override
     public void initDefaults() {
+        if (status == null) {
+            status = "ACTIVE";
+        }
+        if (adminStateUp == null) {
+            adminStateUp = true;
+        }
     }
 }

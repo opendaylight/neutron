@@ -277,8 +277,4 @@ public class NeutronFirewallRule extends NeutronObject implements Serializable, 
             ", firewallRuleIsEnabled=" + firewallRuleIsEnabled +
             '}';
     }
-
-    @Override
-    public void initDefaults() {
-    }
 }
