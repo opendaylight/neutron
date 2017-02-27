@@ -46,9 +46,4 @@ public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSec
         return "NeutronSecurityGroup{" + "securityGroupUUID='" + uuid + '\'' + ", securityGroupName='"
                 + name + '\'' + ", securityGroupTenantID='" + tenantID + '\'' + "]";
     }
-
-    @Override
-    public void initDefaults() {
-        //TODO verify no defaults values are nessecary required.
-    }
 }
