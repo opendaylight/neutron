@@ -140,6 +140,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_c7aec02d",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 3547
+      },
+      "writtenOn": "2017-02-27T09:44:40Z",
+      "side": 1,
+      "message": "Ritu, unit tests get stuck in my env when I removed the executor service. It\u0027s probably a bug in mdsal - the code stops being executed when transactions are submitted. I haven\u0027t had that much time for further investigation.",
+      "parentUuid": "fafc7978_af4bbc85",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 93,
+        "endChar": 23
+      },
+      "revId": "bd8ca3714a1f7b6082885406ebedbd1c9be626de",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_4f7df0b0",
         "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
         "patchSetId": 6
