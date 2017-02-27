@@ -8,8 +8,9 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.lang.Thread;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -72,6 +73,39 @@ public class NeutronNetworkTests {
     public void singleton_network_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/networks";
         ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "networks");
+    }
+
+    public String singleton_default_network_create_test() {
+        String url = base + "/networks";
+        String content = "{ \"network\": {" + "\"name\": \"netdefault\", \"subnets\": [], "
+                + " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
+                + " \"router:external\": false, \"segments\": [ " + " { \"provider:segmentation_id\": 2, "
+                + " \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
+                + " \"provider:network_type\": \"vlan\" }, { " + " \"provider:segmentation_id\": null, "
+                + " \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
+                + " \"provider:network_type\": \"stt\" } ], "
+                + " \"id\": \"de8e5957-d49f-d77b-de5b-d1f75b21c03c\" " + " } } ";
+        ITNeutronE2E.test_create(url, content, "Singleton Default Network Post Failed NB");
+        return content;
+    }
+
+    public void default_network_content_validation_test() {
+        //Validates Network default parameters are set.
+        //Default parameters: status,shared
+        String element = "status";
+        String url = base + "/networks/de8e5957-d49f-d77b-de5b-d1f75b21c03c?fields=" + element;
+        String expectedContent = "\"ACTIVE\"";
+        String context = "Network details do not match.";
+        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = jsonObjectOutput.getAsJsonObject("network");
+        JsonElement jsonElementValue = jsonObjectOutput.get(element);
+        Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
+        element = "shared";
+        url = base + "/networks/de8e5957-d49f-d77b-de5b-d1f75b21c03c?fields=" + element;
+        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = jsonObjectOutput.getAsJsonObject("network");
+        jsonElementValue = jsonObjectOutput.get(element);
+        Assert.assertEquals(context, false, jsonElementValue.getAsBoolean());
     }
 
     //TODO handle SB check
@@ -163,6 +197,8 @@ public class NeutronNetworkTests {
         network_tester.network_collection_get_test_with_wait();
         String createJsonString = network_tester.singleton_network_create_test();
         network_tester.singleton_network_get_with_one_query_item_test(createJsonString);
+        network_tester.singleton_default_network_create_test();
+        network_tester.default_network_content_validation_test();
         network_tester.external_network_create_test(); //needed for router test
         network_tester.bulk_network_create_test();
         network_tester.network_update_test();

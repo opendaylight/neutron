@@ -75,12 +75,7 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
 
     @Override
     public void initDefaults() {
-        if (status == null) {
-            status = "ACTIVE";
-        }
-        if (adminStateUp == null) {
-            adminStateUp = true;
-        }
+        super.initDefaults();
         if (shared == null) {
             shared = false;
         }

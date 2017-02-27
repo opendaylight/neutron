@@ -72,14 +72,9 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
     }
 
     public void initDefaults() {
+        super.initDefaults();
         if (type == null) {
             type = "l3";
-        }
-        if (status == null) {
-            status = "ACTIVE";
-        }
-        if (adminStateUp == null) {
-            adminStateUp = true;
         }
         if (autoAggregate == null) {
             autoAggregate = false;
