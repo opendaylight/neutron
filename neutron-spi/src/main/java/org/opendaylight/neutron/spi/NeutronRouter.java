@@ -155,11 +155,6 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
     }
 
     @Override
-    public void initDefaults() {
-        adminStateUp = true;
-    }
-
-    @Override
     public String toString() {
         return "NeutronRouter [" +
             "id=" + uuid +

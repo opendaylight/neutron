@@ -29,9 +29,6 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
     @XmlElement (name = "name")
     String networkName;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
     @XmlElement (defaultValue = "false", name = "shared")
     Boolean shared;
 
@@ -50,9 +47,6 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
     //    @XmlElement (name = "provider:segmentation_id")
     @XmlElement (namespace="provider", name="segmentation_id")
     String providerSegmentationID;
-
-    @XmlElement (name = "status")
-    String status;
 
     @XmlElement (name="segments")
     List<NeutronNetwork_Segment> segments;
@@ -75,12 +69,7 @@ public class NeutronNetwork extends NeutronObject implements Serializable, INeut
 
     @Override
     public void initDefaults() {
-        if (status == null) {
-            status = "ACTIVE";
-        }
-        if (adminStateUp == null) {
-            adminStateUp = true;
-        }
+        super.initDefaults();
         if (shared == null) {
             shared = false;
         }

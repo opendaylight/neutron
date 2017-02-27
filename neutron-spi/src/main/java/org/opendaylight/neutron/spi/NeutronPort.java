@@ -36,12 +36,6 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
     @XmlElement (name = "name")
     String name;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
-    @XmlElement (name = "status")
-    String status;
-
     @XmlElement (name = "mac_address")
     String macAddress;
 
@@ -310,10 +304,9 @@ public class NeutronPort extends NeutronObject implements Serializable, INeutron
 
     @Override
     public void initDefaults() {
-        adminStateUp = true;
-        portSecurityEnabled = true;
-        if (status == null) {
-            status = "ACTIVE";
+        super.initDefaults();
+        if (portSecurityEnabled == null) {
+            portSecurityEnabled = true;
         }
         if (fixedIPs == null) {
             fixedIPs = new ArrayList<Neutron_IPs>();

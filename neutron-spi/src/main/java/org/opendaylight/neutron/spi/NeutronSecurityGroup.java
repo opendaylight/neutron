@@ -73,9 +73,4 @@ public class NeutronSecurityGroup extends NeutronObject implements Serializable,
                 ", securityGroupTenantID='" + tenantID + '\'' +
                 "]";
     }
-
-    @Override
-    public void initDefaults() {
-        //TODO verify no defaults values are nessecary required.
-    }
 }

@@ -28,12 +28,6 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
     @XmlElement (name = "name")
     String bgpvpnName;
 
-    @XmlElement (defaultValue = "true", name = "admin_state_up")
-    Boolean adminStateUp;
-
-    @XmlElement (name = "status")
-    String status;
-
     @XmlElement (defaultValue = "l3", name = "type")
     String type;
 
@@ -72,14 +66,9 @@ public class NeutronBgpvpn extends NeutronObject implements Serializable, INeutr
     }
 
     public void initDefaults() {
+        super.initDefaults();
         if (type == null) {
             type = "l3";
-        }
-        if (status == null) {
-            status = "ACTIVE";
-        }
-        if (adminStateUp == null) {
-            adminStateUp = true;
         }
         if (autoAggregate == null) {
             autoAggregate = false;
