@@ -108,7 +108,9 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
 
     @Override
     public void initDefaults() {
-        adminStateUp = true;
+        if (adminStateUp == null) {
+            adminStateUp = true;
+        }
     }
 
     @Override

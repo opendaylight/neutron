@@ -171,9 +171,4 @@ public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule
                 + ", securityRuleGroupID='" + securityRuleGroupID + '\'' + ", securityRuleTenantID='" + tenantID + '\''
                 + '}';
     }
-
-    @Override
-    public void initDefaults() {
-        //TODO verify no defaults values are nessecary required.
-    }
 }

@@ -263,8 +263,12 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
 
     @Override
     public void initDefaults() {
-        adminStateUp = true;
-        portSecurityEnabled = true;
+        if (adminStateUp == null) {
+            adminStateUp = true;
+        }
+        if (portSecurityEnabled == null) {
+            portSecurityEnabled = true;
+        }
         if (status == null) {
             status = "ACTIVE";
         }
