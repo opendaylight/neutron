@@ -248,8 +248,4 @@ public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFire
                 + ", firewallRulePosition=" + firewallRulePosition + ", firewallRuleAction='" + firewallRuleAction
                 + '\'' + ", firewallRuleIsEnabled=" + firewallRuleIsEnabled + '}';
     }
-
-    @Override
-    public void initDefaults() {
-    }
 }
