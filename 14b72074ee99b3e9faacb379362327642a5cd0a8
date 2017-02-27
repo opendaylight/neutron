@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_271b4c74",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-02-27T07:37:22Z",
+      "side": 0,
+      "message": "good catch, didn\u0027t realize these are Boolean, not boolean, so null check should work.",
+      "parentUuid": "fafc7978_e421424e",
+      "range": {
+        "startLine": 266,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "14b72074ee99b3e9faacb379362327642a5cd0a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_84295639",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort.java",
         "patchSetId": 1
