@@ -48,6 +48,16 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
     }
 
     @Override
+    public void initDefaults() {
+        if (adminStateUp == null) {
+            adminStateUp = true;
+        }
+        if (status == null) {
+            status = "ACTIVE";
+        }
+    }
+
+    @Override
     protected void extractField(String field, T ans) {
         super.extractField(field, ans);
         if (field.equals("admin_state_up")) {
