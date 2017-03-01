@@ -73,7 +73,6 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     protected I getNeutronCRUD() {
-        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
         // cls = I.class
         Class<I> cls = getActualTypeArgument(NEUTRON_CRUD_TYPE_INDEX);
         I neutronCrud = NeutronCRUDInterfaces.fetchINeutronCRUD(cls, (Object) this);
