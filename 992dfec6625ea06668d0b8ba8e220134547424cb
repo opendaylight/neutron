@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_685b60f6",
+        "filename": "features/production/src/main/features/features.xml",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-01T14:55:00Z",
+      "side": 1,
+      "message": "Vpp",
+      "range": {
+        "startLine": 65,
+        "startChar": 124,
+        "endLine": 65,
+        "endChar": 127
+      },
+      "revId": "992dfec6625ea06668d0b8ba8e220134547424cb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_a8f708d2",
+        "filename": "neutron-hostconfig/vpp/src/main/resources/config/org.opendaylight.neutron.hostconfig.vpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-01T14:55:00Z",
+      "side": 1,
+      "message": "nit: trailing wfitespace",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 2
+      },
+      "revId": "992dfec6625ea06668d0b8ba8e220134547424cb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
