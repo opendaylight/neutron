@@ -39,6 +39,24 @@
       "revId": "1630c5c7ccee7eb03fb3d08749041a7f0b247130",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_54353c44",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTrunk.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T18:35:41Z",
+      "side": 1,
+      "message": "the default value is \"DOWN\" not \"ACTIVE\".",
+      "parentUuid": "fafc7978_bdc3b336",
+      "revId": "1630c5c7ccee7eb03fb3d08749041a7f0b247130",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
