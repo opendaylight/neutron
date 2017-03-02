@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_d4480cce",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronTrunkTests.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T18:37:30Z",
+      "side": 1,
+      "message": "Unnecessary code churn.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 0
+      },
+      "revId": "1630c5c7ccee7eb03fb3d08749041a7f0b247130",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_bdc3b336",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTrunk.java",
         "patchSetId": 7
