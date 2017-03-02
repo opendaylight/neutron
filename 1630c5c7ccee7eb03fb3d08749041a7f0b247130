@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_bdc3b336",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTrunk.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5492
+      },
+      "writtenOn": "2017-03-02T10:06:28Z",
+      "side": 1,
+      "message": "this one sets the status to \u0027ACTIVE; anyway, so what is the point of line 38 to 40.",
+      "revId": "1630c5c7ccee7eb03fb3d08749041a7f0b247130",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
