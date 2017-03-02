@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_479117f0",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Can you please place this method after singleton_network_get_with_one_query_item_test for consistency?",
+      "range": {
+        "startLine": 65,
+        "startChar": 18,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_e7000b36",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "copy and paste. Can you please update the message to distinguish which test fails?",
+      "range": {
+        "startLine": 75,
+        "startChar": 48,
+        "endLine": 75,
+        "endChar": 80
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_27f7b35a",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronNetworkTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Can you please place this method right after singleton_default_network_create_test for consistency?",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 5
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_278e93d0",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Can you please order methods to match with the execution order?",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_67c37bed",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Please order the methods in the execution order.",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 53
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_87be5f63",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Please update the message.",
+      "range": {
+        "startLine": 55,
+        "startChar": 47,
+        "endLine": 55,
+        "endChar": 78
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_87977feb",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Can you please place this method right after singleton_default_port_create_test for consistency?",
+      "range": {
+        "startLine": 143,
+        "startChar": 4,
+        "endLine": 143,
+        "endChar": 54
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_c79d070c",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronTrunkTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Can you please order method in the order of execution?",
+      "range": {
+        "startLine": 41,
+        "startChar": 17,
+        "endLine": 41,
+        "endChar": 54
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_a7a28348",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronTrunkTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "Please update the message to distinguish which test fails.",
+      "range": {
+        "startLine": 51,
+        "startChar": 49,
+        "endLine": 51,
+        "endChar": 78
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_078b8fc3",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronTrunkTests.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-02T00:16:17Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 108,
+        "startChar": 16,
+        "endLine": 108,
+        "endChar": 53
+      },
+      "revId": "8a65ba39a56c5abc7eda395a34917d29a2942d6d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
