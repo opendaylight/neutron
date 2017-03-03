@@ -156,7 +156,7 @@ public class NeutronRouter extends NeutronObject implements Serializable, INeutr
 
     @Override
     public void initDefaults() {
-        adminStateUp = true;
+        super.initDefaults();
     }
 
     @Override
