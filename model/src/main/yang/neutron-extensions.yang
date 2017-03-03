@@ -50,4 +50,48 @@ module neutron-extensions {
             }
         }
     }
+
+    identity service-provider-feature-type-base {
+        description "Base identity for Feature that openstack service provider
+                    supports.";
+    }
+
+    // The list of openstack service provider features.
+    // Maintain the list of features as they are introduced
+    // identity extension-report {
+    //     description "extensions-attributes is populated";
+    //     base service-provider-feature-type-base;
+    // }
+    // identity port-status {
+    //     description "port status is updated";
+    //     base service-provider-feature-type-base;
+    // }
+
+    grouping service-provider-feature-attributes {
+        leaf service-provider-feature {
+            type identityref {
+                base service-provider-feature-type-base;
+            }
+            description "supported features by openstack service provider";
+        }
+        leaf configuration {
+            type string;
+            description "The configuration of this feature";
+        }
+    }
+
+    grouping service-provider-features-attributes {
+        description "List of features that openstack service provider supports.
+                    networking-odl will retrieve this list and configures itself
+                    to use what features.
+                    This is for networking-odl to support multiple versions
+                    ODL and multiple openstack service providers";
+        container features {
+            config false;
+            list feature {
+                key "service-provider-feature";
+                uses service-provider-feature-attributes;
+            }
+        }
+    }
 }
