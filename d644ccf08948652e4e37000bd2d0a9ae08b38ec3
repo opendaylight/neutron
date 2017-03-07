@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_3c520535",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-07T18:40:17Z",
+      "side": 1,
+      "message": "Do we need this change?\nTop level is consolidated in neutron.yang.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 5
+      },
+      "revId": "d644ccf08948652e4e37000bd2d0a9ae08b38ec3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
