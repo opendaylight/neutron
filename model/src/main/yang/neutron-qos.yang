@@ -38,7 +38,6 @@ module neutron-qos {
     grouping qos-rule-type {
         leaf rule-type {
             type string;
-            config false;
             description "The type of the qos rule";
         }
     }
@@ -97,9 +96,9 @@ module neutron-qos {
             }
         }
         container qos-rule-types {
+            config false;
             list rule-types {
                 key "rule-type";
-                config false;
                 uses qos-rule-type;
             }
         }
