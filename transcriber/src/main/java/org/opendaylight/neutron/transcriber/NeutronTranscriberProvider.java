@@ -41,6 +41,8 @@ import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
+import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
+import org.opendaylight.neutron.spi.INeutronTapServiceCRUD;
 import org.opendaylight.neutron.spi.INeutronTrunkCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
@@ -104,6 +106,8 @@ public final class NeutronTranscriberProvider implements NeutronTranscriber {
         registerCRUDInterface(INeutronSecurityGroupCRUD.class, new NeutronSecurityGroupInterface(db));
         registerCRUDInterface(INeutronSecurityRuleCRUD.class, new NeutronSecurityRuleInterface(db));
         registerCRUDInterface(INeutronSubnetCRUD.class, new NeutronSubnetInterface(db));
+        registerCRUDInterface(INeutronTapServiceCRUD.class, new NeutronTapServiceInterface(db));
+        registerCRUDInterface(INeutronTapFlowCRUD.class, new NeutronTapFlowInterface(db));
         registerCRUDInterface(INeutronTrunkCRUD.class, new NeutronTrunkInterface(db));
         registerCRUDInterface(INeutronVpnIkePolicyCRUD.class, new NeutronVpnIkePolicyInterface(db));
         registerCRUDInterface(INeutronVpnIpSecPolicyCRUD.class, new NeutronVpnIpSecPolicyInterface(db));
