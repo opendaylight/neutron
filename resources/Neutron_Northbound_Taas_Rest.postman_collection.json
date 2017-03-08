@@ -1,0 +1,137 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Tap_As_A_Service",
+		"_postman_id": "27c8c2eb-995a-b9a2-4a82-af222f6a9806",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+        {
+			"name": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/",
+			"request": {
+				"url": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Basic",
+						"value": "YWRtaW46YWRtaW4=",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tapservice\":  {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\",\n             \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", \n             \"name\" : \"tap-service-test\",\n             \"port_id\": \"311d75c3-4da8-4267-8aed-6dbb19a3dcfe\" }}\n"
+				},
+				"description": "Create a Tap Service"
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/d6220bbb-35f3-48ab-8eae-69c60aef3546",
+			"request": {
+				"url": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/d6220bbb-35f3-48ab-8eae-69c60aef3546",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Basic",
+						"value": "YWRtaW46YWRtaW4=",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"tapservice\":  {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\",\n                 \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\n                  \"name\" : \"tap-service-test\",\n                \"port_id\": \"211d75c3-4da8-4267-8aed-6dbb19a3dcfe\" }}\n"
+				},
+				"description": "Update a Tap Service"
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/d6220bbb-35f3-48ab-8eae-69c60aef3546",
+			"request": {
+				"url": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/d6220bbb-35f3-48ab-8eae-69c60aef3546",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "View the existing Tap Service"
+			},
+			"response": []
+		},
+		{
+			"name": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/d6220bbb-35f3-48ab-8eae-69c60aef3546",
+			"request": {
+				"url": "http://{{CONTROLLER-IP}}:{{PORT}}/controller/nb/v2/neutron/tap/services/d6220bbb-35f3-48ab-8eae-69c60aef3546",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Basic",
+						"value": "YWRtaW46YWRtaW4=",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46YWRtaW4=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete the Tap Service with the ID"
+			},
+			"response": []
+		}
+	]
+}
+
