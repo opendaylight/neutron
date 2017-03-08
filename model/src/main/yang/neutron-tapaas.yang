@@ -1,0 +1,106 @@
+/*
+ * Copyright (c) 2017 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-tapaas {
+    yang-version 1;
+    namespace "urn:opendaylight:neutron-tapaas";
+    prefix neutron-tapaas;
+
+    import ietf-yang-types { prefix "yang"; }
+    import neutron-attrs    { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Northbound Project";
+
+    contact "Neutron Northbound <neutron-dev@lists.opendaylight.org>";
+
+    description " This YANG module defines Openstack Neutron Tap-as-a-Service(Taas) Model.
+                  The model is based on the REST APIs exposed by the trunk service of Neutron version 2.
+                  description of the REST API is located in inside the specification for tap-as-a-service
+                  (https://github.com/openstack/tap-as-a-service/blob/master/specs/mitaka/tap-as-a-service.rst)";
+
+    revision "2017-03-08" {
+        description
+            "OpenStack Neutron Tap as a service - Version 1.";
+    }
+
+    identity direction-base {
+        description "";
+    }
+
+    identity direction-in {
+        description "";
+        base direction-base;
+    }
+
+    identity direction-out {
+        description "";
+        base direction-base;
+    }
+
+    identity direction-both {
+        description "";
+        base direction-base;
+    }
+
+    grouping tap-flow-attributes {
+        description "";
+        leaf tap-service-id {
+            type yang:uuid;
+            description "";
+        }
+        leaf source-port {
+            type uint16 {
+                range "0 .. 65535";
+            }
+            description "";
+        }
+        leaf direction {
+            type identityref {
+                base "direction-base";
+                description "";
+            }
+        }
+        leaf status {
+            config false; // TODO: check if this works or not.
+            type string;
+            description "";
+        }
+    }
+
+    grouping tap-service-attributes {
+        description "";
+        leaf port-id {
+            type yang:uuid;
+            description "";
+        }
+        leaf status {
+            config false; // TODO: check if this works or not.
+            type string;
+            description "";
+        }
+        container tap-flows {
+            list tap-flow {
+                key uuid;
+                uses attrs:base-attributes;
+                uses tap-flow-attributes;
+                description "";
+            }
+        }
+    }
+
+    grouping tap-services-attributes {
+        container tap-services {
+            list tap-service {
+                key uuid;
+                uses attrs:base-attributes;
+                uses tap-service-attributes;
+                description "";
+            }
+        }
+    }
+}
