@@ -31,6 +31,7 @@ module neutron {
     import neutron-sfc-flow-classifier { prefix "sfc-flow-classifier"; }
     import neutron-sfc { prefix "sfc"; }
     import neutron-trunks { prefix "trunks"; }
+    import neutron-tapaas { prefix "tapaas"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -71,5 +72,6 @@ module neutron {
         uses sfc-flow-classifier:sfc-flow-classifiers-attributes;
         uses sfc:sfc-attributes;
         uses trunks:trunks-attributes;
+        uses tapaas:tap-services-attributes;
     }
 }
