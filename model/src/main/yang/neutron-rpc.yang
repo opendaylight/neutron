@@ -1,0 +1,81 @@
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-rpc {
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-rpc";
+
+    prefix neutron-rpc;
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Isaku Yamahata <isaku.yamahata@gmail.com>";
+
+    description "This YANG module defines neutron openstack rpc client that are used
+        by OpenDaylight Neutron service providers.
+        This definition is based on OpenStack Oslo Messaging and Neutron RPC definitions.
+        https://wiki.openstack.org/wiki/Oslo/Messaging
+        https://docs.openstack.org/developer/oslo.messaging/";
+
+    revision "2017-03-13" {
+        description
+                "OpenDaylight Nitrogen release";
+    }
+
+    notification neutron-message-send {
+        description "";
+        leaf topic {
+            type string;
+        }
+        leaf vesion {
+            type string;
+        }
+        leaf namespace {
+            type string;
+        }
+        leaf message_id {
+            type uuid;
+        }
+        leaf method {
+            type string;
+        }
+        list args {
+            key name;
+            leaf name {
+                type string;
+            }
+            leaf value {
+                type string;
+            }
+        }
+    }
+
+    rpc neutron-message-reply {
+        description "";
+        leaf topic {
+            type string;
+        }
+        leaf vesion {
+            type string;
+        }
+        leaf namespace {
+            type string;
+        }
+        leaf message_id {
+            type uuid;
+        }
+        leaf reply {
+            type string;
+        }
+        leaf feaiure {
+            description "failure exception":
+            type string;
+        }
+    }
+}
