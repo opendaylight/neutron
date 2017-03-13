@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-rpc {
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-rpc";
+
+    prefix neutron-rpc;
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Isaku Yamahata <isaku.yamahata@gmail.com>";
+
+    description "This YANG module defines neutron openstack rpc client that are used
+        by OpenDaylight Neutron service providers.
+        This definition is based on OpenStack Oslo Messaging and Neutron RPC definitions.
+        https://wiki.openstack.org/wiki/Oslo/Messaging
+        https://docs.openstack.org/developer/oslo.messaging/
+        ODL as openstack RPC server is out of the scope.";
+
+    revision "2017-03-13" {
+        description "OpenDaylight Nitrogen release";
+    }
+
+    grouping target {
+        description "corresponds to oslo_messaging.Target";
+        leaf topic {
+            type string;
+        }
+        leaf vesion {
+            type string;
+        }
+        leaf namespace {
+            type string;
+        }
+    }
+
+    grouping neutron-message-input {
+        description "TBD";
+        uses target;
+        leaf method {
+            type string;
+        }
+        list args {
+            key name;
+            leaf name {
+                type string;
+            }
+            leaf value {
+                type string;
+            }
+        }
+    }
+
+    grouping neutron-message-output {
+        description "TBD";
+        uses target;
+        leaf reply {
+            type string;
+        }
+    }
+
+    grouping neutron-message-id {
+        description "TBD";
+        leaf message_id {
+            // oslo_message._driver uses uuid.uuid4().hex
+            type uuid;
+        }
+    }
+
+    // interface for newtorking-odl via websocket
+    notification neutron-message-send {
+        description "TBD";
+        uses neutron-message-id;
+        uses neutron-message-input;
+    }
+
+    rpc neutron-message-reply {
+        description "TBD";
+        uses neutron-message-id;
+        uses neutron-message-output;
+    }
+
+    // interface for ODL app
+    rpc neutron-call {
+        description "openstack rpc call from ODL to networking-odl";
+        input {
+            uses neutron-message-input;
+        }
+        output {
+            uses neutron-message-output;
+        }
+    }
+}
