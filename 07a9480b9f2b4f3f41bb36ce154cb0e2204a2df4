@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_c048f189",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronBaseAttributes.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-03-16T21:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_741112af",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 48
+      },
+      "revId": "07a9480b9f2b4f3f41bb36ce154cb0e2204a2df4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_144526b3",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronObject.java",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2017-03-16T02:10:20Z",
       "side": 1,
       "message": "tenant-id and project-id need to be fixed up for compatibility.\nThere are several cases. tenant-id and project-id can be null or non-null. In either cases, both tenant-id and project-id should be populated properly.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 5
+      },
+      "revId": "07a9480b9f2b4f3f41bb36ce154cb0e2204a2df4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_005af94f",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronObject.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-03-16T21:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_144526b3",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_40540121",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-03-16T21:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_34482acc",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 131,
+        "endChar": 98
+      },
+      "revId": "07a9480b9f2b4f3f41bb36ce154cb0e2204a2df4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_d43a7e33",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
         "patchSetId": 7
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_a0304d08",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-03-16T21:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_d43a7e33",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "07a9480b9f2b4f3f41bb36ce154cb0e2204a2df4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_f43d022e",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
         "patchSetId": 7
@@ -105,6 +201,30 @@
       "writtenOn": "2017-03-16T02:10:20Z",
       "side": 1,
       "message": "they can be null.",
+      "range": {
+        "startLine": 161,
+        "startChar": 12,
+        "endLine": 161,
+        "endChar": 41
+      },
+      "revId": "07a9480b9f2b4f3f41bb36ce154cb0e2204a2df4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_803549f9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-03-16T21:00:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fafc7978_f43d022e",
       "range": {
         "startLine": 161,
         "startChar": 12,
