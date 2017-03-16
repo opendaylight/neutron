@@ -15,6 +15,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronNetworkSegment;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev150712.NetworkL3Extension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev150712.NetworkL3ExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeBase;
@@ -129,11 +130,11 @@ public final class NeutronNetworkInterface
         if (network.getProviderSegmentationID() != null) {
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
-        if (network.getQosPolicyId() != null) {
-            final QosNetworkExtensionBuilder qosExtensionBuilder = new QosNetworkExtensionBuilder();
-            qosExtensionBuilder.setQosPolicyId(toUuid(network.getQosPolicyId()));
-            networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
-        }
+        // setting qos policy id to null means to disassociate qos policy
+        final QosNetworkExtensionBuilder qosExtensionBuilder = new QosNetworkExtensionBuilder();
+        final Uuid qosPolicyUuid = (network.getQosPolicyId() == null) ? null : toUuid(network.getQosPolicyId());
+        qosExtensionBuilder.setQosPolicyId(qosPolicyUuid);
+        networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkL3Extension.class, l3ExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
     }
