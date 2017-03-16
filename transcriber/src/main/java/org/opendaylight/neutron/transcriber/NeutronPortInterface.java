@@ -246,11 +246,11 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             }
             portBuilder.setSecurityGroups(listSecurityGroups);
         }
-        if (neutronPort.getQosPolicyId() != null) {
-            final QosPortExtensionBuilder qosExtensionBuilder = new QosPortExtensionBuilder();
-            qosExtensionBuilder.setQosPolicyId(toUuid(neutronPort.getQosPolicyId()));
-            portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
-        }
+        // setting qos policy id to null means to disassociate qos policy
+        final QosPortExtensionBuilder qosExtensionBuilder = new QosPortExtensionBuilder();
+        final Uuid qosPolicyUuid= (neutronPort.getQosPolicyId() == null)? null : toUuid(neutronPort.getQosPolicyId());
+        qosExtensionBuilder.setQosPolicyId(qosPolicyUuid);
+        portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
         return portBuilder.build();
     }
 }
