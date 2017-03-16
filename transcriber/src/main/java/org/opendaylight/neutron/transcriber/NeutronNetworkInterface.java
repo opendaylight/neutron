@@ -129,11 +129,11 @@ public final class NeutronNetworkInterface
         if (network.getProviderSegmentationID() != null) {
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
-        if (network.getQosPolicyId() != null) {
-            final QosNetworkExtensionBuilder qosExtensionBuilder = new QosNetworkExtensionBuilder();
-            qosExtensionBuilder.setQosPolicyId(toUuid(network.getQosPolicyId()));
-            networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
-        }
+        // setting qos policy id to null means to disassociate qos policy
+        final QosNetworkExtensionBuilder qosExtensionBuilder = new QosNetworkExtensionBuilder();
+        final Uuid qosPolicyUuid = (network.getQosPolicyId() == null) ? null : toUuid(network.getQosPolicyId());
+        qosExtensionBuilder.setQosPolicyId(qosPolicyUuid);
+        networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkL3Extension.class, l3ExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
     }
