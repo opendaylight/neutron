@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_7b09fadc",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronProjectIdTests.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-16T22:42:11Z",
+      "side": 1,
+      "message": "Can you please add testcases with tenant-id and project-id combination?",
+      "revId": "91634489ae7e58beb000f4470abddce1a7ebc2e4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_5b6b5685",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronRevisionNumberTests.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-16T22:42:11Z",
+      "side": 1,
+      "message": "can you please add the cases with revision_number isn\u0027t set?",
+      "revId": "91634489ae7e58beb000f4470abddce1a7ebc2e4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_fb468a20",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronObject.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-16T22:42:11Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 9
+      },
+      "revId": "91634489ae7e58beb000f4470abddce1a7ebc2e4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_9b5dbeef",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-16T22:42:11Z",
+      "side": 1,
+      "message": "Does checkstyle complain?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 0
+      },
+      "revId": "91634489ae7e58beb000f4470abddce1a7ebc2e4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_7b629aae",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-16T22:42:11Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "91634489ae7e58beb000f4470abddce1a7ebc2e4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_db5746c9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-03-16T22:42:11Z",
+      "side": 1,
+      "message": "boolean.\nI don\u0027t see any necessity for boxed type.",
+      "range": {
+        "startLine": 126,
+        "startChar": 12,
+        "endLine": 126,
+        "endChar": 19
+      },
+      "revId": "91634489ae7e58beb000f4470abddce1a7ebc2e4",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
