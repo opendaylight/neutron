@@ -40,9 +40,6 @@ module neutron-l2gateways{
     }
 
     grouping l2gateway-attributes {
-        leaf l2gateway-name {
-            type string;
-        }
         list devices {
             description "Description of devices.";
             key "uuid";
@@ -82,7 +79,7 @@ module neutron-l2gateways{
             list l2gatewayConnection {
                 description "l2gateway connection description ";
                 key "uuid";
-                uses attrs:base-attributes;
+                uses attrs:id-attributes;
                 uses l2gateway-connection-attributes;
             }
         }
