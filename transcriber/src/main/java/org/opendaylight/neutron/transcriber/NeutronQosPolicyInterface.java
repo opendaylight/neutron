@@ -50,10 +50,9 @@ public final class NeutronQosPolicyInterface
         }
         if (qosPolicy.getBwLimitRules() != null) {
             final List<BandwidthLimitRules> listBandwith = new ArrayList<>();
-            final BandwidthLimitRulesBuilder bandwidthLimitRulesBuilder = new BandwidthLimitRulesBuilder();
             for (final NeutronQosBandwidthRule bandWidthRule : qosPolicy.getBwLimitRules()) {
-                bandwidthLimitRulesBuilder.setUuid(toUuid(bandWidthRule.getID()));
-                bandwidthLimitRulesBuilder.setTenantId(toUuid(bandWidthRule.getTenantID()));
+                final BandwidthLimitRulesBuilder bandwidthLimitRulesBuilder = new BandwidthLimitRulesBuilder();
+                toMdIds(bandWidthRule, bandwidthLimitRulesBuilder);
                 bandwidthLimitRulesBuilder.setMaxKbps(bandWidthRule.getMaxKbps());
                 bandwidthLimitRulesBuilder.setMaxBurstKbps(bandWidthRule.getMaxBurstKbps());
                 listBandwith.add(bandwidthLimitRulesBuilder.build());
@@ -62,10 +61,9 @@ public final class NeutronQosPolicyInterface
         }
         if (qosPolicy.getDscpRules() != null) {
             final List<DscpmarkingRules> listDscp = new ArrayList<>();
-            final DscpmarkingRulesBuilder dscpmarkingRulesBuilder = new DscpmarkingRulesBuilder();
             for (final NeutronQosDscpMarkingRule dscpRule : qosPolicy.getDscpRules()) {
-                dscpmarkingRulesBuilder.setUuid(toUuid(dscpRule.getID()));
-                dscpmarkingRulesBuilder.setTenantId(toUuid(dscpRule.getTenantID()));
+                final DscpmarkingRulesBuilder dscpmarkingRulesBuilder = new DscpmarkingRulesBuilder();
+                toMdIds(dscpRule, dscpmarkingRulesBuilder);
                 dscpmarkingRulesBuilder.setDscpMark(dscpRule.getDscpMark());
                 listDscp.add(dscpmarkingRulesBuilder.build());
             }

@@ -69,6 +69,7 @@ public final class NeutronLoadBalancerPoolInterface
     @Override
     protected Pool toMd(NeutronLoadBalancerPool pool) {
         final PoolBuilder poolBuilder = new PoolBuilder();
+        toMdIds(pool, poolBuilder);
         poolBuilder.setAdminStateUp(pool.getLoadBalancerPoolAdminIsStateIsUp());
         if (pool.getLoadBalancerPoolHealthMonitorID() != null) {
             poolBuilder.setHealthmonitorId(toUuid(pool.getLoadBalancerPoolHealthMonitorID()));
@@ -100,19 +101,12 @@ public final class NeutronLoadBalancerPoolInterface
             sessionPersistenceBuilder.setType(sessionPersistence.getType());
             poolBuilder.setSessionPersistence(sessionPersistenceBuilder.build());
         }
-        if (pool.getTenantID() != null) {
-            poolBuilder.setTenantId(toUuid(pool.getTenantID()));
-        }
-        if (pool.getID() != null) {
-            poolBuilder.setUuid(toUuid(pool.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron load balancer pool without UUID");
-        }
         return poolBuilder.build();
     }
 
     protected NeutronLoadBalancerPool fromMd(Pool pool) {
         final NeutronLoadBalancerPool answer = new NeutronLoadBalancerPool();
+        fromMdIds(pool, answer);
         if (pool.isAdminStateUp() != null) {
             answer.setLoadBalancerPoolAdminStateIsUp(pool.isAdminStateUp());
         }
@@ -149,12 +143,6 @@ public final class NeutronLoadBalancerPoolInterface
             sessionPersistence.setType(pool.getSessionPersistence().getType());
 
             answer.setLoadBalancerSessionPersistence(sessionPersistence);
-        }
-        if (pool.getTenantId() != null) {
-            answer.setTenantID(pool.getTenantId());
-        }
-        if (pool.getUuid() != null) {
-            answer.setID(pool.getUuid().getValue());
         }
         return answer;
     }
