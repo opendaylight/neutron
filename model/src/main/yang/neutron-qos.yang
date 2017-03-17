@@ -43,14 +43,6 @@ module neutron-qos {
     }
 
     grouping bandwidthlimit-rule-attributes {
-        leaf uuid {
-            type yang:uuid;
-            description "The rule id of the associated rule";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "The tenant id of OpenStack Tenant";
-        }
         leaf max-kbps {
             type uint64;
             description "The maximum KBPS value";
@@ -62,14 +54,6 @@ module neutron-qos {
     }
 
     grouping dscpmarking-rule-attributes {
-        leaf uuid {
-            type yang:uuid;
-            description "The rule id of the associated rule";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "The tenant id of OpenStack Tenant";
-        }
         leaf dscp-mark {
             type uint8 {
                 range "0 | 8 | 10 | 12 | 14 | 16 | 18 | 20 | 22 | 24 | 26 | 28 | 30 | 32 | 34 | 36
@@ -87,10 +71,12 @@ module neutron-qos {
                 uses qos-policy-attributes;
                 list bandwidth-limit-rules {
                     key "uuid";
+                    uses attrs:id-attributes;
                     uses bandwidthlimit-rule-attributes;
                 }
                 list dscpmarking-rules {
                     key "uuid";
+                    uses attrs:id-attributes;
                     uses dscpmarking-rule-attributes;
                 }
             }
