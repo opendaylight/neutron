@@ -36,6 +36,7 @@ import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.AdminAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.BaseAttributes;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.IdAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.concepts.Builder;
 import org.opendaylight.yangtools.yang.binding.Augmentable;
@@ -136,7 +137,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         return InstanceIdentifier.create(Neutron.class).child(mdContainerClass);
     }
 
-    protected <S1 extends INeutronBaseAttributes<S1>, M extends BaseAttributes, B extends Builder<M>>
+    protected <S1 extends INeutronOject<S1>, M extends IdAttributes, B extends Builder<M>>
         void toMdIds(INeutronObject<S1> neutronObject, B builder) {
         try {
             if (neutronObject.getID() != null) {
@@ -150,12 +151,15 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             if (neutronObject.getProjectID() != null) {
                 setProjectId.invoke(builder, neutronObject.getTenantID());
             }
+            if (neutronObject.getRevisionNumber() != null) {
+                setRevisionNumber.invoke(builder, neutronObject.getRevisionNumber());
+            }
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
-    protected <S1 extends INeutronBaseAttributes<S1>>
+    protected <S1 extends INeutronObject<S1>>
         void fromMdIds(BaseAttributes baseAttributes, INeutronObject<S1> answer) {
         if (baseAttributes.getUuid() != null) {
             answer.setID(baseAttributes.getUuid().getValue());
@@ -166,6 +170,9 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         if (baseAttributes.getProjectId() != null) {
             answer.setProjectID(baseAttributes.getProjectId());
         }
+        if (baseAttributes.getRevisionNumber() != null) {
+            answer.setRevisionNumber(baseAttributes.getRevisionNumber());
+        }
     }
 
     protected <S1 extends INeutronBaseAttributes<S1>, M extends BaseAttributes, B extends Builder<M>>
@@ -174,9 +181,6 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         try {
             if (neutronObject.getName() != null) {
                 setName.invoke(builder, neutronObject.getName());
-            }
-            if (neutronObject.getRevisionNumber() != null) {
-                setRevisionNumber.invoke(builder, neutronObject.getRevisionNumber());
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new IllegalArgumentException(e);
@@ -188,9 +192,6 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         fromMdIds(baseAttributes, answer);
         if (baseAttributes.getName() != null) {
             answer.setName(baseAttributes.getName());
-        }
-        if (baseAttributes.getRevisionNumber() != null) {
-            answer.setRevisionNumber(baseAttributes.getRevisionNumber());
         }
     }
 
