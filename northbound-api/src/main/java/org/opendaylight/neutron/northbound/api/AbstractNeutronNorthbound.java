@@ -121,6 +121,21 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     protected void updateDelta(String uuid, T delta, T original) {
     }
 
+    private boolean checkRevisionNumber(T original, T delta) {
+        // If new update is null ignore the original revision number
+        if (delta.getRevisionNumber() == null) {
+            return false;
+        }
+        // If what is stored is null no need for comparison
+        if (original.getRevisionNumber() == null) {
+            return false;
+        }
+        if (original.getRevisionNumber() > delta.getRevisionNumber()) {
+            return true;
+        }
+        return false;
+    }
+
     protected Response update(String uuid, final R input) {
         I neutronCRUD = getNeutronCRUD();
         if (!input.isSingleton()) {
@@ -131,8 +146,10 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         if (original == null) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
+        if (checkRevisionNumber(original, delta)) {
+            return Response.status(HttpURLConnection.HTTP_OK).build();
+        }
         updateDelta(uuid, delta, original);
-
         /*
          * update the object and return it
          */
