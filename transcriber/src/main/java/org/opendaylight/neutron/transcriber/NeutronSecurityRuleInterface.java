@@ -53,9 +53,7 @@ public final class NeutronSecurityRuleInterface extends
 
     protected NeutronSecurityRule fromMd(SecurityRule rule) {
         final NeutronSecurityRule answer = new NeutronSecurityRule();
-        if (rule.getTenantId() != null) {
-            answer.setTenantID(rule.getTenantId());
-        }
+        fromMdIds(rule, answer);
         if (rule.getDirection() != null) {
             answer.setSecurityRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
         }
@@ -87,19 +85,13 @@ public final class NeutronSecurityRuleInterface extends
         if (rule.getPortRangeMax() != null) {
             answer.setSecurityRulePortMax(Integer.valueOf(rule.getPortRangeMax()));
         }
-        if (rule.getUuid() != null) {
-            answer.setID(rule.getUuid().getValue());
-        }
         return answer;
     }
 
     @Override
     protected SecurityRule toMd(NeutronSecurityRule securityRule) {
         final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
-
-        if (securityRule.getTenantID() != null) {
-            securityRuleBuilder.setTenantId(toUuid(securityRule.getTenantID()));
-        }
+        toMdIds(securityRule, securityRuleBuilder);
         if (securityRule.getSecurityRuleDirection() != null) {
             final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
             securityRuleBuilder
@@ -135,11 +127,6 @@ public final class NeutronSecurityRuleInterface extends
         }
         if (securityRule.getSecurityRulePortMax() != null) {
             securityRuleBuilder.setPortRangeMax(Integer.valueOf(securityRule.getSecurityRulePortMax()));
-        }
-        if (securityRule.getID() != null) {
-            securityRuleBuilder.setUuid(toUuid(securityRule.getID()));
-        } else {
-            LOGGER.warn("Attempting to write neutron securityRule without UUID");
         }
         return securityRuleBuilder.build();
     }

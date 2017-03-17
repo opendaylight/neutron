@@ -40,14 +40,6 @@ module neutron-metering {
 
     grouping metering-rule-attributes {
         description "OpenStack Layer3 Metering label rules.";
-        leaf uuid {
-            type yang:uuid;
-            description "Metering Rule ID.";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "The UUID of the tenant that will own the object.";
-        }
         leaf direction {
             type identityref {
                 base "constants:direction-base";
@@ -89,6 +81,7 @@ module neutron-metering {
             description " Container for metering rules.";
             list metering-rule {
                 key "uuid";
+                uses attrs:id-attributes;
                 uses metering-rule-attributes;
                 description "List of Metering Rules.";
             }

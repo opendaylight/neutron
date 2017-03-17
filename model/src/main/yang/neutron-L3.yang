@@ -56,14 +56,6 @@ module neutron-L3 {
     }
 
     grouping L3-floatingip-attributes {
-        leaf uuid {
-            type yang:uuid;
-            description "UUID to index this object.";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "The Tenant ID of this object.";
-        }
         leaf router-id {
             description "Contains the Router ID of this floatingip object.";
             type yang:uuid;
@@ -142,6 +134,7 @@ module neutron-L3 {
                     attached to an internal network.";
 
                 key "uuid";
+                uses attrs:id-attributes;
                 uses L3-floatingip-attributes;
             }
         }
