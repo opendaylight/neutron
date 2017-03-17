@@ -41,9 +41,6 @@ public final class NeutronL2gatewayConnectionInterface
         if (l2gatewayConnection.getUuid() != null) {
             result.setID(l2gatewayConnection.getUuid().getValue());
         }
-        if (l2gatewayConnection.getKey().getUuid() != null) {
-            result.setID(l2gatewayConnection.getKey().getUuid().getValue());
-        }
         if (l2gatewayConnection.getL2gatewayId().getValue() != null) {
             result.setL2gatewayID(String.valueOf(l2gatewayConnection.getL2gatewayId().getValue()));
         }
