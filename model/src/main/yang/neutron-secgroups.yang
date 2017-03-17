@@ -34,14 +34,6 @@ module neutron-secgroups {
     }
     grouping security-rule-attributes {
         description "OpenStack Layer3 Security Group rules.";
-        leaf uuid {
-            type yang:uuid;
-            description "Security Rule ID.";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "UUID of the tenant.";
-        }
         leaf direction {
             type identityref {
                 base "constants:direction-base";
@@ -114,6 +106,7 @@ module neutron-secgroups {
             description "Container for security group rules.";
             list security-rule {
                 key "uuid";
+                uses attrs:id-attributes;
                 uses security-rule-attributes;
                 description "List of Security Group Rules.";
             }
