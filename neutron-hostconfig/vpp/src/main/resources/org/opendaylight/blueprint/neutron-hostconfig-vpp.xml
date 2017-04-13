@@ -16,14 +16,4 @@
     </cm:default-properties>
   </cm:property-placeholder>
 
-  <bean id="neutronHostconfigVpp"
-     class="org.opendaylight.neutron.hostconfig.vpp.NeutronHostconfigVppListener"
-     init-method="init"
-     destroy-method="close">
-    <argument ref="dataBroker"/>
-    <argument value="${socket-dir}"/>
-    <argument value="${socket-prefix}"/>
-    <argument value="${vhostuser-mode}"/>
-  </bean>
-
 </blueprint>

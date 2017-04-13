@@ -11,6 +11,10 @@ package org.opendaylight.neutron.transcriber;
 import com.google.common.base.Preconditions;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.INeutronCRUD;
@@ -47,7 +51,8 @@ import org.osgi.framework.ServiceRegistration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscriber {
+@Singleton
+public final class NeutronTranscriberProvider implements NeutronTranscriber {
     private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
 
     private BundleContext context;
@@ -55,6 +60,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
     private final List<ServiceRegistration<? extends INeutronCRUD<?>>> registrations = new ArrayList<>();
     private final List<AutoCloseable> neutronInterfaces = new ArrayList<>();
 
+    @Inject
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
         LOGGER.debug("DataBroker set to: {}", db);
         this.context = Preconditions.checkNotNull(context);
@@ -71,6 +77,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
         registrations.add(crudInterfaceRegistration);
     }
 
+    @PostConstruct
     public void init() {
         registerCRUDInterface(INeutronBgpvpnCRUD.class, new NeutronBgpvpnInterface(db));
         registerCRUDInterface(INeutronFirewallCRUD.class, new NeutronFirewallInterface(db));
@@ -108,7 +115,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
         this.context = null;
     }
 
-    @Override
+    @PreDestroy
     public void close() throws Exception {
         for (final ServiceRegistration registration : registrations) {
             registration.unregister();

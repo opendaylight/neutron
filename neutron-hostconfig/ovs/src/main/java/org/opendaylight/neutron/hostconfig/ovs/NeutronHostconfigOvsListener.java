@@ -14,6 +14,10 @@ import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Nonnull;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
@@ -36,7 +40,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeListener<Node>, AutoCloseable {
+@Singleton
+public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeListener<Node> {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronHostconfigOvsListener.class);
     private final DataBroker dataBroker;
     private final SouthboundUtils southboundUtils;
@@ -46,6 +51,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     private static final String OS_HOST_CONFIG_CONFIG_KEY_PREFIX = "odl_os_hostconfig_config_odl_";
     private static int HOST_TYPE_STR_LEN = 8;
 
+    @Inject
     public NeutronHostconfigOvsListener(final DataBroker dataBroker) {
         this.dataBroker = dataBroker;
         MdsalUtils mdsalUtils = new MdsalUtils(dataBroker);
@@ -91,6 +97,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
                 .child(Node.class);
     }
 
+    @PostConstruct
     public void init() {
         LOG.info("{} start", getClass().getSimpleName());
         DataTreeIdentifier<Node> dataTreeIdentifier =
@@ -99,6 +106,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
         listenerRegistration = dataBroker.registerDataTreeChangeListener(dataTreeIdentifier, this);
     }
 
+    @PreDestroy
     public void close() throws Exception {
         if (listenerRegistration != null) {
             listenerRegistration.close();

@@ -50,7 +50,7 @@ import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.
 import org.opendaylight.yangtools.concepts.ListenerRegistration;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 
-public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
+public class NeutronHostconfigVppTest extends HostconfigsDataBrokerTest
         implements ClusteredDataTreeChangeListener<Hostconfig> {
 
     private static final String V3PO = "(urn:opendaylight:params:xml:ns:yang:v3po?revision=2016-12-14)v3po";
@@ -62,17 +62,17 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
     private static final String VHOSTUSER_MODE = "server";
     private SettableFuture<Integer> sf;
     private ListenerRegistration<DataTreeChangeListener<Hostconfig>> listenerRegistration;
-    private NeutronHostconfigVppListener neutronHostconfigVppListener;
+    private NeutronHostconfigVpp neutronHostconfigVpp;
 
     @Before
     public void init() throws InterruptedException, ExecutionException {
         DataTreeIdentifier<Hostconfig> dataTreeIdentifier = new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL,
                 hostConfigIid(NODE_ID).firstIdentifierOf(Hostconfigs.class).builder().child(Hostconfig.class).build());
         listenerRegistration = getDataBroker().registerDataTreeChangeListener(dataTreeIdentifier,
-                NeutronHostconfigVppListenerTest.this);
-        neutronHostconfigVppListener =
-                new NeutronHostconfigVppListener(getDataBroker(), SOCKET_PATH, SOCKET_PREFIX, VHOSTUSER_MODE);
-        neutronHostconfigVppListener.init();
+                NeutronHostconfigVppTest.this);
+        neutronHostconfigVpp =
+                new NeutronHostconfigVpp(getDataBroker(), SOCKET_PATH, SOCKET_PREFIX, VHOSTUSER_MODE);
+        neutronHostconfigVpp.init();
         sf = SettableFuture.create();
     }
 
@@ -135,8 +135,8 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
         if (listenerRegistration != null) {
             listenerRegistration = null;
         }
-        if (neutronHostconfigVppListener != null) {
-            neutronHostconfigVppListener.close();
+        if (neutronHostconfigVpp != null) {
+            neutronHostconfigVpp.close();
         }
     }
 }

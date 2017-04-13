@@ -7,11 +7,4 @@
       interface="org.opendaylight.controller.md.sal.binding.api.DataBroker"
       odl:type="default" />
 
-  <bean id="neutronHostconfigOvs"
-     class="org.opendaylight.neutron.hostconfig.ovs.NeutronHostconfigOvsListener"
-     init-method="init"
-     destroy-method="close">
-    <argument ref="dataBroker"/>
-  </bean>
-
 </blueprint>

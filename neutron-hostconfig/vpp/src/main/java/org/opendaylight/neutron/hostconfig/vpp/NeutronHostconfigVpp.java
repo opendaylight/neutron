@@ -20,6 +20,10 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
@@ -43,9 +47,10 @@ import org.opendaylight.yangtools.yang.common.QName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeListener<Node> {
+@Singleton
+public class NeutronHostconfigVpp implements ClusteredDataTreeChangeListener<Node> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronHostconfigVppListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronHostconfigVpp.class);
     private final DataBroker dataBroker;
     private final NeutronHostconfigUtils neutronHostconfig;
     private ListenerRegistration<DataTreeChangeListener<Node>> listenerRegistration;
@@ -60,7 +65,8 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     private static final List<QName> REQUIRED_CAPABILITIES = new ArrayList<>();
     private SocketInfo socketInfo;
 
-    public NeutronHostconfigVppListener(final DataBroker dataBroker, String spath, String sname, String vhostMode) {
+    @Inject
+    public NeutronHostconfigVpp(final DataBroker dataBroker, String spath, String sname, String vhostMode) {
         LOG.info("Initializing Neutron-Hostconfig-Vpp-Listener");
         this.dataBroker = Preconditions.checkNotNull(dataBroker);
         vhostMode = Preconditions.checkNotNull(vhostMode).toLowerCase();
@@ -104,6 +110,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         });
     }
 
+    @PostConstruct
     public void init() {
         LOG.info("Initializing {}", getClass().getSimpleName());
         DataTreeIdentifier<Node> dataTreeIdentifier = new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL,
@@ -112,7 +119,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
                     .child(Node.class)
                     .build());
         listenerRegistration =
-                dataBroker.registerDataTreeChangeListener(dataTreeIdentifier, NeutronHostconfigVppListener.this);
+                dataBroker.registerDataTreeChangeListener(dataTreeIdentifier, NeutronHostconfigVpp.this);
         LOG.info("Registered listener to netconf nodes {}.", dataTreeIdentifier.getRootIdentifier());
     }
 
@@ -165,6 +172,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         return REQUIRED_CAPABILITIES.stream().map(QName::toString).allMatch(availableCapabilities::contains);
     }
 
+    @PreDestroy
     public void close() throws Exception {
         if (listenerRegistration != null) {
             listenerRegistration.close();
