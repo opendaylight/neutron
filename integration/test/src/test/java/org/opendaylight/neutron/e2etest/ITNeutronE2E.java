@@ -12,7 +12,6 @@ import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.vmOption;
 import static org.ops4j.pax.exam.CoreOptions.when;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 
@@ -21,7 +20,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -30,59 +28,76 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.Set;
-import javax.inject.Inject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.opendaylight.controller.mdsal.it.base.AbstractMdsalTestBase;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
-import org.osgi.framework.BundleContext;
-import org.osgi.service.cm.ConfigurationAdmin;
+import org.ops4j.pax.exam.options.MavenUrlReference;
+import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
+import org.ops4j.pax.exam.spi.reactors.PerClass;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @RunWith(PaxExam.class)
-public class ITNeutronE2E {
+@ExamReactorStrategy(PerClass.class)
+public class ITNeutronE2E  extends AbstractMdsalTestBase {
 
+    private static final Logger LOG = LoggerFactory.getLogger(ITNeutronE2E.class);
     private static final String KARAF_DEBUG_PORT = "5005";
     private static final String KARAF_DEBUG_PROP = "karaf.debug";
 
-    @Inject
-    private BundleContext bundleContext;
+    final String base = "http://127.0.0.1:8181/controller/nb/v2/neutron";
 
-    @Inject
-    private ConfigurationAdmin configurationAdmin;
+    @Override
+    public String getKarafDistro() {
+        return maven()
+            .groupId("org.opendaylight.neutron")
+            .artifactId("neutron4-karaf")
+            .versionAsInProject()
+            .type("zip")
+            .getURL();
+    }
+
+    @Override
+    public MavenUrlReference getFeatureRepo() {
+        return maven()
+            .groupId("org.opendaylight.neutron")
+            .artifactId("features4-neutron-test")
+            .classifier("features")
+            .type("xml")
+            .versionAsInProject();
+    }
+
+    @Override
+    public String getFeatureName() {
+        return "odl-neutron-logger-test";
+    }
 
     @Configuration
     public Option[] config() {
-        return new Option[] {
-                // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
-                // FIXME: need to *NOT* hardcode the version here - it breaks on
-                // version bumps
-                karafDistributionConfiguration()
-                        .frameworkUrl(maven().groupId("org.opendaylight.neutron").artifactId("neutron-karaf")
-                                .type("zip").versionAsInProject())
-                        .karafVersion("3.0.3").name("Neutron").unpackDirectory(new File("target/pax"))
-                        .useDeployFolder(false),
-                // It is really nice if the container sticks around after the test so you can check the contents
-                // of the data directory when things go wrong.
-                vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"), keepRuntimeFolder(),
-                // Don't bother with local console output as it just ends up cluttering the logs
-                configureConsole().ignoreLocalConsole(),
-                // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
-                logLevel(LogLevel.INFO),
-                // provision the needed features for this test
-                //    features("mvn:org.opendaylight.neutron/features-test/0.5.0-SNAPSHOT/xml/features",
-                //        "features-neutron-test"),
-                // Remember that the test executes in another process.  If you want to debug it, you need
-                // to tell Pax Exam to launch that process with debugging enabled.  Launching the test class itself with
-                // debugging enabled (for example in Eclipse) will not get you the desired results.
-                when(Boolean.getBoolean(KARAF_DEBUG_PROP))
-                        .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)), };
+        Option[] options = super.config();
+        Option[] otherOptions = getOtherOptions();
+        Option[] combinedOptions = new Option[options.length + otherOptions.length];
+        System.arraycopy(options, 0, combinedOptions, 0, options.length);
+        System.arraycopy(otherOptions, 0, combinedOptions, options.length,
+            otherOptions.length);
+        return combinedOptions;
     }
 
-    final String base = "http://127.0.0.1:8080/controller/nb/v2/neutron";
+    private Option[] getOtherOptions() {
+        return new Option[] {
+            vmOption("-javaagent:../../pax/jars/org.jacoco.agent.jar=destfile=../../jacoco-it.exec"),
+            keepRuntimeFolder(), configureConsole().ignoreLocalConsole(),
+            logLevel(LogLevel.INFO),
+            when(Boolean.getBoolean(KARAF_DEBUG_PROP)).useOptions(
+                KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)),};
+    }
 
     @Test
     public void test() throws IOException, InterruptedException {
