@@ -32,11 +32,6 @@
   <dependencies>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
-      <artifactId>neutron-spi</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.opendaylight.neutron</groupId>
       <artifactId>model</artifactId>
       <version>${project.version}</version>
     </dependency>
