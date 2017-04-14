@@ -61,9 +61,9 @@ public class ITNeutronE2E {
                 // FIXME: need to *NOT* hardcode the version here - it breaks on
                 // version bumps
                 karafDistributionConfiguration()
-                        .frameworkUrl(maven().groupId("org.opendaylight.neutron").artifactId("neutron-karaf")
+                        .frameworkUrl(maven().groupId("org.opendaylight.neutron").artifactId("neutron4-karaf")
                                 .type("zip").versionAsInProject())
-                        .karafVersion("3.0.3").name("Neutron").unpackDirectory(new File("target/pax"))
+                        .karafVersion("4.0.9").name("Neutron").unpackDirectory(new File("target/pax"))
                         .useDeployFolder(false),
                 // It is really nice if the container sticks around after the test so you can check the contents
                 // of the data directory when things go wrong.
