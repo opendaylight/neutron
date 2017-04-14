@@ -8,20 +8,15 @@
 
 package org.opendaylight.neutron.e2etest;
 
+import static org.ops4j.pax.exam.CoreOptions.composite;
 import static org.ops4j.pax.exam.CoreOptions.maven;
-import static org.ops4j.pax.exam.CoreOptions.vmOption;
-import static org.ops4j.pax.exam.CoreOptions.when;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.configureConsole;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.editConfigurationFilePut;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -32,57 +27,73 @@ import java.util.Map;
 import java.util.Set;
 import javax.inject.Inject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.ops4j.pax.exam.Configuration;
+import org.opendaylight.controller.mdsal.it.base.AbstractMdsalTestBase;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
-import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
 import org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
+import org.ops4j.pax.exam.options.MavenUrlReference;
+import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
+import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.BundleContext;
-import org.osgi.service.cm.ConfigurationAdmin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @RunWith(PaxExam.class)
-public class ITNeutronE2E {
+@ExamReactorStrategy(PerClass.class)
+public class ITNeutronE2E  extends AbstractMdsalTestBase {
 
-    private static final String KARAF_DEBUG_PORT = "5005";
-    private static final String KARAF_DEBUG_PROP = "karaf.debug";
+    private static final Logger LOG = LoggerFactory.getLogger(ITNeutronE2E.class);
 
-    @Inject
-    private BundleContext bundleContext;
-
-    @Inject
-    private ConfigurationAdmin configurationAdmin;
-
-    @Configuration
-    public Option[] config() {
-        return new Option[] {
-                // Provision and launch a container based on a distribution of Karaf (Apache ServiceMix).
-                // FIXME: need to *NOT* hardcode the version here - it breaks on
-                // version bumps
-                karafDistributionConfiguration()
-                        .frameworkUrl(maven().groupId("org.opendaylight.neutron").artifactId("neutron-karaf")
-                                .type("zip").versionAsInProject())
-                        .karafVersion("3.0.3").name("Neutron").unpackDirectory(new File("target/pax"))
-                        .useDeployFolder(false),
-                // It is really nice if the container sticks around after the test so you can check the contents
-                // of the data directory when things go wrong.
-                vmOption("-javaagent:../jars/org.jacoco.agent.jar=destfile=jacoco-it.exec"), keepRuntimeFolder(),
-                // Don't bother with local console output as it just ends up cluttering the logs
-                configureConsole().ignoreLocalConsole(),
-                // Force the log level to INFO so we have more details during the test.  It defaults to WARN.
-                logLevel(LogLevel.INFO),
-                // provision the needed features for this test
-                //    features("mvn:org.opendaylight.neutron/features-test/0.5.0-SNAPSHOT/xml/features",
-                //        "features-neutron-test"),
-                // Remember that the test executes in another process.  If you want to debug it, you need
-                // to tell Pax Exam to launch that process with debugging enabled.  Launching the test class itself with
-                // debugging enabled (for example in Eclipse) will not get you the desired results.
-                when(Boolean.getBoolean(KARAF_DEBUG_PROP))
-                        .useOptions(KarafDistributionOption.debugConfiguration(KARAF_DEBUG_PORT, true)), };
-    }
+    @Inject BundleContext bundleContext;
 
     final String base = "http://127.0.0.1:8080/controller/nb/v2/neutron";
+
+    @Override
+    public String getKarafDistro() {
+        return maven()
+            .groupId("org.opendaylight.neutron")
+            .artifactId("neutron4-karaf")
+            .versionAsInProject()
+            .type("zip")
+            .getURL();
+    }
+
+    @Override
+    public MavenUrlReference getFeatureRepo() {
+        return maven()
+            .groupId("org.opendaylight.neutron")
+            .artifactId("features4-neutron-test")
+            .classifier("features")
+            .type("xml")
+            .versionAsInProject();
+    }
+
+    @Override
+    public String getFeatureName() {
+        return "odl-neutron-logger-test";
+    }
+
+    @Override
+    public Option getLoggingOption() {
+        Option option = editConfigurationFilePut(ORG_OPS4J_PAX_LOGGING_CFG,
+            "log4j.logger.org.opendaylight.neutron",
+            LogLevel.DEBUG.name());
+        option = composite(option, super.getLoggingOption());
+        return option;
+    }
+
+    @Before
+    public void before() throws Exception {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            LOG.warn("Interrupted while sleeping", e);
+        }
+    }
 
     @Test
     public void test() throws IOException, InterruptedException {
