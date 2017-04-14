@@ -19,6 +19,10 @@
     <name>OpenDaylight :: Neutron :: Hostconfig :: VPP</name>
 
     <properties>
+        <explicitFeatureDependencies>true</explicitFeatureDependencies>
+    </properties>
+
+    <properties>
         <netconf.version>1.3.0-SNAPSHOT</netconf.version>
     </properties>
 
