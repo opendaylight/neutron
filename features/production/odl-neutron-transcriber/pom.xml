@@ -18,6 +18,10 @@
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Implementation</name>
 
+    <properties>
+        <explicitFeatureDependencies>true</explicitFeatureDependencies>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
