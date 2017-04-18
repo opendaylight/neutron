@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_6b59effd",
+        "filename": "integration/test/src/main/features/features.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-04-18T23:47:40Z",
+      "side": 1,
+      "message": "Can you please update details for more meaningful one?\ne.g.\ntest cases for old-neutron-logger\nOr if allowed, drop details.",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 164
+      },
+      "revId": "b55a1001660cdd27251f00973a23f49fb87c4a57",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_4b5cebed",
+        "filename": "integration/test/src/main/features/features.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-04-18T23:47:40Z",
+      "side": 1,
+      "message": "ditto.\ne.g. integration test cases for ODL Neutron Northbound",
+      "range": {
+        "startLine": 10,
+        "startChar": 17,
+        "endLine": 10,
+        "endChar": 164
+      },
+      "revId": "b55a1001660cdd27251f00973a23f49fb87c4a57",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
