@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.transcriber;
 
-
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
