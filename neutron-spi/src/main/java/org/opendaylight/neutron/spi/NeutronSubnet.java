@@ -8,11 +8,10 @@
 
 package org.opendaylight.neutron.spi;
 
+import com.google.common.net.InetAddresses;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.Inet6Address;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -239,22 +238,17 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
             if (parts.length != 2) {
                 return false;
             }
-            try {
-                int length = Integer.parseInt(parts[1]);
-                //TODO?: limit check on length
-                // convert to byte array
-                byte[] addrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
-                for (int index = length; index < IPV6_LENGTH; index++) {
-                    if (((((int) addrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
-                            & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES)))) != 0) {
-                        return (false);
-                    }
+            int length = Integer.parseInt(parts[1]);
+            //TODO?: limit check on length
+            // convert to byte array
+            byte[] addrBytes = ((Inet6Address) InetAddresses.forString(parts[0])).getAddress();
+            for (int index = length; index < IPV6_LENGTH; index++) {
+                if (((((int) addrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
+                        & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES)))) != 0) {
+                    return (false);
                 }
-                return (true);
-            } catch (UnknownHostException e) {
-                LOGGER.warn("Failure in isValidCIDR()", e);
-                return (false);
             }
+            return (true);
         }
         return false;
     }
@@ -349,23 +343,18 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
 
         if (ipVersion == IPV6_VERSION) {
             String[] parts = cidr.split("/");
-            try {
-                int length = Integer.parseInt(parts[1]);
-                byte[] cidrBytes = ((Inet6Address) InetAddress.getByName(parts[0])).getAddress();
-                byte[] ipBytes = ((Inet6Address) InetAddress.getByName(ipAddress)).getAddress();
-                for (int index = 0; index < length; index++) {
-                    if (((((int) cidrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET
-                            - (index % IPV6_LENGTH_BYTES)))) != (
-                                (((int) ipBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
-                                & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES))))) {
-                        return (false);
-                    }
+            int length = Integer.parseInt(parts[1]);
+            byte[] cidrBytes = ((Inet6Address) InetAddresses.forString(parts[0])).getAddress();
+            byte[] ipBytes = ((Inet6Address) InetAddresses.forString(ipAddress)).getAddress();
+            for (int index = 0; index < length; index++) {
+                if (((((int) cidrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET
+                        - (index % IPV6_LENGTH_BYTES)))) != (
+                            (((int) ipBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
+                            & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES))))) {
+                    return (false);
                 }
-                return (true);
-            } catch (UnknownHostException e) {
-                LOGGER.warn("Failure in isValidIp()", e);
-                return (false);
             }
+            return (true);
         }
         return false;
     }
