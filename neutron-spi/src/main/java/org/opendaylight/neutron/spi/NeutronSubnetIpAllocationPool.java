@@ -8,10 +8,10 @@
 
 package org.opendaylight.neutron.spi;
 
+import com.google.common.net.InetAddresses;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.Inet6Address;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -135,12 +135,7 @@ public final class NeutronSubnetIpAllocationPool implements Serializable {
         if (inputString == null) {
             return BigInteger.ZERO;
         }
-        try {
-            return new BigInteger(((Inet6Address) InetAddress.getByName(inputString)).getAddress());
-        } catch (UnknownHostException e) {
-            LOGGER.error("convertV6 error", e);
-            return BigInteger.ZERO;
-        }
+        return new BigInteger(((Inet6Address) InetAddresses.forString(inputString)).getAddress());
     }
 
     /**
