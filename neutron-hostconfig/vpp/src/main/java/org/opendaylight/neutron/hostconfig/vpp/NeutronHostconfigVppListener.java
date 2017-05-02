@@ -52,7 +52,11 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     private final ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     private static final TopologyId TOPOLOGY_NETCONF = new TopologyId("topology-netconf");
-    private static final QName V3PO_CAPABILITY = QName.create(URI.create("urn:opendaylight:params:xml:ns:yang:v3po"),
+    private static final QName V3PO_1704_CAPABILITY = QName.create(
+            URI.create("urn:opendaylight:params:xml:ns:yang:v3po"),
+            NeutronHostconfigUtils.parseDate("2017-03-15"), "v3po");
+    private static final QName V3PO_1701_CAPABILITY = QName.create(
+            URI.create("urn:opendaylight:params:xml:ns:yang:v3po"),
             NeutronHostconfigUtils.parseDate("2016-12-14"), "v3po");
     private static final QName INTERFACES_CAPABILITY =
             QName.create(URI.create("urn:ietf:params:xml:ns:yang:ietf-interfaces"),
@@ -69,7 +73,8 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         this.socketInfo =
                 new SocketInfo(Preconditions.checkNotNull(spath), Preconditions.checkNotNull(sname), vhostMode);
         this.neutronHostconfig = new NeutronHostconfigUtils(dataBroker);
-        REQUIRED_CAPABILITIES.add(V3PO_CAPABILITY);
+        REQUIRED_CAPABILITIES.add(V3PO_1704_CAPABILITY);
+        REQUIRED_CAPABILITIES.add(V3PO_1701_CAPABILITY);
         REQUIRED_CAPABILITIES.add(INTERFACES_CAPABILITY);
     }
 
