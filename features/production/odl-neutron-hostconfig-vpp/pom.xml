@@ -78,6 +78,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <!-- finalname="/etc/org.opendaylight.vbd.impl.startup.cfg" -->
+            <groupId>${project.groupId}</groupId>
+            <artifactId>neutron-hostconfig-vpp</artifactId>
+            <version>${project.version}</version>
+            <type>cfg</type>
+            <classifier>config</classifier>
+        </dependency>
+        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
         </dependency>
