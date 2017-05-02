@@ -53,7 +53,10 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
         implements ClusteredDataTreeChangeListener<Hostconfig> {
 
-    private static final String V3PO = "(urn:opendaylight:params:xml:ns:yang:v3po?revision=2016-12-14)v3po";
+    private static final String V3PO_1704_CAPABILITY =
+        "(urn:opendaylight:params:xml:ns:yang:v3po?revision=2017-03-15)v3po";
+    private static final String V3PO_1701_CAPABILITY =
+        "(urn:opendaylight:params:xml:ns:yang:v3po?revision=2016-12-14)v3po";
     private static final String INTERFACES =
             "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2014-05-08)ietf-interfaces";
     private static final NodeId NODE_ID = new NodeId("node1");
@@ -82,7 +85,8 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
             .child(Topology.class, new TopologyKey(new TopologyId("topology-netconf")))
             .child(Node.class, new NodeKey(new NodeId(NODE_ID)))
             .build();
-        Node node1 = createNetconfNode(NODE_ID, V3PO, INTERFACES);
+        Node node1 =
+            createNetconfNode(NODE_ID, V3PO_1704_CAPABILITY, V3PO_1701_CAPABILITY, INTERFACES);
         WriteTransaction writeTx = getDataBroker().newWriteOnlyTransaction();
         writeTx.put(LogicalDatastoreType.OPERATIONAL, iid, node1, true);
         writeTx.submit().get();
