@@ -69,5 +69,6 @@
     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}</bundle>
     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+    <configfile finalname="/etc/org.opendaylight.neutron.hostconfig.vpp.startup.cfg">mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}/cfg/config</configfile>
   </feature>
 </features>
