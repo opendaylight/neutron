@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_c46c9e39",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3547
+      },
+      "writtenOn": "2017-05-02T10:27:32Z",
+      "side": 1,
+      "message": "The revision in Honeycomb 1701 is 2016-12-14 and in 1704 it is 2017-03-15.\n\nI was thinking about specifying the version in startup.cfg, but since host configuration in /restconf/operational/neuton:neutron/hostconfigs is the same for both versions, I\u0027d keep it as it is.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 68
+      },
+      "revId": "321d2f52581f38d34d493515a0a9f6f29d6ca8e1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
