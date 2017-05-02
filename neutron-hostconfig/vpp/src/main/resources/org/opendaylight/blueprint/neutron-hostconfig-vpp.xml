@@ -8,7 +8,7 @@
       interface="org.opendaylight.controller.md.sal.binding.api.DataBroker"
       odl:type="default" />
 
-  <cm:property-placeholder persistent-id="org.opendaylight.neutron.hostconfig.vpp" update-strategy="none">
+  <cm:property-placeholder persistent-id="org.opendaylight.neutron.hostconfig.vpp.startup" update-strategy="none">
     <cm:default-properties>
       <cm:property name="vhostuser-mode" value="server"/>
       <cm:property name="socket-dir" value="/tmp/"/>
