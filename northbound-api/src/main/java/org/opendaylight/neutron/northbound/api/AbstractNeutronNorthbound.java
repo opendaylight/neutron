@@ -17,8 +17,6 @@ import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
@@ -29,7 +27,6 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     // I extends INeutronCRUD<T> as 2nd type argument
     private static final int NEUTRON_CRUD_TYPE_INDEX = 2;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
     protected static final int HTTP_OK_BOTTOM = 200;
     protected static final int HTTP_OK_TOP = 299;
@@ -55,8 +52,6 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     private R newNeutronRequest(T neutronObject) {
-        // return new R(neutronObject);
-
         // argumentClass = T.class
         Class<T> argumentClass = getActualTypeArgument(NEUTRON_ARGUMENT_TYPE_INDEX);
         // cls = NeturonRequest.class
