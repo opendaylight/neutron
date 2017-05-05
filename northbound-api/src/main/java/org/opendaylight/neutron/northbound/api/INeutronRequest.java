@@ -14,7 +14,7 @@ import org.opendaylight.neutron.spi.INeutronObject;
 
 public interface INeutronRequest<T extends INeutronObject<T>> {
     default T getSingleton() {
-        // return this.sinleton;
+        // return this.sinleton
         Class cls = getClass();
         try {
             Field field = cls.getDeclaredField("singleton");
@@ -27,7 +27,7 @@ public interface INeutronRequest<T extends INeutronObject<T>> {
     }
 
     default boolean isSingleton() {
-        // return this.sinleton != null;
+        // return this.sinleton != null
         Class cls = getClass();
         try {
             Field field = cls.getDeclaredField("singleton");
@@ -38,7 +38,7 @@ public interface INeutronRequest<T extends INeutronObject<T>> {
     }
 
     default List<T> getBulk() {
-        // return this.bulkRequest;
+        // return this.bulkRequest
         Class cls = getClass();
         try {
             Field field = cls.getDeclaredField("bulkRequest");

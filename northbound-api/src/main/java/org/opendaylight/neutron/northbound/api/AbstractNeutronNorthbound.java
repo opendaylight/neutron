@@ -55,7 +55,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     private R newNeutronRequest(T neutronObject) {
-        // return new R(neutronObject);
+        // return new R(neutronObject)
 
         // argumentClass = T.class
         Class<T> argumentClass = getActualTypeArgument(NEUTRON_ARGUMENT_TYPE_INDEX);
