@@ -97,49 +97,44 @@ public final class PaginatedRequestFactory {
         final int startPos;
         String startMarker;
         String endMarker;
-        Boolean firstPage = false;
+        Boolean firstPage;
         Boolean lastPage = false;
+        List<T> localCollection = collection;
 
-        Collections.sort(collection, NEUTRON_OBJECT_COMPARATOR);
+        Collections.sort(localCollection, NEUTRON_OBJECT_COMPARATOR);
 
         if (marker != null) {
-            int offset = Collections.binarySearch(collection, new MarkerObject(marker), NEUTRON_OBJECT_COMPARATOR);
+            int offset = Collections.binarySearch(localCollection, new MarkerObject(marker), NEUTRON_OBJECT_COMPARATOR);
             if (offset < 0) {
                 throw new ResourceNotFoundException("UUID for marker: " + marker + " could not be found");
             }
 
-            if (!pageReverse) {
-                startPos = offset + 1;
-            } else {
-                startPos = offset - limit;
-            }
+            startPos = pageReverse ? offset - limit : offset + 1;
         } else {
             startPos = 0;
         }
 
-        if (startPos == 0) {
-            firstPage = true;
-        }
+        firstPage = startPos == 0;
 
-        if (startPos + limit >= collection.size()) {
-            collection = collection.subList(startPos, collection.size());
-            startMarker = collection.get(0).getID();
-            endMarker = collection.get(collection.size() - 1).getID();
+        if (startPos + limit >= localCollection.size()) {
+            localCollection = localCollection.subList(startPos, localCollection.size());
+            startMarker = localCollection.get(0).getID();
+            endMarker = localCollection.get(localCollection.size() - 1).getID();
             lastPage = true;
         } else if (startPos < 0) {
             if (startPos + limit > 0) {
-                collection = collection.subList(0, startPos + limit);
-                startMarker = collection.get(0).getID();
-                endMarker = collection.get(collection.size() - 1).getID();
+                localCollection = localCollection.subList(0, startPos + limit);
+                startMarker = localCollection.get(0).getID();
+                endMarker = localCollection.get(localCollection.size() - 1).getID();
                 firstPage = true;
             } else {
                 throw new BadRequestException(
                         "Requested page is out of bounds. Please check the supplied limit and marker");
             }
         } else {
-            collection = collection.subList(startPos, startPos + limit);
-            startMarker = collection.get(0).getID();
-            endMarker = collection.get(limit - 1).getID();
+            localCollection = localCollection.subList(startPos, startPos + limit);
+            startMarker = localCollection.get(0).getID();
+            endMarker = localCollection.get(limit - 1).getID();
         }
 
         if (!lastPage) {
@@ -157,6 +152,6 @@ public final class PaginatedRequestFactory {
             links.add(previous);
         }
 
-        return new PaginationResults<T>(collection, links);
+        return new PaginationResults<T>(localCollection, links);
     }
 }
