@@ -67,11 +67,11 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     public NeutronHostconfigVppListener(final DataBroker dataBroker, String spath, String sname, String vhostMode) {
         LOG.info("Initializing Neutron-Hostconfig-Vpp-Listener");
         this.dataBroker = Preconditions.checkNotNull(dataBroker);
-        vhostMode = Preconditions.checkNotNull(vhostMode).toLowerCase();
-        Preconditions.checkArgument(vhostMode.equals("server") || vhostMode.equals("client"),
+        final String vhostUserMode = Preconditions.checkNotNull(vhostMode).toLowerCase();
+        Preconditions.checkArgument(vhostUserMode.equals("server") || vhostUserMode.equals("client"),
                 "Supported values for vhostuser-mode are client and server.");
         this.socketInfo =
-                new SocketInfo(Preconditions.checkNotNull(spath), Preconditions.checkNotNull(sname), vhostMode);
+                new SocketInfo(Preconditions.checkNotNull(spath), Preconditions.checkNotNull(sname), vhostUserMode);
         this.neutronHostconfig = new NeutronHostconfigUtils(dataBroker);
         REQUIRED_CAPABILITIES.add(V3PO_1704_CAPABILITY);
         REQUIRED_CAPABILITIES.add(V3PO_1701_CAPABILITY);
@@ -83,30 +83,34 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         LOG.info("onDataTreeChanged: Received Data Tree Changed ...", changes);
         executorService.submit(() -> {
             for (DataTreeModification<Node> change : Preconditions.checkNotNull(changes, "Changes may not be null!")) {
-                final InstanceIdentifier<Node> key = change.getRootPath().getRootIdentifier();
-                final DataObjectModification<Node> mod = change.getRootNode();
-                LOG.info("onDataTreeChanged: Received Data Tree Changed Update of Type={} for Key={}",
-                        mod.getModificationType(), key);
-                switch (mod.getModificationType()) {
-                    case SUBTREE_MODIFIED:
-                        if (validateVppNode(mod.getDataAfter())) {
-                            updateHostConfig(mod.getDataAfter(), NeutronHostconfigUtils.Action.UPDATE);
-                        } else {
-                            updateHostConfig(mod.getDataBefore(), NeutronHostconfigUtils.Action.DELETE);
-                        }
-                        break;
-                    case DELETE:
-                        updateHostConfig(mod.getDataBefore(), NeutronHostconfigUtils.Action.DELETE);
-                        break;
-                    case WRITE:
-                        if (validateVppNode(mod.getDataAfter())) {
-                            updateHostConfig(mod.getDataAfter(), NeutronHostconfigUtils.Action.ADD);
-                        }
-                        break;
-                    default:
-                }
+                processDataTreeModification(change);
             }
         });
+    }
+
+    private void processDataTreeModification(DataTreeModification<Node> change) {
+        final InstanceIdentifier<Node> key = change.getRootPath().getRootIdentifier();
+        final DataObjectModification<Node> mod = change.getRootNode();
+        LOG.info("onDataTreeChanged: Received Data Tree Changed Update of Type={} for Key={}",
+                mod.getModificationType(), key);
+        switch (mod.getModificationType()) {
+            case SUBTREE_MODIFIED:
+                if (validateVppNode(mod.getDataAfter())) {
+                    updateHostConfig(mod.getDataAfter(), NeutronHostconfigUtils.Action.UPDATE);
+                } else {
+                    updateHostConfig(mod.getDataBefore(), NeutronHostconfigUtils.Action.DELETE);
+                }
+                break;
+            case DELETE:
+                updateHostConfig(mod.getDataBefore(), NeutronHostconfigUtils.Action.DELETE);
+                break;
+            case WRITE:
+                if (validateVppNode(mod.getDataAfter())) {
+                    updateHostConfig(mod.getDataAfter(), NeutronHostconfigUtils.Action.ADD);
+                }
+                break;
+            default:
+        }
     }
 
     public void init() {
@@ -143,9 +147,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
                 LOG.info("Connecting device {} ...", node.getNodeId().getValue());
                 break;
             case Connected:
-                if (netconfNode.getAvailableCapabilities() == null
-                        || netconfNode.getAvailableCapabilities().getAvailableCapability() == null
-                        || netconfNode.getAvailableCapabilities().getAvailableCapability().isEmpty()) {
+                if (isCapabilitiesPresent(netconfNode)) {
                     LOG.warn("Node {} does not contain any capabilities", node.getNodeId().getValue());
                     break;
                 }
@@ -168,6 +170,12 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         final List<String> availableCapabilities =
                 capabilities.stream().map(AvailableCapability::getCapability).collect(Collectors.toList());
         return REQUIRED_CAPABILITIES.stream().map(QName::toString).allMatch(availableCapabilities::contains);
+    }
+
+    private boolean isCapabilitiesPresent(final NetconfNode netconfNode) {
+        return netconfNode.getAvailableCapabilities() == null
+                || netconfNode.getAvailableCapabilities().getAvailableCapability() == null
+                || netconfNode.getAvailableCapabilities().getAvailableCapability().isEmpty();
     }
 
     public void close() throws Exception {
