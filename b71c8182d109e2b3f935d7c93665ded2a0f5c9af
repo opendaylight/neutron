@@ -16,6 +16,24 @@
       "revId": "b71c8182d109e2b3f935d7c93665ded2a0f5c9af",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_e9f36808",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-05T16:41:33Z",
+      "side": 1,
+      "message": "Thanks for the advise, I corrected the title and deleted a useless change.",
+      "parentUuid": "ba068154_a99b20c8",
+      "revId": "b71c8182d109e2b3f935d7c93665ded2a0f5c9af",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
