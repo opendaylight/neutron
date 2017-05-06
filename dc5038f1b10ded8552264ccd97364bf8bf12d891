@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_3f00fea9",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-05-06T21:28:42Z",
+      "side": 1,
+      "message": "it\u0027s confusing to have vhostMode and vhostUserMode.\nI don\u0027t see difference.\n\nPlease invent more meaningful name.",
+      "range": {
+        "startLine": 70,
+        "startChar": 21,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "dc5038f1b10ded8552264ccd97364bf8bf12d891",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_5f0342b8",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-05-06T21:28:42Z",
+      "side": 1,
+      "message": "Please order these two methods as its used order for consistency.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 5
+      },
+      "revId": "dc5038f1b10ded8552264ccd97364bf8bf12d891",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
