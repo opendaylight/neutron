@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ba068154_0ef98ac8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2017-05-09T07:21:17Z",
+      "side": 1,
+      "message": "Thanks for improving this. The shortlog is important too, I was thinking of something more along the lines of\n\n    Remove unused code\n\n    Remove unused code identified by Sonar:\n    * private member in AbstractNeutronNorthbound\n    * various pieces of commented code\n\nThat way, when reading the shortlog (e.g. on gitweb, or tig), you get some idea of what\u0027s in the commit. Obviously the above will need to be reworked to take Isaku\u0027s comments into account.",
+      "revId": "2dce6901d629e2bd66db13988baa4a4bcb7c0993",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba068154_7f31e6a1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
