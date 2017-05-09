@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_f587ae0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-05-09T20:16:58Z",
+      "side": 1,
+      "message": "Can you please expand more?\ngit log --oneline doesn\u0027t work with this subject line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "67fe261e67fe37d4d149ec31c2ee51523d1b3057",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
