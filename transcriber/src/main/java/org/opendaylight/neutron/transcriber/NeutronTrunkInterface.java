@@ -26,12 +26,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.tr
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.Trunk;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk, Trunks, TrunkKey, NeutronTrunk>
         implements INeutronTrunkCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTrunkInterface.class);
     private static final ImmutableBiMap<Class<? extends NetworkTypeBase>, String> NETWORK_TYPE_MAP =
             new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>, String>()
             .put(NetworkTypeFlat.class, "flat").put(NetworkTypeGre.class, "gre")

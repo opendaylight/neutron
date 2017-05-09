@@ -47,13 +47,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronPortInterface extends AbstractNeutronInterface<Port, Ports, PortKey, NeutronPort>
         implements INeutronPortCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPortInterface.class);
-
     // TODO: consolidate this map with NeutronSubnetInterface.IPV_MAP
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,
             Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()

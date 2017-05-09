@@ -18,14 +18,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicy.attributes.LifetimeBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronVpnIpSecPolicyInterface
         extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, IpsecpolicyKey, NeutronVpnIpSecPolicy>
         implements INeutronVpnIpSecPolicyCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIpSecPolicyInterface.class);
-
     NeutronVpnIpSecPolicyInterface(DataBroker db) {
         super(IpsecpolicyBuilder.class, db);
     }

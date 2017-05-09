@@ -23,15 +23,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.a
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.BandwidthLimitRulesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRulesBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronQosPolicyInterface
         extends AbstractNeutronInterface<QosPolicy, QosPolicies, QosPolicyKey,NeutronQosPolicy>
         implements INeutronQosPolicyCRUD {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicyInterface.class);
-
     NeutronQosPolicyInterface(DataBroker db) {
         super(QosPolicyBuilder.class, db);
     }
