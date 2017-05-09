@@ -27,14 +27,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rul
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronFirewallRuleInterface
         extends AbstractNeutronInterface<FirewallRule, FirewallRules, FirewallRuleKey, NeutronFirewallRule>
         implements INeutronFirewallRuleCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRuleInterface.class);
-
     private static final ImmutableBiMap<Class<? extends ActionBase>,
             String> ACTION_MAP = new ImmutableBiMap.Builder<Class<? extends ActionBase>, String>()
                     .put(ActionAllow.class, "allow").put(ActionDeny.class, "deny").build();

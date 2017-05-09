@@ -16,14 +16,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroup;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroupBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.groups.attributes.security.groups.SecurityGroupKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronSecurityGroupInterface
         extends AbstractNeutronInterface<SecurityGroup, SecurityGroups, SecurityGroupKey, NeutronSecurityGroup>
         implements INeutronSecurityGroupCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroupInterface.class);
-
     NeutronSecurityGroupInterface(DataBroker db) {
         super(SecurityGroupBuilder.class, db);
     }

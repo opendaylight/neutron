@@ -28,12 +28,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.router
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.ExternalGatewayInfoBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIpsBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, RouterKey, NeutronRouter>
         implements INeutronRouterCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     // methods needed for creating caches
 
     NeutronRouterInterface(DataBroker db) {

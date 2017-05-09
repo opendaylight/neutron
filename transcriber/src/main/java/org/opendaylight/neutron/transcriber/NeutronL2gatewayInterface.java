@@ -23,14 +23,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gateway;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronL2gatewayInterface
         extends AbstractNeutronInterface<L2gateway, L2gateways, L2gatewayKey, NeutronL2gateway>
         implements INeutronL2gatewayCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayInterface.class);
-
     NeutronL2gatewayInterface(DataBroker db) {
         super(L2gatewayBuilder.class, db);
     }

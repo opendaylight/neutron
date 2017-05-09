@@ -19,15 +19,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.Ipsecsiteconnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronVpnIpSecSiteConnectionsInterface
         extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, IpsecsiteconnectionKey,
         NeutronVpnIpSecSiteConnection>
         implements INeutronVpnIpSecSiteConnectionsCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIkePolicyInterface.class);
-
     NeutronVpnIpSecSiteConnectionsInterface(DataBroker db) {
         super(IpsecsiteconnectionBuilder.class, db);
     }

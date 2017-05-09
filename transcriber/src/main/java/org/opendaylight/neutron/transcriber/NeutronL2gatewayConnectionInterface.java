@@ -16,15 +16,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.l2gatewayconnections.L2gatewayConnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.l2gatewayconnections.L2gatewayConnectionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.l2gatewayconnections.L2gatewayConnectionKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronL2gatewayConnectionInterface
         extends AbstractNeutronInterface<L2gatewayConnection, L2gatewayConnections, L2gatewayConnectionKey,
                                          NeutronL2gatewayConnection>
         implements INeutronL2gatewayConnectionCRUD {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayConnectionInterface.class);
 
     NeutronL2gatewayConnectionInterface(DataBroker db) {
         super(L2gatewayConnectionBuilder.class, db);

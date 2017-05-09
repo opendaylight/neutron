@@ -17,14 +17,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.Loadbalancer;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronLoadBalancerInterface
         extends AbstractNeutronInterface<Loadbalancer, Loadbalancers, LoadbalancerKey, NeutronLoadBalancer>
         implements INeutronLoadBalancerCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerInterface.class);
-
     NeutronLoadBalancerInterface(DataBroker db) {
         super(LoadbalancerBuilder.class, db);
     }
