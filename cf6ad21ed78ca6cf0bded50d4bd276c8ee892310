@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba068154_32ce6c5b",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-09T17:05:39Z",
+      "side": 0,
+      "message": "removing ; solve the issue",
+      "parentUuid": "ba068154_1f209a48",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 39
+      },
+      "revId": "cf6ad21ed78ca6cf0bded50d4bd276c8ee892310",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba068154_bf2b4e2f",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/INeutronRequest.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-06T21:34:24Z",
       "side": 0,
       "message": "This comment is to explain what is implemented below.\nPlease keep this. In order to avoid sonar warning, please update this comment, not delete it.\n\nsame below.",
+      "range": {
+        "startLine": 17,
+        "startChar": 8,
+        "endLine": 17,
+        "endChar": 32
+      },
+      "revId": "cf6ad21ed78ca6cf0bded50d4bd276c8ee892310",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_92dbd81a",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/INeutronRequest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-09T17:05:39Z",
+      "side": 0,
+      "message": "removing ; solve the issue",
+      "parentUuid": "ba068154_bf2b4e2f",
       "range": {
         "startLine": 17,
         "startChar": 8,
