@@ -16,14 +16,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.metering.labels.MeteringLabel;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.metering.labels.MeteringLabelBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.labels.attributes.metering.labels.MeteringLabelKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronMeteringLabelInterface
         extends AbstractNeutronInterface<MeteringLabel, MeteringLabels, MeteringLabelKey, NeutronMeteringLabel>
         implements INeutronMeteringLabelCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelInterface.class);
-
     NeutronMeteringLabelInterface(DataBroker db) {
         super(MeteringLabelBuilder.class, db);
     }

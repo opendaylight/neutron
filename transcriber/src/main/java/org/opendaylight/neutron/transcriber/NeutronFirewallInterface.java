@@ -16,14 +16,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.fir
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.Firewall;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.FirewallBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.firewalls.attributes.firewalls.FirewallKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronFirewallInterface
         extends AbstractNeutronInterface<Firewall, Firewalls, FirewallKey, NeutronFirewall>
         implements INeutronFirewallCRUD {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallInterface.class);
 
     NeutronFirewallInterface(DataBroker db) {
         super(FirewallBuilder.class, db);

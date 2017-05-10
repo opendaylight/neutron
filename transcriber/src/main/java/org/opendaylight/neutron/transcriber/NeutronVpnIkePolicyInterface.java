@@ -18,14 +18,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ik
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicy.attributes.LifetimeBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronVpnIkePolicyInterface
         extends AbstractNeutronInterface<Ikepolicy, IkePolicies, IkepolicyKey, NeutronVpnIkePolicy>
         implements INeutronVpnIkePolicyCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIkePolicyInterface.class);
-
     NeutronVpnIkePolicyInterface(DataBroker db) {
         super(IkepolicyBuilder.class, db);
     }

@@ -21,14 +21,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRuleKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronMeteringLabelRuleInterface
         extends AbstractNeutronInterface<MeteringRule, MeteringRules, MeteringRuleKey, NeutronMeteringLabelRule>
         implements INeutronMeteringLabelRuleCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRuleInterface.class);
-
     private static final ImmutableBiMap<Class<? extends DirectionBase>,
             String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
                     .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();

@@ -32,14 +32,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.neutron.networks.network.SegmentsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtensionBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronNetworkInterface
         extends AbstractNeutronInterface<Network, Networks, NetworkKey, NeutronNetwork>
         implements INeutronNetworkCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkInterface.class);
-
     private static final ImmutableBiMap<Class<? extends NetworkTypeBase>,
             String> NETWORK_MAP = new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>, String>()
                     .put(NetworkTypeFlat.class, "flat").put(NetworkTypeGre.class, "gre")

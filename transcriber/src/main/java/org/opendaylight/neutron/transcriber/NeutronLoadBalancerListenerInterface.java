@@ -26,14 +26,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.Listener;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronLoadBalancerListenerInterface
         extends AbstractNeutronInterface<Listener, Listeners, ListenerKey, NeutronLoadBalancerListener>
         implements INeutronLoadBalancerListenerCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListenerInterface.class);
-
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,
             String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
                     .put(ProtocolHttp.class, "HTTP").put(ProtocolHttps.class, "HTTPS").put(ProtocolTcp.class, "TCP")

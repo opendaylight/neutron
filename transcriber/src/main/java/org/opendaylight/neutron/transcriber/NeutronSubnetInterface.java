@@ -35,13 +35,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.s
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, SubnetKey, NeutronSubnet>
         implements INeutronSubnetCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetInterface.class);
-
     private static final int IPV4_VERSION = 4;
     private static final int IPV6_VERSION = 6;
 

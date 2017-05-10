@@ -16,14 +16,10 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vp
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.vpn.services.Vpnservice;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.vpn.services.VpnserviceBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.vpn.services.VpnserviceKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronVpnServiceInterface
         extends AbstractNeutronInterface<Vpnservice, VpnServices, VpnserviceKey, NeutronVpnService>
         implements INeutronVpnServiceCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnServiceInterface.class);
-
     NeutronVpnServiceInterface(DataBroker db) {
         super(VpnserviceBuilder.class, db);
     }
