@@ -96,14 +96,8 @@ public final class NeutronBgpvpnsNorthbound
         List<NeutronBgpvpn> ans = new ArrayList<>();
         for (NeutronBgpvpn bgpvpn : allBgpvpns) {
             //match filters: TODO provider extension
-            Boolean adminStateUp = null;
-            Boolean autoAggregate = null;
-            if (queryAdminStateUp != null) {
-                adminStateUp = Boolean.valueOf(queryAdminStateUp);
-            }
-            if (queryAutoAggregate != null) {
-                autoAggregate = Boolean.valueOf(queryAutoAggregate);
-            }
+            Boolean adminStateUp = queryAdminStateUp != null ? Boolean.valueOf(queryAdminStateUp) : null;
+            Boolean autoAggregate = queryAutoAggregate != null ? Boolean.valueOf(queryAutoAggregate) : null;
             if ((queryID == null || queryID.equals(bgpvpn.getID()))
                     && (queryName == null || queryName.equals(bgpvpn.getName()))
                     && (adminStateUp == null || adminStateUp.booleanValue() == bgpvpn.isAdminStateUp())

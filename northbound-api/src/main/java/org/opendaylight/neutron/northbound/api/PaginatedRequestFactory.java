@@ -97,7 +97,7 @@ public final class PaginatedRequestFactory {
         final int startPos;
         String startMarker;
         String endMarker;
-        Boolean firstPage = false;
+        Boolean firstPage;
         Boolean lastPage = false;
 
         Collections.sort(collection, NEUTRON_OBJECT_COMPARATOR);
@@ -117,9 +117,7 @@ public final class PaginatedRequestFactory {
             startPos = 0;
         }
 
-        if (startPos == 0) {
-            firstPage = true;
-        }
+        firstPage = startPos == 0;
 
         if (startPos + limit >= collection.size()) {
             collection = collection.subList(startPos, collection.size());
