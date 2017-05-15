@@ -39,10 +39,11 @@ public abstract class NeutronBaseAttributes<T extends NeutronBaseAttributes> ext
     }
 
     @Override
-    protected void extractField(String field, T ans) {
-        super.extractField(field, ans);
+    protected boolean extractField(String field, T ans) {
         if (field.equals("name")) {
             ans.setName(this.getName());
+            return true;
         }
+        return super.extractField(field, ans);
     }
 }
