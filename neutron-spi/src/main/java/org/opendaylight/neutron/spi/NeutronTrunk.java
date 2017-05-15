@@ -15,11 +15,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement(name = "trunk")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> implements Serializable {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTrunk.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "port_id")
@@ -76,14 +78,21 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> imp
     public NeutronTrunk extractFields(List<String> fields) {
         NeutronTrunk ans = new NeutronTrunk();
         for (String s : fields) {
-            extractField(s, ans);
-            if ("port_id".equals(s)) {
-                ans.setPortId(this.getPortId());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if ("sub_ports".equals(s)) {
-                List<NeutronTrunkSubPort> subPortList = new ArrayList<>();
-                subPortList.addAll(this.getSubPorts());
-                ans.setSubPorts(subPortList);
+            switch (s) {
+                case "port_id":
+                    ans.setPortId(this.getPortId());
+                    break;
+                case "sub_ports":
+                    List<NeutronTrunkSubPort> subPortList = new ArrayList<>();
+                    subPortList.addAll(this.getSubPorts());
+                    ans.setSubPorts(subPortList);
+                    break;
+                default:
+                    LOGGER.warn("{} is not an NeutronTrunk suitable field.", s);
+                    break;
             }
         }
         return ans;

@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Load Balancer as a service
@@ -34,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoadBalancer> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancer.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "vip_address")
@@ -61,12 +64,19 @@ public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoa
     public NeutronLoadBalancer extractFields(List<String> fields) {
         NeutronLoadBalancer ans = new NeutronLoadBalancer();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("vip_address")) {
-                ans.setLoadBalancerVipAddress(this.getLoadBalancerVipAddress());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("vip_subnet_id")) {
-                ans.setLoadBalancerVipSubnetID(this.getLoadBalancerVipSubnetID());
+            switch (s) {
+                case "vip_address":
+                    ans.setLoadBalancerVipAddress(this.getLoadBalancerVipAddress());
+                    break;
+                case "vip_subnet_id":
+                    ans.setLoadBalancerVipSubnetID(this.getLoadBalancerVipSubnetID());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronLoadBalancer suitable field.", s);
+                    break;
             }
         }
         return ans;

@@ -16,11 +16,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<NeutronSFCFlowClassifier>
         implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCFlowClassifier.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of
@@ -162,36 +165,43 @@ public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<Neutro
     public NeutronSFCFlowClassifier extractFields(List<String> fields) {
         NeutronSFCFlowClassifier ans = new NeutronSFCFlowClassifier();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("ethertype")) {
-                ans.setEthertype(this.getEthertype());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("source_port_range_min")) {
-                ans.setSourcePortRangeMin(this.getSourcePortRangeMin());
-            }
-            if (s.equals("source_port_range_max")) {
-                ans.setSourcePortRangeMax(this.getSourcePortRangeMax());
-            }
-            if (s.equals("destination_port_range_min")) {
-                ans.setDestinationPortRangeMin(this.getDestinationPortRangeMin());
-            }
-            if (s.equals("destination_port_range_max")) {
-                ans.setDestinationPortRangeMax(this.getDestinationPortRangeMax());
-            }
-            if (s.equals("source_ip_prefix")) {
-                ans.setSourceIpPrefix(this.getSourceIpPrefix());
-            }
-            if (s.equals("destination_ip_prefix")) {
-                ans.setDestinationIpPrefix(this.getDestinationIpPrefix());
-            }
-            if (s.equals("logical_source_port")) {
-                ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
-            }
-            if (s.equals("logical_destination_port")) {
-                ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
-            }
-            if (s.equals("l7_parameters")) {
-                ans.setL7Parameters(new HashMap<String, String>(this.getL7Parameters()));
+            switch (s) {
+                case "ethertype":
+                    ans.setEthertype(this.getEthertype());
+                    break;
+                case "source_port_range_min":
+                    ans.setSourcePortRangeMin(this.getSourcePortRangeMin());
+                    break;
+                case "source_port_range_max":
+                    ans.setSourcePortRangeMax(this.getSourcePortRangeMax());
+                    break;
+                case "destination_port_range_min":
+                    ans.setDestinationPortRangeMin(this.getDestinationPortRangeMin());
+                    break;
+                case "destination_port_range_max":
+                    ans.setDestinationPortRangeMax(this.getDestinationPortRangeMax());
+                    break;
+                case "source_ip_prefix":
+                    ans.setSourceIpPrefix(this.getSourceIpPrefix());
+                    break;
+                case "destination_ip_prefix":
+                    ans.setDestinationIpPrefix(this.getDestinationIpPrefix());
+                    break;
+                case "logical_source_port":
+                    ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
+                    break;
+                case "logical_destination_port":
+                    ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
+                    break;
+                case "l7_parameters":
+                    ans.setL7Parameters(new HashMap<String, String>(this.getL7Parameters()));
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronSFCFlowClassifier suitable field.", s);
+                    break;
             }
         }
         return ans;

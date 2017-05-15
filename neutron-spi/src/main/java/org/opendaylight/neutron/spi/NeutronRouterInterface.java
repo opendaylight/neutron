@@ -14,11 +14,15 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronRouterInterface extends NeutronObject<NeutronRouterInterface>
         implements Serializable, INeutronObject<NeutronRouterInterface> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -58,12 +62,19 @@ public final class NeutronRouterInterface extends NeutronObject<NeutronRouterInt
     public NeutronRouterInterface extractFields(List<String> fields) {
         NeutronRouterInterface ans = new NeutronRouterInterface();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("subnet_id")) {
-                ans.setSubnetUUID(this.getSubnetUUID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("port_id")) {
-                ans.setPortUUID(this.getPortUUID());
+            switch (s) {
+                case "subnet_id":
+                    ans.setSubnetUUID(this.getSubnetUUID());
+                    break;
+                case "port_id":
+                    ans.setPortUUID(this.getPortUUID());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronRouterInterface suitable field.", s);
+                    break;
             }
         }
         return ans;

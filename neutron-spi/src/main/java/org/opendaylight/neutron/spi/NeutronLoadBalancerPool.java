@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<NeutronLoadBalancerPool>
         implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPool.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "protocol")
@@ -153,21 +157,28 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
     public NeutronLoadBalancerPool extractFields(List<String> fields) {
         NeutronLoadBalancerPool ans = new NeutronLoadBalancerPool();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("protocol")) {
-                ans.setLoadBalancerPoolProtocol(this.getLoadBalancerPoolProtocol());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("lb_algorithm")) {
-                ans.setLoadBalancerPoolLbAlgorithm(this.getLoadBalancerPoolLbAlgorithm());
-            }
-            if (s.equals("healthmonitor_id")) {
-                ans.setLoadBalancerPoolHealthMonitorID(this.getLoadBalancerPoolHealthMonitorID());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setLoadBalancerPoolAdminStateIsUp(loadBalancerPoolAdminStateIsUp);
-            }
-            if (s.equals("members")) {
-                ans.setLoadBalancerPoolMembers(getLoadBalancerPoolMembers());
+            switch (s) {
+                case "protocol":
+                    ans.setLoadBalancerPoolProtocol(this.getLoadBalancerPoolProtocol());
+                    break;
+                case "lb_algorithm":
+                    ans.setLoadBalancerPoolLbAlgorithm(this.getLoadBalancerPoolLbAlgorithm());
+                    break;
+                case "healthmonitor_id":
+                    ans.setLoadBalancerPoolHealthMonitorID(this.getLoadBalancerPoolHealthMonitorID());
+                    break;
+                case "admin_state_up":
+                    ans.setLoadBalancerPoolAdminStateIsUp(loadBalancerPoolAdminStateIsUp);
+                    break;
+                case "members":
+                    ans.setLoadBalancerPoolMembers(getLoadBalancerPoolMembers());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronLoadBalancerPool suitable field.", s);
+                    break;
             }
         }
         return ans;

@@ -169,42 +169,49 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
     public NeutronSubnet extractFields(List<String> fields) {
         NeutronSubnet ans = new NeutronSubnet();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("network_id")) {
-                ans.setNetworkUUID(this.getNetworkUUID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("ip_version")) {
-                ans.setIpVersion(this.getIpVersion());
-            }
-            if (s.equals("cidr")) {
-                ans.setCidr(this.getCidr());
-            }
-            if (s.equals("gateway_ip")) {
-                ans.setGatewayIp(this.getGatewayIp());
-            }
-            if (s.equals("dns_nameservers")) {
-                List<String> nsList = new ArrayList<String>();
-                nsList.addAll(this.getDnsNameservers());
-                ans.setDnsNameservers(nsList);
-            }
-            if (s.equals("allocation_pools")) {
-                List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
-                pools.addAll(this.getAllocationPools());
-                ans.setAllocationPools(pools);
-            }
-            if (s.equals("host_routes")) {
-                List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
-                hostRoutes.addAll(this.getHostRoutes());
-                ans.setHostRoutes(hostRoutes);
-            }
-            if (s.equals("enable_dhcp")) {
-                ans.setEnableDHCP(this.getEnableDHCP());
-            }
-            if (s.equals("ipv6_address_mode")) {
-                ans.setIpV6AddressMode(this.getIpV6AddressMode());
-            }
-            if (s.equals("ipv6_ra_mode")) {
-                ans.setIpV6RaMode(this.getIpV6RaMode());
+            switch (s) {
+                case "network_id":
+                    ans.setNetworkUUID(this.getNetworkUUID());
+                    break;
+                case "ip_version":
+                    ans.setIpVersion(this.getIpVersion());
+                    break;
+                case "cidr":
+                    ans.setCidr(this.getCidr());
+                    break;
+                case "gateway_ip":
+                    ans.setGatewayIp(this.getGatewayIp());
+                    break;
+                case "dns_nameservers":
+                    List<String> nsList = new ArrayList<String>();
+                    nsList.addAll(this.getDnsNameservers());
+                    ans.setDnsNameservers(nsList);
+                    break;
+                case "allocation_pools":
+                    List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+                    pools.addAll(this.getAllocationPools());
+                    ans.setAllocationPools(pools);
+                    break;
+                case "host_routes":
+                    List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
+                    hostRoutes.addAll(this.getHostRoutes());
+                    ans.setHostRoutes(hostRoutes);
+                    break;
+                case "enable_dhcp":
+                    ans.setEnableDHCP(this.getEnableDHCP());
+                    break;
+                case "ipv6_address_mode":
+                    ans.setIpV6AddressMode(this.getIpV6AddressMode());
+                    break;
+                case "ipv6_ra_mode":
+                    ans.setIpV6RaMode(this.getIpV6RaMode());
+                    break;
+                default:
+                    LOGGER.warn("{} is not an OpenStackSubnet suitable field.", s);
+                    break;
             }
         }
         return ans;
