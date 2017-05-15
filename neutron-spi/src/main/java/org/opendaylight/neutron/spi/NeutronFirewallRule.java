@@ -195,43 +195,46 @@ public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFire
         NeutronFirewallRule ans = new NeutronFirewallRule();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("shared")) {
-                ans.setFirewallRuleIsShared(firewallRuleIsShared);
+            switch (s) {
+                case "shared":
+                    ans.setFirewallRuleIsShared(firewallRuleIsShared);
+                    break;
+                case "firewall_policy_id":
+                    ans.setFirewallRulePolicyID(this.getFirewallRulePolicyID());
+                    break;
+                case "protocol":
+                    ans.setFirewallRuleProtocol(this.getFirewallRuleProtocol());
+                    break;
+                case "source_ip_address":
+                    ans.setFirewallRuleSrcIpAddr(this.getFirewallRuleSrcIpAddr());
+                    break;
+                case "destination_ip_address":
+                    ans.setFirewallRuleDstIpAddr(this.getFirewallRuleDstIpAddr());
+                    break;
+                case "source_port_range_min":
+                    ans.setFirewallRuleSrcPortRangeMin(this.getFirewallRuleSrcPortRangeMin());
+                    break;
+                case "source_port_range_max":
+                    ans.setFirewallRuleSrcPortRangeMax(this.getFirewallRuleSrcPortRangeMax());
+                    break;
+                case "destination_port_range_min":
+                    ans.setFirewallRuleDstPortRangeMin(this.getFirewallRuleDstPortRangeMin());
+                    break;
+                case "destination_port_range_max":
+                    ans.setFirewallRuleDstPortRangeMax(this.getFirewallRuleDstPortRangeMax());
+                    break;
+                case "position":
+                    ans.setFirewallRulePosition(this.getFirewallRulePosition());
+                    break;
+                case "action":
+                    ans.setFirewallRuleAction(this.getFirewallRuleAction());
+                    break;
+                case "enabled":
+                    ans.setFirewallRuleIsEnabled(firewallRuleIsEnabled);
+                    break;
+                default:
+                    break;
             }
-            if (s.equals("firewall_policy_id")) {
-                ans.setFirewallRulePolicyID(this.getFirewallRulePolicyID());
-            }
-            if (s.equals("protocol")) {
-                ans.setFirewallRuleProtocol(this.getFirewallRuleProtocol());
-            }
-            if (s.equals("source_ip_address")) {
-                ans.setFirewallRuleSrcIpAddr(this.getFirewallRuleSrcIpAddr());
-            }
-            if (s.equals("destination_ip_address")) {
-                ans.setFirewallRuleDstIpAddr(this.getFirewallRuleDstIpAddr());
-            }
-            if (s.equals("source_port_range_min")) {
-                ans.setFirewallRuleSrcPortRangeMin(this.getFirewallRuleSrcPortRangeMin());
-            }
-            if (s.equals("source_port_range_max")) {
-                ans.setFirewallRuleSrcPortRangeMax(this.getFirewallRuleSrcPortRangeMax());
-            }
-            if (s.equals("destination_port_range_min")) {
-                ans.setFirewallRuleDstPortRangeMin(this.getFirewallRuleDstPortRangeMin());
-            }
-            if (s.equals("destination_port_range_max")) {
-                ans.setFirewallRuleDstPortRangeMax(this.getFirewallRuleDstPortRangeMax());
-            }
-            if (s.equals("position")) {
-                ans.setFirewallRulePosition(this.getFirewallRulePosition());
-            }
-            if (s.equals("action")) {
-                ans.setFirewallRuleAction(this.getFirewallRuleAction());
-            }
-            if (s.equals("enabled")) {
-                ans.setFirewallRuleIsEnabled(firewallRuleIsEnabled);
-            }
-
         }
         return ans;
     }

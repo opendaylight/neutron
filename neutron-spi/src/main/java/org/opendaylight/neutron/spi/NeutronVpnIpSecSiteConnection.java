@@ -173,35 +173,39 @@ public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<
         NeutronVpnIpSecSiteConnection ans = new NeutronVpnIpSecSiteConnection();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("peer_address")) {
-                ans.setPeerAddress(this.getPeerAddress());
-            }
-            if (s.equals("peer_id")) {
-                ans.setPeerID(this.getPeerID());
-            }
-            if (s.equals("route_mode")) {
-                ans.setRouteMode(this.getRouteMode());
-            }
-            if (s.equals("mtu")) {
-                ans.setMtu(this.getMtu());
-            }
-            if (s.equals("auth_mode")) {
-                ans.setAuthMode(this.getAuthMode());
-            }
-            if (s.equals("psk")) {
-                ans.setPreSharedKey(this.getPreSharedKey());
-            }
-            if (s.equals("initiator")) {
-                ans.setInitiator(this.getInitiator());
-            }
-            if (s.equals("ikepolicy_id")) {
-                ans.setIkePolicyID(this.getIkePolicyID());
-            }
-            if (s.equals("ipsecpolicy_id")) {
-                ans.setIpsecPolicyID(this.getIpsecPolicyID());
-            }
-            if (s.equals("vpnservice_id")) {
-                ans.setVpnServiceID(this.getVpnServiceID());
+            switch (s) {
+                case "peer_address":
+                    ans.setPeerAddress(this.getPeerAddress());
+                    break;
+                case "peer_id":
+                    ans.setPeerID(this.getPeerID());
+                    break;
+                case "route_mode":
+                    ans.setRouteMode(this.getRouteMode());
+                    break;
+                case "mtu":
+                    ans.setMtu(this.getMtu());
+                    break;
+                case "auth_mode":
+                    ans.setAuthMode(this.getAuthMode());
+                    break;
+                case "psk":
+                    ans.setPreSharedKey(this.getPreSharedKey());
+                    break;
+                case "initiator":
+                    ans.setInitiator(this.getInitiator());
+                    break;
+                case "ikepolicy_id":
+                    ans.setIkePolicyID(this.getIkePolicyID());
+                    break;
+                case "ipsecpolicy_id":
+                    ans.setIpsecPolicyID(this.getIpsecPolicyID());
+                    break;
+                case "vpnservice_id":
+                    ans.setVpnServiceID(this.getVpnServiceID());
+                    break;
+                default:
+                    break;
             }
         }
         return ans;
