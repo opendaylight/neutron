@@ -96,18 +96,22 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
     @Override
     public abstract T extractFields(List<String> fields);
 
-    protected void extractField(String field, T ans) {
-        if (field.equals("id")) {
-            ans.setID(this.getID());
-        }
-        if (field.equals("tenant_id")) {
-            ans.setTenantID(this.getTenantID());
-        }
-        if (field.equals("project_id")) {
-            ans.setProjectID(this.getProjectID());
-        }
-        if (field.equals("revision_number")) {
-            ans.setRevisionNumber(this.getRevisionNumber());
+    protected boolean extractField(String field, T ans) {
+        switch (field) {
+            case "id":
+                ans.setID(this.getID());
+                return true;
+            case "tenant_id":
+                ans.setTenantID(this.getTenantID());
+                return true;
+            case "project_id":
+                ans.setProjectID(this.getProjectID());
+                return true;
+            case "revision_number":
+                ans.setRevisionNumber(this.getRevisionNumber());
+                return true;
+            default:
+                return false;
         }
     }
 }

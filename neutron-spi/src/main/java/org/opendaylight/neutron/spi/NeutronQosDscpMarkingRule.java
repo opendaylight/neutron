@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,6 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosDscpMarkingRule extends NeutronObject<NeutronQosDscpMarkingRule>
         implements Serializable, INeutronObject<NeutronQosDscpMarkingRule> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosDscpMarkingRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "dscp_mark")
@@ -35,9 +39,15 @@ public final class NeutronQosDscpMarkingRule extends NeutronObject<NeutronQosDsc
     public NeutronQosDscpMarkingRule extractFields(List<String> fields) {
         NeutronQosDscpMarkingRule ans = new NeutronQosDscpMarkingRule();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("dscp_mark")) {
-                ans.setDscpMark(this.getDscpMark());
+            if(extractField(s, ans))
+                continue;
+            switch (s) {
+                case "dscp_mark":
+                    ans.setDscpMark(this.getDscpMark());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronQosDscpMarkingRule suitable field.", s);
+                    break;
             }
         }
         return ans;
