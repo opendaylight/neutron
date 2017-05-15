@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -40,6 +43,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<NeutronLoadBalancerHealthMonitor>
         implements Serializable, INeutronObject<NeutronLoadBalancerHealthMonitor> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitor.class);
+
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "type")
@@ -145,29 +150,34 @@ public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<Neutro
         NeutronLoadBalancerHealthMonitor ans = new NeutronLoadBalancerHealthMonitor();
         for (String s : fields) {
             extractField(s, ans);
-            if (s.equals("type")) {
-                ans.setLoadBalancerHealthMonitorType(this.getLoadBalancerHealthMonitorType());
-            }
-            if (s.equals("delay")) {
-                ans.setLoadBalancerHealthMonitorDelay(this.getLoadBalancerHealthMonitorDelay());
-            }
-            if (s.equals("timeout")) {
-                ans.setLoadBalancerHealthMonitorTimeout(this.getLoadBalancerHealthMonitorTimeout());
-            }
-            if (s.equals("max_retries")) {
-                ans.setLoadBalancerHealthMonitorMaxRetries(this.getLoadBalancerHealthMonitorMaxRetries());
-            }
-            if (s.equals("http_method")) {
-                ans.setLoadBalancerHealthMonitorHttpMethod(this.getLoadBalancerHealthMonitorHttpMethod());
-            }
-            if (s.equals("url_path")) {
-                ans.setLoadBalancerHealthMonitorUrlPath(this.getLoadBalancerHealthMonitorUrlPath());
-            }
-            if (s.equals("expected_codes")) {
-                ans.setLoadBalancerHealthMonitorExpectedCodes(this.getLoadBalancerHealthMonitorExpectedCodes());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setLoadBalancerHealthMonitorAdminStateIsUp(loadBalancerHealthMonitorAdminStateIsUp);
+            switch (s) {
+                case "type":
+                    ans.setLoadBalancerHealthMonitorType(this.getLoadBalancerHealthMonitorType());
+                    break;
+                case "delay":
+                    ans.setLoadBalancerHealthMonitorDelay(this.getLoadBalancerHealthMonitorDelay());
+                    break;
+                case "timeout":
+                    ans.setLoadBalancerHealthMonitorTimeout(this.getLoadBalancerHealthMonitorTimeout());
+                    break;
+                case "max_retries":
+                    ans.setLoadBalancerHealthMonitorMaxRetries(this.getLoadBalancerHealthMonitorMaxRetries());
+                    break;
+                case "http_method":
+                    ans.setLoadBalancerHealthMonitorHttpMethod(this.getLoadBalancerHealthMonitorHttpMethod());
+                    break;
+                case "url_path":
+                    ans.setLoadBalancerHealthMonitorUrlPath(this.getLoadBalancerHealthMonitorUrlPath());
+                    break;
+                case "expected_codes":
+                    ans.setLoadBalancerHealthMonitorExpectedCodes(this.getLoadBalancerHealthMonitorExpectedCodes());
+                    break;
+                case "admin_state_up":
+                    ans.setLoadBalancerHealthMonitorAdminStateIsUp(loadBalancerHealthMonitorAdminStateIsUp);
+                    break;
+                default:
+                    LOGGER.debug("Unknown load balancer health monitor attribute {}.", s);
+                    break;
             }
         }
         return ans;
