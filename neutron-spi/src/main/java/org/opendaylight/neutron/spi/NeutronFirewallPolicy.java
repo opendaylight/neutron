@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -34,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFirewallPolicy> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicy.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -61,12 +65,18 @@ public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFi
     public NeutronFirewallPolicy extractFields(List<String> fields) {
         NeutronFirewallPolicy ans = new NeutronFirewallPolicy();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("shared")) {
-                ans.setFirewallPolicyIsShared(firewallPolicyIsShared);
-            }
-            if (s.equals("audited")) {
-                ans.setFirewallPolicyIsAudited(firewallPolicyIsAudited);
+            if(extractField(s, ans))
+                continue;
+            switch (s) {
+                case "shared":
+                    ans.setFirewallPolicyIsShared(firewallPolicyIsShared);
+                    break;
+                case "audited":
+                    ans.setFirewallPolicyIsAudited(firewallPolicyIsAudited);
+                    break;
+                default:
+                    LOGGER.warn("{} is not an NeutronFirewallPolicy suitable field.", s);
+                    break;
             }
         }
         return ans;

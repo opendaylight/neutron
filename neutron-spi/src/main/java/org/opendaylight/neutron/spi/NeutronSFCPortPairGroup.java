@@ -7,6 +7,9 @@
  */
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<NeutronSFCPortPairGroup>
         implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairGroup.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0
@@ -49,9 +53,15 @@ public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<Neutron
     public NeutronSFCPortPairGroup extractFields(List<String> fields) {
         NeutronSFCPortPairGroup ans = new NeutronSFCPortPairGroup();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("port_pairs")) {
-                ans.setPortPairs(this.getPortPairs());
+            if (extractField(s, ans))
+                continue;
+            switch (s) {
+                case "port_pairs":
+                    ans.setPortPairs(this.getPortPairs());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronSFCPortPairGroup suitable field.", s);
+                    break;
             }
         }
         return ans;

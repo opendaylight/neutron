@@ -58,13 +58,17 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
     }
 
     @Override
-    protected void extractField(String field, T ans) {
-        super.extractField(field, ans);
-        if (field.equals("admin_state_up")) {
-            ans.setAdminStateUp(this.getAdminStateUp());
-        }
-        if (field.equals("status")) {
-            ans.setStatus(this.getStatus());
+    protected boolean extractField(String field, T ans) {
+        switch (field)
+        {
+            case "admin_state_up":
+                ans.setAdminStateUp(this.getAdminStateUp());
+                return true;
+            case "status":
+                ans.setStatus(this.getStatus());
+                return true;
+            default:
+                return super.extractField(field, ans);
         }
     }
 }

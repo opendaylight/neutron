@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -28,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSecurityGroup> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroup.class);
     private static final long serialVersionUID = 1L;
 
     public NeutronSecurityGroup() {
@@ -36,7 +40,9 @@ public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSec
     public NeutronSecurityGroup extractFields(List<String> fields) {
         NeutronSecurityGroup ans = new NeutronSecurityGroup();
         for (String s : fields) {
-            extractField(s, ans);
+            if (extractField(s, ans))
+                continue;
+            LOGGER.warn("{} is not a NeutronSecurityGroup suitable field.", s);
         }
         return ans;
     }

@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "bgpvpn")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpn.class);
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -219,36 +223,42 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> i
     public NeutronBgpvpn extractFields(List<String> fields) {
         NeutronBgpvpn ans = new NeutronBgpvpn();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("type")) {
-                ans.setType(this.getType());
-            }
-            if (s.equals("technique")) {
-                ans.setTechnique(this.getTechnique());
-            }
-            if (s.equals("route_targets")) {
-                ans.setRouteTargets(this.getRouteTargets());
-            }
-            if (s.equals("import_targets")) {
-                ans.setImportTargets(this.getImportTargets());
-            }
-            if (s.equals("export_targets")) {
-                ans.setExportTargets(this.getExportTargets());
-            }
-            if (s.equals("route_distinguishers")) {
-                ans.setRouteDistinguishers(this.getRouteDistinguishers());
-            }
-            if (s.equals("routers")) {
-                ans.setRouters(this.getRouters());
-            }
-            if (s.equals("networks")) {
-                ans.setNetworks(this.getNetworks());
-            }
-            if (s.equals("vnid")) {
-                ans.setVnid(this.getVnid());
-            }
-            if (s.equals("auto_aggregate")) {
-                ans.setAutoAggregate(this.getAutoAggregate());
+            if(extractField(s, ans))
+                continue;
+            switch (s) {
+                case "type":
+                    ans.setType(this.getType());
+                    break;
+                case "technique":
+                    ans.setTechnique(this.getTechnique());
+                    break;
+                case "route_targets":
+                    ans.setRouteTargets(this.getRouteTargets());
+                    break;
+                case "import_targets":
+                    ans.setImportTargets(this.getImportTargets());
+                    break;
+                case "export_targets":
+                    ans.setExportTargets(this.getExportTargets());
+                    break;
+                case "route_distinguishe":
+                    ans.setRouteDistinguishers(this.getRouteDistinguishers());
+                    break;
+                case "routers":
+                    ans.setRouters(this.getRouters());
+                    break;
+                case "networks":
+                    ans.setNetworks(this.getNetworks());
+                    break;
+                case "vnid":
+                    ans.setVnid(this.getVnid());
+                    break;
+                case "auto_aggregate":
+                    ans.setAutoAggregate(this.getAutoAggregate());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronBgpvpn suitable field.", s);
+                    break;
             }
         }
         return ans;
