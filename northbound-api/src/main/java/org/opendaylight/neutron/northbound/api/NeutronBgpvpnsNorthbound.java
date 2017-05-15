@@ -10,7 +10,9 @@ package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -96,20 +98,17 @@ public final class NeutronBgpvpnsNorthbound
         List<NeutronBgpvpn> ans = new ArrayList<>();
         for (NeutronBgpvpn bgpvpn : allBgpvpns) {
             //match filters: TODO provider extension
-            Boolean adminStateUp = null;
-            Boolean autoAggregate = null;
-            if (queryAdminStateUp != null) {
-                adminStateUp = Boolean.valueOf(queryAdminStateUp);
-            }
-            if (queryAutoAggregate != null) {
-                autoAggregate = Boolean.valueOf(queryAutoAggregate);
-            }
-            if ((queryID == null || queryID.equals(bgpvpn.getID()))
-                    && (queryName == null || queryName.equals(bgpvpn.getName()))
-                    && (adminStateUp == null || adminStateUp.booleanValue() == bgpvpn.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(bgpvpn.getStatus()))
-                    && (autoAggregate == null || autoAggregate.booleanValue() == bgpvpn.isAutoAggregate())
-                    && (queryTenantID == null || queryTenantID.equals(bgpvpn.getTenantID()))) {
+            Boolean adminStateUp = queryAdminStateUp != null ? Boolean.valueOf(queryAdminStateUp) : null;
+            Boolean autoAggregate = queryAutoAggregate != null ? Boolean.valueOf(queryAutoAggregate) : null;
+            Set<Boolean> nullOrEqual = new HashSet<>();
+            nullOrEqual.add(queryID == null || queryID.equals(bgpvpn.getID()));
+            nullOrEqual.add(queryName == null || queryName.equals(bgpvpn.getName()));
+            nullOrEqual.add(adminStateUp == null || adminStateUp == bgpvpn.isAdminStateUp());
+            nullOrEqual.add(queryStatus == null || queryStatus.equals(bgpvpn.getStatus()));
+            nullOrEqual.add(autoAggregate == null || autoAggregate == bgpvpn.isAutoAggregate());
+            nullOrEqual.add(queryTenantID == null || queryTenantID.equals(bgpvpn.getTenantID()));
+
+            if (!nullOrEqual.contains(false)) {
                 if (fields.size() > 0) {
                     ans.add(bgpvpn.extractFields(fields));
                 } else {
