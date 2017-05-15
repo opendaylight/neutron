@@ -18,10 +18,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPort.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -212,50 +215,57 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
 
     public NeutronPort extractFields(List<String> fields) {
         NeutronPort ans = new NeutronPort();
-        for (String field : fields) {
-            extractField(field, ans);
-            if ("network_id".equals(field)) {
-                ans.setNetworkUUID(this.getNetworkUUID());
+        for (String s : fields) {
+            if (extractField(s, ans)) {
+                continue;
             }
-            if ("mac_address".equals(field)) {
-                ans.setMacAddress(this.getMacAddress());
-            }
-            if ("fixed_ips".equals(field)) {
-                ans.setFixedIps(new ArrayList<NeutronIps>(this.getFixedIps()));
-            }
-            if ("device_id".equals(field)) {
-                ans.setDeviceID(this.getDeviceID());
-            }
-            if ("device_owner".equals(field)) {
-                ans.setDeviceOwner(this.getDeviceOwner());
-            }
-            if ("security_groups".equals(field)) {
-                ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
-            }
-            if ("allowed_address_pairs".equals(field)) {
-                ans.setAllowedAddressPairs(
-                        new ArrayList<NeutronPortAllowedAddressPairs>(this.getAllowedAddressPairs()));
-            }
-            if ("binding:host_id".equals(field)) {
-                ans.setBindinghostID(this.getBindinghostID());
-            }
-            if ("binding:vnic_type".equals(field)) {
-                ans.setBindingvnicType(this.getBindingvnicType());
-            }
-            if ("binding:vif_type".equals(field)) {
-                ans.setBindingvifType(this.getBindingvifType());
-            }
-            if ("binding:vif_details".equals(field)) {
-                ans.setVIFDetails(new HashMap<String, String>(this.getVIFDetails()));
-            }
-            if ("extra_dhcp_opts".equals(field)) {
-                ans.setExtraDHCPOptions(new ArrayList<NeutronPortExtraDHCPOption>(this.getExtraDHCPOptions()));
-            }
-            if ("port_security_enabled".equals(field)) {
-                ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
-            }
-            if ("qos_policy_id".equals(field)) {
-                ans.setQosPolicyId(this.getQosPolicyId());
+            switch (s) {
+                case "network_id":
+                    ans.setNetworkUUID(this.getNetworkUUID());
+                    break;
+                case "mac_address":
+                    ans.setMacAddress(this.getMacAddress());
+                    break;
+                case "fixed_ips":
+                    ans.setFixedIps(new ArrayList<NeutronIps>(this.getFixedIps()));
+                    break;
+                case "device_id":
+                    ans.setDeviceID(this.getDeviceID());
+                    break;
+                case "device_owner":
+                    ans.setDeviceOwner(this.getDeviceOwner());
+                    break;
+                case "security_groups":
+                    ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
+                    break;
+                case "allowed_address_pairs":
+                    ans.setAllowedAddressPairs(
+                            new ArrayList<NeutronPortAllowedAddressPairs>(this.getAllowedAddressPairs()));
+                    break;
+                case "binding:host_id":
+                    ans.setBindinghostID(this.getBindinghostID());
+                    break;
+                case "binding:vnic_type":
+                    ans.setBindingvnicType(this.getBindingvnicType());
+                    break;
+                case "binding:vif_type":
+                    ans.setBindingvifType(this.getBindingvifType());
+                    break;
+                case "binding:vif_details":
+                    ans.setVIFDetails(new HashMap<String, String>(this.getVIFDetails()));
+                    break;
+                case "extra_dhcp_opts":
+                    ans.setExtraDHCPOptions(new ArrayList<NeutronPortExtraDHCPOption>(this.getExtraDHCPOptions()));
+                    break;
+                case "port_security_enabled":
+                    ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
+                    break;
+                case "qos_policy_id":
+                    ans.setQosPolicyId(this.getQosPolicyId());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronPort suitable field.", s);
+                    break;
             }
         }
         return ans;

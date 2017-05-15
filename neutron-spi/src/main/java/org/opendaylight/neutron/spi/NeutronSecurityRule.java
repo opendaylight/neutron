@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * See OpenStack Network API v2.0 Reference for description of
@@ -36,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule>
         implements Serializable, INeutronObject<NeutronSecurityRule> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "direction")
@@ -132,30 +135,37 @@ public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule
     public NeutronSecurityRule extractFields(List<String> fields) {
         NeutronSecurityRule ans = new NeutronSecurityRule();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("direction")) {
-                ans.setSecurityRuleDirection(this.getSecurityRuleDirection());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("protocol")) {
-                ans.setSecurityRuleProtocol(this.getSecurityRuleProtocol());
-            }
-            if (s.equals("port_range_min")) {
-                ans.setSecurityRulePortMin(this.getSecurityRulePortMin());
-            }
-            if (s.equals("port_range_max")) {
-                ans.setSecurityRulePortMax(this.getSecurityRulePortMax());
-            }
-            if (s.equals("ethertype")) {
-                ans.setSecurityRuleEthertype(this.getSecurityRuleEthertype());
-            }
-            if (s.equals("remote_ip_prefix")) {
-                ans.setSecurityRuleRemoteIpPrefix(this.getSecurityRuleRemoteIpPrefix());
-            }
-            if (s.equals("remote_group_id")) {
-                ans.setSecurityRemoteGroupID(this.getSecurityRemoteGroupID());
-            }
-            if (s.equals("security_group_id")) {
-                ans.setSecurityRuleGroupID(this.getSecurityRuleGroupID());
+            switch (s) {
+                case "direction":
+                    ans.setSecurityRuleDirection(this.getSecurityRuleDirection());
+                    break;
+                case "protocol":
+                    ans.setSecurityRuleProtocol(this.getSecurityRuleProtocol());
+                    break;
+                case "port_range_min":
+                    ans.setSecurityRulePortMin(this.getSecurityRulePortMin());
+                    break;
+                case "port_range_max":
+                    ans.setSecurityRulePortMax(this.getSecurityRulePortMax());
+                    break;
+                case "ethertype":
+                    ans.setSecurityRuleEthertype(this.getSecurityRuleEthertype());
+                    break;
+                case "remote_ip_prefix":
+                    ans.setSecurityRuleRemoteIpPrefix(this.getSecurityRuleRemoteIpPrefix());
+                    break;
+                case "remote_group_id":
+                    ans.setSecurityRemoteGroupID(this.getSecurityRemoteGroupID());
+                    break;
+                case "security_group_id":
+                    ans.setSecurityRuleGroupID(this.getSecurityRuleGroupID());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronSecurityRule suitable field.", s);
+                    break;
             }
         }
         return ans;

@@ -14,11 +14,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<NeutronVpnIpSecSiteConnection>
         implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIpSecSiteConnection.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -172,36 +175,43 @@ public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<
     public NeutronVpnIpSecSiteConnection extractFields(List<String> fields) {
         NeutronVpnIpSecSiteConnection ans = new NeutronVpnIpSecSiteConnection();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("peer_address")) {
-                ans.setPeerAddress(this.getPeerAddress());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("peer_id")) {
-                ans.setPeerID(this.getPeerID());
-            }
-            if (s.equals("route_mode")) {
-                ans.setRouteMode(this.getRouteMode());
-            }
-            if (s.equals("mtu")) {
-                ans.setMtu(this.getMtu());
-            }
-            if (s.equals("auth_mode")) {
-                ans.setAuthMode(this.getAuthMode());
-            }
-            if (s.equals("psk")) {
-                ans.setPreSharedKey(this.getPreSharedKey());
-            }
-            if (s.equals("initiator")) {
-                ans.setInitiator(this.getInitiator());
-            }
-            if (s.equals("ikepolicy_id")) {
-                ans.setIkePolicyID(this.getIkePolicyID());
-            }
-            if (s.equals("ipsecpolicy_id")) {
-                ans.setIpsecPolicyID(this.getIpsecPolicyID());
-            }
-            if (s.equals("vpnservice_id")) {
-                ans.setVpnServiceID(this.getVpnServiceID());
+            switch (s) {
+                case "peer_address":
+                    ans.setPeerAddress(this.getPeerAddress());
+                    break;
+                case "peer_id":
+                    ans.setPeerID(this.getPeerID());
+                    break;
+                case "route_mode":
+                    ans.setRouteMode(this.getRouteMode());
+                    break;
+                case "mtu":
+                    ans.setMtu(this.getMtu());
+                    break;
+                case "auth_mode":
+                    ans.setAuthMode(this.getAuthMode());
+                    break;
+                case "psk":
+                    ans.setPreSharedKey(this.getPreSharedKey());
+                    break;
+                case "initiator":
+                    ans.setInitiator(this.getInitiator());
+                    break;
+                case "ikepolicy_id":
+                    ans.setIkePolicyID(this.getIkePolicyID());
+                    break;
+                case "ipsecpolicy_id":
+                    ans.setIpsecPolicyID(this.getIpsecPolicyID());
+                    break;
+                case "vpnservice_id":
+                    ans.setVpnServiceID(this.getVpnServiceID());
+                    break;
+                default:
+                    LOGGER.warn("{} is not an NeutronVpnIpSecSiteConnection suitable field.", s);
+                    break;
             }
         }
         return ans;

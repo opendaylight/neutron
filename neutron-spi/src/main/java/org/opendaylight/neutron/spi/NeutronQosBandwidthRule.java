@@ -15,11 +15,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandwidthRule>
         implements Serializable, INeutronObject<NeutronQosBandwidthRule> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosBandwidthRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "max_kbps")
@@ -47,12 +50,19 @@ public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandw
     public NeutronQosBandwidthRule extractFields(List<String> fields) {
         NeutronQosBandwidthRule ans = new NeutronQosBandwidthRule();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("max_kbps")) {
-                ans.setMaxKbps(this.getMaxKbps());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("max_burst_kbps")) {
-                ans.setMaxBurstKbps(this.getMaxBurstKbps());
+            switch (s) {
+                case "max_kbps":
+                    ans.setMaxKbps(this.getMaxKbps());
+                    break;
+                case "max_burst_kbps":
+                    ans.setMaxBurstKbps(this.getMaxBurstKbps());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronQosBandwidthRule suitable field.", s);
+                    break;
             }
         }
         return ans;

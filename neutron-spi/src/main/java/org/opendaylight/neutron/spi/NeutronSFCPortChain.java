@@ -15,11 +15,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCPortChain> implements Serializable {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChain.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Chain API v1.0 Reference
@@ -74,15 +76,22 @@ public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCP
     public NeutronSFCPortChain extractFields(List<String> fields) {
         NeutronSFCPortChain ans = new NeutronSFCPortChain();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("port_pair_groups")) {
-                ans.setPortPairGroupsUUID(this.getPortPairGroupsUUID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("flow_classifiers")) {
-                ans.setFlowClassifiersUUID(this.getFlowClassifiersUUID());
-            }
-            if (s.equals("chain_parameters")) {
-                ans.setChainParameters(this.getChainParameters());
+            switch (s) {
+                case "port_pair_groups":
+                    ans.setPortPairGroupsUUID(this.getPortPairGroupsUUID());
+                    break;
+                case "flow_classifiers":
+                    ans.setFlowClassifiersUUID(this.getFlowClassifiersUUID());
+                    break;
+                case "chain_parameters":
+                    ans.setChainParameters(this.getChainParameters());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronSFCPortChain suitable field.", s);
+                    break;
             }
         }
         return ans;

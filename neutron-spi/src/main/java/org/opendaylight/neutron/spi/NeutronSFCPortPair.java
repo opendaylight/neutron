@@ -16,11 +16,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPortPair> implements Serializable {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPair.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair API v1.0 Reference
@@ -74,15 +76,22 @@ public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPo
     public NeutronSFCPortPair extractFields(List<String> fields) {
         NeutronSFCPortPair ans = new NeutronSFCPortPair();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("ingress")) {
-                ans.setIngressPortUUID(this.getIngressPortUUID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("egress")) {
-                ans.setEgressPortUUID(this.getEgressPortUUID());
-            }
-            if (s.equals("service_function_parameters")) {
-                ans.setServiceFunctionParameters(new HashMap<String, String>(this.getServiceFunctionParameters()));
+            switch (s) {
+                case "ingress":
+                    ans.setIngressPortUUID(this.getIngressPortUUID());
+                    break;
+                case "egress":
+                    ans.setEgressPortUUID(this.getEgressPortUUID());
+                    break;
+                case "service_function_parameters":
+                    ans.setServiceFunctionParameters(new HashMap<String, String>(this.getServiceFunctionParameters()));
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronSFCPortPair suitable field.", s);
+                    break;
             }
         }
         return ans;

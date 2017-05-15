@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Load Balancer as a service
@@ -41,6 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<NeutronLoadBalancerListener>
         implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListener.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "default_pool_id")
@@ -113,18 +116,25 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
     public NeutronLoadBalancerListener extractFields(List<String> fields) {
         NeutronLoadBalancerListener ans = new NeutronLoadBalancerListener();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("default_pool_id")) {
-                ans.setNeutronLoadBalancerListenerDefaultPoolID(this.getNeutronLoadBalancerListenerDefaultPoolID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("protocol")) {
-                ans.setNeutronLoadBalancerListenerProtocol(this.getNeutronLoadBalancerListenerProtocol());
-            }
-            if (s.equals("protocol_port")) {
-                ans.setNeutronLoadBalancerListenerProtocolPort(this.getNeutronLoadBalancerListenerProtocolPort());
-            }
-            if (s.equals("admin_state_up")) {
-                ans.setLoadBalancerListenerAdminStateIsUp(loadBalancerListenerAdminStateIsUp);
+            switch (s) {
+                case "default_pool_id":
+                    ans.setNeutronLoadBalancerListenerDefaultPoolID(this.getNeutronLoadBalancerListenerDefaultPoolID());
+                    break;
+                case "protocol":
+                    ans.setNeutronLoadBalancerListenerProtocol(this.getNeutronLoadBalancerListenerProtocol());
+                    break;
+                case "protocol_port":
+                    ans.setNeutronLoadBalancerListenerProtocolPort(this.getNeutronLoadBalancerListenerProtocolPort());
+                    break;
+                case "admin_state_up":
+                    ans.setLoadBalancerListenerAdminStateIsUp(loadBalancerListenerAdminStateIsUp);
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronLoadBalancerListener suitable field.", s);
+                    break;
             }
         }
         return ans;
