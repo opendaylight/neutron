@@ -236,7 +236,6 @@ public final class NeutronSubnetIpAllocationPool implements Serializable {
                     }
                 } else {
                     pool.setPoolEnd(NeutronSubnetIpAllocationPool.longToIp(ipaddr - 1));
-                    poolStarted = false;
                     ans.add(pool);
                     pool = new NeutronSubnetIpAllocationPool();
                     // Fix for 2120
