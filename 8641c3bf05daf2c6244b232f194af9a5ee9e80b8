@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_b976aa3c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronFirewallRule.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2017-05-16T09:48:15Z",
+      "side": 1,
+      "message": "It might be worth logging here, in case we ever encounter an unexpected field.",
+      "revId": "8641c3bf05daf2c6244b232f194af9a5ee9e80b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_9973e64c",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronLoadBalancerHealthMonitor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2017-05-16T09:48:15Z",
+      "side": 1,
+      "message": "It might be worth logging here, in case we ever encounter an unexpected field.",
+      "revId": "8641c3bf05daf2c6244b232f194af9a5ee9e80b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_f98f9221",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2017-05-16T09:48:15Z",
+      "side": 1,
+      "message": "It might be worth logging here, in case we ever encounter an unexpected field.",
+      "revId": "8641c3bf05daf2c6244b232f194af9a5ee9e80b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
