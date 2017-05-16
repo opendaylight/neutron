@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba068154_88b8afe6",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-16T19:08:45Z",
+      "side": 1,
+      "message": ":)",
+      "parentUuid": "ba068154_3e6f40c7",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 108
+      },
+      "revId": "70e0f7e91bf2166689949633b1ccd7aec30bb9ed",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba068154_7e68a8ba",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
         "patchSetId": 1
@@ -60,6 +84,54 @@
       "side": 1,
       "message": "Or even early returns:\n\n    if (queryID !\u003d null \u0026\u0026 !queryID.equals(bgpvpn.getID())) {\n        return;\n    }\n\nalthough that ends up being rather verbose. (The old form would stop evaluating if any condition was false, which the new form loses; but I doubt the performance advantage is significant.)\n\nTo be honest I think this is one instance where the Sonar warning is over-zealous, and the if (... \u0026\u0026 ... \u0026\u0026 ...) form is the more maintainable one in the long run.",
       "parentUuid": "ba068154_7e68a8ba",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 55
+      },
+      "revId": "70e0f7e91bf2166689949633b1ccd7aec30bb9ed",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_68bbcbe5",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-16T19:08:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba068154_7e68a8ba",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 55
+      },
+      "revId": "70e0f7e91bf2166689949633b1ccd7aec30bb9ed",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_e8e7bb10",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-16T19:08:45Z",
+      "side": 1,
+      "message": "I agree with your last comment, I think we should keep the old form, I wanted to raise the interest for this part of code because there are several times the same patent. \nMaybe we can find a way to factorise this code patent.",
+      "parentUuid": "ba068154_99c12631",
       "range": {
         "startLine": 103,
         "startChar": 0,
