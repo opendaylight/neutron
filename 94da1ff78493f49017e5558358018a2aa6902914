@@ -22,6 +22,30 @@
       "revId": "94da1ff78493f49017e5558358018a2aa6902914",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_ea185286",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnetIpAllocationPool.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-16T18:20:18Z",
+      "side": 0,
+      "message": ":)\nDone in this patch set https://git.opendaylight.org/gerrit/#/c/57198/",
+      "parentUuid": "ba068154_fe74989d",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 40
+      },
+      "revId": "94da1ff78493f49017e5558358018a2aa6902914",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
