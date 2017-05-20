@@ -100,18 +100,9 @@ public final class NeutronNetworksNorthbound
         List<NeutronNetwork> ans = new ArrayList<>();
         for (NeutronNetwork network : allNetworks) {
             //match filters: TODO provider extension
-            Boolean adminStateUp = null;
-            Boolean shared = null;
-            Boolean routerExternal = null;
-            if (queryAdminStateUp != null) {
-                adminStateUp = Boolean.valueOf(queryAdminStateUp);
-            }
-            if (queryShared != null) {
-                shared = Boolean.valueOf(queryShared);
-            }
-            if (queryRouterExternal != null) {
-                routerExternal = Boolean.valueOf(queryRouterExternal);
-            }
+            Boolean adminStateUp = queryAdminStateUp != null ? Boolean.valueOf(queryAdminStateUp) : null;
+            Boolean shared = queryShared != null ? Boolean.valueOf(queryShared) : null;
+            Boolean routerExternal = queryRouterExternal != null ? Boolean.valueOf(queryRouterExternal) : null;
             if ((queryID == null || queryID.equals(network.getID()))
                     && (queryName == null || queryName.equals(network.getName()))
                     && (adminStateUp == null || adminStateUp.booleanValue() == network.isAdminStateUp())
