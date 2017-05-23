@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_17041e14",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronFirewallRule.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2017-05-23T14:14:02Z",
+      "side": 1,
+      "message": "I would have delegated first:\n\n    for (String s : fields) {\n        if (extractField(s, ans)) {\n            continue;\n        }\n        switch (s) {\n            ...\n            default:\n                LOGGER.warn(\"Unknown firewall rule {}\", s);\n                break;\n        }\n\nbut there are arguments for either approach. (The same applies to the other uses of extractField() with this test.)",
+      "revId": "a14c9a9f39ae5d74afbeebad12f03ebb141e80c0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
