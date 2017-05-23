@@ -16,6 +16,24 @@
       "revId": "a14c9a9f39ae5d74afbeebad12f03ebb141e80c0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_775ac284",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronFirewallRule.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-23T15:32:38Z",
+      "side": 1,
+      "message": "Indeed, it is a far better way",
+      "parentUuid": "7af0899e_17041e14",
+      "revId": "a14c9a9f39ae5d74afbeebad12f03ebb141e80c0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
