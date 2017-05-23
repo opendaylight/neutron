@@ -46,6 +46,54 @@
       "revId": "10009c83e29a33f69c447435881b7514fbdc9a8a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_f4f070cb",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronFirewallRule.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-23T13:03:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba068154_481c0778",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 26
+      },
+      "revId": "10009c83e29a33f69c447435881b7514fbdc9a8a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_14bffcd1",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronFirewallRule.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-05-23T13:03:31Z",
+      "side": 1,
+      "message": "good idea!",
+      "parentUuid": "ba068154_28a9b87b",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 26
+      },
+      "revId": "10009c83e29a33f69c447435881b7514fbdc9a8a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
