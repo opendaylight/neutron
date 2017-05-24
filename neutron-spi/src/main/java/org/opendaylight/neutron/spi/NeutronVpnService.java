@@ -14,10 +14,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronVpnService extends NeutronAdminAttributes<NeutronVpnService> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnService.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -51,12 +54,19 @@ public final class NeutronVpnService extends NeutronAdminAttributes<NeutronVpnSe
     public NeutronVpnService extractFields(List<String> fields) {
         NeutronVpnService ans = new NeutronVpnService();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("router_id")) {
-                ans.setRouterUUID(this.getRouterUUID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("subnet_id")) {
-                ans.setSubnetUUID(this.getSubnetUUID());
+            switch (s) {
+                case "router_id":
+                    ans.setRouterUUID(this.getRouterUUID());
+                    break;
+                case "subnet_id":
+                    ans.setSubnetUUID(this.getSubnetUUID());
+                    break;
+                default:
+                    LOGGER.warn("{} is not an NeutronVpnService suitable field.", s);
+                    break;
             }
         }
         return ans;

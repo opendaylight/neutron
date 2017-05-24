@@ -15,10 +15,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPolicy> implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicy.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -57,19 +60,26 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
     public NeutronQosPolicy extractFields(List<String> fields) {
         NeutronQosPolicy ans = new NeutronQosPolicy();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("shared")) {
-                ans.setPolicyIsShared(this.getPolicyIsShared());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("bandwidth_limit_rules")) {
-                List<NeutronQosBandwidthRule> qosBwRuleList = new ArrayList<>();
-                qosBwRuleList.addAll(this.getBwLimitRules());
-                ans.setQosBwLimitRules(qosBwRuleList);
-            }
-            if (s.equals("dscp_marking_rules")) {
-                List<NeutronQosDscpMarkingRule> qosDscpRuleList = new ArrayList<>();
-                qosDscpRuleList.addAll(this.getDscpRules());
-                ans.setDscpRules(qosDscpRuleList);
+            switch (s) {
+                case "shared":
+                    ans.setPolicyIsShared(this.getPolicyIsShared());
+                    break;
+                case "bandwidth_limit_rules":
+                    List<NeutronQosBandwidthRule> qosBwRuleList = new ArrayList<>();
+                    qosBwRuleList.addAll(this.getBwLimitRules());
+                    ans.setQosBwLimitRules(qosBwRuleList);
+                    break;
+                case "dscp_marking_rules":
+                    List<NeutronQosDscpMarkingRule> qosDscpRuleList = new ArrayList<>();
+                    qosDscpRuleList.addAll(this.getDscpRules());
+                    ans.setDscpRules(qosDscpRuleList);
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronQosPolicy suitable field.", s);
+                    break;
             }
         }
         return ans;

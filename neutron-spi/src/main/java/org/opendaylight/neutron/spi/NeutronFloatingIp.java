@@ -14,11 +14,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFloatingIp
         extends NeutronObject<NeutronFloatingIp> implements Serializable, INeutronObject<NeutronFloatingIp> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIp.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -106,24 +109,31 @@ public final class NeutronFloatingIp
     public NeutronFloatingIp extractFields(List<String> fields) {
         NeutronFloatingIp ans = new NeutronFloatingIp();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("floating_network_id")) {
-                ans.setFloatingNetworkUUID(this.getFloatingNetworkUUID());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("port_id")) {
-                ans.setPortUUID(this.getPortUUID());
-            }
-            if (s.equals("fixed_ip_address")) {
-                ans.setFixedIpAddress(this.getFixedIpAddress());
-            }
-            if (s.equals("floating_ip_address")) {
-                ans.setFloatingIpAddress(this.getFloatingIpAddress());
-            }
-            if (s.equals("router_id")) {
-                ans.setRouterUUID(this.getRouterUUID());
-            }
-            if (s.equals("status")) {
-                ans.setStatus(this.getStatus());
+            switch (s) {
+                case "floating_network_id":
+                    ans.setFloatingNetworkUUID(this.getFloatingNetworkUUID());
+                    break;
+                case "port_id":
+                    ans.setPortUUID(this.getPortUUID());
+                    break;
+                case "fixed_ip_address":
+                    ans.setFixedIpAddress(this.getFixedIpAddress());
+                    break;
+                case "floating_ip_address":
+                    ans.setFloatingIpAddress(this.getFloatingIpAddress());
+                    break;
+                case "router_id":
+                    ans.setRouterUUID(this.getRouterUUID());
+                    break;
+                case "status":
+                    ans.setStatus(this.getStatus());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronFloatingIp suitable field.", s);
+                    break;
             }
         }
         return ans;

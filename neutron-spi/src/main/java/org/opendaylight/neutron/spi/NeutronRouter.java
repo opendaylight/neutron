@@ -14,11 +14,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
         implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouter.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -89,18 +92,25 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
     public NeutronRouter extractFields(List<String> fields) {
         NeutronRouter ans = new NeutronRouter();
         for (String s : fields) {
-            extractField(s, ans);
-            if (s.equals("external_gateway_info")) {
-                ans.setExternalGatewayInfo(this.getExternalGatewayInfo());
+            if (extractField(s, ans)) {
+                continue;
             }
-            if (s.equals("distributed")) {
-                ans.setDistributed(this.getDistributed());
-            }
-            if (s.equals("gw_port_id")) {
-                ans.setGatewayPortId(this.getGatewayPortId());
-            }
-            if (s.equals("routes")) {
-                ans.setRoutes(this.getRoutes());
+            switch (s) {
+                case "external_gateway_info":
+                    ans.setExternalGatewayInfo(this.getExternalGatewayInfo());
+                    break;
+                case "distributed":
+                    ans.setDistributed(this.getDistributed());
+                    break;
+                case "gw_port_id":
+                    ans.setGatewayPortId(this.getGatewayPortId());
+                    break;
+                case "routes":
+                    ans.setRoutes(this.getRoutes());
+                    break;
+                default:
+                    LOGGER.warn("{} is not a NeutronRouter suitable field.", s);
+                    break;
             }
         }
         return ans;
