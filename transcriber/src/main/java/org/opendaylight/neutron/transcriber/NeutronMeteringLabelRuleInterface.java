@@ -54,7 +54,7 @@ public final class NeutronMeteringLabelRuleInterface
         if (meteringLabelRule.getMeteringLabelRuleDirection() != null) {
             final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
             meteringRuleBuilder.setDirection(
-                    (Class<? extends DirectionBase>) mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
+                    mapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
         if (meteringLabelRule.getMeteringLabelRuleRemoteIpPrefix() != null) {
             final IpPrefix ipPrefix = new IpPrefix(
@@ -65,6 +65,7 @@ public final class NeutronMeteringLabelRuleInterface
         return meteringRuleBuilder.build();
     }
 
+    @Override
     protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
         final NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
         if (rule.getUuid() != null) {

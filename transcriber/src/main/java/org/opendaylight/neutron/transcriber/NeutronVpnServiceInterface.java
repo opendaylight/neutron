@@ -29,6 +29,7 @@ public final class NeutronVpnServiceInterface
         return services.getVpnservice();
     }
 
+    @Override
     protected NeutronVpnService fromMd(Vpnservice vpnService) {
         final NeutronVpnService answer = new NeutronVpnService();
         fromMdAdminAttributes(vpnService, answer);

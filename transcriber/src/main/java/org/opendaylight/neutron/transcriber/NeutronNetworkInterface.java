@@ -51,6 +51,7 @@ public final class NeutronNetworkInterface
         return networks.getNetwork();
     }
 
+    @Override
     protected NeutronNetwork fromMd(Network network) {
         final NeutronNetwork result = new NeutronNetwork();
         result.initDefaults();
@@ -64,7 +65,7 @@ public final class NeutronNetworkInterface
         result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());
         result.setProviderSegmentationID(providerExtension.getSegmentationId());
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
-        final List<NeutronNetworkSegment> segments = new ArrayList<NeutronNetworkSegment>();
+        final List<NeutronNetworkSegment> segments = new ArrayList<>();
         if (providerExtension.getSegments() != null) {
             for (final Segments segment : providerExtension.getSegments()) {
                 final NeutronNetworkSegment neutronSegment = new NeutronNetworkSegment();
@@ -98,10 +99,10 @@ public final class NeutronNetworkInterface
         if (network.getProviderNetworkType() != null) {
             final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_MAP.inverse();
             providerExtensionBuilder
-                    .setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
+                    .setNetworkType(mapper.get(network.getProviderNetworkType()));
         }
         if (network.getSegments() != null) {
-            final List<Segments> segments = new ArrayList<Segments>();
+            final List<Segments> segments = new ArrayList<>();
             long count = 0;
             for (final NeutronNetworkSegment segment : network.getSegments()) {
                 count++;
@@ -115,7 +116,7 @@ public final class NeutronNetworkInterface
                 if (segment.getProviderNetworkType() != null) {
                     final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_MAP.inverse();
                     segmentsBuilder.setNetworkType(
-                            (Class<? extends NetworkTypeBase>) mapper.get(segment.getProviderNetworkType()));
+                            mapper.get(segment.getProviderNetworkType()));
                 }
                 segmentsBuilder.setSegmentationIndex(Long.valueOf(count));
                 segments.add(segmentsBuilder.build());
@@ -134,6 +135,7 @@ public final class NeutronNetworkInterface
         networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
     }
 
+    @Override
     protected Network toMd(NeutronNetwork network) {
         final NetworkBuilder networkBuilder = new NetworkBuilder();
         toMdAdminAttributes(network, networkBuilder);

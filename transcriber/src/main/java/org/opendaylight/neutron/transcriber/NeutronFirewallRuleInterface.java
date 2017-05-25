@@ -48,6 +48,7 @@ public final class NeutronFirewallRuleInterface
         return rules.getFirewallRule();
     }
 
+    @Override
     protected NeutronFirewallRule fromMd(FirewallRule rule) {
         final NeutronFirewallRule answer = new NeutronFirewallRule();
         fromMdBaseAttributes(rule, answer);

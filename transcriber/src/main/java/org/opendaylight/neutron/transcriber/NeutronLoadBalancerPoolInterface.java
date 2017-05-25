@@ -50,7 +50,7 @@ import org.slf4j.LoggerFactory;
 public final class NeutronLoadBalancerPoolInterface
         extends AbstractNeutronInterface<Pool, Pools, PoolKey, NeutronLoadBalancerPool>
         implements INeutronLoadBalancerPoolCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,
             String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
@@ -77,7 +77,7 @@ public final class NeutronLoadBalancerPoolInterface
             poolBuilder.setLbAlgorithm(pool.getLoadBalancerPoolLbAlgorithm());
         }
         if (pool.getLoadBalancerPoolListeners() != null) {
-            final List<Uuid> listListener = new ArrayList<Uuid>();
+            final List<Uuid> listListener = new ArrayList<>();
             for (final NeutronID neutronId : pool.getLoadBalancerPoolListeners()) {
                 listListener.add(toUuid(neutronId.getID()));
             }
@@ -90,7 +90,7 @@ public final class NeutronLoadBalancerPoolInterface
         }
         if (pool.getLoadBalancerPoolProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
-            poolBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(pool.getLoadBalancerPoolProtocol()));
+            poolBuilder.setProtocol(mapper.get(pool.getLoadBalancerPoolProtocol()));
         }
         if (pool.getLoadBalancerPoolSessionPersistence() != null) {
             final NeutronLoadBalancerSessionPersistence sessionPersistence = pool
@@ -106,11 +106,12 @@ public final class NeutronLoadBalancerPoolInterface
         if (pool.getID() != null) {
             poolBuilder.setUuid(toUuid(pool.getID()));
         } else {
-            LOGGER.warn("Attempting to write neutron load balancer pool without UUID");
+            LOG.warn("Attempting to write neutron load balancer pool without UUID");
         }
         return poolBuilder.build();
     }
 
+    @Override
     protected NeutronLoadBalancerPool fromMd(Pool pool) {
         final NeutronLoadBalancerPool answer = new NeutronLoadBalancerPool();
         if (pool.isAdminStateUp() != null) {
@@ -123,14 +124,14 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolLbAlgorithm(pool.getLbAlgorithm());
         }
         if (pool.getListeners() != null) {
-            final List<NeutronID> ids = new ArrayList<NeutronID>();
+            final List<NeutronID> ids = new ArrayList<>();
             for (final Uuid id : pool.getListeners()) {
                 ids.add(new NeutronID(id.getValue()));
             }
             answer.setLoadBalancerPoolListeners(ids);
         }
         if (pool.getMembers() != null) {
-            final List<NeutronLoadBalancerPoolMember> members = new ArrayList<NeutronLoadBalancerPoolMember>();
+            final List<NeutronLoadBalancerPoolMember> members = new ArrayList<>();
             for (final Member member : pool.getMembers().getMember()) {
                 members.add(fromMemberMd(member));
             }
@@ -159,6 +160,7 @@ public final class NeutronLoadBalancerPoolInterface
         return answer;
     }
 
+    @Override
     public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) {
         final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
@@ -167,6 +169,7 @@ public final class NeutronLoadBalancerPoolInterface
         return true;
     }
 
+    @Override
     public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String poolUuid, String uuid) {
         final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
@@ -175,22 +178,23 @@ public final class NeutronLoadBalancerPoolInterface
         return fromMemberMd(member);
     }
 
+    @Override
     public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid) {
-        final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<
-                NeutronLoadBalancerPoolMember>();
+        final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<>();
         final Members members = readMd(createMembersInstanceIdentifier(toMd(poolUuid)));
         if (members != null) {
             for (final Member member : members.getMember()) {
                 allLoadBalancerPoolMembers.add(fromMemberMd(member));
             }
         }
-        LOGGER.debug("Exiting getLoadBalancerPoolMembers, Found {} OpenStackLoadBalancerPoolMember",
+        LOG.debug("Exiting getLoadBalancerPoolMembers, Found {} OpenStackLoadBalancerPoolMember",
                 allLoadBalancerPoolMembers.size());
-        final List<NeutronLoadBalancerPoolMember> ans = new ArrayList<NeutronLoadBalancerPoolMember>();
+        final List<NeutronLoadBalancerPoolMember> ans = new ArrayList<>();
         ans.addAll(allLoadBalancerPoolMembers);
         return ans;
     }
 
+    @Override
     public boolean addNeutronLoadBalancerPoolMember(String poolUuid, NeutronLoadBalancerPoolMember input) {
         if (neutronLoadBalancerPoolMemberExists(poolUuid, input.getID())) {
             return false;
@@ -199,6 +203,7 @@ public final class NeutronLoadBalancerPoolInterface
         return true;
     }
 
+    @Override
     public boolean removeNeutronLoadBalancerPoolMember(String poolUuid, String uuid) {
         if (!neutronLoadBalancerPoolMemberExists(poolUuid, uuid)) {
             return false;
@@ -206,6 +211,7 @@ public final class NeutronLoadBalancerPoolInterface
         return removeMemberMd(toMd(poolUuid), toMemberMd(uuid));
     }
 
+    @Override
     public boolean updateNeutronLoadBalancerPoolMember(String poolUuid, String uuid,
             NeutronLoadBalancerPoolMember delta) {
         if (!neutronLoadBalancerPoolMemberExists(poolUuid, uuid)) {
@@ -215,6 +221,7 @@ public final class NeutronLoadBalancerPoolInterface
         return true;
     }
 
+    @Override
     public boolean neutronLoadBalancerPoolMemberInUse(String poolUuid, String loadBalancerPoolMemberID) {
         return !neutronLoadBalancerPoolMemberExists(poolUuid, loadBalancerPoolMemberID);
     }
@@ -301,7 +308,7 @@ public final class NeutronLoadBalancerPoolInterface
                     result = optional.get();
                 }
             } catch (final ReadFailedException e) {
-                LOGGER.warn("Failed to read {}", path, e);
+                LOG.warn("Failed to read {}", path, e);
             }
         }
         transaction.close();
@@ -322,7 +329,7 @@ public final class NeutronLoadBalancerPoolInterface
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ", e);
+            LOG.warn("Transation failed ", e);
             return false;
         }
         return true;
@@ -336,7 +343,7 @@ public final class NeutronLoadBalancerPoolInterface
         try {
             future.get();
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transation failed ", e);
+            LOG.warn("Transation failed ", e);
             return false;
         }
         return true;

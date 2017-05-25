@@ -57,7 +57,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
     // S extends INeutronObject<S> as 3rd type argument
     private static final int NEUTRON_OBJECT_TYPE_INDEX = 3;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractNeutronInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractNeutronInterface.class);
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
     private static final int DEDASHED_UUID_DIV1 = 8;
@@ -142,7 +142,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             if (neutronObject.getID() != null) {
                 setUuid.invoke(builder, toUuid(neutronObject.getID()));
             } else {
-                LOGGER.warn("Attempting to write neutron object {} without UUID", builderClass.getSimpleName());
+                LOG.warn("Attempting to write neutron object {} without UUID", builderClass.getSimpleName());
             }
             if (neutronObject.getTenantID() != null && !neutronObject.getTenantID().isEmpty()) {
                 setTenantId.invoke(builder, toUuid(neutronObject.getTenantID()));
@@ -249,7 +249,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
                     result = optional.get();
                 }
             } catch (final ReadFailedException e) {
-                LOGGER.warn("Failed to read {}", path, e);
+                LOG.warn("Failed to read {}", path, e);
             }
         }
         return result;
@@ -272,7 +272,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             addMd(neutronObject, tx);
             return true;
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transaction failed", e);
+            LOG.warn("Transaction failed", e);
         }
         return false;
     }
@@ -284,7 +284,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
-        // Check if it's successfuly committed, otherwise exception will be thrown.
+        // Check if it's successfully committed, otherwise exception will be thrown.
         future.get();
     }
 
@@ -297,11 +297,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
                 return true;
             } catch (InterruptedException | ExecutionException e) {
                 if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", neutronObject, retries);
+                    LOG.warn("Got OptimisticLockFailedException - {} {}", neutronObject, retries);
                     continue;
                 }
                 // TODO: rethrow exception. don't mask exception
-                LOGGER.error("Transaction failed", e);
+                LOG.error("Transaction failed", e);
             }
             break;
         }
@@ -313,7 +313,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
-        // Check if it's successfuly committed, otherwise exception will be thrown.
+        // Check if it's successfully committed, otherwise exception will be thrown.
         future.get();
     }
 
@@ -323,7 +323,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             removeMd(item, tx);
             return true;
         } catch (InterruptedException | ExecutionException e) {
-            LOGGER.warn("Transaction failed", e);
+            LOG.warn("Transaction failed", e);
         }
         return false;
     }
@@ -389,15 +389,15 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
 
     private List<S> getAll(ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
-        final Set<S> allNeutronObjects = new HashSet<S>();
+        final Set<S> allNeutronObjects = new HashSet<>();
         final U dataObjects = readMd(createInstanceIdentifier(), tx);
         if (dataObjects != null) {
             for (final T dataObject : getDataObjectList(dataObjects)) {
                 allNeutronObjects.add(fromMd(dataObject));
             }
         }
-        LOGGER.debug("Exiting _getAll, Found {} OpenStackFirewall", allNeutronObjects.size());
-        final List<S> ans = new ArrayList<S>();
+        LOG.debug("Exiting _getAll, Found {} OpenStackFirewall", allNeutronObjects.size());
+        final List<S> ans = new ArrayList<>();
         ans.addAll(allNeutronObjects);
         return ans;
     }
@@ -428,11 +428,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
                 return add(input, tx);
             } catch (InterruptedException | ExecutionException e) {
                 if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", input, retries);
+                    LOG.warn("Got OptimisticLockFailedException - {} {}", input, retries);
                     continue;
                 }
                 // TODO: rethrow exception. don't mask exception
-                LOGGER.error("Transaction failed", e);
+                LOG.error("Transaction failed", e);
             }
             break;
         }
@@ -458,11 +458,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
                 return remove(uuid, tx);
             } catch (InterruptedException | ExecutionException e) {
                 if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOGGER.warn("Got OptimisticLockFailedException - {} {}", uuid, retries);
+                    LOG.warn("Got OptimisticLockFailedException - {} {}", uuid, retries);
                     continue;
                 }
                 // TODO: rethrow exception. don't mask exception
-                LOGGER.error("Transaction failed", e);
+                LOG.error("Transaction failed", e);
             }
             break;
         }
@@ -489,11 +489,11 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
                 return update(uuid, delta, tx);
             } catch (InterruptedException | ExecutionException e) {
                 if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOGGER.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
+                    LOG.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
                     continue;
                 }
                 // TODO: rethrow exception. don't mask exception
-                LOGGER.error("Transaction failed", e);
+                LOG.error("Transaction failed", e);
             }
             break;
         }
