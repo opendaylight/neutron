@@ -22,6 +22,11 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
         implements Serializable, INeutronObject<T> {
+    // T extends NeutronObject as 0th type argument. Used by extractFields()
+    private static final int NEUTRON_OBJECT_CLASS_TYPE_INDEX = 0;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRule.class);
+
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "tenant_id")
@@ -93,8 +98,29 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
         }
     }
 
+    /**
+     * This method copies selected fields from the object and returns them
+     * as a new object, suitable for marshaling.
+     *
+     * @param fields
+     *            List of attributes to be extracted
+     * @return an OpenStack Neutron object with only the selected fields
+     *             populated
+     */
+
     @Override
-    public abstract T extractFields(List<String> fields);
+    public T extractFields(List<String> fields) {
+        ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
+        Type[] types = parameterizedType.getActualTypeArguments();
+        Class<T> cls = (Class<T>)types[NEUTRON_OBJECT_CLASS_TYPE_INDEX];
+        T ans = cls.newInstance();
+        for (String s : fields) {
+            if (!extractField(s, ans)) {
+                LOGGER.warn("Unknown {} {}.", cls.getSimpleName(), s);
+            }
+        }
+        return ans;
+    }
 
     protected boolean extractField(String field, T ans) {
         switch (field) {

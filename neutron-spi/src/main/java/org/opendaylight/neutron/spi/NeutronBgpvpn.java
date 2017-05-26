@@ -209,59 +209,43 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> i
         routers.remove(uuid);
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return an OpenStackNetworks object with only the selected fields
-     *             populated
-     */
-
-    public NeutronBgpvpn extractFields(List<String> fields) {
-        NeutronBgpvpn ans = new NeutronBgpvpn();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "type":
-                    ans.setType(this.getType());
-                    break;
-                case "technique":
-                    ans.setTechnique(this.getTechnique());
-                    break;
-                case "route_targets":
-                    ans.setRouteTargets(this.getRouteTargets());
-                    break;
-                case "import_targets":
-                    ans.setImportTargets(this.getImportTargets());
-                    break;
-                case "export_targets":
-                    ans.setExportTargets(this.getExportTargets());
-                    break;
-                case "route_distinguishe":
-                    ans.setRouteDistinguishers(this.getRouteDistinguishers());
-                    break;
-                case "routers":
-                    ans.setRouters(this.getRouters());
-                    break;
-                case "networks":
-                    ans.setNetworks(this.getNetworks());
-                    break;
-                case "vnid":
-                    ans.setVnid(this.getVnid());
-                    break;
-                case "auto_aggregate":
-                    ans.setAutoAggregate(this.getAutoAggregate());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronBgpvpn suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronBgpvpn ans) {
+        switch (field) {
+            case "type":
+                ans.setType(this.getType());
+                break;
+            case "technique":
+                ans.setTechnique(this.getTechnique());
+                break;
+            case "route_targets":
+                ans.setRouteTargets(this.getRouteTargets());
+                break;
+            case "import_targets":
+                ans.setImportTargets(this.getImportTargets());
+                break;
+            case "export_targets":
+                ans.setExportTargets(this.getExportTargets());
+                break;
+            case "route_distinguishe":
+                ans.setRouteDistinguishers(this.getRouteDistinguishers());
+                break;
+            case "routers":
+                ans.setRouters(this.getRouters());
+                break;
+            case "networks":
+                ans.setNetworks(this.getNetworks());
+                break;
+            case "vnid":
+                ans.setVnid(this.getVnid());
+                break;
+            case "auto_aggregate":
+                ans.setAutoAggregate(this.getAutoAggregate());
+                break;
+            default:
+                return extractField(s, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override
