@@ -9,19 +9,15 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFloatingIp
         extends NeutronObject<NeutronFloatingIp> implements Serializable, INeutronObject<NeutronFloatingIp> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIp.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -96,47 +92,31 @@ public final class NeutronFloatingIp
         this.status = status;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return an OpenStackFloatingIps object with only the selected fields
-     *             populated
-     */
-
-    public NeutronFloatingIp extractFields(List<String> fields) {
-        NeutronFloatingIp ans = new NeutronFloatingIp();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "floating_network_id":
-                    ans.setFloatingNetworkUUID(this.getFloatingNetworkUUID());
-                    break;
-                case "port_id":
-                    ans.setPortUUID(this.getPortUUID());
-                    break;
-                case "fixed_ip_address":
-                    ans.setFixedIpAddress(this.getFixedIpAddress());
-                    break;
-                case "floating_ip_address":
-                    ans.setFloatingIpAddress(this.getFloatingIpAddress());
-                    break;
-                case "router_id":
-                    ans.setRouterUUID(this.getRouterUUID());
-                    break;
-                case "status":
-                    ans.setStatus(this.getStatus());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronFloatingIp suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronFloatingIp ans) {
+        switch (field) {
+            case "floating_network_id":
+                ans.setFloatingNetworkUUID(this.getFloatingNetworkUUID());
+                break;
+            case "port_id":
+                ans.setPortUUID(this.getPortUUID());
+                break;
+            case "fixed_ip_address":
+                ans.setFixedIpAddress(this.getFixedIpAddress());
+                break;
+            case "floating_ip_address":
+                ans.setFloatingIpAddress(this.getFloatingIpAddress());
+                break;
+            case "router_id":
+                ans.setRouterUUID(this.getRouterUUID());
+                break;
+            case "status":
+                ans.setStatus(this.getStatus());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

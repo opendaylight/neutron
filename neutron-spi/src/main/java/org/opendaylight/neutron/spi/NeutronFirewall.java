@@ -9,13 +9,10 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Firewall as a service
@@ -37,7 +34,6 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewall.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
@@ -73,28 +69,22 @@ public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall
         this.firewallPolicyID = firewallPolicy;
     }
 
-    public NeutronFirewall extractFields(List<String> fields) {
-        NeutronFirewall ans = new NeutronFirewall();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "admin_state_up":
-                    ans.setFirewallAdminStateIsUp(firewallAdminStateIsUp);
-                    break;
-                case "shared":
-                    ans.setFirewallIsShared(firewallIsShared);
-                    break;
-                case "firewall_policy_id":
-                    ans.setFirewallPolicyID(this.getFirewallPolicyID());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronBgpvpn suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronFirewall ans) {
+        switch (field) {
+            case "admin_state_up":
+                ans.setFirewallAdminStateIsUp(firewallAdminStateIsUp);
+                break;
+            case "shared":
+                ans.setFirewallIsShared(firewallIsShared);
+                break;
+            case "firewall_policy_id":
+                ans.setFirewallPolicyID(this.getFirewallPolicyID());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

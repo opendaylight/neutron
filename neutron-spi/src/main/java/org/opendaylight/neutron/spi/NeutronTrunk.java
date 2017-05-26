@@ -15,13 +15,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement(name = "trunk")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTrunk.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "port_id")
@@ -62,40 +59,21 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> imp
         this.subPorts = subPorts;
     }
 
-
-
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return an OpenStackTrunk object with only the selected fields
-     *             populated
-     */
-
     @Override
-    public NeutronTrunk extractFields(List<String> fields) {
-        NeutronTrunk ans = new NeutronTrunk();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "port_id":
-                    ans.setPortId(this.getPortId());
-                    break;
-                case "sub_ports":
-                    List<NeutronTrunkSubPort> subPortList = new ArrayList<>();
-                    subPortList.addAll(this.getSubPorts());
-                    ans.setSubPorts(subPortList);
-                    break;
-                default:
-                    LOGGER.warn("{} is not an NeutronTrunk suitable field.", s);
-                    break;
-            }
+    protected boolean extractField(String field, NeutronTrunk ans) {
+        switch (field) {
+            case "port_id":
+                ans.setPortId(this.getPortId());
+                break;
+            case "sub_ports":
+                List<NeutronTrunkSubPort> subPortList = new ArrayList<>();
+                subPortList.addAll(this.getSubPorts());
+                ans.setSubPorts(subPortList);
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

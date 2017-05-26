@@ -13,14 +13,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<NeutronSFCPortPairGroup>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairGroup.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0
@@ -40,31 +37,16 @@ public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<Neutron
         this.portPairs = portPairs;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields List of attributes to be extracted
-     * @return an OpenStack Neutron SFC Port Pair Group object with only the selected fields
-     *             populated
-     */
-
-    public NeutronSFCPortPairGroup extractFields(List<String> fields) {
-        NeutronSFCPortPairGroup ans = new NeutronSFCPortPairGroup();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "port_pairs":
-                    ans.setPortPairs(this.getPortPairs());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronSFCPortPairGroup suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronSFCPortPairGroup ans) {
+        switch (field) {
+            case "port_pairs":
+                ans.setPortPairs(this.getPortPairs());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

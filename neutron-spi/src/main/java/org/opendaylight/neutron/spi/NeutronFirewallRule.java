@@ -9,13 +9,10 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Firewall as a service
@@ -48,8 +45,6 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFirewallRule> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRule.class);
-
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -195,55 +190,49 @@ public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFire
         this.firewallRuleIsShared = firewallRuleIsShared;
     }
 
-    public NeutronFirewallRule extractFields(List<String> fields) {
-        NeutronFirewallRule ans = new NeutronFirewallRule();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "shared":
-                    ans.setFirewallRuleIsShared(firewallRuleIsShared);
-                    break;
-                case "firewall_policy_id":
-                    ans.setFirewallRulePolicyID(this.getFirewallRulePolicyID());
-                    break;
-                case "protocol":
-                    ans.setFirewallRuleProtocol(this.getFirewallRuleProtocol());
-                    break;
-                case "source_ip_address":
-                    ans.setFirewallRuleSrcIpAddr(this.getFirewallRuleSrcIpAddr());
-                    break;
-                case "destination_ip_address":
-                    ans.setFirewallRuleDstIpAddr(this.getFirewallRuleDstIpAddr());
-                    break;
-                case "source_port_range_min":
-                    ans.setFirewallRuleSrcPortRangeMin(this.getFirewallRuleSrcPortRangeMin());
-                    break;
-                case "source_port_range_max":
-                    ans.setFirewallRuleSrcPortRangeMax(this.getFirewallRuleSrcPortRangeMax());
-                    break;
-                case "destination_port_range_min":
-                    ans.setFirewallRuleDstPortRangeMin(this.getFirewallRuleDstPortRangeMin());
-                    break;
-                case "destination_port_range_max":
-                    ans.setFirewallRuleDstPortRangeMax(this.getFirewallRuleDstPortRangeMax());
-                    break;
-                case "position":
-                    ans.setFirewallRulePosition(this.getFirewallRulePosition());
-                    break;
-                case "action":
-                    ans.setFirewallRuleAction(this.getFirewallRuleAction());
-                    break;
-                case "enabled":
-                    ans.setFirewallRuleIsEnabled(firewallRuleIsEnabled);
-                    break;
-                default:
-                    LOGGER.warn("Unknown firewall rule {}.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronFirewallRule ans) {
+        switch (field) {
+            case "shared":
+                ans.setFirewallRuleIsShared(firewallRuleIsShared);
+                break;
+            case "firewall_policy_id":
+                ans.setFirewallRulePolicyID(this.getFirewallRulePolicyID());
+                break;
+            case "protocol":
+                ans.setFirewallRuleProtocol(this.getFirewallRuleProtocol());
+                break;
+            case "source_ip_address":
+                ans.setFirewallRuleSrcIpAddr(this.getFirewallRuleSrcIpAddr());
+                break;
+            case "destination_ip_address":
+                ans.setFirewallRuleDstIpAddr(this.getFirewallRuleDstIpAddr());
+                break;
+            case "source_port_range_min":
+                ans.setFirewallRuleSrcPortRangeMin(this.getFirewallRuleSrcPortRangeMin());
+                break;
+            case "source_port_range_max":
+                ans.setFirewallRuleSrcPortRangeMax(this.getFirewallRuleSrcPortRangeMax());
+                break;
+            case "destination_port_range_min":
+                ans.setFirewallRuleDstPortRangeMin(this.getFirewallRuleDstPortRangeMin());
+                break;
+            case "destination_port_range_max":
+                ans.setFirewallRuleDstPortRangeMax(this.getFirewallRuleDstPortRangeMax());
+                break;
+            case "position":
+                ans.setFirewallRulePosition(this.getFirewallRulePosition());
+                break;
+            case "action":
+                ans.setFirewallRuleAction(this.getFirewallRuleAction());
+                break;
+            case "enabled":
+                ans.setFirewallRuleIsEnabled(firewallRuleIsEnabled);
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

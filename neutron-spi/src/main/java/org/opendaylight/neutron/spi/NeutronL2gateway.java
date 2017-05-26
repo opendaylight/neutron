@@ -13,13 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement(name = "l2gateway")
 public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gateway>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gateway.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "devices")
@@ -33,24 +30,18 @@ public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gatew
         this.l2gatewayDevices = l2gatewayDevices;
     }
 
-    public NeutronL2gateway extractFields(List<String> fields) {
-        NeutronL2gateway ans = new NeutronL2gateway();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "devices":
-                    List<NeutronL2gatewayDevice> devices = new ArrayList<NeutronL2gatewayDevice>();
-                    devices.addAll(this.getNeutronL2gatewayDevices());
-                    ans.setNeutronL2gatewayDevices(devices);
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronL2gateway suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronL2gateway ans) {
+        switch (field) {
+            case "devices":
+                List<NeutronL2gatewayDevice> devices = new ArrayList<NeutronL2gatewayDevice>();
+                devices.addAll(this.getNeutronL2gatewayDevices());
+                ans.setNeutronL2gatewayDevices(devices);
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

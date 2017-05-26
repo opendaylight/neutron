@@ -10,19 +10,15 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandwidthRule>
         implements Serializable, INeutronObject<NeutronQosBandwidthRule> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosBandwidthRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "max_kbps")
@@ -47,25 +43,19 @@ public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandw
         this.maxBurstKbps = maxBurstKbps;
     }
 
-    public NeutronQosBandwidthRule extractFields(List<String> fields) {
-        NeutronQosBandwidthRule ans = new NeutronQosBandwidthRule();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "max_kbps":
-                    ans.setMaxKbps(this.getMaxKbps());
-                    break;
-                case "max_burst_kbps":
-                    ans.setMaxBurstKbps(this.getMaxBurstKbps());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronQosBandwidthRule suitable field.", s);
-                    break;
-            }
+    @Override
+    public boolean extractField(String field, NeutronQosBandwidthRule ans) {
+        switch (field) {
+            case "max_kbps":
+                ans.setMaxKbps(this.getMaxKbps());
+                break;
+            case "max_burst_kbps":
+                ans.setMaxBurstKbps(this.getMaxBurstKbps());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

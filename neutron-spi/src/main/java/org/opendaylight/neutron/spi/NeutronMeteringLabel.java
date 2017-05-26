@@ -9,18 +9,14 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMeteringLabel> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMember.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -50,30 +46,15 @@ public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMet
                 + ", shared=" + shared + "]";
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return a NeutronMeteringLabel object with only the selected fields
-     *             populated
-     */
-    public NeutronMeteringLabel extractFields(List<String> fields) {
-        NeutronMeteringLabel ans = new NeutronMeteringLabel();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "shared":
-                    ans.setMeteringLabelShared(this.getMeteringLabelShared());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronMeteringLabel suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronMeteringLabel ans) {
+        switch (field) {
+            case "shared":
+                ans.setMeteringLabelShared(this.getMeteringLabelShared());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 }

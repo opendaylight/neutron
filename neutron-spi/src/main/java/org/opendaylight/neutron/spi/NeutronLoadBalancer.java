@@ -9,13 +9,10 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Load Balancer as a service
@@ -36,7 +33,6 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoadBalancer> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancer.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "vip_address")
@@ -61,25 +57,19 @@ public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoa
         this.loadBalancerVipSubnetID = loadBalancerVipSubnetID;
     }
 
-    public NeutronLoadBalancer extractFields(List<String> fields) {
-        NeutronLoadBalancer ans = new NeutronLoadBalancer();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "vip_address":
-                    ans.setLoadBalancerVipAddress(this.getLoadBalancerVipAddress());
-                    break;
-                case "vip_subnet_id":
-                    ans.setLoadBalancerVipSubnetID(this.getLoadBalancerVipSubnetID());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancer suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronLoadBalancer ans) {
+        switch (field) {
+            case "vip_address":
+                ans.setLoadBalancerVipAddress(this.getLoadBalancerVipAddress());
+                break;
+            case "vip_subnet_id":
+                ans.setLoadBalancerVipSubnetID(this.getLoadBalancerVipSubnetID());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

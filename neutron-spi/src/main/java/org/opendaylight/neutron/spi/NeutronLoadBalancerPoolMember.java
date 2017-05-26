@@ -9,20 +9,16 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLoadBalancerPoolMember>
         implements Serializable, INeutronObject<NeutronLoadBalancerPoolMember> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMember.class);
     private static final long serialVersionUID = 1L;
 
     /**
@@ -97,37 +93,31 @@ public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLo
         this.poolMemberSubnetID = poolMemberSubnetID;
     }
 
-    public NeutronLoadBalancerPoolMember extractFields(List<String> fields) {
-        NeutronLoadBalancerPoolMember ans = new NeutronLoadBalancerPoolMember();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "pool_id":
-                    ans.setPoolID(this.getPoolID());
-                    break;
-                case "address":
-                    ans.setPoolMemberAddress(this.getPoolMemberAddress());
-                    break;
-                case "protocol_port":
-                    ans.setPoolMemberProtoPort(this.getPoolMemberProtoPort());
-                    break;
-                case "admin_state_up":
-                    ans.setPoolMemberAdminStateIsUp(poolMemberAdminStateIsUp);
-                    break;
-                case "weight":
-                    ans.setPoolMemberWeight(this.getPoolMemberWeight());
-                    break;
-                case "subnet_id":
-                    ans.setPoolMemberSubnetID(this.getPoolMemberSubnetID());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancerPoolMember suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronLoadBalancerPoolMember ans) {
+        switch (field) {
+            case "pool_id":
+                ans.setPoolID(this.getPoolID());
+                break;
+            case "address":
+                ans.setPoolMemberAddress(this.getPoolMemberAddress());
+                break;
+            case "protocol_port":
+                ans.setPoolMemberProtoPort(this.getPoolMemberProtoPort());
+                break;
+            case "admin_state_up":
+                ans.setPoolMemberAdminStateIsUp(poolMemberAdminStateIsUp);
+                break;
+            case "weight":
+                ans.setPoolMemberWeight(this.getPoolMemberWeight());
+                break;
+            case "subnet_id":
+                ans.setPoolMemberSubnetID(this.getPoolMemberSubnetID());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

@@ -156,65 +156,49 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
         this.ipV6RaMode = ipV6RaMode;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return an OpenStackSubnets object with only the selected fields
-     *             populated
-     */
-
-    public NeutronSubnet extractFields(List<String> fields) {
-        NeutronSubnet ans = new NeutronSubnet();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "network_id":
-                    ans.setNetworkUUID(this.getNetworkUUID());
-                    break;
-                case "ip_version":
-                    ans.setIpVersion(this.getIpVersion());
-                    break;
-                case "cidr":
-                    ans.setCidr(this.getCidr());
-                    break;
-                case "gateway_ip":
-                    ans.setGatewayIp(this.getGatewayIp());
-                    break;
-                case "dns_nameservers":
-                    List<String> nsList = new ArrayList<String>();
-                    nsList.addAll(this.getDnsNameservers());
-                    ans.setDnsNameservers(nsList);
-                    break;
-                case "allocation_pools":
-                    List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
-                    pools.addAll(this.getAllocationPools());
-                    ans.setAllocationPools(pools);
-                    break;
-                case "host_routes":
-                    List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
-                    hostRoutes.addAll(this.getHostRoutes());
-                    ans.setHostRoutes(hostRoutes);
-                    break;
-                case "enable_dhcp":
-                    ans.setEnableDHCP(this.getEnableDHCP());
-                    break;
-                case "ipv6_address_mode":
-                    ans.setIpV6AddressMode(this.getIpV6AddressMode());
-                    break;
-                case "ipv6_ra_mode":
-                    ans.setIpV6RaMode(this.getIpV6RaMode());
-                    break;
-                default:
-                    LOGGER.warn("{} is not an OpenStackSubnet suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronSubnet ans) {
+        switch (field) {
+            case "network_id":
+                ans.setNetworkUUID(this.getNetworkUUID());
+                break;
+            case "ip_version":
+                ans.setIpVersion(this.getIpVersion());
+                break;
+            case "cidr":
+                ans.setCidr(this.getCidr());
+                break;
+            case "gateway_ip":
+                ans.setGatewayIp(this.getGatewayIp());
+                break;
+            case "dns_nameservers":
+                List<String> nsList = new ArrayList<String>();
+                nsList.addAll(this.getDnsNameservers());
+                ans.setDnsNameservers(nsList);
+                break;
+            case "allocation_pools":
+                List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+                pools.addAll(this.getAllocationPools());
+                ans.setAllocationPools(pools);
+                break;
+            case "host_routes":
+                List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
+                hostRoutes.addAll(this.getHostRoutes());
+                ans.setHostRoutes(hostRoutes);
+                break;
+            case "enable_dhcp":
+                ans.setEnableDHCP(this.getEnableDHCP());
+                break;
+            case "ipv6_address_mode":
+                ans.setIpV6AddressMode(this.getIpV6AddressMode());
+                break;
+            case "ipv6_ra_mode":
+                ans.setIpV6RaMode(this.getIpV6RaMode());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     /* test to see if the cidr address used to define this subnet

@@ -9,19 +9,15 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement(name = "l2gatewayConnection")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronL2gatewayConnection extends NeutronObject<NeutronL2gatewayConnection>
         implements Serializable, INeutronObject<NeutronL2gatewayConnection> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayConnection.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "gateway_id")
@@ -68,34 +64,28 @@ public final class NeutronL2gatewayConnection extends NeutronObject<NeutronL2gat
         this.portID = portID;
     }
 
-    public NeutronL2gatewayConnection extractFields(List<String> fields) {
-        NeutronL2gatewayConnection ans = new NeutronL2gatewayConnection();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "connection_id":
-                    ans.setID(this.getID());
-                    break;
-                case "gateway_id":
-                    ans.setL2gatewayID(this.getL2gatewayID());
-                    break;
-                case "network_id":
-                    ans.setNetworkID(this.getNetworkID());
-                    break;
-                case "segmentation_id":
-                    ans.setSegmentID(this.getSegmentID());
-                    break;
-                case "port_id":
-                    ans.setPortID(this.getPortID());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronL2gatewayConnection suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronL2gatewayConnection ans) {
+        switch (field) {
+            case "connection_id":
+                ans.setID(this.getID());
+                break;
+            case "gateway_id":
+                ans.setL2gatewayID(this.getL2gatewayID());
+                break;
+            case "network_id":
+                ans.setNetworkID(this.getNetworkID());
+                break;
+            case "segmentation_id":
+                ans.setSegmentID(this.getSegmentID());
+                break;
+            case "port_id":
+                ans.setPortID(this.getPortID());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

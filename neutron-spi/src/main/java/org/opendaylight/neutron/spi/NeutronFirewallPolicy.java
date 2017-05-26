@@ -9,13 +9,10 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Firewall as a service
@@ -36,7 +33,6 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFirewallPolicy> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicy.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -61,25 +57,19 @@ public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFi
         this.firewallPolicyIsShared = firewallPolicyIsShared;
     }
 
-    public NeutronFirewallPolicy extractFields(List<String> fields) {
-        NeutronFirewallPolicy ans = new NeutronFirewallPolicy();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "shared":
-                    ans.setFirewallPolicyIsShared(firewallPolicyIsShared);
-                    break;
-                case "audited":
-                    ans.setFirewallPolicyIsAudited(firewallPolicyIsAudited);
-                    break;
-                default:
-                    LOGGER.warn("{} is not an NeutronFirewallPolicy suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronFirewallPolicy ans) {
+        switch (field) {
+            case "shared":
+                ans.setFirewallPolicyIsShared(firewallPolicyIsShared);
+                break;
+            case "audited":
+                ans.setFirewallPolicyIsAudited(firewallPolicyIsAudited);
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

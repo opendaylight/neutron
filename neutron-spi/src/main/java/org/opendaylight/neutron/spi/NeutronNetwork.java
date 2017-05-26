@@ -14,13 +14,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetwork.class);
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -162,47 +159,31 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
         this.qosPolicyId = qosPolicyId;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return an OpenStackNetworks object with only the selected fields
-     *             populated
-     */
-
-    public NeutronNetwork extractFields(List<String> fields) {
-        NeutronNetwork ans = new NeutronNetwork();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "shared":
-                    ans.setShared(shared);
-                    break;
-                case "external":
-                    ans.setRouterExternal(this.getRouterExternal());
-                    break;
-                case "segmentation_id":
-                    ans.setProviderSegmentationID(this.getProviderSegmentationID());
-                    break;
-                case "physical_network":
-                    ans.setProviderPhysicalNetwork(this.getProviderPhysicalNetwork());
-                    break;
-                case "network_type":
-                    ans.setProviderNetworkType(this.getProviderNetworkType());
-                    break;
-                case "qos_policy_id":
-                    ans.setQosPolicyId(this.getQosPolicyId());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronNetwork suitable field.", s);
-                    break;
-            }
+    @Override
+    public boolean extractField(String field, NeutronNetwork ans) {
+        switch (field) {
+            case "shared":
+                ans.setShared(shared);
+                break;
+            case "external":
+                ans.setRouterExternal(this.getRouterExternal());
+                break;
+            case "segmentation_id":
+                ans.setProviderSegmentationID(this.getProviderSegmentationID());
+                break;
+            case "physical_network":
+                ans.setProviderPhysicalNetwork(this.getProviderPhysicalNetwork());
+                break;
+            case "network_type":
+                ans.setProviderNetworkType(this.getProviderNetworkType());
+                break;
+            case "qos_policy_id":
+                ans.setQosPolicyId(this.getQosPolicyId());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

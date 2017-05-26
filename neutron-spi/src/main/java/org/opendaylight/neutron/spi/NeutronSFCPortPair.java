@@ -9,20 +9,16 @@ package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPortPair> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPair.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair API v1.0 Reference
@@ -64,37 +60,22 @@ public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPo
         this.serviceFunctionParameters = serviceFunctionParameters;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields List of attributes to be extracted
-     * @return an OpenStack Neutron SFC Port Pair object with only the selected fields
-     *             populated
-     */
-
-    public NeutronSFCPortPair extractFields(List<String> fields) {
-        NeutronSFCPortPair ans = new NeutronSFCPortPair();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "ingress":
-                    ans.setIngressPortUUID(this.getIngressPortUUID());
-                    break;
-                case "egress":
-                    ans.setEgressPortUUID(this.getEgressPortUUID());
-                    break;
-                case "service_function_parameters":
-                    ans.setServiceFunctionParameters(new HashMap<String, String>(this.getServiceFunctionParameters()));
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronSFCPortPair suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronSFCPortPair ans) {
+        switch (field) {
+            case "ingress":
+                ans.setIngressPortUUID(this.getIngressPortUUID());
+                break;
+            case "egress":
+                ans.setEgressPortUUID(this.getEgressPortUUID());
+                break;
+            case "service_function_parameters":
+                ans.setServiceFunctionParameters(new HashMap<String, String>(this.getServiceFunctionParameters()));
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

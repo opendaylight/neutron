@@ -14,8 +14,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * OpenStack Neutron v2.0 Load Balancer as a service
@@ -42,8 +40,6 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<NeutronLoadBalancerHealthMonitor>
         implements Serializable, INeutronObject<NeutronLoadBalancerHealthMonitor> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitor.class);
-
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "type")
@@ -145,43 +141,37 @@ public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<Neutro
         this.loadBalancerHealthMonitorPools = loadBalancerHealthMonitorPools;
     }
 
-    public NeutronLoadBalancerHealthMonitor extractFields(List<String> fields) {
-        NeutronLoadBalancerHealthMonitor ans = new NeutronLoadBalancerHealthMonitor();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "type":
-                    ans.setLoadBalancerHealthMonitorType(this.getLoadBalancerHealthMonitorType());
-                    break;
-                case "delay":
-                    ans.setLoadBalancerHealthMonitorDelay(this.getLoadBalancerHealthMonitorDelay());
-                    break;
-                case "timeout":
-                    ans.setLoadBalancerHealthMonitorTimeout(this.getLoadBalancerHealthMonitorTimeout());
-                    break;
-                case "max_retries":
-                    ans.setLoadBalancerHealthMonitorMaxRetries(this.getLoadBalancerHealthMonitorMaxRetries());
-                    break;
-                case "http_method":
-                    ans.setLoadBalancerHealthMonitorHttpMethod(this.getLoadBalancerHealthMonitorHttpMethod());
-                    break;
-                case "url_path":
-                    ans.setLoadBalancerHealthMonitorUrlPath(this.getLoadBalancerHealthMonitorUrlPath());
-                    break;
-                case "expected_codes":
-                    ans.setLoadBalancerHealthMonitorExpectedCodes(this.getLoadBalancerHealthMonitorExpectedCodes());
-                    break;
-                case "admin_state_up":
-                    ans.setLoadBalancerHealthMonitorAdminStateIsUp(loadBalancerHealthMonitorAdminStateIsUp);
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancerHealthMonitor suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronLoadBalancerHealthMonitor ans) {
+        switch (field) {
+            case "type":
+                ans.setLoadBalancerHealthMonitorType(this.getLoadBalancerHealthMonitorType());
+                break;
+            case "delay":
+                ans.setLoadBalancerHealthMonitorDelay(this.getLoadBalancerHealthMonitorDelay());
+                break;
+            case "timeout":
+                ans.setLoadBalancerHealthMonitorTimeout(this.getLoadBalancerHealthMonitorTimeout());
+                break;
+            case "max_retries":
+                ans.setLoadBalancerHealthMonitorMaxRetries(this.getLoadBalancerHealthMonitorMaxRetries());
+                break;
+            case "http_method":
+                ans.setLoadBalancerHealthMonitorHttpMethod(this.getLoadBalancerHealthMonitorHttpMethod());
+                break;
+            case "url_path":
+                ans.setLoadBalancerHealthMonitorUrlPath(this.getLoadBalancerHealthMonitorUrlPath());
+                break;
+            case "expected_codes":
+                ans.setLoadBalancerHealthMonitorExpectedCodes(this.getLoadBalancerHealthMonitorExpectedCodes());
+                break;
+            case "admin_state_up":
+                ans.setLoadBalancerHealthMonitorAdminStateIsUp(loadBalancerHealthMonitorAdminStateIsUp);
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

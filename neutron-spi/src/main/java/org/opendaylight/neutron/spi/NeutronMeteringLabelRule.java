@@ -9,19 +9,15 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeteringLabelRule>
         implements Serializable, INeutronObject<NeutronMeteringLabelRule> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "direction")
@@ -85,39 +81,24 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
                 + meteringLabelRuleRemoteIpPrefix + ", metering_label_id=" + meteringLabelRuleLabelID + "]";
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return a NeutronMeteringLabelRule object with only the selected fields
-     *             populated
-     */
-    public NeutronMeteringLabelRule extractFields(List<String> fields) {
-        NeutronMeteringLabelRule ans = new NeutronMeteringLabelRule();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "direction":
-                    ans.setMeteringLabelRuleDirection(this.getMeteringLabelRuleDirection());
-                    break;
-                case "excluded":
-                    ans.setMeteringLabelRuleExcluded(this.getMeteringLabelRuleExcluded());
-                    break;
-                case "remote_ip_prefix":
-                    ans.setMeteringLabelRuleRemoteIpPrefix(this.getMeteringLabelRuleRemoteIpPrefix());
-                    break;
-                case "metering_label_id":
-                    ans.setMeteringLabelRuleLabelID(this.getMeteringLabelRuleLabelID());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronMeteringLabelRule suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronMeteringLabelRule ans) {
+        switch (field) {
+            case "direction":
+                ans.setMeteringLabelRuleDirection(this.getMeteringLabelRuleDirection());
+                break;
+            case "excluded":
+                ans.setMeteringLabelRuleExcluded(this.getMeteringLabelRuleExcluded());
+                break;
+            case "remote_ip_prefix":
+                ans.setMeteringLabelRuleRemoteIpPrefix(this.getMeteringLabelRuleRemoteIpPrefix());
+                break;
+            case "metering_label_id":
+                ans.setMeteringLabelRuleLabelID(this.getMeteringLabelRuleLabelID());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 }

@@ -9,18 +9,14 @@
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronVpnIkePolicy extends NeutronBaseAttributes<NeutronVpnIkePolicy> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIkePolicy.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -95,42 +91,27 @@ public final class NeutronVpnIkePolicy extends NeutronBaseAttributes<NeutronVpnI
         this.lifetime = lifetime;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return a NeutronVpnIkePolicy object with only the selected fields
-     *             populated
-     */
-    public NeutronVpnIkePolicy extractFields(List<String> fields) {
-        NeutronVpnIkePolicy ans = new NeutronVpnIkePolicy();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "auth_algorithm":
-                    ans.setAuthAlgorithm(this.getAuthAlgorithm());
-                    break;
-                case "encryption_algorithm":
-                    ans.setEncryptionAlgorithm(this.getEncryptionAlgorithm());
-                    break;
-                case "phase1_negotiation_mode":
-                    ans.setPhase1NegotiationMode(this.getPhase1NegotiationMode());
-                    break;
-                case "pfs":
-                    ans.setPerfectForwardSecrecy(this.getPerfectForwardSecrecy());
-                    break;
-                case "ike_version":
-                    ans.setIkeVersion(this.getIkeVersion());
-                    break;
-                default:
-                    LOGGER.warn("{} is not an NeutronVpnIkePolicy suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronVpnIkePolicy ans) {
+        switch (field) {
+            case "auth_algorithm":
+                ans.setAuthAlgorithm(this.getAuthAlgorithm());
+                break;
+            case "encryption_algorithm":
+                ans.setEncryptionAlgorithm(this.getEncryptionAlgorithm());
+                break;
+            case "phase1_negotiation_mode":
+                ans.setPhase1NegotiationMode(this.getPhase1NegotiationMode());
+                break;
+            case "pfs":
+                ans.setPerfectForwardSecrecy(this.getPerfectForwardSecrecy());
+                break;
+            case "ike_version":
+                ans.setIkeVersion(this.getIkeVersion());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 }

@@ -14,14 +14,11 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<NeutronVpnIpSecSiteConnection>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIpSecSiteConnection.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -162,59 +159,43 @@ public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<
         this.deadPeerDetection = deadPeerDetection;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them as a
-     * new object, suitable for marshaling.
-     *
-     * @param fields
-     *            List of attributes to be extracted
-     * @return a NeutronVpnIpSecSiteConnection object with only the selected
-     *         fields populated
-     */
-
-    public NeutronVpnIpSecSiteConnection extractFields(List<String> fields) {
-        NeutronVpnIpSecSiteConnection ans = new NeutronVpnIpSecSiteConnection();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "peer_address":
-                    ans.setPeerAddress(this.getPeerAddress());
-                    break;
-                case "peer_id":
-                    ans.setPeerID(this.getPeerID());
-                    break;
-                case "route_mode":
-                    ans.setRouteMode(this.getRouteMode());
-                    break;
-                case "mtu":
-                    ans.setMtu(this.getMtu());
-                    break;
-                case "auth_mode":
-                    ans.setAuthMode(this.getAuthMode());
-                    break;
-                case "psk":
-                    ans.setPreSharedKey(this.getPreSharedKey());
-                    break;
-                case "initiator":
-                    ans.setInitiator(this.getInitiator());
-                    break;
-                case "ikepolicy_id":
-                    ans.setIkePolicyID(this.getIkePolicyID());
-                    break;
-                case "ipsecpolicy_id":
-                    ans.setIpsecPolicyID(this.getIpsecPolicyID());
-                    break;
-                case "vpnservice_id":
-                    ans.setVpnServiceID(this.getVpnServiceID());
-                    break;
-                default:
-                    LOGGER.warn("{} is not an NeutronVpnIpSecSiteConnection suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronVpnIpSecSiteConnection ans) {
+        switch (field) {
+            case "peer_address":
+                ans.setPeerAddress(this.getPeerAddress());
+                break;
+            case "peer_id":
+                ans.setPeerID(this.getPeerID());
+                break;
+            case "route_mode":
+                ans.setRouteMode(this.getRouteMode());
+                break;
+            case "mtu":
+                ans.setMtu(this.getMtu());
+                break;
+            case "auth_mode":
+                ans.setAuthMode(this.getAuthMode());
+                break;
+            case "psk":
+                ans.setPreSharedKey(this.getPreSharedKey());
+                break;
+            case "initiator":
+                ans.setInitiator(this.getInitiator());
+                break;
+            case "ikepolicy_id":
+                ans.setIkePolicyID(this.getIkePolicyID());
+                break;
+            case "ipsecpolicy_id":
+                ans.setIpsecPolicyID(this.getIpsecPolicyID());
+                break;
+            case "vpnservice_id":
+                ans.setVpnServiceID(this.getVpnServiceID());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override

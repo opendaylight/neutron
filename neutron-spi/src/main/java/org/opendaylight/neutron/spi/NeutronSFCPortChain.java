@@ -15,13 +15,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCPortChain> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChain.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Chain API v1.0 Reference
@@ -64,37 +61,22 @@ public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCP
         this.chainParameters = chainParameters;
     }
 
-    /**
-     * This method copies selected fields from the object and returns them
-     * as a new object, suitable for marshaling.
-     *
-     * @param fields List of attributes to be extracted
-     * @return an OpenStack Neutron SFC Port Chain object with only the selected fields
-     *             populated
-     */
-
-    public NeutronSFCPortChain extractFields(List<String> fields) {
-        NeutronSFCPortChain ans = new NeutronSFCPortChain();
-        for (String s : fields) {
-            if (extractField(s, ans)) {
-                continue;
-            }
-            switch (s) {
-                case "port_pair_groups":
-                    ans.setPortPairGroupsUUID(this.getPortPairGroupsUUID());
-                    break;
-                case "flow_classifiers":
-                    ans.setFlowClassifiersUUID(this.getFlowClassifiersUUID());
-                    break;
-                case "chain_parameters":
-                    ans.setChainParameters(this.getChainParameters());
-                    break;
-                default:
-                    LOGGER.warn("{} is not a NeutronSFCPortChain suitable field.", s);
-                    break;
-            }
+    @Override
+    protected boolean extractField(String field, NeutronSFCPortChain ans) {
+        switch (field) {
+            case "port_pair_groups":
+                ans.setPortPairGroupsUUID(this.getPortPairGroupsUUID());
+                break;
+            case "flow_classifiers":
+                ans.setFlowClassifiersUUID(this.getFlowClassifiersUUID());
+                break;
+            case "chain_parameters":
+                ans.setChainParameters(this.getChainParameters());
+                break;
+            default:
+                return super.extractField(field, ans);
         }
-        return ans;
+        return true;
     }
 
     @Override
