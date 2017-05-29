@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoadBalancer> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancer.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "vip_address")
@@ -75,7 +75,7 @@ public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoa
                     ans.setLoadBalancerVipSubnetID(this.getLoadBalancerVipSubnetID());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancer suitable field.", s);
+                    LOG.warn("{} is not a NeutronLoadBalancer suitable field.", s);
                     break;
             }
         }

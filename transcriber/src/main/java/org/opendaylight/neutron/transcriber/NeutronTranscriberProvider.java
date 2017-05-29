@@ -48,7 +48,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronTranscriberProvider implements AutoCloseable, NeutronTranscriber {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronTranscriberProvider.class);
 
     private BundleContext context;
     private final DataBroker db;
@@ -56,7 +56,7 @@ public final class NeutronTranscriberProvider implements AutoCloseable, NeutronT
     private final List<AutoCloseable> neutronInterfaces = new ArrayList<>();
 
     public NeutronTranscriberProvider(BundleContext context, DataBroker db) {
-        LOGGER.debug("DataBroker set to: {}", db);
+        LOG.debug("DataBroker set to: {}", db);
         this.context = Preconditions.checkNotNull(context);
         this.db = Preconditions.checkNotNull(db);
     }

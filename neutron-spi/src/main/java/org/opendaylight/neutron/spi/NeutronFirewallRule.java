@@ -48,7 +48,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFirewallRule> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronFirewallRule.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -239,7 +239,7 @@ public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFire
                     ans.setFirewallRuleIsEnabled(firewallRuleIsEnabled);
                     break;
                 default:
-                    LOGGER.warn("Unknown firewall rule {}.", s);
+                    LOG.warn("Unknown firewall rule {}.", s);
                     break;
             }
         }

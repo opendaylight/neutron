@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<NeutronLoadBalancerPool>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPool.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerPool.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "protocol")
@@ -176,7 +176,7 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
                     ans.setLoadBalancerPoolMembers(getLoadBalancerPoolMembers());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancerPool suitable field.", s);
+                    LOG.warn("{} is not a NeutronLoadBalancerPool suitable field.", s);
                     break;
             }
         }

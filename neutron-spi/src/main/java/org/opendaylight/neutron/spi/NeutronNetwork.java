@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetwork.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronNetwork.class);
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -198,7 +198,7 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
                     ans.setQosPolicyId(this.getQosPolicyId());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronNetwork suitable field.", s);
+                    LOG.warn("{} is not a NeutronNetwork suitable field.", s);
                     break;
             }
         }

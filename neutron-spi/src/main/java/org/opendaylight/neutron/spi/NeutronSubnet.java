@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private static final long serialVersionUID = 1L;
     private static final int IPV4_VERSION = 4;
@@ -210,7 +210,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                     ans.setIpV6RaMode(this.getIpV6RaMode());
                     break;
                 default:
-                    LOGGER.warn("{} is not an OpenStackSubnet suitable field.", s);
+                    LOG.warn("{} is not an OpenStackSubnet suitable field.", s);
                     break;
             }
         }
@@ -232,7 +232,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                     return false;
                 }
             } catch (IllegalArgumentException e) {
-                LOGGER.warn("Failure in isValidCIDR()", e);
+                LOG.warn("Failure in isValidCIDR()", e);
                 return false;
             }
             return true;
@@ -305,7 +305,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                         allocationPools = source.splitPool(gatewayIp);
                     }
                 } catch (IllegalArgumentException e) {
-                    LOGGER.warn("Failure in initDefault()", e);
+                    LOG.warn("Failure in initDefault()", e);
                     return;
                 }
             }
@@ -343,7 +343,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 SubnetInfo info = util.getInfo();
                 return info.isInRange(ipAddress);
             } catch (IllegalArgumentException e) {
-                LOGGER.warn("Failure in isValidIp()", e);
+                LOG.warn("Failure in isValidIp()", e);
                 return false;
             }
         }

@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronRouterInterface extends NeutronObject<NeutronRouterInterface>
         implements Serializable, INeutronObject<NeutronRouterInterface> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouterInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronRouterInterface.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -72,7 +72,7 @@ public final class NeutronRouterInterface extends NeutronObject<NeutronRouterInt
                     ans.setPortUUID(this.getPortUUID());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronRouterInterface suitable field.", s);
+                    LOG.warn("{} is not a NeutronRouterInterface suitable field.", s);
                     break;
             }
         }

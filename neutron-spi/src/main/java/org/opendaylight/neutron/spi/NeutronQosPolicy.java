@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPolicy> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosPolicy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronQosPolicy.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -78,7 +78,7 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
                     ans.setDscpRules(qosDscpRuleList);
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronQosPolicy suitable field.", s);
+                    LOG.warn("{} is not a NeutronQosPolicy suitable field.", s);
                     break;
             }
         }

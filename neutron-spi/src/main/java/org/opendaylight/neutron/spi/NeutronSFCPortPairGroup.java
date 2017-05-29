@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<NeutronSFCPortPairGroup>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairGroup.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCPortPairGroup.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0
@@ -60,7 +60,7 @@ public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<Neutron
                     ans.setPortPairs(this.getPortPairs());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronSFCPortPairGroup suitable field.", s);
+                    LOG.warn("{} is not a NeutronSFCPortPairGroup suitable field.", s);
                     break;
             }
         }

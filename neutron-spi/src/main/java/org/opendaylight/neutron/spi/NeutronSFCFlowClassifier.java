@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<NeutronSFCFlowClassifier>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCFlowClassifier.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCFlowClassifier.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of
@@ -200,7 +200,7 @@ public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<Neutro
                     ans.setL7Parameters(new HashMap<String, String>(this.getL7Parameters()));
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronSFCFlowClassifier suitable field.", s);
+                    LOG.warn("{} is not a NeutronSFCFlowClassifier suitable field.", s);
                     break;
             }
         }

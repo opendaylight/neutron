@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewall.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronFirewall.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
@@ -90,7 +90,7 @@ public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall
                     ans.setFirewallPolicyID(this.getFirewallPolicyID());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronBgpvpn suitable field.", s);
+                    LOG.warn("{} is not a NeutronBgpvpn suitable field.", s);
                     break;
             }
         }

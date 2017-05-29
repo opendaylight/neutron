@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule>
         implements Serializable, INeutronObject<NeutronSecurityRule> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSecurityRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "direction")
@@ -164,7 +164,7 @@ public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule
                     ans.setSecurityRuleGroupID(this.getSecurityRuleGroupID());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronSecurityRule suitable field.", s);
+                    LOG.warn("{} is not a NeutronSecurityRule suitable field.", s);
                     break;
             }
         }

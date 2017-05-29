@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement(name = "l2gateway")
 public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gateway>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gateway.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronL2gateway.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "devices")
@@ -46,7 +46,7 @@ public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gatew
                     ans.setNeutronL2gatewayDevices(devices);
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronL2gateway suitable field.", s);
+                    LOG.warn("{} is not a NeutronL2gateway suitable field.", s);
                     break;
             }
         }

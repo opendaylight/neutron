@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSubnetIpAllocationPool implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSubnetIpAllocationPool.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSubnetIpAllocationPool.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -169,7 +169,7 @@ public final class NeutronSubnetIpAllocationPool implements Serializable {
         try {
             return Inet6Address.getByAddress(ipv4BigInteger.toByteArray()).getHostAddress();
         } catch (UnknownHostException e) {
-            LOGGER.error("bigIntegerToIp", e);
+            LOG.error("bigIntegerToIp", e);
             return "ERROR";
         }
     }

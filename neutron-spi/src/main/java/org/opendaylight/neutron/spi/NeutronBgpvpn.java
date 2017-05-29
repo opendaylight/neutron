@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement(name = "bgpvpn")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpn.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronBgpvpn.class);
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -257,7 +257,7 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> i
                     ans.setAutoAggregate(this.getAutoAggregate());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronBgpvpn suitable field.", s);
+                    LOG.warn("{} is not a NeutronBgpvpn suitable field.", s);
                     break;
             }
         }

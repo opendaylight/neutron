@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLoadBalancerPoolMember>
         implements Serializable, INeutronObject<NeutronLoadBalancerPoolMember> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMember.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerPoolMember.class);
     private static final long serialVersionUID = 1L;
 
     /**
@@ -123,7 +123,7 @@ public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLo
                     ans.setPoolMemberSubnetID(this.getPoolMemberSubnetID());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancerPoolMember suitable field.", s);
+                    LOG.warn("{} is not a NeutronLoadBalancerPoolMember suitable field.", s);
                     break;
             }
         }

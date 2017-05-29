@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronVpnIkePolicy extends NeutronBaseAttributes<NeutronVpnIkePolicy> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIkePolicy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronVpnIkePolicy.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -127,7 +127,7 @@ public final class NeutronVpnIkePolicy extends NeutronBaseAttributes<NeutronVpnI
                     ans.setIkeVersion(this.getIkeVersion());
                     break;
                 default:
-                    LOGGER.warn("{} is not an NeutronVpnIkePolicy suitable field.", s);
+                    LOG.warn("{} is not an NeutronVpnIkePolicy suitable field.", s);
                     break;
             }
         }

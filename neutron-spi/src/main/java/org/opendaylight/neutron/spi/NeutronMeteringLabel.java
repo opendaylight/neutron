@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMeteringLabel> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerPoolMember.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerPoolMember.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -70,7 +70,7 @@ public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMet
                     ans.setMeteringLabelShared(this.getMeteringLabelShared());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronMeteringLabel suitable field.", s);
+                    LOG.warn("{} is not a NeutronMeteringLabel suitable field.", s);
                     break;
             }
         }

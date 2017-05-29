@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronRouter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronRouter.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -109,7 +109,7 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
                     ans.setRoutes(this.getRoutes());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronRouter suitable field.", s);
+                    LOG.warn("{} is not a NeutronRouter suitable field.", s);
                     break;
             }
         }

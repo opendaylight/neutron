@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosDscpMarkingRule extends NeutronObject<NeutronQosDscpMarkingRule>
         implements Serializable, INeutronObject<NeutronQosDscpMarkingRule> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosDscpMarkingRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronQosDscpMarkingRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "dscp_mark")
@@ -46,7 +46,7 @@ public final class NeutronQosDscpMarkingRule extends NeutronObject<NeutronQosDsc
                     ans.setDscpMark(this.getDscpMark());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronQosDscpMarkingRule suitable field.", s);
+                    LOG.warn("{} is not a NeutronQosDscpMarkingRule suitable field.", s);
                     break;
             }
         }

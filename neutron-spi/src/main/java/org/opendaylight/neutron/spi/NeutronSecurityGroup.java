@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSecurityGroup> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityGroup.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSecurityGroup.class);
     private static final long serialVersionUID = 1L;
 
     public NeutronSecurityGroup() {
@@ -42,7 +42,7 @@ public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSec
             if (extractField(s, ans)) {
                 continue;
             }
-            LOGGER.warn("{} is not a NeutronSecurityGroup suitable field.", s);
+            LOG.warn("{} is not a NeutronSecurityGroup suitable field.", s);
         }
         return ans;
     }

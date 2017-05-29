@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<NeutronVpnIpSecSiteConnection>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronVpnIpSecSiteConnection.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronVpnIpSecSiteConnection.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -210,7 +210,7 @@ public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<
                     ans.setVpnServiceID(this.getVpnServiceID());
                     break;
                 default:
-                    LOGGER.warn("{} is not an NeutronVpnIpSecSiteConnection suitable field.", s);
+                    LOG.warn("{} is not an NeutronVpnIpSecSiteConnection suitable field.", s);
                     break;
             }
         }

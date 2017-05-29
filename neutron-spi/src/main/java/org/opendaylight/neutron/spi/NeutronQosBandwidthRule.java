@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandwidthRule>
         implements Serializable, INeutronObject<NeutronQosBandwidthRule> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronQosBandwidthRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronQosBandwidthRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "max_kbps")
@@ -61,7 +61,7 @@ public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandw
                     ans.setMaxBurstKbps(this.getMaxBurstKbps());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronQosBandwidthRule suitable field.", s);
+                    LOG.warn("{} is not a NeutronQosBandwidthRule suitable field.", s);
                     break;
             }
         }

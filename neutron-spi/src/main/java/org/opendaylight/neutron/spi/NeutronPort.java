@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronPort.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronPort.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -264,7 +264,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                     ans.setQosPolicyId(this.getQosPolicyId());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronPort suitable field.", s);
+                    LOG.warn("{} is not a NeutronPort suitable field.", s);
                     break;
             }
         }

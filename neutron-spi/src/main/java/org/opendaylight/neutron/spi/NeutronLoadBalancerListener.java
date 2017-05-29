@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<NeutronLoadBalancerListener>
         implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerListener.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "default_pool_id")
@@ -133,7 +133,7 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
                     ans.setLoadBalancerListenerAdminStateIsUp(loadBalancerListenerAdminStateIsUp);
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancerListener suitable field.", s);
+                    LOG.warn("{} is not a NeutronLoadBalancerListener suitable field.", s);
                     break;
             }
         }

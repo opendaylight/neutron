@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFirewallPolicy> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallPolicy.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronFirewallPolicy.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "false", name = "shared")
@@ -75,7 +75,7 @@ public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFi
                     ans.setFirewallPolicyIsAudited(firewallPolicyIsAudited);
                     break;
                 default:
-                    LOGGER.warn("{} is not an NeutronFirewallPolicy suitable field.", s);
+                    LOG.warn("{} is not an NeutronFirewallPolicy suitable field.", s);
                     break;
             }
         }

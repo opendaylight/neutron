@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 public final class NeutronSecurityRuleInterface extends
         AbstractNeutronInterface<SecurityRule, SecurityRules, SecurityRuleKey, NeutronSecurityRule>
         implements INeutronSecurityRuleCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 
     private static final ImmutableBiMap<Class<? extends DirectionBase>,
             String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
@@ -139,7 +139,7 @@ public final class NeutronSecurityRuleInterface extends
         if (securityRule.getID() != null) {
             securityRuleBuilder.setUuid(toUuid(securityRule.getID()));
         } else {
-            LOGGER.warn("Attempting to write neutron securityRule without UUID");
+            LOG.warn("Attempting to write neutron securityRule without UUID");
         }
         return securityRuleBuilder.build();
     }

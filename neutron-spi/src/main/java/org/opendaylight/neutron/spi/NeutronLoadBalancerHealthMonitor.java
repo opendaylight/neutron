@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<NeutronLoadBalancerHealthMonitor>
         implements Serializable, INeutronObject<NeutronLoadBalancerHealthMonitor> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitor.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitor.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -177,7 +177,7 @@ public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<Neutro
                     ans.setLoadBalancerHealthMonitorAdminStateIsUp(loadBalancerHealthMonitorAdminStateIsUp);
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronLoadBalancerHealthMonitor suitable field.", s);
+                    LOG.warn("{} is not a NeutronLoadBalancerHealthMonitor suitable field.", s);
                     break;
             }
         }

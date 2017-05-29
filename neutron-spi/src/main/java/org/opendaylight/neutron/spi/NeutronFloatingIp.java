@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFloatingIp
         extends NeutronObject<NeutronFloatingIp> implements Serializable, INeutronObject<NeutronFloatingIp> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIp.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronFloatingIp.class);
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -132,7 +132,7 @@ public final class NeutronFloatingIp
                     ans.setStatus(this.getStatus());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronFloatingIp suitable field.", s);
+                    LOG.warn("{} is not a NeutronFloatingIp suitable field.", s);
                     break;
             }
         }

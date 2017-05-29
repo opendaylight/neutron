@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeteringLabelRule>
         implements Serializable, INeutronObject<NeutronMeteringLabelRule> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronMeteringLabelRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronMeteringLabelRule.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "direction")
@@ -114,7 +114,7 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
                     ans.setMeteringLabelRuleLabelID(this.getMeteringLabelRuleLabelID());
                     break;
                 default:
-                    LOGGER.warn("{} is not a NeutronMeteringLabelRule suitable field.", s);
+                    LOG.warn("{} is not a NeutronMeteringLabelRule suitable field.", s);
                     break;
             }
         }

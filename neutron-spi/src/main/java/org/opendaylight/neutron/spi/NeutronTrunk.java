@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement(name = "trunk")
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> implements Serializable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronTrunk.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronTrunk.class);
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "port_id")
@@ -91,7 +91,7 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> imp
                     ans.setSubPorts(subPortList);
                     break;
                 default:
-                    LOGGER.warn("{} is not an NeutronTrunk suitable field.", s);
+                    LOG.warn("{} is not an NeutronTrunk suitable field.", s);
                     break;
             }
         }
