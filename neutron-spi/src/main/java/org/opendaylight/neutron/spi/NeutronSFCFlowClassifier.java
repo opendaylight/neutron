@@ -180,7 +180,7 @@ public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<Neutro
                 ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
                 break;
             case "l7_parameters":
-                ans.setL7Parameters(new HashMap<String, String>(this.getL7Parameters()));
+                ans.setL7Parameters(new HashMap<>(this.getL7Parameters()));
                 break;
             default:
                 return super.extractField(field, ans);

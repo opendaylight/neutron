@@ -79,7 +79,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         }
         result.setEnableDHCP(subnet.isEnableDhcp());
         if (subnet.getAllocationPools() != null) {
-            final List<NeutronSubnetIpAllocationPool> allocationPools = new ArrayList<NeutronSubnetIpAllocationPool>();
+            final List<NeutronSubnetIpAllocationPool> allocationPools = new ArrayList<>();
             for (final AllocationPools allocationPool : subnet.getAllocationPools()) {
                 final NeutronSubnetIpAllocationPool pool = new NeutronSubnetIpAllocationPool();
                 pool.setPoolStart(String.valueOf(allocationPool.getStart().getValue()));
@@ -89,14 +89,14 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             result.setAllocationPools(allocationPools);
         }
         if (subnet.getDnsNameservers() != null) {
-            final List<String> dnsNameServers = new ArrayList<String>();
+            final List<String> dnsNameServers = new ArrayList<>();
             for (final IpAddress dnsNameServer : subnet.getDnsNameservers()) {
                 dnsNameServers.add(String.valueOf(dnsNameServer.getValue()));
             }
             result.setDnsNameservers(dnsNameServers);
         }
         if (subnet.getHostRoutes() != null) {
-            final List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
+            final List<NeutronRoute> hostRoutes = new ArrayList<>();
             for (final HostRoutes hostRoute : subnet.getHostRoutes()) {
                 final NeutronRoute nsHostRoute = new NeutronRoute();
                 nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
@@ -147,7 +147,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             subnetBuilder.setAllocationPools(allocationPools);
         }
         if (subnet.getDnsNameservers() != null) {
-            final List<IpAddress> dnsNameServers = new ArrayList<IpAddress>();
+            final List<IpAddress> dnsNameServers = new ArrayList<>();
             for (final String dnsNameServer : subnet.getDnsNameservers()) {
                 final IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
                 dnsNameServers.add(ipAddress);

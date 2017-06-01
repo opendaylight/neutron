@@ -389,7 +389,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
 
     private List<S> getAll(ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
-        final Set<S> allNeutronObjects = new HashSet<S>();
+        final Set<S> allNeutronObjects = new HashSet<>();
         final U dataObjects = readMd(createInstanceIdentifier(), tx);
         if (dataObjects != null) {
             for (final T dataObject : getDataObjectList(dataObjects)) {
@@ -397,7 +397,7 @@ public abstract class AbstractNeutronInterface<T extends DataObject & Identifiab
             }
         }
         LOGGER.debug("Exiting _getAll, Found {} OpenStackFirewall", allNeutronObjects.size());
-        final List<S> ans = new ArrayList<S>();
+        final List<S> ans = new ArrayList<>();
         ans.addAll(allNeutronObjects);
         return ans;
     }

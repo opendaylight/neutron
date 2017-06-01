@@ -41,7 +41,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
             answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
-            final List<String> peerCidrs = new ArrayList<String>();
+            final List<String> peerCidrs = new ArrayList<>();
             for (final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
@@ -92,7 +92,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
             ipsecSiteConnectionBuilder.setPeerAddress(ipsecSiteConnection.getPeerAddress());
         }
         if (ipsecSiteConnection.getPeerCidrs() != null) {
-            final List<String> peerCidrs = new ArrayList<String>();
+            final List<String> peerCidrs = new ArrayList<>();
             for (final String peerCidr : ipsecSiteConnection.getPeerCidrs()) {
                 peerCidrs.add(peerCidr);
             }
