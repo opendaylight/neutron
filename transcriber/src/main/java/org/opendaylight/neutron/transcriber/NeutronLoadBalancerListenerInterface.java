@@ -56,7 +56,7 @@ public final class NeutronLoadBalancerListenerInterface
             listenerBuilder.setDefaultPoolId(toUuid(listener.getNeutronLoadBalancerListenerDefaultPoolID()));
         }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
-            final List<Uuid> listLoadBalancers = new ArrayList<Uuid>();
+            final List<Uuid> listLoadBalancers = new ArrayList<>();
             for (final NeutronID neutronId : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
                 listLoadBalancers.add(toUuid(neutronId.getID()));
             }
@@ -92,7 +92,7 @@ public final class NeutronLoadBalancerListenerInterface
             answer.setNeutronLoadBalancerListenerDefaultPoolID(listener.getDefaultPoolId().getValue());
         }
         if (listener.getLoadbalancers() != null) {
-            final List<NeutronID> list = new ArrayList<NeutronID>();
+            final List<NeutronID> list = new ArrayList<>();
             for (final Uuid id : listener.getLoadbalancers()) {
                 list.add(new NeutronID(id.getValue()));
             }

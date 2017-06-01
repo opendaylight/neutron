@@ -64,8 +64,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         }
         if (router.getExternalGatewayInfo() != null) {
             ExternalGatewayInfo externalGatewayInfo = null;
-            final List<NeutronRouterNetworkReference> neutronRouterNetworkReferences = new ArrayList<
-                    NeutronRouterNetworkReference>();
+            final List<NeutronRouterNetworkReference> neutronRouterNetworkReferences = new ArrayList<>();
             neutronRouterNetworkReferences.add(router.getExternalGatewayInfo());
             for (final NeutronRouterNetworkReference externalGatewayInfos : neutronRouterNetworkReferences) {
                 final ExternalGatewayInfoBuilder builder = new ExternalGatewayInfoBuilder();
@@ -96,7 +95,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             result.setGatewayPortId(String.valueOf(router.getGatewayPortId().getValue()));
         }
         if (router.getRoutes() != null) {
-            final List<NeutronRoute> routes = new ArrayList<NeutronRoute>();
+            final List<NeutronRoute> routes = new ArrayList<>();
             for (final Routes route : router.getRoutes()) {
                 final NeutronRoute routerRoute = new NeutronRoute();
                 routerRoute.setDestination(String.valueOf(route.getDestination().getValue()));
@@ -111,7 +110,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             extGwInfo.setNetworkID(String.valueOf(router.getExternalGatewayInfo().getExternalNetworkId().getValue()));
             extGwInfo.setEnableSNAT(router.getExternalGatewayInfo().isEnableSnat());
             if (router.getExternalGatewayInfo().getExternalFixedIps() != null) {
-                final List<NeutronIps> fixedIps = new ArrayList<NeutronIps>();
+                final List<NeutronIps> fixedIps = new ArrayList<>();
                 for (final ExternalFixedIps mdFixedIp : router.getExternalGatewayInfo().getExternalFixedIps()) {
                     final NeutronIps fixedIp = new NeutronIps();
                     fixedIp.setSubnetUUID(String.valueOf(mdFixedIp.getSubnetId().getValue()));
