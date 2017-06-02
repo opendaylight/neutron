@@ -31,7 +31,7 @@ public final class NeutronSFCPortChainInterface
         extends AbstractNeutronInterface<PortChain, PortChains, PortChainKey, NeutronSFCPortChain>
         implements INeutronSFCPortChainCRUD {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);
 
     NeutronSFCPortChainInterface(DataBroker db) {
         super(PortChainBuilder.class, db);
@@ -45,7 +45,7 @@ public final class NeutronSFCPortChainInterface
     @Override
     protected PortChain toMd(NeutronSFCPortChain neutronPortChain) {
 
-        LOGGER.trace("toMd: REST SFC Port Chain data : {}", neutronPortChain);
+        LOG.trace("toMd: REST SFC Port Chain data : {}", neutronPortChain);
 
         PortChainBuilder result = new PortChainBuilder();
         toMdBaseAttributes(neutronPortChain, result);
@@ -74,13 +74,13 @@ public final class NeutronSFCPortChainInterface
             }
             result.setChainParameters(chainParams);
         }
-        LOGGER.trace("toMd: Yang SFC Port Chain data : {}", result);
+        LOG.trace("toMd: Yang SFC Port Chain data : {}", result);
         return result.build();
     }
 
     @Override
     protected NeutronSFCPortChain fromMd(PortChain mdPortChain) {
-        LOGGER.trace("fromMd: Yang SFC Port Chain data : {}", mdPortChain);
+        LOG.trace("fromMd: Yang SFC Port Chain data : {}", mdPortChain);
         NeutronSFCPortChain result = new NeutronSFCPortChain();
         fromMdBaseAttributes(mdPortChain, result);
         if (mdPortChain.getPortPairGroups() != null) {
@@ -104,7 +104,7 @@ public final class NeutronSFCPortChainInterface
             }
             result.setChainParameters(chainParams);
         }
-        LOGGER.trace("fromMd: REST SFC Port Chain data : {}", result);
+        LOG.trace("fromMd: REST SFC Port Chain data : {}", result);
         return result;
     }
 }
