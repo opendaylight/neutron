@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 public final class NeutronFloatingIpInterface
         extends AbstractNeutronInterface<Floatingip, Floatingips, FloatingipKey, NeutronFloatingIp>
         implements INeutronFloatingIpCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFloatingIpInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronFloatingIpInterface.class);
 
     NeutronFloatingIpInterface(DataBroker db) {
         super(FloatingipBuilder.class, db);
@@ -63,7 +63,7 @@ public final class NeutronFloatingIpInterface
         if (floatingIp.getID() != null) {
             floatingipBuilder.setUuid(toUuid(floatingIp.getID()));
         } else {
-            LOGGER.warn("Attempting to write neutron floating IP without UUID");
+            LOG.warn("Attempting to write neutron floating IP without UUID");
         }
         return floatingipBuilder.build();
     }

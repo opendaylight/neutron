@@ -32,7 +32,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, HealthmonitorKey,
                                          NeutronLoadBalancerHealthMonitor>
         implements INeutronLoadBalancerHealthMonitorCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ProbeBase>,
             String> PROBE_MAP = new ImmutableBiMap.Builder<Class<? extends ProbeBase>, String>()
@@ -88,7 +88,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         if (healthMonitor.getID() != null) {
             healthmonitorBuilder.setUuid(toUuid(healthMonitor.getID()));
         } else {
-            LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
+            LOG.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
         return healthmonitorBuilder.build();
     }
@@ -132,7 +132,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         if (healthMonitor.getUuid() != null) {
             answer.setID(healthMonitor.getUuid().getValue());
         } else {
-            LOGGER.warn("Attempting to write neutron laod balancer health monitor without UUID");
+            LOG.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
         return answer;
     }

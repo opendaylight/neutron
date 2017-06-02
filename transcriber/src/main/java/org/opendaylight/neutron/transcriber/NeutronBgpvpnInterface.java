@@ -22,12 +22,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.b
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.Bgpvpn;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, BgpvpnKey, NeutronBgpvpn>
         implements INeutronBgpvpnCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpnInterface.class);
 
     private static final ImmutableBiMap<Class<? extends BgpvpnTypeBase>,
             String> BGPVPN_TYPE_MAP = new ImmutableBiMap.Builder<Class<? extends BgpvpnTypeBase>, String>()

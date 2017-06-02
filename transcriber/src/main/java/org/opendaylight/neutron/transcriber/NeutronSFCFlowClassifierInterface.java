@@ -43,7 +43,7 @@ public final class NeutronSFCFlowClassifierInterface
                                          NeutronSFCFlowClassifier>
         implements INeutronSFCFlowClassifierCRUD {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCFlowClassifierInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCFlowClassifierInterface.class);
 
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,
             String> ETHERTYPE_MAP = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>, String>()
@@ -66,7 +66,7 @@ public final class NeutronSFCFlowClassifierInterface
     @Override
     protected SfcFlowClassifier toMd(NeutronSFCFlowClassifier neutronClassifier) {
 
-        LOGGER.trace("toMd: REST SFC Flow Classifier data : {}", neutronClassifier);
+        LOG.trace("toMd: REST SFC Flow Classifier data : {}", neutronClassifier);
 
         SfcFlowClassifierBuilder result = new SfcFlowClassifierBuilder();
         toMdBaseAttributes(neutronClassifier, result);
@@ -119,13 +119,13 @@ public final class NeutronSFCFlowClassifierInterface
             }
             result.setL7Parameter(l7Params);
         }
-        LOGGER.trace("toMd: Yang SFC Flow Classifier data : {}", result);
+        LOG.trace("toMd: Yang SFC Flow Classifier data : {}", result);
         return result.build();
     }
 
     @Override
     protected NeutronSFCFlowClassifier fromMd(SfcFlowClassifier mdClassifier) {
-        LOGGER.trace("fromMd: Yang SFC flow classifier data : {}", mdClassifier);
+        LOG.trace("fromMd: Yang SFC flow classifier data : {}", mdClassifier);
         NeutronSFCFlowClassifier result = new NeutronSFCFlowClassifier();
         fromMdBaseAttributes(mdClassifier, result);
         if (mdClassifier.getEthertype() != null) {
@@ -165,7 +165,7 @@ public final class NeutronSFCFlowClassifierInterface
             }
             result.setL7Parameters(l7Param);
         }
-        LOGGER.trace("fromMd: REST SFC Flow Classifier data : {}", result);
+        LOG.trace("fromMd: REST SFC Flow Classifier data : {}", result);
         return result;
     }
 }
