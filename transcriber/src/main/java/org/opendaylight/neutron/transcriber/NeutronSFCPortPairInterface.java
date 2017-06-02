@@ -31,7 +31,7 @@ public final class NeutronSFCPortPairInterface
         extends AbstractNeutronInterface<PortPair, PortPairs, PortPairKey, NeutronSFCPortPair>
         implements INeutronSFCPortPairCRUD {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCPortPairInterface.class);
 
     NeutronSFCPortPairInterface(DataBroker db) {
         super(PortPairBuilder.class, db);
@@ -40,7 +40,7 @@ public final class NeutronSFCPortPairInterface
     @Override
     protected PortPair toMd(NeutronSFCPortPair neutronPortPair) {
 
-        LOGGER.trace("toMd: REST SFC Port Pair data : {}", neutronPortPair);
+        LOG.trace("toMd: REST SFC Port Pair data : {}", neutronPortPair);
 
         PortPairBuilder result = new PortPairBuilder();
         toMdBaseAttributes(neutronPortPair, result);
@@ -61,13 +61,13 @@ public final class NeutronSFCPortPairInterface
             }
             result.setServiceFunctionParameters(serviceFunctionParams);
         }
-        LOGGER.trace("toMd: Yang SFC Port Pair data : {}", result);
+        LOG.trace("toMd: Yang SFC Port Pair data : {}", result);
         return result.build();
     }
 
     @Override
     protected NeutronSFCPortPair fromMd(PortPair mdPortPair) {
-        LOGGER.trace("fromMd: Yang SFC Port Pair data : {}", mdPortPair);
+        LOG.trace("fromMd: Yang SFC Port Pair data : {}", mdPortPair);
         NeutronSFCPortPair result = new NeutronSFCPortPair();
         fromMdBaseAttributes(mdPortPair, result);
         if (mdPortPair.getIngress() != null) {
@@ -83,7 +83,7 @@ public final class NeutronSFCPortPairInterface
             }
             result.setServiceFunctionParameters(serviceFunctionParam);
         }
-        LOGGER.trace("fromMd: REST SFC Port Pair data : {}", result);
+        LOG.trace("fromMd: REST SFC Port Pair data : {}", result);
         return result;
     }
 

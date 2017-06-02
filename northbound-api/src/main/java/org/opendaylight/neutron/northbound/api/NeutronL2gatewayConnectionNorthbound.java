@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
 public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbound<NeutronL2gatewayConnection,
         NeutronL2gatewayConnectionRequest, INeutronL2gatewayConnectionCRUD> {
 
-    static final Logger LOGGER = LoggerFactory.getLogger(NeutronL2gatewayConnectionNorthbound.class);
+    static final Logger LOG = LoggerFactory.getLogger(NeutronL2gatewayConnectionNorthbound.class);
 
     private static final String RESOURCE_NAME = "L2gatewayConnection";
 
@@ -76,7 +76,7 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
 
     public Response createL2gatewayConnection(final NeutronL2gatewayConnectionRequest input) {
-        LOGGER.debug("createL2GatewayConnection   NeutronL2GatewayConnectionRequest");
+        LOG.debug("createL2GatewayConnection   NeutronL2GatewayConnectionRequest");
         return create(input);
     }
 

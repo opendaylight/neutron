@@ -27,7 +27,7 @@ public final class NeutronSFCPortPairGroupInterface
         extends AbstractNeutronInterface<PortPairGroup, PortPairGroups, PortPairGroupKey, NeutronSFCPortPairGroup>
         implements INeutronSFCPortPairGroupCRUD {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronSFCPortPairGroupInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCPortPairGroupInterface.class);
 
     NeutronSFCPortPairGroupInterface(DataBroker db) {
         super(PortPairGroupBuilder.class, db);
@@ -36,7 +36,7 @@ public final class NeutronSFCPortPairGroupInterface
     @Override
     protected PortPairGroup toMd(NeutronSFCPortPairGroup neutronPortPairGroup) {
 
-        LOGGER.trace("toMd: REST SFC Port Pair Group data : {}", neutronPortPairGroup);
+        LOG.trace("toMd: REST SFC Port Pair Group data : {}", neutronPortPairGroup);
 
         PortPairGroupBuilder result = new PortPairGroupBuilder();
         toMdBaseAttributes(neutronPortPairGroup, result);
@@ -47,13 +47,13 @@ public final class NeutronSFCPortPairGroupInterface
             }
             result.setPortPairs(portPairs);
         }
-        LOGGER.trace("toMd: Yang SFC Port Pair Group data : {}", result);
+        LOG.trace("toMd: Yang SFC Port Pair Group data : {}", result);
         return result.build();
     }
 
     @Override
     protected NeutronSFCPortPairGroup fromMd(PortPairGroup mdPortPairGroup) {
-        LOGGER.trace("fromMd: Yang SFC Port Pair Group data : {}", mdPortPairGroup);
+        LOG.trace("fromMd: Yang SFC Port Pair Group data : {}", mdPortPairGroup);
         NeutronSFCPortPairGroup result = new NeutronSFCPortPairGroup();
         fromMdBaseAttributes(mdPortPairGroup, result);
         if (mdPortPairGroup.getPortPairs() != null) {
@@ -63,7 +63,7 @@ public final class NeutronSFCPortPairGroupInterface
             }
             result.setPortPairs(portPairsUUID);
         }
-        LOGGER.trace("fromMd: REST SFC Port Pair Group data : {}", result);
+        LOG.trace("fromMd: REST SFC Port Pair Group data : {}", result);
         return result;
     }
 
