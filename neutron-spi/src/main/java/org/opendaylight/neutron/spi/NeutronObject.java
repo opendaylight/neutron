@@ -29,7 +29,7 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
     // T extends NeutronObject as 0th type argument. Used by extractFields()
     private static final int NEUTRON_OBJECT_CLASS_TYPE_INDEX = 0;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronFirewallRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronFirewallRule.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -127,7 +127,7 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
         }
         for (String s : fields) {
             if (!extractField(s, ans)) {
-                LOGGER.warn("Unknown {} {}.", cls.getSimpleName(), s);
+                LOG.warn("Unknown {} {}.", cls.getSimpleName(), s);
             }
         }
         return ans;
