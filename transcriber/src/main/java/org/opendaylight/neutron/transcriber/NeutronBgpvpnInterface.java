@@ -22,12 +22,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.b
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.Bgpvpn;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, BgpvpnKey, NeutronBgpvpn>
         implements INeutronBgpvpnCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpnInterface.class);
 
     private static final ImmutableBiMap<Class<? extends BgpvpnTypeBase>,
             String> BGPVPN_TYPE_MAP = new ImmutableBiMap.Builder<Class<? extends BgpvpnTypeBase>, String>()
@@ -57,42 +54,42 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
             result.setTechnique(bgpvpn.getTechnique());
         }
         if (bgpvpn.getRouteTargets() != null) {
-            final List<String> routeTargets = new ArrayList<String>();
+            final List<String> routeTargets = new ArrayList<>();
             for (final String routeTarget : bgpvpn.getRouteTargets()) {
                 routeTargets.add(routeTarget);
             }
             result.setRouteTargets(routeTargets);
         }
         if (bgpvpn.getImportTargets() != null) {
-            final List<String> importTargets = new ArrayList<String>();
+            final List<String> importTargets = new ArrayList<>();
             for (final String importTarget : bgpvpn.getImportTargets()) {
                 importTargets.add(importTarget);
             }
             result.setImportTargets(importTargets);
         }
         if (bgpvpn.getExportTargets() != null) {
-            final List<String> exportTargets = new ArrayList<String>();
+            final List<String> exportTargets = new ArrayList<>();
             for (final String exportTarget : bgpvpn.getExportTargets()) {
                 exportTargets.add(exportTarget);
             }
             result.setExportTargets(exportTargets);
         }
         if (bgpvpn.getRouteDistinguishers() != null) {
-            final List<String> routeDistinguishers = new ArrayList<String>();
+            final List<String> routeDistinguishers = new ArrayList<>();
             for (final String routeDistinguisher : bgpvpn.getRouteDistinguishers()) {
                 routeDistinguishers.add(routeDistinguisher);
             }
             result.setRouteDistinguishers(routeDistinguishers);
         }
         if (bgpvpn.getRouters() != null) {
-            final List<String> routers = new ArrayList<String>();
+            final List<String> routers = new ArrayList<>();
             for (final Uuid router : bgpvpn.getRouters()) {
                 routers.add(router.getValue());
             }
             result.setRouters(routers);
         }
         if (bgpvpn.getNetworks() != null) {
-            final List<String> networks = new ArrayList<String>();
+            final List<String> networks = new ArrayList<>();
             for (final Uuid network : bgpvpn.getNetworks()) {
                 networks.add(network.getValue());
             }
@@ -120,42 +117,42 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
             bgpvpnBuilder.setTechnique(bgpvpn.getTechnique());
         }
         if (bgpvpn.getRouteTargets() != null) {
-            final List<String> routeTargets = new ArrayList<String>();
+            final List<String> routeTargets = new ArrayList<>();
             for (final String routeTarget : bgpvpn.getRouteTargets()) {
                 routeTargets.add(routeTarget);
             }
             bgpvpnBuilder.setRouteTargets(routeTargets);
         }
         if (bgpvpn.getImportTargets() != null) {
-            final List<String> importTargets = new ArrayList<String>();
+            final List<String> importTargets = new ArrayList<>();
             for (final String importTarget : bgpvpn.getImportTargets()) {
                 importTargets.add(importTarget);
             }
             bgpvpnBuilder.setImportTargets(importTargets);
         }
         if (bgpvpn.getExportTargets() != null) {
-            final List<String> exportTargets = new ArrayList<String>();
+            final List<String> exportTargets = new ArrayList<>();
             for (final String exportTarget : bgpvpn.getExportTargets()) {
                 exportTargets.add(exportTarget);
             }
             bgpvpnBuilder.setExportTargets(exportTargets);
         }
         if (bgpvpn.getRouteDistinguishers() != null) {
-            final List<String> routeDistinguishers = new ArrayList<String>();
+            final List<String> routeDistinguishers = new ArrayList<>();
             for (final String routeDistinguisher : bgpvpn.getRouteDistinguishers()) {
                 routeDistinguishers.add(routeDistinguisher);
             }
             bgpvpnBuilder.setRouteDistinguishers(routeDistinguishers);
         }
         if (bgpvpn.getRouters() != null) {
-            final List<Uuid> routers = new ArrayList<Uuid>();
+            final List<Uuid> routers = new ArrayList<>();
             for (final String router : bgpvpn.getRouters()) {
                 routers.add(toUuid(router));
             }
             bgpvpnBuilder.setRouters(routers);
         }
         if (bgpvpn.getNetworks() != null) {
-            final List<Uuid> networks = new ArrayList<Uuid>();
+            final List<Uuid> networks = new ArrayList<>();
             for (final String network : bgpvpn.getNetworks()) {
                 networks.add(toUuid(network));
             }

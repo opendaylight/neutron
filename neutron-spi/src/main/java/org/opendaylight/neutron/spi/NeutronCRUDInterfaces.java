@@ -17,7 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class NeutronCRUDInterfaces {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private NeutronCRUDInterfaces() {
         throw new UnsupportedOperationException("NeutronCRUDInterfaces class shouldn't be instantiated");
@@ -32,7 +32,7 @@ public final class NeutronCRUDInterfaces {
                 return bundleCtx.getService(service);
             }
         } catch (InvalidSyntaxException e) {
-            LOGGER.error("Error in getInstances", e);
+            LOG.error("Error in getInstances", e);
         }
         return null;
     }
