@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
 public final class NeutronResourceMapPropertyAdapter extends XmlAdapter<Object, Map<String, String>> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronResourceMapPropertyAdapter.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronResourceMapPropertyAdapter.class);
 
     @Override
     public Map<String, String> unmarshal(Object domTree) {
@@ -54,7 +54,7 @@ public final class NeutronResourceMapPropertyAdapter extends XmlAdapter<Object, 
             }
             return customXml;
         } catch (javax.xml.parsers.ParserConfigurationException e) {
-            LOGGER.error("ParserConfigurationException", e);
+            LOG.error("ParserConfigurationException", e);
         }
 
         return null;

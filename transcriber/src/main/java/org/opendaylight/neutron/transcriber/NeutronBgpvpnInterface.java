@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, BgpvpnKey, NeutronBgpvpn>
         implements INeutronBgpvpnCRUD {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronBgpvpnInterface.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronBgpvpnInterface.class);
 
     private static final ImmutableBiMap<Class<? extends BgpvpnTypeBase>,
             String> BGPVPN_TYPE_MAP = new ImmutableBiMap.Builder<Class<? extends BgpvpnTypeBase>, String>()

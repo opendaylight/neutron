@@ -23,7 +23,7 @@ public class NeutronNetworkTests {
 
     String base;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NeutronNetworkTests.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronNetworkTests.class);
 
     public NeutronNetworkTests(String base) {
         this.base = base;
@@ -35,7 +35,7 @@ public class NeutronNetworkTests {
             URL url = new URL(urlS);
             HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
             if (httpConn.getResponseCode() != 200) {
-                LOGGER.info("trial " + Integer.toString(retry) + ": failed with: "
+                LOG.info("trial " + Integer.toString(retry) + ": failed with: "
                         + Integer.toString(httpConn.getResponseCode()));
                 Thread.sleep(1000);
             } else {
