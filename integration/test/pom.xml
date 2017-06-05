@@ -80,7 +80,7 @@
           <configuration>
             <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
             <consoleOutput>true</consoleOutput>
-             <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
+            <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
           </configuration>
           <executions>
             <execution>
@@ -182,6 +182,7 @@
                   <fileset dir="../../neutron-spi/src/main/java" casesensitive="yes" />
                   <fileset dir="../../northbound-api/src/main/java" casesensitive="yes" />
                   <fileset dir="../../transcriber/src/main/java" casesensitive="yes" />
+                  <fileset dir="../../neutron-logger/src/main/java" casesensitive="yes" />
                 </copy>
               </target>
             </configuration>
