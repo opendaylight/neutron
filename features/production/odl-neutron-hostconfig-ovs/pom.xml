@@ -29,7 +29,7 @@
             </dependency>
             <dependency>
                 <groupId>org.opendaylight.ovsdb</groupId>
-                <artifactId>odl-ovsdb-southbound-api</artifactId>
+                <artifactId>southbound-artifacts</artifactId>
                 <version>1.5.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -47,7 +47,6 @@
         <dependency>
             <groupId>org.opendaylight.ovsdb</groupId>
             <artifactId>odl-ovsdb-southbound-api</artifactId>
-            <version>1.5.0-SNAPSHOT</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
