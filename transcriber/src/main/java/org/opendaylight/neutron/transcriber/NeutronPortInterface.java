@@ -69,7 +69,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         final PortBindingExtension binding = port.getAugmentation(PortBindingExtension.class);
         result.setBindinghostID(binding.getHostId());
         if (binding.getVifDetails() != null) {
-            final Map<String, String> details = new HashMap<String, String>(binding.getVifDetails().size());
+            final Map<String, String> details = new HashMap<>(binding.getVifDetails().size());
             for (final VifDetails vifDetail : binding.getVifDetails()) {
                 details.put(vifDetail.getDetailsKey(), vifDetail.getValue());
             }
@@ -157,7 +157,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (neutronPort.getVIFDetails() != null) {
             final Map<String, String> vifDetails = neutronPort.getVIFDetails();
-            final List<VifDetails> listVifDetail = new ArrayList<VifDetails>(vifDetails.size());
+            final List<VifDetails> listVifDetail = new ArrayList<>(vifDetails.size());
             for (final Map.Entry<String, String> vifDetail : vifDetails.entrySet()) {
                 final VifDetailsBuilder vifDetailsBuilder = new VifDetailsBuilder();
                 if (vifDetail.getKey() != null) {
@@ -187,7 +187,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         portBuilder.addAugmentation(PortBindingExtension.class, bindingBuilder.build());
         portBuilder.addAugmentation(PortSecurityExtension.class, portSecurityBuilder.build());
         if (neutronPort.getAllowedAddressPairs() != null) {
-            final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<AllowedAddressPairs>();
+            final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<>();
             for (final NeutronPortAllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
                 final AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
                 allowedAddressPairsBuilder
@@ -204,7 +204,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             portBuilder.setDeviceOwner(neutronPort.getDeviceOwner());
         }
         if (neutronPort.getExtraDHCPOptions() != null) {
-            final List<ExtraDhcpOpts> listExtraDHCPOptions = new ArrayList<ExtraDhcpOpts>();
+            final List<ExtraDhcpOpts> listExtraDHCPOptions = new ArrayList<>();
             final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
             for (final NeutronPortExtraDHCPOption extraDHCPOption : neutronPort.getExtraDHCPOptions()) {
                 final ExtraDhcpOptsBuilder extraDHCPOptsBuilder = new ExtraDhcpOptsBuilder();
@@ -221,7 +221,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             portBuilder.setExtraDhcpOpts(listExtraDHCPOptions);
         }
         if (neutronPort.getFixedIps() != null) {
-            final List<FixedIps> listNeutronIps = new ArrayList<FixedIps>();
+            final List<FixedIps> listNeutronIps = new ArrayList<>();
             for (final NeutronIps neutronIPs : neutronPort.getFixedIps()) {
                 final FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
                 fixedIpsBuilder.setIpAddress(new IpAddress(neutronIPs.getIpAddress().toCharArray()));

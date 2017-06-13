@@ -138,7 +138,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         }
         subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
         if (subnet.getAllocationPools() != null) {
-            final List<AllocationPools> allocationPools = new ArrayList<AllocationPools>();
+            final List<AllocationPools> allocationPools = new ArrayList<>();
             for (final NeutronSubnetIpAllocationPool allocationPool : subnet.getAllocationPools()) {
                 final AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
                 builder.setStart(new IpAddress(allocationPool.getPoolStart().toCharArray()));
@@ -157,7 +157,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             subnetBuilder.setDnsNameservers(dnsNameServers);
         }
         if (subnet.getHostRoutes() != null) {
-            final List<HostRoutes> hostRoutes = new ArrayList<HostRoutes>();
+            final List<HostRoutes> hostRoutes = new ArrayList<>();
             for (final NeutronRoute hostRoute : subnet.getHostRoutes()) {
                 final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
                 hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));

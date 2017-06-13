@@ -104,7 +104,7 @@ public final class NeutronL2gatewayInterface
             final List<Devices> devices = new ArrayList<>();
             for (final NeutronL2gatewayDevice neutronL2gatewayDevice : neutronObject.getNeutronL2gatewayDevices()) {
                 final DevicesBuilder deviceBuilder = new DevicesBuilder();
-                final List<Interfaces> interfaces = new ArrayList<Interfaces>();
+                final List<Interfaces> interfaces = new ArrayList<>();
                 for (final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface : neutronL2gatewayDevice
                         .getNeutronL2gatewayDeviceInterfaces()) {
                     final InterfacesBuilder interfacesBuilder = new InterfacesBuilder();

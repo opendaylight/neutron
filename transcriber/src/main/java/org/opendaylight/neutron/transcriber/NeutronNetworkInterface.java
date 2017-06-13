@@ -102,7 +102,7 @@ public final class NeutronNetworkInterface
                     .setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
         }
         if (network.getSegments() != null) {
-            final List<Segments> segments = new ArrayList<Segments>();
+            final List<Segments> segments = new ArrayList<>();
             long count = 0;
             for (final NeutronNetworkSegment segment : network.getSegments()) {
                 count++;

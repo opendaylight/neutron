@@ -53,7 +53,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         }
         routerBuilder.setDistributed(router.getDistributed());
         if (router.getRoutes() != null) {
-            final List<Routes> routes = new ArrayList<Routes>();
+            final List<Routes> routes = new ArrayList<>();
             for (final NeutronRoute route : router.getRoutes()) {
                 final RoutesBuilder routeBuilder = new RoutesBuilder();
                 routeBuilder.setDestination(new IpPrefix(route.getDestination().toCharArray()));
@@ -71,7 +71,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
                 builder.setEnableSnat(externalGatewayInfos.getEnableSNAT());
                 builder.setExternalNetworkId(toUuid(externalGatewayInfos.getNetworkID()));
                 if (externalGatewayInfos.getExternalFixedIps() != null) {
-                    final List<ExternalFixedIps> externalFixedIps = new ArrayList<ExternalFixedIps>();
+                    final List<ExternalFixedIps> externalFixedIps = new ArrayList<>();
                     for (final NeutronIps externalIp : externalGatewayInfos.getExternalFixedIps()) {
                         final ExternalFixedIpsBuilder eFixedIpBuilder = new ExternalFixedIpsBuilder();
                         eFixedIpBuilder.setIpAddress(new IpAddress(externalIp.getIpAddress().toCharArray()));
