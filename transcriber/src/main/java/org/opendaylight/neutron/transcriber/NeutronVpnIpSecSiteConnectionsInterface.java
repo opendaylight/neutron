@@ -55,7 +55,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
             answer.setRouteMode(ipsecSiteConnection.getRouteMode());
         }
         if (ipsecSiteConnection.getMtu() != null) {
-            answer.setMtu((ipsecSiteConnection.getMtu()).intValue());
+            answer.setMtu(ipsecSiteConnection.getMtu().intValue());
         }
         if (ipsecSiteConnection.getAuthMode() != null) {
             answer.setAuthMode(ipsecSiteConnection.getAuthMode());
@@ -106,7 +106,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
             ipsecSiteConnectionBuilder.setRouteMode(ipsecSiteConnection.getRouteMode());
         }
         if (ipsecSiteConnection.getMtu() != null) {
-            ipsecSiteConnectionBuilder.setMtu((ipsecSiteConnection.getMtu()).shortValue());
+            ipsecSiteConnectionBuilder.setMtu(ipsecSiteConnection.getMtu().shortValue());
         }
         if (ipsecSiteConnection.getAuthMode() != null) {
             ipsecSiteConnectionBuilder.setAuthMode(ipsecSiteConnection.getAuthMode());

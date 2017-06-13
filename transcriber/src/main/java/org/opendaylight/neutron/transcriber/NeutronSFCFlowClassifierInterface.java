@@ -65,7 +65,6 @@ public final class NeutronSFCFlowClassifierInterface
 
     @Override
     protected SfcFlowClassifier toMd(NeutronSFCFlowClassifier neutronClassifier) {
-
         LOG.trace("toMd: REST SFC Flow Classifier data : {}", neutronClassifier);
 
         SfcFlowClassifierBuilder result = new SfcFlowClassifierBuilder();
