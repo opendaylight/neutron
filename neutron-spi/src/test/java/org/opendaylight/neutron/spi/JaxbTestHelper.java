@@ -25,11 +25,11 @@ public class JaxbTestHelper {
         Class cls = schemaObject.getClass();
         Class[] types = new Class[1];
         types[0] = cls;
-        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(3);
+        Map<String, String> namespacePrefixMapper = new HashMap<>(3);
         namespacePrefixMapper.put("router", "router");
         namespacePrefixMapper.put("provider", "provider");
         namespacePrefixMapper.put("binding", "binding");
-        Map<String, Object> jaxbProperties = new HashMap<String, Object>(2);
+        Map<String, Object> jaxbProperties = new HashMap<>(2);
         jaxbProperties.put(JAXBContextProperties.MEDIA_TYPE, "application/json");
         jaxbProperties.put(JAXBContextProperties.JSON_INCLUDE_ROOT, false);
         jaxbProperties.put(JAXBContextProperties.JSON_NAMESPACE_SEPARATOR, ':');

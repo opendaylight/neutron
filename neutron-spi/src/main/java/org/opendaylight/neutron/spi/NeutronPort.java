@@ -210,7 +210,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 ans.setMacAddress(this.getMacAddress());
                 break;
             case "fixed_ips":
-                ans.setFixedIps(new ArrayList<NeutronIps>(this.getFixedIps()));
+                ans.setFixedIps(new ArrayList<>(this.getFixedIps()));
                 break;
             case "device_id":
                 ans.setDeviceID(this.getDeviceID());
@@ -219,11 +219,11 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 ans.setDeviceOwner(this.getDeviceOwner());
                 break;
             case "security_groups":
-                ans.setSecurityGroups(new ArrayList<NeutronSecurityGroup>(this.getSecurityGroups()));
+                ans.setSecurityGroups(new ArrayList<>(this.getSecurityGroups()));
                 break;
             case "allowed_address_pairs":
                 ans.setAllowedAddressPairs(
-                        new ArrayList<NeutronPortAllowedAddressPairs>(this.getAllowedAddressPairs()));
+                        new ArrayList<>(this.getAllowedAddressPairs()));
                 break;
             case "binding:host_id":
                 ans.setBindinghostID(this.getBindinghostID());
@@ -235,10 +235,10 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 ans.setBindingvifType(this.getBindingvifType());
                 break;
             case "binding:vif_details":
-                ans.setVIFDetails(new HashMap<String, String>(this.getVIFDetails()));
+                ans.setVIFDetails(new HashMap<>(this.getVIFDetails()));
                 break;
             case "extra_dhcp_opts":
-                ans.setExtraDHCPOptions(new ArrayList<NeutronPortExtraDHCPOption>(this.getExtraDHCPOptions()));
+                ans.setExtraDHCPOptions(new ArrayList<>(this.getExtraDHCPOptions()));
                 break;
             case "port_security_enabled":
                 ans.setPortSecurityEnabled(this.getPortSecurityEnabled());
@@ -259,7 +259,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
             portSecurityEnabled = true;
         }
         if (fixedIps == null) {
-            fixedIps = new ArrayList<NeutronIps>();
+            fixedIps = new ArrayList<>();
         }
     }
 

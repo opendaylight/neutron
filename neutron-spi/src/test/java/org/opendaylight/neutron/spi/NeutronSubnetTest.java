@@ -47,7 +47,7 @@ public class NeutronSubnetTest {
         NeutronSubnetIpAllocationPool allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+        List<NeutronSubnetIpAllocationPool> pools = new ArrayList<>();
         pools.add(allocationPool);
         objectUT.setAllocationPools(pools);
 
@@ -69,7 +69,7 @@ public class NeutronSubnetTest {
         allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+        pools = new ArrayList<>();
         pools.add(allocationPool);
         objectUT.setAllocationPools(pools);
 
@@ -117,7 +117,7 @@ public class NeutronSubnetTest {
         NeutronSubnetIpAllocationPool allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("10.18.0.2");
         allocationPool.setPoolEnd("10.18.0.6");
-        List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+        List<NeutronSubnetIpAllocationPool> pools = new ArrayList<>();
         pools.add(allocationPool);
         allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("10.18.0.10");
@@ -132,7 +132,7 @@ public class NeutronSubnetTest {
         allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("2015::2");
         allocationPool.setPoolEnd("2015::6");
-        pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+        pools = new ArrayList<>();
         pools.add(allocationPool);
         allocationPool = new NeutronSubnetIpAllocationPool();
         allocationPool.setPoolStart("2015::10");

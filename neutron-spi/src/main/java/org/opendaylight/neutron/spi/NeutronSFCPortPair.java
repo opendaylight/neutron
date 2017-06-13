@@ -70,7 +70,7 @@ public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPo
                 ans.setEgressPortUUID(this.getEgressPortUUID());
                 break;
             case "service_function_parameters":
-                ans.setServiceFunctionParameters(new HashMap<String, String>(this.getServiceFunctionParameters()));
+                ans.setServiceFunctionParameters(new HashMap<>(this.getServiceFunctionParameters()));
                 break;
             default:
                 return super.extractField(field, ans);

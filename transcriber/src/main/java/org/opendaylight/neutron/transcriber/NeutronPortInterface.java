@@ -97,7 +97,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         final NeutronPort result = new NeutronPort();
         fromMdAdminAttributes(port, result);
         if (port.getAllowedAddressPairs() != null) {
-            final List<NeutronPortAllowedAddressPairs> pairs = new ArrayList<NeutronPortAllowedAddressPairs>();
+            final List<NeutronPortAllowedAddressPairs> pairs = new ArrayList<>();
             for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
                 final NeutronPortAllowedAddressPairs pair = new NeutronPortAllowedAddressPairs();
                 pair.setIpAddress(String.valueOf(mdPair.getIpAddress().getValue()));
@@ -109,7 +109,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         result.setDeviceID(port.getDeviceId());
         result.setDeviceOwner(port.getDeviceOwner());
         if (port.getExtraDhcpOpts() != null) {
-            final List<NeutronPortExtraDHCPOption> options = new ArrayList<NeutronPortExtraDHCPOption>();
+            final List<NeutronPortExtraDHCPOption> options = new ArrayList<>();
             for (final ExtraDhcpOpts opt : port.getExtraDhcpOpts()) {
                 final NeutronPortExtraDHCPOption arg = new NeutronPortExtraDHCPOption();
                 arg.setName(opt.getOptName());
@@ -120,7 +120,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             result.setExtraDHCPOptions(options);
         }
         if (port.getFixedIps() != null) {
-            final List<NeutronIps> ips = new ArrayList<NeutronIps>();
+            final List<NeutronIps> ips = new ArrayList<>();
             for (final FixedIps mdIp : port.getFixedIps()) {
                 final NeutronIps ip = new NeutronIps();
                 ip.setIpAddress(String.valueOf(mdIp.getIpAddress().getValue()));
@@ -132,13 +132,13 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         result.setMacAddress(port.getMacAddress().getValue());
         result.setNetworkUUID(String.valueOf(port.getNetworkId().getValue()));
         if (port.getSecurityGroups() != null) {
-            final Set<NeutronSecurityGroup> allGroups = new HashSet<NeutronSecurityGroup>();
+            final Set<NeutronSecurityGroup> allGroups = new HashSet<>();
             for (final Uuid sgUuid : port.getSecurityGroups()) {
                 final NeutronSecurityGroup sg = new NeutronSecurityGroup();
                 sg.setID(sgUuid.getValue());
                 allGroups.add(sg);
             }
-            final List<NeutronSecurityGroup> groups = new ArrayList<NeutronSecurityGroup>();
+            final List<NeutronSecurityGroup> groups = new ArrayList<>();
             groups.addAll(allGroups);
             result.setSecurityGroups(groups);
         }
@@ -236,7 +236,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             portBuilder.setNetworkId(toUuid(neutronPort.getNetworkUUID()));
         }
         if (neutronPort.getSecurityGroups() != null) {
-            final List<Uuid> listSecurityGroups = new ArrayList<Uuid>();
+            final List<Uuid> listSecurityGroups = new ArrayList<>();
             for (final NeutronSecurityGroup neutronSecurityGroup : neutronPort.getSecurityGroups()) {
                 listSecurityGroups.add(toUuid(neutronSecurityGroup.getID()));
             }

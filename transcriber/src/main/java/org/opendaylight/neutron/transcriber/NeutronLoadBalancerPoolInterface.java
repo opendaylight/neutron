@@ -77,7 +77,7 @@ public final class NeutronLoadBalancerPoolInterface
             poolBuilder.setLbAlgorithm(pool.getLoadBalancerPoolLbAlgorithm());
         }
         if (pool.getLoadBalancerPoolListeners() != null) {
-            final List<Uuid> listListener = new ArrayList<Uuid>();
+            final List<Uuid> listListener = new ArrayList<>();
             for (final NeutronID neutronId : pool.getLoadBalancerPoolListeners()) {
                 listListener.add(toUuid(neutronId.getID()));
             }
@@ -123,14 +123,14 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolLbAlgorithm(pool.getLbAlgorithm());
         }
         if (pool.getListeners() != null) {
-            final List<NeutronID> ids = new ArrayList<NeutronID>();
+            final List<NeutronID> ids = new ArrayList<>();
             for (final Uuid id : pool.getListeners()) {
                 ids.add(new NeutronID(id.getValue()));
             }
             answer.setLoadBalancerPoolListeners(ids);
         }
         if (pool.getMembers() != null) {
-            final List<NeutronLoadBalancerPoolMember> members = new ArrayList<NeutronLoadBalancerPoolMember>();
+            final List<NeutronLoadBalancerPoolMember> members = new ArrayList<>();
             for (final Member member : pool.getMembers().getMember()) {
                 members.add(fromMemberMd(member));
             }
@@ -176,8 +176,7 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid) {
-        final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<
-                NeutronLoadBalancerPoolMember>();
+        final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<>();
         final Members members = readMd(createMembersInstanceIdentifier(toMd(poolUuid)));
         if (members != null) {
             for (final Member member : members.getMember()) {
@@ -186,7 +185,7 @@ public final class NeutronLoadBalancerPoolInterface
         }
         LOGGER.debug("Exiting getLoadBalancerPoolMembers, Found {} OpenStackLoadBalancerPoolMember",
                 allLoadBalancerPoolMembers.size());
-        final List<NeutronLoadBalancerPoolMember> ans = new ArrayList<NeutronLoadBalancerPoolMember>();
+        final List<NeutronLoadBalancerPoolMember> ans = new ArrayList<>();
         ans.addAll(allLoadBalancerPoolMembers);
         return ans;
     }

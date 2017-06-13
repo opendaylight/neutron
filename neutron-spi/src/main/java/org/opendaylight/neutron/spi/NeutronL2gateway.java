@@ -34,7 +34,7 @@ public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gatew
     protected boolean extractField(String field, NeutronL2gateway ans) {
         switch (field) {
             case "devices":
-                List<NeutronL2gatewayDevice> devices = new ArrayList<NeutronL2gatewayDevice>();
+                List<NeutronL2gatewayDevice> devices = new ArrayList<>();
                 devices.addAll(this.getNeutronL2gatewayDevices());
                 ans.setNeutronL2gatewayDevices(devices);
                 break;

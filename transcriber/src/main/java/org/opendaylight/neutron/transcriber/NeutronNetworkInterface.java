@@ -64,7 +64,7 @@ public final class NeutronNetworkInterface
         result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());
         result.setProviderSegmentationID(providerExtension.getSegmentationId());
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
-        final List<NeutronNetworkSegment> segments = new ArrayList<NeutronNetworkSegment>();
+        final List<NeutronNetworkSegment> segments = new ArrayList<>();
         if (providerExtension.getSegments() != null) {
             for (final Segments segment : providerExtension.getSegments()) {
                 final NeutronNetworkSegment neutronSegment = new NeutronNetworkSegment();

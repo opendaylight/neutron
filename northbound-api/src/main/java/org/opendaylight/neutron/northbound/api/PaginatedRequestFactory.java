@@ -155,6 +155,6 @@ public final class PaginatedRequestFactory {
             links.add(previous);
         }
 
-        return new PaginationResults<T>(collection, links);
+        return new PaginationResults<>(collection, links);
     }
 }

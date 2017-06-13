@@ -172,17 +172,17 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 ans.setGatewayIp(this.getGatewayIp());
                 break;
             case "dns_nameservers":
-                List<String> nsList = new ArrayList<String>();
+                List<String> nsList = new ArrayList<>();
                 nsList.addAll(this.getDnsNameservers());
                 ans.setDnsNameservers(nsList);
                 break;
             case "allocation_pools":
-                List<NeutronSubnetIpAllocationPool> pools = new ArrayList<NeutronSubnetIpAllocationPool>();
+                List<NeutronSubnetIpAllocationPool> pools = new ArrayList<>();
                 pools.addAll(this.getAllocationPools());
                 ans.setAllocationPools(pools);
                 break;
             case "host_routes":
-                List<NeutronRoute> hostRoutes = new ArrayList<NeutronRoute>();
+                List<NeutronRoute> hostRoutes = new ArrayList<>();
                 hostRoutes.addAll(this.getHostRoutes());
                 ans.setHostRoutes(hostRoutes);
                 break;
@@ -269,13 +269,13 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
             ipVersion = IPV4_VERSION;
         }
         if (dnsNameservers == null) {
-            dnsNameservers = new ArrayList<String>();
+            dnsNameservers = new ArrayList<>();
         }
         if (hostRoutes == null) {
-            hostRoutes = new ArrayList<NeutronRoute>();
+            hostRoutes = new ArrayList<>();
         }
         if (allocationPools == null) {
-            allocationPools = new ArrayList<NeutronSubnetIpAllocationPool>();
+            allocationPools = new ArrayList<>();
             if (ipVersion == IPV4_VERSION) {
                 try {
                     SubnetUtils util = new SubnetUtils(cidr);
