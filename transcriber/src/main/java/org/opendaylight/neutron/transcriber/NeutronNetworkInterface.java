@@ -51,6 +51,7 @@ public final class NeutronNetworkInterface
         return networks.getNetwork();
     }
 
+    @Override
     protected NeutronNetwork fromMd(Network network) {
         final NeutronNetwork result = new NeutronNetwork();
         result.initDefaults();
@@ -134,6 +135,7 @@ public final class NeutronNetworkInterface
         networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
     }
 
+    @Override
     protected Network toMd(NeutronNetwork network) {
         final NetworkBuilder networkBuilder = new NetworkBuilder();
         toMdAdminAttributes(network, networkBuilder);

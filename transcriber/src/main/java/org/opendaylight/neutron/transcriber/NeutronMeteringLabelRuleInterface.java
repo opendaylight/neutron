@@ -65,6 +65,7 @@ public final class NeutronMeteringLabelRuleInterface
         return meteringRuleBuilder.build();
     }
 
+    @Override
     protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
         final NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
         if (rule.getUuid() != null) {

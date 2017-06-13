@@ -34,6 +34,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
         return connections.getIpsecsiteconnection();
     }
 
+    @Override
     protected NeutronVpnIpSecSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
         final NeutronVpnIpSecSiteConnection answer = new NeutronVpnIpSecSiteConnection();
         fromMdAdminAttributes(ipsecSiteConnection, answer);

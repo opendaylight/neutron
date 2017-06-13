@@ -68,6 +68,7 @@ public final class NeutronFloatingIpInterface
         return floatingipBuilder.build();
     }
 
+    @Override
     protected NeutronFloatingIp fromMd(Floatingip fip) {
         final NeutronFloatingIp result = new NeutronFloatingIp();
         result.setID(fip.getUuid().getValue());

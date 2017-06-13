@@ -62,6 +62,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         return subnets.getSubnet();
     }
 
+    @Override
     protected NeutronSubnet fromMd(Subnet subnet) {
         final NeutronSubnet result = new NeutronSubnet();
         fromMdBaseAttributes(subnet, result);
@@ -108,6 +109,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         return result;
     }
 
+    @Override
     protected Subnet toMd(NeutronSubnet subnet) {
         final SubnetBuilder subnetBuilder = new SubnetBuilder();
         toMdBaseAttributes(subnet, subnetBuilder);

@@ -30,6 +30,7 @@ public final class NeutronLoadBalancerInterface
         return lbs.getLoadbalancer();
     }
 
+    @Override
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
         final NeutronLoadBalancer answer = new NeutronLoadBalancer();
         fromMdAdminAttributes(loadBalancer, answer);

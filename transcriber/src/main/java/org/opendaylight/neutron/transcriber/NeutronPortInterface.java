@@ -93,6 +93,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
     }
 
+    @Override
     protected NeutronPort fromMd(Port port) {
         final NeutronPort result = new NeutronPort();
         fromMdAdminAttributes(port, result);
