@@ -118,7 +118,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         }
         if (subnet.getIpVersion() != null) {
             final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
-            subnetBuilder.setIpVersion((Class<? extends IpVersionBase>) mapper.get(subnet.getIpVersion()));
+            subnetBuilder.setIpVersion(mapper.get(subnet.getIpVersion()));
         }
         if (subnet.getCidr() != null) {
             final IpPrefix ipPrefix = IpPrefixBuilder.getDefaultInstance(subnet.getCidr());
@@ -130,11 +130,11 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         }
         if (subnet.getIpV6RaMode() != null) {
             final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper = DHCPV6_MAP.inverse();
-            subnetBuilder.setIpv6RaMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6RaMode()));
+            subnetBuilder.setIpv6RaMode(mapper.get(subnet.getIpV6RaMode()));
         }
         if (subnet.getIpV6AddressMode() != null) {
             final ImmutableBiMap<String, Class<? extends Dhcpv6Base>> mapper = DHCPV6_MAP.inverse();
-            subnetBuilder.setIpv6AddressMode((Class<? extends Dhcpv6Base>) mapper.get(subnet.getIpV6AddressMode()));
+            subnetBuilder.setIpv6AddressMode(mapper.get(subnet.getIpV6AddressMode()));
         }
         subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
         if (subnet.getAllocationPools() != null) {

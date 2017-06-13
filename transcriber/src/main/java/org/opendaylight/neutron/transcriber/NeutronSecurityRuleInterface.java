@@ -104,7 +104,7 @@ public final class NeutronSecurityRuleInterface extends
         if (securityRule.getSecurityRuleDirection() != null) {
             final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
             securityRuleBuilder
-                    .setDirection((Class<? extends DirectionBase>) mapper.get(securityRule.getSecurityRuleDirection()));
+                    .setDirection(mapper.get(securityRule.getSecurityRuleDirection()));
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
@@ -129,7 +129,7 @@ public final class NeutronSecurityRuleInterface extends
         if (securityRule.getSecurityRuleEthertype() != null) {
             final ImmutableBiMap<String, Class<? extends EthertypeBase>> mapper = ETHERTYPE_MAP.inverse();
             securityRuleBuilder
-                    .setEthertype((Class<? extends EthertypeBase>) mapper.get(securityRule.getSecurityRuleEthertype()));
+                    .setEthertype(mapper.get(securityRule.getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
             securityRuleBuilder.setPortRangeMin(Integer.valueOf(securityRule.getSecurityRulePortMin()));

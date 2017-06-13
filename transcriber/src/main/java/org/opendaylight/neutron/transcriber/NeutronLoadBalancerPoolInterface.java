@@ -90,7 +90,7 @@ public final class NeutronLoadBalancerPoolInterface
         }
         if (pool.getLoadBalancerPoolProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
-            poolBuilder.setProtocol((Class<? extends ProtocolBase>) mapper.get(pool.getLoadBalancerPoolProtocol()));
+            poolBuilder.setProtocol(mapper.get(pool.getLoadBalancerPoolProtocol()));
         }
         if (pool.getLoadBalancerPoolSessionPersistence() != null) {
             final NeutronLoadBalancerSessionPersistence sessionPersistence = pool

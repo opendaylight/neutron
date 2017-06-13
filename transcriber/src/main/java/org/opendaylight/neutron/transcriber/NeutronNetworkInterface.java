@@ -99,7 +99,7 @@ public final class NeutronNetworkInterface
         if (network.getProviderNetworkType() != null) {
             final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_MAP.inverse();
             providerExtensionBuilder
-                    .setNetworkType((Class<? extends NetworkTypeBase>) mapper.get(network.getProviderNetworkType()));
+                    .setNetworkType(mapper.get(network.getProviderNetworkType()));
         }
         if (network.getSegments() != null) {
             final List<Segments> segments = new ArrayList<>();
@@ -116,7 +116,7 @@ public final class NeutronNetworkInterface
                 if (segment.getProviderNetworkType() != null) {
                     final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_MAP.inverse();
                     segmentsBuilder.setNetworkType(
-                            (Class<? extends NetworkTypeBase>) mapper.get(segment.getProviderNetworkType()));
+                            mapper.get(segment.getProviderNetworkType()));
                 }
                 segmentsBuilder.setSegmentationIndex(Long.valueOf(count));
                 segments.add(segmentsBuilder.build());

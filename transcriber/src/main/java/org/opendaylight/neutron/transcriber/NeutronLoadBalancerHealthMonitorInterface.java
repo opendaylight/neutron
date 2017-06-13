@@ -80,7 +80,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
             final ImmutableBiMap<String, Class<? extends ProbeBase>> mapper = PROBE_MAP.inverse();
             healthmonitorBuilder
-                    .setType((Class<? extends ProbeBase>) mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
+                    .setType(mapper.get(healthMonitor.getLoadBalancerHealthMonitorType()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
             healthmonitorBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
