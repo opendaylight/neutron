@@ -5,7 +5,7 @@
           xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.2.0 http://karaf.apache.org/xmlns/features/v1.2.0">
    <repository>mvn:org.opendaylight.neutron/features-neutron/{{VERSION}}/xml/features</repository>
    <feature name='odl-neutron-neutron-logger-test' version='${project.version}' description="OpenDaylight :: Neutron :: Neutron Logger Test">
-    <feature version='${project.version}'>odl-neutron-service</feature>
-    <bundle>mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}</bundle>
+    <feature version='${project.version}' prerequisite="false" dependency="true">odl-neutron-service</feature>
+    <bundle prerequisite="false" dependency="true">mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}</bundle>
   </feature>
 </features>
