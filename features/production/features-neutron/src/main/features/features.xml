@@ -10,65 +10,66 @@
    <repository>mvn:org.opendaylight.ovsdb/southbound-features/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.netconf/features-restconf/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.netconf/features-netconf-connector/{{VERSION}}/xml/features</repository>
-   <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
-    <feature version='${project.version}'>odl-neutron-spi</feature>
-    <feature version='${project.version}'>odl-neutron-northbound-api</feature>
-    <feature version='${project.version}'>odl-neutron-transcriber</feature>
-  </feature>
-  <feature name='odl-neutron-northbound-api' version='${project.version}' description="OpenDaylight :: Neutron :: Northbound">
-    <feature version='${aaa.version}'>odl-aaa-shiro</feature>
-    <feature>war</feature>
-    <feature version='${project.version}'>odl-neutron-spi</feature>
-    <bundle>mvn:org.opendaylight.neutron/northbound-api/{{VERSION}}</bundle>
-    <bundle>mvn:com.sun.jersey/jersey-core/{{VERSION}}</bundle>
-    <bundle>mvn:com.sun.jersey/jersey-server/{{VERSION}}</bundle>
-    <bundle>mvn:com.sun.jersey/jersey-servlet/{{VERSION}}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/{{VERSION}}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/{{VERSION}}</bundle>
-    <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/{{VERSION}}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-    <bundle>mvn:javax.validation/validation-api/{{VERSION}}</bundle>
-  </feature>
 
-  <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
-    <feature version='${mdsal.model.version}'>odl-mdsal-models</feature>
-    <bundle>mvn:org.opendaylight.neutron/neutron-spi/{{VERSION}}</bundle>
-    <bundle>mvn:commons-net/commons-net/{{VERSION}}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-    <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/{{VERSION}}</bundle>
-  </feature>
-  <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
-    <feature version='${project.version}'>odl-neutron-northbound-api</feature>
-    <feature version='${project.version}'>odl-neutron-spi</feature>
-    <feature>war</feature>
-    <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
-    <bundle>mvn:org.opendaylight.neutron/transcriber/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-  </feature>
-  <feature name='odl-neutron-logger' version='${project.version}' description="OpenDaylight :: Neutron :: Logger">
-    <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
-    <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-  </feature>
-  <feature name='odl-neutron-hostconfig-ovs' version='${project.version}' description="OpenDaylight :: Neutron :: HostconfigOvs">
-    <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
-    <feature version="${ovsdb.version}">odl-ovsdb-southbound-api</feature>
-    <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.ovsdb/utils.mdsal-utils/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.ovsdb/utils.southbound-utils/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-ovs/{{VERSION}}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-  </feature>
-  <feature name='odl-neutron-hostconfig-vpp' version='${project.version}' description="OpenDaylight :: Neutron :: HostconfigVpp">
-    <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
-    <feature version="${netconf.version}">odl-netconf-clustered-topology</feature>
-    <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
-    <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}</bundle>
-    <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
-    <configfile finalname="/etc/org.opendaylight.neutron.hostconfig.vpp.startup.cfg">mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}/cfg/config</configfile>
-  </feature>
+   <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
+     <feature version='${project.version}'>odl-neutron-spi</feature>
+     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
+     <feature version='${project.version}'>odl-neutron-transcriber</feature>
+   </feature>
+
+   <feature name='odl-neutron-northbound-api' version='${project.version}' description="OpenDaylight :: Neutron :: Northbound">
+     <feature version='${aaa.version}'>odl-aaa-shiro</feature>
+     <feature>war</feature>
+     <feature version='${project.version}'>odl-neutron-spi</feature>
+     <bundle>mvn:org.opendaylight.neutron/northbound-api/{{VERSION}}</bundle>
+     <bundle>mvn:com.sun.jersey/jersey-core/{{VERSION}}</bundle>
+     <bundle>mvn:com.sun.jersey/jersey-server/{{VERSION}}</bundle>
+     <bundle>mvn:com.sun.jersey/jersey-servlet/{{VERSION}}</bundle>
+     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.moxy/{{VERSION}}</bundle>
+     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.core/{{VERSION}}</bundle>
+     <bundle>mvn:org.eclipse.persistence/org.eclipse.persistence.antlr/{{VERSION}}</bundle>
+     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+     <bundle>mvn:javax.validation/validation-api/{{VERSION}}</bundle>
+   </feature>
+   <feature name='odl-neutron-spi' version='${project.version}' description="OpenDaylight :: Neutron :: API">
+     <feature version='${mdsal.model.version}'>odl-mdsal-models</feature>
+     <bundle>mvn:org.opendaylight.neutron/neutron-spi/{{VERSION}}</bundle>
+     <bundle>mvn:commons-net/commons-net/{{VERSION}}</bundle>
+     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+     <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/{{VERSION}}</bundle>
+   </feature>
+   <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
+     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
+     <feature version='${project.version}'>odl-neutron-spi</feature>
+     <feature>war</feature>
+     <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
+     <bundle>mvn:org.opendaylight.neutron/transcriber/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
+     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+   </feature>
+   <feature name='odl-neutron-logger' version='${project.version}' description="OpenDaylight :: Neutron :: Logger">
+     <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
+     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.neutron/neutron-logger/{{VERSION}}</bundle>
+     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+   </feature>
+   <feature name='odl-neutron-hostconfig-ovs' version='${project.version}' description="OpenDaylight :: Neutron :: HostconfigOvs">
+     <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
+     <feature version="${ovsdb.version}">odl-ovsdb-southbound-api</feature>
+     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.ovsdb/utils.mdsal-utils/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.ovsdb/utils.southbound-utils/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-ovs/{{VERSION}}</bundle>
+     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+   </feature>
+   <feature name='odl-neutron-hostconfig-vpp' version='${project.version}' description="OpenDaylight :: Neutron :: HostconfigVpp">
+     <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
+     <feature version="${netconf.version}">odl-netconf-clustered-topology</feature>
+     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-utils/{{VERSION}}</bundle>
+     <bundle>mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}</bundle>
+     <bundle>mvn:org.osgi/org.osgi.core/{{VERSION}}</bundle>
+     <configfile finalname="/etc/org.opendaylight.neutron.hostconfig.vpp.startup.cfg">mvn:org.opendaylight.neutron/neutron-hostconfig-vpp/{{VERSION}}/cfg/config</configfile>
+   </feature>
 </features>
