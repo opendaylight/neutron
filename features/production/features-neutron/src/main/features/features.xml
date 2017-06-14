@@ -12,15 +12,15 @@
    <repository>mvn:org.opendaylight.netconf/features-netconf-connector/{{VERSION}}/xml/features</repository>
 
    <feature name='odl-neutron-service' version='${project.version}' description="OpenDaylight :: Neutron :: API">
-     <feature version='${project.version}'>odl-neutron-spi</feature>
-     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
-     <feature version='${project.version}'>odl-neutron-transcriber</feature>
+     <feature version='${project.version}' dependency="true" prerequisite="false">odl-neutron-spi</feature>
+     <feature version='${project.version}' dependency="true" prerequisite="false">odl-neutron-northbound-api</feature>
+     <feature version='${project.version}' dependency="true" prerequisite="false">odl-neutron-transcriber</feature>
    </feature>
 
    <feature name='odl-neutron-northbound-api' version='${project.version}' description="OpenDaylight :: Neutron :: Northbound">
      <feature version='${aaa.version}'>odl-aaa-shiro</feature>
      <feature>war</feature>
-     <feature version='${project.version}'>odl-neutron-spi</feature>
+     <feature version='${project.version}' dependency="true" prerequisite="false">odl-neutron-spi</feature>
      <bundle>mvn:org.opendaylight.neutron/northbound-api/{{VERSION}}</bundle>
      <bundle>mvn:com.sun.jersey/jersey-core/{{VERSION}}</bundle>
      <bundle>mvn:com.sun.jersey/jersey-server/{{VERSION}}</bundle>
@@ -39,8 +39,8 @@
      <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/{{VERSION}}</bundle>
    </feature>
    <feature name='odl-neutron-transcriber' version='${project.version}' description="OpenDaylight :: Neutron :: Implementation">
-     <feature version='${project.version}'>odl-neutron-northbound-api</feature>
-     <feature version='${project.version}'>odl-neutron-spi</feature>
+     <feature version='${project.version}' dependency="true" prerequisite="false">odl-neutron-northbound-api</feature>
+     <feature version='${project.version}' dependency="true" prerequisite="false">odl-neutron-spi</feature>
      <feature>war</feature>
      <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
      <bundle>mvn:org.opendaylight.neutron/transcriber/{{VERSION}}</bundle>
