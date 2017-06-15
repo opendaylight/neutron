@@ -4,19 +4,19 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>features-parent</artifactId>
-    <version>1.7.4-SNAPSHOT</version>
+    <version>1.7.4-Boron-SR4</version>
     <relativePath/>
   </parent>
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>features-neutron</artifactId>
-  <version>0.7.4-SNAPSHOT</version>
+  <version>0.7.4-Boron-SR4</version>
   <packaging>jar</packaging>
   <properties>
-      <aaa.version>0.4.4-SNAPSHOT</aaa.version>
-      <yangtools.version>1.0.4-SNAPSHOT</yangtools.version>
-      <controller.mdsal.version>1.4.4-SNAPSHOT</controller.mdsal.version>
-      <mdsal.model.version>0.9.4-SNAPSHOT</mdsal.model.version>
-      <restconf.version>1.4.4-SNAPSHOT</restconf.version>
+      <aaa.version>0.4.4-Boron-SR4</aaa.version>
+      <yangtools.version>1.0.4-Boron-SR4</yangtools.version>
+      <controller.mdsal.version>1.4.4-Boron-SR4</controller.mdsal.version>
+      <mdsal.model.version>0.9.4-Boron-SR4</mdsal.model.version>
+      <restconf.version>1.4.4-Boron-SR4</restconf.version>
   </properties>
   <dependencyManagement>
     <dependencies>
