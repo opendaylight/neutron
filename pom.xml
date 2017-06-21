@@ -97,7 +97,6 @@
     <module>artifacts</module>
     <module>features/production</module>
     <module>features/test</module>
-    <module>karaf</module>
     <module>karaf4</module>
     <module>integration/test</module>
     <module>model</module>
