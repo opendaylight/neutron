@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="features4-neutron-test">
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="features-neutron-test">
     <repository>mvn:org.opendaylight.neutron/odl-neutron-logger-test/0.9.0-SNAPSHOT/xml/features</repository>
-    <feature name="features4-neutron-test" description="features4-neutron-test" version="0.9.0.SNAPSHOT">
+    <feature name="features-neutron-test" description="features-neutron-test" version="0.9.0.SNAPSHOT">
         <feature version="0.9.0.SNAPSHOT" prerequisite="false" dependency="true">odl-neutron-logger-test</feature>
     </feature>
 </features>

@@ -58,7 +58,7 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
     public String getKarafDistro() {
         return maven()
             .groupId("org.opendaylight.neutron")
-            .artifactId("neutron4-karaf")
+            .artifactId("neutron-karaf")
             .versionAsInProject()
             .type("zip")
             .getURL();
@@ -68,7 +68,7 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
     public MavenUrlReference getFeatureRepo() {
         return maven()
             .groupId("org.opendaylight.neutron")
-            .artifactId("features4-neutron-test")
+            .artifactId("features-neutron-test")
             .classifier("features")
             .type("xml")
             .versionAsInProject();

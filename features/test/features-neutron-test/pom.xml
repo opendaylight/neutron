@@ -13,7 +13,7 @@
     </parent>
 
     <groupId>org.opendaylight.neutron</groupId>
-    <artifactId>features4-neutron-test</artifactId>
+    <artifactId>features-neutron-test</artifactId>
     <version>0.9.0-SNAPSHOT</version>
     <packaging>feature</packaging>
 
