@@ -97,7 +97,7 @@
     <module>artifacts</module>
     <module>features/production</module>
     <module>features/test</module>
-    <module>karaf4</module>
+    <module>karaf</module>
     <module>integration/test</module>
     <module>model</module>
     <module>neutron-hostconfig</module>

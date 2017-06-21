@@ -19,7 +19,7 @@
   <properties>
     <skipITs>false</skipITs>
     <karaf.distro.groupId>org.opendaylight.neutron</karaf.distro.groupId>
-    <karaf.distro.artifactId>neutron4-karaf</karaf.distro.artifactId>
+    <karaf.distro.artifactId>neutron-karaf</karaf.distro.artifactId>
     <karaf.distro.version>${project.version}</karaf.distro.version>
     <karaf.distro.type>zip</karaf.distro.type>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
@@ -30,7 +30,7 @@
   <dependencies>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
-      <artifactId>neutron4-karaf</artifactId>
+      <artifactId>neutron-karaf</artifactId>
       <version>${project.version}</version>
       <type>zip</type>
     </dependency>

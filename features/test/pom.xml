@@ -14,7 +14,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>features4-neutron-test</module>
+    <module>features-neutron-test</module>
     <module>odl-neutron-logger-test</module>
   </modules>
 
