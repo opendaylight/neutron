@@ -70,6 +70,30 @@
       "revId": "17f7dfc7e959245e7a3f2aeec364f893cbf9b145",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa2559ec_21e4723a",
+        "filename": "neutron-hostconfig/vpp/src/test/java/org/opendaylight/neutron/hostconfig/vpp/SocketInfoTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7108
+      },
+      "writtenOn": "2017-06-23T15:32:28Z",
+      "side": 1,
+      "message": "I will do a new patch, can you tell how can I run integration test. I tried mvn -Dtest\u003dNeutronBgpvpnTests test -DfailIfNoTests\u003dfalse but nothing happen",
+      "parentUuid": "fa2559ec_a1f862e6",
+      "range": {
+        "startLine": 22,
+        "startChar": 44,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "17f7dfc7e959245e7a3f2aeec364f893cbf9b145",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
