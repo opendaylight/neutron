@@ -12,6 +12,10 @@ import com.google.common.base.Preconditions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
@@ -25,7 +29,8 @@ import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NeutronLogger implements AutoCloseable {
+@Singleton
+public final class NeutronLogger {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronLogger.class);
 
     private DataBroker db;
@@ -34,6 +39,7 @@ public final class NeutronLogger implements AutoCloseable {
     private ClusteredDataTreeChangeListener<Neutron> operationalDataTreeChangeListener;
     private ListenerRegistration<? extends ClusteredDataTreeChangeListener<Neutron>> operationalRegisteredListener;
 
+    @Inject
     public NeutronLogger(@Nonnull DataBroker db) {
         LOG.info("Creating NeutronLogger {}", db);
         this.db = Preconditions.checkNotNull(db, "null db");
@@ -91,6 +97,7 @@ public final class NeutronLogger implements AutoCloseable {
         LOG.info(messageBuilder.toString());
     }
 
+    @PostConstruct
     public void init() {
         LOG.info("Register listener for Neutron model data changes");
         InstanceIdentifier<Neutron> instanceId = Preconditions.checkNotNull(InstanceIdentifier.create(Neutron.class));
@@ -118,7 +125,7 @@ public final class NeutronLogger implements AutoCloseable {
                 operationalDataTreeChangeListener);
     }
 
-    @Override
+    @PreDestroy
     public void close() throws Exception {
         configurationRegisteredListener.close();
         configurationRegisteredListener = null;

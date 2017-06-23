@@ -7,15 +7,7 @@
       interface="org.opendaylight.controller.md.sal.binding.api.DataBroker"
       odl:type="default" />
 
-  <bean id="neutronTranscriberImpl"
-     class="org.opendaylight.neutron.transcriber.NeutronTranscriberProvider"
-     init-method="init"
-     destroy-method="close">
-    <argument ref="blueprintBundleContext"/>
-    <argument ref="dataBroker"/>
-  </bean>
-
-  <service ref="neutronTranscriberImpl"
+  <service ref="neutronTranscriberProvider"
     interface="org.opendaylight.neutron.transcriber.NeutronTranscriber"
     odl:type="default"/>
 
