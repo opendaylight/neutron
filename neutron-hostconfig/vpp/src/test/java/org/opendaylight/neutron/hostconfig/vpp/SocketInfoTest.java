@@ -19,9 +19,9 @@ public class SocketInfoTest {
     private static final String VHOSTUSER_MODE = "server";
 
     // For equal test
-    private static final String SOCKET_PATH_BIS = "/opt";
-    private static final String SOCKET_PREFIX_BIS = "socket_bis_";
-    private static final String VHOSTUSER_MODE_BIS = "server_bis";
+    private static final String ALT_SOCKET_PATH = "/opt";
+    private static final String ALT_SOCKET_PREFIX = "socket_bis_";
+    private static final String ALT_VHOSTUSER_MODE = "server_bis";
     private SocketInfo socketInfo;
 
     @Before
@@ -61,9 +61,9 @@ public class SocketInfoTest {
         Assert.assertTrue(socketInfo.equals(socketInfo));
         Assert.assertFalse(socketInfo.equals(null));
         Assert.assertFalse(socketInfo.equals(0));
-        Assert.assertFalse(socketInfo.equals(new SocketInfo(SOCKET_PATH_BIS, SOCKET_PREFIX, VHOSTUSER_MODE)));
-        Assert.assertFalse(socketInfo.equals(new SocketInfo(SOCKET_PATH, SOCKET_PREFIX_BIS, VHOSTUSER_MODE)));
-        Assert.assertFalse(socketInfo.equals(new SocketInfo(SOCKET_PATH, SOCKET_PATH, VHOSTUSER_MODE_BIS)));
+        Assert.assertFalse(socketInfo.equals(new SocketInfo(ALT_SOCKET_PATH, SOCKET_PREFIX, VHOSTUSER_MODE)));
+        Assert.assertFalse(socketInfo.equals(new SocketInfo(SOCKET_PATH, ALT_SOCKET_PREFIX, VHOSTUSER_MODE)));
+        Assert.assertFalse(socketInfo.equals(new SocketInfo(SOCKET_PATH, SOCKET_PATH, ALT_VHOSTUSER_MODE)));
     }
 
 
