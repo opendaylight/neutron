@@ -46,6 +46,30 @@
       "revId": "17f7dfc7e959245e7a3f2aeec364f893cbf9b145",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa2559ec_a1f862e6",
+        "filename": "neutron-hostconfig/vpp/src/test/java/org/opendaylight/neutron/hostconfig/vpp/SocketInfoTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-06-23T15:28:47Z",
+      "side": 1,
+      "message": "You can just upload a patch only for renaming it.\nOr do you want to start it over with revert?",
+      "parentUuid": "fa2559ec_1e738f4e",
+      "range": {
+        "startLine": 22,
+        "startChar": 44,
+        "endLine": 22,
+        "endChar": 47
+      },
+      "revId": "17f7dfc7e959245e7a3f2aeec364f893cbf9b145",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
