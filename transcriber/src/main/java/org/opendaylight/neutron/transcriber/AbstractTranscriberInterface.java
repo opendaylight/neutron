@@ -280,13 +280,13 @@ public abstract class AbstractTranscriberInterface<
 
     protected abstract S fromMd(T dataObject);
 
-    private <T extends DataObject> T readMd(InstanceIdentifier<T> path, ReadTransaction tx) {
+    private <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
-        T result = null;
-        final CheckedFuture<Optional<T>,
+        W result = null;
+        final CheckedFuture<Optional<W>,
                 ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
         if (future != null) {
-            Optional<T> optional;
+            Optional<W> optional;
             try {
                 optional = future.checkedGet();
                 if (optional.isPresent()) {
@@ -299,7 +299,7 @@ public abstract class AbstractTranscriberInterface<
         return result;
     }
 
-    protected <T extends DataObject> T readMd(InstanceIdentifier<T> path) {
+    protected <W extends DataObject> W readMd(InstanceIdentifier<W> path) {
         try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
             return readMd(path, tx);
         }
