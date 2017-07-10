@@ -15,12 +15,10 @@ import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionBase;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionEgress;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionIngress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV6;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.DirectionMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.ProtocolMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.SecurityRules;
@@ -35,9 +33,6 @@ public final class NeutronSecurityRuleInterface extends
         implements INeutronSecurityRuleCRUD {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 
-    private static final ImmutableBiMap<Class<? extends DirectionBase>,
-            String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
-                    .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,
             String> ETHERTYPE_MAP = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>, String>()
                     .put(EthertypeV4.class, "IPv4").put(EthertypeV6.class, "IPv6").build();
@@ -56,7 +51,7 @@ public final class NeutronSecurityRuleInterface extends
         final NeutronSecurityRule answer = new NeutronSecurityRule();
         fromMdIds(rule, answer);
         if (rule.getDirection() != null) {
-            answer.setSecurityRuleDirection(DIRECTION_MAP.get(rule.getDirection()));
+            answer.setSecurityRuleDirection(DirectionMapper.getName(rule.getDirection()));
         }
         if (rule.getSecurityGroupId() != null) {
             answer.setSecurityRuleGroupID(rule.getSecurityGroupId().getValue());
@@ -95,9 +90,8 @@ public final class NeutronSecurityRuleInterface extends
         final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
         toMdIds(securityRule, securityRuleBuilder);
         if (securityRule.getSecurityRuleDirection() != null) {
-            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
             securityRuleBuilder
-                    .setDirection(mapper.get(securityRule.getSecurityRuleDirection()));
+                    .setDirection(DirectionMapper.get(securityRule.getSecurityRuleDirection()));
         }
         if (securityRule.getSecurityRuleGroupID() != null) {
             securityRuleBuilder.setSecurityGroupId(toUuid(securityRule.getSecurityRuleGroupID()));
