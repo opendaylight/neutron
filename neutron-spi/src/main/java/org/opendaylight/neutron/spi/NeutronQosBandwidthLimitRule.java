@@ -61,8 +61,8 @@ public final class NeutronQosBandwidthLimitRule extends NeutronObject<NeutronQos
     @Override
     public String toString() {
         return "qosBandwidthLimitRules{" + "qosBandwidthLimitRuleUUID='" + uuid + '\''
-            + ", qosBandwidthLimitRuleTenantID='" + tenantID + '\'' + ", qosBandwidthLimitRuleMaxValue='" + maxKbps
-            + '\'' + ", qosBandwidthLimitRuleMaxBurst='" + maxBurstKbps
+            + ", qosBandwidthLimitRuleTenantID='" + tenantID + '\'' + ", qosBandwidthLimitMaxValue='" + maxKbps + '\''
+            + ", qosBandwidthLimitMaxBurst='" + maxBurstKbps
             + '\''
             + '}';
     }

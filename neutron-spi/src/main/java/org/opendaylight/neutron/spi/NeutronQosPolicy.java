@@ -30,6 +30,9 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
     @XmlElement(name = "dscp_marking_rules")
     List<NeutronQosDscpMarkingRule> dscpMarkingRules;
 
+    @XmlElement(name = "minimum_bandwidth_rules")
+    List<NeutronQosMinimumBandwidthRule> minimumBandwidthRules;
+
     public Boolean getPolicyIsShared() {
         return shared;
     }
@@ -54,6 +57,14 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
         this.dscpMarkingRules = qosDscpMarkingRules;
     }
 
+    public List<NeutronQosMinimumBandwidthRule> getMinimumBandwidthRules() {
+        return minimumBandwidthRules;
+    }
+
+    public void setMinimumBandwidthRules(List<NeutronQosMinimumBandwidthRule> qosMinimumBandwidthRules) {
+        this.minimumBandwidthRules = qosMinimumBandwidthRules;
+    }
+
     @Override
     protected boolean extractField(String field, NeutronQosPolicy ans) {
         switch (field) {
@@ -66,9 +77,14 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
                 ans.setQosBandwidthLimitRules(qosBandwidthRuleList);
                 break;
             case "dscp_marking_rules":
-                List<NeutronQosDscpMarkingRule> qosDscpMarkingRuleList = new ArrayList<>();
-                qosDscpMarkingRuleList.addAll(this.getDscpMarkingRules());
-                ans.setDscpMarkingRules(qosDscpMarkingRuleList);
+                List<NeutronQosDscpMarkingRule> qosDscpRuleList = new ArrayList<>();
+                qosDscpRuleList.addAll(this.getDscpMarkingRules());
+                ans.setDscpMarkingRules(qosDscpRuleList);
+                break;
+            case "minimum_bandwidth_rules":
+                List<NeutronQosMinimumBandwidthRule> qosMinimumBandwidthRuleList = new ArrayList<>();
+                qosMinimumBandwidthRuleList.addAll(this.getMinimumBandwidthRules());
+                ans.setMinimumBandwidthRules(qosMinimumBandwidthRuleList);
                 break;
             default:
                 return super.extractField(field, ans);
@@ -80,9 +96,9 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
     public String toString() {
         return "NeutronQosPolicy{" + "qosPolicyUUID='" + uuid + '\'' + ", qosPolicyTenantID='" + tenantID + '\''
                 + ", qosPolicyName='" + name + '\'' + ", qosPolicyIsShared='" + shared + '\''
-                + ", qosbandwidthLimitRules='" + bandwidthLimitRules + '\'' + ", qosDscpMarkingRules='"
-                + dscpMarkingRules
-                + '\''
+                + ", qosBandwidthLimitRules='" + bandwidthLimitRules + '\'' + ", qosDscpMarkingRules='"
+                + dscpMarkingRules + '\'' + ", qosMinimumBandwidthRules='" + minimumBandwidthRules + '\''
                 + '}';
     }
 }
+
