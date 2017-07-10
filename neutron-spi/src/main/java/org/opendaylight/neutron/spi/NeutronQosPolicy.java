@@ -30,6 +30,9 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
     @XmlElement(name = "dscp_marking_rules")
     List<NeutronQosDscpMarkingRule> dscpRules;
 
+    @XmlElement(name = "minimum_bandwidth_rules")
+    List<NeutronQosMinimumBandwidthRule> minBwLimitRules;
+
     public Boolean getPolicyIsShared() {
         return shared;
     }
@@ -44,6 +47,14 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
 
     public void setQosBwLimitRules(List<NeutronQosBandwidthRule> qosBwLimitRules) {
         this.bwLimitRules = qosBwLimitRules;
+    }
+
+    public List<NeutronQosMinimumBandwidthRule> getMinBwLimitRules() {
+        return minBwLimitRules;
+    }
+
+    public void setMinBwLimitRules(List<NeutronQosMinimumBandwidthRule> qosMinBwLimitRules) {
+        this.minBwLimitRules = qosMinBwLimitRules;
     }
 
     public List<NeutronQosDscpMarkingRule> getDscpRules() {
@@ -70,6 +81,11 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
                 qosDscpRuleList.addAll(this.getDscpRules());
                 ans.setDscpRules(qosDscpRuleList);
                 break;
+            case "minimum_bandwidth_rules":
+                List<NeutronQosMinimumBandwidthRule> qosMinBwRuleList = new ArrayList<>();
+                qosMinBwRuleList.addAll(this.getMinBwLimitRules());
+                ans.setMinBwLimitRules(qosMinBwRuleList);
+                break;
             default:
                 return super.extractField(field, ans);
         }
@@ -80,6 +96,9 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
     public String toString() {
         return "NeutronQosPolicy{" + "qosPolicyUUID='" + uuid + '\'' + ", qosPolicyTenantID='" + tenantID + '\''
                 + ", qosPolicyName='" + name + '\'' + ", qosPolicyIsShared='" + shared + '\'' + ", qosBwLimitRules='"
-                + bwLimitRules + '\'' + ", qosDscpRules='" + dscpRules + '\'' + '}';
+                + bwLimitRules + '\'' + ", qosDscpRules='" + dscpRules + '\'' + ", qosMinBwLimitRules='"
+                + minBwLimitRules + '\''
+                + '}';
     }
 }
+
