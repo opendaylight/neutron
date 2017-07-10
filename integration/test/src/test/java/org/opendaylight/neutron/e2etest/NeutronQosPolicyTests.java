@@ -37,13 +37,16 @@ public class NeutronQosPolicyTests {
     public void qos_policy_modify_test() {
         String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546";
         String content = "{\"policy\": {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
-                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", "
-                + "\"shared\": false,"
-                + "\"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
-                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\"max_kbps\": 25,"
-                + "\"max_burst_kbps\": 100 } ] ,"
-                + "\"dscp_marking_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
-                + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " + "\"dscp_mark\": 8 } ] }}";
+            + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", "
+            + "\"shared\": false,"
+            + "\"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
+            + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\",\"max_kbps\": 25,"
+            + "\"max_burst_kbps\": 100 } ] ,"
+            + "\"dscp_marking_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
+            + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", " + "\"dscp_mark\": 8 } ] ,"
+            + "\"minimum_bandwidth_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
+            + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", " + "\"min_kbps\": 20,"
+            + "\"direction\": \"egress\" } ] }}";
         ITNeutronE2E.test_modify(url, content, "Qos Policy Singleton Put failed");
     }
 
