@@ -8,13 +8,19 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronQosBandwidthRule;
 import org.opendaylight.neutron.spi.NeutronQosDscpMarkingRule;
+import org.opendaylight.neutron.spi.NeutronQosMinimumBandwidthRule;
 import org.opendaylight.neutron.spi.NeutronQosPolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionEgress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionIngress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.DirectionMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.QosPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicyBuilder;
@@ -23,6 +29,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.a
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.BandwidthLimitRulesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRulesBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.MinimumbandwidthRules;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.MinimumbandwidthRulesBuilder;
 
 public final class NeutronQosPolicyInterface
         extends AbstractNeutronInterface<QosPolicy, QosPolicies, QosPolicyKey,NeutronQosPolicy>
@@ -30,6 +38,10 @@ public final class NeutronQosPolicyInterface
     NeutronQosPolicyInterface(DataBroker db) {
         super(QosPolicyBuilder.class, db);
     }
+
+    private static final ImmutableBiMap<Class<? extends DirectionBase>,
+        String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
+        .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();
 
     @Override
     protected List<QosPolicy> getDataObjectList(QosPolicies qosPolicies) {
@@ -66,6 +78,21 @@ public final class NeutronQosPolicyInterface
             }
             qosPolicyBuilder.setDscpmarkingRules(listDscp);
         }
+        if (qosPolicy.getMinBwRules() != null) {
+            final List<MinimumbandwidthRules> listminimumBandwidth = new ArrayList<>();
+            final ImmutableBiMap<String, Class<? extends DirectionBase>> DirectionMapper = DIRECTION_MAP.inverse();
+            for (final NeutronQosMinimumBandwidthRule minimumBandwidthRule : qosPolicy.getMinBwRules()) {
+                final MinimumbandwidthRulesBuilder minimumbandwidthRulesBuilder =
+                        new MinimumbandwidthRulesBuilder();
+                minimumbandwidthRulesBuilder.setUuid(toUuid(minimumBandwidthRule.getID()));
+                minimumbandwidthRulesBuilder.setTenantId(toUuid(minimumBandwidthRule.getTenantID()));
+                minimumbandwidthRulesBuilder.setMinKbps(minimumBandwidthRule.getMinKbps());
+                minimumbandwidthRulesBuilder.setDirection(DirectionMapper.get(minimumBandwidthRule
+                    .getDirection()));
+                listminimumBandwidth.add(minimumbandwidthRulesBuilder.build());
+            }
+            qosPolicyBuilder.setMinimumbandwidthRules(listminimumBandwidth);
+        }
         return qosPolicyBuilder.build();
     }
 
@@ -77,16 +104,16 @@ public final class NeutronQosPolicyInterface
             result.setPolicyIsShared(qosPolicy.isShared());
         }
         if (qosPolicy.getBandwidthLimitRules() != null) {
-            final List<NeutronQosBandwidthRule> bandWidthRules = new ArrayList<>();
+            final List<NeutronQosBandwidthRule> bandWidthLimitRules = new ArrayList<>();
             for (final BandwidthLimitRules rule : qosPolicy.getBandwidthLimitRules()) {
                 NeutronQosBandwidthRule opt = new NeutronQosBandwidthRule();
                 opt.setID(rule.getUuid().getValue());
                 opt.setTenantID(rule.getTenantId().getValue());
                 opt.setMaxKbps(rule.getMaxKbps());
                 opt.setMaxBurstKbps(rule.getMaxBurstKbps());
-                bandWidthRules.add(opt);
+                bandWidthLimitRules.add(opt);
             }
-            result.setQosBwLimitRules(bandWidthRules);
+            result.setBwLimitRules(bandWidthLimitRules);
         }
         if (qosPolicy.getDscpmarkingRules() != null) {
             final List<NeutronQosDscpMarkingRule> dscpRules = new ArrayList<>();
@@ -98,6 +125,18 @@ public final class NeutronQosPolicyInterface
                 dscpRules.add(opt);
             }
             result.setDscpRules(dscpRules);
+        }
+        if (qosPolicy.getMinimumbandwidthRules() != null) {
+            final List<NeutronQosMinimumBandwidthRule> minBandwidthRules = new ArrayList<>();
+            for (final MinimumbandwidthRules rule : qosPolicy.getMinimumbandwidthRules()) {
+                NeutronQosMinimumBandwidthRule opt = new NeutronQosMinimumBandwidthRule();
+                opt.setID(rule.getTenantId().getValue());
+                opt.setTenantID(rule.getTenantId().getValue());
+                opt.setMinKbps(rule.getMinKbps());
+                opt.setDirection(DIRECTION_MAP .get(rule.getDirection()));
+                minBandwidthRules.add(opt);
+            }
+            result.setMinBwRules(minBandwidthRules);
         }
         return result;
     }
