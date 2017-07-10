@@ -8,13 +8,18 @@
 
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronQosBandwidthRule;
 import org.opendaylight.neutron.spi.NeutronQosDscpMarkingRule;
+import org.opendaylight.neutron.spi.NeutronQosMinimumBandwidthRule;
 import org.opendaylight.neutron.spi.NeutronQosPolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionEgress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.DirectionIngress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.QosPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicyBuilder;
@@ -23,6 +28,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.a
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.BandwidthLimitRulesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.DscpmarkingRulesBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.MinimumbandwidthLimitRules;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.qos.policy.MinimumbandwidthLimitRulesBuilder;
 
 public final class NeutronQosPolicyInterface
         extends AbstractNeutronInterface<QosPolicy, QosPolicies, QosPolicyKey,NeutronQosPolicy>
@@ -30,6 +37,10 @@ public final class NeutronQosPolicyInterface
     NeutronQosPolicyInterface(DataBroker db) {
         super(QosPolicyBuilder.class, db);
     }
+
+    private static final ImmutableBiMap<Class<? extends DirectionBase>,
+        String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
+        .put(DirectionEgress.class, "egress").put(DirectionIngress.class, "ingress").build();
 
     @Override
     protected List<QosPolicy> getDataObjectList(QosPolicies qosPolicies) {
@@ -66,6 +77,21 @@ public final class NeutronQosPolicyInterface
             }
             qosPolicyBuilder.setDscpmarkingRules(listDscp);
         }
+        if (qosPolicy.getMinBwLimitRules() != null) {
+            final List<MinimumbandwidthLimitRules> listminimumBandwidth = new ArrayList<>();
+            final ImmutableBiMap<String, Class<? extends DirectionBase>> mapper = DIRECTION_MAP.inverse();
+            for (final NeutronQosMinimumBandwidthRule minimumBandwidthRule : qosPolicy.getMinBwLimitRules()) {
+                final MinimumbandwidthLimitRulesBuilder minimumbandwidthLimitRulesBuilder =
+                        new MinimumbandwidthLimitRulesBuilder();
+                minimumbandwidthLimitRulesBuilder.setDirection(mapper.get(minimumBandwidthRule
+                    .getDirection()));
+                minimumbandwidthLimitRulesBuilder.setUuid(toUuid(minimumBandwidthRule.getID()));
+                minimumbandwidthLimitRulesBuilder.setTenantId(toUuid(minimumBandwidthRule.getTenantID()));
+                minimumbandwidthLimitRulesBuilder.setMinKbps(minimumBandwidthRule.getMinKbps());
+                listminimumBandwidth.add(minimumbandwidthLimitRulesBuilder.build());
+            }
+            qosPolicyBuilder.setMinimumbandwidthLimitRules(listminimumBandwidth);
+        }
         return qosPolicyBuilder.build();
     }
 
@@ -98,6 +124,18 @@ public final class NeutronQosPolicyInterface
                 dscpRules.add(opt);
             }
             result.setDscpRules(dscpRules);
+        }
+        if (qosPolicy.getMinimumbandwidthLimitRules() != null) {
+            final List<NeutronQosMinimumBandwidthRule> minBandwidthRules = new ArrayList<>();
+            for (final MinimumbandwidthLimitRules rule : qosPolicy.getMinimumbandwidthLimitRules()) {
+                NeutronQosMinimumBandwidthRule opt = new NeutronQosMinimumBandwidthRule();
+                opt.setID(rule.getTenantId().getValue());
+                opt.setTenantID(rule.getTenantId().getValue());
+                opt.setMinKbps(rule.getMinKbps());
+                opt.setDirection(DIRECTION_MAP .get(rule.getDirection()));
+                minBandwidthRules.add(opt);
+            }
+            result.setMinBwLimitRules(minBandwidthRules);
         }
         return result;
     }
