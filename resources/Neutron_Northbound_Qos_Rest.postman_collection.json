@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Quality_Of_Service",
-		"_postman_id": "27c8c2eb-995a-b9a2-4a82-af222f6a9806",
+		"_postman_id": "a85eb530-aab5-a5fd-f5e1-90efc89b76df",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -71,7 +71,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"policy\":  {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\",\n                 \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\n                  \"name\" : \"qos-test\",\n                  \"shared\": false,\n                  \"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\",\n                  \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\"max_kbps\": 25,\n                  \"max_burst_kbps\": 100 } ] ,\n                  \"dscp_marking_rules\" : [ {\"id\":\"d6220bbb-35f3-48ab-8eae-69c60aef3548\",\n                  \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\n                  \"dscp_mark\": 8 } ] }}\n"
+					"raw": "{\"policy\":  {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\",\n                 \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\n                  \"name\" : \"qos-test\",\n                  \"shared\": false,\n                  \"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\",\n                  \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\"max_kbps\": 25,\n                  \"max_burst_kbps\": 100 } ] ,\n                  \"dscp_marking_rules\" : [ {\"id\":\"d6220bbb-35f3-48ab-8eae-69c60aef3548\",\n                  \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\n                  \"dscp_mark\": 8 } ] ,\n                  \"minimum_bandwidth_rules\":  [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3549\",\n                  \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\",\"min_kbps\": 25,\n                  \"direction\": \"egress" } ] }}\n"
 				},
 				"description": "Update a QOS Policy"
 			},
@@ -89,10 +89,7 @@
 						"description": ""
 					}
 				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
+				"body": {},
 				"description": "View the existing QOS policy"
 			},
 			"response": []
@@ -134,3 +131,4 @@
 		}
 	]
 }
+
