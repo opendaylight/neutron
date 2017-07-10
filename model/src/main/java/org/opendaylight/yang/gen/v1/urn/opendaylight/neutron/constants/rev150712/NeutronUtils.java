@@ -10,7 +10,6 @@ package org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev15071
 
 import com.google.common.collect.ImmutableBiMap;
 
-
 public final class NeutronUtils {
     private NeutronUtils() {
         throw new UnsupportedOperationException("Utility class should not be instantiated.");
@@ -60,6 +59,42 @@ public final class NeutronUtils {
         public static String getName(Class<? extends ProtocolBase> key) {
             ImmutableBiMap<Class<? extends ProtocolBase>, String> inverseMapper = MAPPER.inverse();
             return inverseMapper.get(key);
+        }
+    }
+
+    // Direction of the Traffic
+    public static class DirectionMapper {
+        private DirectionMapper() {
+            throw new UnsupportedOperationException("Utility class should not be instantiated.");
+        }
+
+        private static final ImmutableBiMap<String, Class<? extends DirectionBase>> MAPPER
+            = new ImmutableBiMap.Builder<String, Class<? extends DirectionBase>>()
+            .put("egress", DirectionEgress.class)
+            .put("ingress", DirectionIngress.class)
+            .build();
+
+        public static Class<? extends DirectionBase> get(String key) {
+            return MAPPER.get(key);
+        }
+        
+        public static String getName(Class<? extends DirectionBase> key) {
+            ImmutableBiMap<Class<? extends DirectionBase>, String> inverseMapper = MAPPER.inverse();
+            return inverseMapper.get(key);
+        }
+
+        private static final ImmutableBiMap<String, Class<? extends DirectionEgress>> MAPPER1
+            = new ImmutableBiMap.Builder<String, Class<? extends DirectionEgress>>()
+            .put("egress", DirectionEgress.class)
+            .build();
+
+        public static Class<? extends DirectionEgress> getE(String key1) {
+            return MAPPER1.get(key1);
+        }
+
+        public static String getEgress(Class<? extends DirectionEgress> key1) {
+            ImmutableBiMap<Class<? extends DirectionEgress>, String> inverseMapper1 = MAPPER1.inverse();
+            return inverseMapper1.get(key1);
         }
     }
 }
