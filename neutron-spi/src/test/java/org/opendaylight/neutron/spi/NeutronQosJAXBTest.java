@@ -24,7 +24,10 @@ public class NeutronQosJAXBTest {
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\"," + "\"max_kbps\": 25, "
             + "\"max_burst_kbps\": 100 } ],"
             + "\"dscp_marking_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
-            + " \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " + "\"dscp_mark\": 8 } ] " + "}";
+            + " \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " + "\"dscp_mark\": 8 } ],"
+            + "\"minimum_bandwidth_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
+            + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " + "\"min_kbps\": 20,"
+            + "\"direction\": \"egress\" } ]" + "}";
 
     @Test
     public void test_NeutronQosPolicy_JAXB() throws JAXBException {
@@ -70,7 +73,21 @@ public class NeutronQosJAXBTest {
         Assert.assertEquals("NeutronQosPolicy JaxB Test 6.2 : Testing Tenant ID failed",
                 "aa902936679e4ea29bfe1158e3450a14", dscpMarkingPolicyRules.get(0).tenantID);
 
-        Assert.assertEquals("NeutronQosPolicy JaxB Test 6.3 : Testing Max ingress/Egress value failed", new Short("8"),
-                dscpMarkingPolicyRules.get(0).dscpMark);
+        Assert.assertEquals("NeutronQosPolicy JaxB Test 6.3 : Testing Max ingress/Egress value failed",
+            new Short("8"), dscpMarkingPolicyRules.get(0).dscpMark);
+
+        List<NeutronQosMinimumBandwidthRule> minBandwidthLimitRules = neutronObject.getMinimumBandwidthRules();
+
+        Assert.assertEquals("NeutronQosPolicy JAXB Test 7.0: Testing Bandwidth Policy length failed", 1,
+            minBandwidthLimitRules.size());
+
+        Assert.assertEquals("NeutronQosPolicy JaxB Test 7.2 : Testing Tenant ID failed",
+            "aa902936679e4ea29bfe1158e3450a14", minBandwidthLimitRules.get(0).tenantID);
+
+        Assert.assertEquals("NeutronQosPolicy JaxB Test 7.3 : Testing Minimum Bandwidth failed",
+            new BigInteger("20"), minBandwidthLimitRules.get(0).minKbps);
+
+        Assert.assertEquals("NeutronQosPolicy JaxB Test 7.4 : Testing Direction failed", "egress",
+            minBandwidthLimitRules.get(0).direction);
     }
 }

@@ -15,6 +15,7 @@ module neutron-qos {
 
     import ietf-yang-types { prefix "yang"; revision-date "2013-07-15"; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -63,6 +64,27 @@ module neutron-qos {
         }
     }
 
+    grouping minimumbandwidth-rule-attributes {
+        leaf uuid {
+            type yang:uuid;
+            description "The rule id of the associated rule";
+        }
+        leaf tenant-id {
+            type yang:uuid;
+            description "The tenant id of OpenStack Tenant";
+        }
+        leaf min-kbps {
+            type uint64;
+            description "The minimum KBPS value";
+        }
+        leaf direction {
+            type identityref {
+                base "constants:direction-minimum-bandwidth-rule";
+            }
+            description "The traffic direction";
+        }
+    }
+
     grouping qos-attributes {
         container qos-policies {
             list qos-policy {
@@ -78,6 +100,10 @@ module neutron-qos {
                     key "uuid";
                     uses attrs:id-attributes;
                     uses dscpmarking-rule-attributes;
+                }
+                list minimumbandwidth-rules {
+                    key "uuid";
+                    uses minimumbandwidth-rule-attributes;
                 }
             }
         }
