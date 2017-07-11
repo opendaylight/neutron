@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "da2a55be_ed318ba3",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 856
+      },
+      "writtenOn": "2017-07-11T16:29:55Z",
+      "side": 1,
+      "message": "Agree - note that \u0027minimumbandwidth-limit\u0027 is technically incorrect.",
+      "parentUuid": "da2a55be_4d7d376e",
+      "range": {
+        "startLine": 118,
+        "startChar": 21,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_edeeab21",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 1
@@ -134,6 +158,23 @@
         "endLine": 34,
         "endChar": 56
       },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_6df63bd9",
+        "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 856
+      },
+      "writtenOn": "2017-07-11T16:29:55Z",
+      "side": 1,
+      "message": "Is addition of \" copy\" to the name intentional?",
       "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
