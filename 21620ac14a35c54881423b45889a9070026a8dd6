@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da2a55be_4dcb77a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "Please include links to it.",
+      "range": {
+        "startLine": 11,
+        "startChar": 49,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_ad8dd37d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "c29f3aaa7c20c89cb1eac818d2981c16fd484ace, the changeset of neutron\nadds directions. So please update this too.\nIt should be done with another patch.",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_4d7d376e",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "Please be consistent for naming.\nminimumbandwidh-rules?",
+      "range": {
+        "startLine": 118,
+        "startChar": 21,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_edeeab21",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "This needs to be updated.\nWill be addressed by another patch?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 9
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_8dc44f93",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosMinimumBandwidthRule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_0d833f57",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "Please be consistent for naming.\nminBwRules?",
+      "range": {
+        "startLine": 34,
+        "startChar": 41,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_adb6733b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "Please don\u0027t duplicate this one. consolidate this logic into NeutronUtils.java",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 93
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_cdbe47ff",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-11T16:06:44Z",
+      "side": 1,
+      "message": "Please don\u0027t put conversion logic in rundom order.\nThis would be after minkbps",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 38
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
