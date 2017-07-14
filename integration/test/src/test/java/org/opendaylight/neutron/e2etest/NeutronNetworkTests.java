@@ -11,6 +11,7 @@ package org.opendaylight.neutron.e2etest;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import org.junit.Assert;
@@ -34,7 +35,16 @@ public class NeutronNetworkTests {
         for (int retry = 0; retry < TIMEOUT; retry++) {
             URL url = new URL(urlS);
             HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
-            if (httpConn.getResponseCode() != 200) {
+            int responseCode;
+            try {
+                responseCode = httpConn.getResponseCode();
+            } catch (ConnectException e) {
+                LOG.info("connection " + Integer.toString(retry) + ": failed", e);
+                Thread.sleep(1000);
+                continue;
+            }
+
+            if (responseCode != 200) {
                 LOG.info("trial " + Integer.toString(retry) + ": failed with: "
                         + Integer.toString(httpConn.getResponseCode()));
                 Thread.sleep(1000);
