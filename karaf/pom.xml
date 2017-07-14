@@ -68,6 +68,33 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
                     </bootFeatures>
                 </configuration>
             </plugin>
+            <plugin>
+              <!--
+                  Karaf4 resolver work around.
+                  In order to make feature, features-neutron-test, boot reliably
+                  for integration test, use older resolver.
+                  TODO: Once it's resolved in odlparent or whole ODL project,
+                  remove this work around.
+              -->
+              <artifactId>maven-antrun-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>feature-dependency-true</id>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>run</goal>
+                  </goals>
+                  <configuration>
+                    <target>
+                      <replace dir="target/assembly/system/org/opendaylight/neutron/" includes="**/*features.xml">
+                        <replacetoken>prerequisite="false" dependency="false"</replacetoken>
+                        <replacevalue>prerequisite="false" dependency="true"</replacevalue>
+                      </replace>
+                    </target>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
