@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da2a55be_14932c50",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-20T02:53:45Z",
+      "side": 1,
+      "message": "Please fill descriptions.",
+      "range": {
+        "startLine": 32,
+        "startChar": 20,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "1a8e1f5245ed03086b26de14386b3601f6a10ad9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
