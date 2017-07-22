@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da2a55be_4dbb4ee5",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-22T00:36:33Z",
+      "side": 1,
+      "message": "builderClass.newInstance()",
+      "range": {
+        "startLine": 187,
+        "startChar": 12,
+        "endLine": 188,
+        "endChar": 48
+      },
+      "revId": "9f439bf6c6586821327a7d4b11af55fd7c892e94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_8db546f0",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-22T00:36:33Z",
+      "side": 1,
+      "message": "Can we reuse toMdIds(INeutronObject\u003cS1\u003e neutronObject, B builder)? line 209",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 9
+      },
+      "revId": "9f439bf6c6586821327a7d4b11af55fd7c892e94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_6db8d2e5",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-22T00:36:33Z",
+      "side": 1,
+      "message": "revision number?",
+      "range": {
+        "startLine": 222,
+        "startChar": 13,
+        "endLine": 222,
+        "endChar": 13
+      },
+      "revId": "9f439bf6c6586821327a7d4b11af55fd7c892e94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_2dbedad4",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronFloatingIpInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-22T00:36:33Z",
+      "side": 1,
+      "message": "are these necessary?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 9
+      },
+      "revId": "9f439bf6c6586821327a7d4b11af55fd7c892e94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_adc92a7b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronLoadBalancerHealthMonitorInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-22T00:36:33Z",
+      "side": 1,
+      "message": "unnecessary.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 9
+      },
+      "revId": "9f439bf6c6586821327a7d4b11af55fd7c892e94",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
