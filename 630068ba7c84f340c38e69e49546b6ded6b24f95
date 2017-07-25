@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da2a55be_422b1430",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-25T22:30:42Z",
+      "side": 1,
+      "message": "Kiran, please add your s-o-b too.",
+      "range": {
+        "startLine": 12,
+        "startChar": 56,
+        "endLine": 12,
+        "endChar": 56
+      },
+      "revId": "630068ba7c84f340c38e69e49546b6ded6b24f95",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_a2e810e3",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTapFlow.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-25T22:30:42Z",
+      "side": 1,
+      "message": "Hmm there is inconsistency to use \"[\"(bracket) or \"{\"(brace)\nDo you mind to cook one more patch to make them consistent?",
+      "range": {
+        "startLine": 89,
+        "startChar": 30,
+        "endLine": 89,
+        "endChar": 31
+      },
+      "revId": "630068ba7c84f340c38e69e49546b6ded6b24f95",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_62b618fc",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronTapFlowNorthbound.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-25T22:30:42Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "630068ba7c84f340c38e69e49546b6ded6b24f95",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da2a55be_c2c42461",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapFlowInterface.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-07-25T22:30:42Z",
+      "side": 1,
+      "message": "createInstanceIdentifier needs to be overloaded.",
+      "revId": "630068ba7c84f340c38e69e49546b6ded6b24f95",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
