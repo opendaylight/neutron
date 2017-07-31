@@ -67,6 +67,14 @@
       <type>xml</type>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.aaa</groupId>
+      <artifactId>odl-aaa-cert</artifactId>
+      <version>${aaa.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
     </dependency>
@@ -122,6 +130,14 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>neutron-logger</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.ovsdb</groupId>
+      <artifactId>library-features</artifactId>
+      <version>${ovsdb.version}</version>
+      <classifier>features</classifier>
+      <type>xml</type>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>

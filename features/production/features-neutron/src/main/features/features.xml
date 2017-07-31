@@ -7,6 +7,7 @@
    <repository>mvn:org.opendaylight.yangtools/features-yangtools/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.mdsal.model/features-mdsal-model/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.controller/features-mdsal/{{VERSION}}/xml/features</repository>
+   <repository>mvn:org.opendaylight.ovsdb/library-features/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.ovsdb/southbound-features/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.netconf/features-restconf/{{VERSION}}/xml/features</repository>
    <repository>mvn:org.opendaylight.netconf/features-netconf-connector/{{VERSION}}/xml/features</repository>
@@ -55,6 +56,8 @@
   <feature name='odl-neutron-hostconfig-ovs' version='${project.version}' description="OpenDaylight :: Neutron :: HostconfigOvs">
     <feature version='${controller.mdsal.version}'>odl-mdsal-broker</feature>
     <feature version="${ovsdb.version}">odl-ovsdb-southbound-api</feature>
+    <feature version="${ovsdb.version}">odl-ovsdb-library</feature>
+    <feature version="${aaa.version}">odl-aaa-cert</feature>
     <bundle>mvn:org.opendaylight.neutron/model/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.ovsdb/utils.mdsal-utils/{{VERSION}}</bundle>
     <bundle>mvn:org.opendaylight.ovsdb/utils.southbound-utils/{{VERSION}}</bundle>
