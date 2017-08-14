@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_0b64cb20",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Sure. I will update this in another patch",
+      "parentUuid": "da2a55be_ad8dd37d",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 9
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_4d7d376e",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 1
@@ -95,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_6bad8731",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2a55be_ed318ba3",
+      "range": {
+        "startLine": 118,
+        "startChar": 21,
+        "endLine": 118,
+        "endChar": 49
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_edeeab21",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 1
@@ -106,6 +154,30 @@
       "writtenOn": "2017-07-11T16:06:44Z",
       "side": 1,
       "message": "This needs to be updated.\nWill be addressed by another patch?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 9
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_cbaab318",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Yes, this will be addresses in the following patch",
+      "parentUuid": "da2a55be_edeeab21",
       "range": {
         "startLine": 124,
         "startChar": 0,
@@ -141,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_eb6857f7",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosMinimumBandwidthRule.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2a55be_8dc44f93",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_0d833f57",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 1
@@ -152,6 +248,30 @@
       "writtenOn": "2017-07-11T16:06:44Z",
       "side": 1,
       "message": "Please be consistent for naming.\nminBwRules?",
+      "range": {
+        "startLine": 34,
+        "startChar": 41,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_8b771bd4",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2a55be_0d833f57",
       "range": {
         "startLine": 34,
         "startChar": 41,
@@ -204,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_6b5bc754",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2a55be_adb6733b",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 93
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_cdbe47ff",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
         "patchSetId": 1
@@ -215,6 +359,30 @@
       "writtenOn": "2017-07-11T16:06:44Z",
       "side": 1,
       "message": "Please don\u0027t put conversion logic in rundom order.\nThis would be after minkbps",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 38
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_cb58f358",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-14T16:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2a55be_cdbe47ff",
       "range": {
         "startLine": 84,
         "startChar": 0,
