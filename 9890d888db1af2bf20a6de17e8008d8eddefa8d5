@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_d6908c50",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-14T18:22:58Z",
+      "side": 1,
+      "message": "nitpick: trailing whitespace.",
+      "range": {
+        "startLine": 27,
+        "startChar": 91,
+        "endLine": 27,
+        "endChar": 92
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_f695d040",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-14T18:22:58Z",
+      "side": 1,
+      "message": "unnecessary code churn.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 102
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_568c9c35",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-14T18:22:58Z",
+      "side": 1,
+      "message": "Please consolidate logic with security group\u0027s one.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 39
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_36a0089f",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-14T18:22:58Z",
+      "side": 1,
+      "message": "nitpick: trailing whitespace",
+      "range": {
+        "startLine": 74,
+        "startChar": 90,
+        "endLine": 74,
+        "endChar": 91
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_b6835803",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-14T18:22:58Z",
+      "side": 1,
+      "message": "Hmm this change is unrelated for this patch.\nCan you please split this change out into another patch?",
+      "range": {
+        "startLine": 48,
+        "startChar": 16,
+        "endLine": 48,
+        "endChar": 31
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_96861412",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-14T18:22:58Z",
+      "side": 1,
+      "message": "Please don\u0027t duplicate this logic.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 93
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
