@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_162b4495",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-17T23:32:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_d6908c50",
+      "range": {
+        "startLine": 27,
+        "startChar": 91,
+        "endLine": 27,
+        "endChar": 92
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_f695d040",
         "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2017-08-14T18:22:58Z",
       "side": 1,
       "message": "unnecessary code churn.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 102
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_7619e087",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-17T23:32:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_f695d040",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_dc7c1bb8",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-17T23:32:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_568c9c35",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 39
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_36a0089f",
         "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
         "patchSetId": 7
@@ -82,6 +154,30 @@
       "writtenOn": "2017-08-14T18:22:58Z",
       "side": 1,
       "message": "nitpick: trailing whitespace",
+      "range": {
+        "startLine": 74,
+        "startChar": 90,
+        "endLine": 74,
+        "endChar": 91
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_561c9c77",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-17T23:32:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_36a0089f",
       "range": {
         "startLine": 74,
         "startChar": 90,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_59032f0d",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-17T23:32:31Z",
+      "side": 1,
+      "message": "Done! I will submit a follow up patch for this.",
+      "parentUuid": "ba1f61a0_b6835803",
+      "range": {
+        "startLine": 48,
+        "startChar": 16,
+        "endLine": 48,
+        "endChar": 31
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_96861412",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
         "patchSetId": 7
@@ -128,6 +248,30 @@
       "writtenOn": "2017-08-14T18:22:58Z",
       "side": 1,
       "message": "Please don\u0027t duplicate this logic.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 93
+      },
+      "revId": "9890d888db1af2bf20a6de17e8008d8eddefa8d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_bc5e8743",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-17T23:32:31Z",
+      "side": 1,
+      "message": "I have fixed this. Please do let me know if this would suffice.",
+      "parentUuid": "ba1f61a0_96861412",
       "range": {
         "startLine": 42,
         "startChar": 0,
