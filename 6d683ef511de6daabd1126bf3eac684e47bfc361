@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_5d3822a0",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronQosPolicyTests.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2017-08-18T22:46:26Z",
+      "side": 1,
+      "message": "can we add project_id as well ? anyway tenant_id has to be deprecated, can we keep both for new additions, as the qos payload with have both ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 14,
+        "endLine": 49,
+        "endChar": 49
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_3d3bae9d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2017-08-18T22:46:26Z",
+      "side": 1,
+      "message": "same here can we add a project_id as well ?",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 5
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
