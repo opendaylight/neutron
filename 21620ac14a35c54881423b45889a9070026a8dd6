@@ -72,6 +72,29 @@
     },
     {
       "key": {
+        "uuid": "da2a55be_997779d4",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5996
+      },
+      "writtenOn": "2017-08-18T22:46:26Z",
+      "side": 1,
+      "message": "should we start using project_id for new additions ? as tenant_id will go away at some point ? openstack cli uses project id. neutron cli still uses tenant id but that will be deprecated soon.",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 5
+      },
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_4d7d376e",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 1
