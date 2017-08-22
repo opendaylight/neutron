@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
-import org.opendaylight.neutron.spi.NeutronQosBandwidthRule;
+import org.opendaylight.neutron.spi.NeutronQosBandwidthLimitRule;
 import org.opendaylight.neutron.spi.NeutronQosDscpMarkingRule;
 import org.opendaylight.neutron.spi.NeutronQosPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.QosPolicies;
@@ -45,12 +45,12 @@ public final class NeutronQosPolicyInterface
         }
         if (qosPolicy.getBwLimitRules() != null) {
             final List<BandwidthLimitRules> listBandwith = new ArrayList<>();
-            for (final NeutronQosBandwidthRule bandWidthRule : qosPolicy.getBwLimitRules()) {
+            for (final NeutronQosBandwidthLimitRule bandwidthRule : qosPolicy.getBwLimitRules()) {
                 final BandwidthLimitRulesBuilder bandwidthLimitRulesBuilder = new BandwidthLimitRulesBuilder();
-                bandwidthLimitRulesBuilder.setUuid(toUuid(bandWidthRule.getID()));
-                bandwidthLimitRulesBuilder.setTenantId(toUuid(bandWidthRule.getTenantID()));
-                bandwidthLimitRulesBuilder.setMaxKbps(bandWidthRule.getMaxKbps());
-                bandwidthLimitRulesBuilder.setMaxBurstKbps(bandWidthRule.getMaxBurstKbps());
+                bandwidthLimitRulesBuilder.setUuid(toUuid(bandwidthRule.getID()));
+                bandwidthLimitRulesBuilder.setTenantId(toUuid(bandwidthRule.getTenantID()));
+                bandwidthLimitRulesBuilder.setMaxKbps(bandwidthRule.getMaxKbps());
+                bandwidthLimitRulesBuilder.setMaxBurstKbps(bandwidthRule.getMaxBurstKbps());
                 listBandwith.add(bandwidthLimitRulesBuilder.build());
             }
             qosPolicyBuilder.setBandwidthLimitRules(listBandwith);
@@ -77,16 +77,16 @@ public final class NeutronQosPolicyInterface
             result.setPolicyIsShared(qosPolicy.isShared());
         }
         if (qosPolicy.getBandwidthLimitRules() != null) {
-            final List<NeutronQosBandwidthRule> bandWidthRules = new ArrayList<>();
+            final List<NeutronQosBandwidthLimitRule> BandwidthRules = new ArrayList<>();
             for (final BandwidthLimitRules rule : qosPolicy.getBandwidthLimitRules()) {
-                NeutronQosBandwidthRule opt = new NeutronQosBandwidthRule();
+                NeutronQosBandwidthLimitRule opt = new NeutronQosBandwidthLimitRule();
                 opt.setID(rule.getUuid().getValue());
                 opt.setTenantID(rule.getTenantId().getValue());
                 opt.setMaxKbps(rule.getMaxKbps());
                 opt.setMaxBurstKbps(rule.getMaxBurstKbps());
-                bandWidthRules.add(opt);
+                BandwidthRules.add(opt);
             }
-            result.setQosBwLimitRules(bandWidthRules);
+            result.setQosBwLimitRules(BandwidthRules);
         }
         if (qosPolicy.getDscpmarkingRules() != null) {
             final List<NeutronQosDscpMarkingRule> dscpRules = new ArrayList<>();

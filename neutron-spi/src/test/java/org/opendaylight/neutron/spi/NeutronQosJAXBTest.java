@@ -42,7 +42,7 @@ public class NeutronQosJAXBTest {
 
         Assert.assertFalse("NeutronQosPolicy JaxB Test 4 : Testing Shared failed", neutronObject.getPolicyIsShared());
 
-        List<NeutronQosBandwidthRule> bwPolicyRules = neutronObject.getBwLimitRules();
+        List<NeutronQosBandwidthLimitRule> bwPolicyRules = neutronObject.getBwLimitRules();
 
         Assert.assertEquals("NeutronQosPolicy JAXB Test 5.0: Testing Bandwidth Policy length failed", 1,
                 bwPolicyRules.size());
