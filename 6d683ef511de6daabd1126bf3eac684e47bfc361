@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_860fe22d",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-22T01:27:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_ddced282",
+      "range": {
+        "startLine": 110,
+        "startChar": 30,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_1da06a9e",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 11
@@ -111,6 +135,53 @@
         "startChar": 19,
         "endLine": 28,
         "endChar": 28
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_e61e9e62",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-22T01:27:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_1da06a9e",
+      "range": {
+        "startLine": 28,
+        "startChar": 19,
+        "endLine": 28,
+        "endChar": 28
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_2676f6a4",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-22T01:27:16Z",
+      "side": 1,
+      "message": "I have named it as \"bandwidthRule\" since i was getting the below error. Apart from this one, same naming convention has been followed in all the fields.\n\n[ERROR] /home/pramod/QOs/neutron/transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java:52:53: Local variable name \u0027BandwidthRule\u0027 must match pattern \u0027^[a-z][a-z0-9][a-zA-Z0-9]*$\u0027. [LocalVariableName]\nAudit done.",
+      "range": {
+        "startLine": 52,
+        "startChar": 47,
+        "endLine": 52,
+        "endChar": 54
       },
       "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
@@ -141,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_a642e63b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-22T01:27:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_1dc98a78",
+      "range": {
+        "startLine": 74,
+        "startChar": 50,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_7db886e5",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
         "patchSetId": 11
@@ -152,6 +247,30 @@
       "writtenOn": "2017-08-19T00:27:10Z",
       "side": 1,
       "message": "bandWidth vs Bandwith?\nplease be consistent.",
+      "range": {
+        "startLine": 121,
+        "startChar": 58,
+        "endLine": 121,
+        "endChar": 66
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_c6471a4a",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-22T01:27:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_7db886e5",
       "range": {
         "startLine": 121,
         "startChar": 58,
