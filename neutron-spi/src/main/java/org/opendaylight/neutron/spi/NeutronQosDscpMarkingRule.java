@@ -45,7 +45,9 @@ public final class NeutronQosDscpMarkingRule extends NeutronObject<NeutronQosDsc
 
     @Override
     public String toString() {
-        return "qosDscpRules{" + "qosDscpRuleUUID='" + uuid + '\'' + ", qosDscpRuleTenantID='" + tenantID + '\''
-                + ", qosDscpRuleDscpMark='" + dscpMark + '\'' + '}';
+        return "qosDscpMarkingRules{" + "qosDscpMarkingRuleUUID='" + uuid + '\'' + ", qosDscpMarkingRuleTenantID='"
+            + tenantID + '\'' + ", qosDscpMarkingRuleDscpMark='" + dscpMark
+            + '\''
+            + '}';
     }
 }
