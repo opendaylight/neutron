@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Intel Corporation.  All rights reserved.
+ * Copyright (c) 2017 Intel Corporation.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandwidthRule>
-        implements Serializable, INeutronObject<NeutronQosBandwidthRule> {
+public final class NeutronQosBandwidthLimitRule extends NeutronObject<NeutronQosBandwidthLimitRule>
+        implements Serializable, INeutronObject<NeutronQosBandwidthLimitRule> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "max_kbps")
@@ -44,7 +44,7 @@ public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandw
     }
 
     @Override
-    public boolean extractField(String field, NeutronQosBandwidthRule ans) {
+    public boolean extractField(String field, NeutronQosBandwidthLimitRule ans) {
         switch (field) {
             case "max_kbps":
                 ans.setMaxKbps(this.getMaxKbps());
@@ -60,8 +60,10 @@ public final class NeutronQosBandwidthRule extends NeutronObject<NeutronQosBandw
 
     @Override
     public String toString() {
-        return "qosBandwidthRules{" + "qosBandwidthRuleUUID='" + uuid + '\'' + ", qosBandwidthRuleTenantID='" + tenantID
-                + '\'' + ", qosBandwidthMaxValue='" + maxKbps + '\'' + ", qosBandwidthMaxBurst='" + maxBurstKbps + '\''
-                + '}';
+        return "qosBandwidthLimitRules{" + "qosBandwidthLimitRuleUUID='" + uuid + '\''
+            + ", qosBandwidthLimitRuleTenantID='" + tenantID + '\'' + ", qosBandwidthLimitRuleMaxValue='" + maxKbps
+            + '\'' + ", qosBandwidthLimitRuleMaxBurst='" + maxBurstKbps
+            + '\''
+            + '}';
     }
 }
