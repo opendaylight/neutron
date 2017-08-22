@@ -25,7 +25,7 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
     Boolean shared;
 
     @XmlElement(name = "bandwidth_limit_rules")
-    List<NeutronQosBandwidthRule> bwLimitRules;
+    List<NeutronQosBandwidthLimitRule> bwLimitRules;
 
     @XmlElement(name = "dscp_marking_rules")
     List<NeutronQosDscpMarkingRule> dscpRules;
@@ -38,11 +38,11 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
         this.shared = qosPolicyIsShared;
     }
 
-    public List<NeutronQosBandwidthRule> getBwLimitRules() {
+    public List<NeutronQosBandwidthLimitRule> getBwLimitRules() {
         return bwLimitRules;
     }
 
-    public void setQosBwLimitRules(List<NeutronQosBandwidthRule> qosBwLimitRules) {
+    public void setQosBwLimitRules(List<NeutronQosBandwidthLimitRule> qosBwLimitRules) {
         this.bwLimitRules = qosBwLimitRules;
     }
 
@@ -61,7 +61,7 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
                 ans.setPolicyIsShared(this.getPolicyIsShared());
                 break;
             case "bandwidth_limit_rules":
-                List<NeutronQosBandwidthRule> qosBwRuleList = new ArrayList<>();
+                List<NeutronQosBandwidthLimitRule> qosBwRuleList = new ArrayList<>();
                 qosBwRuleList.addAll(this.getBwLimitRules());
                 ans.setQosBwLimitRules(qosBwRuleList);
                 break;
