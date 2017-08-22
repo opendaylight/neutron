@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_cc4e1896",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-22T23:11:30Z",
+      "side": 1,
+      "message": "Unable to use B due to the following Error\n\n[ERROR] /home/pramod/QOs/neutron/transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java:52:53: Local variable name \u0027BandwidthRule\u0027 must match pattern \u0027^[a-z][a-z0-9][a-zA-Z0-9]*$\u0027. [LocalVariableName]\nAudit done.",
+      "range": {
+        "startLine": 48,
+        "startChar": 52,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "8d513c3d8fa1898f8d2d49e21ca34e60156ee449",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
