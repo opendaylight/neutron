@@ -69,6 +69,30 @@
       "revId": "8d513c3d8fa1898f8d2d49e21ca34e60156ee449",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_9e1b9f1a",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-23T21:20:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_be62e3aa",
+      "range": {
+        "startLine": 80,
+        "startChar": 53,
+        "endLine": 80,
+        "endChar": 61
+      },
+      "revId": "8d513c3d8fa1898f8d2d49e21ca34e60156ee449",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
