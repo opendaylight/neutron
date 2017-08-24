@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_b8be73d2",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthLimitRule.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-24T23:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_21b256e6",
+      "range": {
+        "startLine": 63,
+        "startChar": 19,
+        "endLine": 63,
+        "endChar": 32
+      },
+      "revId": "d3e34f620226c6fa624775313b12c9f8a88edc4c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_61cbae53",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_18b69ffa",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-24T23:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_61cbae53",
+      "range": {
+        "startLine": 28,
+        "startChar": 39,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "d3e34f620226c6fa624775313b12c9f8a88edc4c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_01b592cc",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2017-08-24T06:48:46Z",
       "side": 1,
       "message": "rename is needed.",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 45
+      },
+      "revId": "d3e34f620226c6fa624775313b12c9f8a88edc4c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_38ca836e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-08-24T23:29:47Z",
+      "side": 1,
+      "message": "I have renamed it as \"dscpMarking\". Please do let me know if i need to follow any other Pattern. \nThanks",
+      "parentUuid": "ba1f61a0_01b592cc",
       "range": {
         "startLine": 31,
         "startChar": 36,
