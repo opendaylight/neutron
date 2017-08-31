@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_b267a04c",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "merge conflict",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 68
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_5256245d",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronTapFlowCRUD.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "mergeconflict",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 7
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_72e08896",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronTapFlowRequest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "tap_flow",
+      "range": {
+        "startLine": 21,
+        "startChar": 24,
+        "endLine": 21,
+        "endChar": 31
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_d2f05469",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronTapFlowRequest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "tap_flows",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_32da90e8",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronTapServiceRequest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "tap_service",
+      "range": {
+        "startLine": 21,
+        "startChar": 24,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_92e37ca3",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronTapServiceRequest.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 35
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_52dd84df",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractNeutronInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-08-31T01:33:16Z",
+      "side": 1,
+      "message": "no point to change this here.",
+      "range": {
+        "startLine": 2,
+        "startChar": 20,
+        "endLine": 2,
+        "endChar": 39
+      },
+      "revId": "6e2eaed0642eb13c94ac9736abcd879f857eec9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
