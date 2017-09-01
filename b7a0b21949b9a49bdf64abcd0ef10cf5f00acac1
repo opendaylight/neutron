@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_048743d8",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-09-01T23:14:30Z",
+      "side": 1,
+      "message": "Please fullfill descriptions.",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 23
+      },
+      "revId": "b7a0b21949b9a49bdf64abcd0ef10cf5f00acac1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_646f1f2c",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-09-01T23:14:30Z",
+      "side": 1,
+      "message": "Please check if \"config false\" works as expected.\nODL has peculiar constraint.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 62
+      },
+      "revId": "b7a0b21949b9a49bdf64abcd0ef10cf5f00acac1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
