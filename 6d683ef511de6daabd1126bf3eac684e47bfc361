@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_c16156aa",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-09-21T21:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_5dd4a21f",
+      "range": {
+        "startLine": 83,
+        "startChar": 2,
+        "endLine": 102,
+        "endChar": 5
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_ddced282",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 11
@@ -155,6 +179,30 @@
       "side": 1,
       "message": "Nooooo. this breaks dependent project.\nand also there are inconsistencies among spi and others.\nPlease fix them all.",
       "parentUuid": "ba1f61a0_860fe22d",
+      "range": {
+        "startLine": 110,
+        "startChar": 30,
+        "endLine": 110,
+        "endChar": 31
+      },
+      "revId": "6d683ef511de6daabd1126bf3eac684e47bfc361",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_a16422b9",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-09-21T21:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba1f61a0_060ad2d1",
       "range": {
         "startLine": 110,
         "startChar": 30,
