@@ -44,8 +44,8 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
         final NeutronBgpvpn result = new NeutronBgpvpn();
         fromMdAdminAttributes(bgpvpn, result);
         result.setAutoAggregate(bgpvpn.isAutoAggregate());
-        if (bgpvpn.getVnid() != null) {
-            result.setVnid(bgpvpn.getVnid());
+        if (bgpvpn.getVni() != null) {
+            result.setVni(bgpvpn.getVni());
         }
         if (bgpvpn.getType() != null) {
             result.setType(BGPVPN_TYPE_MAP.get(bgpvpn.getType()));
@@ -106,8 +106,8 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
         if (bgpvpn.getAutoAggregate() != null) {
             bgpvpnBuilder.setAutoAggregate(bgpvpn.getAutoAggregate());
         }
-        if (bgpvpn.getVnid() != null) {
-            bgpvpnBuilder.setVnid(bgpvpn.getVnid());
+        if (bgpvpn.getVni() != null) {
+            bgpvpnBuilder.setVni(bgpvpn.getVni());
         }
         if (bgpvpn.getType() != null) {
             final ImmutableBiMap<String, Class<? extends BgpvpnTypeBase>> mapper = BGPVPN_TYPE_MAP.inverse();
