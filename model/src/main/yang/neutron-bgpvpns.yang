@@ -78,7 +78,7 @@ module neutron-bgpvpns {
             type string;
             description "list route-distinguishers";
         }
-        leaf vnid {
+        leaf vni {
             type uint32;
             description "globally assigned VxLanId";
         }

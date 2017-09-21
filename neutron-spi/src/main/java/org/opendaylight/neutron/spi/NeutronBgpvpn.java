@@ -40,8 +40,8 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
     @XmlElement(name = "route_distinguishers")
     List<String> routeDistinguishers;
 
-    @XmlElement(name = "vnid")
-    Long vnid;
+    @XmlElement(name = "vni")
+    Long vni;
 
     @XmlElement(defaultValue = "false", name = "auto_aggregate")
     Boolean autoAggregate;
@@ -154,12 +154,12 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
         routeDistinguishers.remove(uuid);
     }
 
-    public Long getVnid() {
-        return vnid;
+    public Long getVni() {
+        return vni;
     }
 
-    public void setVnid(Long input) {
-        vnid = input;
+    public void setVni(Long input) {
+        vni = input;
     }
 
     public Boolean getAutoAggregate() {
@@ -229,8 +229,8 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
             case "networks":
                 ans.setNetworks(this.getNetworks());
                 break;
-            case "vnid":
-                ans.setVnid(this.getVnid());
+            case "vni":
+                ans.setVni(this.getVni());
                 break;
             case "auto_aggregate":
                 ans.setAutoAggregate(this.getAutoAggregate());
@@ -246,7 +246,7 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
         return "NeutronBgpvpn [bgpvpnUUID=" + uuid + ", bgpvpnName=" + name + ", adminStateUp=" + adminStateUp
                 + ", status=" + status + ", tenantID=" + getTenantID() + ", type=" + type + ", technique=" + technique
                 + ", routeTargets=" + routeTargets + ", importTargets=" + importTargets + ", exportTargets="
-                + exportTargets + ", routeDistinguishers=" + routeDistinguishers + ", vnid = " + vnid
+                + exportTargets + ", routeDistinguishers=" + routeDistinguishers + ", vni = " + vni
                 + ", autoAggregate = " + autoAggregate + ", networks = " + networks + ", routers = " + routers + "]";
     }
 }
