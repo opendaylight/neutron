@@ -70,17 +70,23 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>odl-neutron-model</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>neutron-spi</artifactId>
+            <artifactId>odl-neutron-spi</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>neutron-hostconfig-utils</artifactId>
+            <artifactId>odl-neutron-hostconfig-utils</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
             <version>${project.version}</version>
         </dependency>
         <dependency>
