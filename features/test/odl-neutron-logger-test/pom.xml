@@ -32,7 +32,9 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>neutron-logger</artifactId>
+            <artifactId>odl-neutron-logger</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
