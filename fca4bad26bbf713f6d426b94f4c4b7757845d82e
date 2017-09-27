@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba1f61a0_25983077",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthLimitRule.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-09-27T08:07:36Z",
+      "side": 1,
+      "message": "This is unrelated fix.\nPlease create a new patch to fix it.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 5
+      },
+      "revId": "fca4bad26bbf713f6d426b94f4c4b7757845d82e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_05936c5b",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosMinimumBandwidthRule.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-09-27T08:07:36Z",
+      "side": 1,
+      "message": "Please be consistent.\nMin vs Minimum.",
+      "range": {
+        "startLine": 63,
+        "startChar": 49,
+        "endLine": 63,
+        "endChar": 52
+      },
+      "revId": "fca4bad26bbf713f6d426b94f4c4b7757845d82e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_659ea864",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosMinimumBandwidthRule.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-09-27T08:07:36Z",
+      "side": 1,
+      "message": "typo.",
+      "range": {
+        "startLine": 64,
+        "startChar": 28,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "fca4bad26bbf713f6d426b94f4c4b7757845d82e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba1f61a0_4599e477",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-09-27T08:07:36Z",
+      "side": 1,
+      "message": "unrelated fix.\ncreate another patch to fix it.",
+      "range": {
+        "startLine": 48,
+        "startChar": 16,
+        "endLine": 48,
+        "endChar": 41
+      },
+      "revId": "fca4bad26bbf713f6d426b94f4c4b7757845d82e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
