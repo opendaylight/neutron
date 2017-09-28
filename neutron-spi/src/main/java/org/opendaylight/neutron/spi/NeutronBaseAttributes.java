@@ -25,7 +25,6 @@ public abstract class NeutronBaseAttributes<T extends NeutronBaseAttributes> ext
     String name;
 
     public NeutronBaseAttributes() {
-        super();
     }
 
     @Override

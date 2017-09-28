@@ -43,7 +43,6 @@ public final class PaginatedRequestFactory {
         private final String id;
 
         MarkerObject(String id) {
-            super();
             this.id = id;
         }
 

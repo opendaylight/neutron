@@ -28,7 +28,6 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
     String status;
 
     public NeutronAdminAttributes() {
-        super();
     }
 
     public Boolean getAdminStateUp() {
