@@ -43,7 +43,6 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
     Long revisionNumber;
 
     public NeutronObject() {
-        super();
     }
 
     @Override
