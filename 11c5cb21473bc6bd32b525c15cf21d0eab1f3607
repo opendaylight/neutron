@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_d5955789",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/JaxbTestHelper.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-04T21:09:05Z",
+      "side": 1,
+      "message": "Please add \nthrow new UnsupportedOperationException(\"....\");\nto make the intention clearer.",
+      "range": {
+        "startLine": 23,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 5
+      },
+      "revId": "11c5cb21473bc6bd32b525c15cf21d0eab1f3607",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
