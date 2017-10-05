@@ -19,7 +19,7 @@ import java.util.Map;
 
 import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.rev131021.NodeId;
 
-public class HostconfigUtil {
+public final class HostconfigUtil {
 
     static final String L2_HOST_TYPE = "ODL L2";
     private static final String VHOST_USER = "vhostuser";
@@ -27,6 +27,9 @@ public class HostconfigUtil {
     private static final String HAS_DATAPATH_TYPE_NETDEV = "False";
     private static final String SUPPORT_VHOST_USER = "True";
     private static final List<String> SUPPORTED_NET_TYPES = Lists.newArrayList("local", "vlan", "vxlan", "gre");
+
+    private HostconfigUtil() {
+    }
 
     public static Map<String, String> createHostconfigsDataFor(NodeId nodeId, SocketInfo socketInfo) {
         Preconditions.checkNotNull(nodeId);

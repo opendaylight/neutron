@@ -105,20 +105,10 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <configuration>
-          <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
-          <consoleOutput>true</consoleOutput>
-          <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>check</goal>
-            </goals>
-            <phase>process-sources</phase>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.felix</groupId>
