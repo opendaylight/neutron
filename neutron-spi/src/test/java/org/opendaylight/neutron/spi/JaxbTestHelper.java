@@ -18,7 +18,10 @@ import javax.xml.transform.stream.StreamSource;
 import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;
 
-public class JaxbTestHelper {
+public final class JaxbTestHelper {
+
+    private JaxbTestHelper() {
+    }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static Object jaxbUnmarshall(Object schemaObject, String json) throws JAXBException {
