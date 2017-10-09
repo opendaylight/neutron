@@ -68,7 +68,9 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>neutron-spi</artifactId>
+            <artifactId>odl-neutron-spi</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
             <version>${project.version}</version>
         </dependency>
         <dependency>
