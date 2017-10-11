@@ -62,4 +62,26 @@ public final class NeutronUtils {
             return inverseMapper.get(key);
         }
     }
+
+    // Direction of the Traffic
+    public static class DirectionMapper {
+        private DirectionMapper() {
+            throw new UnsupportedOperationException("Utility class should not be instantiated.");
+        }
+
+        private static final ImmutableBiMap<String, Class<? extends DirectionBase>> MAPPER
+            = new ImmutableBiMap.Builder<String, Class<? extends DirectionBase>>()
+            .put("egress", DirectionEgress.class)
+            .put("ingress", DirectionIngress.class)
+            .build();
+
+        public static Class<? extends DirectionBase> get(String key) {
+            return MAPPER.get(key);
+        }
+
+        public static String getName(Class<? extends DirectionBase> key) {
+            ImmutableBiMap<Class<? extends DirectionBase>, String> inverseMapper = MAPPER.inverse();
+            return inverseMapper.get(key);
+        }
+    }
 }
