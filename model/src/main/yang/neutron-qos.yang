@@ -60,6 +60,12 @@ module neutron-qos {
             type uint64;
             description "The burst over the maximum KBPS value";
         }
+        leaf direction {
+            type identityref {
+                base "constants:direction-base";
+            }
+            description "The traffic direction";
+        }
     }
 
     grouping dscpmarking-rule-attributes {
