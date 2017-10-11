@@ -101,4 +101,3 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
                 + '}';
     }
 }
-
