@@ -15,6 +15,7 @@ module neutron-qos {
 
     import ietf-yang-types { prefix "yang"; revision-date "2013-07-15"; }
     import neutron-attrs { prefix "attrs"; }
+    import neutron-constants { prefix "constants"; }
 
     organization "OpenDaylight Neutron Group";
 
@@ -58,6 +59,12 @@ module neutron-qos {
         leaf max-burst-kbps {
             type uint64;
             description "The burst over the maximum KBPS value";
+        }
+        leaf direction {
+            type identityref {
+                base "constants:direction-base";
+            }
+            description "The traffic direction";
         }
     }
 
