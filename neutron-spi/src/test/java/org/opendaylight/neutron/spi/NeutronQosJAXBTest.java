@@ -22,7 +22,7 @@ public class NeutronQosJAXBTest {
             + " \"shared\": false," + "\"rule_type\": \"rule\", "
             + "\"bandwidth_limit_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\", "
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\"," + "\"max_kbps\": 25, "
-            + "\"max_burst_kbps\": 100 } ],"
+            + "\"max_burst_kbps\": 100," + "\"direction\" : \"egress\" } ],"
             + "\"dscp_marking_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
             + " \"tenant_id\": \"aa902936679e4ea29bfe1158e3450a14\", " + "\"dscp_mark\": 8 } ],"
             + "\"minimum_bandwidth_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3547\","
@@ -61,6 +61,9 @@ public class NeutronQosJAXBTest {
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 5.4 : Testing Maximum Burst value failed",
                 new BigInteger("100"), bandwidthLimitPolicyRules.get(0).maxBurstKbps);
+
+        Assert.assertEquals("NeutronQosPolicy JaxB Test 5.5 : Testing Direction failed", "egress",
+            bandwidthLimitPolicyRules.get(0).direction);
 
         List<NeutronQosDscpMarkingRule> dscpMarkingPolicyRules = neutronObject.getDscpMarkingRules();
 
