@@ -12,54 +12,55 @@ import com.google.common.collect.ImmutableBiMap;
 
 
 public final class NeutronUtils {
-    private NeutronUtils() {
-        throw new UnsupportedOperationException("Utility class should not be instantiated.");
-    }
+    private NeutronUtils () {
+    throw new UnsupportedOperationException ("Utility class should not be instantiated.");
+}
 
     // For FWaaS
     public static class FwProtocolMapper {
-        private FwProtocolMapper() {
-            throw new UnsupportedOperationException("Utility class should not be instantiated.");
+        private FwProtocolMapper () {
+            throw new UnsupportedOperationException ("Utility class should not be instantiated.");
         }
 
         private static final ImmutableBiMap<String, Class<? extends FwProtocolBase>> MAPPER
-            = new ImmutableBiMap.Builder<String, Class<? extends FwProtocolBase>>()
-            .put("tcp", FwProtocolTcp.class)
-            .put("udp", FwProtocolUdp.class)
-            .put("icmp", FwProtocolIcmp.class)
-            .build();
+            = new ImmutableBiMap.Builder<String, Class<? extends FwProtocolBase>> ()
+            .put ("tcp", FwProtocolTcp.class)
+            .put ("udp", FwProtocolUdp.class)
+            .put ("icmp", FwProtocolIcmp.class)
+            .build ();
 
-        public static Class<? extends FwProtocolBase> get(String key) {
-            return MAPPER.get(key);
-        }
+        public static Class<? extends FwProtocolBase> get (String key) {
+        return MAPPER.get (key);
+    }
 
-        public static String getName(Class<? extends FwProtocolBase> key) {
-            ImmutableBiMap<Class<? extends FwProtocolBase>, String> inverseMapper = MAPPER.inverse();
-            return inverseMapper.get(key);
+        public static String getName (Class<? extends FwProtocolBase> key) {
+            ImmutableBiMap<Class<? extends FwProtocolBase>, String> inverseMapper = MAPPER.inverse ();
+            return inverseMapper.get (key);
         }
     }
 
     // For security group
     public static class ProtocolMapper {
-        private ProtocolMapper() {
-            throw new UnsupportedOperationException("Utility class should not be instantiated.");
-        }
+        private ProtocolMapper () {
+            throw new UnsupportedOperationException ("Utility class should not be instantiated.");
+    }
 
         private static final ImmutableBiMap<String, Class<? extends ProtocolBase>> MAPPER
-            = new ImmutableBiMap.Builder<String, Class<? extends ProtocolBase>>()
-            .put("icmp", ProtocolIcmp.class)
-            .put("tcp", ProtocolTcp.class)
-            .put("udp", ProtocolUdp.class)
-            .put("icmpv6", ProtocolIcmpV6.class)
-            .build();
+            = new ImmutableBiMap.Builder<String, Class<? extends ProtocolBase>> ()
+            .put ("icmp", ProtocolIcmp.class)
+            .put ("tcp", ProtocolTcp.class)
+            .put ("udp", ProtocolUdp.class)
+            .put ("icmpv6", ProtocolIcmpV6.class)
+            .build ();
 
-        public static Class<? extends ProtocolBase> get(String key) {
-            return MAPPER.get(key);
-        }
+        public static Class<? extends ProtocolBase> get (String key) {
+        return MAPPER.get (key);
+    }
 
-        public static String getName(Class<? extends ProtocolBase> key) {
-            ImmutableBiMap<Class<? extends ProtocolBase>, String> inverseMapper = MAPPER.inverse();
-            return inverseMapper.get(key);
+        public static String getName (Class<? extends ProtocolBase> key) {
+            ImmutableBiMap<Class<? extends ProtocolBase>, String> inverseMapper = MAPPER.inverse ();
+            return inverseMapper.get (key);
         }
     }
 }
+

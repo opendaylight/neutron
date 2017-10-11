@@ -15,6 +15,7 @@ import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronQosBandwidthLimitRule;
 import org.opendaylight.neutron.spi.NeutronQosDscpMarkingRule;
 import org.opendaylight.neutron.spi.NeutronQosPolicy;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.DirectionMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.QosPolicies;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.rev160613.qos.attributes.qos.policies.QosPolicyBuilder;
@@ -51,6 +52,8 @@ public final class NeutronQosPolicyInterface
                 bandwidthLimitRulesBuilder.setTenantId(toUuid(bandwidthLimitRule.getTenantID()));
                 bandwidthLimitRulesBuilder.setMaxKbps(bandwidthLimitRule.getMaxKbps());
                 bandwidthLimitRulesBuilder.setMaxBurstKbps(bandwidthLimitRule.getMaxBurstKbps());
+                bandwidthLimitRulesBuilder.setDirection(DirectionMapper.get(bandwidthLimitRule
+                    .getDirection()));
                 listBandwith.add(bandwidthLimitRulesBuilder.build());
             }
             qosPolicyBuilder.setBandwidthLimitRules(listBandwith);
@@ -84,6 +87,7 @@ public final class NeutronQosPolicyInterface
                 opt.setTenantID(rule.getTenantId().getValue());
                 opt.setMaxKbps(rule.getMaxKbps());
                 opt.setMaxBurstKbps(rule.getMaxBurstKbps());
+                opt.setDirection(DirectionMapper.getName(rule.getDirection()));
                 bandwidthLimitRules.add(opt);
             }
             result.setQosBandwidthLimitRules(bandwidthLimitRules);
