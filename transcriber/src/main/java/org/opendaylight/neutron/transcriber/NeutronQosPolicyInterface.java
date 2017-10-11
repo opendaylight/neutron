@@ -55,6 +55,8 @@ public final class NeutronQosPolicyInterface
                 bandwidthLimitRulesBuilder.setTenantId(toUuid(bandwidthLimitRule.getTenantID()));
                 bandwidthLimitRulesBuilder.setMaxKbps(bandwidthLimitRule.getMaxKbps());
                 bandwidthLimitRulesBuilder.setMaxBurstKbps(bandwidthLimitRule.getMaxBurstKbps());
+                bandwidthLimitRulesBuilder.setDirection(DirectionMapper.get(bandwidthLimitRule
+                    .getDirection()));
                 listBandwith.add(bandwidthLimitRulesBuilder.build());
             }
             qosPolicyBuilder.setBandwidthLimitRules(listBandwith);
@@ -102,6 +104,7 @@ public final class NeutronQosPolicyInterface
                 opt.setTenantID(rule.getTenantId().getValue());
                 opt.setMaxKbps(rule.getMaxKbps());
                 opt.setMaxBurstKbps(rule.getMaxBurstKbps());
+                opt.setDirection(DirectionMapper.getName(rule.getDirection()));
                 bandwidthLimitRules.add(opt);
             }
             result.setQosBandwidthLimitRules(bandwidthLimitRules);
