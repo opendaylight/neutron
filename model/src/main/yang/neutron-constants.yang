@@ -114,6 +114,10 @@ module neutron-constants {
         base direction-base;
 
     }
+    identity direction-empty{
+        description "Placeholder when there is no direction.";
+        base direction-base;
+    }
 
     identity direction-minimum-bandwidth-rule {
         description "Direction for minimum bandwidth rule.";
