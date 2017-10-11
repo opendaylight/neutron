@@ -73,6 +73,7 @@ public final class NeutronUtils {
             = new ImmutableBiMap.Builder<String, Class<? extends DirectionBase>>()
             .put("egress", DirectionEgress.class)
             .put("ingress", DirectionIngress.class)
+            .put("", DirectionEmpty.class)
             .build();
 
         public static Class<? extends DirectionBase> get(String key) {
