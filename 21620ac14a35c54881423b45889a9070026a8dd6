@@ -324,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_23a60f11",
+        "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-10-19T00:42:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2a55be_6df63bd9",
+      "revId": "21620ac14a35c54881423b45889a9070026a8dd6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2a55be_adb6733b",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
         "patchSetId": 1
