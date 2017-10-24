@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_1d21964d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "Once you\u0027re ready, please drop Work-In-Progress.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_fd1be219",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "Those are change from the last patch set, right?\nIf so, commit log isn\u0027t the right place.\nplease comment as review comment or mark it as change from the previous patch set in the log.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 53
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_9dd46621",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "Please update the date.",
+      "range": {
+        "startLine": 26,
+        "startChar": 14,
+        "endLine": 26,
+        "endChar": 24
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_bde16a00",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "key \"...\";\nis needed.",
+      "range": {
+        "startLine": 95,
+        "startChar": 37,
+        "endLine": 95,
+        "endChar": 37
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_1de876e1",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "this name should be same to tap-services-attributes for consistency.",
+      "range": {
+        "startLine": 96,
+        "startChar": 21,
+        "endLine": 96,
+        "endChar": 35
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_fdc9227a",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTapFlow.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "status is also needed.",
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_5dc94e77",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronTapService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "status is also needed.",
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_ddac1ea3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapFlowInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "for consistency, please arrange those in same order to yang model.\ni.e. tap-service-id, source-port and then direction.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 9
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_7da532b4",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapFlowInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "status needs to be returned.",
+      "range": {
+        "startLine": 78,
+        "startChar": 8,
+        "endLine": 78,
+        "endChar": 9
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_bdafaa93",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapFlowInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 9
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_3dc45a5e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapServiceInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "status needs to be returned.",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 9
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_9da2a6ac",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapServiceInterface.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-10-24T06:38:20Z",
+      "side": 1,
+      "message": "don\u0027t we need to preserve tap-flows?\nPlease add unit test to test it.",
+      "range": {
+        "startLine": 50,
+        "startChar": 9,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "95c69b1369b8ac66a76f21aceb737556b9281c35",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
