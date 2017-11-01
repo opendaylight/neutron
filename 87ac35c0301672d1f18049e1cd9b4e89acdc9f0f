@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_9707fe1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-01T23:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_dd837e02",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 6
+      },
+      "revId": "87ac35c0301672d1f18049e1cd9b4e89acdc9f0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_1d7d161d",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2017-10-24T06:48:05Z",
       "side": 1,
       "message": "add why.\nplease add link to the neutron api change.",
+      "revId": "87ac35c0301672d1f18049e1cd9b4e89acdc9f0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_77024a0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-01T23:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_1d7d161d",
       "revId": "87ac35c0301672d1f18049e1cd9b4e89acdc9f0f",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_57b1068e",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-01T23:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_3d729a49",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "87ac35c0301672d1f18049e1cd9b4e89acdc9f0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_7d93724f",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2017-10-24T06:48:05Z",
       "side": 1,
       "message": "lower case for consistency.",
+      "range": {
+        "startLine": 67,
+        "startChar": 29,
+        "endLine": 67,
+        "endChar": 46
+      },
+      "revId": "87ac35c0301672d1f18049e1cd9b4e89acdc9f0f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_37ac5235",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-01T23:18:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_7d93724f",
       "range": {
         "startLine": 67,
         "startChar": 29,
