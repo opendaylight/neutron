@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_eba2c949",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-03T23:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_bd9dea5b",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "268838850bba1531bdc167193c840e253b1e7056",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_fd9e4253",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 20
@@ -36,6 +60,30 @@
       "writtenOn": "2017-10-24T06:56:57Z",
       "side": 1,
       "message": "why?\nplease check neutron api definition.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "268838850bba1531bdc167193c840e253b1e7056",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_4b8b15c3",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 20
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-03T23:10:46Z",
+      "side": 1,
+      "message": "Done. It not accepts only \"egress\".",
+      "parentUuid": "9a245df4_fd9e4253",
       "range": {
         "startLine": 97,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_2b8861c4",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 20
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-03T23:10:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_1da4f6a4",
+      "range": {
+        "startLine": 100,
+        "startChar": 29,
+        "endLine": 100,
+        "endChar": 45
+      },
+      "revId": "268838850bba1531bdc167193c840e253b1e7056",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_5dae6e86",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
         "patchSetId": 20
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_8b918df3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-03T23:10:46Z",
+      "side": 1,
+      "message": "Sure. I will create another patch to fix this",
+      "parentUuid": "9a245df4_5dae6e86",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 9
+      },
+      "revId": "268838850bba1531bdc167193c840e253b1e7056",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_3da9fa7b",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 20
@@ -105,6 +201,30 @@
       "writtenOn": "2017-10-24T06:56:57Z",
       "side": 1,
       "message": "This can\u0027t be used.\nPlease check neutron api and allowed value.",
+      "range": {
+        "startLine": 56,
+        "startChar": 44,
+        "endLine": 56,
+        "endChar": 59
+      },
+      "revId": "268838850bba1531bdc167193c840e253b1e7056",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_6b8ed9d1",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-03T23:10:46Z",
+      "side": 1,
+      "message": "As per the discussion,Since it supports both Ingress and Egress,We can use this function.",
+      "parentUuid": "9a245df4_3da9fa7b",
       "range": {
         "startLine": 56,
         "startChar": 44,
