@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_eb7009de",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 20
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-11-03T23:21:56Z",
+      "side": 1,
+      "message": "now*",
+      "parentUuid": "9a245df4_4b8b15c3",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "268838850bba1531bdc167193c840e253b1e7056",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_1da4f6a4",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 20
