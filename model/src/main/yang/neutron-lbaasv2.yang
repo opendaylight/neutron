@@ -117,15 +117,6 @@ module neutron-lbaasv2 {
         }
     }
     grouping member-attributes {
-        leaf uuid {
-            type yang:uuid;
-            description "The unique ID for the member.";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "Owner of the member. Only an administrative user can specify
-                a tenant ID other than its own.";
-        }
         leaf subnet-id {
             type yang:uuid;
             description "Subnet in which to access this member.";
@@ -155,15 +146,6 @@ module neutron-lbaasv2 {
         }
     }
     grouping healthmonitor-attributes {
-        leaf uuid {
-            type yang:uuid;
-            description "The unique ID for the healthmonitor.";
-        }
-        leaf tenant-id {
-            type yang:uuid;
-            description "Owner of the VIP. Only an administrative user can specify
-                a tenant ID other than its own.";
-        }
         leaf type {
             description "The type of probe, which is PING, TCP, HTTP, or HTTPS, that
                 is sent by the load balancer to verify the member state.";
@@ -246,6 +228,7 @@ module neutron-lbaasv2 {
                     description "Container for pool members.";
                     list member {
                         key "uuid";
+                        uses attrs:id-attributes;
                         uses member-attributes;
                         description "List of members.";
                     }
@@ -256,6 +239,7 @@ module neutron-lbaasv2 {
             description "Container for LBaaSV2.0 healthmonitors.";
             list healthmonitor {
                 key "uuid";
+                uses attrs:id-attributes;
                 uses healthmonitor-attributes;
                 description "List of healthmonitors.";
             }
