@@ -39,6 +39,7 @@ public final class NeutronFloatingIpInterface
     @Override
     protected Floatingip toMd(NeutronFloatingIp floatingIp) {
         final FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
+        toMdIds(floatingIp, floatingipBuilder);
         if (floatingIp.getFixedIpAddress() != null) {
             floatingipBuilder.setFixedIpAddress(new IpAddress(floatingIp.getFixedIpAddress().toCharArray()));
         }
@@ -57,21 +58,13 @@ public final class NeutronFloatingIpInterface
         if (floatingIp.getStatus() != null) {
             floatingipBuilder.setStatus(floatingIp.getStatus());
         }
-        if (floatingIp.getTenantID() != null) {
-            floatingipBuilder.setTenantId(toUuid(floatingIp.getTenantID()));
-        }
-        if (floatingIp.getID() != null) {
-            floatingipBuilder.setUuid(toUuid(floatingIp.getID()));
-        } else {
-            LOG.warn("Attempting to write neutron floating IP without UUID");
-        }
         return floatingipBuilder.build();
     }
 
     @Override
     protected NeutronFloatingIp fromMd(Floatingip fip) {
         final NeutronFloatingIp result = new NeutronFloatingIp();
-        result.setID(fip.getUuid().getValue());
+        fromMdIds(fip, result);
         if (fip.getFloatingNetworkId() != null) {
             result.setFloatingNetworkUUID(String.valueOf(fip.getFloatingNetworkId().getValue()));
         }
@@ -83,9 +76,6 @@ public final class NeutronFloatingIpInterface
         }
         if (fip.getFloatingIpAddress() != null) {
             result.setFloatingIpAddress(String.valueOf(fip.getFloatingIpAddress().getValue()));
-        }
-        if (fip.getTenantId() != null) {
-            result.setTenantID(fip.getTenantId());
         }
         if (fip.getRouterId() != null) {
             result.setRouterUUID(String.valueOf(fip.getRouterId().getValue()));

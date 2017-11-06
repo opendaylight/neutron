@@ -34,14 +34,10 @@ public final class NeutronL2gatewayConnectionInterface
     @Override
     protected NeutronL2gatewayConnection fromMd(L2gatewayConnection l2gatewayConnection) {
         final NeutronL2gatewayConnection result = new NeutronL2gatewayConnection();
-        if (l2gatewayConnection.getUuid() != null) {
-            result.setID(l2gatewayConnection.getUuid().getValue());
-        }
+        fromMdBaseAttributes(l2gatewayConnection, result);
+
         if (l2gatewayConnection.getL2gatewayId().getValue() != null) {
             result.setL2gatewayID(String.valueOf(l2gatewayConnection.getL2gatewayId().getValue()));
-        }
-        if (l2gatewayConnection.getTenantId() != null) {
-            result.setTenantID(l2gatewayConnection.getTenantId());
         }
         if (l2gatewayConnection.getNetworkId().getValue() != null) {
             result.setNetworkID(String.valueOf(l2gatewayConnection.getNetworkId().getValue()));
@@ -58,9 +54,8 @@ public final class NeutronL2gatewayConnectionInterface
     @Override
     protected L2gatewayConnection toMd(NeutronL2gatewayConnection neutronObject) {
         final L2gatewayConnectionBuilder l2gatewayConnectionBuilder = new L2gatewayConnectionBuilder();
-        if (neutronObject.getID() != null) {
-            l2gatewayConnectionBuilder.setUuid(toUuid(neutronObject.getID()));
-        }
+        toMdBaseAttributes(neutronObject, l2gatewayConnectionBuilder);
+
         if (neutronObject.getL2gatewayID() != null) {
             l2gatewayConnectionBuilder.setL2gatewayId(toUuid(neutronObject.getL2gatewayID()));
         }
@@ -69,9 +64,6 @@ public final class NeutronL2gatewayConnectionInterface
         }
         if (neutronObject.getSegmentID() != null) {
             l2gatewayConnectionBuilder.setSegmentId((neutronObject.getSegmentID()));
-        }
-        if (neutronObject.getTenantID() != null) {
-            l2gatewayConnectionBuilder.setTenantId(toUuid(neutronObject.getTenantID()));
         }
         if (neutronObject.getPortID() != null) {
             l2gatewayConnectionBuilder.setPortId(toUuid(neutronObject.getPortID()));

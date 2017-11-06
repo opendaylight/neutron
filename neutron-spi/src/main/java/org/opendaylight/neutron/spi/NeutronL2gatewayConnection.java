@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "l2gatewayConnection")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronL2gatewayConnection extends NeutronObject<NeutronL2gatewayConnection>
-        implements Serializable, INeutronObject<NeutronL2gatewayConnection> {
+public final class NeutronL2gatewayConnection extends NeutronBaseAttributes<NeutronL2gatewayConnection>
+            implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "gateway_id")

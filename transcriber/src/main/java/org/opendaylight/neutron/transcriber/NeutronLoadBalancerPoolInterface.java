@@ -69,6 +69,7 @@ public final class NeutronLoadBalancerPoolInterface
     @Override
     protected Pool toMd(NeutronLoadBalancerPool pool) {
         final PoolBuilder poolBuilder = new PoolBuilder();
+        toMdBaseAttributes(pool, poolBuilder);
         poolBuilder.setAdminStateUp(pool.getLoadBalancerPoolAdminIsStateIsUp());
         if (pool.getLoadBalancerPoolHealthMonitorID() != null) {
             poolBuilder.setHealthmonitorId(toUuid(pool.getLoadBalancerPoolHealthMonitorID()));
@@ -85,9 +86,6 @@ public final class NeutronLoadBalancerPoolInterface
         }
         // because members are another container, we don't want to copy
         // it over, so just skip it here
-        if (pool.getName() != null) {
-            poolBuilder.setName(pool.getName());
-        }
         if (pool.getLoadBalancerPoolProtocol() != null) {
             final ImmutableBiMap<String, Class<? extends ProtocolBase>> mapper = PROTOCOL_MAP.inverse();
             poolBuilder.setProtocol(mapper.get(pool.getLoadBalancerPoolProtocol()));
@@ -100,20 +98,13 @@ public final class NeutronLoadBalancerPoolInterface
             sessionPersistenceBuilder.setType(sessionPersistence.getType());
             poolBuilder.setSessionPersistence(sessionPersistenceBuilder.build());
         }
-        if (pool.getTenantID() != null) {
-            poolBuilder.setTenantId(toUuid(pool.getTenantID()));
-        }
-        if (pool.getID() != null) {
-            poolBuilder.setUuid(toUuid(pool.getID()));
-        } else {
-            LOG.warn("Attempting to write neutron load balancer pool without UUID");
-        }
         return poolBuilder.build();
     }
 
     @Override
     protected NeutronLoadBalancerPool fromMd(Pool pool) {
         final NeutronLoadBalancerPool answer = new NeutronLoadBalancerPool();
+        fromMdBaseAttributes(pool, answer);
         if (pool.isAdminStateUp() != null) {
             answer.setLoadBalancerPoolAdminStateIsUp(pool.isAdminStateUp());
         }
@@ -137,9 +128,6 @@ public final class NeutronLoadBalancerPoolInterface
             }
             answer.setLoadBalancerPoolMembers(members);
         }
-        if (pool.getName() != null) {
-            answer.setName(pool.getName());
-        }
         if (pool.getProtocol() != null) {
             answer.setLoadBalancerPoolProtocol(PROTOCOL_MAP.get(pool.getProtocol()));
         }
@@ -150,12 +138,6 @@ public final class NeutronLoadBalancerPoolInterface
             sessionPersistence.setType(pool.getSessionPersistence().getType());
 
             answer.setLoadBalancerSessionPersistence(sessionPersistence);
-        }
-        if (pool.getTenantId() != null) {
-            answer.setTenantID(pool.getTenantId());
-        }
-        if (pool.getUuid() != null) {
-            answer.setID(pool.getUuid().getValue());
         }
         return answer;
     }
@@ -236,8 +218,9 @@ public final class NeutronLoadBalancerPoolInterface
                 .child(Members.class);
     }
 
-    static NeutronLoadBalancerPoolMember fromMemberMd(Member member) {
+    protected NeutronLoadBalancerPoolMember fromMemberMd(Member member) {
         final NeutronLoadBalancerPoolMember answer = new NeutronLoadBalancerPoolMember();
+        fromMdIds(member, answer);
         if (member.isAdminStateUp() != null) {
             answer.setPoolMemberAdminStateIsUp(member.isAdminStateUp());
         }
@@ -247,15 +230,8 @@ public final class NeutronLoadBalancerPoolInterface
         if (member.getProtocolPort() != null) {
             answer.setPoolMemberProtoPort(member.getProtocolPort());
         }
-        if (member.getUuid() != null) {
-            answer.setID(member.getUuid().getValue());
-            answer.setPoolID(member.getUuid().getValue());
-        }
         if (member.getSubnetId() != null) {
             answer.setPoolMemberSubnetID(member.getSubnetId().getValue());
-        }
-        if (member.getTenantId() != null) {
-            answer.setTenantID(member.getTenantId());
         }
         if (member.getWeight() != null) {
             answer.setPoolMemberWeight(member.getWeight());
@@ -264,7 +240,7 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     protected Member toMemberMd(NeutronLoadBalancerPoolMember member) {
-        final MemberBuilder memberBuilder = new MemberBuilder();
+        final MemberBuilder memberBuilder = toMdIds(member, MemberBuilder.class);
         memberBuilder.setAdminStateUp(member.getPoolMemberAdminStateIsUp());
         if (member.getPoolMemberAddress() != null) {
             final IpAddress ipAddress = new IpAddress(member.getPoolMemberAddress().toCharArray());
@@ -273,14 +249,8 @@ public final class NeutronLoadBalancerPoolInterface
         if (member.getPoolMemberProtoPort() != null) {
             memberBuilder.setProtocolPort(member.getPoolMemberProtoPort());
         }
-        if (member.getID() != null) {
-            memberBuilder.setUuid(toUuid(member.getID()));
-        }
         if (member.getPoolMemberSubnetID() != null) {
             memberBuilder.setSubnetId(toUuid(member.getPoolMemberSubnetID()));
-        }
-        if (member.getTenantID() != null) {
-            memberBuilder.setTenantId(toUuid(member.getTenantID()));
         }
         if (member.getPoolMemberWeight() != null) {
             memberBuilder.setWeight(member.getPoolMemberWeight());

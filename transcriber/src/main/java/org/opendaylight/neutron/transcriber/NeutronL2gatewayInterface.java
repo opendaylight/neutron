@@ -39,17 +39,9 @@ public final class NeutronL2gatewayInterface
     @Override
     protected NeutronL2gateway fromMd(L2gateway l2gateway) {
         final NeutronL2gateway result = new NeutronL2gateway();
+        fromMdBaseAttributes(l2gateway, result);
         final List<NeutronL2gatewayDevice> neutronL2gatewayDevices = new ArrayList<>();
 
-        if (l2gateway.getUuid() != null) {
-            result.setID(l2gateway.getUuid().getValue());
-        }
-        if (l2gateway.getL2gatewayName() != null) {
-            result.setName(String.valueOf(l2gateway.getL2gatewayName()));
-        }
-        if (l2gateway.getTenantId() != null) {
-            result.setTenantID(l2gateway.getTenantId());
-        }
         if (l2gateway.getDevices() != null) {
             for (final Devices device : l2gateway.getDevices()) {
                 final NeutronL2gatewayDevice neutronL2gatewayDevice = new NeutronL2gatewayDevice();
@@ -90,15 +82,7 @@ public final class NeutronL2gatewayInterface
     @Override
     protected L2gateway toMd(NeutronL2gateway neutronObject) {
         final L2gatewayBuilder l2gatewayBuilder = new L2gatewayBuilder();
-        if (neutronObject.getName() != null) {
-            l2gatewayBuilder.setL2gatewayName(neutronObject.getName());
-        }
-        if (neutronObject.getID() != null) {
-            l2gatewayBuilder.setUuid(toUuid(neutronObject.getID()));
-        }
-        if (neutronObject.getTenantID() != null) {
-            l2gatewayBuilder.setTenantId(toUuid(neutronObject.getTenantID()));
-        }
+        toMdBaseAttributes(neutronObject, l2gatewayBuilder);
 
         if (neutronObject.getNeutronL2gatewayDevices() != null) {
             final List<Devices> devices = new ArrayList<>();
