@@ -42,12 +42,7 @@ public final class NeutronMeteringLabelRuleInterface
     @Override
     protected MeteringRule toMd(NeutronMeteringLabelRule meteringLabelRule) {
         final MeteringRuleBuilder meteringRuleBuilder = new MeteringRuleBuilder();
-        if (meteringLabelRule.getID() != null) {
-            meteringRuleBuilder.setUuid(toUuid(meteringLabelRule.getID()));
-        }
-        if (meteringLabelRule.getTenantID() != null) {
-            meteringRuleBuilder.setTenantId(toUuid(meteringLabelRule.getTenantID()));
-        }
+        toMdIds(meteringLabelRule, meteringRuleBuilder);
         if (meteringLabelRule.getMeteringLabelRuleLabelID() != null) {
             meteringRuleBuilder.setMeteringLabelId(toUuid(meteringLabelRule.getMeteringLabelRuleLabelID()));
         }
@@ -68,12 +63,7 @@ public final class NeutronMeteringLabelRuleInterface
     @Override
     protected NeutronMeteringLabelRule fromMd(MeteringRule rule) {
         final NeutronMeteringLabelRule answer = new NeutronMeteringLabelRule();
-        if (rule.getUuid() != null) {
-            answer.setID(rule.getUuid().getValue());
-        }
-        if (rule.getTenantId() != null) {
-            answer.setTenantID(rule.getTenantId());
-        }
+        fromMdIds(rule, answer);
         if (rule.getMeteringLabelId() != null) {
             answer.setMeteringLabelRuleLabelID(rule.getMeteringLabelId().getValue());
         }

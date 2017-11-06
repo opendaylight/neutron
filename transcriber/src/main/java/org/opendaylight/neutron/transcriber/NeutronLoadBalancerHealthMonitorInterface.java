@@ -51,6 +51,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
     @Override
     protected Healthmonitor toMd(NeutronLoadBalancerHealthMonitor healthMonitor) {
         final HealthmonitorBuilder healthmonitorBuilder = new HealthmonitorBuilder();
+        toMdIds(healthMonitor, healthmonitorBuilder);
         healthmonitorBuilder.setAdminStateUp(healthMonitor.getLoadBalancerHealthMonitorAdminStateIsUp());
         if (healthMonitor.getLoadBalancerHealthMonitorDelay() != null) {
             healthmonitorBuilder.setDelay(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorDelay()));
@@ -71,9 +72,6 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             }
             healthmonitorBuilder.setPools(listUuid);
         }
-        if (healthMonitor.getTenantID() != null) {
-            healthmonitorBuilder.setTenantId(toUuid(healthMonitor.getTenantID()));
-        }
         if (healthMonitor.getLoadBalancerHealthMonitorTimeout() != null) {
             healthmonitorBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
         }
@@ -85,17 +83,13 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         if (healthMonitor.getLoadBalancerHealthMonitorUrlPath() != null) {
             healthmonitorBuilder.setUrlPath(healthMonitor.getLoadBalancerHealthMonitorUrlPath());
         }
-        if (healthMonitor.getID() != null) {
-            healthmonitorBuilder.setUuid(toUuid(healthMonitor.getID()));
-        } else {
-            LOG.warn("Attempting to write neutron laod balancer health monitor without UUID");
-        }
         return healthmonitorBuilder.build();
     }
 
     @Override
     protected NeutronLoadBalancerHealthMonitor fromMd(Healthmonitor healthMonitor) {
         final NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
+        fromMdIds(healthMonitor, answer);
         if (healthMonitor.isAdminStateUp() != null) {
             answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.isAdminStateUp());
         }
@@ -118,9 +112,6 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             }
             answer.setLoadBalancerHealthMonitorPools(list);
         }
-        if (healthMonitor.getTenantId() != null) {
-            answer.setTenantID(healthMonitor.getTenantId());
-        }
         if (healthMonitor.getTimeout() != null) {
             answer.setLoadBalancerHealthMonitorTimeout(healthMonitor.getTimeout().intValue());
         }
@@ -129,11 +120,6 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         }
         if (healthMonitor.getUrlPath() != null) {
             answer.setLoadBalancerHealthMonitorUrlPath(healthMonitor.getUrlPath());
-        }
-        if (healthMonitor.getUuid() != null) {
-            answer.setID(healthMonitor.getUuid().getValue());
-        } else {
-            LOG.warn("Attempting to write neutron laod balancer health monitor without UUID");
         }
         return answer;
     }
