@@ -85,5 +85,10 @@ module neutron-networks {
                 uses attrs:admin-attributes;
             }
         }
+        container networks-operational {
+            config false;
+            uses attrs:operational-attributes;
+            description "Operation datastore attributes";
+        }
     }
 }

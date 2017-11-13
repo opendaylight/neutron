@@ -53,7 +53,6 @@ public final class NeutronTrunksNorthbound
             // OpenStack trunk attributes
             @QueryParam("id") String queryUUID,
             @QueryParam("tenant_id") String queryTenantID,
-            @QueryParam("status") String queryStatus,
             @QueryParam("name") String queryName,
             // pagination
             @QueryParam("limit") String limit,
@@ -64,7 +63,6 @@ public final class NeutronTrunksNorthbound
         for (NeutronTrunk nsg : trunkInterface.getAll()) {
             if ((queryUUID == null || queryUUID.equals(nsg.getID()))
                     && (queryTenantID == null || queryTenantID.equals(nsg.getTenantID()))
-                    && (queryStatus == null || queryStatus.equals(nsg.getStatus()))
                     && (queryName == null || queryName.equals(nsg.getName()))) {
                 if (fields.size() > 0) {
                     ans.add(nsg.extractFields(fields));

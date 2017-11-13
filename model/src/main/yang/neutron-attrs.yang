@@ -69,7 +69,22 @@ module neutron-attrs {
         }
         leaf status {
             type string;
+            status deprecated;
             description "The object status.";
+        }
+    }
+
+    grouping operational-attributes {
+        list status {
+            key "uuid";
+            leaf uuid {
+                type yang:uuid;
+                description "UUID to index this neutron object.";
+            }
+            leaf status {
+                type string;
+                description "The object status.";
+            }
         }
     }
 }

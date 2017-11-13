@@ -16,7 +16,7 @@ public class NeutronLoadBalancerJAXBTest {
 
     private static final String NEUTRON_LOAD_BALANCER_SOURCE_JSON = "{"
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", " + "\"name\": \"NeutronLoadBalancer\", "
-            + "\"description\": \"NeutronLoadBalancer_Description\", " + "\"status\": \"ACTIVE\", "
+            + "\"description\": \"NeutronLoadBalancer_Description\", "
             + "\"admin_state_up\": \"false\", " + "\"vip_address\": \"10.0.0.3\", "
             + "\"vip_subnet_id\": \"d23abc8d-2991-4a55-ba98-2aaea84cc72f\", "
             + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\" }";
@@ -32,9 +32,6 @@ public class NeutronLoadBalancerJAXBTest {
 
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 2: Testing LoadBalancer Name failed",
                 "NeutronLoadBalancer", testObject.getName());
-
-        Assert.assertEquals("NeutronLoadBalancer JAXB Test 4: Testing status failed", "ACTIVE",
-                testObject.getStatus());
 
         Assert.assertFalse("NeutronLoadBalancer JAXB Test 5: Testing Admin state up failed",
                 testObject.getAdminStateUp());
