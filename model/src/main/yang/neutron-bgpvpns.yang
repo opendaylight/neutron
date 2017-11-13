@@ -106,5 +106,10 @@ module neutron-bgpvpns {
                 uses bgpvpn-attributes;
             }
         }
+        container bgpvpns-operational {
+            config false;
+            uses attrs:operational-attributes;
+            description "Operation datastore attributes";
+        }
     }
 }

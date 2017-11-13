@@ -204,7 +204,7 @@ public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<
                 + name + '\'' + ", peerAddress=" + peerAddress + ", peerID='" + peerID + '\'' + ", routeMode='"
                 + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\'' + ", preSharedKey='"
                 + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp=" + adminStateUp
-                + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\'' + ", ipsecPolicyID='"
+                + '\'' + ", ikePolicyID='" + ikePolicyID + '\'' + ", ipsecPolicyID='"
                 + ipsecPolicyID + '\'' + ", vpnServiceID='" + vpnServiceID + '\'' + '}';
     }
 }

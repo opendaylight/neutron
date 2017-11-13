@@ -75,7 +75,7 @@ public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoa
     @Override
     public String toString() {
         return "NeutronLoadBalancer{" + "loadBalancerID='" + uuid + '\'' + ", loadBalancerTenantID='" + tenantID + '\''
-                + ", loadBalancerName='" + name + '\'' + ", loadBalancerStatus='" + status
+                + ", loadBalancerName='" + name + '\''
                 + '\'' + ", loadBalancerAdminStateUp='" + adminStateUp + '\'' + ", loadBalancerVipAddress='"
                 + loadBalancerVipAddress + '\'' + ", loadBalancerVipSubnetID='" + loadBalancerVipSubnetID + '\'' + '}';
     }
