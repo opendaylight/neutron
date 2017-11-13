@@ -191,7 +191,7 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
         return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + name + ", adminStateUp=" + adminStateUp
                 + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
                 + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
-                + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
+                + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID
                 + ", qosPolicyId =" + qosPolicyId + ", segments = " + segments + "]";
     }
 }

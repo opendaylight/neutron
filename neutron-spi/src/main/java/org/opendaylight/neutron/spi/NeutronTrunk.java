@@ -32,12 +32,9 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> imp
 
     @Override
     public void initDefaults() {
-        // In order to override super.initDefaults()
-        // status needs to be checked before calling super.initDefaults()
-        if (status == null) {
-            status = "DOWN";
-        }
+
         super.initDefaults();
+
         if (subPorts == null) {
             subPorts = new ArrayList<>();
         }
@@ -80,7 +77,7 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> imp
     public String toString() {
         return "NeutronTrunk{" + "trunkUUID='" + uuid + '\'' + ", trunkName='" + name + '\''
                 + ", tenantID='" + tenantID + '\'' + ", adminStateUp='" + adminStateUp + '\''
-                + ", status='" + status + '\'' + ", portId='" + portId + '\''
+                + '\'' + ", portId='" + portId + '\''
                 + ", subPorts='" + subPorts + '\'' + '}';
     }
 }

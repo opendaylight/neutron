@@ -16,7 +16,7 @@ import org.junit.Test;
 public class NeutronRouterJAXBTest {
 
     private static final String NEUTRON_ROUTER_SOURCE_JSON = "{" + "\"id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", "
-            + "\"name\": \"jaxb-test\", " + "\"admin_state_up\": false , " + "\"status\": \"ACTIVE\", "
+            + "\"name\": \"jaxb-test\", " + "\"admin_state_up\": false , "
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", "
             + "\"external_gateway_info\": {\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f6\" }, "
             + "\"distributed\": false , " + "\"gw_port_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17127\", "
@@ -39,8 +39,6 @@ public class NeutronRouterJAXBTest {
 
         Assert.assertEquals("NeutronRouter JAXB Test 3: Testing admin_state_up failed", false,
                 testObject.getAdminStateUp());
-
-        Assert.assertEquals("NeutronRouter JAXB Test 4: Testing status failed", "ACTIVE", testObject.getStatus());
 
         Assert.assertEquals("NeutronFloatingIp JAXB Test 5: Testing tenant_id failed",
                 "aa902936679e4ea29bfe1158e3450a13", testObject.getTenantID());

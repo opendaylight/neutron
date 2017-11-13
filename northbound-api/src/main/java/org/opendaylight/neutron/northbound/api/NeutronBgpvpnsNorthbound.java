@@ -81,7 +81,6 @@ public final class NeutronBgpvpnsNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
             @QueryParam("admin_state_up") String queryAdminStateUp,
-            @QueryParam("status") String queryStatus,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("type") String queryType,
             @QueryParam("auto_aggregate") String queryAutoAggregate,
@@ -101,7 +100,6 @@ public final class NeutronBgpvpnsNorthbound
             if ((queryID == null || queryID.equals(bgpvpn.getID()))
                     && (queryName == null || queryName.equals(bgpvpn.getName()))
                     && (adminStateUp == null || adminStateUp.booleanValue() == bgpvpn.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(bgpvpn.getStatus()))
                     && (autoAggregate == null || autoAggregate.booleanValue() == bgpvpn.isAutoAggregate())
                     && (queryTenantID == null || queryTenantID.equals(bgpvpn.getTenantID()))) {
                 if (fields.size() > 0) {

@@ -226,6 +226,11 @@ module neutron-lbaasv2 {
                 description "List of Loadbalancers.";
             }
         }
+        container loadbalancers-operational {
+            config false;
+            uses attrs:operational-attributes;
+            description "Operation datastore attributes";
+        }
         container listeners {
             description "Container for Listeners.";
             list listener {
