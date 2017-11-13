@@ -24,9 +24,6 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
     @XmlElement(defaultValue = "true", name = "admin_state_up")
     Boolean adminStateUp;
 
-    @XmlElement(name = "status")
-    String status;
-
     public NeutronAdminAttributes() {
     }
 
@@ -38,21 +35,10 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
         this.adminStateUp = adminStateUp;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public void initDefaults() {
         if (adminStateUp == null) {
             adminStateUp = true;
-        }
-        if (status == null) {
-            status = "ACTIVE";
         }
     }
 
@@ -61,9 +47,6 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
         switch (field) {
             case "admin_state_up":
                 ans.setAdminStateUp(this.getAdminStateUp());
-                return true;
-            case "status":
-                ans.setStatus(this.getStatus());
                 return true;
             default:
                 return super.extractField(field, ans);

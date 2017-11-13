@@ -48,10 +48,10 @@ module neutron-L3 {
             leaf nexthop {
                 type inet:ip-address;
             }
-        }
         leaf router-status {
-            description "Contains the Router status.";
-            type string;
+                status deprecated;
+                description "Contains the Router status.";
+                type string;
         }
     }
 
@@ -84,6 +84,7 @@ module neutron-L3 {
             type inet:ip-address;
         }
         leaf status {
+            status deprecated;
             type string;
             description "The network status.";
         }
@@ -125,6 +126,11 @@ module neutron-L3 {
                 }
             }
         }
+        container routers-operational {
+            config false;
+            uses attrs:operational-attributes;
+            description "Operation datastore attributes";
+        }
     }
     grouping floatingips-attributes {
         container floatingips {
@@ -137,6 +143,11 @@ module neutron-L3 {
                 uses attrs:id-attributes;
                 uses L3-floatingip-attributes;
             }
+        }
+        container floatingips-operational {
+            config false;
+            uses attrs:operational-attributes;
+            description "Operation datastore attributes";
         }
     }
 }

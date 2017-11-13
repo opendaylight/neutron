@@ -55,9 +55,6 @@ public final class NeutronFloatingIpInterface
         if (floatingIp.getRouterUUID() != null) {
             floatingipBuilder.setRouterId(toUuid(floatingIp.getRouterUUID()));
         }
-        if (floatingIp.getStatus() != null) {
-            floatingipBuilder.setStatus(floatingIp.getStatus());
-        }
         return floatingipBuilder.build();
     }
 
@@ -80,7 +77,6 @@ public final class NeutronFloatingIpInterface
         if (fip.getRouterId() != null) {
             result.setRouterUUID(String.valueOf(fip.getRouterId().getValue()));
         }
-        result.setStatus(fip.getStatus());
         return result;
     }
 }

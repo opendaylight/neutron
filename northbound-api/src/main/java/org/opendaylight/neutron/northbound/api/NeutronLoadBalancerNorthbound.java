@@ -72,7 +72,6 @@ public final class NeutronLoadBalancerNorthbound
             @QueryParam("id") String queryLoadBalancerID,
             @QueryParam("tenant_id") String queryLoadBalancerTenantID,
             @QueryParam("name") String queryLoadBalancerName,
-            @QueryParam("status") String queryLoadBalancerStatus,
             @QueryParam("vip_address") String queryLoadBalancerVipAddress,
             @QueryParam("vip_subnet") String queryLoadBalancerVipSubnet,
             // pagination

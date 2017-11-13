@@ -18,7 +18,7 @@ public class TempestPortsIpV6TestJSON {
     public void test_create_port_in_allowed_allocation_pools() {
         // create network
         String urlN = base + "/networks";
-        String contentN = " {\"network\": {\"status\": \"ACTIVE\", \"subnets\": [], \"name\":"
+        String contentN = " {\"network\": {\"subnets\": [], \"name\":"
                 + " \"test-network--1850822235\", \"router:external\": false, "
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"admin_state_up\": true,"
                 + " \"mtu\": 0, \"shared\": false, \"port_security_enabled\": true, "
@@ -37,7 +37,7 @@ public class TempestPortsIpV6TestJSON {
         ITNeutronE2E.test_create(urlS, contentS1, "test_create_port_in_allowed_allocation_pools Subnet Post Failed");
 
         String urlP = base + "/ports";
-        String contentP1 = "{ \"port\": {\"status\": \"ACTIVE\", \"binding:host_id\": \"odl-devstack\","
+        String contentP1 = "{ \"port\": {\"binding:host_id\": \"odl-devstack\","
                 + " \"allowed_address_pairs\": [], \"extra_dhcp_opts\": [], \"device_owner\": \"network:dhcp\","
                 + " \"port_security_enabled\": false, \"binding:profile\": {}, \"fixed_ips\": "
                 + "[{\"subnet_id\": \"77c68c25-72a6-415b-a6f0-886fe26f1b02\", \"ip_address\": \"2003::5\"}], "

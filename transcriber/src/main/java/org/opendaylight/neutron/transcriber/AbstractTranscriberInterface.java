@@ -119,7 +119,6 @@ public abstract class AbstractTranscriberInterface<
     private final Method setProjectId;
     private final Method setName;
     private final Method setAdminStateUp;
-    private final Method setStatus;
     private final Method setRevisionNumber;
 
     protected Class<V> getMdParentClass(final Type[] types) {
@@ -156,10 +155,8 @@ public abstract class AbstractTranscriberInterface<
 
             if (INeutronAdminAttributes.class.isAssignableFrom(neutronObjectClass)) {
                 setAdminStateUp = builderClass.getDeclaredMethod("setAdminStateUp", Boolean.class);
-                setStatus = builderClass.getDeclaredMethod("setStatus", String.class);
             } else {
                 setAdminStateUp = null;
-                setStatus = null;
             }
         } catch (NoSuchMethodException e) {
             throw new IllegalArgumentException(e);
@@ -273,9 +270,6 @@ public abstract class AbstractTranscriberInterface<
             if (neutronObject.getAdminStateUp() != null) {
                 setAdminStateUp.invoke(builder, neutronObject.getAdminStateUp());
             }
-            if (neutronObject.getStatus() != null) {
-                setStatus.invoke(builder, neutronObject.getStatus());
-            }
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new IllegalArgumentException(e);
         }
@@ -286,9 +280,6 @@ public abstract class AbstractTranscriberInterface<
         fromMdBaseAttributes(attr, answer);
         if (attr.isAdminStateUp() != null) {
             answer.setAdminStateUp(attr.isAdminStateUp());
-        }
-        if (attr.getStatus() != null) {
-            answer.setStatus(attr.getStatus());
         }
     }
 

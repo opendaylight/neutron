@@ -38,9 +38,6 @@ public final class NeutronFloatingIp
     @XmlElement(name = "router_id")
     String routerUUID;
 
-    @XmlElement(name = "status")
-    String status;
-
     public NeutronFloatingIp() {
     }
 
@@ -84,14 +81,6 @@ public final class NeutronFloatingIp
         this.routerUUID = routerUUID;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     protected boolean extractField(String field, NeutronFloatingIp ans) {
         switch (field) {
@@ -110,9 +99,6 @@ public final class NeutronFloatingIp
             case "router_id":
                 ans.setRouterUUID(this.getRouterUUID());
                 break;
-            case "status":
-                ans.setStatus(this.getStatus());
-                break;
             default:
                 return super.extractField(field, ans);
         }
@@ -124,6 +110,6 @@ public final class NeutronFloatingIp
         return "NeutronFloatingIp{" + "fipUUID='" + uuid + '\'' + ", fipFloatingNetworkId='" + floatingNetworkUUID
                 + '\'' + ", fipPortUUID='" + portUUID + '\'' + ", fipFixedIpAddress='" + fixedIpAddress + '\''
                 + ", fipFloatingIpAddress=" + floatingIpAddress + ", fipTenantId='" + tenantID + '\''
-                + ", fipRouterId='" + routerUUID + '\'' + ", fipStatus='" + status + '\'' + '}';
+                + ", fipRouterId='" + routerUUID   + '\'' + '}';
     }
 }

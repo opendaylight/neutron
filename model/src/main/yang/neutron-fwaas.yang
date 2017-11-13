@@ -138,6 +138,11 @@ module neutron-fwaas {
                 uses firewall-attributes;
             }
         }
+        container firewalls-operational {
+            config false;
+            uses attrs:operational-attributes;
+            description "Operation datastore attributes";
+        }
     }
     grouping policies-attributes {
         container firewall-policies {

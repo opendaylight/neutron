@@ -100,8 +100,8 @@ public final class NeutronRouter extends NeutronAdminAttributes<NeutronRouter>
 
     @Override
     public String toString() {
-        return "NeutronRouter [" + "id=" + uuid + ", name=" + name + ", adminStateUp=" + adminStateUp + ", status="
-                + status + ", tenantID=" + tenantID + ", external_gateway_info=" + externalGatewayInfo
+        return "NeutronRouter [" + "id=" + uuid + ", name=" + name + ", adminStateUp=" + adminStateUp
+                + ", tenantID=" + tenantID + ", external_gateway_info=" + externalGatewayInfo
                 + ", distributed=" + distributed + ", gw_port_id=" + gatewayPortId + ", routes=" + routes + "]";
     }
 

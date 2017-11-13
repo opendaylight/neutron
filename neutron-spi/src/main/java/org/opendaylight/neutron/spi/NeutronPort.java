@@ -281,7 +281,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     @Override
     public String toString() {
         return "NeutronPort [portUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", adminStateUp="
-                + adminStateUp + ", status=" + status + ", macAddress=" + macAddress + ", fixedIps=" + fixedIps
+                + adminStateUp + ", macAddress=" + macAddress + ", fixedIps=" + fixedIps
                 + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
                 + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
