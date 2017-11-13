@@ -81,7 +81,6 @@ public final class NeutronNetworksNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
             @QueryParam("admin_state_up") String queryAdminStateUp,
-            @QueryParam("status") String queryStatus,
             @QueryParam("shared") String queryShared,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("router_external") String queryRouterExternal,
@@ -106,7 +105,6 @@ public final class NeutronNetworksNorthbound
             if ((queryID == null || queryID.equals(network.getID()))
                     && (queryName == null || queryName.equals(network.getName()))
                     && (adminStateUp == null || adminStateUp.booleanValue() == network.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(network.getStatus()))
                     && (shared == null || shared.booleanValue() == network.isShared())
                     && (routerExternal == null || routerExternal.booleanValue() == network.isRouterExternal())
                     && (queryTenantID == null || queryTenantID.equals(network.getTenantID()))

@@ -83,7 +83,6 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
             @QueryParam("psk") String queryPsk,
             @QueryParam("initiator") String queryInitiator,
             @QueryParam("admin_state_up") Boolean queryAdminStateUp,
-            @QueryParam("status") String queryStatus,
             @QueryParam("ikepolicy_id") String queryIkePolicyID,
             @QueryParam("ipsecpolicy_id") String queryIpSecPolicyID,
             @QueryParam("vpnservice_id") String queryVpnServiceID
@@ -104,7 +103,6 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
                     && (queryPsk == null || queryPsk.equals(siteConnection.getPreSharedKey()))
                     && (queryInitiator == null || queryInitiator.equals(siteConnection.getInitiator()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(siteConnection.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(siteConnection.getStatus()))
                     && (queryIkePolicyID == null || queryIkePolicyID.equals(siteConnection.getIkePolicyID()))
                     && (queryIpSecPolicyID == null || queryIpSecPolicyID.equals(siteConnection.getIpsecPolicyID()))
                     && (queryVpnServiceID == null || queryVpnServiceID.equals(siteConnection.getVpnServiceID()))) {

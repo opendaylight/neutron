@@ -71,5 +71,9 @@
                uses trunk-attributes;
            }
         }
+        container trunks-operational {
+            config false;
+            uses attrs:operational-attributes;
+        }
     }
  }

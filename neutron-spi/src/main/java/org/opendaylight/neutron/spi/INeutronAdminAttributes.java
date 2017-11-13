@@ -17,7 +17,4 @@ public interface INeutronAdminAttributes<T extends INeutronAdminAttributes> exte
 
     void setAdminStateUp(Boolean adminStateUp);
 
-    String getStatus();
-
-    void setStatus(String status);
 }

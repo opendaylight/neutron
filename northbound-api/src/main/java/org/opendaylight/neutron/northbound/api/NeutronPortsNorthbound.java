@@ -81,7 +81,6 @@ public final class NeutronPortsNorthbound
             @QueryParam("network_id") String queryNetworkID,
             @QueryParam("name") String queryName,
             @QueryParam("admin_state_up") Boolean queryAdminStateUp,
-            @QueryParam("status") String queryStatus,
             @QueryParam("mac_address") String queryMACAddress,
             @QueryParam("device_id") String queryDeviceID,
             @QueryParam("device_owner") String queryDeviceOwner,
@@ -102,7 +101,6 @@ public final class NeutronPortsNorthbound
                     && (queryNetworkID == null || queryNetworkID.equals(port.getNetworkUUID()))
                     && (queryName == null || queryName.equals(port.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(port.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(port.getStatus()))
                     && (queryMACAddress == null || queryMACAddress.equals(port.getMacAddress()))
                     && (queryDeviceID == null || queryDeviceID.equals(port.getDeviceID()))
                     && (queryDeviceOwner == null || queryDeviceOwner.equals(port.getDeviceOwner()))

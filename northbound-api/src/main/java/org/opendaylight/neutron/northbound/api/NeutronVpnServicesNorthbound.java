@@ -76,7 +76,6 @@ public final class NeutronVpnServicesNorthbound
             @QueryParam("name") String queryName,
             @QueryParam("admin_state_up") Boolean queryAdminStateUp,
             @QueryParam("router_id") String queryRouterID,
-            @QueryParam("status") String queryStatus,
             @QueryParam("subnet_id") String querySubnetID,
             // pagination
             @QueryParam("limit") String limit,
@@ -91,7 +90,6 @@ public final class NeutronVpnServicesNorthbound
             if ((queryID == null || queryID.equals(vpnService.getID()))
                     && (queryName == null || queryName.equals(vpnService.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(vpnService.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(vpnService.getStatus()))
                     && (querySubnetID == null || querySubnetID.equals(vpnService.getSubnetUUID()))
                     && (queryRouterID == null || queryRouterID.equals(vpnService.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(vpnService.getTenantID()))) {

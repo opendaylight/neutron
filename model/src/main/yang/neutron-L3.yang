@@ -91,10 +91,6 @@ module neutron-L3 {
                 to select a specific IP.";
             type inet:ip-address;
         }
-        leaf status {
-            type string;
-            description "The network status.";
-        }
     }
 
     grouping routers-attributes {
@@ -133,6 +129,10 @@ module neutron-L3 {
                 }
             }
         }
+        container routers-operational {
+            config false;
+            uses attrs:operational-attributes;
+        }
     }
     grouping floatingips-attributes {
         container floatingips {
@@ -144,6 +144,10 @@ module neutron-L3 {
                 key "uuid";
                 uses L3-floatingip-attributes;
             }
+        }
+        container floatingips-operational {
+            config false;
+            uses attrs:operational-attributes;
         }
     }
 }

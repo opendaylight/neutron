@@ -76,7 +76,6 @@ public final class NeutronRoutersNorthbound
             @QueryParam("id") String queryID,
             @QueryParam("name") String queryName,
             @QueryParam("admin_state_up") Boolean queryAdminStateUp,
-            @QueryParam("status") String queryStatus,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("external_gateway_info") String queryExternalGatewayInfo,
             // pagination
@@ -95,7 +94,6 @@ public final class NeutronRoutersNorthbound
             if ((queryID == null || queryID.equals(router.getID()))
                     && (queryName == null || queryName.equals(router.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(router.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(router.getStatus()))
                     && (queryTenantID == null || queryTenantID.equals(router.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(router.extractFields(fields));

@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class NeutronPortQosJAXBTest {
 
-    private static final String NEUTRON_PORT_QOS_ENABLED_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
+    private static final String NEUTRON_PORT_QOS_ENABLED_SOURCE_JSON = "{ "
             + "\"name\": \"net1\", " + "\"admin_state_up\": true, "
             + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"fixed_ips\": [ { \"ip_address\":\"192.168.111.3\" , "
@@ -44,8 +44,6 @@ public class NeutronPortQosJAXBTest {
 
         Assert.assertEquals("NeutronPort JAXB Test 3: Testing network_id failed",
                 "e9330b1f-a2ef-4160-a991-169e56ab17f5", neutronObject.getNetworkUUID());
-
-        Assert.assertEquals("NeutronPort JAXB Test 4: Testing status failed", "ACTIVE", neutronObject.getStatus());
 
         List<NeutronIps> fixedIps = neutronObject.getFixedIps();
         Assert.assertEquals(" NeutronPort JAXB Test 5.1: Testing fixed_ips list length failed", 1, fixedIps.size());

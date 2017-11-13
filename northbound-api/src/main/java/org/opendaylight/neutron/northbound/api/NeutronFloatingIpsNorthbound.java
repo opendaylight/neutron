@@ -76,7 +76,6 @@ public final class NeutronFloatingIpsNorthbound
             @QueryParam("floating_ip_address") String queryFloatingIpAddress,
             @QueryParam("tenant_id") String queryTenantID,
             @QueryParam("router_id") String queryRouterID,
-            @QueryParam("status") String queryStatus,
             // pagination
             @QueryParam("limit") String limit,
             @QueryParam("marker") String marker,
@@ -95,7 +94,6 @@ public final class NeutronFloatingIpsNorthbound
                     && (queryFixedIpAddress == null || queryFixedIpAddress.equals(floatingIp.getFixedIpAddress()))
                     && (queryFloatingIpAddress == null
                         || queryFloatingIpAddress.equals(floatingIp.getFloatingIpAddress()))
-                    && (queryStatus == null || queryStatus.equals(floatingIp.getStatus()))
                     && (queryRouterID == null || queryRouterID.equals(floatingIp.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(floatingIp.getTenantID()))) {
                 if (fields.size() > 0) {
