@@ -64,7 +64,7 @@ public final class NeutronTrunksNorthbound
         for (NeutronTrunk nsg : trunkInterface.getAll()) {
             if ((queryUUID == null || queryUUID.equals(nsg.getID()))
                     && (queryTenantID == null || queryTenantID.equals(nsg.getTenantID()))
-                    && (queryStatus == null || queryStatus.equals(nsg.getStatus()))
+                    && (queryStatus == null)
                     && (queryName == null || queryName.equals(nsg.getName()))) {
                 if (fields.size() > 0) {
                     ans.add(nsg.extractFields(fields));

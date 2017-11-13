@@ -84,14 +84,6 @@ public final class NeutronFloatingIp
         this.routerUUID = routerUUID;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     protected boolean extractField(String field, NeutronFloatingIp ans) {
         switch (field) {
@@ -109,9 +101,6 @@ public final class NeutronFloatingIp
                 break;
             case "router_id":
                 ans.setRouterUUID(this.getRouterUUID());
-                break;
-            case "status":
-                ans.setStatus(this.getStatus());
                 break;
             default:
                 return super.extractField(field, ans);

@@ -19,7 +19,7 @@ public class NeutronFloatingIpJAXBTest {
             + "\"floating_network_id\": \"376da547-b977-4cfe-9cba-275c80debf57\", "
             + "\"id\": \"2f245a7b-796b-4f26-9cf9-9e82d248fda7\", "
             + "\"port_id\": \"ce705c24-c1ef-408a-bda3-7bbd946164ab\", "
-            + "\"router_id\": \"d23abc8d-2991-4a55-ba98-2aaea84cc72f\", " + "\"status\": \"ACTIVE\", "
+            + "\"router_id\": \"d23abc8d-2991-4a55-ba98-2aaea84cc72f\", "
             + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\" }";
 
     @Test
@@ -48,8 +48,5 @@ public class NeutronFloatingIpJAXBTest {
 
         Assert.assertEquals("NeutronFloatingIp JAXB Test 7: Testing fixed ip address failed", "10.0.0.3",
                 testObject.getFixedIpAddress());
-
-        Assert.assertEquals("NeutronFloatingIp JAXB Test 8: Testing status failed", "ACTIVE",
-                testObject.getStatus());
     }
 }

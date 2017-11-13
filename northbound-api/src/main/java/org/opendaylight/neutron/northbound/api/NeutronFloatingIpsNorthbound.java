@@ -95,7 +95,7 @@ public final class NeutronFloatingIpsNorthbound
                     && (queryFixedIpAddress == null || queryFixedIpAddress.equals(floatingIp.getFixedIpAddress()))
                     && (queryFloatingIpAddress == null
                         || queryFloatingIpAddress.equals(floatingIp.getFloatingIpAddress()))
-                    && (queryStatus == null || queryStatus.equals(floatingIp.getStatus()))
+                    && (queryStatus == null)
                     && (queryRouterID == null || queryRouterID.equals(floatingIp.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(floatingIp.getTenantID()))) {
                 if (fields.size() > 0) {

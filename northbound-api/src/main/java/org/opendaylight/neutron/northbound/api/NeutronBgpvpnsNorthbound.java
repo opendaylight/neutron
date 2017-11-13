@@ -101,7 +101,7 @@ public final class NeutronBgpvpnsNorthbound
             if ((queryID == null || queryID.equals(bgpvpn.getID()))
                     && (queryName == null || queryName.equals(bgpvpn.getName()))
                     && (adminStateUp == null || adminStateUp.booleanValue() == bgpvpn.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(bgpvpn.getStatus()))
+                    && (queryStatus == null)
                     && (autoAggregate == null || autoAggregate.booleanValue() == bgpvpn.isAutoAggregate())
                     && (queryTenantID == null || queryTenantID.equals(bgpvpn.getTenantID()))) {
                 if (fields.size() > 0) {

@@ -106,7 +106,7 @@ public final class NeutronNetworksNorthbound
             if ((queryID == null || queryID.equals(network.getID()))
                     && (queryName == null || queryName.equals(network.getName()))
                     && (adminStateUp == null || adminStateUp.booleanValue() == network.isAdminStateUp())
-                    && (queryStatus == null || queryStatus.equals(network.getStatus()))
+                    && (queryStatus == null)
                     && (shared == null || shared.booleanValue() == network.isShared())
                     && (routerExternal == null || routerExternal.booleanValue() == network.isRouterExternal())
                     && (queryTenantID == null || queryTenantID.equals(network.getTenantID()))

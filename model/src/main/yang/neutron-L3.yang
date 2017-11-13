@@ -93,6 +93,7 @@ module neutron-L3 {
         }
         leaf status {
             type string;
+            config false;
             description "The network status.";
         }
     }
@@ -132,6 +133,10 @@ module neutron-L3 {
                     }
                 }
             }
+        }
+        container routers-operational {
+            config false;
+            uses attrs:operational-attributes;
         }
     }
     grouping floatingips-attributes {

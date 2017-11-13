@@ -21,7 +21,7 @@ public class NeutronVpnIpSecSiteConnectionJAXBTest {
             + "\"description\": \"Updated description\", " + "\"peer_address\": \"172.24.4.226\", "
             + "\"peer_id\": \"172.24.4.226\", " + "\"peer_cidrs\": [\"10.1.0.0/24\"], " + "\"route_mode\": \"static\", "
             + "\"mtu\": 1500 ," + "\"auth_mode\": \"psk\", " + "\"psk\": \"secret\","
-            + "\"initiator\": \"bi-directional\", " + "\"admin_state_up\": true , " + "\"status\": \"PENDING_CREATE\", "
+            + "\"initiator\": \"bi-directional\", " + "\"admin_state_up\": true , "
             + "\"ikepolicy_id\": \"bf5612ac-15fb-460c-9b3d-6453da2fafa2\", "
             + "\"ipsecpolicy_id\": \"8ba867b2-67eb-4835-bb61-c226804a1584\", "
             + "\"vpnservice_id\": \"c2f3178d-5530-4c4a-89fc-050ecd552636\", " + "\"dpd\": { " + "\"action\": \"hold\", "
@@ -73,9 +73,6 @@ public class NeutronVpnIpSecSiteConnectionJAXBTest {
 
         Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 13: Testing Admin state failed", true,
                 testObject.getAdminStateUp());
-
-        Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 14: Testing status failed", "PENDING_CREATE",
-                testObject.getStatus());
 
         Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 15: Testing IkePolicyID failed",
                 "bf5612ac-15fb-460c-9b3d-6453da2fafa2", testObject.getIkePolicyID());

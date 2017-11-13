@@ -104,7 +104,7 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
                     && (queryPsk == null || queryPsk.equals(siteConnection.getPreSharedKey()))
                     && (queryInitiator == null || queryInitiator.equals(siteConnection.getInitiator()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(siteConnection.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(siteConnection.getStatus()))
+                    && (queryStatus == null)
                     && (queryIkePolicyID == null || queryIkePolicyID.equals(siteConnection.getIkePolicyID()))
                     && (queryIpSecPolicyID == null || queryIpSecPolicyID.equals(siteConnection.getIpsecPolicyID()))
                     && (queryVpnServiceID == null || queryVpnServiceID.equals(siteConnection.getVpnServiceID()))) {

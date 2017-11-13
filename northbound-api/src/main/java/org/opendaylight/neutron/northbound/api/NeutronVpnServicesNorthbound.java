@@ -91,7 +91,7 @@ public final class NeutronVpnServicesNorthbound
             if ((queryID == null || queryID.equals(vpnService.getID()))
                     && (queryName == null || queryName.equals(vpnService.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(vpnService.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(vpnService.getStatus()))
+                    && (queryStatus == null)
                     && (querySubnetID == null || querySubnetID.equals(vpnService.getSubnetUUID()))
                     && (queryRouterID == null || queryRouterID.equals(vpnService.getRouterUUID()))
                     && (queryTenantID == null || queryTenantID.equals(vpnService.getTenantID()))) {

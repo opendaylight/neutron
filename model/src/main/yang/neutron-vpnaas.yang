@@ -177,6 +177,10 @@ module neutron-vpnaas {
                 uses vpnservice-attributes;
             }
         }
+        container vpnservices-operational {
+            config false;
+            uses attrs:operational-attributes;
+        }
     }
     grouping ikepolicies-attributes {
         container ike-policies {
@@ -204,6 +208,10 @@ module neutron-vpnaas {
                 uses attrs:admin-attributes;
                 uses ipsecconnection-attributes;
             }
+        }
+        container ipsecconnections-operational {
+            config false;
+            uses attrs:operational-attributes;
         }
     }
 }

@@ -38,14 +38,6 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
         this.adminStateUp = adminStateUp;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public void initDefaults() {
         if (adminStateUp == null) {
@@ -61,9 +53,6 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
         switch (field) {
             case "admin_state_up":
                 ans.setAdminStateUp(this.getAdminStateUp());
-                return true;
-            case "status":
-                ans.setStatus(this.getStatus());
                 return true;
             default:
                 return super.extractField(field, ans);

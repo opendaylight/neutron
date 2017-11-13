@@ -15,7 +15,7 @@ import org.junit.Test;
 public class NeutronTrunkJAXBTest {
 
     private static final String NEUTRON_TRUNK_SOURCE_JSON =
-            "{\"status\":\"DOWN\",\"name\":\"trunk-jaxb-test\",\"admin_state_up\":true, "
+            "{\"name\":\"trunk-jaxb-test\",\"admin_state_up\":true, "
             + "\"tenant_id\":\"cc3641789c8a4304abaa841c64f638d9\", "
             + "\"port_id\":\"60aac28d-1d3a-48d9-99bc-dd4bd62e50f2\", "
             + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
@@ -30,9 +30,6 @@ public class NeutronTrunkJAXBTest {
                 NEUTRON_TRUNK_SOURCE_JSON);
         Assert.assertEquals("NeutronTrunk JAXB Test 1: Testing id failed", "c935240e-4aa6-496a-841c-d113c54499b9",
                 neutronObject.getID());
-
-        Assert.assertEquals("NeutronTrunk JAXB Test 2 : Testing Status failed", "DOWN",
-                neutronObject.getStatus());
 
         Assert.assertEquals("NeutronTrunk JAXB Test 3 : Testing Name failed", "trunk-jaxb-test",
                 neutronObject.getName());

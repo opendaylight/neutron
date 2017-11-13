@@ -102,7 +102,7 @@ public final class NeutronPortsNorthbound
                     && (queryNetworkID == null || queryNetworkID.equals(port.getNetworkUUID()))
                     && (queryName == null || queryName.equals(port.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(port.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(port.getStatus()))
+                    && (queryStatus == null)
                     && (queryMACAddress == null || queryMACAddress.equals(port.getMacAddress()))
                     && (queryDeviceID == null || queryDeviceID.equals(port.getDeviceID()))
                     && (queryDeviceOwner == null || queryDeviceOwner.equals(port.getDeviceOwner()))

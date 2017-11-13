@@ -95,7 +95,7 @@ public final class NeutronRoutersNorthbound
             if ((queryID == null || queryID.equals(router.getID()))
                     && (queryName == null || queryName.equals(router.getName()))
                     && (queryAdminStateUp == null || queryAdminStateUp.equals(router.getAdminStateUp()))
-                    && (queryStatus == null || queryStatus.equals(router.getStatus()))
+                    && (queryStatus == null)
                     && (queryTenantID == null || queryTenantID.equals(router.getTenantID()))) {
                 if (fields.size() > 0) {
                     ans.add(router.extractFields(fields));

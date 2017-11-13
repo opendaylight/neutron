@@ -97,7 +97,12 @@ module neutron-ports {
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
                 uses port-attributes;
-            }
+                }
+        }
+        container port-operational {
+            config false;
+            uses attrs:operational-attributes;
         }
     }
 }
+

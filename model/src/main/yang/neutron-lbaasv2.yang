@@ -226,6 +226,10 @@ module neutron-lbaasv2 {
                 description "List of Loadbalancers.";
             }
         }
+        container lbaas-operational {
+            config false;
+            uses attrs:operational-attributes;
+        }
         container listeners {
             description "Container for Listeners.";
             list listener {
