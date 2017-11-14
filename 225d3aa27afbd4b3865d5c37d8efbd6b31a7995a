@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_41762da5",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-11-14T20:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_f5e27f9e",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 9
+      },
+      "revId": "225d3aa27afbd4b3865d5c37d8efbd6b31a7995a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_d5df7bd4",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_217b398d",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnsNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-11-14T20:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_d5df7bd4",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 53
+      },
+      "revId": "225d3aa27afbd4b3865d5c37d8efbd6b31a7995a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_35f09766",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronFloatingIpsNorthbound.java",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-14T06:42:00Z",
       "side": 1,
       "message": "same here.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 53
+      },
+      "revId": "225d3aa27afbd4b3865d5c37d8efbd6b31a7995a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_816ca5d1",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronFloatingIpsNorthbound.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5322
+      },
+      "writtenOn": "2017-11-14T20:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a245df4_35f09766",
       "range": {
         "startLine": 79,
         "startChar": 0,
