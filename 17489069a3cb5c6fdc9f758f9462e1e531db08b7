@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_f5743fff",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-14T06:17:35Z",
+      "side": 0,
+      "message": "unnecessaray code churn.",
+      "revId": "17489069a3cb5c6fdc9f758f9462e1e531db08b7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
