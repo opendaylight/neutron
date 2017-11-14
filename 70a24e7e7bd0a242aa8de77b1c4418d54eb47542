@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_5586ebdb",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-14T06:16:23Z",
+      "side": 1,
+      "message": "don\u0027t add one more same logic.\nconsolidate logic.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "70a24e7e7bd0a242aa8de77b1c4418d54eb47542",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_b56e472d",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-14T06:16:23Z",
+      "side": 1,
+      "message": "If neutron version is older, neutron doesn\u0027t pass direction.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 38
+      },
+      "revId": "70a24e7e7bd0a242aa8de77b1c4418d54eb47542",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
