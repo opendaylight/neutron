@@ -61,8 +61,24 @@ module neutron-binding {
         leaf vnic-type {
             type string;
         }
-        leaf profile {
-            type string;
+        list profile {
+            description "A dictionary that enables the application to pass information
+                        about functions that the Networking API provides. To enable or
+                        disable port filtering features such as security group and anti-MAC/IP
+                        spoofing, specify port-filter: True or port-filter: False ";
+            // work around: "key" as leaf name in list can't be used due to java code
+            // generation. getKey() method is reserved for to retrieve key of the list
+            // and get<Name>() is also generated as a getter. it results in name
+            // collision.
+            // please see BindingGeneratorImpl#typeBuildersToGenTypes() for details.
+            // This isn't easily fixed as it's deeply hard-coded.
+            key profile-key;
+            leaf profile-key {
+                type string;
+            }
+            leaf value {
+                type string;
+            }
         }
     }
 

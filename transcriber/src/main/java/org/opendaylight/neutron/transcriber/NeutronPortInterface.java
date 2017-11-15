@@ -27,6 +27,8 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtensionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.Profile;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.ProfileBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetails;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetailsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
@@ -74,6 +76,13 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
                 details.put(vifDetail.getDetailsKey(), vifDetail.getValue());
             }
             result.setVIFDetails(details);
+        }
+        if (binding.getProfile() != null) {
+            final Map<String, String> profiles = new HashMap<>(binding.getProfile().size());
+            for (final Profile profile : binding.getProfile()) {
+                profiles.put(profile.getProfileKey(), profile.getValue());
+            }
+            result.setProfile(profiles);
         }
         result.setBindingvifType(binding.getVifType());
         result.setBindingvnicType(binding.getVnicType());
@@ -169,6 +178,21 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
                 listVifDetail.add(vifDetailsBuilder.build());
             }
             bindingBuilder.setVifDetails(listVifDetail);
+        }
+        if (neutronPort.getProfile() != null) {
+            final Map<String, String> profiles = neutronPort.getProfile();
+            final List<Profile> listProfile = new ArrayList<>(profiles.size());
+            for (final Map.Entry<String, String> profile : profiles.entrySet()) {
+                final ProfileBuilder profileBuilder = new ProfileBuilder();
+                if (profile.getKey() != null) {
+                    profileBuilder.setProfileKey(profile.getKey());
+                }
+                if (profile.getValue() != null) {
+                    profileBuilder.setValue(profile.getValue());
+                }
+                listProfile.add(profileBuilder.build());
+            }
+            bindingBuilder.setProfile(listProfile);
         }
         if (neutronPort.getBindingvifType() != null) {
             bindingBuilder.setVifType(neutronPort.getBindingvifType());
