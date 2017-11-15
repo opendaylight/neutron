@@ -60,6 +60,9 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     @XmlElement(namespace = "binding", name = "vif_type")
     String bindingvifType;
 
+    @XmlElement(namespace = "binding", name = "profile")
+    NeutronPortProfile bindingProfile;
+
     //@XmlElement (name = "binding:vif_details")
     @XmlElement(namespace = "binding", name = "vif_details")
     @XmlJavaTypeAdapter(NeutronResourceMapPropertyAdapter.class)
@@ -165,6 +168,14 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         this.bindinghostID = bindinghostID;
     }
 
+    public NeutronPortProfile getProfile() {
+        return bindingProfile;
+    }
+
+    public void setProfile(NeutronPortProfile bindingProfile) {
+        this.bindingProfile = bindingProfile;
+    }
+
     public String getBindingvnicType() {
         return bindingvnicType;
     }
@@ -234,6 +245,9 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
             case "binding:vif_type":
                 ans.setBindingvifType(this.getBindingvifType());
                 break;
+            case "binding:profile":
+                ans.setProfile(this.getProfile());
+                break;
             case "binding:vif_details":
                 ans.setVIFDetails(new HashMap<>(this.getVIFDetails()));
                 break;
@@ -270,7 +284,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
                 + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
-                + bindingvifType + ", vifDetails=" + vifDetails + ", extraDHCPOptions=" + extraDHCPOptions
+                + bindingvifType + ", bindingProfile=" + bindingProfile + ", extraDHCPOptions=" + extraDHCPOptions
                 + ", portSecurityEnabled=" + portSecurityEnabled + ", qosPolicyId=" + qosPolicyId + "]";
     }
 }

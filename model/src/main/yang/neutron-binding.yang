@@ -61,8 +61,10 @@ module neutron-binding {
         leaf vnic-type {
             type string;
         }
-        leaf profile {
-            type string;
+        container profile {
+            leaf-list capabilities {
+                type string;
+            }
         }
     }
 

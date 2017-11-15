@@ -21,12 +21,14 @@ import org.opendaylight.neutron.spi.NeutronIps;
 import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronPortAllowedAddressPairs;
 import org.opendaylight.neutron.spi.NeutronPortExtraDHCPOption;
+import org.opendaylight.neutron.spi.NeutronPortProfile;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.MacAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtensionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.ProfileBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetails;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetailsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
@@ -74,6 +76,16 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
                 details.put(vifDetail.getDetailsKey(), vifDetail.getValue());
             }
             result.setVIFDetails(details);
+        }
+        if (binding.getProfile() != null) {
+            final List<String> capabilities = new ArrayList<>();
+            if (binding.getProfile().getCapabilities() != null) {
+                capabilities.addAll(binding.getProfile().getCapabilities());
+            }
+            if (result.getProfile() == null) {
+                result.setProfile(new NeutronPortProfile());
+            }
+            result.getProfile().setCapabilities(capabilities);
         }
         result.setBindingvifType(binding.getVifType());
         result.setBindingvnicType(binding.getVnicType());
@@ -175,6 +187,13 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (neutronPort.getBindingvnicType() != null) {
             bindingBuilder.setVnicType(neutronPort.getBindingvnicType());
+        }
+        if (neutronPort.getProfile() != null) {
+            ProfileBuilder profileBuilder = new ProfileBuilder();
+            if (neutronPort.getProfile().getCapabilities() != null) {
+                profileBuilder.setCapabilities(neutronPort.getProfile().getCapabilities());
+            }
+            bindingBuilder.setProfile(profileBuilder.build());
         }
 
         final PortSecurityExtensionBuilder portSecurityBuilder = new PortSecurityExtensionBuilder();
