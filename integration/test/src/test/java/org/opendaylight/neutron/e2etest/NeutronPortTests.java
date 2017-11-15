@@ -114,6 +114,22 @@ public class NeutronPortTests {
         ITNeutronE2E.test_create(url, content, "Router Interface Port Post Failed NB");
     }
 
+    public void binding_profile_port_create_test() {
+        String url = base + "/ports";
+        String content = "{ \"port\": { \"status\": \"DOWN\"," + "\"binding:host_id\": \"\","
+                + "\"name\": \"private-port\"," + "\"allowed_address_pairs\": []," + "\"admin_state_up\": true,"
+                + "\"port_security_enabled\": true,"
+                + "\"network_id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\","
+                + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\"," + "\"binding:vif_details\": {},"
+                + "\"binding:vnic_type\": \"normal\"," + "\"binding:vif_type\": \"unbound\","
+                + "\"device_owner\": \"\"," + "\"mac_address\": \"fa:16:3e:c9:cb:f0\","
+                + "\"binding:profile\": {\"capabilities\": [\"switchdev\", \"other_cap\"]},"
+                + "\"fixed_ips\": [ {" + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
+                + "\"ip_address\": \"10.0.0.2\" } ]," + "\"id\": \"89125887-6821-4898-aff2-cde8a3b3b5de\","
+                + "\"security_groups\": [] ," + "\"device_id\": \"\" } }";
+        ITNeutronE2E.test_create(url, content, "Binding profile Port Post Failed NB");
+    }
+
     public void bulk_port_create_test() {
         String url = base + "/ports";
         String content = "{ \"ports\": [ { " + " \"status\": \"DOWN\", " + " \"name\": \"sample_port_1\", "
