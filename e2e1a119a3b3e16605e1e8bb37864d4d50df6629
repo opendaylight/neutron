@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_8de5d80a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-21T23:41:40Z",
+      "side": 1,
+      "message": "If you have a plan to use in ODL (probably in netvirt?), please include pointer/url to it.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 31
+      },
+      "revId": "e2e1a119a3b3e16605e1e8bb37864d4d50df6629",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
