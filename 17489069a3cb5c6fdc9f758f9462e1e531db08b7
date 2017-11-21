@@ -34,6 +34,29 @@
       "revId": "17489069a3cb5c6fdc9f758f9462e1e531db08b7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_4db760f5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthLimitRule.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-21T23:52:46Z",
+      "side": 0,
+      "message": "unnecessary modification.",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "17489069a3cb5c6fdc9f758f9462e1e531db08b7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
