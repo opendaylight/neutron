@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_2d930c51",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-22T00:57:41Z",
+      "side": 1,
+      "message": "This needs to be removed.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "ec39f3008c3128e931e8518eeaef8771ccbf8b9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_0d96083f",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-22T00:57:41Z",
+      "side": 1,
+      "message": "Please add description",
+      "range": {
+        "startLine": 134,
+        "startChar": 46,
+        "endLine": 135,
+        "endChar": 9
+      },
+      "revId": "ec39f3008c3128e931e8518eeaef8771ccbf8b9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_6d99846d",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-22T00:57:41Z",
+      "side": 1,
+      "message": "please add description",
+      "range": {
+        "startLine": 150,
+        "startChar": 46,
+        "endLine": 151,
+        "endChar": 9
+      },
+      "revId": "ec39f3008c3128e931e8518eeaef8771ccbf8b9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_ada6dcab",
+        "filename": "model/src/main/yang/neutron-lbaasv2.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-22T00:57:41Z",
+      "side": 1,
+      "message": "Is this for loadbalancers at line 219?\nSo for consistency, this should be loadbalncers-operational.",
+      "range": {
+        "startLine": 229,
+        "startChar": 18,
+        "endLine": 229,
+        "endChar": 23
+      },
+      "revId": "ec39f3008c3128e931e8518eeaef8771ccbf8b9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_2dbaecc0",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-22T00:57:41Z",
+      "side": 1,
+      "message": "ports(trailing \"s\") for consistency.",
+      "range": {
+        "startLine": 102,
+        "startChar": 17,
+        "endLine": 102,
+        "endChar": 22
+      },
+      "revId": "ec39f3008c3128e931e8518eeaef8771ccbf8b9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_cda7d0a5",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-22T00:57:41Z",
+      "side": 1,
+      "message": "unnecessary code churn.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 0
+      },
+      "revId": "ec39f3008c3128e931e8518eeaef8771ccbf8b9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
