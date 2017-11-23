@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.opendaylight.controller</groupId>
     <artifactId>mdsal-it-parent</artifactId>
-    <version>1.6.1-SNAPSHOT</version>
+    <version>1.6.1</version>
     <relativePath/>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>integration-test</artifactId>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.9.1</version>
   <packaging>bundle</packaging>
 
   <!-- <name> formatting is used by autorelease to parse and notify projects on

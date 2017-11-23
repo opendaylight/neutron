@@ -4,19 +4,19 @@
   <parent>
     <groupId>org.opendaylight.mdsal</groupId>
     <artifactId>binding-parent</artifactId>
-    <version>0.11.1-SNAPSHOT</version>
+    <version>0.11.1</version>
     <relativePath/>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>neutron-hostconfig-vpp</artifactId>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.9.1</version>
   <packaging>bundle</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
   <name>ODL :: neutron :: ${project.artifactId}</name>
   <properties>
-    <netconf.version>1.3.1-SNAPSHOT</netconf.version>
+    <netconf.version>1.3.1</netconf.version>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
   </properties>
   <dependencyManagement>
@@ -24,7 +24,7 @@
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
         <artifactId>mdsal-model-artifacts</artifactId>
-        <version>0.11.1-SNAPSHOT</version>
+        <version>0.11.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -38,7 +38,7 @@
       <dependency>
         <groupId>org.opendaylight.controller</groupId>
         <artifactId>mdsal-artifacts</artifactId>
-        <version>1.6.1-SNAPSHOT</version>
+        <version>1.6.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

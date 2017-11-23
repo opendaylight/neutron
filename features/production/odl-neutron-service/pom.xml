@@ -14,7 +14,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-service</artifactId>
-    <version>0.9.1-SNAPSHOT</version>
+    <version>0.9.1</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Service</name>
 
