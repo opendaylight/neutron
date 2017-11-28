@@ -22,6 +22,30 @@
       "revId": "17489069a3cb5c6fdc9f758f9462e1e531db08b7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_5bf887e5",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPort.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 7595
+      },
+      "writtenOn": "2017-11-28T11:03:06Z",
+      "side": 0,
+      "message": "by mistake, sorry.",
+      "parentUuid": "7a1969be_00585a55",
+      "range": {
+        "startLine": 273,
+        "startChar": 37,
+        "endLine": 273,
+        "endChar": 63
+      },
+      "revId": "17489069a3cb5c6fdc9f758f9462e1e531db08b7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
