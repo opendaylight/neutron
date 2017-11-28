@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_60402e57",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronPortJAXBTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7374
+      },
+      "writtenOn": "2017-11-28T10:22:52Z",
+      "side": 1,
+      "message": "the value should be dict {}",
+      "range": {
+        "startLine": 27,
+        "startChar": 76,
+        "endLine": 27,
+        "endChar": 80
+      },
+      "revId": "5b612aba845ba29522df1ac2710a581efa95cd4b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
