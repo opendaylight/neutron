@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_90ddb945",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-28T17:18:09Z",
+      "side": 1,
+      "message": "Please file weather report and send a mail for it to mailing list.\nAnd then add the links to them here.\n\nhttps://wiki.opendaylight.org/view/Weather",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_70e2bd04",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-28T17:18:09Z",
+      "side": 1,
+      "message": "the test method needs to be called explicitly.",
+      "range": {
+        "startLine": 227,
+        "startChar": 52,
+        "endLine": 228,
+        "endChar": 5
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_90b499f3",
+        "filename": "model/src/main/yang/neutron-binding.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-28T17:18:09Z",
+      "side": 1,
+      "message": "leaf-list or list?\nWhy do you change this to leaf-list?\nThe commit message says it\u0027s dict. i.e. key, value pairs. but yang leaf-list is not.",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 22
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_50a181a8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPortProfile.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-28T17:18:09Z",
+      "side": 1,
+      "message": "nitpick: paren isn\u0027t needed",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
