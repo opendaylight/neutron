@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_c1abe1d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 7595
+      },
+      "writtenOn": "2017-11-29T08:40:25Z",
+      "side": 1,
+      "message": "Seems like I can\u0027t login to the Weather page, do you know how can do I reset my password?\n\nany way i have the report, let me know what you think, and if it\u0027s ok to mail it first and update the Weather page later.\n\n\nHandle NeutronPort\u0027s profile attribute as a Dictionary\n\t* Description:\n\nCurrently the \"binding:profile\" port\u0027s attribute is treated as string,\nOpenstack defines the \"binding:profile\" attribute as a dictionary (see: [1]),\nso we need to handle it as one.\nThis will be used in netvirt as additional information for binding ports (see: [2]).\n[1] - https://specs.openstack.org/openstack/neutron-specs/specs/api/ports_binding_extended_attributes__ports_.html\n[2] - https://git.opendaylight.org/gerrit/#/c/60259/\n\n\t* Reported By: Edan David, Email: edand@mellanox.com\n\t* Reported On: 11/29/2017\n\t* Links to patches:\n\n\t\t* https://git.opendaylight.org/gerrit/#/c/65551\n\t* Expected date patches will be merged:",
+      "parentUuid": "7a1969be_90ddb945",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_70e2bd04",
         "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-28T17:18:09Z",
       "side": 1,
       "message": "the test method needs to be called explicitly.",
+      "range": {
+        "startLine": 227,
+        "startChar": 52,
+        "endLine": 228,
+        "endChar": 5
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_812569ad",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 7595
+      },
+      "writtenOn": "2017-11-29T08:40:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a1969be_70e2bd04",
       "range": {
         "startLine": 227,
         "startChar": 52,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_a157c501",
+        "filename": "model/src/main/yang/neutron-binding.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 7595
+      },
+      "writtenOn": "2017-11-29T08:40:25Z",
+      "side": 1,
+      "message": "The capabilities attribute is a list of strings contained in a binding profile dictionary e.g \n\"binding:profile\": {\"capabilities\": [\u0027a\u0027,\u0027b\u0027,...]}.\nI\u0027m new to this project, I didn\u0027t see another way to model this structure if you have any suggestions I\u0027ll happily change it.",
+      "parentUuid": "7a1969be_90b499f3",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 22
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_50a181a8",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPortProfile.java",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2017-11-28T17:18:09Z",
       "side": 1,
       "message": "nitpick: paren isn\u0027t needed",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_815c4927",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPortProfile.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7595
+      },
+      "writtenOn": "2017-11-29T08:40:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a1969be_50a181a8",
       "range": {
         "startLine": 35,
         "startChar": 14,
