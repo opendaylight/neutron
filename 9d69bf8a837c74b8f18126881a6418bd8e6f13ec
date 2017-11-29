@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_77462f25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-29T17:24:36Z",
+      "side": 1,
+      "message": "Recently, they changed account management to use LinuxFoundation ID as you can see at the bottom of https://wiki.opendaylight.org/view/Main_Page\n\nProbably you can reset it via\nhttps://identity.linuxfoundation.org/\n\nFurther infomation, you can contact LF people.",
+      "parentUuid": "7a1969be_c1abe1d4",
+      "range": {
+        "startLine": 14,
+        "startChar": 52,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_70e2bd04",
         "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/NeutronPortTests.java",
         "patchSetId": 3
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "The capabilities attribute is a list of strings contained in a binding profile dictionary e.g \n\"binding:profile\": {\"capabilities\": [\u0027a\u0027,\u0027b\u0027,...]}.\nI\u0027m new to this project, I didn\u0027t see another way to model this structure if you have any suggestions I\u0027ll happily change it.",
       "parentUuid": "7a1969be_90b499f3",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 22
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_f7169ff0",
+        "filename": "model/src/main/yang/neutron-binding.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-11-29T17:24:36Z",
+      "side": 1,
+      "message": "Does only \u0027capabilities\u0027 requires list (or yang leaf-list)?\nwhich code in openstack defines the value? sriov-agent? os-vif?\n\nOther keys have the value of string.\nQuick grepping related code in openstack gave me such impression that only capabiliti is exception. But I may be wrong.\nFor multiple port binding which would come in future, we need dict(or yang list as key value pairs). So we can\u0027t simply define profile like this.\n\n\nI can think of the following options. What do you think?\nThere are two issues. yang model and serializatin/deserialization.\n\n\nyang model definition:\nA. store the value of capabilities as string which repsents json. i.e. something like json.dumps([\u0027a\u0027, \u0027b\u0027]) and json.loads(\"[\u0027a\u0027, \u0027b\u0027, ]\") in python.\n   this treats capability in same way to other profile keys. But it\u0027s a bit incovenient to use capabilities.\n   \nB. define capabilities like this sepcially, and handle capabilities specially in SPI.\n   This option assumes capabilities is only exception, and in near future we won\u0027t have further exceptions.\n\nC. any other good idea?\n\n\nserialization(marchalling):\nMaybe we may also need to write another XmlJavaTypeAdapter in addition to NeutronResourceMapPropertyAdapter. But I\u0027m not very sure in this case.\nAt least please make it sure that test cases covers both capabilities and other keys.",
+      "parentUuid": "7a1969be_a157c501",
       "range": {
         "startLine": 65,
         "startChar": 11,
