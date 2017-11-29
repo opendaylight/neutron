@@ -1,7 +1,3 @@
-# UUID                                  	Group Name
+# UUID                                                            	Group Name
 #
-0e031d4e46d3a85dd47e60ad851a2aba6e9b41ab	Non-Interactive neutron users
-c9025ab9ddc1e3171919e085449f22c54f8f7b54	GitHub Replication
-global:Anonymous-Users                  	Anonymous Users
-global:Registered-Users                 	Registered Users
 ldap:cn=gerrit-neutron-committers,ou=Groups,dc=opendaylight,dc=org	ldap/gerrit-neutron-committers
