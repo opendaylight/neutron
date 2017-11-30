@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_b426e266",
+        "filename": "model/src/main/yang/neutron-binding.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 7374
+      },
+      "writtenOn": "2017-11-30T08:01:33Z",
+      "side": 1,
+      "message": "yes only the capabilities are list see[1] the other attributes (pci_slot, physical_network, pci_vendor_info) are strings [2]\n\nregarding capabilities the user will define what are the capabilities requested for port all the other assigned by nova.\n\nI think we should only add the attributes that odl will use. we don\u0027t need to parse unused attribute such (pci_slot, physical_network, pci_vendor_info. in case we need to add them in the future we can just do:\n        container profile {\n            leaf-list capabilities {\n                type string;\n            }\n            leaf pci_slot {\n                type string;\n            }\n            leaf  pci_vendor_info {\n            ...\n        }\n    }\n\n\n\n[1] - https://specs.openstack.org/openstack/nova-specs/specs/queens/approved/enable-sriov-nic-features.html.\nwe \n[2] - https://github.com/openstack/nova/blob/master/nova/network/neutronv2/api.py#L1092-L1102",
+      "parentUuid": "7a1969be_f7169ff0",
+      "range": {
+        "startLine": 65,
+        "startChar": 11,
+        "endLine": 65,
+        "endChar": 22
+      },
+      "revId": "9d69bf8a837c74b8f18126881a6418bd8e6f13ec",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_50a181a8",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronPortProfile.java",
         "patchSetId": 3
