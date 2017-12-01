@@ -8,6 +8,9 @@
 
 package org.opendaylight.neutron.spi;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +63,10 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     @XmlElement(namespace = "binding", name = "vif_type")
     String bindingvifType;
 
+    @XmlElement(namespace = "binding", name = "profile")
+    @XmlJavaTypeAdapter(DictJsonAdapter.class)
+    public Map<String, JsonElement> bindingProfile;
+
     //@XmlElement (name = "binding:vif_details")
     @XmlElement(namespace = "binding", name = "vif_details")
     @XmlJavaTypeAdapter(NeutronResourceMapPropertyAdapter.class)
@@ -74,6 +81,34 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
 
     @XmlElement(name = "qos_policy_id")
     String qosPolicyId;
+
+    static public final class DictJsonAdapter extends XmlAdapter<String, Map<String, JsonElement>> {
+        @Override
+        public String marshal(Map<String, JsonElement> v) throws Exception {
+            if (null == v) {
+                return null;
+            }
+            JsonObject jsonObject = new JsonObject();
+            for (Map.Entry<String, JsonElement> entry : v.entrySet()) {
+                jsonObject.add(entry.getKey(), entry.getValue());
+            }
+            return jsonObject.toString();
+        }
+
+        @Override
+        public Map<String, JsonElement> unmarshal(String v) throws Exception {
+            if (null == v) {
+                return null;
+            }
+            Gson gson = new Gson();
+            JsonObject jsonObject = gson.fromJson(v, JsonObject.class);
+            Map<String, JsonElement> map = new HashMap();
+            for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+                map.put(entry.getKey(), entry.getValue());
+            }
+            return map;
+        }
+    }
 
     public NeutronPort() {
     }
@@ -165,6 +200,14 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         this.bindinghostID = bindinghostID;
     }
 
+    public JsonObject getProfile() {
+        return bindingProfile;
+    }
+
+    public void setProfile(JsonObject bindingProfile) {
+        this.bindingProfile = bindingProfile;
+    }
+
     public String getBindingvnicType() {
         return bindingvnicType;
     }
@@ -234,6 +277,9 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
             case "binding:vif_type":
                 ans.setBindingvifType(this.getBindingvifType());
                 break;
+            case "binding:profile":
+                ans.setProfile(this.getProfile());
+                break;
             case "binding:vif_details":
                 ans.setVIFDetails(new HashMap<>(this.getVIFDetails()));
                 break;
@@ -270,7 +316,8 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
                 + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
-                + bindingvifType + ", vifDetails=" + vifDetails + ", extraDHCPOptions=" + extraDHCPOptions
+                + bindingvifType + ", vifDetails=" + vifDetails + ", bindingProfile=" + bindingProfile
+                + ", extraDHCPOptions=" + extraDHCPOptions
                 + ", portSecurityEnabled=" + portSecurityEnabled + ", qosPolicyId=" + qosPolicyId + "]";
     }
 }
