@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.spi;
 
+import com.google.gson.JsonObject;
+// java.util.Map or org.codehaus.jackson.map.JsonNode // maybe jackson JsonNode might be friendly to jaxb mashaling
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +61,10 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
     //@XmlElement (name = "binding:vif_type")
     @XmlElement(namespace = "binding", name = "vif_type")
     String bindingvifType;
+
+    @XmlElement(namespace = "binding", name = "profile")
+    // @XmlJavaTypeAdapter(xxx.class) // some adapter would be needed
+    Map<String, JsonObject> bindingProfile;
 
     //@XmlElement (name = "binding:vif_details")
     @XmlElement(namespace = "binding", name = "vif_details")
@@ -165,6 +171,14 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         this.bindinghostID = bindinghostID;
     }
 
+    public NeutronPortProfile getProfile() {
+        return bindingProfile;
+    }
+
+    public void setProfile(NeutronPortProfile bindingProfile) {
+        this.bindingProfile = bindingProfile;
+    }
+
     public String getBindingvnicType() {
         return bindingvnicType;
     }
@@ -234,6 +248,9 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
             case "binding:vif_type":
                 ans.setBindingvifType(this.getBindingvifType());
                 break;
+            case "binding:profile":
+                ans.setProfile(this.getProfile());
+                break;
             case "binding:vif_details":
                 ans.setVIFDetails(new HashMap<>(this.getVIFDetails()));
                 break;
@@ -270,7 +287,8 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
                 + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
                 + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
-                + bindingvifType + ", vifDetails=" + vifDetails + ", extraDHCPOptions=" + extraDHCPOptions
+                + bindingvifType + ", vifDetails=" + vifDetails + ", bindingProfile=" + bindingProfile
+                + ", extraDHCPOptions=" + extraDHCPOptions
                 + ", portSecurityEnabled=" + portSecurityEnabled + ", qosPolicyId=" + qosPolicyId + "]";
     }
 }
