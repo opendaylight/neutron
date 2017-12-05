@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_6ad8f31d",
+        "filename": "model/src/main/yang/neutron-attrs.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2017-12-05T22:36:52Z",
+      "side": 0,
+      "message": "this change is what will make this patch break netvirt. if we retain this old model [at most mark it config false] and mark as deprecated, we\u0027ll be fine.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 71,
+        "endChar": 45
+      },
+      "revId": "17489069a3cb5c6fdc9f758f9462e1e531db08b7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
