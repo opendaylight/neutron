@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_aa302b57",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-12-05T22:37:49Z",
+      "side": 1,
+      "message": "I have used some \u0027Egress\u0027 specific name. Please do let me know if this would suffice.",
+      "parentUuid": "9a245df4_2dbe6cd5",
+      "range": {
+        "startLine": 92,
+        "startChar": 67,
+        "endLine": 92,
+        "endChar": 71
+      },
+      "revId": "c3fc4fc60258979434e0df7822819a2832468d9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_0a369f52",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 24
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-12-05T22:37:49Z",
+      "side": 1,
+      "message": "I have used some \u0027Egress\u0027 specific name. Please do let me know if this would suffice",
+      "parentUuid": "9a245df4_cdeb50da",
+      "range": {
+        "startLine": 92,
+        "startChar": 55,
+        "endLine": 92,
+        "endChar": 59
+      },
+      "revId": "c3fc4fc60258979434e0df7822819a2832468d9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_edc73462",
         "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
         "patchSetId": 24
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-21T23:52:46Z",
       "side": 1,
       "message": "Is this correct?",
+      "range": {
+        "startLine": 74,
+        "startChar": 905,
+        "endLine": 74,
+        "endChar": 906
+      },
+      "revId": "c3fc4fc60258979434e0df7822819a2832468d9d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_2a3c3b2f",
+        "filename": "resources/Neutron_Northbound_Qos_Rest.postman_collection.json",
+        "patchSetId": 24
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-12-05T22:37:49Z",
+      "side": 1,
+      "message": "Changed to \"egress\". This makes sure that only \"egress\" is supported",
+      "parentUuid": "9a245df4_edc73462",
       "range": {
         "startLine": 74,
         "startChar": 905,
