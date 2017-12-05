@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_4aced784",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-05T21:06:07Z",
+      "side": 1,
+      "message": "unnecessary code churn.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "158173cf0df30cbe1238e6e3b07d4e3095e541a3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
