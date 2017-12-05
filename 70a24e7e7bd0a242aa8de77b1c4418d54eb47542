@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a245df4_81a305ff",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-12-05T22:42:53Z",
+      "side": 1,
+      "message": "Hi Isaku.\nAs discussed, this logic is consolidated",
+      "parentUuid": "9a245df4_5586ebdb",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 5
+      },
+      "revId": "70a24e7e7bd0a242aa8de77b1c4418d54eb47542",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a245df4_b56e472d",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
         "patchSetId": 4
