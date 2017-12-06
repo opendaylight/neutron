@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_fe466522",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-06T21:18:39Z",
+      "side": 1,
+      "message": "unncessary code churn",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 1
+      },
+      "revId": "b03065e72867d13c955c16854988b4de83b8bffa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_5e4b392b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-06T21:18:39Z",
+      "side": 1,
+      "message": "this logic needs to be aware of default value.\nDepending on nuetron version, the direction may or may not be passed. if it\u0027s missing, default value, egress, should be set.\nAnd comment on those logic is worthwhile for such logic.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 38
+      },
+      "revId": "b03065e72867d13c955c16854988b4de83b8bffa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
