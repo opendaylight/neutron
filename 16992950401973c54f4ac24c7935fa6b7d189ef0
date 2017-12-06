@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_3edabd78",
+        "filename": "model/src/main/yang/neutron-tapaas.yang",
+        "patchSetId": 13
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-06T21:00:14Z",
+      "side": 1,
+      "message": "This naming doesn\u0027t align with other patch.\nBut let\u0027s address after the patch merge.",
+      "range": {
+        "startLine": 93,
+        "startChar": 31,
+        "endLine": 93,
+        "endChar": 37
+      },
+      "revId": "16992950401973c54f4ac24c7935fa6b7d189ef0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
