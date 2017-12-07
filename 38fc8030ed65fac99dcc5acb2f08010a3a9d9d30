@@ -22,6 +22,30 @@
       "revId": "38fc8030ed65fac99dcc5acb2f08010a3a9d9d30",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_3ece3d5b",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosBandwidthLimitRule.java",
+        "patchSetId": 25
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2017-12-07T01:40:10Z",
+      "side": 1,
+      "message": "Hi Isaku, the last trailing line is present for other files too. I tried editing from my IDE as well as in the gerrit, but it ends up in the file here. Please do let me know if that is what you meant.",
+      "parentUuid": "7a1969be_9ebe51fe",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "38fc8030ed65fac99dcc5acb2f08010a3a9d9d30",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
