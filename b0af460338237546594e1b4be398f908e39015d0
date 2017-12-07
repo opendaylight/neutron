@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_5fa3339e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronQosPolicy.java",
+        "patchSetId": 28
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-07T22:35:10Z",
+      "side": 1,
+      "message": "unncessary code churn.",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 103,
+        "endChar": 1
+      },
+      "revId": "b0af460338237546594e1b4be398f908e39015d0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
