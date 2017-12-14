@@ -1,0 +1,9 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+1: Sam Hague <shague@redhat.com>
+Code-Review+2: Isaku Yamahata <isaku.yamahata@gmail.com>
+Verified+1: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-by: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-at: Thu, 14 Dec 2017 17:45:21 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/53438
+Project: neutron
+Branch: refs/heads/master
