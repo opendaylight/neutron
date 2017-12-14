@@ -27,18 +27,11 @@ module neutron-attrs {
                 "OpenDaylight Beryllium release";
     }
 
-    grouping base-attributes {
-
+    grouping id-attributes {
         leaf uuid {
             type yang:uuid;
             description "UUID to index this neutron object.";
         }
-
-        leaf name {
-            type string;
-            description "Human-readable name for the item. Might not be unique.";
-        }
-
         leaf tenant-id {
             status deprecated;
             type yang:uuid;
@@ -57,6 +50,14 @@ module neutron-attrs {
             description "The revision number of the resource. Used as monotonic
                          counter that is updated whenever an object is updated
                          on neutron server";
+        }
+    }
+
+    grouping base-attributes {
+        uses id-attributes;
+        leaf name {
+            type string;
+            description "Human-readable name for the item. Might not be unique.";
         }
     }
 
