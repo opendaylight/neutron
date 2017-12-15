@@ -28,6 +28,10 @@
       <artifactId>jersey-server</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-json</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.enunciate</groupId>
       <artifactId>enunciate-core-annotations</artifactId>
     </dependency>
@@ -84,6 +88,7 @@
               javax.validation,
               javax.ws.rs.ext,
               javax.xml.bind,
+              com.sun.xml.bind.v2,
               *
             </Import-Package>
             <Web-ContextPath>/controller/nb/v2/neutron</Web-ContextPath>

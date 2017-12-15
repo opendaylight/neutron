@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.e2etest;
 
 import static org.ops4j.pax.exam.CoreOptions.maven;
@@ -40,29 +39,15 @@ import org.ops4j.pax.exam.karaf.options.LogLevelOption.LogLevel;
 import org.ops4j.pax.exam.options.MavenUrlReference;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
 public class ITNeutronE2E  extends AbstractMdsalTestBase {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ITNeutronE2E.class);
     private static final String KARAF_DEBUG_PORT = "5005";
     private static final String KARAF_DEBUG_PROP = "karaf.debug";
 
     final String base = "http://127.0.0.1:8181/controller/nb/v2/neutron";
-
-    @Override
-    public String getKarafDistro() {
-        return maven()
-            .groupId("org.opendaylight.neutron")
-            .artifactId("neutron-karaf")
-            .versionAsInProject()
-            .type("zip")
-            .getURL();
-    }
 
     @Override
     public MavenUrlReference getFeatureRepo() {
@@ -79,6 +64,7 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
         return "odl-neutron-logger-test";
     }
 
+    @Override
     @Configuration
     public Option[] config() {
         Option[] options = super.config();
@@ -282,7 +268,8 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
         JsonElement jsonElementValue = entrySet.iterator().next().getValue();
         String key = entrySet.iterator().next().getKey();
         Assert.assertEquals(context, collectionName, key);
-        Assert.assertTrue("E2E Tests Failed - Collection not Array", jsonElementValue.isJsonArray());
+        Assert.assertTrue("E2E Tests Failed - Collection not Array: " + jsonElementValue,
+                jsonElementValue.isJsonArray());
         JsonArray jsonArray = jsonElementValue.getAsJsonArray();
         Assert.assertNotEquals(context, jsonArray.size(), 0);
     }

@@ -8,9 +8,6 @@
 
 package org.opendaylight.neutron.hostconfig.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
@@ -79,17 +76,5 @@ public class NeutronHostconfigUtils {
     private InstanceIdentifier<Hostconfig> createInstanceIdentifier(Hostconfig hostconfig) {
         return InstanceIdentifier.create(Neutron.class).child(Hostconfigs.class)
                 .child(Hostconfig.class, hostconfig.getKey());
-    }
-
-    /**
-     * Used for parsing model revisions.
-     */
-    public static Date parseDate(final String strDate) {
-        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            return formatter.parse(strDate);
-        } catch (final ParseException e) {
-            throw new IllegalArgumentException("Date " + strDate + " not valid.", e);
-        }
     }
 }
