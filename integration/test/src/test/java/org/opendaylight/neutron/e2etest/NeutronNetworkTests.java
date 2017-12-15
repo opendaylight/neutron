@@ -31,29 +31,27 @@ public class NeutronNetworkTests {
     }
 
     public void network_collection_get_test_with_wait() throws IOException, InterruptedException {
-        String urlS = base + "/networks";
+        URL url = new URL(base + "/networks");
         for (int retry = 0; retry < TIMEOUT; retry++) {
-            URL url = new URL(urlS);
             HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
             int responseCode;
             try {
                 responseCode = httpConn.getResponseCode();
             } catch (ConnectException e) {
-                LOG.info("connection " + Integer.toString(retry) + ": failed", e);
+                LOG.info("connection trial {} failed to URL {}", retry, url, e);
                 Thread.sleep(1000);
                 continue;
             }
 
             if (responseCode != 200) {
-                LOG.info("trial " + Integer.toString(retry) + ": failed with: "
-                        + Integer.toString(httpConn.getResponseCode()));
+                LOG.info("trial {} to URL {} failed with {}", retry, url, httpConn.getResponseCode());
                 Thread.sleep(1000);
             } else {
                 Assert.assertEquals("Network Collection GET failed", 200, httpConn.getResponseCode());
                 return;
             }
         }
-        Assert.assertFalse("Network Collection GET with wait failed", true);
+        Assert.assertFalse("Network Collection GET to URL " + url + " with wait failed", true);
     }
 
     //TODO handle SB check
