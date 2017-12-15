@@ -153,8 +153,8 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
         return vifDetails;
     }
 
-    public void setVIFDetails(Map<String, String> vifDetails) {
-        this.vifDetails = vifDetails;
+    public void setVIFDetails(Map<String, String> details) {
+        this.vifDetails = details;
     }
 
     public String getBindinghostID() {

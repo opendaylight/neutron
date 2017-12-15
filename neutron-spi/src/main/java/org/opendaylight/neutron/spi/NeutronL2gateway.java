@@ -26,8 +26,8 @@ public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gatew
         return l2gatewayDevices;
     }
 
-    public void setNeutronL2gatewayDevices(List<NeutronL2gatewayDevice> l2gatewayDevices) {
-        this.l2gatewayDevices = l2gatewayDevices;
+    public void setNeutronL2gatewayDevices(List<NeutronL2gatewayDevice> newL2gatewayDevices) {
+        this.l2gatewayDevices = newL2gatewayDevices;
     }
 
     @Override

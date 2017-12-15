@@ -30,8 +30,8 @@ public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMet
         return shared;
     }
 
-    public void setMeteringLabelShared(Boolean shared) {
-        this.shared = shared;
+    public void setMeteringLabelShared(Boolean value) {
+        this.shared = value;
     }
 
     /*

@@ -102,6 +102,7 @@ public final class NeutronFirewallRuleInterface
     }
 
     @Override
+    @SuppressWarnings("checkstyle:AvoidHidingCauseException")
     protected FirewallRule toMd(NeutronFirewallRule rule) {
         final FirewallRuleBuilder ruleBuilder = new FirewallRuleBuilder();
         toMdBaseAttributes(rule, ruleBuilder);
@@ -120,8 +121,7 @@ public final class NeutronFirewallRuleInterface
                 final Protocol protocol = new Protocol(protocolString.toCharArray());
                 ruleBuilder.setProtocol(protocol);
             } catch (NumberFormatException e) {
-                throw new BadRequestException("Protocol {" + rule.getFirewallRuleProtocol()
-                        + "} is not supported");
+                throw new BadRequestException("Protocol {" + rule.getFirewallRuleProtocol() + "} is not supported");
             }
         }
         if (rule.getFirewallRuleIpVer() != null) {

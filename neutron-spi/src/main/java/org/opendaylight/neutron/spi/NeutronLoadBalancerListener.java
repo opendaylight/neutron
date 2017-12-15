@@ -73,41 +73,40 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
         return loadBalancerListenerProtocol;
     }
 
-    public void setNeutronLoadBalancerListenerProtocol(String loadBalancerListenerProtocol) {
-        this.loadBalancerListenerProtocol = loadBalancerListenerProtocol;
+    public void setNeutronLoadBalancerListenerProtocol(String protocol) {
+        this.loadBalancerListenerProtocol = protocol;
     }
 
     public String getNeutronLoadBalancerListenerProtocolPort() {
         return loadBalancerListenerProtocolPort;
     }
 
-    public void setNeutronLoadBalancerListenerProtocolPort(String loadBalancerListenerProtocolPort) {
-        this.loadBalancerListenerProtocolPort = loadBalancerListenerProtocolPort;
+    public void setNeutronLoadBalancerListenerProtocolPort(String port) {
+        this.loadBalancerListenerProtocolPort = port;
     }
 
     public String getNeutronLoadBalancerListenerDefaultPoolID() {
         return loadBalancerListenerDefaultPoolID;
     }
 
-    public void setNeutronLoadBalancerListenerDefaultPoolID(String loadBalancerListenerDefaultPoolID) {
-        this.loadBalancerListenerDefaultPoolID = loadBalancerListenerDefaultPoolID;
+    public void setNeutronLoadBalancerListenerDefaultPoolID(String id) {
+        this.loadBalancerListenerDefaultPoolID = id;
     }
 
     public Integer getNeutronLoadBalancerListenerConnectionLimit() {
         return loadBalancerListenerConnectionLimit;
     }
 
-    public void setNeutronLoadBalancerListenerConnectionLimit(Integer loadBalancerListenerConnectionLimit) {
-        this.loadBalancerListenerConnectionLimit = loadBalancerListenerConnectionLimit;
+    public void setNeutronLoadBalancerListenerConnectionLimit(Integer limit) {
+        this.loadBalancerListenerConnectionLimit = limit;
     }
 
     public List<NeutronID> getNeutronLoadBalancerListenerLoadBalancerIDs() {
         return loadBalancerListenerLoadBalancerIDs;
     }
 
-    public void setNeutronLoadBalancerListenerLoadBalancerIDs(
-            List<NeutronID> loadBalancerListenerLoadBalancerIDs) {
-        this.loadBalancerListenerLoadBalancerIDs = loadBalancerListenerLoadBalancerIDs;
+    public void setNeutronLoadBalancerListenerLoadBalancerIDs(List<NeutronID> ids) {
+        this.loadBalancerListenerLoadBalancerIDs = ids;
     }
 
     @Override

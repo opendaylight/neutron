@@ -182,9 +182,9 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 ans.setAllocationPools(pools);
                 break;
             case "host_routes":
-                List<NeutronRoute> hostRoutes = new ArrayList<>();
-                hostRoutes.addAll(this.getHostRoutes());
-                ans.setHostRoutes(hostRoutes);
+                List<NeutronRoute> routes = new ArrayList<>();
+                routes.addAll(this.getHostRoutes());
+                ans.setHostRoutes(routes);
                 break;
             case "enable_dhcp":
                 ans.setEnableDHCP(this.getEnableDHCP());

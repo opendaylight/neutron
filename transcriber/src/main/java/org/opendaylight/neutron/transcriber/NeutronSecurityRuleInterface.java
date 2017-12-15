@@ -90,6 +90,7 @@ public final class NeutronSecurityRuleInterface extends
     }
 
     @Override
+    @SuppressWarnings("checkstyle:AvoidHidingCauseException")
     protected SecurityRule toMd(NeutronSecurityRule securityRule) {
         final SecurityRuleBuilder securityRuleBuilder = new SecurityRuleBuilder();
         toMdIds(securityRule, securityRuleBuilder);

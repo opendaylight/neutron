@@ -30,7 +30,7 @@ public class NeutronID implements Serializable {
     @XmlElement(name = "id")
     String uuid;
 
-    private void checkUuidPattern(String uuid) {
+    private static void checkUuidPattern(String uuid) {
         Preconditions.checkNotNull(uuid, "Supplied value may not be null");
         Preconditions.checkArgument(UUID_PATTERN.matcher(uuid).matches(),
                 "Supplied value \"%s\" does not match uuid pattern \"%s\"", uuid, UUID_PATTERN_REGEX);
@@ -48,9 +48,9 @@ public class NeutronID implements Serializable {
         return uuid;
     }
 
-    public void setID(String uuid) {
-        checkUuidPattern(uuid);
-        this.uuid = uuid;
+    public void setID(String newUuid) {
+        checkUuidPattern(newUuid);
+        this.uuid = newUuid;
     }
 
     @Override

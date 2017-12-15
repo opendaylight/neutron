@@ -52,7 +52,7 @@ public final class PaginatedRequestFactory {
         }
 
         @Override
-        public void setID(String id) {
+        public void setID(String newId) {
             throw new UnsupportedOperationException("Marker has constant ID");
         }
 

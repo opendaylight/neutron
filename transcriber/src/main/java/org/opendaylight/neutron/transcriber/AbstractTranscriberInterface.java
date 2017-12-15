@@ -179,7 +179,7 @@ public abstract class AbstractTranscriberInterface<
         return InstanceIdentifier.create(mdParentClass).child(mdContainerClass);
     }
 
-    protected <S1 extends INeutronObject<S1>, M extends IdAttributes, B extends Builder<M>>
+    protected static <S1 extends INeutronObject<S1>, M extends IdAttributes, B extends Builder<M>>
         B toMdIds(INeutronObject<S1> neutronObject, Class<B> builderClass) {
         B builder;
         try {
@@ -400,7 +400,7 @@ public abstract class AbstractTranscriberInterface<
         return false;
     }
 
-    protected Uuid toUuid(String uuid) {
+    protected static Uuid toUuid(String uuid) {
         Preconditions.checkNotNull(uuid);
         Uuid result;
         try {

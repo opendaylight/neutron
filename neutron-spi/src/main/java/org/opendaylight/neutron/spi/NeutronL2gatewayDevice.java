@@ -35,8 +35,8 @@ public final class NeutronL2gatewayDevice extends NeutronID implements Serializa
     }
 
     public void setNeutronL2gatewayDeviceInterfaces(
-            List<NeutronL2gatewayDeviceInterface> l2gatewayDeviceInterfaces) {
-        this.l2gatewayDeviceInterfaces = l2gatewayDeviceInterfaces;
+            List<NeutronL2gatewayDeviceInterface> newL2gatewayDeviceInterfaces) {
+        this.l2gatewayDeviceInterfaces = newL2gatewayDeviceInterfaces;
     }
 
     @Override

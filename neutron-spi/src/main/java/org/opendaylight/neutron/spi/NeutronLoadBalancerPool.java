@@ -102,9 +102,8 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
         return loadBalancerPoolSessionPersistence;
     }
 
-    public void setLoadBalancerSessionPersistence(
-            NeutronLoadBalancerSessionPersistence loadBalancerPoolSessionPersistence) {
-        this.loadBalancerPoolSessionPersistence = loadBalancerPoolSessionPersistence;
+    public void setLoadBalancerSessionPersistence(NeutronLoadBalancerSessionPersistence persistence) {
+        this.loadBalancerPoolSessionPersistence = persistence;
     }
 
     public List<NeutronID> getLoadBalancerPoolListeners() {
