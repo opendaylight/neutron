@@ -55,16 +55,6 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
     final String base = "http://127.0.0.1:8181/controller/nb/v2/neutron";
 
     @Override
-    public String getKarafDistro() {
-        return maven()
-            .groupId("org.opendaylight.neutron")
-            .artifactId("neutron-karaf")
-            .versionAsInProject()
-            .type("zip")
-            .getURL();
-    }
-
-    @Override
     public MavenUrlReference getFeatureRepo() {
         return maven()
             .groupId("org.opendaylight.neutron")
@@ -79,6 +69,7 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
         return "odl-neutron-logger-test";
     }
 
+    @Override
     @Configuration
     public Option[] config() {
         Option[] options = super.config();
