@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.hostconfig.vpp;
 
 import com.google.common.base.Preconditions;
-
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,9 +17,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
-
 import javax.annotation.Nonnull;
-
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
@@ -40,6 +37,7 @@ import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.
 import org.opendaylight.yangtools.concepts.ListenerRegistration;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.QName;
+import org.opendaylight.yangtools.yang.common.Revision;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,15 +52,15 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     private static final TopologyId TOPOLOGY_NETCONF = new TopologyId("topology-netconf");
     private static final QName V3PO_1704_CAPABILITY = QName.create(
             URI.create("urn:opendaylight:params:xml:ns:yang:v3po"),
-            NeutronHostconfigUtils.parseDate("2017-03-15"), "v3po");
+            Revision.of("2017-03-15"), "v3po");
     private static final QName V3PO_1701_CAPABILITY = QName.create(
             URI.create("urn:opendaylight:params:xml:ns:yang:v3po"),
-            NeutronHostconfigUtils.parseDate("2016-12-14"), "v3po");
+            Revision.of("2016-12-14"), "v3po");
     private static final QName INTERFACES_CAPABILITY =
             QName.create(URI.create("urn:ietf:params:xml:ns:yang:ietf-interfaces"),
-                    NeutronHostconfigUtils.parseDate("2014-05-08"), "ietf-interfaces");
+                    Revision.of("2014-05-08"), "ietf-interfaces");
     private static final List<QName> REQUIRED_CAPABILITIES = new ArrayList<>();
-    private SocketInfo socketInfo;
+    private final SocketInfo socketInfo;
 
     public NeutronHostconfigVppListener(final DataBroker dataBroker, String spath, String sname, String vhostMode) {
         LOG.info("Initializing Neutron-Hostconfig-Vpp-Listener");
