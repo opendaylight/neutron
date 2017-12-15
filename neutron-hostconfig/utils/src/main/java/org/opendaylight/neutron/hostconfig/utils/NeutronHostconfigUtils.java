@@ -80,16 +80,4 @@ public class NeutronHostconfigUtils {
         return InstanceIdentifier.create(Neutron.class).child(Hostconfigs.class)
                 .child(Hostconfig.class, hostconfig.getKey());
     }
-
-    /**
-     * Used for parsing model revisions.
-     */
-    public static Date parseDate(final String strDate) {
-        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            return formatter.parse(strDate);
-        } catch (final ParseException e) {
-            throw new IllegalArgumentException("Date " + strDate + " not valid.", e);
-        }
-    }
 }
