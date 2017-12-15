@@ -79,6 +79,7 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
         return "odl-neutron-logger-test";
     }
 
+    @Override
     @Configuration
     public Option[] config() {
         Option[] options = super.config();
