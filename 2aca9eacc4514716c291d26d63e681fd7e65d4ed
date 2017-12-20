@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "35bc911a_d9bb27e8",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2017-12-20T22:50:44Z",
+      "side": 1,
+      "message": "The intention of this patch is to bump the versions and get it building.  That said I\u0027ll push another change to remove the method but any other clean up or further follow-up changes I\u0027ll leave up to the project devs. I\u0027ve submitted similar patches in many other projects to help get the ball rolling for the version bumps but I don\u0027t have the bandwidth to do follow-up in each project.",
+      "parentUuid": "64ffdf5e_f611a10d",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 23
+      },
+      "revId": "2aca9eacc4514716c291d26d63e681fd7e65d4ed",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6cd3b6e1_59ab2284",
         "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-20T21:58:26Z",
       "side": 1,
       "message": "Are these related to odlparent 3.0? I guess no.\n\nSo can you please create another patch for this change?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 40
+      },
+      "revId": "2aca9eacc4514716c291d26d63e681fd7e65d4ed",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a29dbe1a_c0c9e55f",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2017-12-20T22:50:44Z",
+      "side": 1,
+      "message": "Which specific change are you referring to? These changes are related to yangtools 2.0.0.",
+      "parentUuid": "6cd3b6e1_59ab2284",
       "range": {
         "startLine": 52,
         "startChar": 0,

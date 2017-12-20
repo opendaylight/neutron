@@ -16,6 +16,24 @@
       "revId": "aae9b7b991b3178a46109ed848e6b6955c8c8269",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58ae7753_636d4fd4",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2017-12-20T22:50:44Z",
+      "side": 0,
+      "message": "Not for checkstyle - eclipse does that automatically.",
+      "parentUuid": "64a9f1af_ad683918",
+      "revId": "aae9b7b991b3178a46109ed848e6b6955c8c8269",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
