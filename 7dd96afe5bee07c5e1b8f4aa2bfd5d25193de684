@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60174ae8_a594ae57",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-20T22:29:36Z",
+      "side": 0,
+      "message": "Although this may not break dependent projects, let\u0027s mark it deprecated and remove it with later patch.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "7dd96afe5bee07c5e1b8f4aa2bfd5d25193de684",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e2655b9_620b448d",
+        "filename": "model/src/main/yang/neutron-L3.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-20T22:29:36Z",
+      "side": 0,
+      "message": "ditto.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 46
+      },
+      "revId": "7dd96afe5bee07c5e1b8f4aa2bfd5d25193de684",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}

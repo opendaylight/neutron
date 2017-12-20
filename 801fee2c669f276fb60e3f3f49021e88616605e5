@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77fcfa18_8c607d3c",
+        "filename": "model/src/main/yang/neutron-networks.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-20T22:29:36Z",
+      "side": 1,
+      "message": "remove this blank line.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 0
+      },
+      "revId": "801fee2c669f276fb60e3f3f49021e88616605e5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b30db6e8_39b1a617",
+        "filename": "model/src/main/yang/neutron-ports.yang",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-20T22:29:36Z",
+      "side": 1,
+      "message": "wrong indent.",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 100,
+        "endChar": 16
+      },
+      "revId": "801fee2c669f276fb60e3f3f49021e88616605e5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
