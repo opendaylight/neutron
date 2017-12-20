@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64a9f1af_ad683918",
+        "filename": "neutron-hostconfig/vpp/src/main/java/org/opendaylight/neutron/hostconfig/vpp/NeutronHostconfigVppListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2017-12-20T21:58:26Z",
+      "side": 0,
+      "message": "Are those removing blank lines for checkstyle?\nIf so, can you please include into checkstyle patch?",
+      "revId": "aae9b7b991b3178a46109ed848e6b6955c8c8269",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
