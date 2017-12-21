@@ -159,6 +159,21 @@
     </plugins>
   </build>
 
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>findbugs-maven-plugin</artifactId>
+        <version>${findbugs.maven.plugin.version}</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <goal>site</goal>
+        </configuration>
+      </plugin>
+    </plugins>
+  </reporting>
+
   <!--
       Maven Site Configuration
 
