@@ -14,6 +14,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -67,7 +68,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     public NeutronHostconfigVppListener(final DataBroker dataBroker, String spath, String sname, String vhostMode) {
         LOG.info("Initializing Neutron-Hostconfig-Vpp-Listener");
         this.dataBroker = Preconditions.checkNotNull(dataBroker);
-        final String vhostModeChecked = Preconditions.checkNotNull(vhostMode).toLowerCase();
+        final String vhostModeChecked = Preconditions.checkNotNull(vhostMode).toLowerCase(Locale.ROOT);
         Preconditions.checkArgument(vhostModeChecked.equals("server") || vhostModeChecked.equals("client"),
                 "Supported values for vhostuser-mode are client and server.");
         this.socketInfo =
