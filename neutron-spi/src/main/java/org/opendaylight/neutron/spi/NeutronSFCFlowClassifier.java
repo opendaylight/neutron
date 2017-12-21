@@ -174,7 +174,7 @@ public final class NeutronSFCFlowClassifier extends NeutronBaseAttributes<Neutro
                 ans.setDestinationIpPrefix(this.getDestinationIpPrefix());
                 break;
             case "logical_source_port":
-                ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
+                ans.setLogicalSourcePortUUID(this.getLogicalSourcePortUUID());
                 break;
             case "logical_destination_port":
                 ans.setLogicalDestinationPortUUID(this.getLogicalDestinationPortUUID());
