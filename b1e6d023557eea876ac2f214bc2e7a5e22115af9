@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "af9f4108_a51f8afe",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 33
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-01-06T00:57:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8261a2fd_3ff04f6b",
+      "range": {
+        "startLine": 87,
+        "startChar": 86,
+        "endLine": 87,
+        "endChar": 98
+      },
+      "revId": "b1e6d023557eea876ac2f214bc2e7a5e22115af9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3a5304f_8f366918",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 33
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-20T22:17:28Z",
       "side": 1,
       "message": "define its own direction base class. because in future neutron may change the range. So that we can add more direction in future without breaking ABI.",
+      "range": {
+        "startLine": 98,
+        "startChar": 22,
+        "endLine": 98,
+        "endChar": 48
+      },
+      "revId": "b1e6d023557eea876ac2f214bc2e7a5e22115af9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb4d7f5d_474e75af",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 33
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-01-06T00:57:17Z",
+      "side": 1,
+      "message": "Done. I have added the class. Do let me know if it would suffice.",
+      "parentUuid": "f3a5304f_8f366918",
       "range": {
         "startLine": 98,
         "startChar": 22,
