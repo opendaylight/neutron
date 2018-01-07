@@ -24,8 +24,8 @@ public class NeutronPortJAXBTest {
             + "\"extra_dhcp_opts\": [\"\"], " + "\"security_groups\": [\"\"], " + "\"allowed_address_pairs\": [\"\"], "
             + "\"device_id\": \"257614cc-e178-4c92-9c61-3b28d40eca44\", " + "\"device_owner\": \"\", "
             + "\"binding:host_id\": \"\", " + "\"binding:vif_type\": \"unbound\", "
-            + "\"binding:vnic_type\": \"normal\", " + "\"mac_address\": \"fa:16:3e:c9:cb:f0\", "
-            + "\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", "
+            + "\"binding:vnic_type\": \"normal\", " + "\"binding:profile\": \"{\'capabilities\': [\'switchdev\']}\", "
+            + "\"mac_address\": \"fa:16:3e:c9:cb:f0\", " + "\"network_id\": \"e9330b1f-a2ef-4160-a991-169e56ab17f5\", "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
@@ -97,7 +97,7 @@ public class NeutronPortJAXBTest {
         Assert.assertEquals("NeutronPort JAXB Test 16: Testing device_owner failed", "",
                 neutronObject.getDeviceOwner());
 
-        Assert.assertEquals("NeutronPort JAXB Test 17: Testing binding:host_id failed", "",
-                neutronObject.getBindinghostID());
+        Assert.assertEquals("NeutronPort JAXB Test 17: Testing binding:profile failed",
+                "{\'capabilities\': [\'switchdev\']}", neutronObject.getProfile());
     }
 }
