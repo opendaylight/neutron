@@ -75,6 +75,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             }
             result.setVIFDetails(details);
         }
+        result.setProfile(binding.getProfile());
         result.setBindingvifType(binding.getVifType());
         result.setBindingvnicType(binding.getVnicType());
     }
@@ -175,6 +176,9 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (neutronPort.getBindingvnicType() != null) {
             bindingBuilder.setVnicType(neutronPort.getBindingvnicType());
+        }
+        if (neutronPort.getProfile() != null) {
+            bindingBuilder.setProfile(neutronPort.getProfile());
         }
 
         final PortSecurityExtensionBuilder portSecurityBuilder = new PortSecurityExtensionBuilder();
