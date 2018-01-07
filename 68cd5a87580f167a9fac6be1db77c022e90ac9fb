@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6aa31765_61799957",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronPortInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7374
+      },
+      "writtenOn": "2018-01-07T09:23:13Z",
+      "side": 1,
+      "message": "where do you use the LOG?",
+      "range": {
+        "startLine": 55,
+        "startChar": 3,
+        "endLine": 55,
+        "endChar": 90
+      },
+      "revId": "68cd5a87580f167a9fac6be1db77c022e90ac9fb",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
