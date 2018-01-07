@@ -75,6 +75,10 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             }
             result.setVIFDetails(details);
         }
+        if (binding.getProfile() != null) {
+            NeutronPort.DictJsonAdapter dictJsonAdapter = new NeutronPort.DictJsonAdapter();
+            result.setProfile(dictJsonAdapter.unmarshal(binding.getProfile()));
+        }
         result.setBindingvifType(binding.getVifType());
         result.setBindingvnicType(binding.getVnicType());
     }
@@ -175,6 +179,10 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (neutronPort.getBindingvnicType() != null) {
             bindingBuilder.setVnicType(neutronPort.getBindingvnicType());
+        }
+        if (neutronPort.getProfile() != null) {
+            NeutronPort.DictJsonAdapter dictJsonAdapter = new NeutronPort.DictJsonAdapter();
+            bindingBuilder.setProfile(dictJsonAdapter.marshal(neutronPort.getProfile()));
         }
 
         final PortSecurityExtensionBuilder portSecurityBuilder = new PortSecurityExtensionBuilder();
