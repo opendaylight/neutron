@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "26465164_05084249",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 36
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-01-09T03:11:38Z",
+      "side": 1,
+      "message": "Done. It was used previously if any feature used only \"Egress\" explicitly. I have removed it now, as we have the new method doing the same.",
+      "parentUuid": "b16a4fd7_ef12906a",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 9
+      },
+      "revId": "469e04cfe0814c34ca974d3f089886ddffbe28fe",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cea8b970_1205b8e8",
         "filename": "model/src/main/yang/neutron-qos.yang",
         "patchSetId": 36
@@ -36,6 +60,30 @@
       "writtenOn": "2018-01-09T01:48:40Z",
       "side": 1,
       "message": "follow the way of bandwidth limitation and dscp-mark.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 9
+      },
+      "revId": "469e04cfe0814c34ca974d3f089886ddffbe28fe",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "550454e3_b450f374",
+        "filename": "model/src/main/yang/neutron-qos.yang",
+        "patchSetId": 36
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-01-09T03:11:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea8b970_1205b8e8",
       "range": {
         "startLine": 68,
         "startChar": 0,
