@@ -12,6 +12,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
@@ -135,11 +136,11 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
                     // suffix OS_HOST_CONFIG_CONFIG_KEY_PREFIX.length()
                     String hostType = openvswitchExternalIds.getExternalIdKey().substring(
                             OS_HOST_CONFIG_CONFIG_KEY_PREFIX.length());
-                    if (null != hostType && hostType.length() > 0) {
+                    if (hostType.length() > 0) {
                         if (hostType.length() > HOST_TYPE_STR_LEN) {
                             hostType = hostType.substring(0, HOST_TYPE_STR_LEN);
                         }
-                        hostType = "ODL " + hostType.toUpperCase();
+                        hostType = "ODL " + hostType.toUpperCase(Locale.ROOT);
                         if (null != openvswitchExternalIds.getExternalIdValue()) {
                             config.put(hostType, openvswitchExternalIds.getExternalIdValue());
                         }
