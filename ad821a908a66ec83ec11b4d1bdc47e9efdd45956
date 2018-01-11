@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f40b79b0_06665f80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-11T20:20:55Z",
+      "side": 1,
+      "message": "Please refer to the patch for networking-odl.",
+      "range": {
+        "startLine": 7,
+        "startChar": 51,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "ad821a908a66ec83ec11b4d1bdc47e9efdd45956",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8fdf96b2_bbafb7ae",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronDictJsonAdapter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-11T20:20:55Z",
+      "side": 1,
+      "message": "Do we really want this?\nAt least marshal isn\u0027t needed because binding:profile isn\u0027t supposed to be changed by netvirt or any other backend.\n\nRegarding to unmarshal, it can be considered common library. but now neutorn-spi isn\u0027t supposed to be used by other ODL component. If we really like to do so, we should define its own karaf feature.\n\nAnyway can you please split this code into its own patch?\nso that we can merge change of NeutronPort and transcriber.",
+      "revId": "ad821a908a66ec83ec11b4d1bdc47e9efdd45956",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
