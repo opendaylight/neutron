@@ -16,6 +16,24 @@
       "revId": "4246e2b26c47e8a65c0adf5250cda271da9b71b7",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b563817d_dd7fc345",
+        "filename": "integration/test/src/test/java/org/opendaylight/neutron/e2etest/ITNeutronE2E.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-15T19:00:34Z",
+      "side": 0,
+      "message": "It\u0027s not needed as this is configured via properties in the pom. I had removed this in patch set 5 but was put back by patch set 6.",
+      "parentUuid": "76328a68_2a883d81",
+      "revId": "4246e2b26c47e8a65c0adf5250cda271da9b71b7",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
