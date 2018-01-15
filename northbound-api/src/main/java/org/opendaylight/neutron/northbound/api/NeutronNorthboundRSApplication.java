@@ -58,7 +58,6 @@ public final class NeutronNorthboundRSApplication extends Application {
         classes.add(NeutronQosPolicyNorthbound.class);
         classes.add(NeutronTrunksNorthbound.class);
 
-        classes.add(MOXyJsonProvider.class);
         return classes;
     }
 
