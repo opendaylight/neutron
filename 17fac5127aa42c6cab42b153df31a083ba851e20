@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "30babf35_fb53be2a",
+        "filename": "features/production/odl-neutron-hostconfig-ovs/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-16T13:35:28Z",
+      "side": 1,
+      "message": "I\u0027m not very familiar with ovsdb, but is a right to depend on a *-test feature in neutron/features/production?",
+      "revId": "17fac5127aa42c6cab42b153df31a083ba851e20",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
