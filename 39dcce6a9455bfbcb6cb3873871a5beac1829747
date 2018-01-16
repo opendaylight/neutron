@@ -34,6 +34,24 @@
       "revId": "39dcce6a9455bfbcb6cb3873871a5beac1829747",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27ce1d40_9fd112f6",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-16T12:46:19Z",
+      "side": 1,
+      "message": "\u003e versions will be added as observed at compile-time\n\u003e hence determined by and matching the jersey-core import\n\u003e which is precisely what we want.\n\noh, right; forget that BND does that - great, all good then.",
+      "parentUuid": "8b608bac_3ef35a3e",
+      "revId": "39dcce6a9455bfbcb6cb3873871a5beac1829747",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
