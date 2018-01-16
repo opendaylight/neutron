@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80252b5f_73c9def8",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-16T12:10:47Z",
+      "side": 1,
+      "message": "Robert, based on NEUTRON-154, I assumed that you would have wanted to put something like \u0027;version\u003d\"[1.0.0,2)\"\u0027 to the javax.ws import-package lines here... but hey, as this seems to do the trick and works - fine with me!",
+      "revId": "39dcce6a9455bfbcb6cb3873871a5beac1829747",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
