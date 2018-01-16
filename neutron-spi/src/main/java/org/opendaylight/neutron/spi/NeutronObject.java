@@ -9,7 +9,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -18,6 +17,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,7 +61,7 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
     }
 
     @Override
-    @JsonIgnore
+    @XmlTransient
     public void setTenantID(Uuid tenantID) {
         this.tenantID = tenantID.getValue().replace("-", "");
     }
