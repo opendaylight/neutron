@@ -16,6 +16,24 @@
       "revId": "39dcce6a9455bfbcb6cb3873871a5beac1829747",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b608bac_3ef35a3e",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 649
+      },
+      "writtenOn": "2018-01-16T12:14:13Z",
+      "side": 1,
+      "message": "Well... I originally did not want to include any of this crud, but wrapping moxy made these non-optional.\n\nA version is not required, as versions will be added as observed at compile-time -- hence determined by and matching the jersey-core import -- which is precisely what we want.",
+      "parentUuid": "80252b5f_73c9def8",
+      "revId": "39dcce6a9455bfbcb6cb3873871a5beac1829747",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
