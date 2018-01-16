@@ -268,8 +268,8 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
         JsonElement jsonElementValue = entrySet.iterator().next().getValue();
         String key = entrySet.iterator().next().getKey();
         Assert.assertEquals(context, collectionName, key);
-        Assert.assertTrue("E2E Tests Failed - Collection not Array: " + jsonElementValue,
-                jsonElementValue.isJsonArray());
+        Assert.assertTrue("E2E Tests Failed - Collection not Array: " + jsonElementValue + "; URL: " + urlStr
+                + "; full response: " + response, jsonElementValue.isJsonArray());
         JsonArray jsonArray = jsonElementValue.getAsJsonArray();
         Assert.assertNotEquals(context, jsonArray.size(), 0);
     }
