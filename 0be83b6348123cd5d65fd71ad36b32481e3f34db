@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67b780db_3598140a",
+        "filename": "parent/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-16T13:25:31Z",
+      "side": 1,
+      "message": "Isaku, do you have a good reason to really use this?  Those Maven produced sites are of limited value.. have you EVER looked at it?  Do you know of anyone who does? ;) IMHO the crux to all such code quality kind of stuff is just to enable enforcement, and not reports via sites... so just to save on build time, I would remove this \u003creporting\u003e section, if I were you.  What do you think?",
+      "revId": "0be83b6348123cd5d65fd71ad36b32481e3f34db",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
