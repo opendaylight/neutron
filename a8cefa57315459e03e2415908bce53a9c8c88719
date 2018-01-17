@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e8681f2a_f9db56e6",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 39
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-17T01:06:23Z",
+      "side": 1,
+      "message": "camel case. minimumBandwidthKey or just key.",
+      "range": {
+        "startLine": 94,
+        "startChar": 52,
+        "endLine": 94,
+        "endChar": 71
+      },
+      "revId": "a8cefa57315459e03e2415908bce53a9c8c88719",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d41cd1c_ab31e7da",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 39
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-17T01:06:23Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 99,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 31
+      },
+      "revId": "a8cefa57315459e03e2415908bce53a9c8c88719",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
