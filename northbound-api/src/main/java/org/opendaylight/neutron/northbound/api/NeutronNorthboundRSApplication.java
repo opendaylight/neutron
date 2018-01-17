@@ -60,7 +60,6 @@ public final class NeutronNorthboundRSApplication extends Application {
         classes.add(NeutronTapServiceNorthbound.class);
         classes.add(NeutronTapFlowNorthbound.class);
 
-        classes.add(MOXyJsonProvider.class);
         return classes;
     }
 
