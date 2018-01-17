@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,8 +16,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLoadBalancerPoolMember>
-        implements Serializable, INeutronObject<NeutronLoadBalancerPoolMember> {
+public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLoadBalancerPoolMember> {
     private static final long serialVersionUID = 1L;
 
     /**

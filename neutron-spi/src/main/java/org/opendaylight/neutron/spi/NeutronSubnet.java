@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.spi;
 
 import com.google.common.net.InetAddresses;
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.Inet6Address;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> implements Serializable {
+public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
 
     private static final long serialVersionUID = 1L;
@@ -234,12 +233,12 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
             // convert to byte array
             byte[] addrBytes = ((Inet6Address) InetAddresses.forString(parts[0])).getAddress();
             for (int index = length; index < IPV6_LENGTH; index++) {
-                if (((((int) addrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
-                        & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES)))) != 0) {
-                    return (false);
+                if ((addrBytes[index / IPV6_LENGTH_BYTES] & IPV6_LSB_MASK
+                        & 1 << IPV6_BYTE_OFFSET - index % IPV6_LENGTH_BYTES) != 0) {
+                    return false;
                 }
             }
-            return (true);
+            return true;
         }
         return false;
     }
@@ -280,7 +279,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 try {
                     SubnetUtils util = new SubnetUtils(cidr);
                     SubnetInfo info = util.getInfo();
-                    if (gatewayIp == null || ("").equals(gatewayIp)) {
+                    if (gatewayIp == null || "".equals(gatewayIp)) {
                         gatewayIp = info.getLowAddress();
                     }
                     if (allocationPools.size() < 1) {
@@ -305,7 +304,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
                 BigInteger mask = BigInteger.ONE.shiftLeft(length).subtract(BigInteger.ONE);
                 String highAddress = NeutronSubnetIpAllocationPool
                         .bigIntegerToIp(lowAddressBi.add(mask).subtract(BigInteger.ONE));
-                if (gatewayIp == null || ("").equals(gatewayIp)) {
+                if (gatewayIp == null || "".equals(gatewayIp)) {
                     gatewayIp = lowAddress;
                 }
                 if (allocationPools.size() < 1) {
@@ -338,14 +337,14 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
             byte[] cidrBytes = ((Inet6Address) InetAddresses.forString(parts[0])).getAddress();
             byte[] ipBytes = ((Inet6Address) InetAddresses.forString(ipAddress)).getAddress();
             for (int index = 0; index < length; index++) {
-                if (((((int) cidrBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK) & (1 << (IPV6_BYTE_OFFSET
-                        - (index % IPV6_LENGTH_BYTES)))) != (
-                            (((int) ipBytes[index / IPV6_LENGTH_BYTES]) & IPV6_LSB_MASK)
-                            & (1 << (IPV6_BYTE_OFFSET - (index % IPV6_LENGTH_BYTES))))) {
-                    return (false);
+                if ((cidrBytes[index / IPV6_LENGTH_BYTES] & IPV6_LSB_MASK & 1 << IPV6_BYTE_OFFSET
+                        - index % IPV6_LENGTH_BYTES) != (
+                            ipBytes[index / IPV6_LENGTH_BYTES] & IPV6_LSB_MASK
+                            & 1 << IPV6_BYTE_OFFSET - index % IPV6_LENGTH_BYTES)) {
+                    return false;
                 }
             }
-            return (true);
+            return true;
         }
         return false;
     }

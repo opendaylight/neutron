@@ -8,7 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,8 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "l2gatewayConnection")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronL2gatewayConnection extends NeutronBaseAttributes<NeutronL2gatewayConnection>
-            implements Serializable {
+public final class NeutronL2gatewayConnection extends NeutronBaseAttributes<NeutronL2gatewayConnection> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "gateway_id")
@@ -56,10 +55,14 @@ public final class NeutronL2gatewayConnection extends NeutronBaseAttributes<Neut
         this.segmentID = segmentID;
     }
 
+    // getPortID differ only by capitalization with NeutronTrunk.getPortId but it's not worth changing the API and
+    // disrupting downstream users just for that reason.
+    @SuppressFBWarnings("NM_CONFUSING")
     public String getPortID() {
         return portID;
     }
 
+    @SuppressFBWarnings("NM_CONFUSING")
     public void setPortID(String portID) {
         this.portID = portID;
     }

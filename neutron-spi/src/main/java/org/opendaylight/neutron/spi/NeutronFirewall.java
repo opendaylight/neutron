@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -33,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall> implements Serializable {
+public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")

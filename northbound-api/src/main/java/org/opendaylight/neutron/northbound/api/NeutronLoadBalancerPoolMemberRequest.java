@@ -8,10 +8,12 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class NeutronLoadBalancerPoolMemberRequest implements INeutronRequest<NeutronLoadBalancerPoolMember> {
     /**
      * See OpenStack Network API v2.0 Reference for description of the following link.

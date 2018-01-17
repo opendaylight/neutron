@@ -7,7 +7,6 @@
  */
 
 package org.opendaylight.neutron.spi;
-import java.io.Serializable;
 import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,8 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronQosMinimumBandwidthRule extends NeutronObject<NeutronQosMinimumBandwidthRule>
-    implements Serializable, INeutronObject<NeutronQosMinimumBandwidthRule> {
+public final class NeutronQosMinimumBandwidthRule extends NeutronObject<NeutronQosMinimumBandwidthRule> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "min_kbps")

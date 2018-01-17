@@ -7,6 +7,7 @@
  */
 package org.opendaylight.neutron.northbound.api;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,6 +17,7 @@ import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class NeutronSFCPortChainRequest implements INeutronRequest<NeutronSFCPortChain> {
     // See OpenStack Networking SFC (networking-sfc) Port Chain API v1.0 Reference
     // for description of annotated attributes

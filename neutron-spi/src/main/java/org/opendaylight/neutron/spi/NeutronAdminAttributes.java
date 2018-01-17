@@ -9,7 +9,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,8 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> extends NeutronBaseAttributes<T>
-        implements Serializable, INeutronAdminAttributes<T> {
+public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes<T>> extends NeutronBaseAttributes<T>
+        implements INeutronAdminAttributes<T> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(defaultValue = "true", name = "admin_state_up")
@@ -30,18 +29,29 @@ public abstract class NeutronAdminAttributes<T extends NeutronAdminAttributes> e
     public NeutronAdminAttributes() {
     }
 
+    @Override
     public Boolean getAdminStateUp() {
         return adminStateUp;
     }
 
+    public boolean isAdminStateUp() {
+        if (adminStateUp == null) {
+            return true;
+        }
+        return adminStateUp;
+    }
+
+    @Override
     public void setAdminStateUp(Boolean adminStateUp) {
         this.adminStateUp = adminStateUp;
     }
 
+    @Override
     public String getStatus() {
         return status;
     }
 
+    @Override
     public void setStatus(String status) {
         this.status = status;
     }

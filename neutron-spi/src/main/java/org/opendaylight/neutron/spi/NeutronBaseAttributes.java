@@ -9,7 +9,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,8 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class NeutronBaseAttributes<T extends NeutronBaseAttributes> extends NeutronObject<T>
-        implements Serializable, INeutronBaseAttributes<T> {
+public abstract class NeutronBaseAttributes<T extends NeutronBaseAttributes<T>> extends NeutronObject<T>
+        implements INeutronBaseAttributes<T> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "name")

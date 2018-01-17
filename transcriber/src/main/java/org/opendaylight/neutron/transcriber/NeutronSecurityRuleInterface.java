@@ -76,10 +76,10 @@ public final class NeutronSecurityRuleInterface extends
             answer.setSecurityRuleEthertype(ETHERTYPE_MAP.get(rule.getEthertype()));
         }
         if (rule.getPortRangeMin() != null) {
-            answer.setSecurityRulePortMin(Integer.valueOf(rule.getPortRangeMin()));
+            answer.setSecurityRulePortMin(rule.getPortRangeMin());
         }
         if (rule.getPortRangeMax() != null) {
-            answer.setSecurityRulePortMax(Integer.valueOf(rule.getPortRangeMax()));
+            answer.setSecurityRulePortMax(rule.getPortRangeMax());
         }
         return answer;
     }
@@ -119,10 +119,10 @@ public final class NeutronSecurityRuleInterface extends
                     .setEthertype(mapper.get(securityRule.getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
-            securityRuleBuilder.setPortRangeMin(Integer.valueOf(securityRule.getSecurityRulePortMin()));
+            securityRuleBuilder.setPortRangeMin(securityRule.getSecurityRulePortMin());
         }
         if (securityRule.getSecurityRulePortMax() != null) {
-            securityRuleBuilder.setPortRangeMax(Integer.valueOf(securityRule.getSecurityRulePortMax()));
+            securityRuleBuilder.setPortRangeMax(securityRule.getSecurityRulePortMax());
         }
         return securityRuleBuilder.build();
     }

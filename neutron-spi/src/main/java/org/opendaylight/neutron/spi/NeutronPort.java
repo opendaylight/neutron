@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> implements Serializable {
+public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Network API v2.0 Reference for description of
@@ -88,13 +87,6 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> imple
 
     public void setNetworkUUID(String networkUUID) {
         this.networkUUID = networkUUID;
-    }
-
-    public boolean isAdminStateUp() {
-        if (adminStateUp == null) {
-            return true;
-        }
-        return adminStateUp;
     }
 
     public String getMacAddress() {

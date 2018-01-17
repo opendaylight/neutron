@@ -80,7 +80,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     @Override
     public void onDataTreeChanged(@Nonnull Collection<DataTreeModification<Node>> changes) {
         LOG.info("onDataTreeChanged: Received Data Tree Changed ...", changes);
-        executorService.submit(() -> {
+        executorService.execute(() -> {
             for (DataTreeModification<Node> change : Preconditions.checkNotNull(changes, "Changes may not be null!")) {
                 processDataTreeModification(change);
             }

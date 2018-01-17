@@ -8,6 +8,7 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,6 +18,7 @@ import org.opendaylight.neutron.spi.NeutronVpnIpSecSiteConnection;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class NeutronVpnIpSecSiteConnectionRequest implements INeutronRequest<NeutronVpnIpSecSiteConnection> {
     @XmlElement(name = "ipsec_site_connection")
     NeutronVpnIpSecSiteConnection singleton;

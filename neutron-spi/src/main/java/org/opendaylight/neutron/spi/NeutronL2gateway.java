@@ -8,15 +8,13 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "l2gateway")
-public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gateway>
-        implements Serializable {
+public final class NeutronL2gateway extends NeutronBaseAttributes<NeutronL2gateway> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "devices")
