@@ -22,6 +22,30 @@
       "revId": "f0d18774f4d38b8e57f90b870669d7b7e04c8d8e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "981f9f2d_4f144ba0",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 38
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-01-17T00:36:29Z",
+      "side": 1,
+      "message": "Fixed. Please do let me know if it would suffice",
+      "parentUuid": "9c2996cf_842d8c61",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 9
+      },
+      "revId": "f0d18774f4d38b8e57f90b870669d7b7e04c8d8e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
