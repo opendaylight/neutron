@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f9d01d15_0e45448a",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-18T01:39:36Z",
+      "side": 1,
+      "message": "ok - if you\u0027re sure no downstream is using it.",
+      "parentUuid": "841c61df_f638f362",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1ad451b_d62fd58e",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e1a7633f_69bc4d37",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-18T01:39:36Z",
+      "side": 1,
+      "message": "Right - I can have the setter make a copy but I was afraid of breaking something. I assume JAXB wouldn\u0027t have an issue with ArrayList?",
+      "parentUuid": "c1ad451b_d62fd58e",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 7
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "186f1e74_f34613ca",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-01-18T00:14:11Z",
       "side": 1,
       "message": "I don\u0027t remember operation association rule well. but it\u0027s findbugs call. it\u0027s inevitable.",
+      "range": {
+        "startLine": 237,
+        "startChar": 26,
+        "endLine": 237,
+        "endChar": 75
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4fc54a71_81a185fc",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-18T01:39:36Z",
+      "side": 1,
+      "message": "This isn\u0027t FindBugs - this was done by Eclipse save action - removes unnecessary parens.",
+      "parentUuid": "186f1e74_f34613ca",
       "range": {
         "startLine": 237,
         "startChar": 26,
