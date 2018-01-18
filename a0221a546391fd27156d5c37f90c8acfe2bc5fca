@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "841c61df_f638f362",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-18T00:14:11Z",
+      "side": 1,
+      "message": "actually neutron-api isn\u0027t intended to be used by depending components. only used by neutron northbound itself.\nSo it\u0027s okay to change/fix it.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1ad451b_d62fd58e",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-18T00:14:11Z",
+      "side": 1,
+      "message": "How about to use ArrayList which is serializable.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 7
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "186f1e74_f34613ca",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-18T00:14:11Z",
+      "side": 1,
+      "message": "I don\u0027t remember operation association rule well. but it\u0027s findbugs call. it\u0027s inevitable.",
+      "range": {
+        "startLine": 237,
+        "startChar": 26,
+        "endLine": 237,
+        "endChar": 75
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
