@@ -6,9 +6,9 @@
   </prerequisites>
 
   <parent>
-    <groupId>org.opendaylight.odlparent</groupId>
-    <artifactId>odlparent</artifactId>
-    <version>3.0.2</version>
+    <groupId>org.opendaylight.mdsal</groupId>
+    <artifactId>binding-parent</artifactId>
+    <version>0.12.0-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
@@ -21,16 +21,8 @@
   <name>ODL :: neutron :: ${project.artifactId}</name>
 
   <properties>
-    <aaa.version>0.7.0-SNAPSHOT</aaa.version>
-    <ietf-yang-types.version>2013.07.15.12.0-SNAPSHOT</ietf-yang-types.version>
-    <ietf-inet-types.version>1.4.0-SNAPSHOT</ietf-inet-types.version>
-    <salGeneratorPath>src/main/yang-gen-sal</salGeneratorPath>
-    <mdsal.model.version>0.12.0-SNAPSHOT</mdsal.model.version>
-    <yangtools.version>2.0.1</yangtools.version>
-    <yang-ext.version>2013.09.07.12.0-SNAPSHOT</yang-ext.version>
     <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.jacoco.itReportPath>../target/jacoco-it.exec</sonar.jacoco.itReportPath>
-    <checkstyle.location>${project.build.resources[0].directory}</checkstyle.location>
   </properties>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
@@ -41,29 +33,11 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.opendaylight.mdsal</groupId>
-        <artifactId>yang-binding</artifactId>
-        <version>${mdsal.model.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.opendaylight.yangtools</groupId>
-        <artifactId>yang-common</artifactId>
-        <version>${yangtools.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.opendaylight.mdsal.model</groupId>
-        <artifactId>ietf-inet-types-2013-07-15</artifactId>
-        <version>${ietf-inet-types.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.opendaylight.mdsal.model</groupId>
-        <artifactId>ietf-yang-types-20130715</artifactId>
-        <version>${ietf-yang-types.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.opendaylight.mdsal.model</groupId>
-        <artifactId>yang-ext</artifactId>
-        <version>${yang-ext.version}</version>
+        <groupId>org.opendaylight.controller</groupId>
+        <artifactId>mdsal-artifacts</artifactId>
+        <version>1.7.0-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -71,42 +45,6 @@
   <build>
     <pluginManagement>
       <plugins>
-        <plugin>
-          <artifactId>maven-checkstyle-plugin</artifactId>
-          <configuration>
-            <excludes>org/opendaylight/yang/gen/**,**/yang/**</excludes>
-            <consoleOutput>true</consoleOutput>
-            <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
-          </configuration>
-          <executions>
-            <execution>
-              <goals>
-                <goal>check</goal>
-              </goals>
-              <phase>process-sources</phase>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>2.2.1</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>2.4</version>
-        </plugin>
-        <plugin>
-          <groupId>org.opendaylight.yangtools</groupId>
-          <artifactId>yang-maven-plugin</artifactId>
-          <version>${yangtools.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-bundle-plugin</artifactId>
-          <version>${maven.bundle.version}</version>
-        </plugin>
 <!--        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -122,6 +60,12 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <configuration>
+          <propertyExpansion>checkstyle.violationSeverity=error</propertyExpansion>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
