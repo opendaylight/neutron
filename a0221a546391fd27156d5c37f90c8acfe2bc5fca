@@ -377,6 +377,24 @@
       "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8d42ddcb_6b071040",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-24T21:30:33Z",
+      "side": 1,
+      "message": "It\u0027s just used for serialization. I\u0027ve seen this before elsewhere and actually removed the unused fields and it blew up :)",
+      "parentUuid": "70c709a7_39595d7b",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
