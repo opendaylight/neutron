@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89741c49_5a27723f",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronAdminAttributes.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T12:41:33Z",
+      "side": 0,
+      "message": "OK cauz NeutronBaseAttributes already implements Serializable",
+      "revId": "5d93eeee7331c6405d607be4b30f57b7d7744039",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}

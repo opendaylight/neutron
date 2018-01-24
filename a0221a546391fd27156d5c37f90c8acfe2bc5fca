@@ -49,6 +49,47 @@
     },
     {
       "key": {
+        "uuid": "833fcd1a_2f6ac514",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T12:41:33Z",
+      "side": 1,
+      "message": "I don\u0027t understand this - what\u0027s NeutronTrunk.getPortId() got to do with this class?  FindBugs doesn\u0027t cmprare method names accross classes, or does it?  If Isaku says it\u0027s OK to rename it, then just go for it, no?  Although I like getPortID better than getPortId, so if it\u0027s possible to change the other one..",
+      "parentUuid": "f9d01d15_0e45448a",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b99faa7_f5bae0f8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T12:41:33Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1ad451b_d62fd58e",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
         "patchSetId": 1
@@ -120,6 +161,23 @@
     },
     {
       "key": {
+        "uuid": "e3ede3de_06963174",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T12:41:33Z",
+      "side": 1,
+      "message": "you sure? why? Isaku, fine? Or is the argument here that this is what it currently already does anyway? It doesn\u0027t, right? Auto boxing will throw a NullPointerException? So perhaps this could hide a problem, in the future.. may be better to throw new IllegalStateException(\"Boolean shared \u003d\u003d null\") to clarify?  Or, if there is a sensible default value for shared of true or false, then just make the field a primitive boolean instead of a wrapper Boolean?",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "186f1e74_f34613ca",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
         "patchSetId": 1
@@ -161,6 +219,47 @@
         "endLine": 237,
         "endChar": 75
       },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a2e9e25_41b5d861",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T12:41:33Z",
+      "side": 1,
+      "message": "+1 Isaku this is fine; Eclipse auto-save should be doing this right... ;)",
+      "parentUuid": "4fc54a71_81a185fc",
+      "range": {
+        "startLine": 237,
+        "startChar": 26,
+        "endLine": 237,
+        "endChar": 75
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36738ee2_528de752",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T12:41:33Z",
+      "side": 1,
+      "message": "erm, this class looks very weird.. what\u0027s the point of this JAXB class without any getter and package local not public fields?  In an API, huh?",
       "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
