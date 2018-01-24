@@ -238,6 +238,24 @@
     },
     {
       "key": {
+        "uuid": "1f30034a_1b27f697",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-01-24T16:39:02Z",
+      "side": 1,
+      "message": "In neutron side, shared has default value of false. and it requires openstack admin right.\nSo it\u0027s safe to assume false default value.\n\nnetworking-odl should send shared always, but historically shared wasn\u0027t sent depending on networking-odl version.\nSo for backward compatibility, if shared wasn\u0027t sent by networking-odl, we assume its default value is false.",
+      "parentUuid": "7390ace2_8e0bf304",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "186f1e74_f34613ca",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
         "patchSetId": 1
