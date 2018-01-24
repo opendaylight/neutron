@@ -220,6 +220,24 @@
     },
     {
       "key": {
+        "uuid": "7390ace2_8e0bf304",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T15:14:19Z",
+      "side": 1,
+      "message": "Objection was that this changes the behaviour (from a NullPointerException from auto boxing) to what I assumed was an arbitrary default.. I actually not even seen the initDefaults() method.  I\u0027ll propose a follow-up Gerrit to initialize inline instead of relying on explicit initDefaults call, and +1 this as is.  I won\u0027t change fields to private, awaiting a discussion on this in general not just this class, see neutron-dev list post.",
+      "parentUuid": "288d7e39_1d8073d0",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "186f1e74_f34613ca",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
         "patchSetId": 1
@@ -320,6 +338,24 @@
       "side": 1,
       "message": "It\u0027s a request class so apparently only used outbound.",
       "parentUuid": "36738ee2_528de752",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70c709a7_39595d7b",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-01-24T15:14:19Z",
+      "side": 1,
+      "message": "I still don\u0027t really get this design, but let\u0027s take that discussion to https://lists.opendaylight.org/pipermail/neutron-dev/2018-January/001525.html isntead of here",
+      "parentUuid": "6ae2b0ca_ea5729e9",
       "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
