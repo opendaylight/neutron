@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "f743e2e2_20541d0b",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-24T14:24:20Z",
+      "side": 1,
+      "message": "It does compare method names across classes. It\u0027s a minor violation and I think we should just suppress it as this is a public API - I don\u0027t know if we can be sure no one\u0027s using it.",
+      "parentUuid": "833fcd1a_2f6ac514",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b99faa7_f5bae0f8",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronL2gatewayConnection.java",
         "patchSetId": 1
@@ -178,6 +202,24 @@
     },
     {
       "key": {
+        "uuid": "288d7e39_1d8073d0",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronNetwork.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-24T14:24:20Z",
+      "side": 1,
+      "message": "Not sure exactly what your objection is here - avoiding NPE or default value. The default value is false - see initDefaults. This saves an NPE if someone didn\u0027t call initDefaults. Seems safe to me and fixes FB violation. However, I agree this should be boolean and fields should be initialized inline instead of relying on explicit initDefaults call. Also fields should be private. Maybe there was a good reason it was done this way to work with JAXB - that\u0027s why I\u0027m wary of changing it - I have no way of testing this stuff.",
+      "parentUuid": "e3ede3de_06963174",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "186f1e74_f34613ca",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronSubnet.java",
         "patchSetId": 1
@@ -260,6 +302,24 @@
       "writtenOn": "2018-01-24T12:41:33Z",
       "side": 1,
       "message": "erm, this class looks very weird.. what\u0027s the point of this JAXB class without any getter and package local not public fields?  In an API, huh?",
+      "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ae2b0ca_ea5729e9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronBgpvpnRequest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-01-24T14:24:20Z",
+      "side": 1,
+      "message": "It\u0027s a request class so apparently only used outbound.",
+      "parentUuid": "36738ee2_528de752",
       "revId": "a0221a546391fd27156d5c37f90c8acfe2bc5fca",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
