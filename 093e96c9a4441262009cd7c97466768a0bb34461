@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "905a806f_3014a44a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-07T06:59:30Z",
+      "side": 1,
+      "message": "remove this line because this is openstack specific.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 53
+      },
+      "revId": "093e96c9a4441262009cd7c97466768a0bb34461",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1e19e2e_191f831d",
+        "filename": "model/src/main/yang/neutron-constants.yang",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-07T06:59:30Z",
+      "side": 1,
+      "message": "this isn\u0027t necessary. why?",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "093e96c9a4441262009cd7c97466768a0bb34461",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
