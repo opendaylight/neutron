@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3030fe8_e44ae15b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-07T06:59:30Z",
+      "side": 1,
+      "message": "ODL gerrit doesn\u0027t support this.\nand depends-on is for cross-repo.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 53
+      },
+      "revId": "3e6ac71a3027d294d1bb0cf0d08eb2adf30468e1",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
