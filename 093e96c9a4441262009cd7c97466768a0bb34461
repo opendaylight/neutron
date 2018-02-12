@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cdb65a54_fe6d8329",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-02-12T21:34:06Z",
+      "side": 1,
+      "message": "Done Isaku!",
+      "parentUuid": "905a806f_3014a44a",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 53
+      },
+      "revId": "093e96c9a4441262009cd7c97466768a0bb34461",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1e19e2e_191f831d",
         "filename": "model/src/main/yang/neutron-constants.yang",
         "patchSetId": 14
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-07T06:59:30Z",
       "side": 1,
       "message": "this isn\u0027t necessary. why?",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "093e96c9a4441262009cd7c97466768a0bb34461",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3be4d6d5_5fd6b0c1",
+        "filename": "model/src/main/yang/neutron-constants.yang",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-02-12T21:34:06Z",
+      "side": 1,
+      "message": "This was to show that there is no direction supported if there was a older version of neutron used.\nBut have discarded now.",
+      "parentUuid": "f1e19e2e_191f831d",
       "range": {
         "startLine": 117,
         "startChar": 0,
