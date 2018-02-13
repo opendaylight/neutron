@@ -55,6 +55,13 @@
             <classifier>features</classifier>
         </dependency>
         <dependency>
+            <groupId>org.opendaylight.ovsdb</groupId>
+            <artifactId>odl-ovsdb-utils</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
+            <version>1.6.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-cert</artifactId>
             <type>xml</type>
@@ -72,16 +79,6 @@
             <type>xml</type>
             <classifier>features</classifier>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opendaylight.ovsdb</groupId>
-            <artifactId>utils.mdsal-utils</artifactId>
-            <version>1.6.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opendaylight.ovsdb</groupId>
-            <artifactId>utils.southbound-utils</artifactId>
-            <version>1.6.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
