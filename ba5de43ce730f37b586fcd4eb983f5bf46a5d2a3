@@ -22,6 +22,30 @@
       "revId": "ba5de43ce730f37b586fcd4eb983f5bf46a5d2a3",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a43e765_ede5ad6d",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4350
+      },
+      "writtenOn": "2018-02-14T23:38:05Z",
+      "side": 1,
+      "message": "Hi Isaku,\nIF there is no direction parameter passed, then nothing is updated(old neutron case), if there is a direction parameter passed with no value, by default egress is updated. This takes care of the comment on PS4. Please do let me know if there is anything to be updated.",
+      "parentUuid": "8c878bb9_c58a1b9d",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 38
+      },
+      "revId": "ba5de43ce730f37b586fcd4eb983f5bf46a5d2a3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
