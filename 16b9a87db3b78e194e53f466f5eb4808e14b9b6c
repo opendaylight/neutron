@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b7e0b99_77b44692",
+        "filename": "features/production/odl-neutron-hostconfig-ovs/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-02-14T12:34:45Z",
+      "side": 1,
+      "message": "OK",
+      "revId": "16b9a87db3b78e194e53f466f5eb4808e14b9b6c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a0f6bcf6_a6c32484",
+        "filename": "neutron-hostconfig/ovs/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-02-14T12:34:45Z",
+      "side": 1,
+      "message": "NOK - do we need this? If we do (and if e.g. odl-ovsdb-utils, see c/68214 ; and every other odl- feature artifact) extend single-feature-parent (not feature-repo-parent), then we willstart (IMHO) \"polluting\" our bundles with dependencies to features?  This is horrible, in terms of classpath and mixing org.apache.karaf.bundle.core (!), karaf.branding, features-test etc. etc. as dependencies to all functional code...",
+      "revId": "16b9a87db3b78e194e53f466f5eb4808e14b9b6c",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
