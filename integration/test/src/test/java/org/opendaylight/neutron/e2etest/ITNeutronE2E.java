@@ -42,12 +42,10 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class ITNeutronE2E  extends AbstractMdsalTestBase {
+public class ITNeutronE2E extends AbstractMdsalTestBase {
 
     private static final String KARAF_DEBUG_PORT = "5005";
     private static final String KARAF_DEBUG_PROP = "karaf.debug";
-
-    final String base = "http://127.0.0.1:8181/controller/nb/v2/neutron";
 
     @Override
     public MavenUrlReference getFeatureRepo() {
@@ -87,42 +85,7 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
 
     @Test
     public void test() throws IOException, InterruptedException {
-        NeutronNetworkTests.runTests(base);
-        NeutronSubnetTests.runTests(base);
-        NeutronPortTests.runTests(base);
-        NeutronRouterTests.runTests(base);
-        NeutronFloatingIpTests.runTests(base);
-        NeutronSecurityGroupTests.runTests(base);
-        NeutronSecurityRuleTests.runTests(base);
-        NeutronFirewallTests.runTests(base);
-        NeutronFirewallPolicyTests.runTests(base);
-        NeutronFirewallRuleTests.runTests(base);
-        NeutronLoadBalancerTests.runTests(base);
-        NeutronLBListenerTests.runTests(base);
-        NeutronLBPoolTests.runTests(base);
-        NeutronLBPoolMembersTests.runTests(base);
-        NeutronLBHealthMonitorTests.runTests(base);
-        NeutronMeteringLabelTests.runTests(base);
-        NeutronMeteringRuleTests.runTests(base);
-        NeutronVpnServicesTests.runTests(base);
-        NeutronIpSecPoliciesTests.runTests(base);
-        NeutronIpSecSiteConnectionTests.runTests(base);
-        NeutronIKEPoliciesTests.runTests(base);
-        NeutronBgpvpnTests.runTests(base);
-        NeutronL2GatewayTests.runTests(base);
-        NeutronL2GatewayConnectionTests.runTests(base);
-        NeutronQosPolicyTests.runTests(base);
-        NeutronSFCPortPairTests.runTests(base);
-        NeutronSFCPortPairGroupTests.runTests(base);
-        NeutronSFCPortChainTests.runTests(base);
-        NeutronSFCFlowClassifierTests.runTests(base);
-        NeutronTrunkTests.runTests(base);
-        NeutronRevisionNumberTests.runTests(base);
-        NeutronProjectIdTests.runTests(base);
-        // tests related to bugs
-        NeutronBug3812Tests.runTests(base);
-        TempestPortsIpV6TestJSON.runTests(base);
-        NeutronBug4027Tests.runTests(base);
+        NeutronAllTests.testNeutron("http://127.0.0.1:8181/controller/nb/v2/neutron");
     }
 
     static HttpURLConnection httpURLConnectionFactoryGet(URL url) throws IOException {
