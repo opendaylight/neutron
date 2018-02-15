@@ -19,7 +19,6 @@
     <module>odl-neutron-hostconfig-ovs</module>
     <module>odl-neutron-hostconfig-vpp</module>
     <module>odl-neutron-northbound-api</module>
-    <module>odl-neutron-transcriber</module>
     <module>odl-neutron-logger</module>
     <module>odl-neutron-service</module>
   </modules>
