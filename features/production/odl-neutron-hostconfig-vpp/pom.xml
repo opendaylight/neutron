@@ -8,18 +8,18 @@
     <parent>
         <groupId>org.opendaylight.odlparent</groupId>
         <artifactId>single-feature-parent</artifactId>
-        <version>1.8.3-SNAPSHOT</version>
+        <version>1.8.3-Carbon</version>
         <relativePath/>
     </parent>
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-hostconfig-vpp</artifactId>
-    <version>0.8.3-SNAPSHOT</version>
+    <version>0.8.3-Carbon</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Hostconfig :: VPP</name>
 
     <properties>
-        <netconf.version>1.2.3-SNAPSHOT</netconf.version>
+        <netconf.version>1.2.3-Carbon</netconf.version>
     </properties>
 
     <dependencyManagement>
@@ -27,7 +27,7 @@
             <dependency>
                 <groupId>org.opendaylight.controller</groupId>
                 <artifactId>mdsal-artifacts</artifactId>
-                <version>1.5.3-SNAPSHOT</version>
+                <version>1.5.3-Carbon</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
