@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b194ea9_a84aff84",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-15T00:25:41Z",
+      "side": 1,
+      "message": "again, please address the comment on previous patch",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 38
+      },
+      "revId": "955873c0b676c9836b74a9ca193190e913cb1657",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
