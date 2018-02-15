@@ -5,14 +5,12 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 /**
  * This interface defines the methods for CRUD of NB OpenStack L2gateway
  * Connection objects.
  */
-
 public interface INeutronL2gatewayConnectionCRUD extends INeutronCRUD<NeutronL2gatewayConnection> {
-    //Do nothing here.
+    // Do nothing here.
 }

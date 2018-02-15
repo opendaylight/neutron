@@ -6,13 +6,13 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 /**
  * This class contains behaviour common to Neutron configuration objects.
  */
 public interface INeutronBaseAttributes<T extends INeutronBaseAttributes> extends INeutronObject<T> {
+
     String getName();
 
     void setName(String name);

@@ -9,7 +9,6 @@ package org.opendaylight.neutron.spi;
 
 /**
  * This interface defines the methods for CRUD of NB SFC Port Pair objects.
- *
  */
 public interface INeutronSFCPortPairCRUD extends INeutronCRUD<NeutronSFCPortPair> {
     // Nothing Here.

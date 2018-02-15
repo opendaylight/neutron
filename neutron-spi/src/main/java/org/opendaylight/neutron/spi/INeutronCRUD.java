@@ -5,17 +5,15 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
 
 /**
  * This interface defines the methods for CRUD of NB neutron objects.
- *
  */
-
 public interface INeutronCRUD<T extends INeutronObject<T>> {
+
     /**
      * Applications call this interface method to determine if a particular
      * Neutron object exists.
@@ -24,7 +22,6 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *            UUID of the Neutron object
      * @return boolean
      */
-
     boolean exists(String uuid);
 
     /**
@@ -36,7 +33,6 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      * @return {@link org.opendaylight.neutron.spi.INeutronObject}
      *          OpenStack Neutron class
      */
-
     T get(String uuid);
 
     /**
@@ -44,7 +40,6 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *
      * @return List of OpenStackNeutrons objects
      */
-
     List<T> getAll();
 
     /**
@@ -55,7 +50,6 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *            OpenStackNeutron object
      * @return boolean on whether the object was added or not
      */
-
     boolean add(T input);
 
     /**
@@ -66,7 +60,6 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *            identifier for the neutron object
      * @return boolean on whether the object was removed or not
      */
-
     boolean remove(String uuid);
 
     /**
@@ -78,6 +71,5 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *            OpenStackNeutron object containing changes to apply
      * @return boolean on whether the object was updated or not
      */
-
     boolean update(String uuid, T delta);
 }
