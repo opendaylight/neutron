@@ -5,10 +5,11 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
@@ -16,12 +17,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.pol
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
-
+@Singleton
+@OsgiServiceProvider(classes = INeutronFirewallPolicyCRUD.class)
 public final class NeutronFirewallPolicyInterface
         extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, FirewallPolicyKey, NeutronFirewallPolicy>
         implements INeutronFirewallPolicyCRUD {
-    NeutronFirewallPolicyInterface(DataBroker db) {
+
+    @Inject
+    public NeutronFirewallPolicyInterface(DataBroker db) {
         super(FirewallPolicyBuilder.class, db);
     }
 

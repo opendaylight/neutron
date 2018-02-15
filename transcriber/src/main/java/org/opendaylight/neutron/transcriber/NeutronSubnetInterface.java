@@ -5,12 +5,13 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronRoute;
@@ -35,9 +36,13 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.s
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronSubnetCRUD.class)
 public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subnet, Subnets, SubnetKey, NeutronSubnet>
         implements INeutronSubnetCRUD {
+
     private static final int IPV4_VERSION = 4;
     private static final int IPV6_VERSION = 6;
 
@@ -51,7 +56,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
                     .put(Dhcpv6Off.class, "off").put(Dhcpv6Stateful.class, "dhcpv6-stateful")
                     .put(Dhcpv6Slaac.class, "slaac").put(Dhcpv6Stateless.class, "dhcpv6-stateless").build();
 
-    NeutronSubnetInterface(DataBroker db) {
+    @Inject
+    public NeutronSubnetInterface(DataBroker db) {
         super(SubnetBuilder.class, db);
     }
 
