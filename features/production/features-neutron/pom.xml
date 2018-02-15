@@ -39,13 +39,6 @@
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
-         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>odl-neutron-transcriber</artifactId>
-            <version>${project.version}</version>
-            <type>xml</type>
-            <classifier>features</classifier>
-        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>odl-neutron-hostconfig-ovs</artifactId>
