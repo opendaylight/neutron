@@ -28,6 +28,12 @@
     <sonar.sources>pom.xml,target/generated-sources/dependency</sonar.sources>
   </properties>
   <dependencies>
+     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
       <artifactId>neutron-karaf</artifactId>
