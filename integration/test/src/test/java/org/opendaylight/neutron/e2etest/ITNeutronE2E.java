@@ -32,6 +32,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.opendaylight.controller.mdsal.it.base.AbstractMdsalTestBase;
 import org.ops4j.pax.exam.Configuration;
+import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.karaf.options.KarafDistributionOption;
@@ -78,6 +79,8 @@ public class ITNeutronE2E  extends AbstractMdsalTestBase {
 
     private Option[] getOtherOptions() {
         return new Option[] {
+            // timeout 15 minutes instead of default 3 minutes, because Jenkins build VMs are *SLOW*
+            CoreOptions.systemTimeout(15 * 60 * 1000),
             vmOption("-javaagent:../../pax/jars/org.jacoco.agent.jar=destfile=../../jacoco-it.exec"),
             keepRuntimeFolder(), configureConsole().ignoreLocalConsole(),
             logLevel(LogLevel.INFO),
