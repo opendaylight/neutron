@@ -5,11 +5,12 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
@@ -27,10 +28,14 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rul
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronFirewallRuleCRUD.class)
 public final class NeutronFirewallRuleInterface
         extends AbstractNeutronInterface<FirewallRule, FirewallRules, FirewallRuleKey, NeutronFirewallRule>
         implements INeutronFirewallRuleCRUD {
+
     private static final ImmutableBiMap<Class<? extends ActionBase>,
             String> ACTION_MAP = new ImmutableBiMap.Builder<Class<? extends ActionBase>, String>()
                     .put(ActionAllow.class, "allow").put(ActionDeny.class, "deny").build();
@@ -39,7 +44,8 @@ public final class NeutronFirewallRuleInterface
             Integer> IP_VERSION_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
                     .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
 
-    NeutronFirewallRuleInterface(DataBroker db) {
+    @Inject
+    public NeutronFirewallRuleInterface(DataBroker db) {
         super(FirewallRuleBuilder.class, db);
     }
 

@@ -5,11 +5,12 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.NeutronIps;
@@ -28,12 +29,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.router
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.ExternalGatewayInfoBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIpsBuilder;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronRouterCRUD.class)
 public final class NeutronRouterInterface extends AbstractNeutronInterface<Router, Routers, RouterKey, NeutronRouter>
         implements INeutronRouterCRUD {
     // methods needed for creating caches
 
-    NeutronRouterInterface(DataBroker db) {
+    @Inject
+    public NeutronRouterInterface(DataBroker db) {
         super(RouterBuilder.class, db);
     }
 

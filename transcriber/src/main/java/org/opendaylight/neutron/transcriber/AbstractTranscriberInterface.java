@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import javax.annotation.PreDestroy;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
@@ -423,9 +424,8 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
+    @PreDestroy
     public void close() throws Exception {
-        // TODO Auto-generated method stub
-
     }
 
     private boolean exists(String uuid, ReadTransaction tx) {

@@ -5,13 +5,14 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.util.concurrent.CheckedFuture;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
@@ -32,9 +33,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.ta
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.tap.services.attributes.tap.services.TapService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.tap.services.attributes.tap.services.TapServiceKey;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronTapFlowCRUD.class)
 public final class NeutronTapFlowInterface
         extends AbstractTranscriberInterface<TapFlow, TapFlows, TapFlowKey, NeutronTapFlow, TapServiceAttributes>
         implements INeutronTapFlowCRUD {
@@ -47,7 +51,8 @@ public final class NeutronTapFlowInterface
                     .put(DirectionIn.class, "IN")
                     .put(DirectionBoth.class, "BOTH").build();
 
-    NeutronTapFlowInterface(DataBroker db) {
+    @Inject
+    public NeutronTapFlowInterface(DataBroker db) {
         super(TapFlowBuilder.class, db);
     }
 
@@ -98,6 +103,7 @@ public final class NeutronTapFlowInterface
         return flowBuilder.build();
     }
 
+    @Override
     public boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID) {
         final TapFlow dataObject = readMd(createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID)));
         return dataObject != null;

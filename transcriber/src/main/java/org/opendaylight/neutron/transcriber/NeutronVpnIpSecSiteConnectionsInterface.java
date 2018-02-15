@@ -5,11 +5,12 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnDeadPeerDetection;
@@ -19,12 +20,17 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.Ipsecsiteconnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronVpnIpSecSiteConnectionsCRUD.class)
 public final class NeutronVpnIpSecSiteConnectionsInterface
         extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, IpsecsiteconnectionKey,
         NeutronVpnIpSecSiteConnection>
         implements INeutronVpnIpSecSiteConnectionsCRUD {
-    NeutronVpnIpSecSiteConnectionsInterface(DataBroker db) {
+
+    @Inject
+    public NeutronVpnIpSecSiteConnectionsInterface(DataBroker db) {
         super(IpsecsiteconnectionBuilder.class, db);
     }
 

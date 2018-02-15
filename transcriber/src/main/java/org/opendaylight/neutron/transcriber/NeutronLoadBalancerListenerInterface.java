@@ -5,12 +5,13 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
@@ -26,16 +27,21 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.Listener;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronLoadBalancerListenerCRUD.class)
 public final class NeutronLoadBalancerListenerInterface
         extends AbstractNeutronInterface<Listener, Listeners, ListenerKey, NeutronLoadBalancerListener>
         implements INeutronLoadBalancerListenerCRUD {
+
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,
             String> PROTOCOL_MAP = new ImmutableBiMap.Builder<Class<? extends ProtocolBase>, String>()
                     .put(ProtocolHttp.class, "HTTP").put(ProtocolHttps.class, "HTTPS").put(ProtocolTcp.class, "TCP")
                     .put(ProtocolTerminatedHttps.class, "TERMINATED_HTTPS").build();
 
-    NeutronLoadBalancerListenerInterface(DataBroker db) {
+    @Inject
+    public NeutronLoadBalancerListenerInterface(DataBroker db) {
         super(ListenerBuilder.class, db);
     }
 

@@ -5,12 +5,13 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronID;
@@ -25,21 +26,22 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.Healthmonitor;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronLoadBalancerHealthMonitorCRUD.class)
 public final class NeutronLoadBalancerHealthMonitorInterface
         extends AbstractNeutronInterface<Healthmonitor, Healthmonitors, HealthmonitorKey,
                                          NeutronLoadBalancerHealthMonitor>
         implements INeutronLoadBalancerHealthMonitorCRUD {
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerHealthMonitorInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ProbeBase>,
             String> PROBE_MAP = new ImmutableBiMap.Builder<Class<? extends ProbeBase>, String>()
                     .put(ProbeHttp.class, "HTTP").put(ProbeHttps.class, "HTTPS").put(ProbePing.class, "PING")
                     .put(ProbeTcp.class, "TCP").build();
 
-    NeutronLoadBalancerHealthMonitorInterface(DataBroker db) {
+    @Inject
+    public NeutronLoadBalancerHealthMonitorInterface(DataBroker db) {
         super(HealthmonitorBuilder.class, db);
     }
 

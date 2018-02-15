@@ -5,10 +5,11 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
@@ -17,11 +18,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.Loadbalancer;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronLoadBalancerCRUD.class)
 public final class NeutronLoadBalancerInterface
         extends AbstractNeutronInterface<Loadbalancer, Loadbalancers, LoadbalancerKey, NeutronLoadBalancer>
         implements INeutronLoadBalancerCRUD {
-    NeutronLoadBalancerInterface(DataBroker db) {
+
+    @Inject
+    public NeutronLoadBalancerInterface(DataBroker db) {
         super(LoadbalancerBuilder.class, db);
     }
 
