@@ -98,6 +98,7 @@
     <module>features/production</module>
     <module>features/test</module>
     <module>karaf</module>
+    <module>integration/test-standalone</module>
     <module>integration/test</module>
     <module>model</module>
     <module>neutron-hostconfig</module>
