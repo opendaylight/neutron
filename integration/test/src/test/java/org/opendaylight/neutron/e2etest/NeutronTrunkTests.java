@@ -21,7 +21,7 @@ public class NeutronTrunkTests {
 
     public void trunk_collection_get_test() {
         String url = base + "/trunks";
-        ITNeutronE2E.test_fetch(url, "Trunk collection GET failed");
+        HttpUtils.test_fetch(url, "Trunk collection GET failed");
     }
 
     public String singleton_trunk_create_test() {
@@ -34,13 +34,13 @@ public class NeutronTrunkTests {
                 + "{\"segmentation_type\":\"vlan\",\"port_id\":\"be28febe-bdff-45cc-8a2d-872d54e62527\", "
                 + "\"segmentation_id\":102}],\"id\":\"c935240e-4aa6-496a-841c-d113c54499b9\", "
                 + "\"description\":\"test trunk0\"} }";
-        ITNeutronE2E.test_create(url, content, "Singleton Trunk Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton Trunk Post Failed NB");
         return content;
     }
 
     public void singleton_trunk_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/trunks";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "trunks");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "trunks");
     }
 
     public String singleton_default_trunk_create_test() {
@@ -53,7 +53,7 @@ public class NeutronTrunkTests {
                 + "{\"segmentation_type\":\"vlan\",\"port_id\":\"be28febe-bdff-45cc-8a2d-872d54e62527\", "
                 + "\"segmentation_id\":102}],\"id\":\"d935240e-4aa6-d96a-d41c-d113c54499b9\", "
                 + "\"description\":\"test trunkdefault\"} }";
-        ITNeutronE2E.test_create(url, content, "Singleton Default Trunk Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton Default Trunk Post Failed NB");
         return content;
     }
 
@@ -64,13 +64,13 @@ public class NeutronTrunkTests {
         String url = base + "/trunks/d935240e-4aa6-d96a-d41c-d113c54499b9?fields=" + element;
         String expectedContent = "\"DOWN\"";
         String context = "Trunk details do not match.";
-        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        JsonObject jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("trunk");
         JsonElement jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
         element = "admin_state_up";
         url = base + "/trunks/d935240e-4aa6-d96a-d41c-d113c54499b9?fields=" + element;
-        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("trunk");
         jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, true, jsonElementValue.getAsBoolean());
@@ -94,7 +94,7 @@ public class NeutronTrunkTests {
                 + "{\"segmentation_type\":\"vlan\",\"port_id\":\"9dedb63e-ff66-4948-979f-e12f8356e299\", "
                 + "\"segmentation_id\":102}],"
                 + "\"id\":\"5e97b0a4-b5a3-49fd-b0cb-821bec16acfe\",\"description\":\"test trunk2\"}]}";
-        ITNeutronE2E.test_create(url, content, "Bulk Trunk Post Failed");
+        HttpUtils.test_create(url, content, "Bulk Trunk Post Failed");
     }
 
     public void trunk_update_test() {
@@ -104,34 +104,34 @@ public class NeutronTrunkTests {
                 + "\"sub_ports\":[{\"segmentation_type\":\"vlan\", "
                 + "\"port_id\":\"dca33436-2a7c-415b-aa35-14769e7834e3\",\"segmentation_id\":101}], "
                 + "\"id\":\"c935240e-4aa6-496a-841c-d113c54499b9\", \"description\":\"test trunk0 updated\"} }";
-        ITNeutronE2E.test_modify(url, content, "Trunk Put Failed");
+        HttpUtils.test_modify(url, content, "Trunk Put Failed");
     }
 
     public void trunk_bulk_get_test() {
         String url = base + "/trunks"; // /c935240e-4aa6-496a-841c-d113c54499b9";
-        ITNeutronE2E.test_fetch(url, true, "Trunk Bulk Get Failed");
+        HttpUtils.test_fetch(url, true, "Trunk Bulk Get Failed");
     }
 
     public void trunk_element_get_test() {
         String url = base + "/trunks/c935240e-4aa6-496a-841c-d113c54499b9";
-        ITNeutronE2E.test_fetch(url, true, "Trunk Element Get Failed");
+        HttpUtils.test_fetch(url, true, "Trunk Element Get Failed");
     }
 
     public void trunk_element_get_test_with_added_query() {
         String url = base + "/trunks/c935240e-4aa6-496a-841c-d113c54499b9"
                 + "?fields=id&fields=tenant_id&fields=name&fields=port_id"
                 + "&fields=status&fields=admin_state_up&fields=sub_ports";
-        ITNeutronE2E.test_fetch(url, true, "Trunk Element Get with query Failed");
+        HttpUtils.test_fetch(url, true, "Trunk Element Get with query Failed");
     }
 
     public void trunk_element_negative_get_test() {
         String url = base + "/trunks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
-        ITNeutronE2E.test_fetch(url, false, "Trunk Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "Trunk Element Negative Get Failed");
     }
 
     public void trunk_delete_test() {
         String url = base + "/trunks/c935240e-4aa6-496a-841c-d113c54499b9";
-        ITNeutronE2E.test_delete(url, "Trunk Element Delete Failed");
+        HttpUtils.test_delete(url, "Trunk Element Delete Failed");
     }
 
     public static void runTests(String base) {

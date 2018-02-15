@@ -35,7 +35,7 @@ public class NeutronRevisionNumberTests {
                 + " \"id\": \"c0e7435c-1512-45fb-aa9e-9a7c5932fb30\", " + " \"ip_version\": 4, " + " \"name\": \"\", "
                 + " \"network_id\": \"af374017-c9ae-4a1d-b799-ab73111476e2\", "
                 + " \"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\" } ] }";
-        ITNeutronE2E.test_create(url, content, "Revision Number Post Failed");
+        HttpUtils.test_create(url, content, "Revision Number Post Failed");
     }
 
     public void subnet_update_test() {
@@ -49,7 +49,7 @@ public class NeutronRevisionNumberTests {
                 + " \"ip_version\": 4, " + " \"gateway_ip\": \"10.0.0.1\", " + " \"cidr\": \"10.0.0.0/24\", "
                 + "\"revision_number\": 3, "
                 + " \"id\": \"c0e7435c-1512-45fb-aa9e-9a7c5932fb30\" } }";
-        ITNeutronE2E.test_modify(url, content, "Revision Number Put Failed");
+        HttpUtils.test_modify(url, content, "Revision Number Put Failed");
     }
 
     public void subnet_update_test_with_old_value() {
@@ -63,7 +63,7 @@ public class NeutronRevisionNumberTests {
                 + " \"ip_version\": 4, " + " \"gateway_ip\": \"10.0.0.1\", " + " \"cidr\": \"10.0.0.0/24\", "
                 + "\"revision_number\": 2, "
                 + " \"id\": \"c0e7435c-1512-45fb-aa9e-9a7c5932fb30\" } }";
-        ITNeutronE2E.test_modify(url, content, "Revision Number Put Failed");
+        HttpUtils.test_modify(url, content, "Revision Number Put Failed");
     }
 
     public void subnet_update_test_with_no_value() {
@@ -76,17 +76,17 @@ public class NeutronRevisionNumberTests {
                 + " \"host_routes\": [{ \"destination\":\"192.168.0.0/24\", " + " \"nexthop\":\"10.0.0.11\" } ], "
                 + " \"ip_version\": 4, " + " \"gateway_ip\": \"10.0.0.1\", " + " \"cidr\": \"10.0.0.0/24\", "
                 + " \"id\": \"c0e7435c-1512-45fb-aa9e-9a7c5932fb30\" } }";
-        ITNeutronE2E.test_modify(url, content, "Revision Number Put Failed");
+        HttpUtils.test_modify(url, content, "Revision Number Put Failed");
     }
 
     public void subnet_element_get_test() {
         String url = base + "/subnets/c0e7435c-1512-45fb-aa9e-9a7c5932fb30";
-        ITNeutronE2E.test_fetch(url, true, "Revision Number Element Get Failed");
+        HttpUtils.test_fetch(url, true, "Revision Number Element Get Failed");
     }
 
     public void subnet_delete_test() {
         String url = base + "/subnets/c0e7435c-1512-45fb-aa9e-9a7c5932fb30";
-        ITNeutronE2E.test_delete(url, "Revision Number Element Delete Failed");
+        HttpUtils.test_delete(url, "Revision Number Element Delete Failed");
     }
 
     public static void runTests(String base) {

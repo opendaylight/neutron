@@ -17,7 +17,7 @@ public class NeutronLBPoolTests {
 
     public void pool_collection_get_test() {
         String url = base + "/lbaas/pools";
-        ITNeutronE2E.test_fetch(url, "LB Pool Collection GET failed");
+        HttpUtils.test_fetch(url, "LB Pool Collection GET failed");
     }
 
     //TODO handle SB check
@@ -30,13 +30,13 @@ public class NeutronLBPoolTests {
                 + "\"name\": \"pool1\", " + "\"protocol\": \"HTTP\", " + "\"session_persistence\": { "
                 + "\"cookie_name\": \"my_cookie\", " + "\"type\": \"APP_COOKIE\" }, "
                 + "\"tenant_id\": \"b7c1a69e88bf4b21a8148f787aef2081\" } }";
-        ITNeutronE2E.test_create(url, content, "Singleton LB Pool Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton LB Pool Post Failed NB");
         return content;
     }
 
     public void singleton_lb_pool_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/lbaas/pools";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "pools");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "pools");
     }
 
     public void pool_update_test() {
@@ -47,12 +47,12 @@ public class NeutronLBPoolTests {
                 + "\"id\": \"39de4d56-d663-46e5-85a1-5b9d5fa17829\" } ]," + "\"members\": []," + "\"name\": \"pool2\","
                 + "\"protocol\": \"HTTP\"," + "\"session_persistence\": { \"cookie_name\": null,"
                 + "\"type\": \"HTTP_COOKIE\" }," + "\"tenant_id\": \"1a3e005cf9ce40308c900bcb08e5320c\" } }";
-        ITNeutronE2E.test_modify(url, content, "LB Pool Put Failed");
+        HttpUtils.test_modify(url, content, "LB Pool Put Failed");
     }
 
     public void pool_element_get_test() {
         String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
-        ITNeutronE2E.test_fetch(url, true, "LB Pool Element Get Failed");
+        HttpUtils.test_fetch(url, true, "LB Pool Element Get Failed");
     }
 
     public void pool_element_get_with_query_test() {
@@ -60,17 +60,17 @@ public class NeutronLBPoolTests {
                 + "?fields=id&fields=tenant_id&fields=name&fields=description"
                 + "&fields=lb_algorithm&fields=protocol&fields=healthmonitor_id"
                 + "&fields=members&fields=admin_state_up&fields=limit&fields=marker" + "&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, true, "LB Pool Element Get With Query Failed");
+        HttpUtils.test_fetch(url, true, "LB Pool Element Get With Query Failed");
     }
 
     public void pool_element_negative_get_test() {
         String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
-        ITNeutronE2E.test_fetch(url, false, "LB Pool Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "LB Pool Element Negative Get Failed");
     }
 
     public void pool_delete_test() {
         String url = base + "/lbaas/pools/12ff63af-4127-4074-a251-bcb2ecc53ebe";
-        ITNeutronE2E.test_delete(url, "LB Pool Element Delete Failed");
+        HttpUtils.test_delete(url, "LB Pool Element Delete Failed");
     }
 
     public static void runTests(String base) {

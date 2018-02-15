@@ -17,7 +17,7 @@ public class NeutronQosPolicyTests {
 
     public void qos_policy_collection_get_test() {
         String url = base + "/qos/policies";
-        ITNeutronE2E.test_fetch(url, "Qos Policy collection GET failed");
+        HttpUtils.test_fetch(url, "Qos Policy collection GET failed");
     }
 
     public String singleton_qos_policy_create_test() {
@@ -25,13 +25,13 @@ public class NeutronQosPolicyTests {
         String content = "{\"policy\": {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
                 + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\"," + "\"name\": \"jaxb-test\", "
                 + "\"shared\": false }}";
-        ITNeutronE2E.test_create(url, content, "Qos Policy Singleton POST Failed");
+        HttpUtils.test_create(url, content, "Qos Policy Singleton POST Failed");
         return content;
     }
 
     public void singleton_qos_policy_get_with_query_item_test(String createJsonString) {
         String url = base + "/qos/policies";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "policies");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "policies");
     }
 
     public void qos_policy_modify_test() {
@@ -47,29 +47,29 @@ public class NeutronQosPolicyTests {
             + "\"minimum_bandwidth_rules\": [ {\"id\": \"d6220bbb-35f3-48ab-8eae-69c60aef3546\","
             + "\"tenant_id\": \"aa902936679e4ea29bfe1158e3450a13\", " + "\"min_kbps\": 20,"
             + "\"direction\": \"egress\" } ] }}";
-        ITNeutronE2E.test_modify(url, content, "Qos Policy Singleton Put failed");
+        HttpUtils.test_modify(url, content, "Qos Policy Singleton Put failed");
     }
 
     public void qos_policy_element_get_test() {
         String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546";
-        ITNeutronE2E.test_fetch(url, true, "Qos Policy Element Get failed");
+        HttpUtils.test_fetch(url, true, "Qos Policy Element Get failed");
     }
 
     public void qos_policy_element_get_with_query_test() {
         String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546"
                 + "?fields=tenant_id&fields=id&fields=name&fields=description" + "&fields=shared&fields=limits"
                 + "&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, true, "Qos Firewall Element Get with Query Failed");
+        HttpUtils.test_fetch(url, true, "Qos Firewall Element Get with Query Failed");
     }
 
     public void qos_policy_delete_test() {
         String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546";
-        ITNeutronE2E.test_delete(url, "Qos Policy Delete Failed");
+        HttpUtils.test_delete(url, "Qos Policy Delete Failed");
     }
 
     public void qos_policy_element_negative_get_test() {
         String url = base + "/qos/policies/d6220bbb-35f3-48ab-8eae-69c60aef3546";
-        ITNeutronE2E.test_fetch(url, false, "Qos Policy Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "Qos Policy Element Negative Get Failed");
     }
 
     public static void runTests(String base) {
