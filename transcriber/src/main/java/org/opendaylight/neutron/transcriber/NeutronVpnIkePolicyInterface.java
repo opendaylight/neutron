@@ -5,10 +5,11 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
@@ -18,11 +19,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ik
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicy.attributes.LifetimeBuilder;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronVpnIkePolicyCRUD.class)
 public final class NeutronVpnIkePolicyInterface
         extends AbstractNeutronInterface<Ikepolicy, IkePolicies, IkepolicyKey, NeutronVpnIkePolicy>
         implements INeutronVpnIkePolicyCRUD {
-    NeutronVpnIkePolicyInterface(DataBroker db) {
+
+    @Inject
+    public NeutronVpnIkePolicyInterface(DataBroker db) {
         super(IkepolicyBuilder.class, db);
     }
 

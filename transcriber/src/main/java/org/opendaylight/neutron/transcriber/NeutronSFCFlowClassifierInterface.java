@@ -11,7 +11,8 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
@@ -32,12 +33,15 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifier;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com) on 6/24/16.
  */
+@Singleton
+@OsgiServiceProvider(classes = INeutronSFCFlowClassifierCRUD.class)
 public final class NeutronSFCFlowClassifierInterface
         extends AbstractNeutronInterface<SfcFlowClassifier, SfcFlowClassifiers, SfcFlowClassifierKey,
                                          NeutronSFCFlowClassifier>
@@ -54,7 +58,8 @@ public final class NeutronSFCFlowClassifierInterface
                     .put(ProtocolTcp.class, "tcp").put(ProtocolUdp.class, "udp").put(ProtocolIcmp.class, "icmp")
                     .build();
 
-    NeutronSFCFlowClassifierInterface(DataBroker db) {
+    @Inject
+    public NeutronSFCFlowClassifierInterface(DataBroker db) {
         super(SfcFlowClassifierBuilder.class, db);
     }
 

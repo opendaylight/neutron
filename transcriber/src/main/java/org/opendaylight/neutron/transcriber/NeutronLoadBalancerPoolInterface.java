@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.base.Optional;
@@ -16,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
@@ -44,12 +45,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.pool.attributes.SessionPersistenceBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronLoadBalancerPoolCRUD.class)
 public final class NeutronLoadBalancerPoolInterface
         extends AbstractNeutronInterface<Pool, Pools, PoolKey, NeutronLoadBalancerPool>
         implements INeutronLoadBalancerPoolCRUD {
+
     private static final Logger LOG = LoggerFactory.getLogger(NeutronLoadBalancerPoolInterface.class);
 
     private static final ImmutableBiMap<Class<? extends ProtocolBase>,
@@ -57,7 +62,8 @@ public final class NeutronLoadBalancerPoolInterface
                     .put(ProtocolHttp.class, "HTTP").put(ProtocolHttps.class, "HTTPS").put(ProtocolTcp.class, "TCP")
                     .put(ProtocolTerminatedHttps.class, "TERMINATED_HTTPS").build();
 
-    NeutronLoadBalancerPoolInterface(DataBroker db) {
+    @Inject
+    public NeutronLoadBalancerPoolInterface(DataBroker db) {
         super(PoolBuilder.class, db);
     }
 

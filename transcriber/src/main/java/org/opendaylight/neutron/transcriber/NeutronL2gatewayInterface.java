@@ -5,11 +5,12 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
@@ -23,11 +24,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gateway;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronL2gatewayCRUD.class)
 public final class NeutronL2gatewayInterface
         extends AbstractNeutronInterface<L2gateway, L2gateways, L2gatewayKey, NeutronL2gateway>
         implements INeutronL2gatewayCRUD {
-    NeutronL2gatewayInterface(DataBroker db) {
+
+    @Inject
+    public NeutronL2gatewayInterface(DataBroker db) {
         super(L2gatewayBuilder.class, db);
     }
 
