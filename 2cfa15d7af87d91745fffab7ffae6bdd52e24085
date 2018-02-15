@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3849647b_d1d67df7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronL2gatewayConnectionInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-15T23:53:03Z",
+      "side": 1,
+      "message": "this is unrelated fix.\ncan you please create another patch for those style fix?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 82
+      },
+      "revId": "2cfa15d7af87d91745fffab7ffae6bdd52e24085",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d6525d6_a6f505c5",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronTapFlowInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-15T23:53:03Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "2cfa15d7af87d91745fffab7ffae6bdd52e24085",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}

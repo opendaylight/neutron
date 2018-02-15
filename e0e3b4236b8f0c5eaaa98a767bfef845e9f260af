@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16820269_3e15d418",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronFloatingIpInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-15T23:53:03Z",
+      "side": 0,
+      "message": "Here too.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 96
+      },
+      "revId": "e0e3b4236b8f0c5eaaa98a767bfef845e9f260af",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ccde1c93_55605a32",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronLoadBalancerHealthMonitorInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-02-15T23:53:03Z",
+      "side": 0,
+      "message": "This is also unrelated fix. can you move this out into another patch?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 103
+      },
+      "revId": "e0e3b4236b8f0c5eaaa98a767bfef845e9f260af",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
