@@ -17,7 +17,7 @@ public class NeutronFirewallRuleTests {
 
     public void fw_rule_collection_get_test() {
         String url = base + "/fw/firewall_rules";
-        ITNeutronE2E.test_fetch(url, "Firewall Rule Collection GET failed");
+        HttpUtils.test_fetch(url, "Firewall Rule Collection GET failed");
     }
 
     public String singleton_fw_rule_create_test() {
@@ -29,13 +29,13 @@ public class NeutronFirewallRuleTests {
                 + "\"shared\": false, \"source_ip_address\": null,"
                 + "\"source_port_min\": null, \"source_port_max\": null,"
                 + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_create(url, content, "Firewall Rule Singleton Post Failed");
+        HttpUtils.test_create(url, content, "Firewall Rule Singleton Post Failed");
         return content;
     }
 
     public void singleton_fw_rule_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/fw/firewall_rules";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "firewall_rules");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "firewall_rules");
     }
 
     public void fw_rule_modify_test() {
@@ -47,12 +47,12 @@ public class NeutronFirewallRuleTests {
                 + "\"shared\": true, \"source_ip_address\": null,"
                 + "\"source_port_min\": null, \"source_port_max\": null,"
                 + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_modify(url, content, "Firewall Rule Singleton Put Failed");
+        HttpUtils.test_modify(url, content, "Firewall Rule Singleton Put Failed");
     }
 
     public void fw_rule_element_get_test() {
         String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0";
-        ITNeutronE2E.test_fetch(url, true, "Firewall Rule Element Get Failed");
+        HttpUtils.test_fetch(url, true, "Firewall Rule Element Get Failed");
     }
 
     public void fw_rule_element_get_with_query_test() {
@@ -63,17 +63,17 @@ public class NeutronFirewallRuleTests {
                 + "&fields=destination_port_min&fields=destination_port_max&fields=position"
                 + "&fields=action&fields=source_port_min&fields=source_port_max"
                 + "&fields=limit&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, true, "Firewall Rule Element Get With Query Failed");
+        HttpUtils.test_fetch(url, true, "Firewall Rule Element Get With Query Failed");
     }
 
     public void fw_rule_delete_test() {
         String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0";
-        ITNeutronE2E.test_delete(url, "Firewall Rule Delete Failed");
+        HttpUtils.test_delete(url, "Firewall Rule Delete Failed");
     }
 
     public void fw_rule_element_negative_get_test() {
         String url = base + "/fw/firewall_rules/8722e0e0-9cc9-4490-9660-8c9a5732fbb0";
-        ITNeutronE2E.test_fetch(url, false, "Firewall Rule Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "Firewall Rule Element Negative Get Failed");
     }
 
     public String test_bug6398_fw_rule_create_test() {
@@ -85,7 +85,7 @@ public class NeutronFirewallRuleTests {
                 + "\"shared\": false, \"source_ip_address\": null,"
                 + "\"source_port_min\": null, \"source_port_max\": null,"
                 + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_create(url, 400, content, "Firewall Rule Singleton Post Bug 6398 regressed");
+        HttpUtils.test_create(url, 400, content, "Firewall Rule Singleton Post Bug 6398 regressed");
         return content;
     }
 

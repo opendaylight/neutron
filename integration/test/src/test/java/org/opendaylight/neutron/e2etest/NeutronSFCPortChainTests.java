@@ -17,7 +17,7 @@ public class NeutronSFCPortChainTests {
 
     public void sfc_portchain_collection_get_test() {
         String url = base + "/sfc/portchains";
-        ITNeutronE2E.test_fetch(url, "Portchains group collection GET failed");
+        HttpUtils.test_fetch(url, "Portchains group collection GET failed");
     }
 
     public String singleton_sfc_portchain_create_test() {
@@ -38,18 +38,18 @@ public class NeutronSFCPortChainTests {
             + "], "
             + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" } }";
-        ITNeutronE2E.test_create(url, content, "SFC Portchain group singleton POST failed");
+        HttpUtils.test_create(url, content, "SFC Portchain group singleton POST failed");
         return content;
     }
 
     public void singleton_sfc_portchain_get_with_query_item(String createJsonString) {
         String url = base + "/sfc/portchains";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "portchains");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "portchains");
     }
 
     public void sfc_portchain_element_get_test() {
         String url = base + "/sfc/portchains";
-        ITNeutronE2E.test_fetch(url, "SFC portchains elements GET failed");
+        HttpUtils.test_fetch(url, "SFC portchains elements GET failed");
     }
 
     public void sfc_portchain_element_get_test_with_query_test() {
@@ -57,7 +57,7 @@ public class NeutronSFCPortChainTests {
             + "?fields=name&fields=port_pair_groups&fields=flow_classifiers"
             + "&fields=chain_parameters&fields=tenant_id&fields=id"
             + "&fields=limits&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, "SFC portchain group element GET with query failed");
+        HttpUtils.test_fetch(url, "SFC portchain group element GET with query failed");
     }
 
     public void sfc_portchain_modify_test() {
@@ -79,17 +79,17 @@ public class NeutronSFCPortChainTests {
             + "], "
             + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" } }";
-        ITNeutronE2E.test_modify(url, content, "SFC portchain group singleton PUT failed");
+        HttpUtils.test_modify(url, content, "SFC portchain group singleton PUT failed");
     }
 
     public void sfc_portchain_delete_test() {
         String url = base + "/sfc/portchains/4e8e5957-649f-477b-9e5b-f1f75b21c03c";
-        ITNeutronE2E.test_delete(url, "SFC portchain DELETE failed");
+        HttpUtils.test_delete(url, "SFC portchain DELETE failed");
     }
 
     public void sfc_portchain_element_negative_get_test() {
         String url = base + "/sfc/portchains/4e8e5957-649f-477b-9e5b-f1f75b21c03c";
-        ITNeutronE2E.test_fetch(url, false, "SFC portchain Element negative GET failed");
+        HttpUtils.test_fetch(url, false, "SFC portchain Element negative GET failed");
     }
 
     public static void runTests(String base) {

@@ -17,7 +17,7 @@ public class NeutronSecurityRuleTests {
 
     public void securityRule_collection_get_test() {
         String url = base + "/security-group-rules";
-        ITNeutronE2E.test_fetch(url, "Security Rule Collection GET failed");
+        HttpUtils.test_fetch(url, "Security Rule Collection GET failed");
     }
 
     public String singleton_sr_create_test() {
@@ -27,13 +27,13 @@ public class NeutronSecurityRuleTests {
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\", " + "\"security_group_id\": "
                 + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
-        ITNeutronE2E.test_create(url, content, "Security Rule Singleton Post Failed");
+        HttpUtils.test_create(url, content, "Security Rule Singleton Post Failed");
         return content;
     }
 
     public void singleton_sr_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/security-group-rules";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "security_group_rules");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "security_group_rules");
     }
 
     public void multiple_sr_create_test() {
@@ -56,7 +56,7 @@ public class NeutronSecurityRuleTests {
                 + "  \"remote_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
                 + "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
                 + "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" + "}" + "]}";
-        ITNeutronE2E.test_create(url, content, "Security Rule Multiple Post Failed");
+        HttpUtils.test_create(url, content, "Security Rule Multiple Post Failed");
     }
 
     public void singleton_sr_modify_test() {
@@ -66,12 +66,12 @@ public class NeutronSecurityRuleTests {
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\", " + "\"security_group_id\": "
                 + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
-        ITNeutronE2E.test_modify(url, content, "Security Rule Singleton Put Failed");
+        HttpUtils.test_modify(url, content, "Security Rule Singleton Put Failed");
     }
 
     public void sr_element_get_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
-        ITNeutronE2E.test_fetch(url, true, "Security Rule Element Get Failed");
+        HttpUtils.test_fetch(url, true, "Security Rule Element Get Failed");
     }
 
     public void sr_element_get_with_query_test() {
@@ -80,22 +80,22 @@ public class NeutronSecurityRuleTests {
                 + "&fields=port_range_max&fields=ethertype&fields=remote_ip_prefix"
                 + "&fields=remote_group_id&fields=security_group_id&fields=tenant_id"
                 + "&fields=limit&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, true, "Security Rule Element Get With Query Failed");
+        HttpUtils.test_fetch(url, true, "Security Rule Element Get With Query Failed");
     }
 
     public void sr_delete_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
-        ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
+        HttpUtils.test_delete(url, "Security Rule Delete Failed");
     }
 
     public void sr_element_negative_get_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
-        ITNeutronE2E.test_fetch(url, false, "Security Rule Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "Security Rule Element Negative Get Failed");
     }
 
     public void bug5478_rule_delete_negative_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
-        ITNeutronE2E.test_delete_404(url, "Security Rule Delete 404 Failed");
+        HttpUtils.test_delete_404(url, "Security Rule Delete 404 Failed");
     }
 
     public void bug4043_ipv4_test() {
@@ -106,10 +106,10 @@ public class NeutronSecurityRuleTests {
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"01234567-0123-0123-0123-01234567890a\", " + "\"security_group_id\": "
                 + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
-        ITNeutronE2E.test_create(url, content, "Security Rule bug4043 IPv4 Failed");
+        HttpUtils.test_create(url, content, "Security Rule bug4043 IPv4 Failed");
 
         url = url + "/01234567-0123-0123-0123-01234567890a";
-        ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
+        HttpUtils.test_delete(url, "Security Rule Delete Failed");
     }
 
     public void bug4043_ipv6_test() {
@@ -120,10 +120,10 @@ public class NeutronSecurityRuleTests {
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"01234567-0123-0123-0123-01234567890a\", " + "\"security_group_id\": "
                 + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
-        ITNeutronE2E.test_create(url, content, "Security Rule Bug4043 IPv6 Failed");
+        HttpUtils.test_create(url, content, "Security Rule Bug4043 IPv6 Failed");
 
         url = url + "/01234567-0123-0123-0123-01234567890a";
-        ITNeutronE2E.test_delete(url, "Security Rule Delete Failed");
+        HttpUtils.test_delete(url, "Security Rule Delete Failed");
     }
 
     public String bug6398_sr_create_test() {
@@ -133,7 +133,7 @@ public class NeutronSecurityRuleTests {
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\", " + "\"security_group_id\": "
                 + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
-        ITNeutronE2E.test_create(url, 400, content, "Security Rule Singleton Post Bug 6398 regressed");
+        HttpUtils.test_create(url, 400, content, "Security Rule Singleton Post Bug 6398 regressed");
         return content;
     }
 

@@ -21,7 +21,7 @@ public class NeutronPortTests {
 
     public void port_collection_get_test() {
         String url = base + "/ports";
-        ITNeutronE2E.test_fetch(url, "Ports Collection GET failed");
+        HttpUtils.test_fetch(url, "Ports Collection GET failed");
     }
 
     //TODO handle SB check
@@ -37,13 +37,13 @@ public class NeutronPortTests {
                 + "\"fixed_ips\": [ {" + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
                 + "\"ip_address\": \"10.0.0.2\" } ]," + "\"id\": \"65c0ee9f-d634-4522-8954-51021b570b0d\","
                 + "\"security_groups\": [] ," + "\"device_id\": \"\" } }";
-        ITNeutronE2E.test_create(url, content, "Singleton Port Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton Port Post Failed NB");
         return content;
     }
 
     public void singleton_port_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/ports";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ports");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "ports");
     }
 
     public String singleton_default_port_create_test() {
@@ -57,7 +57,7 @@ public class NeutronPortTests {
                 + "\"fixed_ips\": [ {" + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\","
                 + "\"ip_address\": \"10.0.0.2\" } ]," + "\"id\": \"d5c0ee9f-d634-d522-d954-d1021b570b0d\","
                 + "\"security_groups\": [] ," + "\"device_id\": \"\" } }";
-        ITNeutronE2E.test_create(url, content, "Singleton Default Port Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton Default Port Post Failed NB");
         return content;
     }
 
@@ -69,19 +69,19 @@ public class NeutronPortTests {
                 + "?fields=" + element;
         String expectedContent = "\"ACTIVE\"";
         String context = "Port details do not match.";
-        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        JsonObject jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("port");
         JsonElement jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
         element = "port_security_enabled";
         url = base + "/ports/d5c0ee9f-d634-d522-d954-d1021b570b0d?fields=" + element;
-        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("port");
         jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, true, jsonElementValue.getAsBoolean());
         element = "admin_state_up";
         url = base + "/ports/d5c0ee9f-d634-d522-d954-d1021b570b0d?fields=" + element;
-        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("port");
         jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, true, jsonElementValue.getAsBoolean());
@@ -111,7 +111,7 @@ public class NeutronPortTests {
                 + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + "\"binding:vif_details\": {}, \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\","
                 + " \"mac_address\": \"fa:16:3e:dc:1d:8e\"} ] }";
-        ITNeutronE2E.test_create(url, content, "Router Interface Port Post Failed NB");
+        HttpUtils.test_create(url, content, "Router Interface Port Post Failed NB");
     }
 
     public void bulk_port_create_test() {
@@ -132,7 +132,7 @@ public class NeutronPortTests {
                 + "\"subnet_id\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\"," + " \"ip_address\": \"10.0.0.6\" } ], "
                 + " \"id\": \"43c831e0-19ce-4a76-9a49-57b57e69428b\", " + " \"security_groups\": [], "
                 + " \"device_id\": \"\" } ] } ";
-        ITNeutronE2E.test_create(url, content, "Bulk Port Post Failed");
+        HttpUtils.test_create(url, content, "Bulk Port Post Failed");
     }
 
     public void port_update_test() {
@@ -150,12 +150,12 @@ public class NeutronPortTests {
                 + " \"tenant_id\": \"522eda8d23124b25bf03fe44f1986b74\", " + " \"binding:vif_details\": {}, "
                 + " \"binding:vnic_type\": \"normal\", " + " \"binding:vif_type\": \"binding_failed\", "
                 + " \"mac_address\": \"fa:16:3e:11:11:5e\" } } ";
-        ITNeutronE2E.test_modify(url, content, "Port Put Failed");
+        HttpUtils.test_modify(url, content, "Port Put Failed");
     }
 
     public void port_element_get_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        ITNeutronE2E.test_fetch(url, true, "Port Element Get Failed");
+        HttpUtils.test_fetch(url, true, "Port Element Get Failed");
     }
 
     public void port_element_get_with_query_test() {
@@ -163,7 +163,7 @@ public class NeutronPortTests {
                 + "?fields=id&fields=network_id&fields=name&fields=admin_state_up&fields=port_seurity_enabled"
                 + "&fields=status&fields=mac_address&fields=device_id&fields=tenant_id"
                 + "&fields=device_owner&fields=limit&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, true, "Port Element Get With Query Failed");
+        HttpUtils.test_fetch(url, true, "Port Element Get With Query Failed");
     }
 
     public void port_element_get_with_query_content_validation_test() {
@@ -172,13 +172,13 @@ public class NeutronPortTests {
                 + "?fields=" + element;
         String expectedContent = "[{\"mac_address\":\"fa:16:3e:11:11:5e\",\"ip_address\":\"192.168.1.200/32\"}]";
         String context = "Port details do not match.";
-        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        JsonObject jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("port");
         JsonElement jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
         element = "port_security_enabled";
         url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b" + "?fields=" + element;
-        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("port");
         jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, true,  jsonElementValue.getAsBoolean());
@@ -186,12 +186,12 @@ public class NeutronPortTests {
 
     public void port_delete_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        ITNeutronE2E.test_delete(url, "Port Element Delete Failed");
+        HttpUtils.test_delete(url, "Port Element Delete Failed");
     }
 
     public void port_element_negative_get_test() {
         String url = base + "/ports/43c831e0-19ce-4a76-9a49-57b57e69428b";
-        ITNeutronE2E.test_fetch(url, false, "Port Element Get Failed");
+        HttpUtils.test_fetch(url, false, "Port Element Get Failed");
     }
 
     public static void runTests(String base) {

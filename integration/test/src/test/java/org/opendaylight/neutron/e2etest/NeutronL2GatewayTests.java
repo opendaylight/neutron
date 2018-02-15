@@ -17,7 +17,7 @@ public class NeutronL2GatewayTests {
 
     public void l2gateway_collection_get_test() {
         String url = base + "/l2-gateways?limit=5&name=gateway1";
-        ITNeutronE2E.test_fetch(url, "Firewall Collection GET failed");
+        HttpUtils.test_fetch(url, "Firewall Collection GET failed");
     }
 
     public String singleton_l2gateway_create_test() {
@@ -27,13 +27,13 @@ public class NeutronL2GatewayTests {
                 + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\","
                 + "\"devices\": [{ \"device_name\": \"device1\"," + "\"id\": \"0a24b09a-88a1-4f2c-94e9-92515972a704\","
                 + "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100] }] }]" + "} }";
-        ITNeutronE2E.test_create(url, content, "L2 Gateway Singleton Post Failed");
+        HttpUtils.test_create(url, content, "L2 Gateway Singleton Post Failed");
         return content;
     }
 
     public void singleton_l2gateway_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/l2-gateways";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "l2_gateways");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "l2_gateways");
     }
 
     public void l2gateway_modify_test() {
@@ -43,28 +43,28 @@ public class NeutronL2GatewayTests {
                 + "\"tenant_id\": \"45977fa2dbd7482098dd68d0d8970117\","
                 + "\"devices\": [{ \"device_name\": \"device1\"," + "\"id\": \"0a24b09a-88a1-4f2c-94e9-92515972a704\","
                 + "\"interfaces\": [{\"name\": \"interface1\", \"segmentation_id\": [100, 50] }] }]" + "} }";
-        ITNeutronE2E.test_modify(url, content, "L2 Gateway  Singleton Put Failed");
+        HttpUtils.test_modify(url, content, "L2 Gateway  Singleton Put Failed");
     }
 
     public void l2gateway_element_get_test() {
         String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        ITNeutronE2E.test_fetch(url, true, "L2 Gateway  Element Get Failed");
+        HttpUtils.test_fetch(url, true, "L2 Gateway  Element Get Failed");
     }
 
     public void l2gateway_element_get_with_query_test() {
         String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977"
                 + "?fields=tenant_id&fields=id&fields=name" + "&fields=devices";
-        ITNeutronE2E.test_fetch(url, true, "L2 Gateway Element Get With Query Failed");
+        HttpUtils.test_fetch(url, true, "L2 Gateway Element Get With Query Failed");
     }
 
     public void l2gateway_delete_test() {
         String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        ITNeutronE2E.test_delete(url, "L2 Gateway Delete Failed");
+        HttpUtils.test_delete(url, "L2 Gateway Delete Failed");
     }
 
     public void l2gateway_element_negative_get_test() {
         String url = base + "/l2-gateways/3b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        ITNeutronE2E.test_fetch(url, false, "L2 Gateway Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "L2 Gateway Element Negative Get Failed");
     }
 
     public static void runTests(String base) {

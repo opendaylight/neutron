@@ -17,7 +17,7 @@ public class NeutronIpSecSiteConnectionTests {
 
     public void ipsecSiteConnection_collection_get_test() {
         String url = base + "/vpn/ipsecsiteconnections";
-        ITNeutronE2E.test_fetch(url, "IPSEC Site Connection Collection GET failed");
+        HttpUtils.test_fetch(url, "IPSEC Site Connection Collection GET failed");
     }
 
     public String singleton_ipsecSiteConnection_create_test() {
@@ -32,13 +32,13 @@ public class NeutronIpSecSiteConnectionTests {
                 + "\"peer_address\": \"172.24.4.233\"," + "\"peer_id\": \"172.24.4.233\","
                 + "\"id\": \"af44dfd7-cf91-4451-be57-cd4fdd96b5dc\","
                 + "\"ipsecpolicy_id\": \"22b8abdc-e822-45b3-90dd-f2c8512acfa5\" } }";
-        ITNeutronE2E.test_create(url, content, "IPSEC Site Connection POST failed");
+        HttpUtils.test_create(url, content, "IPSEC Site Connection POST failed");
         return content;
     }
 
     public void singleton_ipsecSiteConnection_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/vpn/ipsecsiteconnections";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "ipsec_site_connections");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "ipsec_site_connections");
     }
 
     public void ipsecSiteConnection_update_test() {
@@ -53,12 +53,12 @@ public class NeutronIpSecSiteConnectionTests {
                 + "\"peer_address\": \"172.24.4.233\"," + "\"peer_id\": \"172.24.4.233\","
                 + "\"id\": \"af44dfd7-cf91-4451-be57-cd4fdd96b5dc\","
                 + "\"ipsecpolicy_id\": \"9958d4fe-3719-4e8c-84e7-9893895b76b4\" } }";
-        ITNeutronE2E.test_modify(url, content, "IPSEC Site Connection PUT failed");
+        HttpUtils.test_modify(url, content, "IPSEC Site Connection PUT failed");
     }
 
     public void ipsecSiteConnection_element_get_test() {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc";
-        ITNeutronE2E.test_fetch(url, true, "IPSEC Site Connection Element GET failed");
+        HttpUtils.test_fetch(url, true, "IPSEC Site Connection Element GET failed");
     }
 
     public void ipsecSiteConnection_element_get_with_query_test() {
@@ -67,17 +67,17 @@ public class NeutronIpSecSiteConnectionTests {
                 + "&fields=peer_id&fields=route_mode&fields=auth_mode&fields=initiator"
                 + "&fields=mtu&fields=psk&fields=admin_state_up&fields=status&fields=ikepolicy_id"
                 + "&fields=ipsecpolicy_id&fields=vpnservice_id";
-        ITNeutronE2E.test_fetch(url, true, "IPSEC Site Connection Element GET With Query failed");
+        HttpUtils.test_fetch(url, true, "IPSEC Site Connection Element GET With Query failed");
     }
 
     public void ipsecSiteConnection_delete_test() {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc";
-        ITNeutronE2E.test_delete(url, "IPSEC Site Connection DELETE failed");
+        HttpUtils.test_delete(url, "IPSEC Site Connection DELETE failed");
     }
 
     public void ipsecSiteConnection_element_negative_get_test() {
         String url = base + "/vpn/ipsecsiteconnections/af44dfd7-cf91-4451-be57-cd4fdd96b5dc";
-        ITNeutronE2E.test_fetch(url, false, "IPSEC Site Connection Element Negative GET failed");
+        HttpUtils.test_fetch(url, false, "IPSEC Site Connection Element Negative GET failed");
     }
 
     public static void runTests(String base) {

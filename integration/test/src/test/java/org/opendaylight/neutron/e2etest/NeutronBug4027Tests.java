@@ -27,7 +27,7 @@ public class NeutronBug4027Tests {
                 + "\"security_groups\" : [ ]," + "\"allowed_address_pairs\" : [ ],"
                 + "\"binding:host_id\" : \"devstack-control\"," + "\"binding:vnic_type\" : \"normal\","
                 + "\"binding:vif_type\" : \"unbound\"," + "\"binding:vif_details\" : { } } }";
-        ITNeutronE2E.test_create(urlN, contentN, "Bug 4027 Port Post Failed");
+        HttpUtils.test_create(urlN, contentN, "Bug 4027 Port Post Failed");
         String url2 = base + "/ports/ea2ac142-8454-4990-8bfb-7a218479864b";
         String content2 = " { \"port\" : {" + "\"id\" : \"ea2ac142-8454-4990-8bfb-7a218479864b\"," + "\"name\" : \"\","
                 + "\"admin_state_up\" : true,"
@@ -36,7 +36,7 @@ public class NeutronBug4027Tests {
                 + "\"allowed_address_pairs\" : [ ]," + "\"binding:host_id\" : \"devstack-control\","
                 + "\"binding:vnic_type\" : \"normal\"," + "\"binding:vif_type\" : \"ovs\","
                 + "\"binding:vif_details\" : { \"port_filter\" : \"true\" }," + "\"extra_dhcp_opts\" : [ ] } } }";
-        ITNeutronE2E.test_modify(url2, content2, "Bug 4027 Port Modify Failed");
+        HttpUtils.test_modify(url2, content2, "Bug 4027 Port Modify Failed");
     }
 
     public static void runTests(String base) {

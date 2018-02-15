@@ -17,7 +17,7 @@ public class NeutronSFCPortPairTests {
 
     public void sfc_portpair_collection_get_test() {
         String url = base + "/sfc/portpairs";
-        ITNeutronE2E.test_fetch(url, "Portpair collection GET failed");
+        HttpUtils.test_fetch(url, "Portpair collection GET failed");
     }
 
     public String singleton_sfc_portpair_create_test() {
@@ -33,25 +33,25 @@ public class NeutronSFCPortPairTests {
             + "], "
             + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" } }";
-        ITNeutronE2E.test_create(url, content, "SFC Portpair Singleton POST failed");
+        HttpUtils.test_create(url, content, "SFC Portpair Singleton POST failed");
         return content;
     }
 
     public void singleton_sfc_portpair_get_with_query_item_test(String createJsonString) {
         String url = base + "/sfc/portpairs";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "portpairs");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "portpairs");
     }
 
     public void sfc_portpair_element_get_test() {
         String url = base + "/sfc/portpairs/4e8e5957-649f-477b-9e5b-f1f75b21c03c";
-        ITNeutronE2E.test_fetch(url, "SFC Portpair Element GET failed");
+        HttpUtils.test_fetch(url, "SFC Portpair Element GET failed");
     }
 
     public void sfc_portpair_element_get_with_query_test() {
         String url = base + "/sfc/portpairs/4e8e5957-649f-477b-9e5b-f1f75b21c03c"
             + "?fields=name&fields=ingress&fields=egress"
             + "&fields=limits&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, "SFC Portpair Element GET with query failed");
+        HttpUtils.test_fetch(url, "SFC Portpair Element GET with query failed");
     }
 
     public void sfc_portpair_modify_test() {
@@ -67,17 +67,17 @@ public class NeutronSFCPortPairTests {
             + "], "
             + "\"tenant_id\": \"4969c491a3c74ee4af974e6d800c62de\", "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }}";
-        ITNeutronE2E.test_modify(url, content, "SFC Portpair Singleton PUT failed");
+        HttpUtils.test_modify(url, content, "SFC Portpair Singleton PUT failed");
     }
 
     public void sfc_portpair_delete_test() {
         String url = base + "/sfc/portpairs/4e8e5957-649f-477b-9e5b-f1f75b21c03c";
-        ITNeutronE2E.test_delete(url, "SFC Portpair DELETE failed");
+        HttpUtils.test_delete(url, "SFC Portpair DELETE failed");
     }
 
     public void sfc_portpair_element_negative_get_test() {
         String url = base + "/sfc/portpairs/4e8e5957-649f-477b-9e5b-f1f75b21c03c";
-        ITNeutronE2E.test_fetch(url, false, "SFC Portpair Element Negative GET Failed");
+        HttpUtils.test_fetch(url, false, "SFC Portpair Element Negative GET Failed");
     }
 
     public static void runTests(String base) {

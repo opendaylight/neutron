@@ -33,7 +33,7 @@ public class NeutronNetworkTests {
     public void network_collection_get_test_with_wait() throws IOException, InterruptedException {
         URL url = new URL(base + "/networks");
         for (int retry = 0; retry < TIMEOUT; retry++) {
-            HttpURLConnection httpConn = ITNeutronE2E.httpURLConnectionFactoryGet(url);
+            HttpURLConnection httpConn = HttpUtils.httpURLConnectionFactoryGet(url);
             int responseCode;
             try {
                 responseCode = httpConn.getResponseCode();
@@ -66,13 +66,13 @@ public class NeutronNetworkTests {
                 + " \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
                 + " \"provider:network_type\": \"stt\" } ], "
                 + " \"shared\": false, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " + " } } ";
-        ITNeutronE2E.test_create(url, content, "Singleton Network Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton Network Post Failed NB");
         return content;
     }
 
     public void singleton_network_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/networks";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "networks");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "networks");
     }
 
     public String singleton_default_network_create_test() {
@@ -85,7 +85,7 @@ public class NeutronNetworkTests {
                 + " \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
                 + " \"provider:network_type\": \"stt\" } ], "
                 + " \"id\": \"de8e5957-d49f-d77b-de5b-d1f75b21c03c\" " + " } } ";
-        ITNeutronE2E.test_create(url, content, "Singleton Default Network Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton Default Network Post Failed NB");
         return content;
     }
 
@@ -96,13 +96,13 @@ public class NeutronNetworkTests {
         String url = base + "/networks/de8e5957-d49f-d77b-de5b-d1f75b21c03c?fields=" + element;
         String expectedContent = "\"ACTIVE\"";
         String context = "Network details do not match.";
-        JsonObject jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        JsonObject jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("network");
         JsonElement jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, expectedContent, String.valueOf(jsonElementValue));
         element = "shared";
         url = base + "/networks/de8e5957-d49f-d77b-de5b-d1f75b21c03c?fields=" + element;
-        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = HttpUtils.test_fetch_gson(url, context);
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("network");
         jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, false, jsonElementValue.getAsBoolean());
@@ -116,7 +116,7 @@ public class NeutronNetworkTests {
                 + " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
                 + " \"router:external\": true, \"shared\": false, "
                 + " \"id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" } } ";
-        ITNeutronE2E.test_create(url, content, "External Network Post Failed NB");
+        HttpUtils.test_create(url, content, "External Network Post Failed NB");
     }
 
     //TODO handle SB check
@@ -132,7 +132,7 @@ public class NeutronNetworkTests {
                 + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", " + "\"provider:network_type\": \"local\", "
                 + "\"shared\": false, " + "\"id\": \"af374017-c9ae-4a1d-b799-ab73111476e2\", "
                 + "\"provider:segmentation_id\": null } ] } ";
-        ITNeutronE2E.test_create(url, content, "Bulk Network Post Failed");
+        HttpUtils.test_create(url, content, "Bulk Network Post Failed");
     }
 
     //TODO handle SB check
@@ -143,17 +143,17 @@ public class NeutronNetworkTests {
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
                 + "\"provider:network_type\": \"local\", " + "\"router:external\": false, " + "\"shared\": false, "
                 + "\"provider:segmentation_id\": null } } ";
-        ITNeutronE2E.test_modify(url, content, "Network Put Failed");
+        HttpUtils.test_modify(url, content, "Network Put Failed");
     }
 
     public void network_collection_get_test() {
         String urlS = base + "/networks";
-        ITNeutronE2E.test_fetch(urlS, true, "Network collection Get Failed");
+        HttpUtils.test_fetch(urlS, true, "Network collection Get Failed");
     }
 
     public void network_element_get_test() {
         String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
-        ITNeutronE2E.test_fetch(url, true, "Network Element Get Failed");
+        HttpUtils.test_fetch(url, true, "Network Element Get Failed");
     }
 
     public void network_element_get_test_with_query() {
@@ -162,17 +162,17 @@ public class NeutronNetworkTests {
                 + "&fields=provider:physical_network&fields=admin_state_up"
                 + "&fields=tenant_id&fields=provides:network_type"
                 + "&fields=router:external&fields=shared&fields=provider:segmentation_id";
-        ITNeutronE2E.test_fetch(url, true, "Network Element with query Get Failed");
+        HttpUtils.test_fetch(url, true, "Network Element with query Get Failed");
     }
 
     public void network_element_negative_get_test() {
         String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
-        ITNeutronE2E.test_fetch(url, false, "Network Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "Network Element Negative Get Failed");
     }
 
     public void network_delete_test() {
         String url = base + "/networks/bc1a76cb-8767-4c3a-bb95-018b822f2130";
-        ITNeutronE2E.test_delete(url, "Network Element Delete Failed");
+        HttpUtils.test_delete(url, "Network Element Delete Failed");
     }
 
     public static void runTests(String base) throws IOException, InterruptedException {

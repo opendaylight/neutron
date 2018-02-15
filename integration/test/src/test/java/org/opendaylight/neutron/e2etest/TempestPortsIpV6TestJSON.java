@@ -23,7 +23,7 @@ public class TempestPortsIpV6TestJSON {
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"admin_state_up\": true,"
                 + " \"mtu\": 0, \"shared\": false, \"port_security_enabled\": true, "
                 + "\"id\": \"114ddf69-8ccd-46bb-92fb-bc3e921318d4\"}}";
-        ITNeutronE2E.test_create(urlN, contentN, "test_create_port_in_allowed_allocation_pools Network Post Failed");
+        HttpUtils.test_create(urlN, contentN, "test_create_port_in_allowed_allocation_pools Network Post Failed");
 
         // create subnet
         String urlS = base + "/subnets";
@@ -34,7 +34,7 @@ public class TempestPortsIpV6TestJSON {
                 + "\"allocation_pools\": [{\"start\": \"2003::4\", \"end\": \"2003::6\"}], \"host_routes\": [], "
                 + "\"ip_version\": 6, \"ipv6_address_mode\": null, \"cidr\": \"2003::/64\", "
                 + "\"id\": \"77c68c25-72a6-415b-a6f0-886fe26f1b02\", \"subnetpool_id\": null}}";
-        ITNeutronE2E.test_create(urlS, contentS1, "test_create_port_in_allowed_allocation_pools Subnet Post Failed");
+        HttpUtils.test_create(urlS, contentS1, "test_create_port_in_allowed_allocation_pools Subnet Post Failed");
 
         String urlP = base + "/ports";
         String contentP1 = "{ \"port\": {\"status\": \"ACTIVE\", \"binding:host_id\": \"odl-devstack\","
@@ -47,7 +47,7 @@ public class TempestPortsIpV6TestJSON {
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"binding:vif_details\": "
                 + "{\"port_filter\": \"true\"}, \"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"ovs\", "
                 + "\"mac_address\": \"fa:16:3e:09:db:75\"}}";
-        ITNeutronE2E.test_create(urlP, contentP1, "test_create_port_in_allowed_allocation_pools Port Post Failed");
+        HttpUtils.test_create(urlP, contentP1, "test_create_port_in_allowed_allocation_pools Port Post Failed");
 
         String contentP2 = "{\"port\": {\"binding:host_id\": \"\", \"allowed_address_pairs\": [], "
                 + "\"device_owner\": \"\", \"port_security_enabled\": true, \"binding:profile\": {}, "
@@ -80,7 +80,7 @@ public class TempestPortsIpV6TestJSON {
                 + "\"tenant_id\": \"4c1be4874f0048fc8205acffe2821cd3\", \"binding:vif_details\": {}, "
                 + "\"binding:vnic_type\": \"normal\", \"binding:vif_type\": \"unbound\","
                 + " \"mac_address\": \"FA:16:3E:66:B1:38\"}}";
-        ITNeutronE2E.test_create(urlP, contentP2, "test_create_port_in_allowed_allocation_pools Port Post 2 Failed");
+        HttpUtils.test_create(urlP, contentP2, "test_create_port_in_allowed_allocation_pools Port Post 2 Failed");
 
     }
 

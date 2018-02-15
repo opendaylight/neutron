@@ -17,7 +17,7 @@ public class NeutronLBHealthMonitorTests {
 
     public void healthMonitor_collection_get_test() {
         String url = base + "/lbaas/healthmonitors";
-        ITNeutronE2E.test_fetch(url, "LB Health Monitor Collection GET failed");
+        HttpUtils.test_fetch(url, "LB Health Monitor Collection GET failed");
     }
 
     public String singleton_lb_healthMonitor_create_test() {
@@ -28,13 +28,13 @@ public class NeutronLBHealthMonitorTests {
                 + "\"pools\": [ { \"id\": \"74aa2010-a59f-4d35-a436-60a6da882819\" } ],"
                 + "\"tenant_id\": \"6f3584d5754048a18e30685362b88411\"," + "\"timeout\": 1, \"type\": \"HTTP\","
                 + "\"url_path\": \"/index.html\" } }";
-        ITNeutronE2E.test_create(url, content, "Singleton LB Health Monitor Post Failed NB");
+        HttpUtils.test_create(url, content, "Singleton LB Health Monitor Post Failed NB");
         return content;
     }
 
     public void singleton_lb_healthMonitor_with_one_query_item_test(String createJsonString) {
         String url = base + "/lbaas/healthmonitors";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "healthmonitors");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "healthmonitors");
     }
 
     public void healthMonitor_update_test() {
@@ -45,12 +45,12 @@ public class NeutronLBHealthMonitorTests {
                 + "\"pools\": [ { \"id\": \"74aa2010-a59f-4d35-a436-60a6da882819\" } ],"
                 + "\"tenant_id\": \"6f3584d5754048a18e30685362b88411\"," + "\"timeout\": 2, \"type\": \"HTTP\","
                 + "\"url_path\": \"/page.html\" } }";
-        ITNeutronE2E.test_modify(url, content, "LB Health Monitor Put Failed");
+        HttpUtils.test_modify(url, content, "LB Health Monitor Put Failed");
     }
 
     public void healthMonitor_element_get_test() {
         String url = base + "/lbaas/healthmonitors/0a9ac99d-0a09-4b18-8499-a0796850279a";
-        ITNeutronE2E.test_fetch(url, true, "LB Health Monitor Element Get Failed");
+        HttpUtils.test_fetch(url, true, "LB Health Monitor Element Get Failed");
     }
 
     public void healthMonitor_element_get_with_query_test() {
@@ -58,17 +58,17 @@ public class NeutronLBHealthMonitorTests {
                 + "?fields=id&fields=tenant_id&fields=type&fields=delay&fields=timeout"
                 + "&fields=max_retries&fields=http_method&fields=url_path&fields=admin_state_up"
                 + "&fields=expected_codes&fields=limit&fields=marker&fields=page_reverse";
-        ITNeutronE2E.test_fetch(url, true, "LB Health Monitor Element Get Failed");
+        HttpUtils.test_fetch(url, true, "LB Health Monitor Element Get Failed");
     }
 
     public void healthMonitor_element_negative_get_test() {
         String url = base + "/lbaas/healthmonitors/0a9ac99d-0a09-4b18-8499-a0796850279a";
-        ITNeutronE2E.test_fetch(url, false, "LB Health Monitor Element Negative Get Failed");
+        HttpUtils.test_fetch(url, false, "LB Health Monitor Element Negative Get Failed");
     }
 
     public void healthMonitor_delete_test() {
         String url = base + "/lbaas/healthmonitors/0a9ac99d-0a09-4b18-8499-a0796850279a";
-        ITNeutronE2E.test_delete(url, "LB Health Monitor Element Delete Failed");
+        HttpUtils.test_delete(url, "LB Health Monitor Element Delete Failed");
     }
 
     public static void runTests(String base) {

@@ -17,7 +17,7 @@ public class NeutronProjectIdTests {
 
     public void collection_get_test() {
         String url = base + "/fw/firewalls";
-        ITNeutronE2E.test_fetch(url, "RevisionID Collection GET failed");
+        HttpUtils.test_fetch(url, "RevisionID Collection GET failed");
     }
 
     public String singleton_create_test() {
@@ -27,13 +27,13 @@ public class NeutronProjectIdTests {
                 + "\"id\": \"4b0ef8f4-82c7-44d4-a4fb-6177f9a21977\","
                 + "\"name\": \"\","
                 + "\"project_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_create(url, content, "RevisionID Singleton Post Failed");
+        HttpUtils.test_create(url, content, "RevisionID Singleton Post Failed");
         return content;
     }
 
     public void singleton_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/fw/firewalls";
-        ITNeutronE2E.test_fetch_with_one_query_item(url, createJsonString, "firewalls");
+        HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "firewalls");
     }
 
     public void modify_test() {
@@ -43,17 +43,17 @@ public class NeutronProjectIdTests {
                 + "\"id\": \"4b0ef8f4-82c7-44d4-a4fb-6177f9a21977\","
                 + "\"name\": \"\","
                 + "\"project_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_modify(url, content, "RevisionID Singleton Post Failed");
+        HttpUtils.test_modify(url, content, "RevisionID Singleton Post Failed");
     }
 
     public void element_get_test() {
         String url = base + "/fw/firewalls/4b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        ITNeutronE2E.test_fetch(url, true, "RevisionID Element Get Failed");
+        HttpUtils.test_fetch(url, true, "RevisionID Element Get Failed");
     }
 
     public void delete_test() {
         String url = base + "/fw/firewalls/4b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        ITNeutronE2E.test_delete(url, "RevisionID Delete Failed");
+        HttpUtils.test_delete(url, "RevisionID Delete Failed");
     }
 
     public String singleton_create_test_with_tenant_id() {
@@ -64,13 +64,13 @@ public class NeutronProjectIdTests {
                 + "\"name\": \"\","
                 + "\"tenant_id\": \"55988fb3dbd7482098dd68d0d8970228\","
                 + "\"project_id\": \"45977fa2dbd7482098dd68d0d8970117\" } }";
-        ITNeutronE2E.test_create(url, content, "RevisionID Singleton Post Failed");
+        HttpUtils.test_create(url, content, "RevisionID Singleton Post Failed");
         return content;
     }
 
     public void delete_test_with_tenant_id() {
         String url = base + "/fw/firewalls/5b0ef8f4-82c7-44d4-a4fb-6177f9a21977";
-        ITNeutronE2E.test_delete(url, "RevisionID Delete Failed");
+        HttpUtils.test_delete(url, "RevisionID Delete Failed");
     }
 
     public static void runTests(String base) {
