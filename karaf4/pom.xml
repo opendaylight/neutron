@@ -11,13 +11,13 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
     <parent>
         <groupId>org.opendaylight.odlparent</groupId>
         <artifactId>karaf4-parent</artifactId>
-        <version>1.8.3-SNAPSHOT</version>
+        <version>1.8.4-SNAPSHOT</version>
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>neutron4-karaf</artifactId>
-    <version>0.8.3-SNAPSHOT</version>
+    <version>0.8.4-SNAPSHOT</version>
     <name>${project.artifactId}</name>
 
     <dependencyManagement>

@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.opendaylight.controller</groupId>
     <artifactId>config-parent</artifactId>
-    <version>0.6.3-SNAPSHOT</version>
+    <version>0.6.4-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>neutron-hostconfig-ovs</artifactId>
-  <version>0.8.3-SNAPSHOT</version>
+  <version>0.8.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -23,7 +23,7 @@
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
         <artifactId>mdsal-model-artifacts</artifactId>
-        <version>0.10.3-SNAPSHOT</version>
+        <version>0.10.4-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -43,12 +43,12 @@
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>utils.mdsal-utils</artifactId>
-      <version>1.4.3-SNAPSHOT</version>
+      <version>1.4.4-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>utils.southbound-utils</artifactId>
-      <version>1.4.3-SNAPSHOT</version>
+      <version>1.4.4-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
@@ -66,7 +66,7 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>config-api</artifactId>
-      <version>0.6.3-SNAPSHOT</version>
+      <version>0.6.4-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
