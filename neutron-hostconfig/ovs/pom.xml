@@ -4,13 +4,13 @@
   <parent>
     <groupId>org.opendaylight.mdsal</groupId>
     <artifactId>binding-parent</artifactId>
-    <version>0.11.2-SNAPSHOT</version>
+    <version>0.11.3-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>neutron-hostconfig-ovs</artifactId>
-  <version>0.9.2-SNAPSHOT</version>
+  <version>0.9.3-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -23,7 +23,7 @@
       <dependency>
         <groupId>org.opendaylight.mdsal.model</groupId>
         <artifactId>mdsal-model-artifacts</artifactId>
-        <version>0.11.2-SNAPSHOT</version>
+        <version>0.11.3-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -43,12 +43,12 @@
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>utils.mdsal-utils</artifactId>
-      <version>1.5.2-SNAPSHOT</version>
+      <version>1.5.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>utils.southbound-utils</artifactId>
-      <version>1.5.2-SNAPSHOT</version>
+      <version>1.5.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
