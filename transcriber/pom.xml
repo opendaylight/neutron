@@ -31,6 +31,18 @@
       <plugin>
         <groupId>org.apache.aries.blueprint</groupId>
         <artifactId>blueprint-maven-plugin</artifactId>
+        <configuration>
+          <scanPaths>
+            <!-- This is required so that the @Singleton @Inject annotations used in northbound-api,
+                 which is a dependency of this project JUST for its BadRequestException, do not cause
+                 the autowire.xml generated in this project to include the <bean> etc. of northbound-api
+                 to be repeated (which would be wrong and causes e.g. "Unresolved ref/idref to component: webContextSecurer");
+                 see also https://wiki.opendaylight.org/view/BestPractices/DI_Guidelines#Nota_Bene for more background about this.
+                 A better solution may be to move the BadRequestException to a new artifact ("common" ?), or perhaps, seeing that it
+                 extends javax.ws.rs.WebApplicationException, make transcriber have its own Exception to be independent of JAX WS.  -->
+            <scanPath>org.opendaylight.neutron.transcriber</scanPath>
+          </scanPaths>
+        </configuration>
       </plugin>
     </plugins>
   </build>
