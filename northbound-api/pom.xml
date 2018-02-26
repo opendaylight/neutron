@@ -34,6 +34,10 @@
       <artifactId>jersey-server</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.sun.jersey</groupId>
+      <artifactId>jersey-servlet</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.codehaus.enunciate</groupId>
       <artifactId>enunciate-core-annotations</artifactId>
     </dependency>
@@ -51,63 +55,46 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.aaa</groupId>
+      <artifactId>aaa-shiro</artifactId>
+      <version>0.7.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlets</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.ops4j.pax.cdi</groupId>
+      <artifactId>pax-cdi-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.aaa.web</groupId>
+      <artifactId>web-osgi-impl</artifactId>
+      <version>0.8.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <build>
     <plugins>
+      <plugin>
+       <groupId>org.apache.aries.blueprint</groupId>
+       <artifactId>blueprint-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>
-              com.sun.jersey.spi.container.servlet,
-              org.eclipse.jetty.servlets,
-              org.opendaylight.aaa.shiro.filters,
-              org.opendaylight.aaa.shiro.realm,
-              org.opendaylight.aaa.shiro.web.env,
-              org.apache.shiro.web.env,
-              !org.codehaus.enunciate.jaxrs,
-
-              com.sun.xml.bind;resolution:=optional,
-              com.sun.xml.bind.annotation;resolution:=optional,
-              com.sun.xml.bind.api;resolution:=optional,
-              com.sun.xml.bind.api.impl;resolution:=optional,
-              com.sun.codemodel;resolution:=optional,
-              com.sun.xml.xsom;resolution:=optional,
-              com.sun.xml.xsom.impl;resolution:=optional,
-              com.sun.xml.xsom.impl.parser;resolution:=optional,
-              com.sun.tools.xjc;resolution:=optional,
-              com.sun.tools.xjc.model;resolution:=optional,
-              com.sun.tools.xjc.outline;resolution:=optional,
-              javax.activation;resolution:=optional,
-              javax.json;resolution:=optional,
-              javax.json.stream;resolution:=optional,
-              javax.naming;resolution:=optional,
-              javax.validation;resolution:=optional,
-              javax.validation.constraints;resolution:=optional;
-              javax.validation.groups;resolution:=optional;
-              javax.ws.rs;resolution:=optional,
-              javax.ws.rs.core;resolution:=optional,
-              javax.ws.rs.ext;resolution:=optional,
-              javax.xml.namespace;resolution:=optional,
-              javax.xml.parsers;resolution:=optional,
-              javax.xml.stream;resolution:=optional,
-              javax.xml.transform;resolution:=optional,
-              javax.xml.transform.dom;resolution:=optional,
-              javax.xml.transform.sax;resolution:=optional,
-              javax.xml.transform.stax;resolution:=optional,
-              javax.xml.transform.stream;resolution:=optional,
-              javax.xml.validation;resolution:=optional,
-              org.eclipse.persistence.internal.libraries.asm;resolution:=optional,
-              *
-            </Import-Package>
-
-            <Web-ContextPath>/controller/nb/v2/neutron</Web-ContextPath>
-
             <!-- Workaround for javax.ws.rs version mismatch with jackson/jersey/moxy -->
             <Embed-Transitive>true</Embed-Transitive>
             <Embed-Dependency>org.eclipse.persistence.moxy;inline</Embed-Dependency>
