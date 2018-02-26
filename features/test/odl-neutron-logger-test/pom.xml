@@ -14,7 +14,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-logger-test</artifactId>
-    <version>0.10.0-SNAPSHOT</version>
+    <version>0.11.0-SNAPSHOT</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Logger :: Test</name>
 

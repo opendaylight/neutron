@@ -10,7 +10,7 @@
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>features-test-aggregator</artifactId>
-  <version>0.10.0-SNAPSHOT</version>
+  <version>0.11.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
