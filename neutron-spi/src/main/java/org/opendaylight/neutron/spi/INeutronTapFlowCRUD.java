@@ -5,14 +5,13 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 /**
  * This interface defines the methods for CRUD of NB OpenStack Tap Flow objects.
  */
-
 public interface INeutronTapFlowCRUD extends INeutronCRUD<NeutronTapFlow> {
+
     /**
      * Applications call this interface method to check if a NeutronTapFlow object exists.
      *
