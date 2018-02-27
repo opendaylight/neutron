@@ -5,35 +5,42 @@
 # terms of the Eclipse Public License v1.0 which accompanies this distribution,
 # and is available at http://www.eclipse.org/legal/epl-v10.html
 #
-*.class
-**/target
-bin/
-dist
+
+# sorted alphabetically
+
+# wildcard match
 **/logs
-products
-repository
-workspace
-*~
-target
-.classpath
-.project
-.settings
-*.ipr
+**/target
+*.class
 *.iml
+*.ipr
 *.iws
-.idea
 *.pyc
-log.html
-output.xml
-report.html
 *.swp
+*~
+
+# directory
+bin/
 target-ide/
-.vagrant
+
+# particular files
 .DS_Store
 .checkstyle
-yang-gen-config
-yang-gen-sal
-maven-metadata-local.xml
+.classpath
 .factorypath
 .fbExcludeFilterFile
-
+.idea
+.project
+.settings
+.vagrant
+dist
+log.html
+maven-metadata-local.xml
+output.xml
+products
+report.html
+repository
+target
+workspace
+yang-gen-config
+yang-gen-sal
