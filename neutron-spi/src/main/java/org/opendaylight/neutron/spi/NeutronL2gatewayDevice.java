@@ -8,11 +8,10 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 
-public final class NeutronL2gatewayDevice extends NeutronID implements Serializable {
+public final class NeutronL2gatewayDevice extends NeutronID {
 
     private static final long serialVersionUID = 1L;
 

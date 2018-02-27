@@ -7,7 +7,6 @@
  */
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCPortChain> implements Serializable {
+public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCPortChain> {
     private static final long serialVersionUID = 1L;
 
     // See OpenStack Networking SFC (networking-sfc) Port Chain API v1.0 Reference

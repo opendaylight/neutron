@@ -43,7 +43,7 @@ public final class NeutronL2gatewayConnectionInterface
             result.setNetworkID(String.valueOf(l2gatewayConnection.getNetworkId().getValue()));
         }
         if (l2gatewayConnection.getSegmentId() != null) {
-            result.setSegmentID(Integer.valueOf(l2gatewayConnection.getSegmentId()));
+            result.setSegmentID(l2gatewayConnection.getSegmentId());
         }
         if (l2gatewayConnection.getPortId() != null) {
             result.setPortID(String.valueOf(l2gatewayConnection.getPortId().getValue()));
@@ -63,7 +63,7 @@ public final class NeutronL2gatewayConnectionInterface
             l2gatewayConnectionBuilder.setNetworkId(toUuid(neutronObject.getNetworkID()));
         }
         if (neutronObject.getSegmentID() != null) {
-            l2gatewayConnectionBuilder.setSegmentId((neutronObject.getSegmentID()));
+            l2gatewayConnectionBuilder.setSegmentId(neutronObject.getSegmentID());
         }
         if (neutronObject.getPortID() != null) {
             l2gatewayConnectionBuilder.setPortId(toUuid(neutronObject.getPortID()));

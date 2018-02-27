@@ -47,7 +47,7 @@ public final class NeutronL2gatewayInterface
                 final NeutronL2gatewayDevice neutronL2gatewayDevice = new NeutronL2gatewayDevice();
                 final List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces = new ArrayList<>();
                 if (device.getDeviceName() != null) {
-                    neutronL2gatewayDevice.setDeviceName(device.getDeviceName().toString());
+                    neutronL2gatewayDevice.setDeviceName(device.getDeviceName());
                 }
                 if (device.getUuid() != null) {
                     neutronL2gatewayDevice.setID(device.getUuid().getValue());
@@ -59,7 +59,7 @@ public final class NeutronL2gatewayInterface
                         String interfaceName = null;
                         final List<Integer> segmentationIds = new ArrayList<>();
                         if (deviceInterface.getInterfaceName() != null) {
-                            interfaceName = deviceInterface.getInterfaceName().toString();
+                            interfaceName = deviceInterface.getInterfaceName();
                         }
                         if (deviceInterface.getSegmentationIds() != null) {
                             for (final Integer segmentId : deviceInterface.getSegmentationIds()) {

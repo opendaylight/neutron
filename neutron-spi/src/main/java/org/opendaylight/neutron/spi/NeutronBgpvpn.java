@@ -8,7 +8,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "bgpvpn")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> implements Serializable {
+public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -60,6 +59,7 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> i
     public NeutronBgpvpn() {
     }
 
+    @Override
     public void initDefaults() {
         super.initDefaults();
         if (type == null) {
@@ -68,10 +68,6 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> i
         if (autoAggregate == null) {
             autoAggregate = false;
         }
-    }
-
-    public boolean isAdminStateUp() {
-        return adminStateUp;
     }
 
     public boolean isAutoAggregate() {

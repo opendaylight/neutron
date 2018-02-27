@@ -8,10 +8,12 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
 
+@SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class NeutronL2gatewayRequest implements INeutronRequest<NeutronL2gateway> {
     @XmlElement(name = "l2_gateway")
     NeutronL2gateway singleton;

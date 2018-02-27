@@ -63,7 +63,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             healthmonitorBuilder.setHttpMethod(healthMonitor.getLoadBalancerHealthMonitorHttpMethod());
         }
         if (healthMonitor.getLoadBalancerHealthMonitorMaxRetries() != null) {
-            healthmonitorBuilder.setMaxRetries(Integer.valueOf(healthMonitor.getLoadBalancerHealthMonitorMaxRetries()));
+            healthmonitorBuilder.setMaxRetries(healthMonitor.getLoadBalancerHealthMonitorMaxRetries());
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             final List<Uuid> listUuid = new ArrayList<>();
@@ -103,7 +103,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             answer.setLoadBalancerHealthMonitorHttpMethod(healthMonitor.getHttpMethod());
         }
         if (healthMonitor.getMaxRetries() != null) {
-            answer.setLoadBalancerHealthMonitorMaxRetries(Integer.valueOf(healthMonitor.getMaxRetries()));
+            answer.setLoadBalancerHealthMonitorMaxRetries(healthMonitor.getMaxRetries());
         }
         if (healthMonitor.getPools() != null) {
             final List<NeutronID> list = new ArrayList<>();

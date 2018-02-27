@@ -21,12 +21,8 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 
 public final class PaginatedRequestFactory {
 
-    private static final Comparator<INeutronObject> NEUTRON_OBJECT_COMPARATOR = new Comparator<INeutronObject>() {
-        @Override
-        public int compare(INeutronObject o1, INeutronObject o2) {
-            return o1.getID().compareTo(o2.getID());
-        }
-    };
+    private static final Comparator<INeutronObject<?>> NEUTRON_OBJECT_COMPARATOR =
+        (o1, o2) -> o1.getID().compareTo(o2.getID());
 
     public static class PaginationResults<T extends INeutronObject<T>> {
         List<T> collection;
@@ -38,8 +34,9 @@ public final class PaginatedRequestFactory {
         }
     }
 
-    private static final class MarkerObject extends NeutronObject<MarkerObject>
-            implements INeutronObject<MarkerObject> {
+    private static final class MarkerObject extends NeutronObject<MarkerObject> {
+        private static final long serialVersionUID = 1L;
+
         private final String id;
 
         MarkerObject(String id) {

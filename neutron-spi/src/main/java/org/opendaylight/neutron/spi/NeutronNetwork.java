@@ -8,7 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +17,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "network")
 @XmlAccessorType(XmlAccessType.NONE)
-public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork> implements Serializable {
+// Non-transient non-serializable instance field 'segments' - we have to assume/hope users will set a Serializable List
+// instance.
+@SuppressFBWarnings("SE_BAD_FIELD")
+public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 
@@ -75,11 +78,11 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
         }
     }
 
-    public boolean isAdminStateUp() {
-        return adminStateUp;
-    }
-
     public boolean isShared() {
+        if (shared == null) {
+            return false;
+        }
+
         return shared;
     }
 
@@ -92,6 +95,10 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
     }
 
     public boolean isRouterExternal() {
+        if (routerExternal == null) {
+            return false;
+        }
+
         return routerExternal;
     }
 
@@ -163,7 +170,7 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
     public boolean extractField(String field, NeutronNetwork ans) {
         switch (field) {
             case "shared":
-                ans.setShared(shared);
+                ans.setShared(isShared());
                 break;
             case "external":
                 ans.setRouterExternal(this.getRouterExternal());

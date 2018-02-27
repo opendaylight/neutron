@@ -9,7 +9,6 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -24,8 +23,7 @@ import org.slf4j.LoggerFactory;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
-        implements Serializable, INeutronObject<T> {
+public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronID implements INeutronObject<T> {
     // T extends NeutronObject as 0th type argument. Used by extractFields()
     private static final int NEUTRON_OBJECT_CLASS_TYPE_INDEX = 0;
 
