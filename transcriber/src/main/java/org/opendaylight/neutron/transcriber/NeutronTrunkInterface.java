@@ -5,12 +5,13 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronTrunkCRUD;
 import org.opendaylight.neutron.spi.NeutronTrunk;
@@ -26,15 +27,20 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.tr
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.Trunk;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronTrunkCRUD.class)
 public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk, Trunks, TrunkKey, NeutronTrunk>
         implements INeutronTrunkCRUD {
+
     private static final ImmutableBiMap<Class<? extends NetworkTypeBase>, String> NETWORK_TYPE_MAP =
             new ImmutableBiMap.Builder<Class<? extends NetworkTypeBase>, String>()
             .put(NetworkTypeFlat.class, "flat").put(NetworkTypeGre.class, "gre")
             .put(NetworkTypeVlan.class, "vlan").put(NetworkTypeVxlan.class, "vxlan").build();
 
-    NeutronTrunkInterface(DataBroker db) {
+    @Inject
+    public NeutronTrunkInterface(DataBroker db) {
         super(TrunkBuilder.class, db);
     }
 

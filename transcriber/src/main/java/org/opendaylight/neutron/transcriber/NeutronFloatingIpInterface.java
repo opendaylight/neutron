@@ -5,10 +5,11 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.NeutronFloatingIp;
@@ -17,15 +18,16 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floati
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.Floatingip;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronFloatingIpCRUD.class)
 public final class NeutronFloatingIpInterface
         extends AbstractNeutronInterface<Floatingip, Floatingips, FloatingipKey, NeutronFloatingIp>
         implements INeutronFloatingIpCRUD {
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronFloatingIpInterface.class);
 
-    NeutronFloatingIpInterface(DataBroker db) {
+    @Inject
+    public NeutronFloatingIpInterface(DataBroker db) {
         super(FloatingipBuilder.class, db);
     }
 

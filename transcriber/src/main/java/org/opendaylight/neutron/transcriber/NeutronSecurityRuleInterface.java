@@ -10,6 +10,8 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
@@ -25,19 +27,20 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
+@Singleton
+@OsgiServiceProvider(classes = INeutronSecurityRuleCRUD.class)
 public final class NeutronSecurityRuleInterface extends
         AbstractNeutronInterface<SecurityRule, SecurityRules, SecurityRuleKey, NeutronSecurityRule>
         implements INeutronSecurityRuleCRUD {
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronSecurityRuleInterface.class);
 
     private static final ImmutableBiMap<Class<? extends EthertypeBase>,
             String> ETHERTYPE_MAP = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>, String>()
                     .put(EthertypeV4.class, "IPv4").put(EthertypeV6.class, "IPv6").build();
 
-    NeutronSecurityRuleInterface(DataBroker db) {
+    @Inject
+    public NeutronSecurityRuleInterface(DataBroker db) {
         super(SecurityRuleBuilder.class, db);
     }
 

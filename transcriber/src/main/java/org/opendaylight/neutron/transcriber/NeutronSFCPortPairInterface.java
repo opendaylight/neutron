@@ -10,6 +10,8 @@ package org.opendaylight.neutron.transcriber;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortPair;
@@ -21,19 +23,23 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.a
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPair;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPairBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPairKey;
+import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Created by Anil Vishnoi (avishnoi@Brocade.com).
  */
+@Singleton
+@OsgiServiceProvider(classes = INeutronSFCPortPairCRUD.class)
 public final class NeutronSFCPortPairInterface
         extends AbstractNeutronInterface<PortPair, PortPairs, PortPairKey, NeutronSFCPortPair>
         implements INeutronSFCPortPairCRUD {
 
     private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCPortPairInterface.class);
 
-    NeutronSFCPortPairInterface(DataBroker db) {
+    @Inject
+    public NeutronSFCPortPairInterface(DataBroker db) {
         super(PortPairBuilder.class, db);
     }
 

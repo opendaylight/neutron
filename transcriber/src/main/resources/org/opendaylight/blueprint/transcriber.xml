@@ -7,8 +7,4 @@
       interface="org.opendaylight.controller.md.sal.binding.api.DataBroker"
       odl:type="default" />
 
-  <service ref="neutronTranscriberProvider"
-    interface="org.opendaylight.neutron.transcriber.NeutronTranscriber"
-    odl:type="default"/>
-
 </blueprint>
