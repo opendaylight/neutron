@@ -1,0 +1,9 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+1: Anil Belur <abelur@linuxfoundation.org>
+Code-Review+2: Isaku Yamahata <isaku.yamahata@gmail.com>
+Verified+1: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-by: Anil Belur <abelur@linuxfoundation.org>
+Submitted-at: Wed, 14 Mar 2018 02:38:29 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/69397
+Project: neutron
+Branch: refs/heads/stable/oxygen
