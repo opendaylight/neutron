@@ -31,6 +31,13 @@
     <dependencies>
         <dependency>
             <groupId>org.opendaylight.aaa</groupId>
+            <artifactId>odl-aaa-web</artifactId>
+            <version>0.8.0-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-shiro</artifactId>
             <version>0.8.0-SNAPSHOT</version>
             <type>xml</type>

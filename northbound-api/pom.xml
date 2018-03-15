@@ -74,7 +74,7 @@
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
-      <artifactId>web-osgi-impl</artifactId> <!-- TODO <artifactId>web-api</artifactId> -->
+      <artifactId>web-api</artifactId>
       <version>0.8.0-SNAPSHOT</version>
     </dependency>
     <dependency>
