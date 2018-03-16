@@ -16,6 +16,24 @@
       "revId": "02e34415c8e43e9e1e72a179c549d85b24284c5e",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4b9a61b_43563874",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-03-16T11:52:12Z",
+      "side": 1,
+      "message": "actually.. I\u0027m mixing up 2 things here. As long as \tthe northbound-api bundle has a dependency to the aaa-shiro, and this odl-neutron-northbound-api has a dependency to odl-aaa-shiro, there is no need need for a dependency to odl-aaa-web.  I do have plans to extend the Web API and let a bundle such as this one (or restconf) not have to depend on the Shiro implementation details of AAA, and when I get to that then this will be needed (and the odl-aaa-shiro dependency here and the northbound-api dependency to aaa-shiro will be removed) - but not yet.",
+      "parentUuid": "1a7c9fa5_4c341123",
+      "revId": "02e34415c8e43e9e1e72a179c549d85b24284c5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
