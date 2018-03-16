@@ -11,13 +11,11 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.servlet.ServletException;
-import org.eclipse.jetty.servlets.CrossOriginFilter;
-import org.opendaylight.aaa.shiro.filters.AAAShiroFilter;
-import org.opendaylight.aaa.shiro.web.env.KarafIniWebEnvironmentLoaderListener;
-import org.opendaylight.aaa.web.FilterDetails;
 import org.opendaylight.aaa.web.ServletDetails;
 import org.opendaylight.aaa.web.WebContext;
+import org.opendaylight.aaa.web.WebContextBuilder;
 import org.opendaylight.aaa.web.WebContextRegistration;
+import org.opendaylight.aaa.web.WebContextSecurer;
 import org.opendaylight.aaa.web.WebServer;
 
 /**
@@ -31,30 +29,19 @@ public class WebInitializer {
     private final WebContextRegistration registraton;
 
     @Inject
-    public WebInitializer(WebServer webServer) throws ServletException {
-        this.registraton = webServer.registerWebContext(WebContext.builder()
+    public WebInitializer(WebServer webServer, WebContextSecurer webContextSecurer) throws ServletException {
+        WebContextBuilder webContextBuilder = WebContext.builder()
             .contextPath("/controller/nb/v2/neutron").supportsSessions(true)
             // TODO confirm through testing that Jersey & Neutron are fine without sessions, and false instead true
 
             .addServlet(ServletDetails.builder()
                     .servlet(new com.sun.jersey.spi.container.servlet.ServletContainer(
                             new NeutronNorthboundRSApplication()))
-                    .addUrlPattern("/*").build())
+                    .addUrlPattern("/*").build());
 
+        webContextSecurer.requireAuthentication(webContextBuilder, "/*");
 
-             // TODO factor out this common AAA related web context configuration to somewhere shared
-             //   instead of likely copy/pasting it from here to WebInitializer classes which will want to do the same
-            //  Shiro initialization
-            .addListener(new KarafIniWebEnvironmentLoaderListener())
-            .addFilter(FilterDetails.builder().filter(new AAAShiroFilter()).addUrlPattern("/*").build())
-
-            .addFilter(FilterDetails.builder().filter(new CrossOriginFilter()).addUrlPattern("/*")
-                .putInitParam("allowedOrigins", "*")
-                .putInitParam("allowedMethods", "GET,POST,OPTIONS,DELETE,PUT,HEAD")
-                .putInitParam("allowedHeaders", "origin, content-type, accept, authorization")
-                .build())
-
-            .build());
+        this.registraton = webServer.registerWebContext(webContextBuilder.build());
     }
 
     @PreDestroy
