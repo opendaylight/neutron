@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a7c9fa5_4c341123",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-03-16T11:38:49Z",
+      "side": 1,
+      "message": "Is this enough, or do we ALSO need a feature.xml listing a feature dependency to odl-aaa-web?  The auto generated one has prerequisite\u003d\"false\" dependency\u003d\"false\", is that correct?",
+      "revId": "02e34415c8e43e9e1e72a179c549d85b24284c5e",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
