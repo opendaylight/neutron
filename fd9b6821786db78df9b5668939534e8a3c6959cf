@@ -87,6 +87,24 @@
       "revId": "fd9b6821786db78df9b5668939534e8a3c6959cf",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "36a03a1e_ad57f4f6",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/WebInitializer.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-03-16T12:35:22Z",
+      "side": 1,
+      "message": "OK - not sure where webContextSecurer comes from but the idea is to just enable security/authentication in the WebContextBuilder and AAA will do the shiro stuff behind the scenes. I like that. My patch patch still applies though - we just don\u0027t need the public API and OSGi service.",
+      "parentUuid": "3be2a5d6_e66a3102",
+      "revId": "fd9b6821786db78df9b5668939534e8a3c6959cf",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
