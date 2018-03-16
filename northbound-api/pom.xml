@@ -72,11 +72,6 @@
       <artifactId>web-api</artifactId>
       <version>0.8.0-SNAPSHOT</version>
     </dependency>
-    <dependency>
-      <groupId>org.opendaylight.aaa</groupId>
-      <artifactId>aaa-shiro</artifactId>
-      <version>0.8.0-SNAPSHOT</version>
-    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -93,10 +88,6 @@
             <Import-Package>
               com.sun.jersey.spi.container.servlet,
               org.eclipse.jetty.servlets,
-              org.opendaylight.aaa.shiro.filters,
-              org.opendaylight.aaa.shiro.realm,
-              org.opendaylight.aaa.shiro.web.env,
-              org.apache.shiro.web.env,
               !org.codehaus.enunciate.jaxrs,
 
               com.sun.xml.bind;resolution:=optional,

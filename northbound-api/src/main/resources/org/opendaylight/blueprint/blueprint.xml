@@ -4,4 +4,6 @@
 
   <reference id="webServer" interface="org.opendaylight.aaa.web.WebServer" />
 
+  <reference id="webContextSecurer" interface="org.opendaylight.aaa.web.spi.WebContextSecurer" />
+
 </blueprint>
