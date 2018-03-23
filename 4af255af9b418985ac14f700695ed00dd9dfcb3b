@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d7506942_17bfa6ca",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-03-23T15:54:04Z",
+      "side": 0,
+      "message": "How is this related to findbug plugin?\nIf no, please split out this change into another patch.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 15
+      },
+      "revId": "4af255af9b418985ac14f700695ed00dd9dfcb3b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
