@@ -85,9 +85,7 @@
       <timezone>Asia/Kolkata</timezone>
     </developer>
   </developers>
-  <properties>
-    <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
-  </properties>
+
   <modules>
     <module>parent</module>
     <module>neutron-spi</module>
