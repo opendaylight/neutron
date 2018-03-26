@@ -46,6 +46,30 @@
       "revId": "4af255af9b418985ac14f700695ed00dd9dfcb3b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25e2e310_71b78113",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-03-26T15:58:45Z",
+      "side": 0,
+      "message": "the size of change doesn\u0027t matter.\nthis is logically different from find bug stuff. changes should be split into logically independent one.",
+      "parentUuid": "39263986_493971d5",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 15
+      },
+      "revId": "4af255af9b418985ac14f700695ed00dd9dfcb3b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
