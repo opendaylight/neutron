@@ -71,6 +71,13 @@ module neutron-extensions {
         base service-provider-feature-type-base;
     }
 
+    identity qos-rules {
+        description "qos rules suppoorted, configuration leaf must contain a json
+                    array of specific rule types supported, e.g.,
+                    [\"dscp-marking\", \"bandwidth-limit\"]";
+        base service-provider-feature-type-base;
+    }
+
     grouping service-provider-feature-attributes {
         leaf service-provider-feature {
             type identityref {
