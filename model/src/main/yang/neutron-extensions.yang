@@ -71,6 +71,21 @@ module neutron-extensions {
         base service-provider-feature-type-base;
     }
 
+    identity qos-dscp-marking {
+        description "support of dscp marking";
+        base service-provider-feature-type-base;
+    }
+
+    identity qos-bandwidth-limit {
+        description "support of bandwidth limit";
+        base service-provider-feature-type-base;
+    }
+
+    identity qos-minimum-bandwidth {
+        description "support of minimum bandwidth limit";
+        base service-provider-feature-type-base;
+    }
+
     grouping service-provider-feature-attributes {
         leaf service-provider-feature {
             type identityref {
