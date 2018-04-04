@@ -71,6 +71,14 @@ module neutron-extensions {
         base service-provider-feature-type-base;
     }
 
+    identity qos-rules {
+        description "The qos rules supported. The configuration leaf should
+        contain a json string such that models the supported_rules
+        parameter of neutron_lib.services.qos.DriverBase";
+
+        base service-provider-feature-type-base;
+    }
+
     grouping service-provider-feature-attributes {
         leaf service-provider-feature {
             type identityref {
