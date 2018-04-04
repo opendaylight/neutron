@@ -34,6 +34,24 @@
       "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2acb38fc_e80faaa7",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/WebInitializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-04-04T18:47:26Z",
+      "side": 1,
+      "message": "\u003e as in baked into the web-api?  That would seem wrong from a\n \u003e \"modularity\" PoV, to me... why would the generic web-api have a\n \u003e dependency to and know about that particular Web Framework\n \u003e (javax.ws.rs), but not the trillion other ones out there? \n\nI\u0027m not familiar with the other (trillion -1) ones out there. Admittedly I\u0027m a bit ignorant of Web Frameworks but I figured javax.ws.rs was a pretty standard API, like javax.servlet which our web-api does depend on. \n\n\u003e No harm\n \u003e to just have to .servlet(new ServletContainer(new XyzApplication())\n \u003e instead of your .application(new XyzApplication()), no?  \n\nI was considering the problems we\u0027ve had with jersey versions and if we ever want to get rid of jersey (although I don\u0027t know of alternatives). My thought was to provide a \"default\" servlet impl based on a javax.ws.rs.core.Application where we could easily change such impl in one place so other projects don\u0027t have to depend on com.sun.jersey. All the web projects I\u0027ve seen do the same thing creating a ServletContainer. Doesn\u0027t seem like an evil ideal to me but if there\u0027s really no issue with using jersey then that\u0027s fine.\n\n\u003e Hoping to get your +1 on this! ;)\n\nI\u0027m not -1 - just a thought...",
+      "parentUuid": "b4e7230b_5a03e233",
+      "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
