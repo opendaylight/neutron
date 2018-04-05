@@ -52,6 +52,24 @@
       "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b71cab6_587eaa15",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/WebInitializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-05T04:06:02Z",
+      "side": 1,
+      "message": "\u003e javax.ws.rs was a pretty standard API,\n\u003e like javax.servlet which our web-api does depend on. \n\njust because they are both in the javax.* namespace?  That just means someone went through the JSR, instead of innovating outside it, like Spring, Vaadin, or whatever else. \n\nBut JAX RS is still a completely separate API from the base Servlet API (which is the common denominator that all other web frameworks build upon); therefore I still don\u0027t think this minor syntactic sugar short cut adds any real value, and only \"pollutes\" the simple base web API.  \n\nIt\u0027s a very minor point in this overall change - is it OK with you otherwise?",
+      "parentUuid": "2acb38fc_e80faaa7",
+      "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
