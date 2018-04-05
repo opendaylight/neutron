@@ -55,10 +55,6 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.eclipse.jetty</groupId>
-      <artifactId>jetty-servlets</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.osgi</groupId>
       <artifactId>org.osgi.core</artifactId>
     </dependency>
@@ -87,7 +83,6 @@
           <instructions>
             <Import-Package>
               com.sun.jersey.spi.container.servlet,
-              org.eclipse.jetty.servlets,
               !org.codehaus.enunciate.jaxrs,
 
               com.sun.xml.bind;resolution:=optional,
