@@ -70,6 +70,24 @@
       "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21bee294_415579d9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/WebInitializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-04-05T06:35:13Z",
+      "side": 1,
+      "message": "I\u0027m not referring to this patch in particular and not -1 it. Let\u0027s put aside philosophy of web APIs for a moment and consider practicality. Every web app in ODL I\u0027ve seen uses  JAXRS and registers an Application instance via com.sun.jersey. Even putting aside the risks of using anything in the com.sun space, I\u0027ve heard concerns/issues from several folks about using jersey and I\u0027ve battled issues myself wrt the jersey version we\u0027re using and the dependencies it requires. I\u0027m only proposing to make things easier should we choose to move away from jersey. Maybe I\u0027ve misunderstood the whole jersey thing and am off base here but can you please speak to that instead of web framework philosophies and \"purity\" of our web API? In the end all that really matters is what\u0027s best for ODL and if every app is going to basically do the same thing then why not add a little sugar to centralize it. (we\u0027re not trying to build a super generic API for the whole world to consume).",
+      "parentUuid": "1b71cab6_587eaa15",
+      "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
