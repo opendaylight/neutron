@@ -88,6 +88,24 @@
       "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44b3cc29_f287d60d",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/WebInitializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-05T15:17:10Z",
+      "side": 1,
+      "message": "\u003e I\u0027ve battled issues myself wrt the jersey version we\u0027re \n\u003e using and the dependencies it requires. I\u0027m only proposing\n\u003e to make things easier should we choose to move away from \n\u003e jersey. Maybe I\u0027ve misunderstood the whole jersey thing and \n\u003e am off base here but can you please speak to that \n\nI actually know less not more than you ;) about all that.  You seem to imply that .servlet(new com.sun.jersey...ServletContainer(new XyzApplication()) could one day be replaced ODL wide with something.else.ServletContainer(new XyzApplication()) ?  I didn\u0027t know that.  If that is the case, and we have plans for that and people motivated to work on that (you?), then sure go for it and propose such sugar and raise patches to start using it!  But please let that not hold up this.  If you have no other objections to this change, I would love to see this already go in as-is; you can always add sugar on top of it in follow-up changes.",
+      "parentUuid": "21bee294_415579d9",
+      "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
