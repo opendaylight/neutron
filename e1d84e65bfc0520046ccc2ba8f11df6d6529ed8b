@@ -106,6 +106,24 @@
       "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a597b9c4_bffbee7c",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/WebInitializer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-04-05T15:23:38Z",
+      "side": 1,
+      "message": "I\u0027m not trying to hold up this patch for that - just an idea for discussion. I don\u0027t know the status of com.sun.jersey either - I\u0027ll bring this up on the kernel call.",
+      "parentUuid": "44b3cc29_f287d60d",
+      "revId": "e1d84e65bfc0520046ccc2ba8f11df6d6529ed8b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
