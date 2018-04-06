@@ -97,7 +97,6 @@
     <module>artifacts</module>
     <module>features/production</module>
     <module>features/test</module>
-    <module>karaf</module>
     <module>integration/test</module>
     <module>model</module>
     <module>neutron-hostconfig</module>
@@ -134,6 +133,15 @@
   </scm>
 
   <profiles>
+    <profile>
+      <id>karaf</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>karaf</module>
+      </modules>
+    </profile>
     <profile>
       <!--
           This profile is to ensure we only build javadocs reports
