@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b943caef_282f1256",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-09T16:25:07Z",
+      "side": 1,
+      "message": "Now openstack neutron defines three rules. MIN_BANDWIDTH_RULES.\nSo let\u0027s add MIN_BANDWIDTH_RULES too.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
