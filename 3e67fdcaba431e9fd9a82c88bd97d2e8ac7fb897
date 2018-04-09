@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "75e4ee37_e48bd9df",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-09T18:50:21Z",
+      "side": 1,
+      "message": "What if no qos rule is supported?\nIn that case, how we distinguish the case that feature isn\u0027t supported yet from the case that no qos rule is supported.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b943caef_282f1256",
         "filename": "model/src/main/yang/neutron-extensions.yang",
         "patchSetId": 1
@@ -15,6 +38,29 @@
       "message": "Now openstack neutron defines three rules. MIN_BANDWIDTH_RULES.\nSo let\u0027s add MIN_BANDWIDTH_RULES too.",
       "range": {
         "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2490e8a5_e4f4f385",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-09T18:50:21Z",
+      "side": 1,
+      "message": "Why do we want feature per qos rule?\nFor example, we can have\nsupported-qos-rules identity and all related values as paramater.",
+      "range": {
+        "startLine": 74,
         "startChar": 0,
         "endLine": 84,
         "endChar": 1
