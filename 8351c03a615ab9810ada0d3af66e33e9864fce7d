@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc8eeaeb_df0ac5ff",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronNetworkQosJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-10T19:06:21Z",
+      "side": 1,
+      "message": "BTW, is there any way to enforce this?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "8351c03a615ab9810ada0d3af66e33e9864fce7d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
