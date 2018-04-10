@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "98f9ffcb_496aea91",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-10T14:55:36Z",
+      "side": 1,
+      "message": "I mean the compatibility of ODL versions.\nnetworking-odl needs to handle the multiple versions of ODL.\nnitrogen, oxygen, fluorine.\n\nnetworking-odl should be able to handle them reasonablely.y",
+      "parentUuid": "7504f3ae_a6a6fc2f",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b943caef_282f1256",
         "filename": "model/src/main/yang/neutron-extensions.yang",
         "patchSetId": 1
@@ -131,6 +155,30 @@
       "side": 1,
       "message": "I don\u0027t think it\u0027s necessary to change the model for this. Currently the model supports a flat list of features. How many different qos rule types will there be? Is it really a problem to have them all?",
       "parentUuid": "2490e8a5_e4f4f385",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2e43e67_4badfa89",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-10T14:55:36Z",
+      "side": 1,
+      "message": "The support qos rule is open.\nIn future, more qos rule would come. and acctually min bandwidth is added later. and more would come in future.\nIn that case, we don\u0027t want to keep adding new rules.",
+      "parentUuid": "905b0cdb_5bfc5d9b",
       "range": {
         "startLine": 74,
         "startChar": 0,
