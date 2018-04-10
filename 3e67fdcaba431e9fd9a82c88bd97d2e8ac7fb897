@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7504f3ae_a6a6fc2f",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-10T06:53:30Z",
+      "side": 1,
+      "message": "\"In that case, how we distinguish the case that feature isn\u0027t supported yet from the case that no qos rule is supported.\"\n\nWhat is the difference between \"feature isn\u0027t supported yet\" and \"no qos rule is supported\"? Either ODL knows how to configure a certain type of qos rule or it doesn\u0027t, no?",
+      "parentUuid": "75e4ee37_e48bd9df",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b943caef_282f1256",
         "filename": "model/src/main/yang/neutron-extensions.yang",
         "patchSetId": 1
@@ -59,6 +83,54 @@
       "writtenOn": "2018-04-09T18:50:21Z",
       "side": 1,
       "message": "Why do we want feature per qos rule?\nFor example, we can have\nsupported-qos-rules identity and all related values as paramater.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc03cd88_90adf140",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-10T06:53:30Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "b943caef_282f1256",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "905b0cdb_5bfc5d9b",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-10T06:53:30Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s necessary to change the model for this. Currently the model supports a flat list of features. How many different qos rule types will there be? Is it really a problem to have them all?",
+      "parentUuid": "2490e8a5_e4f4f385",
       "range": {
         "startLine": 74,
         "startChar": 0,
