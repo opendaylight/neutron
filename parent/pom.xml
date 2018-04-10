@@ -44,6 +44,30 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!-- Bump EclipseLink Moxy JAXB implementation to a higher version than the one we get from odlparent
+           until https://git.opendaylight.org/gerrit/#/c/70716/ is merged, an odlparent with it is release and this project bumped to it;
+           TODO then remove this again.
+
+           This was done in the hope it may help with the weird spurious test failures seen in NEUTRON-159.
+
+           NB odl-neutron-northbound-api has identical version bumps, and must be kept in sync with this.
+       -->
+      <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>org.eclipse.persistence.antlr</artifactId>
+        <version>2.7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>org.eclipse.persistence.core</artifactId>
+        <version>2.7.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.eclipse.persistence</groupId>
+        <artifactId>org.eclipse.persistence.moxy</artifactId>
+        <version>2.7.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
