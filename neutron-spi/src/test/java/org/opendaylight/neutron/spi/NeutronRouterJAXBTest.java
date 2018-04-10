@@ -24,9 +24,7 @@ public class NeutronRouterJAXBTest {
 
     @Test
     public void test_NeutronRouter_JAXB() throws JAXBException {
-        NeutronRouter dummyObject = new NeutronRouter();
-
-        NeutronRouter testObject = (NeutronRouter) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronRouter testObject = JaxbTestHelper.jaxbUnmarshall(NeutronRouter.class,
                 NEUTRON_ROUTER_SOURCE_JSON);
 
         NeutronRouterNetworkReference externalGatewayInfo = testObject.getExternalGatewayInfo();

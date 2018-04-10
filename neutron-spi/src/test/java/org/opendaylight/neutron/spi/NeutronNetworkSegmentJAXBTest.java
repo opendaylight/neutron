@@ -19,9 +19,7 @@ public class NeutronNetworkSegmentJAXBTest {
 
     @Test
     public void test_NeutronNetworkSegment_JAXB()  throws JAXBException {
-        NeutronNetworkSegment segmentObject = new NeutronNetworkSegment();
-
-        NeutronNetworkSegment testObject = (NeutronNetworkSegment) JaxbTestHelper.jaxbUnmarshall(segmentObject,
+        NeutronNetworkSegment testObject = JaxbTestHelper.jaxbUnmarshall(NeutronNetworkSegment.class,
                 NEUTRON_NETWORK_SEGMENT_SOURCE_JSON);
 
         Assert.assertEquals("NeutronNetworkSegment JAXB Test 1: Testing provider:network_type failed", "vlan",

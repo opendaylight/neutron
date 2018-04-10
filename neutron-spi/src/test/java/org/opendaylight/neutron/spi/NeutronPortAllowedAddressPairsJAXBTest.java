@@ -19,10 +19,8 @@ public class NeutronPortAllowedAddressPairsJAXBTest {
 
     @Test
     public void test_NeutronPortAllowedAddressPairs_JAXB()  throws JAXBException {
-        NeutronPortAllowedAddressPairs portObject = new NeutronPortAllowedAddressPairs();
-
-        NeutronPortAllowedAddressPairs testObject = (NeutronPortAllowedAddressPairs) JaxbTestHelper
-                .jaxbUnmarshall(portObject, NEUTRON_PORT_ALLOWED_ADDRESS_PAIRS_SOURCE_JSON);
+        NeutronPortAllowedAddressPairs testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronPortAllowedAddressPairs.class, NEUTRON_PORT_ALLOWED_ADDRESS_PAIRS_SOURCE_JSON);
         Assert.assertEquals("NeutronPort Allowed Address Pairs JAXB Test 1: Testing ip_address failed",
                 "192.168.199.1", testObject.getIpAddress());
 

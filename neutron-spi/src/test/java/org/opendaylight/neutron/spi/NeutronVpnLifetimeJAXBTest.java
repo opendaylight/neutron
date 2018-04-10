@@ -19,9 +19,7 @@ public class NeutronVpnLifetimeJAXBTest {
 
     @Test
     public void test_NeutronVPNLifetime_JAXB() throws JAXBException {
-        NeutronVpnLifetime dummyObject = new NeutronVpnLifetime();
-
-        NeutronVpnLifetime testObject = (NeutronVpnLifetime) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronVpnLifetime testObject = JaxbTestHelper.jaxbUnmarshall(NeutronVpnLifetime.class,
                 NEUTRON_VPN_LIFETIME_TEST_SOURCE_JSON);
         Assert.assertEquals("NeutronVpnLifetime JAXB Test 1: Testing units failed", "seconds",
                 testObject.getUnits());

@@ -19,10 +19,8 @@ public class NeutronLoadBalancerSessionPersistenceJAXBTest {
 
     @Test
     public void test_NeutronLoadBalancerSessionPersistence_JAXB() throws JAXBException {
-        NeutronLoadBalancerSessionPersistence dummyObject = new NeutronLoadBalancerSessionPersistence();
-
-        NeutronLoadBalancerSessionPersistence testObject = (NeutronLoadBalancerSessionPersistence) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_SESSION_PERSISTENCE_SOURCE_JSON);
+        NeutronLoadBalancerSessionPersistence testObject = JaxbTestHelper.jaxbUnmarshall(
+                NeutronLoadBalancerSessionPersistence.class, NEUTRON_LOAD_BALANCER_SESSION_PERSISTENCE_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
                 "NeutronLoadBalancerSessionPersistence_Cookie", testObject.getCookieName());
 

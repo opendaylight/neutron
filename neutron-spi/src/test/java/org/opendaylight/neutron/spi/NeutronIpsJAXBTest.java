@@ -19,8 +19,7 @@ public class NeutronIpsJAXBTest {
 
     @Test
     public void test_NeutronIps_JAXB() throws JAXBException {
-        NeutronIps neutronObject = new NeutronIps();
-        NeutronIps testObject = (NeutronIps) JaxbTestHelper.jaxbUnmarshall(neutronObject, NEUTRON_IPS_SOURCE_JSON);
+        NeutronIps testObject = JaxbTestHelper.jaxbUnmarshall(NeutronIps.class, NEUTRON_IPS_SOURCE_JSON);
 
         Assert.assertEquals("NeutronIps JAXB Test 1: Testing ip_address failed", "192.168.111.3",
                     testObject.getIpAddress());

@@ -26,9 +26,7 @@ public class NeutronSecurityGroupJAXBTest {
 
     @Test
     public void test_NeutronSecurityGroup_JAXB() throws JAXBException {
-        NeutronSecurityGroup dummyObject = new NeutronSecurityGroup();
-
-        NeutronSecurityGroup testObject = (NeutronSecurityGroup) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronSecurityGroup testObject = JaxbTestHelper.jaxbUnmarshall(NeutronSecurityGroup.class,
                 NEUTRON_SECURITY_GROUP_SOURCE_JSON);
         Assert.assertEquals("NeutronSecurityGroup JAXB Test 1: Testing id failed",
                 "2076db17-a522-4506-91de-c6dd8e837028", testObject.getID());

@@ -24,8 +24,7 @@ public class NeutronTapFlowJAXBTest {
 
     @Test
     public void test_NeutronTapFlow_JAXB() throws JAXBException {
-        NeutronTapFlow testObject = new NeutronTapFlow();
-        NeutronTapFlow neutronObject = (NeutronTapFlow) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronTapFlow neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronTapFlow.class,
                 NEUTRON_TAP_FLOW_SOURCE_JSON);
         Assert.assertEquals("NeutronTapFlow JAXB Test 1: Testing id failed", "f6220bbb-35f3-48ab-8eae-69c60aef3546",
                 neutronObject.getID());

@@ -23,10 +23,8 @@ public class NeutronRouterNetworkReferenceJAXBTest {
 
     @Test
     public void test_NeutronRouterNetworkReference_JAXB() throws JAXBException {
-        NeutronRouterNetworkReference dummyObject = new NeutronRouterNetworkReference();
-
-        NeutronRouterNetworkReference testObject = (NeutronRouterNetworkReference) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NEUTRON_ROUTER_NETWORK_REFERENCE_SOURCE_JSON);
+        NeutronRouterNetworkReference testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronRouterNetworkReference.class, NEUTRON_ROUTER_NETWORK_REFERENCE_SOURCE_JSON);
 
         List<NeutronIps> externalFixedIps = testObject.getExternalFixedIps();
 

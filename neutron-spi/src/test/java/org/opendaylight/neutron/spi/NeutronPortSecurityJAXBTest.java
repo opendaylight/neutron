@@ -78,9 +78,7 @@ public class NeutronPortSecurityJAXBTest {
     }
 
     private void test_PortSecurityEnabled_JAXB(String sourceJson, Boolean portSecurityEnabled) throws JAXBException {
-        NeutronPort testObject = new NeutronPort();
-
-        NeutronPort neutronObject = (NeutronPort) JaxbTestHelper.jaxbUnmarshall(testObject, sourceJson);
+        NeutronPort neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronPort.class, sourceJson);
         Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());
 

@@ -29,8 +29,7 @@ public class NeutronSFCFlowClassifierJAXBTest {
 
     @Test
     public void test_NeutronSFCFlowClassifier_JAXB() throws JAXBException {
-        NeutronSFCFlowClassifier testObject = new NeutronSFCFlowClassifier();
-        NeutronSFCFlowClassifier neutronObject = (NeutronSFCFlowClassifier) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronSFCFlowClassifier neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronSFCFlowClassifier.class,
                 NEUTRON_SFC_FLOW_CLASSIFIER_SOURCE_JSON);
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 1: Testing id failed",

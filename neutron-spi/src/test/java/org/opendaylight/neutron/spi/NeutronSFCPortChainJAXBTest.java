@@ -27,8 +27,7 @@ public class NeutronSFCPortChainJAXBTest {
 
     @Test
     public void test_NeutronSFCPortChain_JAXB() throws JAXBException {
-        NeutronSFCPortChain testObject = new NeutronSFCPortChain();
-        NeutronSFCPortChain neutronObject = (NeutronSFCPortChain) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronSFCPortChain neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronSFCPortChain.class,
                 NEUTRON_SFC_PORT_CHAIN_SOURCE_JSON);
 
         Assert.assertEquals("NeutronSFCPortChain JAXB Test 1: Testing id failed",

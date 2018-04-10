@@ -22,8 +22,7 @@ public class NeutronTapServiceJAXBTest {
 
     @Test
     public void test_NeutronTapService_JAXB() throws JAXBException {
-        NeutronTapService testObject = new NeutronTapService();
-        NeutronTapService neutronObject = (NeutronTapService) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronTapService neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronTapService.class,
                 NEUTRON_TAP_SERVICE_SOURCE_JSON);
         Assert.assertEquals("NeutronTapService JAXB Test 1: Testing id failed", "b6440bbb-35f3-48ab-8eae-69c60aef3546",
                 neutronObject.getID());

@@ -20,9 +20,7 @@ public class NeutronRouterInterfaceJAXBTest {
 
     @Test
     public void test_NeutronRouterInterface_JAXB() throws JAXBException {
-        NeutronRouterInterface dummyObject = new NeutronRouterInterface();
-
-        NeutronRouterInterface testObject = (NeutronRouterInterface) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronRouterInterface testObject = JaxbTestHelper.jaxbUnmarshall(NeutronRouterInterface.class,
                 NEUTRON_ROUTER_INTERFACE_SOURCE_JSON);
 
         Assert.assertEquals("NeutronRouterInterface JAXB Test 1: Testing subnet_id failed",

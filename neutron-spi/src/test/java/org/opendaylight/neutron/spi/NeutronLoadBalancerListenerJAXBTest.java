@@ -31,10 +31,8 @@ public class NeutronLoadBalancerListenerJAXBTest {
 
     @Test
     public void test_NeutronLoadBalancerListener_JAXB() throws JAXBException {
-        NeutronLoadBalancerListener dummyObject = new NeutronLoadBalancerListener();
-
-        NeutronLoadBalancerListener testObject = (NeutronLoadBalancerListener) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_LISTENER_SOURCE_JSON);
+        NeutronLoadBalancerListener testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronLoadBalancerListener.class, NEUTRON_LOAD_BALANCER_LISTENER_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancerListener JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 

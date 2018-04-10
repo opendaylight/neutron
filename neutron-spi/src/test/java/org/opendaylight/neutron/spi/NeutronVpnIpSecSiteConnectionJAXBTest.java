@@ -29,10 +29,8 @@ public class NeutronVpnIpSecSiteConnectionJAXBTest {
 
     @Test
     public void test_NeutronVpnIPSecSiteConnection_JAXB() throws JAXBException {
-        NeutronVpnIpSecSiteConnection dummyObject = new NeutronVpnIpSecSiteConnection();
-
-        NeutronVpnIpSecSiteConnection testObject = (NeutronVpnIpSecSiteConnection) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NEUTRON_VPN_IPSEC_SITE_CONNECTION_SOURCE_JSON);
+        NeutronVpnIpSecSiteConnection testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronVpnIpSecSiteConnection.class, NEUTRON_VPN_IPSEC_SITE_CONNECTION_SOURCE_JSON);
         Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 1: Testing id failed",
                 "cbc152a0-7e93-4f98-9f04-b085a4bf2511", testObject.getID());
 

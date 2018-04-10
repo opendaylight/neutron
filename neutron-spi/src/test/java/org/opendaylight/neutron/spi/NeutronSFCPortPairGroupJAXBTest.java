@@ -23,8 +23,7 @@ public class NeutronSFCPortPairGroupJAXBTest {
 
     @Test
     public void test_NeutronSFCPortPairGroup_JAXB() throws JAXBException {
-        NeutronSFCPortPairGroup testObject = new NeutronSFCPortPairGroup();
-        NeutronSFCPortPairGroup neutronObject = (NeutronSFCPortPairGroup) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronSFCPortPairGroup neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronSFCPortPairGroup.class,
                 NEUTRON_SFC_PORT_PAIR_GROUP_SOURCE_JSON);
 
         Assert.assertEquals("NeutronSFCPortPairGroup JAXB Test 1: Testing id failed",

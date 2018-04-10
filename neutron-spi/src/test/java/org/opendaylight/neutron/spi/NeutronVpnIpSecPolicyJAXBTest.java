@@ -24,9 +24,7 @@ public class NeutronVpnIpSecPolicyJAXBTest {
 
     @Test
     public void test_NeutronVpnIPSecPolicy_JAXB() throws JAXBException {
-        NeutronVpnIpSecPolicy dummyObject = new NeutronVpnIpSecPolicy();
-
-        NeutronVpnIpSecPolicy testObject = (NeutronVpnIpSecPolicy) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronVpnIpSecPolicy testObject = JaxbTestHelper.jaxbUnmarshall(NeutronVpnIpSecPolicy.class,
                 NEUTRON_VPN_IPSEC_POLICY_SINGLE_PROVIDER_SOURCE_JSON);
         Assert.assertEquals("NeutronVpnIpSecPolicy JAXB Test 1: Testing id failed",
                 "5291b189-fd84-46e5-84bd-78f40c05d69c", testObject.getID());

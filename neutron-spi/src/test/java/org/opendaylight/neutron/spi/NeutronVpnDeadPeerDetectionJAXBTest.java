@@ -19,10 +19,8 @@ public class NeutronVpnDeadPeerDetectionJAXBTest {
 
     @Test
     public void test_NeutronVPNDeadPeerDetection_JAXB() throws JAXBException {
-        NeutronVpnDeadPeerDetection dummyObject = new NeutronVpnDeadPeerDetection();
-
-        NeutronVpnDeadPeerDetection testObject = (NeutronVpnDeadPeerDetection) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NEUTRON_VPN_DEAD_PEER_DETECTION_SOURCE_JSON);
+        NeutronVpnDeadPeerDetection testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronVpnDeadPeerDetection.class, NEUTRON_VPN_DEAD_PEER_DETECTION_SOURCE_JSON);
         Assert.assertEquals("NeutronVpnDeadPeerDetection JAXB Test 1: Testing action failed", "hold",
                 testObject.getAction());
 

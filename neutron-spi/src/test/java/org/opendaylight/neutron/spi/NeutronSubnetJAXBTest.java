@@ -39,9 +39,7 @@ public class NeutronSubnetJAXBTest {
 
     @Test
     public void test_NeutronSubnet_JAXB() throws JAXBException {
-        NeutronSubnet dummyObject = new NeutronSubnet();
-
-        NeutronSubnet testObject = (NeutronSubnet) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronSubnet testObject = JaxbTestHelper.jaxbUnmarshall(NeutronSubnet.class,
                 NEUTRON_SUBNET_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronSubnet JAXB Test 1: Testing id failed",
                             "dd4320eb-a56b-412b-ae83-fc5ac2a5e6f6", testObject.getID());

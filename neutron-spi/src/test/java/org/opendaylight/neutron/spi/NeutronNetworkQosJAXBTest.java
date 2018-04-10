@@ -24,9 +24,7 @@ public class NeutronNetworkQosJAXBTest {
 
     @Test
     public void test_NeutronNetworkQos_JAXB() throws JAXBException {
-        NeutronNetwork dummyObject = new NeutronNetwork();
-
-        NeutronNetwork testObject = (NeutronNetwork) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronNetwork testObject = JaxbTestHelper.jaxbUnmarshall(NeutronNetwork.class,
                 NEUTRON_NETWORK_QOS_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());

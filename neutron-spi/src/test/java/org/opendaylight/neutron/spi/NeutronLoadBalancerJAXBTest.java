@@ -23,9 +23,7 @@ public class NeutronLoadBalancerJAXBTest {
 
     @Test
     public void test_NeutronLoadBalancer_JAXB() throws JAXBException {
-        NeutronLoadBalancer dummyObject = new NeutronLoadBalancer();
-
-        NeutronLoadBalancer testObject = (NeutronLoadBalancer) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronLoadBalancer testObject = JaxbTestHelper.jaxbUnmarshall(NeutronLoadBalancer.class,
                 NEUTRON_LOAD_BALANCER_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancer JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.uuid);

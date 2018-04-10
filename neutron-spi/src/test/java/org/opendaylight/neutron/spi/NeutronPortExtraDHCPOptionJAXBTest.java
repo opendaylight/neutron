@@ -27,10 +27,7 @@ public class NeutronPortExtraDHCPOptionJAXBTest {
 
     @Test
     public void test_NeutronPortExtraDHCPOption_JAXB() throws JAXBException {
-        NeutronPortExtraDHCPOption portObject = new NeutronPortExtraDHCPOption();
-        NeutronPortExtraDHCPOption testObject;
-
-        testObject = (NeutronPortExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
+        NeutronPortExtraDHCPOption testObject = JaxbTestHelper.jaxbUnmarshall(NeutronPortExtraDHCPOption.class,
                 NEUTRON_PORT_EXTRA_DHCP_OPTION_SOURCE_JSON);
 
         Assert.assertEquals("NeutronPortExtraDHCPOption JAXB Test 1: Testing opt_value failed", "123.123.123.456",
@@ -43,10 +40,7 @@ public class NeutronPortExtraDHCPOptionJAXBTest {
 
     @Test
     public void test_NeutronPortExtraDHCPOption_IPv4_JAXB() throws JAXBException {
-        NeutronPortExtraDHCPOption portObject = new NeutronPortExtraDHCPOption();
-        NeutronPortExtraDHCPOption testObject;
-
-        testObject = (NeutronPortExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
+        NeutronPortExtraDHCPOption testObject = JaxbTestHelper.jaxbUnmarshall(NeutronPortExtraDHCPOption.class,
                 NEUTRON_PORT_EXTRA_DHCP_OPTION_IPV4_SOURCE_JSON);
 
         Assert.assertEquals("NeutronPortExtraDHCPOption_IPv4 JAXB Test 1: Testing opt_value failed", "123.123.123.456",
@@ -59,11 +53,8 @@ public class NeutronPortExtraDHCPOptionJAXBTest {
 
     @Test
     public void test_NeutronPortExtraDHCPOption_IPv6_JAXB() throws JAXBException {
-        NeutronPortExtraDHCPOption portObject = new NeutronPortExtraDHCPOption();
-        NeutronPortExtraDHCPOption testObject;
-
-        testObject = (NeutronPortExtraDHCPOption) JaxbTestHelper.jaxbUnmarshall(portObject,
-                NEUTRON_PORT_EXTRA_DHCP_OPTION_IPV6_SOURCE_JSON);
+        NeutronPortExtraDHCPOption testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronPortExtraDHCPOption.class, NEUTRON_PORT_EXTRA_DHCP_OPTION_IPV6_SOURCE_JSON);
 
         Assert.assertEquals("NeutronPortExtraDHCPOption_IPv6 JAXB Test 1: Testing opt_value failed",
                 "::ffff:123.123.123.456", testObject.getValue());

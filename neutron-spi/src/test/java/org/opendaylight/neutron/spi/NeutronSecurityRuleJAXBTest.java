@@ -40,9 +40,7 @@ public class NeutronSecurityRuleJAXBTest {
 
     @Test
     public void test_NeutronSecurityRule_JAXB() throws JAXBException {
-        NeutronSecurityRule dummyObject = new NeutronSecurityRule();
-
-        NeutronSecurityRule testObject = (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronSecurityRule testObject = JaxbTestHelper.jaxbUnmarshall(NeutronSecurityRule.class,
                 NEUTRON_SECURITY_RULE_SOURCE_JSON);
         Assert.assertEquals("NeutronSecurityRule JAXB Test 1: Testing id failed",
                 "2bc0accf-312e-429a-956e-e4407625eb62", testObject.getID());
@@ -77,8 +75,7 @@ public class NeutronSecurityRuleJAXBTest {
 
     @Test
     public void test_NeutronSecurityRuleProtocolNumber_JAXB() throws JAXBException {
-        NeutronSecurityRule dummyObject = new NeutronSecurityRule();
-        NeutronSecurityRule testObject = (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronSecurityRule testObject = JaxbTestHelper.jaxbUnmarshall(NeutronSecurityRule.class,
                 NEUTRON_SECURITY_RULE_PROTOCOL_NUMBER_SOURCE_JSON);
         Assert.assertEquals("NeutronSecurityRuleProtocolNumber JAXB: Testing protocol failed", "6",
                 testObject.getSecurityRuleProtocol());
@@ -86,8 +83,7 @@ public class NeutronSecurityRuleJAXBTest {
 
     @Test
     public void test_NeutronSecurityRuleProtocolNumberString_JAXB() throws JAXBException {
-        NeutronSecurityRule dummyObject = new NeutronSecurityRule();
-        NeutronSecurityRule testObject = (NeutronSecurityRule) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronSecurityRule testObject = JaxbTestHelper.jaxbUnmarshall(NeutronSecurityRule.class,
                 NEUTRON_SECURITY_RULE_PROTOCOL_NUMBER_STRING_SOURCE_JSON);
         Assert.assertEquals("NeutronSecurityRuleProtocolNumberString JAXB: Testing protocol failed", "6",
                 testObject.getSecurityRuleProtocol());

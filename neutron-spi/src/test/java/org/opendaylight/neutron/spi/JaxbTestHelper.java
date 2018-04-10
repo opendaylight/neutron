@@ -25,11 +25,6 @@ public final class JaxbTestHelper {
     private JaxbTestHelper() {
     }
 
-    @Deprecated
-    public static Object jaxbUnmarshall(Object schemaObject, String json) throws JAXBException {
-        return jaxbUnmarshall(schemaObject.getClass(), json);
-    }
-
     public static <T> T jaxbUnmarshall(Class<T> schemaClass, String json) throws JAXBException {
         Map<String, String> namespacePrefixMapper = new HashMap<>(3);
         namespacePrefixMapper.put("router", "router");

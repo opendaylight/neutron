@@ -21,10 +21,8 @@ public class NeutronMeteringLabelRuleJAXBTest {
 
     @Test
     public void test_NeutronMeteringLabelRule_JAXB()  throws JAXBException {
-        NeutronMeteringLabelRule meteringObject = new NeutronMeteringLabelRule();
-
-        NeutronMeteringLabelRule testObject = (NeutronMeteringLabelRule) JaxbTestHelper
-                .jaxbUnmarshall(meteringObject, NEUTRON_METERING_LABEL_RULE_SOURCE_JSON);
+        NeutronMeteringLabelRule testObject = JaxbTestHelper
+                .jaxbUnmarshall(NeutronMeteringLabelRule.class, NEUTRON_METERING_LABEL_RULE_SOURCE_JSON);
         Assert.assertEquals("NeutronMeteringLabelRule JAXB Test 1: Testing metering_label_id failed",
                 "e131d186-b02d-4c0b-83d5-0c0725c4f812", testObject.getMeteringLabelRuleLabelID());
 

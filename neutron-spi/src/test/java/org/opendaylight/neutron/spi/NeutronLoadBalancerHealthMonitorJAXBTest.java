@@ -24,10 +24,8 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
 
     @Test
     public void test_NeutronLoadBalancerHealthMonitor_JAXB() throws JAXBException {
-        NeutronLoadBalancerHealthMonitor dummyObject = new NeutronLoadBalancerHealthMonitor();
-
-        NeutronLoadBalancerHealthMonitor testObject = (NeutronLoadBalancerHealthMonitor) JaxbTestHelper
-                .jaxbUnmarshall(dummyObject, NEUTRON_LOAD_BALANCER_HEALTH_MONITOR_SOURCE_JSON);
+        NeutronLoadBalancerHealthMonitor testObject = JaxbTestHelper.jaxbUnmarshall(
+                NeutronLoadBalancerHealthMonitor.class, NEUTRON_LOAD_BALANCER_HEALTH_MONITOR_SOURCE_JSON);
         Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 

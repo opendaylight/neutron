@@ -25,8 +25,7 @@ public class NeutronTrunkJAXBTest {
 
     @Test
     public void test_NeutronTrunk_JAXB() throws JAXBException {
-        NeutronTrunk testObject = new NeutronTrunk();
-        NeutronTrunk neutronObject = (NeutronTrunk) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronTrunk neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronTrunk.class,
                 NEUTRON_TRUNK_SOURCE_JSON);
         Assert.assertEquals("NeutronTrunk JAXB Test 1: Testing id failed", "c935240e-4aa6-496a-841c-d113c54499b9",
                 neutronObject.getID());

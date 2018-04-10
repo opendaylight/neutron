@@ -25,9 +25,7 @@ public class NeutronNetworkJAXBTest {
 
     @Test
     public void test_NeutronNetwork_SingleProvider_JAXB()  throws JAXBException {
-        NeutronNetwork dummyObject = new NeutronNetwork();
-
-        NeutronNetwork testObject = (NeutronNetwork) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronNetwork testObject = JaxbTestHelper.jaxbUnmarshall(NeutronNetwork.class,
                 NEUTRON_NETWORK_SINGLE_PROVIDER_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());
@@ -69,9 +67,7 @@ public class NeutronNetworkJAXBTest {
 
     @Test
     public void test_NeutronNetwork_MultipleProvider_JAXB()  throws JAXBException {
-        NeutronNetwork dummyObject = new NeutronNetwork();
-
-        NeutronNetwork testObject = (NeutronNetwork) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronNetwork testObject = JaxbTestHelper.jaxbUnmarshall(NeutronNetwork.class,
                 NEUTRON_NETWORK_MULTIPLE_PROVIDER_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());
@@ -123,9 +119,7 @@ public class NeutronNetworkJAXBTest {
 
     @Test
     public void test_NeutronNetwork_L3_HA_JAXB()  throws JAXBException {
-        NeutronNetwork dummyObject = new NeutronNetwork();
-
-        NeutronNetwork testObject = (NeutronNetwork) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronNetwork testObject = JaxbTestHelper.jaxbUnmarshall(NeutronNetwork.class,
                 NEUTRON_NETWORK_L3_HA_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "d3a2beea-c6ca-4e76-ba7d-e947c5df0c0e",
                 testObject.getID());

@@ -23,9 +23,7 @@ public class NeutronVpnServiceJAXBTest {
 
     @Test
     public void test_NeutronVPNService_JAXB() throws JAXBException {
-        NeutronVpnService dummyObject = new NeutronVpnService();
-
-        NeutronVpnService testObject = (NeutronVpnService) JaxbTestHelper.jaxbUnmarshall(dummyObject,
+        NeutronVpnService testObject = JaxbTestHelper.jaxbUnmarshall(NeutronVpnService.class,
                 NEUTRON_VPN_SERVICE_SOURCE_JSON);
         Assert.assertEquals("NeutronVpnService JAXB Test 1: Testing router id failed",
                 "ec8619be-0ba8-4955-8835-3b49ddb76f89", testObject.getRouterUUID());

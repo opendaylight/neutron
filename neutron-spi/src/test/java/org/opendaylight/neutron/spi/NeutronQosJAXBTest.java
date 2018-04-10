@@ -31,8 +31,7 @@ public class NeutronQosJAXBTest {
 
     @Test
     public void test_NeutronQosPolicy_JAXB() throws JAXBException {
-        NeutronQosPolicy testObject = new NeutronQosPolicy();
-        NeutronQosPolicy neutronObject = (NeutronQosPolicy) JaxbTestHelper.jaxbUnmarshall(testObject,
+        NeutronQosPolicy neutronObject = JaxbTestHelper.jaxbUnmarshall(NeutronQosPolicy.class,
                 NEUTRON_QOS_POLICY_SOURCE_JSON);
         Assert.assertEquals("NeutronQosPolicy JAXB Test 1: Testing id failed", "d6220bbb-35f3-48ab-8eae-69c60aef3546",
                 neutronObject.getID());
