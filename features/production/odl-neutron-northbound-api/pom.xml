@@ -39,5 +39,29 @@
             <artifactId>northbound-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- because the REST API classes @Inject @OsgiService INeutronCRUD dependencies,
+             we do need a dependency to the implementation of those INeutronCRUDs in transcriber;
+             otherwise this feature would not work standalone, and SFT will fail. -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>transcriber</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- See NEUTRON-160 & NEUTRON-159, and keep this in sync with, project-neutron-parent -->
+        <dependency>
+          <groupId>org.eclipse.persistence</groupId>
+          <artifactId>org.eclipse.persistence.antlr</artifactId>
+          <version>2.7.1</version>
+        </dependency>
+        <dependency>
+          <groupId>org.eclipse.persistence</groupId>
+          <artifactId>org.eclipse.persistence.core</artifactId>
+          <version>2.7.1</version>
+        </dependency>
+        <dependency>
+          <groupId>org.eclipse.persistence</groupId>
+          <artifactId>org.eclipse.persistence.moxy</artifactId>
+          <version>2.7.1</version>
+        </dependency>
      </dependencies>
 </project>
