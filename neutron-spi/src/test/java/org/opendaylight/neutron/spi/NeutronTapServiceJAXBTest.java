@@ -28,14 +28,13 @@ public class NeutronTapServiceJAXBTest {
         Assert.assertEquals("NeutronTapService JAXB Test 1: Testing id failed", "b6440bbb-35f3-48ab-8eae-69c60aef3546",
                 neutronObject.getID());
 
-        Assert.assertEquals("NeutronTapService JAXB Test 2: Testing tenant_id failed",
-                "aa902936679e4ea29bfe1158e3450a13", neutronObject.getTenantID());
-
         Assert.assertEquals("NeutronTapService JAXB Test 3 : Testing name failed", "tap-service-test",
                 neutronObject.getName());
 
         Assert.assertEquals("NeutronTapService JAXB Test 4 : Testing port_id failed",
                 "311d75c3-4da8-4267-8aed-6dbb19a3dcfe", neutronObject.getTapServicePortID());
 
+        Assert.assertEquals("NeutronTapService JAXB Test 2: Testing tenant_id failed",
+                "aa902936679e4ea29bfe1158e3450a13", neutronObject.getTenantID());
     }
 }

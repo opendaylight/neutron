@@ -44,9 +44,6 @@ public class NeutronLoadBalancerPoolJAXBTest {
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 6: Testing Protocol failed", "HTTP",
                 testObject.getLoadBalancerPoolProtocol());
 
-        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 7: Testing Tenant_id failed",
-                "1a3e005cf9ce40308c900bcb08e5320c", testObject.getTenantID());
-
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 8: Testing HealthMonitorID failed",
                 "00066a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerPoolHealthMonitorID());
 
@@ -66,5 +63,8 @@ public class NeutronLoadBalancerPoolJAXBTest {
 
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 12: Testing session_persistence type failed",
                 "APP_COOKIE", testObject.getLoadBalancerPoolSessionPersistence().getType());
+
+        Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 7: Testing Tenant_id failed",
+                "1a3e005cf9ce40308c900bcb08e5320c", testObject.getTenantID());
     }
 }

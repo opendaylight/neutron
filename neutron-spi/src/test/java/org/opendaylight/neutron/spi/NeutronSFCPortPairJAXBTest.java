@@ -32,9 +32,6 @@ public class NeutronSFCPortPairJAXBTest {
         Assert.assertEquals("NeutronSFCPortPair JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());
 
-        Assert.assertEquals("NeutronSFCPortPair JAXB Test 2: Testing tenant_id failed",
-                "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
-
         Assert.assertEquals("NeutronSFCPortPair JAXB Test 3: Testing ingress failed",
                 "5e8e5957-649f-477b-9e5b-f1f75b21c03c", neutronObject.getIngressPortUUID());
 
@@ -45,5 +42,8 @@ public class NeutronSFCPortPairJAXBTest {
         Assert.assertEquals(
                 "NeutronSFCPortPair JAXB Test 5: Testing service_function_parameters list length " + "failed", 1,
                 param.size());
+
+        Assert.assertEquals("NeutronSFCPortPair JAXB Test 2: Testing tenant_id failed",
+                "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
     }
 }

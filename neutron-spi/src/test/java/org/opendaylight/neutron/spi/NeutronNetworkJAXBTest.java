@@ -32,9 +32,6 @@ public class NeutronNetworkJAXBTest {
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
-                "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
-
         Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing physical network id failed",
                 "8bab8453-1bc9-45af-8c70-f83aa9b50453", testObject.getProviderPhysicalNetwork());
 
@@ -55,6 +52,9 @@ public class NeutronNetworkJAXBTest {
                 testObject.getProviderNetworkType());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 11: Testing shared failed", false, testObject.getShared());
+
+        Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
+                "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
     }
 
     private static final String NEUTRON_NETWORK_MULTIPLE_PROVIDER_SOURCE_JSON = "{" + "\"status\": \"ACTIVE\", "
@@ -75,9 +75,6 @@ public class NeutronNetworkJAXBTest {
                 NEUTRON_NETWORK_MULTIPLE_PROVIDER_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());
-
-        Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
-                "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing status failed", "ACTIVE", testObject.getStatus());
 
@@ -112,6 +109,9 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 9.4: Testing segment index 1 network type failed", "stt",
                 segments.get(1).getProviderNetworkType());
+
+        Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
+                "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
     }
 
     private static final String NEUTRON_NETWORK_L3_HA_SOURCE_JSON = "{"
@@ -130,9 +130,6 @@ public class NeutronNetworkJAXBTest {
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "d3a2beea-c6ca-4e76-ba7d-e947c5df0c0e",
                 testObject.getID());
 
-        // Bug 4775: tenantId is null when json provides it as empty string
-        Assert.assertNull("NeutronNetwork JAXB Test 2: Testing tenant_id failed", testObject.getTenantID());
-
         Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing name failed",
                 "HA network tenant c15340eb65804b20af2dd0fd3beddc8c", testObject.getName());
 
@@ -146,5 +143,8 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 7: Testing provider segmentation id failed", "1018",
                 testObject.getProviderSegmentationID());
+
+        // Bug 4775: tenantId is null when json provides it as empty string
+        Assert.assertNull("NeutronNetwork JAXB Test 2: Testing tenant_id failed", testObject.getTenantID());
     }
 }

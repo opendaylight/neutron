@@ -36,9 +36,6 @@ public class NeutronVpnIpSecSiteConnectionJAXBTest {
         Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 1: Testing id failed",
                 "cbc152a0-7e93-4f98-9f04-b085a4bf2511", testObject.getID());
 
-        Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 2: Testing tenant id failed",
-                "ccb81365fe36411a9011e90491fe1330", testObject.getTenantID());
-
         Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 3: Testing name failed", "myvpn",
                 testObject.getName());
 
@@ -94,5 +91,8 @@ public class NeutronVpnIpSecSiteConnectionJAXBTest {
 
         Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 18.3: Testing DeadPeerDetection failed",
                 new Integer(120), testObject.getDeadPeerDetection().getTimeout());
+
+        Assert.assertEquals("NeutronVpnIpSecSiteConnection JAXB Test 2: Testing tenant id failed",
+                "ccb81365fe36411a9011e90491fe1330", testObject.getTenantID());
     }
 }

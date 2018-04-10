@@ -31,9 +31,6 @@ public class NeutronVpnIpSecPolicyJAXBTest {
         Assert.assertEquals("NeutronVpnIpSecPolicy JAXB Test 1: Testing id failed",
                 "5291b189-fd84-46e5-84bd-78f40c05d69c", testObject.getID());
 
-        Assert.assertEquals("NeutronVpnIpSecPolicy JAXB Test 2: Testing tenant id failed",
-                "ccb81365fe36411a9011e90491fe1330", testObject.getTenantID());
-
         Assert.assertEquals("NeutronVpnIpSecPolicy JAXB Test 3: Testing name failed", "ipsecpolicy1",
                 testObject.getName());
 
@@ -57,5 +54,8 @@ public class NeutronVpnIpSecPolicyJAXBTest {
 
         Assert.assertEquals("NeutronVpnIpSecPolicy JAXB Test 11: Testing Lifetime value failed", new Integer(3600),
                 testObject.getLifetime().getValue());
+
+        Assert.assertEquals("NeutronVpnIpSecPolicy JAXB Test 2: Testing tenant id failed",
+                "ccb81365fe36411a9011e90491fe1330", testObject.getTenantID());
     }
 }

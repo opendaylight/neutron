@@ -40,9 +40,6 @@ public class NeutronTrunkJAXBTest {
         Assert.assertTrue("NeutronTrunk JAXB Test 4 : Testing AdminStateUp failed",
                 neutronObject.getAdminStateUp());
 
-        Assert.assertEquals("NeutronTrunk JAXB Test 5: Testing tenant_id failed",
-                "cc3641789c8a4304abaa841c64f638d9", neutronObject.getTenantID());
-
         Assert.assertEquals("NeutronTrunk JAXB Test 6 : Testing PotId failed", "60aac28d-1d3a-48d9-99bc-dd4bd62e50f2",
                 neutronObject.getPortId());
 
@@ -59,5 +56,8 @@ public class NeutronTrunkJAXBTest {
 
         Assert.assertEquals("NeutronTrunk JAXB Test 10 : Testing SubPort Port Id failed",
                 "dca33436-2a7c-415b-aa35-14769e7834e3",  subPort.getPortId());
+
+        Assert.assertEquals("NeutronTrunk JAXB Test 5: Testing tenant_id failed",
+                "cc3641789c8a4304abaa841c64f638d9", neutronObject.getTenantID());
     }
 }

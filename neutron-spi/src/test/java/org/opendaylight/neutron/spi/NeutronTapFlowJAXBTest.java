@@ -30,9 +30,6 @@ public class NeutronTapFlowJAXBTest {
         Assert.assertEquals("NeutronTapFlow JAXB Test 1: Testing id failed", "f6220bbb-35f3-48ab-8eae-69c60aef3546",
                 neutronObject.getID());
 
-        Assert.assertEquals("NeutronTapFlow JAXB Test 2: Testing tenant_id failed",
-                "aa902936679e4ea29bfe1158e3450a13", neutronObject.getTenantID());
-
         Assert.assertEquals("NeutronTapFlow JAXB Test 3 : Testing name failed", "tap-flow-test",
                 neutronObject.getName());
 
@@ -45,5 +42,7 @@ public class NeutronTapFlowJAXBTest {
         Assert.assertEquals("NeutronTapFlow JAXB Test 6: Testing direction failed",
                 "BOTH", neutronObject.getTapFlowDirection());
 
+        Assert.assertEquals("NeutronTapFlow JAXB Test 2: Testing tenant_id failed",
+                "aa902936679e4ea29bfe1158e3450a13", neutronObject.getTenantID());
     }
 }

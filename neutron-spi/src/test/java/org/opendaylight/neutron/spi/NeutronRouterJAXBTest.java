@@ -42,9 +42,6 @@ public class NeutronRouterJAXBTest {
 
         Assert.assertEquals("NeutronRouter JAXB Test 4: Testing status failed", "ACTIVE", testObject.getStatus());
 
-        Assert.assertEquals("NeutronFloatingIp JAXB Test 5: Testing tenant_id failed",
-                "aa902936679e4ea29bfe1158e3450a13", testObject.getTenantID());
-
         Assert.assertEquals("NeutronRouter JAXB Test 6: Testing externalGatewayInfo failed",
                 "e9330b1f-a2ef-4160-a991-169e56ab17f6", externalGatewayInfo.getNetworkID());
 
@@ -58,5 +55,8 @@ public class NeutronRouterJAXBTest {
 
         Assert.assertEquals("NeutronRouter JAXB Test 9.2: Testing routes failed", "10.0.0.0/24",
                 routes.get(0).getDestination());
+
+        Assert.assertEquals("NeutronFloatingIp JAXB Test 5: Testing tenant_id failed",
+                "aa902936679e4ea29bfe1158e3450a13", testObject.getTenantID());
     }
 }

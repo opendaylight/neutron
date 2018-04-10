@@ -36,9 +36,6 @@ public class NeutronPortJAXBTest {
         Assert.assertEquals("NeutronPort JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 neutronObject.getID());
 
-        Assert.assertEquals("NeutronPort JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
-                neutronObject.getTenantID());
-
         Assert.assertEquals("NeutronPort JAXB Test 3: Testing network_id failed",
                 "e9330b1f-a2ef-4160-a991-169e56ab17f5", neutronObject.getNetworkUUID());
 
@@ -99,5 +96,8 @@ public class NeutronPortJAXBTest {
 
         Assert.assertEquals("NeutronPort JAXB Test 17: Testing binding:profile failed",
                 "{\'capabilities\': [\'switchdev\']}", neutronObject.getProfile());
+
+        Assert.assertEquals("NeutronPort JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
+                neutronObject.getTenantID());
     }
 }

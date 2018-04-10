@@ -36,9 +36,6 @@ public class NeutronSFCFlowClassifierJAXBTest {
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 1: Testing id failed",
                 "4e8e5957-649f-477b-9e5b-f1f75b21c03c", neutronObject.getID());
 
-        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 2: Testing tenant_id failed",
-                "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
-
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 3: Testing ethertype failed", "IPv4",
                 neutronObject.getEthertype());
 
@@ -72,5 +69,8 @@ public class NeutronSFCFlowClassifierJAXBTest {
         Map<String, String> l7Param = neutronObject.getL7Parameters();
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 13: Testing L7_parameters list length failed", 1,
                 l7Param.size());
+
+        Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 2: Testing tenant_id failed",
+                "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
     }
 }

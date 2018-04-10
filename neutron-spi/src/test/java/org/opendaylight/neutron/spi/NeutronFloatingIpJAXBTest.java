@@ -31,9 +31,6 @@ public class NeutronFloatingIpJAXBTest {
         Assert.assertEquals("NeutronFloatingIp JAXB Test 1: Testing id failed",
                 "2f245a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getID());
 
-        Assert.assertEquals("NeutronFloatingIp JAXB Test 2: Testing tenant_id failed",
-                "4969c491a3c74ee4af974e6d800c62de", testObject.getTenantID());
-
         Assert.assertEquals("NeutronFloatingIp JAXB Test 3: Testing router id failed",
                 "d23abc8d-2991-4a55-ba98-2aaea84cc72f", testObject.getRouterUUID());
 
@@ -51,5 +48,8 @@ public class NeutronFloatingIpJAXBTest {
 
         Assert.assertEquals("NeutronFloatingIp JAXB Test 8: Testing status failed", "ACTIVE",
                 testObject.getStatus());
+
+        Assert.assertEquals("NeutronFloatingIp JAXB Test 2: Testing tenant_id failed",
+                "4969c491a3c74ee4af974e6d800c62de", testObject.getTenantID());
     }
 }

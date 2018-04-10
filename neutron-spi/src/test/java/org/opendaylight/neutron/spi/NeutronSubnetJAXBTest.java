@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronSubnetJAXBTest {
+
     private static final String NEUTRON_SUBNET_ENABLED_SOURCE_JSON = "{"
         + "\"service_types\": [], "
         + "\"description\": \"\", "
@@ -44,8 +45,6 @@ public class NeutronSubnetJAXBTest {
                 NEUTRON_SUBNET_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronSubnet JAXB Test 1: Testing id failed",
                             "dd4320eb-a56b-412b-ae83-fc5ac2a5e6f6", testObject.getID());
-        Assert.assertEquals("NeutronSubnet JAXB Test 2: Testing tenant_id failed",
-                            "379ffe2b9cda498d9e17b319733ec889", testObject.getTenantID());
         Assert.assertEquals("NeutronSubnet JAXB Test 3: Testing name failed", "", testObject.getName());
         Assert.assertEquals("NeutronSubnet JAXB Test 4: Testing enabled_dhcp failed", true, testObject.isEnableDHCP());
         Assert.assertEquals("NeutronSubnet JAXB Test 5: Testing network_id failed",
@@ -65,5 +64,8 @@ public class NeutronSubnetJAXBTest {
                             null, testObject.getIpV6AddressMode());
         Assert.assertEquals("NeutronSubnet JAXB Test 10: Testing cidr failed",
                             "2003::/64", testObject.getCidr());
+
+        Assert.assertEquals("NeutronSubnet JAXB Test 2: Testing tenant_id failed",
+                "379ffe2b9cda498d9e17b319733ec889", testObject.getTenantID());
     }
 }

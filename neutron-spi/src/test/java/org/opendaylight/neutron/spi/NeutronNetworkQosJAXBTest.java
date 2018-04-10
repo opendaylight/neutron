@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NeutronNetworkQosJAXBTest {
+
     private static final String NEUTRON_NETWORK_QOS_ENABLED_SOURCE_JSON = "{ " + "\"status\": \"ACTIVE\", "
             + "\"subnets\": [ \"3b80198d-4f7b-4f77-9ef5-774d54e17126\" ], " + "\"name\": \"net1\", "
             + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
@@ -29,9 +30,6 @@ public class NeutronNetworkQosJAXBTest {
                 NEUTRON_NETWORK_QOS_ENABLED_SOURCE_JSON);
         Assert.assertEquals("NeutronNetwork JAXB Test 1: Testing id failed", "4e8e5957-649f-477b-9e5b-f1f75b21c03c",
                 testObject.getID());
-
-        Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
-                testObject.getTenantID());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 3: Testing physical network id failed",
                 "8bab8453-1bc9-45af-8c70-f83aa9b50453", testObject.getProviderPhysicalNetwork());
@@ -56,5 +54,8 @@ public class NeutronNetworkQosJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 12: Testing qos_policy_id failed",
                 "d6220bbb-35f3-48ab-8eae-69c60aef3546", testObject.getQosPolicyId());
+
+        Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed", "9bacb3c5d39d41a79512987f338cf177",
+                testObject.getTenantID());
     }
 }

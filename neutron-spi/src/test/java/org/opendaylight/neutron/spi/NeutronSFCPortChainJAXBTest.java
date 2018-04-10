@@ -27,16 +27,12 @@ public class NeutronSFCPortChainJAXBTest {
 
     @Test
     public void test_NeutronSFCPortChain_JAXB() throws JAXBException {
-
         NeutronSFCPortChain testObject = new NeutronSFCPortChain();
         NeutronSFCPortChain neutronObject = (NeutronSFCPortChain) JaxbTestHelper.jaxbUnmarshall(testObject,
                 NEUTRON_SFC_PORT_CHAIN_SOURCE_JSON);
 
         Assert.assertEquals("NeutronSFCPortChain JAXB Test 1: Testing id failed",
                 "4e8e5957-649f-477b-9e5b-f1f75b21c03c", neutronObject.getID());
-
-        Assert.assertEquals("NeutronSFCPortChain JAXB Test 2: Testing tenant_id failed",
-                "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
 
         Assert.assertEquals("NeutronSFCPortChain JAXB Test 3: Testing flow_classifiers failed", 2,
                 neutronObject.getFlowClassifiersUUID().size());
@@ -48,5 +44,7 @@ public class NeutronSFCPortChainJAXBTest {
         Assert.assertEquals("NeutronSFCPortChain JAXB Test 5: Testing chain_parameters list length " + "failed", 1,
                 param.size());
 
+        Assert.assertEquals("NeutronSFCPortChain JAXB Test 2: Testing tenant_id failed",
+                "4969c491a3c74ee4af974e6d800c62de", neutronObject.getTenantID());
     }
 }
