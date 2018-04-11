@@ -1,0 +1,7 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+2: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-by: Michael Vorburger <vorburger@redhat.com>
+Submitted-at: Wed, 11 Apr 2018 13:42:59 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/70708
+Project: neutron
+Branch: refs/heads/master
