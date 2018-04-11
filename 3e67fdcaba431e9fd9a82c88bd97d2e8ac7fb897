@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "dce9a72a_7d595dee",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-11T06:20:10Z",
+      "side": 1,
+      "message": "Yes. These are just constants. At the point where netvirt will support any of these features they will be written to the md-sal and not before that. That\u0027s how feature negotiation was designed to work, no?",
+      "parentUuid": "98f9ffcb_496aea91",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b943caef_282f1256",
         "filename": "model/src/main/yang/neutron-extensions.yang",
         "patchSetId": 1
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "The support qos rule is open.\nIn future, more qos rule would come. and acctually min bandwidth is added later. and more would come in future.\nIn that case, we don\u0027t want to keep adding new rules.",
       "parentUuid": "905b0cdb_5bfc5d9b",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5eb7c49d_d77ca3ce",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-11T06:20:10Z",
+      "side": 1,
+      "message": "I still do not understand your thinking here. What is wrong with adding a feature for each rule type as they come along? I *greatly* prefer keeping the data model simple (list of identities) to complicating the model.",
+      "parentUuid": "b2e43e67_4badfa89",
       "range": {
         "startLine": 74,
         "startChar": 0,
