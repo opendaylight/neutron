@@ -46,6 +46,54 @@
       "revId": "8351c03a615ab9810ada0d3af66e33e9864fce7d",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6f5baa0_83c72c09",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronNetworkQosJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-11T13:42:46Z",
+      "side": 1,
+      "message": "sarcasm? ;)",
+      "parentUuid": "356544df_74996074",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "8351c03a615ab9810ada0d3af66e33e9864fce7d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad09c05b_56b9d617",
+        "filename": "neutron-spi/src/test/java/org/opendaylight/neutron/spi/NeutronNetworkQosJAXBTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-11T13:42:46Z",
+      "side": 1,
+      "message": "Checkstyle may have a rule for that, I have not checked.  Getting this rule, if it exists, added to odlparent and then roll it out to all projects, is more work than I have time for unfortunately.",
+      "parentUuid": "cc8eeaeb_df0ac5ff",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "revId": "8351c03a615ab9810ada0d3af66e33e9864fce7d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
