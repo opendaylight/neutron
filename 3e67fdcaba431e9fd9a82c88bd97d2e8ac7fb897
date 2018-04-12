@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "42aab9fb_b2dce835",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-12T18:09:51Z",
+      "side": 1,
+      "message": "How do you(networking-odl) distinguish the following case?\n- nitrogen, oxygen: there is features supported. but no constants for qos rule constant is defined. networking-odl needs to fallback to reasonable default.\n- fluorine: constants for qos rules are defined.\n-- case a: backend like netvirt knows qos rules. it populates supported qos rules. networking-odl retrieve support qos rules.\n-- case b: backend like netvirt knows qos rules. But it doesn\u0027t support any qos rules. so it doesn\u0027t populate qny qos rules. networking-odl should know it and reject all qos rules from openstack user.\n-- case c: backend like netvirt doesn\u0027t know qos rules. so qos rules aren\u0027t populated in features. networking-odl should fallback to reasonable default.",
+      "parentUuid": "dce9a72a_7d595dee",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b943caef_282f1256",
         "filename": "model/src/main/yang/neutron-extensions.yang",
         "patchSetId": 1
@@ -227,6 +251,30 @@
       "side": 1,
       "message": "I still do not understand your thinking here. What is wrong with adding a feature for each rule type as they come along? I *greatly* prefer keeping the data model simple (list of identities) to complicating the model.",
       "parentUuid": "b2e43e67_4badfa89",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8e1dbec_eed98fc8",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-12T18:09:51Z",
+      "side": 1,
+      "message": "ODL neutron northbound shouldn\u0027t be a blocker for ODL backend like netvirt to support new qos rules.\n\nLet\u0027s suppose new qos rule is added at openstack neutron api.\nand the backend wants to support it.\nWith your proposal, we need to add new identity.\nAlso what if they backport new qos rule support to older version? e.g. Neon -\u003e Fluorine\nIt\u0027s undesirable for the backend implementer to update ODL neutron yang model.\n\n\n\nMy proposal is as follows.\n\nidentity supported-qos-rules {\n   ...\n}\nonly this identity. no identity qos rules.\nand then as configuration string, it should include json string, something like\n\n{\n    qos_consts.RULE_TYPE_BANDWIDTH_LIMIT: {\n        qos_consts.MAX_KBPS: {\n            \u0027type:range\u0027: [0, db_consts.DB_INTEGER_MAX_VALUE]},\n        qos_consts.MAX_BURST: {\n            \u0027type:range\u0027: [0, db_consts.DB_INTEGER_MAX_VALUE]},\n        qos_consts.DIRECTION: {\n            \u0027type:values\u0027: constants.VALID_DIRECTIONS}\n    },\n    qos_consts.RULE_TYPE_DSCP_MARKING: {\n        qos_consts.DSCP_MARK: {\u0027type:values\u0027: constants.VALID_DSCP_MARKS}\n    }\n}\n(this is copied from openstack neutron code. constants need to be expanded to actual string value. But you get the idea)\nthen the configuration value will be simply supported_rule in networking-odl\n\nWith this, several issues are solved as follows.\n\n- the lack of supported-qos-rules -\u003e networking-odl falls back to default\n- the presence of support-qos-rules: the backend knows it. the actual supported rules can be empty list.\n- also this is agnostic to actual qos rules. so in future no update is needed for the backend to support new qos rules.\n- configuration string will be directly supported_rules in networking-odl.\n\nMaybe we\u0027d like to write a documentation on those configuration values, what to be populated for the backend developers.",
+      "parentUuid": "5eb7c49d_d77ca3ce",
       "range": {
         "startLine": 74,
         "startChar": 0,
