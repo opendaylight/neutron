@@ -13,6 +13,8 @@ import com.google.common.collect.ImmutableSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.core.Application;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 
@@ -21,8 +23,16 @@ import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
  * that will be instantiated for JAXRS processing. This is necessary
  * because package scanning in jersey doesn't yet work in OSGi environment.
  */
+@Singleton
 public final class NeutronNorthboundRSApplication extends Application {
     private static final int HASHMAP_SIZE = 3;
+
+    private final NeutronNetworksNorthbound neutronNetworksNorthbound;
+
+    @Inject
+    public NeutronNorthboundRSApplication(NeutronNetworksNorthbound neutronNetworksNorthbound) {
+        this.neutronNetworksNorthbound = neutronNetworksNorthbound;
+    }
 
     @Override
     public Set<Class<?>> getClasses() {
@@ -34,7 +44,7 @@ public final class NeutronNorthboundRSApplication extends Application {
         return ImmutableSet.builderWithExpectedSize(32)
                 .add(getMOXyJsonProvider())
                 // Northbound URIs JAX RS Resources:
-                .add(new NeutronNetworksNorthbound())
+                .add(neutronNetworksNorthbound)
                 .add(new NeutronSubnetsNorthbound())
                 .add(new NeutronPortsNorthbound())
                 .add(new NeutronRoutersNorthbound())
