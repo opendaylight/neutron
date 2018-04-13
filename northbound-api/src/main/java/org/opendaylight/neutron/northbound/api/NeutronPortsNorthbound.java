@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -31,23 +30,8 @@ import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.NeutronPort;
 
 /**
- * Neutron Northbound REST APIs.<br>
- * This class provides REST APIs for managing neutron port objects
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for managing neutron port objects.
  */
-
 @Path("/ports")
 public final class NeutronPortsNorthbound
         extends AbstractNeutronNorthbound<NeutronPort, NeutronPortRequest, INeutronPortCRUD> {
@@ -65,7 +49,6 @@ public final class NeutronPortsNorthbound
     /**
      * Returns a list of all Ports.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackPorts.class)
@@ -131,7 +114,6 @@ public final class NeutronPortsNorthbound
     /**
      * Returns a specific Port.
      */
-
     @Path("{portUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -150,7 +132,6 @@ public final class NeutronPortsNorthbound
     /**
      * Creates new Ports.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -188,7 +169,6 @@ public final class NeutronPortsNorthbound
     /**
      * Updates a Port.
      */
-
     @Path("{portUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -206,7 +186,6 @@ public final class NeutronPortsNorthbound
     /**
      * Deletes a Port.
      */
-
     @Path("{portUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

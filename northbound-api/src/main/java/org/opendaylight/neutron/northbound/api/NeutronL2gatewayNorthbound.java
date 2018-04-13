@@ -29,26 +29,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Neutron Northbound REST APIs for L2 gateway.<br>
- * This class provides REST APIs for managing L2 gateway
- * *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
+ * Neutron Northbound REST APIs for L2 gateway.
  */
-
 @Path("/l2-gateways")
 public final class NeutronL2gatewayNorthbound
         extends AbstractNeutronNorthbound<NeutronL2gateway, NeutronL2gatewayRequest, INeutronL2gatewayCRUD> {
-    static final Logger LOG = LoggerFactory.getLogger(NeutronL2gatewayNorthbound.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronL2gatewayNorthbound.class);
 
     private static final String RESOURCE_NAME = "L2gateway";
 
@@ -73,7 +60,6 @@ public final class NeutronL2gatewayNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_CONFLICT, condition = "Conflict"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-
     public Response createL2gateway(final NeutronL2gatewayRequest input) {
         LOG.debug("CreateL2gateway     NeutronL2gatewayRequest");
         return create(input);

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -32,31 +31,16 @@ import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
 
 /**
- * Neutron Northbound REST APIs for Bgpvpn.<br>
- * This class provides REST APIs for managing neutron Bgpvpns
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for Bgpvpn.
  */
-
 @Path("/bgpvpns")
 public final class NeutronBgpvpnsNorthbound
         extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
 
+    private static final String RESOURCE_NAME = "Bgpvpn";
+
     @Context
     UriInfo uriInfo;
-
-    private static final String RESOURCE_NAME = "Bgpvpn";
 
     @Override
     protected String getResourceName() {
@@ -66,7 +50,6 @@ public final class NeutronBgpvpnsNorthbound
     /**
      * Returns a list of all Bgpvpns.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackBgpvpns.class)
@@ -126,7 +109,6 @@ public final class NeutronBgpvpnsNorthbound
     /**
      * Returns a specific Bgpvpn.
      */
-
     @Path("{bgpvpnUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -181,7 +163,6 @@ public final class NeutronBgpvpnsNorthbound
     /**
      * Deletes a Bgpvpn.
      */
-
     @Path("{bgpvpnUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

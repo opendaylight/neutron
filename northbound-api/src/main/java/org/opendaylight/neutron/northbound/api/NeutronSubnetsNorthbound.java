@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -32,25 +31,11 @@ import org.opendaylight.neutron.spi.NeutronSubnet;
 
 /**
  * Neutron Northbound REST APIs for Subnets.<br>
- * This class provides REST APIs for managing neutron Subnets
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
  */
-
 @Path("/subnets")
 public final class NeutronSubnetsNorthbound
         extends AbstractNeutronNorthbound<NeutronSubnet, NeutronSubnetRequest, INeutronSubnetCRUD> {
+
     private static final String RESOURCE_NAME = "Subnet";
 
     @Override
@@ -126,7 +111,6 @@ public final class NeutronSubnetsNorthbound
     /**
      * Returns a specific Subnet.
      */
-
     @Path("{subnetUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -145,7 +129,6 @@ public final class NeutronSubnetsNorthbound
     /**
      * Creates new Subnets.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -163,7 +146,6 @@ public final class NeutronSubnetsNorthbound
          * complete updated object.  So, that needs to be sent down to
          * folks to check
          */
-
         delta.setID(uuid);
         delta.setNetworkUUID(original.getNetworkUUID());
         delta.setTenantID(original.getTenantID());
@@ -174,7 +156,6 @@ public final class NeutronSubnetsNorthbound
     /**
      * Updates a Subnet.
      */
-
     @Path("{subnetUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -190,7 +171,6 @@ public final class NeutronSubnetsNorthbound
     /**
      * Deletes a Subnet.
      */
-
     @Path("{subnetUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

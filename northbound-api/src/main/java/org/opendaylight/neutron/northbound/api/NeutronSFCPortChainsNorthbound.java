@@ -27,23 +27,8 @@ import org.opendaylight.neutron.spi.INeutronSFCPortChainCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 
 /**
- * Neutron Northbound REST APIs for OpenStack SFC Port Chain.<br>
- * This class provides REST APIs for managing OpenStack SFC Port Chain
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for OpenStack SFC Port Chain.
  */
-
 @Path("/sfc/portchains")
 public final class NeutronSFCPortChainsNorthbound
         extends AbstractNeutronNorthbound<NeutronSFCPortChain, NeutronSFCPortChainRequest, INeutronSFCPortChainCRUD> {
@@ -58,7 +43,6 @@ public final class NeutronSFCPortChainsNorthbound
     /**
      * Returns a list of all SFC Port Chains.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -93,7 +77,6 @@ public final class NeutronSFCPortChainsNorthbound
     /**
      * Returns a specific SFC Port Chain.
      */
-
     @Path("{portChainUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -123,12 +106,11 @@ public final class NeutronSFCPortChainsNorthbound
     @Override
     protected void updateDelta(String uuid, NeutronSFCPortChain delta, NeutronSFCPortChain original) {
         /*
-         *  note: what we get appears to not be a delta but
+         * note: what we get appears to not be a delta but
          * rather an incomplete updated object.  So we need to set
          * the ID to complete the object and then send that down
          * for folks to check
          */
-
         delta.setID(uuid);
         delta.setTenantID(original.getTenantID());
     }
