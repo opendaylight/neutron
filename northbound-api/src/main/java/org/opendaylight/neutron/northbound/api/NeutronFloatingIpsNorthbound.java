@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -28,26 +27,12 @@ import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.NeutronFloatingIp;
 
 /**
- * Neutron Northbound REST APIs.<br>
- * This class provides REST APIs for managing Neutron Floating IPs
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for managing Neutron Floating IPs.
  */
-
 @Path("/floatingips")
 public final class NeutronFloatingIpsNorthbound
         extends AbstractNeutronNorthbound<NeutronFloatingIp, NeutronFloatingIpRequest, INeutronFloatingIpCRUD> {
+
     private static final String RESOURCE_NAME = "Floating IP";
 
     @Override
@@ -58,7 +43,6 @@ public final class NeutronFloatingIpsNorthbound
     /**
      * Returns a list of all FloatingIps.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -112,7 +96,6 @@ public final class NeutronFloatingIpsNorthbound
     /**
      * Returns a specific FloatingIp.
      */
-
     @Path("{floatingipUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -130,7 +113,6 @@ public final class NeutronFloatingIpsNorthbound
     /**
      * Creates new FloatingIps.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -143,7 +125,6 @@ public final class NeutronFloatingIpsNorthbound
     /**
      * Updates a FloatingIp.
      */
-
     @Path("{floatingipUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -159,7 +140,6 @@ public final class NeutronFloatingIpsNorthbound
     /**
      * Deletes a FloatingIp.
      */
-
     @Path("{floatingipUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

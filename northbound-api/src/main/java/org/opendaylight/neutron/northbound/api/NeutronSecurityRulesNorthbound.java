@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -29,25 +28,11 @@ import org.opendaylight.neutron.spi.NeutronSecurityRule;
 
 /**
  * Neutron Northbound REST APIs for Security Rule.<br>
- * This class provides REST APIs for managing neutron Security Rule
- *
- * <p>
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
  */
-
 @Path("/security-group-rules")
 public final class NeutronSecurityRulesNorthbound
         extends AbstractNeutronNorthbound<NeutronSecurityRule, NeutronSecurityRuleRequest, INeutronSecurityRuleCRUD> {
+
     private static final String RESOURCE_NAME = "Security Rule";
 
     @Override
@@ -116,7 +101,6 @@ public final class NeutronSecurityRulesNorthbound
     /**
      * Returns a specific Security Rule.
      */
-
     @Path("{securityRuleUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -134,7 +118,6 @@ public final class NeutronSecurityRulesNorthbound
     /**
      * Creates new Security Rule.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -147,7 +130,6 @@ public final class NeutronSecurityRulesNorthbound
     /**
      * Updates a Security Rule.
      */
-
     @Path("{securityRuleUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -163,7 +145,6 @@ public final class NeutronSecurityRulesNorthbound
     /**
      * Deletes a Security Rule.
      */
-
     @Path("{securityRuleUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

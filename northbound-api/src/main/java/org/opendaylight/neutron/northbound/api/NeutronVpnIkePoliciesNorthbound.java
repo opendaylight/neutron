@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -29,26 +28,12 @@ import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
 
 /**
- * Neutron Northbound REST APIs for VPN IKE Policy.<br>
- * This class provides REST APIs for managing neutron VPN IKE Policies
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for VPN IKE Policy.
  */
-
 @Path("/vpn/ikepolicies")
 public final class NeutronVpnIkePoliciesNorthbound
         extends AbstractNeutronNorthbound<NeutronVpnIkePolicy, NeutronVpnIkePolicyRequest, INeutronVpnIkePolicyCRUD> {
+
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     @Override
@@ -59,7 +44,6 @@ public final class NeutronVpnIkePoliciesNorthbound
     /**
      * Returns a list of all VPN IKE Policies.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -108,7 +92,6 @@ public final class NeutronVpnIkePoliciesNorthbound
     /**
      * Returns a specific VPN IKE Policy.
      */
-
     @Path("{policyID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -155,7 +138,6 @@ public final class NeutronVpnIkePoliciesNorthbound
     /**
      * Deletes a VPN IKE Policy.
      */
-
     @Path("{policyID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -29,23 +28,8 @@ import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIpSecPolicy;
 
 /**
- * Neutron Northbound REST APIs for VPN IPSEC Policy.<br>
- * This class provides REST APIs for managing neutron VPN IPSEC Policies
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for VPN IPSEC Policy.
  */
-
 @Path("/vpn/ipsecpolicies")
 public final class NeutronVpnIpSecPoliciesNorthbound extends
         AbstractNeutronNorthbound<NeutronVpnIpSecPolicy, NeutronVpnIpSecPolicyRequest, INeutronVpnIpSecPolicyCRUD> {
@@ -60,7 +44,6 @@ public final class NeutronVpnIpSecPoliciesNorthbound extends
     /**
      * Returns a list of all VPN IPSEC Policies.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -108,7 +91,6 @@ public final class NeutronVpnIpSecPoliciesNorthbound extends
     /**
      * Returns a specific VPN IPSEC Policy.
      */
-
     @Path("{policyID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -155,7 +137,6 @@ public final class NeutronVpnIpSecPoliciesNorthbound extends
     /**
      * Deletes a VPN IPSEC Policy.
      */
-
     @Path("{policyID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

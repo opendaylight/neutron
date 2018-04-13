@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -27,26 +26,12 @@ import org.opendaylight.neutron.spi.INeutronMeteringLabelCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 
 /**
- * Neutron Northbound REST APIs for Metering Lables.<br>
- * This class provides REST APIs for managing neutron metering labels
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for Metering Lables.
  */
-
 @Path("/metering/metering-labels")
 public final class NeutronMeteringLabelsNorthbound extends
         AbstractNeutronNorthbound<NeutronMeteringLabel, NeutronMeteringLabelRequest, INeutronMeteringLabelCRUD> {
+
     private static final String RESOURCE_NAME = "Metering Label";
 
     @Override
@@ -57,7 +42,6 @@ public final class NeutronMeteringLabelsNorthbound extends
     /**
      * Returns a list of all metering labels.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
@@ -95,7 +79,6 @@ public final class NeutronMeteringLabelsNorthbound extends
     /**
      * Returns a specific metering label.
      */
-
     @Path("{labelUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -127,7 +110,6 @@ public final class NeutronMeteringLabelsNorthbound extends
     /**
      * Deletes a Metering Label.
      */
-
     @Path("{labelUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

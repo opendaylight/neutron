@@ -27,23 +27,8 @@ import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
 
 /**
- * Neutron Northbound REST APIs for OpenStack SFC Port Pair.<br>
- * This class provides REST APIs for managing OpenStack SFC Port Pair
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for OpenStack SFC Port Pair.
  */
-
 @Path("/sfc/portpairgroups")
 public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNorthbound<NeutronSFCPortPairGroup,
         NeutronSFCPortPairGroupRequest, INeutronSFCPortPairGroupCRUD> {
@@ -58,7 +43,6 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     /**
      * Returns a list of all SFC Port Pair Groups.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -94,7 +78,6 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     /**
      * Returns a specific SFC Port Pair Group.
      */
-
     @Path("{portPairGroupUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -124,12 +107,11 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     @Override
     protected void updateDelta(String uuid, NeutronSFCPortPairGroup delta, NeutronSFCPortPairGroup original) {
         /*
-         *  note: what we get appears to not be a delta but
+         * Note: what we get appears to not be a delta but
          * rather an incomplete updated object.  So we need to set
          * the ID to complete the object and then send that down
          * for folks to check
          */
-
         delta.setID(uuid);
         delta.setTenantID(original.getTenantID());
     }
@@ -152,7 +134,6 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     /**
      * Deletes the SFC Port Pair Group.
      */
-
     @Path("{portPairGroupUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -29,27 +28,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Neutron Northbound REST APIs for L2 gateway Connection.<br>
- * This class provides REST APIs for managing L2 gateway Connection
- * * *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
+ * Neutron Northbound REST APIs for L2 gateway Connection.
  */
-
 @Path("/l2gateway-connections")
 public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbound<NeutronL2gatewayConnection,
         NeutronL2gatewayConnectionRequest, INeutronL2gatewayConnectionCRUD> {
 
-    static final Logger LOG = LoggerFactory.getLogger(NeutronL2gatewayConnectionNorthbound.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronL2gatewayConnectionNorthbound.class);
 
     private static final String RESOURCE_NAME = "L2gatewayConnection";
 
@@ -82,7 +67,6 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
 
     /**
      * Returns a list of all L2gateway Connections.
-     *
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -112,7 +96,7 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
                     && (queryConnectionID == null || queryConnectionID.equals(connection.getID()))
                     && (queryL2gatewayID == null || queryL2gatewayID.equals(connection.getL2gatewayID()))
                     && (queryNetworkID == null || queryNetworkID.equals(connection.getNetworkID()))
-                    && (querySegmentID == null || (Integer.valueOf(querySegmentID).equals(connection.getSegmentID())))
+                    && (querySegmentID == null || Integer.valueOf(querySegmentID).equals(connection.getSegmentID()))
                     && (queryPortID == null || queryPortID.equals(connection.getPortID()))) {
                 if (fields.size() > 0) {
                     ans.add(connection.extractFields(fields));

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -20,6 +19,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
 public final class NeutronSecurityGroupRequest implements INeutronRequest<NeutronSecurityGroup> {
+
     /**
     * See OpenStack Network API v2.0 Reference for a
     * description of annotated attributes and operations.

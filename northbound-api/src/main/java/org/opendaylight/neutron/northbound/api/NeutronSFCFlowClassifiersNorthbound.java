@@ -27,26 +27,12 @@ import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
 
 /**
- * Neutron Northbound REST APIs for OpenStack SFC Flow Classifier.<br>
- * This class provides REST APIs for managing OpenStack SFC Flow Classifier
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for OpenStack SFC Flow Classifier.
  */
-
 @Path("/sfc/flowclassifiers")
 public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNorthbound<NeutronSFCFlowClassifier,
         NeutronSFCFlowClassifierRequest, INeutronSFCFlowClassifierCRUD> {
+
     private static final String RESOURCE_NAME = "Sfc Flow Classifier";
 
     @Override
@@ -57,7 +43,6 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     /**
      * Returns a list of all SFC Flow Classifiers.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -120,7 +105,6 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     /**
      * Returns a specific SFC Flow Classifier.
      */
-
     @Path("{flowClassifierUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -150,12 +134,11 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     @Override
     protected void updateDelta(String uuid, NeutronSFCFlowClassifier delta, NeutronSFCFlowClassifier original) {
         /*
-         *  note: what we get appears to not be a delta but
+         * note: what we get appears to not be a delta but
          * rather an incomplete updated object.  So we need to set
          * the ID to complete the object and then send that down
          * for folks to check
          */
-
         delta.setID(uuid);
         delta.setTenantID(original.getTenantID());
     }

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -29,28 +28,12 @@ import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouterInterface;
 
 /**
- * Neutron Northbound REST APIs.<br>
- * This class provides REST APIs for managing neutron routers
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for managing neutron routers.
  */
-
 @Path("/routers")
 public final class NeutronRoutersNorthbound
         extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD> {
-    static final String ROUTER_INTERFACE_STR = "network:router_interface";
-    static final String ROUTER_GATEWAY_STR = "network:router_gateway";
+
     private static final String RESOURCE_NAME = "Router";
 
     @Override
@@ -61,7 +44,6 @@ public final class NeutronRoutersNorthbound
     /**
      * Returns a list of all Routers.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackRouters.class)
@@ -111,7 +93,6 @@ public final class NeutronRoutersNorthbound
     /**
      * Returns a specific Router.
      */
-
     @Path("{routerUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -131,7 +112,6 @@ public final class NeutronRoutersNorthbound
     /**
      * Creates new Routers.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -151,7 +131,6 @@ public final class NeutronRoutersNorthbound
     /**
      * Updates a Router.
      */
-
     @Path("{routerUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -167,7 +146,6 @@ public final class NeutronRoutersNorthbound
     /**
      * Deletes a Router.
      */
-
     @Path("{routerUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
@@ -180,7 +158,6 @@ public final class NeutronRoutersNorthbound
     /**
      * Adds an interface to a router.
      */
-
     @Path("{routerUUID}/add_router_interface")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -28,20 +27,7 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 
 /**
- * Neutron Northbound REST APIs for Load Balancer HealthMonitor.<br>
- * This class provides REST APIs for managing neutron LoadBalancerHealthMonitor
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
+ * Neutron Northbound REST APIs for Load Balancer HealthMonitor.
  *
  */
 @Path("/lbaas/healthmonitors")
@@ -65,7 +51,6 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-
     public Response listGroups(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -127,7 +112,6 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     /**
      * Returns a specific LoadBalancerHealthMonitor.
      */
-
     @Path("{loadBalancerHealthMonitorID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -146,7 +130,6 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     /**
      * Creates new LoadBalancerHealthMonitor.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -174,7 +157,7 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
 
     /**
      * Deletes a LoadBalancerHealthMonitor.
-     * */
+     */
     @Path("{loadBalancerHealthMonitorID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
