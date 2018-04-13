@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -29,28 +28,11 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
 /**
- * Neutron Northbound REST APIs for LoadBalancerPool Policies.<br>
- * This class provides REST APIs for managing neutron LoadBalancerPool Policies
+ * Neutron Northbound REST APIs for LoadBalancerPool Policies.
  *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
- */
-
-/**
- * For now, the LB pool member data is maintained with the INeutronLoadBalancerPoolCRUD,
+ * <p>For now, the LB pool member data is maintained with the INeutronLoadBalancerPoolCRUD,
  * and not duplicated within the INeutronLoadBalancerPoolMemberCRUD's cache.
  */
-
 @Path("/lbaas/pools")
 public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound<NeutronLoadBalancerPool,
         NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD> {
@@ -71,7 +53,6 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
             @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
-
     public Response listGroups(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -120,7 +101,6 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     /**
      * Returns a specific LoadBalancerPool.
      */
-
     @Path("{loadBalancerPoolID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -138,7 +118,6 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     /**
      * Creates new LoadBalancerPool.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -166,7 +145,6 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     /**
      * Deletes a LoadBalancerPool.
      */
-
     @Path("{loadBalancerPoolUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
@@ -311,7 +289,6 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     /**
      * Updates a LB member pool.
      */
-
     @Path("{loadBalancerPoolUUID}/members/{loadBalancerPoolMemberUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -337,7 +314,6 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     /**
      * Deletes a LoadBalancerPoolMember.
      */
-
     @Path("{loadBalancerPoolUUID}/members/{loadBalancerPoolMemberUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

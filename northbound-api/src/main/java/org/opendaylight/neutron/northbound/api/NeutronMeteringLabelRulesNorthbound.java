@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -28,25 +27,11 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 
 /**
  * Neutron Northbound REST APIs for Metering Lable Rules.<br>
- * This class provides REST APIs for managing neutron metering label rules
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
  */
-
 @Path("/metering/metering-label-rules")
 public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbound<NeutronMeteringLabelRule,
         NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD> {
+
     private static final String RESOURCE_NAME = "Metering Label Rule";
 
     @Override
@@ -57,7 +42,6 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     /**
      * Returns a list of all metering label rules.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
@@ -98,7 +82,6 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     /**
      * Returns a specific metering label rule.
      */
-
     @Path("{ruleUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -145,7 +128,6 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     /**
      * Deletes a Metering Label rule.
      */
-
     @Path("{ruleUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

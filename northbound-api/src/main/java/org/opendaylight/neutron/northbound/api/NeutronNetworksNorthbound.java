@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -32,31 +31,16 @@ import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 
 /**
- * Neutron Northbound REST APIs for Network.<br>
- * This class provides REST APIs for managing neutron Networks
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for Network.
  */
-
 @Path("/networks")
 public final class NeutronNetworksNorthbound
         extends AbstractNeutronNorthbound<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD> {
 
+    private static final String RESOURCE_NAME = "Network";
+
     @Context
     UriInfo uriInfo;
-
-    private static final String RESOURCE_NAME = "Network";
 
     @Override
     protected String getResourceName() {
@@ -66,7 +50,6 @@ public final class NeutronNetworksNorthbound
     /**
      * Returns a list of all Networks.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     //@TypeHint(OpenStackNetworks.class)
@@ -133,7 +116,6 @@ public final class NeutronNetworksNorthbound
     /**
      * Returns a specific Network.
      */
-
     @Path("{netUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -193,7 +175,6 @@ public final class NeutronNetworksNorthbound
     /**
      * Deletes a Network.
      */
-
     @Path("{netUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

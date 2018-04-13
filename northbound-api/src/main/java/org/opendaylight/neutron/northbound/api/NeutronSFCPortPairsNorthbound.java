@@ -27,23 +27,8 @@ import org.opendaylight.neutron.spi.INeutronSFCPortPairCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortPair;
 
 /**
- * Neutron Northbound REST APIs for OpenStack SFC Port Pair.<br>
- * This class provides REST APIs for managing OpenStack SFC Port Pair
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for OpenStack SFC Port Pair.
  */
-
 @Path("/sfc/portpairs")
 public final class NeutronSFCPortPairsNorthbound
         extends AbstractNeutronNorthbound<NeutronSFCPortPair, NeutronSFCPortPairRequest, INeutronSFCPortPairCRUD> {
@@ -58,7 +43,6 @@ public final class NeutronSFCPortPairsNorthbound
     /**
      * Returns a list of all SFC Port Pairs.
      */
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
@@ -97,7 +81,6 @@ public final class NeutronSFCPortPairsNorthbound
     /**
      * Returns a specific SFC Port Pair.
      */
-
     @Path("{portPairUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -155,7 +138,6 @@ public final class NeutronSFCPortPairsNorthbound
     /**
      * Deletes the SFC Port Pair.
      */
-
     @Path("{portPairUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),

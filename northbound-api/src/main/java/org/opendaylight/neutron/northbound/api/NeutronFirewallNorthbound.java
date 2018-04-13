@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import java.net.HttpURLConnection;
@@ -28,21 +27,7 @@ import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
 
 /**
- * Neutron Northbound REST APIs for Firewall.<br>
- * This class provides REST APIs for managing neutron Firewall
- *
- * <br>
- * <br>
- * Authentication scheme : <b>HTTP Basic</b><br>
- * Authentication realm : <b>opendaylight</b><br>
- * Transport : <b>HTTP and HTTPS</b><br>
- * <br>
- * HTTPS Authentication is disabled by default. Administrator can enable it in
- * tomcat-server.xml after adding a proper keystore / SSL certificate from a
- * trusted authority.<br>
- * More info :
- * http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html#Configuration
- *
+ * Neutron Northbound REST APIs for Firewall.
  */
 @Path("/fw/firewalls")
 public final class NeutronFirewallNorthbound
@@ -105,7 +90,6 @@ public final class NeutronFirewallNorthbound
     /**
      * Returns a specific Firewall.
      */
-
     @Path("{firewallUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
@@ -123,7 +107,6 @@ public final class NeutronFirewallNorthbound
     /**
      * Creates new Firewall.
      */
-
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
@@ -136,7 +119,6 @@ public final class NeutronFirewallNorthbound
     /**
      * Updates a Firewall.
      */
-
     @Path("{firewallUUID}")
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
@@ -151,7 +133,6 @@ public final class NeutronFirewallNorthbound
     /**
      * Deletes a Firewall.
      */
-
     @Path("{firewallUUID}")
     @DELETE
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
