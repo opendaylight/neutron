@@ -28,6 +28,9 @@
   <properties>
     <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.jacoco.itReportPath>../target/jacoco-it.exec</sonar.jacoco.itReportPath>
+
+    <!-- Find duplicates on Classpath, to avoid Jetty version conflicts -->
+    <duplicate-finder.skip>false</duplicate-finder.skip>
   </properties>
   <scm>
     <connection>scm:git:ssh://git.opendaylight.org:29418/neutron.git</connection>
