@@ -11,7 +11,7 @@ package org.opendaylight.neutron.spi;
 /**
  * This class contains behaviour common to Neutron configuration objects.
  */
-public interface INeutronBaseAttributes<T extends INeutronBaseAttributes> extends INeutronObject<T> {
+public interface INeutronBaseAttributes<T extends INeutronBaseAttributes<T>> extends INeutronObject<T> {
 
     String getName();
 

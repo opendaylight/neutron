@@ -11,7 +11,7 @@ package org.opendaylight.neutron.spi;
 /**
  * This class contains behaviour common to Neutron configuration objects.
  */
-public interface INeutronAdminAttributes<T extends INeutronAdminAttributes> extends INeutronBaseAttributes<T> {
+public interface INeutronAdminAttributes<T extends INeutronAdminAttributes<T>> extends INeutronBaseAttributes<T> {
 
     Boolean getAdminStateUp();
 
