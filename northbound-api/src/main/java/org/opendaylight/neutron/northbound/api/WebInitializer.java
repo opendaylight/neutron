@@ -29,14 +29,14 @@ public class WebInitializer {
     private final WebContextRegistration registraton;
 
     @Inject
-    public WebInitializer(WebServer webServer, WebContextSecurer webContextSecurer) throws ServletException {
+    public WebInitializer(WebServer webServer, WebContextSecurer webContextSecurer, NeutronNorthboundRSApplication app)
+            throws ServletException {
         WebContextBuilder webContextBuilder = WebContext.builder()
             .contextPath("/controller/nb/v2/neutron").supportsSessions(true)
             // TODO confirm through testing that Jersey & Neutron are fine without sessions, and false instead true
 
             .addServlet(ServletDetails.builder()
-                    .servlet(new com.sun.jersey.spi.container.servlet.ServletContainer(
-                            new NeutronNorthboundRSApplication()))
+                    .servlet(new com.sun.jersey.spi.container.servlet.ServletContainer(app))
                     .addUrlPattern("/*").build());
 
         webContextSecurer.requireAuthentication(webContextBuilder, "/*");

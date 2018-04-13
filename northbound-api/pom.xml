@@ -66,6 +66,8 @@
     </dependency>
     <dependency>
       <groupId>org.osgi</groupId>
+      <!-- TODO Remove this when AbstractNeutronNorthbound does not need
+           to use bundleContext.getServiceReferences() anymore... -->
       <artifactId>org.osgi.core</artifactId>
     </dependency>
     <dependency>
@@ -73,6 +75,11 @@
       <artifactId>javax.inject</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+     <groupId>org.ops4j.pax.cdi</groupId>
+     <artifactId>pax-cdi-api</artifactId>
+     <optional>true</optional>
+   </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>web-api</artifactId>
