@@ -12,14 +12,23 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
+import java.util.Collection;
 import java.util.List;
 import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
-import org.opendaylight.neutron.spi.NeutronCRUDInterfaces;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
+
     // T extends INeutronObject<T> as 0th type argument
     private static final int NEUTRON_ARGUMENT_TYPE_INDEX = 0;
     // NeutronRequest extends INeutronRequest<T> as 1st type argument
@@ -71,11 +80,25 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     protected I getNeutronCRUD() {
         // cls = I.class
         Class<I> cls = getActualTypeArgument(NEUTRON_CRUD_TYPE_INDEX);
-        I neutronCrud = NeutronCRUDInterfaces.fetchINeutronCRUD(cls, (Object) this);
+        I neutronCrud = fetchINeutronCRUD(cls, (Object) this);
         if (neutronCrud == null) {
             throw new ServiceUnavailableException(serviceUnavailable());
         }
         return neutronCrud;
+    }
+
+    private static <T extends INeutronObject<T>, I extends INeutronCRUD<T>> I fetchINeutronCRUD(Class<I> clazz,
+            Object bundle) {
+        try {
+            BundleContext bundleCtx = FrameworkUtil.getBundle(bundle.getClass()).getBundleContext();
+            Collection<ServiceReference<I>> services = bundleCtx.getServiceReferences(clazz, null);
+            for (ServiceReference<I> service : services) {
+                return bundleCtx.getService(service);
+            }
+        } catch (InvalidSyntaxException e) {
+            LOG.error("Error in getInstances", e);
+        }
+        return null;
     }
 
     protected Response show(String uuid,
