@@ -14,7 +14,7 @@ import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.
 /**
  * This class contains behaviour common to Neutron configuration objects.
  */
-public interface INeutronObject<T extends INeutronObject> {
+public interface INeutronObject<T extends INeutronObject<T>> {
 
     String getID();
 
