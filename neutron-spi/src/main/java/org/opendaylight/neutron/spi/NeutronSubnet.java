@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> {
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronCRUDInterfaces.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronSubnet.class);
 
     private static final long serialVersionUID = 1L;
     private static final int IPV4_VERSION = 4;
