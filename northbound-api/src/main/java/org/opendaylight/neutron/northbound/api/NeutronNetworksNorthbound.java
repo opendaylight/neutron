@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -27,17 +29,25 @@ import javax.ws.rs.core.UriInfo;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
+import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
+import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Network.
  */
+@Singleton
 @Path("/networks")
 public final class NeutronNetworksNorthbound
         extends AbstractNeutronNorthbound<NeutronNetwork, NeutronNetworkRequest, INeutronNetworkCRUD> {
 
     private static final String RESOURCE_NAME = "Network";
+
+    @Inject
+    public NeutronNetworksNorthbound(@OsgiService INeutronNetworkCRUD neutronNetworkCRUD) {
+        super(neutronNetworkCRUD);
+    }
 
     @Context
     UriInfo uriInfo;
@@ -78,7 +88,7 @@ public final class NeutronNetworksNorthbound
             @DefaultValue("false") @QueryParam("page_reverse") Boolean pageReverse
     // sorting not supported
     ) {
-        INeutronNetworkCRUD networkInterface = getNeutronCRUD();
+        INeutronCRUD<NeutronNetwork> networkInterface = getNeutronCRUD();
         List<NeutronNetwork> allNetworks = networkInterface.getAll();
         List<NeutronNetwork> ans = new ArrayList<>();
         for (NeutronNetwork network : allNetworks) {
@@ -110,7 +120,6 @@ public final class NeutronNetworksNorthbound
         }
 
         return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronNetworkRequest(ans)).build();
-
     }
 
     /**
