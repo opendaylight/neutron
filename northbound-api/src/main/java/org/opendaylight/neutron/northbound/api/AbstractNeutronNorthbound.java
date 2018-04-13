@@ -14,6 +14,7 @@ import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
@@ -41,6 +42,23 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
 
     private static final String INTERFACE_NAME_BASE = " CRUD Interface";
     private static final String UUID_NO_EXIST_BASE = " UUID does not exist.";
+
+    private final I neutronCRUD;
+
+    /**
+     * Default constructor.
+     *
+     * @deprecated Replace usage of this method with direct dependency injection,
+     *             see NeutronNetworksNorthbound for how-to.  This will shortly be removed.
+     */
+    @Deprecated
+    protected AbstractNeutronNorthbound() {
+        this.neutronCRUD = null;
+    }
+
+    protected AbstractNeutronNorthbound(I neutronCRUD) {
+        this.neutronCRUD = Objects.requireNonNull(neutronCRUD, "neutronCRUD");
+    }
 
     protected final String serviceUnavailable() {
         return getResourceName() + INTERFACE_NAME_BASE + RestMessages.SERVICEUNAVAILABLE.toString();
@@ -78,6 +96,11 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     protected I getNeutronCRUD() {
+        // TODO remove null check and everything below when the @deprecated default constructor is removed...
+        if (this.neutronCRUD != null) {
+            return this.neutronCRUD;
+        }
+
         // cls = I.class
         Class<I> cls = getActualTypeArgument(NEUTRON_CRUD_TYPE_INDEX);
         I neutronCrud = fetchINeutronCRUD(cls, (Object) this);
