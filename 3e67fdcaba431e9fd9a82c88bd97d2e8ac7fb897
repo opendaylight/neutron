@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "528b637c_6ca25108",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-15T10:16:30Z",
+      "side": 1,
+      "message": "I don\u0027t understand the difference you make between \"knowing qos rules\" and \"supporting qos rules.\" Could you please explain more what this means? I find this hard to understand because in my mind a specific qos rule is either supported or not, no? You seem to have three states: (1) not known and not supported, (2) known and not supported, (3) known and supported.\n\nIn general, WRT nitrogen and oxygen where (if I understand you correctly) the qos features are supported by the netvirt code but not declared as features in the operational md-sal, I would say that the correct solution could be for the operator to define the features manually in the ml2 config. n-odl checks the config first and only queries odl if the config value is not present. So, if a deployment has a newer",
+      "parentUuid": "42aab9fb_b2dce835",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 5
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b943caef_282f1256",
         "filename": "model/src/main/yang/neutron-extensions.yang",
         "patchSetId": 1
@@ -275,6 +299,30 @@
       "side": 1,
       "message": "ODL neutron northbound shouldn\u0027t be a blocker for ODL backend like netvirt to support new qos rules.\n\nLet\u0027s suppose new qos rule is added at openstack neutron api.\nand the backend wants to support it.\nWith your proposal, we need to add new identity.\nAlso what if they backport new qos rule support to older version? e.g. Neon -\u003e Fluorine\nIt\u0027s undesirable for the backend implementer to update ODL neutron yang model.\n\n\n\nMy proposal is as follows.\n\nidentity supported-qos-rules {\n   ...\n}\nonly this identity. no identity qos rules.\nand then as configuration string, it should include json string, something like\n\n{\n    qos_consts.RULE_TYPE_BANDWIDTH_LIMIT: {\n        qos_consts.MAX_KBPS: {\n            \u0027type:range\u0027: [0, db_consts.DB_INTEGER_MAX_VALUE]},\n        qos_consts.MAX_BURST: {\n            \u0027type:range\u0027: [0, db_consts.DB_INTEGER_MAX_VALUE]},\n        qos_consts.DIRECTION: {\n            \u0027type:values\u0027: constants.VALID_DIRECTIONS}\n    },\n    qos_consts.RULE_TYPE_DSCP_MARKING: {\n        qos_consts.DSCP_MARK: {\u0027type:values\u0027: constants.VALID_DSCP_MARKS}\n    }\n}\n(this is copied from openstack neutron code. constants need to be expanded to actual string value. But you get the idea)\nthen the configuration value will be simply supported_rule in networking-odl\n\nWith this, several issues are solved as follows.\n\n- the lack of supported-qos-rules -\u003e networking-odl falls back to default\n- the presence of support-qos-rules: the backend knows it. the actual supported rules can be empty list.\n- also this is agnostic to actual qos rules. so in future no update is needed for the backend to support new qos rules.\n- configuration string will be directly supported_rules in networking-odl.\n\nMaybe we\u0027d like to write a documentation on those configuration values, what to be populated for the backend developers.",
       "parentUuid": "5eb7c49d_d77ca3ce",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 1
+      },
+      "revId": "3e67fdcaba431e9fd9a82c88bd97d2e8ac7fb897",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80770934_9a4fc572",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-15T10:16:30Z",
+      "side": 1,
+      "message": "At what rate do you expect these rule types will be added and how many will there be? I don\u0027t see this as much of a block especially because of the ability to hard code features in the ml2 config. \n\nMy main issue with your proposal is that, as far as I can tell, qos rules are just another set of features and I don\u0027t like there being multiple feature negotiation mechanisms.",
+      "parentUuid": "b8e1dbec_eed98fc8",
       "range": {
         "startLine": 74,
         "startChar": 0,
