@@ -97,6 +97,7 @@
     <module>artifacts</module>
     <module>features/production</module>
     <module>features/test</module>
+    <module>karaf</module>
     <module>integration/test-standalone</module>
     <module>integration/test</module>
     <module>model</module>
@@ -132,16 +133,4 @@
     <tag>HEAD</tag>
     <url>https://wiki.opendaylight.org/view/NeutronNorthbound:Main</url>
   </scm>
-
-  <profiles>
-    <profile>
-      <id>karaf</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <modules>
-        <module>karaf</module>
-      </modules>
-    </profile>
-  </profiles>
 </project>
