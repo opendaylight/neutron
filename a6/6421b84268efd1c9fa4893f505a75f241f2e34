@@ -1,0 +1,8 @@
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+1: Daniel Farrell <dfarrell@redhat.com>
+Code-Review+2: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-by: Isaku Yamahata <isaku.yamahata@gmail.com>
+Submitted-at: Mon, 16 Apr 2018 18:05:07 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/70914
+Project: neutron
+Branch: refs/heads/stable/carbon
