@@ -65,12 +65,6 @@
       <artifactId>jetty-servlets</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.osgi</groupId>
-      <!-- TODO Remove this when AbstractNeutronNorthbound does not need
-           to use bundleContext.getServiceReferences() anymore... -->
-      <artifactId>org.osgi.core</artifactId>
-    </dependency>
-    <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
       <optional>true</optional>
