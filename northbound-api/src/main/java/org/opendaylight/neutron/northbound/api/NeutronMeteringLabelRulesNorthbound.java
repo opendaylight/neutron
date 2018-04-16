@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,15 +26,22 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
+import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Metering Lable Rules.<br>
  */
+@Singleton
 @Path("/metering/metering-label-rules")
 public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNorthbound<NeutronMeteringLabelRule,
         NeutronMeteringLabelRuleRequest, INeutronMeteringLabelRuleCRUD> {
 
     private static final String RESOURCE_NAME = "Metering Label Rule";
+
+    @Inject
+    public NeutronMeteringLabelRulesNorthbound(@OsgiService INeutronMeteringLabelRuleCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {

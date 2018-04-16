@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,11 +32,17 @@ import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
 /**
  * Neutron Northbound REST APIs for VPN IKE Policy.
  */
+@Singleton
 @Path("/vpn/ikepolicies")
 public final class NeutronVpnIkePoliciesNorthbound
         extends AbstractNeutronNorthbound<NeutronVpnIkePolicy, NeutronVpnIkePolicyRequest, INeutronVpnIkePolicyCRUD> {
 
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
+
+    @Inject
+    public NeutronVpnIkePoliciesNorthbound(@Singleton INeutronVpnIkePolicyCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {

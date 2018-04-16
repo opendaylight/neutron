@@ -28,10 +28,102 @@ public final class NeutronNorthboundRSApplication extends Application {
     private static final int HASHMAP_SIZE = 3;
 
     private final NeutronNetworksNorthbound neutronNetworksNorthbound;
+    private final NeutronSubnetsNorthbound neutronSubnetsNorthbound;
+    private final NeutronPortsNorthbound neutronPortsNorthbound;
+    private final NeutronRoutersNorthbound neutronRoutersNorthbound;
+    private final NeutronFloatingIpsNorthbound neutronFloatingIpsNorthbound;
+    private final NeutronSecurityGroupsNorthbound neutronSecurityGroupsNorthbound;
+    private final NeutronSecurityRulesNorthbound neutronSecurityRulesNorthbound;
+    private final NeutronFirewallNorthbound neutronFirewallNorthbound;
+    private final NeutronFirewallPolicyNorthbound neutronFirewallPolicyNorthbound;
+    private final NeutronFirewallRulesNorthbound neutronFirewallRulesNorthbound;
+    private final NeutronLoadBalancerNorthbound neutronLoadBalancerNorthbound;
+    private final NeutronLoadBalancerListenerNorthbound neutronLoadBalancerListenerNorthbound;
+    private final NeutronLoadBalancerPoolNorthbound neutronLoadBalancerPoolNorthbound;
+    private final NeutronBgpvpnsNorthbound neutronBgpvpnsNorthbound;
+    private final NeutronL2gatewayNorthbound neutronL2gatewayNorthbound;
+    private final NeutronL2gatewayConnectionNorthbound neutronL2gatewayConnectionNorthbound;
+    private final NeutronLoadBalancerHealthMonitorNorthbound neutronLoadBalancerHealthMonitorNorthbound;
+    private final NeutronMeteringLabelsNorthbound neutronMeteringLabelsNorthbound;
+    private final NeutronMeteringLabelRulesNorthbound neutronMeteringLabelRulesNorthbound;
+    private final NeutronVpnServicesNorthbound neutronVpnServicesNorthbound;
+    private final NeutronVpnIkePoliciesNorthbound neutronVpnIkePoliciesNorthbound;
+    private final NeutronVpnIpSecPoliciesNorthbound neutronVpnIpSecPoliciesNorthbound;
+    private final NeutronVpnIpSecSiteConnectionsNorthbound neutronVpnIpSecSiteConnectionsNorthbound;
+    private final NeutronSFCFlowClassifiersNorthbound neutronSFCFlowClassifiersNorthbound;
+    private final NeutronSFCPortChainsNorthbound neutronSFCPortChainsNorthbound;
+    private final NeutronSFCPortPairGroupsNorthbound neutronSFCPortPairGroupsNorthbound;
+    private final NeutronSFCPortPairsNorthbound neutronSFCPortPairsNorthbound;
+    private final NeutronQosPolicyNorthbound neutronQosPolicyNorthbound;
+    private final NeutronTrunksNorthbound neutronTrunksNorthbound;
+    private final NeutronTapServiceNorthbound neutronTapServiceNorthbound;
+    private final NeutronTapFlowNorthbound neutronTapFlowNorthbound;
 
     @Inject
-    public NeutronNorthboundRSApplication(NeutronNetworksNorthbound neutronNetworksNorthbound) {
+    public NeutronNorthboundRSApplication(
+            NeutronNetworksNorthbound neutronNetworksNorthbound,
+            NeutronSubnetsNorthbound neutronSubnetsNorthbound,
+            NeutronPortsNorthbound neutronPortsNorthbound,
+            NeutronRoutersNorthbound neutronRoutersNorthbound,
+            NeutronFloatingIpsNorthbound neutronFloatingIpsNorthbound,
+            NeutronSecurityGroupsNorthbound neutronSecurityGroupsNorthbound,
+            NeutronSecurityRulesNorthbound neutronSecurityRulesNorthbound,
+            NeutronFirewallNorthbound neutronFirewallNorthbound,
+            NeutronFirewallPolicyNorthbound neutronFirewallPolicyNorthbound,
+            NeutronFirewallRulesNorthbound neutronFirewallRulesNorthbound,
+            NeutronLoadBalancerListenerNorthbound neutronLoadBalancerListenerNorthbound,
+            NeutronLoadBalancerNorthbound neutronLoadBalancerNorthbound,
+            NeutronLoadBalancerPoolNorthbound neutronLoadBalancerPoolNorthbound,
+            NeutronBgpvpnsNorthbound neutronBgpvpnsNorthbound,
+            NeutronL2gatewayNorthbound neutronL2gatewayNorthbound,
+            NeutronL2gatewayConnectionNorthbound neutronL2gatewayConnectionNorthbound,
+            NeutronLoadBalancerHealthMonitorNorthbound neutronLoadBalancerHealthMonitorNorthbound,
+            NeutronMeteringLabelsNorthbound neutronMeteringLabelsNorthbound,
+            NeutronMeteringLabelRulesNorthbound neutronMeteringLabelRulesNorthbound,
+            NeutronVpnServicesNorthbound neutronVpnServicesNorthbound,
+            NeutronVpnIkePoliciesNorthbound neutronVpnIkePoliciesNorthbound,
+            NeutronVpnIpSecSiteConnectionsNorthbound neutronVpnIpSecSiteConnectionsNorthbound,
+            NeutronVpnIpSecPoliciesNorthbound neutronVpnIpSecPoliciesNorthbound,
+            NeutronSFCFlowClassifiersNorthbound neutronSFCFlowClassifiersNorthbound,
+            NeutronSFCPortChainsNorthbound neutronSFCPortChainsNorthbound,
+            NeutronSFCPortPairGroupsNorthbound neutronSFCPortPairGroupsNorthbound,
+            NeutronSFCPortPairsNorthbound neutronSFCPortPairsNorthbound,
+            NeutronQosPolicyNorthbound neutronQosPolicyNorthbound,
+            NeutronTrunksNorthbound neutronTrunksNorthbound,
+            NeutronTapServiceNorthbound neutronTapServiceNorthbound,
+            NeutronTapFlowNorthbound neutronTapFlowNorthbound) {
+
         this.neutronNetworksNorthbound = neutronNetworksNorthbound;
+        this.neutronSubnetsNorthbound = neutronSubnetsNorthbound;
+        this.neutronPortsNorthbound = neutronPortsNorthbound;
+        this.neutronRoutersNorthbound = neutronRoutersNorthbound;
+        this.neutronFloatingIpsNorthbound = neutronFloatingIpsNorthbound;
+        this.neutronSecurityGroupsNorthbound = neutronSecurityGroupsNorthbound;
+        this.neutronSecurityRulesNorthbound = neutronSecurityRulesNorthbound;
+        this.neutronFirewallNorthbound = neutronFirewallNorthbound;
+        this.neutronFirewallRulesNorthbound = neutronFirewallRulesNorthbound;
+        this.neutronLoadBalancerListenerNorthbound = neutronLoadBalancerListenerNorthbound;
+        this.neutronLoadBalancerNorthbound = neutronLoadBalancerNorthbound;
+        this.neutronFirewallPolicyNorthbound = neutronFirewallPolicyNorthbound;
+        this.neutronLoadBalancerPoolNorthbound = neutronLoadBalancerPoolNorthbound;
+        this.neutronBgpvpnsNorthbound = neutronBgpvpnsNorthbound;
+        this.neutronL2gatewayNorthbound = neutronL2gatewayNorthbound;
+        this.neutronL2gatewayConnectionNorthbound = neutronL2gatewayConnectionNorthbound;
+        this.neutronLoadBalancerHealthMonitorNorthbound = neutronLoadBalancerHealthMonitorNorthbound;
+        this.neutronMeteringLabelsNorthbound = neutronMeteringLabelsNorthbound;
+        this.neutronMeteringLabelRulesNorthbound = neutronMeteringLabelRulesNorthbound;
+        this.neutronVpnServicesNorthbound = neutronVpnServicesNorthbound;
+        this.neutronVpnIkePoliciesNorthbound = neutronVpnIkePoliciesNorthbound;
+        this.neutronVpnIpSecSiteConnectionsNorthbound = neutronVpnIpSecSiteConnectionsNorthbound;
+        this.neutronVpnIpSecPoliciesNorthbound = neutronVpnIpSecPoliciesNorthbound;
+        this.neutronSFCFlowClassifiersNorthbound = neutronSFCFlowClassifiersNorthbound;
+        this.neutronSFCPortChainsNorthbound = neutronSFCPortChainsNorthbound;
+        this.neutronSFCPortPairGroupsNorthbound = neutronSFCPortPairGroupsNorthbound;
+        this.neutronSFCPortPairsNorthbound = neutronSFCPortPairsNorthbound;
+        this.neutronQosPolicyNorthbound = neutronQosPolicyNorthbound;
+        this.neutronTrunksNorthbound = neutronTrunksNorthbound;
+        this.neutronTapServiceNorthbound = neutronTapServiceNorthbound;
+        this.neutronTapFlowNorthbound = neutronTapFlowNorthbound;
     }
 
     @Override
@@ -45,36 +137,36 @@ public final class NeutronNorthboundRSApplication extends Application {
                 .add(getMOXyJsonProvider())
                 // Northbound URIs JAX RS Resources:
                 .add(neutronNetworksNorthbound)
-                .add(new NeutronSubnetsNorthbound())
-                .add(new NeutronPortsNorthbound())
-                .add(new NeutronRoutersNorthbound())
-                .add(new NeutronFloatingIpsNorthbound())
-                .add(new NeutronSecurityGroupsNorthbound())
-                .add(new NeutronSecurityRulesNorthbound())
-                .add(new NeutronFirewallNorthbound())
-                .add(new NeutronFirewallPolicyNorthbound())
-                .add(new NeutronFirewallRulesNorthbound())
-                .add(new NeutronLoadBalancerNorthbound())
-                .add(new NeutronLoadBalancerListenerNorthbound())
-                .add(new NeutronLoadBalancerPoolNorthbound())
-                .add(new NeutronLoadBalancerHealthMonitorNorthbound())
-                .add(new NeutronMeteringLabelsNorthbound())
-                .add(new NeutronMeteringLabelRulesNorthbound())
-                .add(new NeutronVpnServicesNorthbound())
-                .add(new NeutronVpnIkePoliciesNorthbound())
-                .add(new NeutronVpnIpSecPoliciesNorthbound())
-                .add(new NeutronVpnIpSecSiteConnectionsNorthbound())
-                .add(new NeutronBgpvpnsNorthbound())
-                .add(new NeutronL2gatewayNorthbound())
-                .add(new NeutronL2gatewayConnectionNorthbound())
-                .add(new NeutronSFCFlowClassifiersNorthbound())
-                .add(new NeutronSFCPortPairsNorthbound())
-                .add(new NeutronSFCPortPairGroupsNorthbound())
-                .add(new NeutronSFCPortChainsNorthbound())
-                .add(new NeutronQosPolicyNorthbound())
-                .add(new NeutronTrunksNorthbound())
-                .add(new NeutronTapServiceNorthbound())
-                .add(new NeutronTapFlowNorthbound())
+                .add(neutronSubnetsNorthbound)
+                .add(neutronPortsNorthbound)
+                .add(neutronRoutersNorthbound)
+                .add(neutronFloatingIpsNorthbound)
+                .add(neutronSecurityGroupsNorthbound)
+                .add(neutronSecurityRulesNorthbound)
+                .add(neutronFirewallNorthbound)
+                .add(neutronFirewallPolicyNorthbound)
+                .add(neutronFirewallRulesNorthbound)
+                .add(neutronLoadBalancerNorthbound)
+                .add(neutronLoadBalancerListenerNorthbound)
+                .add(neutronLoadBalancerPoolNorthbound)
+                .add(neutronLoadBalancerHealthMonitorNorthbound)
+                .add(neutronMeteringLabelsNorthbound)
+                .add(neutronMeteringLabelRulesNorthbound)
+                .add(neutronVpnServicesNorthbound)
+                .add(neutronVpnIkePoliciesNorthbound)
+                .add(neutronVpnIpSecPoliciesNorthbound)
+                .add(neutronVpnIpSecSiteConnectionsNorthbound)
+                .add(neutronBgpvpnsNorthbound)
+                .add(neutronL2gatewayNorthbound)
+                .add(neutronL2gatewayConnectionNorthbound)
+                .add(neutronSFCFlowClassifiersNorthbound)
+                .add(neutronSFCPortPairsNorthbound)
+                .add(neutronSFCPortPairGroupsNorthbound)
+                .add(neutronSFCPortChainsNorthbound)
+                .add(neutronQosPolicyNorthbound)
+                .add(neutronTrunksNorthbound)
+                .add(neutronTapServiceNorthbound)
+                .add(neutronTapFlowNorthbound)
                 .build();
     }
 

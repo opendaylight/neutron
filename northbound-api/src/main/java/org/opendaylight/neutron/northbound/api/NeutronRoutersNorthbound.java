@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,15 +28,22 @@ import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronRouterCRUD;
 import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouterInterface;
+import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for managing neutron routers.
  */
+@Singleton
 @Path("/routers")
 public final class NeutronRoutersNorthbound
         extends AbstractNeutronNorthbound<NeutronRouter, NeutronRouterRequest, INeutronRouterCRUD> {
 
     private static final String RESOURCE_NAME = "Router";
+
+    @Inject
+    public NeutronRoutersNorthbound(@OsgiService INeutronRouterCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {

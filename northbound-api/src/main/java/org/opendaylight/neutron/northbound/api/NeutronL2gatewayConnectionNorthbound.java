@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,12 +26,14 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronL2gatewayConnectionCRUD;
 import org.opendaylight.neutron.spi.NeutronL2gatewayConnection;
+import org.ops4j.pax.cdi.api.OsgiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Neutron Northbound REST APIs for L2 gateway Connection.
  */
+@Singleton
 @Path("/l2gateway-connections")
 public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronNorthbound<NeutronL2gatewayConnection,
         NeutronL2gatewayConnectionRequest, INeutronL2gatewayConnectionCRUD> {
@@ -37,6 +41,11 @@ public final class NeutronL2gatewayConnectionNorthbound extends AbstractNeutronN
     private static final Logger LOG = LoggerFactory.getLogger(NeutronL2gatewayConnectionNorthbound.class);
 
     private static final String RESOURCE_NAME = "L2gatewayConnection";
+
+    @Inject
+    public NeutronL2gatewayConnectionNorthbound(@OsgiService INeutronL2gatewayConnectionCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {

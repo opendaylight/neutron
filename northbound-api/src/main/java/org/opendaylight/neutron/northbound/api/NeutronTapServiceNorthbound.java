@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,12 +27,19 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronTapServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronTapService;
+import org.ops4j.pax.cdi.api.OsgiService;
 
+@Singleton
 @Path("/tap/services")
 public final class NeutronTapServiceNorthbound
         extends AbstractNeutronNorthbound<NeutronTapService, NeutronTapServiceRequest, INeutronTapServiceCRUD> {
 
     private static final String RESOURCE_NAME = "Tap Service";
+
+    @Inject
+    public NeutronTapServiceNorthbound(@OsgiService INeutronTapServiceCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {

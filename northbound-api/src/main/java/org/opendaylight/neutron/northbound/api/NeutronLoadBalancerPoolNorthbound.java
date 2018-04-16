@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,6 +28,7 @@ import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
+import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for LoadBalancerPool Policies.
@@ -33,11 +36,17 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
  * <p>For now, the LB pool member data is maintained with the INeutronLoadBalancerPoolCRUD,
  * and not duplicated within the INeutronLoadBalancerPoolMemberCRUD's cache.
  */
+@Singleton
 @Path("/lbaas/pools")
 public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNorthbound<NeutronLoadBalancerPool,
         NeutronLoadBalancerPoolRequest, INeutronLoadBalancerPoolCRUD> {
 
     private static final String RESOURCE_NAME = "LoadBalancerPool";
+
+    @Inject
+    public NeutronLoadBalancerPoolNorthbound(@OsgiService INeutronLoadBalancerPoolCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {
