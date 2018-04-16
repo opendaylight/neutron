@@ -10,6 +10,8 @@ package org.opendaylight.neutron.northbound.api;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -29,10 +31,12 @@ import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
+import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Bgpvpn.
  */
+@Singleton
 @Path("/bgpvpns")
 public final class NeutronBgpvpnsNorthbound
         extends AbstractNeutronNorthbound<NeutronBgpvpn, NeutronBgpvpnRequest, INeutronBgpvpnCRUD> {
@@ -41,6 +45,11 @@ public final class NeutronBgpvpnsNorthbound
 
     @Context
     UriInfo uriInfo;
+
+    @Inject
+    public NeutronBgpvpnsNorthbound(@OsgiService INeutronBgpvpnCRUD neutronCRUD) {
+        super(neutronCRUD);
+    }
 
     @Override
     protected String getResourceName() {
