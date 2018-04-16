@@ -17,6 +17,7 @@ import org.opendaylight.aaa.web.WebContextBuilder;
 import org.opendaylight.aaa.web.WebContextRegistration;
 import org.opendaylight.aaa.web.WebContextSecurer;
 import org.opendaylight.aaa.web.WebServer;
+import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Initializer for web components.
@@ -29,8 +30,8 @@ public class WebInitializer {
     private final WebContextRegistration registraton;
 
     @Inject
-    public WebInitializer(WebServer webServer, WebContextSecurer webContextSecurer, NeutronNorthboundRSApplication app)
-            throws ServletException {
+    public WebInitializer(@OsgiService WebServer webServer, @OsgiService WebContextSecurer webContextSecurer,
+            NeutronNorthboundRSApplication app) throws ServletException {
         WebContextBuilder webContextBuilder = WebContext.builder()
             .contextPath("/controller/nb/v2/neutron").supportsSessions(true)
             // TODO confirm through testing that Jersey & Neutron are fine without sessions, and false instead true
