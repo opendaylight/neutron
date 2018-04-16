@@ -12,23 +12,14 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.net.HttpURLConnection;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceReference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
-
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
     // T extends INeutronObject<T> as 0th type argument
     private static final int NEUTRON_ARGUMENT_TYPE_INDEX = 0;
@@ -44,17 +35,6 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     private static final String UUID_NO_EXIST_BASE = " UUID does not exist.";
 
     private final I neutronCRUD;
-
-    /**
-     * Default constructor.
-     *
-     * @deprecated Replace usage of this method with direct dependency injection,
-     *             see NeutronNetworksNorthbound for how-to.  This will shortly be removed.
-     */
-    @Deprecated
-    protected AbstractNeutronNorthbound() {
-        this.neutronCRUD = null;
-    }
 
     protected AbstractNeutronNorthbound(I neutronCRUD) {
         this.neutronCRUD = Objects.requireNonNull(neutronCRUD, "neutronCRUD");
@@ -96,39 +76,13 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     protected I getNeutronCRUD() {
-        // TODO remove null check and everything below when the @deprecated default constructor is removed...
-        if (this.neutronCRUD != null) {
-            return this.neutronCRUD;
-        }
-
-        // cls = I.class
-        Class<I> cls = getActualTypeArgument(NEUTRON_CRUD_TYPE_INDEX);
-        I neutronCrud = fetchINeutronCRUD(cls, (Object) this);
-        if (neutronCrud == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
-        return neutronCrud;
-    }
-
-    private static <T extends INeutronObject<T>, I extends INeutronCRUD<T>> I fetchINeutronCRUD(Class<I> clazz,
-            Object bundle) {
-        try {
-            BundleContext bundleCtx = FrameworkUtil.getBundle(bundle.getClass()).getBundleContext();
-            Collection<ServiceReference<I>> services = bundleCtx.getServiceReferences(clazz, null);
-            for (ServiceReference<I> service : services) {
-                return bundleCtx.getService(service);
-            }
-        } catch (InvalidSyntaxException e) {
-            LOG.error("Error in getInstances", e);
-        }
-        return null;
+        return this.neutronCRUD;
     }
 
     protected Response show(String uuid,
             // return fields
             List<String> fields) {
-        I gotNeutronCRUD = getNeutronCRUD(); // TODO remove and just use new private neutronCRUD field
-        T ans = gotNeutronCRUD.get(uuid);
+        T ans = neutronCRUD.get(uuid);
         if (ans == null) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
@@ -142,19 +96,18 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     protected Response create(final R input) {
-        I gotNeutronCRUD = getNeutronCRUD(); // TODO remove and just use new private neutronCRUD field
         if (input.isSingleton()) {
             T singleton = input.getSingleton();
 
             singleton.initDefaults();
-            gotNeutronCRUD.add(singleton);
+            neutronCRUD.add(singleton);
         } else {
             if (input.getBulk() == null) {
                 throw new BadRequestException("Invalid requests");
             }
             for (T test : input.getBulk()) {
                 test.initDefaults();
-                gotNeutronCRUD.add(test);
+                neutronCRUD.add(test);
             }
         }
         return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
@@ -179,12 +132,11 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
     }
 
     protected Response update(String uuid, final R input) {
-        I gotNeutronCRUD = getNeutronCRUD(); // TODO remove and just use new private neutronCRUD field
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
         }
         T delta = input.getSingleton();
-        T original = gotNeutronCRUD.get(uuid);
+        T original = neutronCRUD.get(uuid);
         if (original == null) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
@@ -195,20 +147,18 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         /*
          * update the object and return it
          */
-        if (!gotNeutronCRUD.update(uuid, delta)) {
+        if (!neutronCRUD.update(uuid, delta)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
-        T updated = gotNeutronCRUD.get(uuid);
+        T updated = neutronCRUD.get(uuid);
         return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
     }
 
     protected Response delete(String uuid) {
-        final I gotNeutronCRUD = getNeutronCRUD(); // TODO remove and just use new private neutronCRUD field
-
         /*
          * remove it and return 204 status
          */
-        if (!gotNeutronCRUD.remove(uuid)) {
+        if (!neutronCRUD.remove(uuid)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
 
