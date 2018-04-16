@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91d2e8bd_4d000caf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-16T10:58:57Z",
+      "side": 1,
+      "message": "this will be completed in c/70977 once this is merged",
+      "revId": "36b65ea58507aecca727b0b8dfdd07df9639a739",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
