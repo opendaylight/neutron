@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f7bed38_0e25c689",
+        "filename": "parent/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-17T14:36:01Z",
+      "side": 1,
+      "message": "Can you please expand this a bit?\nwhat caused jetty version conflicts?\n\nPerhaps more description in the commit log helps to understand the issue.",
+      "range": {
+        "startLine": 32,
+        "startChar": 42,
+        "endLine": 32,
+        "endChar": 71
+      },
+      "revId": "55628465e8ba7e404ffb672c7a8f0e1250543f66",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
