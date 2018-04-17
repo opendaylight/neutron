@@ -22,6 +22,30 @@
       "revId": "55628465e8ba7e404ffb672c7a8f0e1250543f66",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "875ce930_dc77503a",
+        "filename": "parent/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-17T16:54:30Z",
+      "side": 1,
+      "message": "Sure, wil do.  In order not to let this block this the merge of the other changes which I had chained to this, I\u0027ll break this particular change out of that chain, so that we can merge the others and then review and this one in later.",
+      "parentUuid": "0f7bed38_0e25c689",
+      "range": {
+        "startLine": 32,
+        "startChar": 42,
+        "endLine": 32,
+        "endChar": 71
+      },
+      "revId": "55628465e8ba7e404ffb672c7a8f0e1250543f66",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
