@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>project-neutron-parent</artifactId>
-    <version>0.10.1-SNAPSHOT</version>
+    <version>0.10.1</version>
     <relativePath>../../parent</relativePath>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>neutron-hostconfig-ovs</artifactId>
-  <version>0.10.1-SNAPSHOT</version>
+  <version>0.10.1</version>
   <packaging>bundle</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -31,12 +31,12 @@
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>utils.mdsal-utils</artifactId>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.ovsdb</groupId>
       <artifactId>utils.southbound-utils</artifactId>
-      <version>1.6.1-SNAPSHOT</version>
+      <version>1.6.1</version>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
