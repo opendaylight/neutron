@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04ce8b06_87572d55",
+        "filename": "integration/test-standalone/src/test/java/org/opendaylight/neutron/e2etest/NeutronE2ETest.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-04-19T18:33:25Z",
+      "side": 1,
+      "message": "this needs https://git.opendaylight.org/gerrit/#/c/70923/",
+      "revId": "19dd4ecd4cb058db76ce365c3978af2d38abe84f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
