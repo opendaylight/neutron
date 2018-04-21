@@ -8,12 +8,12 @@
     <parent>
         <groupId>org.opendaylight.odlparent</groupId>
         <artifactId>feature-repo-parent</artifactId>
-        <version>1.8.4-SNAPSHOT</version>
+        <version>1.8.4-Carbon</version>
     </parent>
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>features4-odl-neutron-test</artifactId>
-    <version>0.8.4-SNAPSHOT</version>
+    <version>0.8.4-Carbon</version>
     <packaging>feature</packaging>
 
     <dependencies>
