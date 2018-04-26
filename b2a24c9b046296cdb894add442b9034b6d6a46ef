@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d733ab25_b5556276",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-04-26T17:11:25Z",
+      "side": 1,
+      "message": "this example isn\u0027t correct.\nPlease refer to https://git.openstack.org/cgit/openstack/neutron/tree/neutron/services/qos/drivers/openvswitch/driver.py#n28\nSUPPORTED_RULES \u003d {\n    qos_consts.RULE_TYPE_BANDWIDTH_LIMIT: {\n        qos_consts.MAX_KBPS: {\n            \u0027type:range\u0027: [0, db_consts.DB_INTEGER_MAX_VALUE]},\n        qos_consts.MAX_BURST: {\n            \u0027type:range\u0027: [0, db_consts.DB_INTEGER_MAX_VALUE]},\n        qos_consts.DIRECTION: {\n            \u0027type:values\u0027: constants.VALID_DIRECTIONS}\n    },\n    qos_consts.RULE_TYPE_DSCP_MARKING: {\n        qos_consts.DSCP_MARK: {\u0027type:values\u0027: constants.VALID_DSCP_MARKS}\n    }\n}",
+      "range": {
+        "startLine": 77,
+        "startChar": 19,
+        "endLine": 77,
+        "endChar": 60
+      },
+      "revId": "b2a24c9b046296cdb894add442b9034b6d6a46ef",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
