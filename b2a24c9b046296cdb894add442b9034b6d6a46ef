@@ -22,6 +22,30 @@
       "revId": "b2a24c9b046296cdb894add442b9034b6d6a46ef",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05b73214_8616e17f",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-04-29T06:35:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d733ab25_b5556276",
+      "range": {
+        "startLine": 77,
+        "startChar": 19,
+        "endLine": 77,
+        "endChar": 60
+      },
+      "revId": "b2a24c9b046296cdb894add442b9034b6d6a46ef",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
