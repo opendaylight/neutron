@@ -11,7 +11,7 @@
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>neutron-hostconfig</artifactId>
-  <version>0.9.3-SNAPSHOT</version>
+  <version>0.9.3</version>
   <packaging>pom</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
