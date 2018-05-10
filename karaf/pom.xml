@@ -15,7 +15,7 @@ and is available at http://www.eclipse.org/legal/epl-v10.html INTERNAL
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>neutron-karaf</artifactId>
-    <version>0.9.3-SNAPSHOT</version>
+    <version>0.9.4-SNAPSHOT</version>
     <name>${project.artifactId}</name>
 
     <dependencyManagement>
