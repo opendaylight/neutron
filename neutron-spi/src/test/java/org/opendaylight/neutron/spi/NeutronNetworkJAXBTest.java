@@ -20,7 +20,7 @@ public class NeutronNetworkJAXBTest {
             + "\"admin_state_up\": true, " + "\"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
             + "\"router:external\": false, " + "\"provider:segmentation_id\": \"2\", "
             + "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
-            + "\"provider:network_type\": \"vlan\", " + "\"shared\": false, "
+            + "\"provider:network_type\": \"vlan\", " + "\"shared\": false, " + "\"vlan_transparent\": false, "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
@@ -51,6 +51,9 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 11: Testing shared failed", false, testObject.getShared());
 
+        Assert.assertEquals("NeutronNetwork JAXB Test 12: Testing vlan_transparent failed", false,
+                testObject.getVlanTransparent());
+
         Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
                 "9bacb3c5d39d41a79512987f338cf177", testObject.getTenantID());
     }
@@ -62,7 +65,7 @@ public class NeutronNetworkJAXBTest {
             + "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
             + "\"provider:network_type\": \"vlan\" }, " + "{ \"provider:segmentation_id\": null, "
             + "\"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50454\", "
-            + "\"provider:network_type\": \"stt\" } ], " + "\"shared\": false, "
+            + "\"provider:network_type\": \"stt\" } ], " + "\"shared\": false, " + "\"vlan_transparent\": false, "
             + "\"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" }";
 
     @Test
@@ -84,26 +87,29 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 8: Testing shared failed", false, testObject.getShared());
 
+        Assert.assertEquals("NeutronNetwork JAXB Test 9: Testing vlan_transparent failed", false,
+                testObject.getVlanTransparent());
+
         List<NeutronNetworkSegment> segments = testObject.getSegments();
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.1: Testing segments list length failed", 2,
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.1: Testing segments list length failed", 2,
                 segments.size());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.2: Testing segment index 0 segmentation id failed", "2",
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.2: Testing segment index 0 segmentation id failed", "2",
                 segments.get(0).getProviderSegmentationID());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.3: Testing segment index 0 physical network failed",
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.3: Testing segment index 0 physical network failed",
                 "8bab8453-1bc9-45af-8c70-f83aa9b50453", segments.get(0).getProviderPhysicalNetwork());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.4: Testing segment index 0 network type failed", "vlan",
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.4: Testing segment index 0 network type failed", "vlan",
                 segments.get(0).getProviderNetworkType());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.5: Testing segment index 1 segmentation id failed", null,
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.5: Testing segment index 1 segmentation id failed", null,
                 segments.get(1).getProviderSegmentationID());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.3: Testing segment index 1 physical network failed",
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.3: Testing segment index 1 physical network failed",
                 "8bab8453-1bc9-45af-8c70-f83aa9b50454", segments.get(1).getProviderPhysicalNetwork());
 
-        Assert.assertEquals("NeutronNetwork JAXB Test 9.4: Testing segment index 1 network type failed", "stt",
+        Assert.assertEquals("NeutronNetwork JAXB Test 10.4: Testing segment index 1 network type failed", "stt",
                 segments.get(1).getProviderNetworkType());
 
         Assert.assertEquals("NeutronNetwork JAXB Test 2: Testing tenant_id failed",
@@ -113,7 +119,7 @@ public class NeutronNetworkJAXBTest {
     private static final String NEUTRON_NETWORK_L3_HA_SOURCE_JSON = "{"
             + "\"name\": \"HA network tenant c15340eb65804b20af2dd0fd3beddc8c\", "
             + "\"provider:physical_network\": null, " + "\"admin_state_up\": true, " + "\"tenant_id\": \"\", "
-            + "\"mtu\": 0, " + "\"router:external\": false, " + "\"shared\": false, " + "\"vlan_transparent\": null, "
+            + "\"mtu\": 0, " + "\"router:external\": false, " + "\"shared\": false, " + "\"vlan_transparent\": false, "
             + "\"port_security_enabled\": true, " + "\"provider:network_type\": \"vxlan\", "
             + "\"id\": \"d3a2beea-c6ca-4e76-ba7d-e947c5df0c0e\", " + "\"provider:segmentation_id\": 1018 " + "}";
 
@@ -137,6 +143,9 @@ public class NeutronNetworkJAXBTest {
 
         Assert.assertEquals("NeutronNetwork JAXB Test 7: Testing provider segmentation id failed", "1018",
                 testObject.getProviderSegmentationID());
+
+        Assert.assertEquals("NeutronNetwork JAXB Test 8: Testing vlan_transparent failed", false,
+                testObject.getVlanTransparent());
 
         // Bug 4775: tenantId is null when json provides it as empty string
         Assert.assertNull("NeutronNetwork JAXB Test 2: Testing tenant_id failed", testObject.getTenantID());
