@@ -172,6 +172,12 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
             case "shared":
                 ans.setShared(isShared());
                 break;
+            case "vlan_transparent":
+                ans.setVlanTransparent(this.getVlanTransparent());
+                break;
+            case "vlan_transparent":
+                ans.setVlanTransparent(this.getVlanTransparent());
+                break;
             case "external":
                 ans.setRouterExternal(this.getRouterExternal());
                 break;
@@ -196,9 +202,10 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
     @Override
     public String toString() {
         return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + name + ", adminStateUp=" + adminStateUp
-                + ", shared=" + shared + ", tenantID=" + tenantID + ", routerExternal=" + routerExternal
-                + ", providerNetworkType=" + providerNetworkType + ", providerPhysicalNetwork="
-                + providerPhysicalNetwork + ", providerSegmentationID=" + providerSegmentationID + ", status=" + status
-                + ", qosPolicyId =" + qosPolicyId + ", segments = " + segments + "]";
+                + ", shared=" + shared + ", vlanTransparent=" + vlanTransparent + ", tenantID=" + tenantID
+                + ", routerExternal=" + routerExternal + ", providerNetworkType=" + providerNetworkType
+                + ", providerPhysicalNetwork=" + providerPhysicalNetwork + ", providerSegmentationID="
+                + providerSegmentationID + ", status=" + status + ", qosPolicyId =" + qosPolicyId
+                + ", segments = " + segments + "]";
     }
 }
