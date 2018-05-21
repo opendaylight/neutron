@@ -51,6 +51,7 @@ public final class NeutronUtils {
             .put("tcp", ProtocolTcp.class)
             .put("udp", ProtocolUdp.class)
             .put("icmpv6", ProtocolIcmpV6.class)
+            .put("igmp", ProtocolIgmp.class)
             .build();
 
         public static Class<? extends ProtocolBase> get(String key) {

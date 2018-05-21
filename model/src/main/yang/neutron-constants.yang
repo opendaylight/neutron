@@ -61,6 +61,11 @@ module neutron-constants {
         base protocol-base;
     }
 
+    identity protocol-igmp {
+        description "IGMP protocol.";
+        base protocol-base;
+    }
+
     // PROBE
     identity probe-base {
         description "Base identity for all probes";
