@@ -65,7 +65,8 @@ public class NeutronNetworkTests {
                 + " \"provider:network_type\": \"vlan\" }, { " + " \"provider:segmentation_id\": null, "
                 + " \"provider:physical_network\": \"8bab8453-1bc9-45af-8c70-f83aa9b50453\", "
                 + " \"provider:network_type\": \"stt\" } ], "
-                + " \"shared\": false, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " + " } } ";
+                + " \"shared\": false, \"vlan_transparent\": false, "
+                + " \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " + " } } ";
         ITNeutronE2E.test_create(url, content, "Singleton Network Post Failed NB");
         return content;
     }
@@ -106,6 +107,12 @@ public class NeutronNetworkTests {
         jsonObjectOutput = jsonObjectOutput.getAsJsonObject("network");
         jsonElementValue = jsonObjectOutput.get(element);
         Assert.assertEquals(context, false, jsonElementValue.getAsBoolean());
+        element = "vlan_transparent";
+        url = base + "/networks/de8e5957-d49f-d77b-de5b-d1f75b21c03c?fields=" + element;
+        jsonObjectOutput = ITNeutronE2E.test_fetch_gson(url, context);
+        jsonObjectOutput = jsonObjectOutput.getAsJsonObject("network");
+        jsonElementValue = jsonObjectOutput.get(element);
+        Assert.assertEquals(context, false, jsonElementValue.getAsBoolean());
     }
 
     //TODO handle SB check
@@ -114,7 +121,7 @@ public class NeutronNetworkTests {
         String content = "{ \"network\": {" + " \"status\": \"ACTIVE\", \"subnets\": [], "
                 + " \"name\": \"external1\", \"admin_state_up\": true, "
                 + " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", "
-                + " \"router:external\": true, \"shared\": false, "
+                + " \"router:external\": true, \"shared\": false, \"vlan_transparent\": false,"
                 + " \"id\": \"8ca37218-28ff-41cb-9b10-039601ea7e6b\" } } ";
         ITNeutronE2E.test_create(url, content, "External Network Post Failed NB");
     }
@@ -125,13 +132,13 @@ public class NeutronNetworkTests {
         String content = "{ \"networks\": [ { " + "\"status\": \"ACTIVE\", \"subnets\": [], "
                 + "\"name\": \"sample_network3\", " + "\"provider:physical_network\": null, "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
-                + "\"provider:network_type\": \"local\", " + "\"shared\": false, "
+                + "\"provider:network_type\": \"local\", " + "\"shared\": false, \"vlan_transparent\": false, "
                 + "\"id\": \"bc1a76cb-8767-4c3a-bb95-018b822f2130\", " + "\"provider:segmentation_id\": null }, { "
                 + "\"status\": \"ACTIVE\", " + "\"subnets\": [], " + "\"name\": \"sample_network4\", "
                 + "\"provider:physical_network\": null, " + "\"admin_state_up\": true, "
                 + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", " + "\"provider:network_type\": \"local\", "
-                + "\"shared\": false, " + "\"id\": \"af374017-c9ae-4a1d-b799-ab73111476e2\", "
-                + "\"provider:segmentation_id\": null } ] } ";
+                + "\"shared\": false, " + "\"vlan_transparent\": false, "
+                + "\"id\": \"af374017-c9ae-4a1d-b799-ab73111476e2\", " + "\"provider:segmentation_id\": null } ] } ";
         ITNeutronE2E.test_create(url, content, "Bulk Network Post Failed");
     }
 
@@ -142,7 +149,7 @@ public class NeutronNetworkTests {
                 + "\"name\": \"sample_network_5_updated\", " + "\"provider:physical_network\": null, "
                 + "\"admin_state_up\": true, " + "\"tenant_id\": \"4fd44f30292945e481c7b8a0c8908869\", "
                 + "\"provider:network_type\": \"local\", " + "\"router:external\": false, " + "\"shared\": false, "
-                + "\"provider:segmentation_id\": null } } ";
+                + "\"vlan_transparent\": false, " + "\"provider:segmentation_id\": null } } ";
         ITNeutronE2E.test_modify(url, content, "Network Put Failed");
     }
 
@@ -161,7 +168,7 @@ public class NeutronNetworkTests {
                 + "?fields=status&fields=subnets&fields=name"
                 + "&fields=provider:physical_network&fields=admin_state_up"
                 + "&fields=tenant_id&fields=provides:network_type"
-                + "&fields=router:external&fields=shared&fields=provider:segmentation_id";
+                + "&fields=router:external&fields=shared&fields=vlan_transparent&fields=provider:segmentation_id";
         ITNeutronE2E.test_fetch(url, true, "Network Element with query Get Failed");
     }
 
