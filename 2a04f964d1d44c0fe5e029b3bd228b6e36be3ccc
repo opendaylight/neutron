@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e984d02b_6c7c7409",
+        "filename": "model/src/main/yang/neutron-networks.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 3316
+      },
+      "writtenOn": "2018-05-21T16:18:31Z",
+      "side": 1,
+      "message": "nitpick: trailing whitespace.",
+      "range": {
+        "startLine": 86,
+        "startChar": 94,
+        "endLine": 86,
+        "endChar": 95
+      },
+      "revId": "2a04f964d1d44c0fe5e029b3bd228b6e36be3ccc",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
