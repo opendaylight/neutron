@@ -81,6 +81,13 @@ module neutron-networks {
                                 value.";
                 }
 
+                leaf vlan-transparent {
+                    type boolean;
+                    default "false";
+                    description "The state of the network, which is VLAN transparent (true) or
+                                not VLAN transparent (false)";
+                }
+
                 uses attrs:base-attributes;
                 uses attrs:admin-attributes;
             }
