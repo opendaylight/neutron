@@ -22,6 +22,30 @@
       "revId": "d8d72cb4c6b0749535b84a94b0caa2585781c57b",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b179799b_0a56ef20",
+        "filename": "model/src/main/yang/neutron-networks.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5882
+      },
+      "writtenOn": "2018-05-24T09:40:48Z",
+      "side": 1,
+      "message": "Latest patch set cherry picked from oxygen has default value set for this parameter",
+      "parentUuid": "d45864b1_1b2f9591",
+      "range": {
+        "startLine": 85,
+        "startChar": 30,
+        "endLine": 85,
+        "endChar": 31
+      },
+      "revId": "d8d72cb4c6b0749535b84a94b0caa2585781c57b",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
