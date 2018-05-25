@@ -9,13 +9,11 @@ package org.opendaylight.neutron.e2etest;
 
 import java.io.IOException;
 import javax.inject.Inject;
-import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
 import org.opendaylight.aaa.web.WebServer;
 import org.opendaylight.infrautils.inject.guice.testutils.AnnotationsModule;
 import org.opendaylight.infrautils.inject.guice.testutils.GuiceRule;
-import org.opendaylight.infrautils.testutils.ClasspathHellDuplicatesCheckRule;
 
 /**
  * Neutron "end to end" (component) test.
@@ -26,7 +24,7 @@ import org.opendaylight.infrautils.testutils.ClasspathHellDuplicatesCheckRule;
  */
 public class NeutronE2ETest {
 
-    public static @ClassRule ClasspathHellDuplicatesCheckRule jHades = new ClasspathHellDuplicatesCheckRule();
+    //public static @ClassRule ClasspathHellDuplicatesCheckRule jHades = new ClasspathHellDuplicatesCheckRule();
 
     public @Rule GuiceRule guice = new GuiceRule(NeutronTestWiring.class, AnnotationsModule.class);
 
