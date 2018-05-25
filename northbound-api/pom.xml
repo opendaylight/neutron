@@ -24,19 +24,19 @@
        build failure. Please do not modify this unless you have a good reason. -->
   <name>ODL :: neutron :: ${project.artifactId}</name>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.opendaylight.aaa</groupId>
+        <artifactId>aaa-artifacts</artifactId>
+        <version>0.8.0-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-server</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-servlet</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.codehaus.enunciate</groupId>
       <artifactId>enunciate-core-annotations</artifactId>
@@ -67,7 +67,10 @@
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>web-api</artifactId>
-      <version>0.8.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.aaa.web</groupId>
+      <artifactId>servlet-api</artifactId>
     </dependency>
   </dependencies>
   <build>
@@ -82,47 +85,47 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>
-              com.sun.jersey.spi.container.servlet,
-              !org.codehaus.enunciate.jaxrs,
+<!--             <Import-Package> -->
+<!--               com.sun.jersey.spi.container.servlet, -->
+<!--               !org.codehaus.enunciate.jaxrs, -->
 
-              com.sun.xml.bind;resolution:=optional,
-              com.sun.xml.bind.annotation;resolution:=optional,
-              com.sun.xml.bind.api;resolution:=optional,
-              com.sun.xml.bind.api.impl;resolution:=optional,
-              com.sun.codemodel;resolution:=optional,
-              com.sun.xml.xsom;resolution:=optional,
-              com.sun.xml.xsom.impl;resolution:=optional,
-              com.sun.xml.xsom.impl.parser;resolution:=optional,
-              com.sun.tools.xjc;resolution:=optional,
-              com.sun.tools.xjc.model;resolution:=optional,
-              com.sun.tools.xjc.outline;resolution:=optional,
-              javax.activation;resolution:=optional,
-              javax.json;resolution:=optional,
-              javax.json.stream;resolution:=optional,
-              javax.naming;resolution:=optional,
-              javax.validation;resolution:=optional,
-              javax.validation.constraints;resolution:=optional;
-              javax.validation.groups;resolution:=optional;
-              javax.ws.rs;resolution:=optional,
-              javax.ws.rs.core;resolution:=optional,
-              javax.ws.rs.ext;resolution:=optional,
-              javax.xml.namespace;resolution:=optional,
-              javax.xml.parsers;resolution:=optional,
-              javax.xml.stream;resolution:=optional,
-              javax.xml.transform;resolution:=optional,
-              javax.xml.transform.dom;resolution:=optional,
-              javax.xml.transform.sax;resolution:=optional,
-              javax.xml.transform.stax;resolution:=optional,
-              javax.xml.transform.stream;resolution:=optional,
-              javax.xml.validation;resolution:=optional,
-              org.eclipse.persistence.internal.libraries.asm;resolution:=optional,
-              *
-            </Import-Package>
+<!--               com.sun.xml.bind;resolution:=optional, -->
+<!--               com.sun.xml.bind.annotation;resolution:=optional, -->
+<!--               com.sun.xml.bind.api;resolution:=optional, -->
+<!--               com.sun.xml.bind.api.impl;resolution:=optional, -->
+<!--               com.sun.codemodel;resolution:=optional, -->
+<!--               com.sun.xml.xsom;resolution:=optional, -->
+<!--               com.sun.xml.xsom.impl;resolution:=optional, -->
+<!--               com.sun.xml.xsom.impl.parser;resolution:=optional, -->
+<!--               com.sun.tools.xjc;resolution:=optional, -->
+<!--               com.sun.tools.xjc.model;resolution:=optional, -->
+<!--               com.sun.tools.xjc.outline;resolution:=optional, -->
+<!--               javax.activation;resolution:=optional, -->
+<!--               javax.json;resolution:=optional, -->
+<!--               javax.json.stream;resolution:=optional, -->
+<!--               javax.naming;resolution:=optional, -->
+<!--               javax.validation;resolution:=optional, -->
+<!--               javax.validation.constraints;resolution:=optional; -->
+<!--               javax.validation.groups;resolution:=optional; -->
+<!--               javax.ws.rs;resolution:=optional, -->
+<!--               javax.ws.rs.core;resolution:=optional, -->
+<!--               javax.ws.rs.ext;resolution:=optional, -->
+<!--               javax.xml.namespace;resolution:=optional, -->
+<!--               javax.xml.parsers;resolution:=optional, -->
+<!--               javax.xml.stream;resolution:=optional, -->
+<!--               javax.xml.transform;resolution:=optional, -->
+<!--               javax.xml.transform.dom;resolution:=optional, -->
+<!--               javax.xml.transform.sax;resolution:=optional, -->
+<!--               javax.xml.transform.stax;resolution:=optional, -->
+<!--               javax.xml.transform.stream;resolution:=optional, -->
+<!--               javax.xml.validation;resolution:=optional, -->
+<!--               org.eclipse.persistence.internal.libraries.asm;resolution:=optional, -->
+<!--               * -->
+<!--             </Import-Package> -->
 
             <!-- Workaround for javax.ws.rs version mismatch with jackson/jersey/moxy -->
-            <Embed-Transitive>true</Embed-Transitive>
-            <Embed-Dependency>org.eclipse.persistence.moxy;inline</Embed-Dependency>
+<!--             <Embed-Transitive>true</Embed-Transitive> -->
+<!--             <Embed-Dependency>org.eclipse.persistence.moxy;inline</Embed-Dependency> -->
           </instructions>
         </configuration>
       </plugin>
