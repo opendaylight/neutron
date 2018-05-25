@@ -6,4 +6,5 @@
 
   <reference id="webContextSecurer" interface="org.opendaylight.aaa.web.WebContextSecurer" />
 
+  <reference id="servletSupport" interface="org.opendaylight.aaa.web.servlet.ServletSupport" />
 </blueprint>
