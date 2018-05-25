@@ -11,6 +11,8 @@ import com.google.inject.AbstractModule;
 import org.opendaylight.aaa.web.WebContextSecurer;
 import org.opendaylight.aaa.web.WebServer;
 import org.opendaylight.aaa.web.jetty.JettyWebServer;
+import org.opendaylight.aaa.web.servlet.ServletSupport;
+import org.opendaylight.aaa.web.servlet.jersey2.JerseyServletSupport;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.test.DataBrokerTestModule;
 import org.opendaylight.neutron.northbound.api.WebInitializer;
@@ -88,6 +90,7 @@ public class NeutronTestWiring extends AbstractModule {
     protected void configure() {
         bind(WebServer.class).toInstance(new JettyWebServer(9090));
         bind(WebContextSecurer.class).toInstance((webContextBuilder, urlPatterns) -> { }); // NOOP
+        bind(ServletSupport.class).toInstance(new JerseyServletSupport());
         bind(WebInitializer.class);
 
         DataBrokerTestModule dataBrokerTestModule = new DataBrokerTestModule(true);
