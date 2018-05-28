@@ -67,13 +67,7 @@ public final class HttpUtils {
     }
 
     static void test_create(String urlStr, String content, String context) {
-        try {
-            URL url = new URL(urlStr);
-            HttpURLConnection httpConn = httpURLConnectionFactoryPost(url, content);
-            Assert.assertEquals(context, 201, httpConn.getResponseCode());
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        test_create(urlStr, 201, content, context);
     }
 
     static void test_create(String urlStr, int responseCode, String content, String context) {
