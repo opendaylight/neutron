@@ -81,8 +81,10 @@ public final class NeutronUtils {
         public static Class<? extends DirectionBase> get(String key) {
             return MAPPER.get(key);
         }
+
         public static String getDirectionString(Class<? extends DirectionBase> direction) {
             return MAPPER_INVERSE.get(direction);
         }
+
     }
 }
