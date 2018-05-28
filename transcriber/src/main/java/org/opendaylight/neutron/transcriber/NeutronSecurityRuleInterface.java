@@ -13,6 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
@@ -39,9 +40,12 @@ public final class NeutronSecurityRuleInterface extends
             String> ETHERTYPE_MAP = new ImmutableBiMap.Builder<Class<? extends EthertypeBase>, String>()
                     .put(EthertypeV4.class, "IPv4").put(EthertypeV6.class, "IPv6").build();
 
+    private final NeutronSecurityGroupInterface securityGroupInterface;
+
     @Inject
-    public NeutronSecurityRuleInterface(DataBroker db) {
+    public NeutronSecurityRuleInterface(DataBroker db, NeutronSecurityGroupInterface securityGroupInterface) {
         super(SecurityRuleBuilder.class, db);
+        this.securityGroupInterface = securityGroupInterface;
     }
 
     @Override
@@ -128,5 +132,12 @@ public final class NeutronSecurityRuleInterface extends
             securityRuleBuilder.setPortRangeMax(securityRule.getSecurityRulePortMax());
         }
         return securityRuleBuilder.build();
+    }
+
+    // TODO doc (on parent, no here): /** Implementations *MUST* use the exists() methods with a Tx! */
+    // TODO @Override
+    boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronSecurityRule securityRule) {
+        return securityGroupInterface.exists(securityRule.getSecurityRuleGroupID(), tx);
+        // TODO but must null check:    && securityGroupInterface.exists(securityRule.getSecurityRemoteGroupID(), tx);
     }
 }
