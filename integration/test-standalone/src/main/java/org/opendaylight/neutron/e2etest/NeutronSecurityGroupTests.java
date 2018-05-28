@@ -9,22 +9,23 @@
 package org.opendaylight.neutron.e2etest;
 
 public class NeutronSecurityGroupTests {
-    String base;
+
+    private final String base;
 
     public NeutronSecurityGroupTests(String base) {
         this.base = base;
     }
 
-    public void securityGroup_collection_get_test() {
+    private void securityGroup_collection_get_test() {
         String url = base + "/security-groups";
         HttpUtils.test_fetch(url, "Security Group Collection GET failed");
     }
 
-    public String singleton_sg_create_test() {
+    public String singleton_sg_create(String securityGroupID) {
         String url = base + "/security-groups";
         String content = "{\"security_group\": {\"tenant_id\": "
                 + "\"1dfe7dffa0624ae882cdbda397d1d276\", \"description\": \"\", "
-                + "\"id\": \"521e29d6-67b8-4b3c-8633-027d21195333\", "
+                + "\"id\": \"" + securityGroupID + "\", "
                 + "\"security_group_rules\": [{\"remote_group_id\": null, "
                 + "\"direction\": \"egress\", \"remote_ip_prefix\": null, "
                 + "\"protocol\": null, \"ethertype\": \"IPv4\", "
@@ -42,12 +43,16 @@ public class NeutronSecurityGroupTests {
         return content;
     }
 
-    public void singleton_sg_get_with_one_query_item_test(String createJsonString) {
+    private String singleton_sg_create_test() {
+        return singleton_sg_create("521e29d6-67b8-4b3c-8633-027d21195333");
+    }
+
+    private void singleton_sg_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/security-groups";
         HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "security_groups");
     }
 
-    public void sg_update_test() {
+    private void sg_update_test() {
         String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333";
         String content = "{\"security_group\": {\"tenant_id\": "
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"description\": "
@@ -68,24 +73,24 @@ public class NeutronSecurityGroupTests {
         HttpUtils.test_modify(url, content, "Security Group Put Failed");
     }
 
-    public void sg_element_get_test() {
+    private void sg_element_get_test() {
         String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333";
         HttpUtils.test_fetch(url, true, "Security Group Element Get Failed");
     }
 
-    public void sg_element_get_with_query_test() {
+    private void sg_element_get_with_query_test() {
         String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333"
                 + "?fields=id&fields=name&fields=description&fields=tenant_id"
                 + "&fields=limit&fields=marker&fields=page_reverse";
         HttpUtils.test_fetch(url, true, "Security Group Element Get Failed");
     }
 
-    public void sg_delete_test() {
+    private void sg_delete_test() {
         String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333";
         HttpUtils.test_delete(url, "Security Group Delete Failed");
     }
 
-    public void sg_element_negative_get_test() {
+    private void sg_element_negative_get_test() {
         String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333";
         HttpUtils.test_fetch(url, false, "Security Group Element Negative Get Failed");
     }
