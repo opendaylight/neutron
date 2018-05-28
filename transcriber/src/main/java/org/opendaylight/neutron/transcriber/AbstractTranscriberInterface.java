@@ -500,7 +500,11 @@ public abstract class AbstractTranscriberInterface<
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
-                return add(input, tx);
+                if (areAllDependenciesAvailable(tx, input)) {
+                    return add(input, tx);
+                } else {
+                    return Result.DependencyMissing;
+                }
             } catch (InterruptedException | ExecutionException e) {
                 // TODO replace all this with org.opendaylight.genius.infra.RetryingManagedNewTransactionRunner
                 if (e.getCause() instanceof OptimisticLockFailedException) {
@@ -575,5 +579,25 @@ public abstract class AbstractTranscriberInterface<
             break;
         }
         return false;
+    }
+
+    /**
+     * Check if this particular (subclass) transcriber's dependencies are met.
+     * Default implementation just returns true.  Some but not all transcribers will customize this.
+     *
+     * <p>Implementations *MUST* use the passed in transaction.  They will typically call the
+     * {@link #exists(String, ReadTransaction)} method on ANOTHER transcriber with it.
+     * Care must be taken to use that method instead of the {@link #exists(String)} without a transaction argument.
+     *
+     * @param tx the transaction within which to perform reads to check for dependencies
+     * @param neutronObject the incoming main neutron object in which there may be references to dependencies
+     *
+     * @return true if all dependencies are available and
+     *         {@link #add(INeutronObject)} operation can proceed; false if there
+     *         are unmet dependencies, which will cause the add to abort, and a respective
+     *         error code returned to the caller.
+     */
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, S neutronObject) {
+        return true;
     }
 }
