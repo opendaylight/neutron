@@ -8,6 +8,8 @@
 
 package org.opendaylight.neutron.northbound.api;
 
+import static org.opendaylight.neutron.spi.INeutronCRUD.Result.DependencyMissing;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -28,6 +30,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
 
     protected static final int HTTP_OK_BOTTOM = 200;
     protected static final int HTTP_OK_TOP = 299;
+    private static final int HTTP_MISSING_DEPENDENCY = 442; // see NEUTRON-158 (also in neutron.e2etest.HttpUtils)
 
     private static final String INTERFACE_NAME_BASE = " CRUD Interface";
     private static final String UUID_NO_EXIST_BASE = " UUID does not exist.";
@@ -98,14 +101,18 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             T singleton = input.getSingleton();
 
             singleton.initDefaults();
-            neutronCRUD.add(singleton);
+            if (neutronCRUD.add(singleton).equals(DependencyMissing)) {
+                return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
+            }
         } else {
             if (input.getBulk() == null) {
                 throw new BadRequestException("Invalid requests");
             }
             for (T test : input.getBulk()) {
                 test.initDefaults();
-                neutronCRUD.add(test);
+                if (neutronCRUD.add(test).equals(DependencyMissing)) {
+                    return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
+                }
             }
         }
         return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();

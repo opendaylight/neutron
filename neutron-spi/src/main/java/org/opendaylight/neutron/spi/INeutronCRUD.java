@@ -75,6 +75,6 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
     boolean update(String uuid, T delta);
 
     // TODO The Exception Result should eventually be replaced by propagating exceptions, and removed
-    enum Result { Success, AlreadyExists, Exception }
+    enum Result { Success, AlreadyExists, DependencyMissing, Exception }
 
 }

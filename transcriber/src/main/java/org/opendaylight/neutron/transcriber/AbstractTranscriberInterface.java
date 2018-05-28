@@ -20,7 +20,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 import javax.annotation.PreDestroy;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
@@ -34,6 +37,7 @@ import org.opendaylight.neutron.spi.INeutronAdminAttributes;
 import org.opendaylight.neutron.spi.INeutronBaseAttributes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
+import org.opendaylight.neutron.spi.NeutronObject;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.AdminAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.BaseAttributes;
@@ -402,7 +406,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     protected static Uuid toUuid(String uuid) {
-        Preconditions.checkNotNull(uuid);
+        Preconditions.checkNotNull(uuid, "uuid");
         Uuid result;
         try {
             result = new Uuid(uuid);
@@ -491,7 +495,11 @@ public abstract class AbstractTranscriberInterface<
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
-                return add(input, tx);
+                if (areAllDependenciesAvailable(tx, input)) {
+                    return add(input, tx);
+                } else {
+                    return Result.DependencyMissing;
+                }
             } catch (InterruptedException | ExecutionException e) {
                 // TODO replace all this with org.opendaylight.genius.infra.RetryingManagedNewTransactionRunner
                 if (e.getCause() instanceof OptimisticLockFailedException) {
@@ -567,4 +575,45 @@ public abstract class AbstractTranscriberInterface<
         }
         return false;
     }
+
+    /**
+     * Check if this particular (subclass) transcriber's dependencies are met.
+     * Default implementation just returns true.  Some but not all transcribers will customize this.
+     *
+     * <p>Implementations *MUST* use the passed in transaction.  They will typically call the
+     * {@link #exists(String, ReadTransaction)} method on ANOTHER transcriber with it.
+     *
+     * <p>Implementations should chain {@link #ifNonNull(String, Function)}, or perform null safe comparisons otherwise,
+     * for any optional non-mandatory {@link NeutronObject} properties which may well be null.
+     *
+     * @param tx the transaction within which to perform reads to check for dependencies
+     * @param neutronObject the incoming main neutron object in which there may be references to dependencies
+     *
+     * @return true if all dependencies are available and
+     *         {@link #add(INeutronObject)} operation can proceed; false if there
+     *         are unmet dependencies, which will cause the add to abort, and a respective
+     *         error code returned to the caller.
+     */
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, S neutronObject) {
+        return true;
+    }
+
+    /**
+     * Utility to perform well readable code of null-safe chains of e.g.
+     * {@link #exists(String, ReadTransaction)} method calls.
+     */
+    protected static final <T> boolean ifNonNull(
+            @Nullable T property, Function<@NonNull T, @NonNull Boolean> function) {
+        if (property != null) {
+            Boolean result = function.apply(property);
+            Preconditions.checkNotNull(result, "result");
+            return result;
+        } else {
+            // We return true, in line with the default implementation
+            // in org.opendaylight.neutron.transcriber.AbstractTranscriberInterface.
+            //      areAllDependenciesAvailable(ReadTransaction, S)
+            return true;
+        }
+    }
+
 }

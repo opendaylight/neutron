@@ -5,10 +5,11 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.e2etest;
 
 public class NeutronSecurityRuleTests {
+
+    private static final String TEST_SECURITY_GROUP_ID = "b60490fe-60a5-40be-af63-1d641381b784";
 
     private final String base;
 
@@ -21,14 +22,23 @@ public class NeutronSecurityRuleTests {
         HttpUtils.test_fetch(url, "Security Rule Collection GET failed");
     }
 
-    private String singleton_sr_create_test() {
+    private void singleton_sr_without_groupid_create_test(int responseCode) {
+        String url = base + "/security-group-rules";
+        String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"ingress\", "
+                + "\"remote_ip_prefix\": null, \"protocol\": \"tcp\", " + "\"ethertype\": \"IPv6\", \"tenant_id\": "
+                + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
+                + "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\"}}"; // no security_group_id
+        HttpUtils.test_create(url, responseCode, content, "Security Rule Singleton Post Failed");
+    }
+
+    private String singleton_sr_create_test(int responseCode) {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"ingress\", "
                 + "\"remote_ip_prefix\": null, \"protocol\": \"tcp\", " + "\"ethertype\": \"IPv6\", \"tenant_id\": "
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\", " + "\"security_group_id\": "
-                + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
-        HttpUtils.test_create(url, content, "Security Rule Singleton Post Failed");
+                + "\"" + TEST_SECURITY_GROUP_ID + "\"}}";
+        HttpUtils.test_create(url, responseCode, content, "Security Rule Singleton Post Failed");
         return content;
     }
 
@@ -41,21 +51,21 @@ public class NeutronSecurityRuleTests {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rules\": [" + "{" + "  \"id\": \"35fb0f34-c8d3-416d-a205-a2c75f7b8e22\","
                 + "  \"direction\": \"egress\"," + "  \"ethertype\": \"IPv6\"," + "  \"protocol\": \"tcp\","
-                + "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
+                + "  \"security_group_id\": \"b60490fe-60a5-40be-af63-1d641381b784\","
                 + "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" + "}," + "{"
                 + "  \"id\": \"63814eed-bc12-4fe4-8b17-2af178224c71\"," + "  \"direction\": \"egress\","
                 + "  \"ethertype\": \"IPv4\"," + "  \"protocol\": \"6\","
-                + "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
+                + "  \"security_group_id\": \"b60490fe-60a5-40be-af63-1d641381b784\","
                 + "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" + "}," + "{"
                 + "  \"id\": \"ccb9823e-559b-4d84-b656-2739f8e56d89\"," + "  \"direction\": \"ingress\","
                 + "  \"ethertype\": \"IPv6\"," + "  \"protocol\": 6,"
-                + "  \"remote_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
-                + "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
+                + "  \"remote_group_id\": \"b60490fe-60a5-40be-af63-1d641381b784\","
+                + "  \"security_group_id\": \"b60490fe-60a5-40be-af63-1d641381b784\","
                 + "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" + "}," + "{"
                 + "  \"id\": \"fbc3f809-7378-40a4-822f-7a70f6ccba98\"," + "  \"direction\": \"ingress\","
                 + "  \"ethertype\": \"IPv4\"," + "  \"protocol\": \"udp\","
-                + "  \"remote_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
-                + "  \"security_group_id\": \"70f1b157-e79b-44dc-85a8-7de0fc9f2aab\","
+                + "  \"remote_group_id\": \"b60490fe-60a5-40be-af63-1d641381b784\","
+                + "  \"security_group_id\": \"b60490fe-60a5-40be-af63-1d641381b784\","
                 + "  \"tenant_id\": \"2640ee2ac2474bf3906e482047204fcb\"" + "}" + "]}";
         HttpUtils.test_create(url, content, "Security Rule Multiple Post Failed");
     }
@@ -66,7 +76,7 @@ public class NeutronSecurityRuleTests {
                 + "\"remote_ip_prefix\": null, \"protocol\": \"tcp\", " + "\"ethertype\": \"IPv6\", \"tenant_id\": "
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"9b4be7fa-e56e-40fb-9516-1f0fa9185669\", " + "\"security_group_id\": "
-                + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
+                + "\"" + TEST_SECURITY_GROUP_ID + "\"}}";
         HttpUtils.test_modify(url, content, "Security Rule Singleton Put Failed");
     }
 
@@ -106,7 +116,7 @@ public class NeutronSecurityRuleTests {
                 + "\"ethertype\": \"IPv4\", \"tenant_id\": "
                 + "\"00f340c7c3b34ab7be1fc690c05a0275\", \"port_range_max\": 77, " + "\"port_range_min\": 77, "
                 + "\"id\": \"01234567-0123-0123-0123-01234567890a\", " + "\"security_group_id\": "
-                + "\"b60490fe-60a5-40be-af63-1d641381b784\"}}";
+                + "\"" + TEST_SECURITY_GROUP_ID + "\"}}";
         HttpUtils.test_create(url, content, "Security Rule bug4043 IPv4 Failed");
 
         url = url + "/01234567-0123-0123-0123-01234567890a";
@@ -140,7 +150,10 @@ public class NeutronSecurityRuleTests {
 
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRuleTester = new NeutronSecurityRuleTests(base);
-        String createJsonString = securityRuleTester.singleton_sr_create_test();
+        securityRuleTester.singleton_sr_without_groupid_create_test(500);
+        securityRuleTester.singleton_sr_create_test(HttpUtils.HTTP_MISSING_DEPENDENCY);
+        new NeutronSecurityGroupTests(base).singleton_sg_create(TEST_SECURITY_GROUP_ID);
+        String createJsonString = securityRuleTester.singleton_sr_create_test(201);
         securityRuleTester.singleton_sr_get_with_one_query_item_test(createJsonString);
         securityRuleTester.multiple_sr_create_test();
         securityRuleTester.singleton_sr_modify_test();
