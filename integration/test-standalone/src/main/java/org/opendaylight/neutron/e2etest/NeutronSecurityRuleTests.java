@@ -9,18 +9,19 @@
 package org.opendaylight.neutron.e2etest;
 
 public class NeutronSecurityRuleTests {
-    String base;
+
+    private final String base;
 
     public NeutronSecurityRuleTests(String base) {
         this.base = base;
     }
 
-    public void securityRule_collection_get_test() {
+    private void securityRule_collection_get_test() {
         String url = base + "/security-group-rules";
         HttpUtils.test_fetch(url, "Security Rule Collection GET failed");
     }
 
-    public String singleton_sr_create_test() {
+    private String singleton_sr_create_test() {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"ingress\", "
                 + "\"remote_ip_prefix\": null, \"protocol\": \"tcp\", " + "\"ethertype\": \"IPv6\", \"tenant_id\": "
@@ -31,12 +32,12 @@ public class NeutronSecurityRuleTests {
         return content;
     }
 
-    public void singleton_sr_get_with_one_query_item_test(String createJsonString) {
+    private void singleton_sr_get_with_one_query_item_test(String createJsonString) {
         String url = base + "/security-group-rules";
         HttpUtils.test_fetch_with_one_query_item(url, createJsonString, "security_group_rules");
     }
 
-    public void multiple_sr_create_test() {
+    private void multiple_sr_create_test() {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rules\": [" + "{" + "  \"id\": \"35fb0f34-c8d3-416d-a205-a2c75f7b8e22\","
                 + "  \"direction\": \"egress\"," + "  \"ethertype\": \"IPv6\"," + "  \"protocol\": \"tcp\","
@@ -59,7 +60,7 @@ public class NeutronSecurityRuleTests {
         HttpUtils.test_create(url, content, "Security Rule Multiple Post Failed");
     }
 
-    public void singleton_sr_modify_test() {
+    private void singleton_sr_modify_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
         String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"egress\", "
                 + "\"remote_ip_prefix\": null, \"protocol\": \"tcp\", " + "\"ethertype\": \"IPv6\", \"tenant_id\": "
@@ -69,12 +70,12 @@ public class NeutronSecurityRuleTests {
         HttpUtils.test_modify(url, content, "Security Rule Singleton Put Failed");
     }
 
-    public void sr_element_get_test() {
+    private void sr_element_get_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
         HttpUtils.test_fetch(url, true, "Security Rule Element Get Failed");
     }
 
-    public void sr_element_get_with_query_test() {
+    private void sr_element_get_with_query_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669"
                 + "?fields=id&fields=direction&fields=protocol&fields=port_range_min"
                 + "&fields=port_range_max&fields=ethertype&fields=remote_ip_prefix"
@@ -83,22 +84,22 @@ public class NeutronSecurityRuleTests {
         HttpUtils.test_fetch(url, true, "Security Rule Element Get With Query Failed");
     }
 
-    public void sr_delete_test() {
+    private void sr_delete_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
         HttpUtils.test_delete(url, "Security Rule Delete Failed");
     }
 
-    public void sr_element_negative_get_test() {
+    private void sr_element_negative_get_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
         HttpUtils.test_fetch(url, false, "Security Rule Element Negative Get Failed");
     }
 
-    public void bug5478_rule_delete_negative_test() {
+    private void bug5478_rule_delete_negative_test() {
         String url = base + "/security-group-rules/9b4be7fa-e56e-40fb-9516-1f0fa9185669";
         HttpUtils.test_delete_404(url, "Security Rule Delete 404 Failed");
     }
 
-    public void bug4043_ipv4_test() {
+    private void bug4043_ipv4_test() {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"ingress\", "
                 + "\"remote_ip_prefix\": \"10.10.10.10/16\", \"protocol\": \"tcp\", "
@@ -112,7 +113,7 @@ public class NeutronSecurityRuleTests {
         HttpUtils.test_delete(url, "Security Rule Delete Failed");
     }
 
-    public void bug4043_ipv6_test() {
+    private void bug4043_ipv6_test() {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"ingress\", "
                 + "\"remote_ip_prefix\": \"fe80::1/10\", \"protocol\": \"tcp\", "
@@ -126,7 +127,7 @@ public class NeutronSecurityRuleTests {
         HttpUtils.test_delete(url, "Security Rule Delete Failed");
     }
 
-    public String bug6398_sr_create_test() {
+    private String bug6398_sr_create_test() {
         String url = base + "/security-group-rules";
         String content = " {\"security_group_rule\": " + "{\"remote_group_id\": null, \"direction\": \"ingress\", "
                 + "\"remote_ip_prefix\": null, \"protocol\": \"TCP\", " + "\"ethertype\": \"IPv6\", \"tenant_id\": "
