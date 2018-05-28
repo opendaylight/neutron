@@ -102,5 +102,24 @@ public final class NeutronUtils {
             inverseMinimBandwidthRuleDirectionMapper = MINIMUMBANDWIDTHRULE_MAPPER.inverse();
             return inverseMinimBandwidthRuleDirectionMapper.get(minimumBandwidthKey);
         }
+        //
+
+        private static final ImmutableBiMap<String, Class<? extends DirectionBandwidthLimitRule>>
+                BANDWIDTHLIMITRULE_MAPPER = new ImmutableBiMap.Builder<String, Class<? extends
+                DirectionBandwidthLimitRule>>()
+                .put("egress", DirectionBandwidthLimitRule.class)
+                .build();
+
+        public static Class<? extends DirectionBandwidthLimitRule>
+        getBandwidthLimitRuleDirection(String bandwidthLimitKey) {
+            return BANDWIDTHLIMITRULE_MAPPER.get(bandwidthLimitKey);
+        }
+
+        public static String getBandwidthLimitRuleDirectionString(Class<? extends DirectionBandwidthLimitRule>
+                                                                          bandwidthLimitKey) {
+            ImmutableBiMap<Class<? extends DirectionBandwidthLimitRule>, String>
+                    inverseBandwidthLimitRuleDirectionMapper = BANDWIDTHLIMITRULE_MAPPER.inverse();
+            return inverseBandwidthLimitRuleDirectionMapper.get(bandwidthLimitKey);
+        }
     }
 }

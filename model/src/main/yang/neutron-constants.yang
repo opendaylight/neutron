@@ -132,6 +132,11 @@ module neutron-constants {
         base direction-base;
     }
 
+    identity direction-bandwidth-limit-rule {
+        description "Direction for bandwidth limit rule.";
+        base direction-base;
+    }
+
     // IP VERSION
     identity ip-version-base {
         description "the base identity for ip versions";
