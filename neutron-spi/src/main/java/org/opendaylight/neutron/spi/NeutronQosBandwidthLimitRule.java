@@ -25,6 +25,9 @@ public final class NeutronQosBandwidthLimitRule extends NeutronObject<NeutronQos
     @XmlElement(name = "max_burst_kbps")
     BigInteger maxBurstKbps;
 
+    @XmlElement(defaultValue = "egress", name = "direction")
+    String direction;
+
     public BigInteger getMaxKbps() {
         return maxKbps;
     }
@@ -41,6 +44,14 @@ public final class NeutronQosBandwidthLimitRule extends NeutronObject<NeutronQos
         this.maxBurstKbps = maxBurstKbps;
     }
 
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
     @Override
     public boolean extractField(String field, NeutronQosBandwidthLimitRule ans) {
         switch (field) {
@@ -49,6 +60,9 @@ public final class NeutronQosBandwidthLimitRule extends NeutronObject<NeutronQos
                 break;
             case "max_burst_kbps":
                 ans.setMaxBurstKbps(this.getMaxBurstKbps());
+                break;
+            case "direction":
+                ans.setDirection(this.getDirection());
                 break;
             default:
                 return super.extractField(field, ans);
@@ -61,6 +75,7 @@ public final class NeutronQosBandwidthLimitRule extends NeutronObject<NeutronQos
         return "qosBandwidthLimitRules{" + "qosBandwidthLimitRuleUUID='" + uuid + '\''
             + ", qosBandwidthLimitRuleTenantID='" + tenantID + '\'' + ", qosBandwidthLimitRuleMaxValue='" + maxKbps
             + '\'' + ", qosBandwidthLimitRuleMaxBurst='" + maxBurstKbps
+            + '\'' + ", qosBandwidthLimitRuleDirection='" + direction
             + '\''
             + '}';
     }
