@@ -16,6 +16,24 @@
       "revId": "88a0f2bc3d253b4d6c42168508aa2a249ced85a8",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaae983f_005c8735",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-05-29T10:56:32Z",
+      "side": 0,
+      "message": "Done in Patch Set 5 I had to push to un-draft this.  PS: Gerrit is weird if you collaborate on a change that someone else originally pushed; I could not figure out how to un-draft it, other than pushing a new Patch Set!",
+      "parentUuid": "7d367215_4895e24c",
+      "revId": "88a0f2bc3d253b4d6c42168508aa2a249ced85a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
