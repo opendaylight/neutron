@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "678e4efd_37d69cc7",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-05-29T11:14:31Z",
+      "side": 1,
+      "message": "\u003e even tho it doesn\u0027t use it, at least currently\n\nbut then why did you have to add this here? I know very little about Jersey, so I don\u0027t know what jersey-guava actually is; maybe some integration of Jersey with Guava? But I don\u0027t see you actually using this in NeutronTestWiring, so unless it\u0027s something magical required by Jersey if it gets instantiated by Guice (but should it care?), I\u0027m not getting what this actually for.  I could try running removing and seeing if it still works without this dependency, I guess...",
+      "parentUuid": "2211e755_46f745b6",
+      "revId": "9e7198389b313451fef6f977056caec15893be39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e23e447_5e7b8861",
         "filename": "integration/test-standalone/src/test/java/org/opendaylight/neutron/e2etest/NeutronE2ETest.java",
         "patchSetId": 3
