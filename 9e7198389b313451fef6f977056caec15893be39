@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4982f5cb_596588f5",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-05-29T10:28:00Z",
+      "side": 1,
+      "message": "Tom, should we not better just make this jersey-guava a transitive dependency of aaa.web:servlet-jersey2 instead?",
+      "revId": "9e7198389b313451fef6f977056caec15893be39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e23e447_5e7b8861",
+        "filename": "integration/test-standalone/src/test/java/org/opendaylight/neutron/e2etest/NeutronE2ETest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-05-29T10:28:00Z",
+      "side": 1,
+      "message": "Having to do this smells like possible trouble, specifically in the context of https://github.com/vorburger/opendaylight-simple - so I had a closer look at what classpath duplicates this change introduces, to see if we can exclude them... with https://git.opendaylight.org/gerrit/#/c/72398/ and the exclusion of aopalliance:aopalliance in the POM of this test proposed in Patch Set 4, we avoid having to comment this out.  Tom, will you merge c/72398 and then undraft PS 4? Then I will merge this ASAP.",
+      "revId": "9e7198389b313451fef6f977056caec15893be39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}

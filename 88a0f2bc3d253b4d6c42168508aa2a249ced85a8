@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d367215_4895e24c",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-05-29T10:28:00Z",
+      "side": 0,
+      "message": "Whoa - cool!  Looks like we\u0027re ready for this - I\u0027ve verified, locally, that the (commented out) ITNeutronE2E still passes even without this.  We should actually be able to get rid of the entire maven-bundle-plugin plugin here now  then, agreed?",
+      "revId": "88a0f2bc3d253b4d6c42168508aa2a249ced85a8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
