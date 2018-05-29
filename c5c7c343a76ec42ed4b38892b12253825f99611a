@@ -16,6 +16,23 @@
       "revId": "c5c7c343a76ec42ed4b38892b12253825f99611a",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "698d7b0f_109b28f4",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-05-29T09:15:52Z",
+      "side": 1,
+      "message": "do this only once instead of every time, and store it in a constant",
+      "revId": "c5c7c343a76ec42ed4b38892b12253825f99611a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
