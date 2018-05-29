@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2211e755_46f745b6",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-05-29T11:08:37Z",
+      "side": 1,
+      "message": "You mean add it to the servlet-jersey2 pom (even tho it doesn\u0027t use it, at least currently). I can do that with https://git.opendaylight.org/gerrit/#/c/72210/.",
+      "parentUuid": "4982f5cb_596588f5",
+      "revId": "9e7198389b313451fef6f977056caec15893be39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e23e447_5e7b8861",
         "filename": "integration/test-standalone/src/test/java/org/opendaylight/neutron/e2etest/NeutronE2ETest.java",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-05-29T10:28:00Z",
       "side": 1,
       "message": "Having to do this smells like possible trouble, specifically in the context of https://github.com/vorburger/opendaylight-simple - so I had a closer look at what classpath duplicates this change introduces, to see if we can exclude them... with https://git.opendaylight.org/gerrit/#/c/72398/ and the exclusion of aopalliance:aopalliance in the POM of this test proposed in Patch Set 4, we avoid having to comment this out.  Tom, will you merge c/72398 and then undraft PS 4? Then I will merge this ASAP.",
+      "revId": "9e7198389b313451fef6f977056caec15893be39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceca4558_e18d0b2c",
+        "filename": "integration/test-standalone/src/test/java/org/opendaylight/neutron/e2etest/NeutronE2ETest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-05-29T11:08:37Z",
+      "side": 1,
+      "message": "yeah aopalliance conflict between Guice and Jersey 2, plus the usual javax.annotation crap.",
+      "parentUuid": "5e23e447_5e7b8861",
       "revId": "9e7198389b313451fef6f977056caec15893be39",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
