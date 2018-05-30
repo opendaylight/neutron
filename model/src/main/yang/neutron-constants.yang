@@ -127,11 +127,6 @@ module neutron-constants {
 
     }
 
-    identity direction-minimum-bandwidth-rule {
-        description "Direction for minimum bandwidth rule.";
-        base direction-base;
-    }
-
     // IP VERSION
     identity ip-version-base {
         description "the base identity for ip versions";

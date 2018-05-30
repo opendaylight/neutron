@@ -83,8 +83,7 @@ public final class NeutronQosPolicyInterface
                 minimumBandwidthRulesBuilder.setUuid(toUuid(minimumBandwidthRule.getID()));
                 minimumBandwidthRulesBuilder.setTenantId(toUuid(minimumBandwidthRule.getTenantID()));
                 minimumBandwidthRulesBuilder.setMinKbps(minimumBandwidthRule.getMinKbps());
-                minimumBandwidthRulesBuilder.setDirection(DirectionMapper.getMinimumBandwidthRuleDirection(
-                    minimumBandwidthRule.getDirection()));
+                minimumBandwidthRulesBuilder.setDirection(DirectionMapper.get(minimumBandwidthRule.getDirection()));
                 listMinimumBandwidth.add(minimumBandwidthRulesBuilder.build());
             }
             qosPolicyBuilder.setMinimumbandwidthRules(listMinimumBandwidth);
@@ -125,7 +124,7 @@ public final class NeutronQosPolicyInterface
                 opt.setID(rule.getTenantId().getValue());
                 opt.setTenantID(rule.getTenantId().getValue());
                 opt.setMinKbps(rule.getMinKbps());
-                opt.setDirection(DirectionMapper.getMinimumBandwidthRuleDirectionString(rule.getDirection()));
+                opt.setDirection(DirectionMapper.getDirectionString(rule.getDirection()));
                 minimumBandwidthRules.add(opt);
             }
             result.setMinimumBandwidthRules(minimumBandwidthRules);

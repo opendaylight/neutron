@@ -66,7 +66,7 @@ public final class NeutronMeteringLabelRuleInterface
             answer.setMeteringLabelRuleLabelID(rule.getMeteringLabelId().getValue());
         }
         if (rule.getDirection() != null) {
-            answer.setMeteringLabelRuleDirection(DirectionMapper.getName(rule.getDirection()));
+            answer.setMeteringLabelRuleDirection(DirectionMapper.getDirectionString(rule.getDirection()));
         }
         if (rule.getRemoteIpPrefix() != null) {
             answer.setMeteringLabelRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
