@@ -71,7 +71,7 @@ module neutron-qos {
         }
         leaf direction {
             type identityref {
-                base "constants:direction-minimum-bandwidth-rule";
+                base "constants:direction-base";
             }
             description "The traffic direction";
         }
