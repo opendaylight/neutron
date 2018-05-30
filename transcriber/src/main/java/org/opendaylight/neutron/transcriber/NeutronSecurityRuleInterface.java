@@ -54,7 +54,7 @@ public final class NeutronSecurityRuleInterface extends
         final NeutronSecurityRule answer = new NeutronSecurityRule();
         fromMdIds(rule, answer);
         if (rule.getDirection() != null) {
-            answer.setSecurityRuleDirection(DirectionMapper.getName(rule.getDirection()));
+            answer.setSecurityRuleDirection(DirectionMapper.getDirectionString(rule.getDirection()));
         }
         if (rule.getSecurityGroupId() != null) {
             answer.setSecurityRuleGroupID(rule.getSecurityGroupId().getValue());
