@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbc90f8e_a621da01",
+        "filename": "model/src/main/yang/neutron-constants.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 6648
+      },
+      "writtenOn": "2018-05-30T07:33:02Z",
+      "side": 1,
+      "message": "If it\u0027s feasible, can direction be defined as a yang enumeration instead of identity? this shouldn\u0027t have been identity in the first place since there is not going to be extensions to direction.\nAnd defining enumeration will generate the code that is present in DirectionMapper.\n\nleaf direction {\n   type enumeration {\n      enum \"ingress\";\n      enum \"egress\";\n    }\n    default \"egress\";\n}",
+      "revId": "3bdaba09393ec07054394394bdf0f25dc29f9b24",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
