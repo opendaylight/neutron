@@ -75,6 +75,6 @@ public class NeutronHostconfigUtils {
 
     private InstanceIdentifier<Hostconfig> createInstanceIdentifier(Hostconfig hostconfig) {
         return InstanceIdentifier.create(Neutron.class).child(Hostconfigs.class)
-                .child(Hostconfig.class, hostconfig.getKey());
+                .child(Hostconfig.class, hostconfig.key());
     }
 }

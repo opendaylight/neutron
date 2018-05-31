@@ -127,7 +127,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     private void updateHostConfig(Node node, NeutronHostconfigUtils.Action action) {
         for (Map.Entry<String, String> entry : HostconfigUtil.createHostconfigsDataFor(node.getNodeId(), socketInfo)
             .entrySet()) {
-            LOG.info("Updating hostconfig for node {}. Action: {}.", node.getKey(), action);
+            LOG.info("Updating hostconfig for node {}. Action: {}.", node.key(), action);
             neutronHostconfig.updateMdsal(neutronHostconfig.buildHostConfigInfo(node.getNodeId().getValue(),
                     entry.getKey(), entry.getValue()), action);
         }
@@ -135,7 +135,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
 
     private boolean validateVppNode(Node node) {
         LOG.info("Registering new node {}", node.getNodeId().getValue());
-        NetconfNode netconfNode = node.getAugmentation(NetconfNode.class);
+        NetconfNode netconfNode = node.augmentation(NetconfNode.class);
         if (netconfNode == null) {
             LOG.warn("Node {} is not a netconf device", node.getNodeId().getValue());
             return false;

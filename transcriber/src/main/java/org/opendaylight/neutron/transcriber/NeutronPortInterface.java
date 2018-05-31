@@ -72,7 +72,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
     }
 
     protected void addExtensions(Port port, NeutronPort result) {
-        final PortBindingExtension binding = port.getAugmentation(PortBindingExtension.class);
+        final PortBindingExtension binding = port.augmentation(PortBindingExtension.class);
         result.setBindinghostID(binding.getHostId());
         if (binding.getVifDetails() != null) {
             final Map<String, String> details = new HashMap<>(binding.getVifDetails().size());
@@ -87,14 +87,14 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
     }
 
     private void portSecurityExtension(Port port, NeutronPort result) {
-        final PortSecurityExtension portSecurity = port.getAugmentation(PortSecurityExtension.class);
+        final PortSecurityExtension portSecurity = port.augmentation(PortSecurityExtension.class);
         if (portSecurity != null && portSecurity.isPortSecurityEnabled() != null) {
             result.setPortSecurityEnabled(portSecurity.isPortSecurityEnabled());
         }
     }
 
     private void qosExtension(Port port, NeutronPort result) {
-        final QosPortExtension qos = port.getAugmentation(QosPortExtension.class);
+        final QosPortExtension qos = port.augmentation(QosPortExtension.class);
         if (qos != null && qos.getQosPolicyId() != null) {
             result.setQosPolicyId(qos.getQosPolicyId().getValue());
         }

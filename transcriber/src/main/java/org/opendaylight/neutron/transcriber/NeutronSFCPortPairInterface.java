@@ -60,7 +60,7 @@ public final class NeutronSFCPortPairInterface
             List<ServiceFunctionParameters> serviceFunctionParams = new ArrayList<>();
             for (String paramKey : neutronPortPair.getServiceFunctionParameters().keySet()) {
                 ServiceFunctionParametersBuilder param = new ServiceFunctionParametersBuilder();
-                param.setKey(new ServiceFunctionParametersKey(paramKey));
+                param.withKey(new ServiceFunctionParametersKey(paramKey));
                 param.setServiceFunctionParameter(paramKey);
                 param.setServiceFunctionParameterValue(neutronPortPair.getServiceFunctionParameters().get(paramKey));
                 serviceFunctionParams.add(param.build());

@@ -73,7 +73,7 @@ public final class NeutronSFCPortChainInterface
             List<ChainParameters> chainParams = new ArrayList<>();
             for (String paramKey : neutronPortChain.getChainParameters().keySet()) {
                 ChainParametersBuilder param = new ChainParametersBuilder();
-                param.setKey(new ChainParametersKey(paramKey));
+                param.withKey(new ChainParametersKey(paramKey));
                 param.setChainParameter(paramKey);
                 param.setChainParameterValue(neutronPortChain.getChainParameters().get(paramKey));
                 chainParams.add(param.build());
