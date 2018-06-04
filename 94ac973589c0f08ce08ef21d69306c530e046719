@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "745fd5fc_e13938d2",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-04T10:33:40Z",
+      "side": 1,
+      "message": "I am not clear on the price of calling inverse()...perhaps it\u0027s better to hold the inversed map as a privat static final variable?",
+      "revId": "94ac973589c0f08ce08ef21d69306c530e046719",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
