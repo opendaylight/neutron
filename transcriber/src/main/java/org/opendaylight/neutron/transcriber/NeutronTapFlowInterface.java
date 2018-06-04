@@ -60,7 +60,7 @@ public final class NeutronTapFlowInterface
         return InstanceIdentifier.create(Neutron.class)
                 .child(TapServices.class)
                 .child(TapService.class, new TapServiceKey(toUuid(tapServiceUUID)))
-                .child(TapFlows.class).child(TapFlow.class, item.getKey());
+                .child(TapFlows.class).child(TapFlow.class, item.key());
     }
 
     @Override

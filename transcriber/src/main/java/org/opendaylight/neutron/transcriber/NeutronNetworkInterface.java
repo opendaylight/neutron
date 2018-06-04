@@ -65,10 +65,10 @@ public final class NeutronNetworkInterface
         result.setShared(network.isShared());
         result.setVlanTransparent(network.isVlanTransparent());
 
-        final NetworkL3Extension l3Extension = network.getAugmentation(NetworkL3Extension.class);
+        final NetworkL3Extension l3Extension = network.augmentation(NetworkL3Extension.class);
         result.setRouterExternal(l3Extension.isExternal());
 
-        final NetworkProviderExtension providerExtension = network.getAugmentation(NetworkProviderExtension.class);
+        final NetworkProviderExtension providerExtension = network.augmentation(NetworkProviderExtension.class);
         result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());
         result.setProviderSegmentationID(providerExtension.getSegmentationId());
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
@@ -82,7 +82,7 @@ public final class NeutronNetworkInterface
                 segments.add(neutronSegment);
             }
         }
-        final QosNetworkExtension qos = network.getAugmentation(QosNetworkExtension.class);
+        final QosNetworkExtension qos = network.augmentation(QosNetworkExtension.class);
         if (qos != null && qos.getQosPolicyId() != null) {
             result.setQosPolicyId(qos.getQosPolicyId().getValue());
         }

@@ -173,7 +173,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     private InstanceIdentifier<T> createInstanceIdentifier(T item) {
-        return InstanceIdentifier.create(mdParentClass).child(mdContainerClass).child(mdListClass, item.getKey());
+        return InstanceIdentifier.create(mdParentClass).child(mdContainerClass).child(mdListClass, item.key());
     }
 
     private InstanceIdentifier<U> createInstanceIdentifier() {

@@ -116,7 +116,7 @@ public final class NeutronSFCFlowClassifierInterface
             List<L7Parameter> l7Params = new ArrayList<>();
             for (String paramKey : neutronClassifier.getL7Parameters().keySet()) {
                 L7ParameterBuilder param = new L7ParameterBuilder();
-                param.setKey(new L7ParameterKey(paramKey));
+                param.withKey(new L7ParameterKey(paramKey));
                 param.setMatchParameter(paramKey);
                 param.setMatchParameterValue(neutronClassifier.getL7Parameters().get(paramKey));
                 l7Params.add(param.build());

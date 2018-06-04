@@ -215,12 +215,12 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     protected InstanceIdentifier<Member> createMemberInstanceIdentifier(Pool pool, Member item) {
-        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey())
-                .child(Members.class).child(Member.class, item.getKey());
+        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.key())
+                .child(Members.class).child(Member.class, item.key());
     }
 
     protected InstanceIdentifier<Members> createMembersInstanceIdentifier(Pool pool) {
-        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.getKey())
+        return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.key())
                 .child(Members.class);
     }
 
