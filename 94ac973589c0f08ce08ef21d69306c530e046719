@@ -16,6 +16,24 @@
       "revId": "94ac973589c0f08ce08ef21d69306c530e046719",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbb127c3_e8355f32",
+        "filename": "model/src/main/java/org/opendaylight/yang/gen/v1/urn/opendaylight/neutron/constants/rev150712/NeutronUtils.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-04T11:00:29Z",
+      "side": 1,
+      "message": "it\u0027s probably not huge, but doing it once instead of every time and keeping it in a private static final constant in line 112 is easy enough and better -like in c/72460.",
+      "parentUuid": "745fd5fc_e13938d2",
+      "revId": "94ac973589c0f08ce08ef21d69306c530e046719",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
