@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80c35d19_d8a35a7f",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronQosPolicyInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 6648
+      },
+      "writtenOn": "2018-06-05T05:15:59Z",
+      "side": 1,
+      "message": "line is duplicated here.",
+      "revId": "06da8286ca6b5e64057fb4276b31078ab326d3f9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
