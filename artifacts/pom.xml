@@ -11,7 +11,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>neutron-artifacts</artifactId>
-    <version>0.10.2-SNAPSHOT</version>
+    <version>0.10.2</version>
     <packaging>pom</packaging>
     <name>Neutron Artifacts</name>
 
