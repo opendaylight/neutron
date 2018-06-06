@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 
 /**
  * This interface defines the methods for CRUD of NB OpenStack LoadBalancerPool objects.
@@ -45,8 +46,10 @@ public interface INeutronLoadBalancerPoolCRUD extends INeutronCRUD<NeutronLoadBa
      * @param poolUuid
      *            UUID of the NeutronLoadBalancerPool object
      * @return List of OpenStackNetworks objects
+     * @throws ReadFailedException if the read failed
      */
-    List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid);
+    List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid)
+            throws ReadFailedException;
 
     /**
      * Applications call this interface method to add a NeutronLoadBalancerPoolMember object to the
