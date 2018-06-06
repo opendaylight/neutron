@@ -16,6 +16,7 @@ import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
 import org.opendaylight.neutron.spi.NeutronTapFlow;
@@ -104,12 +105,12 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    public boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID) {
+    public boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID) throws ReadFailedException {
         final TapFlow dataObject = readMd(createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID)));
         return dataObject != null;
     }
 
-    private boolean tapServiceExists(String tapServiceUUID) {
+    private boolean tapServiceExists(String tapServiceUUID) throws ReadFailedException {
         final TapService tapService = readMd(InstanceIdentifier.create(Neutron.class).child(TapServices.class)
                                         .child(TapService.class, new TapServiceKey(toUuid(tapServiceUUID))));
         return tapService != null;
@@ -155,7 +156,7 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    public boolean addTapFlow(NeutronTapFlow tapFlow) {
+    public boolean addTapFlow(NeutronTapFlow tapFlow) throws ReadFailedException {
         if (!tapServiceExists(tapFlow.getTapFlowServiceID())) {
             return false;
         }
@@ -167,7 +168,7 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    public NeutronTapFlow getTapFlow(String tapServiceUUID, String tapFlowUUID) {
+    public NeutronTapFlow getTapFlow(String tapServiceUUID, String tapFlowUUID) throws ReadFailedException {
         final TapFlow tapFlow = readMd(createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID)));
         if (tapFlow == null) {
             return null;
