@@ -167,7 +167,8 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid) {
+    public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid)
+            throws ReadFailedException {
         final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<>();
         final Members members = readMd(createMembersInstanceIdentifier(toMd(poolUuid)));
         if (members != null) {

@@ -15,8 +15,10 @@ import java.net.HttpURLConnection;
 import java.util.List;
 import java.util.Objects;
 import javax.ws.rs.core.Response;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
@@ -79,7 +81,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
 
     protected Response show(String uuid,
             // return fields
-            List<String> fields) {
+            List<String> fields) throws ReadFailedException {
         T ans = neutronCRUD.get(uuid);
         if (ans == null) {
             throw new ResourceNotFoundException(uuidNoExist());
@@ -93,7 +95,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         }
     }
 
-    protected Response create(final R input) {
+    protected Response create(final R input) throws OperationFailedException {
         if (input.isSingleton()) {
             T singleton = input.getSingleton();
 
@@ -129,7 +131,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         return false;
     }
 
-    protected Response update(String uuid, final R input) {
+    protected Response update(String uuid, final R input) throws OperationFailedException {
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
         }
@@ -152,7 +154,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
     }
 
-    protected Response delete(String uuid) {
+    protected Response delete(String uuid) throws OperationFailedException {
         /*
          * remove it and return 204 status
          */
