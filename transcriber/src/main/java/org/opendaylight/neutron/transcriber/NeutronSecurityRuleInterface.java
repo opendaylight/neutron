@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
@@ -135,7 +136,8 @@ public final class NeutronSecurityRuleInterface extends
     }
 
     @Override
-    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronSecurityRule securityRule) {
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronSecurityRule securityRule)
+            throws ReadFailedException {
         return ifNonNull(securityRule.getSecurityRuleGroupID(),
             groupID -> securityGroupInterface.exists(groupID, tx))
             && ifNonNull(securityRule.getSecurityRemoteGroupID(),

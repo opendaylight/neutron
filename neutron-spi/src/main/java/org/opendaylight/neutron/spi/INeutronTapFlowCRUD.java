@@ -7,6 +7,8 @@
  */
 package org.opendaylight.neutron.spi;
 
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
+
 /**
  * This interface defines the methods for CRUD of NB OpenStack Tap Flow objects.
  */
@@ -20,9 +22,10 @@ public interface INeutronTapFlowCRUD extends INeutronCRUD<NeutronTapFlow> {
      * @param tapFlowUUID
      *            UUID of Tap Flow
      * @return boolean on whether the object was added or not
+     * @throws ReadFailedException if the read failed
      */
 
-    boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID);
+    boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID) throws ReadFailedException;
 
     /**
      * Applications call this interface method to get a NeutronTapFlow object.
@@ -32,9 +35,9 @@ public interface INeutronTapFlowCRUD extends INeutronCRUD<NeutronTapFlow> {
      * @param tapFlowUUID
      *            UUID of Tap Flow
      * @return NeutronTapFlow object
+     * @throws ReadFailedException if the read failed
      */
-
-    NeutronTapFlow getTapFlow(String tapServiceUUID, String tapFlowUUID);
+    NeutronTapFlow getTapFlow(String tapServiceUUID, String tapFlowUUID) throws ReadFailedException;
 
     /**
      * Applications call this interface method to add a NeutronTapFlow object to the
@@ -43,9 +46,9 @@ public interface INeutronTapFlowCRUD extends INeutronCRUD<NeutronTapFlow> {
      * @param input
      *            OpenStackNetwork object
      * @return boolean on whether the object was added or not
+     * @throws ReadFailedException if the read failed
      */
-
-    boolean addTapFlow(NeutronTapFlow input);
+    boolean addTapFlow(NeutronTapFlow input) throws ReadFailedException;
 
     /**
      * Applications call this interface method to update a NeutronTapFlow object to the
@@ -55,7 +58,6 @@ public interface INeutronTapFlowCRUD extends INeutronCRUD<NeutronTapFlow> {
      *            OpenStackNetwork object
      * @return boolean on whether the object was added or not
      */
-
     boolean updateTapFlow(NeutronTapFlow input);
 
     /**
@@ -67,6 +69,5 @@ public interface INeutronTapFlowCRUD extends INeutronCRUD<NeutronTapFlow> {
      *            UUID of Tap Flow
      * @return boolean on whether the object was added or not
      */
-
     boolean deleteTapFlow(String tapServiceUUID, String tapFlowUUID);
 }
