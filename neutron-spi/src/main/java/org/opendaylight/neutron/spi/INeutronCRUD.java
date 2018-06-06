@@ -22,7 +22,9 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *            UUID of the Neutron object
      * @return boolean
      */
-    boolean exists(String uuid);
+    boolean exists(String uuid); // TODO remove and replace usages by variant below with Tx
+
+    // TODO boolean exists(String uuid, ReadTransaction tx);
 
     /**
      * Applications call this interface method to return if a particular
