@@ -26,6 +26,7 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
@@ -116,22 +117,21 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response createMeteringLabelRule(final NeutronMeteringLabelRuleRequest input) {
-        INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronCRUD();
         if (input.isSingleton()) {
             NeutronMeteringLabelRule singleton = input.getSingleton();
+            try {
+                // add meteringLabelRule to the cache
+                INeutronMeteringLabelRuleCRUD meteringLabelRuleInterface = getNeutronCRUD();
+                meteringLabelRuleInterface.add(singleton);
+                return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
 
-            /*
-             * add meteringLabelRule to the cache
-             */
-            meteringLabelRuleInterface.add(singleton);
+            } catch (OperationFailedException e) {
+                throw new DatastoreOperationFailedWebApplicationException(e);
+            }
         } else {
-
-            /*
-             * only singleton meteringLabelRule creates supported
-             */
+            // only singleton meteringLabelRule creates supported
             throw new BadRequestException("Only singleton meteringLabelRule creates supported");
         }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     /**

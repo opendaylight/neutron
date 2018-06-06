@@ -26,6 +26,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataTreeIdentifier;
 import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.hostconfig.utils.NeutronHostconfigUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNode;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNodeConnectionStatus;
@@ -81,13 +82,19 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     public void onDataTreeChanged(@Nonnull Collection<DataTreeModification<Node>> changes) {
         LOG.info("onDataTreeChanged: Received Data Tree Changed ...", changes);
         executorService.execute(() -> {
-            for (DataTreeModification<Node> change : Preconditions.checkNotNull(changes, "Changes may not be null!")) {
-                processDataTreeModification(change);
+            try {
+                for (DataTreeModification<Node> change : Preconditions.checkNotNull(changes,
+                        "Changes may not be null!")) {
+                    processDataTreeModification(change);
+                }
+            } catch (TransactionCommitFailedException e) {
+                LOG.error("Transaction commit failed; ignorining changes: ", changes, e);
             }
         });
     }
 
-    private void processDataTreeModification(DataTreeModification<Node> change) {
+    private void processDataTreeModification(DataTreeModification<Node> change)
+            throws TransactionCommitFailedException {
         final InstanceIdentifier<Node> key = change.getRootPath().getRootIdentifier();
         final DataObjectModification<Node> mod = change.getRootNode();
         LOG.info("onDataTreeChanged: Received Data Tree Changed Update of Type={} for Key={}",
@@ -124,7 +131,8 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         LOG.info("Registered listener to netconf nodes {}.", dataTreeIdentifier.getRootIdentifier());
     }
 
-    private void updateHostConfig(Node node, NeutronHostconfigUtils.Action action) {
+    private void updateHostConfig(Node node, NeutronHostconfigUtils.Action action)
+            throws TransactionCommitFailedException {
         for (Map.Entry<String, String> entry : HostconfigUtil.createHostconfigsDataFor(node.getNodeId(), socketInfo)
             .entrySet()) {
             LOG.info("Updating hostconfig for node {}. Action: {}.", node.key(), action);

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
@@ -44,7 +43,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.pool.members.MemberBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.pool.attributes.SessionPersistenceBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
+import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,8 +139,7 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolProtocol(PROTOCOL_MAP.get(pool.getProtocol()));
         }
         if (pool.getSessionPersistence() != null) {
-            final NeutronLoadBalancerSessionPersistence sessionPersistence =
-                    new NeutronLoadBalancerSessionPersistence();
+            NeutronLoadBalancerSessionPersistence sessionPersistence = new NeutronLoadBalancerSessionPersistence();
             sessionPersistence.setCookieName(pool.getSessionPersistence().getCookieName());
             sessionPersistence.setType(pool.getSessionPersistence().getType());
 
@@ -149,7 +149,7 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) {
+    public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) throws ReadFailedException {
         final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
             return false;
@@ -158,7 +158,8 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String poolUuid, String uuid) {
+    public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String poolUuid, String uuid)
+            throws ReadFailedException {
         final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
             return null;
@@ -167,7 +168,8 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid) {
+    public List<NeutronLoadBalancerPoolMember> getAllNeutronLoadBalancerPoolMembers(String poolUuid)
+            throws ReadFailedException {
         final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<>();
         final Members members = readMd(createMembersInstanceIdentifier(toMd(poolUuid)));
         if (members != null) {
@@ -183,7 +185,8 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public boolean addNeutronLoadBalancerPoolMember(String poolUuid, NeutronLoadBalancerPoolMember input) {
+    public boolean addNeutronLoadBalancerPoolMember(String poolUuid, NeutronLoadBalancerPoolMember input)
+            throws OperationFailedException {
         if (neutronLoadBalancerPoolMemberExists(poolUuid, input.getID())) {
             return false;
         }
@@ -192,16 +195,17 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public boolean removeNeutronLoadBalancerPoolMember(String poolUuid, String uuid) {
+    public boolean removeNeutronLoadBalancerPoolMember(String poolUuid, String uuid) throws OperationFailedException {
         if (!neutronLoadBalancerPoolMemberExists(poolUuid, uuid)) {
             return false;
         }
-        return removeMemberMd(toMd(poolUuid), toMemberMd(uuid));
+        removeMemberMd(toMd(poolUuid), toMemberMd(uuid));
+        return true;
     }
 
     @Override
     public boolean updateNeutronLoadBalancerPoolMember(String poolUuid, String uuid,
-            NeutronLoadBalancerPoolMember delta) {
+            NeutronLoadBalancerPoolMember delta) throws OperationFailedException {
         if (!neutronLoadBalancerPoolMemberExists(poolUuid, uuid)) {
             return false;
         }
@@ -210,7 +214,8 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    public boolean neutronLoadBalancerPoolMemberInUse(String poolUuid, String loadBalancerPoolMemberID) {
+    public boolean neutronLoadBalancerPoolMemberInUse(String poolUuid, String loadBalancerPoolMemberID)
+            throws ReadFailedException {
         return !neutronLoadBalancerPoolMemberExists(poolUuid, loadBalancerPoolMemberID);
     }
 
@@ -264,64 +269,47 @@ public final class NeutronLoadBalancerPoolInterface
         return memberBuilder.build();
     }
 
-    protected Member toMemberMd(String uuid) {
+    private Member toMemberMd(String uuid) {
         final MemberBuilder memberBuilder = new MemberBuilder();
         memberBuilder.setUuid(toUuid(uuid));
         return memberBuilder.build();
     }
 
-    protected <
-            T extends org.opendaylight.yangtools.yang.binding.DataObject> T readMemberMd(InstanceIdentifier<T> path) {
+    private <T extends DataObject> T readMemberMd(InstanceIdentifier<T> path) throws ReadFailedException {
         T result = null;
-        final ReadOnlyTransaction transaction = getDataBroker().newReadOnlyTransaction();
-        final CheckedFuture<Optional<T>,
-                ReadFailedException> future = transaction.read(LogicalDatastoreType.CONFIGURATION, path);
-        if (future != null) {
-            Optional<T> optional;
-            try {
+        try (ReadOnlyTransaction transaction = getDataBroker().newReadOnlyTransaction()) {
+            final CheckedFuture<Optional<T>, ReadFailedException> future = transaction
+                    .read(LogicalDatastoreType.CONFIGURATION, path);
+            if (future != null) {
+                Optional<T> optional;
                 optional = future.checkedGet();
                 if (optional.isPresent()) {
                     result = optional.get();
                 }
-            } catch (final ReadFailedException e) {
-                LOG.warn("Failed to read {}", path, e);
             }
         }
-        transaction.close();
         return result;
     }
 
-    protected boolean addMemberMd(Pool pool, NeutronLoadBalancerPoolMember neutronObject) {
+    private void addMemberMd(Pool pool, NeutronLoadBalancerPoolMember neutronObject)
+            throws TransactionCommitFailedException {
         // TODO think about adding existence logic
-        return updateMemberMd(pool, neutronObject);
+        updateMemberMd(pool, neutronObject);
     }
 
-    protected boolean updateMemberMd(Pool pool, NeutronLoadBalancerPoolMember neutronObject) {
+    private void updateMemberMd(Pool pool, NeutronLoadBalancerPoolMember neutronObject)
+            throws TransactionCommitFailedException {
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final Member item = toMemberMd(neutronObject);
         final InstanceIdentifier<Member> iid = createMemberInstanceIdentifier(pool, item);
         transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-        final CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Transation failed ", e);
-            return false;
-        }
-        return true;
+        transaction.submit().checkedGet();
     }
 
-    protected boolean removeMemberMd(Pool pool, Member item) {
+    private void removeMemberMd(Pool pool, Member item) throws TransactionCommitFailedException {
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final InstanceIdentifier<Member> iid = createMemberInstanceIdentifier(pool, item);
         transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        final CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Transation failed ", e);
-            return false;
-        }
-        return true;
+        transaction.submit().checkedGet();
     }
 }

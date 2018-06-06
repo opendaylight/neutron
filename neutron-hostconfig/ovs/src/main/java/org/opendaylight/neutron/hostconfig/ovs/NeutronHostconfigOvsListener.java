@@ -26,6 +26,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataTreeIdentifier;
 import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.hostconfig.utils.NeutronHostconfigUtils;
 import org.opendaylight.ovsdb.utils.mdsal.utils.MdsalUtils;
 import org.opendaylight.ovsdb.utils.southbound.utils.SouthboundUtils;
@@ -60,7 +61,8 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
         this.neutronHostconfig = new NeutronHostconfigUtils(dataBroker);
     }
 
-    private void processChanges(Collection<DataTreeModification<Node>> changes) {
+    private void processChanges(Collection<DataTreeModification<Node>> changes)
+            throws TransactionCommitFailedException {
         LOG.info("onDataTreeChanged: Received Data Tree Changed ...", changes);
         for (DataTreeModification<Node> change : changes) {
             final InstanceIdentifier<Node> key = change.getRootPath().getRootIdentifier();
@@ -88,7 +90,11 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     @Override
     public void onDataTreeChanged(@Nonnull Collection<DataTreeModification<Node>> changes) {
         Preconditions.checkNotNull(changes, "Changes may not be null!");
-        processChanges(changes);
+        try {
+            processChanges(changes);
+        } catch (TransactionCommitFailedException e) {
+            LOG.error("Transaction commit failed; ignorining changes: ", changes, e);
+        }
     }
 
     private InstanceIdentifier<Node> createNodeIdentifier() {
@@ -115,7 +121,8 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
         }
     }
 
-    private void updateHostConfig(Node node, NeutronHostconfigUtils.Action action) {
+    private void updateHostConfig(Node node, NeutronHostconfigUtils.Action action)
+            throws TransactionCommitFailedException {
         String hostId = getExternalId(node, OS_HOST_CONFIG_HOST_ID_KEY);
         if (hostId == null) {
             return;
