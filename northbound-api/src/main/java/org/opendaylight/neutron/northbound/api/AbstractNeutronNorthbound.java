@@ -20,6 +20,7 @@ import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronCRUD.Result;
 import org.opendaylight.neutron.spi.INeutronObject;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
@@ -81,42 +82,49 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         return this.neutronCRUD;
     }
 
-    protected Response show(String uuid,
-            // return fields
-            List<String> fields) {
-        T ans = neutronCRUD.get(uuid);
-        if (ans == null) {
-            throw new ResourceNotFoundException(uuidNoExist());
-        }
+    protected Response show(String uuid, List<String> returnFields)
+            throws DatastoreOperationFailedWebApplicationException {
+        try {
+            T ans = neutronCRUD.get(uuid);
+            if (ans == null) {
+                throw new ResourceNotFoundException(uuidNoExist());
+            }
 
-        if (fields.size() > 0) {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans.extractFields(fields)))
-                    .build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();
+            if (returnFields.size() > 0) {
+                return Response.status(HttpURLConnection.HTTP_OK)
+                        .entity(newNeutronRequest(ans.extractFields(returnFields))).build();
+            } else {
+                return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();
+            }
+        } catch (OperationFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
     }
 
-    protected Response create(final R input) {
-        if (input.isSingleton()) {
-            T singleton = input.getSingleton();
+    protected Response create(final R input) throws DatastoreOperationFailedWebApplicationException {
+        try {
+            if (input.isSingleton()) {
+                T singleton = input.getSingleton();
 
-            singleton.initDefaults();
-            if (neutronCRUD.add(singleton).equals(DependencyMissing)) {
-                return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
-            }
-        } else {
-            if (input.getBulk() == null) {
-                throw new BadRequestException("Invalid requests");
-            }
-            for (T test : input.getBulk()) {
-                test.initDefaults();
-                if (neutronCRUD.add(test).equals(DependencyMissing)) {
+                singleton.initDefaults();
+                if (neutronCRUD.add(singleton).equals(DependencyMissing)) {
                     return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
                 }
+            } else {
+                if (input.getBulk() == null) {
+                    throw new BadRequestException("Invalid requests");
+                }
+                for (T test : input.getBulk()) {
+                    test.initDefaults();
+                    if (neutronCRUD.add(test).equals(DependencyMissing)) {
+                        return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
+                    }
+                }
             }
+            return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        } catch (OperationFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-        return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
     }
 
     protected void updateDelta(String uuid, T delta, T original) {
@@ -137,40 +145,46 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         return false;
     }
 
-    protected Response update(String uuid, final R input) {
+    protected Response update(String uuid, final R input) throws DatastoreOperationFailedWebApplicationException {
         if (!input.isSingleton()) {
             throw new BadRequestException("Only singleton edit supported");
         }
         T delta = input.getSingleton();
-        T original = neutronCRUD.get(uuid);
-        if (original == null) {
-            throw new ResourceNotFoundException(uuidNoExist());
+        try {
+            T original = neutronCRUD.get(uuid);
+            if (original == null) {
+                throw new ResourceNotFoundException(uuidNoExist());
+            }
+            if (checkRevisionNumber(original, delta)) {
+                return Response.status(HttpURLConnection.HTTP_OK).build();
+            }
+            updateDelta(uuid, delta, original);
+            /*
+             * update the object and return it
+             */
+            Result updateResult = neutronCRUD.update(uuid, delta);
+            if (updateResult.equals(DoesNotExist)) {
+                throw new ResourceNotFoundException(uuidNoExist());
+            } else if (updateResult.equals(DependencyMissing)) {
+                return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
+            }
+            T updated = neutronCRUD.get(uuid);
+            return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
+        } catch (OperationFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-        if (checkRevisionNumber(original, delta)) {
-            return Response.status(HttpURLConnection.HTTP_OK).build();
-        }
-        updateDelta(uuid, delta, original);
-        /*
-         * update the object and return it
-         */
-        Result updateResult = neutronCRUD.update(uuid, delta);
-        if (updateResult.equals(DoesNotExist)) {
-            throw new ResourceNotFoundException(uuidNoExist());
-        } else if (updateResult.equals(DependencyMissing)) {
-            return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
-        }
-        T updated = neutronCRUD.get(uuid);
-        return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
     }
 
-    protected Response delete(String uuid) {
-        /*
-         * remove it and return 204 status
-         */
-        if (!neutronCRUD.remove(uuid)) {
-            throw new ResourceNotFoundException(uuidNoExist());
+    protected Response delete(String uuid) throws DatastoreOperationFailedWebApplicationException {
+        try {
+            // remove it and return 204 status
+            if (!neutronCRUD.remove(uuid)) {
+                throw new ResourceNotFoundException(uuidNoExist());
+            } else {
+                return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+            }
+        } catch (OperationFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }

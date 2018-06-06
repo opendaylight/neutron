@@ -8,14 +8,13 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.util.concurrent.CheckedFuture;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
 import org.opendaylight.neutron.spi.NeutronTapFlow;
@@ -33,6 +32,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.ta
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.tap.services.attributes.tap.services.TapService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.tap.services.attributes.tap.services.TapServiceKey;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,58 +104,44 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    public boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID) {
+    public boolean tapFlowExists(String tapServiceUUID, String tapFlowUUID) throws ReadFailedException {
         final TapFlow dataObject = readMd(createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID)));
         return dataObject != null;
     }
 
-    private boolean tapServiceExists(String tapServiceUUID) {
+    private boolean tapServiceExists(String tapServiceUUID) throws ReadFailedException {
         final TapService tapService = readMd(InstanceIdentifier.create(Neutron.class).child(TapServices.class)
                                         .child(TapService.class, new TapServiceKey(toUuid(tapServiceUUID))));
         return tapService != null;
     }
 
 
-    private boolean updateTapFlowMd(NeutronTapFlow tapFlow) {
+    private void updateTapFlowMd(NeutronTapFlow tapFlow) throws TransactionCommitFailedException {
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final TapFlow item = toMd(tapFlow);
         final InstanceIdentifier<TapFlow> iid = createTapFlowInstanceIdentifier(tapFlow.getTapFlowServiceID(), item);
         transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-        final CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Transaction Failed ", e);
-            return false;
-        }
-        return true;
+        transaction.submit().checkedGet();
     }
 
-    private boolean removeTapFlowMd(String tapServiceUUID, String tapFlowUUID) {
+    private void removeTapFlowMd(String tapServiceUUID, String tapFlowUUID) throws TransactionCommitFailedException {
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final InstanceIdentifier<TapFlow> iid = createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID));
         transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        final CheckedFuture<Void, TransactionCommitFailedException> future = transaction.submit();
-        try {
-            future.get();
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Transation failed ", e);
-            return false;
-        }
-        return true;
+        transaction.submit().checkedGet();
     }
 
-    private boolean addTapFlowMd(NeutronTapFlow tapFlow) {
-        return updateTapFlowMd(tapFlow);
+    private void addTapFlowMd(NeutronTapFlow tapFlow) throws TransactionCommitFailedException {
+        updateTapFlowMd(tapFlow);
     }
 
     @Override
-    public boolean updateTapFlow(NeutronTapFlow tapFlow) {
-        return updateTapFlowMd(tapFlow);
+    public void updateTapFlow(NeutronTapFlow tapFlow) throws TransactionCommitFailedException {
+        updateTapFlowMd(tapFlow);
     }
 
     @Override
-    public boolean addTapFlow(NeutronTapFlow tapFlow) {
+    public boolean addTapFlow(NeutronTapFlow tapFlow) throws OperationFailedException {
         if (!tapServiceExists(tapFlow.getTapFlowServiceID())) {
             return false;
         }
@@ -167,7 +153,7 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    public NeutronTapFlow getTapFlow(String tapServiceUUID, String tapFlowUUID) {
+    public NeutronTapFlow getTapFlow(String tapServiceUUID, String tapFlowUUID) throws ReadFailedException {
         final TapFlow tapFlow = readMd(createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID)));
         if (tapFlow == null) {
             return null;
@@ -176,7 +162,7 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    public boolean deleteTapFlow(String tapServiceUUID, String tapFlowUUID) {
-        return removeTapFlowMd(tapServiceUUID, tapFlowUUID);
+    public void deleteTapFlow(String tapServiceUUID, String tapFlowUUID) throws TransactionCommitFailedException {
+        removeTapFlowMd(tapServiceUUID, tapFlowUUID);
     }
 }

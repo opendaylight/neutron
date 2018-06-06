@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Function;
 import javax.annotation.PreDestroy;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -33,11 +31,13 @@ import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import org.opendaylight.infrautils.utils.function.CheckedFunction;
 import org.opendaylight.neutron.spi.INeutronAdminAttributes;
 import org.opendaylight.neutron.spi.INeutronBaseAttributes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronObject;
+import org.opendaylight.neutron.spi.ReadFailedRuntimeException;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.AdminAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.BaseAttributes;
@@ -49,6 +49,7 @@ import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.Identifiable;
 import org.opendaylight.yangtools.yang.binding.Identifier;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -313,37 +314,32 @@ public abstract class AbstractTranscriberInterface<
 
     protected abstract S fromMd(T dataObject);
 
-    private <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadTransaction tx) {
+    private <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadTransaction tx) throws ReadFailedException {
         Preconditions.checkNotNull(tx);
         W result = null;
         final CheckedFuture<Optional<W>,
                 ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
         if (future != null) {
-            Optional<W> optional;
-            try {
-                optional = future.checkedGet();
-                if (optional.isPresent()) {
-                    result = optional.get();
-                }
-            } catch (final ReadFailedException e) {
-                LOG.warn("Failed to read {}", path, e);
+            Optional<W> optional = future.checkedGet();
+            if (optional.isPresent()) {
+                result = optional.get();
             }
         }
         return result;
     }
 
-    protected <W extends DataObject> W readMd(InstanceIdentifier<W> path) {
+    protected <W extends DataObject> W readMd(InstanceIdentifier<W> path) throws ReadFailedException {
         try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
             return readMd(path, tx);
         }
     }
 
-    private void addMd(S neutronObject, WriteTransaction tx) throws InterruptedException, ExecutionException {
+    private void addMd(S neutronObject, WriteTransaction tx) throws TransactionCommitFailedException {
         // TODO think about adding existence logic
         updateMd(neutronObject, tx);
     }
 
-    private void updateMd(S neutronObject, WriteTransaction tx) throws InterruptedException, ExecutionException {
+    private void updateMd(S neutronObject, WriteTransaction tx) throws TransactionCommitFailedException {
         Preconditions.checkNotNull(tx);
 
         final T item = toMd(neutronObject);
@@ -351,16 +347,16 @@ public abstract class AbstractTranscriberInterface<
         tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
-        future.get();
+        future.checkedGet();
     }
 
-    private void removeMd(T item, WriteTransaction tx) throws InterruptedException, ExecutionException {
+    private void removeMd(T item, WriteTransaction tx) throws TransactionCommitFailedException {
         Preconditions.checkNotNull(tx);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
-        future.get();
+        future.checkedGet();
     }
 
     protected static Uuid toUuid(String uuid) {
@@ -391,13 +387,13 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public boolean exists(String uuid, ReadTransaction tx) {
+    public boolean exists(String uuid, ReadTransaction tx) throws ReadFailedException {
         Preconditions.checkNotNull(tx);
         final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         return dataObject != null;
     }
 
-    private S get(String uuid, ReadTransaction tx) {
+    private S get(String uuid, ReadTransaction tx) throws ReadFailedException {
         Preconditions.checkNotNull(tx);
         final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         if (dataObject == null) {
@@ -407,7 +403,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public S get(String uuid) {
+    public S get(String uuid) throws ReadFailedException {
         try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
             return get(uuid, tx);
         }
@@ -415,7 +411,7 @@ public abstract class AbstractTranscriberInterface<
 
     protected abstract List<T> getDataObjectList(U dataObjects);
 
-    private List<S> getAll(ReadTransaction tx) {
+    private List<S> getAll(ReadTransaction tx) throws ReadFailedException {
         Preconditions.checkNotNull(tx);
         final Set<S> allNeutronObjects = new HashSet<>();
         final U dataObjects = readMd(createInstanceIdentifier(), tx);
@@ -431,13 +427,17 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public List<S> getAll() {
+    public List<S> getAll() throws ReadFailedRuntimeException {
         try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
-            return getAll(tx);
+            try {
+                return getAll(tx);
+            } catch (ReadFailedException e) {
+                throw new ReadFailedRuntimeException(e);
+            }
         }
     }
 
-    private Result add(S input, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+    private Result add(S input, ReadWriteTransaction tx) throws OperationFailedException {
         Preconditions.checkNotNull(tx);
         if (exists(input.getID(), tx)) {
             tx.cancel();
@@ -448,8 +448,9 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public Result add(S input) {
+    public Result add(S input) throws OperationFailedException {
         int retries = RETRY_MAX;
+        OptimisticLockFailedException lastOptimisticLockFailedException = null;
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
@@ -458,22 +459,21 @@ public abstract class AbstractTranscriberInterface<
                 } else {
                     return Result.DependencyMissing;
                 }
-            } catch (InterruptedException | ExecutionException e) {
+            } catch (TransactionCommitFailedException e) {
                 // TODO replace all this with org.opendaylight.genius.infra.RetryingManagedNewTransactionRunner
-                if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOG.warn("Got OptimisticLockFailedException - {} {}", input, retries);
+                if (e instanceof OptimisticLockFailedException) {
+                    LOG.debug("Got OptimisticLockFailedException - {} {}", input, retries);
+                    lastOptimisticLockFailedException = (OptimisticLockFailedException) e;
                     continue;
+                } else {
+                    throw e;
                 }
-                // TODO: rethrow exception. don't mask exception
-                LOG.error("Transaction failed", e);
             }
-            break;
         }
-        // TODO remove when re-throwing, and remove Result.Exception completely
-        return Result.Exception;
+        throw lastOptimisticLockFailedException;
     }
 
-    private boolean remove(String uuid, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+    private boolean remove(String uuid, ReadWriteTransaction tx) throws OperationFailedException {
         Preconditions.checkNotNull(tx);
         if (!exists(uuid, tx)) {
             tx.cancel();
@@ -484,27 +484,28 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public boolean remove(String uuid) {
+    public boolean remove(String uuid) throws OperationFailedException {
         int retries = RETRY_MAX;
+        OptimisticLockFailedException lastOptimisticLockFailedException = null;
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
                 return remove(uuid, tx);
-            } catch (InterruptedException | ExecutionException e) {
-                if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOG.warn("Got OptimisticLockFailedException - {} {}", uuid, retries);
+            } catch (TransactionCommitFailedException e) {
+                // TODO replace all this with org.opendaylight.genius.infra.RetryingManagedNewTransactionRunner
+                if (e instanceof OptimisticLockFailedException) {
+                    LOG.debug("Got OptimisticLockFailedException - {} {}", uuid, retries);
+                    lastOptimisticLockFailedException = (OptimisticLockFailedException) e;
                     continue;
+                } else {
+                    throw e;
                 }
-                // TODO: rethrow exception. don't mask exception
-                LOG.error("Transaction failed", e);
             }
-            break;
         }
-        return false;
+        throw lastOptimisticLockFailedException;
     }
 
-    private Result update(String uuid, S delta, ReadWriteTransaction tx)
-            throws InterruptedException, ExecutionException {
+    private Result update(String uuid, S delta, ReadWriteTransaction tx) throws OperationFailedException {
         Preconditions.checkNotNull(tx);
         if (!exists(uuid, tx)) {
             tx.cancel();
@@ -515,8 +516,9 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public Result update(String uuid, S delta) {
+    public Result update(String uuid, S delta) throws OperationFailedException {
         int retries = RETRY_MAX;
+        OptimisticLockFailedException lastOptimisticLockFailedException = null;
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
@@ -525,18 +527,18 @@ public abstract class AbstractTranscriberInterface<
                 } else {
                     return Result.DependencyMissing;
                 }
-            } catch (InterruptedException | ExecutionException e) {
-                if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOG.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
+            } catch (TransactionCommitFailedException e) {
+                // TODO replace all this with org.opendaylight.genius.infra.RetryingManagedNewTransactionRunner
+                if (e instanceof OptimisticLockFailedException) {
+                    LOG.debug("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
+                    lastOptimisticLockFailedException = (OptimisticLockFailedException) e;
                     continue;
+                } else {
+                    throw e;
                 }
-                // TODO: rethrow exception. don't mask exception
-                LOG.error("Transaction failed", e);
             }
-            break;
         }
-        // TODO remove when re-throwing, and remove Result.Exception completely
-        return Result.Exception;
+        throw lastOptimisticLockFailedException;
     }
 
     /**
@@ -546,10 +548,10 @@ public abstract class AbstractTranscriberInterface<
      * <p>Implementations *MUST* use the passed in transaction.  They will typically call the
      * {@link #exists(String, ReadTransaction)} method on ANOTHER transcriber with it.
      *
-     * <p>Implementations should chain {@link #ifNonNull(Object, Function)}, or perform null safe comparisons otherwise,
-     * for both optional non-mandatory {@link NeutronObject} as well as mandatory properties which may well be null.
-     * Both must mandatory and non-mandatory must be guarded, because modify (update) operation are allowed to contain
-     * partial neutron objects with missing fields.
+     * <p>Implementations should chain {@link #ifNonNull(Object, CheckedFunction)}, or perform null safe comparisons
+     * otherwise, for both optional non-mandatory {@link NeutronObject} as well as mandatory properties which may well
+     * be null. Both must mandatory and non-mandatory must be guarded, because modify (update) operation are allowed to
+     * contain partial neutron objects with missing fields.
      *
      * @param tx the transaction within which to perform reads to check for dependencies
      * @param neutronObject the incoming main neutron object in which there may be references to dependencies
@@ -558,17 +560,21 @@ public abstract class AbstractTranscriberInterface<
      *         {@link #add(INeutronObject)} (or {@link #update(String, INeutronObject)} operation can proceed; false if
      *         there are unmet dependencies, which will cause the add to abort, and a respective
      *         error code returned to the caller.
+     *
+     * @throws ReadFailedException in case of a data store problem
      */
-    protected boolean areAllDependenciesAvailable(ReadTransaction tx, S neutronObject) {
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, S neutronObject) throws ReadFailedException {
         return true;
     }
 
     /**
      * Utility to perform well readable code of null-safe chains of e.g.
      * {@link #exists(String, ReadTransaction)} method calls.
+     *
+     * @throws ReadFailedException in case of a data store problem
      */
-    protected static final <X> boolean ifNonNull(
-            @Nullable X property, Function<@NonNull X, @NonNull Boolean> function) {
+    protected static final <X> boolean ifNonNull(@Nullable X property,
+            CheckedFunction<@NonNull X, @NonNull Boolean, ReadFailedException> function) throws ReadFailedException {
         if (property != null) {
             Boolean result = function.apply(property);
             Preconditions.checkNotNull(result, "result");

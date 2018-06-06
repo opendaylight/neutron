@@ -7,6 +7,8 @@
  */
 package org.opendaylight.neutron.northbound.api;
 
+import static java.net.HttpURLConnection.HTTP_OK;
+
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -202,35 +205,39 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     // sorting not supported
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
-            if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
-                throw new ResourceNotFoundException(uuidNoExist());
-            }
-        }
-        List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
-                .getLoadBalancerPoolMembers();
-        List<NeutronLoadBalancerPoolMember> ans = new ArrayList<>();
-        for (NeutronLoadBalancerPoolMember nsg : members) {
-            if ((queryLoadBalancerPoolMemberID == null || queryLoadBalancerPoolMemberID.equals(nsg.getID()))
-                    && loadBalancerPoolUUID.equals(nsg.getPoolID())
-                    && (queryLoadBalancerPoolMemberTenantID == null
-                            || queryLoadBalancerPoolMemberTenantID.equals(nsg.getTenantID()))
-                    && (queryLoadBalancerPoolMemberAddress == null
-                            || queryLoadBalancerPoolMemberAddress.equals(nsg.getPoolMemberAddress()))
-                    && (queryLoadBalancerPoolMemberAdminStateUp == null
-                            || queryLoadBalancerPoolMemberAdminStateUp.equals(nsg.getPoolMemberAdminStateIsUp()))
-                    && (queryLoadBalancerPoolMemberWeight == null
-                            || queryLoadBalancerPoolMemberWeight.equals(nsg.getPoolMemberWeight()))
-                    && (queryLoadBalancerPoolMemberSubnetID == null
-                            || queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID()))) {
-                if (fields.size() > 0) {
-                    ans.add(nsg.extractFields(fields));
-                } else {
-                    ans.add(nsg);
+        try {
+            try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
+                if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
+                    throw new ResourceNotFoundException(uuidNoExist());
                 }
             }
+            List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
+                    .getLoadBalancerPoolMembers();
+            List<NeutronLoadBalancerPoolMember> ans = new ArrayList<>();
+            for (NeutronLoadBalancerPoolMember nsg : members) {
+                if ((queryLoadBalancerPoolMemberID == null || queryLoadBalancerPoolMemberID.equals(nsg.getID()))
+                        && loadBalancerPoolUUID.equals(nsg.getPoolID())
+                        && (queryLoadBalancerPoolMemberTenantID == null
+                                || queryLoadBalancerPoolMemberTenantID.equals(nsg.getTenantID()))
+                        && (queryLoadBalancerPoolMemberAddress == null
+                                || queryLoadBalancerPoolMemberAddress.equals(nsg.getPoolMemberAddress()))
+                        && (queryLoadBalancerPoolMemberAdminStateUp == null
+                                || queryLoadBalancerPoolMemberAdminStateUp.equals(nsg.getPoolMemberAdminStateIsUp()))
+                        && (queryLoadBalancerPoolMemberWeight == null
+                                || queryLoadBalancerPoolMemberWeight.equals(nsg.getPoolMemberWeight()))
+                        && (queryLoadBalancerPoolMemberSubnetID == null
+                                || queryLoadBalancerPoolMemberSubnetID.equals(nsg.getPoolMemberSubnetID()))) {
+                    if (fields.size() > 0) {
+                        ans.add(nsg.extractFields(fields));
+                    } else {
+                        ans.add(nsg);
+                    }
+                }
+            }
+            return Response.status(HTTP_OK).entity(new NeutronLoadBalancerPoolMemberRequest(ans)).build();
+        } catch (ReadFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-        return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerPoolMemberRequest(ans)).build();
     }
 
     /**
@@ -249,28 +256,32 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
             // return fields
             @QueryParam("fields") List<String> fields) {
 
-        INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
-            if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
-                throw new ResourceNotFoundException(uuidNoExist());
+        try {
+            INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
+            try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
+                if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
+                    throw new ResourceNotFoundException(uuidNoExist());
+                }
             }
-        }
-        List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
-                .getLoadBalancerPoolMembers();
-        for (NeutronLoadBalancerPoolMember ans : members) {
-            if (!ans.getID().equals(loadBalancerPoolMemberUUID)) {
-                continue;
-            }
+            List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
+                    .getLoadBalancerPoolMembers();
+            for (NeutronLoadBalancerPoolMember ans : members) {
+                if (!ans.getID().equals(loadBalancerPoolMemberUUID)) {
+                    continue;
+                }
 
-            if (fields.size() > 0) {
-                return Response.status(HttpURLConnection.HTTP_OK)
-                        .entity(new NeutronLoadBalancerPoolMemberRequest(ans.extractFields(fields))).build();
-            } else {
-                return Response.status(HttpURLConnection.HTTP_OK).entity(new NeutronLoadBalancerPoolMemberRequest(ans))
-                        .build();
+                if (fields.size() > 0) {
+                    return Response.status(HttpURLConnection.HTTP_OK)
+                            .entity(new NeutronLoadBalancerPoolMemberRequest(ans.extractFields(fields))).build();
+                } else {
+                    return Response.status(HttpURLConnection.HTTP_OK)
+                            .entity(new NeutronLoadBalancerPoolMemberRequest(ans)).build();
+                }
             }
+            throw new ResourceNotFoundException(uuidNoExist());
+        } catch (ReadFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-        throw new ResourceNotFoundException(uuidNoExist());
     }
 
     /**
@@ -318,17 +329,21 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     public Response updateLoadBalancerPoolMember(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID,
             final NeutronLoadBalancerPoolMemberRequest input) {
-        INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.get(loadBalancerPoolUUID);
-        NeutronLoadBalancerPoolMember singleton = input.getSingleton();
-        singleton.setPoolID(loadBalancerPoolUUID);
+        try {
+            INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
+            NeutronLoadBalancerPool singletonPool = loadBalancerPoolInterface.get(loadBalancerPoolUUID);
+            NeutronLoadBalancerPoolMember singleton = input.getSingleton();
+            singleton.setPoolID(loadBalancerPoolUUID);
 
-        if (singletonPool == null) {
-            throw new ResourceNotFoundException("Pool doesn't Exist");
+            if (singletonPool == null) {
+                throw new ResourceNotFoundException("Pool doesn't Exist");
+            }
+            loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID,
+                    loadBalancerPoolMemberUUID, singleton);
+            return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
+        } catch (ReadFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-        loadBalancerPoolInterface.updateNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID,
-                singleton);
-        return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 
     /**
@@ -341,27 +356,31 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteLoadBalancerPoolMember(@PathParam("loadBalancerPoolUUID") String loadBalancerPoolUUID,
             @PathParam("loadBalancerPoolMemberUUID") String loadBalancerPoolMemberUUID) {
-        INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-
-        //Verify that the LB pool member exists
-        NeutronLoadBalancerPoolMember singleton = null;
-        List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
-                .getLoadBalancerPoolMembers();
-        for (NeutronLoadBalancerPoolMember member : members) {
-            if (member.getID().equals(loadBalancerPoolMemberUUID)) {
-                singleton = member;
-                break;
+        try {
+            INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
+            // Verify that the LB pool member exists
+            NeutronLoadBalancerPoolMember singleton = null;
+            List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
+                    .getLoadBalancerPoolMembers();
+            for (NeutronLoadBalancerPoolMember member : members) {
+                if (member.getID().equals(loadBalancerPoolMemberUUID)) {
+                    singleton = member;
+                    break;
+                }
             }
-        }
-        if (singleton == null) {
-            throw new BadRequestException("LoadBalancerPoolMember UUID does not exist.");
-        }
+            if (singleton == null) {
+                throw new BadRequestException("LoadBalancerPoolMember UUID does not exist.");
+            }
 
-        /**
-         * Remove the member from the neutron load balancer pool
-         */
-        loadBalancerPoolInterface.removeNeutronLoadBalancerPoolMember(loadBalancerPoolUUID, loadBalancerPoolMemberUUID);
+            /**
+             * Remove the member from the neutron load balancer pool
+             */
+            loadBalancerPoolInterface.removeNeutronLoadBalancerPoolMember(loadBalancerPoolUUID,
+                    loadBalancerPoolMemberUUID);
 
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+            return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        } catch (ReadFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
+        }
     }
 }

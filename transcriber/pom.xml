@@ -72,6 +72,10 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.opendaylight.infrautils</groupId>
+      <artifactId>infrautils-util</artifactId>
+    </dependency>
+    <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
     </dependency>

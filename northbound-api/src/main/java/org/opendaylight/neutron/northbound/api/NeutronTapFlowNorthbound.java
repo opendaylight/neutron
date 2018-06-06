@@ -25,8 +25,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
 import org.opendaylight.neutron.spi.NeutronTapFlow;
+import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.ops4j.pax.cdi.api.OsgiService;
 
 @Singleton
@@ -108,7 +110,11 @@ public final class NeutronTapFlowNorthbound
             NeutronTapFlow singleton = input.getSingleton();
             singleton.setTapFlowServiceID(tapServiceUUID);
 
-            tapFlowInterface.addTapFlow(singleton);
+            try {
+                tapFlowInterface.addTapFlow(singleton);
+            } catch (OperationFailedException e) {
+                throw new DatastoreOperationFailedWebApplicationException(e);
+            }
         } else {
             throw new BadRequestException("Only Singleton tapFlow creation supported");
         }
@@ -130,19 +136,22 @@ public final class NeutronTapFlowNorthbound
     public Response showTapFlow(@PathParam("tapServiceUUID") String tapServiceUUID,
                                 @PathParam("tapFlowUUID") String tapFlowUUID,
                                 @QueryParam("fields") List<String> fields) {
+        try {
+            INeutronTapFlowCRUD tapFlowInterface = getNeutronCRUD();
+            if (!tapFlowInterface.tapFlowExists(tapServiceUUID, tapFlowUUID)) {
+                throw new ResourceNotFoundException("Specified UUID does not Exist");
+            }
 
-        INeutronTapFlowCRUD tapFlowInterface = getNeutronCRUD();
-        if (!tapFlowInterface.tapFlowExists(tapServiceUUID, tapFlowUUID)) {
-            throw new ResourceNotFoundException("Specified UUID does not Exist");
-        }
-
-        NeutronTapFlow tapFlow = tapFlowInterface.getTapFlow(tapServiceUUID, tapFlowUUID);
-        if (fields.size() > 0) {
-            return Response.status(HttpURLConnection.HTTP_OK)
-                    .entity(new NeutronTapFlowRequest(tapFlow.extractFields(fields))).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_OK)
-                    .entity(new NeutronTapFlowRequest(tapFlow)).build();
+            NeutronTapFlow tapFlow = tapFlowInterface.getTapFlow(tapServiceUUID, tapFlowUUID);
+            if (fields.size() > 0) {
+                return Response.status(HttpURLConnection.HTTP_OK)
+                        .entity(new NeutronTapFlowRequest(tapFlow.extractFields(fields))).build();
+            } else {
+                return Response.status(HttpURLConnection.HTTP_OK)
+                        .entity(new NeutronTapFlowRequest(tapFlow)).build();
+            }
+        } catch (ReadFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
     }
 
@@ -159,18 +168,21 @@ public final class NeutronTapFlowNorthbound
     public Response updateTapFlow(@PathParam("tapServiceUUID") String tapServiceUUID,
                                   @PathParam("tapFlowUUID") String tapFlowUUID,
                                   final NeutronTapFlowRequest input) {
+        try {
+            INeutronTapFlowCRUD tapFlowInterface = getNeutronCRUD();
 
-        INeutronTapFlowCRUD tapFlowInterface = getNeutronCRUD();
+            if (!tapFlowInterface.tapFlowExists(tapServiceUUID, tapFlowUUID)) {
+                throw new ResourceNotFoundException("Specified UUID does not Exist");
+            }
 
-        if (!tapFlowInterface.tapFlowExists(tapServiceUUID, tapFlowUUID)) {
-            throw new ResourceNotFoundException("Specified UUID does not Exist");
+            NeutronTapFlow singleton = input.getSingleton();
+            singleton.setTapFlowServiceID(tapServiceUUID);
+            tapFlowInterface.updateTapFlow(singleton);
+
+            return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
+        } catch (OperationFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-
-        NeutronTapFlow singleton = input.getSingleton();
-        singleton.setTapFlowServiceID(tapServiceUUID);
-        tapFlowInterface.updateTapFlow(singleton);
-
-        return Response.status(HttpURLConnection.HTTP_OK).entity(input).build();
     }
 
     /**
@@ -183,14 +195,17 @@ public final class NeutronTapFlowNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteTapFlow(@PathParam("tapServiceUUID") String tapServiceUUID,
                                   @PathParam("tapFlowUUID") String tapFlowUUID) {
+        try {
+            INeutronTapFlowCRUD tapFlowInterface = getNeutronCRUD();
 
-        INeutronTapFlowCRUD tapFlowInterface = getNeutronCRUD();
+            if (!tapFlowInterface.tapFlowExists(tapServiceUUID, tapFlowUUID)) {
+                throw new ResourceNotFoundException("Specified UUID does not Exist");
+            }
 
-        if (!tapFlowInterface.tapFlowExists(tapServiceUUID, tapFlowUUID)) {
-            throw new ResourceNotFoundException("Specified UUID does not Exist");
+            tapFlowInterface.deleteTapFlow(tapServiceUUID, tapFlowUUID);
+            return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
+        } catch (OperationFailedException e) {
+            throw new DatastoreOperationFailedWebApplicationException(e);
         }
-
-        tapFlowInterface.deleteTapFlow(tapServiceUUID, tapFlowUUID);
-        return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
     }
 }
