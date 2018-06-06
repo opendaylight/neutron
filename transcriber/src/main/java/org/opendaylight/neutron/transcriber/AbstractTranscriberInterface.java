@@ -481,18 +481,18 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
-    private boolean add(S input, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
+    private Result add(S input, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
         if (exists(input.getID(), tx)) {
             tx.cancel();
-            return false;
+            return Result.AlreadyExists;
         }
         addMd(input, tx);
-        return true;
+        return Result.Success;
     }
 
     @Override
-    public boolean add(S input) {
+    public Result add(S input) {
         int retries = RETRY_MAX;
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
@@ -508,7 +508,8 @@ public abstract class AbstractTranscriberInterface<
             }
             break;
         }
-        return false;
+        // TODO remove when re-throwing, and remove Result.Exception completely
+        return Result.Exception;
     }
 
     private boolean remove(String uuid, ReadWriteTransaction tx) throws InterruptedException, ExecutionException {

@@ -48,9 +48,9 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *
      * @param input
      *            OpenStackNeutron object
-     * @return boolean on whether the object was added or not
+     * @return result with indication on whether the object was added or not and if so why
      */
-    boolean add(T input);
+    Result add(T input);
 
     /**
      * Applications call this interface method to remove a Neutron object to the
@@ -72,4 +72,8 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      * @return boolean on whether the object was updated or not
      */
     boolean update(String uuid, T delta);
+
+    // TODO The Exception Result should eventually be replaced by propagating exceptions, and removed
+    enum Result { Success, AlreadyExists, Exception }
+
 }
