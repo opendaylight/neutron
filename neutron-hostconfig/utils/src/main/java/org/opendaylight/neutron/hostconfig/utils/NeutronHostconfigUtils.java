@@ -8,11 +8,10 @@
 
 package org.opendaylight.neutron.hostconfig.utils;
 
-import java.util.concurrent.ExecutionException;
-
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.Hostconfigs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.hostconfigs.Hostconfig;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.hostconfigs.HostconfigBuilder;
@@ -35,33 +34,29 @@ public class NeutronHostconfigUtils {
         this.dataBroker = dataBroker;
     }
 
-    public void updateMdsal(Hostconfig hostConfig, Action action) {
+    public void updateMdsal(Hostconfig hostConfig, Action action) throws TransactionCommitFailedException {
         InstanceIdentifier<Hostconfig> hostConfigId;
         if (hostConfig == null) {
             return;
         }
-        try {
-            switch (action) {
-                case ADD:
-                case UPDATE:
-                    final WriteTransaction writeTx = dataBroker.newWriteOnlyTransaction();
-                    hostConfigId = createInstanceIdentifier(hostConfig);
-                    writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig, true);
-                    writeTx.submit().get();
-                    LOG.trace("Hostconfig updated for node {}", hostConfig.getHostId());
-                    break;
-                case DELETE:
-                    final WriteTransaction delTx = dataBroker.newWriteOnlyTransaction();
-                    hostConfigId = createInstanceIdentifier(hostConfig);
-                    delTx.delete(LogicalDatastoreType.OPERATIONAL, hostConfigId);
-                    LOG.trace("Hostconfig deleted for node {}", hostConfig.getHostId());
-                    delTx.submit().get();
-                    break;
-                default:
-                    break;
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Hostconfig transaction commit failed to DS.", e);
+        switch (action) {
+            case ADD:
+            case UPDATE:
+                final WriteTransaction writeTx = dataBroker.newWriteOnlyTransaction();
+                hostConfigId = createInstanceIdentifier(hostConfig);
+                writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig, true);
+                writeTx.submit().checkedGet();
+                LOG.trace("Hostconfig updated for node {}", hostConfig.getHostId());
+                break;
+            case DELETE:
+                final WriteTransaction delTx = dataBroker.newWriteOnlyTransaction();
+                hostConfigId = createInstanceIdentifier(hostConfig);
+                delTx.delete(LogicalDatastoreType.OPERATIONAL, hostConfigId);
+                LOG.trace("Hostconfig deleted for node {}", hostConfig.getHostId());
+                delTx.submit().checkedGet();
+                break;
+            default:
+                break;
         }
     }
 
