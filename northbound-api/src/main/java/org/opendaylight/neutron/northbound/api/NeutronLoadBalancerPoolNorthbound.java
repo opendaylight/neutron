@@ -25,6 +25,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
+import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -43,9 +45,14 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
 
     private static final String RESOURCE_NAME = "LoadBalancerPool";
 
+    private final DataBroker dataBroker;
+
     @Inject
-    public NeutronLoadBalancerPoolNorthbound(@OsgiService INeutronLoadBalancerPoolCRUD neutronCRUD) {
+    public NeutronLoadBalancerPoolNorthbound(
+            @OsgiService INeutronLoadBalancerPoolCRUD neutronCRUD,
+            @OsgiService DataBroker dataBroker) {
         super(neutronCRUD);
+        this.dataBroker = dataBroker;
     }
 
     @Override
@@ -195,8 +202,10 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     // sorting not supported
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist());
+        try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
+            if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
+                throw new ResourceNotFoundException(uuidNoExist());
+            }
         }
         List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
                 .getLoadBalancerPoolMembers();
@@ -241,8 +250,10 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
             @QueryParam("fields") List<String> fields) {
 
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-        if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID)) {
-            throw new ResourceNotFoundException(uuidNoExist());
+        try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
+            if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
+                throw new ResourceNotFoundException(uuidNoExist());
+            }
         }
         List<NeutronLoadBalancerPoolMember> members = loadBalancerPoolInterface.get(loadBalancerPoolUUID)
                 .getLoadBalancerPoolMembers();

@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
 
 /**
  * This interface defines the methods for CRUD of NB neutron objects.
@@ -15,14 +16,14 @@ import java.util.List;
 public interface INeutronCRUD<T extends INeutronObject<T>> {
 
     /**
-     * Applications call this interface method to determine if a particular
-     * Neutron object exists.
+     * Applications call this interface method to determine if a particular Neutron
+     * object exists.
      *
-     * @param uuid
-     *            UUID of the Neutron object
+     * @param uuid UUID of the Neutron object
+     * @param tx   the ReadTransaction within which to perform the check
      * @return boolean
      */
-    boolean exists(String uuid);
+    boolean exists(String uuid, ReadTransaction tx);
 
     /**
      * Applications call this interface method to return if a particular

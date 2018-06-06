@@ -77,8 +77,6 @@ import org.slf4j.LoggerFactory;
  * @param <K> key type to indentify T
  * @param <S> Neutron-spi class
  * @param <V> parent of U
- *
- *
  */
 public abstract class AbstractTranscriberInterface<
         T extends DataObject & Identifiable<K> & ChildOf<? super U>,
@@ -86,6 +84,9 @@ public abstract class AbstractTranscriberInterface<
         K extends Identifier<T>, S extends INeutronObject<S>,
         V extends DataObject>
         implements AutoCloseable, INeutronCRUD<S> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractTranscriberInterface.class);
+
     // T extends DataObject & Identifiable<K> & ChildOf<? super U> as 0th type argument
     private static final int MD_LIST_CLASS_TYPE_INDEX = 0;
     // U extends ChildOf<? super Neutron> & Augmentable<U> as 1st type argument
@@ -95,7 +96,8 @@ public abstract class AbstractTranscriberInterface<
     // S extends INeutronObject<S> as 3rd type argument
     private static final int NEUTRON_OBJECT_TYPE_INDEX = 3;
 
-    private static final Logger LOG = LoggerFactory.getLogger(AbstractTranscriberInterface.class);
+    private static final LogicalDatastoreType DATASTORE_TYPE = LogicalDatastoreType.CONFIGURATION;
+
     private static final int DEDASHED_UUID_LENGTH = 32;
     private static final int DEDASHED_UUID_START = 0;
     private static final int DEDASHED_UUID_DIV1 = 8;
@@ -313,7 +315,7 @@ public abstract class AbstractTranscriberInterface<
         Preconditions.checkNotNull(tx);
         W result = null;
         final CheckedFuture<Optional<W>,
-                ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
+                ReadFailedException> future = tx.read(DATASTORE_TYPE, path);
         if (future != null) {
             Optional<W> optional;
             try {
@@ -355,7 +357,7 @@ public abstract class AbstractTranscriberInterface<
 
         final T item = toMd(neutronObject);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
+        tx.put(DATASTORE_TYPE, iid, item, true);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
         future.get();
@@ -384,7 +386,7 @@ public abstract class AbstractTranscriberInterface<
     private void removeMd(T item, WriteTransaction tx) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
+        tx.delete(DATASTORE_TYPE, iid);
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
         future.get();
@@ -428,17 +430,11 @@ public abstract class AbstractTranscriberInterface<
     public void close() throws Exception {
     }
 
-    private boolean exists(String uuid, ReadTransaction tx) {
+    @Override
+    public boolean exists(String uuid, ReadTransaction tx) {
         Preconditions.checkNotNull(tx);
         final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         return dataObject != null;
-    }
-
-    @Override
-    public boolean exists(String uuid) {
-        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
-            return exists(uuid, tx);
-        }
     }
 
     private S get(String uuid, ReadTransaction tx) {
@@ -499,6 +495,7 @@ public abstract class AbstractTranscriberInterface<
             try {
                 return add(input, tx);
             } catch (InterruptedException | ExecutionException e) {
+                // TODO replace all this with org.opendaylight.genius.infra.RetryingManagedNewTransactionRunner
                 if (e.getCause() instanceof OptimisticLockFailedException) {
                     LOG.warn("Got OptimisticLockFailedException - {} {}", input, retries);
                     continue;
