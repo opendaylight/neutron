@@ -16,6 +16,24 @@
       "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "330d61f0_6cf9aa54",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronTapFlowCRUD.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-07T10:02:47Z",
+      "side": 1,
+      "message": "Josh, I\u0027ll be significantly rewriting this one, based on https://lists.opendaylight.org/pipermail/neutron-dev/2018-June/001680.html.  Probably AFTER we have agreement on and have merged c/72730, only.",
+      "parentUuid": "18aef4c4_5a4e6fe8",
+      "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
