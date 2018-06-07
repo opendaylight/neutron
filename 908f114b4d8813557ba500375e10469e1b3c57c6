@@ -34,6 +34,24 @@
       "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d07e22f_abb47da1",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronTapFlowCRUD.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-07T17:46:39Z",
+      "side": 1,
+      "message": "and only after c/72728 and c/72372 are in as well; too many conflicts, otherwise.",
+      "parentUuid": "330d61f0_6cf9aa54",
+      "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
