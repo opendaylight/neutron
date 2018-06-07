@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18aef4c4_5a4e6fe8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronTapFlowCRUD.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-07T06:11:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be OperationFailed? This is a write operation, no? Although now I\u0027m thinking...if there is dependency validation wouldn\u0027t every write become a read and then a write?",
+      "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
