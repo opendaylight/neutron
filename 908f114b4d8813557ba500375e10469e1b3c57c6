@@ -52,6 +52,24 @@
       "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a199de27_4507253f",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronTapFlowCRUD.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-10T07:03:20Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "3d07e22f_abb47da1",
+      "revId": "908f114b4d8813557ba500375e10469e1b3c57c6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
