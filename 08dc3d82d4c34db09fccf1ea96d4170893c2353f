@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39a3fbfc_6948c9ea",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronSecurityRuleTests.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-10T07:28:32Z",
+      "side": 1,
+      "message": "Maybe add negative tests as well? At least somewhere...to verify that when a dependency is missing the correct error is returned. Did I just miss this or something?",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea2af104_0f389300",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-10T07:28:32Z",
+      "side": 1,
+      "message": "Understood and makes sense. I\u0027m just thinking out loud here...On the one hand, I don\u0027t think that we necessarily need to implement full validation right now, on the other hand I do wonder whether a null reference to a required dependency should count as a dependency validation error. NOT saying this is the place to solve that, each individual class of object would need to specifically check for this kind of error.",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21698a2a_89040e7d",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-10T07:28:32Z",
+      "side": 1,
+      "message": "and update",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37c9236a_ec406833",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-10T07:28:32Z",
+      "side": 1,
+      "message": "Per my comment in AbstractTranscriber, I think we should consider having a check here that the sec group\u0027s uuid is not null. A rule without a group is wrong.",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
