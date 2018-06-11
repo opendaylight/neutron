@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "41d42fd7_7c9a7974",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronSecurityRuleTests.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-11T15:43:09Z",
+      "side": 1,
+      "message": "Either I\u0027m misunderstanding what you mean or you are missing something, yes ;-) Isn\u0027t what you suggest exactly what the changes around lines 144 - 146 below are doing?",
+      "parentUuid": "39a3fbfc_6948c9ea",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea2af104_0f389300",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-10T07:28:32Z",
       "side": 1,
       "message": "Understood and makes sense. I\u0027m just thinking out loud here...On the one hand, I don\u0027t think that we necessarily need to implement full validation right now, on the other hand I do wonder whether a null reference to a required dependency should count as a dependency validation error. NOT saying this is the place to solve that, each individual class of object would need to specifically check for this kind of error.",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "726f6aee_66438da3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-11T15:43:09Z",
+      "side": 1,
+      "message": "I\u0027ve now removed this; see next comment for more details.",
+      "parentUuid": "ea2af104_0f389300",
       "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "f3440596_e282bc33",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-11T15:43:09Z",
+      "side": 1,
+      "message": "strictly speaking, this change so far, based on what we discussed (by voice and I transribed into text) on NEUTRON-158, I\u0027m so far actually only handling add not even update.  \n\nIf you think it\u0027s important that we cover update already as well, can you comment so NEUTRON-158 and -1 this again, so that I can rework it accordingly?  Best by also adding a test for it then.\n\nBTW: So then what about delete? Again, best comment in NEUTRON-158 instead here.",
+      "parentUuid": "21698a2a_89040e7d",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37c9236a_ec406833",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2018-06-10T07:28:32Z",
       "side": 1,
       "message": "Per my comment in AbstractTranscriber, I think we should consider having a check here that the sec group\u0027s uuid is not null. A rule without a group is wrong.",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77cc3c55_c63c77ed",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-11T15:43:09Z",
+      "side": 1,
+      "message": "I\u0027ve added a new test in NeutronSecurityRuleTests to understand the current behaviour.  Currently, a missing security_group_id leads to an internal error and 500.  How I had it in Patch Set 8 broke that and returned a 201.  That was dumb.  In Patch Set 9 I\u0027ve reworked this, and it would now cause a 500 again.  That seems \"fair\" to me, for this change - as you said in the other comment, adding (real)  \"full validation\" is not in scope here.  Does that work for you as is now?",
+      "parentUuid": "37c9236a_ec406833",
       "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
