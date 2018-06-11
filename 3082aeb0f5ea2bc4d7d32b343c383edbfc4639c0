@@ -16,6 +16,24 @@
       "revId": "3082aeb0f5ea2bc4d7d32b343c383edbfc4639c0",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94250051_c01a80ef",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-11T15:39:12Z",
+      "side": 1,
+      "message": "Done (meaning I\u0027ve \"un-done\" this part of the change)",
+      "parentUuid": "03188190_83f3e831",
+      "revId": "3082aeb0f5ea2bc4d7d32b343c383edbfc4639c0",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
