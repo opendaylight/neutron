@@ -84,6 +84,18 @@
       </roles>
       <timezone>Asia/Kolkata</timezone>
     </developer>
+    <developer>
+      <id>vorburger</id>
+      <name>Michael Vorburger</name>
+      <email>vorburger@redhat.com</email>
+      <organization>Red Hat, Inc.</organization>
+      <organizationUrl>http://www.redhat.com</organizationUrl>
+      <roles>
+         <role>committer</role>
+         <role>contributor</role>
+      </roles>
+      <timezone>Europe/Bern</timezone>
+    </developer>
   </developers>
   <properties>
     <checkstyle.location>${project.parent.basedir}/src/main/resources</checkstyle.location>
