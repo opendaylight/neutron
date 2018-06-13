@@ -125,6 +125,24 @@
     },
     {
       "key": {
+        "uuid": "91593eb4_2716b03f",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-13T11:39:02Z",
+      "side": 1,
+      "message": "You do have a point (re. \"it\u0027s somewhat weird\"), and it actually probably is not that hard anymore now for me to add that - so let\u0027s get this merged in as-is, but I\u0027ll follow-up with a new change which does that.",
+      "parentUuid": "a57cc55c_c9334506",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37c9236a_ec406833",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 8
