@@ -343,17 +343,6 @@ public abstract class AbstractTranscriberInterface<
         updateMd(neutronObject, tx);
     }
 
-    protected boolean addMd(S neutronObject) {
-        try {
-            final WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
-            addMd(neutronObject, tx);
-            return true;
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Transaction failed", e);
-        }
-        return false;
-    }
-
     private void updateMd(S neutronObject, WriteTransaction tx) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
 
@@ -365,26 +354,6 @@ public abstract class AbstractTranscriberInterface<
         future.get();
     }
 
-    protected boolean updateMd(S neutronObject) {
-        int retries = RETRY_MAX;
-        while (retries-- >= 0) {
-            try {
-                final WriteTransaction tx = getDataBroker().newWriteOnlyTransaction();
-                updateMd(neutronObject, tx);
-                return true;
-            } catch (InterruptedException | ExecutionException e) {
-                if (e.getCause() instanceof OptimisticLockFailedException) {
-                    LOG.warn("Got OptimisticLockFailedException - {} {}", neutronObject, retries);
-                    continue;
-                }
-                // TODO: rethrow exception. don't mask exception
-                LOG.error("Transaction failed", e);
-            }
-            break;
-        }
-        return false;
-    }
-
     private void removeMd(T item, WriteTransaction tx) throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
@@ -392,17 +361,6 @@ public abstract class AbstractTranscriberInterface<
         final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
         future.get();
-    }
-
-    protected boolean removeMd(T item) {
-        final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
-        try {
-            removeMd(item, tx);
-            return true;
-        } catch (InterruptedException | ExecutionException e) {
-            LOG.warn("Transaction failed", e);
-        }
-        return false;
     }
 
     protected static Uuid toUuid(String uuid) {
