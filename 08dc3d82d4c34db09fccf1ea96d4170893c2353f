@@ -143,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "12e3bb59_dba602bb",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-20T12:31:39Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003e https://git.opendaylight.org/gerrit/#/c/73248/",
+      "parentUuid": "91593eb4_2716b03f",
+      "revId": "08dc3d82d4c34db09fccf1ea96d4170893c2353f",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37c9236a_ec406833",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 8
