@@ -9,6 +9,7 @@
 package org.opendaylight.neutron.northbound.api;
 
 import static org.opendaylight.neutron.spi.INeutronCRUD.Result.DependencyMissing;
+import static org.opendaylight.neutron.spi.INeutronCRUD.Result.DoesNotExist;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.ws.rs.core.Response;
 import org.opendaylight.neutron.spi.INeutronCRUD;
+import org.opendaylight.neutron.spi.INeutronCRUD.Result;
 import org.opendaylight.neutron.spi.INeutronObject;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
@@ -152,7 +154,8 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         /*
          * update the object and return it
          */
-        if (!neutronCRUD.update(uuid, delta)) {
+        Result updateResult = neutronCRUD.update(uuid, delta);
+        if (updateResult.equals(DoesNotExist)) {
             throw new ResourceNotFoundException(uuidNoExist());
         }
         T updated = neutronCRUD.get(uuid);

@@ -72,9 +72,9 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      *            OpenStackNeutron object containing changes to apply
      * @return boolean on whether the object was updated or not
      */
-    boolean update(String uuid, T delta);
+    Result update(String uuid, T delta);
 
-    // TODO The Exception Result should eventually be replaced by propagating exceptions, and removed
-    enum Result { Success, AlreadyExists, DependencyMissing, Exception }
+    enum Result { Success, AlreadyExists, DoesNotExist, DependencyMissing, Exception }
+    // TODO The Result "Exception" should eventually be replaced by propagating exceptions, and removed
 
 }

@@ -545,19 +545,19 @@ public abstract class AbstractTranscriberInterface<
         return false;
     }
 
-    private boolean update(String uuid, S delta, ReadWriteTransaction tx)
+    private Result update(String uuid, S delta, ReadWriteTransaction tx)
             throws InterruptedException, ExecutionException {
         Preconditions.checkNotNull(tx);
         if (!exists(uuid, tx)) {
             tx.cancel();
-            return false;
+            return Result.DoesNotExist;
         }
         updateMd(delta, tx);
-        return true;
+        return Result.Success;
     }
 
     @Override
-    public boolean update(String uuid, S delta) {
+    public Result update(String uuid, S delta) {
         int retries = RETRY_MAX;
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
@@ -573,7 +573,8 @@ public abstract class AbstractTranscriberInterface<
             }
             break;
         }
-        return false;
+        // TODO remove when re-throwing, and remove Result.Exception completely
+        return Result.Exception;
     }
 
     /**
@@ -589,9 +590,9 @@ public abstract class AbstractTranscriberInterface<
      * @param tx the transaction within which to perform reads to check for dependencies
      * @param neutronObject the incoming main neutron object in which there may be references to dependencies
      *
-     * @return true if all dependencies are available and
-     *         {@link #add(INeutronObject)} operation can proceed; false if there
-     *         are unmet dependencies, which will cause the add to abort, and a respective
+     * @return true if all dependencies are available and the
+     *         {@link #add(INeutronObject)} (or {@link #update(String, INeutronObject)} operation can proceed; false if
+     *         there are unmet dependencies, which will cause the add to abort, and a respective
      *         error code returned to the caller.
      */
     protected boolean areAllDependenciesAvailable(ReadTransaction tx, S neutronObject) {
