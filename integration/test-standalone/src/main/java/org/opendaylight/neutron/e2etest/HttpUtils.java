@@ -84,10 +84,14 @@ public final class HttpUtils {
     }
 
     static void test_modify(String urlStr, String content, String context) {
+        test_modify(urlStr, 200, content, context);
+    }
+
+    static void test_modify(String urlStr, int responseCode, String content, String context) {
         try {
             URL url = new URL(urlStr);
             HttpURLConnection httpConn = httpURLConnectionFactoryPut(url, content);
-            Assert.assertEquals(context, 200, httpConn.getResponseCode());
+            Assert.assertEquals(context, responseCode, httpConn.getResponseCode());
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
