@@ -520,7 +520,11 @@ public abstract class AbstractTranscriberInterface<
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
-                return update(uuid, delta, tx);
+                if (areAllDependenciesAvailable(tx, delta)) {
+                    return update(uuid, delta, tx);
+                } else {
+                    return Result.DependencyMissing;
+                }
             } catch (InterruptedException | ExecutionException e) {
                 if (e.getCause() instanceof OptimisticLockFailedException) {
                     LOG.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);
@@ -543,7 +547,9 @@ public abstract class AbstractTranscriberInterface<
      * {@link #exists(String, ReadTransaction)} method on ANOTHER transcriber with it.
      *
      * <p>Implementations should chain {@link #ifNonNull(Object, Function)}, or perform null safe comparisons otherwise,
-     * for any optional non-mandatory {@link NeutronObject} properties which may well be null.
+     * for both optional non-mandatory {@link NeutronObject} as well as mandatory properties which may well be null.
+     * Both must mandatory and non-mandatory must be guarded, because modify (update) operation are allowed to contain
+     * partial neutron objects with missing fields.
      *
      * @param tx the transaction within which to perform reads to check for dependencies
      * @param neutronObject the incoming main neutron object in which there may be references to dependencies
