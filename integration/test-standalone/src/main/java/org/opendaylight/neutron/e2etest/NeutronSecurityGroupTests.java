@@ -85,9 +85,13 @@ public class NeutronSecurityGroupTests {
         HttpUtils.test_fetch(url, true, "Security Group Element Get Failed");
     }
 
-    private void sg_delete_test() {
-        String url = base + "/security-groups/521e29d6-67b8-4b3c-8633-027d21195333";
+    public void sg_delete(String securityGroupID) {
+        String url = base + "/security-groups/" + securityGroupID;
         HttpUtils.test_delete(url, "Security Group Delete Failed");
+    }
+
+    private void sg_delete_test() {
+        sg_delete("521e29d6-67b8-4b3c-8633-027d21195333");
     }
 
     private void sg_element_negative_get_test() {

@@ -136,8 +136,9 @@ public final class NeutronSecurityRuleInterface extends
 
     @Override
     protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronSecurityRule securityRule) {
-        return securityGroupInterface.exists(securityRule.getSecurityRuleGroupID(), tx)
-                && ifNonNull(securityRule.getSecurityRemoteGroupID(),
-                    remoteGroupID -> securityGroupInterface.exists(remoteGroupID, tx));
+        return ifNonNull(securityRule.getSecurityRuleGroupID(),
+            groupID -> securityGroupInterface.exists(groupID, tx))
+            && ifNonNull(securityRule.getSecurityRemoteGroupID(),
+                remoteGroupID -> securityGroupInterface.exists(remoteGroupID, tx));
     }
 }
