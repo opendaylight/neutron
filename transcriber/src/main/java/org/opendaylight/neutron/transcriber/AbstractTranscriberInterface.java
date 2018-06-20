@@ -520,7 +520,13 @@ public abstract class AbstractTranscriberInterface<
         while (retries-- >= 0) {
             final ReadWriteTransaction tx = getDataBroker().newReadWriteTransaction();
             try {
-                return update(uuid, delta, tx);
+                // delta is assumed to contain all fields used in areAllDependenciesAvailable()
+                // if this is not the case, then we would have to do a full read here instead.
+                if (areAllDependenciesAvailable(tx, delta)) {
+                    return update(uuid, delta, tx);
+                } else {
+                    return Result.DependencyMissing;
+                }
             } catch (InterruptedException | ExecutionException e) {
                 if (e.getCause() instanceof OptimisticLockFailedException) {
                     LOG.warn("Got OptimisticLockFailedException - {} {} {}", uuid, delta, retries);

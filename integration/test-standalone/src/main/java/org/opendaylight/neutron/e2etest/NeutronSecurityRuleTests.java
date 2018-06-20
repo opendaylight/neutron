@@ -151,8 +151,8 @@ public class NeutronSecurityRuleTests {
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRuleTester = new NeutronSecurityRuleTests(base);
         securityRuleTester.singleton_sr_without_groupid_create_test(500);
-        securityRuleTester.singleton_sr_create_test(HttpUtils.HTTP_MISSING_DEPENDENCY);
-        securityRuleTester.singleton_sr_modify_test(404);
+        securityRuleTester.singleton_sr_create_test(HttpUtils.HTTP_MISSING_DEPENDENCY); // NEUTRON-158
+        securityRuleTester.singleton_sr_modify_test(404); // cannot modify a SR that has not been created
         new NeutronSecurityGroupTests(base).singleton_sg_create(TEST_SECURITY_GROUP_ID);
         String createJsonString = securityRuleTester.singleton_sr_create_test(201);
         securityRuleTester.singleton_sr_get_with_one_query_item_test(createJsonString);
@@ -167,5 +167,10 @@ public class NeutronSecurityRuleTests {
         securityRuleTester.bug4043_ipv4_test();
         securityRuleTester.bug4043_ipv6_test();
         securityRuleTester.bug6398_sr_create_test();
+
+        // NEUTRON-158: Cannot modify a SR who's SG is already deleted
+        securityRuleTester.singleton_sr_create_test(201);
+        new NeutronSecurityGroupTests(base).sg_delete(TEST_SECURITY_GROUP_ID);
+        securityRuleTester.singleton_sr_modify_test(HttpUtils.HTTP_MISSING_DEPENDENCY);
     }
 }

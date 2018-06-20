@@ -157,6 +157,8 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         Result updateResult = neutronCRUD.update(uuid, delta);
         if (updateResult.equals(DoesNotExist)) {
             throw new ResourceNotFoundException(uuidNoExist());
+        } else if (updateResult.equals(DependencyMissing)) {
+            return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
         }
         T updated = neutronCRUD.get(uuid);
         return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
