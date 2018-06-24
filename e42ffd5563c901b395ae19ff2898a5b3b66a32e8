@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e7e6b50_897fac0c",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-24T06:39:53Z",
+      "side": 1,
+      "message": "Super-nit: shouldn\u0027t we be updating (c) statement years?",
+      "revId": "e42ffd5563c901b395ae19ff2898a5b3b66a32e8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00c7d989_4b620d7d",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-24T06:39:53Z",
+      "side": 1,
+      "message": "I assume other negative results can be returned?",
+      "revId": "e42ffd5563c901b395ae19ff2898a5b3b66a32e8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
