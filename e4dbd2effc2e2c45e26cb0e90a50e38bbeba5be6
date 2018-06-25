@@ -34,6 +34,24 @@
       "revId": "e4dbd2effc2e2c45e26cb0e90a50e38bbeba5be6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "792c9a7b_c6a03067",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-25T14:17:36Z",
+      "side": 1,
+      "message": "Uhu.. I now think it most probably actually is currently broken for such partial updates - I\u0027ll redo this!",
+      "parentUuid": "bd438185_900935bc",
+      "revId": "e4dbd2effc2e2c45e26cb0e90a50e38bbeba5be6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
