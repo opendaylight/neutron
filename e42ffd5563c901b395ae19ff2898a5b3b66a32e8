@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a0b000aa_9b9280ce",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-25T11:58:55Z",
+      "side": 1,
+      "message": "Done.  I usually forget / don\u0027t care; if this was critical, which I don\u0027t really think it is, we should have it automated... ;\u003d)",
+      "parentUuid": "0e7e6b50_897fac0c",
+      "revId": "e42ffd5563c901b395ae19ff2898a5b3b66a32e8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00c7d989_4b620d7d",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-24T06:39:53Z",
       "side": 1,
       "message": "I assume other negative results can be returned?",
+      "revId": "e42ffd5563c901b395ae19ff2898a5b3b66a32e8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b8c2fcc4_46b0b010",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-06-25T11:58:55Z",
+      "side": 1,
+      "message": "Not really, actually... here\u0027s why:\n\n* AlreadyExists is only for create anyway, and could be handled there, but originally was not, so when I introduced the more fine grained Result status in https://git.opendaylight.org/gerrit/#/c/72730/ I did not touch that.  I\u0027ve just posted \"Expected HTTP return code in case an add/create POST already exists?\" to neutron-dev discuss this further.\n\n* Success is the happy patch in line 161-162\n\n* DependencyMissing is added in https://git.opendaylight.org/gerrit/#/c/73248/2/northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java\n\n* Exception handling... is a big mess in Neutron; I may follow up re. that later with https://git.opendaylight.org/gerrit/#/c/72735/",
+      "parentUuid": "00c7d989_4b620d7d",
       "revId": "e42ffd5563c901b395ae19ff2898a5b3b66a32e8",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
