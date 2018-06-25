@@ -7,6 +7,7 @@
  */
 package org.opendaylight.neutron.northbound.api;
 
+import static org.opendaylight.neutron.spi.INeutronCRUD.Result.AlreadyExists;
 import static org.opendaylight.neutron.spi.INeutronCRUD.Result.DependencyMissing;
 import static org.opendaylight.neutron.spi.INeutronCRUD.Result.DoesNotExist;
 
@@ -102,8 +103,11 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             T singleton = input.getSingleton();
 
             singleton.initDefaults();
-            if (neutronCRUD.add(singleton).equals(DependencyMissing)) {
+            Result result = neutronCRUD.add(singleton);
+            if (result.equals(DependencyMissing)) {
                 return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
+            } else if (result.equals(AlreadyExists)) {
+                return Response.status(HttpURLConnection.HTTP_CONFLICT).entity(input).build();
             }
         } else {
             if (input.getBulk() == null) {
@@ -111,8 +115,11 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             }
             for (T test : input.getBulk()) {
                 test.initDefaults();
-                if (neutronCRUD.add(test).equals(DependencyMissing)) {
+                Result result = neutronCRUD.add(test);
+                if (result.equals(DependencyMissing)) {
                     return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
+                } else if (result.equals(AlreadyExists)) {
+                    return Response.status(HttpURLConnection.HTTP_CONFLICT).entity(input).build();
                 }
             }
         }
