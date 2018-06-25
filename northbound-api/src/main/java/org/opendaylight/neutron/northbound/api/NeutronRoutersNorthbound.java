@@ -77,9 +77,6 @@ public final class NeutronRoutersNorthbound
     // sorting not supported
     ) {
         INeutronRouterCRUD routerInterface = getNeutronCRUD();
-        if (routerInterface == null) {
-            throw new ServiceUnavailableException(serviceUnavailable());
-        }
         List<NeutronRouter> allRouters = routerInterface.getAll();
         List<NeutronRouter> ans = new ArrayList<>();
         for (NeutronRouter router : allRouters) {

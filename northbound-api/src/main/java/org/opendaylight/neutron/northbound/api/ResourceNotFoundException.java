@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import javax.ws.rs.WebApplicationException;
@@ -13,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Status Code 404 (Not Found)
+ * Status Code 404 = Not Found.
  *
  * <p>
  * The server has not found anything matching the Request-URI.
@@ -24,9 +23,6 @@ import javax.ws.rs.core.Response;
  * This status code is commonly used when the server does not wish to
  * reveal exactly why the request has been refused, or when no other
  * response is applicable.
- *
- *
- *
  */
 public class ResourceNotFoundException extends WebApplicationException {
     private static final long serialVersionUID = 1L;

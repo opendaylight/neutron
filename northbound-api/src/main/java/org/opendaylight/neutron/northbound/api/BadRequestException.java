@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
 import javax.ws.rs.WebApplicationException;
@@ -13,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Status Code 400 (Bad Request)
+ * Status Code 400 = Bad Request.
  *
  * <p>
  * The request could not be understood by the server due to malformed syntax.
