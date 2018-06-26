@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79338e9f_228037c3",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-26T06:33:03Z",
+      "side": 1,
+      "message": "I hate to do this to you but...I think that the initial logic that requires a security group reference should be used for create and this logic should be used for update. This means that areAllDependenciesAvailable should take a param to indicate if the operation is C or U.\n\nAlso, what is the advantage of ifNonNull over an if statement?",
+      "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5785a21b_9cf8dbbb",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-06-26T06:33:03Z",
+      "side": 1,
+      "message": "It also occurs to me that there really should be a log statement, probably \"warn\", with the specifics of the dependency missing. Just an idea but it would be really cool if the exists function looked like:\nboolean exists(T dependentObject, Class dependencyType, UUID dependecyId, ReadTransaction tx) \nThat way you could log that \"dependency of object foo of type  bar with ID scooby is missing\".\n\nAlso, maybe have two versions of that call - one where the reference AND the referent must exist (not null and exists) and the other where IF the reference exists, the referent must be present. Perhaps, checkReference and checkReferenceIfNotNull.",
+      "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
