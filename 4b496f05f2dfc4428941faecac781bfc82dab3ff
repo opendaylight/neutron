@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d773ce02_beec9c14",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-07-02T19:35:24Z",
+      "side": 1,
+      "message": "as discussed: How about we cater for what you are after here (enforcing that having a security rule group is actually mandatory for a security rule) a little differently, and do https://git.opendaylight.org/gerrit/#/c/73663/ instead of changing this back?  (I would be concerned that people will otherwise get this wrong and confused and we\u0027ll have NPE bugs, and would like to try to keep it simple, as it is  now.)\n\n\n\u003e what is the advantage of ifNonNull over an if statement?\n\nIt was just a little \"fancier\" with that lambda-based ifNonNull() smartie helper function I came up with; I thought this:\n\n        return ifNonNull(securityRule.getSecurityRuleGroupID(), groupID -\u003e \n                   securityGroupInterface.exists(groupID, tx))\n            \u0026\u0026 ifNonNull(securityRule.getSecurityRemoteGroupID(), remoteGroupID -\u003e \n                   securityGroupInterface.exists(remoteGroupID, tx));\n\nmade more sense than having to write this which contains repetition and thus is more likely to contain copy/paste bugs:\n\n        return (securityRule.getSecurityRuleGroupID() !\u003d null ? securityGroupInterface.exists(securityRule.getSecurityRuleGroupID(), tx) : true)\n            \u0026\u0026 (securityRule.getSecurityRemoteGroupID() !\u003d null ? securityGroupInterface.exists(securityRule.getSecurityRemoteGroupID(), tx) : true);",
+      "parentUuid": "79338e9f_228037c3",
+      "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5785a21b_9cf8dbbb",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2018-06-26T06:33:03Z",
       "side": 1,
       "message": "It also occurs to me that there really should be a log statement, probably \"warn\", with the specifics of the dependency missing. Just an idea but it would be really cool if the exists function looked like:\nboolean exists(T dependentObject, Class dependencyType, UUID dependecyId, ReadTransaction tx) \nThat way you could log that \"dependency of object foo of type  bar with ID scooby is missing\".\n\nAlso, maybe have two versions of that call - one where the reference AND the referent must exist (not null and exists) and the other where IF the reference exists, the referent must be present. Perhaps, checkReference and checkReferenceIfNotNull.",
+      "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca464887_5a240932",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-07-02T19:35:24Z",
+      "side": 1,
+      "message": "I attempted implementing this as suggested, but there was a hiccup... AFAIK we don\u0027t actually have any sort of \"registry\" to look up and find e.g. the securityGroupInterface NeutronSecurityGroupInterface (an INeutronCRUD\u003cNeutronSecurityGroup\u003e), given the \"Class dependencyType\" you allude to above.  Adding that as a concept just for this seems the wrong way to go, to me.  So if we did this, it would have to something like a :\n\n    exists(T dependentObject, INeutronCRUD\u003cT\u003e dependencyLookuper, UUID dependecyId, ReadTransaction tx) \n\nbut that\u0027s not right either; the dependentObject is the NeutronSecurityRule but the \"dependencyLookuper\" has to be a NeutronSecurityGroupInterface.  We don\u0027t have an instance of NeutronSecurityGroup - just its ID.  \n\nLong story short, I think isn\u0027t worth it.  If you could live with having logging that\u0027s just a little less more generic and doesn\u0027t actually contain the field, how about simply doing https://git.opendaylight.org/gerrit/#/c/73665/2/northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/AbstractNeutronNorthbound.java instead?",
+      "parentUuid": "5785a21b_9cf8dbbb",
       "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
