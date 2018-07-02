@@ -21,9 +21,13 @@ import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronCRUD.Result;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R extends INeutronRequest<T>,
         I extends INeutronCRUD<T>> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractNeutronNorthbound.class);
 
     // T extends INeutronObject<T> as 0th type argument
     private static final int NEUTRON_ARGUMENT_TYPE_INDEX = 0;
@@ -97,6 +101,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
                 return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();
             }
         } catch (OperationFailedException e) {
+            LOG.warn("get failed due to datastore problem; uuid: {}", uuid);
             throw new DatastoreOperationFailedWebApplicationException(e);
         }
     }
@@ -117,12 +122,14 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
                 for (T test : input.getBulk()) {
                     test.initDefaults();
                     if (neutronCRUD.add(test).equals(DependencyMissing)) {
+                        LOG.warn("create failed due to input missing dependencies: {}", input);
                         return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
                     }
                 }
             }
             return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
         } catch (OperationFailedException e) {
+            LOG.warn("create failed due to datastore problem (possibly missing required fields); input: {}", input);
             throw new DatastoreOperationFailedWebApplicationException(e);
         }
     }
@@ -166,11 +173,13 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             if (updateResult.equals(DoesNotExist)) {
                 throw new ResourceNotFoundException(uuidNoExist());
             } else if (updateResult.equals(DependencyMissing)) {
+                LOG.warn("update failed due to missing dependencies; input: {}", input);
                 return Response.status(HTTP_MISSING_DEPENDENCY).entity(input).build();
             }
             T updated = neutronCRUD.get(uuid);
             return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
         } catch (OperationFailedException e) {
+            LOG.warn("update failed due to datastore problem (possibly missing required fields); input: {}", input);
             throw new DatastoreOperationFailedWebApplicationException(e);
         }
     }
@@ -184,6 +193,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
                 return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
             }
         } catch (OperationFailedException e) {
+            LOG.warn("delete failed due to datastore problem; uuid: {}", uuid);
             throw new DatastoreOperationFailedWebApplicationException(e);
         }
     }
