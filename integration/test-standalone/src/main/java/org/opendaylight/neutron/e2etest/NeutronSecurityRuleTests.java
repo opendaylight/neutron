@@ -150,7 +150,7 @@ public class NeutronSecurityRuleTests {
 
     public static void runTests(String base) {
         NeutronSecurityRuleTests securityRuleTester = new NeutronSecurityRuleTests(base);
-        // TODO securityRuleTester.singleton_sr_without_groupid_create_test(500);
+        securityRuleTester.singleton_sr_without_groupid_create_test(500);
         securityRuleTester.singleton_sr_create_test(HttpUtils.HTTP_MISSING_DEPENDENCY); // NEUTRON-158
         securityRuleTester.singleton_sr_modify_test(404, true); // cannot modify a SR that has not been created
         new NeutronSecurityGroupTests(base).singleton_sg_create(TEST_SECURITY_GROUP_ID);
@@ -158,7 +158,7 @@ public class NeutronSecurityRuleTests {
         securityRuleTester.singleton_sr_get_with_one_query_item_test(createJsonString);
         securityRuleTester.multiple_sr_create_test();
         securityRuleTester.singleton_sr_modify_test(200, true);
-        securityRuleTester.singleton_sr_modify_test(200, false);
+        securityRuleTester.singleton_sr_modify_test(500, false); // Sic!  Partial delta updates are not possible.
         securityRuleTester.sr_element_get_test();
         securityRuleTester.sr_element_get_with_query_test();
         securityRuleTester.securityRule_collection_get_test();

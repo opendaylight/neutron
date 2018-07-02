@@ -45,6 +45,7 @@ module neutron-secgroups {
         }
         leaf security-group-id {
             type yang:uuid;
+            mandatory true;
             description "The security group ID to associate with this security group rule.";
         }
         leaf remote-group-id {
