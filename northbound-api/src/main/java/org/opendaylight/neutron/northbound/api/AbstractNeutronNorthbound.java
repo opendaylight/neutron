@@ -18,6 +18,8 @@ import java.net.HttpURLConnection;
 import java.util.List;
 import java.util.Objects;
 import javax.ws.rs.core.Response;
+import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronCRUD.Result;
 import org.opendaylight.neutron.spi.INeutronObject;
@@ -101,7 +103,7 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             } else {
                 return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(ans)).build();
             }
-        } catch (OperationFailedException e) {
+        } catch (ReadFailedException e) {
             LOG.warn("get failed due to datastore problem; uuid: {}", uuid);
             throw new DatastoreOperationFailedWebApplicationException(e);
         }
@@ -136,6 +138,9 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
                 }
             }
             return Response.status(HttpURLConnection.HTTP_CREATED).entity(input).build();
+        } catch (OptimisticLockFailedException e) {
+            // Do not log this, it's "normal" - the driver will retry
+            throw new DatastoreOperationFailedWebApplicationException(e);
         } catch (OperationFailedException e) {
             LOG.warn("create failed due to datastore problem (possibly missing required fields); input: {}", input);
             throw new DatastoreOperationFailedWebApplicationException(e);
@@ -186,6 +191,9 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             }
             T updated = neutronCRUD.get(uuid);
             return Response.status(HttpURLConnection.HTTP_OK).entity(newNeutronRequest(updated)).build();
+        } catch (OptimisticLockFailedException e) {
+            // Do not log this, it's "normal" - the driver will retry
+            throw new DatastoreOperationFailedWebApplicationException(e);
         } catch (OperationFailedException e) {
             LOG.warn("update failed due to datastore problem (possibly missing required fields); input: {}", input);
             throw new DatastoreOperationFailedWebApplicationException(e);
@@ -200,6 +208,9 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
             } else {
                 return Response.status(HttpURLConnection.HTTP_NO_CONTENT).build();
             }
+        } catch (OptimisticLockFailedException e) {
+            // Do not log this, it's "normal" - the driver will retry
+            throw new DatastoreOperationFailedWebApplicationException(e);
         } catch (OperationFailedException e) {
             LOG.warn("delete failed due to datastore problem; uuid: {}", uuid);
             throw new DatastoreOperationFailedWebApplicationException(e);
