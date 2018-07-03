@@ -69,6 +69,24 @@
       "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "523786e0_f6cec0f4",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-07-03T13:14:44Z",
+      "side": 1,
+      "message": "I can live with that ;-) Definitely far from the suckiest thing in our code.",
+      "parentUuid": "ca464887_5a240932",
+      "revId": "4b496f05f2dfc4428941faecac781bfc82dab3ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
