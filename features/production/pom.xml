@@ -22,6 +22,7 @@
 
   <modules>
     <module>features-neutron</module>
+    <module>odl-neutron-model</module>
     <module>odl-neutron-spi</module>
     <module>odl-neutron-hostconfig-ovs</module>
     <module>odl-neutron-hostconfig-vpp</module>
