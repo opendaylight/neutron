@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.Loadbalancers;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.Loadbalancer;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.loadbalancers.LoadbalancerBuilder;
@@ -41,7 +41,7 @@ public final class NeutronLoadBalancerInterface
         final NeutronLoadBalancer answer = new NeutronLoadBalancer();
         fromMdAdminAttributes(loadBalancer, answer);
         if (loadBalancer.getVipAddress() != null) {
-            answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().getValue()));
+            answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().stringValue()));
         }
         if (loadBalancer.getVipSubnetId() != null) {
             answer.setLoadBalancerVipSubnetID(loadBalancer.getVipSubnetId().getValue());
@@ -54,7 +54,8 @@ public final class NeutronLoadBalancerInterface
         final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
         toMdAdminAttributes(loadBalancer, loadBalancerBuilder);
         if (loadBalancer.getLoadBalancerVipAddress() != null) {
-            loadBalancerBuilder.setVipAddress(new IpAddress(loadBalancer.getLoadBalancerVipAddress().toCharArray()));
+            loadBalancerBuilder.setVipAddress(IpAddressBuilder.getDefaultInstance(
+                loadBalancer.getLoadBalancerVipAddress()));
         }
         if (loadBalancer.getLoadBalancerVipSubnetID() != null) {
             loadBalancerBuilder.setVipSubnetId(toUuid(loadBalancer.getLoadBalancerVipSubnetID()));

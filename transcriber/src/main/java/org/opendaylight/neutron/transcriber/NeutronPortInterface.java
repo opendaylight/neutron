@@ -23,7 +23,7 @@ import org.opendaylight.neutron.spi.NeutronPort;
 import org.opendaylight.neutron.spi.NeutronPortAllowedAddressPairs;
 import org.opendaylight.neutron.spi.NeutronPortExtraDHCPOption;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.MacAddress;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtension;
@@ -47,7 +47,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150712.PortSecurityExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtensionBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddressBuilder;
 import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
@@ -108,7 +108,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             final List<NeutronPortAllowedAddressPairs> pairs = new ArrayList<>();
             for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
                 final NeutronPortAllowedAddressPairs pair = new NeutronPortAllowedAddressPairs();
-                pair.setIpAddress(String.valueOf(mdPair.getIpAddress().getValue()));
+                pair.setIpAddress(mdPair.getIpAddress().stringValue());
                 pair.setMacAddress(mdPair.getMacAddress().getValue());
                 pairs.add(pair);
             }
@@ -131,7 +131,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             final List<NeutronIps> ips = new ArrayList<>();
             for (final FixedIps mdIp : port.getFixedIps()) {
                 final NeutronIps ip = new NeutronIps();
-                ip.setIpAddress(String.valueOf(mdIp.getIpAddress().getValue()));
+                ip.setIpAddress(mdIp.getIpAddress().stringValue());
                 ip.setSubnetUUID(mdIp.getSubnetId().getValue());
                 ips.add(ip);
             }
@@ -201,7 +201,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             for (final NeutronPortAllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
                 final AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
                 allowedAddressPairsBuilder
-                        .setIpAddress(new IpPrefixOrAddress(allowedAddressPairs.getIpAddress().toCharArray()));
+                        .setIpAddress(IpPrefixOrAddressBuilder.getDefaultInstance(allowedAddressPairs.getIpAddress()));
                 allowedAddressPairsBuilder.setMacAddress(new MacAddress(allowedAddressPairs.getMacAddress()));
                 listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
             }
@@ -234,7 +234,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             final List<FixedIps> listNeutronIps = new ArrayList<>();
             for (final NeutronIps neutronIPs : neutronPort.getFixedIps()) {
                 final FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
-                fixedIpsBuilder.setIpAddress(new IpAddress(neutronIPs.getIpAddress().toCharArray()));
+                fixedIpsBuilder.setIpAddress(IpAddressBuilder.getDefaultInstance(neutronIPs.getIpAddress()));
                 fixedIpsBuilder.setSubnetId(toUuid(neutronIPs.getSubnetUUID()));
                 listNeutronIps.add(fixedIpsBuilder.build());
             }

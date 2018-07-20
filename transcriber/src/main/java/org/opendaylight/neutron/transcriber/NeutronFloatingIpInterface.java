@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.NeutronFloatingIp;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.Floatingips;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.Floatingip;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipBuilder;
@@ -43,10 +43,11 @@ public final class NeutronFloatingIpInterface
         final FloatingipBuilder floatingipBuilder = new FloatingipBuilder();
         toMdIds(floatingIp, floatingipBuilder);
         if (floatingIp.getFixedIpAddress() != null) {
-            floatingipBuilder.setFixedIpAddress(new IpAddress(floatingIp.getFixedIpAddress().toCharArray()));
+            floatingipBuilder.setFixedIpAddress(IpAddressBuilder.getDefaultInstance(floatingIp.getFixedIpAddress()));
         }
         if (floatingIp.getFloatingIpAddress() != null) {
-            floatingipBuilder.setFloatingIpAddress(new IpAddress(floatingIp.getFloatingIpAddress().toCharArray()));
+            floatingipBuilder.setFloatingIpAddress(IpAddressBuilder.getDefaultInstance(
+                floatingIp.getFloatingIpAddress()));
         }
         if (floatingIp.getFloatingNetworkUUID() != null) {
             floatingipBuilder.setFloatingNetworkId(toUuid(floatingIp.getFloatingNetworkUUID()));
@@ -74,10 +75,10 @@ public final class NeutronFloatingIpInterface
             result.setPortUUID(String.valueOf(fip.getPortId().getValue()));
         }
         if (fip.getFixedIpAddress() != null) {
-            result.setFixedIpAddress(String.valueOf(fip.getFixedIpAddress().getValue()));
+            result.setFixedIpAddress(fip.getFixedIpAddress().stringValue());
         }
         if (fip.getFloatingIpAddress() != null) {
-            result.setFloatingIpAddress(String.valueOf(fip.getFloatingIpAddress().getValue()));
+            result.setFloatingIpAddress(fip.getFloatingIpAddress().stringValue());
         }
         if (fip.getRouterId() != null) {
             result.setRouterUUID(String.valueOf(fip.getRouterId().getValue()));
