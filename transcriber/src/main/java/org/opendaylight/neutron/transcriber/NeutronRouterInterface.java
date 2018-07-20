@@ -104,8 +104,8 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             final List<NeutronRoute> routes = new ArrayList<>();
             for (final Routes route : router.getRoutes()) {
                 final NeutronRoute routerRoute = new NeutronRoute();
-                routerRoute.setDestination(String.valueOf(route.getDestination().getValue()));
-                routerRoute.setNextHop(String.valueOf(route.getNexthop().getValue()));
+                routerRoute.setDestination(route.getDestination().stringValue());
+                routerRoute.setNextHop(route.getNexthop().stringValue());
                 routes.add(routerRoute);
             }
             result.setRoutes(routes);
@@ -120,7 +120,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
                 for (final ExternalFixedIps mdFixedIp : router.getExternalGatewayInfo().getExternalFixedIps()) {
                     final NeutronIps fixedIp = new NeutronIps();
                     fixedIp.setSubnetUUID(String.valueOf(mdFixedIp.getSubnetId().getValue()));
-                    fixedIp.setIpAddress(String.valueOf(mdFixedIp.getIpAddress().getValue()));
+                    fixedIp.setIpAddress(mdFixedIp.getIpAddress().stringValue());
                     fixedIps.add(fixedIp);
                 }
                 extGwInfo.setExternalFixedIps(fixedIps);

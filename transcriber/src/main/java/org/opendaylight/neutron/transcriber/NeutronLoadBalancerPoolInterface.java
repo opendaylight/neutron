@@ -28,6 +28,7 @@ import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerSessionPersistence;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolHttp;
@@ -236,7 +237,7 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setPoolMemberAdminStateIsUp(member.isAdminStateUp());
         }
         if (member.getAddress() != null) {
-            answer.setPoolMemberAddress(String.valueOf(member.getAddress().getValue()));
+            answer.setPoolMemberAddress(member.getAddress().stringValue());
         }
         if (member.getProtocolPort() != null) {
             answer.setPoolMemberProtoPort(member.getProtocolPort());
@@ -254,7 +255,7 @@ public final class NeutronLoadBalancerPoolInterface
         final MemberBuilder memberBuilder = toMdIds(member, MemberBuilder.class);
         memberBuilder.setAdminStateUp(member.getPoolMemberAdminStateIsUp());
         if (member.getPoolMemberAddress() != null) {
-            final IpAddress ipAddress = new IpAddress(member.getPoolMemberAddress().toCharArray());
+            final IpAddress ipAddress = IpAddressBuilder.getDefaultInstance(member.getPoolMemberAddress());
             memberBuilder.setAddress(ipAddress);
         }
         if (member.getPoolMemberProtoPort() != null) {

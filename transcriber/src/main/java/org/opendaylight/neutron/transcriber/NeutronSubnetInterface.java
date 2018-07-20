@@ -74,9 +74,9 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         fromMdBaseAttributes(subnet, result);
         result.setNetworkUUID(subnet.getNetworkId().getValue());
         result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
-        result.setCidr(String.valueOf(subnet.getCidr().getValue()));
+        result.setCidr(subnet.getCidr().stringValue());
         if (subnet.getGatewayIp() != null) {
-            result.setGatewayIp(String.valueOf(subnet.getGatewayIp().getValue()));
+            result.setGatewayIp(subnet.getGatewayIp().stringValue());
         }
         if (subnet.getIpv6RaMode() != null) {
             result.setIpV6RaMode(DHCPV6_MAP.get(subnet.getIpv6RaMode()));
@@ -89,8 +89,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             final List<NeutronSubnetIpAllocationPool> allocationPools = new ArrayList<>();
             for (final AllocationPools allocationPool : subnet.getAllocationPools()) {
                 final NeutronSubnetIpAllocationPool pool = new NeutronSubnetIpAllocationPool();
-                pool.setPoolStart(String.valueOf(allocationPool.getStart().getValue()));
-                pool.setPoolEnd(String.valueOf(allocationPool.getEnd().getValue()));
+                pool.setPoolStart(allocationPool.getStart().stringValue());
+                pool.setPoolEnd(allocationPool.getEnd().stringValue());
                 allocationPools.add(pool);
             }
             result.setAllocationPools(allocationPools);
@@ -98,7 +98,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         if (subnet.getDnsNameservers() != null) {
             final List<String> dnsNameServers = new ArrayList<>();
             for (final IpAddress dnsNameServer : subnet.getDnsNameservers()) {
-                dnsNameServers.add(String.valueOf(dnsNameServer.getValue()));
+                dnsNameServers.add(dnsNameServer.stringValue());
             }
             result.setDnsNameservers(dnsNameServers);
         }
@@ -106,8 +106,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             final List<NeutronRoute> hostRoutes = new ArrayList<>();
             for (final HostRoutes hostRoute : subnet.getHostRoutes()) {
                 final NeutronRoute nsHostRoute = new NeutronRoute();
-                nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
-                nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
+                nsHostRoute.setDestination(hostRoute.getDestination().stringValue());
+                nsHostRoute.setNextHop(hostRoute.getNexthop().stringValue());
                 hostRoutes.add(nsHostRoute);
             }
             result.setHostRoutes(hostRoutes);
