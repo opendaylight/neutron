@@ -18,6 +18,7 @@ import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.NeutronSubnet;
 import org.opendaylight.neutron.spi.NeutronSubnetIpAllocationPool;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefixBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.Dhcpv6Base;
@@ -74,9 +75,9 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         fromMdBaseAttributes(subnet, result);
         result.setNetworkUUID(subnet.getNetworkId().getValue());
         result.setIpVersion(IPV_MAP.get(subnet.getIpVersion()));
-        result.setCidr(String.valueOf(subnet.getCidr().getValue()));
+        result.setCidr(subnet.getCidr().stringValue());
         if (subnet.getGatewayIp() != null) {
-            result.setGatewayIp(String.valueOf(subnet.getGatewayIp().getValue()));
+            result.setGatewayIp(subnet.getGatewayIp().stringValue());
         }
         if (subnet.getIpv6RaMode() != null) {
             result.setIpV6RaMode(DHCPV6_MAP.get(subnet.getIpv6RaMode()));
@@ -89,8 +90,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             final List<NeutronSubnetIpAllocationPool> allocationPools = new ArrayList<>();
             for (final AllocationPools allocationPool : subnet.getAllocationPools()) {
                 final NeutronSubnetIpAllocationPool pool = new NeutronSubnetIpAllocationPool();
-                pool.setPoolStart(String.valueOf(allocationPool.getStart().getValue()));
-                pool.setPoolEnd(String.valueOf(allocationPool.getEnd().getValue()));
+                pool.setPoolStart(allocationPool.getStart().stringValue());
+                pool.setPoolEnd(allocationPool.getEnd().stringValue());
                 allocationPools.add(pool);
             }
             result.setAllocationPools(allocationPools);
@@ -98,7 +99,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         if (subnet.getDnsNameservers() != null) {
             final List<String> dnsNameServers = new ArrayList<>();
             for (final IpAddress dnsNameServer : subnet.getDnsNameservers()) {
-                dnsNameServers.add(String.valueOf(dnsNameServer.getValue()));
+                dnsNameServers.add(dnsNameServer.stringValue());
             }
             result.setDnsNameservers(dnsNameServers);
         }
@@ -106,8 +107,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             final List<NeutronRoute> hostRoutes = new ArrayList<>();
             for (final HostRoutes hostRoute : subnet.getHostRoutes()) {
                 final NeutronRoute nsHostRoute = new NeutronRoute();
-                nsHostRoute.setDestination(String.valueOf(hostRoute.getDestination().getValue()));
-                nsHostRoute.setNextHop(String.valueOf(hostRoute.getNexthop().getValue()));
+                nsHostRoute.setDestination(hostRoute.getDestination().stringValue());
+                nsHostRoute.setNextHop(hostRoute.getNexthop().stringValue());
                 hostRoutes.add(nsHostRoute);
             }
             result.setHostRoutes(hostRoutes);
@@ -131,7 +132,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             subnetBuilder.setCidr(ipPrefix);
         }
         if (subnet.getGatewayIp() != null) {
-            final IpAddress ipAddress = new IpAddress(subnet.getGatewayIp().toCharArray());
+            final IpAddress ipAddress = IpAddressBuilder.getDefaultInstance(subnet.getGatewayIp());
             subnetBuilder.setGatewayIp(ipAddress);
         }
         if (subnet.getIpV6RaMode() != null) {
@@ -147,8 +148,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             final List<AllocationPools> allocationPools = new ArrayList<>();
             for (final NeutronSubnetIpAllocationPool allocationPool : subnet.getAllocationPools()) {
                 final AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
-                builder.setStart(new IpAddress(allocationPool.getPoolStart().toCharArray()));
-                builder.setEnd(new IpAddress(allocationPool.getPoolEnd().toCharArray()));
+                builder.setStart(IpAddressBuilder.getDefaultInstance(allocationPool.getPoolStart()));
+                builder.setEnd(IpAddressBuilder.getDefaultInstance(allocationPool.getPoolEnd()));
                 final AllocationPools temp = builder.build();
                 allocationPools.add(temp);
             }
@@ -157,7 +158,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         if (subnet.getDnsNameservers() != null) {
             final List<IpAddress> dnsNameServers = new ArrayList<>();
             for (final String dnsNameServer : subnet.getDnsNameservers()) {
-                final IpAddress ipAddress = new IpAddress(dnsNameServer.toCharArray());
+                final IpAddress ipAddress = IpAddressBuilder.getDefaultInstance(dnsNameServer);
                 dnsNameServers.add(ipAddress);
             }
             subnetBuilder.setDnsNameservers(dnsNameServers);
@@ -166,8 +167,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             final List<HostRoutes> hostRoutes = new ArrayList<>();
             for (final NeutronRoute hostRoute : subnet.getHostRoutes()) {
                 final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
-                hrBuilder.setDestination(new IpPrefix(hostRoute.getDestination().toCharArray()));
-                hrBuilder.setNexthop(new IpAddress(hostRoute.getNextHop().toCharArray()));
+                hrBuilder.setDestination(IpPrefixBuilder.getDefaultInstance(hostRoute.getDestination()));
+                hrBuilder.setNexthop(IpAddressBuilder.getDefaultInstance(hostRoute.getNextHop()));
                 hostRoutes.add(hrBuilder.build());
             }
             subnetBuilder.setHostRoutes(hostRoutes);

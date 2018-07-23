@@ -17,7 +17,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefixBuilder;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV4;
@@ -101,10 +101,11 @@ public final class NeutronSFCFlowClassifierInterface
             result.setDestinationPortRangeMax(neutronClassifier.getDestinationPortRangeMax());
         }
         if (neutronClassifier.getSourceIpPrefix() != null) {
-            result.setSourceIpPrefix(new IpPrefix(neutronClassifier.getSourceIpPrefix().toCharArray()));
+            result.setSourceIpPrefix(IpPrefixBuilder.getDefaultInstance(neutronClassifier.getSourceIpPrefix()));
         }
         if (neutronClassifier.getDestinationIpPrefix() != null) {
-            result.setDestinationIpPrefix(new IpPrefix(neutronClassifier.getDestinationIpPrefix().toCharArray()));
+            result.setDestinationIpPrefix(IpPrefixBuilder.getDefaultInstance(
+                neutronClassifier.getDestinationIpPrefix()));
         }
         if (neutronClassifier.getLogicalSourcePortUUID() != null) {
             result.setLogicalSourcePort(new Uuid(neutronClassifier.getLogicalSourcePortUUID()));
@@ -151,10 +152,10 @@ public final class NeutronSFCFlowClassifierInterface
             result.setDestinationPortRangeMax(mdClassifier.getDestinationPortRangeMax());
         }
         if (mdClassifier.getSourceIpPrefix() != null) {
-            result.setSourceIpPrefix(String.valueOf(mdClassifier.getSourceIpPrefix().getValue()));
+            result.setSourceIpPrefix(mdClassifier.getSourceIpPrefix().stringValue());
         }
         if (mdClassifier.getDestinationIpPrefix() != null) {
-            result.setDestinationIpPrefix(String.valueOf(mdClassifier.getDestinationIpPrefix().getValue()));
+            result.setDestinationIpPrefix(mdClassifier.getDestinationIpPrefix().stringValue());
         }
         if (mdClassifier.getLogicalSourcePort() != null) {
             result.setLogicalSourcePortUUID(mdClassifier.getLogicalSourcePort().getValue());

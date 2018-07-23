@@ -19,12 +19,14 @@ import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronSecurityRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefixBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.EthertypeV6;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.DirectionMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.ProtocolMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributesProtocolBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.SecurityRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
@@ -68,7 +70,7 @@ public final class NeutronSecurityRuleInterface extends
             answer.setSecurityRemoteGroupID(rule.getRemoteGroupId().getValue());
         }
         if (rule.getRemoteIpPrefix() != null) {
-            answer.setSecurityRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
+            answer.setSecurityRuleRemoteIpPrefix(rule.getRemoteIpPrefix().stringValue());
         }
         if (rule.getProtocol() != null) {
             final Protocol protocol = rule.getProtocol();
@@ -108,13 +110,13 @@ public final class NeutronSecurityRuleInterface extends
             securityRuleBuilder.setRemoteGroupId(toUuid(securityRule.getSecurityRemoteGroupID()));
         }
         if (securityRule.getSecurityRuleRemoteIpPrefix() != null) {
-            final IpPrefix ipPrefix = new IpPrefix(securityRule.getSecurityRuleRemoteIpPrefix().toCharArray());
+            final IpPrefix ipPrefix = IpPrefixBuilder.getDefaultInstance(securityRule.getSecurityRuleRemoteIpPrefix());
             securityRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         if (securityRule.getSecurityRuleProtocol() != null) {
             final String protocolString = securityRule.getSecurityRuleProtocol();
             try {
-                final Protocol protocol = new Protocol(protocolString.toCharArray());
+                final Protocol protocol = SecurityRuleAttributesProtocolBuilder.getDefaultInstance(protocolString);
                 securityRuleBuilder.setProtocol(protocol);
             } catch (NumberFormatException e) {
                 throw new BadRequestException("Protocol {" + securityRule.getSecurityRuleProtocol()

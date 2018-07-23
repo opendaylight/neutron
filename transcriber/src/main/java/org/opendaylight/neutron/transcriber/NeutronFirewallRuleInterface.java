@@ -23,11 +23,13 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.Act
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.ActionBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.ActionDeny;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.FirewallRuleAttributes.Protocol;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.FirewallRuleAttributesProtocolBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.FirewallRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddressBuilder;
 import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
@@ -81,10 +83,10 @@ public final class NeutronFirewallRuleInterface
             answer.setFirewallRuleIpVer(IP_VERSION_MAP.get(rule.getIpVersion()));
         }
         if (rule.getSourceIpAddr() != null) {
-            answer.setFirewallRuleSrcIpAddr(String.valueOf(rule.getSourceIpAddr().getValue()));
+            answer.setFirewallRuleSrcIpAddr(rule.getSourceIpAddr().stringValue());
         }
         if (rule.getDestinationIpAddr() != null) {
-            answer.setFirewallRuleDstIpAddr(String.valueOf(rule.getDestinationIpAddr().getValue()));
+            answer.setFirewallRuleDstIpAddr(rule.getDestinationIpAddr().stringValue());
         }
         if (rule.getSourcePortRangeMin() != null) {
             answer.setFirewallRuleSrcPortRangeMin(rule.getSourcePortRangeMin());
@@ -124,7 +126,7 @@ public final class NeutronFirewallRuleInterface
         if (rule.getFirewallRuleProtocol() != null) {
             final String protocolString = rule.getFirewallRuleProtocol();
             try {
-                final Protocol protocol = new Protocol(protocolString.toCharArray());
+                final Protocol protocol = FirewallRuleAttributesProtocolBuilder.getDefaultInstance(protocolString);
                 ruleBuilder.setProtocol(protocol);
             } catch (NumberFormatException e) {
                 throw new BadRequestException("Protocol {" + rule.getFirewallRuleProtocol() + "} is not supported");
@@ -135,11 +137,13 @@ public final class NeutronFirewallRuleInterface
             ruleBuilder.setIpVersion(mapper.get(rule.getFirewallRuleIpVer()));
         }
         if (rule.getFirewallRuleSrcIpAddr() != null) {
-            final IpPrefixOrAddress ipAddress = new IpPrefixOrAddress(rule.getFirewallRuleSrcIpAddr().toCharArray());
+            final IpPrefixOrAddress ipAddress = IpPrefixOrAddressBuilder.getDefaultInstance(
+                rule.getFirewallRuleSrcIpAddr());
             ruleBuilder.setSourceIpAddr(ipAddress);
         }
         if (rule.getFirewallRuleDstIpAddr() != null) {
-            final IpPrefixOrAddress ipAddress = new IpPrefixOrAddress(rule.getFirewallRuleDstIpAddr().toCharArray());
+            final IpPrefixOrAddress ipAddress = IpPrefixOrAddressBuilder.getDefaultInstance(
+                rule.getFirewallRuleDstIpAddr());
             ruleBuilder.setDestinationIpAddr(ipAddress);
         }
         if (rule.getFirewallRuleSrcPortRangeMin() != null) {

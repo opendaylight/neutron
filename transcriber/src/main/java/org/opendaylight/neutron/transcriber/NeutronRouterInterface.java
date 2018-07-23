@@ -17,8 +17,8 @@ import org.opendaylight.neutron.spi.NeutronIps;
 import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.NeutronRouter;
 import org.opendaylight.neutron.spi.NeutronRouterNetworkReference;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddress;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpAddressBuilder;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefixBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.l3.attributes.Routes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.l3.attributes.RoutesBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.Routers;
@@ -61,8 +61,8 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             final List<Routes> routes = new ArrayList<>();
             for (final NeutronRoute route : router.getRoutes()) {
                 final RoutesBuilder routeBuilder = new RoutesBuilder();
-                routeBuilder.setDestination(new IpPrefix(route.getDestination().toCharArray()));
-                routeBuilder.setNexthop(new IpAddress(route.getNextHop().toCharArray()));
+                routeBuilder.setDestination(IpPrefixBuilder.getDefaultInstance(route.getDestination()));
+                routeBuilder.setNexthop(IpAddressBuilder.getDefaultInstance(route.getNextHop()));
                 routes.add(routeBuilder.build());
             }
             routerBuilder.setRoutes(routes);
@@ -79,7 +79,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
                     final List<ExternalFixedIps> externalFixedIps = new ArrayList<>();
                     for (final NeutronIps externalIp : externalGatewayInfos.getExternalFixedIps()) {
                         final ExternalFixedIpsBuilder eFixedIpBuilder = new ExternalFixedIpsBuilder();
-                        eFixedIpBuilder.setIpAddress(new IpAddress(externalIp.getIpAddress().toCharArray()));
+                        eFixedIpBuilder.setIpAddress(IpAddressBuilder.getDefaultInstance(externalIp.getIpAddress()));
                         eFixedIpBuilder.setSubnetId(toUuid(externalIp.getSubnetUUID()));
                         externalFixedIps.add(eFixedIpBuilder.build());
                     }
@@ -104,8 +104,8 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             final List<NeutronRoute> routes = new ArrayList<>();
             for (final Routes route : router.getRoutes()) {
                 final NeutronRoute routerRoute = new NeutronRoute();
-                routerRoute.setDestination(String.valueOf(route.getDestination().getValue()));
-                routerRoute.setNextHop(String.valueOf(route.getNexthop().getValue()));
+                routerRoute.setDestination(route.getDestination().stringValue());
+                routerRoute.setNextHop(route.getNexthop().stringValue());
                 routes.add(routerRoute);
             }
             result.setRoutes(routes);
@@ -120,7 +120,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
                 for (final ExternalFixedIps mdFixedIp : router.getExternalGatewayInfo().getExternalFixedIps()) {
                     final NeutronIps fixedIp = new NeutronIps();
                     fixedIp.setSubnetUUID(String.valueOf(mdFixedIp.getSubnetId().getValue()));
-                    fixedIp.setIpAddress(String.valueOf(mdFixedIp.getIpAddress().getValue()));
+                    fixedIp.setIpAddress(mdFixedIp.getIpAddress().stringValue());
                     fixedIps.add(fixedIp);
                 }
                 extGwInfo.setExternalFixedIps(fixedIps);

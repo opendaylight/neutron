@@ -14,6 +14,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefix;
+import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.inet.types.rev130715.IpPrefixBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils.DirectionMapper;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.MeteringRules;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.metering.rev150712.metering.rules.attributes.metering.rules.MeteringRule;
@@ -50,8 +51,8 @@ public final class NeutronMeteringLabelRuleInterface
                     DirectionMapper.get(meteringLabelRule.getMeteringLabelRuleDirection()));
         }
         if (meteringLabelRule.getMeteringLabelRuleRemoteIpPrefix() != null) {
-            final IpPrefix ipPrefix = new IpPrefix(
-                    meteringLabelRule.getMeteringLabelRuleRemoteIpPrefix().toCharArray());
+            final IpPrefix ipPrefix = IpPrefixBuilder.getDefaultInstance(
+                    meteringLabelRule.getMeteringLabelRuleRemoteIpPrefix());
             meteringRuleBuilder.setRemoteIpPrefix(ipPrefix);
         }
         meteringRuleBuilder.setExcluded(meteringLabelRule.getMeteringLabelRuleExcluded());
@@ -69,7 +70,7 @@ public final class NeutronMeteringLabelRuleInterface
             answer.setMeteringLabelRuleDirection(DirectionMapper.getDirectionString(rule.getDirection()));
         }
         if (rule.getRemoteIpPrefix() != null) {
-            answer.setMeteringLabelRuleRemoteIpPrefix(new String(rule.getRemoteIpPrefix().getValue()));
+            answer.setMeteringLabelRuleRemoteIpPrefix(rule.getRemoteIpPrefix().stringValue());
         }
         answer.setMeteringLabelRuleExcluded(rule.isExcluded());
         return answer;
