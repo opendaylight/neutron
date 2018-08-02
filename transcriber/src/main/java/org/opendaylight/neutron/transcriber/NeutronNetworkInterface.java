@@ -13,6 +13,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronNetworkSegment;
@@ -46,9 +48,12 @@ public final class NeutronNetworkInterface
                     .put(NetworkTypeFlat.class, "flat").put(NetworkTypeGre.class, "gre")
                     .put(NetworkTypeVlan.class, "vlan").put(NetworkTypeVxlan.class, "vxlan").build();
 
+    private final NeutronQosPolicyInterface qosPolicyInterface;
+
     @Inject
-    public NeutronNetworkInterface(DataBroker db) {
+    public NeutronNetworkInterface(DataBroker db, NeutronQosPolicyInterface qosPolicyInterface) {
         super(NetworkBuilder.class, db);
+        this.qosPolicyInterface = qosPolicyInterface;
     }
 
     // IfNBNetworkCRUD methods
@@ -157,5 +162,11 @@ public final class NeutronNetworkInterface
         }
 
         return networkBuilder.build();
+    }
+
+    @Override
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronNetwork network)
+            throws ReadFailedException {
+        return ifNonNull(network.getQosPolicyId(), qosPolicyId -> qosPolicyInterface.exists(qosPolicyId, tx));
     }
 }
