@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93ffbfba_0f822d71",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-08-03T04:18:07Z",
+      "side": 1,
+      "message": "I believe this will result in a ds read, right? This will have perf impact. I\u0027d prefer if we added Tom\u0027s DataTree cache in here to avoid datastore reads. Ideally, we should cache when data is written. May also want to ignore read altogheter by relying only on cache, but that will likely be needed in check for ifNotExists when checking for delete dependencies.",
+      "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
