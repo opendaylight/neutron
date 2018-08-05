@@ -11,7 +11,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-transcriber</artifactId>
-    <version>0.10.3-SNAPSHOT</version>
+    <version>0.10.3</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Implementation</name>
 
@@ -24,7 +24,7 @@
             <dependency>
                 <groupId>org.opendaylight.controller</groupId>
                 <artifactId>mdsal-artifacts</artifactId>
-                <version>1.7.3-SNAPSHOT</version>
+                <version>1.7.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

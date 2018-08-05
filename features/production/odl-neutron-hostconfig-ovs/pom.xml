@@ -11,7 +11,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-hostconfig-ovs</artifactId>
-    <version>0.10.3-SNAPSHOT</version>
+    <version>0.10.3</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Hostconfig :: OVS</name>
 
@@ -24,14 +24,14 @@
             <dependency>
                 <groupId>org.opendaylight.controller</groupId>
                 <artifactId>mdsal-artifacts</artifactId>
-                <version>1.7.3-SNAPSHOT</version>
+                <version>1.7.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.opendaylight.ovsdb</groupId>
                 <artifactId>southbound-artifacts</artifactId>
-                <version>1.6.3-SNAPSHOT</version>
+                <version>1.6.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -56,14 +56,14 @@
             <artifactId>odl-ovsdb-utils</artifactId>
             <type>xml</type>
             <classifier>features</classifier>
-            <version>1.6.3-SNAPSHOT</version>
+            <version>1.6.3</version>
         </dependency>
         <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-cert</artifactId>
             <type>xml</type>
             <classifier>features</classifier>
-            <version>0.7.3-SNAPSHOT</version>
+            <version>0.7.3</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

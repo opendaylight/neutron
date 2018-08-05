@@ -11,12 +11,12 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-hostconfig-vpp</artifactId>
-    <version>0.10.3-SNAPSHOT</version>
+    <version>0.10.3</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Hostconfig :: VPP</name>
 
     <properties>
-        <netconf.version>1.4.3-SNAPSHOT</netconf.version>
+        <netconf.version>1.4.3</netconf.version>
         <explicitFeatureDependencies>true</explicitFeatureDependencies>
     </properties>
 
@@ -25,7 +25,7 @@
             <dependency>
                 <groupId>org.opendaylight.controller</groupId>
                 <artifactId>mdsal-artifacts</artifactId>
-                <version>1.7.3-SNAPSHOT</version>
+                <version>1.7.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
