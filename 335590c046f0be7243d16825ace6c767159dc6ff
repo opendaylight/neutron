@@ -34,6 +34,24 @@
       "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "089221e9_2d42364b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-08-06T10:13:58Z",
+      "side": 1,
+      "message": "I agree with Michael. I think we should KISS and *if* scale testing shows a problem we can work on a solution. Obviously, the rest API can wait a tiny bit more AND even though the read briefly locks the data tree, it\u0027s a branch that does not exactly get a huge amount of action. So, yeah, I say let\u0027s proceed the way it is and if it turns into a problem, we can address it then. Sound good?",
+      "parentUuid": "17651b8f_3d8f381b",
+      "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
