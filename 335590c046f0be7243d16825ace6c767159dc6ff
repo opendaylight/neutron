@@ -16,6 +16,24 @@
       "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17651b8f_3d8f381b",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-06T10:07:51Z",
+      "side": 1,
+      "message": "Correct.  But this change was supposed to be \u0027just\u0027 about illustrating how to replicate what we already did elsewhere (security group) to another neutron entity; I didn\u0027t expect to go back to the drawing board on this dependency check feature... ;-) \n\nAnd I do disagree with the apparently increasing general fear :) of doing any DS reads anywhere. (Note also a similar discussion over on https://git.opendaylight.org/gerrit/#/c/74394/.) We never said that we will never ever read anything directly from the DS anymore anywhere and go through caches everywhere. \n\nIn this particular case, I fear the known to not be transactionally atomic datastore cache usage could lead to consistency issues. \n\nTherefore, I\u0027d love to see this move forward as-is. Iff we ever do find real serious performance issues in neutron which we can prove to be related to doing a little read before doing a write, then we revisit this (but I doubt we will). Would that work for you?",
+      "parentUuid": "93ffbfba_0f822d71",
+      "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
