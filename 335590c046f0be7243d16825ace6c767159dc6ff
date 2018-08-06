@@ -52,6 +52,24 @@
       "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5c5369a_e8dd3080",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-08-06T12:57:34Z",
+      "side": 1,
+      "message": "Cool. that is why didn\u0027t -1, just wanted to bring up a concern that may require revisiting the framework, so as not to require similar effort if we need to change it later.",
+      "parentUuid": "089221e9_2d42364b",
+      "revId": "335590c046f0be7243d16825ace6c767159dc6ff",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
