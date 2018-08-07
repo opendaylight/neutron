@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Brocade Communications Systems, Inc. and others.  All rights reserved.
+ * Copyright (c) 2016, 2018 Brocade Communications Systems, Inc. and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -13,6 +13,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronSFCPortChainCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
@@ -38,9 +40,16 @@ public final class NeutronSFCPortChainInterface
 
     private static final Logger LOG = LoggerFactory.getLogger(NeutronSFCPortChainInterface.class);
 
+    private final NeutronSFCPortPairGroupInterface neutronSFCPPGInterface;
+    private final NeutronSFCFlowClassifierInterface neutronSFCFCInterface;
+
     @Inject
-    public NeutronSFCPortChainInterface(DataBroker db) {
+    public NeutronSFCPortChainInterface(DataBroker db,
+                                        NeutronSFCPortPairGroupInterface neutronSFCPPGInterface,
+                                        NeutronSFCFlowClassifierInterface neutronSFCFCInterface) {
         super(PortChainBuilder.class, db);
+        this.neutronSFCPPGInterface = neutronSFCPPGInterface;
+        this.neutronSFCFCInterface = neutronSFCFCInterface;
     }
 
     @Override
@@ -112,5 +121,39 @@ public final class NeutronSFCPortChainInterface
         }
         LOG.trace("fromMd: REST SFC Port Chain data : {}", result);
         return result;
+    }
+
+    @Override
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronSFCPortChain portChain)
+        throws ReadFailedException {
+        boolean portPairGroupDependencies = arePortPairGroupDependenciesAvailable(tx, portChain);
+        boolean flowClassifierDependencies = areFlowClassifierDependenciesAvailable(tx, portChain);
+        return portPairGroupDependencies && flowClassifierDependencies;
+    }
+
+    private boolean arePortPairGroupDependenciesAvailable(ReadTransaction tx, NeutronSFCPortChain portChain)
+        throws ReadFailedException {
+        if (portChain.getPortPairGroupsUUID() == null) {
+            return true;
+        }
+        for (String portPairGroupUUID : portChain.getPortPairGroupsUUID()) {
+            if (portPairGroupUUID != null && !neutronSFCPPGInterface.exists(portPairGroupUUID, tx)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean areFlowClassifierDependenciesAvailable(ReadTransaction tx, NeutronSFCPortChain portChain)
+        throws ReadFailedException {
+        if (portChain.getFlowClassifiersUUID() == null) {
+            return true;
+        }
+        for (String flowClassifierUUID : portChain.getFlowClassifiersUUID()) {
+            if (flowClassifierUUID != null && !neutronSFCFCInterface.exists(flowClassifierUUID, tx)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
