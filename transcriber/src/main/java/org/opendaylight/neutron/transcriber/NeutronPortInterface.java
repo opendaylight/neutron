@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2015 IBM Corporation and others.  All rights reserved.
+ * Copyright (c) 2013, 2018 IBM Corporation and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -17,6 +17,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronPortCRUD;
 import org.opendaylight.neutron.spi.NeutronIps;
 import org.opendaylight.neutron.spi.NeutronPort;
@@ -60,9 +62,19 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
                     .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
 
+    private final NeutronQosPolicyInterface qosPolicyInterface;
+    private final NeutronNetworkInterface networkInterface;
+    private final NeutronSubnetInterface subnetInterface;
+
     @Inject
-    public NeutronPortInterface(DataBroker db) {
+    public NeutronPortInterface(DataBroker db,
+                                NeutronQosPolicyInterface qosPolicyInterface,
+                                NeutronNetworkInterface networkInterface,
+                                NeutronSubnetInterface subnetInterface) {
         super(PortBuilder.class, db);
+        this.qosPolicyInterface = qosPolicyInterface;
+        this.networkInterface = networkInterface;
+        this.subnetInterface = subnetInterface;
     }
 
     // IfNBPortCRUD methods
@@ -259,5 +271,30 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
         }
         return portBuilder.build();
+    }
+
+    @Override
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronPort port)
+        throws ReadFailedException {
+        boolean qosDependency =
+            ifNonNull(port.getQosPolicyId(), qosPolicyId -> qosPolicyInterface.exists(qosPolicyId, tx));
+        boolean networkDependency =
+            ifNonNull(port.getNetworkUUID(), networkUUID -> networkInterface.exists(networkUUID, tx));
+        boolean subnetDependency = areSubnetDependenciesAvailable(tx, port);
+        return qosDependency && networkDependency && subnetDependency;
+    }
+
+    private boolean areSubnetDependenciesAvailable(ReadTransaction tx, NeutronPort port) throws ReadFailedException {
+        if (port.getFixedIps() == null) {
+            return true;
+        }
+        for (NeutronIps fixedIp : port.getFixedIps()) {
+            boolean subnetDependency =
+                ifNonNull(fixedIp.getSubnetUUID(), subnetUUID -> subnetInterface.exists(subnetUUID, tx));
+            if (!subnetDependency) {
+                return false;
+            }
+        }
+        return true;
     }
 }
