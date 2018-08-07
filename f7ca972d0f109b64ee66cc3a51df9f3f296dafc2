@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bc0c63a_c4d794cc",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronBug4027Tests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-07T12:46:11Z",
+      "side": 1,
+      "message": "how about an inline comment here why this (now, with depenency checking) fails?  And how about then adding an additional new test line with another contentN that makes it actually pass, like before?",
+      "revId": "f7ca972d0f109b64ee66cc3a51df9f3f296dafc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7caf9380_6c249e5b",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronBug4027Tests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-07T12:46:11Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "f7ca972d0f109b64ee66cc3a51df9f3f296dafc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
