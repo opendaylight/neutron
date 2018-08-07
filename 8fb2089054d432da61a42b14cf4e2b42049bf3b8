@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43e0a201_13b8c7d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-07T12:53:22Z",
+      "side": 1,
+      "message": "this should say NEUTRON-184 not NEUTRON-158 (parent issue), right?",
+      "revId": "8fb2089054d432da61a42b14cf4e2b42049bf3b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f24de90a_b26fb819",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronSFCPortChainTests.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-07T12:53:22Z",
+      "side": 1,
+      "message": "instead of commenting out, we should probably either just remove these lines, or (better) create them in this test (I did this for the initial security group) and leave them in for a positive as-is test, and add a new test with non-existant referenced entities and assert it fails as expected.",
+      "revId": "8fb2089054d432da61a42b14cf4e2b42049bf3b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d0fad9b_593484ea",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCPortChainInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-07T12:53:22Z",
+      "side": 1,
+      "message": "the portPairGroupUUID !\u003d null part of this check seems overly cautious and not neccessary to me (and makes it a bit harder to read) - if there are null elements in the getPortPairGroupsUUID() won\u0027t there anyway be bigger problems later?  Just in the interest of simplicity and easy to read code, I would probably remove this.  It\u0027s more of a suggestion though - if you feel strongly that this is important, then leave it - also fine by me.",
+      "revId": "8fb2089054d432da61a42b14cf4e2b42049bf3b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9df91ca2_2380aa4e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSFCPortChainInterface.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-08-07T12:53:22Z",
+      "side": 1,
+      "message": "as above",
+      "revId": "8fb2089054d432da61a42b14cf4e2b42049bf3b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
