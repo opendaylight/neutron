@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "229e65dd_f35f45ee",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronBug4027Tests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-08-08T16:49:25Z",
+      "side": 1,
+      "message": "Tricky part is, with dependency checks for this to pass we also need to create the object it depends on. Currently all these values are practically random strings and only testing if CRUD api works or not. There isn\u0027t even any checks if data made it to mdsal correctly or not.\n\nPlan is to add proper tests, but wanted to push initial code patch up for review first and then figure out how to modify these tests.\n\nCan I assume other than tests rest of the code looks okay?",
+      "parentUuid": "5bc0c63a_c4d794cc",
+      "revId": "f7ca972d0f109b64ee66cc3a51df9f3f296dafc2",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7caf9380_6c249e5b",
         "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronBug4027Tests.java",
         "patchSetId": 1
