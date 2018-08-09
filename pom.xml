@@ -9,12 +9,12 @@
   <parent>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>project-neutron-parent</artifactId>
-    <version>0.10.3-SNAPSHOT</version>
+    <version>0.10.4-SNAPSHOT</version>
     <relativePath>parent</relativePath>
   </parent>
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>project-neutron</artifactId>
-  <version>0.10.3-SNAPSHOT</version>
+  <version>0.10.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>neutron</name> <!-- Used by Sonar to set project name -->
   <description>OpenDaylight Neutron Northbound Service</description>
