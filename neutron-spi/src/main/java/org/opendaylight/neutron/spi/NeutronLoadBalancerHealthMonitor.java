@@ -175,7 +175,7 @@ public final class NeutronLoadBalancerHealthMonitor extends NeutronObject<Neutro
     @Override
     public String toString() {
         return "NeutronLoadBalancerHealthMonitor{" + "loadBalancerHealthMonitorID='" + uuid + '\''
-                + ", loadBalancerHealthMonitorTenantID='" + tenantID + '\'' + ", loadBalancerHealthMonitorType='"
+                + ", loadBalancerHealthMonitorTenantID='" + getTenantID() + '\'' + ", loadBalancerHealthMonitorType='"
                 + loadBalancerHealthMonitorType + '\'' + ", loadBalancerHealthMonitorDelay="
                 + loadBalancerHealthMonitorDelay + ", loadBalancerHealthMonitorTimeout="
                 + loadBalancerHealthMonitorTimeout + ", loadBalancerHealthMonitorMaxRetries="

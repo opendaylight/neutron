@@ -79,8 +79,8 @@ public final class NeutronSFCPortPair extends NeutronBaseAttributes<NeutronSFCPo
 
     @Override
     public String toString() {
-        return "NeutronSFCPortPair[" + "tenantID='" + tenantID + '\'' + ", name='" + name + '\'' + ", ingressPortUUID='"
-                + ingressPortUUID + '\'' + ", egressPortUUID='" + egressPortUUID + '\'' + ", serviceFunctionParameters="
-                + serviceFunctionParameters + ']';
+        return "NeutronSFCPortPair[" + "tenantID='" + getTenantID() + '\'' + ", name='" + name + '\''
+                + ", ingressPortUUID='" + ingressPortUUID + '\'' + ", egressPortUUID='" + egressPortUUID + '\''
+                + ", serviceFunctionParameters=" + serviceFunctionParameters + ']';
     }
 }

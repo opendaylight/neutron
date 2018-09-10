@@ -71,7 +71,7 @@ public final class NeutronTapFlow extends NeutronBaseAttributes<NeutronTapFlow> 
 
     @Override
     public String toString() {
-        return "NeutronTapFlow[" + "tapFlowUUID='" + uuid + '\'' + ", tapFlowTenantID='" + tenantID + '\''
+        return "NeutronTapFlow[" + "tapFlowUUID='" + uuid + '\'' + ", tapFlowTenantID='" + getTenantID() + '\''
                 + ", tapFlowName='" + name + '\'' + ", tapFlowServiceID='" + tapServiceID + '\''
                 + ", tapFlowSourcePort='" + tapFlowSourcePort + '\''
                 + ", tapFlowDirection='" + tapFlowDirection + '\'' + ']';

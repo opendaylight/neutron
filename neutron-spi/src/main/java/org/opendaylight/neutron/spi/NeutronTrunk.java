@@ -78,7 +78,7 @@ public final class NeutronTrunk extends NeutronAdminAttributes<NeutronTrunk> {
     @Override
     public String toString() {
         return "NeutronTrunk{" + "trunkUUID='" + uuid + '\'' + ", trunkName='" + name + '\''
-                + ", tenantID='" + tenantID + '\'' + ", adminStateUp='" + adminStateUp + '\''
+                + ", tenantID='" + getTenantID() + '\'' + ", adminStateUp='" + adminStateUp + '\''
                 + ", status='" + status + '\'' + ", portId='" + portId + '\''
                 + ", subPorts='" + subPorts + '\'' + '}';
     }

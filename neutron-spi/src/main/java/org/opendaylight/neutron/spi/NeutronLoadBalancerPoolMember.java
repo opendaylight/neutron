@@ -121,7 +121,7 @@ public final class NeutronLoadBalancerPoolMember extends NeutronObject<NeutronLo
     @Override
     public String toString() {
         return "NeutronLoadBalancerPoolMember{" + "poolMemberID='" + uuid + '\'' + ", poolID='" + poolID + '\''
-                + ", poolMemberTenantID='" + tenantID + '\'' + ", poolMemberAddress='" + poolMemberAddress + '\''
+                + ", poolMemberTenantID='" + getTenantID() + '\'' + ", poolMemberAddress='" + poolMemberAddress + '\''
                 + ", poolMemberProtoPort=" + poolMemberProtoPort + ", poolMemberAdminStateIsUp="
                 + poolMemberAdminStateIsUp + ", poolMemberWeight=" + poolMemberWeight + ", poolMemberSubnetID='"
                 + poolMemberSubnetID + '\'' + '}';

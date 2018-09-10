@@ -93,7 +93,7 @@ public final class NeutronL2gatewayConnection extends NeutronBaseAttributes<Neut
 
     @Override
     public String toString() {
-        return "NeutronL2GatewayConnection [" + "tenant_id = " + tenantID + ", connection_id = " + uuid
+        return "NeutronL2GatewayConnection [" + "tenant_id = " + getTenantID() + ", connection_id = " + uuid
                 + ", gateway_id = " + l2gatewayID + ", network_id = " + networkID + ", segmentation_id = " + segmentID
                 + ", port_id = " + portID + "]";
     }

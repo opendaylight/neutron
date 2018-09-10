@@ -199,7 +199,7 @@ public final class NeutronNetwork extends NeutronAdminAttributes<NeutronNetwork>
     @Override
     public String toString() {
         return "NeutronNetwork [networkUUID=" + uuid + ", networkName=" + name + ", adminStateUp=" + adminStateUp
-                + ", shared=" + shared + ", vlanTransparent=" + vlanTransparent + ", tenantID=" + tenantID
+                + ", shared=" + shared + ", vlanTransparent=" + vlanTransparent + ", tenantID=" + getTenantID()
                 + ", routerExternal=" + routerExternal + ", providerNetworkType=" + providerNetworkType
                 + ", providerPhysicalNetwork=" + providerPhysicalNetwork + ", providerSegmentationID="
                 + providerSegmentationID + ", status=" + status + ", qosPolicyId =" + qosPolicyId
