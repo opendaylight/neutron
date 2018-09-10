@@ -378,7 +378,7 @@ public final class NeutronSubnet extends NeutronBaseAttributes<NeutronSubnet> im
         return "NeutronSubnet [subnetUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", ipVersion="
                 + ipVersion + ", cidr=" + cidr + ", gatewayIp=" + gatewayIp + ", dnsNameservers=" + dnsNameservers
                 + ", allocationPools=" + allocationPools + ", hostRoutes=" + hostRoutes + ", enableDHCP=" + enableDHCP
-                + ", tenantID=" + tenantID + ", ipv6AddressMode=" + ipV6AddressMode + ", ipv6RaMode=" + ipV6RaMode
+                + ", tenantID=" + getTenantID() + ", ipv6AddressMode=" + ipV6AddressMode + ", ipv6RaMode=" + ipV6RaMode
                 + "]";
     }
 }

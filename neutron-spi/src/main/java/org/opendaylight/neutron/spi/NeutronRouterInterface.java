@@ -71,6 +71,6 @@ public final class NeutronRouterInterface extends NeutronObject<NeutronRouterInt
     @Override
     public String toString() {
         return "NeutronRouterInterface [" + "subnetUUID=" + subnetUUID + ", portUUID=" + portUUID + ", id=" + uuid
-                + ", tenantID=" + tenantID + "]";
+                + ", tenantID=" + getTenantID() + "]";
     }
 }

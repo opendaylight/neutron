@@ -42,7 +42,7 @@ public final class NeutronMeteringLabel extends NeutronBaseAttributes<NeutronMet
 
     @Override
     public String toString() {
-        return "NeutronMeteringLabel [id=" + uuid + ", name=" + name + ", tenant_id=" + tenantID
+        return "NeutronMeteringLabel [id=" + uuid + ", name=" + name + ", tenant_id=" + getTenantID()
                 + ", shared=" + shared + "]";
     }
 

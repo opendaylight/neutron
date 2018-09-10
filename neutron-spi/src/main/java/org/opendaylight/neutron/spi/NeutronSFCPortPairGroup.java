@@ -51,7 +51,7 @@ public final class NeutronSFCPortPairGroup extends NeutronBaseAttributes<Neutron
 
     @Override
     public String toString() {
-        return "NeutronSFCPortPairGroup[" + "tenantID='" + tenantID + '\'' + ", name='" + name + '\'' + ", portPairs="
-                + portPairs + ']';
+        return "NeutronSFCPortPairGroup[" + "tenantID='" + getTenantID() + '\'' + ", name='" + name + '\''
+                + ", portPairs=" + portPairs + ']';
     }
 }

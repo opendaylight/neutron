@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
@@ -29,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * vip_subnet         uuid-str
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
  */
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoadBalancer> implements Serializable {
@@ -74,9 +72,9 @@ public final class NeutronLoadBalancer extends NeutronAdminAttributes<NeutronLoa
 
     @Override
     public String toString() {
-        return "NeutronLoadBalancer{" + "loadBalancerID='" + uuid + '\'' + ", loadBalancerTenantID='" + tenantID + '\''
-                + ", loadBalancerName='" + name + '\'' + ", loadBalancerStatus='" + status
-                + '\'' + ", loadBalancerAdminStateUp='" + adminStateUp + '\'' + ", loadBalancerVipAddress='"
+        return "NeutronLoadBalancer{" + "loadBalancerID='" + uuid + '\'' + ", loadBalancerTenantID='" + getTenantID()
+                + '\'' + ", loadBalancerName='" + name + '\'' + ", loadBalancerStatus='" + status + '\''
+                + ", loadBalancerAdminStateUp='" + adminStateUp + '\'' + ", loadBalancerVipAddress='"
                 + loadBalancerVipAddress + '\'' + ", loadBalancerVipSubnetID='" + loadBalancerVipSubnetID + '\'' + '}';
     }
 }

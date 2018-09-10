@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
@@ -30,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * remote_group_id   uuid-str Source security group to apply to rule.
  * tenant_id         uuid-str Owner of security rule. Admin only outside tenant.
  */
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule>
@@ -168,7 +166,7 @@ public final class NeutronSecurityRule extends NeutronObject<NeutronSecurityRule
                 + ", securityRulePortMin=" + securityRulePortMin + ", securityRulePortMax=" + securityRulePortMax
                 + ", securityRuleEthertype='" + securityRuleEthertype + '\'' + ", securityRuleRemoteIpPrefix='"
                 + securityRuleRemoteIpPrefix + '\'' + ", securityRemoteGroupID=" + securityRemoteGroupID
-                + ", securityRuleGroupID='" + securityRuleGroupID + '\'' + ", securityRuleTenantID='" + tenantID + '\''
-                + '}';
+                + ", securityRuleGroupID='" + securityRuleGroupID + '\'' + ", securityRuleTenantID='" + getTenantID()
+                + '\'' + '}';
     }
 }

@@ -34,7 +34,7 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
 
     private static final long serialVersionUID = 1L;
 
-    String tenantID;
+    private String tenantID;
 
     @XmlElement(name = "project_id")
     String projectID;
@@ -67,7 +67,7 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
 
     @Override
     public String toString() {
-        return "NeutronObject [id=" + uuid + ", tenantID=" + tenantID + "]";
+        return "NeutronObject [id=" + uuid + ", tenantID=" + getTenantID() + "]";
     }
 
     @Override
@@ -92,11 +92,11 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
 
     @Override
     public void initDefaults() {
-        if (projectID != null && tenantID == null) {
-            tenantID = projectID;
+        if (projectID != null && getTenantID() == null) {
+            setTenantID(projectID);
         }
-        if (projectID == null && tenantID != null) {
-            projectID = tenantID;
+        if (projectID == null && getTenantID() != null) {
+            projectID = getTenantID();
         }
     }
 

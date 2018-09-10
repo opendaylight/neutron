@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 import java.io.Serializable;
@@ -29,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * http://docs.openstack.org/api/openstack-network/2.0/openstack-network.pdf
  *
  */
-
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFirewallPolicy> implements Serializable {
@@ -74,8 +72,8 @@ public final class NeutronFirewallPolicy extends NeutronBaseAttributes<NeutronFi
 
     @Override
     public String toString() {
-        return "NeutronFirewallPolicy{" + "firewallPolicyUUID='" + uuid + '\'' + ", firewallPolicyTenantID='" + tenantID
-                + '\'' + ", firewallPolicyName='" + name + '\'' + ", firewallPolicyIsShared="
+        return "NeutronFirewallPolicy{" + "firewallPolicyUUID='" + uuid + '\'' + ", firewallPolicyTenantID='"
+                + getTenantID() + '\'' + ", firewallPolicyName='" + name + '\'' + ", firewallPolicyIsShared="
                 + firewallPolicyIsShared + ", firewallPolicyIsAudited='" + firewallPolicyIsAudited + '\'' + '}';
     }
 }

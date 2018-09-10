@@ -89,7 +89,7 @@ public final class NeutronFirewall extends NeutronBaseAttributes<NeutronFirewall
 
     @Override
     public String toString() {
-        return "NeutronFirewall{" + "firewallUUID='" + uuid + '\'' + ", firewallTenantID='" + tenantID + '\''
+        return "NeutronFirewall{" + "firewallUUID='" + uuid + '\'' + ", firewallTenantID='" + getTenantID() + '\''
                 + ", firewallName='" + name + '\'' + ", firewallAdminStateIsUp=" + firewallAdminStateIsUp
                 + ", firewallIsShared=" + firewallIsShared + ", firewallRulePolicyID=" + firewallPolicyID + '}';
     }

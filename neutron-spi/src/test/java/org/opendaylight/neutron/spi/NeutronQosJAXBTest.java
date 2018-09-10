@@ -54,7 +54,7 @@ public class NeutronQosJAXBTest {
                 "d6220bbb-35f3-48ab-8eae-69c60aef3547", bandwidthLimitPolicyRules.get(0).uuid);
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 5.2 : Testing Tenant ID failed",
-                "aa902936679e4ea29bfe1158e3450a14", bandwidthLimitPolicyRules.get(0).tenantID);
+                "aa902936679e4ea29bfe1158e3450a14", bandwidthLimitPolicyRules.get(0).getTenantID());
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 5.3 : Testing Max ingress/Egress value failed",
                 new BigInteger("25"), bandwidthLimitPolicyRules.get(0).maxKbps);
@@ -71,7 +71,7 @@ public class NeutronQosJAXBTest {
                 "d6220bbb-35f3-48ab-8eae-69c60aef3547", dscpMarkingPolicyRules.get(0).uuid);
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 6.2 : Testing Tenant ID failed",
-                "aa902936679e4ea29bfe1158e3450a14", dscpMarkingPolicyRules.get(0).tenantID);
+                "aa902936679e4ea29bfe1158e3450a14", dscpMarkingPolicyRules.get(0).getTenantID());
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 6.3 : Testing Max ingress/Egress value failed",
             new Short("8"), dscpMarkingPolicyRules.get(0).dscpMark);
@@ -82,7 +82,7 @@ public class NeutronQosJAXBTest {
             minBandwidthLimitRules.size());
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 7.2 : Testing Tenant ID failed",
-            "aa902936679e4ea29bfe1158e3450a14", minBandwidthLimitRules.get(0).tenantID);
+            "aa902936679e4ea29bfe1158e3450a14", minBandwidthLimitRules.get(0).getTenantID());
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 7.3 : Testing Minimum Bandwidth failed",
             new BigInteger("20"), minBandwidthLimitRules.get(0).minKbps);

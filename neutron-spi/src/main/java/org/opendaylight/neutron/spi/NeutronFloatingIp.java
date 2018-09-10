@@ -123,7 +123,7 @@ public final class NeutronFloatingIp
     public String toString() {
         return "NeutronFloatingIp{" + "fipUUID='" + uuid + '\'' + ", fipFloatingNetworkId='" + floatingNetworkUUID
                 + '\'' + ", fipPortUUID='" + portUUID + '\'' + ", fipFixedIpAddress='" + fixedIpAddress + '\''
-                + ", fipFloatingIpAddress=" + floatingIpAddress + ", fipTenantId='" + tenantID + '\''
+                + ", fipFloatingIpAddress=" + floatingIpAddress + ", fipTenantId='" + getTenantID() + '\''
                 + ", fipRouterId='" + routerUUID + '\'' + ", fipStatus='" + status + '\'' + '}';
     }
 }

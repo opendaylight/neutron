@@ -76,7 +76,7 @@ public final class NeutronMeteringLabelRule extends NeutronObject<NeutronMeterin
 
     @Override
     public String toString() {
-        return "NeutronMeteringLabelRule [id=" + uuid + ", tenantID=" + tenantID + ", direction="
+        return "NeutronMeteringLabelRule [id=" + uuid + ", tenantID=" + getTenantID() + ", direction="
                 + meteringLabelRuleDirection + ", excluded=" + meteringLabelRuleExcluded + ", remote_ip_prefix="
                 + meteringLabelRuleRemoteIpPrefix + ", metering_label_id=" + meteringLabelRuleLabelID + "]";
     }

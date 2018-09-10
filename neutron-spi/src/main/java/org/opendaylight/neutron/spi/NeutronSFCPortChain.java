@@ -81,7 +81,7 @@ public final class NeutronSFCPortChain extends NeutronBaseAttributes<NeutronSFCP
 
     @Override
     public String toString() {
-        return "NeutronSFCPortChain[" + "tenantID='" + tenantID + '\'' + ", name='" + name + '\''
+        return "NeutronSFCPortChain[" + "tenantID='" + getTenantID() + '\'' + ", name='" + name + '\''
                 + ", portPairGroupsUUID=" + portPairGroupsUUID + ", flowClassifiersUUID='" + flowClassifiersUUID + '\''
                 + ", chainParameters=" + chainParameters + ']';
     }

@@ -61,7 +61,7 @@ public final class NeutronQosMinimumBandwidthRule extends NeutronObject<NeutronQ
     @Override
     public String toString() {
         return "qosMinimumBandwidthRules{" + "qosMinimumBandwidthRuleUUID='" + uuid + '\'' + ","
-                + " qosMinimumBandwidthRuleTenantID='" + tenantID
+                + " qosMinimumBandwidthRuleTenantID='" + getTenantID()
                 + '\'' + ", qosMinimumBandwidthMinValue='" + minKbps
                 + '\'' + ", qosMinimumBandwidthDirection='" + direction + '\''
                 + '}';

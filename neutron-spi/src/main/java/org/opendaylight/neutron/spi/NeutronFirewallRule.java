@@ -237,7 +237,7 @@ public final class NeutronFirewallRule extends NeutronBaseAttributes<NeutronFire
 
     @Override
     public String toString() {
-        return "firewallPolicyRules{" + "firewallRuleUUID='" + uuid + '\'' + ", firewallRuleTenantID='" + tenantID
+        return "firewallPolicyRules{" + "firewallRuleUUID='" + uuid + '\'' + ", firewallRuleTenantID='" + getTenantID()
                 + '\'' + ", firewallRuleName='" + name + '\'' + ", firewallRuleIsShared="
                 + firewallRuleIsShared + ", firewallRulePolicyID=" + firewallRulePolicyID + ", firewallRuleProtocol='"
                 + firewallRuleProtocol + '\'' + ", firewallRuleIpVer=" + firewallRuleIpVer + ", firewallRuleSrcIpAddr='"
