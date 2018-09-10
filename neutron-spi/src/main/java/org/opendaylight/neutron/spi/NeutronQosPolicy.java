@@ -93,7 +93,7 @@ public final class NeutronQosPolicy extends NeutronBaseAttributes<NeutronQosPoli
 
     @Override
     public String toString() {
-        return "NeutronQosPolicy{" + "qosPolicyUUID='" + uuid + '\'' + ", qosPolicyTenantID='" + tenantID + '\''
+        return "NeutronQosPolicy{" + "qosPolicyUUID='" + uuid + '\'' + ", qosPolicyTenantID='" + getTenantID() + '\''
                 + ", qosPolicyName='" + name + '\'' + ", qosPolicyIsShared='" + shared + '\''
                 + ", qosbandwidthLimitRules='" + bandwidthLimitRules + '\'' + ", qosDscpMarkingRules='"
                 + dscpMarkingRules + '\'' + ", qosMinimumBandwidthRules='" + minimumBandwidthRules + '\''

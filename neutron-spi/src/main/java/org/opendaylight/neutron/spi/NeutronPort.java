@@ -274,7 +274,7 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> {
     public String toString() {
         return "NeutronPort [portUUID=" + uuid + ", networkUUID=" + networkUUID + ", name=" + name + ", adminStateUp="
                 + adminStateUp + ", status=" + status + ", macAddress=" + macAddress + ", fixedIps=" + fixedIps
-                + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + tenantID
+                + ", deviceID=" + deviceID + ", deviceOwner=" + deviceOwner + ", tenantID=" + getTenantID()
                 + ", securityGroups=" + securityGroups + ", allowedAddressPairs" + allowedAddressPairs
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
                 + bindingvifType + ", vifDetails=" + vifDetails + ", bindingProfile=" + bindingProfile

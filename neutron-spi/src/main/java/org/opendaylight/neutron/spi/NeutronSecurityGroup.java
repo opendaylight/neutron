@@ -34,6 +34,6 @@ public final class NeutronSecurityGroup extends NeutronBaseAttributes<NeutronSec
     @Override
     public String toString() {
         return "NeutronSecurityGroup{" + "securityGroupUUID='" + uuid + '\'' + ", securityGroupName='"
-                + name + '\'' + ", securityGroupTenantID='" + tenantID + '\'' + "]";
+                + name + '\'' + ", securityGroupTenantID='" + getTenantID() + '\'' + "]";
     }
 }

@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
@@ -198,11 +197,11 @@ public final class NeutronVpnIpSecSiteConnection extends NeutronAdminAttributes<
 
     @Override
     public String toString() {
-        return "NeutronVpnIpSecSiteConnection{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
-                + name + '\'' + ", peerAddress=" + peerAddress + ", peerID='" + peerID + '\'' + ", routeMode='"
-                + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\'' + ", preSharedKey='"
-                + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp=" + adminStateUp
-                + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\'' + ", ipsecPolicyID='"
-                + ipsecPolicyID + '\'' + ", vpnServiceID='" + vpnServiceID + '\'' + '}';
+        return "NeutronVpnIpSecSiteConnection{" + "id='" + uuid + '\'' + ", tenantID='" + getTenantID() + '\''
+                + ", name='" + name + '\'' + ", peerAddress=" + peerAddress + ", peerID='" + peerID + '\''
+                + ", routeMode='" + routeMode + '\'' + ", mtu=" + mtu + ", authMode='" + authMode + '\''
+                + ", preSharedKey='" + preSharedKey + '\'' + ", initiator='" + initiator + '\'' + ", adminStateUp="
+                + adminStateUp + ", status='" + status + '\'' + ", ikePolicyID='" + ikePolicyID + '\''
+                + ", ipsecPolicyID='" + ipsecPolicyID + '\'' + ", vpnServiceID='" + vpnServiceID + '\'' + '}';
     }
 }

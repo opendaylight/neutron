@@ -44,7 +44,7 @@ public final class NeutronTapService extends NeutronBaseAttributes<NeutronTapSer
     @Override
     public String toString() {
         return "NeutronTapService[" + "tapServiceUUID='" + uuid + '\'' + ", tapServiceTenantID='"
-                + tenantID + '\'' + ", tapServiceName='" + name + '\'' + ", tapServicePortID='"
+                + getTenantID() + '\'' + ", tapServiceName='" + name + '\'' + ", tapServicePortID='"
                 + tapServicePortID + '\'' + ']';
     }
 }

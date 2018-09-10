@@ -133,7 +133,7 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
         return "NeutronLoadBalancerListener{" + "loadBalancerListenerID='" + uuid + '\''
                 + ", loadBalancerListenerDefaultPoolID='" + loadBalancerListenerDefaultPoolID + '\''
                 + ", loadBalancerListenerConnectionLimit='" + loadBalancerListenerConnectionLimit + '\''
-                + ", loadBalancerListenerTenantID='" + tenantID + '\''
+                + ", loadBalancerListenerTenantID='" + getTenantID() + '\''
                 + ", loadBalancerListenerName='" + name + '\''
                 + ", loadBalancerListenerAdminStateIsUp=" + loadBalancerListenerAdminStateIsUp + '\''
                 + ", loadBalancerListenerProtocol='" + loadBalancerListenerProtocol + '\''

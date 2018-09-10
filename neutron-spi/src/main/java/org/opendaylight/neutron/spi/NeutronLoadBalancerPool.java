@@ -173,7 +173,7 @@ public final class NeutronLoadBalancerPool extends NeutronBaseAttributes<Neutron
 
     @Override
     public String toString() {
-        return "NeutronLoadBalancerPool{" + "id='" + uuid + '\'' + ", tenantID='" + tenantID + '\'' + ", name='"
+        return "NeutronLoadBalancerPool{" + "id='" + uuid + '\'' + ", tenantID='" + getTenantID() + '\'' + ", name='"
                 + name + '\'' + ", protocol=" + loadBalancerPoolProtocol + '\'' + ", lbAlgorithm='"
                 + loadBalancerPoolLbAlgorithm + '\'' + ", healthmonitorID=" + loadBalancerPoolHealthMonitorID
                 + ", adminStateUp=" + loadBalancerPoolAdminStateIsUp + '}';

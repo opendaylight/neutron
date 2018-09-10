@@ -244,7 +244,7 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
     @Override
     public String toString() {
         return "NeutronBgpvpn [bgpvpnUUID=" + uuid + ", bgpvpnName=" + name + ", adminStateUp=" + adminStateUp
-                + ", status=" + status + ", tenantID=" + tenantID + ", type=" + type + ", technique=" + technique
+                + ", status=" + status + ", tenantID=" + getTenantID() + ", type=" + type + ", technique=" + technique
                 + ", routeTargets=" + routeTargets + ", importTargets=" + importTargets + ", exportTargets="
                 + exportTargets + ", routeDistinguishers=" + routeDistinguishers + ", vnid = " + vnid
                 + ", autoAggregate = " + autoAggregate + ", networks = " + networks + ", routers = " + routers + "]";
