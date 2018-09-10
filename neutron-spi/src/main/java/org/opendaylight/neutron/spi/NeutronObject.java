@@ -31,7 +31,6 @@ public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronI
 
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "tenant_id")
     String tenantID;
 
     @XmlElement(name = "project_id")
@@ -44,6 +43,7 @@ public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronI
     }
 
     @Override
+    @XmlElement(name = "tenant_id")
     public String getTenantID() {
         if (tenantID != null && tenantID.isEmpty()) {
             // Bug 4775 - Treat empty string tenantId as null, so no attempt is made
@@ -54,6 +54,7 @@ public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronI
     }
 
     @Override
+    @XmlElement(name = "tenant_id")
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
     }
