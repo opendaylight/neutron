@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,17 +47,14 @@ public abstract class NeutronObject<T extends NeutronObject> extends NeutronID
 
     @Override
     @XmlElement(name = "tenant_id")
+    @XmlJavaTypeAdapter(EmptyStringAsNullAdapter.class)
     public String getTenantID() {
-        if (tenantID != null && tenantID.isEmpty()) {
-            // Bug 4775 - Treat empty string tenantId as null, so no attempt is made
-            //            to turn it into a uuid.
-            return null;
-        }
         return tenantID;
     }
 
     @Override
     @XmlElement(name = "tenant_id")
+    @XmlJavaTypeAdapter(EmptyStringAsNullAdapter.class)
     public void setTenantID(String tenantID) {
         this.tenantID = tenantID;
     }
