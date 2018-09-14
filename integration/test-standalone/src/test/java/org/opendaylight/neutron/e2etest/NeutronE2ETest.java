@@ -34,7 +34,7 @@ public class NeutronE2ETest {
 
     @Test
     public void test() throws IOException, InterruptedException {
-        NeutronAllTests.testNeutron(webServer.getBaseURL() + "/controller/nb/v2/neutron");
+        String baseURL = webServer.getBaseURL(); // Karaf: "http://localhost:8181"
+        NeutronAllTests.testNeutron(baseURL + "/controller/nb/v2/neutron");
     }
-
 }

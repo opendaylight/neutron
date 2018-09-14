@@ -10,6 +10,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewallPolicy;
@@ -17,10 +18,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.pol
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicy;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.policies.attributes.firewall.policies.FirewallPolicyKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronFirewallPolicyCRUD.class)
+@Service(classes = INeutronFirewallPolicyCRUD.class)
 public final class NeutronFirewallPolicyInterface
         extends AbstractNeutronInterface<FirewallPolicy, FirewallPolicies, FirewallPolicyKey, NeutronFirewallPolicy>
         implements INeutronFirewallPolicyCRUD {

@@ -10,6 +10,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronL2gatewayConnectionCRUD;
 import org.opendaylight.neutron.spi.NeutronL2gatewayConnection;
@@ -17,10 +18,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.l2gatewayconnections.L2gatewayConnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.l2gatewayconnections.L2gatewayConnectionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateway.connections.attributes.l2gatewayconnections.L2gatewayConnectionKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronL2gatewayConnectionCRUD.class)
+@Service(classes = INeutronL2gatewayConnectionCRUD.class)
 public final class NeutronL2gatewayConnectionInterface
         extends AbstractNeutronInterface<L2gatewayConnection, L2gatewayConnections, L2gatewayConnectionKey,
                                          NeutronL2gatewayConnection>

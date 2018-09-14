@@ -23,12 +23,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIpSecSiteConnection;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for VPN IPSEC SiteConnection.<br>
@@ -42,7 +42,7 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
     private static final String RESOURCE_NAME = "VPNIPSECSiteConnections";
 
     @Inject
-    public NeutronVpnIpSecSiteConnectionsNorthbound(@OsgiService INeutronVpnIpSecSiteConnectionsCRUD neutronCRUD) {
+    public NeutronVpnIpSecSiteConnectionsNorthbound(@Reference INeutronVpnIpSecSiteConnectionsCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

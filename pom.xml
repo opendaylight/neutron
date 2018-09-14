@@ -107,6 +107,7 @@
     <module>transcriber</module>
     <module>neutron-logger</module>
     <module>artifacts</module>
+    <module>features/parent</module>
     <module>features/production</module>
     <module>features/test</module>
     <module>karaf</module>
