@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronTapServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronTapService;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 @Singleton
 @Path("/tap/services")
@@ -37,7 +37,7 @@ public final class NeutronTapServiceNorthbound
     private static final String RESOURCE_NAME = "Tap Service";
 
     @Inject
-    public NeutronTapServiceNorthbound(@OsgiService INeutronTapServiceCRUD neutronCRUD) {
+    public NeutronTapServiceNorthbound(@Reference INeutronTapServiceCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

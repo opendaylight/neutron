@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
@@ -23,10 +24,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.b
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.Bgpvpn;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronBgpvpnCRUD.class)
+@Service(classes = INeutronBgpvpnCRUD.class)
 public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvpn, Bgpvpns, BgpvpnKey, NeutronBgpvpn>
         implements INeutronBgpvpnCRUD {
 

@@ -26,12 +26,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Bgpvpn.
@@ -47,7 +47,7 @@ public final class NeutronBgpvpnsNorthbound
     UriInfo uriInfo;
 
     @Inject
-    public NeutronBgpvpnsNorthbound(@OsgiService INeutronBgpvpnCRUD neutronCRUD) {
+    public NeutronBgpvpnsNorthbound(@Reference INeutronBgpvpnCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 
