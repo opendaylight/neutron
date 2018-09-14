@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancer;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for LoadBalancers.<br>
@@ -40,7 +40,7 @@ public final class NeutronLoadBalancerNorthbound
     private static final String RESOURCE_NAME = "LoadBalancer";
 
     @Inject
-    public NeutronLoadBalancerNorthbound(@OsgiService INeutronLoadBalancerCRUD neutronCRUD) {
+    public NeutronLoadBalancerNorthbound(@Reference INeutronLoadBalancerCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

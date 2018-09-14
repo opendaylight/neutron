@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronTrunkCRUD;
 import org.opendaylight.neutron.spi.NeutronTrunk;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 @Singleton
 @Path("/trunks")
@@ -37,7 +37,7 @@ public final class NeutronTrunksNorthbound
     private static final String RESOURCE_NAME = "Trunk";
 
     @Inject
-    public NeutronTrunksNorthbound(@OsgiService INeutronTrunkCRUD neutronCRUD) {
+    public NeutronTrunksNorthbound(@Reference INeutronTrunkCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 
