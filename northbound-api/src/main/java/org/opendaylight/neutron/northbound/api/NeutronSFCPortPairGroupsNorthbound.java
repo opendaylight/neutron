@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for OpenStack SFC Port Pair.
@@ -40,7 +40,7 @@ public final class NeutronSFCPortPairGroupsNorthbound extends AbstractNeutronNor
     private static final String RESOURCE_NAME = "Sfc Port Pair Group";
 
     @Inject
-    public NeutronSFCPortPairGroupsNorthbound(@OsgiService INeutronSFCPortPairGroupCRUD neutronCRUD) {
+    public NeutronSFCPortPairGroupsNorthbound(@Reference INeutronSFCPortPairGroupCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

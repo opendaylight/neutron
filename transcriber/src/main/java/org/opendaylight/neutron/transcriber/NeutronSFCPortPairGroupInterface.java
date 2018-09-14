@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronSFCPortPairGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
@@ -19,7 +20,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.a
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pair.groups.PortPairGroup;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pair.groups.PortPairGroupBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pair.groups.PortPairGroupKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
  * Created by Anil Vishnoi (avishnoi@Brocade.com).
  */
 @Singleton
-@OsgiServiceProvider(classes = INeutronSFCPortPairGroupCRUD.class)
+@Service(classes = INeutronSFCPortPairGroupCRUD.class)
 public final class NeutronSFCPortPairGroupInterface
         extends AbstractNeutronInterface<PortPairGroup, PortPairGroups, PortPairGroupKey, NeutronSFCPortPairGroup>
         implements INeutronSFCPortPairGroupCRUD {
