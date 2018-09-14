@@ -25,6 +25,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
@@ -34,7 +35,6 @@ import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for LoadBalancerPool Policies.
@@ -53,8 +53,8 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
 
     @Inject
     public NeutronLoadBalancerPoolNorthbound(
-            @OsgiService INeutronLoadBalancerPoolCRUD neutronCRUD,
-            @OsgiService DataBroker dataBroker) {
+            @Reference INeutronLoadBalancerPoolCRUD neutronCRUD,
+            @Reference DataBroker dataBroker) {
         super(neutronCRUD);
         this.dataBroker = dataBroker;
     }
