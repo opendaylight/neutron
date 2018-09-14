@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Load Balancer HealthMonitor.
@@ -42,7 +42,7 @@ public final class NeutronLoadBalancerHealthMonitorNorthbound
     private static final String RESOURCE_NAME = "LoadBalancerHealthMonitor";
 
     @Inject
-    public NeutronLoadBalancerHealthMonitorNorthbound(@OsgiService INeutronLoadBalancerHealthMonitorCRUD neutronCRUD) {
+    public NeutronLoadBalancerHealthMonitorNorthbound(@Reference INeutronLoadBalancerHealthMonitorCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 
