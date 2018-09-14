@@ -26,11 +26,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronSubnet;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Subnets.<br>
@@ -43,7 +43,7 @@ public final class NeutronSubnetsNorthbound
     private static final String RESOURCE_NAME = "Subnet";
 
     @Inject
-    public NeutronSubnetsNorthbound(@OsgiService INeutronSubnetCRUD neutronCRUD) {
+    public NeutronSubnetsNorthbound(@Reference INeutronSubnetCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

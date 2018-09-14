@@ -26,13 +26,13 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Network.
@@ -45,7 +45,7 @@ public final class NeutronNetworksNorthbound
     private static final String RESOURCE_NAME = "Network";
 
     @Inject
-    public NeutronNetworksNorthbound(@OsgiService INeutronNetworkCRUD neutronNetworkCRUD) {
+    public NeutronNetworksNorthbound(@Reference INeutronNetworkCRUD neutronNetworkCRUD) {
         super(neutronNetworkCRUD);
     }
 
