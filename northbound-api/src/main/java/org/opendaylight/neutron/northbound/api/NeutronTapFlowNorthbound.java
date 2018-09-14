@@ -23,13 +23,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
 import org.opendaylight.neutron.spi.NeutronTapFlow;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 @Singleton
 @Path("/tap/flows")
@@ -39,7 +39,7 @@ public final class NeutronTapFlowNorthbound
     private static final String RESOURCE_NAME = "Tap Flow";
 
     @Inject
-    public NeutronTapFlowNorthbound(@OsgiService INeutronTapFlowCRUD neutronCRUD) {
+    public NeutronTapFlowNorthbound(@Reference INeutronTapFlowCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

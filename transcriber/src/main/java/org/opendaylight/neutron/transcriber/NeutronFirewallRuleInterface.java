@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableBiMap;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
@@ -30,10 +31,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rul
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddressBuilder;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronFirewallRuleCRUD.class)
+@Service(classes = INeutronFirewallRuleCRUD.class)
 public final class NeutronFirewallRuleInterface
         extends AbstractNeutronInterface<FirewallRule, FirewallRules, FirewallRuleKey, NeutronFirewallRule>
         implements INeutronFirewallRuleCRUD {
