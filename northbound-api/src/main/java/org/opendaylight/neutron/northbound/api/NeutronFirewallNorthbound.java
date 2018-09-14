@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.NeutronFirewall;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Firewall.
@@ -40,7 +40,7 @@ public final class NeutronFirewallNorthbound
     private static final String RESOURCE_NAME = "Firewall";
 
     @Inject
-    public NeutronFirewallNorthbound(@OsgiService INeutronFirewallCRUD neutronCRUD) {
+    public NeutronFirewallNorthbound(@Reference INeutronFirewallCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

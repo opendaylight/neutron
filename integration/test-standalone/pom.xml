@@ -5,7 +5,8 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>bundle-parent</artifactId>
-    <version>3.1.3</version>
+    <!-- TODO drop SNAPSHOT and move everything else to 4.0.2 after release, as we need https://git.opendaylight.org/gerrit/#/c/76434/ -->
+    <version>4.0.2-SNAPSHOT</version>
     <relativePath/>
   </parent>
 
@@ -71,12 +72,6 @@
       <artifactId>inject.guice.testutils</artifactId>
       <version>1.5.0-SNAPSHOT</version>
       <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>aopalliance</groupId>
-          <artifactId>aopalliance</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
@@ -90,11 +85,12 @@
       <version>0.9.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
+
+    <!-- TODO DO NOT FIX THIS HERE BUT IN ODLPARENT (if it works) -->
     <dependency>
-      <groupId>org.glassfish.jersey.bundles.repackaged</groupId>
-      <artifactId>jersey-guava</artifactId>
-      <version>2.6</version>
-      <scope>test</scope>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.1</version>
     </dependency>
   </dependencies>
 </project>
