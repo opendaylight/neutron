@@ -10,33 +10,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.opendaylight.odlparent</groupId>
-        <artifactId>single-feature-parent</artifactId>
-        <version>3.1.3</version>
-        <relativePath/>
+        <groupId>org.opendaylight.neutron</groupId>
+        <artifactId>neutron-single-feature-parent</artifactId>
+        <version>0.12.0-SNAPSHOT</version>
+        <relativePath>../../parent</relativePath>
     </parent>
 
-    <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-logger</artifactId>
-    <version>0.12.0-SNAPSHOT</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Logger</name>
-
-    <properties>
-        <explicitFeatureDependencies>true</explicitFeatureDependencies>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.opendaylight.controller</groupId>
-                <artifactId>mdsal-artifacts</artifactId>
-                <version>1.9.0-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -58,5 +40,4 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
 </project>

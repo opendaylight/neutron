@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnDeadPeerDetection;
@@ -20,10 +21,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.Ipsecsiteconnection;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecconnections.attributes.ipsec.site.connections.IpsecsiteconnectionKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronVpnIpSecSiteConnectionsCRUD.class)
+@Service(classes = INeutronVpnIpSecSiteConnectionsCRUD.class)
 public final class NeutronVpnIpSecSiteConnectionsInterface
         extends AbstractNeutronInterface<Ipsecsiteconnection, IpsecSiteConnections, IpsecsiteconnectionKey,
         NeutronVpnIpSecSiteConnection>

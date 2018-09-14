@@ -23,12 +23,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIpSecPolicy;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for VPN IPSEC Policy.
@@ -41,7 +41,7 @@ public final class NeutronVpnIpSecPoliciesNorthbound extends
     private static final String RESOURCE_NAME = "VPNIPSECPolicy";
 
     @Inject
-    public NeutronVpnIpSecPoliciesNorthbound(@OsgiService INeutronVpnIpSecPolicyCRUD neutronCRUD) {
+    public NeutronVpnIpSecPoliciesNorthbound(@Reference INeutronVpnIpSecPolicyCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 
