@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.NeutronFloatingIp;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for managing Neutron Floating IPs.
@@ -40,7 +40,7 @@ public final class NeutronFloatingIpsNorthbound
     private static final String RESOURCE_NAME = "Floating IP";
 
     @Inject
-    public NeutronFloatingIpsNorthbound(@OsgiService INeutronFloatingIpCRUD neutronCRUD) {
+    public NeutronFloatingIpsNorthbound(@Reference INeutronFloatingIpCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

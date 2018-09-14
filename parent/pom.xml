@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.opendaylight.mdsal</groupId>
     <artifactId>binding-parent</artifactId>
-    <version>0.14.0-SNAPSHOT</version>
+    <version>3.0.0</version>
     <relativePath/>
   </parent>
 
@@ -50,6 +50,43 @@
         <version>1.9.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <!-- NEUTRON-197: We need to enforce usage of org.glassfish:javax.json v1.0.4,
+           that exact old version, because only that version includes both packages javax.json.*
+           as well as org.glassfish.json.* (AND THEREFORE THE Class.forName WORKS EVEN UNDER OSGi).
+
+           Newer releases of org.glassfish:javax.json (such as 1.1.2) have (only) the
+           org.glassfish.json packages, with a dep to the separate new javax.json:javax.json-api
+           which contains (only) the javax.json packages; this nicer API / Impl split packaging breaks under OSGi.
+
+           We must also prevent Moxy from dragging along javax.json:javax.json-api
+           to prevent confusing classpath duplicates on javax.json.  Moxy changed its policy from directly depending
+           on org.glassfish:javax.json 1.0.4 in its 2.7.1 to depending on javax.json:javax.json-api since 2.7.3.
+
+           The same block is copy/pasted in ../features/parent (that's the
+           neutron-single-feature-parent, not to be confused with this project-neutron-parent);
+           keep any changes made there, or here, in sync with each other. -->
+      <dependency>
+         <groupId>org.eclipse.persistence</groupId>
+         <artifactId>org.eclipse.persistence.moxy</artifactId>
+         <!-- This is the same version (of EclipseLink) currently used in odlparent (4.0.2);
+              we just have to repeat it here because, apparently, Maven is too dumb to inherit
+              the version from a dependencyManagement in a parent POM to the dependencyManagement here.
+              (The alternative to repeat the exclusion below in each Neutron project is much worse.) -->
+         <version>2.7.3</version>
+         <exclusions>
+           <exclusion>
+             <groupId>javax.json</groupId>
+             <artifactId>javax.json-api</artifactId>
+           </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <!-- do not touch this version, see above -->
+        <version>1.0.4</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

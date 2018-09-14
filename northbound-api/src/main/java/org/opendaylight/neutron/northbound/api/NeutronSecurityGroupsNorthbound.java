@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSecurityGroupCRUD;
 import org.opendaylight.neutron.spi.NeutronSecurityGroup;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Security Group.
@@ -40,7 +40,7 @@ public final class NeutronSecurityGroupsNorthbound extends
     private static final String RESOURCE_NAME = "Security Group";
 
     @Inject
-    public NeutronSecurityGroupsNorthbound(@OsgiService INeutronSecurityGroupCRUD neutronCRUD) {
+    public NeutronSecurityGroupsNorthbound(@Reference INeutronSecurityGroupCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 
