@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronTrunkCRUD;
 import org.opendaylight.neutron.spi.NeutronTrunk;
@@ -27,10 +28,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.tr
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.Trunk;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronTrunkCRUD.class)
+@Service(classes = INeutronTrunkCRUD.class)
 public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk, Trunks, TrunkKey, NeutronTrunk>
         implements INeutronTrunkCRUD {
 

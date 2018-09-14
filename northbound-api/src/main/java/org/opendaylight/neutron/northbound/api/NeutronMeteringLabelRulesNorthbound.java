@@ -22,12 +22,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronMeteringLabelRuleCRUD;
 import org.opendaylight.neutron.spi.NeutronMeteringLabelRule;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for Metering Lable Rules.<br>
@@ -40,7 +40,7 @@ public final class NeutronMeteringLabelRulesNorthbound extends AbstractNeutronNo
     private static final String RESOURCE_NAME = "Metering Label Rule";
 
     @Inject
-    public NeutronMeteringLabelRulesNorthbound(@OsgiService INeutronMeteringLabelRuleCRUD neutronCRUD) {
+    public NeutronMeteringLabelRulesNorthbound(@Reference INeutronMeteringLabelRuleCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

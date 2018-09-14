@@ -10,6 +10,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronFloatingIpCRUD;
 import org.opendaylight.neutron.spi.NeutronFloatingIp;
@@ -18,10 +19,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floati
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.Floatingip;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.floatingips.attributes.floatingips.FloatingipKey;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronFloatingIpCRUD.class)
+@Service(classes = INeutronFloatingIpCRUD.class)
 public final class NeutronFloatingIpInterface
         extends AbstractNeutronInterface<Floatingip, Floatingips, FloatingipKey, NeutronFloatingIp>
         implements INeutronFloatingIpCRUD {
