@@ -23,12 +23,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVpnServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnService;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for VPN Service.
@@ -41,7 +41,7 @@ public final class NeutronVpnServicesNorthbound
     private static final String RESOURCE_NAME = "VpnService";
 
     @Inject
-    public NeutronVpnServicesNorthbound(@OsgiService INeutronVpnServiceCRUD neutronCRUD) {
+    public NeutronVpnServicesNorthbound(@Reference INeutronVpnServiceCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

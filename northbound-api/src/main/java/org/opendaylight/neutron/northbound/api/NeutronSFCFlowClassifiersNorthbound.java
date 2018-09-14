@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronSFCFlowClassifierCRUD;
 import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for OpenStack SFC Flow Classifier.
@@ -40,7 +40,7 @@ public final class NeutronSFCFlowClassifiersNorthbound extends AbstractNeutronNo
     private static final String RESOURCE_NAME = "Sfc Flow Classifier";
 
     @Inject
-    public NeutronSFCFlowClassifiersNorthbound(@OsgiService INeutronSFCFlowClassifierCRUD neutronCRUD) {
+    public NeutronSFCFlowClassifiersNorthbound(@Reference INeutronSFCFlowClassifierCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

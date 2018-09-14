@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
-import org.ops4j.pax.cdi.api.OsgiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +44,7 @@ public final class NeutronL2gatewayNorthbound
     private static final String RESOURCE_NAME = "L2gateway";
 
     @Inject
-    public NeutronL2gatewayNorthbound(@OsgiService INeutronL2gatewayCRUD neutronCRUD) {
+    public NeutronL2gatewayNorthbound(@Reference INeutronL2gatewayCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

@@ -23,12 +23,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.codehaus.enunciate.jaxrs.TypeHint;
 import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 /**
  * Neutron Northbound REST APIs for VPN IKE Policy.
@@ -41,7 +41,7 @@ public final class NeutronVpnIkePoliciesNorthbound
     private static final String RESOURCE_NAME = "VPNIKEPolicy";
 
     @Inject
-    public NeutronVpnIkePoliciesNorthbound(@OsgiService INeutronVpnIkePolicyCRUD neutronCRUD) {
+    public NeutronVpnIkePoliciesNorthbound(@Reference INeutronVpnIkePolicyCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 

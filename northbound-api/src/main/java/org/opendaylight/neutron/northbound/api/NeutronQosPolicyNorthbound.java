@@ -23,11 +23,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.aries.blueprint.annotation.service.Reference;
 import org.codehaus.enunciate.jaxrs.ResponseCode;
 import org.codehaus.enunciate.jaxrs.StatusCodes;
 import org.opendaylight.neutron.spi.INeutronQosPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronQosPolicy;
-import org.ops4j.pax.cdi.api.OsgiService;
 
 @Singleton
 @Path("/qos/policies")
@@ -37,7 +37,7 @@ public final class NeutronQosPolicyNorthbound
     private static final String RESOURCE_NAME = "Qos Policy";
 
     @Inject
-    public NeutronQosPolicyNorthbound(@OsgiService INeutronQosPolicyCRUD neutronCRUD) {
+    public NeutronQosPolicyNorthbound(@Reference INeutronQosPolicyCRUD neutronCRUD) {
         super(neutronCRUD);
     }
 
