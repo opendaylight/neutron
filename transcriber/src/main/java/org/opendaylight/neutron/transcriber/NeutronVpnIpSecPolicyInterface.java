@@ -10,6 +10,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIpSecPolicy;
@@ -19,10 +20,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ip
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicies.attributes.ipsec.policies.IpsecpolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ipsecpolicy.attributes.LifetimeBuilder;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronVpnIpSecPolicyCRUD.class)
+@Service(classes = INeutronVpnIpSecPolicyCRUD.class)
 public final class NeutronVpnIpSecPolicyInterface
         extends AbstractNeutronInterface<Ipsecpolicy, IpsecPolicies, IpsecpolicyKey, NeutronVpnIpSecPolicy>
         implements INeutronVpnIpSecPolicyCRUD {

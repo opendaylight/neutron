@@ -10,6 +10,7 @@ package org.opendaylight.neutron.transcriber;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVpnIkePolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
@@ -19,10 +20,9 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ik
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicies.attributes.ike.policies.IkepolicyKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.ikepolicy.attributes.LifetimeBuilder;
-import org.ops4j.pax.cdi.api.OsgiServiceProvider;
 
 @Singleton
-@OsgiServiceProvider(classes = INeutronVpnIkePolicyCRUD.class)
+@Service(classes = INeutronVpnIkePolicyCRUD.class)
 public final class NeutronVpnIkePolicyInterface
         extends AbstractNeutronInterface<Ikepolicy, IkePolicies, IkepolicyKey, NeutronVpnIkePolicy>
         implements INeutronVpnIkePolicyCRUD {
