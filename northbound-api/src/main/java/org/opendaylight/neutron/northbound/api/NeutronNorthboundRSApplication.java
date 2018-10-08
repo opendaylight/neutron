@@ -18,7 +18,8 @@ import javax.inject.Singleton;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
-import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+import org.glassfish.jersey.moxy.json.MoxyJsonConfig;
+import org.glassfish.jersey.moxy.json.MoxyJsonFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -141,7 +142,13 @@ public final class NeutronNorthboundRSApplication extends Application {
     @Override
     public Set<Object> getSingletons() {
         return ImmutableSet.builderWithExpectedSize(32)
-                .add(getMOXyJsonProvider())
+                // Moxy JSON Feature seems to be auto-detected by Jersey from classpath,
+                // but let's register here anyway just in case to make this explicit; this
+                // will also prevent someone from inadvertently removing the jersey-media-moxy dependency.
+                .add(new MoxyJsonFeature())
+                .add(getMOXyJsonConfig())
+                // TODO unclear if this is still needed now
+                // .add(getMOXyJsonProvider())
                 // Northbound URIs JAX RS Resources:
                 .add(neutronNetworksNorthbound)
                 .add(neutronSubnetsNorthbound)
@@ -177,7 +184,7 @@ public final class NeutronNorthboundRSApplication extends Application {
                 .add(new LoggingExceptionMapper())
                 .build();
     }
-
+/*
     private MOXyJsonProvider getMOXyJsonProvider() {
         MOXyJsonProvider moxyJsonProvider = new MOXyJsonProvider();
 
@@ -196,6 +203,26 @@ public final class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setNamespaceSeparator(':');
 
         return moxyJsonProvider;
+    }
+*/
+    private MoxyJsonConfig getMOXyJsonConfig() {
+        MoxyJsonConfig moxyJsonConfig = new MoxyJsonConfig();
+
+        moxyJsonConfig.setAttributePrefix("@");
+        moxyJsonConfig.setFormattedOutput(true);
+        moxyJsonConfig.setIncludeRoot(false);
+        moxyJsonConfig.setMarshalEmptyCollections(true);
+        moxyJsonConfig.setValueWrapper("$");
+
+        Map<String, String> namespacePrefixMapper = new HashMap<>(HASHMAP_SIZE);
+        // FIXME: fill in next two with XSD
+        namespacePrefixMapper.put("router", "router");
+        namespacePrefixMapper.put("provider", "provider");
+        namespacePrefixMapper.put("binding", "binding");
+        moxyJsonConfig.setNamespacePrefixMapper(namespacePrefixMapper);
+        moxyJsonConfig.setNamespaceSeparator(':');
+
+        return moxyJsonConfig;
     }
 
     // do not inline this as a lambda; for some (strange) reason, the HK2 DI thing used by Jersey (v2.25.1) does
