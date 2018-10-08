@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "a094ac46_4ccbd2a7",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronNorthboundRSApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-08T15:59:02Z",
+      "side": 1,
+      "message": "as per IRC, for some reason this does not work as a lambda, but does like this:\n\npublic static class LoggingExceptionMapper implements ExceptionMapper\u003cException\u003e {\n        @Override\n        public Response toResponse(Exception exception) {\n            LOG.error(\"Error processing response\", exception);\n            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(exception).type(\n                MediaType.TEXT_PLAIN_TYPE).build();\n        }\n    }",
+      "revId": "7cc930f56334c31fb420295ac7248186e432ca81",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54906127_3b357f55",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronNorthboundRSApplication.java",
         "patchSetId": 1
