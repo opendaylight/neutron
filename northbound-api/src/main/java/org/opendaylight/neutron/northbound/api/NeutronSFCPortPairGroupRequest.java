@@ -18,7 +18,7 @@ import org.opendaylight.neutron.spi.NeutronSFCPortPairGroup;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronSFCPortPairGroupRequest implements INeutronRequest<NeutronSFCPortPairGroup> {
+public final class NeutronSFCPortPairGroupRequest extends NeutronRequest<NeutronSFCPortPairGroup> {
     // See OpenStack Networking SFC (networking-sfc) Port Pair Group API v1.0 Reference
     // for description of annotated attributes
 

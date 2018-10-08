@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronL2gatewayConnection;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronL2gatewayConnectionRequest implements INeutronRequest<NeutronL2gatewayConnection> {
+public final class NeutronL2gatewayConnectionRequest extends NeutronRequest<NeutronL2gatewayConnection> {
     @XmlElement(name = "l2gateway_connection")
     NeutronL2gatewayConnection singleton;
 

@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronVpnIkePolicy;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronVpnIkePolicyRequest implements INeutronRequest<NeutronVpnIkePolicy> {
+public final class NeutronVpnIkePolicyRequest extends NeutronRequest<NeutronVpnIkePolicy> {
     @XmlElement(name = "ikepolicy")
     NeutronVpnIkePolicy singleton;
 

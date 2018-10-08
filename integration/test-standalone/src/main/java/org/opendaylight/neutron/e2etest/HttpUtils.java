@@ -150,7 +150,7 @@ public final class HttpUtils {
         Assert.assertTrue("E2E Tests Failed - Json Error", entrySet.size() > 0);
         JsonElement jsonElementValue = entrySet.iterator().next().getValue();
         String key = entrySet.iterator().next().getKey();
-        Assert.assertEquals(context, collectionName, key);
+        Assert.assertEquals(context + "; jsonObjectOutput=" + jsonObjectOutput.toString(), collectionName, key);
         Assert.assertTrue("E2E Tests Failed - Collection not Array: " + jsonElementValue + "; URL: " + urlStr
                 + "; full response: " + response, jsonElementValue.isJsonArray());
         JsonArray jsonArray = jsonElementValue.getAsJsonArray();

@@ -18,7 +18,7 @@ import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronSFCPortChainRequest implements INeutronRequest<NeutronSFCPortChain> {
+public final class NeutronSFCPortChainRequest extends NeutronRequest<NeutronSFCPortChain> {
     // See OpenStack Networking SFC (networking-sfc) Port Chain API v1.0 Reference
     // for description of annotated attributes
 

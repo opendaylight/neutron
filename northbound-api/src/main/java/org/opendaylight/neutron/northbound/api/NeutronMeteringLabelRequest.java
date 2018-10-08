@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronMeteringLabel;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronMeteringLabelRequest implements INeutronRequest<NeutronMeteringLabel> {
+public final class NeutronMeteringLabelRequest extends NeutronRequest<NeutronMeteringLabel> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

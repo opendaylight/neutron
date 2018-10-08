@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronLoadBalancerPoolMemberRequest implements INeutronRequest<NeutronLoadBalancerPoolMember> {
+public final class NeutronLoadBalancerPoolMemberRequest extends NeutronRequest<NeutronLoadBalancerPoolMember> {
     /**
      * See OpenStack Network API v2.0 Reference for description of the following link.
      * http://docs.openstack.org/api/openstack-network/2.0/content/

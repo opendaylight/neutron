@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronBgpvpn;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronBgpvpnRequest implements INeutronRequest<NeutronBgpvpn> {
+public final class NeutronBgpvpnRequest extends NeutronRequest<NeutronBgpvpn> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronRouter;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronRouterRequest implements INeutronRequest<NeutronRouter> {
+public final class NeutronRouterRequest extends NeutronRequest<NeutronRouter> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

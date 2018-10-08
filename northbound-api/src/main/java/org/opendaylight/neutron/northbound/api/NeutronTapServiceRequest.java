@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronTapService;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronTapServiceRequest implements INeutronRequest<NeutronTapService> {
+public final class NeutronTapServiceRequest extends NeutronRequest<NeutronTapService> {
     @XmlElement(name = "tap_service")
     NeutronTapService singleton;
 
