@@ -16,7 +16,12 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is an instance of javax.ws.rs.core.Application and is used to return the classes
@@ -26,6 +31,7 @@ import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 @Singleton
 public final class NeutronNorthboundRSApplication extends Application {
     private static final int HASHMAP_SIZE = 3;
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronNorthboundRSApplication.class);
 
     private final NeutronNetworksNorthbound neutronNetworksNorthbound;
     private final NeutronSubnetsNorthbound neutronSubnetsNorthbound;
@@ -167,6 +173,12 @@ public final class NeutronNorthboundRSApplication extends Application {
                 .add(neutronTrunksNorthbound)
                 .add(neutronTapServiceNorthbound)
                 .add(neutronTapFlowNorthbound)
+            .add((ExceptionMapper<Exception>) exception -> {
+                LOG.error("Error processing response", exception);
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(exception).type(
+                    MediaType.TEXT_PLAIN_TYPE).build();
+            })
+            .add(new MOXyJsonProvider())
                 .build();
     }
 
