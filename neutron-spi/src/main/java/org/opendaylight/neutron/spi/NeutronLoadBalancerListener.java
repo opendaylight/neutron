@@ -57,7 +57,7 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
     String loadBalancerListenerProtocolPort;
 
     @XmlElement(name = "loadbalancers")
-    List<NeutronID> loadBalancerListenerLoadBalancerIDs;
+    List<String> loadBalancerListenerLoadBalancerIDs;
 
     public Boolean getLoadBalancerListenerAdminStateIsUp() {
         return loadBalancerListenerAdminStateIsUp;
@@ -99,11 +99,11 @@ public final class NeutronLoadBalancerListener extends NeutronBaseAttributes<Neu
         this.loadBalancerListenerConnectionLimit = limit;
     }
 
-    public List<NeutronID> getNeutronLoadBalancerListenerLoadBalancerIDs() {
+    public List<String> getNeutronLoadBalancerListenerLoadBalancerIDs() {
         return loadBalancerListenerLoadBalancerIDs;
     }
 
-    public void setNeutronLoadBalancerListenerLoadBalancerIDs(List<NeutronID> ids) {
+    public void setNeutronLoadBalancerListenerLoadBalancerIDs(List<String> ids) {
         this.loadBalancerListenerLoadBalancerIDs = ids;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 IBM Corporation and others.  All rights reserved.
+ * Copyright (c) 2018 Red Hat and others.  All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
@@ -13,12 +13,21 @@ import java.util.regex.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import org.eclipse.persistence.oxm.annotations.XmlClassExtractor;
+import javax.xml.bind.annotation.XmlRootElement;
 
-// @XmlRootElement
+/**
+ * TODO Doc.
+ *
+ * @author Michael Vorburger.ch
+ */
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlClassExtractor(NoClassExtractor.class)
-public abstract class NeutronID implements Serializable {
+public final class NeutronIDRef implements Serializable {
+
+    // TODO this should not be an ugly copy/paste of NeutronID, but share as much as possible
+
+    // TODO see if this can be written as a (hand-written) immutable instead of this style?
+
     private static final long serialVersionUID = 1L;
     private static final String UUID_PATTERN_REGEX =
             "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
@@ -36,10 +45,10 @@ public abstract class NeutronID implements Serializable {
                 "Supplied value \"%s\" does not match uuid pattern \"%s\"", uuid, UUID_PATTERN_REGEX);
     }
 
-    public NeutronID() {
+    public NeutronIDRef() {
     }
 
-    public NeutronID(String uuid) {
+    public NeutronIDRef(String uuid) {
         checkUuidPattern(uuid);
         this.uuid = uuid;
     }

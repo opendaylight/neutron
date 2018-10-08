@@ -15,14 +15,13 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@XmlRootElement
+// @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronID implements INeutronObject<T> {
     // T extends NeutronObject as 0th type argument. Used by extractFields()

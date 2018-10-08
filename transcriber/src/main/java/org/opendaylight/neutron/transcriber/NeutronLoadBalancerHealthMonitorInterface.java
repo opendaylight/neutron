@@ -7,6 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerHealthMonitorCRUD;
-import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerHealthMonitor;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProbeBase;
@@ -69,8 +69,10 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             final List<Uuid> listUuid = new ArrayList<>();
-            for (final NeutronID neutronId : healthMonitor.getLoadBalancerHealthMonitorPools()) {
-                listUuid.add(toUuid(neutronId.getID()));
+            for (final String neutronId : healthMonitor.getLoadBalancerHealthMonitorPools()) {
+                if (!Strings.isNullOrEmpty(neutronId)) {
+                    listUuid.add(toUuid(neutronId));
+                }
             }
             healthmonitorBuilder.setPools(listUuid);
         }
@@ -108,9 +110,9 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             answer.setLoadBalancerHealthMonitorMaxRetries(healthMonitor.getMaxRetries());
         }
         if (healthMonitor.getPools() != null) {
-            final List<NeutronID> list = new ArrayList<>();
+            final List<String> list = new ArrayList<>();
             for (final Uuid id : healthMonitor.getPools()) {
-                list.add(new NeutronID(id.getValue()));
+                list.add(id.getValue());
             }
             answer.setLoadBalancerHealthMonitorPools(list);
         }

@@ -8,7 +8,7 @@
 
 package org.opendaylight.neutron.spi;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.xml.bind.JAXBException;
 import org.junit.Assert;
@@ -56,13 +56,11 @@ public class NeutronLoadBalancerHealthMonitorJAXBTest {
         Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 10: Testing tenant_id failed",
                 "00045a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getTenantID());
 
-        NeutronID neutronId = new NeutronID();
-        neutronId.setID("2f245a7b-0000-4f26-9cf9-9e82d248fda7");
-        List<NeutronID> loadBalancerHealthMonitorPool = new ArrayList<>();
-        loadBalancerHealthMonitorPool.add(neutronId);
+        String neutronId = "2f245a7b-0000-4f26-9cf9-9e82d248fda7";
+        List<String> loadBalancerHealthMonitorPool = Collections.singletonList(neutronId);
         testObject.setLoadBalancerHealthMonitorPools(loadBalancerHealthMonitorPool);
         Assert.assertEquals("NeutronLoadBalancerHealthMonitor JAXB Test 11: Testing Pools failed",
                 "2f245a7b-0000-4f26-9cf9-9e82d248fda7",
-                testObject.getLoadBalancerHealthMonitorPools().get(0).getID());
+                testObject.getLoadBalancerHealthMonitorPools().get(0));
     }
 }

@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.util.concurrent.CheckedFuture;
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
-import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerSessionPersistence;
@@ -87,8 +87,10 @@ public final class NeutronLoadBalancerPoolInterface
         }
         if (pool.getLoadBalancerPoolListeners() != null) {
             final List<Uuid> listListener = new ArrayList<>();
-            for (final NeutronID neutronId : pool.getLoadBalancerPoolListeners()) {
-                listListener.add(toUuid(neutronId.getID()));
+            for (final String neutronId : pool.getLoadBalancerPoolListeners()) {
+                if (!Strings.isNullOrEmpty(neutronId)) {
+                    listListener.add(toUuid(neutronId));
+                }
             }
             poolBuilder.setListeners(listListener);
         }
@@ -123,9 +125,9 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setLoadBalancerPoolLbAlgorithm(pool.getLbAlgorithm());
         }
         if (pool.getListeners() != null) {
-            final List<NeutronID> ids = new ArrayList<>();
+            final List<String> ids = new ArrayList<>();
             for (final Uuid id : pool.getListeners()) {
-                ids.add(new NeutronID(id.getValue()));
+                ids.add(id.getValue());
             }
             answer.setLoadBalancerPoolListeners(ids);
         }

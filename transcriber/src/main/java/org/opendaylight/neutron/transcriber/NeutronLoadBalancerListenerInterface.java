@@ -7,6 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,6 @@ import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.northbound.api.BadRequestException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerListenerCRUD;
-import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerListener;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
@@ -63,8 +63,10 @@ public final class NeutronLoadBalancerListenerInterface
         }
         if (listener.getNeutronLoadBalancerListenerLoadBalancerIDs() != null) {
             final List<Uuid> listLoadBalancers = new ArrayList<>();
-            for (final NeutronID neutronId : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
-                listLoadBalancers.add(toUuid(neutronId.getID()));
+            for (final String neutronId : listener.getNeutronLoadBalancerListenerLoadBalancerIDs()) {
+                if (!Strings.isNullOrEmpty(neutronId)) {
+                    listLoadBalancers.add(toUuid(neutronId));
+                }
             }
             listenerBuilder.setLoadbalancers(listLoadBalancers);
         }
@@ -98,9 +100,9 @@ public final class NeutronLoadBalancerListenerInterface
             answer.setNeutronLoadBalancerListenerDefaultPoolID(listener.getDefaultPoolId().getValue());
         }
         if (listener.getLoadbalancers() != null) {
-            final List<NeutronID> list = new ArrayList<>();
+            final List<String> list = new ArrayList<>();
             for (final Uuid id : listener.getLoadbalancers()) {
-                list.add(new NeutronID(id.getValue()));
+                list.add(id.getValue());
             }
             answer.setNeutronLoadBalancerListenerLoadBalancerIDs(list);
         }

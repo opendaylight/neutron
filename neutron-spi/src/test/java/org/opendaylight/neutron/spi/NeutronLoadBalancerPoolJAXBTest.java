@@ -45,12 +45,12 @@ public class NeutronLoadBalancerPoolJAXBTest {
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 8: Testing HealthMonitorID failed",
                 "00066a7b-796b-4f26-9cf9-9e82d248fda7", testObject.getLoadBalancerPoolHealthMonitorID());
 
-        List<NeutronID> testListeners = testObject.getLoadBalancerPoolListeners();
+        List<String> testListeners = testObject.getLoadBalancerPoolListeners();
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.1: Testing Listeners failed", 1,
                 testListeners.size());
 
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 9.2: Testing Listeners failed",
-                "39de4d56-d663-46e5-85a1-5b9d5fa17829", testObject.getLoadBalancerPoolListeners().get(0).getID());
+                "39de4d56-d663-46e5-85a1-5b9d5fa17829", testObject.getLoadBalancerPoolListeners().get(0));
 
         List<NeutronLoadBalancerPoolMember> testMembers = testObject.getLoadBalancerPoolMembers();
         Assert.assertEquals("NeutronLoadBalancerPool JAXB Test 10.1: Testing Listeners failed", 0,
