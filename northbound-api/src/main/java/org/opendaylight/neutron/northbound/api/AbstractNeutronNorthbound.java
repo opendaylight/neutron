@@ -144,6 +144,8 @@ public abstract class AbstractNeutronNorthbound<T extends INeutronObject<T>, R e
         } catch (OperationFailedException e) {
             LOG.warn("create failed due to datastore problem (possibly missing required fields); input: {}", input);
             throw new DatastoreOperationFailedWebApplicationException(e);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("IAE for input: " + input.toString(), e);
         }
     }
 

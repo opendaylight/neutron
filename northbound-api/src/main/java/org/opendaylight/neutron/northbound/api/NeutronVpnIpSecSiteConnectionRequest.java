@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronVpnIpSecSiteConnection;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronVpnIpSecSiteConnectionRequest implements INeutronRequest<NeutronVpnIpSecSiteConnection> {
+public final class NeutronVpnIpSecSiteConnectionRequest extends NeutronRequest<NeutronVpnIpSecSiteConnection> {
     @XmlElement(name = "ipsec_site_connection")
     NeutronVpnIpSecSiteConnection singleton;
 

@@ -18,7 +18,7 @@ import org.opendaylight.neutron.spi.NeutronSFCFlowClassifier;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronSFCFlowClassifierRequest implements INeutronRequest<NeutronSFCFlowClassifier> {
+public final class NeutronSFCFlowClassifierRequest extends NeutronRequest<NeutronSFCFlowClassifier> {
     // See OpenStack Networking SFC (networking-sfc) API v1.0 Reference for description of
     // annotated attributes
 

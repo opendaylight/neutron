@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronQosPolicy;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronQosPolicyRequest implements INeutronRequest<NeutronQosPolicy> {
+public final class NeutronQosPolicyRequest extends NeutronRequest<NeutronQosPolicy> {
     @XmlElement(name = "policy")
     NeutronQosPolicy singleton;
 

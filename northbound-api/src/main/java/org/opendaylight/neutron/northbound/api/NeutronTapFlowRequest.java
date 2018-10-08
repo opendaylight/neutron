@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronTapFlow;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronTapFlowRequest implements INeutronRequest<NeutronTapFlow> {
+public final class NeutronTapFlowRequest extends NeutronRequest<NeutronTapFlow> {
     @XmlElement(name = "tap_flow")
     NeutronTapFlow singleton;
 

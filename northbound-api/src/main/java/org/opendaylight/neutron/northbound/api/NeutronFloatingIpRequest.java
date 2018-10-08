@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronFloatingIp;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronFloatingIpRequest implements INeutronRequest<NeutronFloatingIp> {
+public final class NeutronFloatingIpRequest extends NeutronRequest<NeutronFloatingIp> {
     // See OpenStack Network API v2.0 Reference for description of
     // annotated attributes
 

@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronTrunk;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronTrunkRequest implements INeutronRequest<NeutronTrunk> {
+public final class NeutronTrunkRequest extends NeutronRequest<NeutronTrunk> {
 
     @XmlElement(name = "trunk")
     NeutronTrunk singleton;
