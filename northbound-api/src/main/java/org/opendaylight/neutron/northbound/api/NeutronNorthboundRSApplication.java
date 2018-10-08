@@ -16,7 +16,11 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
 import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is an instance of javax.ws.rs.core.Application and is used to return the classes
@@ -25,6 +29,9 @@ import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
  */
 @Singleton
 public final class NeutronNorthboundRSApplication extends Application {
+
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronNorthboundRSApplication.class);
+
     private static final int HASHMAP_SIZE = 3;
 
     private final NeutronNetworksNorthbound neutronNetworksNorthbound;
@@ -167,6 +174,7 @@ public final class NeutronNorthboundRSApplication extends Application {
                 .add(neutronTrunksNorthbound)
                 .add(neutronTapServiceNorthbound)
                 .add(neutronTapFlowNorthbound)
+                .add(new LoggingExceptionMapper())
                 .build();
     }
 
@@ -188,5 +196,20 @@ public final class NeutronNorthboundRSApplication extends Application {
         moxyJsonProvider.setNamespaceSeparator(':');
 
         return moxyJsonProvider;
+    }
+
+    // do not inline this as a lambda; for some (strange) reason, the HK2 DI thing used by Jersey (v2.25.1) does
+    // not like it: "WARNING: The following warnings have been detected: WARNING: Unknown HK2 failure detected:
+    //  javax.ws.rs.ProcessingException: Could not find exception type for given ExceptionMapper class:
+    //  class org.opendaylight.neutron.northbound.api.NeutronNorthboundRSApplication$$Lambda$157/5987161."
+    public static class LoggingExceptionMapper implements ExceptionMapper<Exception> {
+        @Override
+        public Response toResponse(Exception exception) {
+            LOG.error("Error processing response", exception);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+            // In order to return the exception in the Response, it would need mapping.
+            // This could be brittle, and potentially insecure to provide internal exception externally.
+            // We thus intentionally chose to only return a generic 500 with details (only) in the log.
+        }
     }
 }
