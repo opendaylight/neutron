@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d205ecf1_4f21b1c7",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronID.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-08T22:21:59Z",
+      "side": 1,
+      "message": "This (org.eclipse.persistence.oxm.annotations.XmlClassExtractor) is available in org.eclipse.persistence.core, so this dependency probably needs to be added (I may have forgotten this when I pushed this draft change)\n\n     \u003cdependency\u003e\n      \u003cgroupId\u003eorg.eclipse.persistence\u003c/groupId\u003e\n      \u003cartifactId\u003eorg.eclipse.persistence.core\u003c/artifactId\u003e\n    \u003c/dependency\u003e",
+      "revId": "ea1eadc1a1f2fec5a3da8dea87b4edb25cc9abf9",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
