@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fc03653_f85327ec",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronNorthboundRSApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-08T15:45:37Z",
+      "side": 1,
+      "message": "nit, sorry, but indent this better?",
+      "revId": "7cc930f56334c31fb420295ac7248186e432ca81",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54906127_3b357f55",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/api/NeutronNorthboundRSApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-08T15:45:37Z",
+      "side": 1,
+      "message": "this is already there in line 143 above, remove?",
+      "revId": "7cc930f56334c31fb420295ac7248186e432ca81",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
