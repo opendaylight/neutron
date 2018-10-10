@@ -66,6 +66,12 @@ module neutron-extensions {
     //     description "port status is updated";
     //     base service-provider-feature-type-base;
     // }
+
+    identity bgpvpn-vni {
+        description "Support for vni attribute in bgpvpn resource";
+        base service-provider-feature-type-base;
+    }
+
     identity operational-port-status {
         description "port status update when port created";
         base service-provider-feature-type-base;
