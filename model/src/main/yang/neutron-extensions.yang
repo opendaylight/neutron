@@ -78,7 +78,10 @@ module neutron-extensions {
 
         base service-provider-feature-type-base;
     }
-
+    identity bgpvpn-multiple-routers {
+         description "multiple router associations for a bgpvpn resource";
+         base service-provider-feature-type-base;
+    }
     grouping service-provider-feature-attributes {
         leaf service-provider-feature {
             type identityref {
