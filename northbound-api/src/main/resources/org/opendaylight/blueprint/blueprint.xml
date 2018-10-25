@@ -7,4 +7,12 @@
   <reference id="webContextSecurer" interface="org.opendaylight.aaa.web.WebContextSecurer" />
 
   <reference id="servletSupport" interface="org.opendaylight.aaa.web.servlet.ServletSupport" />
+
+  <reference id="jSONRestconfService" interface="org.opendaylight.netconf.sal.restconf.api.JSONRestconfService" />
+
+  <odl:clustered-app-config id="neutronNorthboundApiConfig"
+                        binding-class="org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.northbound.api.config.rev181024.NeutronNorthboundApiConfig"
+                        default-config-file-name="neutron-northbound-api-config.xml"
+                        update-strategy="none">
+  </odl:clustered-app-config>
 </blueprint>
