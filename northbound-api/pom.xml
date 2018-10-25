@@ -24,6 +24,10 @@
        build failure. Please do not modify this unless you have a good reason. -->
   <name>ODL :: neutron :: ${project.artifactId}</name>
 
+  <properties>
+    <restconf.version>1.9.0-SNAPSHOT</restconf.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -64,10 +68,10 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-     <groupId>org.ops4j.pax.cdi</groupId>
-     <artifactId>pax-cdi-api</artifactId>
-     <optional>true</optional>
-   </dependency>
+      <groupId>org.ops4j.pax.cdi</groupId>
+      <artifactId>pax-cdi-api</artifactId>
+      <optional>true</optional>
+    </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>web-api</artifactId>
@@ -76,12 +80,43 @@
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>servlet-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.opendaylight.netconf</groupId>
+      <artifactId>restconf-nb-bierman02</artifactId>
+      <version>${restconf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.mdsal</groupId>
+      <artifactId>mdsal-dom-schema-service-osgi</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
        <groupId>org.apache.aries.blueprint</groupId>
        <artifactId>blueprint-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <file>${project.build.directory}/classes/initial/neutron-northbound-api-config.xml</file>
+                  <type>xml</type>
+                  <classifier>config</classifier>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
