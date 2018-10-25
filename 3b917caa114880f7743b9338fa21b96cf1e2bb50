@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0838fc43_bf4c2fef",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-10-25T09:38:52Z",
+      "side": 1,
+      "message": "nitpick: tab to space",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6b30e852_83b6dd27",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-10-25T09:38:52Z",
+      "side": 1,
+      "message": "same as above",
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "558f0631_c4712f89",
+        "filename": "features/production/odl-neutron-northbound-api/src/main/feature/feature.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-10-25T09:38:52Z",
+      "side": 1,
+      "message": "nitpick: tab to space",
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54b645f4_112190ca",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-10-25T09:38:52Z",
+      "side": 1,
+      "message": "do we need to specify hardcoded snapshot?",
+      "range": {
+        "startLine": 82,
+        "startChar": 15,
+        "endLine": 82,
+        "endChar": 29
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a2871ca_1f72201b",
+        "filename": "northbound-api/src/main/resources/initial/neutron-northbound-api-config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-10-25T09:38:52Z",
+      "side": 1,
+      "message": "n-odl uses ssl or non ssl for default?",
+      "range": {
+        "startLine": 3,
+        "startChar": 24,
+        "endLine": 3,
+        "endChar": 29
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a5ea2fc_ec6e4749",
+        "filename": "northbound-api/src/main/yang/northbound-api-config.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3276
+      },
+      "writtenOn": "2018-10-25T09:38:52Z",
+      "side": 1,
+      "message": "ssl",
+      "range": {
+        "startLine": 24,
+        "startChar": 73,
+        "endLine": 24,
+        "endChar": 76
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
