@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "11bd8d43_867cbade",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-25T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0838fc43_bf4c2fef",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6b30e852_83b6dd27",
         "filename": "features/production/odl-neutron-northbound-api/pom.xml",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-10-25T09:38:52Z",
       "side": 1,
       "message": "same as above",
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6d6d64f_ac405774",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-25T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b30e852_83b6dd27",
       "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "18effdff_d5b997a3",
+        "filename": "features/production/odl-neutron-northbound-api/src/main/feature/feature.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-25T10:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "558f0631_c4712f89",
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54b645f4_112190ca",
         "filename": "northbound-api/pom.xml",
         "patchSetId": 1
@@ -70,6 +130,30 @@
       "writtenOn": "2018-10-25T09:38:52Z",
       "side": 1,
       "message": "do we need to specify hardcoded snapshot?",
+      "range": {
+        "startLine": 82,
+        "startChar": 15,
+        "endLine": 82,
+        "endChar": 29
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9846ae85_54a4ece0",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-25T10:49:05Z",
+      "side": 1,
+      "message": "Yes. But I moved it to a parameter so that it *appears* less hard coded ;-)",
+      "parentUuid": "54b645f4_112190ca",
       "range": {
         "startLine": 82,
         "startChar": 15,
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "d28679da_0dd8f846",
+        "filename": "northbound-api/src/main/resources/initial/neutron-northbound-api-config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-25T10:49:05Z",
+      "side": 1,
+      "message": "non",
+      "parentUuid": "2a2871ca_1f72201b",
+      "range": {
+        "startLine": 3,
+        "startChar": 24,
+        "endLine": 3,
+        "endChar": 29
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a5ea2fc_ec6e4749",
         "filename": "northbound-api/src/main/yang/northbound-api-config.yang",
         "patchSetId": 1
@@ -116,6 +224,30 @@
       "writtenOn": "2018-10-25T09:38:52Z",
       "side": 1,
       "message": "ssl",
+      "range": {
+        "startLine": 24,
+        "startChar": 73,
+        "endLine": 24,
+        "endChar": 76
+      },
+      "revId": "3b917caa114880f7743b9338fa21b96cf1e2bb50",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7f69ece_1562f3a0",
+        "filename": "northbound-api/src/main/yang/northbound-api-config.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-25T10:49:05Z",
+      "side": 1,
+      "message": "wss is the scheme for websocket over ssl...I changed it to be clearer.",
+      "parentUuid": "8a5ea2fc_ec6e4749",
       "range": {
         "startLine": 24,
         "startChar": 73,
