@@ -20,6 +20,11 @@
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Northbound</name>
 
+    <properties>
+        <explicitFeatureDependencies>true</explicitFeatureDependencies>
+        <config.configfile.directory>etc/opendaylight/datastore/initial/config</config.configfile.directory>
+        <config.configfile.file>neutron-northbound-api-config.xml</config.configfile.file>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.opendaylight.infrautils</groupId>
@@ -46,6 +51,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>northbound-api</artifactId>
             <version>${project.version}</version>
+
         </dependency>
         <!-- because the REST API classes @Inject @Reference INeutronCRUD dependencies,
              we do need a dependency to the implementation of those INeutronCRUDs in transcriber;
