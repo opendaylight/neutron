@@ -17,13 +17,29 @@
 
     <properties>
         <explicitFeatureDependencies>true</explicitFeatureDependencies>
+        <config.configfile.directory>etc/opendaylight/datastore/initial/config</config.configfile.directory>
+        <config.configfile.file>neutron-northbound-api-config.xml</config.configfile.file>
     </properties>
 
     <dependencies>
         <dependency>
+            <groupId>org.opendaylight.infrautils</groupId>
+            <artifactId>odl-infrautils-inject</artifactId>
+            <version>1.3.4-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-shiro</artifactId>
             <version>0.7.4-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.netconf</groupId>
+            <artifactId>odl-restconf</artifactId>
+            <version>1.7.4-SNAPSHOT</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
@@ -38,6 +54,13 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>northbound-api</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.neutron</groupId>
+            <artifactId>northbound-api</artifactId>
+            <version>${project.version}</version>
+            <type>xml</type>
+            <classifier>config</classifier>
         </dependency>
         <!-- because the REST API classes @Inject @OsgiService INeutronCRUD dependencies,
              we do need a dependency to the implementation of those INeutronCRUDs in transcriber;
@@ -62,6 +85,11 @@
           <groupId>org.eclipse.persistence</groupId>
           <artifactId>org.eclipse.persistence.moxy</artifactId>
           <version>2.7.1</version>
+        </dependency>
+        <dependency>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>javax.ws.rs-api</artifactId>
+          <version>2.0.1</version>
         </dependency>
      </dependencies>
 </project>
