@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fe495b9_81ca7436",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5089
+      },
+      "writtenOn": "2018-10-25T12:59:22Z",
+      "side": 1,
+      "message": "do you really want to log at info level what was returned? Why not check what was returned and raise/log an error if subscription failed or make this a debug log",
+      "range": {
+        "startLine": 78,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb349246_c97d4d9c",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5089
+      },
+      "writtenOn": "2018-10-25T12:59:22Z",
+      "side": 1,
+      "message": "shouldn\u0027t this default to false when null?",
+      "range": {
+        "startLine": 83,
+        "startChar": 24,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c83ab101_64ab0078",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5089
+      },
+      "writtenOn": "2018-10-25T12:59:22Z",
+      "side": 1,
+      "message": "subscription",
+      "range": {
+        "startLine": 98,
+        "startChar": 96,
+        "endLine": 98,
+        "endChar": 107
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dede1c3_3e7fc593",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5089
+      },
+      "writtenOn": "2018-10-25T12:59:22Z",
+      "side": 1,
+      "message": "is it good to use a path like this? what happens if the revision changes?",
+      "range": {
+        "startLine": 105,
+        "startChar": 22,
+        "endLine": 105,
+        "endChar": 42
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
