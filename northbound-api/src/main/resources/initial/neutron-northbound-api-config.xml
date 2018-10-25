@@ -1,0 +1,4 @@
+<neutron-northbound-api-config xmlns="urn:opendaylight:neutron:northbound-api:config">
+    <pre-register-port-status-websocket>true</pre-register-port-status-websocket>
+    <websocket-uses-ssl>false</websocket-uses-ssl>
+</neutron-northbound-api-config>
