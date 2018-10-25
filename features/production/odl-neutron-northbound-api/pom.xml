@@ -17,6 +17,8 @@
 
     <properties>
         <explicitFeatureDependencies>true</explicitFeatureDependencies>
+        <config.configfile.directory>etc/opendaylight/datastore/initial/config</config.configfile.directory>
+        <config.configfile.file>neutron-northbound-api-config.xml</config.configfile.file>
     </properties>
 
     <dependencies>
@@ -24,6 +26,13 @@
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-shiro</artifactId>
             <version>0.7.4-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.opendaylight.netconf</groupId>
+            <artifactId>odl-restconf</artifactId>
+            <version>1.7.4-SNAPSHOT</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
@@ -62,6 +71,11 @@
           <groupId>org.eclipse.persistence</groupId>
           <artifactId>org.eclipse.persistence.moxy</artifactId>
           <version>2.7.1</version>
+        </dependency>
+        <dependency>
+          <groupId>javax.ws.rs</groupId>
+          <artifactId>javax.ws.rs-api</artifactId>
+          <version>2.0.1</version>
         </dependency>
      </dependencies>
 </project>
