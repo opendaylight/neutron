@@ -23,21 +23,60 @@
     <name>OpenDaylight :: Neutron :: Northbound</name>
 
     <properties>
-        <explicitFeatureDependencies>true</explicitFeatureDependencies>
+        <config.configfile.directory>etc/opendaylight/datastore/initial/config</config.configfile.directory>
+        <config.configfile.file>neutron-northbound-api-config.xml</config.configfile.file>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.opendaylight.infrautils</groupId>
+                <artifactId>infrautils-artifacts</artifactId>
+                <version>1.4.2-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opendaylight.aaa</groupId>
+                <artifactId>aaa-artifacts</artifactId>
+                <version>0.8.2-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.opendaylight.netconf</groupId>
+                <artifactId>restconf-artifacts</artifactId>
+                <version>1.8.1-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.opendaylight.infrautils</groupId>
             <artifactId>odl-infrautils-utils</artifactId>
-            <version>1.4.2-SNAPSHOT</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
         <dependency>
+            <groupId>org.opendaylight.infrautils</groupId>
+            <artifactId>odl-infrautils-inject</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <!--
+        <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-shiro</artifactId>
-            <version>0.8.2-SNAPSHOT</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>org.opendaylight.netconf</groupId>
+            <artifactId>odl-restconf</artifactId>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
@@ -48,12 +87,21 @@
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
+        <!--
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>northbound-api</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- because the REST API classes @Inject @OsgiService INeutronCRUD dependencies,
+        <dependency>
+            <groupId>org.opendaylight.neutron</groupId>
+            <artifactId>northbound-api</artifactId>
+            <version>${project.version}</version>
+            <type>xml</type>
+            <classifier>config</classifier>
+        </dependency>
+        -->
+        <!-- because the REST API classes @Inject @Reference INeutronCRUD dependencies,
              we do need a dependency to the implementation of those INeutronCRUDs in transcriber;
              otherwise this feature would not work standalone, and SFT will fail. -->
         <dependency>
