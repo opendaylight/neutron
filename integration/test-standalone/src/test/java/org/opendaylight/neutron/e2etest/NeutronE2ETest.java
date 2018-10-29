@@ -10,7 +10,6 @@ package org.opendaylight.neutron.e2etest;
 import java.io.IOException;
 import javax.inject.Inject;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.opendaylight.aaa.web.WebServer;
@@ -25,7 +24,6 @@ import org.opendaylight.infrautils.testutils.ClasspathHellDuplicatesCheckRule;
  *
  * @author Michael Vorburger.ch
  */
-@Ignore // TODO NEUTRON-197: remove this again post Neon-MRI, see c/76239
 public class NeutronE2ETest {
 
     public static @ClassRule ClasspathHellDuplicatesCheckRule jHades = new ClasspathHellDuplicatesCheckRule();
