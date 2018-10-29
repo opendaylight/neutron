@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "644e05ae_8d741e56",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "what\u0027s this used for? Does it not work without this?",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c54c1fe_6894eb01",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "remove this commented out dependency?  It\u0027s (now, recently changed) wrong anyway; see https://wiki.opendaylight.org/view/Neon_platform_upgrade#Blueprint_declarations",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c36aa80_10e27a1f",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "as far as I can tell / understand, you don\u0027t actually use this, do you, or am I missing something?  If so, could we remove it?",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb674167_52655350",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "remove repetion of class name (\"PortStatusUpdateInitializer\") from log message",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09876594_9098be53",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "perhaps more of a LOG.error than a LOG.warn?  Or, perhaps even much better, why only log this .. how about instead just letting it propagate (dataChangeEventSubscription throws OperationFailedException, and PortStatusUpdateInitializer also throws OperationFailedException), so that boot actually fails if this didn\u0027t work?",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb5afab0_0f5211f9",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 77,
+        "startChar": 14,
+        "endLine": 77,
+        "endChar": 15
+      },
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
