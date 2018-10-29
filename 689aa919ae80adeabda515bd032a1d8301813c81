@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb5437bb_aeeba03b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T17:14:17Z",
+      "side": 1,
+      "message": "I\u0027ll do that, some day, in https://git.opendaylight.org/gerrit/#/c/76771/ .. let\u0027s already get this in as-is now.",
+      "revId": "689aa919ae80adeabda515bd032a1d8301813c81",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
