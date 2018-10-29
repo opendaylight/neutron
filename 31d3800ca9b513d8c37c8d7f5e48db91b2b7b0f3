@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e63a69d6_7caa3601",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "is this 1-time at init, or continous?  If it\u0027s 1 time then I don\u0027t mind it being info; if it\u0027s continous as runt-time, then yes we should reduce it to avoid spamming the log...",
+      "parentUuid": "6fe495b9_81ca7436",
+      "range": {
+        "startLine": 78,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb349246_c97d4d9c",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 2
@@ -42,6 +66,23 @@
         "endLine": 83,
         "endChar": 56
       },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "645b76cc_9bddca5a",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-10-29T21:21:04Z",
+      "side": 1,
+      "message": "as above - is this 1-time at init, or continous?  (From what I can tell, it\u0027s only 1 time at initialization, so probably fine.)",
       "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
