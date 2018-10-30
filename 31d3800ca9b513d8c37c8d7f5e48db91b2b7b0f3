@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "2781b944_6761907c",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "I actually do because there are a lot of levels below this and I don\u0027t want to loose data in the event that something goes wrong and we can\u0027t detect it.",
+      "parentUuid": "6fe495b9_81ca7436",
+      "range": {
+        "startLine": 78,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 29
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb349246_c97d4d9c",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 2
@@ -60,6 +84,30 @@
       "writtenOn": "2018-10-25T12:59:22Z",
       "side": 1,
       "message": "shouldn\u0027t this default to false when null?",
+      "range": {
+        "startLine": 83,
+        "startChar": 24,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb2d442e_12a727ac",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Actually, I\u0027m removing this because I realized that you do not really need to specify whether the websocket is ws or wss when opening it.",
+      "parentUuid": "eb349246_c97d4d9c",
       "range": {
         "startLine": 83,
         "startChar": 24,
@@ -112,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "6a8bae88_cea74f06",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c83ab101_64ab0078",
+      "range": {
+        "startLine": 98,
+        "startChar": 96,
+        "endLine": 98,
+        "endChar": 107
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dede1c3_3e7fc593",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 2
@@ -123,6 +195,30 @@
       "writtenOn": "2018-10-25T12:59:22Z",
       "side": 1,
       "message": "is it good to use a path like this? what happens if the revision changes?",
+      "range": {
+        "startLine": 105,
+        "startChar": 22,
+        "endLine": 105,
+        "endChar": 42
+      },
+      "revId": "31d3800ca9b513d8c37c8d7f5e48db91b2b7b0f3",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13a15b47_1662aec3",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dede1c3_3e7fc593",
       "range": {
         "startLine": 105,
         "startChar": 22,
