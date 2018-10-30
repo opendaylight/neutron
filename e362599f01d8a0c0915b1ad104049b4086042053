@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0500d19f_2c5ad07c",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Apparently not ;-) I erased it.",
+      "parentUuid": "644e05ae_8d741e56",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7c54c1fe_6894eb01",
         "filename": "northbound-api/pom.xml",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-29T21:21:04Z",
       "side": 1,
       "message": "remove this commented out dependency?  It\u0027s (now, recently changed) wrong anyway; see https://wiki.opendaylight.org/view/Neon_platform_upgrade#Blueprint_declarations",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d336200d_88f782ec",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c54c1fe_6894eb01",
       "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "13039cc9_60be47e4",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c36aa80_10e27a1f",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb674167_52655350",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 3
@@ -64,6 +118,24 @@
       "writtenOn": "2018-10-29T21:21:04Z",
       "side": 1,
       "message": "remove repetion of class name (\"PortStatusUpdateInitializer\") from log message",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "532d2aa1_816e6c47",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb674167_52655350",
       "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "0e210dbf_db40252f",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "I changed the level to error. I was actually torn about whether to throw the error. Ultimately, I decided against it because just because it fails here does not necessarily mean that the system is unusable since the registration can still be done via REST. I agree that if it fails here, it should fail there. However, I was a little concerned that there could be initialization issues that would cause it to fail only here since it is happening at system init time...those are the sides of the argument. I decided to err on the side of not blocking the whole system ;-) Definitely open to being challenged on this.",
+      "parentUuid": "09876594_9098be53",
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb5afab0_0f5211f9",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 3
@@ -98,6 +188,30 @@
       "writtenOn": "2018-10-29T21:21:04Z",
       "side": 1,
       "message": "as above",
+      "range": {
+        "startLine": 77,
+        "startChar": 14,
+        "endLine": 77,
+        "endChar": 15
+      },
+      "revId": "e362599f01d8a0c0915b1ad104049b4086042053",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7ed1b24_8e25ee3e",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-10-30T07:58:17Z",
+      "side": 1,
+      "message": "as above ;-)",
+      "parentUuid": "eb5afab0_0f5211f9",
       "range": {
         "startLine": 77,
         "startChar": 14,
