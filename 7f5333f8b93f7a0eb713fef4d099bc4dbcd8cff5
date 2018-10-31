@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "753b4892_436da2de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 8269
+      },
+      "writtenOn": "2018-10-31T08:58:34Z",
+      "side": 1,
+      "message": "I have removed the \"vnid\" to \"vni\" change from this. The change will be addressed in https://git.opendaylight.org/gerrit/#/c/63405/",
+      "parentUuid": "748f83d7_d61bdffc",
+      "revId": "7f5333f8b93f7a0eb713fef4d099bc4dbcd8cff5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9b083b9_6afae20f",
         "filename": "model/src/main/yang/neutron-bgpvpns.yang",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2018-10-29T20:48:05Z",
       "side": 1,
       "message": "this is -of course- an \"API change\", in the sense that this changes the ODL Neutron YANG model, to which other ODL applications such as NetVirt or LispFlowMapping register listeners for.  Can someone more knowledgeable comment re. this being fine, and not causing any build breakages?",
+      "revId": "7f5333f8b93f7a0eb713fef4d099bc4dbcd8cff5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a2adf7e_c1d6578b",
+        "filename": "model/src/main/yang/neutron-bgpvpns.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 8269
+      },
+      "writtenOn": "2018-10-31T08:58:34Z",
+      "side": 1,
+      "message": "will be addressed in https://git.opendaylight.org/gerrit/#/c/63405/",
+      "parentUuid": "b9b083b9_6afae20f",
       "revId": "7f5333f8b93f7a0eb713fef4d099bc4dbcd8cff5",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5ceebce2_5273c50e",
+        "filename": "model/src/main/yang/neutron-extensions.yang",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 8269
+      },
+      "writtenOn": "2018-10-31T08:58:34Z",
+      "side": 1,
+      "message": "This change will depend on \nhttps://review.openstack.org/#/c/614428/",
+      "parentUuid": "3d46b7c9_09e7ecee",
+      "revId": "7f5333f8b93f7a0eb713fef4d099bc4dbcd8cff5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e09692d6_7a68a296",
         "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2018-10-29T20:48:05Z",
       "side": 1,
       "message": "this is -of course- an \"API change\", in the sense that this will ultimatiely cause the XML in a Northbound REST XML to have to contain a \u003cvni\u003e intead of a \u003cvnid\u003e element... I myself don\u0027t know enough about Neutron in OpenStack to be able to judge if this is actually correct (and thus this change corrects a mistake that was originally made when this was originally coded), or if this could break any existing clients consuming the Neutron Northbound REST API?  Can someone more knowledgeable comment re. this?",
+      "revId": "7f5333f8b93f7a0eb713fef4d099bc4dbcd8cff5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "638bd8ad_1dc93ec8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/NeutronBgpvpn.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 8269
+      },
+      "writtenOn": "2018-10-31T08:58:34Z",
+      "side": 1,
+      "message": "this cahnge will be addressed in https://git.opendaylight.org/gerrit/#/c/63405/",
+      "parentUuid": "e09692d6_7a68a296",
       "revId": "7f5333f8b93f7a0eb713fef4d099bc4dbcd8cff5",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
