@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97d22e7b_4d210e0f",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2018-10-31T15:52:14Z",
+      "side": 1,
+      "message": "This is rather unfortunate and I don’t have a decent explanation for it. Ideally we should split up the NETCONF packages into API and implementation, which might help avoid the duplicate issue.",
+      "revId": "09d5cbac2a94cf6e6c6827fed8482dbf5c7c9fac",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
