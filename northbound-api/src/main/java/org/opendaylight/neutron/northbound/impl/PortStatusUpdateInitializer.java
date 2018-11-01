@@ -58,7 +58,7 @@ public class PortStatusUpdateInitializer {
         try {
             Optional<String> res = jsonRestconfService.invokeRpc(
                     "sal-remote:create-data-change-event-subscription", Optional.of(SUBSCRIBE_JSON));
-            LOG.info("create-data-change-event-subscription returned {}", res.toString());
+            LOG.info("create-data-change-event-subscription returned {}", res);
         } catch (OperationFailedException e) {
             LOG.error("exception while calling create-data-change-event-subscription", e);
         }
@@ -72,7 +72,7 @@ public class PortStatusUpdateInitializer {
         Optional<String> res = null;
         try {
             res = jsonRestconfService.subscribeToStream(identifier, map);
-            LOG.info("subscribeToStream returned {}", res.toString());
+            LOG.info("subscribeToStream returned {}", res);
         } catch (OperationFailedException e) {
             LOG.error("exception while calling subscribeToStream", e);
         }
