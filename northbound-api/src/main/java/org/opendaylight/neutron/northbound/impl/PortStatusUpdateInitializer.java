@@ -8,12 +8,22 @@
 package org.opendaylight.neutron.northbound.impl;
 
 import com.google.common.base.Optional;
+import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.MultivaluedHashMap;
 
 import org.opendaylight.netconf.sal.restconf.api.JSONRestconfService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.northbound.api.config.rev181024.NeutronNorthboundApiConfig;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.ports.attributes.Ports;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.md.sal.remote.rev140114.CreateDataChangeEventSubscriptionInputBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.controller.md.sal.remote.rev140114.SalRemoteService;
+import org.opendaylight.yang.gen.v1.urn.sal.restconf.event.subscription.rev140708.CreateDataChangeEventSubscriptionInput1;
+import org.opendaylight.yang.gen.v1.urn.sal.restconf.event.subscription.rev140708.CreateDataChangeEventSubscriptionInput1.Datastore;
+import org.opendaylight.yang.gen.v1.urn.sal.restconf.event.subscription.rev140708.CreateDataChangeEventSubscriptionInput1.Scope;
+import org.opendaylight.yang.gen.v1.urn.sal.restconf.event.subscription.rev140708.CreateDataChangeEventSubscriptionInput1Builder;
+import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,22 +32,15 @@ import org.slf4j.LoggerFactory;
 public class PortStatusUpdateInitializer {
     private static final Logger LOG = LoggerFactory.getLogger(PortStatusUpdateInitializer.class);
 
-    private static final String SUBSCRIBE_JSON = "{\n"
-            + "  \"input\": {\n"
-            + "    \"path\": \"/neutron:neutron/neutron:ports\", \n"
-            + "    \"sal-remote-augment:notification-output-type\": \"JSON\", \n"
-            + "    \"sal-remote-augment:datastore\": \"OPERATIONAL\", \n"
-            + "    \"sal-remote-augment:scope\": \"SUBTREE\"\n"
-            + "  }\n"
-            + "}\n";
-
     private final NeutronNorthboundApiConfig cfg;
+    private final SalRemoteService salRemoteService;
     private final JSONRestconfService jsonRestconfService;
 
     @Inject
-    public PortStatusUpdateInitializer(JSONRestconfService jsonRestconfService,
-                                       final NeutronNorthboundApiConfig neutronNorthboundApiConfig) {
+    public PortStatusUpdateInitializer(SalRemoteService salRemoteService, JSONRestconfService jsonRestconfService,
+                                       NeutronNorthboundApiConfig neutronNorthboundApiConfig) {
         this.cfg = neutronNorthboundApiConfig;
+        this.salRemoteService = salRemoteService;
         this.jsonRestconfService = jsonRestconfService;
 
         boolean preRegister = cfg.isPreRegisterPortStatusWebsocket() == null || cfg.isPreRegisterPortStatusWebsocket();
@@ -56,10 +59,16 @@ public class PortStatusUpdateInitializer {
 
     private void dataChangeEventSubscription() {
         try {
-            Optional<String> res = jsonRestconfService.invokeRpc(
-                    "sal-remote:create-data-change-event-subscription", Optional.of(SUBSCRIBE_JSON));
-            LOG.info("create-data-change-event-subscription returned {}", res);
-        } catch (OperationFailedException e) {
+            String streamName = salRemoteService.createDataChangeEventSubscription(
+                new CreateDataChangeEventSubscriptionInputBuilder()
+                    .setPath(InstanceIdentifier.builder(Neutron.class).child(Ports.class).build())
+                    .addAugmentation(CreateDataChangeEventSubscriptionInput1.class,
+                        new CreateDataChangeEventSubscriptionInput1Builder()
+                            .setDatastore(Datastore.OPERATIONAL)
+                            .setScope(Scope.SUBTREE).build())
+                    .build()).get().getResult().getStreamName();
+            LOG.info("create-data-change-event-subscription returned {}", streamName);
+        } catch (InterruptedException | ExecutionException e) {
             LOG.error("exception while calling create-data-change-event-subscription", e);
         }
     }
@@ -67,11 +76,10 @@ public class PortStatusUpdateInitializer {
     private void streamSubscribe() {
         String identifier = "data-change-event-subscription/neutron:neutron/neutron:ports"
                                                                         + "/datastore=OPERATIONAL/scope=SUBTREE";
-        MultivaluedHashMap map = new MultivaluedHashMap<String, String>();
+        MultivaluedHashMap<String, String> map = new MultivaluedHashMap<>();
         map.add("odl-leaf-nodes-only", "true");
-        Optional<String> res = null;
         try {
-            res = jsonRestconfService.subscribeToStream(identifier, map);
+            Optional<String> res = jsonRestconfService.subscribeToStream(identifier, map);
             LOG.info("subscribeToStream returned {}", res);
         } catch (OperationFailedException e) {
             LOG.error("exception while calling subscribeToStream", e);
