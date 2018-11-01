@@ -59,12 +59,6 @@
             <classifier>features</classifier>
         </dependency>
         <dependency>
-            <groupId>org.opendaylight.infrautils</groupId>
-            <artifactId>odl-infrautils-inject</artifactId>
-            <type>xml</type>
-            <classifier>features</classifier>
-        </dependency>
-        <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-shiro</artifactId>
             <type>xml</type>
