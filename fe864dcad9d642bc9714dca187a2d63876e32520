@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a306effc_c9751bf8",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-01T13:00:38Z",
+      "side": 1,
+      "message": "https://git.opendaylight.org/gerrit/#/c/77408/",
+      "parentUuid": "bc7b2bee_3e75e54d",
+      "revId": "fe864dcad9d642bc9714dca187a2d63876e32520",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1732b530_16c258f5",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 10
@@ -53,6 +71,24 @@
       "writtenOn": "2018-11-01T11:40:53Z",
       "side": 1,
       "message": "minor: better to remove toString here; but I\u0027ll merge anyway if nothing else - do this in a follow-up?",
+      "revId": "fe864dcad9d642bc9714dca187a2d63876e32520",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc8603bc_99d32647",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-01T13:00:38Z",
+      "side": 1,
+      "message": "https://git.opendaylight.org/gerrit/#/c/77408/",
+      "parentUuid": "c7c49f6e_cf7b1b71",
       "revId": "fe864dcad9d642bc9714dca187a2d63876e32520",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
