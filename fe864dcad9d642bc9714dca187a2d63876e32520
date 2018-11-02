@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "28073a8d_742cfab8",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2018-11-02T08:16:53Z",
+      "side": 1,
+      "message": "I added it because it does end up being used.",
+      "parentUuid": "bc7b2bee_3e75e54d",
+      "revId": "fe864dcad9d642bc9714dca187a2d63876e32520",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1732b530_16c258f5",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 10
