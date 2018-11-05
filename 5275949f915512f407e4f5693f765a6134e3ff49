@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "0d880349_e01d43c5",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T16:35:45Z",
+      "side": 1,
+      "message": "I have a look at this, and this is related to the new Web API and un-static-ifying stuff ... it\u0027s not trivial at all to back-port all that to Oxygen.  :-(\n\nBut what I mainly really object to isn\u0027t really the retries (although those are ugly too), but the fact that you do it in the background, and \"cheat\" blueprint and therefore infrautils.ready \u0026 diagstatus... but I think I could live with this if was done sync in the foreground during construction, thus blocking BP, instead of a background thread timer task.",
+      "parentUuid": "244b3704_eae20c0a",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecf3517b_9a4f7a44",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 3
