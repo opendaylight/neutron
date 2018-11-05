@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "244b3704_eae20c0a",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T16:05:41Z",
+      "side": 1,
+      "message": "\u003e How come it works more reliably on master and this deferrered processing is only required on Oxygen?\n\njhershbe: vorburger, because on master RestconfImpl is created with a the ControllerContext. However, in stable/oxygen RestconfImpl is created AND THEN ControllerContext is \"set\" on it. The registration happens between those two.\n\nCould that change be back ported over in netconf, so that we can avoid doing this here?",
+      "parentUuid": "343448cb_852f4acd",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ecf3517b_9a4f7a44",
         "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
         "patchSetId": 3
