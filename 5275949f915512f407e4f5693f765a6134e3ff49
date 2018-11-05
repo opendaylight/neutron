@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "446ef1d5_c82c6324",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "FTR: see https://git.opendaylight.org/gerrit/#/c/77507/ for why this",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0207281_d72928d4",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "final ?",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9749eeb0_c5cb5cab",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "neat - I \u0027forgot\u0027 that anon inner classes can have fields.. ;)",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "343448cb_852f4acd",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "retrying every 1s for this here really ... urgh.  Why do we have to do this?  How come restconf isn\u0027t ready yet when we want to do this in neutron?  How come it works more reliably on master and this deferrered processing is only required on Oxygen?  This also totally breaks infrautils.ready/diagstatus... you\u0027re doing something \"behind it\u0027s back\" (in a backgroud thread) here, so cheating it, so it won\u0027t be able to report readyness accurately anymore. :-( Is there a better solution?",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecf3517b_9a4f7a44",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "rm toString as in https://git.opendaylight.org/gerrit/#/c/77408/1/northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a19a7f5e_0f8859d8",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "why e.getLocalizedMessage() instead of just e, like on master?",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c5cbae1_c2de2fc0",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "rm toString as in https://git.opendaylight.org/gerrit/#/c/77408/1/northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3535a801_336a132e",
+        "filename": "northbound-api/src/main/java/org/opendaylight/neutron/northbound/impl/PortStatusUpdateInitializer.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:52:04Z",
+      "side": 1,
+      "message": "as above",
+      "range": {
+        "startLine": 105,
+        "startChar": 69,
+        "endLine": 105,
+        "endChar": 70
+      },
+      "revId": "5275949f915512f407e4f5693f765a6134e3ff49",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
