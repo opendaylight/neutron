@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronVpnService;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronVpnServiceRequest implements INeutronRequest<NeutronVpnService> {
+public final class NeutronVpnServiceRequest extends NeutronRequest<NeutronVpnService> {
     @XmlElement(name = "vpnservice")
     NeutronVpnService singleton;
 

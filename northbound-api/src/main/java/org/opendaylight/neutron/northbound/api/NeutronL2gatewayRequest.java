@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
 
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronL2gatewayRequest implements INeutronRequest<NeutronL2gateway> {
+public final class NeutronL2gatewayRequest extends NeutronRequest<NeutronL2gateway> {
     @XmlElement(name = "l2_gateway")
     NeutronL2gateway singleton;
 

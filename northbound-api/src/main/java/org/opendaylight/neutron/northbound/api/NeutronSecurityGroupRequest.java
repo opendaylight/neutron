@@ -18,7 +18,7 @@ import org.opendaylight.neutron.spi.NeutronSecurityGroup;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronSecurityGroupRequest implements INeutronRequest<NeutronSecurityGroup> {
+public final class NeutronSecurityGroupRequest extends NeutronRequest<NeutronSecurityGroup> {
 
     /**
     * See OpenStack Network API v2.0 Reference for a

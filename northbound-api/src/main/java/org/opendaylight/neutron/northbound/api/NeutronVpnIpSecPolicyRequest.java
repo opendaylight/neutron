@@ -19,7 +19,7 @@ import org.opendaylight.neutron.spi.NeutronVpnIpSecPolicy;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressFBWarnings("URF_UNREAD_FIELD")
-public final class NeutronVpnIpSecPolicyRequest implements INeutronRequest<NeutronVpnIpSecPolicy> {
+public final class NeutronVpnIpSecPolicyRequest extends NeutronRequest<NeutronVpnIpSecPolicy> {
     @XmlElement(name = "ipsecpolicy")
     NeutronVpnIpSecPolicy singleton;
 
