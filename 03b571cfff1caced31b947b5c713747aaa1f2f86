@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66ba4996_8ff72f7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-05T15:38:06Z",
+      "side": 1,
+      "message": "just because we want bundles from other ODL projects, or 3rd party deps, to only be pulled by a single feature, not by multiple (to avoid reload issues; although not a problem in this particular case, but it\u0027s just more consistent like this).",
+      "revId": "03b571cfff1caced31b947b5c713747aaa1f2f86",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
