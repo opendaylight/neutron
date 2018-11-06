@@ -8,11 +8,12 @@
 package org.opendaylight.neutron.northbound.impl;
 
 import com.google.common.base.Optional;
-
+import java.time.Duration;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import org.opendaylight.netconf.sal.restconf.api.JSONRestconfService;
+import org.opendaylight.neutron.northbound.impl.Retrier.RetryExhaustedException;
 import org.opendaylight.restconf.common.util.MultivaluedHashMap;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.northbound.api.config.rev181024.NeutronNorthboundApiConfig;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
@@ -37,9 +38,13 @@ public class PortStatusUpdateInitializer {
     private final NeutronNorthboundApiConfig cfg;
     private final JSONRestconfService jsonRestconfService;
 
+    private final Retrier<OperationFailedException> retrier
+        = new Retrier<>(OperationFailedException.class, 20, Duration.ofSeconds(1));
+
     @Inject
     public PortStatusUpdateInitializer(JSONRestconfService jsonRestconfService,
-                                       final NeutronNorthboundApiConfig neutronNorthboundApiConfig) {
+            NeutronNorthboundApiConfig neutronNorthboundApiConfig)
+            throws RetryExhaustedException, InterruptedException {
         this.cfg = neutronNorthboundApiConfig;
         this.jsonRestconfService = jsonRestconfService;
 
@@ -52,51 +57,27 @@ public class PortStatusUpdateInitializer {
 
         // In stable/oxygen the restconf bundle comes alive before it is fully wired. This results
         // in failed registration attempts. Retrying works.
-        for (int i = 0; i < 20; i++) {
-            if (subscribeWebsocket()) {
-                break;
-            }
-
-            LOG.info("pre-register of websocket failed, assuming initialization order issue, retrying ({})", i);
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                LOG.warn("Exception while sleeping", e);
-            }
-        }
+        retrier.runWithRetries(() -> subscribeWebsocket());
     }
 
-    private boolean subscribeWebsocket() {
-        return dataChangeEventSubscription() && streamSubscribe();
+    private void subscribeWebsocket() throws OperationFailedException {
+        dataChangeEventSubscription();
+        streamSubscribe();
     }
 
-    private boolean dataChangeEventSubscription() {
-        try {
-            Optional<String> res = jsonRestconfService.invokeRpc(
-                    "sal-remote:create-data-change-event-subscription", Optional.of(SUBSCRIBE_JSON));
-            LOG.info("create-data-change-event-subscription returned {}", res.toString());
-        } catch (OperationFailedException e) {
-            LOG.warn("exception while calling create-data-change-event-subscription {}", e.getLocalizedMessage());
-            return false;
-        }
-        return true;
+    private void dataChangeEventSubscription() throws OperationFailedException {
+        Optional<String> res = jsonRestconfService.invokeRpc(
+                "sal-remote:create-data-change-event-subscription", Optional.of(SUBSCRIBE_JSON));
+        LOG.info("create-data-change-event-subscription returned {}", res.toString());
     }
 
-    private boolean streamSubscribe() {
+    private void streamSubscribe() throws OperationFailedException {
         String identifier = "data-change-event-subscription/neutron:neutron/neutron:ports"
                                                                         + "/datastore=OPERATIONAL/scope=SUBTREE";
-        MultivaluedHashMap map = new MultivaluedHashMap<String, String>();
+        MultivaluedHashMap<String, String> map = new MultivaluedHashMap<>();
         map.add("odl-leaf-nodes-only", "true");
-        Optional<String> res = null;
-        try {
-            res = jsonRestconfService.subscribeToStream(identifier, map);
-            LOG.info("subscribeToStream returned {}", res.toString());
-        } catch (OperationFailedException e) {
-            LOG.warn("exception while calling subscribeToStream {}", e.getLocalizedMessage());
-            return false;
-        }
 
-        return true;
+        Optional<String> res = jsonRestconfService.subscribeToStream(identifier, map);
+        LOG.info("subscribeToStream returned {}", res.toString());
     }
 }
