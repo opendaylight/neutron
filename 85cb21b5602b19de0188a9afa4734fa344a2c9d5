@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf7a5c4c_c3e56411",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-07T14:17:17Z",
+      "side": 1,
+      "message": "changing @OsgiService to @Reference here on Fluorine is technically wrong (that is only changing on Neon master), but it\u0027s just a comment, so forget about it!",
+      "revId": "85cb21b5602b19de0188a9afa4734fa344a2c9d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30be5a5a_2761ebae",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-07T14:17:17Z",
+      "side": 1,
+      "message": "FTR https://git.opendaylight.org/gerrit/#/c/77326/ is still not in, so the classpath duplicate test in test-standalone is still ignored, but let\u0027s get this in, then rebase that one.",
+      "revId": "85cb21b5602b19de0188a9afa4734fa344a2c9d5",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
