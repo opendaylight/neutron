@@ -18,7 +18,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>odl-neutron-northbound-api</artifactId>
-    <version>0.11.1-SNAPSHOT</version>
+    <version>0.11.1</version>
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Northbound</name>
 
@@ -30,14 +30,14 @@
         <dependency>
             <groupId>org.opendaylight.infrautils</groupId>
             <artifactId>odl-infrautils-utils</artifactId>
-            <version>1.4.1-SNAPSHOT</version>
+            <version>1.4.1</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
         <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-shiro</artifactId>
-            <version>0.8.1-SNAPSHOT</version>
+            <version>0.8.1</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
