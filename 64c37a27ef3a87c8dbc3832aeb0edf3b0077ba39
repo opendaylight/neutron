@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93286f71_cae0cff4",
+        "filename": "model/src/main/yang/neutron-mtu.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5197
+      },
+      "writtenOn": "2018-11-16T13:26:14Z",
+      "side": 1,
+      "message": "Aswin, we would need these changes in Florine. So how to go about it? Can we use \"Florine\" here? (or remove reference to the release name)",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 34
+      },
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
