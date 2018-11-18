@@ -63,6 +63,64 @@
       "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d315c62f_7e0e0eb0",
+        "filename": "model/src/main/yang/neutron-mtu.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-11-18T08:11:58Z",
+      "side": 1,
+      "message": "If this is going to be in fluorine I think best is to remove the description. Alternatively you can say this is the date it was added but it\u0027s backported to versions x, y, and z.",
+      "parentUuid": "bd3367ef_2112834a",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 34
+      },
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b22534f3_21a5cda4",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-11-18T08:11:58Z",
+      "side": 1,
+      "message": "Why is this dependent on the existence of a qos policy?",
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76f169d3_49b046ed",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 5357
+      },
+      "writtenOn": "2018-11-18T08:11:58Z",
+      "side": 1,
+      "message": "This can be moved inside the if",
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
