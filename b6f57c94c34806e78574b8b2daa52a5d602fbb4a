@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a53975b_71e2b752",
+        "filename": "neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-19T20:21:35Z",
+      "side": 1,
+      "message": "required to avoid having to  @SuppressFBWarnings(\"SLF4J_SIGN_ONLY_FORMAT\") .. this is different from the SLF4J_FORMAT_SHOULD_BE_CONST from https://git.opendaylight.org/gerrit/#/c/77944/1..2/neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
+      "revId": "b6f57c94c34806e78574b8b2daa52a5d602fbb4a",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
