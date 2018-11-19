@@ -69,6 +69,24 @@
       "revId": "697538059c5bac9e7c8ac43b6770c039d817b995",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61912db4_ababcba6",
+        "filename": "neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-11-19T19:33:49Z",
+      "side": 1,
+      "message": "sure",
+      "parentUuid": "dde7a820_e176c9dd",
+      "revId": "697538059c5bac9e7c8ac43b6770c039d817b995",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
