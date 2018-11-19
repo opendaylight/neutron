@@ -9,7 +9,6 @@
 package org.opendaylight.neutron.logger;
 
 import com.google.common.base.Preconditions;
-
 import java.util.Collection;
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
@@ -33,7 +32,7 @@ import org.slf4j.LoggerFactory;
 public final class NeutronLogger {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronLogger.class);
 
-    private DataBroker db;
+    private final DataBroker db;
     private ClusteredDataTreeChangeListener<Neutron> configurationDataTreeChangeListener;
     private ListenerRegistration<? extends ClusteredDataTreeChangeListener<Neutron>> configurationRegisteredListener;
     private ClusteredDataTreeChangeListener<Neutron> operationalDataTreeChangeListener;
@@ -91,10 +90,11 @@ public final class NeutronLogger {
     }
 
     private void logChanges(String prefix, @Nonnull Collection<DataTreeModification<Neutron>> changes) {
-        final StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append(prefix);
-        formatChanges(messageBuilder, changes);
-        LOG.info(messageBuilder.toString());
+        if (LOG.isInfoEnabled()) {
+            final StringBuilder messageBuilder = new StringBuilder(prefix);
+            formatChanges(messageBuilder, changes);
+            LOG.info("{}", messageBuilder.toString());
+        }
     }
 
     @PostConstruct
@@ -104,23 +104,13 @@ public final class NeutronLogger {
 
         DataTreeIdentifier<Neutron> configurationDataTreeId = new DataTreeIdentifier<>(
                 LogicalDatastoreType.CONFIGURATION, instanceId);
-        configurationDataTreeChangeListener = new ClusteredDataTreeChangeListener<Neutron>() {
-            @Override
-            public void onDataTreeChanged(Collection<DataTreeModification<Neutron>> changes) {
-                logChanges("Configuration DataTreeChanged ", changes);
-            }
-        };
+        configurationDataTreeChangeListener = changes -> logChanges("Configuration DataTreeChanged ", changes);
         configurationRegisteredListener = db.registerDataTreeChangeListener(configurationDataTreeId,
                 configurationDataTreeChangeListener);
 
         DataTreeIdentifier<
                 Neutron> operationalDataTreeId = new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL, instanceId);
-        operationalDataTreeChangeListener = new ClusteredDataTreeChangeListener<Neutron>() {
-            @Override
-            public void onDataTreeChanged(Collection<DataTreeModification<Neutron>> changes) {
-                logChanges("Operational DataTreeChanged ", changes);
-            }
-        };
+        operationalDataTreeChangeListener = changes -> logChanges("Operational DataTreeChanged ", changes);
         operationalRegisteredListener = db.registerDataTreeChangeListener(operationalDataTreeId,
                 operationalDataTreeChangeListener);
     }
