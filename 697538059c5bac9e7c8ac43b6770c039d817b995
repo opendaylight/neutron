@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b893f6ec_3faee0d8",
+        "filename": "neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2018-11-19T20:21:55Z",
+      "side": 1,
+      "message": "but FYI https://git.opendaylight.org/gerrit/#/c/77930/4/neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java@96",
+      "parentUuid": "7dc8e1d3_b197c679",
+      "revId": "697538059c5bac9e7c8ac43b6770c039d817b995",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42da137a_b8e12a9d",
         "filename": "neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
         "patchSetId": 1
