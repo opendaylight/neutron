@@ -93,7 +93,7 @@ public final class NeutronLogger {
         if (LOG.isInfoEnabled()) {
             final StringBuilder messageBuilder = new StringBuilder(prefix);
             formatChanges(messageBuilder, changes);
-            LOG.info("{}", messageBuilder.toString());
+            LOG.info("Changes: {}", messageBuilder.toString());
         }
     }
 

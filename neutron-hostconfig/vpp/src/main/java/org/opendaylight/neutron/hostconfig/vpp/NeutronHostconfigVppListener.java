@@ -80,7 +80,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
 
     @Override
     public void onDataTreeChanged(@Nonnull Collection<DataTreeModification<Node>> changes) {
-        LOG.info("onDataTreeChanged: Received Data Tree Changed ...", changes);
+        LOG.info("onDataTreeChanged: Received Data Tree Changes: {}", changes);
         executorService.execute(() -> {
             try {
                 for (DataTreeModification<Node> change : Preconditions.checkNotNull(changes,
@@ -88,7 +88,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
                     processDataTreeModification(change);
                 }
             } catch (TransactionCommitFailedException e) {
-                LOG.error("Transaction commit failed; ignorining changes: ", changes, e);
+                LOG.error("Transaction commit failed; ignorining changes: {}", changes, e);
             }
         });
     }
