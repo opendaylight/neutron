@@ -28,7 +28,7 @@ public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronI
     // T extends NeutronObject as 0th type argument. Used by extractFields()
     private static final int NEUTRON_OBJECT_CLASS_TYPE_INDEX = 0;
 
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronFirewallRule.class);
+    private static final Logger LOG = LoggerFactory.getLogger(NeutronObject.class);
 
     private static final long serialVersionUID = 1L;
 

@@ -63,7 +63,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
 
     private void processChanges(Collection<DataTreeModification<Node>> changes)
             throws TransactionCommitFailedException {
-        LOG.info("onDataTreeChanged: Received Data Tree Changed ...", changes);
+        LOG.info("onDataTreeChanged: Received Data Tree Changes: {}", changes);
         for (DataTreeModification<Node> change : changes) {
             final InstanceIdentifier<Node> key = change.getRootPath().getRootIdentifier();
             final DataObjectModification<Node> mod = change.getRootNode();
@@ -93,7 +93,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
         try {
             processChanges(changes);
         } catch (TransactionCommitFailedException e) {
-            LOG.error("Transaction commit failed; ignorining changes: ", changes, e);
+            LOG.error("Transaction commit failed; ignorining changes: {}", changes, e);
         }
     }
 
