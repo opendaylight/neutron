@@ -16,6 +16,23 @@
       "revId": "697538059c5bac9e7c8ac43b6770c039d817b995",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42da137a_b8e12a9d",
+        "filename": "neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1842
+      },
+      "writtenOn": "2018-11-19T13:51:39Z",
+      "side": 1,
+      "message": "So INFO level is the default - would it make more sense for this to be DEBUG level?",
+      "revId": "697538059c5bac9e7c8ac43b6770c039d817b995",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
