@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "061c6666_73ea1da6",
+        "filename": "neutron-logger/src/main/java/org/opendaylight/neutron/logger/NeutronLogger.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2018-11-19T13:23:53Z",
+      "side": 1,
+      "message": "This is one instance where the format really should be a constant:\n\n    LOG.info(\"{}\", messageBuilder.toString());\n\nThe changes as formatted could include \"{}\" strings.",
+      "revId": "697538059c5bac9e7c8ac43b6770c039d817b995",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
