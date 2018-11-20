@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8f4e6dde_8ec962a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4269
+      },
+      "writtenOn": "2018-11-20T15:02:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0720daf5_6322c679",
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93286f71_cae0cff4",
         "filename": "model/src/main/yang/neutron-mtu.yang",
         "patchSetId": 1
@@ -90,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "91c24289_f57f42bf",
+        "filename": "model/src/main/yang/neutron-mtu.yang",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4269
+      },
+      "writtenOn": "2018-11-20T15:02:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d315c62f_7e0e0eb0",
+      "range": {
+        "startLine": 24,
+        "startChar": 30,
+        "endLine": 24,
+        "endChar": 34
+      },
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b22534f3_21a5cda4",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
         "patchSetId": 1
@@ -107,6 +149,24 @@
     },
     {
       "key": {
+        "uuid": "aad3e9a7_106f6fd7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 4269
+      },
+      "writtenOn": "2018-11-20T15:02:30Z",
+      "side": 1,
+      "message": "Was a copy paste error, changed to MTU.",
+      "parentUuid": "b22534f3_21a5cda4",
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76f169d3_49b046ed",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
         "patchSetId": 1
@@ -118,6 +178,24 @@
       "writtenOn": "2018-11-18T08:11:58Z",
       "side": 1,
       "message": "This can be moved inside the if",
+      "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "61fd05bb_f8a3ec4e",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronNetworkInterface.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 4269
+      },
+      "writtenOn": "2018-11-20T15:02:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f169d3_49b046ed",
       "revId": "64c37a27ef3a87c8dbc3832aeb0edf3b0077ba39",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
