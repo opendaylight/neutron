@@ -12,13 +12,13 @@
   <parent>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>project-neutron-parent</artifactId>
-    <version>0.11.1-SNAPSHOT</version>
+    <version>0.11.2-SNAPSHOT</version>
     <relativePath>../parent</relativePath>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>northbound-api</artifactId>
-  <version>0.11.1-SNAPSHOT</version>
+  <version>0.11.2-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -29,7 +29,7 @@
       <dependency>
         <groupId>org.opendaylight.aaa</groupId>
         <artifactId>aaa-artifacts</artifactId>
-        <version>0.8.1-SNAPSHOT</version>
+        <version>0.8.2-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
