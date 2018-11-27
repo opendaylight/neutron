@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7333f141_71bb6a8b",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2018-11-27T08:57:17Z",
+      "side": 1,
+      "message": "This should also be 1.8.2-SNAPSHOT.",
+      "revId": "943bce1a73845552dcacac57c2d851f36a8016b8",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
