@@ -21,6 +21,8 @@ import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronNetworkSegment;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev150712.NetworkL3Extension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.ext.rev150712.NetworkL3ExtensionBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.mtu.ext.rev181114.NetworkMtuExtension;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.mtu.ext.rev181114.NetworkMtuExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeFlat;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.NetworkTypeGre;
@@ -91,6 +93,10 @@ public final class NeutronNetworkInterface
         if (qos != null && qos.getQosPolicyId() != null) {
             result.setQosPolicyId(qos.getQosPolicyId().getValue());
         }
+        final NetworkMtuExtension mtu = network.augmentation(NetworkMtuExtension.class);
+        if (mtu != null && mtu.getMtu() != null) {
+            result.setMtu(mtu.getMtu());
+        }
         result.setSegments(segments);
         return result;
     }
@@ -145,6 +151,11 @@ public final class NeutronNetworkInterface
         }
         networkBuilder.addAugmentation(NetworkL3Extension.class, l3ExtensionBuilder.build());
         networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
+        if (network.getMtu() != null) {
+            final NetworkMtuExtensionBuilder mtuExtensionBuilder = new NetworkMtuExtensionBuilder();
+            mtuExtensionBuilder.setMtu(network.getMtu());
+            networkBuilder.addAugmentation(NetworkMtuExtension.class, mtuExtensionBuilder.build());
+        }
     }
 
     @Override
