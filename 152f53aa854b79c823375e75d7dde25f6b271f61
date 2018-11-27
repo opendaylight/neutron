@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "047a919d_f68fd3e2",
+        "filename": "features/production/odl-neutron-northbound-api/pom.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2018-11-27T08:56:35Z",
+      "side": 1,
+      "message": "This should be 1.8.2-SNAPSHOT.",
+      "revId": "152f53aa854b79c823375e75d7dde25f6b271f61",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
