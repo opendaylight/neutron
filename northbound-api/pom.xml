@@ -5,13 +5,13 @@
   <parent>
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>project-neutron-parent</artifactId>
-    <version>0.10.4-SNAPSHOT</version>
+    <version>0.10.5-SNAPSHOT</version>
     <relativePath>../parent</relativePath>
   </parent>
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>northbound-api</artifactId>
-  <version>0.10.4-SNAPSHOT</version>
+  <version>0.10.5-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -50,7 +50,7 @@
     <dependency>
       <groupId>org.opendaylight.netconf</groupId>
       <artifactId>restconf-nb-bierman02</artifactId>
-      <version>1.7.4-SNAPSHOT</version>
+      <version>1.7.5-SNAPSHOT</version>
       <!-- The following fails the classpath duplicate test in test-standalone -->
       <exclusions>
         <exclusion>
