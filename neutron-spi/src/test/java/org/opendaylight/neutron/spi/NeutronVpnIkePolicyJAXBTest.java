@@ -49,7 +49,7 @@ public class NeutronVpnIkePolicyJAXBTest {
         Assert.assertEquals("NeutronVpnIkePolicy JAXB Test 10.1: Testing lifetime units value failed", "seconds",
                 testObject.getLifetime().getUnits());
 
-        Assert.assertEquals("NeutronVpnIkePolicy JAXB Test 10.2: Testing lifetime values failed", new Integer(3600),
+        Assert.assertEquals("NeutronVpnIkePolicy JAXB Test 10.2: Testing lifetime values failed", Integer.valueOf(3600),
                 testObject.getLifetime().getValue());
 
         Assert.assertEquals("NeutronVpnIkePolicy JAXB Test 2: Testing tenant id failed",

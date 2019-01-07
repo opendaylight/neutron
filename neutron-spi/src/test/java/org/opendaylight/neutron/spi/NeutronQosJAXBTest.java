@@ -73,7 +73,7 @@ public class NeutronQosJAXBTest {
                 "aa902936679e4ea29bfe1158e3450a14", dscpMarkingPolicyRules.get(0).getTenantID());
 
         Assert.assertEquals("NeutronQosPolicy JaxB Test 6.3 : Testing Max ingress/Egress value failed",
-            new Short("8"), dscpMarkingPolicyRules.get(0).dscpMark);
+            Short.valueOf((short)8), dscpMarkingPolicyRules.get(0).dscpMark);
 
         List<NeutronQosMinimumBandwidthRule> minBandwidthLimitRules = neutronObject.getMinimumBandwidthRules();
 

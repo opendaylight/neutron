@@ -24,10 +24,10 @@ public class NeutronVpnDeadPeerDetectionJAXBTest {
         Assert.assertEquals("NeutronVpnDeadPeerDetection JAXB Test 1: Testing action failed", "hold",
                 testObject.getAction());
 
-        Assert.assertEquals("NeutronVpnDeadPeerDetection JAXB Test 2: Testing interval failed", new Integer(30),
+        Assert.assertEquals("NeutronVpnDeadPeerDetection JAXB Test 2: Testing interval failed", Integer.valueOf(30),
                 testObject.getInterval());
 
-        Assert.assertEquals("NeutronVpnDeadPeerDetection JAXB Test 3: Testing timeout failed", new Integer(120),
+        Assert.assertEquals("NeutronVpnDeadPeerDetection JAXB Test 3: Testing timeout failed", Integer.valueOf(120),
                 testObject.getTimeout());
     }
 }

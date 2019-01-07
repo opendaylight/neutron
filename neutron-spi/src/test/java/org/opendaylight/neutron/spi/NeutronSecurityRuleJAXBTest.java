@@ -51,10 +51,10 @@ public class NeutronSecurityRuleJAXBTest {
         Assert.assertEquals("NeutronSecurityRule JAXB Test 3: Testing protocol failed", "tcp",
                 testObject.getSecurityRuleProtocol());
 
-        Assert.assertEquals("NeutronSecurityRule JAXB Test 4: Testing port range min failed", new Integer(80),
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 4: Testing port range min failed", Integer.valueOf(80),
                 testObject.getSecurityRulePortMin());
 
-        Assert.assertEquals("NeutronSecurityRule JAXB Test 5: Testing port range max failed", new Integer(80),
+        Assert.assertEquals("NeutronSecurityRule JAXB Test 5: Testing port range max failed", Integer.valueOf(80),
                 testObject.getSecurityRulePortMax());
 
         Assert.assertEquals("NeutronSecurityRule JAXB Test 6: Testing ethertype failed", "IPv4",

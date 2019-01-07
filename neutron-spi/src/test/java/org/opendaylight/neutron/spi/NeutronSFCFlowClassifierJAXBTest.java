@@ -42,16 +42,16 @@ public class NeutronSFCFlowClassifierJAXBTest {
                 neutronObject.getProtocol());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 5: Testing source_port_range_min failed",
-                new Integer(100), neutronObject.getSourcePortRangeMin());
+                Integer.valueOf(100), neutronObject.getSourcePortRangeMin());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 6: Testing source_port_range_max failed",
-                new Integer(200), neutronObject.getSourcePortRangeMax());
+                Integer.valueOf(200), neutronObject.getSourcePortRangeMax());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 7: Testing destination_port_range_min failed",
-                new Integer(100), neutronObject.getDestinationPortRangeMin());
+                Integer.valueOf(100), neutronObject.getDestinationPortRangeMin());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 8: Testing destination_port_range_max failed",
-                new Integer(200), neutronObject.getDestinationPortRangeMax());
+                Integer.valueOf(200), neutronObject.getDestinationPortRangeMax());
 
         Assert.assertEquals("NeutronSFCFlowClassifier JAXB Test 9: Testing source_ip_prefix failed", "10.0.0.0/24",
                 neutronObject.getSourceIpPrefix());

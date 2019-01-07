@@ -94,7 +94,7 @@ public class NeutronFirewallJAXBTest {
         Assert.assertEquals("NeutronFirewallRule JAXB Test 7: Testing protocol failed", "tcp",
                 testObject.getFirewallRuleProtocol());
 
-        Assert.assertEquals("NeutronFirewallRule JAXB Test 8: Testing IP version failed", new Integer(4),
+        Assert.assertEquals("NeutronFirewallRule JAXB Test 8: Testing IP version failed", Integer.valueOf(4),
                 testObject.getFirewallRuleIpVer());
 
         Assert.assertEquals("NeutronFirewallRule JAXB Test 9: Testing source IP address failed", "10.10.10.8",
@@ -110,12 +110,12 @@ public class NeutronFirewallJAXBTest {
                 testObject.getFirewallRuleSrcPortRangeMax());
 
         Assert.assertEquals("NeutronFirewallRule JAXB Test 12.1: Testing destination port min failed",
-                new Integer(80), testObject.getFirewallRuleDstPortRangeMin());
+                Integer.valueOf(80), testObject.getFirewallRuleDstPortRangeMin());
 
         Assert.assertEquals("NeutronFirewallRule JAXB Test 12.2: Testing destination port max failed",
-                new Integer(81), testObject.getFirewallRuleDstPortRangeMax());
+                Integer.valueOf(81), testObject.getFirewallRuleDstPortRangeMax());
 
-        Assert.assertEquals("NeutronFirewallRule JAXB Test 13: Testing position failed", new Integer(1),
+        Assert.assertEquals("NeutronFirewallRule JAXB Test 13: Testing position failed", Integer.valueOf(1),
                 testObject.getFirewallRulePosition());
 
         Assert.assertEquals("NeutronFirewallRule JAXB Test 14: Testing action", "allow",

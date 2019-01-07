@@ -116,8 +116,8 @@ public abstract class NeutronObject<T extends NeutronObject<T>> extends NeutronI
         Class<T> cls = (Class<T>) types[NEUTRON_OBJECT_CLASS_TYPE_INDEX];
         T ans;
         try {
-            ans = cls.newInstance();
-        } catch (IllegalAccessException | InstantiationException e) {
+            ans = cls.getDeclaredConstructor().newInstance();
+        } catch (ReflectiveOperationException e) {
             // should not happen.
             throw new IllegalStateException(e);
         }

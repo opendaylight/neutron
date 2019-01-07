@@ -189,7 +189,7 @@ public abstract class AbstractTranscriberInterface<
         B toMdIds(INeutronObject<S1> neutronObject, Class<B> builderClass) {
         B builder;
         try {
-            builder = builderClass.newInstance();
+            builder = builderClass.getDeclaredConstructor().newInstance();
 
             if (neutronObject.getID() != null) {
                 final Method setUuid = builderClass.getMethod("setUuid", Uuid.class);
@@ -207,8 +207,7 @@ public abstract class AbstractTranscriberInterface<
                 final Method setRevisionNumber = builderClass.getMethod("setRevisionNumber", Long.class);
                 setRevisionNumber.invoke(builder, neutronObject.getRevisionNumber());
             }
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException
-                | NoSuchMethodException e) {
+        } catch (ReflectiveOperationException e) {
             throw new IllegalArgumentException(e);
         }
         return builder;
@@ -303,9 +302,9 @@ public abstract class AbstractTranscriberInterface<
     protected T toMd(String uuid) {
         Builder<T> builder;
         try {
-            builder = builderClass.newInstance();
+            builder = builderClass.getDeclaredConstructor().newInstance();
             setUuid.invoke(builder, toUuid(uuid));
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        } catch (ReflectiveOperationException e) {
             // should not happen.
             throw new IllegalArgumentException(e);
         }
