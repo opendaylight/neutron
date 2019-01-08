@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "086f0807_17794c0d",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2019-01-08T21:52:06Z",
+      "side": 0,
+      "message": "Robert, while reviewing this I\u0027m wondering why we had this exclusion here in the first place.. there must have been a good reason (Stephen, do you remember?).  Would it hurt to keep it (the exclusion here) and just also add it as \u003cscope\u003etest as you have, but not remove the exclusion?",
+      "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
+    }
+  ]
+}
