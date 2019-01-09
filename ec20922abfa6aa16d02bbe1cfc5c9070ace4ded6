@@ -34,6 +34,24 @@
       "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ebd37c5_b662932c",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 649
+      },
+      "writtenOn": "2019-01-09T09:33:33Z",
+      "side": 0,
+      "message": "And the same thing seems to be true of jaxb-api.",
+      "parentUuid": "dd6664cd_c2f6436d",
+      "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
