@@ -16,6 +16,24 @@
       "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd6664cd_c2f6436d",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 649
+      },
+      "writtenOn": "2019-01-09T09:31:21Z",
+      "side": 0,
+      "message": "The exclusion seems to be historic -- it has no effect on dependency:tree.",
+      "parentUuid": "086f0807_17794c0d",
+      "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
