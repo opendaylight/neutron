@@ -52,6 +52,24 @@
       "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "161da80d_5bf1c5c2",
+        "filename": "integration/test-standalone/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 5867
+      },
+      "writtenOn": "2019-01-10T15:58:17Z",
+      "side": 0,
+      "message": "OK then (trusting you on the dependency:tree; haven\u0027t verified)",
+      "parentUuid": "9ebd37c5_b662932c",
+      "revId": "ec20922abfa6aa16d02bbe1cfc5c9070ace4ded6",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": false
     }
   ]
 }
