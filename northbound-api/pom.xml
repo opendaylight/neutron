@@ -49,7 +49,7 @@
       <artifactId>sal-common-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.codehaus.enunciate</groupId>
+      <groupId>com.webcohesion.enunciate</groupId>
       <artifactId>enunciate-core-annotations</artifactId>
     </dependency>
     <dependency>
