@@ -10,7 +10,6 @@ package org.opendaylight.neutron.hostconfig.ovs;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
@@ -28,7 +27,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.hostconfig.utils.NeutronHostconfigUtils;
-import org.opendaylight.ovsdb.utils.mdsal.utils.MdsalUtils;
+import org.opendaylight.ovsdb.utils.mdsal.utils.ControllerMdsalUtils;
 import org.opendaylight.ovsdb.utils.southbound.utils.SouthboundUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.OvsdbNodeAugmentation;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.ovsdb.node.attributes.OpenvswitchExternalIds;
@@ -38,7 +37,6 @@ import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.
 import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.rev131021.network.topology.topology.Node;
 import org.opendaylight.yangtools.concepts.ListenerRegistration;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +54,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     @Inject
     public NeutronHostconfigOvsListener(final DataBroker dataBroker) {
         this.dataBroker = dataBroker;
-        MdsalUtils mdsalUtils = new MdsalUtils(dataBroker);
+        ControllerMdsalUtils mdsalUtils = new ControllerMdsalUtils(dataBroker);
         this.southboundUtils = new SouthboundUtils(mdsalUtils);
         this.neutronHostconfig = new NeutronHostconfigUtils(dataBroker);
     }
