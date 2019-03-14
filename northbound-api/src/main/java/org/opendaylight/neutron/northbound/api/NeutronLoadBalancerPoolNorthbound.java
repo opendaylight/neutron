@@ -28,9 +28,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.aries.blueprint.annotation.service.Reference;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.ReadTransaction;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPoolMember;
@@ -207,7 +207,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
     ) {
         INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
         try {
-            try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
+            try (ReadTransaction tx = dataBroker.newReadOnlyTransaction()) {
                 if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
                     throw new ResourceNotFoundException(uuidNoExist());
                 }
@@ -259,7 +259,7 @@ public final class NeutronLoadBalancerPoolNorthbound extends AbstractNeutronNort
 
         try {
             INeutronLoadBalancerPoolCRUD loadBalancerPoolInterface = getNeutronCRUD();
-            try (ReadOnlyTransaction tx = dataBroker.newReadOnlyTransaction()) {
+            try (ReadTransaction tx = dataBroker.newReadOnlyTransaction()) {
                 if (!loadBalancerPoolInterface.exists(loadBalancerPoolUUID, tx)) {
                     throw new ResourceNotFoundException(uuidNoExist());
                 }
