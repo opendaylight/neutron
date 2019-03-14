@@ -8,10 +8,12 @@
 
 package org.opendaylight.neutron.hostconfig.utils;
 
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import com.google.common.base.Throwables;
+import java.util.concurrent.ExecutionException;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.WriteTransaction;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
+import org.opendaylight.mdsal.common.api.TransactionCommitFailedException;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.Hostconfigs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.hostconfigs.Hostconfig;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.hostconfig.rev150712.hostconfig.attributes.hostconfigs.HostconfigBuilder;
@@ -22,6 +24,9 @@ import org.slf4j.LoggerFactory;
 
 public class NeutronHostconfigUtils {
     private static final Logger LOG = LoggerFactory.getLogger(NeutronHostconfigUtils.class);
+    private static final InstanceIdentifier<Hostconfigs> HOSTCONFIGS = InstanceIdentifier.builder(Neutron.class)
+            .child(Hostconfigs.class).build();
+
     private final DataBroker dataBroker;
 
     public enum Action {
@@ -45,15 +50,15 @@ public class NeutronHostconfigUtils {
                 final WriteTransaction writeTx = dataBroker.newWriteOnlyTransaction();
                 hostConfigId = createInstanceIdentifier(hostConfig);
                 writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig, true);
-                writeTx.submit().checkedGet();
+                commit(writeTx);
                 LOG.trace("Hostconfig updated for node {}", hostConfig.getHostId());
                 break;
             case DELETE:
                 final WriteTransaction delTx = dataBroker.newWriteOnlyTransaction();
                 hostConfigId = createInstanceIdentifier(hostConfig);
                 delTx.delete(LogicalDatastoreType.OPERATIONAL, hostConfigId);
+                commit(delTx);
                 LOG.trace("Hostconfig deleted for node {}", hostConfig.getHostId());
-                delTx.submit().checkedGet();
                 break;
             default:
                 break;
@@ -68,8 +73,19 @@ public class NeutronHostconfigUtils {
         return hostconfigBuilder.build();
     }
 
-    private InstanceIdentifier<Hostconfig> createInstanceIdentifier(Hostconfig hostconfig) {
-        return InstanceIdentifier.create(Neutron.class).child(Hostconfigs.class)
-                .child(Hostconfig.class, hostconfig.key());
+    private static void commit(WriteTransaction tx) throws TransactionCommitFailedException {
+        try {
+            tx.commit().get();
+        } catch (InterruptedException e) {
+            throw new TransactionCommitFailedException("Interrupted while waiting", e);
+        } catch (ExecutionException e) {
+            LOG.debug("Commit failed", e);
+            Throwables.throwIfInstanceOf(e.getCause(), TransactionCommitFailedException.class);
+            throw new TransactionCommitFailedException("Commit failed", e);
+        }
+    }
+
+    private static InstanceIdentifier<Hostconfig> createInstanceIdentifier(Hostconfig hostconfig) {
+        return HOSTCONFIGS.child(Hostconfig.class, hostconfig.key());
     }
 }
