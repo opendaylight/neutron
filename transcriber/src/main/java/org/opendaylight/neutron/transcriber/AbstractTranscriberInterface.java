@@ -8,9 +8,9 @@
 
 package org.opendaylight.neutron.transcriber;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import com.google.common.util.concurrent.CheckedFuture;
+import com.google.common.base.Throwables;
+import com.google.common.util.concurrent.FluentFuture;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -18,20 +18,22 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.PreDestroy;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
-import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
-import org.opendaylight.controller.md.sal.binding.api.ReadWriteTransaction;
-import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
-import org.opendaylight.controller.md.sal.common.api.data.OptimisticLockFailedException;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.infrautils.utils.function.CheckedFunction;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.ReadOperations;
+import org.opendaylight.mdsal.binding.api.ReadTransaction;
+import org.opendaylight.mdsal.binding.api.ReadWriteTransaction;
+import org.opendaylight.mdsal.binding.api.WriteTransaction;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
+import org.opendaylight.mdsal.common.api.OptimisticLockFailedException;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
+import org.opendaylight.mdsal.common.api.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronAdminAttributes;
 import org.opendaylight.neutron.spi.INeutronBaseAttributes;
 import org.opendaylight.neutron.spi.INeutronCRUD;
@@ -313,22 +315,21 @@ public abstract class AbstractTranscriberInterface<
 
     protected abstract S fromMd(T dataObject);
 
-    private <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadTransaction tx) throws ReadFailedException {
-        Preconditions.checkNotNull(tx);
-        W result = null;
-        final CheckedFuture<Optional<W>,
-                ReadFailedException> future = tx.read(LogicalDatastoreType.CONFIGURATION, path);
-        if (future != null) {
-            Optional<W> optional = future.checkedGet();
-            if (optional.isPresent()) {
-                result = optional.get();
-            }
+    private <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadOperations tx) throws ReadFailedException {
+        final FluentFuture<Optional<W>> future = Preconditions.checkNotNull(tx).read(LogicalDatastoreType.CONFIGURATION,
+            path);
+        try {
+            return future.get().orElse(null);
+        } catch (InterruptedException e) {
+            throw new ReadFailedException("Interrupted while waiting for read of " + path, e);
+        } catch (ExecutionException e) {
+            Throwables.throwIfInstanceOf(e.getCause(), ReadFailedException.class);
+            throw new ReadFailedException("Read of " + path + " failed", e);
         }
-        return result;
     }
 
     protected <W extends DataObject> W readMd(InstanceIdentifier<W> path) throws ReadFailedException {
-        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+        try (ReadTransaction tx = getDataBroker().newReadOnlyTransaction()) {
             return readMd(path, tx);
         }
     }
@@ -344,18 +345,16 @@ public abstract class AbstractTranscriberInterface<
         final T item = toMd(neutronObject);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-        final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
-        future.checkedGet();
+        checkedCommit(tx);
     }
 
     private void removeMd(T item, WriteTransaction tx) throws TransactionCommitFailedException {
         Preconditions.checkNotNull(tx);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        final CheckedFuture<Void, TransactionCommitFailedException> future = tx.submit();
         // Check if it's successfully committed, otherwise exception will be thrown.
-        future.checkedGet();
+        checkedCommit(tx);
     }
 
     protected static Uuid toUuid(String uuid) {
@@ -386,7 +385,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     @Override
-    public boolean exists(String uuid, ReadTransaction tx) throws ReadFailedException {
+    public boolean exists(String uuid, ReadOperations tx) throws ReadFailedException {
         Preconditions.checkNotNull(tx);
         final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         return dataObject != null;
@@ -403,7 +402,7 @@ public abstract class AbstractTranscriberInterface<
 
     @Override
     public S get(String uuid) throws ReadFailedException {
-        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+        try (ReadTransaction tx = getDataBroker().newReadOnlyTransaction()) {
             return get(uuid, tx);
         }
     }
@@ -427,7 +426,7 @@ public abstract class AbstractTranscriberInterface<
 
     @Override
     public List<S> getAll() throws ReadFailedRuntimeException {
-        try (ReadOnlyTransaction tx = getDataBroker().newReadOnlyTransaction()) {
+        try (ReadTransaction tx = getDataBroker().newReadOnlyTransaction()) {
             try {
                 return getAll(tx);
             } catch (ReadFailedException e) {
@@ -562,7 +561,7 @@ public abstract class AbstractTranscriberInterface<
      *
      * @throws ReadFailedException in case of a data store problem
      */
-    protected boolean areAllDependenciesAvailable(ReadTransaction tx, S neutronObject) throws ReadFailedException {
+    protected boolean areAllDependenciesAvailable(ReadOperations tx, S neutronObject) throws ReadFailedException {
         return true;
     }
 
@@ -586,4 +585,15 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
+    protected static final void checkedCommit(WriteTransaction tx) throws TransactionCommitFailedException {
+        final FluentFuture<?> future = tx.commit();
+        try {
+            future.get();
+        } catch (InterruptedException e) {
+            throw new TransactionCommitFailedException("Interrupted while waiting for commit", e);
+        } catch (ExecutionException e) {
+            Throwables.throwIfInstanceOf(e.getCause(), TransactionCommitFailedException.class);
+            throw new TransactionCommitFailedException("Transaction commit failed", e);
+        }
+    }
 }
