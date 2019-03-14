@@ -8,8 +8,8 @@
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
-import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
+import org.opendaylight.mdsal.binding.api.ReadOperations;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
 
 /**
@@ -26,7 +26,7 @@ public interface INeutronCRUD<T extends INeutronObject<T>> {
      * @return boolean
      * @throws ReadFailedException if the read failed
      */
-    boolean exists(String uuid, ReadTransaction tx) throws ReadFailedException;
+    boolean exists(String uuid, ReadOperations tx) throws ReadFailedException;
 
     /**
      * Applications call this interface method to return if a particular

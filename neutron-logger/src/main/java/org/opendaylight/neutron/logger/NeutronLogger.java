@@ -5,7 +5,6 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.logger;
 
 import com.google.common.base.Preconditions;
@@ -14,14 +13,13 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeIdentifier;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.mdsal.binding.api.ClusteredDataTreeChangeListener;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.DataObjectModification;
+import org.opendaylight.mdsal.binding.api.DataTreeIdentifier;
+import org.opendaylight.mdsal.binding.api.DataTreeModification;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.concepts.ListenerRegistration;
 import org.opendaylight.yangtools.yang.binding.DataObject;
@@ -103,14 +101,14 @@ public final class NeutronLogger {
         LOG.info("Register listener for Neutron model data changes");
         InstanceIdentifier<Neutron> instanceId = Preconditions.checkNotNull(InstanceIdentifier.create(Neutron.class));
 
-        DataTreeIdentifier<Neutron> configurationDataTreeId = new DataTreeIdentifier<>(
+        DataTreeIdentifier<Neutron> configurationDataTreeId = DataTreeIdentifier.create(
                 LogicalDatastoreType.CONFIGURATION, instanceId);
         configurationDataTreeChangeListener = changes -> logChanges("Configuration DataTreeChanged ", changes);
         configurationRegisteredListener = db.registerDataTreeChangeListener(configurationDataTreeId,
                 configurationDataTreeChangeListener);
 
-        DataTreeIdentifier<
-                Neutron> operationalDataTreeId = new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL, instanceId);
+        DataTreeIdentifier<Neutron> operationalDataTreeId = DataTreeIdentifier.create(
+                LogicalDatastoreType.OPERATIONAL, instanceId);
         operationalDataTreeChangeListener = changes -> logChanges("Operational DataTreeChanged ", changes);
         operationalRegisteredListener = db.registerDataTreeChangeListener(operationalDataTreeId,
                 operationalDataTreeChangeListener);

@@ -22,6 +22,32 @@
     <odlparent.spotbugs.enforce>false</odlparent.spotbugs.enforce>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.opendaylight.mdsal</groupId>
+        <artifactId>mdsal-artifacts</artifactId>
+        <version>5.0.9</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.opendaylight.aaa</groupId>
+        <artifactId>aaa-artifacts</artifactId>
+        <version>0.11.0-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.opendaylight.infrautils</groupId>
+        <artifactId>infrautils-artifacts</artifactId>
+        <version>1.7.0-SNAPSHOT</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
     <dependency>
       <!-- GSON is only used by the test code (which is in src/main here) -->
@@ -59,9 +85,8 @@
     </dependency>
 
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>sal-binding-broker-impl</artifactId>
-      <version>1.11.0</version>
+      <groupId>org.opendaylight.mdsal</groupId>
+      <artifactId>mdsal-binding-dom-adapter</artifactId>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -71,22 +96,19 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>sal-binding-broker-impl</artifactId>
-      <version>1.11.0</version>
+      <groupId>org.opendaylight.mdsal</groupId>
+      <artifactId>mdsal-binding-dom-adapter</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.infrautils</groupId>
       <artifactId>infrautils-testutils</artifactId>
-      <version>1.8.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.infrautils</groupId>
       <artifactId>inject.guice.testutils</artifactId>
-      <version>1.8.0-SNAPSHOT</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -98,13 +120,11 @@
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>web-jetty-impl</artifactId>
-      <version>0.12.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>servlet-jersey2</artifactId>
-      <version>0.12.0-SNAPSHOT</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
