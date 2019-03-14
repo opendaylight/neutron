@@ -26,7 +26,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.apache.aries.blueprint.annotation.service.Reference;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
 import org.opendaylight.neutron.spi.NeutronTapFlow;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;

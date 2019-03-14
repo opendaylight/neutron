@@ -7,9 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableBiMap;
-import com.google.common.util.concurrent.CheckedFuture;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -17,12 +15,11 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.ReadOnlyTransaction;
-import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.WriteTransaction;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
+import org.opendaylight.mdsal.common.api.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronLoadBalancerPoolCRUD;
 import org.opendaylight.neutron.spi.NeutronID;
 import org.opendaylight.neutron.spi.NeutronLoadBalancerPool;
@@ -45,7 +42,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.pools.pool.members.MemberBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.pool.attributes.SessionPersistenceBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
-import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.slf4j.Logger;
@@ -151,7 +147,7 @@ public final class NeutronLoadBalancerPoolInterface
 
     @Override
     public boolean neutronLoadBalancerPoolMemberExists(String poolUuid, String uuid) throws ReadFailedException {
-        final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
+        final Member member = readMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
             return false;
         }
@@ -161,7 +157,7 @@ public final class NeutronLoadBalancerPoolInterface
     @Override
     public NeutronLoadBalancerPoolMember getNeutronLoadBalancerPoolMember(String poolUuid, String uuid)
             throws ReadFailedException {
-        final Member member = readMemberMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
+        final Member member = readMd(createMemberInstanceIdentifier(toMd(poolUuid), toMemberMd(uuid)));
         if (member == null) {
             return null;
         }
@@ -276,22 +272,6 @@ public final class NeutronLoadBalancerPoolInterface
         return memberBuilder.build();
     }
 
-    private <T extends DataObject> T readMemberMd(InstanceIdentifier<T> path) throws ReadFailedException {
-        T result = null;
-        try (ReadOnlyTransaction transaction = getDataBroker().newReadOnlyTransaction()) {
-            final CheckedFuture<Optional<T>, ReadFailedException> future = transaction
-                    .read(LogicalDatastoreType.CONFIGURATION, path);
-            if (future != null) {
-                Optional<T> optional;
-                optional = future.checkedGet();
-                if (optional.isPresent()) {
-                    result = optional.get();
-                }
-            }
-        }
-        return result;
-    }
-
     private void addMemberMd(Pool pool, NeutronLoadBalancerPoolMember neutronObject)
             throws TransactionCommitFailedException {
         // TODO think about adding existence logic
@@ -304,13 +284,13 @@ public final class NeutronLoadBalancerPoolInterface
         final Member item = toMemberMd(neutronObject);
         final InstanceIdentifier<Member> iid = createMemberInstanceIdentifier(pool, item);
         transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-        transaction.submit().checkedGet();
+        checkedCommit(transaction);
     }
 
     private void removeMemberMd(Pool pool, Member item) throws TransactionCommitFailedException {
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final InstanceIdentifier<Member> iid = createMemberInstanceIdentifier(pool, item);
         transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        transaction.submit().checkedGet();
+        checkedCommit(transaction);
     }
 }

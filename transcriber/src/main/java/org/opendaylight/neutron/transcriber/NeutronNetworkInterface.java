@@ -13,9 +13,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.ReadOperations;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronNetworkCRUD;
 import org.opendaylight.neutron.spi.NeutronNetwork;
 import org.opendaylight.neutron.spi.NeutronNetworkSegment;
@@ -178,7 +178,7 @@ public final class NeutronNetworkInterface
     }
 
     @Override
-    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronNetwork network)
+    protected boolean areAllDependenciesAvailable(ReadOperations tx, NeutronNetwork network)
             throws ReadFailedException {
         return ifNonNull(network.getQosPolicyId(), qosPolicyId -> qosPolicyInterface.exists(qosPolicyId, tx));
     }
