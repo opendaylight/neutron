@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.spi;
 
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
 
 /**
  * {@link ReadFailedException} as an unchecked RuntimeException.
