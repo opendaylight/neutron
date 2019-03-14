@@ -13,8 +13,8 @@ import org.opendaylight.aaa.web.WebServer;
 import org.opendaylight.aaa.web.jetty.JettyWebServer;
 import org.opendaylight.aaa.web.servlet.ServletSupport;
 import org.opendaylight.aaa.web.servlet.jersey2.JerseyServletSupport;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.test.DataBrokerTestModule;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.dom.adapter.test.AbstractConcurrentDataBrokerTest;
 import org.opendaylight.neutron.northbound.api.WebInitializer;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
@@ -84,7 +84,18 @@ import org.opendaylight.neutron.transcriber.NeutronVpnServiceInterface;
  *
  * @author Michael Vorburger.ch
  */
+@SuppressWarnings("checkstyle:IllegalCatch")
 public class NeutronTestWiring extends AbstractModule {
+    private static final class BrokerSetup extends AbstractConcurrentDataBrokerTest {
+        BrokerSetup() {
+            super(true);
+            try {
+                setup();
+            } catch (Exception e) {
+                throw new IllegalStateException("Failed to initialize", e);
+            }
+        }
+    }
 
     @Override
     protected void configure() {
@@ -93,8 +104,7 @@ public class NeutronTestWiring extends AbstractModule {
         bind(ServletSupport.class).toInstance(new JerseyServletSupport());
         bind(WebInitializer.class);
 
-        DataBrokerTestModule dataBrokerTestModule = new DataBrokerTestModule(true);
-        DataBroker dataBroker = dataBrokerTestModule.getDataBroker();
+        DataBroker dataBroker = new BrokerSetup().getDataBroker();
         bind(DataBroker.class).toInstance(dataBroker);
 
         bind(INeutronNetworkCRUD.class).to(NeutronNetworkInterface.class);
