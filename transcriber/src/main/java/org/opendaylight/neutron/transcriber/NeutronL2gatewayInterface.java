@@ -12,7 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronL2gatewayCRUD;
 import org.opendaylight.neutron.spi.NeutronL2gateway;
 import org.opendaylight.neutron.spi.NeutronL2gatewayDevice;

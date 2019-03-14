@@ -12,11 +12,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
-import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.WriteTransaction;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
+import org.opendaylight.mdsal.common.api.ReadFailedException;
+import org.opendaylight.mdsal.common.api.TransactionCommitFailedException;
 import org.opendaylight.neutron.spi.INeutronTapFlowCRUD;
 import org.opendaylight.neutron.spi.NeutronTapFlow;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
@@ -121,14 +121,14 @@ public final class NeutronTapFlowInterface
         final TapFlow item = toMd(tapFlow);
         final InstanceIdentifier<TapFlow> iid = createTapFlowInstanceIdentifier(tapFlow.getTapFlowServiceID(), item);
         transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
-        transaction.submit().checkedGet();
+        checkedCommit(transaction);
     }
 
     private void removeTapFlowMd(String tapServiceUUID, String tapFlowUUID) throws TransactionCommitFailedException {
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final InstanceIdentifier<TapFlow> iid = createTapFlowInstanceIdentifier(tapServiceUUID, toMd(tapFlowUUID));
         transaction.delete(LogicalDatastoreType.CONFIGURATION, iid);
-        transaction.submit().checkedGet();
+        checkedCommit(transaction);
     }
 
     private void addTapFlowMd(NeutronTapFlow tapFlow) throws TransactionCommitFailedException {
