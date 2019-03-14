@@ -9,7 +9,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.lang.reflect.Type;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.concepts.Builder;
