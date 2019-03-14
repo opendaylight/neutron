@@ -17,18 +17,17 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
-import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeChangeListener;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeIdentifier;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
-import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
+import org.opendaylight.mdsal.binding.api.ClusteredDataTreeChangeListener;
+import org.opendaylight.mdsal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.DataObjectModification;
+import org.opendaylight.mdsal.binding.api.DataTreeChangeListener;
+import org.opendaylight.mdsal.binding.api.DataTreeIdentifier;
+import org.opendaylight.mdsal.binding.api.DataTreeModification;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
+import org.opendaylight.mdsal.common.api.TransactionCommitFailedException;
 import org.opendaylight.neutron.hostconfig.utils.NeutronHostconfigUtils;
-import org.opendaylight.ovsdb.utils.mdsal.utils.ControllerMdsalUtils;
+import org.opendaylight.ovsdb.utils.mdsal.utils.MdsalUtils;
 import org.opendaylight.ovsdb.utils.southbound.utils.SouthboundUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.OvsdbNodeAugmentation;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.ovsdb.node.attributes.OpenvswitchExternalIds;
@@ -55,8 +54,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     @Inject
     public NeutronHostconfigOvsListener(final DataBroker dataBroker) {
         this.dataBroker = dataBroker;
-        ControllerMdsalUtils mdsalUtils = new ControllerMdsalUtils(dataBroker);
-        this.southboundUtils = new SouthboundUtils(mdsalUtils);
+        this.southboundUtils = new SouthboundUtils(new MdsalUtils(dataBroker));
         this.neutronHostconfig = new NeutronHostconfigUtils(dataBroker);
     }
 
@@ -96,7 +94,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
         }
     }
 
-    private InstanceIdentifier<Node> createNodeIdentifier() {
+    private static InstanceIdentifier<Node> createNodeIdentifier() {
         return InstanceIdentifier
                 .create(NetworkTopology.class)
                 .child(Topology.class, new TopologyKey(SouthboundUtils.OVSDB_TOPOLOGY_ID))
@@ -107,7 +105,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     public void init() {
         LOG.info("{} start", getClass().getSimpleName());
         DataTreeIdentifier<Node> dataTreeIdentifier =
-                new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL, createNodeIdentifier());
+                DataTreeIdentifier.create(LogicalDatastoreType.OPERATIONAL, createNodeIdentifier());
         LOG.info("Neutron Hostconfig DataChange listener registration {}", dataTreeIdentifier);
         listenerRegistration = dataBroker.registerDataTreeChangeListener(dataTreeIdentifier, this);
     }
