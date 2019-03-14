@@ -11,7 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
-import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.mdsal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnIpSecPolicy;
 import org.opendaylight.neutron.spi.NeutronVpnLifetime;

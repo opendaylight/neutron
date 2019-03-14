@@ -50,8 +50,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.opendaylight.controller</groupId>
-      <artifactId>sal-common-api</artifactId>
+      <groupId>org.opendaylight.mdsal</groupId>
+      <artifactId>mdsal-common-api</artifactId>
     </dependency>
     <dependency>
       <groupId>com.webcohesion.enunciate</groupId>

@@ -9,25 +9,23 @@
 package org.opendaylight.neutron.hostconfig.vpp;
 
 import com.google.common.util.concurrent.SettableFuture;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
-import org.opendaylight.controller.md.sal.binding.api.DataObjectModification.ModificationType;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeChangeListener;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeIdentifier;
-import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
-import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
-import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.mdsal.binding.api.ClusteredDataTreeChangeListener;
+import org.opendaylight.mdsal.binding.api.DataObjectModification.ModificationType;
+import org.opendaylight.mdsal.binding.api.DataTreeChangeListener;
+import org.opendaylight.mdsal.binding.api.DataTreeIdentifier;
+import org.opendaylight.mdsal.binding.api.DataTreeModification;
+import org.opendaylight.mdsal.binding.api.WriteTransaction;
+import org.opendaylight.mdsal.common.api.LogicalDatastoreType;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNode;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNodeBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.netconf.node.topology.rev150114.NetconfNodeConnectionStatus.ConnectionStatus;
@@ -68,7 +66,7 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
 
     @Before
     public void init() throws InterruptedException, ExecutionException {
-        DataTreeIdentifier<Hostconfig> dataTreeIdentifier = new DataTreeIdentifier<>(LogicalDatastoreType.OPERATIONAL,
+        DataTreeIdentifier<Hostconfig> dataTreeIdentifier = DataTreeIdentifier.create(LogicalDatastoreType.OPERATIONAL,
                 hostConfigIid(NODE_ID).firstIdentifierOf(Hostconfigs.class).builder().child(Hostconfig.class).build());
         listenerRegistration = getDataBroker().registerDataTreeChangeListener(dataTreeIdentifier,
                 NeutronHostconfigVppListenerTest.this);
@@ -88,12 +86,12 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
             createNetconfNode(NODE_ID, V3PO_1704_CAPABILITY, V3PO_1701_CAPABILITY, INTERFACES);
         WriteTransaction writeTx = getDataBroker().newWriteOnlyTransaction();
         writeTx.put(LogicalDatastoreType.OPERATIONAL, iid, node1, true);
-        writeTx.submit().get();
+        writeTx.commit().get();
         Assert.assertEquals(sf.get(), Integer.valueOf(1));
         sf = SettableFuture.create();
         writeTx = getDataBroker().newWriteOnlyTransaction();
         writeTx.delete(LogicalDatastoreType.OPERATIONAL, iid);
-        writeTx.submit().get();
+        writeTx.commit().get();
         Assert.assertEquals(sf.get(), Integer.valueOf(2));
     }
 
