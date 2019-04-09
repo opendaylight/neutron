@@ -16,8 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
-
+import org.eclipse.jdt.annotation.NonNull;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -98,7 +97,7 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
         Assert.assertEquals(sf.get(), Integer.valueOf(2));
     }
 
-    private InstanceIdentifier<Hostconfig> hostConfigIid(@Nonnull NodeId nodeId) {
+    private InstanceIdentifier<Hostconfig> hostConfigIid(@NonNull NodeId nodeId) {
         return InstanceIdentifier.builder(Neutron.class)
             .child(Hostconfigs.class)
             .child(Hostconfig.class, new HostconfigKey(nodeId.getValue(), HostconfigUtil.L2_HOST_TYPE))

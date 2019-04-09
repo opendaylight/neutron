@@ -13,11 +13,12 @@ import com.google.common.collect.Maps;
 import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
-import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import org.eclipse.jdt.annotation.NonNull;
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
@@ -86,7 +87,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     }
 
     @Override
-    public void onDataTreeChanged(@Nonnull Collection<DataTreeModification<Node>> changes) {
+    public void onDataTreeChanged(@NonNull Collection<DataTreeModification<Node>> changes) {
         Preconditions.checkNotNull(changes, "Changes may not be null!");
         try {
             processChanges(changes);

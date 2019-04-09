@@ -10,11 +10,12 @@ package org.opendaylight.neutron.logger;
 
 import com.google.common.base.Preconditions;
 import java.util.Collection;
-import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import org.eclipse.jdt.annotation.NonNull;
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
@@ -39,13 +40,13 @@ public final class NeutronLogger {
     private ListenerRegistration<? extends ClusteredDataTreeChangeListener<Neutron>> operationalRegisteredListener;
 
     @Inject
-    public NeutronLogger(@Nonnull DataBroker db) {
+    public NeutronLogger(@NonNull DataBroker db) {
         LOG.info("Creating NeutronLogger {}", db);
         this.db = Preconditions.checkNotNull(db, "null db");
     }
 
-    private <T extends DataObject> void formatModification(@Nonnull final StringBuilder messageBuilder,
-            @Nonnull final DataObjectModification<T> objectModification) {
+    private <T extends DataObject> void formatModification(@NonNull final StringBuilder messageBuilder,
+            @NonNull final DataObjectModification<T> objectModification) {
         final String typeName = objectModification.getDataType().getSimpleName();
 
         switch (objectModification.getModificationType()) {
@@ -73,8 +74,8 @@ public final class NeutronLogger {
         }
     }
 
-    private <T extends DataObject> void formatChanges(@Nonnull final StringBuilder messageBuilder,
-            @Nonnull final Collection<DataTreeModification<T>> changes) {
+    private <T extends DataObject> void formatChanges(@NonNull final StringBuilder messageBuilder,
+            @NonNull final Collection<DataTreeModification<T>> changes) {
         for (DataTreeModification<T> modification : changes) {
             final DataTreeIdentifier<T> identifier = modification.getRootPath();
             final LogicalDatastoreType datastoreType = identifier.getDatastoreType();
@@ -89,7 +90,7 @@ public final class NeutronLogger {
         }
     }
 
-    private void logChanges(String prefix, @Nonnull Collection<DataTreeModification<Neutron>> changes) {
+    private void logChanges(String prefix, @NonNull Collection<DataTreeModification<Neutron>> changes) {
         if (LOG.isInfoEnabled()) {
             final StringBuilder messageBuilder = new StringBuilder(prefix);
             formatChanges(messageBuilder, changes);

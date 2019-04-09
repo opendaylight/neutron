@@ -18,7 +18,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
+
+import org.eclipse.jdt.annotation.NonNull;
 import org.opendaylight.controller.md.sal.binding.api.ClusteredDataTreeChangeListener;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
@@ -79,7 +80,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     }
 
     @Override
-    public void onDataTreeChanged(@Nonnull Collection<DataTreeModification<Node>> changes) {
+    public void onDataTreeChanged(@NonNull Collection<DataTreeModification<Node>> changes) {
         LOG.info("onDataTreeChanged: Received Data Tree Changes: {}", changes);
         executorService.execute(() -> {
             try {
