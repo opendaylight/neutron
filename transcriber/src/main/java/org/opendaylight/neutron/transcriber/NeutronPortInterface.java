@@ -103,6 +103,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
     @Override
     protected NeutronPort fromMd(Port port) {
         final NeutronPort result = new NeutronPort();
+        fromMdBaseAttributes(port, result);
         fromMdAdminAttributes(port, result);
         if (port.getAllowedAddressPairs() != null) {
             final List<NeutronPortAllowedAddressPairs> pairs = new ArrayList<>();
@@ -193,6 +194,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
 
         final PortBuilder portBuilder = new PortBuilder();
+        toMdBaseAttributes(neutronPort, portBuilder);
         toMdAdminAttributes(neutronPort, portBuilder);
         portBuilder.addAugmentation(PortBindingExtension.class, bindingBuilder.build());
         portBuilder.addAugmentation(PortSecurityExtension.class, portSecurityBuilder.build());

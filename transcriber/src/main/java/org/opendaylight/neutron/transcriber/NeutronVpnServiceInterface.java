@@ -38,6 +38,7 @@ public final class NeutronVpnServiceInterface
     @Override
     protected NeutronVpnService fromMd(Vpnservice vpnService) {
         final NeutronVpnService answer = new NeutronVpnService();
+        fromMdBaseAttributes(vpnService, answer);
         fromMdAdminAttributes(vpnService, answer);
         if (vpnService.getSubnetId() != null) {
             answer.setSubnetUUID(vpnService.getSubnetId().getValue());
@@ -51,6 +52,7 @@ public final class NeutronVpnServiceInterface
     @Override
     protected Vpnservice toMd(NeutronVpnService vpnService) {
         final VpnserviceBuilder vpnServiceBuilder = new VpnserviceBuilder();
+        toMdBaseAttributes(vpnService, vpnServiceBuilder);
         toMdAdminAttributes(vpnService, vpnServiceBuilder);
         if (vpnService.getSubnetUUID() != null) {
             vpnServiceBuilder.setSubnetId(toUuid(vpnService.getSubnetUUID()));

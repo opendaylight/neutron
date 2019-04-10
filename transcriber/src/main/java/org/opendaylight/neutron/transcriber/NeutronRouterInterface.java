@@ -52,6 +52,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
     protected Router toMd(NeutronRouter router) {
 
         final RouterBuilder routerBuilder = new RouterBuilder();
+        toMdBaseAttributes(router, routerBuilder);
         toMdAdminAttributes(router, routerBuilder);
         if (router.getGatewayPortId() != null && !router.getGatewayPortId().isEmpty()) {
             routerBuilder.setGatewayPortId(toUuid(router.getGatewayPortId()));
@@ -95,6 +96,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
     @Override
     public NeutronRouter fromMd(Router router) {
         final NeutronRouter result = new NeutronRouter();
+        fromMdBaseAttributes(router, result);
         fromMdAdminAttributes(router, result);
         result.setDistributed(router.isDistributed());
         if (router.getGatewayPortId() != null) {

@@ -43,6 +43,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
     @Override
     protected NeutronVpnIpSecSiteConnection fromMd(Ipsecsiteconnection ipsecSiteConnection) {
         final NeutronVpnIpSecSiteConnection answer = new NeutronVpnIpSecSiteConnection();
+        fromMdBaseAttributes(ipsecSiteConnection, answer);
         fromMdAdminAttributes(ipsecSiteConnection, answer);
         if (ipsecSiteConnection.getPeerAddress() != null) {
             answer.setPeerAddress(ipsecSiteConnection.getPeerAddress());
@@ -94,6 +95,7 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
     @Override
     protected Ipsecsiteconnection toMd(NeutronVpnIpSecSiteConnection ipsecSiteConnection) {
         final IpsecsiteconnectionBuilder ipsecSiteConnectionBuilder = new IpsecsiteconnectionBuilder();
+        toMdBaseAttributes(ipsecSiteConnection, ipsecSiteConnectionBuilder);
         toMdAdminAttributes(ipsecSiteConnection, ipsecSiteConnectionBuilder);
         if (ipsecSiteConnection.getPeerAddress() != null) {
             ipsecSiteConnectionBuilder.setPeerAddress(ipsecSiteConnection.getPeerAddress());

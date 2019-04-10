@@ -52,6 +52,7 @@ public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk,
     @Override
     protected NeutronTrunk fromMd(Trunk trunk) {
         final NeutronTrunk result = new NeutronTrunk();
+        fromMdBaseAttributes(trunk, result);
         fromMdAdminAttributes(trunk, result);
         if (trunk.getPortId() != null) {
             result.setPortId(trunk.getPortId().getValue());
@@ -73,6 +74,7 @@ public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk,
     @Override
     protected Trunk toMd(NeutronTrunk trunk) {
         final TrunkBuilder trunkBuilder = new TrunkBuilder();
+        toMdBaseAttributes(trunk, trunkBuilder);
         toMdAdminAttributes(trunk, trunkBuilder);
         if (trunk.getPortId() != null) {
             trunkBuilder.setPortId(toUuid(trunk.getPortId()));

@@ -39,6 +39,7 @@ public final class NeutronLoadBalancerInterface
     @Override
     protected NeutronLoadBalancer fromMd(Loadbalancer loadBalancer) {
         final NeutronLoadBalancer answer = new NeutronLoadBalancer();
+        fromMdBaseAttributes(loadBalancer, answer);
         fromMdAdminAttributes(loadBalancer, answer);
         if (loadBalancer.getVipAddress() != null) {
             answer.setLoadBalancerVipAddress(String.valueOf(loadBalancer.getVipAddress().stringValue()));
@@ -52,6 +53,7 @@ public final class NeutronLoadBalancerInterface
     @Override
     protected Loadbalancer toMd(NeutronLoadBalancer loadBalancer) {
         final LoadbalancerBuilder loadBalancerBuilder = new LoadbalancerBuilder();
+        toMdBaseAttributes(loadBalancer, loadBalancerBuilder);
         toMdAdminAttributes(loadBalancer, loadBalancerBuilder);
         if (loadBalancer.getLoadBalancerVipAddress() != null) {
             loadBalancerBuilder.setVipAddress(IpAddressBuilder.getDefaultInstance(

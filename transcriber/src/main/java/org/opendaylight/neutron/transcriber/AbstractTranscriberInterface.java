@@ -271,9 +271,8 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
-    protected <S1 extends INeutronAdminAttributes<S1>, M extends BaseAttributes & AdminAttributes, B extends Builder<M>>
+    protected <S1 extends INeutronAdminAttributes<S1>, M extends AdminAttributes, B extends Builder<M>>
         void toMdAdminAttributes(S1 neutronObject, B builder) {
-        toMdBaseAttributes(neutronObject, builder);
         try {
             if (neutronObject.getAdminStateUp() != null) {
                 setAdminStateUp.invoke(builder, neutronObject.getAdminStateUp());
@@ -286,9 +285,8 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
-    protected <M extends BaseAttributes & AdminAttributes, S1 extends INeutronAdminAttributes<S1>>
+    protected <M extends AdminAttributes, S1 extends INeutronAdminAttributes<S1>>
         void fromMdAdminAttributes(M attr, S1 answer) {
-        fromMdBaseAttributes(attr, answer);
         if (attr.isAdminStateUp() != null) {
             answer.setAdminStateUp(attr.isAdminStateUp());
         }

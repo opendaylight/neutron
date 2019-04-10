@@ -68,6 +68,7 @@ public final class NeutronNetworkInterface
     protected NeutronNetwork fromMd(Network network) {
         final NeutronNetwork result = new NeutronNetwork();
         result.initDefaults();
+        fromMdBaseAttributes(network, result);
         fromMdAdminAttributes(network, result);
         result.setShared(network.isShared());
         result.setVlanTransparent(network.isVlanTransparent());
@@ -161,6 +162,7 @@ public final class NeutronNetworkInterface
     @Override
     protected Network toMd(NeutronNetwork network) {
         final NetworkBuilder networkBuilder = new NetworkBuilder();
+        toMdBaseAttributes(network, networkBuilder);
         toMdAdminAttributes(network, networkBuilder);
         fillExtensions(networkBuilder, network);
 
