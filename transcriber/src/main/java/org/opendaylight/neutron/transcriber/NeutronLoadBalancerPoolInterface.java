@@ -240,13 +240,13 @@ public final class NeutronLoadBalancerPoolInterface
             answer.setPoolMemberAddress(member.getAddress().stringValue());
         }
         if (member.getProtocolPort() != null) {
-            answer.setPoolMemberProtoPort(member.getProtocolPort());
+            answer.setPoolMemberProtoPort(member.getProtocolPort().toJava());
         }
         if (member.getSubnetId() != null) {
             answer.setPoolMemberSubnetID(member.getSubnetId().getValue());
         }
         if (member.getWeight() != null) {
-            answer.setPoolMemberWeight(member.getWeight());
+            answer.setPoolMemberWeight(member.getWeight().toJava());
         }
         return answer;
     }

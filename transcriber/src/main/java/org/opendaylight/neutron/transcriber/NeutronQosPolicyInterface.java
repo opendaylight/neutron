@@ -103,8 +103,8 @@ public final class NeutronQosPolicyInterface
             final List<NeutronQosBandwidthLimitRule> bandwidthLimitRules = new ArrayList<>();
             for (final BandwidthLimitRules rule : qosPolicy.getBandwidthLimitRules()) {
                 NeutronQosBandwidthLimitRule opt = new NeutronQosBandwidthLimitRule();
-                opt.setMaxKbps(rule.getMaxKbps());
-                opt.setMaxBurstKbps(rule.getMaxBurstKbps());
+                opt.setMaxKbps(rule.getMaxKbps().toJava());
+                opt.setMaxBurstKbps(rule.getMaxBurstKbps().toJava());
                 opt.setDirection(DirectionMapper.getDirectionString(rule.getDirection()));
                 bandwidthLimitRules.add(opt);
             }
@@ -114,7 +114,7 @@ public final class NeutronQosPolicyInterface
             final List<NeutronQosDscpMarkingRule> dscpMarkingRules = new ArrayList<>();
             for (final DscpmarkingRules rule : qosPolicy.getDscpmarkingRules()) {
                 NeutronQosDscpMarkingRule opt = new NeutronQosDscpMarkingRule();
-                opt.setDscpMark(rule.getDscpMark());
+                opt.setDscpMark(rule.getDscpMark().toJava());
                 dscpMarkingRules.add(opt);
             }
             result.setDscpMarkingRules(dscpMarkingRules);
@@ -125,7 +125,7 @@ public final class NeutronQosPolicyInterface
                 NeutronQosMinimumBandwidthRule opt = new NeutronQosMinimumBandwidthRule();
                 opt.setID(rule.getTenantId().getValue());
                 opt.setTenantID(rule.getTenantId().getValue());
-                opt.setMinKbps(rule.getMinKbps());
+                opt.setMinKbps(rule.getMinKbps().toJava());
                 opt.setDirection(DirectionMapper.getDirectionString(rule.getDirection()));
                 minimumBandwidthRules.add(opt);
             }
