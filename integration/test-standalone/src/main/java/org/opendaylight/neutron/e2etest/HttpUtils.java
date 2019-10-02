@@ -27,7 +27,9 @@ public final class HttpUtils {
     // copy/pasted from org.opendaylight.neutron.northbound.api.AbstractNeutronNorthbound
     public static final int HTTP_MISSING_DEPENDENCY = 442; // see NEUTRON-158
 
-    private HttpUtils() { }
+    private HttpUtils() {
+
+    }
 
     static HttpURLConnection httpURLConnectionFactoryGet(URL url) throws IOException {
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
