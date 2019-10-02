@@ -11,6 +11,7 @@ package org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.FwProtocolBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.FirewallRuleAttributes.Protocol;
+import org.opendaylight.yangtools.yang.common.Uint8;
 
 /**
  * The purpose of generated class in src/main/java for Union types is to create new instances of unions from a string representation.
@@ -22,13 +23,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.Fir
  *
  */
 public class FirewallRuleAttributesProtocolBuilder {
-    public static Protocol getDefaultInstance(final java.lang.String defaultValue) {
-        Class<? extends FwProtocolBase> fwProtocol =
-            NeutronUtils.FwProtocolMapper.get(defaultValue);
+    public static Protocol getDefaultInstance(final String defaultValue) {
+        Class<? extends FwProtocolBase> fwProtocol = NeutronUtils.FwProtocolMapper.get(defaultValue);
         if (fwProtocol != null) {
             return new Protocol(fwProtocol);
         }
-        Short protocol = Short.parseShort(defaultValue);
-        return new Protocol(protocol);
+        return new Protocol(Uint8.valueOf(defaultValue));
     }
 }

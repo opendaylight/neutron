@@ -51,7 +51,7 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
         fromMdAdminAttributes(bgpvpn, result);
         result.setAutoAggregate(bgpvpn.isAutoAggregate());
         if (bgpvpn.getVni() != null) {
-            result.setVni(bgpvpn.getVni());
+            result.setVni(bgpvpn.getVni().toJava());
         }
         if (bgpvpn.getType() != null) {
             result.setType(BGPVPN_TYPE_MAP.get(bgpvpn.getType()));

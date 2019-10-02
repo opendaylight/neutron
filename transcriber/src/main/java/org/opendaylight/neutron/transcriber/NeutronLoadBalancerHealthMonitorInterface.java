@@ -105,7 +105,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             answer.setLoadBalancerHealthMonitorHttpMethod(healthMonitor.getHttpMethod());
         }
         if (healthMonitor.getMaxRetries() != null) {
-            answer.setLoadBalancerHealthMonitorMaxRetries(healthMonitor.getMaxRetries());
+            answer.setLoadBalancerHealthMonitorMaxRetries(healthMonitor.getMaxRetries().toJava());
         }
         if (healthMonitor.getPools() != null) {
             final List<NeutronID> list = new ArrayList<>();
