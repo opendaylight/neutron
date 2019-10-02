@@ -11,7 +11,9 @@ import java.io.IOException;
 
 public final class NeutronAllTests {
 
-    private NeutronAllTests() { }
+    private NeutronAllTests() {
+
+    }
 
     public static void testNeutron(String baseURL) throws IOException, InterruptedException {
         NeutronNetworkTests.runTests(baseURL);
