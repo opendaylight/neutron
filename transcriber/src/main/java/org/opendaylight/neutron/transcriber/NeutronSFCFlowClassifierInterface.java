@@ -140,16 +140,16 @@ public final class NeutronSFCFlowClassifierInterface
             result.setProtocol(PROTOCOL_MAP.get(mdClassifier.getProtocol()));
         }
         if (mdClassifier.getSourcePortRangeMin() != null) {
-            result.setSourcePortRangeMin(mdClassifier.getSourcePortRangeMin());
+            result.setSourcePortRangeMin(mdClassifier.getSourcePortRangeMin().toJava());
         }
         if (mdClassifier.getSourcePortRangeMax() != null) {
-            result.setSourcePortRangeMax(mdClassifier.getSourcePortRangeMax());
+            result.setSourcePortRangeMax(mdClassifier.getSourcePortRangeMax().toJava());
         }
         if (mdClassifier.getDestinationPortRangeMin() != null) {
-            result.setDestinationPortRangeMin(mdClassifier.getDestinationPortRangeMin());
+            result.setDestinationPortRangeMin(mdClassifier.getDestinationPortRangeMin().toJava());
         }
         if (mdClassifier.getDestinationPortRangeMax() != null) {
-            result.setDestinationPortRangeMax(mdClassifier.getDestinationPortRangeMax());
+            result.setDestinationPortRangeMax(mdClassifier.getDestinationPortRangeMax().toJava());
         }
         if (mdClassifier.getSourceIpPrefix() != null) {
             result.setSourceIpPrefix(mdClassifier.getSourceIpPrefix().stringValue());

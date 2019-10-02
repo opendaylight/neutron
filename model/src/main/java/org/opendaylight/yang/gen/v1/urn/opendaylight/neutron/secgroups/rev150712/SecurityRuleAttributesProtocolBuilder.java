@@ -10,6 +10,7 @@ package org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.NeutronUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.SecurityRuleAttributes.Protocol;
+import org.opendaylight.yangtools.yang.common.Uint8;
 
 
 /**
@@ -23,14 +24,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712
  */
 public class SecurityRuleAttributesProtocolBuilder {
 
-    public static Protocol getDefaultInstance(java.lang.String defaultValue) {
-        Class<? extends ProtocolBase> protocol =
-            NeutronUtils.ProtocolMapper.get(defaultValue);
+    public static Protocol getDefaultInstance(final String defaultValue) {
+        Class<? extends ProtocolBase> protocol = NeutronUtils.ProtocolMapper.get(defaultValue);
         if (protocol != null) {
             return new Protocol(protocol);
         }
-        Short protocolShort = Short.parseShort(defaultValue);
-        return new Protocol(protocolShort);
+        return new Protocol(Uint8.valueOf(defaultValue));
     }
 
 }

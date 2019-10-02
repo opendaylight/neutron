@@ -86,10 +86,10 @@ public final class NeutronSecurityRuleInterface extends
             answer.setSecurityRuleEthertype(ETHERTYPE_MAP.get(rule.getEthertype()));
         }
         if (rule.getPortRangeMin() != null) {
-            answer.setSecurityRulePortMin(rule.getPortRangeMin());
+            answer.setSecurityRulePortMin(rule.getPortRangeMin().toJava());
         }
         if (rule.getPortRangeMax() != null) {
-            answer.setSecurityRulePortMax(rule.getPortRangeMax());
+            answer.setSecurityRulePortMax(rule.getPortRangeMax().toJava());
         }
         return answer;
     }

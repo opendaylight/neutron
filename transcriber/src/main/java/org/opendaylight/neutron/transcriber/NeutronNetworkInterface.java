@@ -96,7 +96,7 @@ public final class NeutronNetworkInterface
         }
         final NetworkMtuExtension mtu = network.augmentation(NetworkMtuExtension.class);
         if (mtu != null && mtu.getMtu() != null) {
-            result.setMtu(mtu.getMtu());
+            result.setMtu(mtu.getMtu().toJava());
         }
         result.setSegments(segments);
         return result;

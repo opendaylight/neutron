@@ -89,16 +89,16 @@ public final class NeutronFirewallRuleInterface
             answer.setFirewallRuleDstIpAddr(rule.getDestinationIpAddr().stringValue());
         }
         if (rule.getSourcePortRangeMin() != null) {
-            answer.setFirewallRuleSrcPortRangeMin(rule.getSourcePortRangeMin());
+            answer.setFirewallRuleSrcPortRangeMin(rule.getSourcePortRangeMin().toJava());
         }
         if (rule.getSourcePortRangeMax() != null) {
-            answer.setFirewallRuleSrcPortRangeMax(rule.getSourcePortRangeMax());
+            answer.setFirewallRuleSrcPortRangeMax(rule.getSourcePortRangeMax().toJava());
         }
         if (rule.getDestinationPortRangeMin() != null) {
-            answer.setFirewallRuleDstPortRangeMin(rule.getDestinationPortRangeMin());
+            answer.setFirewallRuleDstPortRangeMin(rule.getDestinationPortRangeMin().toJava());
         }
         if (rule.getDestinationPortRangeMax() != null) {
-            answer.setFirewallRuleDstPortRangeMax(rule.getDestinationPortRangeMax());
+            answer.setFirewallRuleDstPortRangeMax(rule.getDestinationPortRangeMax().toJava());
         }
         if (rule.getPosition() != null) {
             answer.setFirewallRulePosition(Integer.valueOf(rule.getPosition().intValue()));
