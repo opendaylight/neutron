@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ce6a57e_0f054cf8",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronCRUD.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-11-08T09:21:51Z",
+      "side": 1,
+      "message": "ReadOperations",
+      "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591b8d3a_0f7ad5d7",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-11-08T09:21:51Z",
+      "side": 1,
+      "message": "rx to represent ReadOperations across this class",
+      "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c277323c_cbe23414",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-11-08T09:21:51Z",
+      "side": 1,
+      "message": "Why is this changed ??",
+      "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cdc39ee4_f56484ba",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/NeutronSecurityRuleInterface.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-11-08T09:21:51Z",
+      "side": 1,
+      "message": "rx",
+      "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    }
+  ]
+}
