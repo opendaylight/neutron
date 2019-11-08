@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c630ed72_4a32f49c",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2019-11-08T11:21:12Z",
+      "side": 1,
+      "message": "The variable represents a transaction, hence tx; its type changes but not its meaning.",
+      "parentUuid": "591b8d3a_0f7ad5d7",
+      "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c277323c_cbe23414",
         "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
         "patchSetId": 12
@@ -47,6 +65,24 @@
       "writtenOn": "2019-11-08T09:21:51Z",
       "side": 1,
       "message": "Why is this changed ??",
+      "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f5e9d8e_3340fa27",
+        "filename": "transcriber/src/main/java/org/opendaylight/neutron/transcriber/AbstractTranscriberInterface.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 4540
+      },
+      "writtenOn": "2019-11-08T11:21:12Z",
+      "side": 1,
+      "message": "Because the new mdsal API returns a ReadTransaction, not a ReadOnlyTransaction.",
+      "parentUuid": "c277323c_cbe23414",
       "revId": "ac9386ac6bb2db6fb018cb99fb1b17e0dd388efa",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": true
