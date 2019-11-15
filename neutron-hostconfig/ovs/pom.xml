@@ -32,6 +32,11 @@
     </dependency>
     <dependency>
       <groupId>org.opendaylight.neutron</groupId>
+      <artifactId>utils</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opendaylight.neutron</groupId>
       <artifactId>model</artifactId>
       <version>${project.version}</version>
     </dependency>

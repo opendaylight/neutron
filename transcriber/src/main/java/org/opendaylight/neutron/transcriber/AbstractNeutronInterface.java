@@ -11,6 +11,7 @@ package org.opendaylight.neutron.transcriber;
 import java.lang.reflect.Type;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronObject;
+import org.opendaylight.neutron.utils.NeutronUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.concepts.Builder;
 import org.opendaylight.yangtools.yang.binding.Augmentable;
@@ -34,5 +35,6 @@ public abstract class AbstractNeutronInterface<
 
     protected AbstractNeutronInterface(Class<? extends Builder<T>> builderClass, DataBroker db) {
         super(builderClass, db);
+        NeutronUtils.waitForAllShards();
     }
 }
