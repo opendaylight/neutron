@@ -115,6 +115,7 @@
     <!-- <module>integration/test</module> -->
     <module>model</module>
     <module>neutron-hostconfig</module>
+    <module>utils</module>
   </modules>
   <build>
     <plugins>
