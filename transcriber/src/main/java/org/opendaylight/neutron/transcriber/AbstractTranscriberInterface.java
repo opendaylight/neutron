@@ -38,6 +38,7 @@ import org.opendaylight.neutron.spi.INeutronCRUD;
 import org.opendaylight.neutron.spi.INeutronObject;
 import org.opendaylight.neutron.spi.NeutronObject;
 import org.opendaylight.neutron.spi.ReadFailedRuntimeException;
+import org.opendaylight.neutron.utils.NeutronUtils;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.AdminAttributes;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.attrs.rev150712.BaseAttributes;
@@ -135,6 +136,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     protected AbstractTranscriberInterface(Class<? extends Builder<T>> builderClass, DataBroker db) {
+        NeutronUtils.waitForAllShards();
         this.db = Preconditions.checkNotNull(db);
         this.builderClass = builderClass;
 

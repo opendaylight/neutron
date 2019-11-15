@@ -13,6 +13,7 @@ import javax.inject.Singleton;
 import javax.ws.rs.core.MultivaluedHashMap;
 
 import org.opendaylight.netconf.sal.restconf.api.JSONRestconfService;
+import org.opendaylight.neutron.utils.NeutronUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.northbound.api.config.rev181024.NeutronNorthboundApiConfig;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
 import org.slf4j.Logger;
@@ -37,6 +38,7 @@ public class PortStatusUpdateInitializer {
     @Inject
     public PortStatusUpdateInitializer(JSONRestconfService jsonRestconfService,
                                        final NeutronNorthboundApiConfig neutronNorthboundApiConfig) {
+        NeutronUtils.waitForAllShards();
         this.cfg = neutronNorthboundApiConfig;
         this.jsonRestconfService = jsonRestconfService;
 

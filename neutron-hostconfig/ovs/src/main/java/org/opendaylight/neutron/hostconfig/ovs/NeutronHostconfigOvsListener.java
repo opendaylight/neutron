@@ -28,6 +28,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.md.sal.common.api.data.TransactionCommitFailedException;
 import org.opendaylight.neutron.hostconfig.utils.NeutronHostconfigUtils;
+import org.opendaylight.neutron.utils.NeutronUtils;
 import org.opendaylight.ovsdb.utils.mdsal.utils.ControllerMdsalUtils;
 import org.opendaylight.ovsdb.utils.southbound.utils.SouthboundUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.OvsdbNodeAugmentation;
@@ -54,6 +55,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
 
     @Inject
     public NeutronHostconfigOvsListener(final DataBroker dataBroker) {
+        NeutronUtils.waitForAllShards();
         this.dataBroker = dataBroker;
         ControllerMdsalUtils mdsalUtils = new ControllerMdsalUtils(dataBroker);
         this.southboundUtils = new SouthboundUtils(mdsalUtils);

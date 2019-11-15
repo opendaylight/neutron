@@ -22,6 +22,7 @@ import org.opendaylight.controller.md.sal.binding.api.DataObjectModification;
 import org.opendaylight.controller.md.sal.binding.api.DataTreeIdentifier;
 import org.opendaylight.controller.md.sal.binding.api.DataTreeModification;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
+import org.opendaylight.neutron.utils.NeutronUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.concepts.ListenerRegistration;
 import org.opendaylight.yangtools.yang.binding.DataObject;
@@ -41,6 +42,7 @@ public final class NeutronLogger {
 
     @Inject
     public NeutronLogger(@NonNull DataBroker db) {
+        NeutronUtils.waitForAllShards();
         LOG.info("Creating NeutronLogger {}", db);
         this.db = Preconditions.checkNotNull(db, "null db");
     }
