@@ -173,6 +173,12 @@ public final class NeutronPortsNorthbound
         if (delta.getFixedIps() == null) {
             delta.setFixedIps(original.getFixedIps());
         }
+        if (delta.getTrunkportType() == null) {
+            delta.setTrunkportType(original.getTrunkportType());
+        }
+        if (delta.getTrunkportVid() == null) {
+            delta.setTrunkportVid(original.getTrunkportVid());
+        }
     }
 
     /**

@@ -192,6 +192,7 @@ public final class NeutronNorthboundRSApplication extends Application {
         namespacePrefixMapper.put("router", "router");
         namespacePrefixMapper.put("provider", "provider");
         namespacePrefixMapper.put("binding", "binding");
+        namespacePrefixMapper.put("trunkport", "trunkport");
         moxyJsonProvider.setNamespacePrefixMapper(namespacePrefixMapper);
         moxyJsonProvider.setNamespaceSeparator(':');
 

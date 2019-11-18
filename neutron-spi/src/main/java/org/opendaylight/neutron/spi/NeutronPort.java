@@ -71,6 +71,18 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> {
     @XmlElement(name = "extra_dhcp_opts")
     List<NeutronPortExtraDHCPOption> extraDHCPOptions;
 
+    //@XmlElement (name = "trunkport:type")
+    @XmlElement (namespace = "trunkport", name = "type")
+    String trunkportType;
+
+    //@XmlElement (name = "trunkport:parent_id")
+    @XmlElement (namespace = "trunkport", name = "parent_id")
+    String trunkportParentId;
+
+    //@XmlElement (name = "trunkport:vid")
+    @XmlElement (namespace = "trunkport", name = "vid")
+    Integer trunkportVid;
+
     //Port security is enabled by default for backward compatibility.
     @XmlElement(defaultValue = "true", name = "port_security_enabled")
     Boolean portSecurityEnabled;
@@ -200,6 +212,30 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> {
         this.qosPolicyId = qosPolicyId;
     }
 
+    public String getTrunkportType() {
+        return trunkportType;
+    }
+
+    public void setTrunkportType(String trunkportType) {
+        this.trunkportType = trunkportType;
+    }
+
+    public String getTrunkportParentId() {
+        return trunkportParentId;
+    }
+
+    public void setTrunkportParentId(String trunkportParentId) {
+        this.trunkportParentId = trunkportParentId;
+    }
+
+    public Integer getTrunkportVid() {
+        return trunkportVid;
+    }
+
+    public void setTrunkportVid(Integer trunkportVid) {
+        this.trunkportVid = trunkportVid;
+    }
+
     public void setPortSecurityEnabled(Boolean newValue) {
         portSecurityEnabled = newValue;
     }
@@ -253,6 +289,15 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> {
             case "qos_policy_id":
                 ans.setQosPolicyId(this.getQosPolicyId());
                 break;
+            case "type":
+                ans.setTrunkportType(this.getTrunkportType());
+                break;
+            case "parent_id":
+                ans.setTrunkportParentId(this.getTrunkportParentId());
+                break;
+            case "vid":
+                ans.setTrunkportVid(this.getTrunkportVid());
+                break;
             default:
                 return super.extractField(field, ans);
         }
@@ -279,6 +324,8 @@ public final class NeutronPort extends NeutronAdminAttributes<NeutronPort> {
                 + ", bindinghostID=" + bindinghostID + ", bindingvnicType=" + bindingvnicType + ", bindingvifType="
                 + bindingvifType + ", vifDetails=" + vifDetails + ", bindingProfile=" + bindingProfile
                 + ", extraDHCPOptions=" + extraDHCPOptions
-                + ", portSecurityEnabled=" + portSecurityEnabled + ", qosPolicyId=" + qosPolicyId + "]";
+                + ", portSecurityEnabled=" + portSecurityEnabled + ", qosPolicyId=" + qosPolicyId
+                + ", trunkportType=" + trunkportType + ", trunkportParentId=" + trunkportParentId
+                + ", trunkportVid=" + trunkportVid + "]";
     }
 }

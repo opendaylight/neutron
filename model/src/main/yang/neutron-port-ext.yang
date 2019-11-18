@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2015 Ericsson India Global Services Pvt Ltd. and others.
+ * All rights reserved.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-port-ext {
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-port-ext";
+
+    prefix neutron-port-ext;
+
+    import ietf-yang-types { prefix "yang"; }
+    import neutron { prefix "neutron"; }
+    import yang-ext { prefix ext; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Vishal Thapar <vishal.thapar@ericsson.com>";
+
+    description "This YANG module defines trunk port attributes that are used by Openstack
+        KILO Neutron YANG modules.";
+
+    revision "2015-11-25" {
+        description
+                "Initial version of trunk port attributes used by OpenStack KILO Neutron models";
+    }
+
+    identity trunkport-type-base {
+        description "Base Trunkport type for all Trunkport type identifiers.";
+    }
+
+    identity trunkport-type-trunkport {
+        base trunkport-type-base;
+        description "Trunkport type identity.";
+    }
+
+    identity trunkport-type-subport {
+        base trunkport-type-base;
+        description "Subport type identity.";
+    }
+
+    augment "/neutron:neutron/neutron:ports/neutron:port" {
+        ext:augment-identifier "trunkport_ext";
+        description "This module augments the ports container in the neutron-ports
+          module with trunk port information.";
+        leaf type {
+            type identityref {
+                base trunkport-type-base;
+            }
+            description "This type is used to refer to a Trunk port Type.";
+        }
+
+        leaf parent-id {
+            type yang:uuid;
+            description "Port id of a trunkport.";
+        }
+
+        leaf vid {
+            type uint16 {
+                range "1..4094";
+            }
+            description "VID that is used to access the given subport from the trunkport.";
+        }
+    }
+}

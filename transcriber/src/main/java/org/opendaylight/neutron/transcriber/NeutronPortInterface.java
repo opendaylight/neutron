@@ -34,6 +34,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.b
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV6;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.port.ext.rev151125.TrunkportExt;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.port.ext.rev151125.TrunkportExtBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.port.ext.rev151125.TrunkportTypeBase;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.port.ext.rev151125.TrunkportTypeSubport;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.port.ext.rev151125.TrunkportTypeTrunkport;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.AllowedAddressPairs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.AllowedAddressPairsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.ports.rev150712.port.attributes.ExtraDhcpOpts;
@@ -59,6 +64,12 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,
             Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
                     .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
+
+    private static final ImmutableBiMap<Class<? extends TrunkportTypeBase>, String> TRUNKPORT_TYPE_MAP
+            = new ImmutableBiMap.Builder<Class<? extends TrunkportTypeBase>, String>()
+            .put(TrunkportTypeTrunkport.class, "trunkport")
+            .put(TrunkportTypeSubport.class, "subport")
+            .build();
 
     @Inject
     public NeutronPortInterface(DataBroker db) {
@@ -154,7 +165,20 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         addExtensions(port, result);
         portSecurityExtension(port, result);
         qosExtension(port, result);
+        addTrunkportExtensionsToNeutronPort(port, result);
         return result;
+    }
+
+    protected void addTrunkportExtensionsToNeutronPort(Port port, NeutronPort result) {
+        TrunkportExt trunkportExt = port.augmentation(TrunkportExt.class);
+        if (trunkportExt != null) {
+            result.setTrunkportType(TRUNKPORT_TYPE_MAP.get(trunkportExt.getType()));
+            Uuid parentUuid = trunkportExt.getParentId();
+            if (parentUuid != null) {
+                result.setTrunkportParentId(String.valueOf(parentUuid.getValue()));
+            }
+            result.setTrunkportVid(trunkportExt.getVid().intValue());
+        }
     }
 
     @Override
@@ -255,11 +279,31 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             }
             portBuilder.setSecurityGroups(listSecurityGroups);
         }
+
+        addTrunkportExtensionsToPortBuilder(portBuilder, neutronPort);
         if (neutronPort.getQosPolicyId() != null) {
             final QosPortExtensionBuilder qosExtensionBuilder = new QosPortExtensionBuilder();
             qosExtensionBuilder.setQosPolicyId(toUuid(neutronPort.getQosPolicyId()));
             portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
         }
         return portBuilder.build();
+    }
+
+    protected void addTrunkportExtensionsToPortBuilder(PortBuilder portBuilder, NeutronPort neutronPort) {
+        if (neutronPort.getTrunkportType() != null) {
+            TrunkportExtBuilder trunkportBuilder = new TrunkportExtBuilder();
+
+            ImmutableBiMap<String, Class<? extends TrunkportTypeBase>> mapper = TRUNKPORT_TYPE_MAP.inverse();
+            trunkportBuilder.setType(mapper.get(neutronPort.getTrunkportType()));
+            if (TrunkportTypeSubport.class.equals(mapper.get(neutronPort.getTrunkportType()))) {
+                if (neutronPort.getTrunkportParentId() != null) {
+                    trunkportBuilder.setParentId(toUuid(neutronPort.getTrunkportParentId()));
+                }
+                if (neutronPort.getTrunkportVid() != null) {
+                    trunkportBuilder.setVid(neutronPort.getTrunkportVid());
+                }
+            }
+            portBuilder.addAugmentation(TrunkportExt.class, trunkportBuilder.build());
+        }
     }
 }
