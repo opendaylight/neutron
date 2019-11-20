@@ -106,6 +106,7 @@
     <module>northbound-api</module>
     <module>transcriber</module>
     <module>neutron-logger</module>
+    <module>neutron-filter</module>
     <module>artifacts</module>
     <module>features/parent</module>
     <module>features/production</module>
