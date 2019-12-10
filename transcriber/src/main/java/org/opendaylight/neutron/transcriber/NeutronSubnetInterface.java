@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronSubnetCRUD;
 import org.opendaylight.neutron.spi.NeutronRoute;
 import org.opendaylight.neutron.spi.NeutronSubnet;
@@ -57,9 +59,12 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
                     .put(Dhcpv6Off.class, "off").put(Dhcpv6Stateful.class, "dhcpv6-stateful")
                     .put(Dhcpv6Slaac.class, "slaac").put(Dhcpv6Stateless.class, "dhcpv6-stateless").build();
 
+    private final NeutronNetworkInterface neutronNetworkInterface;
+
     @Inject
-    public NeutronSubnetInterface(DataBroker db) {
+    public NeutronSubnetInterface(DataBroker db, NeutronNetworkInterface neutronNetworkInterface) {
         super(SubnetBuilder.class, db);
+        this.neutronNetworkInterface = neutronNetworkInterface;
     }
 
     // IfNBSubnetCRUD methods
@@ -174,5 +179,11 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             subnetBuilder.setHostRoutes(hostRoutes);
         }
         return subnetBuilder.build();
+    }
+
+    @Override
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronSubnet subnet)
+            throws ReadFailedException {
+        return ifNonNull(subnet.getNetworkUUID(), networkId -> neutronNetworkInterface.exists(networkId, tx));
     }
 }
