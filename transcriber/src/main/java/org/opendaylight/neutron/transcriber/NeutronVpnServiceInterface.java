@@ -12,6 +12,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
+import org.opendaylight.controller.md.sal.binding.api.ReadTransaction;
+import org.opendaylight.controller.md.sal.common.api.data.ReadFailedException;
 import org.opendaylight.neutron.spi.INeutronVpnServiceCRUD;
 import org.opendaylight.neutron.spi.NeutronVpnService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.vpnaas.rev150712.vpnservices.attributes.VpnServices;
@@ -25,9 +27,15 @@ public final class NeutronVpnServiceInterface
         extends AbstractNeutronInterface<Vpnservice, VpnServices, VpnserviceKey, NeutronVpnService>
         implements INeutronVpnServiceCRUD {
 
+    private final NeutronSubnetInterface neutronSubnetInterface;
+    private final NeutronRouterInterface neutronRouterInterface;
+
     @Inject
-    public NeutronVpnServiceInterface(DataBroker db) {
+    public NeutronVpnServiceInterface(DataBroker db, NeutronSubnetInterface neutronSubnetInterface,
+                                      NeutronRouterInterface neutronRouterInterface) {
         super(VpnserviceBuilder.class, db);
+        this.neutronSubnetInterface = neutronSubnetInterface;
+        this.neutronRouterInterface = neutronRouterInterface;
     }
 
     @Override
@@ -61,5 +69,14 @@ public final class NeutronVpnServiceInterface
             vpnServiceBuilder.setRouterId(toUuid(vpnService.getRouterUUID()));
         }
         return vpnServiceBuilder.build();
+    }
+
+    @Override
+    protected boolean areAllDependenciesAvailable(ReadTransaction tx, NeutronVpnService vpnService)
+            throws ReadFailedException {
+        return ifNonNull(vpnService.getSubnetUUID(),
+                subnetId -> neutronSubnetInterface.exists(subnetId, tx))
+                && ifNonNull(vpnService.getRouterUUID(),
+                routerId -> neutronRouterInterface.exists(routerId, tx));
     }
 }
