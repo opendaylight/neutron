@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03787438_d1c51df0",
+        "filename": "neutron-filter/src/main/java/org/opendaylight/neutron/filter/logging/entity/LoggingRequest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-12-12T11:41:37Z",
+      "side": 1,
+      "message": "Correct year to 2019 in all files",
+      "revId": "7f905789bbac075628a19251caf3100fad51059d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    }
+  ]
+}
