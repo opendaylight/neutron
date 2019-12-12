@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef407ea0_8900450e",
+        "filename": "utils/src/main/java/org/opendaylight/neutron/utils/NeutronUtils.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-12-12T12:04:09Z",
+      "side": 1,
+      "message": "....for attempt {}.\", ++retryCount);",
+      "revId": "9b1291ac1503ac230a2b805ca03f05f4507233ce",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59fa7b8f_0176b85a",
+        "filename": "utils/src/main/java/org/opendaylight/neutron/utils/ShardStatusMonitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-12-12T12:04:09Z",
+      "side": 1,
+      "message": "Use the new syntax for for loop",
+      "revId": "9b1291ac1503ac230a2b805ca03f05f4507233ce",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2884a85_fc128b63",
+        "filename": "utils/src/main/java/org/opendaylight/neutron/utils/ShardStatusMonitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-12-12T12:04:09Z",
+      "side": 1,
+      "message": "No need of if else , just pass type in log statement",
+      "revId": "9b1291ac1503ac230a2b805ca03f05f4507233ce",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a6f08f2_8b99f553",
+        "filename": "utils/src/main/java/org/opendaylight/neutron/utils/ShardStatusMonitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-12-12T12:04:09Z",
+      "side": 1,
+      "message": "statusResult ? return \"OPER\" : return \"ERROR\"",
+      "revId": "9b1291ac1503ac230a2b805ca03f05f4507233ce",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    }
+  ]
+}
