@@ -67,6 +67,24 @@
       "revId": "9b1291ac1503ac230a2b805ca03f05f4507233ce",
       "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e55dd00f_04a4eb31",
+        "filename": "utils/src/main/java/org/opendaylight/neutron/utils/ShardStatusMonitor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2019-12-13T08:21:33Z",
+      "side": 1,
+      "message": "\u003ereturn status \u003d statusResult ?  \"OPER\" : \"ERROR\"",
+      "parentUuid": "6a6f08f2_8b99f553",
+      "revId": "9b1291ac1503ac230a2b805ca03f05f4507233ce",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
     }
   ]
 }
