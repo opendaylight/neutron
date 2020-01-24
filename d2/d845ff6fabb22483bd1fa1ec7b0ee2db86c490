@@ -1,0 +1,8 @@
+Code-Review+1: Thanh Ha (zxiiro) <zxiiro@gmail.com>
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Code-Review+2: Achuth Maniyedath <achuth.maniyedath@gmail.com>
+Submitted-by: Achuth Maniyedath <achuth.maniyedath@gmail.com>
+Submitted-at: Fri, 24 Jan 2020 06:44:11 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/c/neutron/+/86935
+Project: neutron
+Branch: refs/heads/stable/sodium
