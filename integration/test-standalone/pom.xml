@@ -11,7 +11,7 @@
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>integration-test-standalone</artifactId>
-  <version>0.13.2-SNAPSHOT</version>
+  <version>0.13.2</version>
 
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -56,7 +56,7 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>sal-binding-broker-impl</artifactId>
-      <version>1.10.2-SNAPSHOT</version>
+      <version>1.10.2</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -68,20 +68,20 @@
     <dependency>
       <groupId>org.opendaylight.controller</groupId>
       <artifactId>sal-binding-broker-impl</artifactId>
-      <version>1.10.2-SNAPSHOT</version>
+      <version>1.10.2</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.infrautils</groupId>
       <artifactId>infrautils-testutils</artifactId>
-      <version>1.6.2-SNAPSHOT</version>
+      <version>1.6.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.infrautils</groupId>
       <artifactId>inject.guice.testutils</artifactId>
-      <version>1.6.2-SNAPSHOT</version>
+      <version>1.6.2</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -93,13 +93,13 @@
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>web-jetty-impl</artifactId>
-      <version>0.10.2-SNAPSHOT</version>
+      <version>0.10.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>servlet-jersey2</artifactId>
-      <version>0.10.2-SNAPSHOT</version>
+      <version>0.10.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
