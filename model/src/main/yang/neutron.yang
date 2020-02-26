@@ -26,6 +26,8 @@ module neutron {
     import neutron-vpnaas { prefix "vpnaas"; }
     import neutron-fwaas { prefix "fwaas"; }
     import neutron-bgpvpns { prefix "bgpvpns"; }
+    import neutron-bgpvpn-network-association { prefix "bgpvpn-network-associations"; }
+    import neutron-bgpvpn-router-association { prefix "bgpvpn-router-associations"; }
     import neutron-hostconfig { prefix "hostconfig"; }
     import neutron-qos { prefix "qos"; }
     import neutron-sfc-flow-classifier { prefix "sfc-flow-classifier"; }
@@ -65,6 +67,8 @@ module neutron {
         uses vpnaas:ipsecpolicies-attributes;
         uses vpnaas:ipsecconnections-attributes;
         uses bgpvpns:bgpvpns-attributes;
+	uses bgpvpn-network-associations:bgpvpn-network-associations-attributes;
+        uses bgpvpn-router-associations:bgpvpn-router-associations-attributes;
         uses l2gateways:l2gateways-attributes;
         uses l2gateways:l2gateway-connections-attributes;
         uses hostconfig:hostconfig-attributes;

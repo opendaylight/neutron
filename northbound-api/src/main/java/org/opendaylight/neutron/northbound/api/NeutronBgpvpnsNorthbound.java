@@ -31,7 +31,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.apache.aries.blueprint.annotation.service.Reference;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
+import org.opendaylight.neutron.spi.INeutronBgpvpnNetworkAssociationCRUD;
+import org.opendaylight.neutron.spi.INeutronBgpvpnRouterAssociationCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
+import org.opendaylight.neutron.spi.NeutronBgpvpnNetworkAssociation;
+import org.opendaylight.neutron.spi.NeutronBgpvpnRouterAssociation;
 
 /**
  * Neutron Northbound REST APIs for Bgpvpn.
@@ -178,6 +182,22 @@ public final class NeutronBgpvpnsNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteBgpvpn(@PathParam("bgpvpnUUID") String bgpvpnUUID) {
+        NeutronBgpvpnNetworkAssociationsNorthbound netAssoNorthBound = new NeutronBgpvpnNetworkAssociationsNorthbound();
+        INeutronBgpvpnNetworkAssociationCRUD bgpvpnNetAssoInterface = netAssoNorthBound.getNeutronCRUD();
+        List<NeutronBgpvpnNetworkAssociation> allBgpvpnNetAssos = bgpvpnNetAssoInterface.getAll();
+        for (NeutronBgpvpnNetworkAssociation bgpvpnNetAsso : allBgpvpnNetAssos) {
+            if (bgpvpnUUID != null && bgpvpnUUID.equals(bgpvpnNetAsso.getBgpvpnId())) {
+                netAssoNorthBound.delete(bgpvpnNetAsso.getID());
+            }
+        }
+        NeutronBgpvpnRouterAssociationsNorthbound routeAssoNorthBound = new NeutronBgpvpnRouterAssociationsNorthbound();
+        INeutronBgpvpnRouterAssociationCRUD bgpvpnRouterAssoInterface = routeAssoNorthBound.getNeutronCRUD();
+        List<NeutronBgpvpnRouterAssociation> allBgpvpnRouteAssos = bgpvpnRouterAssoInterface.getAll();
+        for (NeutronBgpvpnRouterAssociation bgpvpnRouteAsso : allBgpvpnRouteAssos) {
+            if (bgpvpnUUID != null && bgpvpnUUID.equals(bgpvpnRouteAsso.getBgpvpnId())) {
+                routeAssoNorthBound.delete(bgpvpnRouteAsso.getID());
+            }
+        }
         return delete(bgpvpnUUID);
     }
 }
