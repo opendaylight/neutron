@@ -46,11 +46,6 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
     @XmlElement(defaultValue = "false", name = "auto_aggregate")
     Boolean autoAggregate;
 
-    @XmlElement(name = "networks")
-    List<String> networks;
-
-    @XmlElement(name = "routers")
-    List<String> routers;
 
     /* This attribute lists the ports associated with an instance
      * which is needed for determining if that instance can be deleted
@@ -170,38 +165,6 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
         autoAggregate = newValue;
     }
 
-    public List<String> getNetworks() {
-        return networks;
-    }
-
-    public void setNetworks(List<String> networks) {
-        this.networks = networks;
-    }
-
-    public void addNetwork(String uuid) {
-        networks.add(uuid);
-    }
-
-    public void removeNetwork(String uuid) {
-        networks.remove(uuid);
-    }
-
-    public List<String> getRouters() {
-        return routers;
-    }
-
-    public void setRouters(List<String> routers) {
-        this.routers = routers;
-    }
-
-    public void addRouter(String uuid) {
-        routers.add(uuid);
-    }
-
-    public void removeRouter(String uuid) {
-        routers.remove(uuid);
-    }
-
     @Override
     protected boolean extractField(String field, NeutronBgpvpn ans) {
         switch (field) {
@@ -223,12 +186,6 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
             case "route_distinguishe":
                 ans.setRouteDistinguishers(this.getRouteDistinguishers());
                 break;
-            case "routers":
-                ans.setRouters(this.getRouters());
-                break;
-            case "networks":
-                ans.setNetworks(this.getNetworks());
-                break;
             case "vni":
                 ans.setVni(this.getVni());
                 break;
@@ -247,6 +204,6 @@ public final class NeutronBgpvpn extends NeutronAdminAttributes<NeutronBgpvpn> {
                 + ", status=" + status + ", tenantID=" + getTenantID() + ", type=" + type + ", technique=" + technique
                 + ", routeTargets=" + routeTargets + ", importTargets=" + importTargets + ", exportTargets="
                 + exportTargets + ", routeDistinguishers=" + routeDistinguishers + ", vni = " + vni
-                + ", autoAggregate = " + autoAggregate + ", networks = " + networks + ", routers = " + routers + "]";
+                + ", autoAggregate = " + autoAggregate + "]";
     }
 }

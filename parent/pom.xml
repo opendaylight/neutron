@@ -105,6 +105,12 @@
           <failOnError>true</failOnError>
         </configuration>
       </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
 </project>
