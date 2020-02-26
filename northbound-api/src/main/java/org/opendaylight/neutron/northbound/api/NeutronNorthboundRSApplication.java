@@ -65,6 +65,8 @@ public final class NeutronNorthboundRSApplication extends Application {
     private final NeutronTrunksNorthbound neutronTrunksNorthbound;
     private final NeutronTapServiceNorthbound neutronTapServiceNorthbound;
     private final NeutronTapFlowNorthbound neutronTapFlowNorthbound;
+    private final NeutronBgpvpnNetworkAssociationsNorthbound neutronBgpvpnNetworkAssociationsNorthbound;
+    private final NeutronBgpvpnRouterAssociationsNorthbound neutronBgpvpnRouterAssociationsNorthbound;
 
     @Inject
     public NeutronNorthboundRSApplication(
@@ -98,7 +100,9 @@ public final class NeutronNorthboundRSApplication extends Application {
             NeutronQosPolicyNorthbound neutronQosPolicyNorthbound,
             NeutronTrunksNorthbound neutronTrunksNorthbound,
             NeutronTapServiceNorthbound neutronTapServiceNorthbound,
-            NeutronTapFlowNorthbound neutronTapFlowNorthbound) {
+            NeutronTapFlowNorthbound neutronTapFlowNorthbound,
+            NeutronBgpvpnNetworkAssociationsNorthbound neutronBgpvpnNetworkAssociationsNorthbound,
+            NeutronBgpvpnRouterAssociationsNorthbound neutronBgpvpnRouterAssociationsNorthbound) {
 
         this.neutronNetworksNorthbound = neutronNetworksNorthbound;
         this.neutronSubnetsNorthbound = neutronSubnetsNorthbound;
@@ -131,6 +135,8 @@ public final class NeutronNorthboundRSApplication extends Application {
         this.neutronTrunksNorthbound = neutronTrunksNorthbound;
         this.neutronTapServiceNorthbound = neutronTapServiceNorthbound;
         this.neutronTapFlowNorthbound = neutronTapFlowNorthbound;
+        this.neutronBgpvpnNetworkAssociationsNorthbound = neutronBgpvpnNetworkAssociationsNorthbound;
+        this.neutronBgpvpnRouterAssociationsNorthbound = neutronBgpvpnRouterAssociationsNorthbound;
     }
 
     @Override
@@ -140,7 +146,7 @@ public final class NeutronNorthboundRSApplication extends Application {
 
     @Override
     public Set<Object> getSingletons() {
-        return ImmutableSet.builderWithExpectedSize(32)
+        return ImmutableSet.builderWithExpectedSize(34)
                 .add(getMOXyJsonProvider())
                 // Northbound URIs JAX RS Resources:
                 .add(neutronNetworksNorthbound)
@@ -164,6 +170,8 @@ public final class NeutronNorthboundRSApplication extends Application {
                 .add(neutronVpnIpSecPoliciesNorthbound)
                 .add(neutronVpnIpSecSiteConnectionsNorthbound)
                 .add(neutronBgpvpnsNorthbound)
+                .add(neutronBgpvpnNetworkAssociationsNorthbound)
+                .add(neutronBgpvpnRouterAssociationsNorthbound)
                 .add(neutronL2gatewayNorthbound)
                 .add(neutronL2gatewayConnectionNorthbound)
                 .add(neutronSFCFlowClassifiersNorthbound)
