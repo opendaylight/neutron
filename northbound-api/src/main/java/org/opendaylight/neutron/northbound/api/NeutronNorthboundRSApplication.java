@@ -164,6 +164,8 @@ public final class NeutronNorthboundRSApplication extends Application {
                 .add(neutronVpnIpSecPoliciesNorthbound)
                 .add(neutronVpnIpSecSiteConnectionsNorthbound)
                 .add(neutronBgpvpnsNorthbound)
+                .add(NeutronBgpvpnNetworkAssociationsNorthbound)
+                .add(NeutronBgpvpnRouterAssociationsNorthbound)
                 .add(neutronL2gatewayNorthbound)
                 .add(neutronL2gatewayConnectionNorthbound)
                 .add(neutronSFCFlowClassifiersNorthbound)
