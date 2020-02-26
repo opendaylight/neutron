@@ -87,14 +87,6 @@ module neutron-bgpvpns {
             description "auto-aggregate enabled or not";
             default "false";
         }
-        leaf-list networks {
-            type yang:uuid;
-            description "list of networks this vpn is associated with.";
-        }
-        leaf-list routers {
-            type yang:uuid;
-            description "list of routers this vpn is associated with.";
-        }
     }
 
     grouping bgpvpns-attributes {

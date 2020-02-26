@@ -30,7 +30,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.apache.aries.blueprint.annotation.service.Reference;
+import org.opendaylight.neutron.spi.INeutronBgpvpnNetworkAssociationCRUD;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
+import org.opendaylight.neutron.spi.INeutronBgpvpnRouterAssociationCRUD;
+import org.opendaylight.neutron.spi.NeutronBgpvpnNetworkAssociation;
+import org.opendaylight.neutron.spi.NeutronBgpvpnRouterAssociation;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
 
 /**
@@ -46,9 +50,16 @@ public final class NeutronBgpvpnsNorthbound
     @Context
     UriInfo uriInfo;
 
+
+    INeutronBgpvpnNetworkAssociationCRUD iNeutronBgpvpnNetworkAssociationCRUD;
+    INeutronBgpvpnRouterAssociationCRUD iNeutronBgpvpnRouterAssociationCRUD;
+
     @Inject
-    public NeutronBgpvpnsNorthbound(@Reference INeutronBgpvpnCRUD neutronCRUD) {
+    public NeutronBgpvpnsNorthbound(@Reference INeutronBgpvpnCRUD neutronCRUD, INeutronBgpvpnNetworkAssociationCRUD iNeutronBgpvpnNetworkAssociationCRUD, INeutronBgpvpnRouterAssociationCRUD iNeutronBgpvpnRouterAssociationCRUD) {
         super(neutronCRUD);
+        this.iNeutronBgpvpnNetworkAssociationCRUD = iNeutronBgpvpnNetworkAssociationCRUD;
+        this.iNeutronBgpvpnRouterAssociationCRUD = iNeutronBgpvpnRouterAssociationCRUD;
+
     }
 
     @Override
@@ -178,6 +189,23 @@ public final class NeutronBgpvpnsNorthbound
             @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
             @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
     public Response deleteBgpvpn(@PathParam("bgpvpnUUID") String bgpvpnUUID) {
+        NeutronBgpvpnNetworkAssociationsNorthbound netAssoNorthBound =
+                new NeutronBgpvpnNetworkAssociationsNorthbound(iNeutronBgpvpnNetworkAssociationCRUD);
+        List<NeutronBgpvpnNetworkAssociation> allBgpvpnNetAssos = iNeutronBgpvpnNetworkAssociationCRUD.getAll();
+        for (NeutronBgpvpnNetworkAssociation bgpvpnNetAsso : allBgpvpnNetAssos) {
+            if (bgpvpnUUID != null && bgpvpnUUID.equals(bgpvpnNetAsso.getBgpvpnId())) {
+                netAssoNorthBound.delete(bgpvpnNetAsso.getID());
+            }
+        }
+
+        NeutronBgpvpnRouterAssociationsNorthbound routeAssoNorthBound =
+                new NeutronBgpvpnRouterAssociationsNorthbound(iNeutronBgpvpnRouterAssociationCRUD);
+        List<NeutronBgpvpnRouterAssociation> allBgpvpnRouteAssos = iNeutronBgpvpnRouterAssociationCRUD.getAll();
+        for (NeutronBgpvpnRouterAssociation bgpvpnRouteAsso : allBgpvpnRouteAssos) {
+            if (bgpvpnUUID != null && bgpvpnUUID.equals(bgpvpnRouteAsso.getBgpvpnId())) {
+                routeAssoNorthBound.delete(bgpvpnRouteAsso.getID());
+            }
+        }
         return delete(bgpvpnUUID);
     }
 }
