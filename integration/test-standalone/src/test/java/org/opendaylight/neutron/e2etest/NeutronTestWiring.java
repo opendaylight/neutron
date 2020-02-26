@@ -17,6 +17,8 @@ import org.opendaylight.mdsal.binding.api.DataBroker;
 import org.opendaylight.mdsal.binding.dom.adapter.test.AbstractConcurrentDataBrokerTest;
 import org.opendaylight.neutron.northbound.api.WebInitializer;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
+import org.opendaylight.neutron.spi.INeutronBgpvpnNetworkAssociationCRUD;
+import org.opendaylight.neutron.spi.INeutronBgpvpnRouterAssociationCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronFirewallRuleCRUD;
@@ -48,6 +50,8 @@ import org.opendaylight.neutron.spi.INeutronVpnIpSecPolicyCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnIpSecSiteConnectionsCRUD;
 import org.opendaylight.neutron.spi.INeutronVpnServiceCRUD;
 import org.opendaylight.neutron.transcriber.NeutronBgpvpnInterface;
+import org.opendaylight.neutron.transcriber.NeutronBgpvpnNetworkAssociationInterface;
+import org.opendaylight.neutron.transcriber.NeutronBgpvpnRouterAssociationInterface;
 import org.opendaylight.neutron.transcriber.NeutronFirewallInterface;
 import org.opendaylight.neutron.transcriber.NeutronFirewallPolicyInterface;
 import org.opendaylight.neutron.transcriber.NeutronFirewallRuleInterface;
@@ -78,6 +82,7 @@ import org.opendaylight.neutron.transcriber.NeutronVpnIkePolicyInterface;
 import org.opendaylight.neutron.transcriber.NeutronVpnIpSecPolicyInterface;
 import org.opendaylight.neutron.transcriber.NeutronVpnIpSecSiteConnectionsInterface;
 import org.opendaylight.neutron.transcriber.NeutronVpnServiceInterface;
+
 
 /**
  * Dependency Injection wiring for Neutron.
@@ -121,6 +126,8 @@ public class NeutronTestWiring extends AbstractModule {
         bind(INeutronLoadBalancerListenerCRUD.class).to(NeutronLoadBalancerListenerInterface.class);
         bind(INeutronLoadBalancerPoolCRUD.class).to(NeutronLoadBalancerPoolInterface.class);
         bind(INeutronBgpvpnCRUD.class).to(NeutronBgpvpnInterface.class);
+        bind(INeutronBgpvpnRouterAssociationCRUD.class).to(NeutronBgpvpnRouterAssociationInterface.class);
+        bind(INeutronBgpvpnNetworkAssociationCRUD.class).to(NeutronBgpvpnNetworkAssociationInterface.class);
         bind(INeutronL2gatewayCRUD.class).to(NeutronL2gatewayInterface.class);
         bind(INeutronL2gatewayConnectionCRUD.class).to(NeutronL2gatewayConnectionInterface.class);
         bind(INeutronLoadBalancerHealthMonitorCRUD.class).to(NeutronLoadBalancerHealthMonitorInterface.class);
