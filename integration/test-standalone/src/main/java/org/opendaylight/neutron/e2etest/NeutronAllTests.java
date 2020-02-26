@@ -38,6 +38,8 @@ public final class NeutronAllTests {
         NeutronIpSecSiteConnectionTests.runTests(baseURL);
         NeutronIKEPoliciesTests.runTests(baseURL);
         NeutronBgpvpnTests.runTests(baseURL);
+        NeutronBgpvpnNetworkAssociationTests.runTests(baseURL);
+        NeutronBgpvpnRouterAssociationTests.runTests(baseURL);
         NeutronL2GatewayTests.runTests(baseURL);
         NeutronL2GatewayConnectionTests.runTests(baseURL);
         NeutronQosPolicyTests.runTests(baseURL);

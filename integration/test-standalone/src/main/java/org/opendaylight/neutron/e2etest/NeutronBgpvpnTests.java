@@ -26,7 +26,6 @@ public class NeutronBgpvpnTests {
         String content = "{ \"bgpvpn\": {" + " \"status\": \"ACTIVE\", \"type\": \"l3\", "
                 + " \"name\": \"vpn1\", \"admin_state_up\": true, "
                 + " \"tenant_id\": \"9bacb3c5d39d41a79512987f338cf177\", " + " \"route_targets\": \"64512:1\", "
-                + " \"networks\": \"3b80198d-4f7b-4f77-9ef5-774d54e17126\", "
                 + " \"vni\": 100, "
                 + " \"auto_aggregate\": true, \"id\": \"4e8e5957-649f-477b-9e5b-f1f75b21c03c\" " + " } }";
         HttpUtils.test_create(url, content, "Singleton Bgpvpn Post Failed NB");
