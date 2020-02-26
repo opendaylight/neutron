@@ -1,0 +1,50 @@
+/*
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse License v1.0 which accompanies this distribution,
+ * and is available at http://www.eclipse.org/legal/epl-v10.html
+ */
+
+module neutron-bgpvpn-network-association {
+
+    yang-version 1;
+
+    namespace "urn:opendaylight:neutron-bgpvpn-network-association";
+
+    prefix neutron-bgpvpn-network-association;
+
+    import ietf-yang-types { prefix "yang"; }
+    import neutron-attrs { prefix "attrs"; }
+
+    organization "OpenDaylight Neutron Group";
+
+    contact "Manjunath N P <manjupayala@gmail.com>";
+
+    description "This YANG module defines Openstack Liberty Neutron BGPVPN Network Association model";
+
+    revision "2019-05-02" {
+        description
+            "Initial version of Openstack Neutron Liberty BGPVPN Network Association model.";
+    }
+
+    grouping bgpvpn-network-association-attributes {
+        leaf bgpvpn-id {
+            type yang:uuid;
+        }
+        leaf network-id {
+            type yang:uuid;
+            description "Network associated to this VPN.";
+        }
+    }
+
+    grouping bgpvpn-network-associations-attributes {
+        container bgpvpn-network-associations {
+            list bgpvpn-network-association {
+                key "uuid";
+                uses attrs:base-attributes;
+                uses attrs:admin-attributes;
+                uses bgpvpn-network-association-attributes;
+            }
+        }
+    }
+}
