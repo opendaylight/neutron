@@ -16,7 +16,6 @@ import org.apache.aries.blueprint.annotation.service.Service;
 import org.opendaylight.controller.md.sal.binding.api.DataBroker;
 import org.opendaylight.neutron.spi.INeutronBgpvpnCRUD;
 import org.opendaylight.neutron.spi.NeutronBgpvpn;
-import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.BgpvpnTypeBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.BgpvpnTypeL2;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.BgpvpnTypeL3;
@@ -87,20 +86,6 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
             }
             result.setRouteDistinguishers(routeDistinguishers);
         }
-        if (bgpvpn.getRouters() != null) {
-            final List<String> routers = new ArrayList<>();
-            for (final Uuid router : bgpvpn.getRouters()) {
-                routers.add(router.getValue());
-            }
-            result.setRouters(routers);
-        }
-        if (bgpvpn.getNetworks() != null) {
-            final List<String> networks = new ArrayList<>();
-            for (final Uuid network : bgpvpn.getNetworks()) {
-                networks.add(network.getValue());
-            }
-            result.setNetworks(networks);
-        }
         return result;
     }
 
@@ -150,20 +135,6 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
                 routeDistinguishers.add(routeDistinguisher);
             }
             bgpvpnBuilder.setRouteDistinguishers(routeDistinguishers);
-        }
-        if (bgpvpn.getRouters() != null) {
-            final List<Uuid> routers = new ArrayList<>();
-            for (final String router : bgpvpn.getRouters()) {
-                routers.add(toUuid(router));
-            }
-            bgpvpnBuilder.setRouters(routers);
-        }
-        if (bgpvpn.getNetworks() != null) {
-            final List<Uuid> networks = new ArrayList<>();
-            for (final String network : bgpvpn.getNetworks()) {
-                networks.add(toUuid(network));
-            }
-            bgpvpnBuilder.setNetworks(networks);
         }
         return bgpvpnBuilder.build();
     }
