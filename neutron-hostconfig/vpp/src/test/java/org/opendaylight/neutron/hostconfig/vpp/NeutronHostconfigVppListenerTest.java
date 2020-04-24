@@ -5,17 +5,14 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.hostconfig.vpp;
 
 import com.google.common.util.concurrent.SettableFuture;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.junit.After;
 import org.junit.Assert;

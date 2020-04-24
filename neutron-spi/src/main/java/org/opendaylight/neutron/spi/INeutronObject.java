@@ -8,7 +8,6 @@
 package org.opendaylight.neutron.spi;
 
 import java.util.List;
-
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 
 /**

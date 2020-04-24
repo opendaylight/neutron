@@ -11,7 +11,6 @@ import com.google.common.base.Optional;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.MultivaluedHashMap;
-
 import org.opendaylight.netconf.sal.restconf.api.JSONRestconfService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.northbound.api.config.rev181024.NeutronNorthboundApiConfig;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
