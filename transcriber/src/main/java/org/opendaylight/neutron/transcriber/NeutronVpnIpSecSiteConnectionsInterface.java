@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,8 +37,8 @@ public final class NeutronVpnIpSecSiteConnectionsInterface
 
     // INeutronVpnIpSecSiteConnectionsCRUD methods
     @Override
-    protected List<Ipsecsiteconnection> getDataObjectList(IpsecSiteConnections connections) {
-        return connections.getIpsecsiteconnection();
+    protected Collection<Ipsecsiteconnection> getDataObjectList(IpsecSiteConnections connections) {
+        return connections.nonnullIpsecsiteconnection().values();
     }
 
     @Override

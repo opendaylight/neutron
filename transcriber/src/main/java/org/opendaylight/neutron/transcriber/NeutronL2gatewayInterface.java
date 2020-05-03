@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,8 +39,8 @@ public final class NeutronL2gatewayInterface
     }
 
     @Override
-    protected List<L2gateway> getDataObjectList(L2gateways l2gateways) {
-        return l2gateways.getL2gateway();
+    protected Collection<L2gateway> getDataObjectList(L2gateways l2gateways) {
+        return l2gateways.nonnullL2gateway().values();
     }
 
     @Override
@@ -48,38 +49,34 @@ public final class NeutronL2gatewayInterface
         fromMdBaseAttributes(l2gateway, result);
         final List<NeutronL2gatewayDevice> neutronL2gatewayDevices = new ArrayList<>();
 
-        if (l2gateway.getDevices() != null) {
-            for (final Devices device : l2gateway.getDevices()) {
-                final NeutronL2gatewayDevice neutronL2gatewayDevice = new NeutronL2gatewayDevice();
-                final List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces = new ArrayList<>();
-                if (device.getDeviceName() != null) {
-                    neutronL2gatewayDevice.setDeviceName(device.getDeviceName());
-                }
-                if (device.getUuid() != null) {
-                    neutronL2gatewayDevice.setID(device.getUuid().getValue());
-                }
-                if (device.getInterfaces() != null) {
-                    for (final Interfaces deviceInterface : device.getInterfaces()) {
-                        final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface =
-                                new NeutronL2gatewayDeviceInterface();
-                        String interfaceName = null;
-                        final List<Integer> segmentationIds = new ArrayList<>();
-                        if (deviceInterface.getInterfaceName() != null) {
-                            interfaceName = deviceInterface.getInterfaceName();
-                        }
-                        if (deviceInterface.getSegmentationIds() != null) {
-                            for (final Integer segmentId : deviceInterface.getSegmentationIds()) {
-                                segmentationIds.add(segmentId);
-                            }
-                            neutronL2gatewayDeviceInterface.setSegmentationId(segmentationIds);
-                        }
-                        neutronL2gatewayDeviceInterface.setInterfaceName(interfaceName);
-                        neutronL2gatewayDeviceInterfaces.add(neutronL2gatewayDeviceInterface);
-                    }
-                }
-                neutronL2gatewayDevice.setNeutronL2gatewayDeviceInterfaces(neutronL2gatewayDeviceInterfaces);
-                neutronL2gatewayDevices.add(neutronL2gatewayDevice);
+        for (final Devices device : l2gateway.nonnullDevices().values()) {
+            final NeutronL2gatewayDevice neutronL2gatewayDevice = new NeutronL2gatewayDevice();
+            final List<NeutronL2gatewayDeviceInterface> neutronL2gatewayDeviceInterfaces = new ArrayList<>();
+            if (device.getDeviceName() != null) {
+                neutronL2gatewayDevice.setDeviceName(device.getDeviceName());
             }
+            if (device.getUuid() != null) {
+                neutronL2gatewayDevice.setID(device.getUuid().getValue());
+            }
+            for (final Interfaces deviceInterface : device.nonnullInterfaces().values()) {
+                final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface =
+                        new NeutronL2gatewayDeviceInterface();
+                String interfaceName = null;
+                final List<Integer> segmentationIds = new ArrayList<>();
+                if (deviceInterface.getInterfaceName() != null) {
+                    interfaceName = deviceInterface.getInterfaceName();
+                }
+                if (deviceInterface.getSegmentationIds() != null) {
+                    for (final Integer segmentId : deviceInterface.getSegmentationIds()) {
+                        segmentationIds.add(segmentId);
+                    }
+                    neutronL2gatewayDeviceInterface.setSegmentationId(segmentationIds);
+                }
+                neutronL2gatewayDeviceInterface.setInterfaceName(interfaceName);
+                neutronL2gatewayDeviceInterfaces.add(neutronL2gatewayDeviceInterface);
+            }
+            neutronL2gatewayDevice.setNeutronL2gatewayDeviceInterfaces(neutronL2gatewayDeviceInterfaces);
+            neutronL2gatewayDevices.add(neutronL2gatewayDevice);
         }
         result.setNeutronL2gatewayDevices(neutronL2gatewayDevices);
         return result;

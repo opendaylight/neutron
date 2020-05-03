@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -74,7 +75,7 @@ public final class NeutronSFCPortPairGroupInterface
     }
 
     @Override
-    protected List<PortPairGroup> getDataObjectList(PortPairGroups dataObjects) {
-        return dataObjects.getPortPairGroup();
+    protected Collection<PortPairGroup> getDataObjectList(PortPairGroups dataObjects) {
+        return dataObjects.nonnullPortPairGroup().values();
     }
 }

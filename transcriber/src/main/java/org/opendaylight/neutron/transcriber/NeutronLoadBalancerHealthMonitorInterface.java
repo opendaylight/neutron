@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -46,8 +47,8 @@ public final class NeutronLoadBalancerHealthMonitorInterface
     }
 
     @Override
-    protected List<Healthmonitor> getDataObjectList(Healthmonitors healthMonitors) {
-        return healthMonitors.getHealthmonitor();
+    protected Collection<Healthmonitor> getDataObjectList(Healthmonitors healthMonitors) {
+        return healthMonitors.nonnullHealthmonitor().values();
     }
 
     @Override

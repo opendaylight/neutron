@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -31,8 +31,8 @@ public final class NeutronFirewallPolicyInterface
     }
 
     @Override
-    protected List<FirewallPolicy> getDataObjectList(FirewallPolicies policies) {
-        return policies.getFirewallPolicy();
+    protected Collection<FirewallPolicy> getDataObjectList(FirewallPolicies policies) {
+        return policies.nonnullFirewallPolicy().values();
     }
 
     @Override

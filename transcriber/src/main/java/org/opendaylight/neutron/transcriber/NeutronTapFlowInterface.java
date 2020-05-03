@@ -8,7 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -34,17 +34,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.ta
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.tapaas.rev171024.tap.services.attributes.tap.services.TapServiceKey;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Singleton
 @Service(classes = INeutronTapFlowCRUD.class)
 public final class NeutronTapFlowInterface
         extends AbstractTranscriberInterface<TapFlow, TapFlows, TapFlowKey, NeutronTapFlow, TapServiceAttributes>
         implements INeutronTapFlowCRUD {
-
-    private static final Logger LOG = LoggerFactory.getLogger(NeutronTapFlowInterface.class);
-
     private static final ImmutableBiMap<Class<? extends DirectionBase>,
             String> DIRECTION_MAP = new ImmutableBiMap.Builder<Class<? extends DirectionBase>, String>()
                     .put(DirectionOut.class, "OUT")
@@ -56,7 +51,7 @@ public final class NeutronTapFlowInterface
         super(TapFlowBuilder.class, db);
     }
 
-    protected InstanceIdentifier<TapFlow> createTapFlowInstanceIdentifier(String tapServiceUUID, TapFlow item) {
+    private static InstanceIdentifier<TapFlow> createTapFlowInstanceIdentifier(String tapServiceUUID, TapFlow item) {
         return InstanceIdentifier.create(Neutron.class)
                 .child(TapServices.class)
                 .child(TapService.class, new TapServiceKey(toUuid(tapServiceUUID)))
@@ -64,8 +59,8 @@ public final class NeutronTapFlowInterface
     }
 
     @Override
-    protected List<TapFlow> getDataObjectList(TapFlows flows) {
-        return flows.getTapFlow();
+    protected Collection<TapFlow> getDataObjectList(TapFlows flows) {
+        return flows.nonnullTapFlow().values();
     }
 
     @Override
@@ -120,7 +115,7 @@ public final class NeutronTapFlowInterface
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final TapFlow item = toMd(tapFlow);
         final InstanceIdentifier<TapFlow> iid = createTapFlowInstanceIdentifier(tapFlow.getTapFlowServiceID(), item);
-        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
+        transaction.mergeParentStructurePut(LogicalDatastoreType.CONFIGURATION, iid, item);
         checkedCommit(transaction);
     }
 

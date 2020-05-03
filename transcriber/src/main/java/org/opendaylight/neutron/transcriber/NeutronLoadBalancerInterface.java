@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -32,8 +32,8 @@ public final class NeutronLoadBalancerInterface
     }
 
     @Override
-    protected List<Loadbalancer> getDataObjectList(Loadbalancers lbs) {
-        return lbs.getLoadbalancer();
+    protected Collection<Loadbalancer> getDataObjectList(Loadbalancers lbs) {
+        return lbs.nonnullLoadbalancer().values();
     }
 
     @Override

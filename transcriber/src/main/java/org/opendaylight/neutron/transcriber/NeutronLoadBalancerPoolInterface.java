@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,8 +67,8 @@ public final class NeutronLoadBalancerPoolInterface
     }
 
     @Override
-    protected List<Pool> getDataObjectList(Pools pools) {
-        return pools.getPool();
+    protected Collection<Pool> getDataObjectList(Pools pools) {
+        return pools.nonnullPool().values();
     }
 
     @Override
@@ -127,7 +128,7 @@ public final class NeutronLoadBalancerPoolInterface
         }
         if (pool.getMembers() != null) {
             final List<NeutronLoadBalancerPoolMember> members = new ArrayList<>();
-            for (final Member member : pool.getMembers().getMember()) {
+            for (final Member member : pool.getMembers().nonnullMember().values()) {
                 members.add(fromMemberMd(member));
             }
             answer.setLoadBalancerPoolMembers(members);
@@ -170,7 +171,7 @@ public final class NeutronLoadBalancerPoolInterface
         final Set<NeutronLoadBalancerPoolMember> allLoadBalancerPoolMembers = new HashSet<>();
         final Members members = readMd(createMembersInstanceIdentifier(toMd(poolUuid)));
         if (members != null) {
-            for (final Member member : members.getMember()) {
+            for (final Member member : members.nonnullMember().values()) {
                 allLoadBalancerPoolMembers.add(fromMemberMd(member));
             }
         }
@@ -216,12 +217,12 @@ public final class NeutronLoadBalancerPoolInterface
         return !neutronLoadBalancerPoolMemberExists(poolUuid, loadBalancerPoolMemberID);
     }
 
-    protected InstanceIdentifier<Member> createMemberInstanceIdentifier(Pool pool, Member item) {
+    static InstanceIdentifier<Member> createMemberInstanceIdentifier(Pool pool, Member item) {
         return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.key())
                 .child(Members.class).child(Member.class, item.key());
     }
 
-    protected InstanceIdentifier<Members> createMembersInstanceIdentifier(Pool pool) {
+    static InstanceIdentifier<Members> createMembersInstanceIdentifier(Pool pool) {
         return InstanceIdentifier.create(Neutron.class).child(Pools.class).child(Pool.class, pool.key())
                 .child(Members.class);
     }
@@ -247,7 +248,7 @@ public final class NeutronLoadBalancerPoolInterface
         return answer;
     }
 
-    protected Member toMemberMd(NeutronLoadBalancerPoolMember member) {
+    static Member toMemberMd(NeutronLoadBalancerPoolMember member) {
         final MemberBuilder memberBuilder = toMdIds(member, MemberBuilder.class);
         memberBuilder.setAdminStateUp(member.getPoolMemberAdminStateIsUp());
         if (member.getPoolMemberAddress() != null) {
@@ -266,7 +267,7 @@ public final class NeutronLoadBalancerPoolInterface
         return memberBuilder.build();
     }
 
-    private Member toMemberMd(String uuid) {
+    private static Member toMemberMd(String uuid) {
         final MemberBuilder memberBuilder = new MemberBuilder();
         memberBuilder.setUuid(toUuid(uuid));
         return memberBuilder.build();
@@ -283,7 +284,7 @@ public final class NeutronLoadBalancerPoolInterface
         final WriteTransaction transaction = getDataBroker().newWriteOnlyTransaction();
         final Member item = toMemberMd(neutronObject);
         final InstanceIdentifier<Member> iid = createMemberInstanceIdentifier(pool, item);
-        transaction.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
+        transaction.mergeParentStructurePut(LogicalDatastoreType.CONFIGURATION, iid, item);
         checkedCommit(transaction);
     }
 

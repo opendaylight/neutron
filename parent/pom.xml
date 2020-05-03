@@ -12,7 +12,7 @@
   <parent>
     <groupId>org.opendaylight.mdsal</groupId>
     <artifactId>binding-parent</artifactId>
-    <version>5.0.9</version>
+    <version>6.0.0</version>
     <relativePath/>
   </parent>
 
@@ -45,8 +45,8 @@
       </dependency>
       <dependency>
         <groupId>org.opendaylight.controller</groupId>
-        <artifactId>mdsal-artifacts</artifactId>
-        <version>1.11.0</version>
+        <artifactId>controller-artifacts</artifactId>
+        <version>2.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -73,7 +73,7 @@
               we just have to repeat it here because, apparently, Maven is too dumb to inherit
               the version from a dependencyManagement in a parent POM to the dependencyManagement here.
               (The alternative to repeat the exclusion below in each Neutron project is much worse.) -->
-         <version>2.7.3</version>
+         <version>2.7.5</version>
          <exclusions>
            <exclusion>
              <groupId>javax.json</groupId>

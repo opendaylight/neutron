@@ -140,7 +140,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         }
     }
 
-    private boolean validateVppNode(Node node) {
+    private static boolean validateVppNode(Node node) {
         LOG.info("Registering new node {}", node.getNodeId().getValue());
         NetconfNode netconfNode = node.augmentation(NetconfNode.class);
         if (netconfNode == null) {
@@ -172,13 +172,13 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         return false;
     }
 
-    private boolean isCapabilitiesPresent(final NetconfNode netconfNode) {
+    private static boolean isCapabilitiesPresent(final NetconfNode netconfNode) {
         return netconfNode.getAvailableCapabilities() == null
                 || netconfNode.getAvailableCapabilities().getAvailableCapability() == null
                 || netconfNode.getAvailableCapabilities().getAvailableCapability().isEmpty();
     }
 
-    private boolean capabilityCheck(final List<AvailableCapability> capabilities) {
+    private static boolean capabilityCheck(final List<AvailableCapability> capabilities) {
         final List<String> availableCapabilities =
                 capabilities.stream().map(AvailableCapability::getCapability).collect(Collectors.toList());
         return REQUIRED_CAPABILITIES.stream().map(QName::toString).allMatch(availableCapabilities::contains);

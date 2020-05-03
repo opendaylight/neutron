@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -42,8 +43,8 @@ public final class NeutronQosPolicyInterface
     }
 
     @Override
-    protected List<QosPolicy> getDataObjectList(QosPolicies qosPolicies) {
-        return qosPolicies.getQosPolicy();
+    protected Collection<QosPolicy> getDataObjectList(QosPolicies qosPolicies) {
+        return qosPolicies.nonnullQosPolicy().values();
     }
 
     @Override
@@ -101,7 +102,7 @@ public final class NeutronQosPolicyInterface
         }
         if (qosPolicy.getBandwidthLimitRules() != null) {
             final List<NeutronQosBandwidthLimitRule> bandwidthLimitRules = new ArrayList<>();
-            for (final BandwidthLimitRules rule : qosPolicy.getBandwidthLimitRules()) {
+            for (final BandwidthLimitRules rule : qosPolicy.getBandwidthLimitRules().values()) {
                 NeutronQosBandwidthLimitRule opt = new NeutronQosBandwidthLimitRule();
                 opt.setMaxKbps(rule.getMaxKbps().toJava());
                 opt.setMaxBurstKbps(rule.getMaxBurstKbps().toJava());
@@ -112,7 +113,7 @@ public final class NeutronQosPolicyInterface
         }
         if (qosPolicy.getDscpmarkingRules() != null) {
             final List<NeutronQosDscpMarkingRule> dscpMarkingRules = new ArrayList<>();
-            for (final DscpmarkingRules rule : qosPolicy.getDscpmarkingRules()) {
+            for (final DscpmarkingRules rule : qosPolicy.getDscpmarkingRules().values()) {
                 NeutronQosDscpMarkingRule opt = new NeutronQosDscpMarkingRule();
                 opt.setDscpMark(rule.getDscpMark().toJava());
                 dscpMarkingRules.add(opt);
@@ -121,7 +122,7 @@ public final class NeutronQosPolicyInterface
         }
         if (qosPolicy.getMinimumbandwidthRules() != null) {
             final List<NeutronQosMinimumBandwidthRule> minimumBandwidthRules = new ArrayList<>();
-            for (final MinimumbandwidthRules rule : qosPolicy.getMinimumbandwidthRules()) {
+            for (final MinimumbandwidthRules rule : qosPolicy.getMinimumbandwidthRules().values()) {
                 NeutronQosMinimumBandwidthRule opt = new NeutronQosMinimumBandwidthRule();
                 opt.setID(rule.getTenantId().getValue());
                 opt.setTenantID(rule.getTenantId().getValue());

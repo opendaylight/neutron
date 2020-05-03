@@ -8,7 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -52,8 +52,8 @@ public final class NeutronFirewallRuleInterface
     }
 
     @Override
-    protected List<FirewallRule> getDataObjectList(FirewallRules rules) {
-        return rules.getFirewallRule();
+    protected Collection<FirewallRule> getDataObjectList(FirewallRules rules) {
+        return rules.nonnullFirewallRule().values();
     }
 
     @Override

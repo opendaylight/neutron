@@ -5,10 +5,10 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.transcriber;
 
-import com.google.common.base.Preconditions;
+import static java.util.Objects.requireNonNull;
+
 import com.google.common.base.Throwables;
 import com.google.common.util.concurrent.FluentFuture;
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -137,7 +138,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     protected AbstractTranscriberInterface(Class<? extends Builder<T>> builderClass, DataBroker db) {
-        this.db = Preconditions.checkNotNull(db);
+        this.db = requireNonNull(db);
         this.builderClass = builderClass;
 
         ParameterizedType parameterizedType = (ParameterizedType) getClass().getGenericSuperclass();
@@ -174,9 +175,8 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
-    public DataBroker getDataBroker() {
-        Preconditions.checkNotNull(db);
-        return db;
+    public @NonNull DataBroker getDataBroker() {
+        return requireNonNull(db);
     }
 
     private InstanceIdentifier<T> createInstanceIdentifier(T item) {
@@ -313,9 +313,9 @@ public abstract class AbstractTranscriberInterface<
 
     protected abstract S fromMd(T dataObject);
 
-    private <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadOperations tx) throws ReadFailedException {
-        final FluentFuture<Optional<W>> future = Preconditions.checkNotNull(tx).read(LogicalDatastoreType.CONFIGURATION,
-            path);
+    private static <W extends DataObject> W readMd(InstanceIdentifier<W> path, ReadOperations tx)
+            throws ReadFailedException {
+        final FluentFuture<Optional<W>> future = requireNonNull(tx).read(LogicalDatastoreType.CONFIGURATION, path);
         try {
             return future.get().orElse(null);
         } catch (InterruptedException e) {
@@ -338,17 +338,17 @@ public abstract class AbstractTranscriberInterface<
     }
 
     private void updateMd(S neutronObject, WriteTransaction tx) throws TransactionCommitFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
 
         final T item = toMd(neutronObject);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
-        tx.put(LogicalDatastoreType.CONFIGURATION, iid, item, true);
+        tx.mergeParentStructurePut(LogicalDatastoreType.CONFIGURATION, iid, item);
         // Check if it's successfully committed, otherwise exception will be thrown.
         checkedCommit(tx);
     }
 
     private void removeMd(T item, WriteTransaction tx) throws TransactionCommitFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         final InstanceIdentifier<T> iid = createInstanceIdentifier(item);
         tx.delete(LogicalDatastoreType.CONFIGURATION, iid);
         // Check if it's successfully committed, otherwise exception will be thrown.
@@ -356,7 +356,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     protected static Uuid toUuid(String uuid) {
-        Preconditions.checkNotNull(uuid, "uuid");
+        requireNonNull(uuid, "uuid");
         Uuid result;
         try {
             result = new Uuid(uuid);
@@ -384,13 +384,13 @@ public abstract class AbstractTranscriberInterface<
 
     @Override
     public boolean exists(String uuid, ReadOperations tx) throws ReadFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         return dataObject != null;
     }
 
     private S get(String uuid, ReadTransaction tx) throws ReadFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         final T dataObject = readMd(createInstanceIdentifier(toMd(uuid)), tx);
         if (dataObject == null) {
             return null;
@@ -405,10 +405,10 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
-    protected abstract List<T> getDataObjectList(U dataObjects);
+    protected abstract Collection<T> getDataObjectList(U dataObjects);
 
     private List<S> getAll(ReadTransaction tx) throws ReadFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         final Set<S> allNeutronObjects = new HashSet<>();
         final U dataObjects = readMd(createInstanceIdentifier(), tx);
         if (dataObjects != null) {
@@ -434,7 +434,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     private Result add(S input, ReadWriteTransaction tx) throws OperationFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         if (exists(input.getID(), tx)) {
             tx.cancel();
             return Result.AlreadyExists;
@@ -470,7 +470,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     private boolean remove(String uuid, ReadWriteTransaction tx) throws OperationFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         if (!exists(uuid, tx)) {
             tx.cancel();
             return false;
@@ -502,7 +502,7 @@ public abstract class AbstractTranscriberInterface<
     }
 
     private Result update(String uuid, S delta, ReadWriteTransaction tx) throws OperationFailedException {
-        Preconditions.checkNotNull(tx);
+        requireNonNull(tx);
         if (!exists(uuid, tx)) {
             tx.cancel();
             return Result.DoesNotExist;
@@ -573,8 +573,7 @@ public abstract class AbstractTranscriberInterface<
             CheckedFunction<@NonNull X, @NonNull Boolean, ReadFailedException> function) throws ReadFailedException {
         if (property != null) {
             Boolean result = function.apply(property);
-            Preconditions.checkNotNull(result, "result");
-            return result;
+            return requireNonNull(result, "result");
         } else {
             // We return true, in line with the default implementation
             // in org.opendaylight.neutron.transcriber.AbstractTranscriberInterface.

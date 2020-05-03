@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -40,8 +41,8 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
     }
 
     @Override
-    protected List<Bgpvpn> getDataObjectList(Bgpvpns bgpvpns) {
-        return bgpvpns.getBgpvpn();
+    protected Collection<Bgpvpn> getDataObjectList(Bgpvpns bgpvpns) {
+        return bgpvpns.nonnullBgpvpn().values();
     }
 
     @Override

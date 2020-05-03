@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -35,8 +35,8 @@ public final class NeutronVpnIpSecPolicyInterface
     // IfNBVPNIPSECPolicyCRUD methods
 
     @Override
-    protected List<Ipsecpolicy> getDataObjectList(IpsecPolicies policies) {
-        return policies.getIpsecpolicy();
+    protected Collection<Ipsecpolicy> getDataObjectList(IpsecPolicies policies) {
+        return policies.nonnullIpsecpolicy().values();
     }
 
     @Override

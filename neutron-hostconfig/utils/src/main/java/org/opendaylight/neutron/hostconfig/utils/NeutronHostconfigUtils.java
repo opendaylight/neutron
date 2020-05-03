@@ -49,7 +49,7 @@ public class NeutronHostconfigUtils {
             case UPDATE:
                 final WriteTransaction writeTx = dataBroker.newWriteOnlyTransaction();
                 hostConfigId = createInstanceIdentifier(hostConfig);
-                writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig, true);
+                writeTx.put(LogicalDatastoreType.OPERATIONAL, hostConfigId, hostConfig);
                 commit(writeTx);
                 LOG.trace("Hostconfig updated for node {}", hostConfig.getHostId());
                 break;

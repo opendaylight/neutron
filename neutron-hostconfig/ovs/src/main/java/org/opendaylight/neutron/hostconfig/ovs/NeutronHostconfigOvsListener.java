@@ -7,9 +7,10 @@
  */
 package org.opendaylight.neutron.hostconfig.ovs;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -30,6 +31,7 @@ import org.opendaylight.ovsdb.utils.mdsal.utils.MdsalUtils;
 import org.opendaylight.ovsdb.utils.southbound.utils.SouthboundUtils;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.OvsdbNodeAugmentation;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.ovsdb.node.attributes.OpenvswitchExternalIds;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.params.xml.ns.yang.ovsdb.rev150105.ovsdb.node.attributes.OpenvswitchExternalIdsKey;
 import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.rev131021.NetworkTopology;
 import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.rev131021.network.topology.Topology;
 import org.opendaylight.yang.gen.v1.urn.tbd.params.xml.ns.yang.network.topology.rev131021.network.topology.TopologyKey;
@@ -46,7 +48,8 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     private final SouthboundUtils southboundUtils;
     private final NeutronHostconfigUtils neutronHostconfig;
     private ListenerRegistration<DataTreeChangeListener<Node>> listenerRegistration;
-    private static final String OS_HOST_CONFIG_HOST_ID_KEY = "odl_os_hostconfig_hostid";
+    private static final OpenvswitchExternalIdsKey OS_HOST_CONFIG_HOST_ID_KEY =
+            new OpenvswitchExternalIdsKey("odl_os_hostconfig_hostid");
     private static final String OS_HOST_CONFIG_CONFIG_KEY_PREFIX = "odl_os_hostconfig_config_odl_";
     private static int HOST_TYPE_STR_LEN = 8;
 
@@ -85,7 +88,7 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
 
     @Override
     public void onDataTreeChanged(@NonNull Collection<DataTreeModification<Node>> changes) {
-        Preconditions.checkNotNull(changes, "Changes may not be null!");
+        requireNonNull(changes, "Changes may not be null!");
         try {
             processChanges(changes);
         } catch (TransactionCommitFailedException e) {
@@ -130,10 +133,10 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
     }
 
     private Map<String, String> extractHostConfig(Node node) {
-        Map<String, String> config = Maps.newHashMap();
+        Map<String, String> config = new HashMap<>();
         OvsdbNodeAugmentation ovsdbNode = getOvsdbNodeAugmentation(node);
-        if (ovsdbNode != null && ovsdbNode.getOpenvswitchExternalIds() != null) {
-            for (OpenvswitchExternalIds openvswitchExternalIds : ovsdbNode.getOpenvswitchExternalIds()) {
+        if (ovsdbNode != null) {
+            for (OpenvswitchExternalIds openvswitchExternalIds : ovsdbNode.nonnullOpenvswitchExternalIds().values()) {
                 if (openvswitchExternalIds.getExternalIdKey().startsWith(OS_HOST_CONFIG_CONFIG_KEY_PREFIX)) {
                     // Extract the host type. Max 8 characters after
                     // suffix OS_HOST_CONFIG_CONFIG_KEY_PREFIX.length()
@@ -154,13 +157,12 @@ public class NeutronHostconfigOvsListener implements ClusteredDataTreeChangeList
         return config;
     }
 
-    private String getExternalId(Node node, String key) {
+    private String getExternalId(Node node, OpenvswitchExternalIdsKey key) {
         OvsdbNodeAugmentation ovsdbNode = getOvsdbNodeAugmentation(node);
-        if (ovsdbNode != null && ovsdbNode.getOpenvswitchExternalIds() != null) {
-            for (OpenvswitchExternalIds openvswitchExternalIds : ovsdbNode.getOpenvswitchExternalIds()) {
-                if (openvswitchExternalIds.getExternalIdKey().equals(key)) {
-                    return openvswitchExternalIds.getExternalIdValue();
-                }
+        if (ovsdbNode != null) {
+            OpenvswitchExternalIds openvswitchExternalIds = ovsdbNode.nonnullOpenvswitchExternalIds().get(key);
+            if (openvswitchExternalIds != null) {
+                return openvswitchExternalIds.getExternalIdValue();
             }
         }
         return null;

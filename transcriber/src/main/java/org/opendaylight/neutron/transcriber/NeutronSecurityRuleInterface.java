@@ -9,7 +9,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -52,8 +52,8 @@ public final class NeutronSecurityRuleInterface extends
     }
 
     @Override
-    protected List<SecurityRule> getDataObjectList(SecurityRules rules) {
-        return rules.getSecurityRule();
+    protected Collection<SecurityRule> getDataObjectList(SecurityRules rules) {
+        return rules.nonnullSecurityRule().values();
     }
 
     @Override

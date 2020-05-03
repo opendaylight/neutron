@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -35,8 +35,8 @@ public final class NeutronVpnIkePolicyInterface
     // IfNBVPNIKEPolicyCRUD methods
 
     @Override
-    protected List<Ikepolicy> getDataObjectList(IkePolicies policies) {
-        return policies.getIkepolicy();
+    protected Collection<Ikepolicy> getDataObjectList(IkePolicies policies) {
+        return policies.nonnullIkepolicy().values();
     }
 
     @Override

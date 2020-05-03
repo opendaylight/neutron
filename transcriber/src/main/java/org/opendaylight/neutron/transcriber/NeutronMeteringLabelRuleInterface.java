@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -35,8 +35,8 @@ public final class NeutronMeteringLabelRuleInterface
 
     // IfNBMeteringLabelRuleCRUD methods
     @Override
-    protected List<MeteringRule> getDataObjectList(MeteringRules rules) {
-        return rules.getMeteringRule();
+    protected Collection<MeteringRule> getDataObjectList(MeteringRules rules) {
+        return rules.nonnullMeteringRule().values();
     }
 
     @Override

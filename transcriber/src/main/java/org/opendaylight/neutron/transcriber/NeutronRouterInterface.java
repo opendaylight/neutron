@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,8 +45,8 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
 
     // IfNBRouterCRUD Interface methods
     @Override
-    protected List<Router> getDataObjectList(Routers routers) {
-        return routers.getRouter();
+    protected Collection<Router> getDataObjectList(Routers routers) {
+        return routers.nonnullRouter().values();
     }
 
     @Override
@@ -104,7 +105,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         }
         if (router.getRoutes() != null) {
             final List<NeutronRoute> routes = new ArrayList<>();
-            for (final Routes route : router.getRoutes()) {
+            for (final Routes route : router.getRoutes().values()) {
                 final NeutronRoute routerRoute = new NeutronRoute();
                 routerRoute.setDestination(route.getDestination().stringValue());
                 routerRoute.setNextHop(route.getNexthop().stringValue());
@@ -119,7 +120,8 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
             extGwInfo.setEnableSNAT(router.getExternalGatewayInfo().isEnableSnat());
             if (router.getExternalGatewayInfo().getExternalFixedIps() != null) {
                 final List<NeutronIps> fixedIps = new ArrayList<>();
-                for (final ExternalFixedIps mdFixedIp : router.getExternalGatewayInfo().getExternalFixedIps()) {
+                for (final ExternalFixedIps mdFixedIp
+                        : router.getExternalGatewayInfo().nonnullExternalFixedIps().values()) {
                     final NeutronIps fixedIp = new NeutronIps();
                     fixedIp.setSubnetUUID(String.valueOf(mdFixedIp.getSubnetId().getValue()));
                     fixedIp.setIpAddress(mdFixedIp.getIpAddress().stringValue());

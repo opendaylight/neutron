@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -65,8 +66,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
     // IfNBSubnetCRUD methods
 
     @Override
-    protected List<Subnet> getDataObjectList(Subnets subnets) {
-        return subnets.getSubnet();
+    protected Collection<Subnet> getDataObjectList(Subnets subnets) {
+        return subnets.nonnullSubnet().values();
     }
 
     @Override
@@ -88,7 +89,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         result.setEnableDHCP(subnet.isEnableDhcp());
         if (subnet.getAllocationPools() != null) {
             final List<NeutronSubnetIpAllocationPool> allocationPools = new ArrayList<>();
-            for (final AllocationPools allocationPool : subnet.getAllocationPools()) {
+            for (final AllocationPools allocationPool : subnet.getAllocationPools().values()) {
                 final NeutronSubnetIpAllocationPool pool = new NeutronSubnetIpAllocationPool();
                 pool.setPoolStart(allocationPool.getStart().stringValue());
                 pool.setPoolEnd(allocationPool.getEnd().stringValue());
@@ -105,7 +106,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         }
         if (subnet.getHostRoutes() != null) {
             final List<NeutronRoute> hostRoutes = new ArrayList<>();
-            for (final HostRoutes hostRoute : subnet.getHostRoutes()) {
+            for (final HostRoutes hostRoute : subnet.getHostRoutes().values()) {
                 final NeutronRoute nsHostRoute = new NeutronRoute();
                 nsHostRoute.setDestination(hostRoute.getDestination().stringValue());
                 nsHostRoute.setNextHop(hostRoute.getNexthop().stringValue());

@@ -8,8 +8,9 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.Maps;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.P
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.PortBindingExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetails;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetailsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.binding.rev150712.binding.attributes.VifDetailsKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionBase;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV4;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.IpVersionV6;
@@ -67,16 +69,18 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
 
     // IfNBPortCRUD methods
     @Override
-    protected List<Port> getDataObjectList(Ports ports) {
-        return ports.getPort();
+    protected Collection<Port> getDataObjectList(Ports ports) {
+        return ports.nonnullPort().values();
     }
 
     protected void addExtensions(Port port, NeutronPort result) {
         final PortBindingExtension binding = port.augmentation(PortBindingExtension.class);
         result.setBindinghostID(binding.getHostId());
-        if (binding.getVifDetails() != null) {
-            final Map<String, String> details = new HashMap<>(binding.getVifDetails().size());
-            for (final VifDetails vifDetail : binding.getVifDetails()) {
+
+        final Map<VifDetailsKey, VifDetails> vifDetails = binding.getVifDetails();
+        if (vifDetails != null) {
+            final Map<String, String> details = Maps.newHashMapWithExpectedSize(vifDetails.size());
+            for (final VifDetails vifDetail : vifDetails.values()) {
                 details.put(vifDetail.getDetailsKey(), vifDetail.getValue());
             }
             result.setVIFDetails(details);
@@ -107,7 +111,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         fromMdAdminAttributes(port, result);
         if (port.getAllowedAddressPairs() != null) {
             final List<NeutronPortAllowedAddressPairs> pairs = new ArrayList<>();
-            for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs()) {
+            for (final AllowedAddressPairs mdPair : port.getAllowedAddressPairs().values()) {
                 final NeutronPortAllowedAddressPairs pair = new NeutronPortAllowedAddressPairs();
                 pair.setIpAddress(mdPair.getIpAddress().stringValue());
                 pair.setMacAddress(mdPair.getMacAddress().getValue());
@@ -119,7 +123,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         result.setDeviceOwner(port.getDeviceOwner());
         if (port.getExtraDhcpOpts() != null) {
             final List<NeutronPortExtraDHCPOption> options = new ArrayList<>();
-            for (final ExtraDhcpOpts opt : port.getExtraDhcpOpts()) {
+            for (final ExtraDhcpOpts opt : port.getExtraDhcpOpts().values()) {
                 final NeutronPortExtraDHCPOption arg = new NeutronPortExtraDHCPOption();
                 arg.setName(opt.getOptName());
                 arg.setValue(opt.getOptValue());
@@ -130,7 +134,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         }
         if (port.getFixedIps() != null) {
             final List<NeutronIps> ips = new ArrayList<>();
-            for (final FixedIps mdIp : port.getFixedIps()) {
+            for (final FixedIps mdIp : port.getFixedIps().values()) {
                 final NeutronIps ip = new NeutronIps();
                 ip.setIpAddress(mdIp.getIpAddress().stringValue());
                 ip.setSubnetUUID(mdIp.getSubnetId().getValue());

@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
@@ -44,8 +45,8 @@ public final class NeutronSFCPortChainInterface
     }
 
     @Override
-    protected List<PortChain> getDataObjectList(PortChains dataObjects) {
-        return dataObjects.getPortChain();
+    protected Collection<PortChain> getDataObjectList(PortChains dataObjects) {
+        return dataObjects.nonnullPortChain().values();
     }
 
     @Override
@@ -105,7 +106,7 @@ public final class NeutronSFCPortChainInterface
         }
         if (mdPortChain.getChainParameters() != null) {
             HashMap<String, String> chainParams = new HashMap<>();
-            for (ChainParameters param : mdPortChain.getChainParameters()) {
+            for (ChainParameters param : mdPortChain.getChainParameters().values()) {
                 chainParams.put(param.getChainParameter(), param.getChainParameterValue());
             }
             result.setChainParameters(chainParams);

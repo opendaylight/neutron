@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -32,8 +32,8 @@ public final class NeutronL2gatewayConnectionInterface
     }
 
     @Override
-    protected List<L2gatewayConnection> getDataObjectList(L2gatewayConnections l2gatewayConnections) {
-        return l2gatewayConnections.getL2gatewayConnection();
+    protected Collection<L2gatewayConnection> getDataObjectList(L2gatewayConnections l2gatewayConnections) {
+        return l2gatewayConnections.nonnullL2gatewayConnection().values();
     }
 
     @Override

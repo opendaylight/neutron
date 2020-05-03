@@ -84,7 +84,7 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
         Node node1 =
             createNetconfNode(NODE_ID, V3PO_1704_CAPABILITY, V3PO_1701_CAPABILITY, INTERFACES);
         WriteTransaction writeTx = getDataBroker().newWriteOnlyTransaction();
-        writeTx.put(LogicalDatastoreType.OPERATIONAL, iid, node1, true);
+        writeTx.mergeParentStructurePut(LogicalDatastoreType.OPERATIONAL, iid, node1);
         writeTx.commit().get();
         Assert.assertEquals(sf.get(), Integer.valueOf(1));
         sf = SettableFuture.create();
@@ -94,14 +94,14 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
         Assert.assertEquals(sf.get(), Integer.valueOf(2));
     }
 
-    private InstanceIdentifier<Hostconfig> hostConfigIid(@NonNull NodeId nodeId) {
+    private static InstanceIdentifier<Hostconfig> hostConfigIid(@NonNull NodeId nodeId) {
         return InstanceIdentifier.builder(Neutron.class)
             .child(Hostconfigs.class)
             .child(Hostconfig.class, new HostconfigKey(nodeId.getValue(), HostconfigUtil.L2_HOST_TYPE))
             .build();
     }
 
-    private Node createNetconfNode(NodeId nodeId, String... capabilities) {
+    private static Node createNetconfNode(NodeId nodeId, String... capabilities) {
         List<AvailableCapability> caps = Arrays.asList(capabilities)
             .stream()
             .map(name -> new AvailableCapabilityBuilder().setCapability(name).build())
@@ -109,7 +109,7 @@ public class NeutronHostconfigVppListenerTest extends HostconfigsDataBrokerTest
         NetconfNode netconfNode = new NetconfNodeBuilder().setConnectionStatus(ConnectionStatus.Connected)
             .setAvailableCapabilities(new AvailableCapabilitiesBuilder().setAvailableCapability(caps).build())
             .build();
-        return new NodeBuilder().setNodeId(nodeId).addAugmentation(NetconfNode.class, netconfNode).build();
+        return new NodeBuilder().setNodeId(nodeId).addAugmentation(netconfNode).build();
     }
 
     @Override

@@ -8,6 +8,7 @@
 package org.opendaylight.neutron.transcriber;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
@@ -84,7 +85,7 @@ public final class NeutronSFCPortPairInterface
         }
         if (mdPortPair.getServiceFunctionParameters() != null) {
             HashMap<String, String> serviceFunctionParam = new HashMap<>();
-            for (ServiceFunctionParameters param : mdPortPair.getServiceFunctionParameters()) {
+            for (ServiceFunctionParameters param : mdPortPair.getServiceFunctionParameters().values()) {
                 serviceFunctionParam.put(param.getServiceFunctionParameter(), param.getServiceFunctionParameterValue());
             }
             result.setServiceFunctionParameters(serviceFunctionParam);
@@ -94,8 +95,7 @@ public final class NeutronSFCPortPairInterface
     }
 
     @Override
-    protected List<PortPair> getDataObjectList(PortPairs dataObjects) {
-        return dataObjects.getPortPair();
+    protected Collection<PortPair> getDataObjectList(PortPairs dataObjects) {
+        return dataObjects.nonnullPortPair().values();
     }
-
 }

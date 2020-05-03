@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -45,8 +46,8 @@ public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk,
     }
 
     @Override
-    protected List<Trunk> getDataObjectList(Trunks trunks) {
-        return trunks.getTrunk();
+    protected Collection<Trunk> getDataObjectList(Trunks trunks) {
+        return trunks.nonnullTrunk().values();
     }
 
     @Override
@@ -59,7 +60,7 @@ public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk,
         }
         if (trunk.getSubPorts() != null) {
             final List<NeutronTrunkSubPort> subPortList = new ArrayList<>();
-            for (final SubPorts subPort : trunk.getSubPorts()) {
+            for (final SubPorts subPort : trunk.getSubPorts().values()) {
                 NeutronTrunkSubPort trunkSubPort = new NeutronTrunkSubPort();
                 trunkSubPort.setPortId(subPort.getPortId().getValue());
                 trunkSubPort.setSegmentationType(NETWORK_TYPE_MAP.get(subPort.getSegmentationType()));

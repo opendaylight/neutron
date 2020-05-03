@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -60,8 +61,8 @@ public final class NeutronNetworkInterface
 
     // IfNBNetworkCRUD methods
     @Override
-    protected List<Network> getDataObjectList(Networks networks) {
-        return networks.getNetwork();
+    protected Collection<Network> getDataObjectList(Networks networks) {
+        return networks.nonnullNetwork().values();
     }
 
     @Override
@@ -81,14 +82,12 @@ public final class NeutronNetworkInterface
         result.setProviderSegmentationID(providerExtension.getSegmentationId());
         result.setProviderNetworkType(NETWORK_MAP.get(providerExtension.getNetworkType()));
         final List<NeutronNetworkSegment> segments = new ArrayList<>();
-        if (providerExtension.getSegments() != null) {
-            for (final Segments segment : providerExtension.getSegments()) {
-                final NeutronNetworkSegment neutronSegment = new NeutronNetworkSegment();
-                neutronSegment.setProviderPhysicalNetwork(segment.getPhysicalNetwork());
-                neutronSegment.setProviderSegmentationID(segment.getSegmentationId());
-                neutronSegment.setProviderNetworkType(NETWORK_MAP.get(segment.getNetworkType()));
-                segments.add(neutronSegment);
-            }
+        for (final Segments segment : providerExtension.nonnullSegments().values()) {
+            final NeutronNetworkSegment neutronSegment = new NeutronNetworkSegment();
+            neutronSegment.setProviderPhysicalNetwork(segment.getPhysicalNetwork());
+            neutronSegment.setProviderSegmentationID(segment.getSegmentationId());
+            neutronSegment.setProviderNetworkType(NETWORK_MAP.get(segment.getNetworkType()));
+            segments.add(neutronSegment);
         }
         final QosNetworkExtension qos = network.augmentation(QosNetworkExtension.class);
         if (qos != null && qos.getQosPolicyId() != null) {

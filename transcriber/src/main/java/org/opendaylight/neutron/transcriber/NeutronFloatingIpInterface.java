@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.List;
+import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -34,8 +34,8 @@ public final class NeutronFloatingIpInterface
     // IfNBFloatingIpCRUD interface methods
 
     @Override
-    protected List<Floatingip> getDataObjectList(Floatingips fips) {
-        return fips.getFloatingip();
+    protected Collection<Floatingip> getDataObjectList(Floatingips fips) {
+        return fips.nonnullFloatingip().values();
     }
 
     @Override

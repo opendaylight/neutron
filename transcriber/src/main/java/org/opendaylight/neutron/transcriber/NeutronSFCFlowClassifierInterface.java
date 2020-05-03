@@ -9,6 +9,7 @@ package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import javax.inject.Inject;
@@ -64,8 +65,8 @@ public final class NeutronSFCFlowClassifierInterface
     }
 
     @Override
-    protected List<SfcFlowClassifier> getDataObjectList(SfcFlowClassifiers dataObjects) {
-        return dataObjects.getSfcFlowClassifier();
+    protected Collection<SfcFlowClassifier> getDataObjectList(SfcFlowClassifiers dataObjects) {
+        return dataObjects.nonnullSfcFlowClassifier().values();
     }
 
     @Override
@@ -165,7 +166,7 @@ public final class NeutronSFCFlowClassifierInterface
         }
         if (mdClassifier.getL7Parameter() != null) {
             HashMap<String, String> l7Param = new HashMap<>();
-            for (L7Parameter param : mdClassifier.getL7Parameter()) {
+            for (L7Parameter param : mdClassifier.getL7Parameter().values()) {
                 l7Param.put(param.getMatchParameter(), param.getMatchParameterValue());
             }
             result.setL7Parameters(l7Param);
