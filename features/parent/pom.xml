@@ -18,7 +18,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>neutron-single-feature-parent</artifactId>
-    <version>0.13.3-SNAPSHOT</version>
+    <version>0.13.4-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -37,7 +37,7 @@
             <dependency>
                 <groupId>org.opendaylight.controller</groupId>
                 <artifactId>mdsal-artifacts</artifactId>
-                <version>1.10.3-SNAPSHOT</version>
+                <version>1.10.4-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
