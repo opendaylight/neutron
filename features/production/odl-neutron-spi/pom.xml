@@ -28,6 +28,12 @@
             <classifier>features</classifier>
         </dependency>
         <dependency>
+            <groupId>org.opendaylight.odlparent</groupId>
+            <artifactId>odl-apache-commons-net</artifactId>
+            <type>xml</type>
+            <classifier>features</classifier>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>odl-neutron-model</artifactId>
             <version>${project.version}</version>
@@ -38,10 +44,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>neutron-spi</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-net</groupId>
-            <artifactId>commons-net</artifactId>
         </dependency>
     </dependencies>
 </project>
