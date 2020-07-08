@@ -100,7 +100,7 @@ public class NeutronTestWiring extends AbstractModule {
     @Override
     protected void configure() {
         bind(WebServer.class).toInstance(new JettyWebServer(9090));
-        bind(WebContextSecurer.class).toInstance((webContextBuilder, urlPatterns) -> { }); // NOOP
+        bind(WebContextSecurer.class).toInstance((webContextBuilder, asyncSupported, urlPatterns) -> { }); // NOOP
         bind(ServletSupport.class).toInstance(new JerseyServletSupport());
         bind(WebInitializer.class);
 
