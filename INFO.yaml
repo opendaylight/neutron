@@ -1,0 +1,54 @@
+---
+project: 'neutron'
+project_creation_date: '2015-02-12'
+project_category: ''
+lifecycle_state: 'Incubation'
+project_lead: &odl_neutron_ptl
+    name: 'Achuth Maniyedath'
+    email: 'achuth.maniyedath@gmail.com'
+    company: ''
+    id: 'achuthm'
+    timezone: 'Unknown/Unknown'
+primary_contact: *odl_neutron_ptl
+issue_tracking:
+    type: 'jira'
+    url: 'https://jira.opendaylight.org/projects/'
+    key: 'neutron'
+mailing_list:
+    type: 'groups.io'
+    url: 'app-dev@lists.opendaylight.org'
+    tag: '[]'
+realtime_discussion:
+    type: 'irc'
+    server: 'freenode.net'
+    channel: '#opendaylight'
+meetings:
+    - type: 'gotomeeting+irc'
+      agenda: 'https://wiki.opendaylight.org'
+      url: ''
+      server: 'freenode.net'
+      channel: '#opendaylight'
+      repeats: ''
+      time: ''
+repositories:
+    - neutron
+committers:
+    - <<: *odl_neutron_ptl
+    - name: 'Achuth Maniyedath'
+      email: 'achuth.maniyedath@gmail.com'
+      company: ''
+      id: 'achuthm'
+      timezone: 'Unknown/Unknown'
+    - name: 'Karthikeyan Krishnan'
+      email: 'karthikeyangceb007@gmail.com'
+      company: 'altencalsoftlabs'
+      id: 'karthikeyan'
+      timezone: 'Unknown/Unknown'
+
+tsc:
+    # yamllint disable rule:line-length
+    approval: 'https://meetings.opendaylight.org/meetings/opendaylight-meeting/2015/tsc/opendaylight-meeting-tsc.2015-02-12-18.00.html'
+    changes:
+        - type: ''
+          name: ''
+          link: ''
