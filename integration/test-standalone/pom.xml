@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.opendaylight.odlparent</groupId>
     <artifactId>bundle-parent</artifactId>
-    <version>7.0.3</version>
+    <version>7.0.5</version>
     <relativePath/>
   </parent>
 
@@ -27,7 +27,7 @@
       <dependency>
         <groupId>org.opendaylight.mdsal</groupId>
         <artifactId>mdsal-artifacts</artifactId>
-        <version>6.0.2</version>
+        <version>6.0.4</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -107,6 +107,11 @@
     <dependency>
       <groupId>org.opendaylight.aaa.web</groupId>
       <artifactId>servlet-jersey2</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.inject</groupId>
+      <artifactId>jersey-hk2</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
