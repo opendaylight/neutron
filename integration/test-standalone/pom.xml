@@ -11,7 +11,7 @@
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>integration-test-standalone</artifactId>
-  <version>0.15.0-SNAPSHOT</version>
+  <version>0.16.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <!-- <name> formatting is used by autorelease to parse and notify projects on
@@ -34,7 +34,7 @@
       <dependency>
         <groupId>org.opendaylight.aaa</groupId>
         <artifactId>aaa-artifacts</artifactId>
-        <version>0.12.0-SNAPSHOT</version>
+        <version>0.13.0-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
