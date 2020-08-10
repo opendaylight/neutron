@@ -18,7 +18,7 @@
 
   <groupId>org.opendaylight.neutron</groupId>
   <artifactId>project-neutron-parent</artifactId>
-  <version>0.14.2-SNAPSHOT</version>
+  <version>0.14.3-SNAPSHOT</version>
   <packaging>pom</packaging>
   <!-- <name> formatting is used by autorelease to parse and notify projects on
        build failure. Please do not modify this unless you have a good reason. -->
@@ -39,14 +39,14 @@
       <dependency>
         <groupId>org.opendaylight.infrautils</groupId>
         <artifactId>infrautils-artifacts</artifactId>
-        <version>1.7.2-SNAPSHOT</version>
+        <version>1.7.3-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.opendaylight.controller</groupId>
         <artifactId>mdsal-artifacts</artifactId>
-        <version>1.11.2-SNAPSHOT</version>
+        <version>1.11.3-SNAPSHOT</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
