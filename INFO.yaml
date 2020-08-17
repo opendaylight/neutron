@@ -34,11 +34,6 @@ repositories:
     - neutron
 committers:
     - <<: *odl_neutron_ptl
-    - name: 'Achuth Maniyedath'
-      email: 'achuth.maniyedath@gmail.com'
-      company: ''
-      id: 'achuthm'
-      timezone: 'Unknown/Unknown'
     - name: 'Karthikeyan Krishnan'
       email: 'karthikeyangceb007@gmail.com'
       company: 'altencalsoftlabs'
