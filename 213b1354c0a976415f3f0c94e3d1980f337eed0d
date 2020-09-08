@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1bfb7b45_8951f0ee",
+        "filename": "integration/test-standalone/src/main/java/org/opendaylight/neutron/e2etest/NeutronBgpvpnNetworkAssociationTests.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2020-09-08T06:23:26Z",
+      "side": 1,
+      "message": "remove or test against this too",
+      "revId": "213b1354c0a976415f3f0c94e3d1980f337eed0d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d70aad0_27df2d1d",
+        "filename": "neutron-spi/src/main/java/org/opendaylight/neutron/spi/INeutronBgpvpnNetworkAssociationCRUD.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2020-09-08T06:23:26Z",
+      "side": 1,
+      "message": "Change to 2020 for all new files",
+      "revId": "213b1354c0a976415f3f0c94e3d1980f337eed0d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75976773_ee2cb859",
+        "filename": "northbound-api/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 6321
+      },
+      "writtenOn": "2020-09-08T06:23:26Z",
+      "side": 1,
+      "message": "no change here",
+      "revId": "213b1354c0a976415f3f0c94e3d1980f337eed0d",
+      "serverId": "7fc14799-209e-464c-9743-7a06c2c21a81",
+      "unresolved": true
+    }
+  ]
+}
