@@ -1,4 +1,5 @@
 # UUID                                                                 	Group Name
 #
 c9025ab9ddc1e3171919e085449f22c54f8f7b54                               	GitHub Replication
+f3b64c594c98fee555c12b3d0f3534c28d2e3adf                               	saml/odl-gerrit-neutron-committers
 ldap:cn=odl-gerrit-neutron-committers,ou=Groups,dc=freestandards,dc=org	ldap/odl-gerrit-neutron-committers
