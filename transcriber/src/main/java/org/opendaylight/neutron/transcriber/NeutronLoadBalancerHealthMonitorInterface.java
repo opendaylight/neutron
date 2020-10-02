@@ -28,6 +28,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.Healthmonitor;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorKey;
+import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
 @Service(classes = INeutronLoadBalancerHealthMonitorCRUD.class)
@@ -57,7 +58,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
         toMdIds(healthMonitor, healthmonitorBuilder);
         healthmonitorBuilder.setAdminStateUp(healthMonitor.getLoadBalancerHealthMonitorAdminStateIsUp());
         if (healthMonitor.getLoadBalancerHealthMonitorDelay() != null) {
-            healthmonitorBuilder.setDelay(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorDelay()));
+            healthmonitorBuilder.setDelay(Uint32.valueOf(healthMonitor.getLoadBalancerHealthMonitorDelay()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorExpectedCodes() != null) {
             healthmonitorBuilder.setExpectedCodes(healthMonitor.getLoadBalancerHealthMonitorExpectedCodes());
@@ -76,7 +77,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             healthmonitorBuilder.setPools(listUuid);
         }
         if (healthMonitor.getLoadBalancerHealthMonitorTimeout() != null) {
-            healthmonitorBuilder.setTimeout(Long.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
+            healthmonitorBuilder.setTimeout(Uint32.valueOf(healthMonitor.getLoadBalancerHealthMonitorTimeout()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorType() != null) {
             final ImmutableBiMap<String, Class<? extends ProbeBase>> mapper = PROBE_MAP.inverse();

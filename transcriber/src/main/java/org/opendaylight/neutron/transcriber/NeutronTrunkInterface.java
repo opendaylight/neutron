@@ -29,6 +29,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.tr
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.Trunk;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkKey;
+import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
 @Service(classes = INeutronTrunkCRUD.class)
@@ -87,7 +88,7 @@ public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk,
             for (NeutronTrunkSubPort subPort: trunk.getSubPorts()) {
                 subPortsBuilder.setPortId(toUuid(subPort.getPortId()));
                 subPortsBuilder.setSegmentationType(mapper.get(subPort.getSegmentationType()));
-                subPortsBuilder.setSegmentationId(Long.valueOf(subPort.getSegmentationId()));
+                subPortsBuilder.setSegmentationId(Uint32.valueOf(subPort.getSegmentationId()));
                 subPortsList.add(subPortsBuilder.build());
             }
             trunkBuilder.setSubPorts(subPortsList);

@@ -39,6 +39,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.neutron.networks.network.SegmentsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtensionBuilder;
+import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
 @Service(classes = INeutronNetworkCRUD.class)
@@ -136,7 +137,7 @@ public final class NeutronNetworkInterface
                     segmentsBuilder.setNetworkType(
                             mapper.get(segment.getProviderNetworkType()));
                 }
-                segmentsBuilder.setSegmentationIndex(Long.valueOf(count));
+                segmentsBuilder.setSegmentationIndex(Uint32.valueOf(count));
                 segments.add(segmentsBuilder.build());
             }
             providerExtensionBuilder.setSegments(segments);

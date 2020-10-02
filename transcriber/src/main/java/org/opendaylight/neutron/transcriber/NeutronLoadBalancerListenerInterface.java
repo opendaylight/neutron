@@ -29,6 +29,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.Listener;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.listeners.ListenerKey;
+import org.opendaylight.yangtools.yang.common.Uint16;
 
 @Singleton
 @Service(classes = INeutronLoadBalancerListenerCRUD.class)
@@ -80,7 +81,7 @@ public final class NeutronLoadBalancerListenerInterface
             }
         }
         if (listener.getNeutronLoadBalancerListenerProtocolPort() != null) {
-            listenerBuilder.setProtocolPort(Integer.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
+            listenerBuilder.setProtocolPort(Uint16.valueOf(listener.getNeutronLoadBalancerListenerProtocolPort()));
         }
         return listenerBuilder.build();
     }
