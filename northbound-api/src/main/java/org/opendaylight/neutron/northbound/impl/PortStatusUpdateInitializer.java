@@ -34,7 +34,7 @@ public class PortStatusUpdateInitializer {
     private final JSONRestconfService jsonRestconfService;
 
     @Inject
-    public PortStatusUpdateInitializer(JSONRestconfService jsonRestconfService,
+    public PortStatusUpdateInitializer(final JSONRestconfService jsonRestconfService,
                                        final NeutronNorthboundApiConfig neutronNorthboundApiConfig) {
         this.cfg = neutronNorthboundApiConfig;
         this.jsonRestconfService = jsonRestconfService;
@@ -66,7 +66,7 @@ public class PortStatusUpdateInitializer {
     private void streamSubscribe() {
         String identifier = "data-change-event-subscription/neutron:neutron/neutron:ports"
                                                                         + "/datastore=OPERATIONAL/scope=SUBTREE";
-        MultivaluedHashMap map = new MultivaluedHashMap<String, String>();
+        MultivaluedHashMap<String, String> map = new MultivaluedHashMap<>();
         map.add("odl-leaf-nodes-only", "true");
         Optional<String> res = null;
         try {
