@@ -200,8 +200,8 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         final PortBuilder portBuilder = new PortBuilder();
         toMdBaseAttributes(neutronPort, portBuilder);
         toMdAdminAttributes(neutronPort, portBuilder);
-        portBuilder.addAugmentation(PortBindingExtension.class, bindingBuilder.build());
-        portBuilder.addAugmentation(PortSecurityExtension.class, portSecurityBuilder.build());
+        portBuilder.addAugmentation(bindingBuilder.build());
+        portBuilder.addAugmentation(portSecurityBuilder.build());
         if (neutronPort.getAllowedAddressPairs() != null) {
             final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<>();
             for (final NeutronPortAllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
@@ -260,9 +260,9 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             portBuilder.setSecurityGroups(listSecurityGroups);
         }
         if (neutronPort.getQosPolicyId() != null) {
-            final QosPortExtensionBuilder qosExtensionBuilder = new QosPortExtensionBuilder();
-            qosExtensionBuilder.setQosPolicyId(toUuid(neutronPort.getQosPolicyId()));
-            portBuilder.addAugmentation(QosPortExtension.class, qosExtensionBuilder.build());
+            portBuilder.addAugmentation(new QosPortExtensionBuilder()
+                .setQosPolicyId(toUuid(neutronPort.getQosPolicyId()))
+                .build());
         }
         return portBuilder.build();
     }

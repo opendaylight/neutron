@@ -145,16 +145,14 @@ public final class NeutronNetworkInterface
             providerExtensionBuilder.setSegmentationId(network.getProviderSegmentationID());
         }
         if (network.getQosPolicyId() != null) {
-            final QosNetworkExtensionBuilder qosExtensionBuilder = new QosNetworkExtensionBuilder();
-            qosExtensionBuilder.setQosPolicyId(toUuid(network.getQosPolicyId()));
-            networkBuilder.addAugmentation(QosNetworkExtension.class, qosExtensionBuilder.build());
+            networkBuilder.addAugmentation(new QosNetworkExtensionBuilder()
+                .setQosPolicyId(toUuid(network.getQosPolicyId()))
+                .build());
         }
-        networkBuilder.addAugmentation(NetworkL3Extension.class, l3ExtensionBuilder.build());
-        networkBuilder.addAugmentation(NetworkProviderExtension.class, providerExtensionBuilder.build());
+        networkBuilder.addAugmentation(l3ExtensionBuilder.build());
+        networkBuilder.addAugmentation(providerExtensionBuilder.build());
         if (network.getMtu() != null) {
-            final NetworkMtuExtensionBuilder mtuExtensionBuilder = new NetworkMtuExtensionBuilder();
-            mtuExtensionBuilder.setMtu(network.getMtu());
-            networkBuilder.addAugmentation(NetworkMtuExtension.class, mtuExtensionBuilder.build());
+            networkBuilder.addAugmentation(new NetworkMtuExtensionBuilder().setMtu(network.getMtu()).build());
         }
     }
 
