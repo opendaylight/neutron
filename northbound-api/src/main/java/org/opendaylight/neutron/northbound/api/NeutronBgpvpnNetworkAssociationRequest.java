@@ -5,9 +5,9 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.northbound.api;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -28,12 +28,12 @@ public class NeutronBgpvpnNetworkAssociationRequest implements INeutronRequest<N
     NeutronBgpvpnNetworkAssociationRequest() {
     }
 
-    @edu.umd.cs.findbugs.annotations.SuppressWarnings("URF_UNREAD_FIELD")
+    @SuppressFBWarnings("URF_UNREAD_FIELD")
     NeutronBgpvpnNetworkAssociationRequest(NeutronBgpvpnNetworkAssociation bgpvpnNetworkAssociation) {
         this.singleton = bgpvpnNetworkAssociation;
     }
 
-    @edu.umd.cs.findbugs.annotations.SuppressWarnings("URF_UNREAD_FIELD")
+    @SuppressFBWarnings("URF_UNREAD_FIELD")
     NeutronBgpvpnNetworkAssociationRequest(List<NeutronBgpvpnNetworkAssociation> bulk) {
         this.bulkRequest = bulk;
     }
