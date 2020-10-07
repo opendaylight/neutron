@@ -7,8 +7,8 @@
  */
 package org.opendaylight.neutron.hostconfig.vpp;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
+import static java.util.Objects.requireNonNull;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.util.HashMap;
@@ -23,14 +23,14 @@ public final class HostconfigUtil {
     private static final String VNIC_TYPE = "normal";
     private static final String HAS_DATAPATH_TYPE_NETDEV = "False";
     private static final String SUPPORT_VHOST_USER = "True";
-    private static final List<String> SUPPORTED_NET_TYPES = Lists.newArrayList("local", "vlan", "vxlan", "gre");
+    private static final List<String> SUPPORTED_NET_TYPES = List.of("local", "vlan", "vxlan", "gre");
 
     private HostconfigUtil() {
     }
 
     public static Map<String, String> createHostconfigsDataFor(NodeId nodeId, SocketInfo socketInfo) {
-        Preconditions.checkNotNull(nodeId);
-        Preconditions.checkNotNull(socketInfo);
+        requireNonNull(nodeId);
+        requireNonNull(socketInfo);
         JsonObject odlL2 = new JsonObject();
         odlL2.add("allowed_network_types", buildSupportedNetworkTypes());
         odlL2.add("supported_vnic_types", buildSupportedVnicTypes(socketInfo));

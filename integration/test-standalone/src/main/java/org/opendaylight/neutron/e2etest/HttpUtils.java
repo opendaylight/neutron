@@ -31,6 +31,7 @@ public final class HttpUtils {
 
     }
 
+    // TODO: Java 11+ has HttpClient, we should be using that instead
     static HttpURLConnection httpURLConnectionFactoryGet(URL url) throws IOException {
         HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
         httpConn.setRequestMethod("GET");
@@ -180,7 +181,7 @@ public final class HttpUtils {
     }
 
     private static String fetchResponse(String urlStr, String context) {
-        StringBuffer response = new StringBuffer();
+        StringBuilder response = new StringBuilder();
 
         try {
             URL url = new URL(urlStr);

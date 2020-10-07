@@ -7,6 +7,8 @@
  */
 package org.opendaylight.neutron.hostconfig.vpp;
 
+import static java.util.Objects.requireNonNull;
+
 import com.google.common.base.Preconditions;
 import java.net.URI;
 import java.util.ArrayList;
@@ -63,14 +65,14 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     private static final List<QName> REQUIRED_CAPABILITIES = new ArrayList<>();
     private final SocketInfo socketInfo;
 
-    public NeutronHostconfigVppListener(final DataBroker dataBroker, String spath, String sname, String vhostMode) {
+    public NeutronHostconfigVppListener(final DataBroker dataBroker, final String spath, final String sname,
+            final String vhostMode) {
         LOG.info("Initializing Neutron-Hostconfig-Vpp-Listener");
-        this.dataBroker = Preconditions.checkNotNull(dataBroker);
-        final String vhostModeChecked = Preconditions.checkNotNull(vhostMode).toLowerCase(Locale.ROOT);
+        this.dataBroker = requireNonNull(dataBroker);
+        final String vhostModeChecked = requireNonNull(vhostMode).toLowerCase(Locale.ROOT);
         Preconditions.checkArgument(vhostModeChecked.equals("server") || vhostModeChecked.equals("client"),
                 "Supported values for vhostuser-mode are client and server.");
-        this.socketInfo =
-                new SocketInfo(Preconditions.checkNotNull(spath), Preconditions.checkNotNull(sname), vhostModeChecked);
+        this.socketInfo = new SocketInfo(spath, sname, vhostModeChecked);
         this.neutronHostconfig = new NeutronHostconfigUtils(dataBroker);
         REQUIRED_CAPABILITIES.add(V3PO_1704_CAPABILITY);
         REQUIRED_CAPABILITIES.add(V3PO_1701_CAPABILITY);
@@ -78,12 +80,11 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
     }
 
     @Override
-    public void onDataTreeChanged(@NonNull Collection<DataTreeModification<Node>> changes) {
+    public void onDataTreeChanged(@NonNull final Collection<DataTreeModification<Node>> changes) {
         LOG.info("onDataTreeChanged: Received Data Tree Changes: {}", changes);
         executorService.execute(() -> {
             try {
-                for (DataTreeModification<Node> change : Preconditions.checkNotNull(changes,
-                        "Changes may not be null!")) {
+                for (DataTreeModification<Node> change : requireNonNull(changes, "Changes may not be null!")) {
                     processDataTreeModification(change);
                 }
             } catch (TransactionCommitFailedException e) {
@@ -92,7 +93,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         });
     }
 
-    private void processDataTreeModification(DataTreeModification<Node> change)
+    private void processDataTreeModification(final DataTreeModification<Node> change)
             throws TransactionCommitFailedException {
         final InstanceIdentifier<Node> key = change.getRootPath().getRootIdentifier();
         final DataObjectModification<Node> mod = change.getRootNode();
@@ -130,7 +131,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         LOG.info("Registered listener to netconf nodes {}.", dataTreeIdentifier.getRootIdentifier());
     }
 
-    private void updateHostConfig(Node node, NeutronHostconfigUtils.Action action)
+    private void updateHostConfig(final Node node, final NeutronHostconfigUtils.Action action)
             throws TransactionCommitFailedException {
         for (Map.Entry<String, String> entry : HostconfigUtil.createHostconfigsDataFor(node.getNodeId(), socketInfo)
             .entrySet()) {
@@ -140,7 +141,7 @@ public class NeutronHostconfigVppListener implements ClusteredDataTreeChangeList
         }
     }
 
-    private static boolean validateVppNode(Node node) {
+    private static boolean validateVppNode(final Node node) {
         LOG.info("Registering new node {}", node.getNodeId().getValue());
         NetconfNode netconfNode = node.augmentation(NetconfNode.class);
         if (netconfNode == null) {

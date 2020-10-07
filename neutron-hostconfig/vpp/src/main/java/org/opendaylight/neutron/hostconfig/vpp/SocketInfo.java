@@ -5,10 +5,9 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.hostconfig.vpp;
 
-import com.google.common.base.Preconditions;
+import static java.util.Objects.requireNonNull;
 
 public class SocketInfo {
 
@@ -18,9 +17,9 @@ public class SocketInfo {
     private static final String PORT_ID = "$PORT_ID";
 
     public SocketInfo(String socketPath, String socketPrefix, String vhostuserMode) {
-        this.socketPath = Preconditions.checkNotNull(socketPath);
-        this.socketPrefix = Preconditions.checkNotNull(socketPrefix);
-        this.vhostuserMode = Preconditions.checkNotNull(vhostuserMode);
+        this.socketPath = requireNonNull(socketPath);
+        this.socketPrefix = requireNonNull(socketPrefix);
+        this.vhostuserMode = requireNonNull(vhostuserMode);
     }
 
     public String getSocketPath() {

@@ -12,7 +12,7 @@
   <parent>
     <groupId>org.opendaylight.mdsal</groupId>
     <artifactId>binding-parent</artifactId>
-    <version>6.0.5</version>
+    <version>7.0.0</version>
     <relativePath/>
   </parent>
 
@@ -39,14 +39,14 @@
       <dependency>
         <groupId>org.opendaylight.infrautils</groupId>
         <artifactId>infrautils-artifacts</artifactId>
-        <version>1.8.1</version>
+        <version>1.9.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.opendaylight.controller</groupId>
         <artifactId>controller-artifacts</artifactId>
-        <version>2.0.4</version>
+        <version>3.0.0</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -69,10 +69,6 @@
       <dependency>
          <groupId>org.eclipse.persistence</groupId>
          <artifactId>org.eclipse.persistence.moxy</artifactId>
-         <!-- This is the same version (of EclipseLink) currently used in odlparent (4.0.6);
-              we just have to repeat it here because, apparently, Maven is too dumb to inherit
-              the version from a dependencyManagement in a parent POM to the dependencyManagement here.
-              (The alternative to repeat the exclusion below in each Neutron project is much worse.) -->
          <version>2.7.5</version>
          <exclusions>
            <exclusion>
@@ -86,6 +82,11 @@
         <artifactId>javax.json</artifactId>
         <!-- do not touch this version, see above -->
         <version>1.0.4</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>1.1.0.Final</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

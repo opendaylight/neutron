@@ -7,7 +7,8 @@
  */
 package org.opendaylight.neutron.logger;
 
-import com.google.common.base.Preconditions;
+import static java.util.Objects.requireNonNull;
+
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -40,7 +41,7 @@ public final class NeutronLogger {
     @Inject
     public NeutronLogger(@NonNull DataBroker db) {
         LOG.info("Creating NeutronLogger {}", db);
-        this.db = Preconditions.checkNotNull(db, "null db");
+        this.db = requireNonNull(db, "null db");
     }
 
     private <T extends DataObject> void formatModification(@NonNull final StringBuilder messageBuilder,
@@ -99,7 +100,7 @@ public final class NeutronLogger {
     @PostConstruct
     public void init() {
         LOG.info("Register listener for Neutron model data changes");
-        InstanceIdentifier<Neutron> instanceId = Preconditions.checkNotNull(InstanceIdentifier.create(Neutron.class));
+        InstanceIdentifier<Neutron> instanceId = InstanceIdentifier.create(Neutron.class);
 
         DataTreeIdentifier<Neutron> configurationDataTreeId = DataTreeIdentifier.create(
                 LogicalDatastoreType.CONFIGURATION, instanceId);
