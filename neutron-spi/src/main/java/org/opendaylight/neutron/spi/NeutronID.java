@@ -5,8 +5,9 @@
  * terms of the Eclipse Public License v1.0 which accompanies this distribution,
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  */
-
 package org.opendaylight.neutron.spi;
+
+import static java.util.Objects.requireNonNull;
 
 import com.google.common.base.Preconditions;
 import java.io.Serializable;
@@ -31,8 +32,8 @@ public class NeutronID implements Serializable {
     String uuid;
 
     private static void checkUuidPattern(String uuid) {
-        Preconditions.checkNotNull(uuid, "Supplied value may not be null");
-        Preconditions.checkArgument(UUID_PATTERN.matcher(uuid).matches(),
+        Preconditions.checkArgument(
+                UUID_PATTERN.matcher(requireNonNull(uuid, "Supplied value may not be null")).matches(),
                 "Supplied value \"%s\" does not match uuid pattern \"%s\"", uuid, UUID_PATTERN_REGEX);
     }
 
