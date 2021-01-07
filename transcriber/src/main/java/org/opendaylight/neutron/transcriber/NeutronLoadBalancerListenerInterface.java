@@ -90,8 +90,8 @@ public final class NeutronLoadBalancerListenerInterface
     protected NeutronLoadBalancerListener fromMd(Listener listener) {
         final NeutronLoadBalancerListener answer = new NeutronLoadBalancerListener();
         fromMdBaseAttributes(listener, answer);
-        if (listener.isAdminStateUp() != null) {
-            answer.setLoadBalancerListenerAdminStateIsUp(listener.isAdminStateUp());
+        if (listener.getAdminStateUp() != null) {
+            answer.setLoadBalancerListenerAdminStateIsUp(listener.getAdminStateUp());
         }
         if (listener.getConnectionLimit() != null) {
             answer.setNeutronLoadBalancerListenerConnectionLimit(listener.getConnectionLimit());

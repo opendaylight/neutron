@@ -99,7 +99,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         final NeutronRouter result = new NeutronRouter();
         fromMdBaseAttributes(router, result);
         fromMdAdminAttributes(router, result);
-        result.setDistributed(router.isDistributed());
+        result.setDistributed(router.getDistributed());
         if (router.getGatewayPortId() != null) {
             result.setGatewayPortId(String.valueOf(router.getGatewayPortId().getValue()));
         }
@@ -117,7 +117,7 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         if (router.getExternalGatewayInfo() != null) {
             final NeutronRouterNetworkReference extGwInfo = new NeutronRouterNetworkReference();
             extGwInfo.setNetworkID(String.valueOf(router.getExternalGatewayInfo().getExternalNetworkId().getValue()));
-            extGwInfo.setEnableSNAT(router.getExternalGatewayInfo().isEnableSnat());
+            extGwInfo.setEnableSNAT(router.getExternalGatewayInfo().getEnableSnat());
             if (router.getExternalGatewayInfo().getExternalFixedIps() != null) {
                 final List<NeutronIps> fixedIps = new ArrayList<>();
                 for (final ExternalFixedIps mdFixedIp

@@ -287,10 +287,10 @@ public abstract class AbstractTranscriberInterface<
         }
     }
 
-    protected <M extends AdminAttributes, S1 extends INeutronAdminAttributes<S1>>
-        void fromMdAdminAttributes(M attr, S1 answer) {
-        if (attr.isAdminStateUp() != null) {
-            answer.setAdminStateUp(attr.isAdminStateUp());
+    protected <M extends AdminAttributes, S1 extends INeutronAdminAttributes<S1>> void fromMdAdminAttributes(M attr,
+            S1 answer) {
+        if (attr.getAdminStateUp() != null) {
+            answer.setAdminStateUp(attr.getAdminStateUp());
         }
         if (attr.getStatus() != null) {
             answer.setStatus(attr.getStatus());

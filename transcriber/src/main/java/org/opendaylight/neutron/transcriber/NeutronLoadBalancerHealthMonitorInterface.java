@@ -94,8 +94,8 @@ public final class NeutronLoadBalancerHealthMonitorInterface
     protected NeutronLoadBalancerHealthMonitor fromMd(Healthmonitor healthMonitor) {
         final NeutronLoadBalancerHealthMonitor answer = new NeutronLoadBalancerHealthMonitor();
         fromMdIds(healthMonitor, answer);
-        if (healthMonitor.isAdminStateUp() != null) {
-            answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.isAdminStateUp());
+        if (healthMonitor.getAdminStateUp() != null) {
+            answer.setLoadBalancerHealthMonitorAdminStateIsUp(healthMonitor.getAdminStateUp());
         }
         if (healthMonitor.getDelay() != null) {
             answer.setLoadBalancerHealthMonitorDelay(healthMonitor.getDelay().intValue());

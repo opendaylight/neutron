@@ -50,8 +50,8 @@ public final class NeutronMeteringLabelInterface
     protected NeutronMeteringLabel fromMd(MeteringLabel label) {
         final NeutronMeteringLabel answer = new NeutronMeteringLabel();
         fromMdBaseAttributes(label, answer);
-        if (label.isShared() != null) {
-            answer.setMeteringLabelShared(label.isShared());
+        if (label.getShared() != null) {
+            answer.setMeteringLabelShared(label.getShared());
         }
         return answer;
     }

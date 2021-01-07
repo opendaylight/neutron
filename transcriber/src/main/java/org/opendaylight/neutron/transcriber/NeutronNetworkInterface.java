@@ -72,11 +72,11 @@ public final class NeutronNetworkInterface
         result.initDefaults();
         fromMdBaseAttributes(network, result);
         fromMdAdminAttributes(network, result);
-        result.setShared(network.isShared());
-        result.setVlanTransparent(network.isVlanTransparent());
+        result.setShared(network.getShared());
+        result.setVlanTransparent(network.getVlanTransparent());
 
         final NetworkL3Extension l3Extension = network.augmentation(NetworkL3Extension.class);
-        result.setRouterExternal(l3Extension.isExternal());
+        result.setRouterExternal(l3Extension.getExternal());
 
         final NetworkProviderExtension providerExtension = network.augmentation(NetworkProviderExtension.class);
         result.setProviderPhysicalNetwork(providerExtension.getPhysicalNetwork());

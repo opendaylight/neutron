@@ -39,11 +39,11 @@ public final class NeutronFirewallPolicyInterface
     protected NeutronFirewallPolicy fromMd(FirewallPolicy policy) {
         final NeutronFirewallPolicy answer = new NeutronFirewallPolicy();
         fromMdBaseAttributes(policy, answer);
-        if (policy.isShared() != null) {
-            answer.setFirewallPolicyIsShared(policy.isShared());
+        if (policy.getShared() != null) {
+            answer.setFirewallPolicyIsShared(policy.getShared());
         }
-        if (policy.isAudited() != null) {
-            answer.setFirewallPolicyIsAudited(policy.isAudited());
+        if (policy.getAudited() != null) {
+            answer.setFirewallPolicyIsAudited(policy.getAudited());
         }
         return answer;
     }

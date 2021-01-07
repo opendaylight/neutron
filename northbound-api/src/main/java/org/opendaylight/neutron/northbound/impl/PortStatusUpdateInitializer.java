@@ -39,9 +39,7 @@ public class PortStatusUpdateInitializer {
         this.cfg = neutronNorthboundApiConfig;
         this.jsonRestconfService = jsonRestconfService;
 
-        boolean preRegister = cfg.isPreRegisterPortStatusWebsocket() == null || cfg.isPreRegisterPortStatusWebsocket();
-
-        if (preRegister) {
+        if (!Boolean.FALSE.equals(cfg.getPreRegisterPortStatusWebsocket())) {
             subscribeWebsocket();
         } else {
             LOG.info("PortStatusUpdateInitializer: Skipping pre-register of websockets");

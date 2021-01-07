@@ -110,8 +110,8 @@ public final class NeutronLoadBalancerPoolInterface
     protected NeutronLoadBalancerPool fromMd(Pool pool) {
         final NeutronLoadBalancerPool answer = new NeutronLoadBalancerPool();
         fromMdBaseAttributes(pool, answer);
-        if (pool.isAdminStateUp() != null) {
-            answer.setLoadBalancerPoolAdminStateIsUp(pool.isAdminStateUp());
+        if (pool.getAdminStateUp() != null) {
+            answer.setLoadBalancerPoolAdminStateIsUp(pool.getAdminStateUp());
         }
         if (pool.getHealthmonitorId() != null) {
             answer.setLoadBalancerPoolHealthMonitorID(pool.getHealthmonitorId().getValue());
@@ -230,8 +230,8 @@ public final class NeutronLoadBalancerPoolInterface
     protected NeutronLoadBalancerPoolMember fromMemberMd(Member member) {
         final NeutronLoadBalancerPoolMember answer = new NeutronLoadBalancerPoolMember();
         fromMdIds(member, answer);
-        if (member.isAdminStateUp() != null) {
-            answer.setPoolMemberAdminStateIsUp(member.isAdminStateUp());
+        if (member.getAdminStateUp() != null) {
+            answer.setPoolMemberAdminStateIsUp(member.getAdminStateUp());
         }
         if (member.getAddress() != null) {
             answer.setPoolMemberAddress(member.getAddress().stringValue());

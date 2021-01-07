@@ -44,7 +44,7 @@ public final class NeutronFirewallRuleInterface
 
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,
             Integer> IP_VERSION_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
-                    .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
+                    .put(IpVersionV4.class, 4).put(IpVersionV6.class, 6).build();
 
     @Inject
     public NeutronFirewallRuleInterface(DataBroker db) {
@@ -60,11 +60,11 @@ public final class NeutronFirewallRuleInterface
     protected NeutronFirewallRule fromMd(FirewallRule rule) {
         final NeutronFirewallRule answer = new NeutronFirewallRule();
         fromMdBaseAttributes(rule, answer);
-        if (rule.isShared() != null) {
-            answer.setFirewallRuleIsShared(rule.isShared());
+        if (rule.getShared() != null) {
+            answer.setFirewallRuleIsShared(rule.getShared());
         }
-        if (rule.isEnabled() != null) {
-            answer.setFirewallRuleIsEnabled(rule.isEnabled());
+        if (rule.getEnabled() != null) {
+            answer.setFirewallRuleIsEnabled(rule.getEnabled());
         }
         if (rule.getFirewallPolicyId() != null) {
             answer.setFirewallRulePolicyID(rule.getFirewallPolicyId().getValue());
@@ -101,7 +101,7 @@ public final class NeutronFirewallRuleInterface
             answer.setFirewallRuleDstPortRangeMax(rule.getDestinationPortRangeMax().toJava());
         }
         if (rule.getPosition() != null) {
-            answer.setFirewallRulePosition(Integer.valueOf(rule.getPosition().intValue()));
+            answer.setFirewallRulePosition(rule.getPosition().intValue());
         }
         if (rule.getAction() != null) {
             answer.setFirewallRuleAction(ACTION_MAP.get(rule.getAction()));

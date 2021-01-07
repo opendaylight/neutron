@@ -97,8 +97,8 @@ public final class NeutronQosPolicyInterface
     protected NeutronQosPolicy fromMd(QosPolicy qosPolicy) {
         final NeutronQosPolicy result = new NeutronQosPolicy();
         fromMdBaseAttributes(qosPolicy, result);
-        if (qosPolicy.isShared() != null) {
-            result.setPolicyIsShared(qosPolicy.isShared());
+        if (qosPolicy.getShared() != null) {
+            result.setPolicyIsShared(qosPolicy.getShared());
         }
         if (qosPolicy.getBandwidthLimitRules() != null) {
             final List<NeutronQosBandwidthLimitRule> bandwidthLimitRules = new ArrayList<>();

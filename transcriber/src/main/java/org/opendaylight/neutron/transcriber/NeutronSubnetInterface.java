@@ -50,8 +50,8 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
 
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,
             Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
-                    .put(IpVersionV4.class, Integer.valueOf(IPV4_VERSION))
-                    .put(IpVersionV6.class, Integer.valueOf(IPV6_VERSION)).build();
+                    .put(IpVersionV4.class, IPV4_VERSION)
+                    .put(IpVersionV6.class, IPV6_VERSION).build();
 
     private static final ImmutableBiMap<Class<? extends Dhcpv6Base>,
             String> DHCPV6_MAP = new ImmutableBiMap.Builder<Class<? extends Dhcpv6Base>, String>()
@@ -86,7 +86,7 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         if (subnet.getIpv6AddressMode() != null) {
             result.setIpV6AddressMode(DHCPV6_MAP.get(subnet.getIpv6AddressMode()));
         }
-        result.setEnableDHCP(subnet.isEnableDhcp());
+        result.setEnableDHCP(subnet.getEnableDhcp());
         if (subnet.getAllocationPools() != null) {
             final List<NeutronSubnetIpAllocationPool> allocationPools = new ArrayList<>();
             for (final AllocationPools allocationPool : subnet.getAllocationPools().values()) {

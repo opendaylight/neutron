@@ -40,9 +40,9 @@ public final class NeutronFirewallInterface
     protected NeutronFirewall fromMd(Firewall firewall) {
         final NeutronFirewall answer = new NeutronFirewall();
         fromMdBaseAttributes(firewall, answer);
-        answer.setFirewallAdminStateIsUp(firewall.isAdminStateUp());
-        if (firewall.isShared() != null) {
-            answer.setFirewallIsShared(firewall.isShared());
+        answer.setFirewallAdminStateIsUp(firewall.getAdminStateUp());
+        if (firewall.getShared() != null) {
+            answer.setFirewallIsShared(firewall.getShared());
         }
         if (firewall.getFirewallPolicyId() != null) {
             answer.setFirewallPolicyID(firewall.getFirewallPolicyId().getValue());

@@ -60,7 +60,7 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
     // TODO: consolidate this map with NeutronSubnetInterface.IPV_MAP
     private static final ImmutableBiMap<Class<? extends IpVersionBase>,
             Integer> IPV_MAP = new ImmutableBiMap.Builder<Class<? extends IpVersionBase>, Integer>()
-                    .put(IpVersionV4.class, Integer.valueOf(4)).put(IpVersionV6.class, Integer.valueOf(6)).build();
+                    .put(IpVersionV4.class, 4).put(IpVersionV6.class, 6).build();
 
     @Inject
     public NeutronPortInterface(DataBroker db) {
@@ -90,14 +90,14 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         result.setBindingvnicType(binding.getVnicType());
     }
 
-    private void portSecurityExtension(Port port, NeutronPort result) {
+    private static void portSecurityExtension(Port port, NeutronPort result) {
         final PortSecurityExtension portSecurity = port.augmentation(PortSecurityExtension.class);
-        if (portSecurity != null && portSecurity.isPortSecurityEnabled() != null) {
-            result.setPortSecurityEnabled(portSecurity.isPortSecurityEnabled());
+        if (portSecurity != null && portSecurity.getPortSecurityEnabled() != null) {
+            result.setPortSecurityEnabled(portSecurity.getPortSecurityEnabled());
         }
     }
 
-    private void qosExtension(Port port, NeutronPort result) {
+    private static void qosExtension(Port port, NeutronPort result) {
         final QosPortExtension qos = port.augmentation(QosPortExtension.class);
         if (qos != null && qos.getQosPolicyId() != null) {
             result.setQosPolicyId(qos.getQosPolicyId().getValue());

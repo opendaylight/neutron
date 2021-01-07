@@ -72,7 +72,7 @@ public final class NeutronMeteringLabelRuleInterface
         if (rule.getRemoteIpPrefix() != null) {
             answer.setMeteringLabelRuleRemoteIpPrefix(rule.getRemoteIpPrefix().stringValue());
         }
-        answer.setMeteringLabelRuleExcluded(rule.isExcluded());
+        answer.setMeteringLabelRuleExcluded(rule.getExcluded());
         return answer;
     }
 }
