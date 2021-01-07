@@ -7,7 +7,7 @@
  */
 package org.opendaylight.neutron.northbound.impl;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.core.MultivaluedHashMap;
