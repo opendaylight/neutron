@@ -1,0 +1,7 @@
+Code-Review+2: Robert Varga <nite@hq.sk>
+Verified+1: jenkins-releng <jenkins-releng@opendaylight.org>
+Submitted-by: Robert Varga <nite@hq.sk>
+Submitted-at: Thu, 07 Jan 2021 22:17:46 +0000
+Reviewed-on: https://git.opendaylight.org/gerrit/c/neutron/+/94482
+Project: neutron
+Branch: refs/heads/master
