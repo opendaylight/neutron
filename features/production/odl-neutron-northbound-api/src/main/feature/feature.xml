@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.1" name="odl-neutron-northbound-api-${project.version}">
-   <feature name="odl-neutron-northbound-api" version="${project.version}">
-      <configfile finalname="${config.configfile.directory}/${config.configfile.file}">mvn:org.opendaylight.neutron/northbound-api/${project.version}/xml/config</configfile>
-   </feature>
+    <feature name="odl-neutron-northbound-api" version="${project.version}">
+        <configfile finalname="${config.configfile.directory}/${config.configfile.file}">mvn:org.opendaylight.neutron/northbound-api/${project.version}/xml/config</configfile>
+        <feature version="[0.13,1)">odl-aaa-shiro</feature>
+        <feature version="[1.9,2)">odl-infrautils-utils</feature>
+    </feature>
 </features>
