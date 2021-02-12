@@ -18,7 +18,7 @@
 
     <groupId>org.opendaylight.neutron</groupId>
     <artifactId>neutron-single-feature-parent</artifactId>
-    <version>0.15.3-SNAPSHOT</version>
+    <version>0.15.3</version>
     <packaging>pom</packaging>
 
     <properties>
