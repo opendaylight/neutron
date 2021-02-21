@@ -4,5 +4,6 @@
         <configfile finalname="${config.configfile.directory}/${config.configfile.file}">mvn:org.opendaylight.neutron/northbound-api/${project.version}/xml/config</configfile>
         <feature version="[0.13,1)">odl-aaa-shiro</feature>
         <feature version="[1.9,2)">odl-infrautils-utils</feature>
+        <feature version="[1.13,2)">odl-restconf</feature>
     </feature>
 </features>

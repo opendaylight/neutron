@@ -20,41 +20,22 @@
     <packaging>feature</packaging>
     <name>OpenDaylight :: Neutron :: Hostconfig :: VPP</name>
 
-    <properties>
-        <netconf.version>1.10.0-SNAPSHOT</netconf.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.opendaylight.netconf</groupId>
-                <artifactId>netconf-artifacts</artifactId>
-                <version>${netconf.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>org.opendaylight.netconf</groupId>
             <artifactId>odl-netconf-clustered-topology</artifactId>
-            <version>${netconf.version}</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
         <dependency>
             <groupId>org.opendaylight.netconf</groupId>
             <artifactId>odl-netconf-connector</artifactId>
-            <version>${netconf.version}</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
         <dependency>
             <groupId>org.opendaylight.netconf</groupId>
             <artifactId>odl-netconf-tcp</artifactId>
-            <version>${netconf.version}</version>
             <type>xml</type>
             <classifier>features</classifier>
         </dependency>
