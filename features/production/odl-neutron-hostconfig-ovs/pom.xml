@@ -12,7 +12,7 @@
     <parent>
         <groupId>org.opendaylight.neutron</groupId>
         <artifactId>neutron-single-feature-parent</artifactId>
-        <version>0.15.3-SNAPSHOT</version>
+        <version>0.15.4-SNAPSHOT</version>
         <relativePath>../../parent</relativePath>
     </parent>
 
@@ -25,7 +25,7 @@
             <dependency>
                 <groupId>org.opendaylight.ovsdb</groupId>
                 <artifactId>southbound-artifacts</artifactId>
-                <version>1.11.3-SNAPSHOT</version>
+                <version>1.11.4-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -44,14 +44,14 @@
             <artifactId>odl-ovsdb-utils</artifactId>
             <type>xml</type>
             <classifier>features</classifier>
-            <version>1.11.3-SNAPSHOT</version>
+            <version>1.11.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.opendaylight.aaa</groupId>
             <artifactId>odl-aaa-cert</artifactId>
             <type>xml</type>
             <classifier>features</classifier>
-            <version>0.12.3-SNAPSHOT</version>
+            <version>0.12.4-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
