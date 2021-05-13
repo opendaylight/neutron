@@ -51,7 +51,7 @@
             <artifactId>odl-aaa-cert</artifactId>
             <type>xml</type>
             <classifier>features</classifier>
-            <version>0.13.2</version>
+            <version>0.13.3</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
