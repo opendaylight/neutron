@@ -55,10 +55,12 @@ public final class NeutronVpnIkePoliciesNorthbound
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response listVpnIkePolicies(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -104,12 +106,14 @@ public final class NeutronVpnIkePoliciesNorthbound
     @Path("{policyID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response showVpnIkePolicy(@PathParam("policyID") String policyUUID,
                                      // return fields
                                      @QueryParam("fields") List<String> fields) {
@@ -123,8 +127,10 @@ public final class NeutronVpnIkePoliciesNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVpnIkePolicy.class)
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response createVpnIkePolicy(final NeutronVpnIkePolicyRequest input) {
         return create(input);
     }
@@ -136,9 +142,11 @@ public final class NeutronVpnIkePoliciesNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response updateVpnIkePolicy(@PathParam("policyID") String policyUUID,
                                        final NeutronVpnIkePolicyRequest input) {
         return update(policyUUID, input);
@@ -149,9 +157,11 @@ public final class NeutronVpnIkePoliciesNorthbound
      */
     @Path("{policyID}")
     @DELETE
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response deleteVpnIkePolicy(@PathParam("policyID") String policyUUID) {
         return delete(policyUUID);
     }

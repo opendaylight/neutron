@@ -56,10 +56,12 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response listVpnIPSecSiteConnections(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -118,12 +120,14 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
     @Path("{connectionID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_FORBIDDEN, condition = "Forbidden"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response showVpnIPSecSiteConnection(@PathParam("connectionID") String connectionID,
                                                // return fields
                                                @QueryParam("fields") List<String> fields) {
@@ -137,8 +141,10 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
     @TypeHint(NeutronVpnIpSecSiteConnection.class)
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response createVpnIPSecSiteConnection(final NeutronVpnIpSecSiteConnectionRequest input) {
         return create(input);
     }
@@ -150,9 +156,11 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response updateVpnIPSecSiteConnection(@PathParam("connectionID") String connectionID,
                                                  final NeutronVpnIpSecSiteConnectionRequest input) {
         return update(connectionID, input);
@@ -163,11 +171,12 @@ public final class NeutronVpnIpSecSiteConnectionsNorthbound
      */
     @Path("{connectionID}")
     @DELETE
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response deleteVpnIPSecSiteConnection(@PathParam("connectionID") String connectionID) {
         return delete(connectionID);
     }
-
 }

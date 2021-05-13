@@ -54,10 +54,12 @@ public final class NeutronSFCPortPairsNorthbound
      */
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response listSFCPortPairs(
             // return fields
             @QueryParam("fields") List<String> fields,
@@ -93,11 +95,13 @@ public final class NeutronSFCPortPairsNorthbound
     @Path("{portPairUUID}")
     @GET
     @Produces({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAUTHORIZED, condition = "Unauthorized"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_IMPLEMENTED, condition = "Not Implemented"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response showSFCPortPair(@PathParam("portPairUUID") String sfcPortPairUUID,
             // return fields
             @QueryParam("fields") List<String> fields) {
@@ -110,8 +114,10 @@ public final class NeutronSFCPortPairsNorthbound
     @POST
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_CREATED, condition = "Created"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response createSFCPortPair(final NeutronSFCPortPairRequest input) {
         return create(input);
     }
@@ -136,9 +142,11 @@ public final class NeutronSFCPortPairsNorthbound
     @PUT
     @Produces({ MediaType.APPLICATION_JSON })
     @Consumes({ MediaType.APPLICATION_JSON })
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_OK, condition = "Operation successful"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response updateSFCPortPair(@PathParam("portPairUUID") String sfcPortPairUUID,
             final NeutronSFCPortPairRequest input) {
         return update(sfcPortPairUUID, input);
@@ -149,11 +157,12 @@ public final class NeutronSFCPortPairsNorthbound
      */
     @Path("{portPairUUID}")
     @DELETE
-    @StatusCodes({ @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
-            @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
-            @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available") })
+    @StatusCodes({
+        @ResponseCode(code = HttpURLConnection.HTTP_NO_CONTENT, condition = "No Content"),
+        @ResponseCode(code = HttpURLConnection.HTTP_NOT_FOUND, condition = "Not Found"),
+        @ResponseCode(code = HttpURLConnection.HTTP_UNAVAILABLE, condition = "No providers available")
+    })
     public Response deleteSFCPortPair(@PathParam("portPairUUID") String sfcPortPairUUID) {
         return delete(sfcPortPairUUID);
     }
-
 }
