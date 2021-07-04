@@ -25,6 +25,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.b
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.Bgpvpn;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.bgpvpns.rev150903.bgpvpns.attributes.bgpvpns.BgpvpnKey;
+import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
 @Service(classes = INeutronBgpvpnCRUD.class)
@@ -115,7 +116,7 @@ public final class NeutronBgpvpnInterface extends AbstractNeutronInterface<Bgpvp
             bgpvpnBuilder.setAutoAggregate(bgpvpn.getAutoAggregate());
         }
         if (bgpvpn.getVni() != null) {
-            bgpvpnBuilder.setVni(bgpvpn.getVni());
+            bgpvpnBuilder.setVni(Uint32.valueOf(bgpvpn.getVni()));
         }
         if (bgpvpn.getType() != null) {
             final ImmutableBiMap<String, Class<? extends BgpvpnTypeBase>> mapper = BGPVPN_TYPE_MAP.inverse();

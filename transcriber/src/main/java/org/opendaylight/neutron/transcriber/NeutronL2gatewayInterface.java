@@ -26,6 +26,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev15071
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gateway;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l2gateways.rev150712.l2gateways.attributes.l2gateways.L2gatewayKey;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 
 @Singleton
 @Service(classes = INeutronL2gatewayCRUD.class)
@@ -88,29 +89,27 @@ public final class NeutronL2gatewayInterface
         toMdBaseAttributes(neutronObject, l2gatewayBuilder);
 
         if (neutronObject.getNeutronL2gatewayDevices() != null) {
-            final List<Devices> devices = new ArrayList<>();
-            for (final NeutronL2gatewayDevice neutronL2gatewayDevice : neutronObject.getNeutronL2gatewayDevices()) {
-                final DevicesBuilder deviceBuilder = new DevicesBuilder();
-                final List<Interfaces> interfaces = new ArrayList<>();
-                for (final NeutronL2gatewayDeviceInterface neutronL2gatewayDeviceInterface : neutronL2gatewayDevice
-                        .getNeutronL2gatewayDeviceInterfaces()) {
-                    final InterfacesBuilder interfacesBuilder = new InterfacesBuilder();
-                    final List<Integer> segmentIds = new ArrayList<>();
-                    interfacesBuilder.setInterfaceName(neutronL2gatewayDeviceInterface.getInterfaceName());
-                    if (neutronL2gatewayDeviceInterface.getSegmentationId() != null) {
-                        for (final Integer segmentationId : neutronL2gatewayDeviceInterface.getSegmentationId()) {
-                            segmentIds.add(segmentationId);
-                        }
-                        interfacesBuilder.setSegmentationIds(segmentIds);
-                    }
-                    interfaces.add(interfacesBuilder.build());
-                }
-                deviceBuilder.setDeviceName(neutronL2gatewayDevice.getDeviceName());
-                deviceBuilder.setUuid(toUuid(neutronL2gatewayDevice.getID()));
-                deviceBuilder.setInterfaces(interfaces);
-                devices.add(deviceBuilder.build());
-            }
-            l2gatewayBuilder.setDevices(devices);
+            l2gatewayBuilder.setDevices(neutronObject.getNeutronL2gatewayDevices().stream()
+                .map(neutronL2gatewayDevice -> new DevicesBuilder()
+                    .setDeviceName(neutronL2gatewayDevice.getDeviceName())
+                    .setUuid(toUuid(neutronL2gatewayDevice.getID()))
+                    .setInterfaces(neutronL2gatewayDevice.getNeutronL2gatewayDeviceInterfaces().stream()
+                        .map(neutronL2gatewayDeviceInterface -> {
+                            final InterfacesBuilder interfacesBuilder = new InterfacesBuilder();
+                            final List<Integer> segmentIds = new ArrayList<>();
+                            interfacesBuilder.setInterfaceName(neutronL2gatewayDeviceInterface.getInterfaceName());
+                            if (neutronL2gatewayDeviceInterface.getSegmentationId() != null) {
+                                for (Integer segmentationId : neutronL2gatewayDeviceInterface.getSegmentationId()) {
+                                    segmentIds.add(segmentationId);
+                                }
+                                interfacesBuilder.setSegmentationIds(segmentIds);
+                            }
+
+                            return interfacesBuilder.build();
+                        })
+                        .collect(BindingMap.toOrderedMap()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         return l2gatewayBuilder.build();
     }

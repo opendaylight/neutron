@@ -32,6 +32,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRule;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.secgroups.rev150712.security.rules.attributes.security.rules.SecurityRuleKey;
+import org.opendaylight.yangtools.yang.common.Uint16;
 
 @Singleton
 @Service(classes = INeutronSecurityRuleCRUD.class)
@@ -129,10 +130,10 @@ public final class NeutronSecurityRuleInterface extends
                     .setEthertype(mapper.get(securityRule.getSecurityRuleEthertype()));
         }
         if (securityRule.getSecurityRulePortMin() != null) {
-            securityRuleBuilder.setPortRangeMin(securityRule.getSecurityRulePortMin());
+            securityRuleBuilder.setPortRangeMin(Uint16.valueOf(securityRule.getSecurityRulePortMin()));
         }
         if (securityRule.getSecurityRulePortMax() != null) {
-            securityRuleBuilder.setPortRangeMax(securityRule.getSecurityRulePortMax());
+            securityRuleBuilder.setPortRangeMax(Uint16.valueOf(securityRule.getSecurityRulePortMax()));
         }
         return securityRuleBuilder.build();
     }

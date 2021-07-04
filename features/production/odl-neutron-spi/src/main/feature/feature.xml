@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.1" name="odl-neutron-spi-${project.version}">
    <feature name="odl-neutron-spi" version="${project.version}">
-     <feature version="[8.1,9)">odl-apache-commons-net</feature>
-     <feature version="[3,4)">odl-mdsal-broker</feature>
+     <feature version="[9,10)">odl-apache-commons-net</feature>
+     <feature version="[4,5)">odl-mdsal-broker</feature>
    </feature>
 </features>
