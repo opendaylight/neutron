@@ -28,6 +28,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.l
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.Healthmonitor;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.lbaas.attributes.healthmonitors.HealthmonitorKey;
+import org.opendaylight.yangtools.yang.common.Uint16;
 import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
@@ -67,7 +68,7 @@ public final class NeutronLoadBalancerHealthMonitorInterface
             healthmonitorBuilder.setHttpMethod(healthMonitor.getLoadBalancerHealthMonitorHttpMethod());
         }
         if (healthMonitor.getLoadBalancerHealthMonitorMaxRetries() != null) {
-            healthmonitorBuilder.setMaxRetries(healthMonitor.getLoadBalancerHealthMonitorMaxRetries());
+            healthmonitorBuilder.setMaxRetries(Uint16.valueOf(healthMonitor.getLoadBalancerHealthMonitorMaxRetries()));
         }
         if (healthMonitor.getLoadBalancerHealthMonitorPools() != null) {
             final List<Uuid> listUuid = new ArrayList<>();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.1" name="odl-neutron-hostconfig-ovs-${project.version}">
     <feature name="odl-neutron-hostconfig-ovs">
-        <feature version="[0.13,1)">odl-aaa-cert</feature>
+        <feature version="[0.14,1)">odl-aaa-cert</feature>
     </feature>
 </features>

@@ -31,6 +31,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rul
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.fwaas.rev150712.rules.attributes.firewall.rules.FirewallRuleKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddress;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddressBuilder;
+import org.opendaylight.yangtools.yang.common.Uint16;
 
 @Singleton
 @Service(classes = INeutronFirewallRuleCRUD.class)
@@ -147,16 +148,16 @@ public final class NeutronFirewallRuleInterface
             ruleBuilder.setDestinationIpAddr(ipAddress);
         }
         if (rule.getFirewallRuleSrcPortRangeMin() != null) {
-            ruleBuilder.setSourcePortRangeMin(rule.getFirewallRuleSrcPortRangeMin());
+            ruleBuilder.setSourcePortRangeMin(Uint16.valueOf(rule.getFirewallRuleSrcPortRangeMin()));
         }
         if (rule.getFirewallRuleSrcPortRangeMax() != null) {
-            ruleBuilder.setSourcePortRangeMax(rule.getFirewallRuleSrcPortRangeMax());
+            ruleBuilder.setSourcePortRangeMax(Uint16.valueOf(rule.getFirewallRuleSrcPortRangeMax()));
         }
         if (rule.getFirewallRuleDstPortRangeMin() != null) {
-            ruleBuilder.setDestinationPortRangeMin(rule.getFirewallRuleDstPortRangeMin());
+            ruleBuilder.setDestinationPortRangeMin(Uint16.valueOf(rule.getFirewallRuleDstPortRangeMin()));
         }
         if (rule.getFirewallRuleDstPortRangeMax() != null) {
-            ruleBuilder.setDestinationPortRangeMax(rule.getFirewallRuleDstPortRangeMax());
+            ruleBuilder.setDestinationPortRangeMax(Uint16.valueOf(rule.getFirewallRuleDstPortRangeMax()));
         }
         if (rule.getFirewallRulePosition() != null) {
             ruleBuilder.setPosition(rule.getFirewallRulePosition().shortValue());

@@ -35,10 +35,11 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.networks.rev150712.networks.attributes.networks.NetworkKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.NetworkProviderExtensionBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.neutron.networks.network.Segments;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.neutron.networks.network.SegmentsBuilder;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.network.provider.extension.Segments;
+import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.provider.ext.rev150712.network.provider.extension.SegmentsBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosNetworkExtensionBuilder;
+import org.opendaylight.yangtools.yang.common.Uint16;
 import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
@@ -153,7 +154,9 @@ public final class NeutronNetworkInterface
         networkBuilder.addAugmentation(l3ExtensionBuilder.build());
         networkBuilder.addAugmentation(providerExtensionBuilder.build());
         if (network.getMtu() != null) {
-            networkBuilder.addAugmentation(new NetworkMtuExtensionBuilder().setMtu(network.getMtu()).build());
+            networkBuilder.addAugmentation(new NetworkMtuExtensionBuilder()
+                .setMtu(Uint16.valueOf(network.getMtu()))
+                .build());
         }
     }
 

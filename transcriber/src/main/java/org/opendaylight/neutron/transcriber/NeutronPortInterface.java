@@ -51,6 +51,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.portsecurity.rev150
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtension;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.qos.ext.rev160613.QosPortExtensionBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.types.rev160517.IpPrefixOrAddressBuilder;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 
 @Singleton
 @Service(classes = INeutronPortCRUD.class)
@@ -203,15 +204,12 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
         portBuilder.addAugmentation(bindingBuilder.build());
         portBuilder.addAugmentation(portSecurityBuilder.build());
         if (neutronPort.getAllowedAddressPairs() != null) {
-            final List<AllowedAddressPairs> listAllowedAddressPairs = new ArrayList<>();
-            for (final NeutronPortAllowedAddressPairs allowedAddressPairs : neutronPort.getAllowedAddressPairs()) {
-                final AllowedAddressPairsBuilder allowedAddressPairsBuilder = new AllowedAddressPairsBuilder();
-                allowedAddressPairsBuilder
-                        .setIpAddress(IpPrefixOrAddressBuilder.getDefaultInstance(allowedAddressPairs.getIpAddress()));
-                allowedAddressPairsBuilder.setMacAddress(new MacAddress(allowedAddressPairs.getMacAddress()));
-                listAllowedAddressPairs.add(allowedAddressPairsBuilder.build());
-            }
-            portBuilder.setAllowedAddressPairs(listAllowedAddressPairs);
+            portBuilder.setAllowedAddressPairs(neutronPort.getAllowedAddressPairs().stream()
+                .map(allowedAddressPairs -> new AllowedAddressPairsBuilder()
+                    .setIpAddress(IpPrefixOrAddressBuilder.getDefaultInstance(allowedAddressPairs.getIpAddress()))
+                    .setMacAddress(new MacAddress(allowedAddressPairs.getMacAddress()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         if (neutronPort.getDeviceID() != null) {
             portBuilder.setDeviceId(neutronPort.getDeviceID());
@@ -220,31 +218,29 @@ public final class NeutronPortInterface extends AbstractNeutronInterface<Port, P
             portBuilder.setDeviceOwner(neutronPort.getDeviceOwner());
         }
         if (neutronPort.getExtraDHCPOptions() != null) {
-            final List<ExtraDhcpOpts> listExtraDHCPOptions = new ArrayList<>();
             final ImmutableBiMap<Integer, Class<? extends IpVersionBase>> mapper = IPV_MAP.inverse();
-            for (final NeutronPortExtraDHCPOption extraDHCPOption : neutronPort.getExtraDHCPOptions()) {
-                final ExtraDhcpOptsBuilder extraDHCPOptsBuilder = new ExtraDhcpOptsBuilder();
-                extraDHCPOptsBuilder.setOptName(extraDHCPOption.getName());
-                extraDHCPOptsBuilder.setOptValue(extraDHCPOption.getValue());
-                Integer ipVersion = extraDHCPOption.getIpVersion();
-                if (ipVersion == null) {
-                    // default as v4 for neutron api evolves
-                    ipVersion = 4;
-                }
-                extraDHCPOptsBuilder.setIpVersion(mapper.get(ipVersion));
-                listExtraDHCPOptions.add(extraDHCPOptsBuilder.build());
-            }
-            portBuilder.setExtraDhcpOpts(listExtraDHCPOptions);
+            portBuilder.setExtraDhcpOpts(neutronPort.getExtraDHCPOptions().stream()
+                .map(extraDHCPOption -> {
+                    Integer ipVersion = extraDHCPOption.getIpVersion();
+                    if (ipVersion == null) {
+                        // default as v4 for neutron api evolves
+                        ipVersion = 4;
+                    }
+                    return new ExtraDhcpOptsBuilder()
+                        .setOptName(extraDHCPOption.getName())
+                        .setOptValue(extraDHCPOption.getValue())
+                        .setIpVersion(mapper.get(ipVersion))
+                        .build();
+                })
+                .collect(BindingMap.toOrderedMap()));
         }
         if (neutronPort.getFixedIps() != null) {
-            final List<FixedIps> listNeutronIps = new ArrayList<>();
-            for (final NeutronIps neutronIPs : neutronPort.getFixedIps()) {
-                final FixedIpsBuilder fixedIpsBuilder = new FixedIpsBuilder();
-                fixedIpsBuilder.setIpAddress(IpAddressBuilder.getDefaultInstance(neutronIPs.getIpAddress()));
-                fixedIpsBuilder.setSubnetId(toUuid(neutronIPs.getSubnetUUID()));
-                listNeutronIps.add(fixedIpsBuilder.build());
-            }
-            portBuilder.setFixedIps(listNeutronIps);
+            portBuilder.setFixedIps(neutronPort.getFixedIps().stream()
+                .map(neutronIPs -> new FixedIpsBuilder()
+                    .setIpAddress(IpAddressBuilder.getDefaultInstance(neutronIPs.getIpAddress()))
+                    .setSubnetId(toUuid(neutronIPs.getSubnetUUID()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         if (neutronPort.getMacAddress() != null) {
             portBuilder.setMacAddress(new MacAddress(neutronPort.getMacAddress()));

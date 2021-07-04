@@ -35,6 +35,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifier;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierKey;
+import org.opendaylight.yangtools.yang.common.Uint16;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,16 +91,16 @@ public final class NeutronSFCFlowClassifierInterface
             }
         }
         if (neutronClassifier.getSourcePortRangeMin() != null) {
-            result.setSourcePortRangeMin(neutronClassifier.getSourcePortRangeMin());
+            result.setSourcePortRangeMin(Uint16.valueOf(neutronClassifier.getSourcePortRangeMin()));
         }
         if (neutronClassifier.getSourcePortRangeMax() != null) {
-            result.setSourcePortRangeMax(neutronClassifier.getSourcePortRangeMax());
+            result.setSourcePortRangeMax(Uint16.valueOf(neutronClassifier.getSourcePortRangeMax()));
         }
         if (neutronClassifier.getDestinationPortRangeMin() != null) {
-            result.setDestinationPortRangeMin(neutronClassifier.getDestinationPortRangeMin());
+            result.setDestinationPortRangeMin(Uint16.valueOf(neutronClassifier.getDestinationPortRangeMin()));
         }
         if (neutronClassifier.getDestinationPortRangeMax() != null) {
-            result.setDestinationPortRangeMax(neutronClassifier.getDestinationPortRangeMax());
+            result.setDestinationPortRangeMax(Uint16.valueOf(neutronClassifier.getDestinationPortRangeMax()));
         }
         if (neutronClassifier.getSourceIpPrefix() != null) {
             result.setSourceIpPrefix(IpPrefixBuilder.getDefaultInstance(neutronClassifier.getSourceIpPrefix()));
