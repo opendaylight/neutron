@@ -39,6 +39,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.s
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.Subnet;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.subnets.rev150712.subnets.attributes.subnets.SubnetKey;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 
 @Singleton
 @Service(classes = INeutronSubnetCRUD.class)
@@ -146,15 +147,12 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
         }
         subnetBuilder.setEnableDhcp(subnet.getEnableDHCP());
         if (subnet.getAllocationPools() != null) {
-            final List<AllocationPools> allocationPools = new ArrayList<>();
-            for (final NeutronSubnetIpAllocationPool allocationPool : subnet.getAllocationPools()) {
-                final AllocationPoolsBuilder builder = new AllocationPoolsBuilder();
-                builder.setStart(IpAddressBuilder.getDefaultInstance(allocationPool.getPoolStart()));
-                builder.setEnd(IpAddressBuilder.getDefaultInstance(allocationPool.getPoolEnd()));
-                final AllocationPools temp = builder.build();
-                allocationPools.add(temp);
-            }
-            subnetBuilder.setAllocationPools(allocationPools);
+            subnetBuilder.setAllocationPools(subnet.getAllocationPools().stream()
+                .map(allocationPool -> new AllocationPoolsBuilder()
+                    .setStart(IpAddressBuilder.getDefaultInstance(allocationPool.getPoolStart()))
+                    .setEnd(IpAddressBuilder.getDefaultInstance(allocationPool.getPoolEnd()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         if (subnet.getDnsNameservers() != null) {
             final List<IpAddress> dnsNameServers = new ArrayList<>();
@@ -165,14 +163,12 @@ public final class NeutronSubnetInterface extends AbstractNeutronInterface<Subne
             subnetBuilder.setDnsNameservers(dnsNameServers);
         }
         if (subnet.getHostRoutes() != null) {
-            final List<HostRoutes> hostRoutes = new ArrayList<>();
-            for (final NeutronRoute hostRoute : subnet.getHostRoutes()) {
-                final HostRoutesBuilder hrBuilder = new HostRoutesBuilder();
-                hrBuilder.setDestination(IpPrefixBuilder.getDefaultInstance(hostRoute.getDestination()));
-                hrBuilder.setNexthop(IpAddressBuilder.getDefaultInstance(hostRoute.getNextHop()));
-                hostRoutes.add(hrBuilder.build());
-            }
-            subnetBuilder.setHostRoutes(hostRoutes);
+            subnetBuilder.setHostRoutes(subnet.getHostRoutes().stream()
+                .map(hostRoute -> new HostRoutesBuilder()
+                    .setDestination(IpPrefixBuilder.getDefaultInstance(hostRoute.getDestination()))
+                    .setNexthop(IpAddressBuilder.getDefaultInstance(hostRoute.getNextHop()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         return subnetBuilder.build();
     }

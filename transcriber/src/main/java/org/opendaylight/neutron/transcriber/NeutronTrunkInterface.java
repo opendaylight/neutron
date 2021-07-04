@@ -29,6 +29,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.tr
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.Trunk;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.trunks.rev170118.trunks.attributes.trunks.TrunkKey;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 import org.opendaylight.yangtools.yang.common.Uint32;
 
 @Singleton
@@ -82,16 +83,14 @@ public final class NeutronTrunkInterface extends AbstractNeutronInterface<Trunk,
             trunkBuilder.setPortId(toUuid(trunk.getPortId()));
         }
         if (trunk.getSubPorts() != null) {
-            final List<SubPorts> subPortsList = new ArrayList<>();
-            final SubPortsBuilder subPortsBuilder = new SubPortsBuilder();
             final ImmutableBiMap<String, Class<? extends NetworkTypeBase>> mapper = NETWORK_TYPE_MAP.inverse();
-            for (NeutronTrunkSubPort subPort: trunk.getSubPorts()) {
-                subPortsBuilder.setPortId(toUuid(subPort.getPortId()));
-                subPortsBuilder.setSegmentationType(mapper.get(subPort.getSegmentationType()));
-                subPortsBuilder.setSegmentationId(Uint32.valueOf(subPort.getSegmentationId()));
-                subPortsList.add(subPortsBuilder.build());
-            }
-            trunkBuilder.setSubPorts(subPortsList);
+            trunkBuilder.setSubPorts(trunk.getSubPorts().stream()
+                .map(subPort -> new SubPortsBuilder()
+                    .setPortId(toUuid(subPort.getPortId()))
+                    .setSegmentationType(mapper.get(subPort.getSegmentationType()))
+                    .setSegmentationId(Uint32.valueOf(subPort.getSegmentationId()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         return trunkBuilder.build();
     }

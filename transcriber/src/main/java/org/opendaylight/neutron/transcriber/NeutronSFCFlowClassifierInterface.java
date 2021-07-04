@@ -8,10 +8,8 @@
 package org.opendaylight.neutron.transcriber;
 
 import com.google.common.collect.ImmutableBiMap;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -30,11 +28,12 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.constants.rev150712.ProtocolUdp;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.flow.classifier.match.attributes.L7Parameter;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.flow.classifier.match.attributes.L7ParameterBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.flow.classifier.match.attributes.L7ParameterKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.SfcFlowClassifiers;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifier;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.flow.classifier.rev160511.sfc.flow.classifiers.attributes.sfc.flow.classifiers.SfcFlowClassifierKey;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
+import org.opendaylight.yangtools.yang.common.Uint16;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,16 +89,16 @@ public final class NeutronSFCFlowClassifierInterface
             }
         }
         if (neutronClassifier.getSourcePortRangeMin() != null) {
-            result.setSourcePortRangeMin(neutronClassifier.getSourcePortRangeMin());
+            result.setSourcePortRangeMin(Uint16.valueOf(neutronClassifier.getSourcePortRangeMin()));
         }
         if (neutronClassifier.getSourcePortRangeMax() != null) {
-            result.setSourcePortRangeMax(neutronClassifier.getSourcePortRangeMax());
+            result.setSourcePortRangeMax(Uint16.valueOf(neutronClassifier.getSourcePortRangeMax()));
         }
         if (neutronClassifier.getDestinationPortRangeMin() != null) {
-            result.setDestinationPortRangeMin(neutronClassifier.getDestinationPortRangeMin());
+            result.setDestinationPortRangeMin(Uint16.valueOf(neutronClassifier.getDestinationPortRangeMin()));
         }
         if (neutronClassifier.getDestinationPortRangeMax() != null) {
-            result.setDestinationPortRangeMax(neutronClassifier.getDestinationPortRangeMax());
+            result.setDestinationPortRangeMax(Uint16.valueOf(neutronClassifier.getDestinationPortRangeMax()));
         }
         if (neutronClassifier.getSourceIpPrefix() != null) {
             result.setSourceIpPrefix(IpPrefixBuilder.getDefaultInstance(neutronClassifier.getSourceIpPrefix()));
@@ -115,15 +114,12 @@ public final class NeutronSFCFlowClassifierInterface
             result.setLogicalDestinationPort(new Uuid(neutronClassifier.getLogicalDestinationPortUUID()));
         }
         if (neutronClassifier.getL7Parameters() != null) {
-            List<L7Parameter> l7Params = new ArrayList<>();
-            for (String paramKey : neutronClassifier.getL7Parameters().keySet()) {
-                L7ParameterBuilder param = new L7ParameterBuilder();
-                param.withKey(new L7ParameterKey(paramKey));
-                param.setMatchParameter(paramKey);
-                param.setMatchParameterValue(neutronClassifier.getL7Parameters().get(paramKey));
-                l7Params.add(param.build());
-            }
-            result.setL7Parameter(l7Params);
+            result.setL7Parameter(neutronClassifier.getL7Parameters().entrySet().stream()
+                .map(entry -> new L7ParameterBuilder()
+                    .setMatchParameter(entry.getKey())
+                    .setMatchParameterValue(entry.getValue())
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         LOG.trace("toMd: Yang SFC Flow Classifier data : {}", result);
         return result.build();

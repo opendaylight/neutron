@@ -31,6 +31,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.router
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.ExternalGatewayInfoBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIps;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.l3.rev150712.routers.attributes.routers.router.external_gateway_info.ExternalFixedIpsBuilder;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 
 @Singleton
 @Service(classes = INeutronRouterCRUD.class)
@@ -60,14 +61,12 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
         }
         routerBuilder.setDistributed(router.getDistributed());
         if (router.getRoutes() != null) {
-            final List<Routes> routes = new ArrayList<>();
-            for (final NeutronRoute route : router.getRoutes()) {
-                final RoutesBuilder routeBuilder = new RoutesBuilder();
-                routeBuilder.setDestination(IpPrefixBuilder.getDefaultInstance(route.getDestination()));
-                routeBuilder.setNexthop(IpAddressBuilder.getDefaultInstance(route.getNextHop()));
-                routes.add(routeBuilder.build());
-            }
-            routerBuilder.setRoutes(routes);
+            routerBuilder.setRoutes(router.getRoutes().stream()
+                .map(route -> new RoutesBuilder()
+                    .setDestination(IpPrefixBuilder.getDefaultInstance(route.getDestination()))
+                    .setNexthop(IpAddressBuilder.getDefaultInstance(route.getNextHop()))
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         if (router.getExternalGatewayInfo() != null) {
             ExternalGatewayInfo externalGatewayInfo = null;
@@ -78,14 +77,12 @@ public final class NeutronRouterInterface extends AbstractNeutronInterface<Route
                 builder.setEnableSnat(externalGatewayInfos.getEnableSNAT());
                 builder.setExternalNetworkId(toUuid(externalGatewayInfos.getNetworkID()));
                 if (externalGatewayInfos.getExternalFixedIps() != null) {
-                    final List<ExternalFixedIps> externalFixedIps = new ArrayList<>();
-                    for (final NeutronIps externalIp : externalGatewayInfos.getExternalFixedIps()) {
-                        final ExternalFixedIpsBuilder eFixedIpBuilder = new ExternalFixedIpsBuilder();
-                        eFixedIpBuilder.setIpAddress(IpAddressBuilder.getDefaultInstance(externalIp.getIpAddress()));
-                        eFixedIpBuilder.setSubnetId(toUuid(externalIp.getSubnetUUID()));
-                        externalFixedIps.add(eFixedIpBuilder.build());
-                    }
-                    builder.setExternalFixedIps(externalFixedIps);
+                    builder.setExternalFixedIps(externalGatewayInfos.getExternalFixedIps().stream()
+                        .map(externalIp -> new ExternalFixedIpsBuilder()
+                            .setIpAddress(IpAddressBuilder.getDefaultInstance(externalIp.getIpAddress()))
+                            .setSubnetId(toUuid(externalIp.getSubnetUUID()))
+                            .build())
+                        .collect(BindingMap.toOrderedMap()));
                 }
                 externalGatewayInfo = builder.build();
             }

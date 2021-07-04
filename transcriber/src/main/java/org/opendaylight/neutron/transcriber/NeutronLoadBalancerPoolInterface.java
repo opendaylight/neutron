@@ -45,6 +45,7 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.lbaasv2.rev150712.p
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.rev150712.Neutron;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.OperationFailedException;
+import org.opendaylight.yangtools.yang.common.Uint16;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -256,13 +257,13 @@ public final class NeutronLoadBalancerPoolInterface
             memberBuilder.setAddress(ipAddress);
         }
         if (member.getPoolMemberProtoPort() != null) {
-            memberBuilder.setProtocolPort(member.getPoolMemberProtoPort());
+            memberBuilder.setProtocolPort(Uint16.valueOf(member.getPoolMemberProtoPort()));
         }
         if (member.getPoolMemberSubnetID() != null) {
             memberBuilder.setSubnetId(toUuid(member.getPoolMemberSubnetID()));
         }
         if (member.getPoolMemberWeight() != null) {
-            memberBuilder.setWeight(member.getPoolMemberWeight());
+            memberBuilder.setWeight(Uint16.valueOf(member.getPoolMemberWeight()));
         }
         return memberBuilder.build();
     }

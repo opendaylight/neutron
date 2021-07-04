@@ -20,11 +20,11 @@ import org.opendaylight.neutron.spi.NeutronSFCPortChain;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.chain.attributes.ChainParameters;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.chain.attributes.ChainParametersBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.chain.attributes.ChainParametersKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.PortChains;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.chains.PortChain;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.chains.PortChainBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.chains.PortChainKey;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,15 +71,12 @@ public final class NeutronSFCPortChainInterface
             result.setFlowClassifiers(flowClassifiers);
         }
         if (neutronPortChain.getChainParameters() != null) {
-            List<ChainParameters> chainParams = new ArrayList<>();
-            for (String paramKey : neutronPortChain.getChainParameters().keySet()) {
-                ChainParametersBuilder param = new ChainParametersBuilder();
-                param.withKey(new ChainParametersKey(paramKey));
-                param.setChainParameter(paramKey);
-                param.setChainParameterValue(neutronPortChain.getChainParameters().get(paramKey));
-                chainParams.add(param.build());
-            }
-            result.setChainParameters(chainParams);
+            result.setChainParameters(neutronPortChain.getChainParameters().entrySet().stream()
+                .map(entry -> new ChainParametersBuilder()
+                    .setChainParameter(entry.getKey())
+                    .setChainParameterValue(entry.getValue())
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         LOG.trace("toMd: Yang SFC Port Chain data : {}", result);
         return result.build();

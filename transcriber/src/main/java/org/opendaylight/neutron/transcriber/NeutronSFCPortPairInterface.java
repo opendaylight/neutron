@@ -7,10 +7,8 @@
  */
 package org.opendaylight.neutron.transcriber;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.apache.aries.blueprint.annotation.service.Service;
@@ -20,11 +18,11 @@ import org.opendaylight.neutron.spi.NeutronSFCPortPair;
 import org.opendaylight.yang.gen.v1.urn.ietf.params.xml.ns.yang.ietf.yang.types.rev130715.Uuid;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.pair.attributes.ServiceFunctionParameters;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.pair.attributes.ServiceFunctionParametersBuilder;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.port.pair.attributes.ServiceFunctionParametersKey;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.PortPairs;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPair;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPairBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.neutron.sfc.rev160511.sfc.attributes.port.pairs.PortPairKey;
+import org.opendaylight.yangtools.yang.binding.util.BindingMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,15 +56,12 @@ public final class NeutronSFCPortPairInterface
             result.setEgress(new Uuid(neutronPortPair.getEgressPortUUID()));
         }
         if (neutronPortPair.getServiceFunctionParameters() != null) {
-            List<ServiceFunctionParameters> serviceFunctionParams = new ArrayList<>();
-            for (String paramKey : neutronPortPair.getServiceFunctionParameters().keySet()) {
-                ServiceFunctionParametersBuilder param = new ServiceFunctionParametersBuilder();
-                param.withKey(new ServiceFunctionParametersKey(paramKey));
-                param.setServiceFunctionParameter(paramKey);
-                param.setServiceFunctionParameterValue(neutronPortPair.getServiceFunctionParameters().get(paramKey));
-                serviceFunctionParams.add(param.build());
-            }
-            result.setServiceFunctionParameters(serviceFunctionParams);
+            result.setServiceFunctionParameters(neutronPortPair.getServiceFunctionParameters().entrySet().stream()
+                .map(entry -> new ServiceFunctionParametersBuilder()
+                    .setServiceFunctionParameter(entry.getKey())
+                    .setServiceFunctionParameterValue(entry.getValue())
+                    .build())
+                .collect(BindingMap.toOrderedMap()));
         }
         LOG.trace("toMd: Yang SFC Port Pair data : {}", result);
         return result.build();
