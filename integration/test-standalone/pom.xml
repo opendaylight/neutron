@@ -27,14 +27,14 @@
       <dependency>
         <groupId>org.opendaylight.mdsal</groupId>
         <artifactId>mdsal-artifacts</artifactId>
-        <version>8.0.0</version>
+        <version>8.0.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
       <dependency>
         <groupId>org.opendaylight.aaa</groupId>
         <artifactId>aaa-artifacts</artifactId>
-        <version>0.14.0</version>
+        <version>0.14.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
